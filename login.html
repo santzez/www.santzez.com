@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Acceso — Donostia / San Sebastián</title>
+  <link rel="icon" type="image/svg+xml" href="/web/assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/web/css/style.css" />
+</head>
+<body>
+
+<header class="cabecera">
+  <div class="contenedor">
+    <a class="cabecera__marca" href="/web/index.html">
+      <img src="/web/assets/logo.svg" alt="" style="height:44px;filter:brightness(0) invert(1)" />
+      <span>
+        <span class="cabecera__titulo">Donostia · San Sebastián</span>
+      </span>
+    </a>
+  </div>
+</header>
+
+<main>
+  <div class="login-wrap">
+    <h1>Identifícate</h1>
+    <div class="mensaje-error" id="error-msg"></div>
+    <form id="formulario-login" autocomplete="on">
+      <div class="campo">
+        <label for="usuario">Usuario</label>
+        <input type="text" id="usuario" name="usuario" autocomplete="username" required />
+      </div>
+      <div class="campo">
+        <label for="contrasena">Contraseña</label>
+        <input type="password" id="contrasena" name="contrasena" autocomplete="current-password" required />
+      </div>
+      <button type="submit" class="btn" style="width:100%">Entrar</button>
+    </form>
+    <p style="text-align:center;font-size:0.85rem;color:var(--color-texto-suave);margin-top:1.5rem;margin-bottom:0">
+      ¿Has olvidado la contraseña? Contacta con el administrador.
+    </p>
+  </div>
+</main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <p style="margin:0">© Donostia · San Sebastián — Acceso restringido</p>
+  </div>
+</footer>
+
+<script src="/web/js/auth.js"></script>
+<script>
+  // Si ya hay sesión, redirige al destino o a inicio
+  (function () {
+    const sesion = AuthSession.get();
+    const params = new URLSearchParams(location.search);
+    const destino = params.get('destino') || '/web/index.html';
+    if (sesion) { location.href = destino; return; }
+
+    const form = document.getElementById('formulario-login');
+    const err = document.getElementById('error-msg');
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      err.classList.remove('visible');
+      const usuario = document.getElementById('usuario').value.trim();
+      const contrasena = document.getElementById('contrasena').value;
+      const res = await AuthSession.validar(usuario, contrasena);
+      if (res.ok) {
+        AuthSession.set(res.usuario);
+        location.href = destino;
+      } else {
+        err.textContent = res.error;
+        err.classList.add('visible');
+      }
+    });
+  })();
+</script>
+</body>
+</html>

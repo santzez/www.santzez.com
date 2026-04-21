@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Oposición — Oposizioak</title>
+  <link rel="icon" type="image/svg+xml" href="/web/assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/web/css/style.css" />
+</head>
+<body>
+
+<header class="cabecera">
+  <div class="contenedor">
+    <a class="cabecera__marca" href="/web/index.html">
+      <img src="/web/assets/logo.svg" alt="" style="height:44px;filter:brightness(0) invert(1)" />
+      <span>
+        <span class="cabecera__titulo">Donostia · San Sebastián</span>
+        <span class="cabecera__subtitulo">Oposizioak</span>
+      </span>
+    </a>
+    <nav class="cabecera__nav">
+      <a href="/web/index.html">Inicio</a>
+      <a href="/web/oposizioak/index.html">Oposizioak</a>
+    </nav>
+    <div class="cabecera__usuario" id="usuario-cabecera"></div>
+  </div>
+</header>
+
+<main>
+  <div class="contenedor">
+    <nav class="migas">
+      <a href="/web/index.html">Inicio</a> <span>›</span>
+      <a href="/web/oposizioak/index.html">Oposizioak</a> <span>›</span>
+      <span id="migas-ope">…</span>
+    </nav>
+
+    <h1 id="ope-titulo">Oposición</h1>
+    <p id="ope-descripcion"></p>
+
+    <h2 style="margin-top:2rem">Temas</h2>
+    <div class="grid" id="lista-temas">
+      <div class="tarjeta" style="opacity:0.6">Cargando temas…</div>
+    </div>
+  </div>
+</main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <p style="margin:0">© Donostia · San Sebastián</p>
+  </div>
+</footer>
+
+<script src="/web/js/auth.js"></script>
+<script src="/web/js/storage.js"></script>
+<script>
+  (async function () {
+    const sesion = AuthSession.exigirLogin();
+    if (!sesion) return;
+
+    const params = new URLSearchParams(location.search);
+    const opeId = params.get('ope');
+    if (!opeId) { location.href = '/web/oposizioak/index.html'; return; }
+
+    document.getElementById('migas-ope').textContent = opeId;
+    document.title = `${opeId} — Oposizioak`;
+
+    try {
+      const resp = await fetch(`data/${opeId}/info.json`, { cache: 'no-store' });
+      if (!resp.ok) throw new Error('No se pudo cargar la información de la oposición');
+      const info = await resp.json();
+
+      document.getElementById('ope-titulo').textContent = info.nombre || opeId;
+      document.getElementById('ope-descripcion').textContent = info.descripcion || '';
+
+      const cont = document.getElementById('lista-temas');
+      cont.innerHTML = '';
+
+      for (const tema of info.temas || []) {
+        // Intenta cargar el tema para contar preguntas
+        let numPreguntas = null;
+        try {
+          const r = await fetch(`data/${opeId}/${tema.id}.json`, { cache: 'no-store' });
+          if (r.ok) {
+            const d = await r.json();
+            numPreguntas = (d.preguntas || []).length;
+          }
+        } catch {}
+
+        const a = document.createElement('a');
+        a.className = 'tarjeta';
+        a.href = `quiz.html?ope=${encodeURIComponent(opeId)}&tema=${encodeURIComponent(tema.id)}`;
+        a.innerHTML = `
+          <div class="tarjeta__titulo">${tema.id}</div>
+          <p class="tarjeta__descripcion">${tema.titulo || ''}</p>
+          <div class="tarjeta__meta">
+            <span>${numPreguntas != null ? numPreguntas + ' preguntas' : 'Disponible'}</span>
+            <span>Empezar →</span>
+          </div>`;
+        cont.appendChild(a);
+      }
+
+      if (!info.temas || info.temas.length === 0) {
+        cont.innerHTML = '<div class="tarjeta">No hay temas cargados todavía.</div>';
+      }
+    } catch (err) {
+      document.getElementById('lista-temas').innerHTML =
+        `<div class="tarjeta">Error: ${err.message}</div>`;
+    }
+  })();
+</script>
+</body>
+</html>

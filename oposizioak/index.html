@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Oposizioak — Donostia / San Sebastián</title>
+  <link rel="icon" type="image/svg+xml" href="/web/assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/web/css/style.css" />
+</head>
+<body>
+
+<header class="cabecera">
+  <div class="contenedor">
+    <a class="cabecera__marca" href="/web/index.html">
+      <img src="/web/assets/logo.svg" alt="" style="height:44px;filter:brightness(0) invert(1)" />
+      <span>
+        <span class="cabecera__titulo">Donostia · San Sebastián</span>
+        <span class="cabecera__subtitulo">Oposizioak</span>
+      </span>
+    </a>
+    <nav class="cabecera__nav">
+      <a href="/web/index.html">Inicio</a>
+      <a href="/web/oposizioak/index.html">Oposizioak</a>
+    </nav>
+    <div class="cabecera__usuario" id="usuario-cabecera"></div>
+  </div>
+</header>
+
+<main>
+  <div class="contenedor">
+    <nav class="migas">
+      <a href="/web/index.html">Inicio</a> <span>›</span> <span>Oposizioak</span>
+    </nav>
+
+    <h1>Oposizioak</h1>
+    <p>Elige la oposición que quieras preparar.</p>
+
+    <div class="grid" id="lista-opes">
+      <div class="tarjeta" style="opacity:0.6">Cargando oposiciones…</div>
+    </div>
+  </div>
+</main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <p style="margin:0">© Donostia · San Sebastián</p>
+  </div>
+</footer>
+
+<script src="/web/js/auth.js"></script>
+<script src="/web/js/storage.js"></script>
+<script>
+  (async function () {
+    const sesion = AuthSession.exigirLogin();
+    if (!sesion) return;
+
+    try {
+      const resp = await fetch('data/opes.json', { cache: 'no-store' });
+      const datos = await resp.json();
+      const cont = document.getElementById('lista-opes');
+      cont.innerHTML = '';
+      (datos.opes || []).forEach(ope => {
+        const a = document.createElement('a');
+        a.className = 'tarjeta';
+        a.href = `ope.html?ope=${encodeURIComponent(ope.id)}`;
+        a.innerHTML = `
+          <div class="tarjeta__titulo">${ope.id}</div>
+          <p class="tarjeta__descripcion">${ope.nombre || ''}</p>
+          <div class="tarjeta__meta">
+            <span>${ope.temas} tema${ope.temas === 1 ? '' : 's'}</span>
+            <span>→</span>
+          </div>`;
+        cont.appendChild(a);
+      });
+      if (!datos.opes || datos.opes.length === 0) {
+        cont.innerHTML = '<div class="tarjeta">No hay oposiciones cargadas todavía.</div>';
+      }
+    } catch (err) {
+      document.getElementById('lista-opes').innerHTML =
+        `<div class="tarjeta">Error cargando el listado: ${err.message}</div>`;
+    }
+  })();
+</script>
+</body>
+</html>
