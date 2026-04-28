@@ -41,7 +41,7 @@ const AuthSession = {
   // Cierra sesión
   logout() {
     localStorage.removeItem(this.LS_KEY);
-    window.location.href = '/web/login.html';
+    window.location.href = '/login.html';
   },
 
   // Protege una página: redirige a login si no hay sesión
@@ -49,7 +49,7 @@ const AuthSession = {
     const sesion = this.get();
     if (!sesion) {
       const destino = encodeURIComponent(window.location.pathname + window.location.search);
-      window.location.href = `/web/login.html?destino=${destino}`;
+      window.location.href = `/login.html?destino=${destino}`;
       return null;
     }
     return sesion;
@@ -58,7 +58,7 @@ const AuthSession = {
   // Valida usuario/contraseña contra el fichero de usuarios
   async validar(usuario, contrasena) {
     try {
-      const resp = await fetch('/web/js/usuarios.json', { cache: 'no-store' });
+      const resp = await fetch('/js/usuarios.json', { cache: 'no-store' });
       if (!resp.ok) throw new Error('No se pudo cargar la base de usuarios');
       const data = await resp.json();
       const registro = (data.usuarios || []).find(
