@@ -7,9 +7,10 @@
    con gráfico (Chart.js) y las opciones de repetir.
    ============================================================= */
 
-(function () {
-  const sesion = AuthSession.exigirLogin();
+(async function () {
+  const sesion = await AuthSession.exigirLogin();
   if (!sesion) return;
+  const usuarioId = sesion.user.id;
 
   // Parámetros de URL
   const params = new URLSearchParams(window.location.search);
@@ -63,7 +64,7 @@
 
       // Filtro por modo "falladas"
       if (modo === 'falladas') {
-        const falladas = Storage.preguntasFalladas(sesion.usuario, pool);
+        const falladas = await Storage.preguntasFalladas(usuarioId, pool);
         pool = pool.filter(p => falladas.includes(p.id));
         if (pool.length === 0) {
           document.getElementById('quiz-raiz').innerHTML = `
@@ -157,8 +158,8 @@
     });
     if (!acertada) botonPulsado.classList.add('opcion--error');
 
-    // Registrar intento
-    Storage.guardarIntento(sesion.usuario, pregunta.id, acertada);
+    // Registrar intento (fire-and-forget; los errores se loguean en consola)
+    Storage.guardarIntento(usuarioId, pregunta.id, acertada);
 
     if (acertada) estado.aciertos++;
     else {
@@ -200,8 +201,8 @@
     const fallos = estado.fallos;
     const porcentaje = Math.round((aciertos / total) * 100);
 
-    // Guardar la sesión
-    Storage.guardarSesion(sesion.usuario, {
+    // Guardar la sesión (fire-and-forget)
+    Storage.guardarSesion(usuarioId, {
       ope: opeId,
       tema: temaId,
       total,

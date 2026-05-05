@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Acceso — Donostia / San Sebastián</title>
+  <title>Acceso — santzez</title>
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,9 +15,10 @@
 <header class="cabecera">
   <div class="contenedor">
     <a class="cabecera__marca" href="/index.html">
-      <img src="/assets/logo.svg" alt="" style="height:44px;filter:brightness(0) invert(1)" />
+      <img src="/assets/logo.svg" alt="" style="height:44px" />
       <span>
-        <span class="cabecera__titulo">Donostia · San Sebastián</span>
+        <span class="cabecera__titulo">santzez</span>
+        <span class="cabecera__subtitulo">the webpage</span>
       </span>
     </a>
   </div>
@@ -29,8 +30,8 @@
     <div class="mensaje-error" id="error-msg"></div>
     <form id="formulario-login" autocomplete="on">
       <div class="campo">
-        <label for="usuario">Usuario</label>
-        <input type="text" id="usuario" name="usuario" autocomplete="username" required />
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" autocomplete="username" required />
       </div>
       <div class="campo">
         <label for="contrasena">Contraseña</label>
@@ -38,42 +39,54 @@
       </div>
       <button type="submit" class="btn" style="width:100%">Entrar</button>
     </form>
-    <p style="text-align:center;font-size:0.85rem;color:var(--color-texto-suave);margin-top:1.5rem;margin-bottom:0">
-      ¿Has olvidado la contraseña? Contacta con el administrador.
+    <p style="text-align:center;font-size:0.9rem;margin-top:1.5rem;margin-bottom:0.4rem">
+      <a href="/recuperar.html">¿Has olvidado la contraseña?</a>
+    </p>
+    <p style="text-align:center;font-size:0.9rem;margin-top:0.4rem;margin-bottom:0">
+      ¿No tienes cuenta? <a href="/registro.html">Regístrate</a>
     </p>
   </div>
 </main>
 
 <footer class="pie">
   <div class="contenedor">
-    <p style="margin:0">© Donostia · San Sebastián — Acceso restringido</p>
+    <p style="margin:0">© santzez — Acceso restringido</p>
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/js/supabase-config.js"></script>
 <script src="/js/auth.js"></script>
 <script>
-  // Si ya hay sesión, redirige al destino o a inicio
-  (function () {
-    const sesion = AuthSession.get();
+  (async function () {
     const params = new URLSearchParams(location.search);
-    const destino = params.get('destino') || '/index.html';
-    if (sesion) { location.href = destino; return; }
+    let destino = params.get('destino') || '/index.html';
+    if (!destino.startsWith('/') || destino.startsWith('//')) destino = '/index.html';
+
+    try {
+      const sesion = await AuthSession.getSesion();
+      if (sesion) {
+        const aprobado = await AuthSession.aprobado();
+        location.href = aprobado ? destino : '/pendiente.html';
+        return;
+      }
+    } catch {}
 
     const form = document.getElementById('formulario-login');
     const err = document.getElementById('error-msg');
     form.addEventListener('submit', async (ev) => {
       ev.preventDefault();
       err.classList.remove('visible');
-      const usuario = document.getElementById('usuario').value.trim();
+      const email = document.getElementById('email').value.trim();
       const contrasena = document.getElementById('contrasena').value;
-      const res = await AuthSession.validar(usuario, contrasena);
-      if (res.ok) {
-        AuthSession.set(res.usuario);
-        location.href = destino;
-      } else {
+      const res = await AuthSession.iniciarSesion(email, contrasena);
+      if (!res.ok) {
         err.textContent = res.error;
         err.classList.add('visible');
+        return;
       }
+      const aprobado = await AuthSession.aprobado();
+      location.href = aprobado ? destino : '/pendiente.html';
     });
   })();
 </script>

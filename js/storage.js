@@ -1,84 +1,86 @@
 /* =============================================================
-   storage.js — Capa de almacenamiento del progreso
+   storage.js — Persistencia del progreso en Supabase
    -------------------------------------------------------------
-   Guarda los resultados de cada tanda del quiz y los intentos de
-   cada pregunta. Encapsulado en una API simple para que, cuando
-   se migre a Supabase/Firebase, sólo haya que sustituir el
-   backend sin tocar el resto del código.
+   Sustituye al storage antiguo basado en localStorage. Toda la
+   API es ahora asincrona. Usa el mismo cliente Supabase que
+   crea AuthSession (auth.js).
+
+   Tablas implicadas (ver recursos/supabase/setup.sql):
+   - sesiones_quiz: una fila por tanda completada
+   - intentos:       una fila por respuesta a pregunta
    ============================================================= */
 
 const Storage = {
-  LS_PROGRESO: 'oposizioak.progreso',
+  cliente() { return AuthSession.cliente(); },
 
-  _leer() {
-    try {
-      return JSON.parse(localStorage.getItem(this.LS_PROGRESO) || '{}');
-    } catch {
-      return {};
-    }
-  },
-
-  _escribir(obj) {
-    localStorage.setItem(this.LS_PROGRESO, JSON.stringify(obj));
-  },
-
-  // Obtiene (o crea) el "cuaderno" de un usuario
-  _cuaderno(usuario) {
-    const todo = this._leer();
-    if (!todo[usuario]) todo[usuario] = { sesiones: [], intentos: {} };
-    return { todo, cuaderno: todo[usuario] };
-  },
-
-  // Guarda una sesión completa de estudio (tanda de preguntas)
-  guardarSesion(usuario, resumen) {
-    const { todo, cuaderno } = this._cuaderno(usuario);
-    cuaderno.sesiones.push({
-      fecha: new Date().toISOString(),
-      ...resumen,
+  /**
+   * Guarda el resumen de una tanda de quiz.
+   * resumen: { ope, tema, total, aciertos, fallos, porcentaje, modo }
+   */
+  async guardarSesion(usuarioId, resumen) {
+    const { error } = await this.cliente().from('sesiones_quiz').insert({
+      usuario_id: usuarioId,
+      ope_id: resumen.ope,
+      tema_id: resumen.tema,
+      modo: resumen.modo || 'todas',
+      total: resumen.total,
+      aciertos: resumen.aciertos,
+      fallos: resumen.fallos,
+      porcentaje: resumen.porcentaje
     });
-    // Limita el histórico a las 200 últimas sesiones
-    if (cuaderno.sesiones.length > 200) {
-      cuaderno.sesiones = cuaderno.sesiones.slice(-200);
+    if (error) console.error('Error guardando sesion:', error);
+  },
+
+  /** Registra el intento de una pregunta concreta. */
+  async guardarIntento(usuarioId, preguntaId, acertada) {
+    const { error } = await this.cliente().from('intentos').insert({
+      usuario_id: usuarioId,
+      pregunta_id: preguntaId,
+      acertada: !!acertada
+    });
+    if (error) console.error('Error guardando intento:', error);
+  },
+
+  /**
+   * Devuelve los IDs de preguntas (de las pasadas en preguntasDelTema)
+   * cuyo numero de fallos del usuario es mayor al de aciertos.
+   */
+  async preguntasFalladas(usuarioId, preguntasDelTema) {
+    const ids = preguntasDelTema.map(p => p.id);
+    if (ids.length === 0) return [];
+    const { data, error } = await this.cliente()
+      .from('intentos')
+      .select('pregunta_id, acertada')
+      .eq('usuario_id', usuarioId)
+      .in('pregunta_id', ids);
+    if (error) { console.error(error); return []; }
+
+    const stats = {};
+    for (const intento of (data || [])) {
+      const s = stats[intento.pregunta_id] || (stats[intento.pregunta_id] = { ac: 0, fa: 0 });
+      if (intento.acertada) s.ac++; else s.fa++;
     }
-    this._escribir(todo);
+    return Object.entries(stats)
+      .filter(([, s]) => s.fa > s.ac)
+      .map(([id]) => id);
   },
 
-  // Guarda el intento de una pregunta (acierto/fallo)
-  guardarIntento(usuario, preguntaId, acertada) {
-    const { todo, cuaderno } = this._cuaderno(usuario);
-    if (!cuaderno.intentos[preguntaId]) {
-      cuaderno.intentos[preguntaId] = { aciertos: 0, fallos: 0, ultimo: null };
-    }
-    const reg = cuaderno.intentos[preguntaId];
-    if (acertada) reg.aciertos++; else reg.fallos++;
-    reg.ultimo = new Date().toISOString();
-    this._escribir(todo);
-  },
+  /** Devuelve estadisticas globales acumuladas del usuario. */
+  async estadisticas(usuarioId) {
+    const { data, error } = await this.cliente()
+      .from('sesiones_quiz')
+      .select('aciertos, fallos, total')
+      .eq('usuario_id', usuarioId);
+    if (error) { console.error(error); return null; }
 
-  // Devuelve los IDs de preguntas fallados por el usuario en un tema
-  preguntasFalladas(usuario, preguntasDelTema) {
-    const { cuaderno } = this._cuaderno(usuario);
-    return preguntasDelTema
-      .filter(p => {
-        const i = cuaderno.intentos[p.id];
-        return i && i.fallos > i.aciertos;
-      })
-      .map(p => p.id);
-  },
+    const stats = (data || []).reduce((acc, s) => ({
+      aciertos: acc.aciertos + s.aciertos,
+      fallos:   acc.fallos   + s.fallos,
+      total:    acc.total    + s.total,
+      sesiones: acc.sesiones + 1
+    }), { aciertos: 0, fallos: 0, total: 0, sesiones: 0 });
 
-  // Estadísticas globales del usuario
-  estadisticas(usuario) {
-    const { cuaderno } = this._cuaderno(usuario);
-    const sesiones = cuaderno.sesiones;
-    const totalSesiones = sesiones.length;
-    const totalPreguntas = sesiones.reduce((s, x) => s + (x.total || 0), 0);
-    const totalAciertos = sesiones.reduce((s, x) => s + (x.aciertos || 0), 0);
-    return {
-      totalSesiones,
-      totalPreguntas,
-      totalAciertos,
-      porcentaje: totalPreguntas ? Math.round((totalAciertos / totalPreguntas) * 100) : 0,
-      ultimaSesion: sesiones[sesiones.length - 1] || null,
-    };
-  },
+    stats.porcentaje = stats.total > 0 ? Math.round((stats.aciertos / stats.total) * 100) : 0;
+    return stats;
+  }
 };

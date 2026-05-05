@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registro — santzez</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+<header class="cabecera">
+  <div class="contenedor">
+    <a class="cabecera__marca" href="/index.html">
+      <img src="/assets/logo.svg" alt="" style="height:44px" />
+      <span>
+        <span class="cabecera__titulo">santzez</span>
+        <span class="cabecera__subtitulo">the webpage</span>
+      </span>
+    </a>
+  </div>
+</header>
+
+<main>
+  <div class="login-wrap">
+    <h1>Crear cuenta</h1>
+    <p style="font-size:0.9rem;color:var(--color-texto-suave);margin-top:-0.6rem;margin-bottom:1.2rem">
+      Tu acceso quedará pendiente de aprobación manual del administrador.
+    </p>
+    <div class="mensaje-error" id="error-msg"></div>
+    <div id="bloque-formulario">
+      <form id="formulario-registro" autocomplete="on">
+        <div class="campo">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" required />
+        </div>
+        <div class="campo">
+          <label for="contrasena">Contraseña <span style="font-weight:400;color:var(--color-texto-suave)">(mínimo 8 caracteres)</span></label>
+          <input type="password" id="contrasena" name="contrasena" autocomplete="new-password" minlength="8" required />
+        </div>
+        <div class="campo">
+          <label for="contrasena2">Repetir contraseña</label>
+          <input type="password" id="contrasena2" name="contrasena2" autocomplete="new-password" minlength="8" required />
+        </div>
+        <button type="submit" class="btn" style="width:100%">Crear cuenta</button>
+      </form>
+    </div>
+
+    <div id="bloque-exito" style="display:none">
+      <div class="feedback feedback--acierto visible" style="margin-top:0">
+        <div class="feedback__titulo">¡Cuenta creada!</div>
+        <p style="margin:0.6rem 0 0">Te hemos enviado un correo de confirmación a tu email. Haz clic en el enlace para validarlo. Después, el administrador deberá aprobar tu cuenta antes de que puedas usar la web.</p>
+      </div>
+    </div>
+
+    <p style="text-align:center;font-size:0.9rem;margin-top:1.5rem;margin-bottom:0">
+      ¿Ya tienes cuenta? <a href="/login.html">Inicia sesión</a>
+    </p>
+  </div>
+</main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <p style="margin:0">© santzez</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/js/supabase-config.js"></script>
+<script src="/js/auth.js"></script>
+<script>
+  (function () {
+    const form = document.getElementById('formulario-registro');
+    const err = document.getElementById('error-msg');
+    const blForm = document.getElementById('bloque-formulario');
+    const blOk = document.getElementById('bloque-exito');
+
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      err.classList.remove('visible');
+
+      const email = document.getElementById('email').value.trim();
+      const c1 = document.getElementById('contrasena').value;
+      const c2 = document.getElementById('contrasena2').value;
+
+      if (c1 !== c2) {
+        err.textContent = 'Las contraseñas no coinciden.';
+        err.classList.add('visible');
+        return;
+      }
+      if (c1.length < 8) {
+        err.textContent = 'La contraseña debe tener al menos 8 caracteres.';
+        err.classList.add('visible');
+        return;
+      }
+
+      const res = await AuthSession.registrar(email, c1);
+      if (!res.ok) {
+        err.textContent = res.error;
+        err.classList.add('visible');
+        return;
+      }
+
+      blForm.style.display = 'none';
+      blOk.style.display = 'block';
+    });
+  })();
+</script>
+</body>
+</html>

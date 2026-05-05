@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Quiz — santzez</title>
+  <title>Cuenta pendiente — santzez</title>
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,32 +21,24 @@
         <span class="cabecera__subtitulo">the webpage</span>
       </span>
     </a>
-    <nav class="cabecera__nav">
-      <a href="/index.html">Inicio</a>
-      <a href="/oposizioak/index.html">Oposizioak</a>
-    </nav>
     <div class="cabecera__usuario" id="usuario-cabecera"></div>
   </div>
 </header>
 
 <main>
-  <div class="contenedor-estrecho">
-    <nav class="migas">
-      <a href="/index.html">Inicio</a> <span>›</span>
-      <a href="/oposizioak/index.html">Oposizioak</a> <span>›</span>
-      <span id="quiz-titulo-migas">Quiz</span>
-    </nav>
-
-    <div class="quiz-cabecera">
-      <h2 id="quiz-titulo">Quiz</h2>
-      <div class="quiz-contador" id="contador-texto">Preparando…</div>
+  <div class="login-wrap">
+    <h1>Cuenta pendiente</h1>
+    <div class="feedback visible" style="margin-top:0;background:var(--color-primario-suave);border-color:var(--color-primario)">
+      <div class="feedback__titulo" style="color:var(--color-primario)">En espera de aprobación</div>
+      <p style="margin:0.6rem 0 0">
+        Tu registro está completo, pero el administrador todavía no ha aprobado tu acceso. Recibirás un correo cuando esté activo. Si llevas mucho tiempo esperando, escribe a
+        <a href="mailto:santzez@gmail.com">santzez@gmail.com</a>.
+      </p>
     </div>
 
-    <div class="barra-progreso" aria-hidden="true">
-      <div class="barra-progreso__relleno" id="barra-relleno"></div>
-    </div>
-
-    <div id="quiz-raiz"></div>
+    <p style="text-align:center;font-size:0.9rem;margin-top:1.5rem;margin-bottom:0">
+      <button type="button" class="btn btn--secundario" id="btn-salir">Cerrar sesión</button>
+    </p>
   </div>
 </main>
 
@@ -59,8 +51,16 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-config.js"></script>
 <script src="/js/auth.js"></script>
-<script src="/js/storage.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<script src="js/quiz-engine.js"></script>
+<script>
+  (async function () {
+    const sesion = await AuthSession.getSesion();
+    if (!sesion) { location.href = '/login.html'; return; }
+
+    const aprobado = await AuthSession.aprobado();
+    if (aprobado) { location.href = '/index.html'; return; }
+
+    document.getElementById('btn-salir').addEventListener('click', () => AuthSession.logout());
+  })();
+</script>
 </body>
 </html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cambiar contraseña — santzez</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+<header class="cabecera">
+  <div class="contenedor">
+    <a class="cabecera__marca" href="/index.html">
+      <img src="/assets/logo.svg" alt="" style="height:44px" />
+      <span>
+        <span class="cabecera__titulo">santzez</span>
+        <span class="cabecera__subtitulo">the webpage</span>
+      </span>
+    </a>
+  </div>
+</header>
+
+<main>
+  <div class="login-wrap">
+    <h1>Nueva contraseña</h1>
+    <p style="font-size:0.9rem;color:var(--color-texto-suave);margin-top:-0.6rem;margin-bottom:1.2rem">
+      Define la nueva contraseña para tu cuenta.
+    </p>
+    <div class="mensaje-error" id="error-msg"></div>
+
+    <div id="bloque-sin-token" style="display:none">
+      <div class="feedback feedback--error visible" style="margin-top:0">
+        <div class="feedback__titulo">Enlace inválido o expirado</div>
+        <p style="margin:0.6rem 0 0">Vuelve a solicitar un correo de recuperación.</p>
+      </div>
+      <p style="text-align:center;font-size:0.9rem;margin-top:1.5rem;margin-bottom:0">
+        <a href="/recuperar.html">Solicitar enlace nuevo</a>
+      </p>
+    </div>
+
+    <div id="bloque-formulario" style="display:none">
+      <form id="formulario-cambio" autocomplete="on">
+        <div class="campo">
+          <label for="contrasena">Nueva contraseña <span style="font-weight:400;color:var(--color-texto-suave)">(mínimo 8 caracteres)</span></label>
+          <input type="password" id="contrasena" name="contrasena" autocomplete="new-password" minlength="8" required />
+        </div>
+        <div class="campo">
+          <label for="contrasena2">Repetir contraseña</label>
+          <input type="password" id="contrasena2" name="contrasena2" autocomplete="new-password" minlength="8" required />
+        </div>
+        <button type="submit" class="btn" style="width:100%">Guardar contraseña</button>
+      </form>
+    </div>
+
+    <div id="bloque-exito" style="display:none">
+      <div class="feedback feedback--acierto visible" style="margin-top:0">
+        <div class="feedback__titulo">Contraseña actualizada</div>
+        <p style="margin:0.6rem 0 0">Vamos a redirigirte al inicio de sesión…</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <p style="margin:0">© santzez</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/js/supabase-config.js"></script>
+<script src="/js/auth.js"></script>
+<script>
+  (async function () {
+    const blSinToken = document.getElementById('bloque-sin-token');
+    const blForm = document.getElementById('bloque-formulario');
+    const blOk = document.getElementById('bloque-exito');
+    const err = document.getElementById('error-msg');
+
+    await new Promise(r => setTimeout(r, 300));
+
+    const sesion = await AuthSession.getSesion();
+    if (!sesion) {
+      blSinToken.style.display = 'block';
+      return;
+    }
+
+    blForm.style.display = 'block';
+
+    const form = document.getElementById('formulario-cambio');
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      err.classList.remove('visible');
+      const c1 = document.getElementById('contrasena').value;
+      const c2 = document.getElementById('contrasena2').value;
+      if (c1 !== c2) {
+        err.textContent = 'Las contraseñas no coinciden.';
+        err.classList.add('visible');
+        return;
+      }
+      if (c1.length < 8) {
+        err.textContent = 'La contraseña debe tener al menos 8 caracteres.';
+        err.classList.add('visible');
+        return;
+      }
+      const res = await AuthSession.cambiarContrasena(c1);
+      if (!res.ok) {
+        err.textContent = res.error;
+        err.classList.add('visible');
+        return;
+      }
+      blForm.style.display = 'none';
+      blOk.style.display = 'block';
+      await AuthSession.cliente().auth.signOut();
+      setTimeout(() => location.href = '/login.html', 1800);
+    });
+  })();
+</script>
+</body>
+</html>
