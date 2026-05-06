@@ -81,26 +81,55 @@
       cont.innerHTML = '';
 
       for (const tema of info.temas || []) {
-        let numPreguntas = null;
+        let preguntas = [];
         try {
           const r = await fetch(`data/${opeId}/${tema.id}.json`, { cache: 'no-store' });
           if (r.ok) {
             const d = await r.json();
-            numPreguntas = (d.preguntas || []).length;
+            preguntas = d.preguntas || [];
           }
         } catch {}
+        const numPreguntas = preguntas.length;
 
-        const a = document.createElement('a');
-        a.className = 'tarjeta';
-        a.href = `quiz.html?ope=${encodeURIComponent(opeId)}&tema=${encodeURIComponent(tema.id)}`;
-        a.innerHTML = `
+        // Cuenta cuántas preguntas tiene falladas el usuario en este tema
+        let numFalladas = 0;
+        if (numPreguntas > 0) {
+          try {
+            const falladas = await Storage.preguntasFalladas(sesion.user.id, preguntas);
+            numFalladas = falladas.length;
+          } catch (e) { console.warn('No se pudieron leer las falladas:', e); }
+        }
+
+        const urlTema = `quiz.html?ope=${encodeURIComponent(opeId)}&tema=${encodeURIComponent(tema.id)}`;
+        const urlFalladas = urlTema + '&modo=falladas';
+
+        const div = document.createElement('div');
+        div.className = 'tarjeta tarjeta--clicable';
+        div.dataset.href = urlTema;
+        div.innerHTML = `
           <div class="tarjeta__titulo">${tema.id}</div>
           <p class="tarjeta__descripcion">${tema.titulo || ''}</p>
           <div class="tarjeta__meta">
-            <span>${numPreguntas != null ? numPreguntas + ' preguntas' : 'Disponible'}</span>
-            <span>Empezar →</span>
-          </div>`;
-        cont.appendChild(a);
+            <span>${numPreguntas > 0 ? numPreguntas + ' preguntas' : 'Disponible'}</span>
+            ${numFalladas > 0
+              ? `<span class="tarjeta__badge tarjeta__badge--error">${numFalladas} fallada${numFalladas === 1 ? '' : 's'}</span>`
+              : '<span>Empezar →</span>'}
+          </div>
+          ${numFalladas > 0
+            ? `<div class="tarjeta__acciones">
+                 <a class="btn btn--secundario" href="${urlFalladas}">Repasar solo fallos (${numFalladas})</a>
+               </div>`
+            : ''}
+        `;
+
+        // Click en la tarjeta entera → empezar el tema completo
+        div.addEventListener('click', () => { location.href = div.dataset.href; });
+        // Click en el botón secundario → no propaga al div
+        div.querySelectorAll('a').forEach(a =>
+          a.addEventListener('click', e => e.stopPropagation())
+        );
+
+        cont.appendChild(div);
       }
 
       if (!info.temas || info.temas.length === 0) {
