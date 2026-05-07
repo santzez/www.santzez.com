@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Estadísticas — santzez</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+<header class="cabecera">
+  <div class="contenedor">
+    <a class="cabecera__marca" href="/index.html">
+      <img src="/assets/logo.svg" alt="" style="height:44px" />
+      <span>
+        <span class="cabecera__titulo">santzez</span>
+        <span class="cabecera__subtitulo">the webpage</span>
+      </span>
+    </a>
+    <nav class="cabecera__nav">
+      <a href="/index.html">Inicio</a>
+      <a href="/oposizioak/index.html">Oposizioak</a>
+    </nav>
+    <div class="cabecera__usuario" id="usuario-cabecera"></div>
+  </div>
+</header>
+
+<main>
+  <div class="contenedor">
+    <nav class="migas">
+      <a href="/index.html">Inicio</a> <span>›</span>
+      <a href="/oposizioak/index.html">Oposizioak</a> <span>›</span>
+      <span>Estadísticas</span>
+    </nav>
+
+    <h1>Mis estadísticas</h1>
+    <p style="color:var(--color-texto-suave);margin-top:-0.6rem;max-width:640px">
+      Tu progreso histórico en todas las oposiciones. Los datos se sincronizan entre dispositivos: si entras desde otro ordenador con la misma cuenta, verás los mismos números.
+    </p>
+
+    <div id="bloque-cargando">
+      <p style="opacity:0.6;margin-top:2rem">Cargando datos…</p>
+    </div>
+
+    <div id="bloque-vacio" style="display:none">
+      <div class="tarjeta" style="margin-top:1.5rem">
+        <h2 style="margin-top:0">Aún no hay datos</h2>
+        <p>Completa alguna tanda de preguntas y vuelve por aquí. Verás tu evolución, las preguntas que más fallas y todo el resto.</p>
+        <a class="btn" href="/oposizioak/index.html">Ir a las oposiciones</a>
+      </div>
+    </div>
+
+    <div id="bloque-stats" style="display:none">
+
+      <!-- KPIs -->
+      <div class="kpis">
+        <div class="kpi">
+          <div class="kpi__valor" id="kpi-tandas">0</div>
+          <div class="kpi__etiqueta">Tandas completadas</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi__valor" id="kpi-preguntas">0</div>
+          <div class="kpi__etiqueta">Preguntas respondidas</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi__valor" id="kpi-acierto">0%</div>
+          <div class="kpi__etiqueta">Acierto medio histórico</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi__valor" id="kpi-falladas">0</div>
+          <div class="kpi__etiqueta">Preguntas pendientes de dominar</div>
+        </div>
+      </div>
+
+      <!-- Evolución temporal -->
+      <h2 style="margin-top:2.5rem">Evolución por tanda</h2>
+      <div class="tarjeta" style="padding:1.25rem">
+        <canvas id="grafico-evolucion" height="120"></canvas>
+      </div>
+
+      <!-- Top 10 falladas -->
+      <h2 style="margin-top:2.5rem">10 preguntas que más has fallado</h2>
+      <div class="top-falladas" id="lista-top"></div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <p style="margin:0">© santzez</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/js/supabase-config.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/storage.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+(async function () {
+  const sesion = await AuthSession.exigirLogin();
+  if (!sesion) return;
+  const userId = sesion.user.id;
+  const cliente = AuthSession.cliente();
+
+  const elCargando = document.getElementById('bloque-cargando');
+  const elVacio    = document.getElementById('bloque-vacio');
+  const elStats    = document.getElementById('bloque-stats');
+
+  // ---------- Carga de datos ----------
+  const [{ data: sesiones, error: errS }, { data: intentos, error: errI }] = await Promise.all([
+    cliente.from('sesiones_quiz')
+      .select('*')
+      .eq('usuario_id', userId)
+      .order('fecha', { ascending: true }),
+    cliente.from('intentos')
+      .select('pregunta_id, acertada, fecha')
+      .eq('usuario_id', userId)
+  ]);
+  if (errS) console.error(errS);
+  if (errI) console.error(errI);
+
+  elCargando.style.display = 'none';
+
+  if (!sesiones || sesiones.length === 0) {
+    elVacio.style.display = 'block';
+    return;
+  }
+  elStats.style.display = 'block';
+
+  // ---------- KPIs ----------
+  const totalTandas    = sesiones.length;
+  const totalPreguntas = sesiones.reduce((s, x) => s + (x.total || 0), 0);
+  const totalAciertos  = sesiones.reduce((s, x) => s + (x.aciertos || 0), 0);
+  const acierto        = totalPreguntas > 0 ? Math.round((totalAciertos / totalPreguntas) * 100) : 0;
+
+  // Stats por pregunta a partir de la tabla intentos
+  const statsPorPregunta = {};
+  for (const i of (intentos || [])) {
+    const s = statsPorPregunta[i.pregunta_id] || (statsPorPregunta[i.pregunta_id] = { ac: 0, fa: 0, last: null });
+    if (i.acertada) s.ac++; else s.fa++;
+    if (!s.last || i.fecha > s.last) s.last = i.fecha;
+  }
+  const numFalladasNetas = Object.values(statsPorPregunta).filter(s => s.fa > s.ac).length;
+
+  document.getElementById('kpi-tandas').textContent    = totalTandas;
+  document.getElementById('kpi-preguntas').textContent = totalPreguntas;
+  document.getElementById('kpi-acierto').textContent   = acierto + '%';
+  document.getElementById('kpi-falladas').textContent  = numFalladasNetas;
+
+  // ---------- Gráfico de evolución ----------
+  const labels = sesiones.map((s, i) => `T${i + 1}`);
+  const datos  = sesiones.map(s => Number(s.porcentaje));
+
+  // Media móvil de 5 tandas
+  const media5 = datos.map((_, i) => {
+    const ini = Math.max(0, i - 4);
+    const slice = datos.slice(ini, i + 1);
+    return Math.round(slice.reduce((a, b) => a + b, 0) / slice.length);
+  });
+
+  // eslint-disable-next-line no-undef
+  new Chart(document.getElementById('grafico-evolucion'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: '% Acierto por tanda',
+          data: datos,
+          borderColor: '#003da5',
+          backgroundColor: 'rgba(0, 61, 165, 0.10)',
+          borderWidth: 2,
+          fill: true,
+          tension: 0.25,
+          pointBackgroundColor: '#003da5',
+          pointRadius: 3,
+        },
+        {
+          label: 'Media móvil (5 últimas)',
+          data: media5,
+          borderColor: '#2d2926',
+          borderWidth: 1.5,
+          borderDash: [4, 4],
+          fill: false,
+          tension: 0.3,
+          pointRadius: 0,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: { min: 0, max: 100, ticks: { callback: v => v + '%' } }
+      },
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { family: 'Barlow, Arial' } } },
+        tooltip: {
+          callbacks: {
+            afterLabel: (ctx) => {
+              const s = sesiones[ctx.dataIndex];
+              if (!s) return '';
+              const f = new Date(s.fecha).toLocaleDateString('es-ES');
+              return `${s.tema_id} · ${s.aciertos}/${s.total} · ${f}`;
+            }
+          }
+        }
+      }
+    }
+  });
+
+  // ---------- Top 10 falladas ----------
+  const top = Object.entries(statsPorPregunta)
+    .filter(([, s]) => s.fa > 0)
+    .sort((a, b) => {
+      // Primero por (fallos - aciertos) descendente, desempate por fallos absolutos
+      const da = a[1].fa - a[1].ac;
+      const db = b[1].fa - b[1].ac;
+      if (db !== da) return db - da;
+      return b[1].fa - a[1].fa;
+    })
+    .slice(0, 10);
+
+  const lista = document.getElementById('lista-top');
+
+  if (top.length === 0) {
+    lista.innerHTML = `
+      <div class="top-falladas__item">
+        <div></div>
+        <div class="top-falladas__pregunta">Todavía no has fallado ninguna pregunta. ¡Bien!</div>
+        <div></div>
+      </div>`;
+  } else {
+    // Cargar textos de las preguntas (un fetch por tema único)
+    const cacheTemas = {};
+    async function cargarTema(opeId, temaId) {
+      const k = `${opeId}/${temaId}`;
+      if (cacheTemas[k]) return cacheTemas[k];
+      try {
+        const r = await fetch(`data/${opeId}/${temaId}.json`, { cache: 'no-store' });
+        if (r.ok) {
+          const d = await r.json();
+          cacheTemas[k] = d.preguntas || [];
+        } else {
+          cacheTemas[k] = [];
+        }
+      } catch {
+        cacheTemas[k] = [];
+      }
+      return cacheTemas[k];
+    }
+    function parseId(id) {
+      const m = id.match(/^(OPE_\d+)_(Tema\d+)_/);
+      if (!m) return null;
+      return { opeId: m[1], temaId: `${m[1]}_${m[2]}` };
+    }
+
+    lista.innerHTML = '';
+    let rank = 1;
+    for (const [pId, s] of top) {
+      const ref = parseId(pId);
+      let texto = pId;
+      if (ref) {
+        const preguntas = await cargarTema(ref.opeId, ref.temaId);
+        const p = preguntas.find(x => x.id === pId);
+        if (p && p.pregunta) texto = p.pregunta;
+      }
+
+      const fila = document.createElement('div');
+      fila.className = 'top-falladas__item';
+      fila.innerHTML = `
+        <div class="top-falladas__rank">${rank}.</div>
+        <div>
+          <div class="top-falladas__pregunta-id">${pId}</div>
+          <div class="top-falladas__pregunta">${texto}</div>
+        </div>
+        <div class="top-falladas__fallos">
+          ${s.fa} fallo${s.fa === 1 ? '' : 's'}
+          <small>${s.ac} acierto${s.ac === 1 ? '' : 's'}</small>
+        </div>
+      `;
+      lista.appendChild(fila);
+      rank++;
+    }
+  }
+})();
+</script>
+</body>
+</html>

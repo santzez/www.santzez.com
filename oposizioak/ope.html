@@ -41,7 +41,7 @@
     <p id="ope-descripcion"></p>
 
     <h2 style="margin-top:2rem">Temas</h2>
-    <div class="grid" id="lista-temas">
+    <div class="lista-temas" id="lista-temas">
       <div class="tarjeta" style="opacity:0.6">Cargando temas…</div>
     </div>
   </div>
@@ -104,22 +104,25 @@
         const urlFalladas = urlTema + '&modo=falladas';
 
         const div = document.createElement('div');
-        div.className = 'tarjeta tarjeta--clicable';
+        div.className = 'tarjeta tarjeta--clicable tarjeta--fila';
         div.dataset.href = urlTema;
         div.innerHTML = `
-          <div class="tarjeta__titulo">${tema.id}</div>
-          <p class="tarjeta__descripcion">${tema.titulo || ''}</p>
-          <div class="tarjeta__meta">
+          <div class="tarjeta__principal">
+            <div class="tarjeta__titulo">${tema.id}</div>
+            <p class="tarjeta__descripcion">${tema.titulo || ''}</p>
+          </div>
+          <div class="tarjeta__estado">
             <span>${numPreguntas > 0 ? numPreguntas + ' preguntas' : 'Disponible'}</span>
             ${numFalladas > 0
               ? `<span class="tarjeta__badge tarjeta__badge--error">${numFalladas} fallada${numFalladas === 1 ? '' : 's'}</span>`
-              : '<span>Empezar →</span>'}
+              : ''}
           </div>
-          ${numFalladas > 0
-            ? `<div class="tarjeta__acciones">
-                 <a class="btn btn--secundario" href="${urlFalladas}">Repasar solo fallos (${numFalladas})</a>
-               </div>`
-            : ''}
+          <div class="tarjeta__cta">
+            ${numFalladas > 0
+              ? `<a class="btn btn--secundario" href="${urlFalladas}">Repasar fallos</a>`
+              : ''}
+            <span class="tarjeta__flecha" aria-hidden="true">→</span>
+          </div>
         `;
 
         // Click en la tarjeta entera → empezar el tema completo
