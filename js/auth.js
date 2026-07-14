@@ -68,43 +68,74 @@ const AuthSession = {
     return { user: sesion.user };
   },
 
+  /**
+   * Envuelve una promesa con un timeout. Si el servidor no responde en
+   * `ms` milisegundos, lanza un error que _traducirError() reconoce como
+   * "Supabase caido".
+   */
+  _conTimeout(promesa, ms = 8000) {
+    return Promise.race([
+      promesa,
+      new Promise((_, rej) => setTimeout(
+        () => rej(new Error('Load failed')),
+        ms
+      ))
+    ]);
+  },
+
   /** Login con email + contraseña. */
   async iniciarSesion(email, contrasena) {
-    const { data, error } = await this.cliente().auth.signInWithPassword({
-      email: email.trim(),
-      password: contrasena
-    });
-    if (error) return { ok: false, error: this._traducirError(error) };
-    return { ok: true, sesion: data.session };
+    try {
+      const { data, error } = await this._conTimeout(this.cliente().auth.signInWithPassword({
+        email: email.trim(),
+        password: contrasena
+      }));
+      if (error) return { ok: false, error: this._traducirError(error) };
+      return { ok: true, sesion: data.session };
+    } catch (e) {
+      return { ok: false, error: this._traducirError(e) };
+    }
   },
 
   /** Registro de un usuario nuevo. Supabase enviara correo de confirmacion. */
   async registrar(email, contrasena) {
-    const { data, error } = await this.cliente().auth.signUp({
-      email: email.trim(),
-      password: contrasena,
-      options: {
-        emailRedirectTo: location.origin + '/login.html'
-      }
-    });
-    if (error) return { ok: false, error: this._traducirError(error) };
-    return { ok: true, sesion: data.session };
+    try {
+      const { data, error } = await this._conTimeout(this.cliente().auth.signUp({
+        email: email.trim(),
+        password: contrasena,
+        options: {
+          emailRedirectTo: location.origin + '/login.html'
+        }
+      }));
+      if (error) return { ok: false, error: this._traducirError(error) };
+      return { ok: true, sesion: data.session };
+    } catch (e) {
+      return { ok: false, error: this._traducirError(e) };
+    }
   },
 
   /** Solicita correo de recuperacion de contrasena. */
   async solicitarReset(email) {
-    const { error } = await this.cliente().auth.resetPasswordForEmail(email.trim(), {
-      redirectTo: location.origin + '/cambiar-contrasena.html'
-    });
-    if (error) return { ok: false, error: this._traducirError(error) };
-    return { ok: true };
+    try {
+      const { error } = await this._conTimeout(this.cliente().auth.resetPasswordForEmail(email.trim(), {
+        redirectTo: location.origin + '/cambiar-contrasena.html'
+      }));
+      if (error) return { ok: false, error: this._traducirError(error) };
+      return { ok: true };
+    } catch (e) {
+      return { ok: false, error: this._traducirError(e) };
+    }
   },
 
   /** Cambia la contrasena del usuario logueado actualmente. */
   async cambiarContrasena(nueva) {
-    const { error } = await this.cliente().auth.updateUser({ password: nueva });
-    if (error) return { ok: false, error: this._traducirError(error) };
-    return { ok: true };
+    try {
+      const { error } = await this._conTimeout(this.cliente().auth.updateUser({ password: nueva }));
+      if (error) return { ok: false, error: this._traducirError(error) };
+      return { ok: true };
+    } catch (e) {
+      return { ok: false, error: this._traducirError(e) };
+    }
   },
 
   /** Cierra sesion y vuelve al login. */
@@ -136,6 +167,21 @@ const AuthSession = {
 
   _traducirError(error) {
     const m = (error && error.message) || '';
+    const nombre = (error && error.name) || '';
+    // Errores de red / servidor caído / timeout → mensaje humano
+    if (
+      m.includes('Load failed') ||
+      m.includes('Failed to fetch') ||
+      m.includes('NetworkError') ||
+      m.toLowerCase().includes('network') ||
+      m.toLowerCase().includes('timeout') ||
+      m.toLowerCase().includes('timed out') ||
+      m.includes('AbortError') ||
+      nombre === 'AbortError' ||
+      nombre === 'TypeError'
+    ) {
+      return 'Servicio no disponible temporalmente. Supabase caído. Es lo que tiene no pagar :)';
+    }
     if (m.includes('Invalid login credentials')) return 'Email o contraseña incorrectos.';
     if (m.includes('Email not confirmed')) return 'Confirma tu email haciendo clic en el enlace que te hemos enviado.';
     if (m.includes('User already registered')) return 'Ya hay una cuenta con ese email. Prueba a iniciar sesión.';
