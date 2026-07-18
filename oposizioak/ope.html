@@ -31,18 +31,17 @@
 
 <main>
   <div class="contenedor">
-    <nav class="migas">
+    <nav class="migas" id="migas-navegacion">
       <a href="/index.html">Inicio</a> <span>›</span>
-      <a href="/oposizioak/index.html">Oposizioak</a> <span>›</span>
-      <span id="migas-ope">…</span>
+      <a href="/oposizioak/index.html">Oposizioak</a>
     </nav>
 
     <h1 id="ope-titulo">Oposición</h1>
     <p id="ope-descripcion"></p>
 
-    <h2 style="margin-top:2rem">Temas</h2>
-    <div class="lista-temas" id="lista-temas">
-      <div class="tarjeta" style="opacity:0.6">Cargando temas…</div>
+    <h2 id="ope-subtitulo" style="margin-top:2rem">Contenido</h2>
+    <div class="lista-temas" id="lista-contenido">
+      <div class="tarjeta" style="opacity:0.6">Cargando…</div>
     </div>
   </div>
 </main>
@@ -58,88 +57,155 @@
 <script src="/js/auth.js"></script>
 <script src="/js/storage.js"></script>
 <script>
+  /* -------------------------------------------------------------
+     ope.html — navegación jerárquica de una oposición.
+     Lee ?ope=<ruta> donde <ruta> puede ser una jerarquía separada
+     por "/" (ej: OPE_DONOSTIA_2026_2027/Temario_General_C1).
+     Renderiza según info.tipo:
+       - "grupo" → tarjetas de sub-navegación (hijos)
+       - "temas" → tarjetas de temas para lanzar el quiz
+       - "vacio" → mensaje "próximamente"
+     ------------------------------------------------------------- */
   (async function () {
     const sesion = await AuthSession.exigirLogin();
     if (!sesion) return;
 
     const params = new URLSearchParams(location.search);
-    const opeId = params.get('ope');
-    if (!opeId) { location.href = '/oposizioak/index.html'; return; }
+    const rutaOpe = params.get('ope');
+    if (!rutaOpe) { location.href = '/oposizioak/index.html'; return; }
 
-    document.getElementById('migas-ope').textContent = opeId;
-    document.title = `${opeId} — santzez`;
+    // Construir migas de pan a partir de la ruta jerárquica
+    const partes = rutaOpe.split('/').filter(Boolean);
+    const migas = document.getElementById('migas-navegacion');
+    let acumulada = '';
+    for (let i = 0; i < partes.length; i++) {
+      acumulada += (i === 0 ? '' : '/') + partes[i];
+      const esUltima = i === partes.length - 1;
+      migas.insertAdjacentHTML('beforeend', ' <span>›</span> ');
+      if (esUltima) {
+        const span = document.createElement('span');
+        span.textContent = partes[i];
+        migas.appendChild(span);
+      } else {
+        const a = document.createElement('a');
+        a.href = `ope.html?ope=${encodeURIComponent(acumulada)}`;
+        a.textContent = partes[i];
+        migas.appendChild(a);
+      }
+    }
+
+    document.title = `${partes[partes.length - 1]} — santzez`;
 
     try {
-      const resp = await fetch(`data/${opeId}/info.json`, { cache: 'no-store' });
-      if (!resp.ok) throw new Error('No se pudo cargar la información de la oposición');
+      const resp = await fetch(`data/${rutaOpe}/info.json`, { cache: 'no-store' });
+      if (!resp.ok) throw new Error('No se pudo cargar la información');
       const info = await resp.json();
 
-      document.getElementById('ope-titulo').textContent = info.nombre || opeId;
+      document.getElementById('ope-titulo').textContent = info.nombre || rutaOpe;
       document.getElementById('ope-descripcion').textContent = info.descripcion || '';
 
-      const cont = document.getElementById('lista-temas');
+      const cont = document.getElementById('lista-contenido');
+      const subtitulo = document.getElementById('ope-subtitulo');
       cont.innerHTML = '';
 
-      for (const tema of info.temas || []) {
-        let preguntas = [];
-        try {
-          const r = await fetch(`data/${opeId}/${tema.id}.json`, { cache: 'no-store' });
-          if (r.ok) {
-            const d = await r.json();
-            preguntas = d.preguntas || [];
-          }
-        } catch {}
-        const numPreguntas = preguntas.length;
+      // Tipo "vacio" → mensaje "próximamente"
+      if (info.tipo === 'vacio') {
+        subtitulo.textContent = 'Contenido';
+        cont.innerHTML = `
+          <div class="tarjeta" style="text-align:center;padding:2rem">
+            <div style="font-size:1.2rem;margin-bottom:0.5rem">⏳</div>
+            <p style="margin:0;color:var(--color-texto-suave, #666)">
+              ${info.mensaje || 'Contenido próximamente disponible.'}
+            </p>
+          </div>`;
+        return;
+      }
 
-        // Cuenta cuántas preguntas tiene falladas el usuario en este tema
-        let numFalladas = 0;
-        if (numPreguntas > 0) {
-          try {
-            const falladas = await Storage.preguntasFalladas(sesion.user.id, preguntas);
-            numFalladas = falladas.length;
-          } catch (e) { console.warn('No se pudieron leer las falladas:', e); }
+      // Tipo "grupo" → renderizar hijos como tarjetas navegables
+      if (info.tipo === 'grupo' && Array.isArray(info.hijos)) {
+        subtitulo.textContent = 'Selecciona una sección';
+        for (const hijo of info.hijos) {
+          const rutaHijo = `${rutaOpe}/${hijo.id}`;
+          const a = document.createElement('a');
+          a.className = 'tarjeta tarjeta--clicable';
+          a.href = `ope.html?ope=${encodeURIComponent(rutaHijo)}`;
+          a.innerHTML = `
+            <div class="tarjeta__titulo">${hijo.nombre || hijo.id}</div>
+            <p class="tarjeta__descripcion">${hijo.descripcion || ''}</p>
+            <div class="tarjeta__meta">
+              <span>Explorar</span>
+              <span>→</span>
+            </div>`;
+          cont.appendChild(a);
         }
-
-        const urlTema = `quiz.html?ope=${encodeURIComponent(opeId)}&tema=${encodeURIComponent(tema.id)}`;
-        const urlFalladas = urlTema + '&modo=falladas';
-
-        const div = document.createElement('div');
-        div.className = 'tarjeta tarjeta--clicable tarjeta--fila';
-        div.dataset.href = urlTema;
-        div.innerHTML = `
-          <div class="tarjeta__principal">
-            <div class="tarjeta__titulo">${tema.id}</div>
-            <p class="tarjeta__descripcion">${tema.titulo || ''}</p>
-          </div>
-          <div class="tarjeta__estado">
-            <span>${numPreguntas > 0 ? numPreguntas + ' preguntas' : 'Disponible'}</span>
-            ${numFalladas > 0
-              ? `<span class="tarjeta__badge tarjeta__badge--error">${numFalladas} fallada${numFalladas === 1 ? '' : 's'}</span>`
-              : ''}
-          </div>
-          <div class="tarjeta__cta">
-            ${numFalladas > 0
-              ? `<a class="btn btn--secundario" href="${urlFalladas}">Repasar fallos</a>`
-              : ''}
-            <span class="tarjeta__flecha" aria-hidden="true">→</span>
-          </div>
-        `;
-
-        // Click en la tarjeta entera → empezar el tema completo
-        div.addEventListener('click', () => { location.href = div.dataset.href; });
-        // Click en el botón secundario → no propaga al div
-        div.querySelectorAll('a').forEach(a =>
-          a.addEventListener('click', e => e.stopPropagation())
-        );
-
-        cont.appendChild(div);
+        if (info.hijos.length === 0) {
+          cont.innerHTML = '<div class="tarjeta">Sin contenido todavía.</div>';
+        }
+        return;
       }
 
-      if (!info.temas || info.temas.length === 0) {
-        cont.innerHTML = '<div class="tarjeta">No hay temas cargados todavía.</div>';
+      // Tipo "temas" (o info.temas presente) → listado de temas para el quiz
+      if (info.tipo === 'temas' || Array.isArray(info.temas)) {
+        subtitulo.textContent = 'Temas';
+        for (const tema of info.temas || []) {
+          let preguntas = [];
+          try {
+            const r = await fetch(`data/${rutaOpe}/${tema.id}.json`, { cache: 'no-store' });
+            if (r.ok) {
+              const d = await r.json();
+              preguntas = d.preguntas || [];
+            }
+          } catch {}
+          const numPreguntas = preguntas.length;
+
+          let numFalladas = 0;
+          if (numPreguntas > 0) {
+            try {
+              const falladas = await Storage.preguntasFalladas(sesion.user.id, preguntas);
+              numFalladas = falladas.length;
+            } catch (e) { console.warn('No se pudieron leer las falladas:', e); }
+          }
+
+          const urlTema = `quiz.html?ope=${encodeURIComponent(rutaOpe)}&tema=${encodeURIComponent(tema.id)}`;
+          const urlFalladas = urlTema + '&modo=falladas';
+
+          const div = document.createElement('div');
+          div.className = 'tarjeta tarjeta--clicable tarjeta--fila';
+          div.dataset.href = urlTema;
+          div.innerHTML = `
+            <div class="tarjeta__principal">
+              <div class="tarjeta__titulo">${tema.id}</div>
+              <p class="tarjeta__descripcion">${tema.titulo || ''}</p>
+            </div>
+            <div class="tarjeta__estado">
+              <span>${numPreguntas > 0 ? numPreguntas + ' preguntas' : 'Disponible'}</span>
+              ${numFalladas > 0
+                ? `<span class="tarjeta__badge tarjeta__badge--error">${numFalladas} fallada${numFalladas === 1 ? '' : 's'}</span>`
+                : ''}
+            </div>
+            <div class="tarjeta__cta">
+              ${numFalladas > 0
+                ? `<a class="btn btn--secundario" href="${urlFalladas}">Repasar fallos</a>`
+                : ''}
+              <span class="tarjeta__flecha" aria-hidden="true">→</span>
+            </div>
+          `;
+          div.addEventListener('click', () => { location.href = div.dataset.href; });
+          div.querySelectorAll('a').forEach(a =>
+            a.addEventListener('click', e => e.stopPropagation())
+          );
+          cont.appendChild(div);
+        }
+        if (!info.temas || info.temas.length === 0) {
+          cont.innerHTML = '<div class="tarjeta">No hay temas cargados todavía.</div>';
+        }
+        return;
       }
+
+      // Sin tipo reconocido
+      cont.innerHTML = '<div class="tarjeta">Formato de contenido no reconocido.</div>';
     } catch (err) {
-      document.getElementById('lista-temas').innerHTML =
+      document.getElementById('lista-contenido').innerHTML =
         `<div class="tarjeta">Error: ${err.message}</div>`;
     }
   })();

@@ -72,8 +72,8 @@
               <h2>¡No hay preguntas falladas!</h2>
               <p class="resultados__detalle">Todavía no has fallado ninguna pregunta de este tema o ya las has recuperado.</p>
               <div class="resultados__acciones">
-                <a class="btn" href="quiz.html?ope=${opeId}&tema=${temaId}">Hacer el tema completo</a>
-                <a class="btn btn--secundario" href="ope.html?ope=${opeId}">Volver</a>
+                <a class="btn" href="quiz.html?ope=${encodeURIComponent(opeId)}&tema=${encodeURIComponent(temaId)}">Hacer el tema completo</a>
+                <a class="btn btn--secundario" href="ope.html?ope=${encodeURIComponent(opeId)}">Volver</a>
               </div>
             </div>`;
           return;
@@ -246,10 +246,10 @@
 
         <div class="resultados__acciones">
           ${hayFalladas
-            ? `<a class="btn" href="quiz.html?ope=${opeId}&tema=${temaId}&modo=falladas">Repetir sólo falladas (${estado.falladasIds.length})</a>`
+            ? `<a class="btn" href="quiz.html?ope=${encodeURIComponent(opeId)}&tema=${encodeURIComponent(temaId)}&modo=falladas">Repetir sólo falladas (${estado.falladasIds.length})</a>`
             : ''}
-          <a class="btn ${hayFalladas ? 'btn--secundario' : ''}" href="quiz.html?ope=${opeId}&tema=${temaId}">Repetir todas</a>
-          <a class="btn btn--secundario" href="ope.html?ope=${opeId}">Volver a los temas</a>
+          <a class="btn ${hayFalladas ? 'btn--secundario' : ''}" href="quiz.html?ope=${encodeURIComponent(opeId)}&tema=${encodeURIComponent(temaId)}">Repetir todas</a>
+          <a class="btn btn--secundario" href="ope.html?ope=${encodeURIComponent(opeId)}">Volver a los temas</a>
         </div>
       </div>`;
 
