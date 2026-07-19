@@ -144,25 +144,100 @@ const AuthSession = {
     location.href = '/login.html';
   },
 
-  /** Pinta el bloque "usuario + boton salir" en la cabecera, si existe. */
+  /**
+   * Pinta el bloque "usuario + iconos ajustes + salir" en la cabecera.
+   * Estructura: [email] [⚙ ajustes] [⏻ salir]
+   * El icono de ajustes abre un panel flotante con toggles de estilo.
+   */
   async pintarUsuarioEnCabecera() {
     const cont = document.getElementById('usuario-cabecera');
     if (!cont) return;
     let usuario = null;
     try { usuario = await this.getUsuario(); } catch { /* sin sesion o sin config aun */ }
-    if (usuario) {
-      cont.innerHTML = '';
-      const span = document.createElement('span');
-      span.style.cssText = 'opacity:0.85;margin-right:0.6rem';
-      span.textContent = usuario.email;
-      const btn = document.createElement('button');
-      btn.className = 'btn btn--secundario';
-      btn.type = 'button';
-      btn.textContent = 'Salir';
-      btn.addEventListener('click', () => this.logout());
-      cont.appendChild(span);
-      cont.appendChild(btn);
+    if (!usuario) return;
+
+    // Sincronizar preferencias con Supabase en background (silencioso)
+    if (window.Preferencias?.sincronizarDesdeServidor) {
+      Preferencias.sincronizarDesdeServidor();
     }
+
+    // SVG iconos (Feather-style)
+    const ICONO_ENGRANAJE = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>';
+    const ICONO_SALIR = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>';
+
+    cont.innerHTML = `
+      <span class="cabecera__email">${usuario.email}</span>
+      <button type="button" class="btn-icono" id="btn-ajustes" aria-label="Ajustes" title="Ajustes de estilo">
+        ${ICONO_ENGRANAJE}
+      </button>
+      <button type="button" class="btn-icono" id="btn-salir" aria-label="Cerrar sesión" title="Cerrar sesión">
+        ${ICONO_SALIR}
+      </button>
+      <div class="panel-ajustes" id="panel-ajustes" hidden>
+        <div class="panel-ajustes__titulo">Ajustes de estilo</div>
+        ${this._pintarToggle('quizFeedback', 'Quiz Feedback', 'Ripple, feedback verde/rojo, barra fluida, contador animado y confeti al ≥ 80%.')}
+        ${this._pintarToggle('identidad', 'Identidad!', 'Gradiente animado en el header y logo con micro-bounce al hover.')}
+        ${this._pintarToggle('viewTransitions', 'Antes muerta que sencilla', 'Transiciones nativas entre páginas. En navegadores viejos: sin efecto.')}
+      </div>
+    `;
+
+    // Estado inicial de los toggles
+    const prefs = window.Preferencias ? Preferencias.get() : {};
+    for (const clave of Object.keys(prefs)) {
+      const input = cont.querySelector(`#toggle-${clave}`);
+      if (input) input.checked = !!prefs[clave];
+    }
+
+    // Handlers
+    cont.querySelector('#btn-salir').addEventListener('click', () => this.logout());
+
+    const btnAjustes = cont.querySelector('#btn-ajustes');
+    const panel = cont.querySelector('#panel-ajustes');
+    btnAjustes.addEventListener('click', (e) => {
+      e.stopPropagation();
+      panel.hidden = !panel.hidden;
+      btnAjustes.classList.toggle('activo', !panel.hidden);
+    });
+
+    // Cerrar panel al hacer clic fuera
+    document.addEventListener('click', (e) => {
+      if (panel.hidden) return;
+      if (!panel.contains(e.target) && e.target !== btnAjustes) {
+        panel.hidden = true;
+        btnAjustes.classList.remove('activo');
+      }
+    });
+    // Cerrar con Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !panel.hidden) {
+        panel.hidden = true;
+        btnAjustes.classList.remove('activo');
+      }
+    });
+
+    // Cambios de toggles → guardar y aplicar
+    panel.querySelectorAll('input[type="checkbox"]').forEach(input => {
+      input.addEventListener('change', () => {
+        if (window.Preferencias) {
+          Preferencias.set({ [input.dataset.clave]: input.checked });
+        }
+      });
+    });
+  },
+
+  _pintarToggle(clave, etiqueta, descripcion) {
+    return `
+      <label class="ajuste-toggle" for="toggle-${clave}">
+        <div class="ajuste-toggle__texto">
+          <div class="ajuste-toggle__etiqueta">${etiqueta}</div>
+          <div class="ajuste-toggle__descripcion">${descripcion}</div>
+        </div>
+        <div class="ajuste-toggle__switch">
+          <input type="checkbox" id="toggle-${clave}" data-clave="${clave}" />
+          <span class="ajuste-toggle__slider"></span>
+        </div>
+      </label>
+    `;
   },
 
   _traducirError(error) {

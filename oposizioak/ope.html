@@ -46,7 +46,21 @@
 
     <h2 id="ope-subtitulo" style="margin-top:2rem">Contenido</h2>
     <div class="lista-temas" id="lista-contenido">
-      <div class="tarjeta" style="opacity:0.6">Cargando…</div>
+      <div class="skeleton-tarjeta">
+        <div class="skeleton-linea skeleton-linea--titulo"></div>
+        <div class="skeleton-linea skeleton-linea--larga"></div>
+        <div class="skeleton-linea skeleton-linea--corta"></div>
+      </div>
+      <div class="skeleton-tarjeta">
+        <div class="skeleton-linea skeleton-linea--titulo"></div>
+        <div class="skeleton-linea skeleton-linea--larga"></div>
+        <div class="skeleton-linea skeleton-linea--corta"></div>
+      </div>
+      <div class="skeleton-tarjeta">
+        <div class="skeleton-linea skeleton-linea--titulo"></div>
+        <div class="skeleton-linea skeleton-linea--larga"></div>
+        <div class="skeleton-linea skeleton-linea--corta"></div>
+      </div>
     </div>
   </div>
 </main>
@@ -59,6 +73,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-config.js"></script>
+<script src="/js/preferencias.js"></script>
+<script src="/js/view-transitions.js"></script>
 <script src="/js/auth.js"></script>
 <script src="/js/storage.js"></script>
 <script>
@@ -139,10 +155,11 @@
           const ss = Math.floor(s % 60).toString().padStart(2, '0');
           return `${m}:${ss}`;
         };
-        for (const pod of podcasts) {
+        podcasts.forEach((pod, i) => {
           const url = base + pod.archivo;
           const div = document.createElement('div');
-          div.className = 'tarjeta tarjeta--podcast';
+          div.className = 'tarjeta tarjeta--podcast tarjeta--aparecer';
+          div.style.animationDelay = (i * 60) + 'ms';
           div.innerHTML = `
             <div class="podcast__cabecera">
               <div>
@@ -172,7 +189,7 @@
             badgeDuracion.style.color = 'var(--color-error)';
           });
           cont.appendChild(div);
-        }
+        });
         return;
       }
 
@@ -192,16 +209,17 @@
       // Tipo "grupo" → renderizar hijos como tarjetas navegables
       if (info.tipo === 'grupo' && Array.isArray(info.hijos)) {
         subtitulo.textContent = 'Selecciona una sección';
-        for (const hijo of info.hijos) {
+        info.hijos.forEach((hijo, i) => {
           const rutaHijo = `${rutaOpe}/${hijo.id}`;
           const a = document.createElement('a');
-          a.className = 'tarjeta tarjeta--clicable';
+          a.className = 'tarjeta tarjeta--clicable tarjeta--aparecer';
+          a.style.animationDelay = (i * 60) + 'ms';
           a.href = `ope.html?ope=${encodeURIComponent(rutaHijo)}`;
           a.innerHTML = `
             <div class="tarjeta__titulo">${hijo.nombre || hijo.id}</div>
             <p class="tarjeta__descripcion">${hijo.descripcion || ''}</p>`;
           cont.appendChild(a);
-        }
+        });
         if (info.hijos.length === 0) {
           cont.innerHTML = '<div class="tarjeta">Sin contenido todavía.</div>';
         }
@@ -211,6 +229,7 @@
       // Tipo "temas" (o info.temas presente) → listado de temas para el quiz
       if (info.tipo === 'temas' || Array.isArray(info.temas)) {
         subtitulo.textContent = 'Temas';
+        let indiceTema = 0;
         for (const tema of info.temas || []) {
           let preguntas = [];
           try {
@@ -234,7 +253,8 @@
           const urlFalladas = urlTema + '&modo=falladas';
 
           const div = document.createElement('div');
-          div.className = 'tarjeta tarjeta--clicable tarjeta--fila';
+          div.className = 'tarjeta tarjeta--clicable tarjeta--fila tarjeta--aparecer';
+          div.style.animationDelay = (indiceTema++ * 60) + 'ms';
           div.dataset.href = urlTema;
           div.innerHTML = `
             <div class="tarjeta__principal">

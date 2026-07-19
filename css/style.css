@@ -182,25 +182,166 @@ main {
 .cabecera__usuario {
   font-size: 0.85rem;
   color: #fff;
-  opacity: 0.9;
+  opacity: 0.95;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
+  position: relative;    /* para posicionar el panel de ajustes */
 }
 
-.cabecera__usuario button {
-  background: rgba(255, 255, 255, 0.15);
+.cabecera__email {
+  margin-right: 0.25rem;
+  opacity: 0.9;
+}
+
+/* Botones-icono circulares */
+.btn-icono {
+  background: rgba(255, 255, 255, 0.12);
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 0.3rem 0.7rem;
-  border-radius: var(--radio);
-  font-size: 0.8rem;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   font-family: inherit;
+  padding: 0;
+  transition: background 0.15s, transform 0.15s, border-color 0.15s;
+}
+.btn-icono:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+.btn-icono:active {
+  transform: scale(0.94);
+}
+.btn-icono.activo {
+  background: #fff;
+  color: var(--color-primario);
+  border-color: #fff;
+}
+.btn-icono svg {
+  display: block;
 }
 
-.cabecera__usuario button:hover {
-  background: rgba(255, 255, 255, 0.25);
+/* =============================================================
+   PANEL DE AJUSTES (flotante, ancla en el icono de engranaje)
+   ============================================================= */
+
+.panel-ajustes {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  right: 0;
+  min-width: 320px;
+  max-width: 90vw;
+  background: #fff;
+  color: var(--color-texto);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-grande);
+  box-shadow: var(--sombra-fuerte);
+  padding: 1rem;
+  z-index: 100;
+  animation: panel-aparecer 0.18s ease-out;
+}
+@keyframes panel-aparecer {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+.panel-ajustes[hidden] { display: none; }
+
+.panel-ajustes__titulo {
+  font-family: var(--fuente-corporativa);
+  color: var(--color-primario);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0 0 0.75rem;
+  border-bottom: 1px solid var(--color-borde-claro);
+  margin-bottom: 0.25rem;
+}
+
+/* Un ajuste = etiqueta + descripción + interruptor tipo iOS */
+.ajuste-toggle {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.65rem 0.25rem;
+  border-radius: var(--radio);
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.ajuste-toggle:hover {
+  background: var(--color-primario-suave);
+}
+.ajuste-toggle + .ajuste-toggle {
+  border-top: 1px solid var(--color-borde-claro);
+}
+
+.ajuste-toggle__texto {
+  flex: 1;
+  min-width: 0;
+}
+.ajuste-toggle__etiqueta {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--color-texto);
+  margin-bottom: 0.15rem;
+}
+.ajuste-toggle__descripcion {
+  font-size: 0.78rem;
+  color: var(--color-texto-suave);
+  line-height: 1.35;
+}
+
+/* Switch tipo iOS con checkbox oculto */
+.ajuste-toggle__switch {
+  position: relative;
+  width: 42px;
+  height: 24px;
+  flex: 0 0 auto;
+}
+.ajuste-toggle__switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+.ajuste-toggle__slider {
+  position: absolute;
+  inset: 0;
+  background: var(--color-borde);
+  border-radius: 999px;
+  transition: background 0.2s;
+}
+.ajuste-toggle__slider::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.22s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.ajuste-toggle__switch input:checked + .ajuste-toggle__slider {
+  background: var(--color-primario);
+}
+.ajuste-toggle__switch input:checked + .ajuste-toggle__slider::before {
+  transform: translateX(18px);
+}
+.ajuste-toggle__switch input:focus-visible + .ajuste-toggle__slider {
+  outline: 2px solid var(--color-primario);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .cabecera__email { display: none; }   /* solo iconos en móvil */
+  .panel-ajustes { min-width: 280px; right: -0.5rem; }
 }
 
 /* Pie */
@@ -1088,6 +1229,209 @@ a.tarjeta:hover {
     gap: 0.5rem;
   }
   .podcast__descarga { text-align: center; }
+}
+
+/* =============================================================
+   ANIMACIONES — Paquete A (elegante y discreto)
+   Micro-interacciones para toda la nav y las tarjetas.
+   ============================================================= */
+
+/* Respeto por accesibilidad: si el usuario prefiere sin animación */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 1) HOVER pulido: el título ya toma color al elevarse la tarjeta */
+.tarjeta {
+  transition: transform 0.22s cubic-bezier(0.25, 0.8, 0.25, 1),
+              box-shadow 0.22s cubic-bezier(0.25, 0.8, 0.25, 1),
+              border-color 0.22s ease-out;
+}
+.tarjeta__titulo {
+  transition: color 0.22s ease-out;
+}
+a.tarjeta:hover .tarjeta__titulo,
+.tarjeta--clicable:hover .tarjeta__titulo {
+  color: var(--color-primario-hover);
+}
+
+/* 2) FADE-IN con leve slide-up cuando aparecen los items */
+@keyframes tarjeta-entrar {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+.tarjeta--aparecer {
+  animation: tarjeta-entrar 0.35s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+}
+
+/* 3) SKELETON loaders — sustituyen a "Cargando…" con rectángulos pulsantes */
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 1;    }
+  50%      { opacity: 0.55; }
+}
+.skeleton-tarjeta {
+  padding: 1.5rem;
+  border-radius: var(--radio-grande);
+  border: 1px solid var(--color-borde-claro);
+  background: #fff;
+}
+.skeleton-linea {
+  height: 0.9rem;
+  background: var(--color-borde-claro);
+  border-radius: 4px;
+  animation: skeleton-pulse 1.4s ease-in-out infinite;
+}
+.skeleton-linea--titulo { width: 45%; height: 1.2rem; margin-bottom: 0.9rem; }
+.skeleton-linea--corta  { width: 70%; margin: 0.35rem 0; }
+.skeleton-linea--larga  { width: 90%; margin: 0.35rem 0; }
+/* Desfase entre pulsos de skeletons vecinos para que no parpadeen a la vez */
+.skeleton-tarjeta:nth-child(2) .skeleton-linea { animation-delay: 0.15s; }
+.skeleton-tarjeta:nth-child(3) .skeleton-linea { animation-delay: 0.30s; }
+.skeleton-tarjeta:nth-child(4) .skeleton-linea { animation-delay: 0.45s; }
+
+/* 4) Migas de pan con slide-in en cascada */
+@keyframes miga-entrar {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: translateX(0);    }
+}
+.migas > a,
+.migas > span {
+  animation: miga-entrar 0.3s ease-out both;
+}
+.migas > *:nth-child(1)  { animation-delay: 0.00s; }
+.migas > *:nth-child(2)  { animation-delay: 0.05s; }
+.migas > *:nth-child(3)  { animation-delay: 0.10s; }
+.migas > *:nth-child(4)  { animation-delay: 0.15s; }
+.migas > *:nth-child(5)  { animation-delay: 0.20s; }
+.migas > *:nth-child(6)  { animation-delay: 0.25s; }
+.migas > *:nth-child(7)  { animation-delay: 0.30s; }
+.migas > *:nth-child(8)  { animation-delay: 0.35s; }
+.migas > *:nth-child(9)  { animation-delay: 0.40s; }
+.migas > *:nth-child(10) { animation-delay: 0.45s; }
+
+/* =============================================================
+   CATEGORÍA B — Quiz Feedback (activa con html.anim-quiz-feedback)
+   Ripple + feedback verde/rojo animado + barra fluida + contador
+   + confetti al terminar con ≥ 80%.
+   ============================================================= */
+
+/* Barra de progreso más fluida (solo si activa la categoría) */
+html.anim-quiz-feedback .barra-progreso__relleno {
+  transition: width 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Ripple sobre las opciones al pulsar */
+html.anim-quiz-feedback .opcion {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.12s ease-out;
+}
+html.anim-quiz-feedback .opcion:active {
+  transform: scale(0.985);
+}
+html.anim-quiz-feedback .opcion .ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(0, 61, 165, 0.25);   /* azul primario 25% */
+  transform: scale(0);
+  animation: ripple-expand 0.55s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes ripple-expand {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* Feedback verde/rojo animado (entra con scale + fade) */
+@keyframes feedback-entrar {
+  from { opacity: 0; transform: translateY(-4px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+html.anim-quiz-feedback .feedback.visible {
+  animation: feedback-entrar 0.28s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+}
+
+/* Opción correcta con leve pulso al revelarse */
+@keyframes acierto-pulso {
+  0%   { box-shadow: 0 0 0 0 rgba(46, 125, 60, 0.35); }
+  100% { box-shadow: 0 0 0 10px rgba(46, 125, 60, 0);  }
+}
+html.anim-quiz-feedback .opcion.opcion--acierto {
+  animation: acierto-pulso 0.9s ease-out;
+}
+/* Opción marcada incorrecta con leve shake */
+@keyframes error-shake {
+  0%,100% { transform: translateX(0); }
+  20%     { transform: translateX(-3px); }
+  40%     { transform: translateX(3px);  }
+  60%     { transform: translateX(-2px); }
+  80%     { transform: translateX(2px);  }
+}
+html.anim-quiz-feedback .opcion.opcion--error {
+  animation: error-shake 0.35s ease-in-out;
+}
+
+/* Contador final animado en resultados (opacity fade cuando cambia) */
+html.anim-quiz-feedback .resultados__nota {
+  transition: opacity 0.2s ease-out;
+}
+
+/* =============================================================
+   CATEGORÍA C — Identidad! (activa con html.anim-identidad)
+   Gradiente sutil animado en la cabecera + micro-bounce del logo.
+   ============================================================= */
+
+html.anim-identidad .cabecera {
+  background: linear-gradient(
+    120deg,
+    var(--color-primario) 0%,
+    var(--color-primario-hover) 25%,
+    var(--color-primario) 50%,
+    var(--color-primario-hover) 75%,
+    var(--color-primario) 100%
+  );
+  background-size: 300% 100%;
+  animation: identidad-fluir 18s ease-in-out infinite;
+}
+@keyframes identidad-fluir {
+  0%,100% { background-position: 0% 50%; }
+  50%     { background-position: 100% 50%; }
+}
+
+html.anim-identidad .cabecera__marca img {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+html.anim-identidad .cabecera__marca:hover img {
+  transform: translateY(-2px) rotate(-4deg) scale(1.05);
+}
+
+/* =============================================================
+   CATEGORÍA D — Antes muerta que sencilla (View Transitions)
+   Marca visual mientras dura la transición (opcional).
+   ============================================================= */
+
+html.anim-view-transitions {
+  /* View Transitions API es nativa; el JS que las lanza vive
+     en view-transitions.js. Aquí solo aplicamos afinado visual. */
+}
+@keyframes vt-slide-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+@keyframes vt-slide-out {
+  from { opacity: 1; transform: translateY(0);    }
+  to   { opacity: 0; transform: translateY(-6px); }
+}
+html.anim-view-transitions::view-transition-old(root) {
+  animation: 180ms ease-out both vt-slide-out;
+}
+html.anim-view-transitions::view-transition-new(root) {
+  animation: 260ms cubic-bezier(0.25, 0.8, 0.25, 1) both vt-slide-in;
 }
 
 /* =============================================================

@@ -47,6 +47,77 @@
 
   const letra = i => String.fromCharCode(97 + i); // 0 -> a, 1 -> b...
 
+  // ¿Está activa la Categoría B?
+  const feedbackAnimActivo = () =>
+    document.documentElement.classList.contains('anim-quiz-feedback');
+
+  // Ripple sobre un botón (feedback táctil al pulsar una opción)
+  function lanzarRipple(evt, botonPulsado) {
+    if (!feedbackAnimActivo()) return;
+    const rect = botonPulsado.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = (evt.clientX ?? (rect.left + rect.width / 2)) - rect.left - size / 2;
+    const y = (evt.clientY ?? (rect.top + rect.height / 2)) - rect.top - size / 2;
+    const span = document.createElement('span');
+    span.className = 'ripple';
+    span.style.cssText = `left:${x}px;top:${y}px;width:${size}px;height:${size}px;`;
+    botonPulsado.appendChild(span);
+    setTimeout(() => span.remove(), 600);
+  }
+
+  // Contador animado (de 0 a valor final en ~800 ms)
+  function animarContador(nodo, valorFinal, duracionMs = 800) {
+    if (!feedbackAnimActivo()) { nodo.textContent = valorFinal; return; }
+    const inicio = performance.now();
+    function paso(t) {
+      const p = Math.min(1, (t - inicio) / duracionMs);
+      // easing outCubic
+      const eased = 1 - Math.pow(1 - p, 3);
+      nodo.textContent = Math.round(valorFinal * eased);
+      if (p < 1) requestAnimationFrame(paso);
+      else nodo.textContent = valorFinal;
+    }
+    requestAnimationFrame(paso);
+  }
+
+  // Confeti (carga la lib solo si se necesita)
+  let _confettiPromise = null;
+  function cargarConfetti() {
+    if (_confettiPromise) return _confettiPromise;
+    _confettiPromise = new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js';
+      s.onload = () => resolve(window.confetti);
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+    return _confettiPromise;
+  }
+  async function lanzarConfetti() {
+    if (!feedbackAnimActivo()) return;
+    try {
+      const confetti = await cargarConfetti();
+      if (!confetti) return;
+      // Ráfaga desde el centro-inferior + dos laterales, colores corporativos
+      const colors = ['#003da5', '#2e7d3c', '#ffffff', '#5a5652'];
+      const duration = 1500;
+      const end = Date.now() + duration;
+      (function frame() {
+        confetti({
+          particleCount: 3, angle: 60, spread: 55,
+          origin: { x: 0, y: 0.85 }, colors
+        });
+        confetti({
+          particleCount: 3, angle: 120, spread: 55,
+          origin: { x: 1, y: 0.85 }, colors
+        });
+        if (Date.now() < end) requestAnimationFrame(frame);
+      })();
+    } catch (e) {
+      console.warn('No se pudo cargar canvas-confetti:', e);
+    }
+  }
+
   // ------- Carga de datos -------
   async function cargarTema() {
     const ruta = `data/${opeId}/${temaId}.json`;
@@ -141,7 +212,7 @@
       btn.innerHTML = `
         <span class="opcion__letra">${letra(idx)}</span>
         <span>${op.texto}</span>`;
-      btn.addEventListener('click', () => responder(btn, pregunta));
+      btn.addEventListener('click', (ev) => { lanzarRipple(ev, btn); responder(btn, pregunta); });
       contOp.appendChild(btn);
     });
   }
@@ -222,7 +293,7 @@
     document.getElementById('quiz-raiz').innerHTML = `
       <div class="resultados">
         <h2>Resultados</h2>
-        <div class="resultados__nota">${aciertos}<span style="font-size:1.6rem;color:var(--color-texto-suave)">/${total}</span></div>
+        <div class="resultados__nota"><span id="cnt-aciertos">${feedbackAnimActivo() ? 0 : aciertos}</span><span style="font-size:1.6rem;color:var(--color-texto-suave)">/${total}</span></div>
         <p class="resultados__detalle">Has acertado el <strong>${porcentaje}%</strong> de las preguntas.</p>
 
         <div class="resultados__grafico">
@@ -277,6 +348,11 @@
     });
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Contador animado + confetti (solo si la Categoría B está activa)
+    const cntNodo = document.getElementById('cnt-aciertos');
+    if (cntNodo) animarContador(cntNodo, aciertos, 900);
+    if (porcentaje >= 80) lanzarConfetti();
   }
 
   iniciar();
