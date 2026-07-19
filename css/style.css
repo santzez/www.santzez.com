@@ -872,6 +872,144 @@ a.tarjeta:hover {
 }
 
 /* =============================================================
+   INFO AMPLIADA — <details> desplegable "+ INFO"
+   ============================================================= */
+
+.info-ampliada {
+  margin: 0.75rem 0 1.5rem;
+}
+
+/* Botón/enlace "+ INFO" */
+.info-ampliada > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  color: var(--color-primario);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--color-primario);
+  border-radius: var(--radio);
+  background: transparent;
+  transition: background 0.15s, color 0.15s;
+  list-style: none;                  /* quita el triangulito por defecto */
+  user-select: none;
+}
+.info-ampliada > summary::-webkit-details-marker { display: none; }
+.info-ampliada > summary::before {
+  content: "+";
+  font-size: 1rem;
+  line-height: 1;
+  font-weight: 700;
+  display: inline-block;
+  transition: transform 0.2s;
+}
+.info-ampliada[open] > summary::before {
+  content: "−";
+}
+.info-ampliada > summary:hover {
+  background: var(--color-primario);
+  color: #fff;
+}
+.info-ampliada > summary:focus-visible {
+  outline: 2px solid var(--color-primario);
+  outline-offset: 2px;
+}
+
+/* Panel de contenido desplegado */
+.info-ampliada__contenido {
+  margin-top: 1rem;
+  padding: 1.5rem;
+  background: var(--color-fondo-alt);
+  border-left: 3px solid var(--color-primario);
+  border-radius: var(--radio-grande);
+  animation: infoAmpliadaSlide 0.2s ease-out;
+}
+
+@keyframes infoAmpliadaSlide {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.info-ampliada__contenido > *:first-child { margin-top: 0; }
+.info-ampliada__contenido > *:last-child  { margin-bottom: 0; }
+
+.info-ampliada__contenido h3 {
+  margin: 1.25rem 0 0.5rem;
+  font-size: 1rem;
+  color: var(--color-primario);
+  letter-spacing: 0.02em;
+}
+.info-ampliada__contenido h3:first-child { margin-top: 0; }
+
+.info-ampliada__contenido ul {
+  margin: 0.5rem 0;
+  padding-left: 1.25rem;
+}
+.info-ampliada__contenido li {
+  margin: 0.35rem 0;
+  line-height: 1.5;
+}
+
+.info-ampliada__contenido code {
+  background: var(--color-primario-suave);
+  color: var(--color-primario);
+  padding: 0.05em 0.35em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-family: 'SF Mono', Menlo, Consolas, monospace;
+}
+
+/* Tabla dentro de "info ampliada" */
+.info-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.5rem 0 0.75rem;
+  font-size: 0.9rem;
+  background: var(--color-fondo);
+  border-radius: var(--radio);
+  overflow: hidden;
+}
+.info-tabla thead th {
+  background: var(--color-primario-suave);
+  color: var(--color-primario);
+  padding: 0.55rem 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--color-primario);
+}
+.info-tabla tbody td {
+  padding: 0.45rem 0.75rem;
+  border-bottom: 1px solid var(--color-borde-claro);
+}
+.info-tabla tbody tr:last-child td { border-bottom: 0; }
+.info-tabla tfoot th {
+  padding: 0.55rem 0.75rem;
+  background: var(--color-fondo-alt);
+  border-top: 2px solid var(--color-primario);
+  font-weight: 700;
+  text-align: left;
+  color: var(--color-primario);
+}
+/* Columnas numéricas alineadas a la derecha (todas menos la primera) */
+.info-tabla th:not(:first-child),
+.info-tabla td:not(:first-child) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 640px) {
+  .info-ampliada__contenido { padding: 1rem; }
+  .info-tabla { font-size: 0.82rem; }
+  .info-tabla thead th,
+  .info-tabla tbody td,
+  .info-tabla tfoot th { padding: 0.4rem 0.5rem; }
+}
+
+/* =============================================================
    PODCASTS — reproductor con controles adicionales
    ============================================================= */
 

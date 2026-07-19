@@ -37,7 +37,11 @@
     </nav>
 
     <h1 id="ope-titulo">Oposición</h1>
-    <p id="ope-descripcion"></p>
+    <p id="ope-descripcion" style="white-space:pre-line"></p>
+    <details id="ope-info-ampliada" class="info-ampliada" hidden>
+      <summary>INFO</summary>
+      <div class="info-ampliada__contenido" id="ope-info-ampliada-contenido"></div>
+    </details>
 
     <h2 id="ope-subtitulo" style="margin-top:2rem">Contenido</h2>
     <div class="lista-temas" id="lista-contenido">
@@ -103,6 +107,13 @@
 
       document.getElementById('ope-titulo').textContent = info.nombre || rutaOpe;
       document.getElementById('ope-descripcion').textContent = info.descripcion || '';
+
+      // Panel desplegable "+ INFO" con contenido HTML controlado desde el JSON
+      const detalles = document.getElementById('ope-info-ampliada');
+      if (info.infoAmpliada && String(info.infoAmpliada).trim().length > 0) {
+        document.getElementById('ope-info-ampliada-contenido').innerHTML = info.infoAmpliada;
+        detalles.hidden = false;
+      }
 
       const cont = document.getElementById('lista-contenido');
       const subtitulo = document.getElementById('ope-subtitulo');
