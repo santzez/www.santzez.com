@@ -108,6 +108,87 @@
       const subtitulo = document.getElementById('ope-subtitulo');
       cont.innerHTML = '';
 
+      // Tipo "podcasts" → lista de reproductores HTML5
+      if (info.tipo === 'podcasts') {
+        subtitulo.textContent = 'Podcasts';
+        cont.classList.add('lista-podcasts');
+        const podcasts = info.podcasts || [];
+        const base = info.urlBase || '';
+        if (podcasts.length === 0) {
+          cont.innerHTML = '<div class="tarjeta">Todavía no hay podcasts publicados.</div>';
+          return;
+        }
+        // Formateador mm:ss
+        const mmss = s => {
+          if (!s || isNaN(s)) return '';
+          const m = Math.floor(s / 60);
+          const ss = Math.floor(s % 60).toString().padStart(2, '0');
+          return `${m}:${ss}`;
+        };
+        for (const pod of podcasts) {
+          const url = base + pod.archivo;
+          const div = document.createElement('div');
+          div.className = 'tarjeta tarjeta--podcast';
+          div.innerHTML = `
+            <div class="podcast__cabecera">
+              <div>
+                <div class="tarjeta__titulo">
+                  ${pod.tema ? `<span class="podcast__tema">${pod.tema}</span> ` : ''}${pod.titulo || pod.archivo}
+                </div>
+                ${pod.descripcion ? `<p class="tarjeta__descripcion">${pod.descripcion}</p>` : ''}
+              </div>
+              <span class="podcast__duracion" data-duracion>${pod.duracion ? mmss(pod.duracion) : ''}</span>
+            </div>
+            <audio class="podcast__audio" controls preload="metadata" src="${url}"></audio>
+            <div class="podcast__acciones">
+              <div class="podcast__velocidad" role="group" aria-label="Velocidad de reproducción">
+                <button type="button" data-vel="0.75">0.75×</button>
+                <button type="button" data-vel="1" class="activo">1×</button>
+                <button type="button" data-vel="1.25">1.25×</button>
+                <button type="button" data-vel="1.5">1.5×</button>
+                <button type="button" data-vel="1.75">1.75×</button>
+                <button type="button" data-vel="2">2×</button>
+              </div>
+              <div class="podcast__saltos" role="group" aria-label="Saltos de 15 segundos">
+                <button type="button" data-salto="-15" title="Retroceder 15 s">‹ 15 s</button>
+                <button type="button" data-salto="15" title="Avanzar 15 s">15 s ›</button>
+              </div>
+              <a class="podcast__descarga btn btn--secundario" href="${url}" download="${pod.archivo}" title="Descargar el archivo m4a">↓ Descargar</a>
+            </div>
+          `;
+          const audio = div.querySelector('audio');
+          // Duración automática desde metadata (si no venía en el JSON)
+          const badgeDuracion = div.querySelector('[data-duracion]');
+          audio.addEventListener('loadedmetadata', () => {
+            if (!badgeDuracion.textContent.trim() && audio.duration && !isNaN(audio.duration)) {
+              badgeDuracion.textContent = mmss(audio.duration);
+            }
+          });
+          audio.addEventListener('error', () => {
+            badgeDuracion.textContent = '⚠';
+            badgeDuracion.title = 'No se pudo cargar el audio (¿archivo subido a R2?)';
+            badgeDuracion.style.color = 'var(--color-error)';
+          });
+          // Velocidad
+          div.querySelectorAll('.podcast__velocidad button').forEach(b => {
+            b.addEventListener('click', () => {
+              audio.playbackRate = parseFloat(b.dataset.vel);
+              div.querySelectorAll('.podcast__velocidad button').forEach(x => x.classList.remove('activo'));
+              b.classList.add('activo');
+            });
+          });
+          // Saltos ±15s
+          div.querySelectorAll('.podcast__saltos button').forEach(b => {
+            b.addEventListener('click', () => {
+              const salto = parseFloat(b.dataset.salto);
+              audio.currentTime = Math.max(0, Math.min((audio.duration || 1e9), audio.currentTime + salto));
+            });
+          });
+          cont.appendChild(div);
+        }
+        return;
+      }
+
       // Tipo "vacio" → mensaje "próximamente"
       if (info.tipo === 'vacio') {
         subtitulo.textContent = 'Contenido';
