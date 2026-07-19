@@ -138,6 +138,12 @@
       const subtitulo = document.getElementById('ope-subtitulo');
       cont.innerHTML = '';
 
+      // Tipo "material" → PDFs por tema en Supabase Storage
+      if (info.tipo === 'material') {
+        await renderMaterial(info, rutaOpe);
+        return;
+      }
+
       // Tipo "podcasts" → lista de reproductores HTML5
       if (info.tipo === 'podcasts') {
         subtitulo.textContent = 'Podcasts';
@@ -290,6 +296,173 @@
     } catch (err) {
       document.getElementById('lista-contenido').innerHTML =
         `<div class="tarjeta">Error: ${err.message}</div>`;
+    }
+
+    // -------------------------------------------------------------
+    // Renderizado tipo "material": PDFs por tema en Supabase Storage
+    // -------------------------------------------------------------
+    async function renderMaterial(info, rutaOpe) {
+      const cont = document.getElementById('lista-contenido');
+      const subtitulo = document.getElementById('ope-subtitulo');
+      subtitulo.textContent = 'Material de estudio por tema';
+      cont.innerHTML = '';
+
+      const bucket = info.bucket || 'material';
+      // El prefijo es la propia ruta jerárquica quitando el último nivel
+      // (Material_de_estudio). Así los PDFs viven en:
+      //   material/OPE_DONOSTIA_2026_2027/Temario_General_C1/T1/*.pdf
+      const prefijoBase = rutaOpe.replace(/\/[^/]+$/, '');
+      const cliente = AuthSession.cliente();
+
+      // Detectar admin
+      let esAdmin = false;
+      try { esAdmin = await AuthSession.esAdmin(); } catch {}
+
+      // Formateador de tamaño
+      const kb = b => b < 1024*1024
+        ? `${(b/1024).toFixed(1)} KB`
+        : `${(b/1024/1024).toFixed(1)} MB`;
+
+      // Función que refresca la lista de un tema
+      async function cargarPDFsTema(temaId, listaNodo) {
+        listaNodo.innerHTML = '<div class="skeleton-linea skeleton-linea--larga"></div><div class="skeleton-linea skeleton-linea--corta"></div>';
+        const carpeta = `${prefijoBase}/${temaId}`;
+        const { data, error } = await cliente.storage.from(bucket).list(carpeta, {
+          limit: 100, sortBy: { column: 'name', order: 'asc' }
+        });
+        if (error) {
+          listaNodo.innerHTML = `<p class="material__vacio">Error cargando la lista: ${error.message}</p>`;
+          return;
+        }
+        const pdfs = (data || []).filter(x => x.name && x.name.toLowerCase().endsWith('.pdf'));
+        if (pdfs.length === 0) {
+          listaNodo.innerHTML = '<p class="material__vacio">Aún no hay PDFs en este tema.</p>';
+          return;
+        }
+        listaNodo.innerHTML = '';
+        for (const pdf of pdfs) {
+          const rutaCompleta = `${carpeta}/${pdf.name}`;
+          const { data: pub } = cliente.storage.from(bucket).getPublicUrl(rutaCompleta);
+          const url = pub.publicUrl;
+          const tam = pdf.metadata?.size ? kb(pdf.metadata.size) : '';
+          const fila = document.createElement('div');
+          fila.className = 'material-pdf';
+          fila.innerHTML = `
+            <div class="material-pdf__icono">📄</div>
+            <div class="material-pdf__info">
+              <div class="material-pdf__nombre">${pdf.name}</div>
+              ${tam ? `<div class="material-pdf__meta">${tam}</div>` : ''}
+            </div>
+            <div class="material-pdf__acciones">
+              <a class="btn btn--secundario" href="${url}" target="_blank" rel="noopener">Ver</a>
+              <a class="btn btn--secundario" href="${url}" download="${pdf.name}">↓ Descargar</a>
+              ${esAdmin ? `
+                <button type="button" class="btn-icono material-pdf__btn" data-accion="renombrar" data-nombre="${pdf.name}" title="Renombrar">✎</button>
+                <button type="button" class="btn-icono material-pdf__btn material-pdf__btn--peligro" data-accion="borrar" data-nombre="${pdf.name}" title="Borrar">🗑</button>
+              ` : ''}
+            </div>
+          `;
+          // Handlers admin
+          if (esAdmin) {
+            fila.querySelector('[data-accion="renombrar"]').addEventListener('click', async () => {
+              const nuevo = prompt(`Nuevo nombre para "${pdf.name}"`, pdf.name);
+              if (!nuevo || nuevo === pdf.name) return;
+              const nombreFinal = nuevo.toLowerCase().endsWith('.pdf') ? nuevo : nuevo + '.pdf';
+              const { error } = await cliente.storage.from(bucket).move(rutaCompleta, `${carpeta}/${nombreFinal}`);
+              if (error) return alert(`Error renombrando: ${error.message}`);
+              await cargarPDFsTema(temaId, listaNodo);
+            });
+            fila.querySelector('[data-accion="borrar"]').addEventListener('click', async () => {
+              if (!confirm(`¿Borrar "${pdf.name}"? Esta acción no se puede deshacer.`)) return;
+              const { error } = await cliente.storage.from(bucket).remove([rutaCompleta]);
+              if (error) return alert(`Error borrando: ${error.message}`);
+              await cargarPDFsTema(temaId, listaNodo);
+            });
+          }
+          listaNodo.appendChild(fila);
+        }
+      }
+
+      // Función que sube un archivo
+      async function subirArchivo(file, temaId, listaNodo, barra) {
+        if (!file) return;
+        if (!file.type.includes('pdf') && !file.name.toLowerCase().endsWith('.pdf')) {
+          alert('Solo se admiten archivos PDF.');
+          return;
+        }
+        if (file.size > 50 * 1024 * 1024) {
+          alert('El archivo supera el máximo de 50 MB.');
+          return;
+        }
+        const rutaCompleta = `${prefijoBase}/${temaId}/${file.name}`;
+        barra.classList.add('material__barra--visible');
+        barra.textContent = `Subiendo ${file.name}…`;
+        const { error } = await cliente.storage.from(bucket).upload(rutaCompleta, file, {
+          cacheControl: '3600', upsert: true, contentType: 'application/pdf'
+        });
+        barra.classList.remove('material__barra--visible');
+        if (error) return alert(`Error subiendo: ${error.message}`);
+        await cargarPDFsTema(temaId, listaNodo);
+      }
+
+      // Render principal: una tarjeta por tema
+      const temas = info.temas || [];
+      if (temas.length === 0) {
+        cont.innerHTML = '<div class="tarjeta">No hay temas definidos.</div>';
+        return;
+      }
+      temas.forEach((tema, i) => {
+        const div = document.createElement('div');
+        div.className = 'tarjeta tarjeta--material tarjeta--aparecer';
+        div.style.animationDelay = (i * 60) + 'ms';
+        div.innerHTML = `
+          <div class="material__cabecera">
+            <div class="tarjeta__titulo"><span class="podcast__tema">${tema.id}</span> ${tema.titulo || tema.id}</div>
+          </div>
+          <div class="material__lista"></div>
+          ${esAdmin ? `
+            <div class="material__admin">
+              <div class="material__barra"></div>
+              <div class="material__dropzone" tabindex="0">
+                <div class="material__dropzone-txt">
+                  <strong>Arrastra PDFs aquí</strong> o pulsa para seleccionar
+                </div>
+                <input type="file" accept="application/pdf,.pdf" multiple hidden>
+              </div>
+            </div>
+          ` : ''}
+        `;
+        const listaNodo = div.querySelector('.material__lista');
+        cargarPDFsTema(tema.id, listaNodo);
+
+        // Handlers admin: drag & drop + input file
+        if (esAdmin) {
+          const barra = div.querySelector('.material__barra');
+          const zona = div.querySelector('.material__dropzone');
+          const input = div.querySelector('input[type="file"]');
+
+          zona.addEventListener('click', () => input.click());
+          zona.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); }
+          });
+          input.addEventListener('change', async () => {
+            for (const f of input.files) await subirArchivo(f, tema.id, listaNodo, barra);
+            input.value = '';
+          });
+          ['dragenter','dragover'].forEach(ev =>
+            zona.addEventListener(ev, e => { e.preventDefault(); zona.classList.add('material__dropzone--activa'); })
+          );
+          ['dragleave','drop'].forEach(ev =>
+            zona.addEventListener(ev, e => { e.preventDefault(); zona.classList.remove('material__dropzone--activa'); })
+          );
+          zona.addEventListener('drop', async e => {
+            e.preventDefault();
+            const files = Array.from(e.dataTransfer.files);
+            for (const f of files) await subirArchivo(f, tema.id, listaNodo, barra);
+          });
+        }
+        cont.appendChild(div);
+      });
     }
   })();
 </script>

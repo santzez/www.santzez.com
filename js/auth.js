@@ -48,6 +48,25 @@ const AuthSession = {
   },
 
   /**
+   * Comprueba si el usuario actual es admin (columna es_admin en perfiles).
+   * Cachea el resultado para toda la sesión JS.
+   */
+  _esAdminCache: undefined,
+  async esAdmin() {
+    if (this._esAdminCache !== undefined) return this._esAdminCache;
+    const sesion = await this.getSesion();
+    if (!sesion) { this._esAdminCache = false; return false; }
+    const { data, error } = await this.cliente()
+      .from('perfiles')
+      .select('es_admin')
+      .eq('id', sesion.user.id)
+      .maybeSingle();
+    if (error) { console.warn('No se pudo leer es_admin:', error); this._esAdminCache = false; return false; }
+    this._esAdminCache = !!data && data.es_admin === true;
+    return this._esAdminCache;
+  },
+
+  /**
    * Garantiza sesion activa Y aprobada antes de continuar.
    * - Sin sesion → redirige a /login.html
    * - Sesion no aprobada → redirige a /pendiente.html
