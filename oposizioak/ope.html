@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Oposición — santzez</title>
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
@@ -78,7 +79,9 @@
     const rutaOpe = params.get('ope');
     if (!rutaOpe) { location.href = '/oposizioak/index.html'; return; }
 
-    // Construir migas de pan a partir de la ruta jerárquica
+    // Construir migas de pan a partir de la ruta jerárquica.
+    // Mostramos texto sin guiones bajos, pero la URL/href se mantiene con el ID técnico.
+    const formatear = id => id.replace(/_/g, ' ');
     const partes = rutaOpe.split('/').filter(Boolean);
     const migas = document.getElementById('migas-navegacion');
     let acumulada = '';
@@ -88,17 +91,17 @@
       migas.insertAdjacentHTML('beforeend', ' <span>›</span> ');
       if (esUltima) {
         const span = document.createElement('span');
-        span.textContent = partes[i];
+        span.textContent = formatear(partes[i]);
         migas.appendChild(span);
       } else {
         const a = document.createElement('a');
         a.href = `ope.html?ope=${encodeURIComponent(acumulada)}`;
-        a.textContent = partes[i];
+        a.textContent = formatear(partes[i]);
         migas.appendChild(a);
       }
     }
 
-    document.title = `${partes[partes.length - 1]} — santzez`;
+    document.title = `${formatear(partes[partes.length - 1])} — santzez`;
 
     try {
       const resp = await fetch(`data/${rutaOpe}/info.json`, { cache: 'no-store' });
