@@ -121,6 +121,23 @@
 
     try {
       const resp = await fetch(`data/${rutaOpe}/info.json`, { cache: 'no-store' });
+      if (resp.status === 404) {
+        // Este tema/sección aún no tiene contenido publicado
+        document.getElementById('ope-titulo').textContent = formatear(partes[partes.length - 1]);
+        document.getElementById('ope-descripcion').textContent = '';
+        document.getElementById('ope-subtitulo').textContent = 'Contenido';
+        document.getElementById('lista-contenido').innerHTML = `
+          <div class="tarjeta" style="text-align:center;padding:2.5rem">
+            <div style="font-size:1.5rem;margin-bottom:0.75rem">🚧</div>
+            <p style="margin:0 0 0.5rem;font-weight:600;color:var(--color-primario)">
+              Este apartado todavía no tiene material publicado.
+            </p>
+            <p style="margin:0;color:var(--color-texto-suave);font-size:0.9rem">
+              Se irá subiendo poco a poco. Vuelve pronto o revisa otros temas.
+            </p>
+          </div>`;
+        return;
+      }
       if (!resp.ok) throw new Error('No se pudo cargar la información');
       const info = await resp.json();
 
@@ -137,6 +154,49 @@
       const cont = document.getElementById('lista-contenido');
       const subtitulo = document.getElementById('ope-subtitulo');
       cont.innerHTML = '';
+
+      // Tipo "bloques" → acordeón: bloques colapsables con temas dentro
+      if (info.tipo === 'bloques' && Array.isArray(info.bloques)) {
+        subtitulo.textContent = 'Temario por bloques';
+        info.bloques.forEach((bloque, iB) => {
+          const details = document.createElement('details');
+          details.className = 'bloque tarjeta--aparecer';
+          details.style.animationDelay = (iB * 80) + 'ms';
+          const nTemas = bloque.temas?.length || 0;
+          details.innerHTML = `
+            <summary class="bloque__summary">
+              <div class="bloque__titulo">${bloque.titulo || bloque.id}</div>
+              <div class="bloque__meta">
+                <span class="bloque__contador">${nTemas} tema${nTemas === 1 ? '' : 's'}</span>
+                <span class="bloque__chevron" aria-hidden="true">▸</span>
+              </div>
+            </summary>
+            <div class="bloque__contenido">
+              ${bloque.descripcion ? `<p class="bloque__descripcion">${bloque.descripcion}</p>` : ''}
+              <div class="bloque__temas"></div>
+            </div>
+          `;
+          const temasCont = details.querySelector('.bloque__temas');
+          (bloque.temas || []).forEach((tema, iT) => {
+            const rutaTema = `${rutaOpe}/${tema.id}`;
+            const a = document.createElement('a');
+            a.className = 'bloque-tema tarjeta--aparecer';
+            a.style.animationDelay = (iT * 40) + 'ms';
+            a.href = `ope.html?ope=${encodeURIComponent(rutaTema)}`;
+            a.innerHTML = `
+              <span class="bloque-tema__id">${tema.id}</span>
+              <span class="bloque-tema__titulo">${tema.titulo || tema.id}</span>
+              <span class="bloque-tema__flecha" aria-hidden="true">›</span>
+            `;
+            temasCont.appendChild(a);
+          });
+          cont.appendChild(details);
+        });
+        if (info.bloques.length === 0) {
+          cont.innerHTML = '<div class="tarjeta">No hay bloques definidos todavía.</div>';
+        }
+        return;
+      }
 
       // Tipo "material" → PDFs por tema en Supabase Storage
       if (info.tipo === 'material') {

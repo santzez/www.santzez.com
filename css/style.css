@@ -1158,6 +1158,152 @@ a.tarjeta:hover {
 }
 
 /* =============================================================
+   BLOQUES DE TEMARIO (acordeón) — tipo "bloques"
+   Bloques colapsables con temas dentro (OPE CAU/REDES).
+   ============================================================= */
+
+.bloque {
+  background: #fff;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-grande);
+  overflow: hidden;
+  transition: box-shadow 0.22s ease-out, border-color 0.22s ease-out;
+}
+.bloque:hover { box-shadow: var(--sombra); }
+.bloque[open] {
+  border-color: var(--color-primario);
+  box-shadow: var(--sombra);
+}
+
+.bloque__summary {
+  padding: 1.1rem 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  list-style: none;             /* quita el triángulo por defecto */
+  transition: background 0.18s;
+}
+.bloque__summary::-webkit-details-marker { display: none; }
+.bloque__summary:hover { background: var(--color-primario-suave); }
+
+.bloque__titulo {
+  flex: 1;
+  font-family: var(--fuente-corporativa);
+  color: var(--color-primario);
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.35;
+}
+
+.bloque__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  color: var(--color-texto-suave);
+  font-size: 0.85rem;
+  font-weight: 600;
+  flex: 0 0 auto;
+}
+.bloque__contador {
+  padding: 0.2rem 0.65rem;
+  background: var(--color-primario-suave);
+  color: var(--color-primario);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+}
+.bloque__chevron {
+  font-size: 1.2rem;
+  color: var(--color-primario);
+  transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: inline-block;
+  transform-origin: center;
+}
+.bloque[open] .bloque__chevron {
+  transform: rotate(90deg);
+}
+
+.bloque__contenido {
+  padding: 0.75rem 1.5rem 1.25rem;
+  border-top: 1px solid var(--color-borde-claro);
+  background: var(--color-fondo-alt);
+  animation: bloque-desplegar 0.25s ease-out;
+}
+@keyframes bloque-desplegar {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+.bloque__descripcion {
+  color: var(--color-texto-suave);
+  font-size: 0.88rem;
+  margin: 0.4rem 0 0.9rem;
+  font-style: italic;
+  line-height: 1.5;
+}
+.bloque__temas {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+/* Cada tema dentro del bloque */
+.bloque-tema {
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+  padding: 0.65rem 0.85rem;
+  background: #fff;
+  border: 1px solid var(--color-borde-claro);
+  border-radius: var(--radio);
+  color: var(--color-texto);
+  text-decoration: none;
+  transition: transform 0.18s cubic-bezier(0.25, 0.8, 0.25, 1),
+              border-color 0.18s ease-out,
+              box-shadow 0.18s ease-out,
+              background 0.18s ease-out;
+}
+.bloque-tema:hover {
+  transform: translateX(3px);
+  border-color: var(--color-primario);
+  background: var(--color-primario-suave);
+  box-shadow: 0 1px 4px rgba(0, 61, 165, 0.08);
+  color: var(--color-primario);
+  text-decoration: none;
+}
+.bloque-tema__id {
+  flex: 0 0 auto;
+  min-width: 3ch;
+  font-weight: 700;
+  color: var(--color-primario);
+  font-family: var(--fuente-corporativa);
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+.bloque-tema__titulo {
+  flex: 1;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  color: inherit;
+}
+.bloque-tema__flecha {
+  flex: 0 0 auto;
+  font-size: 1.1rem;
+  color: var(--color-primario);
+  opacity: 0.4;
+  transition: opacity 0.18s;
+}
+.bloque-tema:hover .bloque-tema__flecha { opacity: 1; }
+
+@media (max-width: 640px) {
+  .bloque__summary { padding: 0.9rem 1rem; }
+  .bloque__titulo { font-size: 0.95rem; }
+  .bloque__contenido { padding: 0.6rem 1rem 1rem; }
+}
+
+/* =============================================================
    MATERIAL DE ESTUDIO — listado de PDFs por tema
    ============================================================= */
 
