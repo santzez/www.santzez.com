@@ -1,0 +1,174 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T28</div>
+    <h1 class="tema-cabecera__titulo">Redes LAN, MAN y WAN. Tipología. Métodos de acceso y protocolos. Medios de transmisión y equipos de interconexión. Cableado estructurado. Administración de redes locales y equipamiento</h1>
+    <div class="tema-cabecera__meta">Bloque IV · Comunicaciones y redes — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-tipos-de-red-según-su-extensión-lan-man-y-wan">1. Tipos de red según su extensión: LAN, MAN y WAN</a></li>
+<li><a href="#2-topologías-de-red">2. Topologías de red</a></li>
+<li><a href="#3-métodos-de-acceso-al-medio">3. Métodos de acceso al medio</a></li>
+<li><a href="#4-medios-de-transmisión">4. Medios de transmisión</a></li>
+<li><a href="#5-equipos-de-interconexión">5. Equipos de interconexión</a></li>
+<li><a href="#6-cableado-estructurado">6. Cableado estructurado</a></li>
+<li><a href="#7-administración-de-redes-locales-y-equipamiento">7. Administración de redes locales y equipamiento</a></li>
+<li><a href="#8-resumen-esquemático">8. Resumen esquemático</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h3 class="tema-h3">Qué vas a encontrar en este tema</h3>
+<ul class="tema-lista">
+<li>Los tipos de red según su extensión geográfica: LAN, MAN y WAN.</li>
+<li>Las topologías de red más habituales.</li>
+<li>Los métodos de acceso al medio compartido.</li>
+<li>Los medios de transmisión, cableados e inalámbricos.</li>
+<li>Los equipos de interconexión y en qué capa OSI opera cada uno.</li>
+<li>El cableado estructurado de un edificio.</li>
+<li>Cómo se administra una red local y su equipamiento.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Este tema da por conocido el modelo OSI/TCP/IP y el concepto de encaminamiento vistos en el Tema 27, que aquí se aplican a equipos y escenarios concretos. La seguridad perimetral (cortafuegos, VPN) se desarrolla en el Tema 29, y las redes inalámbricas Wi-Fi y la movilidad, con más detalle, en el Tema 30.</th>
+</tr>
+</table></div>
+<p>1. Tipos de red según su extensión: LAN, MAN y WAN</p>
+<p>2. Topologías de red</p>
+<p>3. Métodos de acceso al medio</p>
+<p>4. Medios de transmisión</p>
+<p>5. Equipos de interconexión</p>
+<p>6. Cableado estructurado</p>
+<p>7. Administración de redes locales y equipamiento</p>
+<p>8. Resumen esquemático</p>
+<h2 id="1-tipos-de-red-según-su-extensión-lan-man-y-wan" class="tema-h2">1. Tipos de red según su extensión: LAN, MAN y WAN</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Tipo</strong></th>
+<th><strong>Extensión</strong></th>
+<th><strong>Ejemplo</strong></th>
+</tr>
+<tr>
+<td>LAN (Local Area Network)</td>
+<td>Reducida: un edificio o campus, bajo una única organización</td>
+<td>La red interna de un ayuntamiento</td>
+</tr>
+<tr>
+<td>MAN (Metropolitan Area Network)</td>
+<td>Una ciudad o área metropolitana</td>
+<td>Red que interconecta varias sedes municipales repartidas por la ciudad</td>
+</tr>
+<tr>
+<td>WAN (Wide Area Network)</td>
+<td>Amplia: país, continente o global</td>
+<td>Internet, o la red que conecta sedes de una organización en distintas ciudades</td>
+</tr>
+</table></div>
+<p>Una LAN se caracteriza por su alta velocidad y su gestión íntegra por una única organización; una WAN, en cambio, suele apoyarse en infraestructura de operadores de telecomunicaciones (líneas alquiladas, la propia Internet) para interconectar redes distantes. Internet es, en este sentido, la WAN por excelencia, formada por la interconexión de innumerables redes LAN, MAN y WAN de todo el mundo.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Existen otras categorías por extensión que completan esta clasificación: la PAN (Personal Area Network), de alcance muy reducido y en torno a una única persona (Bluetooth, Tema 8), y la WLAN, que no es más que una LAN cuyo medio de transmisión es inalámbrico en lugar de cableado (se desarrolla en el Tema 30). No debe confundirse la sigla SAN de este contexto (Storage Area Network, red de almacenamiento, Tema 7) con estas categorías de extensión geográfica: hacen referencia a conceptos completamente distintos que comparten, por coincidencia, las mismas siglas.</th>
+</tr>
+</table></div>
+<h2 id="2-topologías-de-red" class="tema-h2">2. Topologías de red</h2>
+<ul class="tema-lista">
+<li><strong>Bus</strong>: todos los equipos se conectan a un único cable central (backbone). En desuso hoy: un fallo en el cable central deja sin comunicación a toda la red.</li>
+<li><strong>Estrella (star)</strong>: todos los equipos se conectan a un dispositivo central (un switch, punto 5). Es la topología física dominante en las LAN cableadas actuales: un fallo en un cable solo afecta al equipo conectado a él, aunque el dispositivo central se convierte en un punto único de fallo para toda la red.</li>
+<li><strong>Anillo (ring)</strong>: cada equipo se conecta con los dos equipos adyacentes, formando un círculo cerrado. Usada históricamente (Token Ring, FDDI), hoy en desuso en redes LAN, aunque el concepto pervive en algunos backbones de fibra óptica en anillo, valorados por su redundancia.</li>
+<li><strong>Malla (mesh)</strong>: cada nodo se conecta con varios, o con todos, los demás nodos. Ofrece la máxima redundancia y tolerancia a fallos, a cambio de un mayor coste y complejidad; el concepto ha resurgido con fuerza en los sistemas Wi-Fi mesh actuales para el hogar y la oficina (Tema 30).</li>
+<li><strong>Árbol o jerárquica</strong>: combina varias topologías en estrella interconectadas de forma jerárquica (por ejemplo, varios switches de planta conectados a un switch central de edificio). Es la topología típica de las redes de campus u organizaciones de cierto tamaño.</li>
+</ul>
+<h2 id="3-métodos-de-acceso-al-medio" class="tema-h2">3. Métodos de acceso al medio</h2>
+<p>Cuando varios equipos comparten un mismo medio de transmisión, necesitan un método que determine cuándo puede transmitir cada uno, para evitar o gestionar las colisiones que se producirían si dos transmitieran a la vez.</p>
+<ul class="tema-lista">
+<li><strong>CSMA/CD (Carrier Sense Multiple Access with Collision Detection)</strong>: usado históricamente en Ethernet sobre medios compartidos (hubs, punto 5). Cada equipo escucha el medio antes de transmitir y, si detecta una colisión, detiene la transmisión y reintenta tras una espera aleatoria. En las redes Ethernet conmutadas actuales, con switches y enlaces full-duplex, las colisiones prácticamente no llegan a producirse, por lo que CSMA/CD ha quedado en desuso en la práctica, aunque forma parte del estándar histórico de Ethernet.</li>
+<li><strong>CSMA/CA (Carrier Sense Multiple Access with Collision Avoidance)</strong>: usado en redes inalámbricas Wi-Fi (802.11, Tema 30). Al ser mucho más difícil detectar una colisión de forma fiable en un medio inalámbrico que en uno cableado, el objetivo pasa de detectar la colisión a evitarla: el equipo espera un intervalo aleatorio tras comprobar que el medio está libre antes de transmitir.</li>
+<li><strong>Paso de testigo (token passing)</strong>: un «testigo» (token) circula de forma ordenada por la red, y únicamente el equipo que lo posee en cada momento puede transmitir. Usado en Token Ring, hoy en desuso.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>No debe confundirse CSMA/CD (Collision Detection, propio de Ethernet cableado clásico) con CSMA/CA (Collision Avoidance, propio de Wi-Fi): el primero detecta colisiones después de que ocurran; el segundo trata de evitarlas de antemano, precisamente porque en un medio inalámbrico resulta mucho más difícil detectarlas de forma fiable mientras ocurren.</th>
+</tr>
+</table></div>
+<h2 id="4-medios-de-transmisión" class="tema-h2">4. Medios de transmisión</h2>
+<ul class="tema-lista">
+<li><strong>Par trenzado (UTP/STP)</strong>: cable de cobre, el medio cableado más habitual en el cableado horizontal de una LAN (se detalla en el punto 6), con categorías crecientes (5e, 6, 6A, 7) que ofrecen mayor ancho de banda y mejor comportamiento frente a interferencias.</li>
+<li><strong>Fibra óptica</strong>: transmite la información mediante pulsos de luz; ofrece mucho mayor ancho de banda y alcance que el cobre, y es inmune a las interferencias electromagnéticas. Se distingue entre fibra <strong>monomodo</strong> (un único haz de luz, adecuada para largas distancias, como el cableado vertical o los enlaces entre edificios) y <strong>multimodo</strong> (varios haces de luz, adecuada para distancias más cortas dentro de un mismo edificio o campus, con un coste menor).</li>
+<li><strong>Radiofrecuencia</strong>: el medio de las redes inalámbricas Wi-Fi (Tema 30) y de los enlaces de microondas punto a punto entre edificios.</li>
+<li><strong>Infrarrojos</strong>: medio inalámbrico de alcance muy limitado y que exige línea de vista directa; hoy prácticamente en desuso para redes, más allá de mandos a distancia u otros usos puntuales.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Criterio</strong></th>
+<th><strong>Par trenzado (cobre)</strong></th>
+<th><strong>Fibra óptica</strong></th>
+</tr>
+<tr>
+<td>Velocidad y ancho de banda</td>
+<td>Alto, pero menor que la fibra</td>
+<td>Muy alto</td>
+</tr>
+<tr>
+<td>Distancia máxima efectiva</td>
+<td>Limitada (decenas de metros sin repetidor)</td>
+<td>Mucho mayor (kilómetros)</td>
+</tr>
+<tr>
+<td>Inmunidad a interferencias electromagnéticas</td>
+<td>Baja/media</td>
+<td>Total (no es un conductor eléctrico)</td>
+</tr>
+<tr>
+<td>Coste de instalación</td>
+<td>Menor</td>
+<td>Mayor (aunque en descenso)</td>
+</tr>
+</table></div>
+<h2 id="5-equipos-de-interconexión" class="tema-h2">5. Equipos de interconexión</h2>
+<ul class="tema-lista">
+<li><strong>Repetidor (repeater)</strong>: regenera la señal para extender el alcance físico de un medio de transmisión, sin ninguna inteligencia sobre el tráfico (capa 1, Física). En desuso como dispositivo independiente.</li>
+<li><strong>Hub (concentrador)</strong>: dispositivo de capa 1 que interconecta varios equipos, retransmitiendo cualquier señal recibida por un puerto hacia <strong>todos</strong> los demás puertos, formando un único dominio de colisión. En desuso, sustituido por el switch.</li>
+<li><strong>Switch (conmutador)</strong>: dispositivo de capa 2 (Enlace) que aprende qué dirección MAC está conectada a cada uno de sus puertos y reenvía cada trama <strong>únicamente</strong> al puerto correspondiente, en lugar de a todos. Elimina las colisiones y mejora notablemente el rendimiento; es el equipo estándar hoy para interconectar equipos dentro de una LAN.</li>
+<li><strong>Puente (bridge)</strong>: dispositivo de capa 2 que interconecta dos segmentos de red; conceptualmente, el switch actual puede entenderse como una evolución multipuerto del puente clásico.</li>
+<li><strong>Router (encaminador)</strong>: dispositivo de capa 3 (Red) que interconecta redes distintas, cada una con su propio direccionamiento IP, y realiza el encaminamiento visto en el Tema 27.</li>
+<li><strong>Punto de acceso (Access Point, AP)</strong>: dispositivo que permite a los equipos inalámbricos conectarse a una red cableada existente, actuando de puente entre el medio Wi-Fi y el medio cableado (se desarrolla en el Tema 30).</li>
+<li><strong>Pasarela (gateway)</strong>: dispositivo o software que interconecta redes que emplean protocolos distintos entre sí, traduciendo la comunicación entre ambos entornos.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>La diferencia entre hub y switch es uno de los puntos más preguntados sobre equipos de interconexión: el hub retransmite el tráfico recibido por un puerto a <strong>todos</strong> los demás puertos, sin distinción (todo el segmento comparte un único dominio de colisión); el switch aprende qué equipo está en cada puerto (por su dirección MAC) y envía cada trama <strong>solo</strong> al puerto de destino correspondiente, eliminando las colisiones entre el resto de puertos.</th>
+</tr>
+</table></div>
+<h2 id="6-cableado-estructurado" class="tema-h2">6. Cableado estructurado</h2>
+<p>El <strong>cableado estructurado</strong> es un sistema de cableado normalizado y jerárquico, diseñado para dar servicio de comunicaciones a un edificio o campus completo de forma flexible y duradera, con independencia de las aplicaciones concretas que vaya a soportar en cada momento (voz, datos, vídeo). Se rige por estándares internacionales como la norma <strong>ISO/IEC 11801</strong>, con sus equivalentes regionales (EN 50173 en Europa, TIA/EIA-568 en Estados Unidos).</p>
+<ul class="tema-lista">
+<li><strong>Área de trabajo</strong>: el tramo final entre el equipo de la persona usuaria y la toma de pared (roseta).</li>
+<li><strong>Cableado horizontal</strong>: desde la toma de usuario hasta el armario de distribución de la planta; habitualmente en par trenzado, con una distancia máxima normalizada de 90 metros.</li>
+<li><strong>Cableado vertical o backbone</strong>: interconecta los distintos armarios de distribución de planta entre sí y con el repartidor principal del edificio; al cubrir distancias mayores, suele emplear fibra óptica.</li>
+<li><strong>Repartidor de planta o armario de telecomunicaciones</strong>: concentra las conexiones de una planta o zona concreta del edificio.</li>
+<li><strong>Repartidor principal</strong>: el punto central de todo el cableado del edificio, habitualmente ubicado en o junto al centro de datos (CPD, Tema 22).</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>La ventaja principal del cableado estructurado frente a un cableado «ad hoc», tendido según las necesidades del momento, es su flexibilidad ante cambios (mover un puesto de trabajo no exige tender cable nuevo, basta con reconfigurar la conexión en el armario de planta), su facilidad de mantenimiento y diagnóstico, su capacidad de crecer de forma ordenada, y su independencia respecto a un fabricante o aplicación concretos.</th>
+</tr>
+</table></div>
+<h2 id="7-administración-de-redes-locales-y-equipamiento" class="tema-h2">7. Administración de redes locales y equipamiento</h2>
+<ul class="tema-lista">
+<li><strong>Documentación de red</strong>: mantener actualizado un inventario y un plano de la red (equipos, direccionamiento IP, VLANs, recorrido del cableado) resulta imprescindible tanto para el mantenimiento diario como para diagnosticar incidencias con rapidez; conecta directamente con la medida de inventario de activos del ENS vista en el Tema 21 (op.exp.1).</li>
+<li><strong>VLAN (Virtual LAN)</strong>: segmentación lógica de una única red física en varias redes independientes a nivel de capa 2, sin necesidad de cableado ni de switches separados para cada segmento. Mejora tanto la seguridad (aísla el tráfico entre segmentos que no deben comunicarse directamente) como el rendimiento (reduce el tamaño del dominio de difusión o broadcast).</li>
+<li><strong>SNMP (Simple Network Management Protocol)</strong>: protocolo estándar para la supervisión y gestión remota de equipos de red (switches, routers, puntos de acceso), que permite consultar su estado y recibir alertas automáticas ante incidencias.</li>
+<li><strong>Monitorización de red</strong>: herramientas que comprueban de forma continua la disponibilidad y el rendimiento de los equipos y enlaces de red, en la línea de las soluciones de monitorización ya vistas para servidores en los Temas 12 y 13 (SCOM, Nagios, Zabbix, Prometheus+Grafana), aplicadas aquí específicamente al equipamiento de red.</li>
+<li><strong>Buenas prácticas</strong>: etiquetado físico coherente de cables y puertos, documentación siempre actualizada, control formal de cambios sobre la configuración de los equipos de red (op.exp.5 del ENS, Tema 21), y redundancia en los enlaces y equipos considerados críticos para el servicio.</li>
+</ul>
+<h2 id="8-resumen-esquemático" class="tema-h2">8. Resumen esquemático</h2>
+<ul class="tema-lista">
+<li><strong>LAN, MAN, WAN</strong>: según extensión geográfica, de menor a mayor; Internet como la gran WAN global; PAN y WLAN como categorías relacionadas.</li>
+<li><strong>Topologías</strong>: bus y anillo (en desuso), estrella (dominante hoy en LAN cableada), malla (máxima redundancia, en auge en Wi-Fi) y árbol/jerárquica (redes de campus).</li>
+<li><strong>Métodos de acceso</strong>: CSMA/CD (detección de colisiones, Ethernet cableado clásico) frente a CSMA/CA (evitación de colisiones, Wi-Fi); paso de testigo, en desuso.</li>
+<li><strong>Medios de transmisión</strong>: par trenzado (cobre, económico) y fibra óptica -monomodo/multimodo- (mayor ancho de banda y distancia, inmune a interferencias); radiofrecuencia e infrarrojos como medios inalámbricos.</li>
+<li><strong>Equipos de interconexión por capa OSI</strong>: repetidor/hub (capa 1, sin inteligencia), switch/puente (capa 2, por dirección MAC), router (capa 3, por dirección IP); punto de acceso como puente entre red cableada e inalámbrica.</li>
+<li><strong>Cableado estructurado</strong>: sistema normalizado (ISO/IEC 11801) por subsistemas: área de trabajo, cableado horizontal (par trenzado, hasta 90 m), cableado vertical/backbone (fibra), repartidores de planta y principal.</li>
+<li><strong>Administración de red</strong>: documentación e inventario, VLAN para segmentación lógica, SNMP y monitorización continua, control de cambios y redundancia en lo crítico.</li>
+</ul>
+  </div>
+</article>

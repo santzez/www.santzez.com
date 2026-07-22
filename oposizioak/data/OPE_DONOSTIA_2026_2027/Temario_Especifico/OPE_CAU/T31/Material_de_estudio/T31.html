@@ -1,0 +1,156 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T31</div>
+    <h1 class="tema-cabecera__titulo">La red Internet. Conceptos elementales sobre protocolos y servicios en Internet. Estado actual</h1>
+    <div class="tema-cabecera__meta">Bloque IV · Comunicaciones y redes — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-concepto-de-internet-la-red-de-redes">1. Concepto de Internet: la red de redes</a></li>
+<li><a href="#2-organismos-y-gobernanza-de-internet">2. Organismos y gobernanza de Internet</a></li>
+<li><a href="#3-el-sistema-de-nombres-de-dominio-dns">3. El sistema de nombres de dominio (DNS)</a></li>
+<li><a href="#4-la-web-y-el-protocolo-http-evolución-hasta-http3">4. La Web y el protocolo HTTP: evolución hasta HTTP/3</a></li>
+<li><a href="#5-otros-servicios-y-protocolos-de-internet">5. Otros servicios y protocolos de Internet</a></li>
+<li><a href="#6-direccionamiento-en-internet-estado-actual-de-ipv6">6. Direccionamiento en Internet: estado actual de IPv6</a></li>
+<li><a href="#7-estado-actual-de-internet-tendencias">7. Estado actual de Internet: tendencias</a></li>
+<li><a href="#8-resumen-esquemático">8. Resumen esquemático</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h3 class="tema-h3">Qué vas a encontrar en este tema</h3>
+<ul class="tema-lista">
+<li>Qué es Internet y qué organismos gestionan su funcionamiento global.</li>
+<li>Cómo funciona el sistema de nombres de dominio (DNS).</li>
+<li>La Web y la evolución del protocolo HTTP hasta HTTP/3.</li>
+<li>Otros servicios y protocolos habituales de Internet.</li>
+<li>El estado actual de Internet: adopción de IPv6 y HTTP/3, y principales tendencias.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Este tema da por conocidos el modelo TCP/IP, el direccionamiento IPv4/IPv6 y el encaminamiento (Tema 27), así como la arquitectura del correo electrónico (Tema 17) y las VPN (Tema 29), que aquí no se repiten. El objetivo de este tema es dar una visión general de Internet como red global de servicios, más que profundizar de nuevo en los protocolos de nivel de red ya estudiados.</th>
+</tr>
+</table></div>
+<p>1. Concepto de Internet: la red de redes</p>
+<p>2. Organismos y gobernanza de Internet</p>
+<p>3. El sistema de nombres de dominio (DNS)</p>
+<p>4. La Web y el protocolo HTTP: evolución hasta HTTP/3</p>
+<p>5. Otros servicios y protocolos de Internet</p>
+<p>6. Direccionamiento en Internet: estado actual de IPv6</p>
+<p>7. Estado actual de Internet: tendencias</p>
+<p>8. Resumen esquemático</p>
+<h2 id="1-concepto-de-internet-la-red-de-redes" class="tema-h2">1. Concepto de Internet: la red de redes</h2>
+<p><strong>Internet</strong> es una red de alcance mundial que interconecta millones de redes informáticas independientes —de operadores, empresas, universidades y administraciones públicas— utilizando un conjunto común de protocolos, fundamentalmente el <strong>modelo TCP/IP</strong> (Tema 27). Ninguna organización posee ni controla Internet en su conjunto: su funcionamiento depende de que todas las redes que la componen acuerden usar los mismos protocolos y de la coordinación de una serie de organismos internacionales que se describen en el siguiente punto.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>La expresión habitual «Internet es la red de redes» resume bien su naturaleza: no es una única red física, sino la interconexión, mediante protocolos comunes, de innumerables redes distintas que siguen siendo, cada una, gestionadas por su propio operador u organización.</th>
+</tr>
+</table></div>
+<h2 id="2-organismos-y-gobernanza-de-internet" class="tema-h2">2. Organismos y gobernanza de Internet</h2>
+<ul class="tema-lista">
+<li><strong>IETF (Internet Engineering Task Force)</strong>: organismo que desarrolla y estandariza los protocolos técnicos de Internet (HTTP, TCP/IP, DNS…), publicados como documentos RFC (Request for Comments).</li>
+<li><strong>ICANN (Internet Corporation for Assigned Names and Numbers)</strong>: organización responsable de coordinar a nivel global el sistema de nombres de dominio y la asignación de direcciones IP e identificadores únicos de Internet.</li>
+<li><strong>IANA (Internet Assigned Numbers Authority)</strong>: función operada bajo el paraguas de ICANN, encargada de gestionar en la práctica los registros centrales de direcciones IP, números de puerto y dominios de primer nivel.</li>
+<li><strong>Registros regionales de Internet (RIR)</strong>: organizaciones como RIPE NCC (Europa), ARIN (Norteamérica) o LACNIC (Latinoamérica), que reciben de IANA bloques de direcciones IP y los distribuyen a los operadores y organizaciones de su región geográfica.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Es habitual confundir estos organismos entre sí. Para el examen conviene retener la idea general: el <strong>IETF estandariza los protocolos</strong> (el «cómo»), mientras que <strong>ICANN/IANA y los RIR coordinan la asignación de identificadores</strong> —nombres de dominio y direcciones IP— para que sean únicos en toda la red (el «quién usa qué»). Ninguno de estos organismos «es dueño» de Internet ni controla su contenido.</th>
+</tr>
+</table></div>
+<h2 id="3-el-sistema-de-nombres-de-dominio-dns" class="tema-h2">3. El sistema de nombres de dominio (DNS)</h2>
+<p>El <strong>DNS (Domain Name System)</strong> es el servicio que traduce nombres de dominio legibles por personas (por ejemplo, www.gipuzkoa.eus) en las direcciones IP (Tema 27) que realmente identifican a los equipos en la red, y que son las que se usan para el encaminamiento del tráfico.</p>
+<p>El DNS se organiza como una <strong>jerarquía de espacios de nombres</strong>, de derecha a izquierda: el dominio raíz (representado por un punto final implícito), los dominios de primer nivel o TLD (Top Level Domain, como .com, .eus o .es), los dominios de segundo nivel (como gipuzkoa dentro de gipuzkoa.eus) y, opcionalmente, subdominios adicionales. La resolución de un nombre de dominio consiste en consultar, en cascada, distintos servidores DNS —empezando por los servidores raíz y descendiendo por la jerarquía— hasta obtener la dirección IP correspondiente; en la práctica, esta consulta suele resolverla directamente un servidor DNS «caché» o «recursivo» (a menudo el del propio operador de Internet), que mantiene en memoria las resoluciones más recientes para agilizar el proceso.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Entre los tipos de registro DNS más habituales están el registro <strong>A</strong> (asocia un nombre a una dirección IPv4), <strong>AAAA</strong> (asocia un nombre a una dirección IPv6), <strong>CNAME</strong> (define un alias de un nombre hacia otro nombre de dominio) y <strong>MX</strong> (indica qué servidores gestionan el correo de un dominio, relevante para el Tema 17).</th>
+</tr>
+</table></div>
+<h2 id="4-la-web-y-el-protocolo-http-evolución-hasta-http3" class="tema-h2">4. La Web y el protocolo HTTP: evolución hasta HTTP/3</h2>
+<p>La <strong>World Wide Web (WWW)</strong>, o simplemente «la Web», es el servicio de Internet basado en documentos de hipertexto —enlazados entre sí mediante hiperenlaces— que se transmiten mediante el protocolo <strong>HTTP (HyperText Transfer Protocol)</strong>. No debe confundirse la Web, que es uno de los muchos servicios que ofrece Internet, con Internet en su conjunto, un error terminológico muy extendido en el lenguaje coloquial.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Versión</strong></th>
+<th><strong>Novedad principal</strong></th>
+</tr>
+<tr>
+<td>HTTP/1.1</td>
+<td>Versión clásica; una conexión TCP por cada petición (o reutilizada de forma limitada)</td>
+</tr>
+<tr>
+<td>HTTP/2</td>
+<td>Multiplexación de varias peticiones sobre una misma conexión TCP, cabeceras comprimidas</td>
+</tr>
+<tr>
+<td>HTTP/3</td>
+<td>Sustituye TCP por QUIC (sobre UDP), reduciendo la latencia de establecimiento de conexión y evitando el bloqueo de cabecera de línea (head-of-line blocking) entre peticiones</td>
+</tr>
+</table></div>
+<p><strong>HTTPS (HTTP Secure)</strong> es la variante cifrada de HTTP, en la que el tráfico se protege mediante TLS (Tema 29) antes de transmitirse; hoy es el estándar de facto para prácticamente cualquier sitio web, y los navegadores actuales señalan de forma explícita los sitios que no lo utilizan como «no seguros».</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>A mediados de 2026, la adopción de HTTP/3 se sitúa aproximadamente entre el 20 % y el 40 % del tráfico web según la fuente de medición, con una adopción especialmente alta en mercados con un uso intensivo de conexiones móviles, donde QUIC ofrece más ventajas frente a redes con pérdida de paquetes. HTTP/2 y HTTP/1.1 siguen conviviendo con HTTP/3 en la mayoría de sitios, que negocian automáticamente la versión más adecuada con cada cliente.</th>
+</tr>
+</table></div>
+<h2 id="5-otros-servicios-y-protocolos-de-internet" class="tema-h2">5. Otros servicios y protocolos de Internet</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Servicio</strong></th>
+<th><strong>Protocolo(s)</strong></th>
+<th><strong>Función</strong></th>
+</tr>
+<tr>
+<td>Web</td>
+<td>HTTP / HTTPS</td>
+<td>Acceso a páginas y aplicaciones web</td>
+</tr>
+<tr>
+<td>Correo electrónico</td>
+<td>SMTP, IMAP, POP3 (Tema 17)</td>
+<td>Envío y recepción de mensajes de correo</td>
+</tr>
+<tr>
+<td>Transferencia de ficheros</td>
+<td>FTP / SFTP</td>
+<td>Subida y descarga de archivos entre equipos</td>
+</tr>
+<tr>
+<td>Acceso remoto seguro</td>
+<td>SSH</td>
+<td>Conexión remota cifrada a la línea de comandos de un equipo</td>
+</tr>
+<tr>
+<td>Resolución de nombres</td>
+<td>DNS</td>
+<td>Traducción de nombres de dominio a direcciones IP</td>
+</tr>
+</table></div>
+<p>El <strong>FTP (File Transfer Protocol)</strong> es uno de los protocolos más antiguos de Internet, diseñado para transferir archivos entre un cliente y un servidor; transmite las credenciales y los datos sin cifrar, por lo que en un contexto de administración pública actual se recomienda su sustitución por <strong>SFTP (SSH File Transfer Protocol)</strong>, que aporta cifrado sobre una conexión SSH, o por <strong>FTPS</strong>, que añade cifrado TLS al FTP tradicional.</p>
+<p><strong>SSH (Secure Shell)</strong> permite establecer una sesión remota cifrada con la línea de comandos de otro equipo —típicamente un servidor Linux (Tema 13)— y sustituye a protocolos antiguos sin cifrar como Telnet, hoy en desuso por motivos de seguridad.</p>
+<h2 id="6-direccionamiento-en-internet-estado-actual-de-ipv6" class="tema-h2">6. Direccionamiento en Internet: estado actual de IPv6</h2>
+<p>El direccionamiento IPv4 e IPv6 y el proceso de encaminamiento se explicaron en detalle en el Tema 27; aquí se retoma únicamente para situar su <strong>estado actual de adopción</strong>, dado que forma parte de la fotografía global de Internet que pide este tema.</p>
+<p>A mediados de 2026, la capacidad de acceder a Internet mediante IPv6 se sitúa a nivel mundial en el entorno del 45-50 % del tráfico, con una adopción muy desigual entre países: algunos operadores y países líderes superan el 70 %, mientras que otros —España entre ellos— permanecen todavía en cifras de un solo dígito o próximas al 10 %. La adopción de IPv6 avanza de forma especialmente rápida en las redes de datos móviles, donde los operadores lo han desplegado de forma agresiva para paliar el agotamiento de las direcciones IPv4 disponibles, con frecuencia por delante de la banda ancha fija en el mismo país.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Fuentes: [ISOC Pulse — 18 Years Later, IPv6 Reaches Majority (2026)](https://pulse.internetsociety.org/en/blog/2026/04/18-years-later-ipv6-reaches-majority/); [Google — Estadísticas IPv6](https://www.google.com/intl/en/ipv6/statistics.html).</th>
+</tr>
+</table></div>
+<h2 id="7-estado-actual-de-internet-tendencias" class="tema-h2">7. Estado actual de Internet: tendencias</h2>
+<ul class="tema-lista">
+<li><strong>Consolidación del cifrado</strong>: HTTPS es ya el estándar de facto en la Web, y el tráfico cifrado (incluidas las VPN, Tema 29) sigue creciendo frente al tráfico sin cifrar.</li>
+<li><strong>Migración progresiva a IPv6</strong>, impulsada sobre todo por el agotamiento de las direcciones IPv4 y el crecimiento de los dispositivos móviles y conectados.</li>
+<li><strong>Adopción creciente de HTTP/3 y QUIC</strong>, con mayor tracción en escenarios móviles y de red de peor calidad.</li>
+<li><strong>Migración de servicios a la nube</strong> (se desarrolla en detalle en el Tema 32), que traslada gran parte de las aplicaciones y de la infraestructura de las organizaciones a proveedores externos accesibles a través de Internet.</li>
+<li><strong>Crecimiento del número y variedad de dispositivos conectados</strong> (IoT), que multiplica el volumen de tráfico y la superficie de exposición a amenazas de seguridad (Temas 22 y 25).</li>
+<li><strong>Mayor exigencia normativa y de ciberseguridad</strong>, con marcos como el Esquema Nacional de Seguridad (Tema 21) que condicionan cómo las administraciones públicas prestan sus servicios a través de Internet.</li>
+</ul>
+<h2 id="8-resumen-esquemático" class="tema-h2">8. Resumen esquemático</h2>
+<ul class="tema-lista">
+<li><strong>Internet</strong>: red de redes interconectadas mediante TCP/IP (Tema 27); no la controla ninguna organización única.</li>
+<li><strong>Gobernanza</strong>: IETF estandariza protocolos (RFC); ICANN/IANA y los RIR (RIPE NCC, ARIN…) coordinan la asignación de nombres de dominio y direcciones IP.</li>
+<li><strong>DNS</strong>: jerarquía de nombres (raíz → TLD → dominio → subdominio); registros A/AAAA/CNAME/MX; resolución en cascada, habitualmente cacheada.</li>
+<li><strong>HTTP</strong>: de HTTP/1.1 a HTTP/2 (multiplexación) y HTTP/3 (QUIC sobre UDP); HTTPS como estándar de cifrado de facto.</li>
+<li><strong>Otros servicios</strong>: correo (SMTP/IMAP/POP3, Tema 17), FTP/SFTP para ficheros, SSH para acceso remoto seguro.</li>
+<li><strong>Estado actual</strong>: IPv6 en torno al 45-50 % del tráfico mundial (España, en torno al 10 %); HTTP/3 entre el 20 % y el 40 % según la medición; migración a la nube y crecimiento del IoT como tendencias de fondo.</li>
+</ul>
+  </div>
+</article>

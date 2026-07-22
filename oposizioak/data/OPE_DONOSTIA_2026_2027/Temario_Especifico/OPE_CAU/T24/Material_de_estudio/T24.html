@@ -1,0 +1,138 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T24</div>
+    <h1 class="tema-cabecera__titulo">Técnicas de autenticación y firma digital, certificado digital, certificado profesional, b@k-Q, Giltza, Viafirma, Izenpe, DNI electrónico</h1>
+    <div class="tema-cabecera__meta">Bloque III · Seguridad — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-autenticación-y-firma-digital-conceptos-básicos">1. Autenticación y firma digital: conceptos básicos</a></li>
+<li><a href="#2-fundamento-técnico-criptografía-asimétrica-y-pki">2. Fundamento técnico: criptografía asimétrica y PKI</a></li>
+<li><a href="#3-el-certificado-digital-qué-es-y-qué-tipos-existen">3. El certificado digital: qué es y qué tipos existen</a></li>
+<li><a href="#4-izenpe-la-autoridad-de-certificación-vasca">4. Izenpe: la autoridad de certificación vasca</a></li>
+<li><a href="#5-bk-q-identificación-electrónica-sin-certificado">5. b@k-Q: identificación electrónica sin certificado</a></li>
+<li><a href="#6-giltza-la-plataforma-de-identificación-de-las-aapp-vascas">6. Giltza: la plataforma de identificación de las AAPP vascas</a></li>
+<li><a href="#7-viafirma-plataforma-de-firma-electrónica">7. Viafirma: plataforma de firma electrónica</a></li>
+<li><a href="#8-el-dni-electrónico-dnie">8. El DNI electrónico (DNIe)</a></li>
+<li><a href="#9-resumen-esquemático">9. Resumen esquemático</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h3 class="tema-h3">Qué vas a encontrar en este tema</h3>
+<ul class="tema-lista">
+<li>La diferencia entre autenticación y firma digital, y los niveles de firma electrónica reconocidos legalmente.</li>
+<li>El fundamento técnico de la firma digital: criptografía asimétrica e infraestructura de clave pública (PKI).</li>
+<li>Qué es un certificado digital, qué contiene y qué tipos existen.</li>
+<li>Izenpe, la autoridad de certificación del sector público vasco, y sus certificados ciudadano y profesional.</li>
+<li>b@k-Q, como alternativa gratuita de identificación electrónica sin certificado.</li>
+<li>Giltza, la plataforma común de identificación electrónica de las administraciones públicas vascas.</li>
+<li>Viafirma, como plataforma de firma electrónica.</li>
+<li>El DNI electrónico (DNIe) y sus certificados incorporados.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Este tema da por conocidos los conceptos generales de seguridad lógica (Tema 22), sobre los que se apoya la autenticación. Aquí se profundiza específicamente en las técnicas y sistemas de autenticación y firma digital, con especial atención a los propios del ámbito de las administraciones públicas vascas (Izenpe, b@k-Q, Giltza), tal y como los recoge el temario específico de esta convocatoria.</th>
+</tr>
+</table></div>
+<p>1. Autenticación y firma digital: conceptos básicos</p>
+<p>2. Fundamento técnico: criptografía asimétrica y PKI</p>
+<p>3. El certificado digital: qué es y qué tipos existen</p>
+<p>4. Izenpe: la autoridad de certificación vasca</p>
+<p>5. b@k-Q: identificación electrónica sin certificado</p>
+<p>6. Giltza: la plataforma de identificación de las AAPP vascas</p>
+<p>7. Viafirma: plataforma de firma electrónica</p>
+<p>8. El DNI electrónico (DNIe)</p>
+<p>9. Resumen esquemático</p>
+<h2 id="1-autenticación-y-firma-digital-conceptos-básicos" class="tema-h2">1. Autenticación y firma digital: conceptos básicos</h2>
+<p>La <strong>autenticación</strong> (ya introducida como medida de seguridad lógica en el Tema 22) es el proceso de verificar que una persona, proceso o sistema es realmente quien dice ser, habitualmente combinando factores de conocimiento (algo que se sabe, como una contraseña), posesión (algo que se tiene, como una tarjeta o un dispositivo) e inherencia (algo que se es, como una huella dactilar).</p>
+<p>La <strong>firma digital</strong> es un mecanismo criptográfico que permite garantizar, sobre un documento electrónico, tanto la <strong>autoría</strong> (quién lo ha firmado) como la <strong>integridad</strong> (que no ha sido modificado desde que se firmó), siendo el equivalente electrónico de la firma manuscrita, con garantías técnicas adicionales que esta última no ofrece por sí sola.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>El Reglamento europeo eIDAS (Reglamento UE n.º 910/2014) distingue tres niveles de firma electrónica, de menor a mayor exigencia: <strong>firma electrónica simple</strong> (cualquier dato en formato electrónico que se adjunta a otros datos con la intención de firmar, por ejemplo un nombre escrito al final de un correo); <strong>firma electrónica avanzada</strong> (vinculada al firmante de forma única, permite identificarlo y detectar cualquier cambio posterior en los datos firmados); y <strong>firma electrónica cualificada</strong> (una firma avanzada basada en un certificado cualificado y creada con un dispositivo cualificado de creación de firma), a la que la normativa europea reconoce el mismo valor jurídico que una firma manuscrita. Los certificados y sistemas que se estudian en este tema (Izenpe, DNIe) se emplean habitualmente para generar firmas de nivel avanzado o cualificado.</th>
+</tr>
+</table></div>
+<h2 id="2-fundamento-técnico-criptografía-asimétrica-y-pki" class="tema-h2">2. Fundamento técnico: criptografía asimétrica y PKI</h2>
+<p>La firma digital se apoya en la <strong>criptografía asimétrica o de clave pública</strong>: cada titular dispone de un par de claves matemáticamente relacionadas entre sí, una <strong>clave privada</strong> (secreta, que solo su titular conoce y custodia) y una <strong>clave pública</strong> (que puede difundirse libremente). Lo que se cifra con una de las dos claves solo puede descifrarse con la otra.</p>
+<p>Para firmar un documento, el firmante cifra con su clave privada un resumen criptográfico (hash) de ese documento; cualquiera puede verificar la firma descifrando ese resumen con la clave pública correspondiente y comprobando que coincide con el hash del documento recibido. Si el documento se ha alterado, aunque sea mínimamente, su hash cambia y la verificación falla, lo que garantiza a la vez la autoría (solo el titular de la clave privada pudo generar esa firma concreta) y la integridad del contenido firmado.</p>
+<p>El conjunto de hardware, software, personas, políticas y procedimientos necesarios para crear, gestionar, distribuir, usar, almacenar y revocar certificados digitales se conoce como <strong>PKI (Public Key Infrastructure, infraestructura de clave pública)</strong>. Dentro de esa infraestructura, la <strong>Autoridad de Certificación (CA, Certification Authority)</strong> es la entidad de confianza que emite los certificados digitales, vinculando de forma fehaciente una clave pública con la identidad de su titular (por ejemplo, Izenpe en el ámbito vasco, punto 4).</p>
+<h2 id="3-el-certificado-digital-qué-es-y-qué-tipos-existen" class="tema-h2">3. El certificado digital: qué es y qué tipos existen</h2>
+<p>Un <strong>certificado digital</strong> es un documento electrónico firmado por una Autoridad de Certificación que vincula unos datos de verificación de firma (la clave pública) con la identidad de su titular, permitiendo identificarlo de forma inequívoca en las relaciones telemáticas. Contiene, entre otros datos, la identidad del titular, su clave pública, el periodo de validez, la autoridad emisora, un número de serie único y la propia firma de la autoridad de certificación que lo avala.</p>
+<ul class="tema-lista">
+<li><strong>Certificado de persona física o ciudadano</strong>: identifica a un individuo concreto en sus relaciones personales con las administraciones y otras entidades.</li>
+<li><strong>Certificado profesional o de empleado público</strong>: identifica a la persona junto con su vinculación profesional o su cargo dentro de una organización, para actuar en el ejercicio de sus funciones (por ejemplo, el certificado de empleado público de Izenpe, punto 4).</li>
+<li><strong>Certificado de sede electrónica o de representante</strong>: identifica a una entidad (un organismo, una sede electrónica), no a una persona física concreta.</li>
+</ul>
+<p>Según el soporte en que se almacena la clave privada, un certificado puede emitirse <strong>en tarjeta física</strong> (con chip criptográfico, requiere un lector), <strong>en software</strong> (instalado directamente en el dispositivo del usuario) o <strong>en la nube</strong> (alojado de forma centralizada en un servidor remoto y accesible mediante autenticación, sin depender de un dispositivo o una tarjeta concretos); esta última modalidad ha ganado peso en los últimos años, especialmente entre el personal de las administraciones públicas, por la comodidad de poder firmar desde cualquier equipo autorizado.</p>
+<h2 id="4-izenpe-la-autoridad-de-certificación-vasca" class="tema-h2">4. Izenpe: la autoridad de certificación vasca</h2>
+<p><strong>Izenpe</strong> es el Prestador de Servicios de Certificación de referencia del sector público vasco, participado por el Gobierno Vasco, las tres diputaciones forales y Eudel (la asociación de municipios vascos). Actúa como Autoridad de Certificación (punto 2), emitiendo los certificados digitales que permiten identificarse y firmar electrónicamente en las relaciones con las administraciones públicas vascas.</p>
+<ul class="tema-lista">
+<li><strong>Certificado Ciudadano de Izenpe</strong>: emitido en tarjeta física con chip criptográfico, con una validez de cuatro años, permite identificarse y firmar electrónicamente con administraciones locales, forales, autonómicas y estatales.</li>
+<li><strong>Certificado profesional o de empleado público</strong>: dirigido específicamente al personal funcionario y empleado de las administraciones públicas vascas, disponible también en la modalidad en la nube, para firmar documentos en el ejercicio de sus funciones sin depender de una tarjeta física.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Izenpe cumple, en el ámbito de las administraciones públicas vascas, un papel equivalente al que cumple la FNMT-RCM (Fábrica Nacional de Moneda y Timbre) a nivel estatal: ambas son Autoridades de Certificación de confianza que emiten certificados digitales reconocidos para relacionarse electrónicamente con la Administración.</th>
+</tr>
+</table></div>
+<h2 id="5-bk-q-identificación-electrónica-sin-certificado" class="tema-h2">5. b@k-Q: identificación electrónica sin certificado</h2>
+<p><strong>b@k-Q</strong> es un sistema de identificación electrónica gratuito, alternativo al certificado digital, impulsado igualmente en el ámbito de las administraciones públicas vascas. Se compone de tres elementos: el número de DNI o NIE de la persona usuaria, una contraseña alfanumérica de ocho caracteres elegida por ella misma, y una tarjeta de coordenadas (un conjunto de códigos numerados de los que el sistema solicita uno concreto en cada operación).</p>
+<p>A diferencia del certificado digital, b@k-Q no requiere tarjeta con chip criptográfico ni lector alguno, lo que lo hace más accesible para la ciudadanía que no dispone de un certificado digital, a cambio de un nivel de garantía de identificación menor, adecuado para trámites de exigencia baja o media.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>b@k-Q es, conceptualmente, equivalente al sistema <strong>Cl@ve PIN</strong> del Estado: un sistema de claves concertadas, sin certificado digital, pensado para facilitar el acceso electrónico a trámites de menor exigencia a quien no dispone de un certificado o DNIe, o simplemente prefiere no usarlo.</th>
+</tr>
+</table></div>
+<h2 id="6-giltza-la-plataforma-de-identificación-de-las-aapp-vascas" class="tema-h2">6. Giltza: la plataforma de identificación de las AAPP vascas</h2>
+<p><strong>Giltza</strong> («llave», en euskera) es la plataforma común de identificación electrónica de las administraciones públicas vascas: actúa como intermediaria entre la persona usuaria y los distintos servicios y sedes electrónicas, verificando el método de identificación que esta elija —certificado digital (de Izenpe o de cualquier otra autoridad de certificación reconocida, incluido el DNIe) o b@k-Q— sin que cada servicio electrónico tenga que implementar por separado la verificación de cada uno de esos métodos.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Puede resultar útil imaginar Giltza como el portero único de un edificio con muchas salas (los distintos servicios y trámites electrónicos): el portero comprueba la identificación en la entrada, con el método que la persona prefiera, y a partir de ahí esta puede moverse por las salas del edificio sin que cada una de ellas tenga que volver a comprobar quién es.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Ámbito vasco</strong></th>
+<th><strong>Equivalente estatal</strong></th>
+</tr>
+<tr>
+<td>Plataforma común de identificación</td>
+<td>Giltza</td>
+<td>Cl@ve</td>
+</tr>
+<tr>
+<td>Certificado digital de referencia</td>
+<td>Izenpe (Certificado Ciudadano / Profesional)</td>
+<td>FNMT-RCM (Certificado de la FNMT)</td>
+</tr>
+<tr>
+<td>Identificación sin certificado (claves concertadas)</td>
+<td>b@k-Q</td>
+<td>Cl@ve PIN</td>
+</tr>
+</table></div>
+<h2 id="7-viafirma-plataforma-de-firma-electrónica" class="tema-h2">7. Viafirma: plataforma de firma electrónica</h2>
+<p><strong>Viafirma</strong> es una plataforma privada de software de firma electrónica, ampliamente utilizada por administraciones públicas españolas —entre ellas, las vascas— como «portafirmas» electrónico: un punto centralizado desde el que el personal de la organización revisa y firma digitalmente los documentos que requieren su firma en el ejercicio de sus funciones.</p>
+<ul class="tema-lista">
+<li><strong>Firma con certificado digital</strong>: integrando los certificados vistos en los puntos anteriores (Izenpe, DNIe, u otros reconocidos).</li>
+<li><strong>Firma mediante código OTP (One-Time Password)</strong>: un código de un solo uso enviado por SMS o correo electrónico, como alternativa que no requiere certificado digital.</li>
+<li><strong>Firma biométrica manuscrita</strong>: captura de la firma a mano en una pantalla táctil o tableta, registrando además datos biométricos del trazo (presión, velocidad) que refuerzan su validez probatoria.</li>
+<li><strong>Gestión de flujos de firma</strong>: permite definir circuitos con varios firmantes, en un orden determinado, antes de dar un documento por completamente firmado.</li>
+</ul>
+<p>Viafirma no sustituye a los certificados o sistemas de identificación de los puntos anteriores, sino que actúa como una capa intermedia: ofrece una interfaz común de firma electrónica, integrable en las aplicaciones de gestión de expedientes de la organización, con independencia del método concreto de autenticación o firma que finalmente emplee cada persona usuaria.</p>
+<h2 id="8-el-dni-electrónico-dnie" class="tema-h2">8. El DNI electrónico (DNIe)</h2>
+<p>El <strong>DNI electrónico (DNIe)</strong>, emitido por la Dirección General de la Policía, es el documento nacional de identidad español que incorpora un chip criptográfico con dos certificados digitales: un <strong>certificado de autenticación</strong>, que permite identificar de forma fehaciente a su titular, y un <strong>certificado de firma</strong>, que permite firmar electrónicamente con la misma validez legal que la firma manuscrita, además de conservar la información de identidad y biométrica habitual del DNI físico.</p>
+<p>Su uso requiere introducir un <strong>PIN</strong> conocido únicamente por el titular, y acceder al chip mediante un <strong>lector de tarjetas con contacto</strong>, o, en las versiones más recientes del documento (DNIe 4.0), mediante <strong>NFC (Near Field Communication)</strong>, que permite leer el chip sin contacto físico, incluso desde un smartphone compatible, sin necesidad de un lector dedicado.</p>
+<h2 id="9-resumen-esquemático" class="tema-h2">9. Resumen esquemático</h2>
+<ul class="tema-lista">
+<li><strong>Autenticación frente a firma digital</strong>: verificar identidad frente a garantizar autoría e integridad de un documento; la normativa eIDAS distingue firma electrónica simple, avanzada y cualificada (esta última, equivalente legal a la manuscrita).</li>
+<li><strong>Fundamento técnico</strong>: criptografía asimétrica (clave privada/pública) y PKI; la Autoridad de Certificación vincula una clave pública con la identidad de su titular mediante un certificado digital.</li>
+<li><strong>Certificado digital</strong>: de persona física, profesional/empleado público o de sede electrónica; soportado en tarjeta, software o en la nube.</li>
+<li><strong>Izenpe</strong>: Autoridad de Certificación del sector público vasco; Certificado Ciudadano (tarjeta, 4 años) y certificado profesional/de empleado público (también en la nube).</li>
+<li><strong>b@k-Q</strong>: identificación electrónica gratuita sin certificado (DNI/NIE + contraseña + coordenadas), equivalente a Cl@ve PIN a nivel estatal.</li>
+<li><strong>Giltza</strong>: plataforma común de identificación de las AAPP vascas, verifica certificado digital o b@k-Q; equivalente a Cl@ve a nivel estatal.</li>
+<li><strong>Viafirma</strong>: plataforma privada de firma electrónica (portafirmas), con firma por certificado, OTP o biometría manuscrita, y gestión de flujos de firma.</li>
+<li><strong>DNIe</strong>: DNI con chip criptográfico, certificados de autenticación y de firma, acceso mediante PIN y lector de contacto o NFC (DNIe 4.0).</li>
+</ul>
+  </div>
+</article>

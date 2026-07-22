@@ -1,0 +1,121 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T29</div>
+    <h1 class="tema-cabecera__titulo">Seguridad: cortafuegos, protocolos seguros (IPSec, SSL…) redes privadas virtuales</h1>
+    <div class="tema-cabecera__meta">Bloque IV · Comunicaciones y redes — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-cortafuegos-firewall-concepto-y-funcionamiento">1. Cortafuegos (firewall): concepto y funcionamiento</a></li>
+<li><a href="#2-tipos-de-cortafuegos-y-su-evolución">2. Tipos de cortafuegos y su evolución</a></li>
+<li><a href="#3-arquitecturas-de-red-con-cortafuegos-la-dmz">3. Arquitecturas de red con cortafuegos: la DMZ</a></li>
+<li><a href="#4-protocolos-seguros-ssltls">4. Protocolos seguros: SSL/TLS</a></li>
+<li><a href="#5-protocolos-seguros-ipsec">5. Protocolos seguros: IPSec</a></li>
+<li><a href="#6-redes-privadas-virtuales-vpn">6. Redes privadas virtuales (VPN)</a></li>
+<li><a href="#7-resumen-esquemático">7. Resumen esquemático</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h3 class="tema-h3">Qué vas a encontrar en este tema</h3>
+<ul class="tema-lista">
+<li>Qué es un cortafuegos, cómo filtra el tráfico de red y cómo ha evolucionado.</li>
+<li>El concepto de DMZ (zona desmilitarizada) para exponer servicios de forma segura.</li>
+<li>Los protocolos seguros SSL/TLS e IPSec, y en qué capa opera cada uno.</li>
+<li>Las redes privadas virtuales (VPN): concepto, tipos y protocolos habituales.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Este tema aplica a la seguridad de red los conceptos generales ya vistos en los Temas 21 y 22 (amenazas, vulnerabilidades, requisitos del ENS) y se apoya en el modelo OSI/TCP/IP y en los equipos de interconexión estudiados en los Temas 27 y 28. Las redes inalámbricas y la movilidad, con sus propios mecanismos de seguridad, se desarrollan en el Tema 30.</th>
+</tr>
+</table></div>
+<p>1. Cortafuegos (firewall): concepto y funcionamiento</p>
+<p>2. Tipos de cortafuegos y su evolución</p>
+<p>3. Arquitecturas de red con cortafuegos: la DMZ</p>
+<p>4. Protocolos seguros: SSL/TLS</p>
+<p>5. Protocolos seguros: IPSec</p>
+<p>6. Redes privadas virtuales (VPN)</p>
+<p>7. Resumen esquemático</p>
+<h2 id="1-cortafuegos-firewall-concepto-y-funcionamiento" class="tema-h2">1. Cortafuegos (firewall): concepto y funcionamiento</h2>
+<p>Un <strong>cortafuegos (firewall)</strong> es un sistema, hardware o software, que controla el tráfico de red que entra y sale de una red o de un equipo, permitiendo o bloqueando ese tráfico según un conjunto de reglas predefinidas. Suele situarse en la frontera entre una red de confianza (la red interna de la organización) y una red no confiable (típicamente Internet).</p>
+<p>Las reglas de un cortafuegos se definen habitualmente en función de la dirección IP de origen y destino (Tema 27), el puerto, el protocolo (TCP o UDP) y el sentido del tráfico (entrante o saliente).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>La buena práctica de seguridad, coherente con el principio de mínimo privilegio ya visto en los Temas 9, 12, 14 y 21, es configurar el cortafuegos con una política por defecto de <strong>denegación</strong>: se bloquea todo el tráfico salvo el que se ha permitido de forma explícita (lista blanca), en lugar de permitir todo salvo lo expresamente bloqueado (lista negra). La primera política exige más trabajo de configuración inicial, pero reduce drásticamente la superficie de ataque frente a tráfico no previsto.</th>
+</tr>
+</table></div>
+<h2 id="2-tipos-de-cortafuegos-y-su-evolución" class="tema-h2">2. Tipos de cortafuegos y su evolución</h2>
+<ul class="tema-lista">
+<li><strong>Filtrado de paquetes (packet filtering)</strong>: el modelo más básico y antiguo; examina cada paquete de forma aislada (IP, puerto, protocolo) sin recordar el contexto de la conexión a la que pertenece. Es rápido, pero limitado.</li>
+<li><strong>Inspección de estado (stateful inspection)</strong>: mantiene una tabla de las conexiones activas y su estado, lo que permite tomar decisiones más inteligentes —por ejemplo, permitir automáticamente el tráfico de respuesta a una conexión saliente ya autorizada—, sin tener que abrir manualmente esos puertos de vuelta. Es el modelo estándar en la mayoría de cortafuegos actuales.</li>
+<li><strong>Cortafuegos de aplicación (proxy o application-level gateway)</strong>: opera en la capa de aplicación (Tema 27), entendiendo el protocolo concreto (HTTP, FTP…) e inspeccionando el contenido real de las comunicaciones, no solo sus cabeceras. Es más lento, pero ofrece un control mucho más granular.</li>
+<li><strong>Cortafuegos de nueva generación (NGFW, Next-Generation Firewall)</strong>: combina las capacidades anteriores con funciones adicionales, como la inspección profunda de paquetes (DPI, Deep Packet Inspection), la prevención de intrusiones integrada (IPS, Intrusion Prevention System), la identificación de aplicaciones concretas más allá del puerto que usan, y el filtrado basado en inteligencia de amenazas actualizada. Es el estándar de referencia en entornos corporativos actuales.</li>
+</ul>
+<p>Además de por su nivel de inspección, los cortafuegos se distinguen por su ubicación: un <strong>cortafuegos personal (host-based)</strong> se ejecuta en el propio equipo y lo protege de forma individual (ya citado como parte de los paquetes de seguridad integral del puesto de trabajo, Tema 25), mientras que un <strong>cortafuegos de red o perimetral (network-based)</strong> protege a toda una red desde un único punto centralizado.</p>
+<h2 id="3-arquitecturas-de-red-con-cortafuegos-la-dmz" class="tema-h2">3. Arquitecturas de red con cortafuegos: la DMZ</h2>
+<p>Una <strong>DMZ (DeMilitarized Zone, zona desmilitarizada)</strong> es un segmento de red intermedio, aislado tanto de la red interna como de la red externa mediante uno o varios cortafuegos, donde se ubican los servicios que deben ser accesibles desde el exterior (un servidor web público, un servidor de correo) sin necesidad de exponer directamente la red interna al tráfico de Internet.</p>
+<p>Una arquitectura típica sitúa un cortafuegos externo entre Internet y la DMZ, y un segundo cortafuegos interno entre la DMZ y la red interna: `Internet → [Cortafuegos externo] → DMZ (servidores públicos) → [Cortafuegos interno] → Red interna`. Si un servidor de la DMZ sufriera un fallo de seguridad y llegara a ser comprometido, el atacante queda contenido en ese segmento intermedio, sin obtener por ello acceso directo a la red interna de la organización.</p>
+<h2 id="4-protocolos-seguros-ssltls" class="tema-h2">4. Protocolos seguros: SSL/TLS</h2>
+<p><strong>TLS (Transport Layer Security)</strong> es el protocolo que proporciona cifrado, autenticación (mediante certificados digitales, Tema 24) e integridad a las comunicaciones sobre TCP. Opera conceptualmente entre la capa de Transporte y la de Aplicación del modelo TCP/IP (Tema 27).</p>
+<p>En un proceso simplificado de negociación (handshake), el cliente y el servidor acuerdan la versión del protocolo y los algoritmos de cifrado a usar; el servidor presenta su certificado digital para autenticarse frente al cliente; y ambos establecen una clave de sesión —apoyándose inicialmente en criptografía asimétrica (Tema 24) y, a partir de ahí, en cifrado simétrico, más rápido, para el resto de la comunicación—.</p>
+<p>Su uso más conocido es <strong>HTTPS</strong> (HTTP sobre TLS, Tema 20), aunque también protege otros protocolos, como las variantes seguras de SMTP e IMAP vistas en el Tema 17.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br><strong>SSL (Secure Sockets Layer)</strong> es el predecesor histórico de TLS; sus versiones están obsoletas y en desuso desde hace años por vulnerabilidades conocidas, y las versiones vigentes en uso hoy son TLS 1.2 y, cada vez más, TLS 1.3. Aun así, es habitual en el lenguaje cotidiano seguir hablando de «certificado SSL» o «conexión SSL» para referirse, en realidad, a TLS. A efectos de examen conviene tener clara esta precisión: lo que protege las comunicaciones actuales es TLS, no SSL.</th>
+</tr>
+</table></div>
+<h2 id="5-protocolos-seguros-ipsec" class="tema-h2">5. Protocolos seguros: IPSec</h2>
+<p><strong>IPSec (Internet Protocol Security)</strong> es un conjunto de protocolos que proporciona autenticación y cifrado a nivel de la capa de Red (IP, Tema 27), a diferencia de TLS, que opera en capas superiores. Al actuar en la propia capa IP, IPSec protege cualquier tráfico IP con independencia de la aplicación que lo genere, de forma transparente para esta.</p>
+<ul class="tema-lista">
+<li><strong>Modo transporte</strong>: cifra únicamente los datos del paquete IP, manteniendo visibles las cabeceras IP originales; se usa típicamente para proteger la comunicación extremo a extremo entre dos equipos concretos.</li>
+<li><strong>Modo túnel</strong>: cifra el paquete IP completo, incluida su cabecera original, y lo encapsula dentro de un nuevo paquete IP; se usa típicamente para interconectar redes completas entre sí, como en una VPN sitio a sitio (punto 6).</li>
+</ul>
+<p>IPSec se apoya en dos protocolos principales: <strong>AH (Authentication Header)</strong>, que garantiza autenticidad e integridad sin cifrar el contenido, y <strong>ESP (Encapsulating Security Payload)</strong>, que añade cifrado además de autenticidad e integridad, y es el más utilizado en la práctica. El uso más habitual de IPSec es servir de base técnica a muchas VPN, en especial las VPN sitio a sitio entre distintas sedes de una misma organización.</p>
+<h2 id="6-redes-privadas-virtuales-vpn" class="tema-h2">6. Redes privadas virtuales (VPN)</h2>
+<p>Una <strong>VPN (Virtual Private Network, red privada virtual)</strong> crea una conexión cifrada y segura —un «túnel»— a través de una red no confiable, típicamente Internet, de forma que los equipos conectados a través de ella se comunican como si estuvieran dentro de la misma red privada, con independencia de la distancia física real que los separe.</p>
+<ul class="tema-lista">
+<li><strong>VPN de acceso remoto (client-to-site)</strong>: una persona usuaria individual —por ejemplo, en teletrabajo— se conecta de forma segura a la red de su organización desde cualquier ubicación externa.</li>
+<li><strong>VPN sitio a sitio (site-to-site)</strong>: interconecta de forma permanente y segura dos redes completas —por ejemplo, dos sedes de un mismo organismo— a través de Internet, sin necesidad de contratar una línea dedicada física entre ambas ubicaciones.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Protocolo</strong></th>
+<th><strong>Capa / enfoque</strong></th>
+<th><strong>Uso habitual</strong></th>
+</tr>
+<tr>
+<td>IPSec</td>
+<td>Capa de Red; protege cualquier tráfico IP</td>
+<td>VPN sitio a sitio entre sedes</td>
+</tr>
+<tr>
+<td>SSL/TLS («SSL VPN»)</td>
+<td>Capas superiores; a menudo basada en navegador o cliente ligero</td>
+<td>VPN de acceso remoto para personas usuarias individuales</td>
+</tr>
+<tr>
+<td>OpenVPN</td>
+<td>Código abierto, basado en TLS</td>
+<td>Ambos escenarios, muy extendido</td>
+</tr>
+<tr>
+<td>WireGuard</td>
+<td>Diseño moderno, más simple</td>
+<td>Ambos escenarios, adopción creciente</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br><strong>WireGuard</strong> es un protocolo de VPN relativamente reciente, incorporado al núcleo Linux en 2020 (Tema 13), que ha ganado adopción con rapidez frente a IPSec y OpenVPN por su diseño mucho más simple (una base de código muy reducida, más fácil de auditar) y su mejor rendimiento. Aun así, IPSec y OpenVPN siguen siendo mayoritarios en muchos entornos corporativos ya desplegados, por la inercia propia de una infraestructura ya en producción.</th>
+</tr>
+</table></div>
+<p>Entre los beneficios de una VPN destacan la confidencialidad e integridad de las comunicaciones que viajan sobre una red no confiable, la posibilidad de dar acceso remoto seguro a recursos internos sin exponerlos directamente a Internet, y el ahorro económico frente a contratar líneas dedicadas físicas para interconectar sedes distantes.</p>
+<h2 id="7-resumen-esquemático" class="tema-h2">7. Resumen esquemático</h2>
+<ul class="tema-lista">
+<li><strong>Cortafuegos</strong>: filtra tráfico según reglas (IP, puerto, protocolo, sentido); política de denegación por defecto como buena práctica; evolución desde el filtrado de paquetes hasta los NGFW, pasando por la inspección de estado y los cortafuegos de aplicación; personal (host) frente a perimetral (red).</li>
+<li><strong>DMZ</strong>: segmento intermedio y aislado para exponer servicios públicos sin comprometer la red interna.</li>
+<li><strong>SSL/TLS</strong>: cifrado, autenticación e integridad sobre TCP; TLS es la versión vigente, SSL está obsoleto aunque el nombre perdura en el lenguaje común; base de HTTPS y de otros protocolos seguros.</li>
+<li><strong>IPSec</strong>: seguridad a nivel de capa de Red, transparente a las aplicaciones; modo transporte (extremo a extremo) frente a modo túnel (redes completas); AH (autenticidad) y ESP (autenticidad + cifrado).</li>
+<li><strong>VPN</strong>: acceso remoto (client-to-site) frente a sitio a sitio (site-to-site); protocolos IPSec, SSL/TLS, OpenVPN y WireGuard (este último, en auge por su simplicidad y rendimiento).</li>
+</ul>
+  </div>
+</article>

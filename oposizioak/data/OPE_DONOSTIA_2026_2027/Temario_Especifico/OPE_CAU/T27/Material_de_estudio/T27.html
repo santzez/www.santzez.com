@@ -1,0 +1,154 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T27</div>
+    <h1 class="tema-cabecera__titulo">Modelo de referencia OSI de ISO. El modelo TCP/IP: arquitectura capas, protocolos, direccionamiento y encaminamiento</h1>
+    <div class="tema-cabecera__meta">Bloque IV · Comunicaciones y redes — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-el-modelo-de-referencia-osi-concepto-y-objetivo">1. El modelo de referencia OSI: concepto y objetivo</a></li>
+<li><a href="#2-las-siete-capas-del-modelo-osi">2. Las siete capas del modelo OSI</a></li>
+<li><a href="#3-el-modelo-tcpip-capas-y-relación-con-osi">3. El modelo TCP/IP: capas y relación con OSI</a></li>
+<li><a href="#4-protocolos-principales-por-capa">4. Protocolos principales por capa</a></li>
+<li><a href="#5-direccionamiento-ipv4-e-ipv6">5. Direccionamiento: IPv4 e IPv6</a></li>
+<li><a href="#6-encaminamiento-routing">6. Encaminamiento (routing)</a></li>
+<li><a href="#7-resumen-esquemático">7. Resumen esquemático</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h3 class="tema-h3">Qué vas a encontrar en este tema</h3>
+<ul class="tema-lista">
+<li>Qué es el modelo de referencia OSI y para qué sirve dividir la comunicación en capas.</li>
+<li>Las siete capas del modelo OSI y la función de cada una.</li>
+<li>El modelo TCP/IP, sus capas y su correspondencia con el modelo OSI.</li>
+<li>Los protocolos principales de cada capa del modelo TCP/IP.</li>
+<li>El direccionamiento IP, en sus versiones IPv4 e IPv6.</li>
+<li>El encaminamiento (routing): cómo viaja un paquete de un extremo a otro de la red.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Este tema sienta las bases teóricas de las comunicaciones en red. La tipología de redes LAN/MAN/WAN, los medios de transmisión, el cableado estructurado y los equipos de interconexión (switches, routers) se desarrollan con más detalle en el Tema 28; aquí basta con introducir el concepto de encaminamiento y la diferencia entre conmutación y enrutamiento.</th>
+</tr>
+</table></div>
+<p>1. El modelo de referencia OSI: concepto y objetivo</p>
+<p>2. Las siete capas del modelo OSI</p>
+<p>3. El modelo TCP/IP: capas y relación con OSI</p>
+<p>4. Protocolos principales por capa</p>
+<p>5. Direccionamiento: IPv4 e IPv6</p>
+<p>6. Encaminamiento (routing)</p>
+<p>7. Resumen esquemático</p>
+<h2 id="1-el-modelo-de-referencia-osi-concepto-y-objetivo" class="tema-h2">1. El modelo de referencia OSI: concepto y objetivo</h2>
+<p>El <strong>modelo OSI (Open Systems Interconnection)</strong> es un modelo de referencia desarrollado por la <strong>ISO (International Organization for Standardization)</strong> en 1984 para estandarizar cómo se comunican entre sí los sistemas informáticos. Su idea central es dividir el proceso completo de comunicación en red en <strong>siete capas</strong> independientes, cada una responsable de una función concreta, que solo se comunica directamente con la capa inmediatamente superior e inferior, a través de interfaces bien definidas.</p>
+<p>El objetivo de este enfoque por capas es la <strong>interoperabilidad</strong>: cada fabricante puede implementar su capa sabiendo exactamente qué servicio debe ofrecer a la capa superior y qué puede esperar de la capa inferior, sin necesidad de conocer los detalles internos de las demás capas.</p>
+<p>Cada capa añade su propia cabecera (y, en algún caso, también una cola) a los datos que recibe de la capa superior, en un proceso llamado <strong>encapsulación</strong>, dando lugar a una unidad de datos propia de esa capa (PDU, Protocol Data Unit). En el sistema de destino, el proceso se realiza a la inversa —<strong>desencapsulación</strong>—, retirando cada capa la cabecera que le corresponde antes de entregar los datos a la capa superior.</p>
+<h2 id="2-las-siete-capas-del-modelo-osi" class="tema-h2">2. Las siete capas del modelo OSI</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Capa</strong></th>
+<th><strong>Función principal</strong></th>
+<th><strong>Ejemplo</strong></th>
+</tr>
+<tr>
+<td>7. Aplicación</td>
+<td>Protocolos usados directamente por las aplicaciones</td>
+<td>HTTP, SMTP, DNS</td>
+</tr>
+<tr>
+<td>6. Presentación</td>
+<td>Formato, cifrado/compresión y traducción de los datos</td>
+<td>Codificación de caracteres, cifrado TLS</td>
+</tr>
+<tr>
+<td>5. Sesión</td>
+<td>Establecimiento y gestión de sesiones de comunicación</td>
+<td>Apertura y cierre de una sesión entre aplicaciones</td>
+</tr>
+<tr>
+<td>4. Transporte</td>
+<td>Comunicación extremo a extremo, control de flujo y de errores</td>
+<td>TCP, UDP</td>
+</tr>
+<tr>
+<td>3. Red</td>
+<td>Direccionamiento lógico y encaminamiento entre redes</td>
+<td>IP</td>
+</tr>
+<tr>
+<td>2. Enlace de datos</td>
+<td>Transmisión fiable de tramas entre nodos de la misma red</td>
+<td>Ethernet, Wi-Fi (802.11)</td>
+</tr>
+<tr>
+<td>1. Física</td>
+<td>Transmisión de bits en bruto sobre el medio físico</td>
+<td>Cableado, señales eléctricas/ópticas/radio</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Una mnemotecnia habitual para recordar las siete capas de arriba abajo (Aplicación → Física) es la frase «A Presos Sin Toalla Repartes Espejos, Físicamente» (Aplicación, Presentación, Sesión, Transporte, Red, Enlace, Física). Lo importante no es memorizar una frase concreta, sino tener claro el orden y qué función cumple cada capa, especialmente el salto conceptual entre la capa de Red (direcciones IP) y la capa de Enlace (direcciones físicas/MAC).</th>
+</tr>
+</table></div>
+<h2 id="3-el-modelo-tcpip-capas-y-relación-con-osi" class="tema-h2">3. El modelo TCP/IP: capas y relación con OSI</h2>
+<p>El <strong>modelo TCP/IP</strong> (también llamado modelo DoD, por el Departamento de Defensa de EE. UU. que impulsó su desarrollo en los años 70 para la red ARPANET, precursora de Internet) es anterior en el tiempo al modelo OSI y es, a diferencia de este, el modelo que <strong>realmente se implementa</strong> en Internet y en la inmensa mayoría de redes actuales. Se organiza en cuatro capas:</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Capa TCP/IP</strong></th>
+<th><strong>Capas OSI equivalentes</strong></th>
+</tr>
+<tr>
+<td>Aplicación</td>
+<td>Aplicación + Presentación + Sesión</td>
+</tr>
+<tr>
+<td>Transporte</td>
+<td>Transporte</td>
+</tr>
+<tr>
+<td>Internet</td>
+<td>Red</td>
+</tr>
+<tr>
+<td>Acceso a la red (Enlace)</td>
+<td>Enlace de datos + Física</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Es un punto clásico de examen: el modelo OSI es un <strong>modelo de referencia teórico y didáctico</strong>, que nunca llegó a implementarse tal cual en la práctica, pero que sigue siendo el estándar de facto para explicar, diseñar y diagnosticar problemas de red («¿en qué capa está fallando esto?»). El modelo TCP/IP, con sus cuatro capas, es el que realmente <strong>funciona</strong> en Internet. No son dos alternativas en competencia: se estudian juntos porque el modelo OSI aporta el vocabulario y el marco conceptual con el que se explica, capa a capa, el funcionamiento real del TCP/IP.</th>
+</tr>
+</table></div>
+<h2 id="4-protocolos-principales-por-capa" class="tema-h2">4. Protocolos principales por capa</h2>
+<ul class="tema-lista">
+<li><strong>Capa de aplicación</strong>: HTTP/HTTPS (Tema 20), SMTP, POP3, IMAP (Tema 17), FTP (transferencia de ficheros), DNS (resolución de nombres de dominio), SSH (acceso remoto seguro, Tema 13).</li>
+<li><strong>Capa de transporte</strong>: TCP (Transmission Control Protocol), orientado a conexión y fiable, garantiza la entrega ordenada y sin pérdidas de los datos; UDP (User Datagram Protocol), sin conexión y sin garantías de entrega, pero más rápido y con menos sobrecarga, adecuado para aplicaciones que toleran alguna pérdida a cambio de velocidad (streaming, videollamadas).</li>
+<li><strong>Capa de Internet</strong>: IP (Internet Protocol), responsable del direccionamiento lógico y el encaminamiento (puntos 5 y 6); ICMP (Internet Control Message Protocol), usado para mensajes de control y diagnóstico de red (el comando `ping` se basa en ICMP); ARP (Address Resolution Protocol), que resuelve una dirección IP a la dirección MAC correspondiente dentro de una misma red local.</li>
+<li><strong>Capa de acceso a la red</strong>: los protocolos y tecnologías del medio físico y de enlace, como Ethernet (redes cableadas) o Wi-Fi/802.11 (redes inalámbricas), que se desarrollan con más detalle en el Tema 28.</li>
+</ul>
+<h2 id="5-direccionamiento-ipv4-e-ipv6" class="tema-h2">5. Direccionamiento: IPv4 e IPv6</h2>
+<p><strong>IPv4</strong> utiliza direcciones de <strong>32 bits</strong>, representadas habitualmente en notación decimal punteada (cuatro grupos de 8 bits, por ejemplo `192.168.1.1`). Su espacio de direcciones, de algo más de 4.300 millones de combinaciones, resultó insuficiente para el crecimiento de Internet, lo que se ha mitigado durante años mediante <strong>NAT (Network Address Translation)</strong> y el uso de rangos de direccionamiento privado (definidos en el RFC 1918: `10.0.0.0/8`, `172.16.0.0/12` y `192.168.0.0/16`), que permiten que muchos equipos de una red local compartan una única dirección IP pública frente al exterior.</p>
+<p>La <strong>máscara de red</strong>, habitualmente expresada en notación <strong>CIDR (Classless Inter-Domain Routing)</strong> con el formato `/n` (por ejemplo, `/24`), determina qué parte de una dirección IP identifica la red y cuál identifica al host concreto dentro de ella.</p>
+<p><strong>IPv6</strong> utiliza direcciones de <strong>128 bits</strong>, representadas en notación hexadecimal separada por dos puntos (ocho grupos de 16 bits), lo que ofrece un espacio de direcciones prácticamente inagotable y fue diseñado, entre otros motivos, para resolver el agotamiento de IPv4 y simplificar el encaminamiento; por diseño, no necesita depender de NAT para funcionar, aunque puede convivir con él en algunos escenarios.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>La adopción de IPv6 ha avanzado de forma desigual, pero sostenida: a nivel mundial, el porcentaje de usuarios que acceden a los servicios de Google mediante IPv6 nativo superó por primera vez el 50% en marzo de 2026, un hito simbólico casi treinta años después de su diseño. La adopción varía enormemente por país —encabezada por Francia, India o Arabia Saudí, con cifras superiores al 65%—, mientras que España se sitúa entre los países con menor despliegue, en torno al 10%. Este dato de contexto ayuda a entender por qué, en la práctica, buena parte de las redes y servicios en España todavía conviven con IPv4 e IPv6 simultáneamente (lo que se conoce como «doble pila» o dual stack), en lugar de haber migrado por completo a IPv6.</th>
+</tr>
+</table></div>
+<h2 id="6-encaminamiento-routing" class="tema-h2">6. Encaminamiento (routing)</h2>
+<p>El <strong>encaminamiento o enrutamiento (routing)</strong> es el proceso de seleccionar, para cada paquete, la ruta que debe seguir desde su origen hasta su destino, atravesando los distintos routers o encaminadores intermedios que interconectan redes diferentes. Es una función propia de la capa de Red (OSI) o de Internet (TCP/IP), y se basa en el direccionamiento IP visto en el punto anterior.</p>
+<p>Cada router mantiene una <strong>tabla de encaminamiento (routing table)</strong>, con las rutas conocidas hacia distintas redes de destino y el «siguiente salto» (next hop) al que debe reenviar cada paquete para acercarlo a su destino final. Esas rutas pueden configurarse manualmente (<strong>encaminamiento estático</strong>) o aprenderse y actualizarse de forma automática mediante protocolos de encaminamiento dinámico (por ejemplo, RIP, OSPF o BGP), en los que los propios routers intercambian información entre sí sobre las rutas disponibles.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>No debe confundirse el encaminamiento (routing) con la conmutación (switching): la conmutación ocurre en la capa de Enlace (capa 2), dentro de una misma red local, y decide a qué puerto físico reenviar una trama en función de la dirección MAC de destino; el encaminamiento ocurre en la capa de Red (capa 3), entre redes distintas, y decide por qué camino debe viajar un paquete en función de su dirección IP de destino. El detalle de los equipos que realizan cada función —switches y routers— se desarrolla en el Tema 28.</th>
+</tr>
+</table></div>
+<h2 id="7-resumen-esquemático" class="tema-h2">7. Resumen esquemático</h2>
+<ul class="tema-lista">
+<li><strong>Modelo OSI</strong>: modelo de referencia de ISO (1984), siete capas (Física, Enlace, Red, Transporte, Sesión, Presentación, Aplicación), encapsulación/desencapsulación de datos entre capas; modelo teórico-didáctico, no implementado tal cual en la práctica.</li>
+<li><strong>Modelo TCP/IP</strong>: modelo realmente implementado en Internet, cuatro capas (Acceso a la red, Internet, Transporte, Aplicación), cada una equivalente a una o varias capas OSI.</li>
+<li><strong>Protocolos principales</strong>: aplicación (HTTP, SMTP, DNS, SSH…), transporte (TCP fiable, UDP sin garantías), Internet (IP, ICMP, ARP), acceso a la red (Ethernet, Wi-Fi).</li>
+<li><strong>Direccionamiento</strong>: IPv4 (32 bits, NAT y rangos privados por escasez de direcciones) frente a IPv6 (128 bits, espacio prácticamente inagotable, adopción mundial superando el 50% en 2026 pero aún baja en España); máscara/CIDR para distinguir red y host.</li>
+<li><strong>Encaminamiento</strong>: selección de ruta entre redes mediante tablas de encaminamiento, estático o dinámico (RIP, OSPF, BGP); distinto de la conmutación (capa 2, dentro de la misma red local, basada en MAC).</li>
+</ul>
+  </div>
+</article>
