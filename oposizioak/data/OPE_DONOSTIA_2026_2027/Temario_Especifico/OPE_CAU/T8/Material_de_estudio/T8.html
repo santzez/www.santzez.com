@@ -1,0 +1,244 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T8</div>
+    <h1 class="tema-cabecera__titulo">Periféricos y su conectividad. Periféricos de entrada, salida, almacenamiento y comunicación. Buses y sus tipos e interfaces. USB. Firewire, SCSI, Bluetooth. Interfaces gráficas clásicas y de alta definición</h1>
+    <div class="tema-cabecera__meta">Bloque II · Tecnología básica — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-concepto-de-periférico-y-clasificación">1. Concepto de periférico y clasificación</a></li>
+<li><a href="#2-el-bus-concepto-tipos-y-características">2. El bus: concepto, tipos y características</a></li>
+<li><a href="#3-usb-universal-serial-bus">3. USB (Universal Serial Bus)</a></li>
+<li><a href="#4-firewire-ieee-1394">4. FireWire (IEEE 1394)</a></li>
+<li><a href="#5-scsi-small-computer-system-interface">5. SCSI (Small Computer System Interface)</a></li>
+<li><a href="#6-bluetooth">6. Bluetooth</a></li>
+<li><a href="#7-interfaces-gráficas-clásicas-y-de-alta-definición">7. Interfaces gráficas: clásicas y de alta definición</a></li>
+<li><a href="#8-resumen-esquemático">8. Resumen esquemático</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h3 class="tema-h3">Qué vas a encontrar en este tema</h3>
+<ul class="tema-lista">
+<li>Qué es un periférico y cómo se clasifica en periféricos de entrada, salida, almacenamiento y comunicación.</li>
+<li>Qué es un bus y cómo se diferencian según su ubicación (interno/externo) y su modo de transmisión (serie/paralelo).</li>
+<li>Los buses e interfaces más relevantes para conectar periféricos al ordenador: USB, FireWire y SCSI.</li>
+<li>Bluetooth como tecnología de conectividad inalámbrica de corto alcance para periféricos.</li>
+<li>Las interfaces gráficas clásicas (VGA, DVI) y de alta definición (HDMI, DisplayPort) para conectar pantallas.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Este tema no repite el estudio de los buses internos del ordenador (bus de datos, de direcciones y de control entre CPU y memoria), que se vieron en el Tema 3, ni las interfaces de almacenamiento internas (SATA, SAS, NVMe) del Tema 6: aquí el foco son los buses e interfaces externos que conectan periféricos al equipo.<br>Tampoco se trata aquí el Wi-Fi ni el resto de tecnologías de red, que se estudian en el Bloque IV (Temas 27 y 28). Bluetooth se incluye en este tema porque se usa para conectar periféricos (ratón, teclado, auriculares), no como tecnología de red de área local.</th>
+</tr>
+</table></div>
+<p>1. Concepto de periférico y clasificación</p>
+<p>2. El bus: concepto, tipos y características</p>
+<p>3. USB (Universal Serial Bus)</p>
+<p>4. FireWire (IEEE 1394)</p>
+<p>5. SCSI (Small Computer System Interface)</p>
+<p>6. Bluetooth</p>
+<p>7. Interfaces gráficas: clásicas y de alta definición</p>
+<p>8. Resumen esquemático</p>
+<h2 id="1-concepto-de-periférico-y-clasificación" class="tema-h2">1. Concepto de periférico y clasificación</h2>
+<p>Un <strong>periférico</strong> es todo dispositivo hardware externo a la unidad central de proceso (CPU) que se conecta al ordenador para ampliar su funcionalidad, permitiendo la interacción con el usuario, con el entorno físico o con otros sistemas informáticos. El término «periférico» hace referencia a su posición: rodea al núcleo de procesamiento sin formar parte de él.</p>
+<p>Todo periférico se comunica con el ordenador a través de un <strong>bus</strong> (el canal físico de conexión, que se estudia en el punto 2) y, habitualmente, mediante un <strong>controlador o driver</strong>: un programa que traduce las órdenes genéricas del sistema operativo a las señales eléctricas concretas que entiende ese dispositivo, y viceversa.</p>
+<p>Atendiendo al sentido en que circula la información respecto al ordenador, los periféricos se clasifican en cuatro grandes categorías:</p>
+<ul class="tema-lista">
+<li><strong>Periféricos de entrada</strong>: capturan información del exterior y la convierten en datos que el sistema puede procesar. Ejemplos: teclado, ratón, escáner, micrófono, cámara web, lector de códigos de barras, panel táctil.</li>
+<li><strong>Periféricos de salida</strong>: presentan al exterior la información que ha procesado el sistema. Ejemplos: monitor, impresora, altavoces, auriculares.</li>
+<li><strong>Periféricos de almacenamiento</strong>: guardan información de forma persistente fuera de la memoria principal. Discos externos, unidades flash USB, lectores de tarjetas de memoria… La tecnología de estos dispositivos se estudió en el Tema 6, y las arquitecturas que los ponen en red (NAS y SAN), en el Tema 7; aquí interesa únicamente cómo se conectan al equipo.</li>
+<li><strong>Periféricos de comunicación</strong>: permiten que el equipo intercambie información con otros sistemas. Módems, tarjetas de red, adaptadores Bluetooth o Wi-Fi. El detalle de los protocolos de red se estudia en el Bloque IV (Temas 27 y 28).</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>La clasificación de un periférico depende del sentido del flujo de información respecto al ordenador: entrada = información que entra al sistema; salida = información que sale de él.<br>Un mismo dispositivo puede pertenecer a más de una categoría a la vez: una pantalla táctil es periférico de entrada y de salida simultáneamente; una impresora multifunción con escáner integrado, también.</th>
+</tr>
+</table></div>
+<h2 id="2-el-bus-concepto-tipos-y-características" class="tema-h2">2. El bus: concepto, tipos y características</h2>
+<p>Un <strong>bus</strong> es el conjunto de líneas físicas de comunicación (conductores) que permite transmitir datos, direcciones y señales de control entre los distintos componentes de un sistema informático, o entre el sistema y sus periféricos. Funciona como un canal compartido por el que circula la información entre los elementos conectados a él.</p>
+<p>El Tema 3 ya introdujo los buses internos del ordenador según su función (bus de datos, de direcciones y de control, que conectan la CPU con la memoria y el resto de componentes). Este tema se centra en los buses que conectan el ordenador con sus periféricos, y en dos criterios de clasificación adicionales: la ubicación del bus y su modo de transmisión.</p>
+<h4 class="tema-h4">Según su ubicación</h4>
+<ul class="tema-lista">
+<li><strong>Bus interno (o de sistema)</strong>: conecta los componentes internos del ordenador —CPU, memoria, chipset— y opera a las mayores velocidades del sistema. Es el que se estudió en el Tema 3.</li>
+<li><strong>Bus externo (o de expansión/periféricos)</strong>: conecta el ordenador con dispositivos externos o con tarjetas de expansión. Es el objeto de este tema: USB, FireWire, SCSI…</li>
+</ul>
+<h4 class="tema-h4">Según el modo de transmisión</h4>
+<ul class="tema-lista">
+<li><strong>Bus serie</strong>: transmite los bits uno detrás de otro, de forma secuencial, por una única línea de datos.</li>
+<li><strong>Bus paralelo</strong>: transmite varios bits simultáneamente, cada uno por una línea física distinta, todas en paralelo.</li>
+</ul>
+<p>A primera vista, un bus paralelo parece más rápido por transmitir más bits a la vez, pero a partir de cierta frecuencia sufre dos problemas físicos: la <strong>diafonía</strong> o interferencia entre líneas adyacentes, y el <strong>skew</strong> o desincronización en la llegada de los bits que viajan por líneas distintas. Ambos limitan la frecuencia máxima a la que puede funcionar un bus paralelo de forma fiable. El bus serie, al usar una única línea, no sufre estos problemas y puede alcanzar frecuencias mucho más altas, compensando con velocidad de reloj lo que pierde en anchura. Por eso la práctica totalidad de interfaces modernas de periféricos —USB, FireWire, SATA— son serie, en un proceso de sustitución de las antiguas interfaces paralelas (puerto paralelo o LPT, SCSI paralelo, IDE/PATA).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Criterio</strong></th>
+<th><strong>Bus serie</strong></th>
+<th><strong>Bus paralelo</strong></th>
+</tr>
+<tr>
+<td>Líneas de datos</td>
+<td>Una única línea</td>
+<td>Varias líneas simultáneas</td>
+</tr>
+<tr>
+<td>Problemas a alta frecuencia</td>
+<td>Prácticamente ninguno</td>
+<td>Diafonía (crosstalk) y desincronización (skew)</td>
+</tr>
+<tr>
+<td>Velocidad máxima alcanzable</td>
+<td>Muy alta (frecuencias elevadas)</td>
+<td>Limitada por los problemas anteriores</td>
+</tr>
+<tr>
+<td>Ejemplos</td>
+<td>USB, FireWire, SATA</td>
+<td>Puerto paralelo (LPT), SCSI paralelo, IDE/PATA</td>
+</tr>
+<tr>
+<td>Situación actual</td>
+<td>Estándar en la mayoría de interfaces</td>
+<td>En desuso como interfaz de periféricos</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Es un error habitual pensar que un bus paralelo siempre será más rápido que uno serie por transmitir más bits a la vez. En la práctica ocurre justo lo contrario a partir de cierta frecuencia: los problemas de sincronización entre líneas limitan la velocidad del paralelo, mientras que el serie escala mucho mejor. Este es un punto que aparece con frecuencia en preguntas de examen sobre la evolución de las interfaces.</th>
+</tr>
+</table></div>
+<h2 id="3-usb-universal-serial-bus" class="tema-h2">3. USB (Universal Serial Bus)</h2>
+<p><strong>USB (Universal Serial Bus)</strong> es el bus serie estándar para conectar periféricos a un ordenador: teclados, ratones, impresoras, memorias flash, discos externos, smartphones, etc. Su éxito se debe a que es <strong>plug and play</strong> (el sistema operativo reconoce el dispositivo automáticamente al conectarlo, sin configuración manual), admite <strong>conexión en caliente</strong> o hot-plugging (se puede conectar y desconectar con el equipo encendido) y, en muchos casos, puede <strong>alimentar eléctricamente</strong> al propio periférico a través del mismo cable (bus-powered).</p>
+<p>USB tiene una arquitectura <strong>host-based</strong> o asimétrica: existe siempre un controlador central (el host, normalmente el propio ordenador) que gestiona y arbitra la comunicación con todos los dispositivos conectados, que actúan como periféricos subordinados. Esto la diferencia de FireWire (punto 4), que permite comunicación directa entre dispositivos.</p>
+<h4 class="tema-h4">Versiones y velocidades</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Versión</strong></th>
+<th><strong>Velocidad máxima</strong></th>
+<th><strong>Nombre comercial</strong></th>
+</tr>
+<tr>
+<td>USB 1.1</td>
+<td>12 Mbps</td>
+<td>Full Speed</td>
+</tr>
+<tr>
+<td>USB 2.0</td>
+<td>480 Mbps</td>
+<td>High Speed</td>
+</tr>
+<tr>
+<td>USB 3.0 / 3.1 Gen 1</td>
+<td>5 Gbps</td>
+<td>SuperSpeed</td>
+</tr>
+<tr>
+<td>USB 3.1 Gen 2 / 3.2</td>
+<td>10-20 Gbps</td>
+<td>SuperSpeed+</td>
+</tr>
+<tr>
+<td>USB4</td>
+<td>hasta 40 Gbps</td>
+<td>basado en Thunderbolt 3</td>
+</tr>
+</table></div>
+<h4 class="tema-h4">Conectores</h4>
+<p>A lo largo de sus versiones, USB ha usado distintos conectores físicos: Type-A (el rectangular clásico, en el lado del host), Type-B, Mini-USB y Micro-USB (habituales en dispositivos antiguos). El conector actual de referencia es <strong>USB Type-C</strong>: reversible (se puede insertar en cualquier orientación), compatible con USB Power Delivery (entrega de energía de hasta 240 W) y capaz de transportar señal de vídeo mediante modos alternativos como DisplayPort Alt Mode.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>USB-C es un tipo de conector, no una velocidad ni una versión del protocolo. Un puerto o cable USB-C puede transportar USB 2.0, USB 3.x o USB4 según la electrónica que lleve dentro. No debe confundirse la forma física del conector (USB-C) con el estándar de datos que utiliza (USB 2.0, 3.x, 4).</th>
+</tr>
+</table></div>
+<h2 id="4-firewire-ieee-1394" class="tema-h2">4. FireWire (IEEE 1394)</h2>
+<p><strong>FireWire</strong>, estandarizado como <strong>IEEE 1394</strong>, es un bus serie desarrollado originalmente por Apple como alternativa a USB, especialmente popular en equipos de vídeo y audio profesional (cámaras de vídeo digitales, interfaces de audio) por ofrecer un ancho de banda sostenido más estable, adecuado para la transmisión de flujos de datos en tiempo real.</p>
+<p>A diferencia de USB, FireWire tiene una arquitectura <strong>peer-to-peer</strong> (entre iguales): los dispositivos pueden comunicarse directamente entre sí sin necesidad de que un host central arbitre la comunicación. Existieron dos versiones principales: <strong>FireWire 400</strong> (400 Mbps) y <strong>FireWire 800</strong> (800 Mbps).</p>
+<p>Hoy FireWire está prácticamente en desuso, desplazado por USB 3.x y por Thunderbolt. Su relevancia en el temario es, sobre todo, comparativa: sirve para contrastar la arquitectura peer-to-peer frente a la arquitectura host-based de USB.</p>
+<h2 id="5-scsi-small-computer-system-interface" class="tema-h2">5. SCSI (Small Computer System Interface)</h2>
+<p><strong>SCSI (Small Computer System Interface)</strong> es un estándar de bus, originalmente paralelo, utilizado desde los años 80 para conectar periféricos —principalmente discos, unidades de cinta y escáneres— a un ordenador, sobre todo en el ámbito de servidores y estaciones profesionales.</p>
+<p>Los dispositivos SCSI se conectan formando una <strong>cadena (daisy chain)</strong>: cada dispositivo de la cadena tiene asignado un identificador único (SCSI ID) y, obligatoriamente, los dos extremos de la cadena deben cerrarse con un <strong>terminador</strong>, un componente que evita que la señal eléctrica rebote y provoque interferencias.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Un error muy habitual entre opositores es olvidar el requisito del terminador en los extremos de la cadena SCSI. Sin terminación correcta, el bus SCSI no funciona de forma fiable, aunque el cableado y los identificadores estén bien configurados.</th>
+</tr>
+</table></div>
+<p>SCSI evolucionó a través de varias versiones que fueron duplicando aproximadamente su velocidad y anchura de bus: SCSI-1, SCSI-2 (con las variantes Fast y Wide), Ultra SCSI, Ultra Wide SCSI y Ultra320 SCSI, la última generación relevante del SCSI paralelo.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Como bus físico paralelo para conectar periféricos externos, SCSI está hoy obsoleto: fue desplazado por USB y FireWire para uso general. Sin embargo, el conjunto de comandos SCSI sigue plenamente vigente, transportado sobre interfaces serie más modernas: SAS (Serial Attached SCSI), visto en el Tema 6 como interfaz de discos internos de servidor, e iSCSI (SCSI sobre redes IP), visto en el Tema 7 como protocolo de acceso a una SAN.<br>No es necesario repetir aquí esos contenidos: basta con reconocer que SAS e iSCSI son la continuación, sobre bus serie, del estándar de comandos que nació con el SCSI paralelo.</th>
+</tr>
+</table></div>
+<h2 id="6-bluetooth" class="tema-h2">6. Bluetooth</h2>
+<p><strong>Bluetooth</strong> es una tecnología de comunicación inalámbrica de corto alcance, estandarizada como <strong>IEEE 802.15.1</strong>, que opera en la banda de radiofrecuencia de 2,4 GHz (banda ISM, de uso libre). Se clasifica como una tecnología de <strong>red de área personal inalámbrica (WPAN, Wireless Personal Area Network)</strong>, pensada para conectar periféricos y dispositivos cercanos sin necesidad de cables: ratones, teclados, auriculares, altavoces, impresoras, smartphones…</p>
+<h4 class="tema-h4">Alcance</h4>
+<p>El alcance de un dispositivo Bluetooth depende de su clase de potencia: <strong>Clase 1</strong> (hasta unos 100 metros, uso industrial), <strong>Clase 2</strong> (hasta unos 10 metros, la más habitual en periféricos de consumo) y <strong>Clase 3</strong> (hasta 1 metro).</p>
+<h4 class="tema-h4">Versiones</h4>
+<p>Se distingue entre <strong>Bluetooth clásico (BR/EDR)</strong>, orientado a transferencias de datos más continuas (audio, ficheros), y <strong>Bluetooth Low Energy (BLE)</strong>, introducido en la versión 4.0, diseñado para dispositivos que priorizan el bajo consumo energético frente al caudal de datos (wearables, sensores IoT, dispositivos de salud). La versión actualmente más extendida es <strong>Bluetooth 5.x</strong> (5.0 a 5.4), que mejora alcance, velocidad y capacidad de difusión (broadcasting) respecto a las versiones anteriores, manteniendo compatibilidad con dispositivos más antiguos.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Conectar dos dispositivos Bluetooth por primera vez requiere un proceso de emparejamiento (pairing), en el que ambos dispositivos intercambian claves de seguridad y quedan «recordados» mutuamente para futuras conexiones automáticas. El comportamiento de cada periférico durante el emparejamiento (qué datos transmite, cómo se comporta) está definido por un perfil Bluetooth: por ejemplo, el perfil HID (Human Interface Device) para teclados y ratones, o el perfil A2DP para audio estéreo.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>No debe confundirse Bluetooth con Wi-Fi. Bluetooth es una WPAN de corto alcance pensada para conectar periféricos entre sí o con un equipo cercano; Wi-Fi es una WLAN (red de área local inalámbrica) pensada para dar acceso a una red completa, con mayor alcance y velocidad. El funcionamiento de Wi-Fi se estudia en el Bloque IV, junto con el resto de tecnologías de red.</th>
+</tr>
+</table></div>
+<h2 id="7-interfaces-gráficas-clásicas-y-de-alta-definición" class="tema-h2">7. Interfaces gráficas: clásicas y de alta definición</h2>
+<p>Al igual que el resto de periféricos, un monitor o pantalla se conecta al ordenador a través de una interfaz específica, en este caso diseñada para transportar señal de vídeo (y, en las interfaces más modernas, también audio).</p>
+<h4 class="tema-h4">Interfaces clásicas</h4>
+<ul class="tema-lista">
+<li><strong>VGA (Video Graphics Array)</strong>: interfaz analógica, con conector D-sub de 15 pines, estándar desde finales de los años 80. Al ser una señal analógica, la calidad de imagen se degrada con la longitud del cable. No transporta audio.</li>
+<li><strong>DVI (Digital Visual Interface)</strong>: interfaz digital (con variante compatible con señal analógica). Existen tres tipos de conector: DVI-D (solo señal digital), DVI-A (solo señal analógica, para compatibilidad con VGA) y DVI-I (ambas señales, digital y analógica). Mejora sustancialmente la calidad de imagen respecto a VGA al no sufrir degradación analógica, pero tampoco transporta audio.</li>
+</ul>
+<h4 class="tema-h4">Interfaces de alta definición</h4>
+<ul class="tema-lista">
+<li><strong>HDMI (High-Definition Multimedia Interface)</strong>: interfaz digital que transporta vídeo y audio por el mismo cable, con protección anticopia HDCP. Es el estándar dominante en electrónica de consumo (televisores, reproductores, monitores, portátiles). Sus versiones sucesivas (1.4, 2.0, 2.1) han ido aumentando la resolución máxima soportada (hasta 4K y 8K) y la tasa de refresco.</li>
+<li><strong>DisplayPort</strong>: interfaz digital desarrollada por VESA, orientada al entorno de PC y a usos profesionales. También transporta audio y admite Multi-Stream Transport (MST), que permite encadenar varios monitores desde una única salida de vídeo del ordenador. Existe una variante de conector reducido, Mini DisplayPort.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Criterio</strong></th>
+<th><strong>VGA</strong></th>
+<th><strong>DVI</strong></th>
+<th><strong>HDMI / DisplayPort</strong></th>
+</tr>
+<tr>
+<td>Tipo de señal</td>
+<td>Analógica</td>
+<td>Digital (DVI-I: también analógica)</td>
+<td>Digital</td>
+</tr>
+<tr>
+<td>Audio</td>
+<td>No</td>
+<td>No</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>Calidad con la distancia</td>
+<td>Se degrada</td>
+<td>Estable (parte digital)</td>
+<td>Estable</td>
+</tr>
+<tr>
+<td>Uso actual</td>
+<td>Legacy / equipos antiguos</td>
+<td>Legacy / equipos antiguos</td>
+<td>Estándar actual</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Hoy en día, HDMI y DisplayPort son las interfaces gráficas de referencia: ambas son digitales, transportan audio y vídeo, y dominan tanto el mercado de consumo (HDMI) como el profesional/PC (DisplayPort, gracias a MST). VGA y DVI se consideran interfaces clásicas o legacy: siguen apareciendo en equipos antiguos, pero ya no son la opción de diseño en equipos actuales.</th>
+</tr>
+</table></div>
+<h2 id="8-resumen-esquemático" class="tema-h2">8. Resumen esquemático</h2>
+<ul class="tema-lista">
+<li><strong>Periférico</strong>: dispositivo externo a la CPU que amplía la funcionalidad del ordenador; se clasifica en entrada, salida, almacenamiento y comunicación, según el sentido del flujo de información.</li>
+<li><strong>Bus</strong>: canal físico de comunicación. Según ubicación: interno (Tema 3) o externo/de periféricos (este tema). Según transmisión: serie (una línea, escala mejor en frecuencia) o paralelo (varias líneas, limitado por diafonía y skew a alta frecuencia).</li>
+<li><strong>USB</strong>: bus serie estándar de periféricos; plug and play, hot-plug, host-based (arquitectura asimétrica con un host central); versiones de 1.1 a USB4 (hasta 40 Gbps); USB-C es el conector actual, independiente de la versión del protocolo.</li>
+<li><strong>FireWire (IEEE 1394)</strong>: bus serie peer-to-peer, alternativa histórica a USB en audio/vídeo profesional; en desuso hoy.</li>
+<li><strong>SCSI</strong>: bus (originalmente paralelo) en cadena, con ID único por dispositivo y terminador obligatorio en los extremos; obsoleto como bus físico externo, pero su conjunto de comandos sigue vivo en SAS (Tema 6) e iSCSI (Tema 7).</li>
+<li><strong>Bluetooth</strong>: WPAN inalámbrica de corto alcance (IEEE 802.15.1, 2,4 GHz) para conectar periféricos; distingue Bluetooth clásico (BR/EDR) de BLE (bajo consumo); versión actual de referencia: Bluetooth 5.x. No confundir con Wi-Fi (WLAN, Bloque IV).</li>
+<li><strong>Interfaces gráficas</strong>: VGA (analógica) y DVI (digital, sin audio) son clásicas y hoy legacy; HDMI y DisplayPort (digitales, con audio) son el estándar actual, con DisplayPort destacando por su soporte de múltiples monitores (MST).</li>
+</ul>
+  </div>
+</article>

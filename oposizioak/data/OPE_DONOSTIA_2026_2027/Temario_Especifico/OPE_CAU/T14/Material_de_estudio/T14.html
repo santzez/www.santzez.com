@@ -1,0 +1,135 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T14</div>
+    <h1 class="tema-cabecera__titulo">Entorno Windows - Administración de usuarios y grupos. Logon scripts</h1>
+    <div class="tema-cabecera__meta">Bloque II · Tecnología básica — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-cuentas-de-usuario-en-windows-locales-y-de-dominio">1. Cuentas de usuario en Windows: locales y de dominio</a></li>
+<li><a href="#2-grupos-tipos-y-ámbitos">2. Grupos: tipos y ámbitos</a></li>
+<li><a href="#3-herramientas-de-administración-de-usuarios-y-grupos">3. Herramientas de administración de usuarios y grupos</a></li>
+<li><a href="#4-perfiles-de-usuario">4. Perfiles de usuario</a></li>
+<li><a href="#5-buenas-prácticas-en-la-gestión-de-cuentas">5. Buenas prácticas en la gestión de cuentas</a></li>
+<li><a href="#6-logon-scripts">6. Logon scripts</a></li>
+<li><a href="#7-resumen-esquemático">7. Resumen esquemático</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h3 class="tema-h3">Qué vas a encontrar en este tema</h3>
+<ul class="tema-lista">
+<li>Cómo se administran las cuentas de usuario en Windows, tanto locales como de dominio.</li>
+<li>Los tipos y ámbitos de los grupos, y cómo se combinan para asignar permisos de forma eficiente.</li>
+<li>Las herramientas de administración de usuarios y grupos, en el equipo local y en el dominio.</li>
+<li>Qué son los perfiles de usuario y las carpetas redirigidas.</li>
+<li>Buenas prácticas habituales en la gestión de cuentas.</li>
+<li>Qué son los logon scripts y cómo se configuran para automatizar el inicio de sesión.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Este tema da por conocidos los fundamentos del Directorio Activo (dominio, OU, controlador de dominio, GPO), vistos en el Tema 12, y las características generales de Windows de usuario, vistas en el Tema 11. Aquí se profundiza específicamente en la administración práctica de usuarios y grupos y en los logon scripts. La supervisión del visor de eventos y la gestión de comparticiones y permisos de red se tratan en el Tema 15.</th>
+</tr>
+</table></div>
+<p>1. Cuentas de usuario en Windows: locales y de dominio</p>
+<p>2. Grupos: tipos y ámbitos</p>
+<p>3. Herramientas de administración de usuarios y grupos</p>
+<p>4. Perfiles de usuario</p>
+<p>5. Buenas prácticas en la gestión de cuentas</p>
+<p>6. Logon scripts</p>
+<p>7. Resumen esquemático</p>
+<h2 id="1-cuentas-de-usuario-en-windows-locales-y-de-dominio" class="tema-h2">1. Cuentas de usuario en Windows: locales y de dominio</h2>
+<p>Una <strong>cuenta local</strong> se almacena en la base de datos de seguridad propia de cada equipo Windows (el SAM, Security Accounts Manager) y solo es válida para iniciar sesión en ese equipo concreto. Una <strong>cuenta de dominio</strong>, en cambio, se almacena de forma centralizada en el Directorio Activo (AD DS, Tema 12) y permite al usuario iniciar sesión con las mismas credenciales en cualquier equipo unido a ese dominio.</p>
+<p>Todo equipo Windows dispone, además, de dos cuentas locales integradas: <strong>Administrador</strong>, con privilegios completos sobre el equipo, y <strong>Invitado</strong>, con privilegios muy limitados; ambas están deshabilitadas por defecto en las instalaciones modernas, en aplicación del principio de mínimo privilegio (Temas 9 y 12).</p>
+<p>Internamente, Windows no identifica a una cuenta por su nombre, sino por su <strong>SID (Security Identifier)</strong>: un identificador único, generado al crear la cuenta, que es lo que realmente se compara al conceder o denegar permisos sobre un recurso. Cuando se elimina una cuenta y más tarde se crea otra con el mismo nombre, ambas tienen SID distintos y no heredan los permisos entre sí.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>No debe confundirse una cuenta local del equipo con una cuenta de dominio: una cuenta local solo existe y solo sirve en el equipo donde se creó; una cuenta de dominio existe una única vez en AD DS y es válida en todos los equipos unidos a ese dominio. Es un error habitual pensar que crear un usuario «en Windows» equivale a crearlo en el dominio: si se crea desde la configuración local del equipo, seguirá siendo una cuenta local.</th>
+</tr>
+</table></div>
+<h2 id="2-grupos-tipos-y-ámbitos" class="tema-h2">2. Grupos: tipos y ámbitos</h2>
+<p>Un <strong>grupo</strong> es una colección de cuentas (de usuario, de equipo o incluso de otros grupos) que permite asignar permisos y derechos a todos sus miembros de una sola vez, en lugar de tener que hacerlo cuenta por cuenta. Igual que las cuentas, los grupos pueden ser <strong>locales</strong> (definidos en el SAM de un equipo, válidos solo en él) o <strong>de dominio</strong> (definidos en AD DS).</p>
+<h4 class="tema-h4">Tipos de grupo en Active Directory</h4>
+<ul class="tema-lista">
+<li><strong>Grupo de seguridad (security group)</strong>: puede recibir permisos sobre recursos (carpetas compartidas, impresoras…). Es el tipo habitual para la gestión de accesos.</li>
+<li><strong>Grupo de distribución (distribution group)</strong>: se usa únicamente como lista de distribución de correo electrónico; no puede recibir permisos sobre recursos.</li>
+</ul>
+<h4 class="tema-h4">Ámbitos de grupo en Active Directory</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Ámbito</strong></th>
+<th><strong>Puede contener como miembros</strong></th>
+<th><strong>Puede recibir permisos en</strong></th>
+</tr>
+<tr>
+<td>Local de dominio</td>
+<td>Cuentas y grupos de cualquier dominio del bosque</td>
+<td>Solo en su propio dominio</td>
+</tr>
+<tr>
+<td>Global</td>
+<td>Solo cuentas y grupos de su propio dominio</td>
+<td>En cualquier dominio con relación de confianza</td>
+</tr>
+<tr>
+<td>Universal</td>
+<td>Cuentas y grupos de cualquier dominio del bosque</td>
+<td>En cualquier dominio del bosque</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>La regla clásica para combinar cuentas, grupos y permisos en un dominio de Active Directory se resume con la mnemotecnia <strong>AGDLP</strong> (o, si se usan grupos universales, AGUDLP): las cuentas de usuario (Account) se meten en grupos Globales; los grupos Globales, si es necesario, se meten en grupos Universales; y, finalmente, se meten en grupos Locales de Dominio, a los que se asignan los Permisos sobre el recurso. Seguir este patrón facilita enormemente el mantenimiento de los permisos frente a asignarlos usuario a usuario.</th>
+</tr>
+</table></div>
+<h2 id="3-herramientas-de-administración-de-usuarios-y-grupos" class="tema-h2">3. Herramientas de administración de usuarios y grupos</h2>
+<ul class="tema-lista">
+<li><strong>Usuarios y grupos locales (lusrmgr.msc)</strong>: consola MMC (Tema 12) para administrar las cuentas y grupos locales de un equipo Windows concreto; en Windows 11 buena parte de esta gestión básica también está disponible desde Configuración &gt; Cuentas.</li>
+<li><strong>Usuarios y equipos de Active Directory (ADUC, dsa.msc)</strong>: consola MMC de referencia para crear, modificar y eliminar usuarios, grupos y equipos en el dominio, y para organizarlos dentro de las unidades organizativas (OU) vistas en el Tema 12.</li>
+<li><strong>PowerShell con el módulo ActiveDirectory</strong>: alternativa en línea de comandos (cmdlets como `New-ADUser` o `Add-ADGroupMember`), imprescindible para automatizar la creación o modificación masiva de cuentas, por ejemplo al dar de alta a todo el alumnado de un curso o a los empleados de un nuevo departamento.</li>
+</ul>
+<p>Al crear una cuenta de dominio se definen, entre otros datos, su nombre de inicio de sesión —bien en formato <strong>UPN (User Principal Name)</strong>, del tipo `usuario@dominio`, bien en el formato heredado `DOMINIO\usuario`—, su contraseña inicial (sujeta a las directivas de contraseña aplicadas por GPO, Tema 12) y la unidad organizativa (OU) en la que se ubicará el objeto.</p>
+<h2 id="4-perfiles-de-usuario" class="tema-h2">4. Perfiles de usuario</h2>
+<p>El <strong>perfil de usuario</strong> es el conjunto de carpetas y configuraciones personales asociado a una cuenta: el escritorio, los documentos, la configuración de las aplicaciones y una parte del Registro (Tema 11) específica del usuario, almacenada en el archivo `NTUSER.DAT`.</p>
+<ul class="tema-lista">
+<li><strong>Perfil local</strong>: se almacena en el propio equipo (`C:\Users\nombre`); no viaja con el usuario si este inicia sesión en otro equipo distinto.</li>
+<li><strong>Perfil móvil o itinerante (roaming profile)</strong>: se almacena en una ubicación de red y se copia al equipo local en cada inicio de sesión, y de vuelta al servidor al cerrarla, de modo que el usuario encuentra su mismo escritorio y configuración en cualquier equipo del dominio.</li>
+<li><strong>Perfil obligatorio (mandatory profile)</strong>: variante de solo lectura del perfil móvil; los cambios que haga el usuario durante la sesión no se guardan al cerrarla. Resulta muy útil en equipos compartidos por varias personas, como aulas de formación o puestos de acceso público.</li>
+</ul>
+<p>Como alternativa o complemento a los perfiles móviles, la <strong>redirección de carpetas (folder redirection)</strong>, configurada por GPO, permite que solo determinadas carpetas del perfil (por ejemplo, Documentos o Escritorio) apunten directamente a una ubicación de red, sin necesidad de copiar todo el perfil completo en cada inicio y cierre de sesión.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>No debe confundirse un perfil móvil con la redirección de carpetas: en el perfil móvil, todo el perfil se copia de ida y vuelta entre el servidor y el equipo local en cada inicio y cierre de sesión, lo que puede ralentizarlos si el perfil es voluminoso; con la redirección de carpetas, solo las carpetas concretas que se hayan configurado permanecen físicamente en la red y se accede a ellas directamente, sin copiarlas, lo que agiliza el inicio de sesión.</th>
+</tr>
+</table></div>
+<h2 id="5-buenas-prácticas-en-la-gestión-de-cuentas" class="tema-h2">5. Buenas prácticas en la gestión de cuentas</h2>
+<ul class="tema-lista">
+<li>Aplicar el <strong>principio de mínimo privilegio</strong> (Temas 9 y 12): conceder únicamente los permisos estrictamente necesarios para el puesto de cada persona.</li>
+<li><strong>Asignar permisos a través de grupos</strong>, nunca cuenta a cuenta: facilita enormemente el mantenimiento cuando cambian las funciones de una persona o se incorpora una nueva.</li>
+<li>Mantener una <strong>nomenclatura consistente</strong> de cuentas y grupos, que facilite identificar de un vistazo su propósito y a quién pertenecen.</li>
+<li>Evitar las <strong>cuentas compartidas</strong> por varias personas: dificultan enormemente la trazabilidad de quién ha hecho qué (algo especialmente relevante de cara al Visor de eventos del Tema 15 y a los requisitos de trazabilidad del Tema 21).</li>
+<li><strong>Deshabilitar, en lugar de eliminar,</strong> las cuentas de bajas temporales o personal que se ausenta por un tiempo: al eliminar una cuenta se pierde también su SID y, con él, el histórico de permisos asociado; al deshabilitarla, se impide el acceso sin perder esa información.</li>
+</ul>
+<h2 id="6-logon-scripts" class="tema-h2">6. Logon scripts</h2>
+<p>Un <strong>logon script</strong> (script de inicio de sesión) es un pequeño programa que se ejecuta automáticamente cuando un usuario inicia sesión, con el fin de preparar su entorno de trabajo de forma coherente y automática: mapear unidades de red, conectar impresoras compartidas, sincronizar la hora del equipo, establecer variables de entorno, etc. Tradicionalmente se escribían como archivos por lotes (`.bat` o `.cmd`), aunque hoy es cada vez más habitual escribirlos como scripts de <strong>PowerShell</strong> (Tema 11), por su mayor capacidad y su mejor integración con el resto de la administración moderna de Windows.</p>
+<h4 class="tema-h4">Formas de asignar un logon script</h4>
+<ul class="tema-lista">
+<li><strong>Directamente en la cuenta de usuario</strong>: en las propiedades del usuario en AD DS (pestaña «Perfil», campo «Script de inicio de sesión»), indicando el nombre de un script almacenado en la carpeta compartida especial <strong>NETLOGON</strong> del dominio, que se replica automáticamente entre todos los controladores de dominio (Tema 12).</li>
+<li><strong>A través de una Directiva de grupo (GPO)</strong>: en Configuración de usuario &gt; Windows PowerShell Scripts (Inicio/Cierre de sesión) de una GPO vinculada a un dominio, sitio o unidad organizativa (Tema 12). Es la forma más flexible, porque permite aplicar el script a todos los usuarios de una OU completa de una sola vez, y controlar aspectos como el orden de ejecución de varios scripts.</li>
+</ul>
+<p>Un ejemplo clásico de logon script en formato `.bat` incluye órdenes como `net use Z: \\servidor\recurso` (para mapear una unidad de red) o `net use LPT1: \\servidor\impresora` (para conectar una impresora de red).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>PowerShell ha ido sustituyendo progresivamente a los scripts por lotes (.bat/.cmd) tradicionales en los entornos Windows modernos, tanto para logon scripts como para el resto de tareas de administración, por su capacidad de manejar objetos (no solo texto) y por integrarse mejor con el resto de la plataforma de gestión de Windows.</th>
+</tr>
+</table></div>
+<h2 id="7-resumen-esquemático" class="tema-h2">7. Resumen esquemático</h2>
+<ul class="tema-lista">
+<li><strong>Cuentas</strong>: locales (SAM del equipo, válidas solo en él) frente a cuentas de dominio (AD DS, válidas en todo el dominio); identificadas internamente por su SID, no por su nombre.</li>
+<li><strong>Grupos</strong>: de seguridad (con permisos) frente a distribución (solo correo); ámbitos local de dominio, global y universal; regla AGDLP para asignar permisos de forma mantenible.</li>
+<li><strong>Herramientas</strong>: lusrmgr.msc (local), Usuarios y equipos de Active Directory / ADUC (dominio), PowerShell con el módulo ActiveDirectory (automatización masiva).</li>
+<li><strong>Perfiles</strong>: local (no viaja), móvil/itinerante (se copia en cada inicio/cierre de sesión), obligatorio (de solo lectura); redirección de carpetas como alternativa más ágil para carpetas concretas.</li>
+<li><strong>Buenas prácticas</strong>: mínimo privilegio, permisos por grupo, nomenclatura consistente, evitar cuentas compartidas, deshabilitar en vez de eliminar.</li>
+<li><strong>Logon scripts</strong>: automatizan el inicio de sesión (unidades de red, impresoras…); se asignan desde la propia cuenta (carpeta NETLOGON) o, de forma más flexible, mediante GPO; tradicionalmente en .bat, cada vez más en PowerShell.</li>
+</ul>
+  </div>
+</article>

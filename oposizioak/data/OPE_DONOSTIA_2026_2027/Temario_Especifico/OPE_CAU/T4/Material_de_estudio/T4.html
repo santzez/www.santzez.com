@@ -1,0 +1,322 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T4</div>
+    <h1 class="tema-cabecera__titulo">Ficheros: organización de la información, métodos de inserción y acceso, indexación, formatos y características, operaciones</h1>
+    <div class="tema-cabecera__meta">Bloque II · Tecnología básica — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-el-fichero-como-unidad-de-almacenamiento-de-información">1. El fichero como unidad de almacenamiento de información</a></li>
+<li><a href="#2-organización-de-la-información-tipos-de-organización-de-fi">2. Organización de la información: tipos de organización de ficheros</a></li>
+<li><a href="#3-métodos-de-inserción-y-de-acceso">3. Métodos de inserción y de acceso</a></li>
+<li><a href="#4-indexación">4. Indexación</a></li>
+<li><a href="#5-formatos-y-características-de-los-ficheros">5. Formatos y características de los ficheros</a></li>
+<li><a href="#6-operaciones-sobre-ficheros">6. Operaciones sobre ficheros</a></li>
+<li><a href="#7-resumen-esquemático">7. Resumen esquemático</a></li>
+<li class="tema-indice__sep">— Complemento —</li>
+<li><a href="#1-concepto-de-fichero-y-jerarquía-de-la-información">1. Concepto de fichero y jerarquía de la información</a></li>
+<li><a href="#2-organización-de-la-información-en-un-fichero">2. Organización de la información en un fichero</a></li>
+<li><a href="#3-métodos-de-inserción-y-acceso">3. Métodos de inserción y acceso</a></li>
+<li><a href="#4-indexación">4. Indexación</a></li>
+<li><a href="#5-formatos-y-características-de-un-fichero">5. Formatos y características de un fichero</a></li>
+<li><a href="#6-operaciones-sobre-ficheros">6. Operaciones sobre ficheros</a></li>
+<li><a href="#7-resumen-esquemático">7. Resumen esquemático</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h3 class="tema-h3">Qué vas a encontrar en este tema</h3>
+<ul class="tema-lista">
+<li>Qué es un fichero y de qué elementos se compone: campo, registro, fichero y clave.</li>
+<li>Cómo se puede organizar la información dentro de un fichero: secuencial, secuencial indexada y directa (o relativa).</li>
+<li>Los métodos para insertar nuevos registros y para acceder a los ya existentes.</li>
+<li>Qué es la indexación, para qué sirve y qué tipos de índices existen.</li>
+<li>Los formatos y características principales de los ficheros, y las operaciones básicas que se pueden hacer sobre ellos.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Este tema trata los ficheros desde un punto de vista lógico y conceptual: cómo se organiza la información dentro de ellos, con independencia del soporte físico o del sistema operativo concreto.<br>No profundices aquí en los dispositivos de almacenamiento (discos, discos sólidos, memorias flash...), que es el Tema 6, ni en los sistemas de archivos de un sistema operativo concreto (NTFS, ext4...), que se estudian en el Tema 9.<br>Tampoco es el momento de entrar en las bases de datos relacionales: eso es el Tema 5. Aquí se sientan las bases conceptuales (registro, clave, índice...) que luego se reutilizan allí.</th>
+</tr>
+</table></div>
+<p>1. El fichero como unidad de almacenamiento de información</p>
+<p>2. Organización de la información: tipos de organización de ficheros</p>
+<p>3. Métodos de inserción y de acceso</p>
+<p>4. Indexación</p>
+<p>5. Formatos y características de los ficheros</p>
+<p>6. Operaciones sobre ficheros</p>
+<p>7. Resumen esquemático</p>
+<h2 id="1-el-fichero-como-unidad-de-almacenamiento-de-información" class="tema-h2">1. El fichero como unidad de almacenamiento de información</h2>
+<p>Antes de que existieran las bases de datos tal y como las conocemos hoy —y en paralelo a ellas—, la forma habitual de almacenar información de forma persistente en un ordenador han sido los ficheros (o archivos): conjuntos organizados de datos relacionados entre sí, guardados en un soporte de almacenamiento bajo un nombre que permite identificarlos y recuperarlos.</p>
+<p>Aunque hoy conviven con las bases de datos, los ficheros nunca han dejado de usarse: siguen siendo la base de los sistemas operativos, de los ficheros de configuración, de los logs, de las copias de seguridad y del intercambio de datos entre aplicaciones (por ejemplo, un CSV o un XML).</p>
+<h4 class="tema-h4">Los elementos que componen un fichero</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Campo: unidad mínima de información con significado propio (por ejemplo, «nombre» o «DNI»).<br>Registro: conjunto de campos relacionados entre sí que describen una misma entidad u ocurrencia (por ejemplo, todos los datos de un empleado).<br>Fichero: conjunto de registros del mismo tipo, relacionados entre sí y tratados como una unidad.<br>Clave (o campo clave): campo, o conjunto de campos, que permite identificar de forma única cada registro dentro del fichero.</th>
+</tr>
+</table></div>
+<p>No todas las claves cumplen el mismo papel: la clave primaria identifica de forma única e inequívoca cada registro (no puede repetirse), mientras que una clave secundaria es un campo que también se usa para buscar o para ordenar, pero que puede repetirse en varios registros (por ejemplo, el «departamento» de una plantilla de empleados).</p>
+<h2 id="2-organización-de-la-información-tipos-de-organización-de-fi" class="tema-h2">2. Organización de la información: tipos de organización de ficheros</h2>
+<p>La organización de un fichero es la forma en que sus registros se disponen y relacionan entre sí. No es una cuestión menor: de ella depende qué métodos de acceso son posibles y qué eficiencia tienen. Las tres organizaciones clásicas son:</p>
+<ul class="tema-lista">
+<li>Organización secuencial: los registros se almacenan uno detrás de otro, normalmente por orden de llegada o según el valor de un campo clave. Para llegar a un registro concreto hay que recorrer, en principio, todos los anteriores.</li>
+<li>Organización secuencial indexada: mantiene los registros ordenados secuencialmente, pero añade un índice —una especie de tabla de consulta— que apunta a la posición de determinados registros, acelerando su localización.</li>
+<li>Organización directa (o relativa): la posición de cada registro se calcula matemáticamente a partir del valor de su clave, mediante una función de aleatorización o «hash», lo que permite acceder a él sin recorrer el fichero.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Históricamente, la organización secuencial estuvo muy ligada a los soportes de acceso secuencial, como la cinta magnética (Tema 6), mientras que las organizaciones indexada y directa se popularizaron con los discos, que permiten un acceso mucho más flexible.<br>Aun así, la organización de un fichero es un concepto lógico: un fichero secuencial puede residir físicamente tanto en una cinta como en un disco.</th>
+</tr>
+</table></div>
+<h2 id="3-métodos-de-inserción-y-de-acceso" class="tema-h2">3. Métodos de inserción y de acceso</h2>
+<h4 class="tema-h4">Métodos de acceso</h4>
+<p>Determinan cómo se localiza un registro dentro del fichero una vez almacenado:</p>
+<ul class="tema-lista">
+<li>Acceso secuencial: se recorren los registros uno a uno desde el principio hasta encontrar el buscado. Es el único método posible en un fichero con organización secuencial pura.</li>
+<li>Acceso directo (o aleatorio): permite llegar a un registro concreto sin pasar por los anteriores, calculando su posición (organización directa) o mediante un puntero de posición.</li>
+<li>Acceso secuencial indexado (ISAM, Indexed Sequential Access Method): combina los dos anteriores. Se usa el índice para saltar directamente a la zona aproximada donde está el registro, y desde ahí se hace una búsqueda secuencial corta.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Método de acceso</strong></th>
+<th><strong>Cómo localiza el registro</strong></th>
+<th><strong>Cuándo conviene</strong></th>
+</tr>
+<tr>
+<td>Secuencial</td>
+<td>Recorre los registros uno a uno desde el principio</td>
+<td>Ficheros pequeños o que se procesan siempre en bloque (por ejemplo, un proceso de nóminas que recorre toda la plantilla)</td>
+</tr>
+<tr>
+<td>Directo (aleatorio)</td>
+<td>Calcula la posición a partir de la clave (hash) y accede sin recorrer los anteriores</td>
+<td>Consultas puntuales sobre un registro concreto, con muchos accesos y pocos recorridos completos</td>
+</tr>
+<tr>
+<td>Indexado-secuencial (ISAM)</td>
+<td>Usa un índice para saltar a la zona aproximada y termina con una búsqueda secuencial corta</td>
+<td>Ficheros que necesitan tanto accesos puntuales rápidos como recorridos secuenciales ocasionales</td>
+</tr>
+</table></div>
+<h4 class="tema-h4">Métodos de inserción</h4>
+<p>La forma de insertar un nuevo registro depende también de la organización del fichero:</p>
+<ul class="tema-lista">
+<li>Inserción al final (append): en ficheros secuenciales sin orden exigido, los nuevos registros se añaden simplemente al final.</li>
+<li>Inserción ordenada: si el fichero debe mantenerse ordenado, insertar implica desplazar registros o recurrir a zonas de desbordamiento (overflow) que se van reorganizando periódicamente.</li>
+<li>Inserción por cálculo de posición: en ficheros de organización directa, la función hash determina directamente dónde se inserta el nuevo registro, con algún mecanismo para resolver colisiones cuando dos claves calculan la misma posición.</li>
+</ul>
+<h2 id="4-indexación" class="tema-h2">4. Indexación</h2>
+<p>Un índice es una estructura auxiliar que asocia el valor de una clave con la posición del registro correspondiente en el fichero de datos, evitando tener que recorrerlo entero para encontrarlo. Es la misma idea que el índice de un libro: en vez de leer todas las páginas para encontrar un tema, consultas el índice y vas directo a la página correcta.</p>
+<ul class="tema-lista">
+<li>Índice denso: contiene una entrada por cada registro del fichero. Es rápido de consultar, pero puede llegar a ocupar mucho espacio.</li>
+<li>Índice disperso (o no denso): contiene una entrada solo para algunos registros (por ejemplo, el primero de cada bloque), lo que reduce el tamaño del índice a cambio de una pequeña búsqueda secuencial adicional dentro del bloque.</li>
+<li>Índice multinivel: cuando el propio índice crece demasiado, se indexa a su vez, formando varios niveles (un índice del índice), hasta llegar a estructuras en árbol.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Las estructuras en árbol, como el árbol B o el árbol B+, son la forma habitual de implementar índices multinivel en sistemas reales, porque se mantienen equilibrados y garantizan tiempos de búsqueda predecibles.<br>No hace falta conocer su funcionamiento interno para este tema: basta con saber que existen y para qué se usan.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Aquí se presenta la indexación como concepto general aplicado a ficheros. En el Tema 5, al hablar de bases de datos relacionales, esta misma idea reaparece aplicada a tablas (índices sobre columnas): es el mismo concepto de fondo, pero no dupliques aquí el detalle de cómo se indexan las tablas de una base de datos.</th>
+</tr>
+</table></div>
+<h2 id="5-formatos-y-características-de-los-ficheros" class="tema-h2">5. Formatos y características de los ficheros</h2>
+<ul class="tema-lista">
+<li>Ficheros de texto frente a ficheros binarios: un fichero de texto es directamente legible (caracteres codificados, por ejemplo en ASCII o UTF-8); un fichero binario necesita un programa que interprete su estructura interna (un ejecutable, una imagen...).</li>
+<li>Registros de longitud fija frente a longitud variable: en los de longitud fija todos los registros ocupan el mismo espacio, lo que facilita calcular la posición de cualquiera de ellos (útil para el acceso directo); en los de longitud variable cada registro ocupa solo lo que necesita, pero hay que marcar de algún modo dónde termina cada uno.</li>
+<li>Ficheros con campos delimitados: los valores de cada registro se separan mediante un carácter reservado (coma, punto y coma, tabulador...). El caso más habitual es el CSV.</li>
+<li>Ficheros maestros y ficheros de movimientos: el fichero maestro guarda los datos relativamente estables de una entidad (por ejemplo, el catálogo de empleados); el fichero de movimientos recoge las transacciones o cambios que, periódicamente, se aplican sobre el maestro para actualizarlo.</li>
+</ul>
+<p>Junto a estos formatos «clásicos», hoy es habitual intercambiar datos mediante formatos estructurados y semilegibles como XML o JSON, que añaden etiquetas o pares clave-valor dentro del propio fichero de texto para describir la estructura de la información que contienen.</p>
+<h2 id="6-operaciones-sobre-ficheros" class="tema-h2">6. Operaciones sobre ficheros</h2>
+<p>Con independencia de su organización, sobre un fichero se pueden realizar una serie de operaciones básicas:</p>
+<ul class="tema-lista">
+<li>Crear / abrir / cerrar: operaciones necesarias para empezar y terminar de trabajar con un fichero.</li>
+<li>Leer: recuperar el contenido de uno o varios registros.</li>
+<li>Escribir (insertar): añadir nuevos registros.</li>
+<li>Actualizar (modificar): cambiar el valor de uno o varios campos de un registro ya existente.</li>
+<li>Borrar: eliminar un registro.</li>
+<li>Buscar: localizar uno o varios registros que cumplen un criterio determinado.</li>
+<li>Ordenar: reorganizar los registros según el valor de un campo.</li>
+<li>Fusionar (mezclar): combinar dos o más ficheros, ya ordenados por la misma clave, en un único fichero manteniendo el orden.</li>
+<li>Reorganizar (compactar): eliminar físicamente los registros marcados como borrados y recuperar el espacio libre; es especialmente necesaria tras acumular muchos borrados lógicos.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Borrado lógico: el registro se marca como eliminado, pero sigue ocupando espacio en el fichero. Es rápido y reversible mientras no se reorganice el fichero.<br>Borrado físico: el registro se elimina realmente y su espacio se libera de inmediato. Es irreversible.<br>La reorganización periódica de un fichero suele ser el momento en el que los borrados lógicos acumulados se convierten en liberación física real del espacio.</th>
+</tr>
+</table></div>
+<h2 id="7-resumen-esquemático" class="tema-h2">7. Resumen esquemático</h2>
+<ul class="tema-lista">
+<li>Fichero = conjunto organizado de registros; registro = conjunto de campos de una misma entidad; campo = unidad mínima de información; clave = campo(s) que identifica cada registro.</li>
+<li>Organización de un fichero: secuencial, secuencial indexada o directa (relativa/hash) — es un concepto lógico, independiente del soporte físico.</li>
+<li>Métodos de acceso: secuencial (recorrido completo), directo (cálculo de posición) e indexado-secuencial o ISAM (índice + búsqueda secuencial corta).</li>
+<li>Métodos de inserción: al final, ordenada (con desplazamientos o zonas de desbordamiento) o por cálculo de posición (hash, con gestión de colisiones).</li>
+<li>Indexación: índice denso (una entrada por registro), disperso (una entrada por bloque) y multinivel (índice del índice, típicamente en árbol B/B+).</li>
+<li>Formatos: texto vs. binario, longitud fija vs. variable, campos delimitados (CSV) y ficheros maestros vs. de movimientos.</li>
+<li>Operaciones básicas: crear, abrir, cerrar, leer, escribir, actualizar, borrar (lógico o físico), buscar, ordenar, fusionar y reorganizar.</li>
+<li>Este tema sienta las bases conceptuales (registro, clave, índice) que se reutilizan en el Tema 5 (bases de datos); el soporte físico se estudia en el Tema 6 y los sistemas de archivos concretos, en el Tema 9.</li>
+</ul>
+<hr class="tema-separador">
+<div class="tema-nota-fusion">Continúa con material complementario del segundo dossier de Ficheros.</div>
+<h3 class="tema-h3">Qué vas a encontrar en este tema</h3>
+<ul class="tema-lista">
+<li>Qué es un fichero y cómo se organiza jerárquicamente la información dentro de él.</li>
+<li>Los métodos de organización de ficheros: secuencial, directa e indexada.</li>
+<li>Los métodos de inserción y acceso asociados a cada tipo de organización.</li>
+<li>Qué es un índice, para qué sirve y qué tipos existen.</li>
+<li>Formatos y características de un fichero, y las operaciones básicas que se pueden hacer sobre él.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>No confundir</strong><br>Este tema trata la organización de ficheros desde un punto de vista teórico/clásico (independiente de cualquier sistema operativo concreto). No lo confundas con el Tema 9, que aborda los sistemas de archivos como parte de un sistema operativo real (NTFS, ext4...).<br>Tampoco te adelantes al Tema 5: ahí se estudian las bases de datos, que son un salto cualitativo respecto a los ficheros planos que vemos aquí.</th>
+</tr>
+</table></div>
+<p>1. Concepto de fichero y jerarquía de la información</p>
+<p>2. Organización de la información en un fichero</p>
+<p>3. Métodos de inserción y acceso</p>
+<p>4. Indexación</p>
+<p>5. Formatos y características de un fichero</p>
+<p>6. Operaciones sobre ficheros</p>
+<p>7. Resumen esquemático</p>
+<h2 id="1-concepto-de-fichero-y-jerarquía-de-la-información" class="tema-h2">1. Concepto de fichero y jerarquía de la información</h2>
+<p>Un fichero (o archivo) es un conjunto organizado de información relacionada, almacenado como una unidad con nombre propio, que puede ser tratado por un programa o un usuario. Para entender cómo se organiza esa información dentro del fichero conviene tener clara la jerarquía clásica de estructuración de datos:</p>
+<ul class="tema-lista">
+<li>Carácter: la unidad más pequeña de información (una letra, un dígito, un símbolo).</li>
+<li>Campo: uno o varios caracteres que representan un dato con significado propio (por ejemplo, un DNI o un nombre).</li>
+<li>Registro: conjunto de campos relacionados entre sí, referidos a una misma entidad (por ejemplo, todos los datos de una persona).</li>
+<li>Fichero: conjunto de registros del mismo tipo, relacionados entre sí (por ejemplo, el fichero de personal de una organización).</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Un nivel más arriba estaría la base de datos, como conjunto organizado de ficheros relacionados — pero ese salto conceptual, con sus ventajas frente al fichero plano, es propiamente el contenido del Tema 5.</th>
+</tr>
+</table></div>
+<h2 id="2-organización-de-la-información-en-un-fichero" class="tema-h2">2. Organización de la información en un fichero</h2>
+<p>La organización de un fichero es la forma en que se disponen físicamente sus registros. De ella depende directamente qué métodos de acceso son posibles y qué rendimiento se obtiene. Las tres organizaciones clásicas son:</p>
+<h4 class="tema-h4">Organización secuencial</h4>
+<ul class="tema-lista">
+<li>Los registros se almacenan uno a continuación de otro, normalmente en el orden de entrada o siguiendo el valor de un campo clave.</li>
+<li>Es la más sencilla de implementar y la más eficiente para procesar el fichero de principio a fin (por ejemplo, para generar un listado completo).</li>
+<li>Es poco eficiente cuando se necesita acceder a un único registro concreto, porque obliga a recorrer el fichero desde el principio.</li>
+</ul>
+<h4 class="tema-h4">Organización directa (aleatoria)</h4>
+<ul class="tema-lista">
+<li>Permite calcular la posición física de un registro a partir de su clave, normalmente mediante una función de transformación (función hash).</li>
+<li>Su gran ventaja es la velocidad de acceso a un registro concreto, sin necesidad de recorrer los anteriores.</li>
+<li>Su inconveniente principal son las colisiones: cuando la función hash asigna la misma posición a dos claves distintas, hace falta una estrategia de resolución (por ejemplo, una zona de desbordamiento).</li>
+</ul>
+<h4 class="tema-h4">Organización secuencial indexada</h4>
+<ul class="tema-lista">
+<li>Combina lo mejor de las dos anteriores: los registros se mantienen ordenados secuencialmente, pero además se construye un índice auxiliar que permite localizar rápidamente el punto de partida de la búsqueda.</li>
+<li>Permite tanto el acceso secuencial (recorriendo todo el fichero) como el acceso directo razonablemente rápido (a través del índice).</li>
+<li>Es la organización más habitual en sistemas que necesitan ambos tipos de acceso.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Organización</strong></th>
+<th><strong>Acceso a un registro</strong></th>
+<th><strong>Recorrido completo</strong></th>
+</tr>
+<tr>
+<td>Secuencial</td>
+<td>Lento (recorre desde el inicio)</td>
+<td>Muy eficiente</td>
+</tr>
+<tr>
+<td>Directa (hash)</td>
+<td>Muy rápido</td>
+<td>Poco eficiente / desordenado</td>
+</tr>
+<tr>
+<td>Secuencial indexada</td>
+<td>Rápido (vía índice)</td>
+<td>Eficiente</td>
+</tr>
+</table></div>
+<h2 id="3-métodos-de-inserción-y-acceso" class="tema-h2">3. Métodos de inserción y acceso</h2>
+<h4 class="tema-h4">Métodos de inserción</h4>
+<ul class="tema-lista">
+<li>Inserción al final: el nuevo registro se añade tras el último existente; sencilla, pero puede desordenar el fichero si la organización requiere orden.</li>
+<li>Inserción ordenada: el registro se coloca en su posición correspondiente según la clave, lo que puede implicar desplazar registros posteriores.</li>
+<li>Inserción con zona de desbordamiento (overflow): el registro nuevo se escribe en una zona auxiliar, dejando pendiente una reorganización posterior que lo integre en su posición definitiva. Es habitual en organización directa e indexada, para no tener que reescribir todo el fichero con cada alta.</li>
+</ul>
+<h4 class="tema-h4">Métodos de acceso</h4>
+<ul class="tema-lista">
+<li>Acceso secuencial: se recorren los registros uno a uno, en orden, hasta llegar al deseado.</li>
+<li>Acceso directo (aleatorio): se accede directamente a la posición del registro buscado, sin pasar por los anteriores.</li>
+<li>Acceso secuencial indexado: se consulta primero el índice para situarse cerca del registro buscado, y desde ahí se completa el acceso de forma secuencial (o casi directa).</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Fíjate en la correspondencia directa entre organización y método de acceso: cada organización del apartado 2 permite, de forma natural, el método de acceso del mismo nombre. No son conceptos independientes, sino dos caras de la misma decisión de diseño.</th>
+</tr>
+</table></div>
+<h2 id="4-indexación" class="tema-h2">4. Indexación</h2>
+<p>Un índice es una estructura de datos auxiliar que asocia el valor de una clave con la posición física del registro correspondiente en el fichero, con el objetivo de acelerar su localización sin tener que recorrer todo el fichero.</p>
+<h4 class="tema-h4">Tipos de índice según la clave</h4>
+<ul class="tema-lista">
+<li>Índice primario: se construye sobre el campo clave que determina el orden físico de los registros en el fichero (solo puede haber uno).</li>
+<li>Índice secundario: se construye sobre otro campo distinto al que determina el orden físico; permite buscar por criterios adicionales sin reordenar el fichero (puede haber varios).</li>
+</ul>
+<h4 class="tema-h4">Tipos de índice según su densidad</h4>
+<ul class="tema-lista">
+<li>Índice denso: contiene una entrada por cada registro del fichero. Más grande, pero garantiza una localización exacta desde el propio índice.</li>
+<li>Índice disperso (no denso): contiene una entrada solo para algunos registros (por ejemplo, uno por cada bloque de almacenamiento). Más pequeño y rápido de recorrer, aunque requiere una búsqueda secuencial corta dentro del bloque una vez localizado.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>En sistemas reales, los índices no suelen ser una simple tabla, sino estructuras en árbol (como los árboles B o B+), pensadas para mantener tiempos de acceso rápidos incluso con el índice creciendo mucho.<br>No hace falta memorizar el detalle de esas estructuras de árbol para este tema: basta con saber que existen y por qué se usan (equilibrar velocidad de búsqueda con tamaño del índice).</th>
+</tr>
+</table></div>
+<h2 id="5-formatos-y-características-de-un-fichero" class="tema-h2">5. Formatos y características de un fichero</h2>
+<h4 class="tema-h4">Formato de texto vs. formato binario</h4>
+<ul class="tema-lista">
+<li>Ficheros de texto: la información se codifica como caracteres legibles (por ejemplo, con codificación UTF-8), lo que los hace fáciles de leer, editar e intercambiar entre sistemas distintos.</li>
+<li>Ficheros binarios: la información se codifica de forma optimizada para el programa que la usa, no pensada para ser leída directamente por una persona; suelen ser más compactos y rápidos de procesar.</li>
+</ul>
+<h4 class="tema-h4">Características habituales de un fichero</h4>
+<ul class="tema-lista">
+<li>Nombre y extensión (esta última suele indicar el tipo o formato del contenido).</li>
+<li>Tamaño, expresado en la unidad de medida correspondiente.</li>
+<li>Fechas de creación, última modificación y último acceso.</li>
+<li>Atributos: por ejemplo, de solo lectura, oculto, de sistema o comprimido.</li>
+<li>Ubicación (ruta) dentro de la estructura de carpetas donde reside.</li>
+<li>Permisos: quién puede leerlo, modificarlo o ejecutarlo.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Formatos concretos como CSV, XML o JSON son, en el fondo, ficheros de texto con una sintaxis concreta para organizar datos estructurados; no es necesario profundizar aquí en su sintaxis particular.</th>
+</tr>
+</table></div>
+<h2 id="6-operaciones-sobre-ficheros" class="tema-h2">6. Operaciones sobre ficheros</h2>
+<h4 class="tema-h4">A nivel de fichero completo</h4>
+<ul class="tema-lista">
+<li>Crear: dar de alta un fichero nuevo, vacío o con un contenido inicial.</li>
+<li>Abrir: preparar el fichero para que un programa pueda leerlo o escribirlo.</li>
+<li>Leer / Escribir: acceder a su contenido o modificarlo.</li>
+<li>Cerrar: liberar el fichero tras terminar de trabajar con él, asegurando que los cambios quedan guardados.</li>
+<li>Eliminar (borrar), renombrar, copiar y mover: operaciones de gestión sobre el fichero como unidad completa.</li>
+</ul>
+<h4 class="tema-h4">A nivel de registro</h4>
+<ul class="tema-lista">
+<li>Insertar: añadir un nuevo registro al fichero.</li>
+<li>Buscar (consultar): localizar uno o varios registros que cumplan un criterio.</li>
+<li>Actualizar (modificar): cambiar el contenido de uno o varios campos de un registro existente.</li>
+<li>Eliminar: dar de baja un registro (de forma física, borrándolo realmente, o lógica, marcándolo como no válido sin borrarlo).</li>
+</ul>
+<h2 id="7-resumen-esquemático" class="tema-h2">7. Resumen esquemático</h2>
+<ul class="tema-lista">
+<li>Jerarquía de la información: carácter → campo → registro → fichero (→ base de datos, en el Tema 5).</li>
+<li>Organización secuencial: rápida para recorrer todo, lenta para acceder a un registro concreto.</li>
+<li>Organización directa (hash): acceso muy rápido a un registro, pero con riesgo de colisiones.</li>
+<li>Organización secuencial indexada: combina orden secuencial + índice, para tener ambos tipos de acceso.</li>
+<li>Métodos de inserción: al final, ordenada, o con zona de desbordamiento (overflow).</li>
+<li>Índice = estructura auxiliar clave → posición. Primario (define el orden físico) vs. secundario (campo adicional). Denso (una entrada por registro) vs. disperso (una entrada por bloque).</li>
+<li>Ficheros de texto (legibles, fáciles de intercambiar) vs. binarios (optimizados, no legibles directamente).</li>
+<li>Características típicas de un fichero: nombre, extensión, tamaño, fechas, atributos, ubicación y permisos.</li>
+<li>Operaciones de fichero completo: crear, abrir, leer/escribir, cerrar, eliminar, renombrar, copiar, mover.</li>
+<li>Operaciones de registro: insertar, buscar, actualizar, eliminar (física o lógica).</li>
+</ul>
+  </div>
+</article>

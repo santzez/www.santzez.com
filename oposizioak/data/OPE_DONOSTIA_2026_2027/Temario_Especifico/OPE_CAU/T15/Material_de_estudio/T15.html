@@ -1,0 +1,157 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T15</div>
+    <h1 class="tema-cabecera__titulo">Entorno Windows - Supervisión de visor de eventos. Gestión de compartidos y permisos de red</h1>
+    <div class="tema-cabecera__meta">Bloque II · Tecnología básica — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-el-visor-de-eventos-estructura-y-registros">1. El Visor de eventos: estructura y registros</a></li>
+<li><a href="#2-niveles-de-gravedad-y-tipos-de-eventos">2. Niveles de gravedad y tipos de eventos</a></li>
+<li><a href="#3-supervisión-práctica-vistas-personalizadas-y-reenvío-de-ev">3. Supervisión práctica: vistas personalizadas y reenvío de eventos</a></li>
+<li><a href="#4-recursos-compartidos-carpetas-e-impresoras">4. Recursos compartidos: carpetas e impresoras</a></li>
+<li><a href="#5-permisos-de-recurso-compartido-share">5. Permisos de recurso compartido (share)</a></li>
+<li><a href="#6-permisos-ntfs">6. Permisos NTFS</a></li>
+<li><a href="#7-combinación-de-permisos-de-recurso-compartido-y-ntfs">7. Combinación de permisos de recurso compartido y NTFS</a></li>
+<li><a href="#8-resumen-esquemático">8. Resumen esquemático</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h3 class="tema-h3">Qué vas a encontrar en este tema</h3>
+<ul class="tema-lista">
+<li>Qué es el Visor de eventos, cómo se organiza y qué niveles de gravedad maneja.</li>
+<li>Cómo se supervisa de forma práctica la actividad de uno o varios equipos: vistas personalizadas y reenvío de eventos.</li>
+<li>Cómo se comparten carpetas e impresoras en una red Windows.</li>
+<li>Los permisos de recurso compartido y los permisos NTFS, y cómo se combinan cuando se accede a un recurso por red.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Este tema da por conocidos los fundamentos del Directorio Activo (Tema 12) y la administración de usuarios y grupos (Tema 14), sobre los que se apoyan los permisos que aquí se explican. El protocolo SMB/CIFS que hace posible compartir carpetas en red ya se citó en el Tema 7 al hablar de NAS; aquí se retoma desde el punto de vista de la administración práctica de un servidor Windows.</th>
+</tr>
+</table></div>
+<p>1. El Visor de eventos: estructura y registros</p>
+<p>2. Niveles de gravedad y tipos de eventos</p>
+<p>3. Supervisión práctica: vistas personalizadas y reenvío de eventos</p>
+<p>4. Recursos compartidos: carpetas e impresoras</p>
+<p>5. Permisos de recurso compartido (share)</p>
+<p>6. Permisos NTFS</p>
+<p>7. Combinación de permisos de recurso compartido y NTFS</p>
+<p>8. Resumen esquemático</p>
+<h2 id="1-el-visor-de-eventos-estructura-y-registros" class="tema-h2">1. El Visor de eventos: estructura y registros</h2>
+<p>El <strong>Visor de eventos (Event Viewer, eventvwr.msc)</strong> es la consola MMC (Tema 12) que permite consultar los registros (logs) de sucesos que Windows y las aplicaciones van generando durante su funcionamiento, y almacena en archivos con extensión `.evtx`. Cada suceso registrado incluye, entre otros datos, un identificador de evento (Event ID) que identifica el tipo de suceso, el origen (el componente que lo generó), la fecha y hora, y una descripción del propio evento.</p>
+<ul class="tema-lista">
+<li><strong>Aplicación</strong>: eventos generados por los programas instalados en el equipo.</li>
+<li><strong>Seguridad</strong>: inicios y cierres de sesión, cambios de permisos y accesos a objetos auditados; requiere que la auditoría correspondiente esté habilitada (por GPO, Tema 12) para registrar esos sucesos.</li>
+<li><strong>Sistema</strong>: eventos generados por los propios componentes del sistema operativo: controladores, servicios (Tema 11), arranque y apagado.</li>
+<li><strong>Instalación</strong>: en un servidor (Tema 12), recoge los eventos relacionados con la instalación de roles y características.</li>
+<li><strong>Eventos reenviados (Forwarded Events)</strong>: registro que recibe eventos originados en otros equipos, en un escenario de reenvío de eventos (punto 3).</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>El Visor de eventos de Windows cumple, dentro de un entorno Windows, un papel equivalente al que cumplen journalctl y los archivos de /var/log en un servidor Linux, vistos en el Tema 13: ambos son el histórico centralizado de lo que ha ido ocurriendo en el sistema, imprescindible para diagnosticar incidencias.</th>
+</tr>
+</table></div>
+<h2 id="2-niveles-de-gravedad-y-tipos-de-eventos" class="tema-h2">2. Niveles de gravedad y tipos de eventos</h2>
+<p>Cada evento registrado se clasifica según su nivel de gravedad, lo que permite priorizar de un vistazo qué sucesos merecen atención inmediata:</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Nivel</strong></th>
+<th><strong>Significado</strong></th>
+</tr>
+<tr>
+<td>Información</td>
+<td>Suceso normal: algo ha ocurrido correctamente (por ejemplo, un servicio se ha iniciado)</td>
+</tr>
+<tr>
+<td>Advertencia (Warning)</td>
+<td>Situación que podría convertirse en un problema, sin ser aún crítica</td>
+</tr>
+<tr>
+<td>Error</td>
+<td>Un fallo que ha afectado a alguna funcionalidad concreta</td>
+</tr>
+<tr>
+<td>Crítico</td>
+<td>Fallo grave, con pérdida de datos o caída de un componente principal</td>
+</tr>
+<tr>
+<td>Auditoría correcta / con error</td>
+<td>Específicos del registro de Seguridad: éxito o fracaso de una acción auditada (por ejemplo, un inicio de sesión)</td>
+</tr>
+</table></div>
+<h2 id="3-supervisión-práctica-vistas-personalizadas-y-reenvío-de-ev" class="tema-h2">3. Supervisión práctica: vistas personalizadas y reenvío de eventos</h2>
+<ul class="tema-lista">
+<li><strong>Vistas personalizadas (Custom Views)</strong>: filtros guardados sobre uno o varios registros, que permiten centrarse únicamente en los eventos relevantes (por ejemplo, solo errores y eventos críticos de las últimas 24 horas), en lugar de revisar manualmente todo el registro.</li>
+<li><strong>Adjuntar una tarea a un evento</strong>: permite automatizar una respuesta concreta (enviar un correo, ejecutar un script) cada vez que se produzca un evento determinado, sin necesidad de supervisión manual continua.</li>
+<li><strong>Reenvío de eventos (Windows Event Forwarding, WEF) y suscripciones</strong>: mecanismo que permite centralizar en un único «equipo recolector» los eventos generados en varios equipos de la red, apoyándose en el servicio WinRM (Windows Remote Management). Resulta especialmente útil para supervisar de forma centralizada muchos equipos sin tener que conectarse a cada uno de ellos individualmente.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>En organizaciones con muchos equipos, el reenvío de eventos suele ser el primer paso hacia soluciones de correlación y análisis más avanzadas (herramientas SIEM, Security Information and Event Management), que agregan y correlacionan eventos de múltiples fuentes para detectar patrones de ataque que no serían visibles observando cada equipo por separado. El detalle de estas herramientas queda fuera del alcance de este tema.</th>
+</tr>
+</table></div>
+<h2 id="4-recursos-compartidos-carpetas-e-impresoras" class="tema-h2">4. Recursos compartidos: carpetas e impresoras</h2>
+<p><strong>Compartir una carpeta</strong> consiste en hacerla accesible desde otros equipos de la red, a través de una ruta UNC (Universal Naming Convention) del tipo `\\servidor\recurso`, usando el protocolo SMB/CIFS ya citado en el Tema 7 al hablar de NAS. Puede hacerse desde el propio Explorador de archivos (Propiedades &gt; Compartir), desde la consola de Administración de equipos (carpeta «Carpetas compartidas», fsmgmt.msc) o mediante PowerShell (`New-SmbShare`).</p>
+<p>Windows crea automáticamente, además, unos <strong>recursos compartidos administrativos ocultos</strong> —identificables porque su nombre termina en `$` (por ejemplo, `C$` o `ADMIN$`)— pensados para la administración remota del equipo; al terminar en `$` no aparecen al explorar la red, aunque siguen siendo accesibles conociendo su ruta y con los permisos adecuados.</p>
+<p><strong>Compartir una impresora</strong> sigue una lógica equivalente: una impresora conectada físicamente (o en red) a un equipo o a un servidor de impresión se comparte para que el resto de equipos de la red puedan enviarle trabajos de impresión sin necesidad de que cada uno de ellos tenga la impresora conectada directamente ni, en muchos casos, sin tener que instalar manualmente su controlador.</p>
+<h2 id="5-permisos-de-recurso-compartido-share" class="tema-h2">5. Permisos de recurso compartido (share)</h2>
+<p>Los <strong>permisos de recurso compartido (share permissions)</strong> se definen sobre el propio recurso compartido y solo entran en juego cuando se accede a él <strong>a través de la red</strong>, mediante su ruta UNC; no afectan en absoluto al acceso realizado de forma local, directamente en el equipo donde reside la carpeta.</p>
+<ul class="tema-lista">
+<li><strong>Lectura</strong>: permite ver el contenido y abrir los archivos, sin modificarlos.</li>
+<li><strong>Cambiar</strong>: añade la posibilidad de leer, escribir, modificar y eliminar archivos y carpetas.</li>
+<li><strong>Control total</strong>: añade además la posibilidad de modificar los propios permisos del recurso compartido.</li>
+</ul>
+<p>Los permisos de recurso compartido son la única capa de protección disponible en volúmenes con sistemas de archivo antiguos que no soportan permisos más granulares (como FAT32); en un volumen NTFS, se combinan con los permisos NTFS del punto siguiente.</p>
+<h2 id="6-permisos-ntfs" class="tema-h2">6. Permisos NTFS</h2>
+<p>Los <strong>permisos NTFS</strong> se definen sobre el propio sistema de archivos (Tema 9) y se aplican siempre, tanto si el acceso es local como si se realiza a través de la red, con un nivel de detalle mucho mayor que los permisos de recurso compartido, y a nivel de archivo o carpeta individual, no solo del recurso compartido en su conjunto.</p>
+<ul class="tema-lista">
+<li><strong>Permisos básicos</strong>: Control total, Modificar, Lectura y ejecución, Mostrar el contenido de la carpeta, Lectura, Escritura.</li>
+<li><strong>Permisos especiales o avanzados</strong>: un desglose más granular todavía (recorrer carpeta/ejecutar archivo, crear archivos, eliminar, cambiar permisos, tomar posesión…), sobre el que se construyen los permisos básicos anteriores.</li>
+</ul>
+<p>Cada archivo y carpeta tiene asociada una <strong>ACL (Access Control List)</strong>, formada por entradas individuales llamadas <strong>ACE (Access Control Entry)</strong>, cada una de las cuales concede o deniega un permiso concreto a un usuario o grupo determinado. Por defecto, los permisos definidos sobre una carpeta se <strong>heredan</strong> por sus subcarpetas y archivos, aunque esa herencia puede romperse para definir permisos explícitos distintos en un punto concreto del árbol.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Cuando coexisten un permiso de «Permitir» y un permiso de «Denegar» para el mismo usuario o grupo sobre el mismo recurso, <strong>Denegar siempre prevalece sobre Permitir</strong>. Es un punto que se pregunta con frecuencia: basta con que exista una única denegación explícita, en cualquier grupo al que pertenezca el usuario, para que ese usuario pierda el acceso, sin importar cuántos permisos de «Permitir» tenga por otras vías.</th>
+</tr>
+</table></div>
+<h2 id="7-combinación-de-permisos-de-recurso-compartido-y-ntfs" class="tema-h2">7. Combinación de permisos de recurso compartido y NTFS</h2>
+<p>Cuando un usuario accede a una carpeta compartida <strong>a través de la red</strong>, se evalúan simultáneamente los permisos de recurso compartido (punto 5) y los permisos NTFS (punto 6), y el permiso efectivo resultante es siempre <strong>el más restrictivo de los dos</strong> (la intersección de ambos), nunca el más permisivo.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Permiso de recurso compartido</strong></th>
+<th><strong>Permiso NTFS</strong></th>
+<th><strong>Permiso efectivo por red</strong></th>
+</tr>
+<tr>
+<td>Control total</td>
+<td>Lectura</td>
+<td>Lectura (el NTFS es más restrictivo)</td>
+</tr>
+<tr>
+<td>Lectura</td>
+<td>Control total</td>
+<td>Lectura (el de recurso compartido es más restrictivo)</td>
+</tr>
+<tr>
+<td>Cambiar</td>
+<td>Modificar</td>
+<td>Cambiar/Modificar (equivalentes; el resultado es ese nivel)</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Por esta razón, la práctica habitual en administración de sistemas Windows es dejar el permiso de recurso compartido en «Control total» para el grupo relevante (o para «Todos»), y gestionar todo el control fino de acceso exclusivamente a través de los permisos NTFS. De ese modo solo hay que administrar un conjunto de permisos, y se evitan inconsistencias entre ambas capas que, de otro modo, habría que revisar cada vez que cambie alguna de las dos.</th>
+</tr>
+</table></div>
+<p>Cuando el acceso a la carpeta se realiza <strong>de forma local</strong> (directamente en el equipo, sin pasar por la red), los permisos de recurso compartido no intervienen en absoluto: solo se aplican los permisos NTFS.</p>
+<h2 id="8-resumen-esquemático" class="tema-h2">8. Resumen esquemático</h2>
+<ul class="tema-lista">
+<li><strong>Visor de eventos</strong>: consulta los registros Aplicación, Seguridad, Sistema e Instalación (.evtx); niveles Información, Advertencia, Error, Crítico y Auditoría correcta/con error.</li>
+<li><strong>Supervisión práctica</strong>: vistas personalizadas para filtrar, tareas adjuntas a eventos para automatizar respuestas, y reenvío de eventos (WEF, sobre WinRM) para centralizar la supervisión de varios equipos.</li>
+<li><strong>Recursos compartidos</strong>: carpetas e impresoras accesibles por red vía SMB/CIFS y rutas UNC; recursos administrativos ocultos terminados en $.</li>
+<li><strong>Permisos de recurso compartido</strong>: Lectura, Cambiar y Control total; solo aplican al acceso por red.</li>
+<li><strong>Permisos NTFS</strong>: más granulares, aplican siempre (local y red); ACL formada por ACE; herencia entre carpetas y archivos; Denegar prevalece siempre sobre Permitir.</li>
+<li><strong>Combinación</strong>: al acceder por red se aplica el permiso más restrictivo entre el de recurso compartido y el NTFS; buena práctica: recurso compartido en Control total y control fino solo por NTFS.</li>
+</ul>
+  </div>
+</article>

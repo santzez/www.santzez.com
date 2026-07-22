@@ -1158,6 +1158,244 @@ a.tarjeta:hover {
 }
 
 /* =============================================================
+   CONTENIDO DE TEMA (tipo "contenido") — material de estudio
+   Formato web nativo con tipografía cómoda y buena impresión.
+   ============================================================= */
+
+.tema-contenedor { max-width: 780px; margin: 0 auto; }
+
+.tema-acciones {
+  display: flex; gap: 0.5rem; flex-wrap: wrap;
+  margin: 0 0 1.5rem;
+}
+.tema-acciones .btn { padding: 0.45rem 0.9rem; font-size: 0.88rem; }
+
+.tema-articulo {
+  background: #fff;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-grande);
+  padding: 2.25rem 2.5rem;
+  line-height: 1.65;
+  color: var(--color-texto);
+}
+.tema-articulo p {
+  margin: 0 0 0.9rem;
+  font-size: 1rem;
+}
+.tema-articulo strong { color: var(--color-primario); }
+
+/* Cabecera del tema */
+.tema-cabecera {
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 3px solid var(--color-primario);
+}
+.tema-cabecera__id {
+  display: inline-block;
+  background: var(--color-primario);
+  color: #fff;
+  padding: 0.25rem 0.85rem;
+  border-radius: var(--radio);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+.tema-cabecera__titulo {
+  font-family: var(--fuente-corporativa);
+  color: var(--color-primario);
+  font-size: 1.65rem;
+  font-weight: 700;
+  margin: 0 0 0.35rem;
+  line-height: 1.25;
+}
+.tema-cabecera__meta {
+  color: var(--color-texto-suave);
+  font-size: 0.88rem;
+  font-style: italic;
+}
+
+/* Índice del tema */
+.tema-indice {
+  background: var(--color-fondo-alt);
+  border-left: 4px solid var(--color-primario);
+  border-radius: var(--radio);
+  padding: 1.1rem 1.35rem;
+  margin: 0 0 2rem;
+}
+.tema-indice__titulo {
+  font-family: var(--fuente-corporativa);
+  color: var(--color-primario);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+.tema-indice__lista {
+  margin: 0; padding: 0 0 0 1.25rem;
+  counter-reset: idx;
+  list-style: decimal;
+}
+.tema-indice__lista li { margin: 0.2rem 0; font-size: 0.92rem; }
+.tema-indice__lista a {
+  color: var(--color-texto);
+  text-decoration: none;
+  border-bottom: 1px dotted transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.tema-indice__lista a:hover {
+  color: var(--color-primario);
+  border-bottom-color: var(--color-primario);
+}
+.tema-indice__sep {
+  list-style: none; margin-left: -1.25rem;
+  color: var(--color-texto-suave);
+  font-size: 0.8rem; font-style: italic;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-borde-claro);
+}
+
+/* Cuerpo del tema — H2 = secciones principales */
+.tema-h2 {
+  font-family: var(--fuente-corporativa);
+  color: var(--color-primario);
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 2.5rem 0 0.9rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--color-primario-suave);
+  scroll-margin-top: 100px;
+}
+.tema-h3 {
+  color: var(--color-primario-hover);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 1.75rem 0 0.6rem;
+}
+.tema-h4 {
+  color: var(--color-texto);
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 1.35rem 0 0.45rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.tema-h5 { font-size: 0.95rem; margin: 1.1rem 0 0.35rem; }
+
+.tema-lista {
+  margin: 0.4rem 0 1rem;
+  padding-left: 1.5rem;
+}
+.tema-lista li {
+  margin: 0.3rem 0;
+  line-height: 1.55;
+}
+.tema-lista li::marker { color: var(--color-primario); }
+
+/* Tablas del tema */
+.tabla-wrap { overflow-x: auto; margin: 1rem 0 1.35rem; }
+.tabla-tema {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  background: #fff;
+}
+.tabla-tema th {
+  background: var(--color-primario-suave);
+  color: var(--color-primario);
+  padding: 0.6rem 0.85rem;
+  text-align: left;
+  font-weight: 700;
+  border-bottom: 2px solid var(--color-primario);
+  vertical-align: top;
+}
+.tabla-tema td {
+  padding: 0.5rem 0.85rem;
+  border-bottom: 1px solid var(--color-borde-claro);
+  vertical-align: top;
+}
+.tabla-tema tr:last-child td { border-bottom: 0; }
+
+/* Separador entre partes fusionadas (T4) */
+.tema-separador {
+  border: 0; border-top: 2px dashed var(--color-borde);
+  margin: 2.5rem 0 1.5rem;
+}
+.tema-nota-fusion {
+  background: var(--color-primario-suave);
+  color: var(--color-primario);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radio);
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .tema-articulo { padding: 1.35rem 1.15rem; }
+  .tema-cabecera__titulo { font-size: 1.35rem; }
+  .tema-h2 { font-size: 1.2rem; }
+}
+
+/* =============================================================
+   IMPRESIÓN — @media print
+   Layout optimizado para papel A4: márgenes limpios, sin cabecera
+   ni botones, tipografía serif para el cuerpo, saltos coherentes.
+   ============================================================= */
+@media print {
+  @page {
+    size: A4;
+    margin: 1.8cm 1.5cm;
+  }
+  html, body { background: #fff !important; color: #000; }
+  .cabecera, .pie, .migas, .no-print, .tema-acciones,
+  .cabecera__usuario, .panel-ajustes { display: none !important; }
+  main { padding: 0 !important; }
+  .contenedor { max-width: none; padding: 0; }
+  .tema-articulo {
+    padding: 0; border: 0; box-shadow: none;
+    max-width: none; font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.5;
+    color: #000;
+  }
+  .tema-cabecera { break-after: avoid; page-break-after: avoid; }
+  .tema-cabecera__id {
+    background: #000; color: #fff;
+    padding: 0.15rem 0.55rem;
+  }
+  .tema-cabecera__titulo,
+  .tema-h2, .tema-h3, .tema-h4 {
+    color: #000;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    break-after: avoid; page-break-after: avoid;
+  }
+  .tema-h2 { border-color: #000; }
+  .tema-articulo strong { color: #000; }
+  .tema-indice {
+    background: #f5f5f5; border-left-color: #000;
+  }
+  .tema-indice a { text-decoration: none; color: #000; }
+  .tema-indice a::after {
+    content: "";              /* sin números de página automáticos */
+  }
+  .tabla-wrap { overflow: visible; }
+  .tabla-tema, .tabla-tema tr {
+    break-inside: avoid; page-break-inside: avoid;
+  }
+  .tabla-tema th {
+    background: #e5e5e5 !important; color: #000;
+    border-color: #000;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .tema-lista li { break-inside: avoid; page-break-inside: avoid; }
+  p, li { orphans: 3; widows: 3; }
+  a { color: #000; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.85em; }
+}
+
+/* =============================================================
    BLOQUES DE TEMARIO (acordeón) — tipo "bloques"
    Bloques colapsables con temas dentro (OPE CAU/REDES).
    ============================================================= */

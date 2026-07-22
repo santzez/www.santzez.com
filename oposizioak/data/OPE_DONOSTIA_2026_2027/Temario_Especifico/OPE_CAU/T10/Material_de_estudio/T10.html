@@ -1,0 +1,174 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T10</div>
+    <h1 class="tema-cabecera__titulo">Virtualización de equipos y servidores. Conceptos básicos, casos de uso, ventajas y desventajas</h1>
+    <div class="tema-cabecera__meta">Bloque II · Tecnología básica — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-concepto-de-virtualización">1. Concepto de virtualización</a></li>
+<li><a href="#2-el-hipervisor-concepto-y-tipos">2. El hipervisor: concepto y tipos</a></li>
+<li><a href="#3-tipos-de-virtualización">3. Tipos de virtualización</a></li>
+<li><a href="#4-casos-de-uso">4. Casos de uso</a></li>
+<li><a href="#5-ventajas-y-desventajas">5. Ventajas y desventajas</a></li>
+<li><a href="#6-panorama-actual-de-la-virtualización">6. Panorama actual de la virtualización</a></li>
+<li><a href="#7-resumen-esquemático">7. Resumen esquemático</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h3 class="tema-h3">Qué vas a encontrar en este tema</h3>
+<ul class="tema-lista">
+<li>Qué es la virtualización y qué problema resuelve respecto al uso tradicional de servidores físicos.</li>
+<li>Qué es un hipervisor y cómo se diferencian los hipervisores de tipo 1 (bare-metal) y tipo 2 (alojado).</li>
+<li>Los principales tipos de virtualización: completa, paravirtualización y virtualización a nivel de sistema operativo (contenedores).</li>
+<li>Los casos de uso más habituales de la virtualización de equipos y servidores.</li>
+<li>Sus ventajas y desventajas frente a la infraestructura física tradicional.</li>
+<li>El panorama actual del mercado de virtualización, tras los cambios de licenciamiento de VMware.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Este tema trata la virtualización como tecnología general. No es el lugar para el detalle de cómo se instala o administra un sistema operativo concreto sobre una máquina virtual: eso corresponde a los Temas 11 (Windows de usuario), 12 (Windows Server) y 13 (Linux de servidor).<br>Tampoco es el lugar para la computación en la nube (cloud computing), que se apoya en la virtualización pero se estudia como tema propio en el Bloque IV (Tema 32).</th>
+</tr>
+</table></div>
+<p>1. Concepto de virtualización</p>
+<p>2. El hipervisor: concepto y tipos</p>
+<p>3. Tipos de virtualización</p>
+<p>4. Casos de uso</p>
+<p>5. Ventajas y desventajas</p>
+<p>6. Panorama actual de la virtualización</p>
+<p>7. Resumen esquemático</p>
+<h2 id="1-concepto-de-virtualización" class="tema-h2">1. Concepto de virtualización</h2>
+<p>La <strong>virtualización</strong> es la tecnología que permite crear una versión virtual —simulada por software— de un recurso físico, de forma que ese recurso pueda compartirse entre varios usos independientes entre sí como si cada uno dispusiera de su propio recurso dedicado. Aplicada a equipos y servidores, la virtualización permite ejecutar varios ordenadores «completos» de forma simultánea sobre un único equipo físico, cada uno con su propio sistema operativo, funcionando de forma aislada de los demás.</p>
+<p>En este contexto se manejan tres términos clave:</p>
+<ul class="tema-lista">
+<li><strong>Host (anfitrión)</strong>: el equipo físico real, con su hardware (CPU, memoria, disco, red), sobre el que se ejecuta la virtualización.</li>
+<li><strong>Guest (invitado)</strong>: cada sistema operativo que se ejecuta de forma virtualizada sobre el host.</li>
+<li><strong>Máquina virtual (VM)</strong>: el «ordenador» definido por software —con su CPU virtual, memoria virtual, disco virtual y tarjeta de red virtual— sobre el que se instala y ejecuta cada sistema operativo invitado.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Es como dividir un edificio (el host) en varios apartamentos independientes (las máquinas virtuales): cada inquilino (sistema operativo invitado) tiene sus propias habitaciones y su propia puerta con llave, y no ve lo que ocurre en los demás apartamentos, aunque todos compartan la misma estructura, las mismas tuberías y el mismo suministro eléctrico del edificio (el hardware físico del host).</th>
+</tr>
+</table></div>
+<h2 id="2-el-hipervisor-concepto-y-tipos" class="tema-h2">2. El hipervisor: concepto y tipos</h2>
+<p>El <strong>hipervisor</strong> (también llamado VMM, Virtual Machine Monitor) es la capa de software responsable de crear, ejecutar y gestionar las máquinas virtuales, repartiendo entre ellas de forma controlada los recursos físicos del host y garantizando su aislamiento.</p>
+<ul class="tema-lista">
+<li><strong>Hipervisor de tipo 1 (bare-metal o «nativo»)</strong>: se instala directamente sobre el hardware, sin un sistema operativo convencional de por medio; el propio hipervisor actúa como capa base del sistema. Ofrece mejor rendimiento y es el modelo habitual en entornos de servidor y producción. Ejemplos: VMware ESXi, Microsoft Hyper-V, KVM (integrado en el núcleo de Linux), Xen, Proxmox VE.</li>
+<li><strong>Hipervisor de tipo 2 (alojado o «hosted»)</strong>: se instala como una aplicación más sobre un sistema operativo convencional (Windows, Linux, macOS) ya existente. Es más sencillo de desplegar, pero introduce una capa adicional que penaliza algo el rendimiento. Habitual en entornos de escritorio, pruebas o desarrollo. Ejemplos: VMware Workstation/Fusion, Oracle VirtualBox, Parallels Desktop.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Criterio</strong></th>
+<th><strong>Tipo 1 (bare-metal)</strong></th>
+<th><strong>Tipo 2 (alojado)</strong></th>
+</tr>
+<tr>
+<td>Dónde se instala</td>
+<td>Directamente sobre el hardware</td>
+<td>Sobre un sistema operativo anfitrión</td>
+</tr>
+<tr>
+<td>Rendimiento</td>
+<td>Mayor: acceso más directo al hardware</td>
+<td>Menor: capa adicional del SO anfitrión</td>
+</tr>
+<tr>
+<td>Uso típico</td>
+<td>Servidores y producción</td>
+<td>Escritorio, pruebas y desarrollo</td>
+</tr>
+<tr>
+<td>Ejemplos</td>
+<td>VMware ESXi, Hyper-V, KVM, Xen, Proxmox VE</td>
+<td>VMware Workstation/Fusion, VirtualBox, Parallels</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Microsoft Hyper-V suele generar dudas al clasificarlo: se activa como un rol dentro de una instalación de Windows Server o Windows 11, lo que podría sugerir que es de tipo 2. Sin embargo, técnicamente es de tipo 1: al habilitarlo, el propio Windows pasa a ejecutarse como una máquina virtual más (la «partición raíz») por encima del hipervisor, que se sitúa directamente sobre el hardware.</th>
+</tr>
+</table></div>
+<h2 id="3-tipos-de-virtualización" class="tema-h2">3. Tipos de virtualización</h2>
+<ul class="tema-lista">
+<li><strong>Virtualización completa (full virtualization)</strong>: el hipervisor simula un hardware completo, de forma que el sistema operativo invitado se ejecuta sin modificaciones, sin ser consciente de que está virtualizado. Se apoya en extensiones de virtualización por hardware del propio procesador (Intel VT-x, AMD-V), que aceleran esta simulación.</li>
+<li><strong>Paravirtualización</strong>: el sistema operativo invitado sí es consciente de que se ejecuta sobre un hipervisor, y se modifica (o incluye drivers específicos) para comunicarse directamente con él mediante llamadas optimizadas (hypercalls), evitando parte de la simulación de hardware. Puede ofrecer mejor rendimiento, a cambio de requerir un SO invitado compatible.</li>
+<li><strong>Virtualización a nivel de sistema operativo (contenedores)</strong>: en lugar de virtualizar hardware completo para ejecutar SO invitados independientes, se aísla a nivel de procesos sobre un único núcleo (kernel) compartido con el host. Cada contenedor empaqueta una aplicación con sus dependencias, pero no un sistema operativo completo, lo que lo hace mucho más ligero y rápido de arrancar que una máquina virtual (Docker es el ejemplo más extendido).</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Criterio</strong></th>
+<th><strong>Máquina virtual (VM)</strong></th>
+<th><strong>Contenedor</strong></th>
+</tr>
+<tr>
+<td>Qué se virtualiza</td>
+<td>El hardware completo</td>
+<td>El sistema operativo (procesos aislados)</td>
+</tr>
+<tr>
+<td>Sistema operativo</td>
+<td>Cada VM tiene su propio SO invitado</td>
+<td>Todos los contenedores comparten el núcleo del host</td>
+</tr>
+<tr>
+<td>Peso y arranque</td>
+<td>Mayor tamaño; arranque en minutos</td>
+<td>Muy ligero; arranque en segundos</td>
+</tr>
+<tr>
+<td>Aislamiento</td>
+<td>Muy alto (SO completo independiente)</td>
+<td>Menor que una VM, aunque suficiente para la mayoría de usos</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Los contenedores no forman parte del contenido explícito de este tema, centrado en la virtualización de equipos y servidores mediante hipervisores, pero conviene reconocer la diferencia porque es una fuente habitual de confusión: una máquina virtual virtualiza hardware para ejecutar un SO completo; un contenedor aísla procesos sobre un SO ya en ejecución, sin virtualizar hardware.</th>
+</tr>
+</table></div>
+<h2 id="4-casos-de-uso" class="tema-h2">4. Casos de uso</h2>
+<ul class="tema-lista">
+<li><strong>Consolidación de servidores</strong>: sustituir varios servidores físicos infrautilizados por un único host más potente que ejecuta varias máquinas virtuales, aprovechando mucho mejor la capacidad de cada equipo.</li>
+<li><strong>Entornos de prueba y desarrollo</strong>: crear y destruir máquinas virtuales bajo demanda para probar software, actualizaciones o configuraciones, sin arriesgar los sistemas de producción y sin necesidad de hardware dedicado para cada prueba.</li>
+<li><strong>Alta disponibilidad</strong>: mediante la migración en caliente de máquinas virtuales entre distintos hosts físicos (por ejemplo, vMotion en VMware o Live Migration en Hyper-V), es posible mover una VM en ejecución de un servidor a otro sin interrupción del servicio, lo que facilita el mantenimiento planificado del hardware.</li>
+<li><strong>Recuperación ante desastres (DR)</strong>: replicar máquinas virtuales completas hacia otro centro de datos permite recuperar el servicio con rapidez ante un fallo grave o una catástrofe en el centro principal.</li>
+<li><strong>Escritorios virtuales (VDI, Virtual Desktop Infrastructure)</strong>: alojar los escritorios de los usuarios como máquinas virtuales centralizadas en el centro de datos, a las que se accede de forma remota, facilitando su gestión y actualización centralizada.</li>
+<li><strong>Base de la computación en la nube</strong>: los proveedores de nube pública construyen sus servicios sobre virtualización a gran escala, permitiendo ofrecer «servidores virtuales» bajo demanda (el detalle de la nube se estudia en el Tema 32).</li>
+</ul>
+<h2 id="5-ventajas-y-desventajas" class="tema-h2">5. Ventajas y desventajas</h2>
+<h4 class="tema-h4">Ventajas</h4>
+<ul class="tema-lista">
+<li><strong>Mejor aprovechamiento del hardware</strong>: varios sistemas comparten los mismos recursos físicos en lugar de infrautilizar servidores dedicados.</li>
+<li><strong>Ahorro de costes</strong>: menos servidores físicos que comprar, alojar, alimentar y refrigerar en el centro de datos (CPD).</li>
+<li><strong>Aislamiento</strong>: en condiciones normales, un fallo o una incidencia de seguridad dentro de una máquina virtual no debería afectar a las demás VM del mismo host.</li>
+<li><strong>Flexibilidad y rapidez de despliegue</strong>: crear, clonar o eliminar una máquina virtual es cuestión de minutos, frente a los plazos de adquisición e instalación de un servidor físico nuevo.</li>
+<li><strong>Instantáneas (snapshots)</strong>: permiten capturar el estado completo de una VM en un momento dado y volver a él rápidamente, muy útil antes de aplicar cambios arriesgados.</li>
+<li><strong>Migración en caliente</strong>: mover una VM en ejecución entre hosts físicos sin cortar el servicio, facilitando el mantenimiento sin tiempos de inactividad.</li>
+</ul>
+<h4 class="tema-h4">Desventajas</h4>
+<ul class="tema-lista">
+<li><strong>Sobrecarga de rendimiento (overhead)</strong>: la capa de virtualización consume recursos y puede introducir una ligera pérdida de rendimiento frente al hardware físico, aunque las extensiones de virtualización por hardware (VT-x, AMD-V) la han reducido notablemente.</li>
+<li><strong>Punto único de fallo</strong>: si el host físico falla y no existe una configuración de alta disponibilidad, todas las máquinas virtuales que aloja se ven afectadas a la vez, a diferencia de un fallo en un servidor físico dedicado, que solo afecta a ese servicio.</li>
+<li><strong>Mayor complejidad de gestión</strong>: requiere planificar con cuidado el reparto de recursos entre VM; un sobreaprovisionamiento (overcommit) mal controlado de CPU o memoria puede degradar el rendimiento de todas las máquinas virtuales del host.</li>
+<li><strong>Coste de licenciamiento</strong>: el software de virtualización de nivel empresarial suele requerir licencias, cuyo coste ha cobrado especial relevancia en los últimos años (véase el punto 6).</li>
+</ul>
+<h2 id="6-panorama-actual-de-la-virtualización" class="tema-h2">6. Panorama actual de la virtualización</h2>
+<p>Durante años, VMware (con su hipervisor vSphere/ESXi) fue el proveedor de referencia en virtualización de servidores empresariales. Tras su adquisición por Broadcom, completada en 2023, el modelo de licenciamiento cambió de forma significativa: desde enero de 2024 dejaron de venderse licencias perpetuas para cualquier producto VMware, sustituidas por un modelo exclusivamente de suscripción, con precios calculados por núcleo de CPU (frente al anterior modelo por zócalo/socket) y unos mínimos de compra que han encarecido notablemente el coste para organizaciones con clústeres pequeños o medianos.</p>
+<p>Este cambio ha impulsado a muchas organizaciones a evaluar alternativas: <strong>Microsoft Hyper-V</strong> (integrado en Windows Server, sin coste de licencia adicional para quien ya dispone de esas licencias), y opciones de código abierto basadas en <strong>KVM</strong> (Kernel-based Virtual Machine, integrado en el núcleo de Linux), habitualmente gestionadas a través de plataformas como <strong>Proxmox VE</strong>.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Este panorama comercial cambia con rapidez y no conviene memorizar cifras concretas de precios, sino entender la tendencia de fondo: el mercado de la virtualización, tradicionalmente dominado por una única solución de referencia, se ha vuelto más fragmentado, con alternativas de pago (Hyper-V) y de código abierto (KVM/Proxmox VE) ganando peso frente al modelo clásico de VMware. Los conceptos fundamentales —hipervisor, máquina virtual, snapshot, migración en caliente— son comunes a todas las soluciones, sea cual sea el fabricante.</th>
+</tr>
+</table></div>
+<h2 id="7-resumen-esquemático" class="tema-h2">7. Resumen esquemático</h2>
+<ul class="tema-lista">
+<li><strong>Virtualización</strong>: crear versiones virtuales de un recurso físico; host (físico), guest (SO virtualizado), VM (el «ordenador» definido por software).</li>
+<li><strong>Hipervisor</strong>: capa que crea y gestiona las VM. Tipo 1 (bare-metal, sobre el hardware, mayor rendimiento: ESXi, Hyper-V, KVM) frente a tipo 2 (alojado sobre un SO, más sencillo: VirtualBox, VMware Workstation).</li>
+<li><strong>Tipos de virtualización</strong>: completa (SO invitado sin modificar, apoyada en VT-x/AMD-V), paravirtualización (SO invitado adaptado, más eficiente) y contenedores (aislamiento de procesos sobre un kernel compartido, sin virtualizar hardware).</li>
+<li><strong>Casos de uso</strong>: consolidación de servidores, pruebas y desarrollo, alta disponibilidad (migración en caliente), recuperación ante desastres, escritorios virtuales (VDI) y base de la computación en la nube.</li>
+<li><strong>Ventajas</strong>: mejor aprovechamiento del hardware, ahorro de costes, aislamiento, rapidez de despliegue, snapshots y migración en caliente.</li>
+<li><strong>Desventajas</strong>: overhead de rendimiento, punto único de fallo del host, mayor complejidad de gestión y coste de licenciamiento.</li>
+<li><strong>Panorama actual</strong>: fin de las licencias perpetuas de VMware (Broadcom, desde 2024) y auge de alternativas como Hyper-V y KVM/Proxmox VE.</li>
+</ul>
+  </div>
+</article>

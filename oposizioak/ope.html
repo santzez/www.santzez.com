@@ -155,6 +155,34 @@
       const subtitulo = document.getElementById('ope-subtitulo');
       cont.innerHTML = '';
 
+      // Tipo "contenido" → fragmento HTML con material de estudio + botón imprimir
+      if (info.tipo === 'contenido' && info.html) {
+        subtitulo.hidden = true;
+        try {
+          const r = await fetch(`data/${rutaOpe}/${info.html}`, { cache: 'no-store' });
+          if (!r.ok) throw new Error('No se pudo cargar el contenido');
+          const htmlFragmento = await r.text();
+          cont.classList.add('tema-contenedor');
+          cont.innerHTML = `
+            <div class="tema-acciones no-print">
+              <button type="button" class="btn btn--secundario" onclick="window.print()">
+                🖨 Imprimir / Guardar PDF
+              </button>
+              <button type="button" class="btn btn--secundario" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+                ↑ Volver arriba
+              </button>
+            </div>
+            ${htmlFragmento}
+          `;
+          // Oculta el título/descripción de arriba (los reemplaza la cabecera del tema)
+          document.getElementById('ope-titulo').hidden = true;
+          document.getElementById('ope-descripcion').hidden = true;
+        } catch (e) {
+          cont.innerHTML = `<div class="tarjeta">Error cargando el contenido: ${e.message}</div>`;
+        }
+        return;
+      }
+
       // Tipo "bloques" → acordeón: bloques colapsables con temas dentro
       if (info.tipo === 'bloques' && Array.isArray(info.bloques)) {
         subtitulo.textContent = 'Temario por bloques';

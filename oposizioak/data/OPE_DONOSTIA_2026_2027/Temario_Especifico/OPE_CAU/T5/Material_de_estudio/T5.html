@@ -1,0 +1,122 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T5</div>
+    <h1 class="tema-cabecera__titulo">Introducción a las bases de datos: tipos, conceptos básicos del modelo relacional y estándares de conectividad</h1>
+    <div class="tema-cabecera__meta">Bloque II · Tecnología básica — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-de-los-ficheros-al-sistema-gestor-de-bases-de-datos-sgbd">1. De los ficheros al Sistema Gestor de Bases de Datos (SGBD)</a></li>
+<li><a href="#2-tipos-de-bases-de-datos">2. Tipos de bases de datos</a></li>
+<li><a href="#3-el-modelo-relacional-conceptos-básicos">3. El modelo relacional: conceptos básicos</a></li>
+<li><a href="#4-claves-y-relaciones-entre-tablas">4. Claves y relaciones entre tablas</a></li>
+<li><a href="#5-estándares-de-conectividad">5. Estándares de conectividad</a></li>
+<li><a href="#6-resumen-esquemático">6. Resumen esquemático</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h3 class="tema-h3">Qué vas a encontrar en este tema</h3>
+<ul class="tema-lista">
+<li>Qué es una base de datos y qué papel juega el SGBD frente a los ficheros independientes del Tema 4.</li>
+<li>Los principales tipos de bases de datos: jerárquica, en red, relacional, orientada a objetos y NoSQL.</li>
+<li>Los conceptos básicos del modelo relacional: tablas, filas, columnas y dominios.</li>
+<li>Las claves (primaria y foránea) y los tipos de relación entre tablas.</li>
+<li>Los estándares de conectividad que permiten a una aplicación acceder a una base de datos: ODBC y JDBC.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Este tema construye sobre el vocabulario ya visto en el Tema 4 (fichero, registro, campo, clave, índice): aquí ese mismo vocabulario se traslada al modelo relacional (tabla, fila, columna, clave primaria/foránea).<br>El temario no dedica ningún tema aparte al lenguaje SQL ni al diseño avanzado de bases de datos (formas normales, normalización): quédate con los conceptos básicos de tabla, clave y relación que se explican aquí, sin necesidad de profundizar en sintaxis de consultas.</th>
+</tr>
+</table></div>
+<p>1. De los ficheros al Sistema Gestor de Bases de Datos (SGBD)</p>
+<p>2. Tipos de bases de datos</p>
+<p>3. El modelo relacional: conceptos básicos</p>
+<p>4. Claves y relaciones entre tablas</p>
+<p>5. Estándares de conectividad</p>
+<p>6. Resumen esquemático</p>
+<h2 id="1-de-los-ficheros-al-sistema-gestor-de-bases-de-datos-sgbd" class="tema-h2">1. De los ficheros al Sistema Gestor de Bases de Datos (SGBD)</h2>
+<p>En el Tema 4 vimos los ficheros como forma de almacenar información de manera persistente. Cuando varias aplicaciones necesitan compartir esos datos, gestionar ficheros por separado empieza a dar problemas: la misma información se acaba duplicando en varios sitios (redundancia), esas copias se desincronizan entre sí (inconsistencia), y resulta difícil controlar quién accede a qué y evitar que dos procesos escriban a la vez sobre el mismo dato.</p>
+<p>Para resolver esto surge el Sistema Gestor de Bases de Datos (SGBD o DBMS, Database Management System): el software que se sitúa entre las aplicaciones y los datos, centralizando su almacenamiento y ofreciendo mecanismos de control que un conjunto de ficheros sueltos no puede garantizar por sí mismo.</p>
+<ul class="tema-lista">
+<li>Base de datos: conjunto organizado de datos, estructurados y relacionados entre sí, almacenados de forma centralizada y gestionados por un SGBD.</li>
+<li>SGBD: el software que crea, mantiene y controla el acceso a la base de datos, actuando de intermediario entre las aplicaciones y los datos.</li>
+</ul>
+<h4 class="tema-h4">Ventajas de una base de datos frente a ficheros independientes</h4>
+<ul class="tema-lista">
+<li>Menor redundancia: los datos se almacenan una sola vez y se comparten entre aplicaciones.</li>
+<li>Mayor integridad y consistencia: el SGBD aplica reglas que evitan datos contradictorios.</li>
+<li>Control centralizado y seguridad: se puede definir con detalle quién accede a qué información y con qué permisos.</li>
+<li>Acceso concurrente controlado: varios usuarios o procesos pueden trabajar a la vez sin pisarse los cambios.</li>
+<li>Independencia entre datos y programas: las aplicaciones no necesitan conocer cómo se almacenan físicamente los datos para poder usarlos.</li>
+</ul>
+<h2 id="2-tipos-de-bases-de-datos" class="tema-h2">2. Tipos de bases de datos</h2>
+<p>No todas las bases de datos organizan la información del mismo modo. Los modelos más habituales son:</p>
+<ul class="tema-lista">
+<li>Jerárquica: organiza los datos en forma de árbol, con relaciones de padre a hijo (una tabla puede tener varios hijos, pero cada hijo tiene un único padre).</li>
+<li>En red: similar a la jerárquica, pero permite que un registro tenga varios «padres», representando relaciones más complejas mediante punteros.</li>
+<li>Relacional: organiza los datos en tablas vinculadas mediante claves. Es, con diferencia, el modelo más extendido hoy en día, y el que se desarrolla en el resto de este tema.</li>
+<li>Orientada a objetos: almacena los datos como objetos, con sus atributos y comportamientos, de forma coherente con la programación orientada a objetos.</li>
+<li>NoSQL («Not Only SQL»): familia de bases de datos no relacionales, pensadas para grandes volúmenes de datos, alta disponibilidad y esquemas más flexibles que el rígido esquema de tablas del modelo relacional.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Para el examen, lo importante es identificar el modelo dominante: la base de datos relacional organiza la información en tablas con filas y columnas, relacionadas mediante claves.<br>El resto de modelos (jerárquico, en red, orientado a objetos, NoSQL) conviene reconocerlos por su idea general y diferenciarlos del relacional, sin necesidad de memorizar más detalle.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Dentro de NoSQL existen varias familias según cómo almacenan la información: clave-valor (por ejemplo, Redis), documental (por ejemplo, MongoDB), columnar (por ejemplo, Cassandra) y de grafos (por ejemplo, Neo4j).<br>No hace falta memorizar estos ejemplos concretos: basta con saber que NoSQL no es un único modelo, sino una familia de alternativas al modelo relacional.</th>
+</tr>
+</table></div>
+<h2 id="3-el-modelo-relacional-conceptos-básicos" class="tema-h2">3. El modelo relacional: conceptos básicos</h2>
+<p>El modelo relacional fue propuesto por Edgar F. Codd en 1970 y se basa en representar toda la información mediante tablas (también llamadas relaciones), cada una de ellas dedicada a un tipo de entidad (por ejemplo, «empleados» o «departamentos»).</p>
+<ul class="tema-lista">
+<li>Tabla (o relación): estructura bidimensional que almacena los datos de una entidad, organizados en filas y columnas.</li>
+<li>Fila (o tupla, o registro): cada una de las ocurrencias concretas almacenadas en la tabla.</li>
+<li>Columna (o atributo, o campo): cada una de las características que describen a la entidad.</li>
+<li>Dominio: el conjunto de valores posibles que puede tomar un atributo (por ejemplo, el dominio del atributo «edad» son los números enteros positivos razonables para una persona).</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>El modelo relacional reutiliza, con otro nombre, el mismo vocabulario del Tema 4: tabla = fichero, fila = registro, columna = campo.<br>Pensarlo así ayuda a no tratar este tema como algo completamente nuevo, sino como una forma más estructurada y potente de organizar la misma idea de fondo.</th>
+</tr>
+</table></div>
+<h2 id="4-claves-y-relaciones-entre-tablas" class="tema-h2">4. Claves y relaciones entre tablas</h2>
+<ul class="tema-lista">
+<li>Clave primaria (PK, Primary Key): campo, o conjunto de campos, que identifica de forma única cada fila de una tabla. No puede repetirse ni quedar vacía (nula).</li>
+<li>Clave foránea (o ajena, FK, Foreign Key): campo de una tabla que referencia la clave primaria de otra tabla (o de la misma), estableciendo así una relación entre ambas.</li>
+<li>Integridad referencial: regla que garantiza que el valor de una clave foránea corresponde siempre a un valor existente en la clave primaria a la que hace referencia (o que queda vacío, si eso está permitido).</li>
+</ul>
+<h4 class="tema-h4">Tipos de relación entre tablas</h4>
+<ul class="tema-lista">
+<li>Uno a uno (1:1): cada fila de una tabla se relaciona con, como mucho, una fila de la otra.</li>
+<li>Uno a muchos (1:N): una fila de una tabla puede relacionarse con varias filas de otra, pero cada fila de la segunda solo se relaciona con una de la primera (por ejemplo, un departamento tiene varios empleados, pero cada empleado pertenece a un único departamento).</li>
+<li>Muchos a muchos (N:M): varias filas de una tabla pueden relacionarse con varias filas de otra. Se resuelve mediante una tabla intermedia que combina las claves primarias de ambas tablas.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>El diseño detallado de bases de datos (normalización, formas normales, sintaxis SQL) no forma parte de un tema específico de este temario.<br>Quédate con la idea de fondo: cómo se identifica de forma única una fila (clave primaria) y cómo se conectan las tablas entre sí (clave foránea y tipos de relación), sin entrar a diseñar ni consultar bases de datos reales.</th>
+</tr>
+</table></div>
+<h2 id="5-estándares-de-conectividad" class="tema-h2">5. Estándares de conectividad</h2>
+<p>Una aplicación no siempre está escrita en el mismo entorno que el motor de base de datos al que necesita acceder. Para no depender de un SGBD concreto, existen estándares de conectividad: interfaces comunes que permiten a una aplicación dialogar con distintos motores de base de datos de manera uniforme, delegando en un driver específico las particularidades de cada uno.</p>
+<ul class="tema-lista">
+<li>ODBC (Open Database Connectivity): estándar de conectividad de propósito general, que permite a cualquier aplicación acceder a distintos SGBD a través de un driver ODBC específico para cada motor, usando siempre la misma API común.</li>
+<li>JDBC (Java Database Connectivity): el equivalente a ODBC pensado específicamente para aplicaciones Java, mediante drivers JDBC que permiten conectar con distintos motores de base de datos desde código Java.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Tanto ODBC como JDBC comparten la misma idea de arquitectura: la aplicación habla con una API común, y es el driver correspondiente el que traduce esas peticiones al lenguaje propio de cada SGBD.<br>Hoy en día muchas aplicaciones añaden una capa adicional (ORM, mapeo objeto-relacional) por encima de estos estándares, pero no hace falta profundizar en ello para este tema.</th>
+</tr>
+</table></div>
+<h2 id="6-resumen-esquemático" class="tema-h2">6. Resumen esquemático</h2>
+<ul class="tema-lista">
+<li>Base de datos = conjunto organizado de datos centralizado y compartido, gestionado por un SGBD, que reduce redundancia y mejora integridad, seguridad y concurrencia frente a ficheros independientes.</li>
+<li>Tipos de bases de datos: jerárquica, en red, relacional (la dominante), orientada a objetos y NoSQL (clave-valor, documental, columnar, grafos).</li>
+<li>Modelo relacional (Codd, 1970): tabla/relación = fichero, fila/tupla = registro, columna/atributo = campo, dominio = valores posibles de un atributo.</li>
+<li>Clave primaria = identifica de forma única cada fila. Clave foránea = referencia la clave primaria de otra tabla y crea la relación.</li>
+<li>Tipos de relación entre tablas: uno a uno (1:1), uno a muchos (1:N) y muchos a muchos (N:M, resuelta con tabla intermedia).</li>
+<li>Estándares de conectividad: ODBC (propósito general) y JDBC (específico de Java), ambos basados en una API común más un driver específico de cada SGBD.</li>
+</ul>
+  </div>
+</article>

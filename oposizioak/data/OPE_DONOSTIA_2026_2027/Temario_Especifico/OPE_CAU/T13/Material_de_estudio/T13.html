@@ -1,0 +1,202 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T13</div>
+    <h1 class="tema-cabecera__titulo">Servidores Linux. Instalación, configuración y mantenimiento básico: Actualizaciones y monitorización</h1>
+    <div class="tema-cabecera__meta">Bloque II · Tecnología básica — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-distribuciones-linux-de-servidor">1. Distribuciones Linux de servidor</a></li>
+<li><a href="#2-instalación-de-un-servidor-linux">2. Instalación de un servidor Linux</a></li>
+<li><a href="#3-gestión-de-paquetes-y-del-software">3. Gestión de paquetes y del software</a></li>
+<li><a href="#4-arranque-y-gestión-de-servicios-systemd">4. Arranque y gestión de servicios: systemd</a></li>
+<li><a href="#5-administración-básica-y-acceso-remoto">5. Administración básica y acceso remoto</a></li>
+<li><a href="#6-mantenimiento-básico-actualizaciones">6. Mantenimiento básico: actualizaciones</a></li>
+<li><a href="#7-monitorización">7. Monitorización</a></li>
+<li><a href="#8-resumen-esquemático">8. Resumen esquemático</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h3 class="tema-h3">Qué vas a encontrar en este tema</h3>
+<ul class="tema-lista">
+<li>Las principales distribuciones (distros) Linux de servidor y sus familias.</li>
+<li>Cómo se instala y configura un servidor Linux: particionado, sistemas de archivo y gestión de paquetes.</li>
+<li>El sistema de arranque y gestión de servicios systemd, estándar en las distribuciones actuales.</li>
+<li>La administración básica y el acceso remoto a un servidor Linux.</li>
+<li>El mantenimiento básico: actualizaciones del sistema.</li>
+<li>Las herramientas de monitorización más habituales.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Este tema se centra en Linux como sistema operativo de servidor. Los conceptos generales de cualquier sistema operativo (procesos, memoria, planificación) se estudiaron en el Tema 9, y no se repiten aquí. Windows Server y el Directorio Activo se estudiaron en el Tema 12; aunque cumplen funciones equivalentes, cada sistema tiene sus propias herramientas y terminología, que conviene no mezclar.</th>
+</tr>
+</table></div>
+<p>1. Distribuciones Linux de servidor</p>
+<p>2. Instalación de un servidor Linux</p>
+<p>3. Gestión de paquetes y del software</p>
+<p>4. Arranque y gestión de servicios: systemd</p>
+<p>5. Administración básica y acceso remoto</p>
+<p>6. Mantenimiento básico: actualizaciones</p>
+<p>7. Monitorización</p>
+<p>8. Resumen esquemático</p>
+<h2 id="1-distribuciones-linux-de-servidor" class="tema-h2">1. Distribuciones Linux de servidor</h2>
+<p>Linux, en sentido estricto, es solo el núcleo (kernel, Tema 9). Lo que se instala y usa en la práctica es una <strong>distribución (distro)</strong>: el núcleo Linux empaquetado junto con un gestor de paquetes, un conjunto de herramientas del sistema y unas configuraciones por defecto. Las distribuciones de servidor más usadas se agrupan en familias, según el gestor de paquetes y el linaje del que derivan.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Familia</strong></th>
+<th><strong>Distribuciones de servidor habituales</strong></th>
+<th><strong>Gestor de paquetes</strong></th>
+</tr>
+<tr>
+<td>Debian / Ubuntu</td>
+<td>Debian, Ubuntu Server (LTS)</td>
+<td>APT (paquetes .deb)</td>
+</tr>
+<tr>
+<td>Red Hat</td>
+<td>RHEL, Rocky Linux, AlmaLinux, Fedora</td>
+<td>DNF (paquetes .rpm)</td>
+</tr>
+<tr>
+<td>SUSE</td>
+<td>SUSE Linux Enterprise Server, openSUSE</td>
+<td>Zypper (paquetes .rpm)</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Red Hat descontinuó CentOS Linux como distribución estable gratuita de larga duración (CentOS Linux 7 llegó a su fin de vida en junio de 2024), reorientando el proyecto hacia CentOS Stream, una rama de desarrollo previa a RHEL, no equivalente en estabilidad a la antigua CentOS. En su lugar, la comunidad impulsó dos alternativas gratuitas compatibles con RHEL: Rocky Linux y AlmaLinux, hoy las opciones de referencia cuando se busca una distribución de la familia Red Hat sin coste de licencia. Ubuntu Server, con sus versiones LTS (Long Term Support, publicadas cada dos años y con varios años de soporte garantizado), es probablemente la opción más extendida como servidor de propósito general.</th>
+</tr>
+</table></div>
+<h2 id="2-instalación-de-un-servidor-linux" class="tema-h2">2. Instalación de un servidor Linux</h2>
+<p>La instalación de un servidor Linux sigue la misma filosofía <strong>minimalista</strong> que Windows Server Core (Tema 12): se instala solo lo estrictamente necesario, sin entorno gráfico de escritorio, para reducir tanto la superficie de ataque como el consumo de recursos y la cantidad de actualizaciones a aplicar. La administración se realiza en línea de comandos, habitualmente a través de una shell <strong>Bash</strong>.</p>
+<ul class="tema-lista">
+<li><strong>Instalación manual</strong>: a partir de una imagen ISO de instalación, respondiendo de forma interactiva a las preguntas del instalador (particionado, red, usuario inicial…).</li>
+<li><strong>Instalación desatendida</strong>: automatiza estas respuestas mediante un fichero de configuración (kickstart en la familia Red Hat; preseed o, cada vez más, cloud-init en Debian/Ubuntu), lo que resulta imprescindible para desplegar muchos servidores de forma idéntica y reproducible, especialmente en entornos virtualizados (Tema 10) o en la nube.</li>
+</ul>
+<h4 class="tema-h4">Particionado y sistemas de archivo</h4>
+<p>Junto al particionado tradicional (dividir el disco en particiones de tamaño fijo), es habitual usar <strong>LVM (Logical Volume Manager)</strong>: una capa de abstracción que agrupa uno o varios discos físicos en un «volumen» del que se pueden crear particiones lógicas redimensionables en caliente, con mucha más flexibilidad que el particionado clásico. Los sistemas de archivo más habituales en servidores Linux son <strong>ext4</strong> (el más extendido por defecto), <strong>XFS</strong> (frecuente en la familia Red Hat, con buen rendimiento en archivos de gran tamaño) y <strong>Btrfs</strong> (con funciones avanzadas como instantáneas o subvolúmenes); el concepto general de sistema de archivos como gestor de la información persistente ya se introdujo en el Tema 9.</p>
+<h2 id="3-gestión-de-paquetes-y-del-software" class="tema-h2">3. Gestión de paquetes y del software</h2>
+<p>El software en Linux se instala, actualiza y elimina mediante <strong>gestores de paquetes</strong>, que descargan el software desde <strong>repositorios</strong> (servidores remotos con las versiones disponibles de cada paquete) y resuelven automáticamente sus <strong>dependencias</strong> (otros paquetes necesarios para que el software funcione), a diferencia de instalar un paquete suelto de bajo nivel (`.deb` con `dpkg`, `.rpm` con `rpm`) directamente, donde esas dependencias hay que resolverlas a mano.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Acción</strong></th>
+<th><strong>Debian / Ubuntu (APT)</strong></th>
+<th><strong>Red Hat / Rocky / AlmaLinux (DNF)</strong></th>
+</tr>
+<tr>
+<td>Actualizar el índice de paquetes disponibles</td>
+<td>apt update</td>
+<td>dnf check-update</td>
+</tr>
+<tr>
+<td>Actualizar los paquetes instalados</td>
+<td>apt upgrade</td>
+<td>dnf upgrade</td>
+</tr>
+<tr>
+<td>Instalar un paquete</td>
+<td>apt install &lt;paquete&gt;</td>
+<td>dnf install &lt;paquete&gt;</td>
+</tr>
+<tr>
+<td>Formato de paquete</td>
+<td>.deb</td>
+<td>.rpm</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>No debe confundirse «actualizar el índice» con «actualizar los paquetes». El primer paso (apt update / dnf check-update) solo refresca la lista de versiones disponibles en los repositorios configurados; no instala nada. El segundo paso (apt upgrade / dnf upgrade) es el que realmente descarga e instala las versiones más recientes de los paquetes ya presentes en el sistema. Olvidar el primer paso es un error habitual que lleva a instalar versiones desactualizadas sin darse cuenta.</th>
+</tr>
+</table></div>
+<h2 id="4-arranque-y-gestión-de-servicios-systemd" class="tema-h2">4. Arranque y gestión de servicios: systemd</h2>
+<p><strong>systemd</strong> es el sistema de inicio (init system) y la infraestructura de gestión de servicios adoptada como estándar por la gran mayoría de distribuciones Linux actuales (Ubuntu, Debian, RHEL y derivados, SUSE), en sustitución de los antiguos SysV init y Upstart. Es el primer proceso que arranca tras el núcleo (identificado siempre con el PID 1) y se encarga de iniciar, detener y supervisar el resto de servicios del sistema.</p>
+<ul class="tema-lista">
+<li><strong>Unidades (units)</strong>: ficheros de configuración que describen un recurso gestionado por systemd; las más comunes son las unidades `.service` (un servicio o demonio), aunque también existen `.socket`, `.mount` o `.timer` (para tareas programadas, alternativa moderna a cron).</li>
+<li><strong>systemctl</strong>: comando principal para gestionar servicios: `systemctl start|stop|restart|status &lt;servicio&gt;` para controlar su ejecución en el momento, y `systemctl enable|disable &lt;servicio&gt;` para que arranque (o no) automáticamente con el sistema.</li>
+<li><strong>journalctl</strong>: herramienta para consultar el registro centralizado de sucesos (el «journal») que recopila systemd de todos los servicios y del propio arranque del sistema.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>systemd no es el núcleo de Linux, sino el primer proceso de espacio de usuario que el núcleo arranca. Cumple, dentro de un servidor Linux, un papel equivalente al que cumplen conjuntamente el Administrador de servicios (services.msc) y, en parte, el programador de tareas de Windows (Tema 11), pero es importante no llamarlo «núcleo» ni confundirlo con él en el examen.</th>
+</tr>
+</table></div>
+<h2 id="5-administración-básica-y-acceso-remoto" class="tema-h2">5. Administración básica y acceso remoto</h2>
+<p>La administración de un servidor Linux es, salvo excepciones, remota y en línea de comandos, a través de <strong>SSH (Secure Shell)</strong>: un protocolo que cifra toda la comunicación entre el cliente y el servidor, y que escucha por defecto en el puerto 22. La autenticación puede hacerse por contraseña o, de forma más segura y habitual en producción, mediante un par de claves criptográficas (pública en el servidor, privada en el cliente).</p>
+<p>Todo sistema Linux distingue entre el superusuario <strong>root</strong>, con privilegios totales sobre el sistema, y los usuarios normales, con privilegios limitados. La buena práctica de seguridad no es iniciar sesión directamente como root, sino hacerlo como un usuario normal y usar el comando <strong>sudo</strong> (&quot;superuser do&quot;) para ejecutar puntualmente, y de forma auditable, comandos concretos con privilegios elevados.</p>
+<h2 id="6-mantenimiento-básico-actualizaciones" class="tema-h2">6. Mantenimiento básico: actualizaciones</h2>
+<p>Además de la actualización manual con el gestor de paquetes (punto 3), la mayoría de distribuciones ofrecen mecanismos de <strong>actualización automática de seguridad</strong>: `unattended-upgrades` en Debian/Ubuntu o `dnf-automatic` en la familia Red Hat, que instalan sin intervención manual, al menos, los parches de seguridad críticos.</p>
+<p>Como en cualquier sistema operativo, cada distribución tiene un <strong>ciclo de vida</strong> y una fecha de fin de soporte: las versiones LTS de Ubuntu, por ejemplo, reciben cinco años de soporte estándar y, opcionalmente, cinco años adicionales de mantenimiento de seguridad extendido (ESM). El mismo principio que se señaló para Windows 10 en el Tema 11 aplica aquí: seguir usando una versión sin soporte deja el servidor sin parches de seguridad, por lo que la migración a una versión soportada debe planificarse con antelación.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Actualizar el núcleo Linux normalmente exige reiniciar el servidor para que la nueva versión entre en funcionamiento. Algunas distribuciones de la familia Red Hat ofrecen mecanismos de «live patching» (por ejemplo, kpatch), que permiten aplicar parches de seguridad críticos al núcleo en caliente, sin reiniciar, retrasando el reinicio a una ventana de mantenimiento posterior. Es una técnica avanzada, orientada a servicios que no pueden permitirse una parada no planificada.</th>
+</tr>
+</table></div>
+<h2 id="7-monitorización" class="tema-h2">7. Monitorización</h2>
+<p>Un servidor Linux se monitoriza principalmente a través de comandos y utilidades en línea de comandos, complementados con el registro centralizado de systemd (journalctl) y los archivos de registro clásicos en `/var/log`.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Aspecto a monitorizar</strong></th>
+<th><strong>Comando / herramienta</strong></th>
+<th><strong>Qué muestra</strong></th>
+</tr>
+<tr>
+<td>Procesos y consumo de CPU/memoria en tiempo real</td>
+<td>top / htop</td>
+<td>Listado interactivo de procesos y su consumo de recursos</td>
+</tr>
+<tr>
+<td>Listado de procesos</td>
+<td>ps</td>
+<td>Instantánea de los procesos en ejecución</td>
+</tr>
+<tr>
+<td>Memoria disponible</td>
+<td>free</td>
+<td>Memoria RAM y swap usadas y libres</td>
+</tr>
+<tr>
+<td>Espacio en disco</td>
+<td>df</td>
+<td>Espacio ocupado y libre por sistema de archivos</td>
+</tr>
+<tr>
+<td>Uso de espacio por directorio</td>
+<td>du</td>
+<td>Tamaño ocupado por carpetas y archivos</td>
+</tr>
+<tr>
+<td>Carga del sistema y tiempo activo</td>
+<td>uptime</td>
+<td>Tiempo desde el arranque y la «load average»</td>
+</tr>
+<tr>
+<td>Conexiones y puertos de red</td>
+<td>ss (o el más antiguo netstat)</td>
+<td>Conexiones de red activas y puertos en escucha</td>
+</tr>
+<tr>
+<td>Registro de sucesos del sistema</td>
+<td>journalctl / /var/log</td>
+<td>Histórico de eventos del sistema y de los servicios</td>
+</tr>
+</table></div>
+<p>Para entornos con muchos servidores, estas herramientas puntuales se complementan con soluciones de monitorización centralizada que recogen métricas de forma continua y permiten configurar alertas, como Nagios, Zabbix o la combinación Prometheus + Grafana; su configuración detallada queda fuera del alcance de este tema introductorio.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Resulta útil comparar las herramientas de Linux con sus equivalentes de Windows Server, vistas en el Tema 12: journalctl / /var/log equivalen al Visor de eventos; top / htop equivalen al Administrador de tareas; systemctl equivale, a grandes rasgos, a la consola de servicios (services.msc). Los conceptos que hay detrás son los mismos en ambos sistemas operativos; lo que cambia es la herramienta concreta y su sintaxis.</th>
+</tr>
+</table></div>
+<h2 id="8-resumen-esquemático" class="tema-h2">8. Resumen esquemático</h2>
+<ul class="tema-lista">
+<li><strong>Distribuciones</strong>: familias Debian/Ubuntu (APT, .deb), Red Hat (DNF, .rpm — Rocky Linux y AlmaLinux como sucesores gratuitos de CentOS) y SUSE (Zypper); Ubuntu Server LTS como opción muy extendida de propósito general.</li>
+<li><strong>Instalación</strong>: filosofía minimalista, sin entorno gráfico; instalación manual o desatendida (kickstart / preseed / cloud-init); LVM para particionado flexible; sistemas de archivo ext4, XFS y Btrfs.</li>
+<li><strong>Gestión de paquetes</strong>: repositorios y resolución automática de dependencias; «actualizar el índice» (apt update) no es lo mismo que «actualizar los paquetes» (apt upgrade).</li>
+<li><strong>systemd</strong>: sistema de inicio y gestor de servicios estándar (PID 1); unidades .service gestionadas con systemctl; registro consultable con journalctl.</li>
+<li><strong>Administración</strong>: acceso remoto por SSH (cifrado, puerto 22, preferible autenticación por clave); usuario root frente a usuarios normales con sudo.</li>
+<li><strong>Actualizaciones</strong>: actualización manual o automática (unattended-upgrades / dnf-automatic); ciclo de vida y fin de soporte de cada distribución, igual de relevante que en Windows; live patching del núcleo en casos avanzados.</li>
+<li><strong>Monitorización</strong>: top/htop, ps, free, df, du, uptime, ss y journalctl/var/log como herramientas básicas; Nagios, Zabbix o Prometheus+Grafana para monitorización centralizada a mayor escala.</li>
+</ul>
+  </div>
+</article>

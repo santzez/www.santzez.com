@@ -1,0 +1,88 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T18</div>
+    <h1 class="tema-cabecera__titulo">El cliente de correo IBM Notes o HCL Notes: configuración y funcionalidades. Acceso al correo mediante interfaz web y dispositivo móvil</h1>
+    <div class="tema-cabecera__meta">Bloque II · Tecnología básica — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-ibm-notes-hcl-notes-y-domino-qué-son-y-evolución">1. IBM Notes / HCL Notes y Domino: qué son y evolución</a></li>
+<li><a href="#2-arquitectura-cliente-servidor-notes-y-domino">2. Arquitectura cliente-servidor: Notes y Domino</a></li>
+<li><a href="#3-configuración-del-cliente-notes">3. Configuración del cliente Notes</a></li>
+<li><a href="#4-funcionalidades-del-cliente-notes">4. Funcionalidades del cliente Notes</a></li>
+<li><a href="#5-acceso-al-correo-mediante-interfaz-web-inotes">5. Acceso al correo mediante interfaz web: iNotes</a></li>
+<li><a href="#6-acceso-desde-dispositivo-móvil">6. Acceso desde dispositivo móvil</a></li>
+<li><a href="#7-resumen-esquemático">7. Resumen esquemático</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h3 class="tema-h3">Qué vas a encontrar en este tema</h3>
+<ul class="tema-lista">
+<li>Qué son IBM/HCL Notes y Domino, y su evolución reciente como producto.</li>
+<li>La arquitectura cliente-servidor de Notes y Domino, y el papel de las bases de datos NSF y la replicación.</li>
+<li>Cómo se configura el cliente Notes: archivo de identidad y conexión al servidor.</li>
+<li>Las funcionalidades principales del cliente, más allá del correo.</li>
+<li>Cómo se accede al correo mediante interfaz web (iNotes) y desde dispositivo móvil.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>La arquitectura general del correo electrónico (MUA, MTA, MDA, protocolos SMTP/IMAP/POP3) se estudió con carácter genérico en el Tema 17; aquí se da por conocida y se aplica al caso concreto de Notes/Domino, señalando en qué se aparta de ese modelo estándar.</th>
+</tr>
+</table></div>
+<p>1. IBM Notes / HCL Notes y Domino: qué son y evolución</p>
+<p>2. Arquitectura cliente-servidor: Notes y Domino</p>
+<p>3. Configuración del cliente Notes</p>
+<p>4. Funcionalidades del cliente Notes</p>
+<p>5. Acceso al correo mediante interfaz web: iNotes</p>
+<p>6. Acceso desde dispositivo móvil</p>
+<p>7. Resumen esquemático</p>
+<h2 id="1-ibm-notes-hcl-notes-y-domino-qué-son-y-evolución" class="tema-h2">1. IBM Notes / HCL Notes y Domino: qué son y evolución</h2>
+<p><strong>Lotus Notes</strong> nació en 1989 como una de las primeras plataformas de trabajo colaborativo («groupware») del mercado, combinando correo electrónico, calendario y un motor de bases de datos documentales sobre el que se podían construir aplicaciones colaborativas a medida. IBM incorporó Lotus (y con ella, Notes) en 1995, dando lugar a la denominación <strong>IBM Notes</strong> (cliente) e <strong>IBM Domino</strong> (servidor), con la que el producto es conocido todavía en muchas organizaciones.</p>
+<p>En 2019, <strong>HCL Technologies</strong> adquirió a IBM el negocio de Notes y Domino, pasando el producto a denominarse <strong>HCL Notes</strong> y <strong>HCL Domino</strong>. Desde entonces, HCL ha mantenido un ritmo de actualizaciones activo; desde la versión correspondiente a 2026 (build 14.5.1, disponible desde marzo de ese año), el producto adoptó además una convención de nomenclatura por año —«Notes/Domino 2026»— similar a la usada por otros fabricantes de software.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>HCL ha anunciado soporte de versiones anteriores de Notes/Domino hasta el año 2030, lo que refleja la fuerte implantación que la plataforma sigue teniendo en grandes organizaciones y administraciones públicas. Esa permanencia se explica, en muchos casos, no solo por el correo electrónico, sino porque sobre Domino se han desarrollado a lo largo de los años numerosas aplicaciones de gestión interna a medida (punto 4), cuya migración a otra plataforma resulta costosa.</th>
+</tr>
+</table></div>
+<h2 id="2-arquitectura-cliente-servidor-notes-y-domino" class="tema-h2">2. Arquitectura cliente-servidor: Notes y Domino</h2>
+<p><strong>Notes</strong> es el cliente (equivalente al MUA genérico del Tema 17, aunque con funcionalidades adicionales), y <strong>Domino</strong> es el servidor con el que se comunica. Ambos comparten un rasgo distintivo frente al resto de plataformas de correo: absolutamente todo —el buzón de correo de cada usuario, la agenda, la libreta de direcciones e incluso las aplicaciones desarrolladas a medida— se almacena en bases de datos con formato propio <strong>NSF (Notes Storage Facility)</strong>. El propio buzón de correo de un usuario es, técnicamente, una base de datos NSF (habitualmente `mail.nsf`).</p>
+<p>La comunicación nativa entre el cliente Notes y el servidor Domino se realiza mediante un protocolo propietario, <strong>NRPC (Notes Remote Procedure Call)</strong>, aunque Domino también implementa los protocolos estándar de correo vistos en el Tema 17 (SMTP para el envío, IMAP/POP3 para el acceso desde otros clientes) para interoperar con el resto del ecosistema de correo electrónico.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>La <strong>replicación</strong> es la característica más distintiva de Notes/Domino: permite mantener sincronizadas varias copias (réplicas) de una misma base de datos NSF, tanto entre distintos servidores Domino como entre un servidor y una copia local en el propio equipo del usuario. Gracias a la réplica local, es posible seguir trabajando con el correo y con las aplicaciones Notes sin conexión al servidor, sincronizando automáticamente los cambios (en ambos sentidos) en cuanto la conexión se restablece.</th>
+</tr>
+</table></div>
+<h2 id="3-configuración-del-cliente-notes" class="tema-h2">3. Configuración del cliente Notes</h2>
+<ul class="tema-lista">
+<li><strong>Archivo de identidad (ID file, .id)</strong>: contiene el par de claves criptográficas (pública y privada) que identifican de forma única a cada usuario dentro de la organización Notes, protegido por una contraseña. Cumple una función equivalente a la de un certificado personal (Tema 24): permite autenticarse frente al servidor Domino y firmar o cifrar correo de forma nativa.</li>
+<li><strong>Notes.ini</strong>: archivo de configuración del cliente (y, de forma equivalente, del servidor), donde se guardan los parámetros de funcionamiento: la ubicación de los datos locales, el servidor de correo asignado, etc.</li>
+<li><strong>Libreta de direcciones (Address Book / Directory)</strong>: base de datos NSF que actúa como directorio de la organización Notes, almacenando usuarios, grupos y recursos; cumple, dentro del ecosistema Notes/Domino, un papel equivalente al del Directorio Activo o la libreta de direcciones global (GAL) en un entorno Exchange/Outlook.</li>
+</ul>
+<p>La configuración inicial habitual del cliente consiste en instalar el programa, registrar el archivo ID de la persona usuaria e indicar el servidor de correo (mail server) y el nombre de la base de datos NSF de su buzón, datos que el propio departamento de sistemas suele entregar ya preparados para simplificar la puesta en marcha.</p>
+<h2 id="4-funcionalidades-del-cliente-notes" class="tema-h2">4. Funcionalidades del cliente Notes</h2>
+<ul class="tema-lista">
+<li><strong>Correo</strong>: bandeja de entrada, calendario integrado, gestión de tareas y contactos personales, con las mismas funciones básicas que cualquier cliente de correo (Tema 17).</li>
+<li><strong>Aplicaciones Notes</strong>: más allá del correo, Notes es una auténtica plataforma de desarrollo de aplicaciones colaborativas sobre bases de datos NSF (formularios, vistas, flujos de aprobación), muy utilizada históricamente en administraciones públicas para la gestión de expedientes y trámites internos. El desarrollo de estas aplicaciones queda fuera del alcance de un puesto de CAU, pero conviene reconocer que buena parte del uso de Notes en una organización puede no ser correo, sino este tipo de aplicaciones a medida.</li>
+<li><strong>Réplicas locales</strong>: como se ha señalado en el punto 2, permiten trabajar sin conexión tanto con el correo como con las aplicaciones Notes, sincronizando los cambios de forma automática al recuperar la conexión con el servidor Domino.</li>
+<li><strong>Cifrado y firma digital nativos</strong>: apoyándose en el archivo ID de cada usuario, Notes permite cifrar y firmar digitalmente los mensajes de correo de forma integrada, sin necesidad de complementos adicionales.</li>
+</ul>
+<h2 id="5-acceso-al-correo-mediante-interfaz-web-inotes" class="tema-h2">5. Acceso al correo mediante interfaz web: iNotes</h2>
+<p><strong>iNotes</strong> (denominado anteriormente Domino Web Access, DWA) es la interfaz web que permite acceder al correo, el calendario y los contactos de Notes desde cualquier navegador (Tema 20), sin necesidad de tener instalado el cliente de escritorio. Se ejecuta directamente sobre el propio servidor Domino, que incorpora una tarea de servidor web (HTTP) capaz de servir esta interfaz.</p>
+<p>iNotes resulta especialmente útil para consultar el correo desde un equipo donde no está instalado el cliente Notes, o para un acceso puntual y rápido sin necesidad de configuración previa.</p>
+<h2 id="6-acceso-desde-dispositivo-móvil" class="tema-h2">6. Acceso desde dispositivo móvil</h2>
+<ul class="tema-lista">
+<li><strong>HCL Traveler (antes Notes Traveler)</strong>: servicio que sincroniza correo, calendario y contactos de Domino con dispositivos móviles, apoyándose en un protocolo de sincronización equivalente al utilizado por otras plataformas de correo corporativo, de forma que el correo, el calendario y los contactos se mantienen actualizados en el dispositivo de forma similar a como lo haría un cliente de correo móvil nativo.</li>
+<li><strong>Acceso vía navegador móvil a iNotes</strong>: alternativa sin instalar ninguna aplicación específica, accediendo directamente a la interfaz web adaptada a pantallas móviles.</li>
+<li><strong>HCL Verse</strong>: cliente de correo más moderno de HCL, disponible tanto en versión web como móvil, con una interfaz renovada respecto a iNotes, pensado como evolución de cara a la persona usuaria final.</li>
+</ul>
+<h2 id="7-resumen-esquemático" class="tema-h2">7. Resumen esquemático</h2>
+<ul class="tema-lista">
+<li><strong>IBM/HCL Notes y Domino</strong>: plataforma de groupware nacida en 1989 (Lotus Notes); IBM Notes/Domino tras 1995; HCL Notes/Domino desde la adquisición de 2019; nomenclatura por año desde Notes/Domino 2026 (build 14.5.1).</li>
+<li><strong>Arquitectura</strong>: Notes (cliente) y Domino (servidor); todo se almacena en bases de datos NSF; protocolo propietario NRPC, con soporte adicional de SMTP/IMAP/POP3 estándar; replicación entre servidores y hacia réplicas locales, base del trabajo sin conexión.</li>
+<li><strong>Configuración</strong>: archivo de identidad .id (claves criptográficas del usuario), Notes.ini (parámetros del cliente) y Libreta de direcciones/Directory (directorio de la organización).</li>
+<li><strong>Funcionalidades</strong>: correo, calendario y contactos; plataforma de aplicaciones Notes a medida sobre NSF; réplicas locales; cifrado y firma digital nativos.</li>
+<li><strong>Acceso web</strong>: iNotes (antes Domino Web Access), servido por el propio Domino, sin necesidad de cliente instalado.</li>
+<li><strong>Acceso móvil</strong>: HCL Traveler para sincronización nativa en el dispositivo, navegador móvil a iNotes, o HCL Verse como cliente moderno web y móvil.</li>
+</ul>
+  </div>
+</article>

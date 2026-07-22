@@ -1,0 +1,135 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T17</div>
+    <h1 class="tema-cabecera__titulo">Correo electrónico. Arquitectura y componentes. Clientes de correo</h1>
+    <div class="tema-cabecera__meta">Bloque II · Tecnología básica — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-arquitectura-del-correo-electrónico">1. Arquitectura del correo electrónico</a></li>
+<li><a href="#2-el-mensaje-de-correo-estructura-y-formato">2. El mensaje de correo: estructura y formato</a></li>
+<li><a href="#3-protocolo-de-envío-smtp">3. Protocolo de envío: SMTP</a></li>
+<li><a href="#4-protocolos-de-recepción-pop3-e-imap">4. Protocolos de recepción: POP3 e IMAP</a></li>
+<li><a href="#5-autenticación-y-lucha-contra-el-spam-spf-dkim-y-dmarc">5. Autenticación y lucha contra el spam: SPF, DKIM y DMARC</a></li>
+<li><a href="#6-clientes-de-correo">6. Clientes de correo</a></li>
+<li><a href="#7-resumen-esquemático">7. Resumen esquemático</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h3 class="tema-h3">Qué vas a encontrar en este tema</h3>
+<ul class="tema-lista">
+<li>La arquitectura general del correo electrónico y los componentes que intervienen en el envío y la entrega de un mensaje.</li>
+<li>La estructura de un mensaje de correo y el papel de MIME en el envío de adjuntos y contenido HTML.</li>
+<li>El protocolo de envío SMTP y los protocolos de recepción POP3 e IMAP.</li>
+<li>Los mecanismos SPF, DKIM y DMARC para autenticar el remitente y combatir la suplantación y el spam.</li>
+<li>Los tipos de clientes de correo habituales.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Este tema estudia el correo electrónico como servicio genérico, con independencia del fabricante. El cliente de correo IBM Notes o HCL Notes, con sus particularidades de configuración y funcionalidades, se estudia específicamente en el Tema 18.</th>
+</tr>
+</table></div>
+<p>1. Arquitectura del correo electrónico</p>
+<p>2. El mensaje de correo: estructura y formato</p>
+<p>3. Protocolo de envío: SMTP</p>
+<p>4. Protocolos de recepción: POP3 e IMAP</p>
+<p>5. Autenticación y lucha contra el spam: SPF, DKIM y DMARC</p>
+<p>6. Clientes de correo</p>
+<p>7. Resumen esquemático</p>
+<h2 id="1-arquitectura-del-correo-electrónico" class="tema-h2">1. Arquitectura del correo electrónico</h2>
+<p>El correo electrónico se apoya en tres tipos de componentes que cooperan para que un mensaje llegue de un remitente a un destinatario:</p>
+<ul class="tema-lista">
+<li><strong>MUA (Mail User Agent)</strong>: el programa que usa la persona usuaria para redactar, enviar y leer correo (Outlook, Thunderbird, una aplicación de webmail…); se desarrolla en el punto 6.</li>
+<li><strong>MTA (Mail Transfer Agent)</strong>: el servidor que encamina el correo entre dominios, usando el protocolo SMTP (punto 3); un mensaje puede pasar por varios MTA intermedios (relays) antes de llegar a su destino.</li>
+<li><strong>MDA (Mail Delivery Agent)</strong>: el componente que, una vez el mensaje ha llegado al servidor de destino, lo entrega finalmente en el buzón concreto del destinatario.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Es útil pensar en el correo electrónico como en el sistema postal tradicional: el MUA es como escribir la carta; el MTA es como el servicio de correos que transporta esa carta entre ciudades, pudiendo pasar por varias oficinas intermedias; y el MDA es como el buzón concreto del edificio de destino, donde la carta se deposita finalmente a la espera de que el destinatario la recoja.</th>
+</tr>
+</table></div>
+<p>Para que un MTA sepa a qué servidor debe entregar el correo dirigido a un dominio concreto, consulta el <strong>registro MX (Mail Exchanger)</strong> de ese dominio en el DNS: un registro que indica qué servidor o servidores son responsables de recibir el correo de ese dominio, con un orden de prioridad si hay varios.</p>
+<h2 id="2-el-mensaje-de-correo-estructura-y-formato" class="tema-h2">2. El mensaje de correo: estructura y formato</h2>
+<p>Todo mensaje de correo se compone de <strong>cabeceras (headers)</strong> y <strong>cuerpo</strong>. Entre las cabeceras más habituales están `From` (remitente), `To` (destinatario), `Cc` (con copia, visible para todos los destinatarios), `Cco`/`Bcc` (con copia oculta, invisible para el resto), `Subject` (asunto), `Date` y `Message-ID` (identificador único del mensaje). La cabecera `Received` va añadiendo un rastro de cada servidor por el que ha pasado el mensaje, de gran utilidad para diagnosticar problemas de entrega.</p>
+<p>El protocolo SMTP se diseñó originalmente para transportar únicamente texto plano en formato ASCII. El estándar <strong>MIME (Multipurpose Internet Mail Extensions)</strong> resolvió esta limitación sin necesidad de cambiar el protocolo de transporte: define cómo codificar dentro del mensaje contenido no textual —HTML, imágenes, archivos adjuntos de cualquier tipo— transformándolo (por ejemplo, mediante codificación Base64) en una representación de texto que sí puede viajar por SMTP con seguridad.</p>
+<h2 id="3-protocolo-de-envío-smtp" class="tema-h2">3. Protocolo de envío: SMTP</h2>
+<p><strong>SMTP (Simple Mail Transfer Protocol)</strong> es el protocolo estándar para el envío y encaminamiento de correo, tanto entre servidores como del cliente hacia su servidor de salida. Es importante retener que SMTP solo sirve para <strong>enviar</strong>: nunca se usa para que un cliente descargue o consulte el correo ya recibido, función que corresponde a POP3 o IMAP (punto 4).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Puerto</strong></th>
+<th><strong>Uso</strong></th>
+</tr>
+<tr>
+<td>25</td>
+<td>Transporte de correo entre servidores (MTA a MTA); tradicionalmente también usado por clientes, hoy en desuso para ese fin</td>
+</tr>
+<tr>
+<td>587</td>
+<td>Envío autenticado desde un cliente de correo (submission); puerto recomendado en la actualidad</td>
+</tr>
+<tr>
+<td>465</td>
+<td>SMTPS: envío autenticado sobre una conexión cifrada con TLS desde el inicio</td>
+</tr>
+</table></div>
+<h2 id="4-protocolos-de-recepción-pop3-e-imap" class="tema-h2">4. Protocolos de recepción: POP3 e IMAP</h2>
+<ul class="tema-lista">
+<li><strong>POP3 (Post Office Protocol v3)</strong>: descarga los mensajes desde el servidor al dispositivo del cliente y, por configuración habitual, los elimina del servidor tras la descarga. Responde a un modelo pensado para un único dispositivo y una conexión ocasional a internet. Puerto 110 (995 sobre TLS).</li>
+<li><strong>IMAP (Internet Message Access Protocol)</strong>: mantiene los mensajes almacenados en el servidor y sincroniza su estado —leído o no leído, carpetas, mensajes movidos o eliminados— entre todos los dispositivos que acceden a la misma cuenta. Puerto 143 (993 sobre TLS).</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Criterio</strong></th>
+<th><strong>POP3</strong></th>
+<th><strong>IMAP</strong></th>
+</tr>
+<tr>
+<td>Ubicación de los mensajes</td>
+<td>Se descargan al dispositivo (se suelen borrar del servidor)</td>
+<td>Permanecen en el servidor</td>
+</tr>
+<tr>
+<td>Acceso multidispositivo</td>
+<td>No sincroniza entre varios dispositivos</td>
+<td>Sincroniza el mismo estado en todos los dispositivos</td>
+</tr>
+<tr>
+<td>Uso típico actual</td>
+<td>Minoritario, casos concretos de descarga local</td>
+<td>Mayoritario, estándar recomendado hoy</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>La diferencia entre POP3 e IMAP es uno de los puntos más preguntados del correo electrónico: POP3 descarga y, por defecto, borra del servidor (pensado para un único dispositivo); IMAP mantiene todo en el servidor y sincroniza el mismo buzón entre varios dispositivos a la vez. Si una persona usuaria configura el mismo correo en el ordenador y en el móvil y espera ver en ambos los mismos mensajes y carpetas, necesita IMAP, no POP3.</th>
+</tr>
+</table></div>
+<h2 id="5-autenticación-y-lucha-contra-el-spam-spf-dkim-y-dmarc" class="tema-h2">5. Autenticación y lucha contra el spam: SPF, DKIM y DMARC</h2>
+<p>SMTP no verifica, por diseño, que el remitente de un mensaje sea realmente quien dice ser: cualquiera puede indicar como `From` una dirección que no le pertenece. Esta debilidad facilita la suplantación de identidad (spoofing), el spam y el phishing (Tema 25). Para mitigarla se han desarrollado tres mecanismos, complementarios entre sí, publicados como registros en el DNS del dominio remitente:</p>
+<ul class="tema-lista">
+<li><strong>SPF (Sender Policy Framework)</strong>: registro DNS que lista qué servidores están autorizados a enviar correo en nombre de ese dominio. El servidor receptor puede comprobar si el servidor que efectivamente envía el mensaje figura en esa lista.</li>
+<li><strong>DKIM (DomainKeys Identified Mail)</strong>: firma digital criptográfica (Tema 24) incluida en las cabeceras del mensaje, generada con una clave privada del dominio emisor y verificable con la clave pública que ese dominio publica en su DNS; certifica tanto el origen del mensaje como que su contenido no ha sido alterado en el tránsito.</li>
+<li><strong>DMARC (Domain-based Message Authentication, Reporting and Conformance)</strong>: política, también publicada en el DNS del dominio, que indica al servidor receptor qué hacer cuando un mensaje falla las comprobaciones de SPF y/o DKIM (rechazarlo, ponerlo en cuarentena o no hacer nada), y permite recibir informes periódicos sobre esos fallos.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>SPF, DKIM y DMARC actúan en capas distintas y se complementan: SPF verifica el servidor de envío, DKIM verifica la integridad del contenido mediante firma criptográfica, y DMARC decide qué hacer cuando alguna de las dos comprobaciones anteriores falla, además de proporcionar visibilidad sobre los intentos de suplantación del dominio propio. Un dominio bien configurado suele implementar los tres a la vez.</th>
+</tr>
+</table></div>
+<h2 id="6-clientes-de-correo" class="tema-h2">6. Clientes de correo</h2>
+<ul class="tema-lista">
+<li><strong>Clientes de escritorio</strong>: aplicaciones instaladas en el equipo, como Microsoft Outlook, Mozilla Thunderbird o IBM/HCL Notes (Tema 18), que se conectan al servidor mediante los protocolos estándar (SMTP/IMAP/POP3) o, en el caso de algunos productos, mediante protocolos propietarios adicionales (por ejemplo, MAPI/RPC entre Outlook y Microsoft Exchange, o Exchange ActiveSync para sincronización enriquecida de correo, calendario y contactos en dispositivos móviles).</li>
+<li><strong>Webmail</strong>: acceso al correo a través de un navegador web (Tema 20), mediante la interfaz HTTP/HTTPS que ofrece el propio servidor de correo (por ejemplo, Outlook Web Access/OWA o Gmail), sin necesidad de instalar ni configurar ningún programa cliente.</li>
+<li><strong>Clientes móviles</strong>: aplicaciones nativas del sistema operativo móvil o de un proveedor concreto, que igualmente se apoyan en los protocolos estándar o en protocolos propietarios de sincronización, para ofrecer una experiencia de correo, calendario y contactos integrada en el dispositivo.</li>
+</ul>
+<h2 id="7-resumen-esquemático" class="tema-h2">7. Resumen esquemático</h2>
+<ul class="tema-lista">
+<li><strong>Arquitectura</strong>: MUA (cliente) → MTA (encaminamiento vía SMTP, localizado con el registro MX del dominio) → MDA (entrega en el buzón del destinatario).</li>
+<li><strong>Mensaje</strong>: cabeceras (From, To, Cc, Cco, Subject, Received…) y cuerpo; MIME permite transportar HTML y adjuntos sobre un protocolo pensado originalmente solo para texto plano.</li>
+<li><strong>SMTP</strong>: único protocolo de envío; puertos 25 (servidor a servidor), 587 (envío autenticado, recomendado) y 465 (SMTPS).</li>
+<li><strong>POP3 frente a IMAP</strong>: POP3 descarga y borra del servidor (un solo dispositivo); IMAP mantiene todo en el servidor y sincroniza varios dispositivos (estándar actual).</li>
+<li><strong>SPF, DKIM y DMARC</strong>: SPF autoriza servidores de envío; DKIM firma criptográficamente el contenido; DMARC decide qué hacer si fallan las comprobaciones anteriores y ofrece informes; los tres se publican como registros DNS del dominio.</li>
+<li><strong>Clientes de correo</strong>: de escritorio (Outlook, Thunderbird, IBM/HCL Notes), webmail (a través del navegador) y clientes móviles.</li>
+</ul>
+  </div>
+</article>

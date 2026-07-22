@@ -1,0 +1,297 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T9</div>
+    <h1 class="tema-cabecera__titulo">Sistemas operativos. Clasificación. Arquitectura, componentes y funciones. Administración de memoria. Procesos y subprocesos. Entrada/salida. Sistemas de archivo. Planificadores y gestión multitarea</h1>
+    <div class="tema-cabecera__meta">Bloque II · Tecnología básica — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-concepto-y-funciones-de-un-sistema-operativo">1. Concepto y funciones de un sistema operativo</a></li>
+<li><a href="#2-clasificación-de-los-sistemas-operativos">2. Clasificación de los sistemas operativos</a></li>
+<li><a href="#3-arquitectura-de-un-sistema-operativo">3. Arquitectura de un sistema operativo</a></li>
+<li><a href="#4-administración-de-memoria">4. Administración de memoria</a></li>
+<li><a href="#5-procesos-y-subprocesos">5. Procesos y subprocesos</a></li>
+<li><a href="#6-planificación-y-gestión-multitarea">6. Planificación y gestión multitarea</a></li>
+<li><a href="#7-entradasalida">7. Entrada/salida</a></li>
+<li><a href="#8-sistemas-de-archivo">8. Sistemas de archivo</a></li>
+<li><a href="#9-resumen-esquemático">9. Resumen esquemático</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h3 class="tema-h3">Qué vas a encontrar en este tema</h3>
+<ul class="tema-lista">
+<li>Qué es un sistema operativo y qué funciones cumple como gestor de recursos y como máquina virtual extendida.</li>
+<li>Cómo se clasifican los sistemas operativos según distintos criterios: usuarios, tareas, procesadores y tiempo de respuesta.</li>
+<li>La arquitectura interna de un SO: núcleo, modos de ejecución y llamadas al sistema.</li>
+<li>Cómo se administra la memoria: memoria virtual, paginación y segmentación.</li>
+<li>Qué son los procesos y los subprocesos (hilos), y cómo los planifica el SO para dar sensación de multitarea.</li>
+<li>Cómo gestiona el SO la entrada/salida de los periféricos y los sistemas de archivo.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Este tema estudia los conceptos generales, comunes a cualquier sistema operativo. No es el lugar para el detalle de un sistema operativo concreto: Windows de usuario se estudia en el Tema 11, Windows Server en el Tema 12 y Linux de servidor en el Tema 13.<br>Tampoco es el lugar para la organización lógica de la información dentro de los ficheros (registros, claves, métodos de acceso), que se vio en el Tema 4, ni para la virtualización de sistemas operativos completos, que se estudia en el Tema 10.</th>
+</tr>
+</table></div>
+<p>1. Concepto y funciones de un sistema operativo</p>
+<p>2. Clasificación de los sistemas operativos</p>
+<p>3. Arquitectura de un sistema operativo</p>
+<p>4. Administración de memoria</p>
+<p>5. Procesos y subprocesos</p>
+<p>6. Planificación y gestión multitarea</p>
+<p>7. Entrada/salida</p>
+<p>8. Sistemas de archivo</p>
+<p>9. Resumen esquemático</p>
+<h2 id="1-concepto-y-funciones-de-un-sistema-operativo" class="tema-h2">1. Concepto y funciones de un sistema operativo</h2>
+<p>Un <strong>sistema operativo (SO)</strong> es el software de sistema que actúa de intermediario entre el hardware del ordenador y el usuario o las aplicaciones que se ejecutan sobre él. Se carga al arrancar el equipo y permanece en ejecución mientras este funciona, gestionando todos sus recursos: la CPU, la memoria, los dispositivos periféricos (Tema 8) y el almacenamiento.</p>
+<p>Clásicamente se explica el papel de un SO desde dos puntos de vista complementarios:</p>
+<ul class="tema-lista">
+<li><strong>SO como gestor de recursos</strong>: reparte de forma ordenada y eficiente los recursos limitados del sistema (tiempo de CPU, espacio en memoria, acceso a dispositivos) entre los distintos programas que compiten por ellos, evitando conflictos entre procesos.</li>
+<li><strong>SO como máquina virtual extendida (o «máquina abstracta»)</strong>: oculta al programador y al usuario la complejidad real del hardware, ofreciendo una interfaz más sencilla y uniforme (por ejemplo, «guardar un fichero» en lugar de tener que manejar directamente el controlador del disco).</li>
+</ul>
+<p>De estas dos funciones generales se derivan las funciones concretas que cualquier sistema operativo cumple: gestión de procesos, gestión de memoria, gestión de la entrada/salida, gestión del sistema de archivos, gestión de la seguridad y de los usuarios, y provisión de una interfaz de usuario (de línea de comandos o gráfica) para interactuar con el sistema.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Piensa en el sistema operativo como en el personal de un hotel: los huéspedes (los programas) piden recursos (una habitación, el ascensor, el comedor) y el personal (el SO) organiza el acceso a esos recursos compartidos para que todos puedan usarlos sin chocar entre sí, sin que el huésped necesite saber cómo funciona la caldera o el sistema eléctrico del edificio.</th>
+</tr>
+</table></div>
+<h2 id="2-clasificación-de-los-sistemas-operativos" class="tema-h2">2. Clasificación de los sistemas operativos</h2>
+<p>No existe un único criterio para clasificar los sistemas operativos: se combinan varios ejes, y un mismo SO puede describirse con varias de estas etiquetas a la vez (por ejemplo, Linux de servidor es multiusuario, multitarea y de tiempo compartido).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Criterio</strong></th>
+<th><strong>Tipos</strong></th>
+<th><strong>Ejemplo / comentario</strong></th>
+</tr>
+<tr>
+<td>Nº de usuarios simultáneos</td>
+<td>Monousuario / Multiusuario</td>
+<td>MS-DOS (monousuario); Linux, Windows Server (multiusuario)</td>
+</tr>
+<tr>
+<td>Nº de tareas simultáneas</td>
+<td>Monotarea / Multitarea</td>
+<td>MS-DOS (monotarea); Windows, Linux, macOS actuales (multitarea)</td>
+</tr>
+<tr>
+<td>Nº de procesadores gestionados</td>
+<td>Uniprocesador / Multiprocesador</td>
+<td>SMP (multiprocesador simétrico); sistemas distribuidos</td>
+</tr>
+<tr>
+<td>Gestión del tiempo</td>
+<td>Por lotes / Tiempo compartido / Tiempo real</td>
+<td>Batch (histórico); time-sharing (uso interactivo actual); RTOS (control industrial)</td>
+</tr>
+<tr>
+<td>Ámbito de uso</td>
+<td>Escritorio / Servidor / Embebido / Móvil</td>
+<td>Windows 11 (escritorio); Windows Server, Linux (servidor); Android, iOS (móvil)</td>
+</tr>
+</table></div>
+<p>Dentro de los sistemas de <strong>tiempo real (RTOS, Real-Time Operating System)</strong> se distingue, además, entre tiempo real <strong>duro</strong>, donde no cumplir un plazo se considera un fallo del sistema (por ejemplo, el control de un airbag), y tiempo real <strong>blando</strong>, donde incumplir el plazo degrada el servicio pero no lo invalida (por ejemplo, la reproducción de vídeo en streaming).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>No debe confundirse «tiempo compartido» (time-sharing, el modelo habitual de cualquier SO de escritorio o servidor actual, que reparte la CPU entre varios usuarios o procesos dando sensación de simultaneidad) con «tiempo real» (donde lo importante no es repartir el tiempo, sino garantizar que una tarea concreta se ejecuta antes de un plazo determinado).</th>
+</tr>
+</table></div>
+<h2 id="3-arquitectura-de-un-sistema-operativo" class="tema-h2">3. Arquitectura de un sistema operativo</h2>
+<p>El <strong>núcleo o kernel</strong> es la parte central del sistema operativo: el componente que se ejecuta con el máximo nivel de privilegio y que tiene acceso directo al hardware. El resto del software (aplicaciones de usuario, e incluso parte de las utilidades del propio SO) se ejecuta con privilegios más restringidos.</p>
+<h4 class="tema-h4">Modos de ejecución</h4>
+<ul class="tema-lista">
+<li><strong>Modo núcleo (kernel mode o modo supervisor)</strong>: acceso completo al hardware y a todas las instrucciones del procesador. Es el modo en el que se ejecuta el núcleo del SO.</li>
+<li><strong>Modo usuario (user mode)</strong>: acceso restringido; un programa en modo usuario no puede acceder directamente al hardware ni a la memoria de otros procesos, lo que protege la estabilidad y la seguridad del sistema.</li>
+</ul>
+<p>Cuando un programa en modo usuario necesita un servicio que solo el núcleo puede ofrecer (leer un fichero, reservar memoria, enviar datos por red), realiza una <strong>llamada al sistema (system call)</strong>: una petición formal que provoca un cambio controlado a modo núcleo, donde el SO atiende la petición, y un retorno posterior a modo usuario con el resultado.</p>
+<h4 class="tema-h4">Tipos de arquitectura del núcleo</h4>
+<ul class="tema-lista">
+<li><strong>Monolítico</strong>: todos los servicios del SO (gestión de procesos, memoria, sistemas de archivos, drivers…) se ejecutan dentro de un único bloque de código en modo núcleo. Es el diseño más rápido, porque los componentes se comunican mediante llamadas a función directas, sin cambios de modo.</li>
+<li><strong>Microkernel</strong>: el núcleo se reduce al mínimo imprescindible (comunicación entre procesos y planificación básica) y el resto de servicios se ejecutan como procesos independientes en modo usuario. Es más robusto ante fallos (un servicio que falla no tumba el sistema completo) pero más lento, al requerir más comunicación entre procesos.</li>
+<li><strong>Híbrido</strong>: combina ambos enfoques, manteniendo en el núcleo los servicios más críticos por rendimiento y externalizando otros. Es el diseño más habitual en los sistemas operativos comerciales actuales.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Criterio</strong></th>
+<th><strong>Monolítico</strong></th>
+<th><strong>Microkernel</strong></th>
+</tr>
+<tr>
+<td>Rendimiento</td>
+<td>Mayor (comunicación directa)</td>
+<td>Menor (más cambios de contexto)</td>
+</tr>
+<tr>
+<td>Aislamiento ante fallos</td>
+<td>Menor: un fallo puede afectar a todo el núcleo</td>
+<td>Mayor: un servicio puede fallar de forma aislada</td>
+</tr>
+<tr>
+<td>Complejidad de mantenimiento</td>
+<td>Mayor con el tiempo, al crecer el núcleo</td>
+<td>Menor: servicios independientes y modulares</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>El núcleo de Linux es monolítico, aunque modular: admite cargar y descargar módulos (por ejemplo, drivers) en caliente sin recompilar el núcleo. Esto no lo convierte en un microkernel: los módulos, una vez cargados, se ejecutan igualmente en modo núcleo y con acceso directo al resto del sistema, a diferencia de los servicios de un microkernel real, que se ejecutan en modo usuario. El núcleo de Windows (NT) y el de macOS (XNU) se consideran híbridos.</th>
+</tr>
+</table></div>
+<h2 id="4-administración-de-memoria" class="tema-h2">4. Administración de memoria</h2>
+<p>Uno de los cometidos más importantes del SO es gestionar la memoria principal (RAM): decidir qué procesos residen en memoria, en qué dirección, y proteger el espacio de memoria de cada proceso frente al de los demás.</p>
+<h4 class="tema-h4">Memoria virtual</h4>
+<p>La <strong>memoria virtual</strong> es una técnica que permite a cada proceso trabajar con un espacio de direcciones propio, continuo y aparentemente mayor que la memoria física disponible, con independencia de cómo esté distribuida realmente en la RAM o de si parte de ella reside temporalmente en disco. El SO se encarga de traducir esas direcciones «virtuales» a direcciones físicas reales de forma transparente para el proceso.</p>
+<h4 class="tema-h4">Paginación y segmentación</h4>
+<ul class="tema-lista">
+<li><strong>Paginación</strong>: la memoria se divide en bloques de tamaño fijo. En la memoria lógica del proceso se llaman páginas, y en la memoria física, marcos (frames). Una tabla de páginas, mantenida por el SO, traduce cada página a su marco físico correspondiente.</li>
+<li><strong>Segmentación</strong>: la memoria se divide en bloques de tamaño variable, cada uno correspondiente a una unidad lógica del programa (código, datos, pila…), lo que respeta mejor la estructura del programa, pero complica la gestión del espacio libre.</li>
+</ul>
+<p>Cuando el tamaño de los bloques no encaja exactamente con lo que necesita un proceso, aparece la <strong>fragmentación</strong>: <strong>interna</strong>, cuando sobra espacio dentro de un bloque asignado (típica de la paginación, al usar bloques de tamaño fijo), y <strong>externa</strong>, cuando queda espacio libre disperso en huecos demasiado pequeños para ser reutilizados (típica de la segmentación, al usar bloques de tamaño variable).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Paginación = bloques de tamaño fijo → puede generar fragmentación interna, pero no externa. Segmentación = bloques de tamaño variable, ajustados a la lógica del programa → puede generar fragmentación externa, pero no interna. La mayoría de sistemas operativos actuales combinan ambas ideas (segmentación paginada).</th>
+</tr>
+</table></div>
+<p>Cuando la memoria física no es suficiente para todos los procesos activos, el SO recurre al <strong>swapping</strong> o intercambio: mover páginas o procesos completos entre la RAM y una zona reservada del disco (memoria de intercambio o swap), liberando así RAM para lo que se está usando en cada momento a costa de una pérdida de rendimiento, ya que el disco es mucho más lento que la RAM.</p>
+<h2 id="5-procesos-y-subprocesos" class="tema-h2">5. Procesos y subprocesos</h2>
+<p>Un <strong>proceso</strong> es una instancia de un programa en ejecución: el propio código, más los datos que maneja, más el conjunto de recursos que el SO le ha asignado (memoria, archivos abiertos, tiempo de CPU…). El SO representa cada proceso mediante una estructura de control llamada <strong>PCB (Process Control Block)</strong>, donde guarda su estado, el valor de sus registros, su contador de programa y demás información necesaria para gestionarlo.</p>
+<h4 class="tema-h4">Estados de un proceso</h4>
+<p>A lo largo de su vida, un proceso transita por distintos estados, gestionados por el SO:</p>
+<ul class="tema-lista">
+<li><strong>Nuevo</strong>: el proceso se está creando.</li>
+<li><strong>Listo (ready)</strong>: el proceso está preparado para ejecutarse y espera a que el planificador le asigne la CPU.</li>
+<li><strong>En ejecución (running)</strong>: el proceso está usando la CPU en ese instante.</li>
+<li><strong>Bloqueado o en espera (waiting)</strong>: el proceso no puede continuar porque espera un evento externo (por ejemplo, el resultado de una operación de E/S).</li>
+<li><strong>Terminado</strong>: el proceso ha finalizado su ejecución y el SO libera los recursos que tenía asignados.</li>
+</ul>
+<p>El tránsito típico es: nuevo → listo → en ejecución → (listo, si se le retira la CPU, o bloqueado, si espera E/S) → en ejecución de nuevo → terminado.</p>
+<h4 class="tema-h4">Subprocesos o hilos (threads)</h4>
+<p>Un <strong>subproceso o hilo (thread)</strong> es la unidad más pequeña de ejecución dentro de un proceso. Todos los hilos de un mismo proceso comparten su espacio de memoria y sus recursos (archivos abiertos, por ejemplo), pero cada hilo mantiene su propia pila de ejecución y su propio contador de programa, lo que le permite avanzar de forma independiente.</p>
+<p>La <strong>multihebra o multithreading</strong> permite que un mismo proceso realice varias tareas de forma concurrente (por ejemplo, un editor de texto que revisa la ortografía mientras el usuario sigue escribiendo) sin necesidad de crear procesos independientes, que serían más costosos de crear y no compartirían memoria entre sí.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Criterio</strong></th>
+<th><strong>Proceso</strong></th>
+<th><strong>Hilo (thread)</strong></th>
+</tr>
+<tr>
+<td>Espacio de memoria</td>
+<td>Propio e independiente</td>
+<td>Compartido con el resto de hilos del proceso</td>
+</tr>
+<tr>
+<td>Coste de creación</td>
+<td>Alto</td>
+<td>Bajo</td>
+</tr>
+<tr>
+<td>Coste de cambio de contexto</td>
+<td>Alto</td>
+<td>Bajo (menos información que guardar/restaurar)</td>
+</tr>
+<tr>
+<td>Aislamiento ante fallos</td>
+<td>Alto: un proceso no afecta a otro</td>
+<td>Bajo: un fallo puede afectar a todo el proceso</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>No debe confundirse la multitarea entre procesos (varios programas distintos ejecutándose «a la vez») con la multihebra dentro de un proceso (un mismo programa dividiendo su trabajo en varios hilos). Ambas se apoyan en el mismo mecanismo de planificación del SO, pero operan a niveles distintos: el proceso es la unidad de asignación de recursos; el hilo, la unidad de ejecución sobre la CPU.</th>
+</tr>
+</table></div>
+<h2 id="6-planificación-y-gestión-multitarea" class="tema-h2">6. Planificación y gestión multitarea</h2>
+<p>El <strong>planificador (scheduler)</strong> es el componente del SO que decide, en cada instante, qué proceso o hilo de entre los que están en estado «listo» pasa a ocupar la CPU. Gracias a él, un sistema con una única CPU puede dar la sensación de ejecutar varios programas a la vez: en realidad los va alternando a gran velocidad, en operaciones llamadas <strong>cambios de contexto (context switch)</strong>, en las que el SO guarda el estado del proceso saliente y restaura el del proceso entrante.</p>
+<h4 class="tema-h4">Multitarea cooperativa frente a expulsiva</h4>
+<ul class="tema-lista">
+<li><strong>Multitarea cooperativa</strong>: cada proceso cede voluntariamente el control de la CPU cuando lo considera oportuno. Un proceso mal programado que no cede el control puede bloquear todo el sistema. Modelo típico de sistemas antiguos, como Windows 3.x.</li>
+<li><strong>Multitarea expulsiva o apropiativa (preemptive)</strong>: el propio SO puede interrumpir un proceso en ejecución para cederle la CPU a otro, sin depender de su colaboración. Es el modelo de todos los sistemas operativos modernos (Windows, Linux, macOS), y ofrece mucha más estabilidad y capacidad de respuesta.</li>
+</ul>
+<h4 class="tema-h4">Algoritmos de planificación clásicos</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Algoritmo</strong></th>
+<th><strong>Funcionamiento</strong></th>
+<th><strong>Ventaja / inconveniente</strong></th>
+</tr>
+<tr>
+<td>FCFS (First Come, First Served)</td>
+<td>Se atiende a los procesos por orden de llegada</td>
+<td>Sencillo, pero un proceso largo bloquea a los demás (efecto convoy)</td>
+</tr>
+<tr>
+<td>SJF (Shortest Job First)</td>
+<td>Se prioriza el proceso con menor tiempo de ejecución estimado</td>
+<td>Minimiza el tiempo medio de espera, pero requiere conocer o estimar la duración</td>
+</tr>
+<tr>
+<td>Round Robin</td>
+<td>Cada proceso recibe un turno fijo de CPU (quantum) y vuelve al final de la cola</td>
+<td>Reparto equitativo; el rendimiento depende de ajustar bien el quantum</td>
+</tr>
+<tr>
+<td>Por prioridades</td>
+<td>Se ejecuta primero el proceso de mayor prioridad</td>
+<td>Da respuesta rápida a lo importante, pero puede provocar inanición de procesos de baja prioridad</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>El quantum es el intervalo de tiempo máximo que Round Robin concede a cada proceso antes de forzar un cambio de contexto. Un quantum demasiado corto multiplica los cambios de contexto (y su coste); uno demasiado largo hace que el sistema se comporte casi como FCFS, perdiendo capacidad de respuesta.</th>
+</tr>
+</table></div>
+<h2 id="7-entradasalida" class="tema-h2">7. Entrada/salida</h2>
+<p>El SO también actúa de intermediario entre los procesos y los periféricos (Tema 8), a través de los <strong>controladores de dispositivo (drivers)</strong>: programas específicos para cada dispositivo que traducen las operaciones genéricas del SO a las órdenes concretas que entiende ese hardware.</p>
+<p>Para compensar la diferencia de velocidad entre la CPU y los dispositivos (mucho más lentos), el SO utiliza <strong>buffers</strong>: zonas de memoria intermedia donde se acumulan los datos mientras se transfieren entre el dispositivo y el proceso.</p>
+<h4 class="tema-h4">Métodos de entrada/salida</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Método</strong></th>
+<th><strong>Funcionamiento</strong></th>
+<th><strong>Ocupación de la CPU</strong></th>
+</tr>
+<tr>
+<td>E/S programada (polling)</td>
+<td>La CPU pregunta activamente y de forma repetida si el dispositivo ha terminado</td>
+<td>Alta: la CPU queda bloqueada esperando</td>
+</tr>
+<tr>
+<td>E/S por interrupciones</td>
+<td>El dispositivo avisa a la CPU (mediante una interrupción) cuando termina la operación</td>
+<td>Media: la CPU puede hacer otras tareas mientras espera</td>
+</tr>
+<tr>
+<td>DMA (Direct Memory Access)</td>
+<td>El dispositivo transfiere los datos directamente a memoria, sin pasar por la CPU</td>
+<td>Mínima: la CPU solo interviene al inicio y al final de la transferencia</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>El DMA (acceso directo a memoria) es el mecanismo más eficiente porque libera a la CPU de la propia transferencia de datos, que se gestiona mediante un controlador DMA dedicado: la CPU solo configura la operación al principio y recibe una interrupción al finalizar. Es un concepto que aparece con frecuencia en preguntas de examen sobre rendimiento de E/S.</th>
+</tr>
+</table></div>
+<h2 id="8-sistemas-de-archivo" class="tema-h2">8. Sistemas de archivo</h2>
+<p>El <strong>sistema de archivos (file system)</strong> es el componente del SO responsable de organizar la información persistente sobre un dispositivo de almacenamiento: cómo se nombran, almacenan, localizan y protegen los ficheros y directorios.</p>
+<p>Habitualmente organiza los ficheros en una estructura jerárquica en árbol, a partir de un directorio raíz, y mantiene para cada fichero unos metadatos: tamaño, fechas de creación/modificación, propietario y permisos de acceso.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Cada sistema operativo implementa sus propios sistemas de archivo: NTFS y, más recientemente, ReFS en Windows; ext4 en muchas distribuciones Linux; APFS en macOS. Cada uno se estudia con más detalle en el tema del sistema operativo correspondiente (Windows de usuario en el Tema 11, Linux de servidor en el Tema 13). De igual forma, el modelo de permisos de tipo Unix (lectura/escritura/ejecución para propietario, grupo y resto) y las listas de control de acceso (ACL) de Windows se tratan en esos temas.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Este punto no debe confundirse con el Tema 4 (Ficheros): allí se estudió la organización lógica de la información dentro de un fichero (registros, claves, métodos de inserción y acceso) desde el punto de vista de los datos; aquí se estudia el papel del sistema operativo como gestor del conjunto de ficheros y directorios sobre el almacenamiento.</th>
+</tr>
+</table></div>
+<h2 id="9-resumen-esquemático" class="tema-h2">9. Resumen esquemático</h2>
+<ul class="tema-lista">
+<li><strong>Sistema operativo</strong>: intermediario entre hardware y programas; gestor de recursos y máquina virtual extendida.</li>
+<li><strong>Clasificación</strong>: monousuario/multiusuario, monotarea/multitarea, uniprocesador/multiprocesador, por lotes/tiempo compartido/tiempo real, y por ámbito (escritorio, servidor, embebido, móvil).</li>
+<li><strong>Arquitectura</strong>: núcleo en modo privilegiado, resto en modo usuario, comunicados mediante llamadas al sistema; núcleos monolíticos (rápidos), microkernel (robustos) e híbridos (combinación habitual hoy).</li>
+<li><strong>Memoria</strong>: memoria virtual como abstracción; paginación (bloques fijos, fragmentación interna) frente a segmentación (bloques variables, fragmentación externa); swapping cuando falta RAM.</li>
+<li><strong>Procesos y subprocesos</strong>: el proceso como unidad de recursos (PCB, estados: nuevo, listo, ejecución, bloqueado, terminado); el hilo como unidad de ejecución, más ligero y compartiendo memoria dentro del proceso.</li>
+<li><strong>Planificación</strong>: cooperativa frente a expulsiva (estándar actual); algoritmos FCFS, SJF, Round Robin (con quantum) y por prioridades.</li>
+<li><strong>Entrada/salida</strong>: drivers y buffers; polling, interrupciones y DMA (el más eficiente, libera a la CPU).</li>
+<li><strong>Sistemas de archivo</strong>: organización jerárquica de ficheros y metadatos; el detalle de cada sistema de archivos concreto se estudia en el tema del SO correspondiente.</li>
+</ul>
+  </div>
+</article>

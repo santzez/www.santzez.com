@@ -1,0 +1,163 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T11</div>
+    <h1 class="tema-cabecera__titulo">La familia de sistemas operativos de usuario Windows (10 y posteriores). Características técnicas y funcionalidades. Servicios y recursos. Instalación, administración, mantenimiento y recuperación. Gestión del software base e instalación y desinstalación de productos</h1>
+    <div class="tema-cabecera__meta">Bloque II · Tecnología básica — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-la-familia-windows-de-sistemas-operativos-de-usuario">1. La familia Windows de sistemas operativos de usuario</a></li>
+<li><a href="#2-características-técnicas-y-funcionalidades">2. Características técnicas y funcionalidades</a></li>
+<li><a href="#3-servicios-y-recursos-del-sistema">3. Servicios y recursos del sistema</a></li>
+<li><a href="#4-instalación">4. Instalación</a></li>
+<li><a href="#5-administración-y-mantenimiento">5. Administración y mantenimiento</a></li>
+<li><a href="#6-recuperación-del-sistema">6. Recuperación del sistema</a></li>
+<li><a href="#7-gestión-del-software-base-instalación-y-desinstalación-de-">7. Gestión del software base: instalación y desinstalación de productos</a></li>
+<li><a href="#8-resumen-esquemático">8. Resumen esquemático</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h3 class="tema-h3">Qué vas a encontrar en este tema</h3>
+<ul class="tema-lista">
+<li>La familia de sistemas operativos de usuario Windows, de Windows 10 a Windows 11: ediciones y ciclo de servicio.</li>
+<li>Sus características técnicas y funcionalidades principales.</li>
+<li>Los servicios y recursos internos del sistema: servicios de Windows, Administrador de tareas, Registro y PowerShell.</li>
+<li>Cómo se instala un equipo Windows, en instalación individual y en despliegue masivo.</li>
+<li>Cómo se administra y mantiene un equipo Windows, y cómo se recupera ante un fallo.</li>
+<li>Cómo se gestiona el software base: instalación y desinstalación de productos.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Este tema se centra en el sistema operativo de usuario (equipos de escritorio y portátiles). Windows Server, con sus propias herramientas de administración y el Directorio Activo, se estudia en el Tema 12. El visor de eventos y la gestión de comparticiones y permisos de red en un entorno Windows se tratan en detalle en el Tema 15, y las herramientas ofimáticas y la distribución de software en un entorno distribuido, en el Tema 16; aquí solo se citan de pasada para no duplicar contenido.</th>
+</tr>
+</table></div>
+<p>1. La familia Windows de sistemas operativos de usuario</p>
+<p>2. Características técnicas y funcionalidades</p>
+<p>3. Servicios y recursos del sistema</p>
+<p>4. Instalación</p>
+<p>5. Administración y mantenimiento</p>
+<p>6. Recuperación del sistema</p>
+<p>7. Gestión del software base: instalación y desinstalación de productos</p>
+<p>8. Resumen esquemático</p>
+<h2 id="1-la-familia-windows-de-sistemas-operativos-de-usuario" class="tema-h2">1. La familia Windows de sistemas operativos de usuario</h2>
+<p><strong>Windows 10</strong>, publicado en 2015, se distribuyó durante años bajo el modelo «Windows as a Service»: en lugar de nuevas versiones mayores cada pocos años, recibía actualizaciones de funciones periódicas identificadas por año y semestre (por ejemplo, 21H1, 22H2). Su última versión de funciones fue la 22H2. <strong>Windows 10 finalizó su soporte el 14 de octubre de 2025</strong>: a partir de esa fecha ya no recibe actualizaciones de seguridad gratuitas, salvo que el equipo esté inscrito en el programa <strong>ESU (Extended Security Updates)</strong>, que amplía la disponibilidad de parches de seguridad críticos hasta octubre de 2027.</p>
+<p><strong>Windows 11</strong>, publicado en 2021, es la versión actual de la familia. Mantiene el mismo núcleo NT (Tema 9) y gran parte de la compatibilidad de aplicaciones de Windows 10, pero introduce una interfaz rediseñada (menú Inicio centrado, Fluent Design) y, sobre todo, unos <strong>requisitos de hardware más estrictos</strong>, orientados a reforzar la seguridad del equipo desde el propio firmware. Se distribuye igualmente mediante actualizaciones de funciones periódicas (las versiones más recientes en el momento de escribir este tema son 24H2 y 25H2).</p>
+<h4 class="tema-h4">Ediciones</h4>
+<ul class="tema-lista">
+<li><strong>Home</strong>: orientada al uso doméstico; no admite unirse a un dominio de Directorio Activo.</li>
+<li><strong>Pro</strong>: añade funciones orientadas a empresa y profesionales autónomos: unión a dominio, BitLocker, Escritorio remoto como servidor, Hyper-V cliente.</li>
+<li><strong>Enterprise</strong> y <strong>Education</strong>: ediciones de volumen para grandes organizaciones y centros educativos, con funciones adicionales de seguridad y gestión centralizada.</li>
+<li><strong>Enterprise LTSC (Long-Term Servicing Channel)</strong>: canal especial, sin las actualizaciones de funciones periódicas del resto de ediciones, pensado para equipos críticos que necesitan máxima estabilidad (cajeros, equipos industriales) a cambio de un ciclo de vida mucho más largo entre versiones mayores.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Windows 10 ya ha llegado al final de su ciclo de soporte estándar (14/10/2025). Un CAU debe tener presente este dato porque condiciona directamente su trabajo diario: los equipos que aún ejecuten Windows 10 sin estar acogidos al programa ESU dejan de recibir parches de seguridad, lo que los convierte en un riesgo y suele obligar a planificar su migración a Windows 11.</th>
+</tr>
+</table></div>
+<h2 id="2-características-técnicas-y-funcionalidades" class="tema-h2">2. Características técnicas y funcionalidades</h2>
+<p>Windows 10 y 11 se basan en el núcleo NT, de arquitectura híbrida (Tema 9), con soporte nativo de 64 bits (x64) como estándar actual —la arquitectura de 32 bits (x86) ha quedado relegada a equipos muy antiguos— y un soporte creciente de la arquitectura ARM64 en portátiles orientados a la eficiencia energética.</p>
+<h4 class="tema-h4">Requisitos y funciones de seguridad de Windows 11</h4>
+<ul class="tema-lista">
+<li><strong>TPM 2.0 (Trusted Platform Module)</strong>: chip dedicado (físico o firmware) que almacena de forma segura claves criptográficas, usado por funciones como BitLocker o Windows Hello.</li>
+<li><strong>Secure Boot (arranque seguro)</strong>: mecanismo de UEFI que verifica la firma digital del cargador de arranque y de los componentes que se cargan antes que el propio sistema operativo, para impedir que software malicioso de bajo nivel (rootkits, bootkits) se ejecute antes de que Windows tome el control.</li>
+<li><strong>Procesador compatible</strong>: Windows 11 exige un procesador de una lista concreta de modelos soportados, más recientes que los admitidos por Windows 10.</li>
+</ul>
+<h4 class="tema-h4">Funcionalidades destacadas</h4>
+<ul class="tema-lista">
+<li><strong>Windows Update</strong>: mecanismo integrado de descarga e instalación de actualizaciones de seguridad y de funciones.</li>
+<li><strong>Microsoft Defender Antivirus</strong>: antivirus y protección contra amenazas integrado de serie en el sistema (se amplía en el Tema 25).</li>
+<li><strong>BitLocker</strong>: cifrado de disco completo, apoyado en el TPM.</li>
+<li><strong>Hyper-V (cliente)</strong>: hipervisor de tipo 1 (Tema 10) incluido en las ediciones Pro y superiores, útil para máquinas virtuales de prueba en el propio equipo de trabajo.</li>
+<li><strong>WSL (Windows Subsystem for Linux)</strong>: permite ejecutar un entorno Linux integrado dentro de Windows, sin necesidad de una máquina virtual completa.</li>
+<li><strong>Windows Hello</strong>: autenticación biométrica (huella, reconocimiento facial) o mediante PIN, ligada al dispositivo.</li>
+</ul>
+<p>La interfaz de configuración también evoluciona: la aplicación moderna <strong>Configuración</strong> sustituye progresivamente al <strong>Panel de control</strong> clásico, aunque este último se mantiene disponible para algunas opciones avanzadas.</p>
+<h2 id="3-servicios-y-recursos-del-sistema" class="tema-h2">3. Servicios y recursos del sistema</h2>
+<ul class="tema-lista">
+<li><strong>Servicios de Windows</strong>: procesos en segundo plano que se ejecutan sin interacción directa del usuario (por ejemplo, el servicio de impresión o el de Windows Update). Se administran desde la consola de servicios (services.msc), donde cada servicio puede configurarse como automático, automático (inicio retrasado), manual o deshabilitado.</li>
+<li><strong>Administrador de tareas (Task Manager)</strong>: herramienta para supervisar procesos en ejecución, rendimiento de CPU/memoria/disco/red, aplicaciones que arrancan con el sistema, usuarios conectados y el propio historial de uso de aplicaciones.</li>
+<li><strong>Registro de Windows (Windows Registry)</strong>: base de datos jerárquica central donde se almacena la configuración del sistema operativo y de las aplicaciones instaladas, organizada en grandes ramas o «hives» (HKEY_LOCAL_MACHINE, HKEY_CURRENT_USER, HKEY_CLASSES_ROOT, HKEY_USERS, HKEY_CURRENT_CONFIG). Se edita con la herramienta regedit; una modificación incorrecta puede dejar el sistema inestable o inarrancable, por lo que conviene exportar una copia antes de editarlo.</li>
+<li><strong>Visor de eventos (Event Viewer)</strong>: recopila los registros (logs) de sucesos del sistema, la seguridad y las aplicaciones. Su uso y supervisión práctica se desarrolla con detalle en el Tema 15.</li>
+<li><strong>MMC (Microsoft Management Console)</strong>: marco común sobre el que se construyen la mayoría de consolas de administración de Windows, mediante módulos denominados snap-ins (por ejemplo, la propia consola de servicios o la de usuarios y grupos locales).</li>
+<li><strong>PowerShell</strong>: intérprete de comandos y lenguaje de script orientado a objetos (no a texto plano, como el símbolo del sistema clásico, CMD), que se ha convertido en la herramienta de referencia para la administración avanzada y la automatización en Windows.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>No debe confundirse el Registro de Windows (la base de datos de configuración del sistema) con el Visor de eventos (el histórico de sucesos que han ocurrido). Ambos son fuentes de información para el diagnóstico de incidencias, pero cumplen funciones completamente distintas y se consultan con herramientas diferentes (regedit frente al propio Visor de eventos).</th>
+</tr>
+</table></div>
+<h2 id="4-instalación" class="tema-h2">4. Instalación</h2>
+<h4 class="tema-h4">Métodos de instalación</h4>
+<ul class="tema-lista">
+<li><strong>Medio físico de arranque</strong>: un USB o DVD de instalación, creado habitualmente con la herramienta oficial Media Creation Tool, desde el que se arranca el equipo para instalar el sistema de forma manual.</li>
+<li><strong>Instalación en red</strong>: en entornos corporativos, mediante arranque por red (PXE Boot) mediante servicios como WDS (Windows Deployment Services), que permite instalar el sistema operativo en varios equipos sin necesidad de medios físicos individuales.</li>
+<li><strong>Despliegue mediante imágenes personalizadas</strong>: se prepara un equipo de referencia con el sistema, las aplicaciones y la configuración deseada, se generaliza con <strong>Sysprep</strong> (elimina la información específica del equipo, como el identificador de seguridad, para que la imagen pueda clonarse) y se captura como imagen en formato <strong>WIM (Windows Imaging Format)</strong>, gestionable con la herramienta <strong>DISM (Deployment Image Servicing and Management)</strong>. Esa imagen puede desplegarse después en muchos equipos de forma idéntica.</li>
+</ul>
+<h4 class="tema-h4">Tipos de instalación</h4>
+<ul class="tema-lista">
+<li><strong>Instalación limpia (clean install)</strong>: se instala el sistema operativo sobre un disco vacío o formateado, sin conservar aplicaciones ni configuración previas.</li>
+<li><strong>Actualización en el sitio (in-place upgrade)</strong>: se instala la nueva versión sobre la instalación existente, conservando aplicaciones, configuración y archivos del usuario.</li>
+</ul>
+<h4 class="tema-h4">Activación</h4>
+<p>En entornos domésticos, la activación se realiza con una clave de producto individual. En entornos corporativos, es habitual la <strong>activación por volumen</strong>, mediante <strong>KMS (Key Management Service)</strong>, que activa periódicamente los equipos de la organización contra un servidor interno, o <strong>MAK (Multiple Activation Key)</strong>, una clave única que permite activar un número determinado de equipos directamente contra los servidores de Microsoft.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>DISM y Sysprep son herramientas distintas y complementarias en el despliegue masivo: Sysprep generaliza (limpia la identidad) de un equipo de referencia antes de capturarlo como imagen; DISM se usa para servir, montar, modificar e instalar esas imágenes WIM (por ejemplo, para inyectar controladores o actualizaciones sin necesidad de volver a instalar el sistema desde cero).</th>
+</tr>
+</table></div>
+<h2 id="5-administración-y-mantenimiento" class="tema-h2">5. Administración y mantenimiento</h2>
+<h4 class="tema-h4">Actualizaciones</h4>
+<p>Windows Update gestiona la descarga e instalación de actualizaciones en el equipo individual. En entornos gestionados, esa distribución puede centralizarse: <strong>WSUS (Windows Server Update Services)</strong> permite descargar las actualizaciones una sola vez en un servidor interno y distribuirlas de forma controlada a los equipos de la organización. Microsoft anunció en 2024 la <strong>deprecación de WSUS</strong>: sigue siendo totalmente funcional y soportado (incluido en Windows Server 2025), pero no recibirá nuevas funciones, y la orientación de Microsoft es migrar la gestión de actualizaciones de cliente hacia soluciones en la nube, como <strong>Windows Update for Business</strong> o <strong>Windows Autopatch</strong>, integradas con Microsoft Intune.</p>
+<h4 class="tema-h4">Administración remota</h4>
+<ul class="tema-lista">
+<li><strong>Escritorio remoto (RDP, Remote Desktop Protocol)</strong>: acceso gráfico remoto al equipo, disponible como servidor en la edición Pro y superiores.</li>
+<li><strong>PowerShell remoto</strong>: ejecución de comandos y scripts de administración sobre uno o varios equipos remotos.</li>
+<li><strong>Directiva de grupo (GPO, Group Policy Object)</strong>: mecanismo de configuración centralizada de equipos unidos a un dominio de Directorio Activo (se estudia junto al propio Directorio Activo en el Tema 12).</li>
+<li><strong>Microsoft Intune</strong>: plataforma de gestión unificada de endpoints (MDM, Mobile Device Management) en la nube, alternativa/complemento moderno a la Directiva de grupo tradicional, especialmente relevante para equipos que no están permanentemente conectados a la red corporativa.</li>
+</ul>
+<h4 class="tema-h4">Mantenimiento habitual</h4>
+<ul class="tema-lista">
+<li><strong>Liberador de espacio en disco</strong>: elimina archivos temporales, copias de actualizaciones antiguas y otros datos prescindibles.</li>
+<li><strong>Desfragmentación</strong>: reorganiza los datos de un disco HDD (Tema 6) para reducir la fragmentación y mejorar el tiempo de acceso; no es aplicable ni recomendable en discos SSD, donde en su lugar el sistema ejecuta periódicamente la operación <strong>TRIM</strong>, que informa al SSD de qué bloques ya no contienen datos válidos.</li>
+<li><strong>Comprobación de errores de disco (chkdsk)</strong>: analiza y repara errores en el sistema de archivos y en los sectores del disco.</li>
+<li><strong>Monitor de rendimiento y fiabilidad</strong>: registra el histórico de estabilidad del equipo (bloqueos, errores, instalaciones) y el rendimiento en tiempo real de sus componentes.</li>
+</ul>
+<h2 id="6-recuperación-del-sistema" class="tema-h2">6. Recuperación del sistema</h2>
+<ul class="tema-lista">
+<li><strong>Puntos de restauración (System Restore)</strong>: capturas del estado de la configuración y del Registro del sistema en un momento dado, que permiten deshacer cambios recientes (por ejemplo, tras instalar un controlador problemático) sin afectar a los archivos personales del usuario.</li>
+<li><strong>Copia de seguridad</strong>: el Historial de archivos protege carpetas de usuario concretas con copias incrementales, mientras que una imagen del sistema captura el disco completo, incluyendo el sistema operativo, para restaurarlo íntegramente en caso de fallo grave.</li>
+<li><strong>WinRE (Windows Recovery Environment)</strong>: entorno de recuperación accesible al arrancar el equipo, que ofrece reparación de inicio automática, restauración desde una imagen del sistema, restauración desde un punto de restauración, acceso a un símbolo del sistema de recuperación y la opción de reiniciar el equipo.</li>
+<li><strong>Medios de recuperación</strong>: una unidad USB de recuperación, creada desde el propio sistema mientras funciona correctamente, permite acceder a estas mismas opciones aunque el equipo no llegue a arrancar.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>No deben confundirse «Restaurar sistema» y «Reiniciar este PC» (o «Reset»). Restaurar sistema únicamente revierte la configuración y el Registro a un punto anterior, sin tocar los documentos personales del usuario. Reiniciar este PC reinstala el sistema operativo, con la opción de conservar los archivos personales o eliminarlos por completo junto con las aplicaciones instaladas; es una operación mucho más drástica, pensada para cuando el sistema está gravemente dañado o se va a entregar el equipo a otra persona.</th>
+</tr>
+</table></div>
+<h2 id="7-gestión-del-software-base-instalación-y-desinstalación-de-" class="tema-h2">7. Gestión del software base: instalación y desinstalación de productos</h2>
+<h4 class="tema-h4">Formatos y métodos de instalación</h4>
+<ul class="tema-lista">
+<li><strong>Instaladores tradicionales (.exe)</strong>: ejecutables generados con herramientas como InstallShield, NSIS o Inno Setup; cada uno define su propia lógica de instalación.</li>
+<li><strong>MSI (Windows Installer)</strong>: formato estándar de Windows para la instalación de software, basado en una base de datos de componentes; permite instalaciones silenciosas (sin intervención del usuario) y su distribución centralizada mediante GPO o herramientas de gestión de software.</li>
+<li><strong>APPX / MSIX</strong>: formatos modernos de aplicaciones empaquetadas, propios de la Microsoft Store, que aíslan mejor la aplicación del resto del sistema y facilitan una desinstalación limpia.</li>
+<li><strong>Gestores de paquetes en línea de comandos</strong>: <strong>winget</strong> (Windows Package Manager, oficial de Microsoft) permite instalar, actualizar y desinstalar aplicaciones desde la terminal, de forma similar a como funcionan los gestores de paquetes en Linux (Tema 13); Chocolatey es una alternativa de la comunidad con un enfoque similar.</li>
+</ul>
+<h4 class="tema-h4">Desinstalación</h4>
+<p>El software instalado se desinstala desde la aplicación <strong>Configuración &gt; Aplicaciones</strong>, o desde el clásico <strong>Panel de control &gt; Programas y características</strong>. Los paquetes MSI también pueden desinstalarse desde línea de comandos con `msiexec /x`. Una desinstalación correcta debe eliminar, además del propio programa, los componentes y entradas de Registro asociados, para evitar dejar residuos que puedan interferir con instalaciones futuras.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>La distribución de software a gran escala en un entorno con muchos equipos —con qué herramientas se empaqueta, distribuye y mantiene actualizado el software de forma centralizada— se desarrolla en profundidad en el Tema 16, dedicado a herramientas ofimáticas y distribución de software en entornos distribuidos; aquí basta con conocer los formatos y mecanismos básicos de instalación y desinstalación a nivel de un único equipo.</th>
+</tr>
+</table></div>
+<h2 id="8-resumen-esquemático" class="tema-h2">8. Resumen esquemático</h2>
+<ul class="tema-lista">
+<li><strong>Familia Windows</strong>: Windows 10 (fin de soporte 14/10/2025, ESU hasta 10/2027) y Windows 11 (versión actual, mayores requisitos de seguridad: TPM 2.0, Secure Boot); ediciones Home, Pro, Enterprise/Education y Enterprise LTSC.</li>
+<li><strong>Características técnicas</strong>: núcleo NT híbrido, 64 bits estándar; funciones clave: Windows Update, Microsoft Defender, BitLocker, Hyper-V cliente, WSL, Windows Hello.</li>
+<li><strong>Servicios y recursos</strong>: servicios de Windows (services.msc), Administrador de tareas, Registro (regedit), Visor de eventos (detalle en el Tema 15), MMC y PowerShell.</li>
+<li><strong>Instalación</strong>: medio físico, red (PXE/WDS) o imágenes personalizadas (Sysprep + DISM sobre formato WIM); instalación limpia frente a actualización en el sitio; activación individual, KMS o MAK.</li>
+<li><strong>Administración y mantenimiento</strong>: Windows Update/WSUS (deprecado desde 2024, alternativa en la nube: Windows Autopatch/Intune) o GPO/Intune para gestión centralizada; liberador de espacio, TRIM (SSD) frente a desfragmentación (HDD), chkdsk.</li>
+<li><strong>Recuperación</strong>: puntos de restauración (solo configuración), copias de seguridad, WinRE y medios de recuperación; «Restaurar sistema» frente a «Reiniciar este PC».</li>
+<li><strong>Software base</strong>: formatos .exe, MSI, APPX/MSIX; gestores de paquetes winget/Chocolatey; desinstalación desde Configuración, Panel de control o msiexec /x.</li>
+</ul>
+  </div>
+</article>

@@ -1,0 +1,173 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T12</div>
+    <h1 class="tema-cabecera__titulo">Servidores Windows. Instalación, configuración y mantenimiento básico: Actualizaciones y monitorización. Fundamentos de Directorio Activo</h1>
+    <div class="tema-cabecera__meta">Bloque II · Tecnología básica — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-sistemas-operativos-de-servidor-la-familia-windows-server">1. Sistemas operativos de servidor: la familia Windows Server</a></li>
+<li><a href="#2-instalación-y-configuración-roles-y-características">2. Instalación y configuración: roles y características</a></li>
+<li><a href="#3-mantenimiento-básico-actualizaciones-y-monitorización">3. Mantenimiento básico: actualizaciones y monitorización</a></li>
+<li><a href="#4-fundamentos-de-directorio-activo">4. Fundamentos de Directorio Activo</a></li>
+<li><a href="#5-estructura-lógica-y-física-del-directorio-activo">5. Estructura lógica y física del Directorio Activo</a></li>
+<li><a href="#6-componentes-técnicos-controladores-de-dominio-y-roles-fsmo">6. Componentes técnicos: controladores de dominio y roles FSMO</a></li>
+<li><a href="#7-resumen-esquemático">7. Resumen esquemático</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h3 class="tema-h3">Qué vas a encontrar en este tema</h3>
+<ul class="tema-lista">
+<li>Qué distingue a un sistema operativo de servidor de uno de usuario, y la familia Windows Server actual.</li>
+<li>Cómo se instala y configura un servidor Windows mediante roles y características.</li>
+<li>El mantenimiento básico de un servidor Windows: actualizaciones y monitorización.</li>
+<li>Los fundamentos del Directorio Activo: qué es, su estructura lógica y física, y sus componentes técnicos principales.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Este tema se centra en Windows Server y en el Directorio Activo «clásico» (AD DS, on-premise). El sistema operativo de usuario (Windows 10/11) se estudió en el Tema 11, y los servidores Linux se estudian en el Tema 13. La administración de usuarios y grupos, los logon scripts y la supervisión del visor de eventos en un entorno Windows se desarrollan con detalle en los Temas 14 y 15; aquí se citan solo como parte del conjunto de Directorio Activo, sin repetir ese contenido.</th>
+</tr>
+</table></div>
+<p>1. Sistemas operativos de servidor: la familia Windows Server</p>
+<p>2. Instalación y configuración: roles y características</p>
+<p>3. Mantenimiento básico: actualizaciones y monitorización</p>
+<p>4. Fundamentos de Directorio Activo</p>
+<p>5. Estructura lógica y física del Directorio Activo</p>
+<p>6. Componentes técnicos: controladores de dominio y roles FSMO</p>
+<p>7. Resumen esquemático</p>
+<h2 id="1-sistemas-operativos-de-servidor-la-familia-windows-server" class="tema-h2">1. Sistemas operativos de servidor: la familia Windows Server</h2>
+<p>Un sistema operativo de <strong>servidor</strong> está optimizado para permanecer en funcionamiento de forma continua (24/7), atender muchas conexiones simultáneas y administrar recursos compartidos de red, frente a un sistema operativo de usuario (Tema 11), pensado para el uso individual de un único puesto de trabajo. Windows Server admite además una modalidad de instalación mínima, <strong>Server Core</strong>, sin entorno gráfico de escritorio, administrable por PowerShell o de forma remota, que reduce la superficie de ataque y la necesidad de reinicios frente a la instalación con <strong>Desktop Experience</strong> (interfaz gráfica completa).</p>
+<p>La versión más reciente de la familia es <strong>Windows Server 2025</strong> (disponible desde finales de 2024), que convive todavía con un parque muy amplio de servidores en <strong>Windows Server 2022</strong> y versiones anteriores. Entre las novedades más relevantes de Windows Server 2025 destacan mejoras de fondo en Directorio Activo (punto 4), soporte de NUMA para más de 64 núcleos por servidor, cifrado y firma LDAP obligatorios por defecto, TLS 1.3 como protocolo por defecto, y —en su edición Azure— la posibilidad de aplicar parches de seguridad sin reiniciar el servidor (hotpatching).</p>
+<h4 class="tema-h4">Ediciones principales</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Edición</strong></th>
+<th><strong>Virtualización incluida</strong></th>
+<th><strong>Uso típico</strong></th>
+</tr>
+<tr>
+<td>Standard</td>
+<td>Hasta 2 máquinas virtuales por licencia</td>
+<td>Entornos físicos o poco virtualizados</td>
+</tr>
+<tr>
+<td>Datacenter</td>
+<td>Virtualización ilimitada</td>
+<td>Centros de datos muy virtualizados, funciones avanzadas de almacenamiento y clúster</td>
+</tr>
+</table></div>
+<h2 id="2-instalación-y-configuración-roles-y-características" class="tema-h2">2. Instalación y configuración: roles y características</h2>
+<p>La instalación de Windows Server admite los mismos métodos vistos para Windows cliente en el Tema 11 (medio físico, despliegue por red, imágenes personalizadas con Sysprep y DISM), eligiendo además entre instalación Server Core o con Desktop Experience.</p>
+<p>Una vez instalado, el sistema base se especializa añadiendo <strong>roles</strong> y <strong>características</strong> desde el <strong>Administrador del servidor (Server Manager)</strong> o mediante PowerShell (cmdlet `Install-WindowsFeature`), y estas mismas herramientas permiten gestionar de forma centralizada varios servidores a la vez desde un único punto.</p>
+<ul class="tema-lista">
+<li><strong>Rol (server role)</strong>: función principal que el servidor presta a la red. Ejemplos: AD DS (Servicios de dominio de Directorio Activo), servidor DNS, servidor DHCP, Servicios de archivos y almacenamiento, servidor web (IIS), Hyper-V, Servicios de escritorio remoto.</li>
+<li><strong>Característica (feature)</strong>: componente de soporte que complementa al sistema, sin constituir por sí mismo un servicio de red independiente. Ejemplos: herramientas de copia de seguridad de Windows Server, Failover Clustering (clúster de conmutación por error), las herramientas de administración remota del servidor (RSAT).</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Un rol y una característica no son lo mismo, y el examen puede pedir distinguirlos: el rol define qué servicio presta el servidor hacia la red (por ejemplo, ser controlador de dominio o servidor DNS); la característica es un componente auxiliar que da soporte al sistema o a otros roles, pero no ofrece por sí solo un servicio de red identificable.</th>
+</tr>
+</table></div>
+<h2 id="3-mantenimiento-básico-actualizaciones-y-monitorización" class="tema-h2">3. Mantenimiento básico: actualizaciones y monitorización</h2>
+<h4 class="tema-h4">Actualizaciones</h4>
+<p>Microsoft publica sus actualizaciones de seguridad de forma mensual, el segundo martes de cada mes («Patch Tuesday»). En un entorno de servidores, la buena práctica habitual es no instalar los parches directamente en producción: se prueban antes en un entorno de preproducción y se aplican en una ventana de mantenimiento planificada, con una copia de seguridad o una instantánea (snapshot, Tema 10) previa por si es necesario revertir el cambio.</p>
+<p>Para la distribución centralizada de actualizaciones, <strong>WSUS (Windows Server Update Services)</strong> sigue disponible como rol en Windows Server 2025, aunque Microsoft lo declaró en <strong>deprecación desde 2024</strong>: continúa soportado, pero sin nuevas funciones, y la orientación de Microsoft es ir migrando la gestión de parches hacia herramientas en la nube, como <strong>Azure Update Manager</strong>.</p>
+<h4 class="tema-h4">Monitorización</h4>
+<ul class="tema-lista">
+<li><strong>Administrador de tareas</strong> y <strong>Monitor de rendimiento</strong>: igual que en el equipo de usuario (Tema 11), permiten supervisar el consumo de CPU, memoria, disco y red en tiempo real.</li>
+<li><strong>Visor de eventos</strong>: recopila los registros de sistema, seguridad y aplicaciones también en el servidor; su manejo detallado se estudia en el Tema 15.</li>
+<li><strong>Monitor de recursos (Resource Monitor)</strong>: vista más detallada del uso de recursos por proceso, útil para diagnosticar cuellos de botella.</li>
+<li><strong>Windows Admin Center</strong>: consola de administración moderna, basada en navegador web, que centraliza la gestión de varios servidores (Server Core incluido) sustituyendo progresivamente a distintas consolas MMC clásicas.</li>
+<li><strong>System Center Operations Manager (SCOM)</strong>: solución de monitorización a gran escala para entornos empresariales con muchos servidores, con alertado proactivo ante problemas de rendimiento o disponibilidad.</li>
+</ul>
+<h2 id="4-fundamentos-de-directorio-activo" class="tema-h2">4. Fundamentos de Directorio Activo</h2>
+<p><strong>Directorio Activo (Active Directory, AD)</strong> es el servicio de directorio de Microsoft: una base de datos centralizada y jerárquica que almacena información sobre los objetos de una red —usuarios, equipos, grupos, impresoras compartidas— y ofrece los servicios de autenticación y autorización necesarios para que esos objetos puedan identificarse y acceder a los recursos de la red de forma centralizada y segura. El servicio concreto que implementa el Directorio Activo en Windows Server se llama <strong>AD DS (Active Directory Domain Services)</strong>.</p>
+<p>AD DS se apoya en dos protocolos estándar: <strong>LDAP (Lightweight Directory Access Protocol)</strong>, para consultar y modificar los objetos del directorio, y <strong>Kerberos</strong>, para la autenticación segura de usuarios y equipos.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Un Directorio Activo funciona como una gran guía y organigrama centralizado de toda la red: en lugar de que cada equipo mantenga su propia lista de usuarios y contraseñas, existe un único punto central que sabe quién es cada usuario, a qué grupos pertenece, qué equipos existen y qué permisos tiene cada cual sobre los recursos compartidos.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>No debe confundirse AD DS con <strong>Microsoft Entra ID</strong> (el nuevo nombre, desde 2023-2024, de Azure Active Directory): Entra ID es un servicio de identidad en la nube, orientado a aplicaciones y servicios en línea, que no organiza los objetos en dominios, árboles y bosques como AD DS. Es habitual un escenario híbrido, en el que las cuentas de un AD DS local se sincronizan con Entra ID (mediante Entra Connect) para que los usuarios puedan acceder tanto a recursos locales como a servicios en la nube con una única identidad. El temario de este tema se centra en los fundamentos del Directorio Activo «clásico» (AD DS), no en Entra ID.</th>
+</tr>
+</table></div>
+<h2 id="5-estructura-lógica-y-física-del-directorio-activo" class="tema-h2">5. Estructura lógica y física del Directorio Activo</h2>
+<h4 class="tema-h4">Estructura lógica</h4>
+<ul class="tema-lista">
+<li><strong>Dominio</strong>: unidad administrativa básica de AD; un conjunto de objetos (usuarios, equipos, grupos) que comparten una misma base de datos de directorio y unas mismas políticas de seguridad.</li>
+<li><strong>Árbol de dominios</strong>: conjunto de uno o más dominios que comparten un espacio de nombres DNS contiguo (por ejemplo, `donostiatik.local` y `sedes.donostiatik.local`).</li>
+<li><strong>Bosque (forest)</strong>: conjunto de uno o más árboles de dominios; no exige un espacio de nombres común, pero sí comparte un mismo esquema y catálogo global. Es el límite máximo de seguridad y de administración dentro de un despliegue de AD.</li>
+<li><strong>Unidad organizativa (OU, Organizational Unit)</strong>: contenedor dentro de un dominio que permite organizar los objetos de forma jerárquica (por departamento, ubicación, función) y aplicarles Directivas de grupo (GPO) de forma selectiva.</li>
+<li><strong>Relación de confianza (trust)</strong>: vínculo que permite que los usuarios de un dominio o bosque accedan a recursos de otro dominio o bosque distinto.</li>
+</ul>
+<h4 class="tema-h4">Estructura física</h4>
+<ul class="tema-lista">
+<li><strong>Sitio (site)</strong>: agrupación de una o varias subredes IP bien conectadas entre sí (habitualmente correspondiente a una ubicación física, como un edificio o un centro de datos), que AD utiliza para optimizar el tráfico de replicación entre controladores de dominio y para que un usuario inicie sesión contra el controlador de dominio más cercano en vez de contra uno remoto.</li>
+<li><strong>Controlador de dominio (Domain Controller, DC)</strong>: servidor que aloja una copia de la base de datos de AD de su dominio y presta los servicios de autenticación y consulta del directorio.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Dominio y sitio son conceptos independientes y no deben confundirse: el dominio es una agrupación lógica de seguridad y administración; el sitio es una agrupación física basada en la conectividad de red. Un mismo dominio puede extenderse por varios sitios (por ejemplo, varias sedes de un organismo), y un mismo sitio puede alojar controladores de dominio de más de un dominio del bosque.</th>
+</tr>
+</table></div>
+<h2 id="6-componentes-técnicos-controladores-de-dominio-y-roles-fsmo" class="tema-h2">6. Componentes técnicos: controladores de dominio y roles FSMO</h2>
+<p>Para dar continuidad de servicio, un dominio suele contar con <strong>varios controladores de dominio</strong>, que se replican entre sí. AD funciona de forma <strong>multimaestro</strong> para la mayoría de las operaciones: un cambio puede hacerse en cualquier controlador de dominio y se replica hacia el resto.</p>
+<ul class="tema-lista">
+<li><strong>Catálogo global (Global Catalog)</strong>: copia parcial —con los atributos más consultados— de todos los objetos de todos los dominios del bosque, alojada en determinados controladores de dominio, para acelerar las búsquedas que abarcan todo el bosque.</li>
+<li><strong>Esquema (schema)</strong>: definición de qué clases de objetos (usuario, equipo, grupo…) y qué atributos pueden existir en el directorio; es común a todo el bosque.</li>
+<li><strong>GPO (Group Policy Object, Directiva de grupo)</strong>: conjunto de configuraciones que se vincula a un dominio, un sitio o una OU, y se aplica automáticamente a los usuarios y equipos incluidos en su ámbito, tal y como se introdujo en el Tema 11.</li>
+<li><strong>LAPS (Local Administrator Password Solution)</strong>: solución, reforzada en Windows Server 2025, para gestionar de forma centralizada y con rotación periódica la contraseña de la cuenta de administrador local de cada equipo unido al dominio.</li>
+</ul>
+<p>Aunque AD DS es multimaestro para la mayoría de cambios, existen <strong>cinco operaciones</strong> que, para evitar conflictos, solo puede realizar un único controlador de dominio a la vez. Son los roles <strong>FSMO (Flexible Single Master Operations)</strong>: dos a nivel de bosque y tres a nivel de dominio.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Rol FSMO</strong></th>
+<th><strong>Ámbito</strong></th>
+<th><strong>Función</strong></th>
+</tr>
+<tr>
+<td>Maestro de esquema (Schema Master)</td>
+<td>Bosque</td>
+<td>Único controlador que puede modificar el esquema del directorio</td>
+</tr>
+<tr>
+<td>Maestro de nomenclatura de dominios (Domain Naming Master)</td>
+<td>Bosque</td>
+<td>Controla la adición y eliminación de dominios en el bosque</td>
+</tr>
+<tr>
+<td>Maestro de RID (RID Master)</td>
+<td>Dominio</td>
+<td>Asigna bloques de identificadores relativos (RID) para crear nuevos objetos con SID único</td>
+</tr>
+<tr>
+<td>Emulador de PDC (PDC Emulator)</td>
+<td>Dominio</td>
+<td>Referencia horaria y compatibilidad con versiones y clientes antiguos; procesa cambios de contraseña con prioridad</td>
+</tr>
+<tr>
+<td>Maestro de infraestructura (Infrastructure Master)</td>
+<td>Dominio</td>
+<td>Mantiene actualizadas las referencias a objetos de otros dominios (por ejemplo, en pertenencia a grupos)</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Para recordar el reparto de los roles FSMO: el bosque tiene dos roles únicos (Esquema y Nomenclatura de dominios), y cada dominio del bosque tiene sus propios tres roles (RID, Emulador de PDC e Infraestructura). Si un dominio de AD se apoya también en DNS —y siempre lo hace, porque AD DS depende de DNS para que los equipos localicen a los controladores de dominio— lo habitual es que el propio controlador de dominio actúe también como servidor DNS, con zonas integradas en el directorio.</th>
+</tr>
+</table></div>
+<h2 id="7-resumen-esquemático" class="tema-h2">7. Resumen esquemático</h2>
+<ul class="tema-lista">
+<li><strong>Windows Server</strong>: sistema operativo de servidor, con instalación Server Core (sin GUI) o Desktop Experience; versión actual Windows Server 2025, muy extendido aún Windows Server 2022; ediciones Standard (virtualización limitada) y Datacenter (ilimitada).</li>
+<li><strong>Roles y características</strong>: el rol presta un servicio de red (AD DS, DNS, DHCP, IIS…); la característica da soporte auxiliar (backup, clustering, RSAT); se gestionan desde el Administrador del servidor o PowerShell.</li>
+<li><strong>Actualizaciones</strong>: Patch Tuesday mensual, prueba en preproducción antes de producción; WSUS deprecado desde 2024 (sigue soportado) frente a Azure Update Manager como alternativa en la nube.</li>
+<li><strong>Monitorización</strong>: Administrador de tareas, Monitor de rendimiento y de recursos, Visor de eventos (Tema 15), Windows Admin Center y SCOM para entornos grandes.</li>
+<li><strong>Directorio Activo (AD DS)</strong>: servicio de directorio centralizado sobre LDAP y Kerberos; distinto de Microsoft Entra ID (identidad en la nube), aunque pueden convivir en modo híbrido.</li>
+<li><strong>Estructura lógica</strong>: dominio, árbol de dominios, bosque (límite de seguridad), unidad organizativa (OU) y relaciones de confianza.</li>
+<li><strong>Estructura física</strong>: sitios (subredes bien conectadas) y controladores de dominio (DC).</li>
+<li><strong>Componentes técnicos</strong>: catálogo global, esquema, GPO, LAPS y los cinco roles FSMO (2 de bosque: Esquema y Nomenclatura de dominios; 3 de dominio: RID, PDC Emulator e Infraestructura).</li>
+</ul>
+  </div>
+</article>
