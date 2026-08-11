@@ -1368,12 +1368,16 @@ a.tarjeta:hover {
   border-bottom: 2px solid var(--color-borde);
   overflow-x: auto;              /* si no cabe, scroll horizontal */
   scrollbar-width: thin;
+  align-items: flex-end;
 }
-.tabs__tab {
+/* Selector con mayor especificidad para ganar a otros button globales */
+.tabs .tabs__tab,
+button.tabs__tab {
   flex: 0 0 auto;
   background: transparent;
-  border: 0;
-  padding: 0.85rem 1.4rem;
+  border: 0;                     /* reset del borde nativo del button */
+  border-radius: 0;              /* reset del border-radius del user-agent */
+  padding: 0.85rem 1.5rem;
   font-family: var(--fuente-corporativa);
   font-size: 0.95rem;
   font-weight: 600;
@@ -1386,16 +1390,34 @@ a.tarjeta:hover {
   letter-spacing: 0.05em;
   white-space: nowrap;
   position: relative;
+  outline: none;
+  box-shadow: none;
 }
-.tabs__tab:hover {
+.tabs .tabs__tab:hover,
+button.tabs__tab:hover {
   color: var(--color-primario);
   background: var(--color-primario-suave);
 }
-.tabs__tab.activo {
+/* ---- Estado activo: bien visible ---- */
+.tabs .tabs__tab.activo,
+button.tabs__tab.activo {
   color: var(--color-primario);
-  border-bottom-color: var(--color-primario);
+  background: var(--color-primario-suave);
+  border-bottom: 3px solid var(--color-primario);
+  font-weight: 700;
 }
-.tabs__tab:focus-visible {
+/* Barra azul superior extra en la activa para reforzar */
+.tabs .tabs__tab.activo::before,
+button.tabs__tab.activo::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--color-primario);
+  border-radius: 3px 3px 0 0;
+}
+.tabs .tabs__tab:focus-visible,
+button.tabs__tab:focus-visible {
   outline: 2px solid var(--color-primario);
   outline-offset: -2px;
 }
