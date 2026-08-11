@@ -236,10 +236,25 @@ const AuthSession = {
 
     const btnAjustes = cont.querySelector('#btn-ajustes');
     const panel = cont.querySelector('#panel-ajustes');
+
+    // Helper: sincroniza backdrop del body según haya algún panel abierto
+    const sincronizarBackdrop = () => {
+      const panelU = cont.querySelector('#panel-usuarios');
+      const hayAlguno = !panel.hidden || (panelU && !panelU.hidden);
+      document.body.classList.toggle('con-backdrop', hayAlguno);
+    };
+
     btnAjustes.addEventListener('click', (e) => {
       e.stopPropagation();
+      // Si estaba abierto el de usuarios, ciérralo primero
+      const panelU = cont.querySelector('#panel-usuarios');
+      if (panelU && !panelU.hidden) {
+        panelU.hidden = true;
+        cont.querySelector('#btn-usuarios')?.classList.remove('activo');
+      }
       panel.hidden = !panel.hidden;
       btnAjustes.classList.toggle('activo', !panel.hidden);
+      sincronizarBackdrop();
     });
 
     // Cerrar panel al hacer clic fuera
@@ -248,6 +263,7 @@ const AuthSession = {
       if (!panel.contains(e.target) && e.target !== btnAjustes) {
         panel.hidden = true;
         btnAjustes.classList.remove('activo');
+        sincronizarBackdrop();
       }
     });
     // Cerrar con Escape
@@ -255,6 +271,7 @@ const AuthSession = {
       if (e.key === 'Escape' && !panel.hidden) {
         panel.hidden = true;
         btnAjustes.classList.remove('activo');
+        sincronizarBackdrop();
       }
     });
 
@@ -386,26 +403,21 @@ const AuthSession = {
         panelUsuarios.hidden = !panelUsuarios.hidden;
         btnUsuarios.classList.toggle('activo', !panelUsuarios.hidden);
         if (!panelUsuarios.hidden) cargarUsuarios();
+        sincronizarBackdrop();
       });
       document.addEventListener('click', (e) => {
         if (panelUsuarios.hidden) return;
         if (!panelUsuarios.contains(e.target) && e.target !== btnUsuarios) {
           panelUsuarios.hidden = true;
           btnUsuarios.classList.remove('activo');
+          sincronizarBackdrop();
         }
       });
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && !panelUsuarios.hidden) {
           panelUsuarios.hidden = true;
           btnUsuarios.classList.remove('activo');
-        }
-      });
-
-      // Al abrir el panel de ajustes, cerrar el de usuarios (si estaba abierto)
-      btnAjustes.addEventListener('click', () => {
-        if (!panelUsuarios.hidden) {
-          panelUsuarios.hidden = true;
-          btnUsuarios.classList.remove('activo');
+          sincronizarBackdrop();
         }
       });
 
