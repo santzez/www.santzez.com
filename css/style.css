@@ -1351,6 +1351,76 @@ a.tarjeta:hover {
 }
 
 /* =============================================================
+   TABS — sub-secciones de un tema (Apuntes / Qwiz / Podcasts)
+   Modo activado con renderComoTabs=true en el info.json del padre.
+   ============================================================= */
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 0.5rem;
+}
+
+.tabs__cabecera {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid var(--color-borde);
+  overflow-x: auto;              /* si no cabe, scroll horizontal */
+  scrollbar-width: thin;
+}
+.tabs__tab {
+  flex: 0 0 auto;
+  background: transparent;
+  border: 0;
+  padding: 0.85rem 1.4rem;
+  font-family: var(--fuente-corporativa);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-texto-suave);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;           /* solapa el borde inferior del contenedor */
+  transition: color 0.18s, border-color 0.18s, background 0.15s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  position: relative;
+}
+.tabs__tab:hover {
+  color: var(--color-primario);
+  background: var(--color-primario-suave);
+}
+.tabs__tab.activo {
+  color: var(--color-primario);
+  border-bottom-color: var(--color-primario);
+}
+.tabs__tab:focus-visible {
+  outline: 2px solid var(--color-primario);
+  outline-offset: -2px;
+}
+
+.tabs__paneles {
+  padding-top: 1.5rem;
+  min-height: 200px;
+}
+.tabs__panel {
+  animation: tab-entrar 0.22s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.tabs__panel[hidden] {
+  display: none;
+}
+@keyframes tab-entrar {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+@media (max-width: 640px) {
+  .tabs__tab { padding: 0.75rem 1rem; font-size: 0.85rem; }
+  .tabs__paneles { padding-top: 1rem; }
+}
+
+/* =============================================================
    CONTENIDO DE TEMA (tipo "contenido") — material de estudio
    Formato web nativo con tipografía cómoda y buena impresión.
    ============================================================= */
