@@ -183,9 +183,18 @@ const AuthSession = {
     // SVG iconos (Feather-style)
     const ICONO_ENGRANAJE = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>';
     const ICONO_SALIR = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>';
+    const ICONO_USUARIOS = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
+
+    // Comprobar si es admin (para mostrar el icono de usuarios)
+    const esAdmin = await this.esAdmin();
 
     cont.innerHTML = `
       <span class="cabecera__email">${usuario.email}</span>
+      ${esAdmin ? `
+      <button type="button" class="btn-icono" id="btn-usuarios" aria-label="Gestión de usuarios" title="Gestión de usuarios">
+        ${ICONO_USUARIOS}
+        <span class="btn-icono__badge" id="badge-pendientes" hidden></span>
+      </button>` : ''}
       <button type="button" class="btn-icono" id="btn-ajustes" aria-label="Ajustes" title="Ajustes de estilo">
         ${ICONO_ENGRANAJE}
       </button>
@@ -198,6 +207,21 @@ const AuthSession = {
         ${this._pintarToggle('identidad', 'Identidad!', 'Gradiente animado en el header y logo con micro-bounce al hover.')}
         ${this._pintarToggle('viewTransitions', 'Antes muerta que sencilla', 'Transiciones nativas entre páginas. En navegadores viejos: sin efecto.')}
       </div>
+      ${esAdmin ? `
+      <div class="panel-usuarios" id="panel-usuarios" hidden>
+        <div class="panel-ajustes__titulo">Gestión de usuarios</div>
+        <div class="panel-usuarios__tabs">
+          <button type="button" class="panel-usuarios__tab activo" data-tab="pendientes">
+            Pendientes <span class="panel-usuarios__num" id="num-pendientes">·</span>
+          </button>
+          <button type="button" class="panel-usuarios__tab" data-tab="aprobados">
+            Aprobados <span class="panel-usuarios__num" id="num-aprobados">·</span>
+          </button>
+        </div>
+        <div class="panel-usuarios__contenido" id="usuarios-contenido">
+          <p class="panel-usuarios__cargando">Cargando…</p>
+        </div>
+      </div>` : ''}
     `;
 
     // Estado inicial de los toggles
@@ -242,6 +266,152 @@ const AuthSession = {
         }
       });
     });
+
+    // ============ PANEL DE GESTIÓN DE USUARIOS (solo admin) ============
+    if (esAdmin) {
+      const btnUsuarios = cont.querySelector('#btn-usuarios');
+      const panelUsuarios = cont.querySelector('#panel-usuarios');
+      let tabActiva = 'pendientes';
+      let usuariosCache = null;
+
+      // Cargar y renderizar
+      const cargarUsuarios = async () => {
+        const contenido = cont.querySelector('#usuarios-contenido');
+        contenido.innerHTML = '<p class="panel-usuarios__cargando">Cargando…</p>';
+        const { data, error } = await this.cliente().rpc('admin_listar_usuarios');
+        if (error) {
+          contenido.innerHTML = `<p class="panel-usuarios__error">Error: ${error.message}</p>`;
+          return;
+        }
+        usuariosCache = data || [];
+        actualizarContadores();
+        renderTab();
+      };
+
+      const actualizarContadores = () => {
+        const pend = usuariosCache.filter(u => !u.aprobado).length;
+        const apro = usuariosCache.filter(u => u.aprobado).length;
+        cont.querySelector('#num-pendientes').textContent = pend;
+        cont.querySelector('#num-aprobados').textContent = apro;
+
+        // Badge del icono en cabecera
+        const badge = cont.querySelector('#badge-pendientes');
+        if (pend > 0) {
+          badge.textContent = pend;
+          badge.hidden = false;
+        } else {
+          badge.hidden = true;
+        }
+      };
+
+      const fmtFecha = iso => {
+        if (!iso) return '—';
+        const d = new Date(iso);
+        return d.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' });
+      };
+
+      const renderTab = () => {
+        const contenido = cont.querySelector('#usuarios-contenido');
+        if (!usuariosCache) return;
+        const lista = usuariosCache.filter(u => tabActiva === 'pendientes' ? !u.aprobado : u.aprobado);
+        if (lista.length === 0) {
+          contenido.innerHTML = `<p class="panel-usuarios__vacio">${tabActiva === 'pendientes' ? '✓ No hay solicitudes pendientes.' : 'Aún no hay usuarios aprobados.'}</p>`;
+          return;
+        }
+        contenido.innerHTML = lista.map(u => `
+          <div class="usuario-fila${u.es_admin ? ' usuario-fila--admin' : ''}" data-id="${u.id}">
+            <div class="usuario-fila__info">
+              <div class="usuario-fila__email">
+                ${u.email}
+                ${u.es_admin ? '<span class="usuario-fila__badge">admin</span>' : ''}
+              </div>
+              <div class="usuario-fila__meta">
+                Registrado ${fmtFecha(u.created_at)}${u.last_sign_in ? ` · Último acceso ${fmtFecha(u.last_sign_in)}` : ''}
+              </div>
+            </div>
+            <div class="usuario-fila__acciones">
+              ${!u.aprobado ? `
+                <button type="button" class="btn btn--acierto" data-accion="aprobar">✓ Aprobar</button>
+                <button type="button" class="btn-icono usuario-fila__eliminar" data-accion="eliminar" title="Eliminar usuario">🗑</button>
+              ` : `
+                ${!u.es_admin ? `<button type="button" class="btn btn--secundario" data-accion="revocar">Revocar</button>` : ''}
+              `}
+            </div>
+          </div>
+        `).join('');
+
+        // Handlers de cada fila
+        contenido.querySelectorAll('.usuario-fila').forEach(fila => {
+          const id = fila.dataset.id;
+          fila.querySelector('[data-accion="aprobar"]')?.addEventListener('click', async () => {
+            await cambiarAprobado(id, true);
+          });
+          fila.querySelector('[data-accion="revocar"]')?.addEventListener('click', async () => {
+            if (!confirm('¿Revocar la aprobación de este usuario? Dejará de poder acceder hasta que lo vuelvas a aprobar.')) return;
+            await cambiarAprobado(id, false);
+          });
+          fila.querySelector('[data-accion="eliminar"]')?.addEventListener('click', async () => {
+            const email = fila.querySelector('.usuario-fila__email').textContent.trim();
+            if (!confirm(`¿Eliminar definitivamente al usuario "${email}"? Se borra su cuenta y todos sus datos. Esta acción no se puede deshacer.`)) return;
+            const { error } = await this.cliente().rpc('admin_eliminar_usuario', { user_id: id });
+            if (error) return alert('Error: ' + error.message);
+            await cargarUsuarios();
+          });
+        });
+      };
+
+      const cambiarAprobado = async (userId, nuevoEstado) => {
+        const { error } = await this.cliente().rpc('admin_cambiar_aprobado', {
+          user_id: userId, nuevo_estado: nuevoEstado
+        });
+        if (error) return alert('Error: ' + error.message);
+        await cargarUsuarios();
+      };
+
+      // Handler tabs
+      cont.querySelectorAll('.panel-usuarios__tab').forEach(t => {
+        t.addEventListener('click', () => {
+          tabActiva = t.dataset.tab;
+          cont.querySelectorAll('.panel-usuarios__tab').forEach(x => x.classList.toggle('activo', x === t));
+          renderTab();
+        });
+      });
+
+      // Abrir / cerrar panel
+      btnUsuarios.addEventListener('click', (e) => {
+        e.stopPropagation();
+        // Cerrar el otro panel si estaba abierto
+        panel.hidden = true;
+        btnAjustes.classList.remove('activo');
+        panelUsuarios.hidden = !panelUsuarios.hidden;
+        btnUsuarios.classList.toggle('activo', !panelUsuarios.hidden);
+        if (!panelUsuarios.hidden) cargarUsuarios();
+      });
+      document.addEventListener('click', (e) => {
+        if (panelUsuarios.hidden) return;
+        if (!panelUsuarios.contains(e.target) && e.target !== btnUsuarios) {
+          panelUsuarios.hidden = true;
+          btnUsuarios.classList.remove('activo');
+        }
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !panelUsuarios.hidden) {
+          panelUsuarios.hidden = true;
+          btnUsuarios.classList.remove('activo');
+        }
+      });
+
+      // Al abrir el panel de ajustes, cerrar el de usuarios (si estaba abierto)
+      btnAjustes.addEventListener('click', () => {
+        if (!panelUsuarios.hidden) {
+          panelUsuarios.hidden = true;
+          btnUsuarios.classList.remove('activo');
+        }
+      });
+
+      // Cargar contadores al inicio (para el badge, aunque el panel esté cerrado)
+      cargarUsuarios();
+    }
   },
 
   _pintarToggle(clave, etiqueta, descripcion) {
