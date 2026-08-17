@@ -12,7 +12,9 @@
 <li><a href="#4-almacenamiento-de-las-copias-la-regla-3-2-1">4. Almacenamiento de las copias: la regla 3-2-1</a></li>
 <li><a href="#5-recuperación-ante-desastres-rto-y-rpo">5. Recuperación ante desastres: RTO y RPO</a></li>
 <li><a href="#6-planes-de-continuidad-y-pruebas-de-recuperación">6. Planes de continuidad y pruebas de recuperación</a></li>
-<li><a href="#7-resumen-esquemático">7. Resumen esquemático</a></li>
+<li><a href="#7-resumen-para-estudiar">7. Resumen para estudiar</a></li>
+<li><a href="#8-conceptos-clave">8. Conceptos clave</a></li>
+<li><a href="#9-posibles-puntos-de-examen">9. Posibles puntos de examen</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
@@ -22,13 +24,6 @@
 <th><strong>⚠️ No confundir</strong><br>Este tema da por conocidos los conceptos generales de seguridad (Tema 22) y el marco del ENS (Tema 21), que exige la continuidad de la actividad como uno de sus requisitos mínimos. Las tecnologías físicas de almacenamiento (discos, cintas) se estudiaron en el Tema 6, y la virtualización y sus instantáneas (snapshots), en el Tema 10; aquí se retoman solo como herramientas al servicio de la política de salvaguarda.</th>
 </tr>
 </table></div>
-<p>1. Política de salvaguarda de la información: concepto</p>
-<p>2. Tipos de copias de seguridad</p>
-<p>3. Estrategias de rotación y retención</p>
-<p>4. Almacenamiento de las copias: la regla 3-2-1</p>
-<p>5. Recuperación ante desastres: RTO y RPO</p>
-<p>6. Planes de continuidad y pruebas de recuperación</p>
-<p>7. Resumen esquemático</p>
 <h2 id="1-política-de-salvaguarda-de-la-información-concepto" class="tema-h2">1. Política de salvaguarda de la información: concepto</h2>
 <p>Una <strong>política de salvaguarda de la información</strong> es el conjunto de directrices, procedimientos y medidas orientadas a garantizar que la información pueda recuperarse ante cualquier incidente que la ponga en riesgo: un fallo de hardware, un error humano, un ciberataque (por ejemplo, un ransomware que cifra los datos) o un desastre físico sobre las instalaciones (Tema 22).</p>
 <p>El propio ENS (Tema 21) recoge la «continuidad de la actividad» como uno de sus requisitos mínimos (art. 26): los sistemas deben disponer de copias de seguridad y de los mecanismos necesarios para garantizar la continuidad de las operaciones en caso de pérdida de los medios habituales, desarrollado en el Anexo II a través de medidas específicas de copias de seguridad y de continuidad del servicio.</p>
@@ -65,6 +60,11 @@
 <th><strong>⚠️ No confundir</strong><br>La diferencia entre copia incremental y diferencial es uno de los puntos que más se confunden en el examen: la incremental siempre toma como referencia la copia inmediatamente anterior, sea del tipo que sea (por eso, para restaurar, hacen falta todas las incrementales intermedias); la diferencial toma siempre como referencia la última copia completa (por eso, para restaurar, basta con la completa y la última diferencial, sin necesidad de las diferenciales intermedias).</th>
 </tr>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Ejemplo</strong><br>Supuesto práctico habitual: copia completa el domingo e incrementales de lunes a viernes. Si el sistema falla el jueves por la tarde, para restaurar se necesita la <strong>completa del domingo + las incrementales de lunes, martes, miércoles y jueves</strong> (4 copias, en orden). Con el mismo calendario pero copias <strong>diferenciales</strong>, bastarían <strong>2</strong>: la completa del domingo y la diferencial del jueves. Saber contar cuántas copias hacen falta para restaurar es la pregunta de cálculo típica de este tema.</th>
+</tr>
+</table></div>
 <h2 id="3-estrategias-de-rotación-y-retención" class="tema-h2">3. Estrategias de rotación y retención</h2>
 <p>La <strong>política de retención</strong> define durante cuánto tiempo se conservan las copias de seguridad antes de sobrescribirlas o eliminarlas, equilibrando la necesidad de poder recuperar información antigua con el coste de almacenamiento que supone conservar copias indefinidamente.</p>
 <p>Un esquema de rotación clásico es el denominado <strong>abuelo-padre-hijo (GFS, Grandfather-Father-Son)</strong>: las copias diarias («hijo») se sobrescriben cada semana; las copias semanales («padre») se conservan durante un mes; y las copias mensuales («abuelo») se conservan durante un año o más. De este modo se dispone de múltiples puntos de recuperación en distintas escalas de tiempo (reciente, del último mes, del último año) sin necesidad de almacenar todas las copias diarias de forma indefinida.</p>
@@ -98,7 +98,7 @@
 <th><strong>⚠️ No confundir</strong><br>Uno de los errores más habituales —tanto en organizaciones reales como en respuestas de examen— es asumir que, por el hecho de realizar copias de seguridad de forma periódica, la información ya está protegida. Una copia de seguridad que nunca se ha probado a restaurar no ofrece ninguna garantía real: puede estar corrupta, incompleta, o el procedimiento de restauración puede no funcionar como se esperaba en el momento en que realmente se necesita. Las pruebas periódicas de restauración son, por tanto, una parte tan esencial de la política de salvaguarda como la propia realización de las copias.</th>
 </tr>
 </table></div>
-<h2 id="7-resumen-esquemático" class="tema-h2">7. Resumen esquemático</h2>
+<h2 id="7-resumen-para-estudiar" class="tema-h2">7. Resumen para estudiar</h2>
 <ul class="tema-lista">
 <li><strong>Política de salvaguarda</strong>: procedimientos para garantizar la recuperación de la información; requisito mínimo del ENS (continuidad de la actividad).</li>
 <li><strong>Tipos de copia</strong>: completa (restauración simple, backup lento), incremental (respecto a la última copia de cualquier tipo; backup rápido, restauración compleja) y diferencial (respecto a la última completa; equilibrio intermedio).</li>
@@ -106,6 +106,32 @@
 <li><strong>Regla 3-2-1</strong> (y su evolución 3-2-1-1-0): 3 copias, 2 soportes distintos, 1 copia offsite, 1 copia offline/inmutable frente al ransomware, 0 errores verificados; cifrado de las copias que salen de las instalaciones.</li>
 <li><strong>RTO frente a RPO</strong>: RTO = tiempo máximo de parada aceptable; RPO = cantidad máxima de datos (en tiempo) que se puede permitir perder; objetivos independientes entre sí.</li>
 <li><strong>Planes de continuidad (BCP/DRP)</strong>: procedimientos, recursos y responsabilidades para recuperar los servicios críticos dentro de los objetivos RTO/RPO; las pruebas periódicas de restauración son tan necesarias como las propias copias.</li>
+</ul>
+
+<h2 id="8-conceptos-clave" class="tema-h2">8. Conceptos clave</h2>
+<ul class="tema-lista">
+<li><strong>Política de salvaguarda</strong> y su encaje en el ENS (art. 26, continuidad).</li>
+<li><strong>Copia completa / incremental / diferencial</strong> y sus referencias de partida.</li>
+<li><strong>Retención</strong> y rotación <strong>GFS (abuelo-padre-hijo)</strong>.</li>
+<li><strong>Regla 3-2-1</strong> y evolución <strong>3-2-1-1-0</strong> (copia offline/inmutable, 0 errores).</li>
+<li><strong>Cifrado de las copias</strong> (especialmente offsite/nube).</li>
+<li><strong>RTO</strong> (tiempo de parada) vs. <strong>RPO</strong> (datos perdidos).</li>
+<li><strong>BCP y DRP</strong>; pruebas periódicas de restauración.</li>
+<li>Relación con <strong>ransomware</strong> (Tema 25) y snapshots (Tema 10).</li>
+</ul>
+
+<h2 id="9-posibles-puntos-de-examen" class="tema-h2">9. Posibles puntos de examen</h2>
+<ul class="tema-lista">
+<li>Distinguir <strong>incremental de diferencial</strong> por su copia de referencia — la pregunta estrella del tema.</li>
+<li><strong>Calcular cuántas copias</strong> hacen falta para restaurar en un calendario dado (supuesto práctico).</li>
+<li>Qué tipo de copia ocupa más espacio y cuál restaura más rápido.</li>
+<li>El significado de cada cifra de la <strong>regla 3-2-1</strong> (y de la 3-2-1-1-0).</li>
+<li>Por qué se exige una copia <strong>offline/inmutable</strong> (ransomware que ataca los backups).</li>
+<li>Definiciones de <strong>RTO y RPO</strong> y no confundirlos (¿cuánto tiempo caídos? vs. ¿cuántos datos perdidos?).</li>
+<li>Qué implica reducir el RPO (copias/replicación más frecuentes) o el RTO (soluciones de alta disponibilidad).</li>
+<li>Diferencia entre <strong>BCP y DRP</strong>.</li>
+<li>Qué es el esquema <strong>GFS</strong> y qué conserva cada «generación».</li>
+<li>Por qué una copia <strong>no probada</strong> no garantiza nada (pruebas de restauración).</li>
 </ul>
   </div>
 </article>

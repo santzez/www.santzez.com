@@ -14,7 +14,9 @@
 <li><a href="#6-planificación-y-gestión-multitarea">6. Planificación y gestión multitarea</a></li>
 <li><a href="#7-entradasalida">7. Entrada/salida</a></li>
 <li><a href="#8-sistemas-de-archivo">8. Sistemas de archivo</a></li>
-<li><a href="#9-resumen-esquemático">9. Resumen esquemático</a></li>
+<li><a href="#9-resumen-para-estudiar">9. Resumen para estudiar</a></li>
+<li><a href="#10-conceptos-clave">10. Conceptos clave</a></li>
+<li><a href="#11-posibles-puntos-de-examen">11. Posibles puntos de examen</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
@@ -24,15 +26,6 @@
 <th><strong>⚠️ No confundir</strong><br>Este tema estudia los conceptos generales, comunes a cualquier sistema operativo. No es el lugar para el detalle de un sistema operativo concreto: Windows de usuario se estudia en el Tema 11, Windows Server en el Tema 12 y Linux de servidor en el Tema 13.<br>Tampoco es el lugar para la organización lógica de la información dentro de los ficheros (registros, claves, métodos de acceso), que se vio en el Tema 4, ni para la virtualización de sistemas operativos completos, que se estudia en el Tema 10.</th>
 </tr>
 </table></div>
-<p>1. Concepto y funciones de un sistema operativo</p>
-<p>2. Clasificación de los sistemas operativos</p>
-<p>3. Arquitectura de un sistema operativo</p>
-<p>4. Administración de memoria</p>
-<p>5. Procesos y subprocesos</p>
-<p>6. Planificación y gestión multitarea</p>
-<p>7. Entrada/salida</p>
-<p>8. Sistemas de archivo</p>
-<p>9. Resumen esquemático</p>
 <h2 id="1-concepto-y-funciones-de-un-sistema-operativo" class="tema-h2">1. Concepto y funciones de un sistema operativo</h2>
 <p>Un <strong>sistema operativo (SO)</strong> es el software de sistema que actúa de intermediario entre el hardware del ordenador y el usuario o las aplicaciones que se ejecutan sobre él. Se carga al arrancar el equipo y permanece en ejecución mientras este funciona, gestionando todos sus recursos: la CPU, la memoria, los dispositivos periféricos (Tema 8) y el almacenamiento.</p>
 <p>Clásicamente se explica el papel de un SO desde dos puntos de vista complementarios:</p>
@@ -143,6 +136,11 @@
 </tr>
 </table></div>
 <p>Cuando la memoria física no es suficiente para todos los procesos activos, el SO recurre al <strong>swapping</strong> o intercambio: mover páginas o procesos completos entre la RAM y una zona reservada del disco (memoria de intercambio o swap), liberando así RAM para lo que se está usando en cada momento a costa de una pérdida de rendimiento, ya que el disco es mucho más lento que la RAM.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Si el sistema pasa más tiempo moviendo páginas entre RAM y disco que ejecutando trabajo útil, se produce la <strong>hiperpaginación (thrashing)</strong>: el rendimiento se desploma aunque la CPU parezca ocupada. Es el diagnóstico típico de un equipo con poca RAM «que va lentísimo y el disco no para de trabajar» — situación que un técnico de CAU reconoce a menudo, y cuya solución de fondo es ampliar la RAM o reducir la carga.</th>
+</tr>
+</table></div>
 <h2 id="5-procesos-y-subprocesos" class="tema-h2">5. Procesos y subprocesos</h2>
 <p>Un <strong>proceso</strong> es una instancia de un programa en ejecución: el propio código, más los datos que maneja, más el conjunto de recursos que el SO le ha asignado (memoria, archivos abiertos, tiempo de CPU…). El SO representa cada proceso mediante una estructura de control llamada <strong>PCB (Process Control Block)</strong>, donde guarda su estado, el valor de sus registros, su contador de programa y demás información necesaria para gestionarlo.</p>
 <h4 class="tema-h4">Estados de un proceso</h4>
@@ -190,6 +188,14 @@
 <th><strong>⚠️ No confundir</strong><br>No debe confundirse la multitarea entre procesos (varios programas distintos ejecutándose «a la vez») con la multihebra dentro de un proceso (un mismo programa dividiendo su trabajo en varios hilos). Ambas se apoyan en el mismo mecanismo de planificación del SO, pero operan a niveles distintos: el proceso es la unidad de asignación de recursos; el hilo, la unidad de ejecución sobre la CPU.</th>
 </tr>
 </table></div>
+<h4 class="tema-h4">Concurrencia e interbloqueo (deadlock)</h4>
+<p>Cuando varios procesos compiten por recursos compartidos puede producirse un <strong>interbloqueo (deadlock)</strong>: dos o más procesos quedan bloqueados <strong>indefinidamente</strong>, cada uno esperando un recurso que retiene otro. El ejemplo clásico: el proceso A tiene la impresora y espera el escáner; el proceso B tiene el escáner y espera la impresora — ninguno avanzará jamás. El SO puede prevenir, evitar o detectar y resolver los interbloqueos (por ejemplo, abortando uno de los procesos implicados).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br><strong>Interbloqueo (deadlock)</strong> ≠ <strong>inanición (starvation)</strong>: en el interbloqueo los procesos se esperan mutuamente y ninguno puede avanzar nunca; en la inanición un proceso sí podría avanzar, pero nunca le llega el turno porque el planificador atiende siempre a otros de mayor prioridad.</th>
+</tr>
+</table></div>
+
 <h2 id="6-planificación-y-gestión-multitarea" class="tema-h2">6. Planificación y gestión multitarea</h2>
 <p>El <strong>planificador (scheduler)</strong> es el componente del SO que decide, en cada instante, qué proceso o hilo de entre los que están en estado «listo» pasa a ocupar la CPU. Gracias a él, un sistema con una única CPU puede dar la sensación de ejecutar varios programas a la vez: en realidad los va alternando a gran velocidad, en operaciones llamadas <strong>cambios de contexto (context switch)</strong>, en las que el SO guarda el estado del proceso saliente y restaura el del proceso entrante.</p>
 <h4 class="tema-h4">Multitarea cooperativa frente a expulsiva</h4>
@@ -274,7 +280,7 @@
 <th><strong>⚠️ No confundir</strong><br>Este punto no debe confundirse con el Tema 4 (Ficheros): allí se estudió la organización lógica de la información dentro de un fichero (registros, claves, métodos de inserción y acceso) desde el punto de vista de los datos; aquí se estudia el papel del sistema operativo como gestor del conjunto de ficheros y directorios sobre el almacenamiento.</th>
 </tr>
 </table></div>
-<h2 id="9-resumen-esquemático" class="tema-h2">9. Resumen esquemático</h2>
+<h2 id="9-resumen-para-estudiar" class="tema-h2">9. Resumen para estudiar</h2>
 <ul class="tema-lista">
 <li><strong>Sistema operativo</strong>: intermediario entre hardware y programas; gestor de recursos y máquina virtual extendida.</li>
 <li><strong>Clasificación</strong>: monousuario/multiusuario, monotarea/multitarea, uniprocesador/multiprocesador, por lotes/tiempo compartido/tiempo real, y por ámbito (escritorio, servidor, embebido, móvil).</li>
@@ -284,6 +290,37 @@
 <li><strong>Planificación</strong>: cooperativa frente a expulsiva (estándar actual); algoritmos FCFS, SJF, Round Robin (con quantum) y por prioridades.</li>
 <li><strong>Entrada/salida</strong>: drivers y buffers; polling, interrupciones y DMA (el más eficiente, libera a la CPU).</li>
 <li><strong>Sistemas de archivo</strong>: organización jerárquica de ficheros y metadatos; el detalle de cada sistema de archivos concreto se estudia en el tema del SO correspondiente.</li>
+<li><strong>Concurrencia</strong>: interbloqueo (espera circular indefinida) vs. inanición (nunca llega el turno); hiperpaginación (thrashing) cuando el swapping domina el sistema.</li>
+</ul>
+
+<h2 id="10-conceptos-clave" class="tema-h2">10. Conceptos clave</h2>
+<ul class="tema-lista">
+<li><strong>SO como gestor de recursos y máquina virtual extendida</strong>.</li>
+<li><strong>Clasificaciones</strong>: mono/multiusuario, mono/multitarea, lotes / tiempo compartido / tiempo real (duro y blando).</li>
+<li><strong>Kernel, modo núcleo vs. modo usuario, llamada al sistema</strong>.</li>
+<li><strong>Monolítico vs. microkernel vs. híbrido</strong> (Linux monolítico modular; Windows NT y macOS híbridos).</li>
+<li><strong>Memoria virtual, paginación (fija/interna) vs. segmentación (variable/externa), swapping, thrashing</strong>.</li>
+<li><strong>Proceso, PCB, estados</strong> (nuevo, listo, ejecución, bloqueado, terminado).</li>
+<li><strong>Hilo (thread)</strong> vs. proceso; multithreading.</li>
+<li><strong>Interbloqueo vs. inanición</strong>.</li>
+<li><strong>Planificador, cambio de contexto, multitarea cooperativa vs. expulsiva</strong>.</li>
+<li><strong>FCFS, SJF, Round Robin (quantum), prioridades</strong>.</li>
+<li><strong>Drivers, buffers, polling, interrupciones, DMA</strong>.</li>
+<li><strong>Sistema de archivos</strong> y metadatos.</li>
+</ul>
+
+<h2 id="11-posibles-puntos-de-examen" class="tema-h2">11. Posibles puntos de examen</h2>
+<ul class="tema-lista">
+<li>Los dos papeles del SO: <strong>gestor de recursos</strong> y <strong>máquina virtual extendida</strong>.</li>
+<li>Distinguir <strong>tiempo compartido de tiempo real</strong> (y tiempo real duro vs. blando).</li>
+<li>Qué ocurre en una <strong>llamada al sistema</strong> (cambio controlado de modo usuario a modo núcleo).</li>
+<li>Emparejar arquitectura de núcleo con su propiedad: monolítico → rendimiento; microkernel → robustez; híbrido → lo habitual hoy.</li>
+<li><strong>Paginación vs. segmentación</strong> y el tipo de fragmentación de cada una — pregunta clásica.</li>
+<li>El <strong>orden de los estados de un proceso</strong> y qué transición provoca una espera de E/S (ejecución → bloqueado).</li>
+<li>Diferencias <strong>proceso vs. hilo</strong> (memoria propia vs. compartida).</li>
+<li>Reconocer un <strong>interbloqueo</strong> en un supuesto y distinguirlo de la inanición.</li>
+<li>Qué es el <strong>quantum</strong> de Round Robin y el efecto de elegirlo mal.</li>
+<li>Cuál es el método de E/S <strong>más eficiente</strong> para la CPU (DMA) y por qué.</li>
 </ul>
   </div>
 </article>

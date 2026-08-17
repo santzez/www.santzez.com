@@ -13,7 +13,9 @@
 <li><a href="#5-permisos-de-recurso-compartido-share">5. Permisos de recurso compartido (share)</a></li>
 <li><a href="#6-permisos-ntfs">6. Permisos NTFS</a></li>
 <li><a href="#7-combinación-de-permisos-de-recurso-compartido-y-ntfs">7. Combinación de permisos de recurso compartido y NTFS</a></li>
-<li><a href="#8-resumen-esquemático">8. Resumen esquemático</a></li>
+<li><a href="#8-resumen-para-estudiar">8. Resumen para estudiar</a></li>
+<li><a href="#9-conceptos-clave">9. Conceptos clave</a></li>
+<li><a href="#10-posibles-puntos-de-examen">10. Posibles puntos de examen</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
@@ -23,14 +25,6 @@
 <th><strong>⚠️ No confundir</strong><br>Este tema da por conocidos los fundamentos del Directorio Activo (Tema 12) y la administración de usuarios y grupos (Tema 14), sobre los que se apoyan los permisos que aquí se explican. El protocolo SMB/CIFS que hace posible compartir carpetas en red ya se citó en el Tema 7 al hablar de NAS; aquí se retoma desde el punto de vista de la administración práctica de un servidor Windows.</th>
 </tr>
 </table></div>
-<p>1. El Visor de eventos: estructura y registros</p>
-<p>2. Niveles de gravedad y tipos de eventos</p>
-<p>3. Supervisión práctica: vistas personalizadas y reenvío de eventos</p>
-<p>4. Recursos compartidos: carpetas e impresoras</p>
-<p>5. Permisos de recurso compartido (share)</p>
-<p>6. Permisos NTFS</p>
-<p>7. Combinación de permisos de recurso compartido y NTFS</p>
-<p>8. Resumen esquemático</p>
 <h2 id="1-el-visor-de-eventos-estructura-y-registros" class="tema-h2">1. El Visor de eventos: estructura y registros</h2>
 <p>El <strong>Visor de eventos (Event Viewer, eventvwr.msc)</strong> es la consola MMC (Tema 12) que permite consultar los registros (logs) de sucesos que Windows y las aplicaciones van generando durante su funcionamiento, y almacena en archivos con extensión `.evtx`. Cada suceso registrado incluye, entre otros datos, un identificador de evento (Event ID) que identifica el tipo de suceso, el origen (el componente que lo generó), la fecha y hora, y una descripción del propio evento.</p>
 <ul class="tema-lista">
@@ -138,7 +132,12 @@
 </tr>
 </table></div>
 <p>Cuando el acceso a la carpeta se realiza <strong>de forma local</strong> (directamente en el equipo, sin pasar por la red), los permisos de recurso compartido no intervienen en absoluto: solo se aplican los permisos NTFS.</p>
-<h2 id="8-resumen-esquemático" class="tema-h2">8. Resumen esquemático</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Ejemplo</strong><br>Supuesto práctico típico: una usuaria pertenece al grupo «Contabilidad», con permiso NTFS de <strong>Modificar</strong> sobre la carpeta, pero el recurso compartido concede solo <strong>Lectura</strong> a ese grupo. Al acceder por la red (\\servidor\contabilidad) podrá abrir los documentos pero no guardarlos: el permiso efectivo es Lectura, el más restrictivo. Si además perteneciera a otro grupo con una <strong>denegación</strong> explícita sobre esa carpeta, no podría ni abrirla: Denegar gana siempre.</th>
+</tr>
+</table></div>
+<h2 id="8-resumen-para-estudiar" class="tema-h2">8. Resumen para estudiar</h2>
 <ul class="tema-lista">
 <li><strong>Visor de eventos</strong>: consulta los registros Aplicación, Seguridad, Sistema e Instalación (.evtx); niveles Información, Advertencia, Error, Crítico y Auditoría correcta/con error.</li>
 <li><strong>Supervisión práctica</strong>: vistas personalizadas para filtrar, tareas adjuntas a eventos para automatizar respuestas, y reenvío de eventos (WEF, sobre WinRM) para centralizar la supervisión de varios equipos.</li>
@@ -146,6 +145,32 @@
 <li><strong>Permisos de recurso compartido</strong>: Lectura, Cambiar y Control total; solo aplican al acceso por red.</li>
 <li><strong>Permisos NTFS</strong>: más granulares, aplican siempre (local y red); ACL formada por ACE; herencia entre carpetas y archivos; Denegar prevalece siempre sobre Permitir.</li>
 <li><strong>Combinación</strong>: al acceder por red se aplica el permiso más restrictivo entre el de recurso compartido y el NTFS; buena práctica: recurso compartido en Control total y control fino solo por NTFS.</li>
+</ul>
+
+<h2 id="9-conceptos-clave" class="tema-h2">9. Conceptos clave</h2>
+<ul class="tema-lista">
+<li><strong>Visor de eventos (eventvwr.msc)</strong>, archivos <strong>.evtx</strong>, <strong>Event ID</strong>.</li>
+<li>Registros: <strong>Aplicación, Seguridad, Sistema, Instalación, Eventos reenviados</strong>.</li>
+<li>Niveles: Información, Advertencia, Error, <strong>Crítico</strong>, Auditoría correcta/con error.</li>
+<li><strong>Vistas personalizadas, tareas adjuntas, WEF/WinRM, SIEM</strong>.</li>
+<li><strong>Ruta UNC (\\servidor\recurso)</strong>, SMB/CIFS, recursos administrativos <strong>$</strong>.</li>
+<li><strong>Permisos share</strong>: Lectura / Cambiar / Control total (solo por red).</li>
+<li><strong>Permisos NTFS</strong>: básicos y avanzados; <strong>ACL/ACE</strong>; herencia.</li>
+<li><strong>Denegar &gt; Permitir</strong>; permiso efectivo = el <strong>más restrictivo</strong> entre share y NTFS.</li>
+</ul>
+
+<h2 id="10-posibles-puntos-de-examen" class="tema-h2">10. Posibles puntos de examen</h2>
+<ul class="tema-lista">
+<li>Emparejar cada <strong>registro</strong> del Visor de eventos con su contenido (Sistema vs. Aplicación vs. Seguridad).</li>
+<li>Ordenar los <strong>niveles de gravedad</strong> y saber cuáles son exclusivos del registro de Seguridad.</li>
+<li>Qué requiere el registro de <strong>Seguridad</strong> para registrar accesos (auditoría habilitada por GPO).</li>
+<li>Qué es el <strong>reenvío de eventos (WEF)</strong> y sobre qué servicio se apoya (WinRM).</li>
+<li>Interpretar una <strong>ruta UNC</strong> y reconocer un recurso administrativo oculto (C$, ADMIN$).</li>
+<li>Los tres <strong>permisos de recurso compartido</strong> y su ámbito (solo red).</li>
+<li>Diferencia entre permisos <strong>share y NTFS</strong> (cuándo aplica cada uno) — pregunta casi segura.</li>
+<li>Calcular el <strong>permiso efectivo</strong> en un supuesto (regla del más restrictivo).</li>
+<li>La regla <strong>«Denegar prevalece sobre Permitir»</strong>.</li>
+<li>Qué es una <strong>ACL</strong> y qué es la <strong>herencia</strong> de permisos.</li>
 </ul>
   </div>
 </article>

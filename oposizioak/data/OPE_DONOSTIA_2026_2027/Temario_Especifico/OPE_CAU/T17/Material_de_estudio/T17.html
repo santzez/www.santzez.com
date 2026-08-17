@@ -12,7 +12,9 @@
 <li><a href="#4-protocolos-de-recepción-pop3-e-imap">4. Protocolos de recepción: POP3 e IMAP</a></li>
 <li><a href="#5-autenticación-y-lucha-contra-el-spam-spf-dkim-y-dmarc">5. Autenticación y lucha contra el spam: SPF, DKIM y DMARC</a></li>
 <li><a href="#6-clientes-de-correo">6. Clientes de correo</a></li>
-<li><a href="#7-resumen-esquemático">7. Resumen esquemático</a></li>
+<li><a href="#7-resumen-para-estudiar">7. Resumen para estudiar</a></li>
+<li><a href="#8-conceptos-clave">8. Conceptos clave</a></li>
+<li><a href="#9-posibles-puntos-de-examen">9. Posibles puntos de examen</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
@@ -22,13 +24,6 @@
 <th><strong>⚠️ No confundir</strong><br>Este tema estudia el correo electrónico como servicio genérico, con independencia del fabricante. El cliente de correo IBM Notes o HCL Notes, con sus particularidades de configuración y funcionalidades, se estudia específicamente en el Tema 18.</th>
 </tr>
 </table></div>
-<p>1. Arquitectura del correo electrónico</p>
-<p>2. El mensaje de correo: estructura y formato</p>
-<p>3. Protocolo de envío: SMTP</p>
-<p>4. Protocolos de recepción: POP3 e IMAP</p>
-<p>5. Autenticación y lucha contra el spam: SPF, DKIM y DMARC</p>
-<p>6. Clientes de correo</p>
-<p>7. Resumen esquemático</p>
 <h2 id="1-arquitectura-del-correo-electrónico" class="tema-h2">1. Arquitectura del correo electrónico</h2>
 <p>El correo electrónico se apoya en tres tipos de componentes que cooperan para que un mensaje llegue de un remitente a un destinatario:</p>
 <ul class="tema-lista">
@@ -63,6 +58,11 @@
 <tr>
 <td>465</td>
 <td>SMTPS: envío autenticado sobre una conexión cifrada con TLS desde el inicio</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br>Puertos del correo — versión sin cifrar / con TLS: <strong>SMTP 25-587/465 · POP3 110/995 · IMAP 143/993</strong>. Regla rápida: los puertos seguros de recepción acaban en 9x (995 y 993), y el de envío autenticado moderno es el <strong>587</strong>.</th>
 </tr>
 </table></div>
 <h2 id="4-protocolos-de-recepción-pop3-e-imap" class="tema-h2">4. Protocolos de recepción: POP3 e IMAP</h2>
@@ -115,7 +115,7 @@
 <li><strong>Webmail</strong>: acceso al correo a través de un navegador web (Tema 20), mediante la interfaz HTTP/HTTPS que ofrece el propio servidor de correo (por ejemplo, Outlook Web Access/OWA o Gmail), sin necesidad de instalar ni configurar ningún programa cliente.</li>
 <li><strong>Clientes móviles</strong>: aplicaciones nativas del sistema operativo móvil o de un proveedor concreto, que igualmente se apoyan en los protocolos estándar o en protocolos propietarios de sincronización, para ofrecer una experiencia de correo, calendario y contactos integrada en el dispositivo.</li>
 </ul>
-<h2 id="7-resumen-esquemático" class="tema-h2">7. Resumen esquemático</h2>
+<h2 id="7-resumen-para-estudiar" class="tema-h2">7. Resumen para estudiar</h2>
 <ul class="tema-lista">
 <li><strong>Arquitectura</strong>: MUA (cliente) → MTA (encaminamiento vía SMTP, localizado con el registro MX del dominio) → MDA (entrega en el buzón del destinatario).</li>
 <li><strong>Mensaje</strong>: cabeceras (From, To, Cc, Cco, Subject, Received…) y cuerpo; MIME permite transportar HTML y adjuntos sobre un protocolo pensado originalmente solo para texto plano.</li>
@@ -123,6 +123,31 @@
 <li><strong>POP3 frente a IMAP</strong>: POP3 descarga y borra del servidor (un solo dispositivo); IMAP mantiene todo en el servidor y sincroniza varios dispositivos (estándar actual).</li>
 <li><strong>SPF, DKIM y DMARC</strong>: SPF autoriza servidores de envío; DKIM firma criptográficamente el contenido; DMARC decide qué hacer si fallan las comprobaciones anteriores y ofrece informes; los tres se publican como registros DNS del dominio.</li>
 <li><strong>Clientes de correo</strong>: de escritorio (Outlook, Thunderbird, IBM/HCL Notes), webmail (a través del navegador) y clientes móviles.</li>
+</ul>
+
+<h2 id="8-conceptos-clave" class="tema-h2">8. Conceptos clave</h2>
+<ul class="tema-lista">
+<li><strong>MUA / MTA / MDA</strong> y el <strong>registro MX</strong>.</li>
+<li><strong>Cabeceras</strong> (From, To, Cc, Cco/Bcc, Subject, Received, Message-ID) y <strong>MIME</strong> (Base64).</li>
+<li><strong>SMTP</strong> = solo envío; puertos <strong>25 / 587 / 465</strong>.</li>
+<li><strong>POP3 (110/995) vs. IMAP (143/993)</strong>.</li>
+<li><strong>SPF / DKIM / DMARC</strong> (autoriza servidores / firma el contenido / decide e informa).</li>
+<li><strong>Spoofing, spam, phishing</strong> (detalle en Tema 25).</li>
+<li><strong>Clientes</strong>: escritorio (MAPI, ActiveSync), webmail (OWA), móviles.</li>
+</ul>
+
+<h2 id="9-posibles-puntos-de-examen" class="tema-h2">9. Posibles puntos de examen</h2>
+<ul class="tema-lista">
+<li>Emparejar <strong>MUA/MTA/MDA</strong> con su función — pregunta clásica.</li>
+<li>Qué registro DNS localiza el servidor de correo de un dominio (<strong>MX</strong>).</li>
+<li><strong>POP3 vs. IMAP</strong>: cuál sincroniza varios dispositivos y cuál descarga y borra — la pregunta más probable del tema.</li>
+<li>Emparejar cada <strong>protocolo con su puerto</strong> (25/587/465, 110/995, 143/993).</li>
+<li>Para qué sirve <strong>MIME</strong> (adjuntos y HTML sobre un protocolo de texto).</li>
+<li>Qué protocolo <strong>nunca</strong> se usa para recibir correo (SMTP).</li>
+<li>Diferencia entre <strong>Cc y Cco/Bcc</strong> (visibilidad de los destinatarios).</li>
+<li>Emparejar <strong>SPF / DKIM / DMARC</strong> con lo que verifica o decide cada uno.</li>
+<li>Qué cabecera permite rastrear los servidores por los que pasó un mensaje (<strong>Received</strong>).</li>
+<li>Ventaja del <strong>webmail</strong> frente al cliente de escritorio (sin instalación/configuración).</li>
 </ul>
   </div>
 </article>

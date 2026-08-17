@@ -12,7 +12,9 @@
 <li><a href="#4-indexacion">4. Indexación</a></li>
 <li><a href="#5-formatos-y-caracteristicas-de-los-ficheros">5. Formatos y características de los ficheros</a></li>
 <li><a href="#6-operaciones-sobre-ficheros">6. Operaciones sobre ficheros</a></li>
-<li><a href="#7-resumen-esquematico">7. Resumen esquemático</a></li>
+<li><a href="#7-resumen-para-estudiar">7. Resumen para estudiar</a></li>
+<li><a href="#8-conceptos-clave">8. Conceptos clave</a></li>
+<li><a href="#9-posibles-puntos-de-examen">9. Posibles puntos de examen</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
@@ -52,7 +54,7 @@
 </ul>
 <h4 class="tema-h4">Organización directa (o relativa, hash)</h4>
 <ul class="tema-lista">
-<li>La posición física de cada registro se calcula matemáticamente a partir de su clave, normalmente mediante una función de dispersión (hash) que transforma el valor de la clave en una dirección de almacenamiento.</li>
+<li>La posición física de cada registro se calcula matemáticamente a partir de su clave, normalmente mediante una <strong>función de dispersión (hash)</strong> que transforma el valor de la clave en una dirección de almacenamiento.</li>
 <li>Su gran ventaja es la velocidad de acceso a un registro concreto, sin necesidad de recorrer los anteriores.</li>
 <li>Su inconveniente principal son las colisiones: cuando la función hash asigna la misma posición a dos claves distintas, hace falta una estrategia de resolución (por ejemplo, encadenar los registros en conflicto o usar una zona de desbordamiento).</li>
 </ul>
@@ -198,7 +200,7 @@
 </tr>
 </table></div>
 
-<h2 id="7-resumen-esquematico" class="tema-h2">7. Resumen esquemático</h2>
+<h2 id="7-resumen-para-estudiar" class="tema-h2">7. Resumen para estudiar</h2>
 <ul class="tema-lista">
 <li>Jerarquía de la información: carácter → campo → registro → fichero (→ base de datos, en el Tema 5); clave primaria (identifica de forma única) frente a clave secundaria (de búsqueda).</li>
 <li>Organización: secuencial (eficiente para recorrer todo, lenta para un registro concreto), directa/hash (acceso muy rápido, con riesgo de colisiones) y secuencial indexada (combina ambas mediante un índice).</li>
@@ -209,6 +211,32 @@
 <li>Características de fichero: nombre, extensión, tamaño, fechas, atributos, ubicación y permisos.</li>
 <li>Operaciones: de fichero completo (crear, abrir, cerrar, eliminar, renombrar, ordenar, fusionar, reorganizar) y de registro (leer, insertar, actualizar, buscar, borrar física o lógicamente).</li>
 <li>Este tema sienta las bases conceptuales (registro, clave, índice) que se reutilizan en el Tema 5 (bases de datos); el soporte físico se estudia en el Tema 6 y los sistemas de archivos concretos, en el Tema 9.</li>
+</ul>
+
+<h2 id="8-conceptos-clave" class="tema-h2">8. Conceptos clave</h2>
+<ul class="tema-lista">
+<li><strong>Jerarquía</strong>: carácter → campo → registro → fichero.</li>
+<li><strong>Clave primaria vs. clave secundaria</strong>.</li>
+<li><strong>Organización secuencial, directa (hash) y secuencial indexada</strong>.</li>
+<li><strong>Colisión</strong> (hash) y <strong>zona de desbordamiento (overflow)</strong>.</li>
+<li><strong>Acceso secuencial, directo e ISAM</strong>.</li>
+<li><strong>Índice primario/secundario</strong> y <strong>denso/disperso</strong>; índice multinivel.</li>
+<li><strong>Longitud fija vs. variable</strong>; texto vs. binario; CSV/JSON/XML.</li>
+<li><strong>Fichero maestro vs. de movimientos</strong> (procesamiento batch).</li>
+<li><strong>Borrado lógico vs. físico</strong>; reorganización/compactación.</li>
+</ul>
+
+<h2 id="9-posibles-puntos-de-examen" class="tema-h2">9. Posibles puntos de examen</h2>
+<ul class="tema-lista">
+<li>El orden correcto de la <strong>jerarquía de la información</strong> (carácter → campo → registro → fichero).</li>
+<li>Reconocer la <strong>organización</strong> adecuada para un caso dado (recorridos completos → secuencial; consultas puntuales → directa; ambos → indexada).</li>
+<li>Qué es una <strong>colisión</strong> y en qué organización se produce.</li>
+<li>Diferencia entre <strong>índice denso y disperso</strong>, y entre <strong>primario y secundario</strong> (dos clasificaciones independientes).</li>
+<li>Qué formato exige registros de <strong>longitud fija</strong> para calcular posiciones (organización directa).</li>
+<li>Identificar un <strong>fichero maestro</strong> frente a uno <strong>de movimientos</strong> en un supuesto.</li>
+<li>Diferencia entre <strong>borrado lógico y físico</strong>, y para qué sirve la <strong>reorganización</strong>.</li>
+<li>Qué significa <strong>ISAM</strong> y cómo combina índice y recorrido secuencial.</li>
+<li>Ejemplos de <strong>formatos de intercambio</strong>: CSV (delimitado), JSON, XML.</li>
 </ul>
 
   </div>

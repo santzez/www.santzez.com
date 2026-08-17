@@ -12,7 +12,9 @@
 <li><a href="#4-funcionalidades-básicas-de-un-navegador">4. Funcionalidades básicas de un navegador</a></li>
 <li><a href="#5-configuración-extensiones-y-perfiles">5. Configuración: extensiones y perfiles</a></li>
 <li><a href="#6-privacidad-y-seguridad-básica-en-el-navegador">6. Privacidad y seguridad básica en el navegador</a></li>
-<li><a href="#7-resumen-esquemático">7. Resumen esquemático</a></li>
+<li><a href="#7-resumen-para-estudiar">7. Resumen para estudiar</a></li>
+<li><a href="#8-conceptos-clave">8. Conceptos clave</a></li>
+<li><a href="#9-posibles-puntos-de-examen">9. Posibles puntos de examen</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
@@ -22,13 +24,6 @@
 <th><strong>⚠️ No confundir</strong><br>Este tema se centra en el navegador como aplicación cliente. El protocolo HTTP/HTTPS sobre el que se comunica con los servidores web, y el resto de protocolos y arquitectura de Internet, se estudian con más detalle en el Bloque IV (Tema 31). Aquí basta con reconocer que el navegador actúa como cliente frente a un servidor web.</th>
 </tr>
 </table></div>
-<p>1. Qué es un navegador web</p>
-<p>2. Motores de renderizado y de JavaScript</p>
-<p>3. Navegadores habituales</p>
-<p>4. Funcionalidades básicas de un navegador</p>
-<p>5. Configuración: extensiones y perfiles</p>
-<p>6. Privacidad y seguridad básica en el navegador</p>
-<p>7. Resumen esquemático</p>
 <h2 id="1-qué-es-un-navegador-web" class="tema-h2">1. Qué es un navegador web</h2>
 <p>Un <strong>navegador web</strong> es una aplicación que permite acceder, interpretar y mostrar recursos alojados en un servidor web, comunicándose con él mediante el protocolo HTTP o su variante cifrada HTTPS. El navegador actúa como <strong>cliente</strong>: solicita al servidor un recurso identificado por una <strong>URL (Uniform Resource Locator)</strong>, recibe el código correspondiente (fundamentalmente HTML, CSS y JavaScript) y lo procesa para presentarlo visualmente a la persona usuaria, en un proceso conocido como <strong>renderizado</strong>.</p>
 <h2 id="2-motores-de-renderizado-y-de-javascript" class="tema-h2">2. Motores de renderizado y de JavaScript</h2>
@@ -104,7 +99,12 @@
 <p>El icono de <strong>candado</strong> en la barra de direcciones indica que la conexión con el sitio está cifrada mediante TLS (HTTPS) y que su certificado digital es válido (Tema 24). Es importante no sobreinterpretar este indicador: certifica que la comunicación está cifrada y que el sitio es quien dice ser según su certificado, pero <strong>no garantiza que el contenido del sitio sea legítimo, fiable o esté libre de intenciones maliciosas</strong> (Tema 25); hoy en día la inmensa mayoría de los sitios de phishing también utilizan HTTPS.</p>
 <p>Las <strong>cookies</strong> son pequeños archivos que un sitio web almacena en el navegador para recordar información entre visitas: una sesión iniciada, preferencias de idioma, o el seguimiento de la actividad del usuario con fines publicitarios. Se distingue entre <strong>cookies propias</strong> (first-party, del propio sitio visitado) y <strong>cookies de terceros</strong> (third-party, utilizadas habitualmente para el seguimiento publicitario entre distintos sitios web), estas últimas cada vez más restringidas por defecto en los navegadores modernos por motivos de privacidad.</p>
 <p>Mantener el navegador <strong>actualizado</strong> a su última versión es una de las medidas de seguridad más básicas y efectivas: buena parte de sus actualizaciones corrigen vulnerabilidades que podrían ser aprovechadas por un sitio malicioso (Tema 25).</p>
-<h2 id="7-resumen-esquemático" class="tema-h2">7. Resumen esquemático</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Ejemplo</strong><br>Diagnóstico clásico de CAU con una aplicación web corporativa que «no funciona»: probar en <strong>modo incógnito</strong> (descarta extensiones y cookies corruptas), <strong>borrar caché y cookies</strong> del sitio, probar en <strong>otro navegador</strong> (descarta un problema del motor concreto) y revisar la consola de <strong>DevTools</strong> (F12) por errores. Esta secuencia resuelve o acota la gran mayoría de incidencias «de navegador».</th>
+</tr>
+</table></div>
+<h2 id="7-resumen-para-estudiar" class="tema-h2">7. Resumen para estudiar</h2>
 <ul class="tema-lista">
 <li><strong>Navegador</strong>: cliente HTTP/HTTPS que solicita recursos mediante una URL y los renderiza para la persona usuaria.</li>
 <li><strong>Motores</strong>: de renderizado (Blink, WebKit, Gecko) y de JavaScript (V8, JavaScriptCore, SpiderMonkey); dominio actual muy marcado de Blink/Chromium.</li>
@@ -112,6 +112,33 @@
 <li><strong>Funcionalidades básicas</strong>: pestañas, historial, marcadores, descargas, modo incógnito (no es anonimato real), DevTools y sincronización de cuenta.</li>
 <li><strong>Extensiones y perfiles</strong>: amplían funcionalidad (con riesgo de seguridad si no son de confianza) y separan configuraciones/sesiones respectivamente.</li>
 <li><strong>Privacidad y seguridad</strong>: el candado/HTTPS certifica cifrado, no legitimidad del sitio; cookies propias frente a cookies de terceros; mantener el navegador actualizado como medida de seguridad básica.</li>
+</ul>
+
+<h2 id="8-conceptos-clave" class="tema-h2">8. Conceptos clave</h2>
+<ul class="tema-lista">
+<li><strong>Navegador = cliente HTTP/HTTPS</strong>; URL; renderizado.</li>
+<li><strong>Motores de renderizado</strong>: Blink (Chrome/Edge/Opera), WebKit (Safari), Gecko (Firefox).</li>
+<li><strong>Motores JavaScript</strong>: V8, JavaScriptCore, SpiderMonkey.</li>
+<li><strong>Omnibox, pestañas, historial, marcadores, descargas, sincronización</strong>.</li>
+<li><strong>Modo incógnito</strong> (qué protege y qué no).</li>
+<li><strong>DevTools (F12)</strong>.</li>
+<li><strong>Extensiones</strong> (riesgos, Manifest V3) y <strong>perfiles</strong>.</li>
+<li><strong>Candado/HTTPS ≠ sitio legítimo</strong>; certificado TLS (Tema 24).</li>
+<li><strong>Cookies propias vs. de terceros</strong>.</li>
+</ul>
+
+<h2 id="9-posibles-puntos-de-examen" class="tema-h2">9. Posibles puntos de examen</h2>
+<ul class="tema-lista">
+<li>Emparejar <strong>navegador con su motor de renderizado</strong> (Chrome-Blink, Safari-WebKit, Firefox-Gecko) — pregunta clásica.</li>
+<li>Qué motor adoptó <strong>Edge desde 2020</strong> (Chromium/Blink).</li>
+<li>Qué es el motor <strong>V8</strong> y dónde se usa (Chrome/Edge, y Node.js).</li>
+<li>Qué protege realmente el <strong>modo incógnito</strong> (y qué no oculta) — muy preguntable.</li>
+<li>Qué significa el <strong>candado HTTPS</strong> y por qué no garantiza legitimidad (phishing con HTTPS).</li>
+<li>Diferencia entre <strong>cookies propias y de terceros</strong>.</li>
+<li>Riesgos de las <strong>extensiones</strong> y para qué sirven los <strong>perfiles</strong>.</li>
+<li>Para qué sirven las <strong>DevTools</strong> en el diagnóstico de una web.</li>
+<li>Qué es la <strong>omnibox</strong> (barra de direcciones + buscador).</li>
+<li>Por qué es clave mantener el navegador <strong>actualizado</strong>.</li>
 </ul>
   </div>
 </article>

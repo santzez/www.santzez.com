@@ -12,7 +12,9 @@
 <li><a href="#4-casos-de-uso">4. Casos de uso</a></li>
 <li><a href="#5-ventajas-y-desventajas">5. Ventajas y desventajas</a></li>
 <li><a href="#6-panorama-actual-de-la-virtualización">6. Panorama actual de la virtualización</a></li>
-<li><a href="#7-resumen-esquemático">7. Resumen esquemático</a></li>
+<li><a href="#7-resumen-para-estudiar">7. Resumen para estudiar</a></li>
+<li><a href="#8-conceptos-clave">8. Conceptos clave</a></li>
+<li><a href="#9-posibles-puntos-de-examen">9. Posibles puntos de examen</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
@@ -22,13 +24,6 @@
 <th><strong>⚠️ No confundir</strong><br>Este tema trata la virtualización como tecnología general. No es el lugar para el detalle de cómo se instala o administra un sistema operativo concreto sobre una máquina virtual: eso corresponde a los Temas 11 (Windows de usuario), 12 (Windows Server) y 13 (Linux de servidor).<br>Tampoco es el lugar para la computación en la nube (cloud computing), que se apoya en la virtualización pero se estudia como tema propio en el Bloque IV (Tema 32).</th>
 </tr>
 </table></div>
-<p>1. Concepto de virtualización</p>
-<p>2. El hipervisor: concepto y tipos</p>
-<p>3. Tipos de virtualización</p>
-<p>4. Casos de uso</p>
-<p>5. Ventajas y desventajas</p>
-<p>6. Panorama actual de la virtualización</p>
-<p>7. Resumen esquemático</p>
 <h2 id="1-concepto-de-virtualización" class="tema-h2">1. Concepto de virtualización</h2>
 <p>La <strong>virtualización</strong> es la tecnología que permite crear una versión virtual —simulada por software— de un recurso físico, de forma que ese recurso pueda compartirse entre varios usos independientes entre sí como si cada uno dispusiera de su propio recurso dedicado. Aplicada a equipos y servidores, la virtualización permite ejecutar varios ordenadores «completos» de forma simultánea sobre un único equipo físico, cada uno con su propio sistema operativo, funcionando de forma aislada de los demás.</p>
 <p>En este contexto se manejan tres términos clave:</p>
@@ -152,7 +147,7 @@
 <th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Este panorama comercial cambia con rapidez y no conviene memorizar cifras concretas de precios, sino entender la tendencia de fondo: el mercado de la virtualización, tradicionalmente dominado por una única solución de referencia, se ha vuelto más fragmentado, con alternativas de pago (Hyper-V) y de código abierto (KVM/Proxmox VE) ganando peso frente al modelo clásico de VMware. Los conceptos fundamentales —hipervisor, máquina virtual, snapshot, migración en caliente— son comunes a todas las soluciones, sea cual sea el fabricante.</th>
 </tr>
 </table></div>
-<h2 id="7-resumen-esquemático" class="tema-h2">7. Resumen esquemático</h2>
+<h2 id="7-resumen-para-estudiar" class="tema-h2">7. Resumen para estudiar</h2>
 <ul class="tema-lista">
 <li><strong>Virtualización</strong>: crear versiones virtuales de un recurso físico; host (físico), guest (SO virtualizado), VM (el «ordenador» definido por software).</li>
 <li><strong>Hipervisor</strong>: capa que crea y gestiona las VM. Tipo 1 (bare-metal, sobre el hardware, mayor rendimiento: ESXi, Hyper-V, KVM) frente a tipo 2 (alojado sobre un SO, más sencillo: VirtualBox, VMware Workstation).</li>
@@ -161,6 +156,32 @@
 <li><strong>Ventajas</strong>: mejor aprovechamiento del hardware, ahorro de costes, aislamiento, rapidez de despliegue, snapshots y migración en caliente.</li>
 <li><strong>Desventajas</strong>: overhead de rendimiento, punto único de fallo del host, mayor complejidad de gestión y coste de licenciamiento.</li>
 <li><strong>Panorama actual</strong>: fin de las licencias perpetuas de VMware (Broadcom, desde 2024) y auge de alternativas como Hyper-V y KVM/Proxmox VE.</li>
+</ul>
+
+<h2 id="8-conceptos-clave" class="tema-h2">8. Conceptos clave</h2>
+<ul class="tema-lista">
+<li><strong>Host / guest / máquina virtual (VM)</strong>.</li>
+<li><strong>Hipervisor (VMM)</strong>: tipo 1 (bare-metal) vs. tipo 2 (alojado), con ejemplos de cada uno.</li>
+<li><strong>Virtualización completa vs. paravirtualización</strong>; extensiones VT-x / AMD-V.</li>
+<li><strong>Contenedores vs. máquinas virtuales</strong> (kernel compartido vs. hardware virtualizado).</li>
+<li><strong>Consolidación de servidores, VDI, DR</strong>.</li>
+<li><strong>Snapshot</strong> y <strong>migración en caliente</strong> (vMotion / Live Migration).</li>
+<li><strong>Overhead, punto único de fallo, overcommit</strong>.</li>
+<li><strong>KVM, Proxmox VE, Hyper-V, VMware ESXi</strong> y el cambio de licenciamiento de VMware/Broadcom.</li>
+</ul>
+
+<h2 id="9-posibles-puntos-de-examen" class="tema-h2">9. Posibles puntos de examen</h2>
+<ul class="tema-lista">
+<li>Distinguir <strong>hipervisor tipo 1 y tipo 2</strong> y clasificar ejemplos concretos (ESXi, VirtualBox, Hyper-V…) — la pregunta más probable.</li>
+<li>El caso especial de <strong>Hyper-V</strong> (parece tipo 2 pero es tipo 1).</li>
+<li>Definiciones de <strong>host, guest y VM</strong>.</li>
+<li>Diferencia entre <strong>virtualización completa y paravirtualización</strong> (¿el SO invitado sabe que está virtualizado?).</li>
+<li>Diferencias <strong>VM vs. contenedor</strong> (SO propio vs. kernel compartido; peso y arranque).</li>
+<li>Qué es un <strong>snapshot</strong> y su uso típico antes de un cambio arriesgado.</li>
+<li>Qué permite la <strong>migración en caliente</strong> y qué problema resuelve (mantenimiento sin corte).</li>
+<li>Identificar la <strong>consolidación de servidores</strong> como caso de uso principal.</li>
+<li>La principal desventaja estructural: el host como <strong>punto único de fallo</strong>.</li>
+<li>Qué son <strong>VT-x / AMD-V</strong> (extensiones de virtualización por hardware).</li>
 </ul>
   </div>
 </article>

@@ -13,7 +13,9 @@
 <li><a href="#5-administración-básica-y-acceso-remoto">5. Administración básica y acceso remoto</a></li>
 <li><a href="#6-mantenimiento-básico-actualizaciones">6. Mantenimiento básico: actualizaciones</a></li>
 <li><a href="#7-monitorización">7. Monitorización</a></li>
-<li><a href="#8-resumen-esquemático">8. Resumen esquemático</a></li>
+<li><a href="#8-resumen-para-estudiar">8. Resumen para estudiar</a></li>
+<li><a href="#9-conceptos-clave">9. Conceptos clave</a></li>
+<li><a href="#10-posibles-puntos-de-examen">10. Posibles puntos de examen</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
@@ -23,14 +25,6 @@
 <th><strong>⚠️ No confundir</strong><br>Este tema se centra en Linux como sistema operativo de servidor. Los conceptos generales de cualquier sistema operativo (procesos, memoria, planificación) se estudiaron en el Tema 9, y no se repiten aquí. Windows Server y el Directorio Activo se estudiaron en el Tema 12; aunque cumplen funciones equivalentes, cada sistema tiene sus propias herramientas y terminología, que conviene no mezclar.</th>
 </tr>
 </table></div>
-<p>1. Distribuciones Linux de servidor</p>
-<p>2. Instalación de un servidor Linux</p>
-<p>3. Gestión de paquetes y del software</p>
-<p>4. Arranque y gestión de servicios: systemd</p>
-<p>5. Administración básica y acceso remoto</p>
-<p>6. Mantenimiento básico: actualizaciones</p>
-<p>7. Monitorización</p>
-<p>8. Resumen esquemático</p>
 <h2 id="1-distribuciones-linux-de-servidor" class="tema-h2">1. Distribuciones Linux de servidor</h2>
 <p>Linux, en sentido estricto, es solo el núcleo (kernel, Tema 9). Lo que se instala y usa en la práctica es una <strong>distribución (distro)</strong>: el núcleo Linux empaquetado junto con un gestor de paquetes, un conjunto de herramientas del sistema y unas configuraciones por defecto. Las distribuciones de servidor más usadas se agrupan en familias, según el gestor de paquetes y el linaje del que derivan.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -180,7 +174,7 @@
 <th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Resulta útil comparar las herramientas de Linux con sus equivalentes de Windows Server, vistas en el Tema 12: journalctl / /var/log equivalen al Visor de eventos; top / htop equivalen al Administrador de tareas; systemctl equivale, a grandes rasgos, a la consola de servicios (services.msc). Los conceptos que hay detrás son los mismos en ambos sistemas operativos; lo que cambia es la herramienta concreta y su sintaxis.</th>
 </tr>
 </table></div>
-<h2 id="8-resumen-esquemático" class="tema-h2">8. Resumen esquemático</h2>
+<h2 id="8-resumen-para-estudiar" class="tema-h2">8. Resumen para estudiar</h2>
 <ul class="tema-lista">
 <li><strong>Distribuciones</strong>: familias Debian/Ubuntu (APT, .deb), Red Hat (DNF, .rpm — Rocky Linux y AlmaLinux como sucesores gratuitos de CentOS) y SUSE (Zypper); Ubuntu Server LTS como opción muy extendida de propósito general.</li>
 <li><strong>Instalación</strong>: filosofía minimalista, sin entorno gráfico; instalación manual o desatendida (kickstart / preseed / cloud-init); LVM para particionado flexible; sistemas de archivo ext4, XFS y Btrfs.</li>
@@ -189,6 +183,34 @@
 <li><strong>Administración</strong>: acceso remoto por SSH (cifrado, puerto 22, preferible autenticación por clave); usuario root frente a usuarios normales con sudo.</li>
 <li><strong>Actualizaciones</strong>: actualización manual o automática (unattended-upgrades / dnf-automatic); ciclo de vida y fin de soporte de cada distribución, igual de relevante que en Windows; live patching del núcleo en casos avanzados.</li>
 <li><strong>Monitorización</strong>: top/htop, ps, free, df, du, uptime, ss y journalctl/var/log como herramientas básicas; Nagios, Zabbix o Prometheus+Grafana para monitorización centralizada a mayor escala.</li>
+</ul>
+
+<h2 id="9-conceptos-clave" class="tema-h2">9. Conceptos clave</h2>
+<ul class="tema-lista">
+<li><strong>Distribución</strong> = kernel + gestor de paquetes + herramientas; familias <strong>Debian/Ubuntu (APT, .deb)</strong>, <strong>Red Hat (DNF, .rpm)</strong> y SUSE (Zypper).</li>
+<li><strong>CentOS descontinuada → Rocky Linux / AlmaLinux</strong>; Ubuntu <strong>LTS</strong>.</li>
+<li><strong>Instalación desatendida</strong>: kickstart / preseed / cloud-init.</li>
+<li><strong>LVM</strong>; sistemas de archivo <strong>ext4, XFS, Btrfs</strong>.</li>
+<li><strong>Repositorio y dependencias</strong>; apt update vs. apt upgrade.</li>
+<li><strong>systemd (PID 1), systemctl (start/enable), journalctl</strong>.</li>
+<li><strong>SSH (puerto 22, claves)</strong>; <strong>root y sudo</strong>.</li>
+<li><strong>unattended-upgrades / dnf-automatic</strong>; ciclo de vida y ESM.</li>
+<li><strong>top/htop, ps, free, df, du, uptime, ss, /var/log</strong>.</li>
+<li>Equivalencias con Windows: journalctl↔Visor de eventos, top↔Administrador de tareas, systemctl↔services.msc.</li>
+</ul>
+
+<h2 id="10-posibles-puntos-de-examen" class="tema-h2">10. Posibles puntos de examen</h2>
+<ul class="tema-lista">
+<li>Emparejar <strong>familia de distribución con su gestor y formato de paquete</strong> (APT/.deb vs. DNF/.rpm) — pregunta casi segura.</li>
+<li>Qué pasó con <strong>CentOS</strong> y cuáles son sus sucesores compatibles con RHEL.</li>
+<li>Diferencia entre <strong>apt update y apt upgrade</strong>.</li>
+<li>Qué es <strong>systemd</strong> (PID 1, no es el kernel) y qué hace <strong>systemctl enable</strong> frente a start.</li>
+<li>Con qué comando se consulta el <strong>journal</strong> (journalctl) y dónde están los logs clásicos (/var/log).</li>
+<li>Puerto por defecto de <strong>SSH (22)</strong> y por qué se prefiere autenticación por clave.</li>
+<li>Función de <strong>sudo</strong> frente a iniciar sesión como root.</li>
+<li>Qué aporta <strong>LVM</strong> frente al particionado clásico.</li>
+<li>Emparejar comandos de monitorización con su función (free → memoria, df → disco, ss → red…).</li>
+<li>Qué significa <strong>LTS</strong> y por qué importa el fin de soporte de una distribución.</li>
 </ul>
   </div>
 </article>

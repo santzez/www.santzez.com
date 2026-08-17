@@ -10,67 +10,78 @@
 <li><a href="#2-nas-network-attached-storage">2. NAS (Network Attached Storage)</a></li>
 <li><a href="#3-san-storage-area-network">3. SAN (Storage Area Network)</a></li>
 <li><a href="#4-diferencias-entre-nas-y-san">4. Diferencias entre NAS y SAN</a></li>
-<li><a href="#5-resumen-esquemático">5. Resumen esquemático</a></li>
+<li><a href="#5-resumen-para-estudiar">5. Resumen para estudiar</a></li>
+<li><a href="#6-conceptos-clave">6. Conceptos clave</a></li>
+<li><a href="#7-posibles-puntos-de-examen">7. Posibles puntos de examen</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
 
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>Este tema da por conocidos los discos y el RAID vistos en el Tema 6: aquí se explica cómo esos discos se agrupan y se ponen accesibles a través de la red, no cómo funciona cada disco por separado.<br>El funcionamiento detallado de las redes y del protocolo TCP/IP se estudia en el Bloque IV (Temas 27 y 28): aquí basta con identificar qué tipo de red usa cada arquitectura, sin entrar en el funcionamiento interno de Ethernet o TCP/IP.</th>
+<th><strong>⚠️ No confundir</strong><br>Este tema da por conocidos los discos y el RAID vistos en el <strong>Tema 6</strong>: aquí se explica cómo esos discos se agrupan y se ponen accesibles a través de la red, no cómo funciona cada disco por separado.<br>El funcionamiento detallado de las redes y del protocolo TCP/IP se estudia en el Bloque IV (<strong>Temas 27 y 28</strong>): aquí basta con identificar qué tipo de red usa cada arquitectura, sin entrar en el funcionamiento interno de Ethernet o TCP/IP. Y cuidado con las siglas: esta <strong>SAN</strong> (Storage Area Network) no tiene nada que ver con la clasificación geográfica de redes LAN/MAN/WAN del Tema 28.</th>
 </tr>
 </table></div>
-<p>1. Del almacenamiento local al almacenamiento en red</p>
-<p>2. NAS (Network Attached Storage)</p>
-<p>3. SAN (Storage Area Network)</p>
-<p>4. Diferencias entre NAS y SAN</p>
-<p>5. Resumen esquemático</p>
+
 <h2 id="1-del-almacenamiento-local-al-almacenamiento-en-red" class="tema-h2">1. Del almacenamiento local al almacenamiento en red</h2>
-<p>En el Tema 6 vimos los discos (HDD, SSD) como dispositivos que se conectan directamente a un equipo o servidor mediante interfaces como SATA, SAS o NVMe, y que a veces se combinan en RAID para ganar rendimiento o redundancia.</p>
-<p>Cuando el volumen de datos crece, o cuando varios servidores y usuarios necesitan compartir el mismo almacenamiento, empieza a interesar «sacar» los discos fuera de cada equipo y ponerlos accesibles a través de la red. De esa necesidad surgen dos arquitecturas de almacenamiento en red: NAS y SAN.</p>
+<p>En el Tema 6 vimos los discos (HDD, SSD) como dispositivos que se conectan directamente a un equipo o servidor mediante interfaces como SATA, SAS o NVMe, y que a veces se combinan en RAID para ganar rendimiento o redundancia. Esa configuración —los discos dentro del propio equipo o directamente conectados a él— se denomina <strong>DAS (Direct Attached Storage</strong>, almacenamiento de conexión directa<strong>)</strong>: solo el equipo al que están conectados puede usarlos directamente.</p>
+<p>Cuando el volumen de datos crece, o cuando varios servidores y usuarios necesitan <strong>compartir</strong> el mismo almacenamiento, empieza a interesar «sacar» los discos fuera de cada equipo y ponerlos accesibles a través de la red. De esa necesidad surgen dos arquitecturas de almacenamiento en red: <strong>NAS</strong> y <strong>SAN</strong>.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>NAS trabaja a nivel de fichero: el cliente ve carpetas y archivos compartidos, igual que un disco de red.<br>SAN trabaja a nivel de bloque: el servidor ve el almacenamiento remoto como si fuera un disco local propio, sin «saber» realmente que está en red.<br>Esta diferencia de nivel de acceso es la clave para distinguir ambas arquitecturas.</th>
+<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br><strong>NAS trabaja a nivel de fichero</strong>: el cliente ve carpetas y archivos compartidos, igual que un disco de red.<br><strong>SAN trabaja a nivel de bloque</strong>: el servidor ve el almacenamiento remoto como si fuera un disco local propio, sin «saber» realmente que está en red.<br>Esta diferencia de <strong>nivel de acceso</strong> es la clave para distinguir ambas arquitecturas, y la pregunta más probable del tema.</th>
 </tr>
 </table></div>
+
 <h2 id="2-nas-network-attached-storage" class="tema-h2">2. NAS (Network Attached Storage)</h2>
-<p>Un NAS es un dispositivo de almacenamiento conectado directamente a la red local (LAN), con su propio sistema operativo especializado, que ofrece almacenamiento a nivel de fichero a múltiples clientes de forma simultánea, a través de protocolos de red estándar.</p>
+<p>Un <strong>NAS</strong> es un dispositivo de almacenamiento conectado directamente a la <strong>red local (LAN)</strong>, con su propio sistema operativo especializado, que ofrece almacenamiento <strong>a nivel de fichero</strong> a múltiples clientes de forma simultánea, a través de protocolos de red estándar.</p>
 <h4 class="tema-h4">Componentes</h4>
 <ul class="tema-lista">
-<li>Cabezal NAS (controladora): el «cerebro» del dispositivo, con su propio sistema operativo, encargado de gestionar los discos internos y de atender las peticiones de los clientes.</li>
-<li>Discos internos: normalmente configurados en RAID, para ofrecer redundancia y/o mejor rendimiento.</li>
-<li>Interfaz de red: habitualmente Ethernet, a través de la cual el NAS se conecta directamente a la LAN ya existente, sin necesidad de infraestructura adicional.</li>
+<li><strong>Cabezal NAS (controladora)</strong>: el «cerebro» del dispositivo, con su propio sistema operativo, encargado de gestionar los discos internos y de atender las peticiones de los clientes.</li>
+<li><strong>Discos internos</strong>: normalmente configurados en <strong>RAID</strong>, para ofrecer redundancia y/o mejor rendimiento.</li>
+<li><strong>Interfaz de red</strong>: habitualmente Ethernet, a través de la cual el NAS se conecta directamente a la LAN ya existente, sin necesidad de infraestructura adicional.</li>
 </ul>
 <h4 class="tema-h4">Protocolos habituales</h4>
 <ul class="tema-lista">
-<li>NFS (Network File System): protocolo de compartición de ficheros típico en entornos Unix/Linux.</li>
-<li>SMB/CIFS (Server Message Block / Common Internet File System): protocolo de compartición de ficheros típico en entornos Windows.</li>
+<li><strong>NFS (Network File System)</strong>: protocolo de compartición de ficheros típico en entornos <strong>Unix/Linux</strong>.</li>
+<li><strong>SMB/CIFS (Server Message Block / Common Internet File System)</strong>: protocolo de compartición de ficheros típico en entornos <strong>Windows</strong> (los recursos compartidos de red que se estudian en el Tema 15 viajan por SMB).</li>
 </ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br><strong>NFS → uNix/liNux · SMB → windowS.</strong> Ambos son protocolos de <strong>fichero</strong>, y por tanto de NAS; si en la pregunta aparecen Fibre Channel o iSCSI, la respuesta apunta a SAN.</th>
+</tr>
+</table></div>
 <h4 class="tema-h4">Funciones</h4>
 <ul class="tema-lista">
-<li>Centralizar archivos compartidos, accesibles para muchos usuarios o equipos a la vez.</li>
-<li>Servir como destino centralizado de copias de seguridad.</li>
-<li>Uso típico en compartición de ficheros de oficina, streaming multimedia doméstico y entornos donde prima la sencillez de despliegue sobre el rendimiento extremo.</li>
-</ul>
-<h2 id="3-san-storage-area-network" class="tema-h2">3. SAN (Storage Area Network)</h2>
-<p>Una SAN es una red de almacenamiento dedicada y de alta velocidad, habitualmente separada de la red local de datos, que conecta servidores con dispositivos de almacenamiento a nivel de bloque. Cada servidor «ve» el espacio de almacenamiento que se le asigna como si fuera un disco local propio.</p>
-<h4 class="tema-h4">Componentes</h4>
-<ul class="tema-lista">
-<li>Cabinas de almacenamiento (storage arrays): conjuntos de discos con sus propias controladoras, que exponen volúmenes lógicos o LUN (Logical Unit Number) a los servidores.</li>
-<li>Conmutadores SAN (switches): forman la red dedicada que interconecta servidores y cabinas de almacenamiento.</li>
-<li>HBA (Host Bus Adapter): tarjeta instalada en cada servidor que le permite conectarse a la red SAN.</li>
-</ul>
-<h4 class="tema-h4">Protocolos habituales</h4>
-<ul class="tema-lista">
-<li>Fibre Channel (FC): protocolo de alta velocidad y baja latencia, tradicionalmente el más usado en SAN, sobre una red dedicada de fibra óptica.</li>
-<li>iSCSI (Internet SCSI): encapsula comandos SCSI sobre TCP/IP, lo que permite montar una SAN sobre una red Ethernet convencional, con un coste menor que Fibre Channel.</li>
+<li><strong>Centralizar archivos compartidos</strong>, accesibles para muchos usuarios o equipos a la vez.</li>
+<li>Servir como <strong>destino centralizado de copias de seguridad</strong>.</li>
+<li>Uso típico en compartición de ficheros de oficina, streaming multimedia doméstico y entornos donde prima la <strong>sencillez de despliegue</strong> sobre el rendimiento extremo.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Un LUN (Logical Unit Number) es el identificador del volumen de almacenamiento que la cabina expone al servidor: desde el punto de vista del servidor, un LUN se comporta como un disco físico más, aunque en realidad resida en la cabina, al otro lado de la red SAN.<br>No hace falta profundizar más en su implementación para este tema.</th>
+<th><strong>💡 Ejemplo</strong><br>En una organización, las «unidades de red» que ven las personas usuarias (por ejemplo, la unidad del departamento o la carpeta común del servicio) suelen residir físicamente en un NAS o en un servidor de ficheros: cada usuario ve carpetas y documentos, y los permisos determinan quién accede a qué (los permisos de red se estudian en el Tema 15).</th>
 </tr>
 </table></div>
-<p>Por su rendimiento y baja latencia, la SAN es la arquitectura habitual para dar soporte a bases de datos, entornos de virtualización y, en general, aplicaciones críticas que necesitan tratar el almacenamiento remoto exactamente igual que si fuera local.</p>
+
+<h2 id="3-san-storage-area-network" class="tema-h2">3. SAN (Storage Area Network)</h2>
+<p>Una <strong>SAN</strong> es una <strong>red de almacenamiento dedicada y de alta velocidad</strong>, habitualmente separada de la red local de datos, que conecta servidores con dispositivos de almacenamiento <strong>a nivel de bloque</strong>. Cada servidor «ve» el espacio de almacenamiento que se le asigna como si fuera un disco local propio.</p>
+<h4 class="tema-h4">Componentes</h4>
+<ul class="tema-lista">
+<li><strong>Cabinas de almacenamiento (storage arrays)</strong>: conjuntos de discos con sus propias controladoras, que exponen volúmenes lógicos o <strong>LUN (Logical Unit Number)</strong> a los servidores.</li>
+<li><strong>Conmutadores SAN (switches)</strong>: forman la red dedicada que interconecta servidores y cabinas de almacenamiento (en Fibre Channel, ese entramado de switches se denomina <strong>fabric</strong>).</li>
+<li><strong>HBA (Host Bus Adapter)</strong>: tarjeta instalada en cada servidor que le permite conectarse a la red SAN.</li>
+</ul>
+<h4 class="tema-h4">Protocolos habituales</h4>
+<ul class="tema-lista">
+<li><strong>Fibre Channel (FC)</strong>: protocolo de alta velocidad y baja latencia, tradicionalmente el más usado en SAN, sobre una <strong>red dedicada</strong> de fibra óptica.</li>
+<li><strong>iSCSI (Internet SCSI)</strong>: encapsula comandos SCSI <strong>sobre TCP/IP</strong>, lo que permite montar una SAN sobre una red Ethernet convencional, con un <strong>coste menor</strong> que Fibre Channel.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Un <strong>LUN (Logical Unit Number)</strong> es el identificador del volumen de almacenamiento que la cabina expone al servidor: desde el punto de vista del servidor, un LUN se comporta como un disco físico más, aunque en realidad resida en la cabina, al otro lado de la red SAN. Existe también <strong>FCoE</strong> (Fibre Channel over Ethernet), que transporta Fibre Channel sobre redes Ethernet, y cabinas «unificadas» que ofrecen a la vez servicios NAS y SAN. No hace falta profundizar más para este tema.</th>
+</tr>
+</table></div>
+<p>Por su rendimiento y baja latencia, la SAN es la arquitectura habitual para dar soporte a <strong>bases de datos</strong> (Tema 5), <strong>entornos de virtualización</strong> (Tema 10) y, en general, aplicaciones críticas que necesitan tratar el almacenamiento remoto exactamente igual que si fuera local.</p>
+
 <h2 id="4-diferencias-entre-nas-y-san" class="tema-h2">4. Diferencias entre NAS y SAN</h2>
 <p>Ambas arquitecturas resuelven el mismo problema de fondo —compartir almacenamiento a través de la red—, pero lo hacen de forma muy distinta:</p>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -80,19 +91,24 @@
 <th><strong>SAN</strong></th>
 </tr>
 <tr>
-<td>Nivel de acceso</td>
+<td><strong>Nivel de acceso</strong></td>
 <td>Fichero (carpetas y archivos compartidos)</td>
 <td>Bloque (discos virtuales, como si fueran locales)</td>
 </tr>
 <tr>
 <td>Red utilizada</td>
-<td>LAN estándar (Ethernet/IP)</td>
+<td>LAN estándar (Ethernet/IP), compartida</td>
 <td>Red dedicada (Fibre Channel) o Ethernet con iSCSI</td>
 </tr>
 <tr>
 <td>Protocolos típicos</td>
 <td>NFS, SMB/CIFS</td>
 <td>Fibre Channel, iSCSI</td>
+</tr>
+<tr>
+<td>Quién lo consume</td>
+<td>Usuarios y equipos cliente directamente</td>
+<td>Servidores (que a su vez dan servicio a los usuarios)</td>
 </tr>
 <tr>
 <td>Complejidad y coste</td>
@@ -107,17 +123,47 @@
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
+<th><strong>🧠 Para memorizar</strong><br>Escalera de arquitecturas: <strong>DAS</strong> (disco conectado directo, sin red) → <strong>NAS</strong> (ficheros sobre la LAN) → <strong>SAN</strong> (bloques sobre red dedicada). Regla rápida: <strong>NAS = Network + Archivos · SAN = Storage + red dedicada (bloques)</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
 <th><strong>⚠️ No confundir</strong><br>El funcionamiento interno de Ethernet, TCP/IP o Fibre Channel como protocolos de red no es el objeto de este tema: aquí basta con identificar qué tipo de red usa cada arquitectura (LAN compartida en NAS; red dedicada, o Ethernet con iSCSI, en SAN) y qué nivel de acceso ofrece cada una (fichero frente a bloque).</th>
 </tr>
 </table></div>
-<h2 id="5-resumen-esquemático" class="tema-h2">5. Resumen esquemático</h2>
+
+<h2 id="5-resumen-para-estudiar" class="tema-h2">5. Resumen para estudiar</h2>
 <ul class="tema-lista">
-<li>NAS y SAN nacen de la misma necesidad —compartir almacenamiento a través de la red— pero con enfoques distintos, construidos sobre los discos y el RAID del Tema 6.</li>
-<li>NAS (Network Attached Storage): dispositivo con su propio SO, conectado a la LAN estándar, que ofrece almacenamiento a nivel de fichero mediante NFS o SMB/CIFS; sencillo y económico.</li>
-<li>SAN (Storage Area Network): red dedicada de alta velocidad que conecta servidores y cabinas de almacenamiento a nivel de bloque (LUN), mediante Fibre Channel o iSCSI; mayor rendimiento y complejidad.</li>
-<li>Componentes NAS: cabezal/controladora, discos en RAID, interfaz de red Ethernet. Componentes SAN: cabinas de almacenamiento, switches SAN, HBA en los servidores.</li>
-<li>Diferencia clave: NAS = nivel de fichero sobre la LAN; SAN = nivel de bloque, con el almacenamiento remoto comportándose como un disco local.</li>
-<li>Uso típico: NAS para compartición de archivos y backups; SAN para bases de datos, virtualización y aplicaciones críticas.</li>
+<li><strong>DAS</strong> = almacenamiento de conexión directa (los discos del propio equipo); NAS y SAN nacen para <strong>compartir</strong> almacenamiento por red, sobre los discos y el RAID del Tema 6.</li>
+<li><strong>NAS</strong>: dispositivo con SO propio, conectado a la <strong>LAN estándar</strong>, acceso a <strong>nivel de fichero</strong> mediante <strong>NFS</strong> (Linux) o <strong>SMB/CIFS</strong> (Windows); sencillo y económico.</li>
+<li><strong>SAN</strong>: <strong>red dedicada</strong> de alta velocidad, acceso a <strong>nivel de bloque</strong> (LUN) mediante <strong>Fibre Channel</strong> o <strong>iSCSI</strong> (SCSI sobre TCP/IP); mayor rendimiento, coste y complejidad.</li>
+<li>Componentes NAS: cabezal/controladora + discos en RAID + interfaz Ethernet.</li>
+<li>Componentes SAN: cabinas de almacenamiento (exponen LUN) + switches SAN (fabric) + HBA en cada servidor.</li>
+<li>Diferencia clave: <strong>NAS = fichero sobre la LAN · SAN = bloque sobre red dedicada</strong> (el servidor ve un disco local).</li>
+<li>Uso típico: NAS para archivos compartidos y backups; SAN para bases de datos, virtualización y aplicaciones críticas.</li>
+</ul>
+
+<h2 id="6-conceptos-clave" class="tema-h2">6. Conceptos clave</h2>
+<ul class="tema-lista">
+<li><strong>DAS / NAS / SAN</strong> y el nivel de acceso de cada uno.</li>
+<li><strong>Nivel de fichero vs. nivel de bloque</strong>.</li>
+<li><strong>NFS</strong> y <strong>SMB/CIFS</strong> (protocolos NAS).</li>
+<li><strong>Fibre Channel</strong> e <strong>iSCSI</strong> (protocolos SAN).</li>
+<li><strong>Cabina de almacenamiento, LUN, switch SAN/fabric, HBA</strong>.</li>
+<li><strong>RAID</strong> como base de ambas arquitecturas (Tema 6).</li>
+</ul>
+
+<h2 id="7-posibles-puntos-de-examen" class="tema-h2">7. Posibles puntos de examen</h2>
+<ul class="tema-lista">
+<li>Distinguir <strong>NAS (fichero) de SAN (bloque)</strong> — la pregunta estrella del tema.</li>
+<li>Emparejar protocolos con arquitectura: <strong>NFS/SMB → NAS; FC/iSCSI → SAN</strong>.</li>
+<li>Qué es un <strong>LUN</strong> y cómo lo «ve» el servidor.</li>
+<li>Qué componente permite a un servidor conectarse a la SAN (<strong>HBA</strong>).</li>
+<li>Qué protocolo SAN funciona sobre TCP/IP y abarata la infraestructura (<strong>iSCSI</strong>).</li>
+<li>Qué arquitectura elegir en un supuesto práctico: compartir carpetas de oficina → NAS; almacenamiento para virtualización o bases de datos → SAN.</li>
+<li>Qué significa <strong>DAS</strong> y en qué se diferencia de NAS/SAN.</li>
+<li>Qué protocolo de fichero corresponde a cada entorno: NFS (Unix/Linux) vs. SMB/CIFS (Windows).</li>
+<li>La ambigüedad de la sigla <strong>SAN</strong> (Storage Area Network aquí; nada que ver con LAN/MAN/WAN del Tema 28).</li>
 </ul>
   </div>
 </article>

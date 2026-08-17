@@ -13,7 +13,9 @@
 <li><a href="#5-equipos-de-interconexión">5. Equipos de interconexión</a></li>
 <li><a href="#6-cableado-estructurado">6. Cableado estructurado</a></li>
 <li><a href="#7-administración-de-redes-locales-y-equipamiento">7. Administración de redes locales y equipamiento</a></li>
-<li><a href="#8-resumen-esquemático">8. Resumen esquemático</a></li>
+<li><a href="#8-resumen-para-estudiar">8. Resumen para estudiar</a></li>
+<li><a href="#9-conceptos-clave">9. Conceptos clave</a></li>
+<li><a href="#10-posibles-puntos-de-examen">10. Posibles puntos de examen</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
@@ -23,14 +25,6 @@
 <th><strong>⚠️ No confundir</strong><br>Este tema da por conocido el modelo OSI/TCP/IP y el concepto de encaminamiento vistos en el Tema 27, que aquí se aplican a equipos y escenarios concretos. La seguridad perimetral (cortafuegos, VPN) se desarrolla en el Tema 29, y las redes inalámbricas Wi-Fi y la movilidad, con más detalle, en el Tema 30.</th>
 </tr>
 </table></div>
-<p>1. Tipos de red según su extensión: LAN, MAN y WAN</p>
-<p>2. Topologías de red</p>
-<p>3. Métodos de acceso al medio</p>
-<p>4. Medios de transmisión</p>
-<p>5. Equipos de interconexión</p>
-<p>6. Cableado estructurado</p>
-<p>7. Administración de redes locales y equipamiento</p>
-<p>8. Resumen esquemático</p>
 <h2 id="1-tipos-de-red-según-su-extensión-lan-man-y-wan" class="tema-h2">1. Tipos de red según su extensión: LAN, MAN y WAN</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -129,6 +123,11 @@
 <th><strong>⚠️ No confundir</strong><br>La diferencia entre hub y switch es uno de los puntos más preguntados sobre equipos de interconexión: el hub retransmite el tráfico recibido por un puerto a <strong>todos</strong> los demás puertos, sin distinción (todo el segmento comparte un único dominio de colisión); el switch aprende qué equipo está en cada puerto (por su dirección MAC) y envía cada trama <strong>solo</strong> al puerto de destino correspondiente, eliminando las colisiones entre el resto de puertos.</th>
 </tr>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br>Equipos por capa OSI, la asociación más preguntada: <strong>capa 1 → repetidor y hub · capa 2 → puente y switch (MAC) · capa 3 → router (IP)</strong>. Regla rápida: cuanto más «inteligente» es el equipo, más alta es su capa.</th>
+</tr>
+</table></div>
 <h2 id="6-cableado-estructurado" class="tema-h2">6. Cableado estructurado</h2>
 <p>El <strong>cableado estructurado</strong> es un sistema de cableado normalizado y jerárquico, diseñado para dar servicio de comunicaciones a un edificio o campus completo de forma flexible y duradera, con independencia de las aplicaciones concretas que vaya a soportar en cada momento (voz, datos, vídeo). Se rige por estándares internacionales como la norma <strong>ISO/IEC 11801</strong>, con sus equivalentes regionales (EN 50173 en Europa, TIA/EIA-568 en Estados Unidos).</p>
 <ul class="tema-lista">
@@ -151,7 +150,7 @@
 <li><strong>Monitorización de red</strong>: herramientas que comprueban de forma continua la disponibilidad y el rendimiento de los equipos y enlaces de red, en la línea de las soluciones de monitorización ya vistas para servidores en los Temas 12 y 13 (SCOM, Nagios, Zabbix, Prometheus+Grafana), aplicadas aquí específicamente al equipamiento de red.</li>
 <li><strong>Buenas prácticas</strong>: etiquetado físico coherente de cables y puertos, documentación siempre actualizada, control formal de cambios sobre la configuración de los equipos de red (op.exp.5 del ENS, Tema 21), y redundancia en los enlaces y equipos considerados críticos para el servicio.</li>
 </ul>
-<h2 id="8-resumen-esquemático" class="tema-h2">8. Resumen esquemático</h2>
+<h2 id="8-resumen-para-estudiar" class="tema-h2">8. Resumen para estudiar</h2>
 <ul class="tema-lista">
 <li><strong>LAN, MAN, WAN</strong>: según extensión geográfica, de menor a mayor; Internet como la gran WAN global; PAN y WLAN como categorías relacionadas.</li>
 <li><strong>Topologías</strong>: bus y anillo (en desuso), estrella (dominante hoy en LAN cableada), malla (máxima redundancia, en auge en Wi-Fi) y árbol/jerárquica (redes de campus).</li>
@@ -160,6 +159,32 @@
 <li><strong>Equipos de interconexión por capa OSI</strong>: repetidor/hub (capa 1, sin inteligencia), switch/puente (capa 2, por dirección MAC), router (capa 3, por dirección IP); punto de acceso como puente entre red cableada e inalámbrica.</li>
 <li><strong>Cableado estructurado</strong>: sistema normalizado (ISO/IEC 11801) por subsistemas: área de trabajo, cableado horizontal (par trenzado, hasta 90 m), cableado vertical/backbone (fibra), repartidores de planta y principal.</li>
 <li><strong>Administración de red</strong>: documentación e inventario, VLAN para segmentación lógica, SNMP y monitorización continua, control de cambios y redundancia en lo crítico.</li>
+</ul>
+
+<h2 id="9-conceptos-clave" class="tema-h2">9. Conceptos clave</h2>
+<ul class="tema-lista">
+<li><strong>LAN / MAN / WAN</strong> (+ PAN y WLAN); SAN de almacenamiento ≠ estas siglas.</li>
+<li><strong>Topologías</strong>: bus, estrella, anillo, malla, árbol — y el estado actual de cada una.</li>
+<li><strong>CSMA/CD vs. CSMA/CA</strong>; paso de testigo; dominio de colisión.</li>
+<li><strong>UTP/STP y categorías (5e-7)</strong>; <strong>fibra monomodo vs. multimodo</strong>.</li>
+<li><strong>Repetidor/hub (capa 1) · puente/switch (capa 2, MAC) · router (capa 3, IP) · AP · gateway</strong>.</li>
+<li><strong>Cableado estructurado (ISO/IEC 11801)</strong>: área de trabajo, horizontal (90 m), vertical/backbone, repartidores.</li>
+<li><strong>VLAN</strong> (segmentación lógica); dominio de difusión.</li>
+<li><strong>SNMP</strong> y monitorización; documentación, etiquetado, control de cambios, redundancia.</li>
+</ul>
+
+<h2 id="10-posibles-puntos-de-examen" class="tema-h2">10. Posibles puntos de examen</h2>
+<ul class="tema-lista">
+<li>Clasificar una red por su extensión (<strong>LAN/MAN/WAN</strong>) en un supuesto.</li>
+<li>Reconocer la <strong>topología</strong> por su descripción y cuál domina hoy en LAN cableada (estrella).</li>
+<li><strong>CSMA/CD vs. CSMA/CA</strong>: cuál corresponde a Ethernet y cuál a Wi-Fi — pregunta clásica.</li>
+<li>Ventajas de la <strong>fibra frente al cobre</strong> (ancho de banda, distancia, inmunidad EM) y monomodo vs. multimodo.</li>
+<li><strong>Hub vs. switch</strong>: a quién reenvían el tráfico y qué pasa con las colisiones — la pregunta estrella.</li>
+<li>Emparejar cada <strong>equipo con su capa OSI</strong> (repetidor-1, switch-2, router-3).</li>
+<li>Los <strong>subsistemas del cableado estructurado</strong> y la distancia máxima del horizontal (90 m).</li>
+<li>Qué norma rige el cableado estructurado (<strong>ISO/IEC 11801</strong>).</li>
+<li>Qué es una <strong>VLAN</strong> y qué ventajas aporta (seguridad + rendimiento).</li>
+<li>Para qué sirve <strong>SNMP</strong>.</li>
 </ul>
   </div>
 </article>

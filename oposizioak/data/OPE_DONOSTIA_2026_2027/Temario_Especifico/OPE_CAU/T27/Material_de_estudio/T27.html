@@ -12,7 +12,9 @@
 <li><a href="#4-protocolos-principales-por-capa">4. Protocolos principales por capa</a></li>
 <li><a href="#5-direccionamiento-ipv4-e-ipv6">5. Direccionamiento: IPv4 e IPv6</a></li>
 <li><a href="#6-encaminamiento-routing">6. Encaminamiento (routing)</a></li>
-<li><a href="#7-resumen-esquemático">7. Resumen esquemático</a></li>
+<li><a href="#7-resumen-para-estudiar">7. Resumen para estudiar</a></li>
+<li><a href="#8-conceptos-clave">8. Conceptos clave</a></li>
+<li><a href="#9-posibles-puntos-de-examen">9. Posibles puntos de examen</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
@@ -22,13 +24,6 @@
 <th><strong>⚠️ No confundir</strong><br>Este tema sienta las bases teóricas de las comunicaciones en red. La tipología de redes LAN/MAN/WAN, los medios de transmisión, el cableado estructurado y los equipos de interconexión (switches, routers) se desarrollan con más detalle en el Tema 28; aquí basta con introducir el concepto de encaminamiento y la diferencia entre conmutación y enrutamiento.</th>
 </tr>
 </table></div>
-<p>1. El modelo de referencia OSI: concepto y objetivo</p>
-<p>2. Las siete capas del modelo OSI</p>
-<p>3. El modelo TCP/IP: capas y relación con OSI</p>
-<p>4. Protocolos principales por capa</p>
-<p>5. Direccionamiento: IPv4 e IPv6</p>
-<p>6. Encaminamiento (routing)</p>
-<p>7. Resumen esquemático</p>
 <h2 id="1-el-modelo-de-referencia-osi-concepto-y-objetivo" class="tema-h2">1. El modelo de referencia OSI: concepto y objetivo</h2>
 <p>El <strong>modelo OSI (Open Systems Interconnection)</strong> es un modelo de referencia desarrollado por la <strong>ISO (International Organization for Standardization)</strong> en 1984 para estandarizar cómo se comunican entre sí los sistemas informáticos. Su idea central es dividir el proceso completo de comunicación en red en <strong>siete capas</strong> independientes, cada una responsable de una función concreta, que solo se comunica directamente con la capa inmediatamente superior e inferior, a través de interfaces bien definidas.</p>
 <p>El objetivo de este enfoque por capas es la <strong>interoperabilidad</strong>: cada fabricante puede implementar su capa sabiendo exactamente qué servicio debe ofrecer a la capa superior y qué puede esperar de la capa inferior, sin necesidad de conocer los detalles internos de las demás capas.</p>
@@ -117,6 +112,50 @@
 <li><strong>Capa de Internet</strong>: IP (Internet Protocol), responsable del direccionamiento lógico y el encaminamiento (puntos 5 y 6); ICMP (Internet Control Message Protocol), usado para mensajes de control y diagnóstico de red (el comando `ping` se basa en ICMP); ARP (Address Resolution Protocol), que resuelve una dirección IP a la dirección MAC correspondiente dentro de una misma red local.</li>
 <li><strong>Capa de acceso a la red</strong>: los protocolos y tecnologías del medio físico y de enlace, como Ethernet (redes cableadas) o Wi-Fi/802.11 (redes inalámbricas), que se desarrollan con más detalle en el Tema 28.</li>
 </ul>
+<p>En la capa de transporte, cada servicio se identifica además por un <strong>número de puerto</strong>. Los «puertos bien conocidos» (well-known ports, 0-1023) más habituales son material clásico de test:</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Puerto</strong></th>
+<th><strong>Protocolo/Servicio</strong></th>
+<th><strong>Puerto</strong></th>
+<th><strong>Protocolo/Servicio</strong></th>
+</tr>
+<tr>
+<td>20/21</td>
+<td>FTP (datos/control)</td>
+<td>80</td>
+<td>HTTP</td>
+</tr>
+<tr>
+<td>22</td>
+<td>SSH</td>
+<td>110</td>
+<td>POP3</td>
+</tr>
+<tr>
+<td>23</td>
+<td>Telnet (obsoleto, sin cifrar)</td>
+<td>143</td>
+<td>IMAP</td>
+</tr>
+<tr>
+<td>25</td>
+<td>SMTP</td>
+<td>443</td>
+<td>HTTPS</td>
+</tr>
+<tr>
+<td>53</td>
+<td>DNS</td>
+<td>3389</td>
+<td>RDP (Escritorio remoto)</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>TCP establece cada conexión mediante el <strong>saludo en tres pasos (three-way handshake)</strong>: SYN → SYN-ACK → ACK. Ese intercambio inicial es lo que lo hace «orientado a conexión», a diferencia de UDP, que envía datagramas directamente sin negociar nada — de ahí su menor latencia y su uso en streaming, DNS o videollamadas.</th>
+</tr>
+</table></div>
 <h2 id="5-direccionamiento-ipv4-e-ipv6" class="tema-h2">5. Direccionamiento: IPv4 e IPv6</h2>
 <p><strong>IPv4</strong> utiliza direcciones de <strong>32 bits</strong>, representadas habitualmente en notación decimal punteada (cuatro grupos de 8 bits, por ejemplo `192.168.1.1`). Su espacio de direcciones, de algo más de 4.300 millones de combinaciones, resultó insuficiente para el crecimiento de Internet, lo que se ha mitigado durante años mediante <strong>NAT (Network Address Translation)</strong> y el uso de rangos de direccionamiento privado (definidos en el RFC 1918: `10.0.0.0/8`, `172.16.0.0/12` y `192.168.0.0/16`), que permiten que muchos equipos de una red local compartan una única dirección IP pública frente al exterior.</p>
 <p>La <strong>máscara de red</strong>, habitualmente expresada en notación <strong>CIDR (Classless Inter-Domain Routing)</strong> con el formato `/n` (por ejemplo, `/24`), determina qué parte de una dirección IP identifica la red y cuál identifica al host concreto dentro de ella.</p>
@@ -134,13 +173,40 @@
 <th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>No debe confundirse el encaminamiento (routing) con la conmutación (switching): la conmutación ocurre en la capa de Enlace (capa 2), dentro de una misma red local, y decide a qué puerto físico reenviar una trama en función de la dirección MAC de destino; el encaminamiento ocurre en la capa de Red (capa 3), entre redes distintas, y decide por qué camino debe viajar un paquete en función de su dirección IP de destino. El detalle de los equipos que realizan cada función —switches y routers— se desarrolla en el Tema 28.</th>
 </tr>
 </table></div>
-<h2 id="7-resumen-esquemático" class="tema-h2">7. Resumen esquemático</h2>
+<h2 id="7-resumen-para-estudiar" class="tema-h2">7. Resumen para estudiar</h2>
 <ul class="tema-lista">
 <li><strong>Modelo OSI</strong>: modelo de referencia de ISO (1984), siete capas (Física, Enlace, Red, Transporte, Sesión, Presentación, Aplicación), encapsulación/desencapsulación de datos entre capas; modelo teórico-didáctico, no implementado tal cual en la práctica.</li>
 <li><strong>Modelo TCP/IP</strong>: modelo realmente implementado en Internet, cuatro capas (Acceso a la red, Internet, Transporte, Aplicación), cada una equivalente a una o varias capas OSI.</li>
 <li><strong>Protocolos principales</strong>: aplicación (HTTP, SMTP, DNS, SSH…), transporte (TCP fiable, UDP sin garantías), Internet (IP, ICMP, ARP), acceso a la red (Ethernet, Wi-Fi).</li>
 <li><strong>Direccionamiento</strong>: IPv4 (32 bits, NAT y rangos privados por escasez de direcciones) frente a IPv6 (128 bits, espacio prácticamente inagotable, adopción mundial superando el 50% en 2026 pero aún baja en España); máscara/CIDR para distinguir red y host.</li>
 <li><strong>Encaminamiento</strong>: selección de ruta entre redes mediante tablas de encaminamiento, estático o dinámico (RIP, OSPF, BGP); distinto de la conmutación (capa 2, dentro de la misma red local, basada en MAC).</li>
+<li><strong>Puertos bien conocidos</strong>: 21 FTP · 22 SSH · 23 Telnet · 25 SMTP · 53 DNS · 80 HTTP · 110 POP3 · 143 IMAP · 443 HTTPS · 3389 RDP; TCP negocia con el three-way handshake (SYN, SYN-ACK, ACK).</li>
+</ul>
+
+<h2 id="8-conceptos-clave" class="tema-h2">8. Conceptos clave</h2>
+<ul class="tema-lista">
+<li><strong>Modelo OSI (ISO, 1984)</strong>: 7 capas y su orden; encapsulación/desencapsulación; PDU.</li>
+<li><strong>Modelo TCP/IP</strong>: 4 capas y su correspondencia con OSI; teórico vs. real.</li>
+<li><strong>TCP vs. UDP</strong> (conexión/fiabilidad vs. velocidad); three-way handshake; <strong>puertos</strong>.</li>
+<li><strong>IP, ICMP (ping), ARP</strong> (IP → MAC).</li>
+<li><strong>IPv4</strong>: 32 bits, NAT, rangos privados RFC 1918, máscara/CIDR.</li>
+<li><strong>IPv6</strong>: 128 bits, hexadecimal, sin NAT por diseño; dual stack.</li>
+<li><strong>Routing</strong>: tabla de encaminamiento, next hop, estático vs. dinámico (RIP, OSPF, BGP).</li>
+<li><strong>Routing (capa 3, IP) vs. switching (capa 2, MAC)</strong>.</li>
+</ul>
+
+<h2 id="9-posibles-puntos-de-examen" class="tema-h2">9. Posibles puntos de examen</h2>
+<ul class="tema-lista">
+<li>El <strong>orden de las 7 capas OSI</strong> y a qué capa pertenece una función dada — pregunta casi segura.</li>
+<li>Correspondencia entre capas <strong>OSI y TCP/IP</strong> (la capa de aplicación TCP/IP agrupa 3 capas OSI).</li>
+<li><strong>TCP vs. UDP</strong>: cuál es fiable/orientado a conexión y cuál se usa en streaming.</li>
+<li>Emparejar <strong>puertos con servicios</strong> (22-SSH, 25-SMTP, 53-DNS, 80/443-HTTP/S…).</li>
+<li>Qué protocolo usa el comando <strong>ping</strong> (ICMP) y qué resuelve <strong>ARP</strong>.</li>
+<li>Longitud de las direcciones <strong>IPv4 (32 bits) e IPv6 (128 bits)</strong> y su notación.</li>
+<li>Reconocer los <strong>rangos privados RFC 1918</strong> y para qué sirve el <strong>NAT</strong>.</li>
+<li>Qué indica la <strong>máscara de red / notación CIDR</strong> (/24).</li>
+<li>Diferencia entre encaminamiento <strong>estático y dinámico</strong> y ejemplos de protocolos (RIP, OSPF, BGP).</li>
+<li><strong>Routing vs. switching</strong>: capa, dirección usada y ámbito de cada uno.</li>
 </ul>
   </div>
 </article>

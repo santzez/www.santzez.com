@@ -12,7 +12,9 @@
 <li><a href="#4-perfiles-de-usuario">4. Perfiles de usuario</a></li>
 <li><a href="#5-buenas-prácticas-en-la-gestión-de-cuentas">5. Buenas prácticas en la gestión de cuentas</a></li>
 <li><a href="#6-logon-scripts">6. Logon scripts</a></li>
-<li><a href="#7-resumen-esquemático">7. Resumen esquemático</a></li>
+<li><a href="#7-resumen-para-estudiar">7. Resumen para estudiar</a></li>
+<li><a href="#8-conceptos-clave">8. Conceptos clave</a></li>
+<li><a href="#9-posibles-puntos-de-examen">9. Posibles puntos de examen</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
@@ -22,13 +24,6 @@
 <th><strong>⚠️ No confundir</strong><br>Este tema da por conocidos los fundamentos del Directorio Activo (dominio, OU, controlador de dominio, GPO), vistos en el Tema 12, y las características generales de Windows de usuario, vistas en el Tema 11. Aquí se profundiza específicamente en la administración práctica de usuarios y grupos y en los logon scripts. La supervisión del visor de eventos y la gestión de comparticiones y permisos de red se tratan en el Tema 15.</th>
 </tr>
 </table></div>
-<p>1. Cuentas de usuario en Windows: locales y de dominio</p>
-<p>2. Grupos: tipos y ámbitos</p>
-<p>3. Herramientas de administración de usuarios y grupos</p>
-<p>4. Perfiles de usuario</p>
-<p>5. Buenas prácticas en la gestión de cuentas</p>
-<p>6. Logon scripts</p>
-<p>7. Resumen esquemático</p>
 <h2 id="1-cuentas-de-usuario-en-windows-locales-y-de-dominio" class="tema-h2">1. Cuentas de usuario en Windows: locales y de dominio</h2>
 <p>Una <strong>cuenta local</strong> se almacena en la base de datos de seguridad propia de cada equipo Windows (el SAM, Security Accounts Manager) y solo es válida para iniciar sesión en ese equipo concreto. Una <strong>cuenta de dominio</strong>, en cambio, se almacena de forma centralizada en el Directorio Activo (AD DS, Tema 12) y permite al usuario iniciar sesión con las mismas credenciales en cualquier equipo unido a ese dominio.</p>
 <p>Todo equipo Windows dispone, además, de dos cuentas locales integradas: <strong>Administrador</strong>, con privilegios completos sobre el equipo, y <strong>Invitado</strong>, con privilegios muy limitados; ambas están deshabilitadas por defecto en las instalaciones modernas, en aplicación del principio de mínimo privilegio (Temas 9 y 12).</p>
@@ -111,10 +106,15 @@
 <p>Un ejemplo clásico de logon script en formato `.bat` incluye órdenes como `net use Z: \\servidor\recurso` (para mapear una unidad de red) o `net use LPT1: \\servidor\impresora` (para conectar una impresora de red).</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
+<th><strong>💡 Ejemplo</strong><br>Escenario típico de CAU: una persona usuaria llama porque «ha desaparecido la unidad Z: del departamento». El técnico sabe que esa unidad la mapea el logon script al iniciar sesión, así que el diagnóstico natural es: ¿se ejecutó el script (basta cerrar y volver a iniciar sesión)?, ¿hay conectividad con el servidor de ficheros?, ¿la cuenta sigue siendo miembro del grupo que da acceso al recurso? Conocer el mecanismo evita «recrear la unidad a mano», que solo ocultaría el problema real.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
 <th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>PowerShell ha ido sustituyendo progresivamente a los scripts por lotes (.bat/.cmd) tradicionales en los entornos Windows modernos, tanto para logon scripts como para el resto de tareas de administración, por su capacidad de manejar objetos (no solo texto) y por integrarse mejor con el resto de la plataforma de gestión de Windows.</th>
 </tr>
 </table></div>
-<h2 id="7-resumen-esquemático" class="tema-h2">7. Resumen esquemático</h2>
+<h2 id="7-resumen-para-estudiar" class="tema-h2">7. Resumen para estudiar</h2>
 <ul class="tema-lista">
 <li><strong>Cuentas</strong>: locales (SAM del equipo, válidas solo en él) frente a cuentas de dominio (AD DS, válidas en todo el dominio); identificadas internamente por su SID, no por su nombre.</li>
 <li><strong>Grupos</strong>: de seguridad (con permisos) frente a distribución (solo correo); ámbitos local de dominio, global y universal; regla AGDLP para asignar permisos de forma mantenible.</li>
@@ -122,6 +122,32 @@
 <li><strong>Perfiles</strong>: local (no viaja), móvil/itinerante (se copia en cada inicio/cierre de sesión), obligatorio (de solo lectura); redirección de carpetas como alternativa más ágil para carpetas concretas.</li>
 <li><strong>Buenas prácticas</strong>: mínimo privilegio, permisos por grupo, nomenclatura consistente, evitar cuentas compartidas, deshabilitar en vez de eliminar.</li>
 <li><strong>Logon scripts</strong>: automatizan el inicio de sesión (unidades de red, impresoras…); se asignan desde la propia cuenta (carpeta NETLOGON) o, de forma más flexible, mediante GPO; tradicionalmente en .bat, cada vez más en PowerShell.</li>
+</ul>
+
+<h2 id="8-conceptos-clave" class="tema-h2">8. Conceptos clave</h2>
+<ul class="tema-lista">
+<li><strong>Cuenta local (SAM) vs. cuenta de dominio (AD DS)</strong>; cuentas integradas Administrador e Invitado.</li>
+<li><strong>SID</strong> (el identificador real de la cuenta; no se hereda al recrearla).</li>
+<li><strong>Grupo de seguridad vs. de distribución</strong>.</li>
+<li><strong>Ámbitos de grupo</strong>: local de dominio, global, universal; regla <strong>AGDLP</strong>.</li>
+<li><strong>lusrmgr.msc, ADUC (dsa.msc), PowerShell (New-ADUser…)</strong>; formato <strong>UPN</strong>.</li>
+<li><strong>Perfil local / móvil / obligatorio</strong>; NTUSER.DAT; <strong>redirección de carpetas</strong>.</li>
+<li><strong>Mínimo privilegio; deshabilitar vs. eliminar</strong> cuentas.</li>
+<li><strong>Logon script</strong>; carpeta <strong>NETLOGON</strong>; asignación por cuenta o por GPO; net use.</li>
+</ul>
+
+<h2 id="9-posibles-puntos-de-examen" class="tema-h2">9. Posibles puntos de examen</h2>
+<ul class="tema-lista">
+<li>Diferencia entre <strong>cuenta local y de dominio</strong>, y dónde se almacena cada una (SAM vs. AD DS).</li>
+<li>Qué es el <strong>SID</strong> y qué ocurre con los permisos al eliminar y recrear una cuenta con el mismo nombre.</li>
+<li>Qué tipo de grupo puede recibir permisos (<strong>seguridad</strong>) y cuál no (distribución).</li>
+<li>Los tres <strong>ámbitos de grupo</strong> y la regla <strong>AGDLP</strong> — pregunta clásica.</li>
+<li>Con qué consola se administran usuarios del dominio (<strong>ADUC / dsa.msc</strong>) frente a los locales (lusrmgr.msc).</li>
+<li>Diferencias entre <strong>perfil local, móvil y obligatorio</strong>, y ventaja de la redirección de carpetas.</li>
+<li>Por qué se recomienda <strong>deshabilitar en lugar de eliminar</strong> una cuenta.</li>
+<li>Qué hace un <strong>logon script</strong> y sus dos vías de asignación (cuenta/NETLOGON vs. GPO).</li>
+<li>Interpretar una orden <strong>net use</strong> en un supuesto práctico.</li>
+<li>Por qué deben evitarse las <strong>cuentas compartidas</strong> (trazabilidad).</li>
 </ul>
   </div>
 </article>

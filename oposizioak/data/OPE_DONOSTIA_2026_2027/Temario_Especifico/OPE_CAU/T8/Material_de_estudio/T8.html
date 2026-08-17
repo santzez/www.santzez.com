@@ -13,7 +13,9 @@
 <li><a href="#5-scsi-small-computer-system-interface">5. SCSI (Small Computer System Interface)</a></li>
 <li><a href="#6-bluetooth">6. Bluetooth</a></li>
 <li><a href="#7-interfaces-gráficas-clásicas-y-de-alta-definición">7. Interfaces gráficas: clásicas y de alta definición</a></li>
-<li><a href="#8-resumen-esquemático">8. Resumen esquemático</a></li>
+<li><a href="#8-resumen-para-estudiar">8. Resumen para estudiar</a></li>
+<li><a href="#9-conceptos-clave">9. Conceptos clave</a></li>
+<li><a href="#10-posibles-puntos-de-examen">10. Posibles puntos de examen</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
@@ -23,14 +25,6 @@
 <th><strong>⚠️ No confundir</strong><br>Este tema no repite el estudio de los buses internos del ordenador (bus de datos, de direcciones y de control entre CPU y memoria), que se vieron en el Tema 3, ni las interfaces de almacenamiento internas (SATA, SAS, NVMe) del Tema 6: aquí el foco son los buses e interfaces externos que conectan periféricos al equipo.<br>Tampoco se trata aquí el Wi-Fi ni el resto de tecnologías de red, que se estudian en el Bloque IV (Temas 27 y 28). Bluetooth se incluye en este tema porque se usa para conectar periféricos (ratón, teclado, auriculares), no como tecnología de red de área local.</th>
 </tr>
 </table></div>
-<p>1. Concepto de periférico y clasificación</p>
-<p>2. El bus: concepto, tipos y características</p>
-<p>3. USB (Universal Serial Bus)</p>
-<p>4. FireWire (IEEE 1394)</p>
-<p>5. SCSI (Small Computer System Interface)</p>
-<p>6. Bluetooth</p>
-<p>7. Interfaces gráficas: clásicas y de alta definición</p>
-<p>8. Resumen esquemático</p>
 <h2 id="1-concepto-de-periférico-y-clasificación" class="tema-h2">1. Concepto de periférico y clasificación</h2>
 <p>Un <strong>periférico</strong> es todo dispositivo hardware externo a la unidad central de proceso (CPU) que se conecta al ordenador para ampliar su funcionalidad, permitiendo la interacción con el usuario, con el entorno físico o con otros sistemas informáticos. El término «periférico» hace referencia a su posición: rodea al núcleo de procesamiento sin formar parte de él.</p>
 <p>Todo periférico se comunica con el ordenador a través de un <strong>bus</strong> (el canal físico de conexión, que se estudia en el punto 2) y, habitualmente, mediante un <strong>controlador o driver</strong>: un programa que traduce las órdenes genéricas del sistema operativo a las señales eléctricas concretas que entiende ese dispositivo, y viceversa.</p>
@@ -133,6 +127,11 @@
 <td>basado en Thunderbolt 3</td>
 </tr>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br>Escalera de velocidades USB: <strong>12 Mbps (1.1) → 480 Mbps (2.0) → 5 Gbps (3.0) → 10-20 Gbps (3.1/3.2) → 40 Gbps (USB4)</strong>. Las dos cifras más preguntadas: <strong>USB 2.0 = 480 Mbps</strong> y <strong>USB 3.0 = 5 Gbps</strong>.</th>
+</tr>
+</table></div>
 <h4 class="tema-h4">Conectores</h4>
 <p>A lo largo de sus versiones, USB ha usado distintos conectores físicos: Type-A (el rectangular clásico, en el lado del host), Type-B, Mini-USB y Micro-USB (habituales en dispositivos antiguos). El conector actual de referencia es <strong>USB Type-C</strong>: reversible (se puede insertar en cualquier orientación), compatible con USB Power Delivery (entrega de energía de hasta 240 W) y capaz de transportar señal de vídeo mediante modos alternativos como DisplayPort Alt Mode.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -223,7 +222,12 @@
 <th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Hoy en día, HDMI y DisplayPort son las interfaces gráficas de referencia: ambas son digitales, transportan audio y vídeo, y dominan tanto el mercado de consumo (HDMI) como el profesional/PC (DisplayPort, gracias a MST). VGA y DVI se consideran interfaces clásicas o legacy: siguen apareciendo en equipos antiguos, pero ya no son la opción de diseño en equipos actuales.</th>
 </tr>
 </table></div>
-<h2 id="8-resumen-esquemático" class="tema-h2">8. Resumen esquemático</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Ejemplo</strong><br>Caso típico de CAU: una persona usuaria conecta su portátil corporativo al proyector de una sala con un cable HDMI y «no se ve nada». El diagnóstico recorre este tema: ¿la fuente de vídeo está seleccionada en el proyector?, ¿el portátil emite por la salida correcta (duplicar/extender pantalla)?, ¿el cable o el adaptador USB-C→HDMI funciona? Conocer qué transporta cada interfaz (vídeo y audio en HDMI/DisplayPort; solo vídeo en VGA/DVI) permite descartar causas con orden.</th>
+</tr>
+</table></div>
+<h2 id="8-resumen-para-estudiar" class="tema-h2">8. Resumen para estudiar</h2>
 <ul class="tema-lista">
 <li><strong>Periférico</strong>: dispositivo externo a la CPU que amplía la funcionalidad del ordenador; se clasifica en entrada, salida, almacenamiento y comunicación, según el sentido del flujo de información.</li>
 <li><strong>Bus</strong>: canal físico de comunicación. Según ubicación: interno (Tema 3) o externo/de periféricos (este tema). Según transmisión: serie (una línea, escala mejor en frecuencia) o paralelo (varias líneas, limitado por diafonía y skew a alta frecuencia).</li>
@@ -232,6 +236,32 @@
 <li><strong>SCSI</strong>: bus (originalmente paralelo) en cadena, con ID único por dispositivo y terminador obligatorio en los extremos; obsoleto como bus físico externo, pero su conjunto de comandos sigue vivo en SAS (Tema 6) e iSCSI (Tema 7).</li>
 <li><strong>Bluetooth</strong>: WPAN inalámbrica de corto alcance (IEEE 802.15.1, 2,4 GHz) para conectar periféricos; distingue Bluetooth clásico (BR/EDR) de BLE (bajo consumo); versión actual de referencia: Bluetooth 5.x. No confundir con Wi-Fi (WLAN, Bloque IV).</li>
 <li><strong>Interfaces gráficas</strong>: VGA (analógica) y DVI (digital, sin audio) son clásicas y hoy legacy; HDMI y DisplayPort (digitales, con audio) son el estándar actual, con DisplayPort destacando por su soporte de múltiples monitores (MST).</li>
+</ul>
+
+<h2 id="9-conceptos-clave" class="tema-h2">9. Conceptos clave</h2>
+<ul class="tema-lista">
+<li><strong>Periférico</strong> y su clasificación (entrada / salida / almacenamiento / comunicación); dispositivos mixtos (pantalla táctil, multifunción).</li>
+<li><strong>Driver (controlador)</strong>.</li>
+<li><strong>Bus serie vs. paralelo</strong>; diafonía y skew.</li>
+<li><strong>USB</strong>: plug and play, hot-plug, host-based, versiones y velocidades; <strong>USB-C</strong> (conector ≠ versión); Power Delivery.</li>
+<li><strong>FireWire / IEEE 1394</strong>: peer-to-peer, 400/800 Mbps.</li>
+<li><strong>SCSI</strong>: cadena, SCSI ID, terminador; herederos SAS e iSCSI.</li>
+<li><strong>Bluetooth / IEEE 802.15.1</strong>: WPAN, 2,4 GHz, clases de potencia, BR/EDR vs. BLE, emparejamiento y perfiles.</li>
+<li><strong>VGA, DVI (D/A/I), HDMI, DisplayPort (MST)</strong>.</li>
+</ul>
+
+<h2 id="10-posibles-puntos-de-examen" class="tema-h2">10. Posibles puntos de examen</h2>
+<ul class="tema-lista">
+<li>Clasificar dispositivos en <strong>entrada/salida/almacenamiento/comunicación</strong>, incluidos los mixtos (pantalla táctil, multifunción).</li>
+<li>Por qué el <strong>bus serie</strong> superó al paralelo (diafonía y skew a alta frecuencia).</li>
+<li><strong>Velocidades USB</strong>: 480 Mbps (2.0) y 5 Gbps (3.0) son las más preguntadas.</li>
+<li><strong>USB-C es un conector</strong>, no una versión del estándar.</li>
+<li>Arquitectura <strong>host-based (USB) vs. peer-to-peer (FireWire)</strong>.</li>
+<li>Requisitos del bus <strong>SCSI</strong>: ID único y <strong>terminador</strong> en los extremos.</li>
+<li><strong>Bluetooth</strong>: banda (2,4 GHz), estándar (IEEE 802.15.1), clase 2 ≈ 10 m, diferencia BR/EDR vs. BLE.</li>
+<li><strong>Bluetooth (WPAN) ≠ Wi-Fi (WLAN)</strong>.</li>
+<li>Qué interfaces gráficas transportan <strong>audio</strong> (HDMI y DisplayPort) y cuál es <strong>analógica</strong> (VGA).</li>
+<li>Variantes del conector <strong>DVI</strong> (D digital, A analógico, I integrado) y qué es <strong>MST</strong> en DisplayPort.</li>
 </ul>
   </div>
 </article>

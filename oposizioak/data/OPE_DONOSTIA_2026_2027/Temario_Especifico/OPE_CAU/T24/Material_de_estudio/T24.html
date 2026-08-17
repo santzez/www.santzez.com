@@ -14,7 +14,9 @@
 <li><a href="#6-giltza-la-plataforma-de-identificación-de-las-aapp-vascas">6. Giltza: la plataforma de identificación de las AAPP vascas</a></li>
 <li><a href="#7-viafirma-plataforma-de-firma-electrónica">7. Viafirma: plataforma de firma electrónica</a></li>
 <li><a href="#8-el-dni-electrónico-dnie">8. El DNI electrónico (DNIe)</a></li>
-<li><a href="#9-resumen-esquemático">9. Resumen esquemático</a></li>
+<li><a href="#9-resumen-para-estudiar">9. Resumen para estudiar</a></li>
+<li><a href="#10-conceptos-clave">10. Conceptos clave</a></li>
+<li><a href="#11-posibles-puntos-de-examen">11. Posibles puntos de examen</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
@@ -24,17 +26,13 @@
 <th><strong>⚠️ No confundir</strong><br>Este tema da por conocidos los conceptos generales de seguridad lógica (Tema 22), sobre los que se apoya la autenticación. Aquí se profundiza específicamente en las técnicas y sistemas de autenticación y firma digital, con especial atención a los propios del ámbito de las administraciones públicas vascas (Izenpe, b@k-Q, Giltza), tal y como los recoge el temario específico de esta convocatoria.</th>
 </tr>
 </table></div>
-<p>1. Autenticación y firma digital: conceptos básicos</p>
-<p>2. Fundamento técnico: criptografía asimétrica y PKI</p>
-<p>3. El certificado digital: qué es y qué tipos existen</p>
-<p>4. Izenpe: la autoridad de certificación vasca</p>
-<p>5. b@k-Q: identificación electrónica sin certificado</p>
-<p>6. Giltza: la plataforma de identificación de las AAPP vascas</p>
-<p>7. Viafirma: plataforma de firma electrónica</p>
-<p>8. El DNI electrónico (DNIe)</p>
-<p>9. Resumen esquemático</p>
 <h2 id="1-autenticación-y-firma-digital-conceptos-básicos" class="tema-h2">1. Autenticación y firma digital: conceptos básicos</h2>
 <p>La <strong>autenticación</strong> (ya introducida como medida de seguridad lógica en el Tema 22) es el proceso de verificar que una persona, proceso o sistema es realmente quien dice ser, habitualmente combinando factores de conocimiento (algo que se sabe, como una contraseña), posesión (algo que se tiene, como una tarjeta o un dispositivo) e inherencia (algo que se es, como una huella dactilar).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br>Los tres factores de autenticación: <strong>algo que SÉ</strong> (contraseña, PIN) · <strong>algo que TENGO</strong> (tarjeta, móvil, token) · <strong>algo que SOY</strong> (huella, cara). La <strong>autenticación multifactor (MFA/2FA)</strong> exige combinar al menos <strong>dos factores de tipo distinto</strong>: contraseña + código en el móvil sí es MFA; dos contraseñas, no.</th>
+</tr>
+</table></div>
 <p>La <strong>firma digital</strong> es un mecanismo criptográfico que permite garantizar, sobre un documento electrónico, tanto la <strong>autoría</strong> (quién lo ha firmado) como la <strong>integridad</strong> (que no ha sido modificado desde que se firmó), siendo el equivalente electrónico de la firma manuscrita, con garantías técnicas adicionales que esta última no ofrece por sí sola.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -44,7 +42,12 @@
 <h2 id="2-fundamento-técnico-criptografía-asimétrica-y-pki" class="tema-h2">2. Fundamento técnico: criptografía asimétrica y PKI</h2>
 <p>La firma digital se apoya en la <strong>criptografía asimétrica o de clave pública</strong>: cada titular dispone de un par de claves matemáticamente relacionadas entre sí, una <strong>clave privada</strong> (secreta, que solo su titular conoce y custodia) y una <strong>clave pública</strong> (que puede difundirse libremente). Lo que se cifra con una de las dos claves solo puede descifrarse con la otra.</p>
 <p>Para firmar un documento, el firmante cifra con su clave privada un resumen criptográfico (hash) de ese documento; cualquiera puede verificar la firma descifrando ese resumen con la clave pública correspondiente y comprobando que coincide con el hash del documento recibido. Si el documento se ha alterado, aunque sea mínimamente, su hash cambia y la verificación falla, lo que garantiza a la vez la autoría (solo el titular de la clave privada pudo generar esa firma concreta) y la integridad del contenido firmado.</p>
-<p>El conjunto de hardware, software, personas, políticas y procedimientos necesarios para crear, gestionar, distribuir, usar, almacenar y revocar certificados digitales se conoce como <strong>PKI (Public Key Infrastructure, infraestructura de clave pública)</strong>. Dentro de esa infraestructura, la <strong>Autoridad de Certificación (CA, Certification Authority)</strong> es la entidad de confianza que emite los certificados digitales, vinculando de forma fehaciente una clave pública con la identidad de su titular (por ejemplo, Izenpe en el ámbito vasco, punto 4).</p>
+<p>El conjunto de hardware, software, personas, políticas y procedimientos necesarios para crear, gestionar, distribuir, usar, almacenar y revocar certificados digitales se conoce como <strong>PKI (Public Key Infrastructure, infraestructura de clave pública)</strong>. Dentro de esa infraestructura, la <strong>Autoridad de Certificación (CA, Certification Authority)</strong> es la entidad de confianza que emite los certificados digitales, vinculando de forma fehaciente una clave pública con la identidad de su titular (por ejemplo, Izenpe en el ámbito vasco, punto 4); la <strong>Autoridad de Registro (RA)</strong> es quien verifica presencialmente o documentalmente la identidad del solicitante antes de la emisión; y la <strong>revocación</strong> permite invalidar un certificado antes de su caducidad (por pérdida, robo o compromiso de la clave), consultándose su estado mediante listas CRL o el protocolo OCSP.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br><strong>Con qué clave se hace cada cosa</strong> es la pregunta trampa clásica: se <strong>firma con la clave PRIVADA</strong> (solo el titular puede) y se <strong>verifica con la PÚBLICA</strong> (cualquiera puede comprobar). En el cifrado para confidencialidad es al revés: se <strong>cifra con la clave PÚBLICA del destinatario</strong> y solo él puede <strong>descifrar con su PRIVADA</strong>.</th>
+</tr>
+</table></div>
 <h2 id="3-el-certificado-digital-qué-es-y-qué-tipos-existen" class="tema-h2">3. El certificado digital: qué es y qué tipos existen</h2>
 <p>Un <strong>certificado digital</strong> es un documento electrónico firmado por una Autoridad de Certificación que vincula unos datos de verificación de firma (la clave pública) con la identidad de su titular, permitiendo identificarlo de forma inequívoca en las relaciones telemáticas. Contiene, entre otros datos, la identidad del titular, su clave pública, el periodo de validez, la autoridad emisora, un número de serie único y la propia firma de la autoridad de certificación que lo avala.</p>
 <ul class="tema-lista">
@@ -113,7 +116,7 @@
 <h2 id="8-el-dni-electrónico-dnie" class="tema-h2">8. El DNI electrónico (DNIe)</h2>
 <p>El <strong>DNI electrónico (DNIe)</strong>, emitido por la Dirección General de la Policía, es el documento nacional de identidad español que incorpora un chip criptográfico con dos certificados digitales: un <strong>certificado de autenticación</strong>, que permite identificar de forma fehaciente a su titular, y un <strong>certificado de firma</strong>, que permite firmar electrónicamente con la misma validez legal que la firma manuscrita, además de conservar la información de identidad y biométrica habitual del DNI físico.</p>
 <p>Su uso requiere introducir un <strong>PIN</strong> conocido únicamente por el titular, y acceder al chip mediante un <strong>lector de tarjetas con contacto</strong>, o, en las versiones más recientes del documento (DNIe 4.0), mediante <strong>NFC (Near Field Communication)</strong>, que permite leer el chip sin contacto físico, incluso desde un smartphone compatible, sin necesidad de un lector dedicado.</p>
-<h2 id="9-resumen-esquemático" class="tema-h2">9. Resumen esquemático</h2>
+<h2 id="9-resumen-para-estudiar" class="tema-h2">9. Resumen para estudiar</h2>
 <ul class="tema-lista">
 <li><strong>Autenticación frente a firma digital</strong>: verificar identidad frente a garantizar autoría e integridad de un documento; la normativa eIDAS distingue firma electrónica simple, avanzada y cualificada (esta última, equivalente legal a la manuscrita).</li>
 <li><strong>Fundamento técnico</strong>: criptografía asimétrica (clave privada/pública) y PKI; la Autoridad de Certificación vincula una clave pública con la identidad de su titular mediante un certificado digital.</li>
@@ -123,6 +126,36 @@
 <li><strong>Giltza</strong>: plataforma común de identificación de las AAPP vascas, verifica certificado digital o b@k-Q; equivalente a Cl@ve a nivel estatal.</li>
 <li><strong>Viafirma</strong>: plataforma privada de firma electrónica (portafirmas), con firma por certificado, OTP o biometría manuscrita, y gestión de flujos de firma.</li>
 <li><strong>DNIe</strong>: DNI con chip criptográfico, certificados de autenticación y de firma, acceso mediante PIN y lector de contacto o NFC (DNIe 4.0).</li>
+<li><strong>Factores de autenticación</strong>: sé / tengo / soy; MFA = dos factores de tipo distinto. <strong>Firmar = clave privada; verificar = clave pública</strong>.</li>
+</ul>
+
+<h2 id="10-conceptos-clave" class="tema-h2">10. Conceptos clave</h2>
+<ul class="tema-lista">
+<li><strong>Los 3 factores de autenticación y MFA/2FA</strong>.</li>
+<li><strong>Firma digital</strong>: autoría + integridad (+ no repudio, Tema 22).</li>
+<li><strong>eIDAS</strong>: firma simple / avanzada / <strong>cualificada</strong> (= manuscrita).</li>
+<li><strong>Criptografía asimétrica</strong>: clave privada/pública; hash; con qué clave se firma y se verifica.</li>
+<li><strong>PKI, CA, RA, revocación (CRL/OCSP)</strong>.</li>
+<li><strong>Certificado digital</strong>: contenido y tipos (ciudadano / profesional-empleado público / sede); soportes tarjeta / software / nube.</li>
+<li><strong>Izenpe</strong> (CA vasca) ↔ FNMT (estatal); Certificado Ciudadano (tarjeta, 4 años).</li>
+<li><strong>b@k-Q</strong> (DNI/NIE + contraseña + coordenadas) ↔ Cl@ve PIN.</li>
+<li><strong>Giltza</strong> (plataforma común de identificación) ↔ Cl@ve.</li>
+<li><strong>Viafirma</strong>: portafirmas; certificado / OTP / biométrica; flujos de firma.</li>
+<li><strong>DNIe</strong>: 2 certificados (autenticación y firma), PIN, NFC en DNIe 4.0.</li>
+</ul>
+
+<h2 id="11-posibles-puntos-de-examen" class="tema-h2">11. Posibles puntos de examen</h2>
+<ul class="tema-lista">
+<li>Clasificar ejemplos en los <strong>tres factores de autenticación</strong> y decidir si un supuesto es MFA real.</li>
+<li><strong>Con qué clave se firma y con cuál se verifica</strong> — la trampa clásica del tema.</li>
+<li>Los <strong>tres niveles de firma eIDAS</strong> y cuál equivale a la manuscrita (cualificada).</li>
+<li>Qué garantiza la firma digital (<strong>autoría + integridad</strong>) y su relación con el hash.</li>
+<li>Funciones de <strong>CA y RA</strong>, y cómo se comprueba si un certificado está revocado (CRL/OCSP).</li>
+<li>Los <strong>equivalentes vasco-estatales</strong>: Giltza↔Cl@ve, Izenpe↔FNMT, b@k-Q↔Cl@ve PIN — tabla muy preguntable en esta convocatoria.</li>
+<li>Los <strong>tres elementos de b@k-Q</strong> (DNI/NIE + contraseña + tarjeta de coordenadas).</li>
+<li>Qué es <strong>Giltza</strong> y qué métodos de identificación admite.</li>
+<li>Qué modalidades de firma ofrece <strong>Viafirma</strong> (certificado, OTP, biométrica) y qué es un flujo de firma.</li>
+<li>Los <strong>dos certificados del DNIe</strong> y las novedades del DNIe 4.0 (NFC).</li>
 </ul>
   </div>
 </article>
