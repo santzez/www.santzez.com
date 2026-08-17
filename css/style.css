@@ -131,13 +131,36 @@ main {
   text-decoration: none;
 }
 
-.cabecera__marca:hover {
+/* Overrides — el a:hover global no debe cambiar color ni añadir underline */
+.cabecera__marca,
+.cabecera__marca:hover,
+.cabecera__marca:visited,
+.cabecera__marca:active,
+.cabecera__marca:hover .cabecera__titulo,
+.cabecera__marca:hover .cabecera__subtitulo {
+  color: #fff;
   text-decoration: none;
 }
 
 .cabecera__marca svg {
   height: 44px;
   width: auto;
+}
+
+/* Logo con animación al hover: giro suave 360° al pasar el mouse.
+   Sin hover, transición de vuelta también suave. Se activa siempre,
+   independiente de la Categoría C. */
+.cabecera__marca img {
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  will-change: transform;
+}
+.cabecera__marca:hover img {
+  animation: logo-girar 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@keyframes logo-girar {
+  0%   { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(180deg) scale(1.08); }
+  100% { transform: rotate(360deg) scale(1); }
 }
 
 .cabecera__titulo {
@@ -147,6 +170,37 @@ main {
   letter-spacing: 0.08em;
   font-size: 1.05rem;
   line-height: 1;
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(
+    90deg,
+    #fff 0%,
+    #fff 40%,
+    rgba(255, 255, 255, 0.4) 50%,
+    #fff 60%,
+    #fff 100%
+  );
+  background-size: 200% 100%;
+  background-position: 200% 0;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  transition: background-position 0.9s cubic-bezier(0.25, 0.8, 0.25, 1),
+              letter-spacing 0.3s ease-out;
+}
+/* Al hover: el brillo barre de derecha a izquierda a través del texto */
+.cabecera__marca:hover .cabecera__titulo {
+  background-position: -50% 0;
+  letter-spacing: 0.11em;
+}
+/* Fallback: si el navegador no soporta background-clip:text, texto blanco fijo */
+@supports not (-webkit-background-clip: text) {
+  .cabecera__titulo {
+    background: none;
+    color: #fff;
+    -webkit-text-fill-color: #fff;
+  }
 }
 
 .cabecera__subtitulo {
@@ -157,6 +211,11 @@ main {
   text-transform: uppercase;
   opacity: 0.8;
   margin-top: 4px;
+  transition: opacity 0.25s ease-out, letter-spacing 0.35s ease-out;
+}
+.cabecera__marca:hover .cabecera__subtitulo {
+  opacity: 1;
+  letter-spacing: 0.18em;
 }
 
 .cabecera__nav {
@@ -1536,9 +1595,8 @@ button.tabs__tab:focus-visible {
   margin-bottom: 0.5rem;
 }
 .tema-indice__lista {
-  margin: 0; padding: 0 0 0 1.25rem;
-  counter-reset: idx;
-  list-style: decimal;
+  margin: 0; padding: 0 0 0 0;
+  list-style: none;              /* los números ya vienen en el propio texto */
 }
 .tema-indice__lista li { margin: 0.2rem 0; font-size: 0.92rem; }
 .tema-indice__lista a {
@@ -2223,12 +2281,9 @@ html.anim-identidad .cabecera {
   50%     { background-position: 100% 50%; }
 }
 
-html.anim-identidad .cabecera__marca img {
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-html.anim-identidad .cabecera__marca:hover img {
-  transform: translateY(-2px) rotate(-4deg) scale(1.05);
-}
+/* La animación del logo al hover ahora es global (siempre activa),
+   se define arriba en .cabecera__marca:hover img.
+   La Categoría C "Identidad" añade únicamente el gradiente del header. */
 
 /* =============================================================
    CATEGORÍA D — Antes muerta que sencilla (View Transitions)
