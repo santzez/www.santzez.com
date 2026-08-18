@@ -1,0 +1,360 @@
+{
+  "id": "OPE_CAU_T4",
+  "opeNombre": "OPE DonostiaTIK — Técnico/a de apoyo (CAU)",
+  "titulo": "T4 · Ficheros. Organización de la información. Métodos de inserción y acceso. Indexación. Formatos y características. Operaciones",
+  "descripcion": "27 preguntas tipo test con explicación didáctica, elaboradas a partir de los apuntes del Tema 4.",
+  "fuente": "Elaboración propia a partir de los apuntes del Tema 4 (web de estudio). Caracteres del tema: 16.428. Preguntas asignadas: 27.",
+  "preguntas": [
+    {
+      "id": "OPE_CAU_T4_001",
+      "pregunta": "¿Cuál es el orden correcto de la jerarquía de la información, de menor a mayor?",
+      "opciones": [
+        { "texto": "Campo → carácter → fichero → registro.", "correcta": false },
+        { "texto": "Carácter → campo → registro → fichero.", "correcta": true },
+        { "texto": "Carácter → registro → campo → fichero.", "correcta": false },
+        { "texto": "Registro → campo → carácter → fichero.", "correcta": false }
+      ],
+      "razonamiento": "La jerarquía clásica es: carácter (unidad mínima) → campo (dato con significado, p. ej. el DNI) → registro (conjunto de campos de una misma entidad) → fichero (conjunto de registros del mismo tipo). Un nivel más arriba estaría la base de datos (Tema 5).",
+      "origen": "T4 §1",
+      "dificultad": "Fácil", "tipo": "Procedimiento", "concepto": "Jerarquía de la información", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T4_002",
+      "pregunta": "El «departamento» de una plantilla de personal se usa para buscar y ordenar, pero se repite en muchos registros. ¿Qué tipo de clave es?",
+      "opciones": [
+        { "texto": "Clave primaria.", "correcta": false },
+        { "texto": "Clave foránea.", "correcta": false },
+        { "texto": "Clave secundaria.", "correcta": true },
+        { "texto": "Clave de desbordamiento.", "correcta": false }
+      ],
+      "razonamiento": "La clave primaria identifica de forma única e inequívoca cada registro (no puede repetirse); una clave secundaria sirve para buscar u ordenar pero su valor puede repetirse. La clave foránea pertenece al modelo relacional (Tema 5).",
+      "origen": "T4 §1",
+      "dificultad": "Media", "tipo": "Identificación", "concepto": "Clave primaria vs secundaria", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T4_003",
+      "pregunta": "¿Qué organización de fichero calcula la posición física de cada registro a partir de su clave mediante una función hash?",
+      "opciones": [
+        { "texto": "Secuencial.", "correcta": false },
+        { "texto": "Secuencial indexada.", "correcta": false },
+        { "texto": "Directa (o relativa).", "correcta": true },
+        { "texto": "Jerárquica.", "correcta": false }
+      ],
+      "razonamiento": "En la organización directa, una función de dispersión (hash) transforma la clave en una dirección de almacenamiento, permitiendo acceso muy rápido sin recorrer el fichero; su inconveniente son las colisiones.",
+      "origen": "T4 §2",
+      "dificultad": "Fácil", "tipo": "Identificación", "concepto": "Organización directa", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T4_004",
+      "pregunta": "¿Qué es una colisión en un fichero de organización directa?",
+      "opciones": [
+        { "texto": "Que dos procesos intentan escribir el mismo registro a la vez.", "correcta": false },
+        { "texto": "Que la función hash asigna la misma posición a dos claves distintas.", "correcta": true },
+        { "texto": "Que el índice y los datos quedan desincronizados.", "correcta": false },
+        { "texto": "Que el fichero supera el tamaño máximo del disco.", "correcta": false }
+      ],
+      "razonamiento": "La colisión ocurre cuando la función hash calcula la misma dirección para dos claves diferentes; debe resolverse con alguna estrategia (encadenar los registros en conflicto o usar una zona de desbordamiento).",
+      "origen": "T4 §2",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "Colisión hash", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T4_005",
+      "pregunta": "Un fichero se procesa casi siempre de principio a fin (listados completos), pero ocasionalmente hay que localizar un registro concreto con rapidez. ¿Qué organización es la más adecuada?",
+      "opciones": [
+        { "texto": "Secuencial pura.", "correcta": false },
+        { "texto": "Directa (hash).", "correcta": false },
+        { "texto": "Aleatoria sin índice.", "correcta": false },
+        { "texto": "Secuencial indexada.", "correcta": true }
+      ],
+      "razonamiento": "La secuencial indexada combina lo mejor de ambas: registros ordenados secuencialmente (recorridos eficientes) más un índice para el acceso rápido a registros concretos. Es la organización típica cuando se necesitan ambos tipos de acceso.",
+      "origen": "T4 §2",
+      "dificultad": "Media", "tipo": "Aplicación", "concepto": "Elección de organización", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T4_006",
+      "pregunta": "¿Qué significa la sigla ISAM?",
+      "opciones": [
+        { "texto": "Indexed Sequential Access Method (método de acceso secuencial indexado).", "correcta": true },
+        { "texto": "Internal Storage Access Mode.", "correcta": false },
+        { "texto": "Integrated System for Archive Management.", "correcta": false },
+        { "texto": "Index Sorting Algorithm Method.", "correcta": false }
+      ],
+      "razonamiento": "ISAM (Indexed Sequential Access Method): se consulta el índice para situarse cerca del registro y se remata con un recorrido secuencial corto. Combina la eficiencia del acceso directo con la simplicidad del secuencial.",
+      "origen": "T4 §3",
+      "dificultad": "Fácil", "tipo": "Precisión", "concepto": "ISAM", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T4_007",
+      "pregunta": "Para evitar desplazar registros en cada alta en un fichero ordenado, el nuevo registro se escribe en una zona auxiliar enlazada lógicamente, pendiente de una reorganización posterior. ¿Cómo se llama este método de inserción?",
+      "opciones": [
+        { "texto": "Inserción al final (append).", "correcta": false },
+        { "texto": "Inserción por cálculo de posición.", "correcta": false },
+        { "texto": "Inserción con zona de desbordamiento (overflow).", "correcta": true },
+        { "texto": "Inserción indexada multinivel.", "correcta": false }
+      ],
+      "razonamiento": "La zona de desbordamiento (overflow) evita el coste de desplazar registros en cada inserción ordenada; a cambio, exige reorganizar periódicamente el fichero para no perder eficiencia.",
+      "origen": "T4 §3",
+      "dificultad": "Media", "tipo": "Identificación", "concepto": "Inserción con overflow", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T4_008",
+      "pregunta": "Señala la correspondencia correcta entre organización y método de acceso natural:",
+      "opciones": [
+        { "texto": "Organización directa → acceso secuencial obligatorio.", "correcta": false },
+        { "texto": "Organización secuencial → acceso directo por hash.", "correcta": false },
+        { "texto": "Cada organización permite de forma natural el método de acceso del mismo nombre: secuencial→secuencial, directa→directo, indexada→secuencial indexado.", "correcta": true },
+        { "texto": "El método de acceso es independiente de la organización del fichero.", "correcta": false }
+      ],
+      "razonamiento": "Organización y método de acceso son dos caras de la misma decisión de diseño: la organización física condiciona qué accesos son posibles y eficientes. No son conceptos independientes.",
+      "origen": "T4 §3",
+      "dificultad": "Media", "tipo": "Relación", "concepto": "Organización vs acceso", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T4_009",
+      "pregunta": "Un índice que contiene una entrada por cada registro del fichero es un índice:",
+      "opciones": [
+        { "texto": "Denso.", "correcta": true },
+        { "texto": "Disperso.", "correcta": false },
+        { "texto": "Multinivel.", "correcta": false },
+        { "texto": "Secundario.", "correcta": false }
+      ],
+      "razonamiento": "El índice denso tiene una entrada por registro (más grande, localización directa); el disperso, una entrada por bloque (más compacto, exige una búsqueda corta dentro del bloque). Denso/disperso es la clasificación por densidad.",
+      "origen": "T4 §4",
+      "dificultad": "Fácil", "tipo": "Definición", "concepto": "Índice denso", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T4_010",
+      "pregunta": "¿Puede un índice ser a la vez secundario y denso?",
+      "opciones": [
+        { "texto": "No: los índices secundarios son siempre dispersos.", "correcta": false },
+        { "texto": "Sí: densidad (denso/disperso) y rol (primario/secundario) son dos clasificaciones independientes.", "correcta": true },
+        { "texto": "No: solo el índice primario puede ser denso.", "correcta": false },
+        { "texto": "Solo si el fichero tiene organización directa.", "correcta": false }
+      ],
+      "razonamiento": "Son dos criterios distintos: el rol indica sobre qué campo se construye (primario define el orden físico; secundario, otro campo) y la densidad cuántas entradas tiene. Un índice puede ser, por ejemplo, secundario y denso a la vez.",
+      "origen": "T4 §4",
+      "dificultad": "Difícil", "tipo": "Relación", "concepto": "Clasificaciones de índices", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T4_011",
+      "pregunta": "Cuando un índice crece tanto que su propia consulta se vuelve lenta y se construye un índice sobre el índice, hablamos de:",
+      "opciones": [
+        { "texto": "Índice disperso.", "correcta": false },
+        { "texto": "Reindexación cíclica.", "correcta": false },
+        { "texto": "Índice espejo.", "correcta": false },
+        { "texto": "Índice multinivel.", "correcta": true }
+      ],
+      "razonamiento": "El índice multinivel indexa a su vez el propio índice, formando varios niveles jerárquicos. En sistemas reales se implementa típicamente con estructuras en árbol (B/B+), que mantienen tiempos de búsqueda predecibles.",
+      "origen": "T4 §4",
+      "dificultad": "Media", "tipo": "Identificación", "concepto": "Índice multinivel", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T4_012",
+      "pregunta": "¿Sobre qué campo se construye el índice primario de un fichero?",
+      "opciones": [
+        { "texto": "Sobre cualquier campo de búsqueda frecuente.", "correcta": false },
+        { "texto": "Sobre el campo clave que determina el orden físico de los registros (solo puede haber uno).", "correcta": true },
+        { "texto": "Sobre el campo de mayor tamaño en bytes.", "correcta": false },
+        { "texto": "Sobre un campo elegido aleatoriamente por el sistema.", "correcta": false }
+      ],
+      "razonamiento": "El índice primario se construye sobre el campo que determina el orden físico del fichero, y por eso solo puede haber uno. Los índices secundarios (puede haber varios) permiten buscar por otros criterios sin reordenar el fichero.",
+      "origen": "T4 §4",
+      "dificultad": "Media", "tipo": "Conocimiento directo", "concepto": "Índice primario", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T4_013",
+      "pregunta": "¿Qué ventaja aportan los registros de longitud fija frente a los de longitud variable?",
+      "opciones": [
+        { "texto": "Ocupan siempre menos espacio en disco.", "correcta": false },
+        { "texto": "Permiten registrar datos de tipos distintos en cada registro.", "correcta": false },
+        { "texto": "Simplifican el cálculo de la posición de cualquier registro, imprescindible en la organización directa.", "correcta": true },
+        { "texto": "Evitan la necesidad de claves primarias.", "correcta": false }
+      ],
+      "razonamiento": "Si todos los registros ocupan el mismo número de bytes, la posición del registro n se calcula multiplicando: por eso la organización directa exige longitud fija. La longitud variable ahorra espacio, pero complica ese cálculo.",
+      "origen": "T4 §5",
+      "dificultad": "Media", "tipo": "Relación", "concepto": "Longitud fija vs variable", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T4_014",
+      "pregunta": "Un fichero cuyos valores se separan mediante comas en cada línea es un ejemplo típico de:",
+      "opciones": [
+        { "texto": "Fichero de campos delimitados (CSV).", "correcta": true },
+        { "texto": "Fichero binario.", "correcta": false },
+        { "texto": "Fichero de longitud fija.", "correcta": false },
+        { "texto": "Fichero indexado.", "correcta": false }
+      ],
+      "razonamiento": "En los ficheros de campos delimitados, un carácter reservado (coma en CSV, punto y coma, tabulador) separa los valores, en lugar de reservar un ancho fijo por campo. CSV, JSON y XML son los formatos de intercambio de texto más habituales hoy.",
+      "origen": "T4 §5",
+      "dificultad": "Fácil", "tipo": "Identificación", "concepto": "Campos delimitados / CSV", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T4_015",
+      "pregunta": "En un esquema clásico de procesamiento por lotes (batch), el fichero que recoge las altas, bajas y modificaciones pendientes de aplicar es:",
+      "opciones": [
+        { "texto": "El fichero maestro.", "correcta": false },
+        { "texto": "El fichero de movimientos.", "correcta": true },
+        { "texto": "El fichero de índices.", "correcta": false },
+        { "texto": "El fichero de desbordamiento.", "correcta": false }
+      ],
+      "razonamiento": "El fichero maestro guarda los datos relativamente estables (p. ej., el catálogo de personas empleadas); el de movimientos acumula las transacciones (altas, bajas, modificaciones) que se aplican sobre el maestro en un proceso posterior.",
+      "origen": "T4 §5",
+      "dificultad": "Media", "tipo": "Diferenciación", "concepto": "Maestro vs movimientos", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T4_016",
+      "pregunta": "Señala la afirmación correcta sobre ficheros de texto y binarios:",
+      "opciones": [
+        { "texto": "El fichero binario es directamente legible por una persona.", "correcta": false },
+        { "texto": "El fichero de texto es siempre más compacto que el binario.", "correcta": false },
+        { "texto": "El fichero de texto codifica caracteres legibles (p. ej., UTF-8); el binario se optimiza para el programa que lo usa y no es directamente legible.", "correcta": true },
+        { "texto": "Los ficheros binarios no pueden contener datos numéricos.", "correcta": false }
+      ],
+      "razonamiento": "El texto es legible e intercambiable; el binario suele ser más compacto y rápido de procesar, pero requiere el programa adecuado para interpretarlo. Es exactamente al revés de lo que afirman los distractores.",
+      "origen": "T4 §5",
+      "dificultad": "Media", "tipo": "Detección de errores", "concepto": "Texto vs binario", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T4_017",
+      "pregunta": "¿Cuál de las siguientes NO es una característica (metadato) típica de un fichero gestionada por el sistema de archivos?",
+      "opciones": [
+        { "texto": "Las fechas de creación y última modificación.", "correcta": false },
+        { "texto": "Los atributos (solo lectura, oculto, sistema).", "correcta": false },
+        { "texto": "Los permisos de acceso.", "correcta": false },
+        { "texto": "La clave primaria de sus registros.", "correcta": true }
+      ],
+      "razonamiento": "Los metadatos típicos son: nombre y extensión, tamaño, fechas, atributos, ubicación (ruta) y permisos. La clave primaria pertenece a la organización lógica interna de los datos, no a los metadatos del sistema de archivos.",
+      "origen": "T4 §5",
+      "dificultad": "Media", "tipo": "Detección de errores", "concepto": "Metadatos del fichero", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T4_018",
+      "pregunta": "¿Qué diferencia hay entre el borrado lógico y el borrado físico de un registro?",
+      "opciones": [
+        { "texto": "El lógico marca el registro como eliminado sin liberar su espacio; el físico lo elimina realmente y libera el espacio de inmediato.", "correcta": true },
+        { "texto": "El lógico lo realiza el usuario y el físico, el administrador.", "correcta": false },
+        { "texto": "El físico es reversible y el lógico, irreversible.", "correcta": false },
+        { "texto": "Son términos equivalentes.", "correcta": false }
+      ],
+      "razonamiento": "El borrado lógico es rápido y reversible mientras no se reorganice el fichero: el registro sigue ocupando espacio, solo está marcado. El físico elimina de verdad y es irreversible. La reversibilidad es justo la contraria a la del distractor.",
+      "origen": "T4 §6",
+      "dificultad": "Media", "tipo": "Diferenciación", "concepto": "Borrado lógico vs físico", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T4_019",
+      "pregunta": "¿Qué operación elimina físicamente los registros marcados como borrados y recupera el espacio de las zonas de desbordamiento?",
+      "opciones": [
+        { "texto": "Fusión.", "correcta": false },
+        { "texto": "Ordenación.", "correcta": false },
+        { "texto": "Reorganización (compactación).", "correcta": true },
+        { "texto": "Indexación.", "correcta": false }
+      ],
+      "razonamiento": "La reorganización o compactación devuelve al fichero su eficiencia original: convierte los borrados lógicos acumulados en liberación física real y reintegra la zona de desbordamiento.",
+      "origen": "T4 §6",
+      "dificultad": "Media", "tipo": "Identificación", "concepto": "Reorganización", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T4_020",
+      "pregunta": "¿Qué requisito deben cumplir dos ficheros para poder fusionarse (mezclarse) en uno solo manteniendo el orden?",
+      "opciones": [
+        { "texto": "Tener el mismo número de registros.", "correcta": false },
+        { "texto": "Estar ambos ordenados por la misma clave.", "correcta": true },
+        { "texto": "Tener organización directa.", "correcta": false },
+        { "texto": "Estar almacenados en el mismo disco físico.", "correcta": false }
+      ],
+      "razonamiento": "La fusión (merge) combina dos o más ficheros ya ordenados por la misma clave en un único fichero resultante que conserva ese orden. Sin ese orden previo común, la operación no puede mantener el resultado ordenado.",
+      "origen": "T4 §6",
+      "dificultad": "Media", "tipo": "Conocimiento directo", "concepto": "Fusión de ficheros", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T4_021",
+      "pregunta": "¿Cuál de las siguientes es una operación a nivel de registro (y no de fichero completo)?",
+      "opciones": [
+        { "texto": "Renombrar.", "correcta": false },
+        { "texto": "Fusionar.", "correcta": false },
+        { "texto": "Reorganizar.", "correcta": false },
+        { "texto": "Actualizar (modificar campos de un registro existente).", "correcta": true }
+      ],
+      "razonamiento": "Operaciones de fichero completo: crear, abrir, cerrar, eliminar, renombrar, copiar, mover, ordenar, fusionar, reorganizar. Operaciones de registro: leer, insertar, actualizar, buscar y borrar (lógico o físico).",
+      "origen": "T4 §6",
+      "dificultad": "Media", "tipo": "Clasificación", "concepto": "Operaciones sobre ficheros", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T4_022",
+      "pregunta": "¿Por qué la organización secuencial es poco adecuada para consultas puntuales de registros concretos?",
+      "opciones": [
+        { "texto": "Porque obliga a recorrer el fichero desde el principio hasta encontrar el registro buscado.", "correcta": true },
+        { "texto": "Porque no admite claves primarias.", "correcta": false },
+        { "texto": "Porque sus registros deben ser de longitud variable.", "correcta": false },
+        { "texto": "Porque requiere resolver colisiones en cada consulta.", "correcta": false }
+      ],
+      "razonamiento": "La organización secuencial es la más eficiente para procesar el fichero completo, pero para llegar a un registro concreto hay que recorrer los anteriores. Las colisiones son propias de la organización directa, no de la secuencial.",
+      "origen": "T4 §2",
+      "dificultad": "Fácil", "tipo": "Relación", "concepto": "Limitación del acceso secuencial", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T4_023",
+      "pregunta": "Históricamente, ¿qué soporte físico fue el típico de los ficheros con organización secuencial?",
+      "opciones": [
+        { "texto": "El disco SSD.", "correcta": false },
+        { "texto": "La memoria flash.", "correcta": false },
+        { "texto": "La cinta magnética.", "correcta": true },
+        { "texto": "El disco óptico regrabable.", "correcta": false }
+      ],
+      "razonamiento": "La cinta magnética solo permite acceso secuencial (avanzar o rebobinar), por lo que fue durante décadas el soporte natural de los ficheros secuenciales. Aun así, la organización es un concepto lógico: un fichero secuencial puede residir también en disco.",
+      "origen": "T4 §2 / Tema 6",
+      "dificultad": "Media", "tipo": "Relación", "concepto": "Organización y soporte físico", "prioridad": "Baja"
+    },
+    {
+      "id": "OPE_CAU_T4_024",
+      "pregunta": "En sistemas reales, los índices multinivel se implementan habitualmente mediante:",
+      "opciones": [
+        { "texto": "Estructuras en árbol (árboles B o B+).", "correcta": true },
+        { "texto": "Listas enlazadas simples.", "correcta": false },
+        { "texto": "Tablas hash sin colisiones.", "correcta": false },
+        { "texto": "Ficheros de movimientos encadenados.", "correcta": false }
+      ],
+      "razonamiento": "Los árboles B y B+ se mantienen equilibrados y garantizan tiempos de búsqueda predecibles aunque el índice crezca mucho. Basta con saber que existen y para qué sirven: equilibrar velocidad de búsqueda y tamaño del índice.",
+      "origen": "T4 §4",
+      "dificultad": "Difícil", "tipo": "Conocimiento directo", "concepto": "Árboles B/B+", "prioridad": "Baja"
+    },
+    {
+      "id": "OPE_CAU_T4_025",
+      "pregunta": "Una aplicación consulta expedientes por su número (único), con miles de consultas puntuales diarias y sin apenas recorridos completos. ¿Qué organización de fichero maximiza el rendimiento?",
+      "opciones": [
+        { "texto": "Secuencial pura, por su sencillez.", "correcta": false },
+        { "texto": "Directa (hash) sobre el número de expediente.", "correcta": true },
+        { "texto": "Secuencial con inserción al final.", "correcta": false },
+        { "texto": "Cualquiera: el rendimiento no depende de la organización.", "correcta": false }
+      ],
+      "razonamiento": "Muchas consultas puntuales por clave única y pocos recorridos completos es el escenario ideal de la organización directa: el hash calcula la posición sin recorrer nada. El precio es gestionar colisiones y renunciar a recorridos ordenados eficientes.",
+      "origen": "T4 §2-3",
+      "dificultad": "Difícil", "tipo": "Caso práctico", "concepto": "Elección de organización", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T4_026",
+      "pregunta": "¿Cuál de las siguientes afirmaciones sobre este tema es INCORRECTA?",
+      "opciones": [
+        { "texto": "La clave primaria no puede repetirse dentro del fichero.", "correcta": false },
+        { "texto": "El índice disperso tiene una entrada por cada registro del fichero.", "correcta": true },
+        { "texto": "CSV, JSON y XML son formatos de texto estructurados de intercambio.", "correcta": false },
+        { "texto": "La inserción ordenada puede exigir desplazar registros posteriores.", "correcta": false }
+      ],
+      "razonamiento": "El índice con una entrada por registro es el denso; el disperso tiene una entrada solo para algunos registros (por ejemplo, el primero de cada bloque). El resto de afirmaciones son correctas según el tema.",
+      "origen": "T4 §4-5",
+      "dificultad": "Difícil", "tipo": "Detección de errores", "concepto": "Repaso transversal", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T4_027",
+      "pregunta": "¿Qué relación tiene este tema con el Tema 5 (bases de datos)?",
+      "opciones": [
+        { "texto": "Ninguna: son ámbitos sin conexión.", "correcta": false },
+        { "texto": "El Tema 5 sustituye los conceptos de este tema, que quedan obsoletos.", "correcta": false },
+        { "texto": "Los conceptos de registro, clave e índice de este tema se reutilizan en el modelo relacional: tabla = fichero, fila = registro, columna = campo.", "correcta": true },
+        { "texto": "Las bases de datos no usan índices, a diferencia de los ficheros.", "correcta": false }
+      ],
+      "razonamiento": "El modelo relacional reutiliza con otro nombre el vocabulario de los ficheros: tabla = fichero, fila (tupla) = registro, columna (atributo) = campo, y la idea de índice reaparece aplicada a tablas. Los ficheros siguen plenamente vigentes (configuración, logs, intercambio de datos).",
+      "origen": "T4 §7",
+      "dificultad": "Fácil", "tipo": "Relación", "concepto": "Puente hacia las bases de datos", "prioridad": "Media"
+    }
+  ]
+}
