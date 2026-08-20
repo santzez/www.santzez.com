@@ -32,11 +32,22 @@
 
 <main>
   <div class="contenedor-estrecho">
-    <nav class="migas">
+    <nav class="migas" id="quiz-migas">
       <a href="/index.html">Inicio</a> <span>›</span>
       <a href="/oposizioak/index.html">Oposizioak</a> <span>›</span>
       <span id="quiz-titulo-migas">Quiz</span>
     </nav>
+
+    <!-- Tabs de navegación al tema (Apuntes/Podcasts/Qwiz). Solo se muestran
+         si el ope del quiz proviene de un tema con estructura de tabs
+         (típicamente OPE_CAU/T{n}/Qwiz). -->
+    <div class="tabs" id="quiz-tabs" hidden>
+      <div class="tabs__cabecera" role="tablist">
+        <a class="tabs__tab" role="tab" id="tab-apuntes" href="#">Apuntes</a>
+        <a class="tabs__tab" role="tab" id="tab-podcasts" href="#">Podcasts</a>
+        <a class="tabs__tab activo" role="tab" aria-selected="true">Qwiz</a>
+      </div>
+    </div>
 
     <div class="quiz-cabecera">
       <h2 id="quiz-titulo">Quiz</h2>
@@ -64,6 +75,25 @@
 <script src="/js/auth.js"></script>
 <script src="/js/storage.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+  /* -------------------------------------------------------------
+     Tabs de navegación al tema: si el ?ope=... acaba en '/Qwiz'
+     (es decir, viene de un tema con estructura de tabs), mostramos
+     los enlaces Apuntes/Podcasts que llevan de vuelta al ope.html
+     del tema con el hash del tab correspondiente.
+     ------------------------------------------------------------- */
+  (function () {
+    const params = new URLSearchParams(location.search);
+    const opeParam = params.get('ope') || '';
+    const tabs = document.getElementById('quiz-tabs');
+    if (!opeParam.endsWith('/Qwiz')) return;
+    const rutaTema = opeParam.replace(/\/Qwiz$/, '');
+    const urlBase = 'ope.html?ope=' + encodeURIComponent(rutaTema);
+    document.getElementById('tab-apuntes').href = urlBase + '#Material_de_estudio';
+    document.getElementById('tab-podcasts').href = urlBase + '#Podcasts';
+    tabs.hidden = false;
+  })();
+</script>
 <script src="js/quiz-engine.js"></script>
 </body>
 </html>

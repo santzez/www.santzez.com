@@ -63,7 +63,7 @@
 <h4 class="tema-h4">Particionado y sistemas de archivo</h4>
 <p>Junto al particionado tradicional (dividir el disco en particiones de tamaño fijo), es habitual usar <strong>LVM (Logical Volume Manager)</strong>: una capa de abstracción que agrupa uno o varios discos físicos en un «volumen» del que se pueden crear particiones lógicas redimensionables en caliente, con mucha más flexibilidad que el particionado clásico. Los sistemas de archivo más habituales en servidores Linux son <strong>ext4</strong> (el más extendido por defecto), <strong>XFS</strong> (frecuente en la familia Red Hat, con buen rendimiento en archivos de gran tamaño) y <strong>Btrfs</strong> (con funciones avanzadas como instantáneas o subvolúmenes); el concepto general de sistema de archivos como gestor de la información persistente ya se introdujo en el Tema 9.</p>
 <h2 id="3-gestión-de-paquetes-y-del-software" class="tema-h2">3. Gestión de paquetes y del software</h2>
-<p>El software en Linux se instala, actualiza y elimina mediante <strong>gestores de paquetes</strong>, que descargan el software desde <strong>repositorios</strong> (servidores remotos con las versiones disponibles de cada paquete) y resuelven automáticamente sus <strong>dependencias</strong> (otros paquetes necesarios para que el software funcione), a diferencia de instalar un paquete suelto de bajo nivel (`.deb` con `dpkg`, `.rpm` con `rpm`) directamente, donde esas dependencias hay que resolverlas a mano.</p>
+<p>El software en Linux se instala, actualiza y elimina mediante <strong>gestores de paquetes</strong>, que descargan el software desde <strong>repositorios</strong> (servidores remotos con las versiones disponibles de cada paquete) y resuelven automáticamente sus <strong>dependencias</strong> (otros paquetes necesarios para que el software funcione), a diferencia de instalar un paquete suelto de bajo nivel (<code>.deb</code> con <code>dpkg</code>, <code>.rpm</code> con <code>rpm</code>) directamente, donde esas dependencias hay que resolverlas a mano.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>Acción</strong></th>
@@ -99,8 +99,8 @@
 <h2 id="4-arranque-y-gestión-de-servicios-systemd" class="tema-h2">4. Arranque y gestión de servicios: systemd</h2>
 <p><strong>systemd</strong> es el sistema de inicio (init system) y la infraestructura de gestión de servicios adoptada como estándar por la gran mayoría de distribuciones Linux actuales (Ubuntu, Debian, RHEL y derivados, SUSE), en sustitución de los antiguos SysV init y Upstart. Es el primer proceso que arranca tras el núcleo (identificado siempre con el PID 1) y se encarga de iniciar, detener y supervisar el resto de servicios del sistema.</p>
 <ul class="tema-lista">
-<li><strong>Unidades (units)</strong>: ficheros de configuración que describen un recurso gestionado por systemd; las más comunes son las unidades `.service` (un servicio o demonio), aunque también existen `.socket`, `.mount` o `.timer` (para tareas programadas, alternativa moderna a cron).</li>
-<li><strong>systemctl</strong>: comando principal para gestionar servicios: `systemctl start|stop|restart|status &lt;servicio&gt;` para controlar su ejecución en el momento, y `systemctl enable|disable &lt;servicio&gt;` para que arranque (o no) automáticamente con el sistema.</li>
+<li><strong>Unidades (units)</strong>: ficheros de configuración que describen un recurso gestionado por systemd; las más comunes son las unidades <code>.service</code> (un servicio o demonio), aunque también existen <code>.socket</code>, <code>.mount</code> o <code>.timer</code> (para tareas programadas, alternativa moderna a cron).</li>
+<li><strong>systemctl</strong>: comando principal para gestionar servicios: <code>systemctl start|stop|restart|status &lt;servicio&gt;</code> para controlar su ejecución en el momento, y <code>systemctl enable|disable &lt;servicio&gt;</code> para que arranque (o no) automáticamente con el sistema.</li>
 <li><strong>journalctl</strong>: herramienta para consultar el registro centralizado de sucesos (el «journal») que recopila systemd de todos los servicios y del propio arranque del sistema.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -112,7 +112,7 @@
 <p>La administración de un servidor Linux es, salvo excepciones, remota y en línea de comandos, a través de <strong>SSH (Secure Shell)</strong>: un protocolo que cifra toda la comunicación entre el cliente y el servidor, y que escucha por defecto en el puerto 22. La autenticación puede hacerse por contraseña o, de forma más segura y habitual en producción, mediante un par de claves criptográficas (pública en el servidor, privada en el cliente).</p>
 <p>Todo sistema Linux distingue entre el superusuario <strong>root</strong>, con privilegios totales sobre el sistema, y los usuarios normales, con privilegios limitados. La buena práctica de seguridad no es iniciar sesión directamente como root, sino hacerlo como un usuario normal y usar el comando <strong>sudo</strong> (&quot;superuser do&quot;) para ejecutar puntualmente, y de forma auditable, comandos concretos con privilegios elevados.</p>
 <h2 id="6-mantenimiento-básico-actualizaciones" class="tema-h2">6. Mantenimiento básico: actualizaciones</h2>
-<p>Además de la actualización manual con el gestor de paquetes (punto 3), la mayoría de distribuciones ofrecen mecanismos de <strong>actualización automática de seguridad</strong>: `unattended-upgrades` en Debian/Ubuntu o `dnf-automatic` en la familia Red Hat, que instalan sin intervención manual, al menos, los parches de seguridad críticos.</p>
+<p>Además de la actualización manual con el gestor de paquetes (punto 3), la mayoría de distribuciones ofrecen mecanismos de <strong>actualización automática de seguridad</strong>: <code>unattended-upgrades</code> en Debian/Ubuntu o <code>dnf-automatic</code> en la familia Red Hat, que instalan sin intervención manual, al menos, los parches de seguridad críticos.</p>
 <p>Como en cualquier sistema operativo, cada distribución tiene un <strong>ciclo de vida</strong> y una fecha de fin de soporte: las versiones LTS de Ubuntu, por ejemplo, reciben cinco años de soporte estándar y, opcionalmente, cinco años adicionales de mantenimiento de seguridad extendido (ESM). El mismo principio que se señaló para Windows 10 en el Tema 11 aplica aquí: seguir usando una versión sin soporte deja el servidor sin parches de seguridad, por lo que la migración a una versión soportada debe planificarse con antelación.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -120,7 +120,7 @@
 </tr>
 </table></div>
 <h2 id="7-monitorización" class="tema-h2">7. Monitorización</h2>
-<p>Un servidor Linux se monitoriza principalmente a través de comandos y utilidades en línea de comandos, complementados con el registro centralizado de systemd (journalctl) y los archivos de registro clásicos en `/var/log`.</p>
+<p>Un servidor Linux se monitoriza principalmente a través de comandos y utilidades en línea de comandos, complementados con el registro centralizado de systemd (journalctl) y los archivos de registro clásicos en <code>/var/log</code>.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>Aspecto a monitorizar</strong></th>
