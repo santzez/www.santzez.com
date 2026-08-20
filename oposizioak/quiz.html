@@ -51,7 +51,13 @@
 
     <div class="quiz-cabecera">
       <h2 id="quiz-titulo">Quiz</h2>
-      <div class="quiz-contador" id="contador-texto">Preparando…</div>
+      <div class="quiz-info">
+        <div class="quiz-contador" id="contador-texto">Preparando…</div>
+        <div class="cronometro" id="cronometro-display" title="Tiempo de ejercicio">
+          <span class="cronometro__icono" aria-hidden="true">⏱</span>
+          <span class="cronometro__tiempo">00:00</span>
+        </div>
+      </div>
     </div>
 
     <div class="barra-progreso" aria-hidden="true">
@@ -75,25 +81,49 @@
 <script src="/js/auth.js"></script>
 <script src="/js/storage.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="js/quiz-engine.js"></script>
 <script>
   /* -------------------------------------------------------------
-     Tabs de navegación al tema: si el ?ope=... acaba en '/Qwiz'
-     (es decir, viene de un tema con estructura de tabs), mostramos
-     los enlaces Apuntes/Podcasts que llevan de vuelta al ope.html
-     del tema con el hash del tab correspondiente.
+     Si el ?ope=... acaba en '/Qwiz' (viene de un tema con tabs),
+     el usuario debería llegar al tab embebido, no a esta página
+     independiente. Redirigimos automáticamente para que el quiz
+     se muestre dentro del tab (con estado persistente al cambiar
+     de tab).
+     Si no, arrancamos el motor en esta página como antes.
      ------------------------------------------------------------- */
-  (function () {
+  (async function () {
+    const sesion = await AuthSession.exigirLogin();
+    if (!sesion) return;
     const params = new URLSearchParams(location.search);
     const opeParam = params.get('ope') || '';
-    const tabs = document.getElementById('quiz-tabs');
-    if (!opeParam.endsWith('/Qwiz')) return;
-    const rutaTema = opeParam.replace(/\/Qwiz$/, '');
-    const urlBase = 'ope.html?ope=' + encodeURIComponent(rutaTema);
-    document.getElementById('tab-apuntes').href = urlBase + '#Material_de_estudio';
-    document.getElementById('tab-podcasts').href = urlBase + '#Podcasts';
-    tabs.hidden = false;
+    const temaParam = params.get('tema') || '';
+    const modoParam = params.get('modo') || 'todas';
+
+    // Si vienes de un tema con estructura de tabs, redirige al ope.html
+    // con la información en query para que arranque el quiz dentro del tab.
+    if (opeParam.endsWith('/Qwiz')) {
+      const rutaTema = opeParam.replace(/\/Qwiz$/, '');
+      const url = 'ope.html?ope=' + encodeURIComponent(rutaTema)
+                + '&startQuiz=' + encodeURIComponent(temaParam)
+                + (modoParam !== 'todas' ? '&startModo=' + encodeURIComponent(modoParam) : '')
+                + '#Qwiz';
+      location.replace(url);
+      return;
+    }
+
+    // Arranque tradicional (opes que aún no usan tabs)
+    QuizEngine.iniciar({
+      ope: opeParam,
+      tema: temaParam,
+      modo: modoParam,
+      usuarioId: sesion.user.id,
+      cont: document.getElementById('quiz-raiz'),
+      titulo: document.getElementById('quiz-titulo'),
+      contador: document.getElementById('contador-texto'),
+      barra: document.getElementById('barra-relleno'),
+      cronometro: document.querySelector('#cronometro-display .cronometro__tiempo'),
+    });
   })();
 </script>
-<script src="js/quiz-engine.js"></script>
 </body>
 </html>

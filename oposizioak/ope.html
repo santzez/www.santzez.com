@@ -77,6 +77,8 @@
 <script src="/js/view-transitions.js"></script>
 <script src="/js/auth.js"></script>
 <script src="/js/storage.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="js/quiz-engine.js"></script>
 <script>
   /* -------------------------------------------------------------
      ope.html — navegación jerárquica de una oposición.
@@ -219,6 +221,12 @@
           });
           // Actualiza la URL con hash (sin recargar)
           history.replaceState(null, '', location.pathname + location.search + '#' + idTab);
+
+          // Cronómetro del quiz: pausa si sales del tab Qwiz, reanuda si vuelves.
+          if (window.QuizEngine && QuizEngine.estaActivo()) {
+            if (idTab === 'Qwiz') QuizEngine.reanudarCronometro();
+            else                   QuizEngine.pausarCronometro();
+          }
         };
         tabsWrap.querySelectorAll('.tabs__tab').forEach(btn => {
           btn.addEventListener('click', () => cambiarTab(btn.dataset.tab));
@@ -416,9 +424,68 @@
         return;
       }
 
-      // Tipo "temas" (o info.temas presente) → listado de temas para el quiz
+      // Tipo "temas" (o info.temas presente) → listado de temas para el quiz.
+      // Al pulsar un tema, se embebe el motor de quiz DENTRO del contenedor
+      // (no se navega), para preservar el estado al cambiar de tab.
       if (info.tipo === 'temas' || Array.isArray(info.temas)) {
         subtitulo.textContent = 'Temas';
+
+        // Estructura: [lista de temas] + [contenedor del quiz oculto]
+        const listaWrap = document.createElement('div');
+        listaWrap.className = 'qwiz-lista';
+        const motorWrap = document.createElement('div');
+        motorWrap.className = 'qwiz-motor';
+        motorWrap.hidden = true;
+        motorWrap.innerHTML = `
+          <button type="button" class="btn btn--secundario qwiz-volver">← Volver a la lista de temas</button>
+          <div class="quiz-cabecera">
+            <h2 class="quiz-titulo qwiz-embed__titulo">Quiz</h2>
+            <div class="quiz-info">
+              <div class="quiz-contador qwiz-embed__contador">Preparando…</div>
+              <div class="cronometro qwiz-embed__cronometro" title="Tiempo de ejercicio">
+                <span class="cronometro__icono" aria-hidden="true">⏱</span>
+                <span class="cronometro__tiempo">00:00</span>
+              </div>
+            </div>
+          </div>
+          <div class="barra-progreso" aria-hidden="true">
+            <div class="barra-progreso__relleno qwiz-embed__barra"></div>
+          </div>
+          <div class="qwiz-embed__raiz"></div>
+        `;
+        cont.appendChild(listaWrap);
+        cont.appendChild(motorWrap);
+
+        // Iniciar quiz embebido con el tema pulsado
+        const arrancarQuiz = (temaId, modo) => {
+          listaWrap.hidden = true;
+          motorWrap.hidden = false;
+          QuizEngine.iniciar({
+            ope: rutaOpe,
+            tema: temaId,
+            modo: modo || 'todas',
+            usuarioId: sesion.user.id,
+            cont: motorWrap.querySelector('.qwiz-embed__raiz'),
+            titulo: motorWrap.querySelector('.qwiz-embed__titulo'),
+            contador: motorWrap.querySelector('.qwiz-embed__contador'),
+            barra: motorWrap.querySelector('.qwiz-embed__barra'),
+            cronometro: motorWrap.querySelector('.qwiz-embed__cronometro .cronometro__tiempo'),
+            alVolver: () => {
+              motorWrap.hidden = true;
+              listaWrap.hidden = false;
+              QuizEngine.destruir();
+            },
+          });
+        };
+
+        // Botón "Volver a la lista" del contenedor del motor
+        motorWrap.querySelector('.qwiz-volver').addEventListener('click', () => {
+          if (!confirm('¿Salir del quiz? Se perderá el progreso.')) return;
+          motorWrap.hidden = true;
+          listaWrap.hidden = false;
+          QuizEngine.destruir();
+        });
+
         let indiceTema = 0;
         for (const tema of info.temas || []) {
           let preguntas = [];
@@ -439,13 +506,9 @@
             } catch (e) { console.warn('No se pudieron leer las falladas:', e); }
           }
 
-          const urlTema = `quiz.html?ope=${encodeURIComponent(rutaOpe)}&tema=${encodeURIComponent(tema.id)}`;
-          const urlFalladas = urlTema + '&modo=falladas';
-
           const div = document.createElement('div');
           div.className = 'tarjeta tarjeta--clicable tarjeta--fila tarjeta--aparecer';
           div.style.animationDelay = (indiceTema++ * 60) + 'ms';
-          div.dataset.href = urlTema;
           div.innerHTML = `
             <div class="tarjeta__principal">
               <div class="tarjeta__titulo">${tema.id}</div>
@@ -459,19 +522,31 @@
             </div>
             <div class="tarjeta__cta">
               ${numFalladas > 0
-                ? `<a class="btn btn--secundario" href="${urlFalladas}">Repasar fallos</a>`
+                ? `<button type="button" class="btn btn--secundario" data-modo="falladas">Repasar fallos</button>`
                 : ''}
             </div>
           `;
-          div.addEventListener('click', () => { location.href = div.dataset.href; });
-          div.querySelectorAll('a').forEach(a =>
-            a.addEventListener('click', e => e.stopPropagation())
-          );
-          cont.appendChild(div);
+          div.addEventListener('click', () => arrancarQuiz(tema.id, 'todas'));
+          const btnFall = div.querySelector('[data-modo="falladas"]');
+          if (btnFall) {
+            btnFall.addEventListener('click', (e) => {
+              e.stopPropagation();
+              arrancarQuiz(tema.id, 'falladas');
+            });
+          }
+          listaWrap.appendChild(div);
         }
         if (!info.temas || info.temas.length === 0) {
-          cont.innerHTML = '<div class="tarjeta">No hay temas cargados todavía.</div>';
+          listaWrap.innerHTML = '<div class="tarjeta">No hay temas cargados todavía.</div>';
         }
+
+        // Auto-arranque si venimos de quiz.html?startQuiz=T1
+        const paramsPagina = new URLSearchParams(location.search);
+        const startQuiz = paramsPagina.get('startQuiz');
+        if (startQuiz && (info.temas || []).some(t => t.id === startQuiz)) {
+          arrancarQuiz(startQuiz, paramsPagina.get('startModo') || 'todas');
+        }
+
         return;
       }
 
