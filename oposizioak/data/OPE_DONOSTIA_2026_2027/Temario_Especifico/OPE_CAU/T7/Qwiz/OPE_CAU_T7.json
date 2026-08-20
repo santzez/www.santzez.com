@@ -1,0 +1,271 @@
+{
+  "id": "OPE_CAU_T7",
+  "opeNombre": "OPE DonostiaTIK — Técnico/a de apoyo (CAU)",
+  "titulo": "T7 · Arquitecturas de almacenamiento masivo NAS y SAN: componentes, funciones y diferencias",
+  "descripcion": "20 preguntas tipo test con explicación didáctica, elaboradas a partir de los apuntes del Tema 7.",
+  "fuente": "Elaboración propia a partir de los apuntes del Tema 7 (web de estudio). Caracteres del tema: 9.397. Preguntas asignadas: 20.",
+  "preguntas": [
+    {
+      "id": "OPE_CAU_T7_001",
+      "pregunta": "¿Cuál es la diferencia fundamental entre NAS y SAN?",
+      "opciones": [
+        { "texto": "El NAS es más rápido que la SAN en cualquier escenario.", "correcta": false },
+        { "texto": "El NAS trabaja a nivel de fichero y la SAN a nivel de bloque.", "correcta": true },
+        { "texto": "El NAS usa discos y la SAN, cintas magnéticas.", "correcta": false },
+        { "texto": "El NAS es hardware y la SAN, software.", "correcta": false }
+      ],
+      "razonamiento": "Es la clave del tema: el NAS ofrece carpetas y archivos compartidos (nivel de fichero); la SAN entrega volúmenes que el servidor ve como si fueran discos locales propios (nivel de bloque).",
+      "mnemotecnico": "🧠 NAS = ficheros sobre la LAN · SAN = bloques sobre red dedicada.",
+      "origen": "T7 §1",
+      "dificultad": "Fácil", "tipo": "Diferenciación", "concepto": "Nivel de fichero vs bloque", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T7_002",
+      "pregunta": "¿Qué significa DAS?",
+      "opciones": [
+        { "texto": "Direct Attached Storage: almacenamiento conectado directamente al equipo, sin red de por medio.", "correcta": true },
+        { "texto": "Data Access Server: servidor de acceso a datos compartidos.", "correcta": false },
+        { "texto": "Distributed Array Storage: cabina distribuida entre varias sedes.", "correcta": false },
+        { "texto": "Digital Archive System: sistema de archivo a largo plazo.", "correcta": false }
+      ],
+      "razonamiento": "DAS es el almacenamiento de conexión directa (los discos del propio equipo o conectados a él): solo lo usa directamente ese equipo. NAS y SAN nacen precisamente para compartir almacenamiento por red.",
+      "origen": "T7 §1",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "DAS", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T7_003",
+      "pregunta": "¿Qué protocolo de compartición de ficheros es típico de entornos Windows?",
+      "opciones": [
+        { "texto": "NFS.", "correcta": false },
+        { "texto": "iSCSI.", "correcta": false },
+        { "texto": "SMB/CIFS.", "correcta": true },
+        { "texto": "Fibre Channel.", "correcta": false }
+      ],
+      "razonamiento": "SMB/CIFS es el protocolo de compartición de ficheros de Windows (por él viajan los recursos compartidos del Tema 15); NFS es el equivalente en Unix/Linux. iSCSI y Fibre Channel son protocolos de bloque, propios de SAN.",
+      "mnemotecnico": "🧠 NFS → uNix/liNux · SMB → windowS.",
+      "origen": "T7 §2",
+      "dificultad": "Fácil", "tipo": "Clasificación", "concepto": "Protocolos NAS", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T7_004",
+      "pregunta": "¿Cuál de estos NO es un componente propio de un NAS?",
+      "opciones": [
+        { "texto": "Cabezal o controladora con sistema operativo propio.", "correcta": false },
+        { "texto": "Discos internos configurados habitualmente en RAID.", "correcta": false },
+        { "texto": "Interfaz de red Ethernet.", "correcta": false },
+        { "texto": "HBA (Host Bus Adapter) instalado en cada servidor.", "correcta": true }
+      ],
+      "razonamiento": "El HBA es la tarjeta que permite a un servidor conectarse a la red SAN, no un componente del NAS. El NAS se compone de cabezal/controladora, discos en RAID e interfaz Ethernet hacia la LAN.",
+      "origen": "T7 §2-3",
+      "dificultad": "Media", "tipo": "Detección de errores", "concepto": "Componentes NAS", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T7_005",
+      "pregunta": "¿Qué es un LUN en una arquitectura SAN?",
+      "opciones": [
+        { "texto": "El identificador del volumen de almacenamiento que la cabina expone al servidor, que este ve como un disco físico más.", "correcta": true },
+        { "texto": "El nombre de la carpeta compartida que ven las personas usuarias.", "correcta": false },
+        { "texto": "El conmutador que interconecta cabinas y servidores.", "correcta": false },
+        { "texto": "El protocolo de acceso a la cabina.", "correcta": false }
+      ],
+      "razonamiento": "LUN (Logical Unit Number) identifica el volumen lógico que la cabina presenta al servidor; desde el punto de vista de este, se comporta como un disco local aunque resida al otro lado de la red SAN.",
+      "origen": "T7 §3",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "LUN", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T7_006",
+      "pregunta": "¿Qué tarjeta permite a un servidor conectarse a la red SAN?",
+      "opciones": [
+        { "texto": "La NIC Ethernet estándar.", "correcta": false },
+        { "texto": "El HBA (Host Bus Adapter).", "correcta": true },
+        { "texto": "La controladora RAID interna.", "correcta": false },
+        { "texto": "El adaptador SATA del servidor.", "correcta": false }
+      ],
+      "razonamiento": "El HBA es el adaptador que conecta cada servidor a la red SAN. Los otros tres elementos existen, pero cumplen funciones distintas (red LAN, gestión de discos internos, conexión de discos SATA).",
+      "origen": "T7 §3",
+      "dificultad": "Media", "tipo": "Conocimiento directo", "concepto": "HBA", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T7_007",
+      "pregunta": "¿Qué protocolo SAN encapsula comandos SCSI sobre TCP/IP, permitiendo montar la red de almacenamiento sobre Ethernet convencional?",
+      "opciones": [
+        { "texto": "Fibre Channel.", "correcta": false },
+        { "texto": "NFS.", "correcta": false },
+        { "texto": "iSCSI.", "correcta": true },
+        { "texto": "SMB.", "correcta": false }
+      ],
+      "razonamiento": "iSCSI (Internet SCSI) transporta comandos SCSI sobre TCP/IP, lo que abarata la infraestructura al aprovechar Ethernet. Fibre Channel exige una red dedicada de fibra óptica, de mayor rendimiento y coste.",
+      "origen": "T7 §3",
+      "dificultad": "Media", "tipo": "Identificación", "concepto": "iSCSI", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T7_008",
+      "pregunta": "En una red Fibre Channel, el entramado de conmutadores que interconecta servidores y cabinas se denomina:",
+      "opciones": [
+        { "texto": "Backbone.", "correcta": false },
+        { "texto": "Fabric.", "correcta": true },
+        { "texto": "Cluster.", "correcta": false },
+        { "texto": "Pool.", "correcta": false }
+      ],
+      "razonamiento": "En Fibre Channel, el conjunto de switches SAN que forma la red se llama fabric. Backbone es el cableado vertical de un edificio (Tema 28) y cluster es una agrupación de servidores.",
+      "origen": "T7 §3",
+      "dificultad": "Difícil", "tipo": "Precisión", "concepto": "Fabric", "prioridad": "Baja"
+    },
+    {
+      "id": "OPE_CAU_T7_009",
+      "pregunta": "Una organización quiere que varias personas usuarias accedan a carpetas compartidas de departamento desde sus equipos, con un despliegue sencillo sobre la red existente. ¿Qué arquitectura es la adecuada?",
+      "opciones": [
+        { "texto": "SAN con Fibre Channel.", "correcta": false },
+        { "texto": "DAS en cada puesto.", "correcta": false },
+        { "texto": "NAS conectado a la LAN.", "correcta": true },
+        { "texto": "Cintas LTO compartidas.", "correcta": false }
+      ],
+      "razonamiento": "Compartir carpetas entre usuarios sobre la LAN existente es el caso de uso natural del NAS: acceso a nivel de fichero, protocolos estándar (SMB/NFS) y despliegue sencillo sin infraestructura adicional.",
+      "origen": "T7 §2",
+      "dificultad": "Fácil", "tipo": "Caso práctico", "concepto": "Uso típico del NAS", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T7_010",
+      "pregunta": "Se necesita almacenamiento de alto rendimiento y baja latencia para un clúster de virtualización y varias bases de datos críticas. ¿Qué arquitectura corresponde?",
+      "opciones": [
+        { "texto": "NAS sobre la LAN corporativa.", "correcta": false },
+        { "texto": "SAN.", "correcta": true },
+        { "texto": "DAS en cada servidor.", "correcta": false },
+        { "texto": "Almacenamiento óptico en biblioteca.", "correcta": false }
+      ],
+      "razonamiento": "La SAN es la arquitectura habitual para bases de datos y virtualización: acceso a nivel de bloque, alto rendimiento y baja latencia, con el almacenamiento remoto comportándose como disco local.",
+      "origen": "T7 §3",
+      "dificultad": "Media", "tipo": "Caso práctico", "concepto": "Uso típico de la SAN", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T7_011",
+      "pregunta": "¿Quién consume principalmente cada arquitectura?",
+      "opciones": [
+        { "texto": "El NAS lo consumen usuarios y equipos cliente directamente; la SAN la consumen los servidores.", "correcta": true },
+        { "texto": "Ambas las consumen directamente las personas usuarias.", "correcta": false },
+        { "texto": "El NAS lo consumen solo los servidores y la SAN, los usuarios.", "correcta": false },
+        { "texto": "Ambas se consumen exclusivamente desde Internet.", "correcta": false }
+      ],
+      "razonamiento": "El NAS ofrece carpetas directamente accesibles por usuarios y equipos; la SAN entrega volúmenes de bloque a los servidores, que son quienes después prestan servicio a los usuarios.",
+      "origen": "T7 §4",
+      "dificultad": "Media", "tipo": "Relación", "concepto": "Consumidores de NAS y SAN", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T7_012",
+      "pregunta": "¿Qué red utiliza habitualmente un NAS?",
+      "opciones": [
+        { "texto": "Una red dedicada de fibra óptica.", "correcta": false },
+        { "texto": "La LAN estándar (Ethernet/IP) ya existente.", "correcta": true },
+        { "texto": "Un bus SCSI paralelo.", "correcta": false },
+        { "texto": "Una conexión USB dedicada.", "correcta": false }
+      ],
+      "razonamiento": "El NAS se conecta a la LAN Ethernet ya existente, sin infraestructura adicional: de ahí su menor coste y complejidad. La red dedicada de fibra es característica de la SAN con Fibre Channel.",
+      "origen": "T7 §2 y §4",
+      "dificultad": "Fácil", "tipo": "Conocimiento directo", "concepto": "Red del NAS", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T7_013",
+      "pregunta": "En este tema, ¿qué significa la sigla SAN?",
+      "opciones": [
+        { "texto": "Storage Area Network (red de área de almacenamiento).", "correcta": true },
+        { "texto": "System Access Node.", "correcta": false },
+        { "texto": "Secure Access Network.", "correcta": false },
+        { "texto": "Shared Application Network.", "correcta": false }
+      ],
+      "razonamiento": "SAN = Storage Area Network. Ojo con la colisión de siglas: nada tiene que ver con la clasificación geográfica LAN/MAN/WAN del Tema 28, aunque comparta terminación.",
+      "origen": "T7 §1",
+      "dificultad": "Fácil", "tipo": "Precisión", "concepto": "Significado de SAN", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T7_014",
+      "pregunta": "¿Qué tecnología, estudiada en el Tema 6, está en la base tanto de los NAS como de las cabinas SAN?",
+      "opciones": [
+        { "texto": "El RAID.", "correcta": true },
+        { "texto": "El TRIM.", "correcta": false },
+        { "texto": "El wear leveling.", "correcta": false },
+        { "texto": "La desfragmentación.", "correcta": false }
+      ],
+      "razonamiento": "Tanto el NAS como las cabinas SAN agrupan sus discos en RAID para obtener redundancia y/o rendimiento. TRIM y wear leveling son mecanismos internos de los SSD, y la desfragmentación es mantenimiento de HDD.",
+      "origen": "T7 §2-3",
+      "dificultad": "Media", "tipo": "Relación", "concepto": "RAID como base", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T7_015",
+      "pregunta": "Señala la afirmación correcta sobre complejidad y coste:",
+      "opciones": [
+        { "texto": "La SAN es más sencilla y barata porque reutiliza la red existente.", "correcta": false },
+        { "texto": "El NAS exige siempre infraestructura de fibra dedicada.", "correcta": false },
+        { "texto": "El NAS tiene menor complejidad y coste al integrarse en la red existente; la SAN requiere infraestructura y gestión más especializadas.", "correcta": true },
+        { "texto": "Ambas tienen idéntico coste de despliegue.", "correcta": false }
+      ],
+      "razonamiento": "El NAS se enchufa a la LAN existente (menor coste y complejidad); la SAN exige switches específicos, HBA en los servidores y personal especializado, a cambio de mayor rendimiento.",
+      "origen": "T7 §4",
+      "dificultad": "Fácil", "tipo": "Diferenciación", "concepto": "Coste y complejidad", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T7_016",
+      "pregunta": "Un servidor tiene asignado un LUN de la cabina. ¿Cómo «ve» ese espacio el sistema operativo del servidor?",
+      "opciones": [
+        { "texto": "Como una carpeta de red que debe montar con credenciales.", "correcta": false },
+        { "texto": "Como un disco local más, sobre el que puede crear su propio sistema de archivos.", "correcta": true },
+        { "texto": "Como un recurso web accesible por HTTP.", "correcta": false },
+        { "texto": "Como una unidad de cinta secuencial.", "correcta": false }
+      ],
+      "razonamiento": "Al trabajar a nivel de bloque, el servidor ve el LUN como un disco físico propio y le aplica su propio sistema de archivos, sin «saber» que está al otro lado de la red. Ver carpetas con credenciales es el comportamiento del NAS.",
+      "origen": "T7 §3",
+      "dificultad": "Difícil", "tipo": "Aplicación", "concepto": "Acceso a nivel de bloque", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T7_017",
+      "pregunta": "Las «unidades de red» que ve el personal de una organización (por ejemplo, la carpeta común del servicio) residen habitualmente en:",
+      "opciones": [
+        { "texto": "Un NAS o servidor de ficheros.", "correcta": true },
+        { "texto": "Una cabina SAN accedida directamente por cada puesto.", "correcta": false },
+        { "texto": "La memoria RAM del equipo del usuario.", "correcta": false },
+        { "texto": "Una biblioteca de cintas LTO.", "correcta": false }
+      ],
+      "razonamiento": "Las unidades de red que ve el usuario son recursos compartidos a nivel de fichero: residen en un NAS o servidor de ficheros, con permisos que determinan quién accede a qué (Tema 15). Los puestos de usuario no acceden directamente a una SAN.",
+      "origen": "T7 §2",
+      "dificultad": "Media", "tipo": "Caso práctico", "concepto": "Unidades de red", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T7_018",
+      "pregunta": "¿Qué es FCoE?",
+      "opciones": [
+        { "texto": "Un protocolo de compartición de ficheros para entornos mixtos.", "correcta": false },
+        { "texto": "Fibre Channel over Ethernet: transporta Fibre Channel sobre redes Ethernet.", "correcta": true },
+        { "texto": "El sistema de archivos propio de las cabinas de almacenamiento.", "correcta": false },
+        { "texto": "Un nivel de RAID orientado a fibra óptica.", "correcta": false }
+      ],
+      "razonamiento": "FCoE (Fibre Channel over Ethernet) permite transportar el protocolo Fibre Channel sobre infraestructura Ethernet, reduciendo la necesidad de una red totalmente separada. Es contenido de ampliación del tema.",
+      "origen": "T7 §3",
+      "dificultad": "Difícil", "tipo": "Definición", "concepto": "FCoE", "prioridad": "Baja"
+    },
+    {
+      "id": "OPE_CAU_T7_019",
+      "pregunta": "Empareja correctamente arquitectura y protocolos:",
+      "opciones": [
+        { "texto": "NAS → Fibre Channel e iSCSI; SAN → NFS y SMB.", "correcta": false },
+        { "texto": "NAS → NFS y SMB/CIFS; SAN → Fibre Channel e iSCSI.", "correcta": true },
+        { "texto": "NAS → iSCSI y SMB; SAN → NFS y Fibre Channel.", "correcta": false },
+        { "texto": "Ambas usan indistintamente los cuatro protocolos.", "correcta": false }
+      ],
+      "razonamiento": "Los protocolos de fichero (NFS, SMB/CIFS) corresponden al NAS; los de bloque (Fibre Channel, iSCSI), a la SAN. Si en un enunciado aparecen FC o iSCSI, la respuesta apunta a SAN.",
+      "origen": "T7 §4",
+      "dificultad": "Media", "tipo": "Clasificación", "concepto": "Protocolos por arquitectura", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T7_020",
+      "pregunta": "Ordena correctamente las tres arquitecturas según su evolución conceptual:",
+      "opciones": [
+        { "texto": "NAS (ficheros) → DAS (directo) → SAN (bloques).", "correcta": false },
+        { "texto": "SAN (bloques) → NAS (ficheros) → DAS (directo).", "correcta": false },
+        { "texto": "DAS (conexión directa, sin red) → NAS (ficheros sobre la LAN) → SAN (bloques sobre red dedicada).", "correcta": true },
+        { "texto": "DAS → SAN → NAS, según su nivel de acceso.", "correcta": false }
+      ],
+      "razonamiento": "La escalera conceptual es DAS → NAS → SAN: del disco conectado directamente al equipo, a compartir ficheros por la LAN, y de ahí a entregar bloques por una red dedicada de alto rendimiento.",
+      "origen": "T7 §1 y §4",
+      "dificultad": "Media", "tipo": "Procedimiento", "concepto": "DAS / NAS / SAN", "prioridad": "Alta"
+    }
+  ]
+}

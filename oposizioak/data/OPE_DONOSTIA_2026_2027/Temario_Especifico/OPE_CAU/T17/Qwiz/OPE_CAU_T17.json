@@ -1,0 +1,285 @@
+{
+  "id": "OPE_CAU_T17",
+  "opeNombre": "OPE DonostiaTIK — Técnico/a de apoyo (CAU)",
+  "titulo": "T17 · Correo electrónico. Arquitectura y componentes. Clientes de correo",
+  "descripcion": "21 preguntas tipo test con explicación didáctica, elaboradas a partir de los apuntes del Tema 17.",
+  "fuente": "Elaboración propia a partir de los apuntes del Tema 17 (web de estudio). Caracteres del tema: 10.564. Preguntas asignadas: 21.",
+  "preguntas": [
+    {
+      "id": "OPE_CAU_T17_001",
+      "pregunta": "En la arquitectura del correo electrónico, ¿qué componente es el programa que usa la persona para redactar y leer mensajes?",
+      "opciones": [
+        { "texto": "MTA (Mail Transfer Agent).", "correcta": false },
+        { "texto": "MUA (Mail User Agent).", "correcta": true },
+        { "texto": "MDA (Mail Delivery Agent).", "correcta": false },
+        { "texto": "MX (Mail Exchanger).", "correcta": false }
+      ],
+      "razonamiento": "MUA es el cliente de correo (Outlook, Thunderbird, webmail). El MTA encamina entre dominios, el MDA entrega en el buzón concreto y MX es el registro DNS que localiza el servidor de correo.",
+      "mnemotecnico": "🧠 MUA = usuario · MTA = transporte · MDA = entrega final.",
+      "origen": "T17 §1",
+      "dificultad": "Fácil", "tipo": "Identificación", "concepto": "MUA / MTA / MDA", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T17_002",
+      "pregunta": "¿Qué componente encamina el correo entre dominios, pudiendo pasar por varios servidores intermedios (relays)?",
+      "opciones": [
+        { "texto": "El MUA.", "correcta": false },
+        { "texto": "El MDA.", "correcta": false },
+        { "texto": "El MTA.", "correcta": true },
+        { "texto": "El servidor DNS.", "correcta": false }
+      ],
+      "razonamiento": "El MTA (Mail Transfer Agent) es el servidor que transporta el mensaje entre dominios usando SMTP; un mensaje puede atravesar varios MTA antes de llegar a destino, y cada uno deja rastro en la cabecera Received.",
+      "origen": "T17 §1",
+      "dificultad": "Fácil", "tipo": "Conocimiento directo", "concepto": "MTA", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T17_003",
+      "pregunta": "¿Qué registro DNS indica qué servidor es responsable de recibir el correo de un dominio?",
+      "opciones": [
+        { "texto": "El registro A.", "correcta": false },
+        { "texto": "El registro CNAME.", "correcta": false },
+        { "texto": "El registro MX (Mail Exchanger).", "correcta": true },
+        { "texto": "El registro AAAA.", "correcta": false }
+      ],
+      "razonamiento": "El registro MX identifica el servidor o servidores de correo del dominio, con un orden de prioridad si hay varios. A y AAAA asocian nombres a direcciones IPv4/IPv6 y CNAME define alias.",
+      "origen": "T17 §1",
+      "dificultad": "Media", "tipo": "Conocimiento directo", "concepto": "Registro MX", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T17_004",
+      "pregunta": "¿Para qué sirve el estándar MIME?",
+      "opciones": [
+        { "texto": "Para cifrar el contenido de los mensajes de correo.", "correcta": false },
+        { "texto": "Para codificar dentro del mensaje contenido no textual (HTML, imágenes, adjuntos) de modo que pueda viajar por SMTP, diseñado originalmente solo para texto ASCII.", "correcta": true },
+        { "texto": "Para autenticar al remitente del mensaje.", "correcta": false },
+        { "texto": "Para comprimir los archivos adjuntos.", "correcta": false }
+      ],
+      "razonamiento": "MIME (Multipurpose Internet Mail Extensions) resolvió la limitación de SMTP a texto plano sin cambiar el protocolo de transporte, codificando el contenido binario (por ejemplo, en Base64) como texto transportable.",
+      "origen": "T17 §2",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "MIME", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T17_005",
+      "pregunta": "¿Qué cabecera de un mensaje permite rastrear los servidores por los que ha pasado?",
+      "opciones": [
+        { "texto": "Message-ID.", "correcta": false },
+        { "texto": "Received.", "correcta": true },
+        { "texto": "Subject.", "correcta": false },
+        { "texto": "From.", "correcta": false }
+      ],
+      "razonamiento": "Cada servidor que procesa el mensaje añade una línea Received, formando un rastro muy útil para diagnosticar problemas de entrega. Message-ID es el identificador único del mensaje.",
+      "origen": "T17 §2",
+      "dificultad": "Media", "tipo": "Identificación", "concepto": "Cabecera Received", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T17_006",
+      "pregunta": "¿Qué diferencia hay entre Cc y Cco (Bcc)?",
+      "opciones": [
+        { "texto": "Cc envía copia oculta y Cco, copia visible.", "correcta": false },
+        { "texto": "Cc envía copia visible para todos los destinatarios; Cco envía copia oculta, invisible para el resto.", "correcta": true },
+        { "texto": "Cco solo puede usarse con destinatarios internos.", "correcta": false },
+        { "texto": "Cc admite un único destinatario y Cco, varios.", "correcta": false }
+      ],
+      "razonamiento": "Cc (con copia) es visible para todos los destinatarios; Cco/Bcc (con copia oculta) no revela esas direcciones al resto. Es la vía correcta para enviar comunicaciones masivas sin exponer las direcciones de terceros.",
+      "origen": "T17 §2",
+      "dificultad": "Fácil", "tipo": "Diferenciación", "concepto": "Cc vs Cco", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T17_007",
+      "pregunta": "¿Para qué se utiliza SMTP?",
+      "opciones": [
+        { "texto": "Únicamente para el envío y encaminamiento de correo.", "correcta": true },
+        { "texto": "Para enviar y también para descargar el correo recibido.", "correcta": false },
+        { "texto": "Solo para la comunicación entre el cliente y su buzón.", "correcta": false },
+        { "texto": "Para sincronizar carpetas entre dispositivos.", "correcta": false }
+      ],
+      "razonamiento": "SMTP solo sirve para enviar y encaminar: nunca se usa para que un cliente descargue o consulte el correo recibido, función que corresponde a POP3 o IMAP. Es un punto clásico de examen.",
+      "origen": "T17 §3",
+      "dificultad": "Media", "tipo": "Precisión", "concepto": "Función de SMTP", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T17_008",
+      "pregunta": "¿Qué puerto se recomienda actualmente para el envío autenticado desde un cliente de correo (submission)?",
+      "opciones": [
+        { "texto": "25.", "correcta": false },
+        { "texto": "110.", "correcta": false },
+        { "texto": "587.", "correcta": true },
+        { "texto": "993.", "correcta": false }
+      ],
+      "razonamiento": "El puerto 587 es el recomendado para el envío autenticado desde clientes; el 25 queda para el transporte entre servidores (MTA a MTA) y el 465 es SMTPS (TLS desde el inicio). 110 y 993 son de recepción.",
+      "origen": "T17 §3",
+      "dificultad": "Media", "tipo": "Precisión", "concepto": "Puerto 587", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T17_009",
+      "pregunta": "¿Qué puerto utiliza tradicionalmente el transporte de correo entre servidores (MTA a MTA)?",
+      "opciones": [
+        { "texto": "25.", "correcta": true },
+        { "texto": "143.", "correcta": false },
+        { "texto": "465.", "correcta": false },
+        { "texto": "995.", "correcta": false }
+      ],
+      "razonamiento": "El puerto 25 es el clásico del transporte entre servidores. Su uso por parte de clientes finales está hoy en desuso, precisamente para dificultar el envío masivo de spam desde equipos comprometidos.",
+      "origen": "T17 §3",
+      "dificultad": "Media", "tipo": "Precisión", "concepto": "Puerto 25", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T17_010",
+      "pregunta": "¿Cuál es la diferencia fundamental entre POP3 e IMAP?",
+      "opciones": [
+        { "texto": "POP3 mantiene los mensajes en el servidor e IMAP los descarga y borra.", "correcta": false },
+        { "texto": "POP3 descarga los mensajes al dispositivo (y por defecto los borra del servidor); IMAP los mantiene en el servidor y sincroniza su estado entre todos los dispositivos.", "correcta": true },
+        { "texto": "POP3 permite sincronizar carpetas e IMAP no.", "correcta": false },
+        { "texto": "Ambos protocolos sirven también para enviar correo.", "correcta": false }
+      ],
+      "razonamiento": "POP3 responde a un modelo de un solo dispositivo; IMAP mantiene todo en el servidor y sincroniza estado, carpetas y mensajes entre todos los dispositivos. Ninguno de los dos sirve para enviar: eso es SMTP.",
+      "origen": "T17 §4",
+      "dificultad": "Fácil", "tipo": "Diferenciación", "concepto": "POP3 vs IMAP", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T17_011",
+      "pregunta": "Una persona usuaria configura su correo en el ordenador y en el móvil, y quiere ver en ambos los mismos mensajes leídos y las mismas carpetas. ¿Qué protocolo necesita?",
+      "opciones": [
+        { "texto": "POP3.", "correcta": false },
+        { "texto": "IMAP.", "correcta": true },
+        { "texto": "SMTP.", "correcta": false },
+        { "texto": "MIME.", "correcta": false }
+      ],
+      "razonamiento": "Solo IMAP sincroniza el mismo buzón entre varios dispositivos: mensajes leídos, carpetas, movimientos y eliminaciones. Con POP3 cada dispositivo descargaría los mensajes por su cuenta, sin sincronización.",
+      "origen": "T17 §4",
+      "dificultad": "Fácil", "tipo": "Caso práctico", "concepto": "Elección de protocolo de recepción", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T17_012",
+      "pregunta": "¿Qué puertos utiliza IMAP, sin cifrar y sobre TLS respectivamente?",
+      "opciones": [
+        { "texto": "110 y 995.", "correcta": false },
+        { "texto": "143 y 993.", "correcta": true },
+        { "texto": "25 y 465.", "correcta": false },
+        { "texto": "587 y 995.", "correcta": false }
+      ],
+      "razonamiento": "IMAP usa 143 (sin cifrar) y 993 (sobre TLS); POP3 usa 110 y 995. Los puertos seguros de recepción acaban ambos en 9x.",
+      "mnemotecnico": "🧠 POP3 110/995 · IMAP 143/993 · SMTP 25-587/465.",
+      "origen": "T17 §4",
+      "dificultad": "Media", "tipo": "Precisión", "concepto": "Puertos IMAP", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T17_013",
+      "pregunta": "¿Qué puertos corresponden a POP3?",
+      "opciones": [
+        { "texto": "143 sin cifrar y 993 sobre TLS.", "correcta": false },
+        { "texto": "110 sin cifrar y 995 sobre TLS.", "correcta": true },
+        { "texto": "25 sin cifrar y 587 sobre TLS.", "correcta": false },
+        { "texto": "80 sin cifrar y 443 sobre TLS.", "correcta": false }
+      ],
+      "razonamiento": "POP3 escucha en el 110 y su variante cifrada en el 995. Los puertos 80 y 443 son de HTTP/HTTPS, propios del acceso webmail por navegador.",
+      "origen": "T17 §4",
+      "dificultad": "Media", "tipo": "Precisión", "concepto": "Puertos POP3", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T17_014",
+      "pregunta": "¿Por qué SMTP no garantiza por sí mismo que el remitente sea quien dice ser?",
+      "opciones": [
+        { "texto": "Porque cifra la cabecera From y no puede verificarla.", "correcta": false },
+        { "texto": "Porque por diseño no verifica la identidad del remitente: cualquiera puede indicar como From una dirección que no le pertenece.", "correcta": true },
+        { "texto": "Porque solo autentica al destinatario, no al remitente.", "correcta": false },
+        { "texto": "Porque delega esa verificación en el protocolo MIME.", "correcta": false }
+      ],
+      "razonamiento": "SMTP se diseñó sin verificación de identidad, lo que facilita la suplantación (spoofing), el spam y el phishing. Para mitigarlo se añadieron SPF, DKIM y DMARC, publicados como registros DNS del dominio.",
+      "origen": "T17 §5",
+      "dificultad": "Media", "tipo": "Relación", "concepto": "Debilidad de SMTP", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T17_015",
+      "pregunta": "¿Qué mecanismo publica en el DNS la lista de servidores autorizados a enviar correo en nombre de un dominio?",
+      "opciones": [
+        { "texto": "DKIM.", "correcta": false },
+        { "texto": "SPF (Sender Policy Framework).", "correcta": true },
+        { "texto": "DMARC.", "correcta": false },
+        { "texto": "MIME.", "correcta": false }
+      ],
+      "razonamiento": "SPF autoriza servidores de envío. DKIM firma criptográficamente el mensaje y DMARC define qué hacer si fallan SPF o DKIM, además de generar informes.",
+      "mnemotecnico": "🧠 SPF autoriza servidores · DKIM firma el contenido · DMARC decide e informa.",
+      "origen": "T17 §5",
+      "dificultad": "Media", "tipo": "Identificación", "concepto": "SPF", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T17_016",
+      "pregunta": "¿Qué aporta DKIM a un mensaje de correo?",
+      "opciones": [
+        { "texto": "Una lista de servidores autorizados a enviar en nombre del dominio.", "correcta": false },
+        { "texto": "Una firma digital criptográfica en las cabeceras que certifica el origen y que el contenido no ha sido alterado en tránsito.", "correcta": true },
+        { "texto": "El cifrado completo del cuerpo del mensaje.", "correcta": false },
+        { "texto": "Una política de rechazo automático para los correos sospechosos.", "correcta": false }
+      ],
+      "razonamiento": "DKIM (DomainKeys Identified Mail) firma con la clave privada del dominio emisor y se verifica con la clave pública publicada en su DNS: garantiza autenticidad e integridad, aunque no confidencialidad (no cifra el mensaje).",
+      "origen": "T17 §5",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "DKIM", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T17_017",
+      "pregunta": "¿Qué función cumple DMARC?",
+      "opciones": [
+        { "texto": "Indicar al servidor receptor qué hacer cuando un mensaje falla las comprobaciones de SPF y/o DKIM, y permitir recibir informes sobre esos fallos.", "correcta": true },
+        { "texto": "Cifrar la conexión entre el cliente y el servidor de correo.", "correcta": false },
+        { "texto": "Sustituir a SPF y DKIM con un único mecanismo de firma.", "correcta": false },
+        { "texto": "Autenticar al usuario ante su servidor de salida.", "correcta": false }
+      ],
+      "razonamiento": "DMARC es la capa de política y visibilidad: define la acción (rechazar, poner en cuarentena o no hacer nada) y proporciona informes sobre los intentos de suplantación. No sustituye a SPF y DKIM: se apoya en ellos.",
+      "origen": "T17 §5",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "DMARC", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T17_018",
+      "pregunta": "¿Qué es el webmail?",
+      "opciones": [
+        { "texto": "Un cliente de escritorio que se instala en el equipo del usuario.", "correcta": false },
+        { "texto": "El acceso al correo a través del navegador mediante la interfaz HTTP/HTTPS que ofrece el propio servidor, sin instalar ni configurar ningún programa cliente.", "correcta": true },
+        { "texto": "Un protocolo alternativo a IMAP para dispositivos móviles.", "correcta": false },
+        { "texto": "El servicio que traduce direcciones de correo en direcciones IP.", "correcta": false }
+      ],
+      "razonamiento": "El webmail (por ejemplo, Outlook Web Access o Gmail) se usa desde el navegador (Tema 20) sin instalación previa, lo que lo hace ideal para accesos puntuales desde equipos ajenos.",
+      "origen": "T17 §6",
+      "dificultad": "Fácil", "tipo": "Definición", "concepto": "Webmail", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T17_019",
+      "pregunta": "¿Qué protocolos propietarios se citan como alternativa a los estándares en algunos clientes de escritorio?",
+      "opciones": [
+        { "texto": "SMTP y POP3.", "correcta": false },
+        { "texto": "MAPI/RPC entre Outlook y Exchange, y Exchange ActiveSync para dispositivos móviles.", "correcta": true },
+        { "texto": "SPF y DKIM.", "correcta": false },
+        { "texto": "HTTP y HTTPS.", "correcta": false }
+      ],
+      "razonamiento": "Además de los estándares SMTP/IMAP/POP3, algunos productos usan protocolos propietarios: MAPI/RPC (Outlook-Exchange) o Exchange ActiveSync, que ofrecen sincronización enriquecida de correo, calendario y contactos.",
+      "origen": "T17 §6",
+      "dificultad": "Difícil", "tipo": "Conocimiento directo", "concepto": "Protocolos propietarios", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T17_020",
+      "pregunta": "Una persona usuaria dice que puede recibir correo pero no enviarlo. ¿Qué parte de la configuración debe revisarse en primer lugar?",
+      "opciones": [
+        { "texto": "La configuración de recepción (IMAP/POP3).", "correcta": false },
+        { "texto": "La configuración del servidor de salida SMTP: puerto, cifrado y autenticación.", "correcta": true },
+        { "texto": "El registro MX del dominio del destinatario.", "correcta": false },
+        { "texto": "El formato MIME de los mensajes.", "correcta": false }
+      ],
+      "razonamiento": "Si recibe correo, la parte de recepción funciona; el envío depende exclusivamente de SMTP, así que hay que revisar servidor de salida, puerto (587/465), cifrado y si exige autenticación. Separar envío y recepción es clave para diagnosticar rápido.",
+      "origen": "T17 §3-4",
+      "dificultad": "Media", "tipo": "Caso práctico", "concepto": "Diagnóstico de envío", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T17_021",
+      "pregunta": "¿Cuál de las siguientes afirmaciones es INCORRECTA?",
+      "opciones": [
+        { "texto": "El MDA entrega el mensaje en el buzón concreto del destinatario.", "correcta": false },
+        { "texto": "SPF, DKIM y DMARC se publican como registros en el DNS del dominio.", "correcta": false },
+        { "texto": "IMAP puede utilizarse para enviar correo si el servidor lo permite.", "correcta": true },
+        { "texto": "MIME permite adjuntar archivos a un mensaje de correo.", "correcta": false }
+      ],
+      "razonamiento": "IMAP es un protocolo exclusivamente de acceso y sincronización del buzón: el envío corresponde siempre a SMTP. Las otras tres afirmaciones son correctas.",
+      "origen": "T17 §1-5",
+      "dificultad": "Media", "tipo": "Detección de errores", "concepto": "Repaso transversal", "prioridad": "Alta"
+    }
+  ]
+}

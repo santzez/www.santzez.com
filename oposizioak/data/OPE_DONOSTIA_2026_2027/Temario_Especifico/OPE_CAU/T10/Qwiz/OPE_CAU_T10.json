@@ -1,0 +1,321 @@
+{
+  "id": "OPE_CAU_T10",
+  "opeNombre": "OPE DonostiaTIK — Técnico/a de apoyo (CAU)",
+  "titulo": "T10 · Virtualización de equipos y servidores. Conceptos básicos, casos de uso, ventajas y desventajas",
+  "descripcion": "24 preguntas tipo test con explicación didáctica, elaboradas a partir de los apuntes del Tema 10.",
+  "fuente": "Elaboración propia a partir de los apuntes del Tema 10 (web de estudio). Caracteres del tema: 13.779. Preguntas asignadas: 24.",
+  "preguntas": [
+    {
+      "id": "OPE_CAU_T10_001",
+      "pregunta": "En virtualización, ¿qué es el «host»?",
+      "opciones": [
+        { "texto": "El equipo físico real, con su hardware, sobre el que se ejecuta la virtualización.", "correcta": true },
+        { "texto": "Cada sistema operativo que se ejecuta virtualizado.", "correcta": false },
+        { "texto": "El ordenador definido por software con CPU y disco virtuales.", "correcta": false },
+        { "texto": "La consola de administración del hipervisor.", "correcta": false }
+      ],
+      "razonamiento": "Host (anfitrión) = equipo físico; guest (invitado) = cada SO virtualizado; máquina virtual = el «ordenador» definido por software sobre el que se instala cada guest.",
+      "origen": "T10 §1",
+      "dificultad": "Fácil", "tipo": "Definición", "concepto": "Host / guest / VM", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T10_002",
+      "pregunta": "¿Qué es el hipervisor?",
+      "opciones": [
+        { "texto": "El sistema operativo invitado de una máquina virtual.", "correcta": false },
+        { "texto": "La capa de software que crea, ejecuta y gestiona las máquinas virtuales, repartiendo los recursos físicos y garantizando su aislamiento.", "correcta": true },
+        { "texto": "El conjunto de discos compartidos entre varias VM.", "correcta": false },
+        { "texto": "El controlador que permite a la CPU ejecutar instrucciones virtualizadas.", "correcta": false }
+      ],
+      "razonamiento": "El hipervisor (también llamado VMM, Virtual Machine Monitor) es la capa responsable de crear y gestionar las máquinas virtuales, repartir los recursos del host y aislar unas VM de otras.",
+      "origen": "T10 §2",
+      "dificultad": "Fácil", "tipo": "Definición", "concepto": "Hipervisor", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T10_003",
+      "pregunta": "¿Qué caracteriza a un hipervisor de tipo 1 (bare-metal)?",
+      "opciones": [
+        { "texto": "Se instala como una aplicación sobre un sistema operativo convencional.", "correcta": false },
+        { "texto": "Se instala directamente sobre el hardware, sin un sistema operativo convencional de por medio.", "correcta": true },
+        { "texto": "Solo puede ejecutar una máquina virtual simultáneamente.", "correcta": false },
+        { "texto": "Se ejecuta dentro de otra máquina virtual.", "correcta": false }
+      ],
+      "razonamiento": "El tipo 1 (bare-metal o nativo) se sitúa directamente sobre el hardware y actúa como capa base del sistema: ofrece mejor rendimiento y es el modelo habitual en servidores y producción.",
+      "origen": "T10 §2",
+      "dificultad": "Fácil", "tipo": "Definición", "concepto": "Hipervisor tipo 1", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T10_004",
+      "pregunta": "¿Cuál de los siguientes es un hipervisor de tipo 2 (alojado)?",
+      "opciones": [
+        { "texto": "VMware ESXi.", "correcta": false },
+        { "texto": "KVM.", "correcta": false },
+        { "texto": "Oracle VirtualBox.", "correcta": true },
+        { "texto": "Proxmox VE.", "correcta": false }
+      ],
+      "razonamiento": "VirtualBox, VMware Workstation/Fusion y Parallels Desktop son de tipo 2: se instalan como una aplicación más sobre un SO existente. ESXi, KVM, Xen, Hyper-V y Proxmox VE son de tipo 1.",
+      "origen": "T10 §2",
+      "dificultad": "Media", "tipo": "Clasificación", "concepto": "Ejemplos de hipervisores", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T10_005",
+      "pregunta": "¿Por qué Microsoft Hyper-V se considera un hipervisor de tipo 1 aunque se active como rol dentro de Windows?",
+      "opciones": [
+        { "texto": "Porque solo puede instalarse en Windows Server.", "correcta": false },
+        { "texto": "Porque al habilitarlo, el propio Windows pasa a ejecutarse como una máquina virtual (partición raíz) por encima del hipervisor, que se sitúa directamente sobre el hardware.", "correcta": true },
+        { "texto": "Porque no permite ejecutar sistemas operativos invitados distintos de Windows.", "correcta": false },
+        { "texto": "Porque requiere obligatoriamente extensiones de virtualización por hardware.", "correcta": false }
+      ],
+      "razonamiento": "Es el caso especial más preguntado: aunque se active desde Windows, al habilitar Hyper-V el hipervisor se coloca bajo el sistema operativo, que pasa a ser una VM privilegiada (partición raíz). Técnicamente es tipo 1.",
+      "origen": "T10 §2",
+      "dificultad": "Difícil", "tipo": "Detección de errores", "concepto": "Hyper-V tipo 1", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T10_006",
+      "pregunta": "¿Qué hipervisor de tipo 1 está integrado en el núcleo de Linux?",
+      "opciones": [
+        { "texto": "KVM.", "correcta": true },
+        { "texto": "VirtualBox.", "correcta": false },
+        { "texto": "ESXi.", "correcta": false },
+        { "texto": "Hyper-V.", "correcta": false }
+      ],
+      "razonamiento": "KVM (Kernel-based Virtual Machine) está integrado en el núcleo Linux y suele gestionarse mediante plataformas como Proxmox VE. ESXi es de VMware y Hyper-V, de Microsoft.",
+      "origen": "T10 §2",
+      "dificultad": "Media", "tipo": "Conocimiento directo", "concepto": "KVM", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T10_007",
+      "pregunta": "En un entorno de servidores de producción, ¿qué tipo de hipervisor es el habitual y por qué?",
+      "opciones": [
+        { "texto": "Tipo 2, por su facilidad de instalación.", "correcta": false },
+        { "texto": "Tipo 1, por su mejor rendimiento al acceder más directamente al hardware.", "correcta": true },
+        { "texto": "Indistintamente ambos: el rendimiento es idéntico.", "correcta": false },
+        { "texto": "Tipo 2, porque permite más máquinas virtuales simultáneas.", "correcta": false }
+      ],
+      "razonamiento": "El tipo 1 evita la capa intermedia del SO anfitrión y por eso rinde mejor: es el modelo de servidores y producción. El tipo 2 es más cómodo de desplegar y se reserva para escritorio, pruebas y desarrollo.",
+      "origen": "T10 §2",
+      "dificultad": "Fácil", "tipo": "Relación", "concepto": "Elección de hipervisor", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T10_008",
+      "pregunta": "¿Qué caracteriza a la virtualización completa (full virtualization)?",
+      "opciones": [
+        { "texto": "El sistema operativo invitado debe modificarse para comunicarse con el hipervisor.", "correcta": false },
+        { "texto": "El hipervisor simula un hardware completo y el SO invitado se ejecuta sin modificaciones, sin ser consciente de que está virtualizado.", "correcta": true },
+        { "texto": "Se aísla a nivel de procesos sobre un núcleo compartido.", "correcta": false },
+        { "texto": "Solo funciona con sistemas operativos de código abierto.", "correcta": false }
+      ],
+      "razonamiento": "En la virtualización completa el guest no sabe que está virtualizado y no requiere modificaciones; se apoya en extensiones de hardware (Intel VT-x, AMD-V) para acelerar la simulación. Modificar el guest es paravirtualización.",
+      "origen": "T10 §3",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "Virtualización completa", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T10_009",
+      "pregunta": "En la paravirtualización, ¿qué ocurre con el sistema operativo invitado?",
+      "opciones": [
+        { "texto": "Es consciente de que se ejecuta sobre un hipervisor y se modifica (o incorpora drivers específicos) para comunicarse con él mediante llamadas optimizadas.", "correcta": true },
+        { "texto": "Se ejecuta sin ninguna modificación, igual que en hardware físico.", "correcta": false },
+        { "texto": "Comparte el núcleo con el sistema anfitrión.", "correcta": false },
+        { "texto": "No necesita hipervisor alguno.", "correcta": false }
+      ],
+      "razonamiento": "La paravirtualización sustituye parte de la simulación de hardware por llamadas directas al hipervisor (hypercalls), lo que mejora el rendimiento a cambio de exigir un SO invitado compatible. Compartir núcleo es propio de los contenedores.",
+      "origen": "T10 §3",
+      "dificultad": "Media", "tipo": "Diferenciación", "concepto": "Paravirtualización", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T10_010",
+      "pregunta": "¿Qué son Intel VT-x y AMD-V?",
+      "opciones": [
+        { "texto": "Dos hipervisores de tipo 1 de la competencia.", "correcta": false },
+        { "texto": "Extensiones de virtualización por hardware del procesador, que aceleran la virtualización completa.", "correcta": true },
+        { "texto": "Formatos de disco virtual.", "correcta": false },
+        { "texto": "Protocolos de migración en caliente.", "correcta": false }
+      ],
+      "razonamiento": "VT-x (Intel) y AMD-V (AMD) son extensiones del procesador que dan soporte hardware a la virtualización, reduciendo notablemente la sobrecarga (overhead) frente a la simulación puramente software.",
+      "origen": "T10 §3",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "VT-x / AMD-V", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T10_011",
+      "pregunta": "¿Cuál es la diferencia esencial entre una máquina virtual y un contenedor?",
+      "opciones": [
+        { "texto": "El contenedor virtualiza el hardware completo y la VM aísla procesos.", "correcta": false },
+        { "texto": "La VM virtualiza hardware y ejecuta un SO invitado completo; el contenedor aísla procesos sobre un núcleo compartido con el host, sin virtualizar hardware.", "correcta": true },
+        { "texto": "Los contenedores solo funcionan en Windows y las VM solo en Linux.", "correcta": false },
+        { "texto": "No hay diferencia técnica: son dos nombres comerciales del mismo concepto.", "correcta": false }
+      ],
+      "razonamiento": "La VM incluye un sistema operativo completo por cada instancia; el contenedor empaqueta una aplicación con sus dependencias y comparte el núcleo del host, por lo que es mucho más ligero y arranca en segundos.",
+      "origen": "T10 §3",
+      "dificultad": "Media", "tipo": "Diferenciación", "concepto": "VM vs contenedor", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T10_012",
+      "pregunta": "Comparando VM y contenedores, ¿qué afirmación es correcta?",
+      "opciones": [
+        { "texto": "El contenedor ofrece mayor aislamiento que una VM.", "correcta": false },
+        { "texto": "La VM arranca más rápido y ocupa menos que un contenedor.", "correcta": false },
+        { "texto": "La VM ofrece mayor aislamiento (SO completo independiente); el contenedor es más ligero y arranca más rápido.", "correcta": true },
+        { "texto": "Ambos requieren un hipervisor de tipo 1.", "correcta": false }
+      ],
+      "razonamiento": "La VM gana en aislamiento porque cada una lleva su propio SO; el contenedor gana en ligereza y velocidad de arranque (segundos frente a minutos) al compartir núcleo. Son enfoques complementarios, no excluyentes.",
+      "origen": "T10 §3",
+      "dificultad": "Media", "tipo": "Relación", "concepto": "Aislamiento y peso", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T10_013",
+      "pregunta": "Sustituir varios servidores físicos infrautilizados por un único host más potente con varias máquinas virtuales se denomina:",
+      "opciones": [
+        { "texto": "Consolidación de servidores.", "correcta": true },
+        { "texto": "Migración en caliente.", "correcta": false },
+        { "texto": "Alta disponibilidad.", "correcta": false },
+        { "texto": "Recuperación ante desastres.", "correcta": false }
+      ],
+      "razonamiento": "La consolidación de servidores es el caso de uso principal de la virtualización: mejor aprovechamiento del hardware y ahorro de espacio, energía y refrigeración en el CPD.",
+      "origen": "T10 §4",
+      "dificultad": "Fácil", "tipo": "Identificación", "concepto": "Consolidación de servidores", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T10_014",
+      "pregunta": "¿Qué permite la migración en caliente (vMotion, Live Migration)?",
+      "opciones": [
+        { "texto": "Convertir una máquina física en virtual sin apagarla.", "correcta": false },
+        { "texto": "Mover una máquina virtual en ejecución de un host físico a otro sin interrumpir el servicio.", "correcta": true },
+        { "texto": "Actualizar el sistema operativo invitado sin reiniciarlo.", "correcta": false },
+        { "texto": "Replicar automáticamente los datos entre dos centros de datos.", "correcta": false }
+      ],
+      "razonamiento": "La migración en caliente traslada una VM en funcionamiento entre hosts sin corte de servicio, lo que permite realizar mantenimiento planificado del hardware sin tiempos de inactividad.",
+      "origen": "T10 §4",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "Migración en caliente", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T10_015",
+      "pregunta": "¿Qué es una instantánea o snapshot de una máquina virtual?",
+      "opciones": [
+        { "texto": "Una copia de seguridad completa y cifrada de la VM en un soporte externo.", "correcta": false },
+        { "texto": "Una captura del estado completo de la VM en un momento dado, que permite volver a él rápidamente.", "correcta": true },
+        { "texto": "Una réplica de la VM en otro centro de datos.", "correcta": false },
+        { "texto": "Un registro de los cambios de configuración del hipervisor.", "correcta": false }
+      ],
+      "razonamiento": "El snapshot congela el estado de la VM y permite revertir con rapidez: es muy útil antes de aplicar un cambio arriesgado (una actualización, un parche). No sustituye a una copia de seguridad real (Tema 23).",
+      "origen": "T10 §5",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "Snapshot", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T10_016",
+      "pregunta": "Antes de aplicar una actualización arriesgada en un servidor virtualizado, ¿qué actuación es la más adecuada?",
+      "opciones": [
+        { "texto": "Migrar la VM a otro host antes de actualizar.", "correcta": false },
+        { "texto": "Tomar una instantánea (snapshot) previa para poder revertir si algo falla.", "correcta": true },
+        { "texto": "Convertir la VM en contenedor para agilizar la vuelta atrás.", "correcta": false },
+        { "texto": "Desactivar temporalmente el hipervisor.", "correcta": false }
+      ],
+      "razonamiento": "El snapshot previo es la práctica estándar antes de un cambio arriesgado: si la actualización falla, se revierte en minutos. Debe complementarse con la copia de seguridad habitual, no sustituirla.",
+      "origen": "T10 §5",
+      "dificultad": "Fácil", "tipo": "Caso práctico", "concepto": "Uso del snapshot", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T10_017",
+      "pregunta": "¿Qué son los escritorios virtuales (VDI)?",
+      "opciones": [
+        { "texto": "Escritorios de usuario alojados como máquinas virtuales centralizadas en el centro de datos, a los que se accede de forma remota.", "correcta": true },
+        { "texto": "Aplicaciones web que simulan un escritorio en el navegador.", "correcta": false },
+        { "texto": "Perfiles de usuario móviles almacenados en red.", "correcta": false },
+        { "texto": "Equipos físicos de bajo coste sin disco duro.", "correcta": false }
+      ],
+      "razonamiento": "VDI (Virtual Desktop Infrastructure) centraliza los escritorios como VM en el CPD, facilitando su gestión y actualización. No debe confundirse con los perfiles móviles de Windows (Tema 14), que son otra cosa.",
+      "origen": "T10 §4",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "VDI", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T10_018",
+      "pregunta": "¿Cuál es la principal desventaja estructural de la virtualización?",
+      "opciones": [
+        { "texto": "La imposibilidad de ejecutar sistemas operativos distintos en el mismo host.", "correcta": false },
+        { "texto": "Que el host se convierte en un punto único de fallo: si falla y no hay alta disponibilidad, se ven afectadas todas las VM que aloja.", "correcta": true },
+        { "texto": "Que impide realizar copias de seguridad de las máquinas virtuales.", "correcta": false },
+        { "texto": "Que obliga a usar siempre hardware del mismo fabricante.", "correcta": false }
+      ],
+      "razonamiento": "Concentrar muchas VM en un host implica que su fallo afecta a todas a la vez, a diferencia de un servidor físico dedicado, cuyo fallo solo afecta a un servicio. Por eso se despliegan configuraciones de alta disponibilidad.",
+      "origen": "T10 §5",
+      "dificultad": "Media", "tipo": "Relación", "concepto": "Punto único de fallo", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T10_019",
+      "pregunta": "¿Qué es el overcommit en un entorno virtualizado?",
+      "opciones": [
+        { "texto": "Asignar a las máquinas virtuales más recursos (CPU o memoria) de los que realmente tiene el host.", "correcta": true },
+        { "texto": "Ejecutar más hipervisores de los soportados por la licencia.", "correcta": false },
+        { "texto": "Realizar demasiadas instantáneas de una misma VM.", "correcta": false },
+        { "texto": "Migrar en caliente más VM de las permitidas simultáneamente.", "correcta": false }
+      ],
+      "razonamiento": "El sobreaprovisionamiento aprovecha que no todas las VM usan sus recursos al máximo a la vez, pero mal controlado degrada el rendimiento de todas las máquinas del host. Exige planificación cuidadosa.",
+      "origen": "T10 §5",
+      "dificultad": "Difícil", "tipo": "Definición", "concepto": "Overcommit", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T10_020",
+      "pregunta": "¿Qué se entiende por overhead de virtualización?",
+      "opciones": [
+        { "texto": "El coste de las licencias del software de virtualización.", "correcta": false },
+        { "texto": "La sobrecarga de recursos que introduce la capa de virtualización, con una ligera pérdida de rendimiento frente al hardware físico.", "correcta": true },
+        { "texto": "El tiempo necesario para crear una nueva máquina virtual.", "correcta": false },
+        { "texto": "El espacio en disco que ocupan las instantáneas.", "correcta": false }
+      ],
+      "razonamiento": "El overhead es la penalización de rendimiento derivada de la propia capa de virtualización, hoy muy reducida gracias a las extensiones por hardware (VT-x, AMD-V). El coste de licencias es una desventaja distinta.",
+      "origen": "T10 §5",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "Overhead", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T10_021",
+      "pregunta": "¿Cuál de las siguientes NO es una ventaja de la virtualización?",
+      "opciones": [
+        { "texto": "Mejor aprovechamiento del hardware.", "correcta": false },
+        { "texto": "Rapidez de despliegue de nuevos servidores.", "correcta": false },
+        { "texto": "Eliminación de la necesidad de copias de seguridad.", "correcta": true },
+        { "texto": "Posibilidad de realizar instantáneas y migración en caliente.", "correcta": false }
+      ],
+      "razonamiento": "La virtualización no elimina la necesidad de copias de seguridad: un snapshot no es un backup y el host sigue siendo un punto único de fallo. Las demás sí son ventajas reconocidas.",
+      "origen": "T10 §5",
+      "dificultad": "Media", "tipo": "Detección de errores", "concepto": "Ventajas de la virtualización", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T10_022",
+      "pregunta": "¿Qué cambio relevante se produjo en el licenciamiento de VMware tras su adquisición por Broadcom?",
+      "opciones": [
+        { "texto": "El paso a un modelo exclusivamente de suscripción, con el fin de las licencias perpetuas desde 2024.", "correcta": true },
+        { "texto": "La liberación de todo su código como software libre.", "correcta": false },
+        { "texto": "La gratuidad total de ESXi para administraciones públicas.", "correcta": false },
+        { "texto": "La eliminación del hipervisor ESXi del catálogo.", "correcta": false }
+      ],
+      "razonamiento": "Desde enero de 2024 dejaron de venderse licencias perpetuas de VMware, sustituidas por suscripción con precios por núcleo. Este cambio ha impulsado la evaluación de alternativas como Hyper-V o KVM/Proxmox VE.",
+      "origen": "T10 §6",
+      "dificultad": "Media", "tipo": "Conocimiento directo", "concepto": "Licenciamiento VMware/Broadcom", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T10_023",
+      "pregunta": "Una organización busca una alternativa de virtualización de código abierto para servidores. ¿Qué combinación es la referencia habitual?",
+      "opciones": [
+        { "texto": "VMware ESXi con vCenter.", "correcta": false },
+        { "texto": "KVM gestionado con Proxmox VE.", "correcta": true },
+        { "texto": "VirtualBox con extensiones empresariales.", "correcta": false },
+        { "texto": "Hyper-V con System Center.", "correcta": false }
+      ],
+      "razonamiento": "KVM (integrado en el núcleo Linux) gestionado mediante Proxmox VE es la opción de código abierto de referencia. ESXi y Hyper-V son soluciones propietarias, y VirtualBox es un hipervisor de tipo 2 para escritorio.",
+      "origen": "T10 §6",
+      "dificultad": "Media", "tipo": "Aplicación", "concepto": "Alternativas de código abierto", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T10_024",
+      "pregunta": "¿Qué relación existe entre la virtualización y la computación en la nube?",
+      "opciones": [
+        { "texto": "Ninguna: son tecnologías independientes.", "correcta": false },
+        { "texto": "La nube sustituyó a la virtualización, que quedó obsoleta.", "correcta": false },
+        { "texto": "Los proveedores de nube pública construyen sus servicios sobre virtualización a gran escala, ofreciendo servidores virtuales bajo demanda.", "correcta": true },
+        { "texto": "La virtualización solo es posible dentro de una nube pública.", "correcta": false }
+      ],
+      "razonamiento": "La virtualización es la base técnica de la nube: permite ofrecer capacidad de cómputo elástica y bajo demanda. El detalle de los modelos de servicio y despliegue de la nube se estudia en el Tema 32.",
+      "origen": "T10 §4",
+      "dificultad": "Fácil", "tipo": "Relación", "concepto": "Virtualización y nube", "prioridad": "Media"
+    }
+  ]
+}

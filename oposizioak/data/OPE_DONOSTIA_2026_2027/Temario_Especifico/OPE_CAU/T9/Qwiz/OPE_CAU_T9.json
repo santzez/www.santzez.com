@@ -1,0 +1,426 @@
+{
+  "id": "OPE_CAU_T9",
+  "opeNombre": "OPE DonostiaTIK — Técnico/a de apoyo (CAU)",
+  "titulo": "T9 · Sistemas operativos. Clasificación. Arquitectura, componentes y funciones. Memoria, procesos, E/S, sistemas de archivo y planificación",
+  "descripcion": "32 preguntas tipo test con explicación didáctica, elaboradas a partir de los apuntes del Tema 9.",
+  "fuente": "Elaboración propia a partir de los apuntes del Tema 9 (web de estudio). Caracteres del tema: 21.787. Preguntas asignadas: 32.",
+  "preguntas": [
+    {
+      "id": "OPE_CAU_T9_001",
+      "pregunta": "Los dos puntos de vista clásicos desde los que se explica el papel de un sistema operativo son:",
+      "opciones": [
+        { "texto": "Gestor de recursos y máquina virtual extendida.", "correcta": true },
+        { "texto": "Núcleo monolítico y microkernel.", "correcta": false },
+        { "texto": "Modo usuario y modo núcleo.", "correcta": false },
+        { "texto": "Software de sistema y software de aplicación.", "correcta": false }
+      ],
+      "razonamiento": "Como gestor de recursos, el SO reparte CPU, memoria y dispositivos entre los programas que compiten por ellos; como máquina virtual extendida, oculta la complejidad del hardware ofreciendo una interfaz uniforme («guardar un fichero» en lugar de manejar el controlador del disco).",
+      "origen": "T9 §1",
+      "dificultad": "Media", "tipo": "Conocimiento directo", "concepto": "Papel del SO", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T9_002",
+      "pregunta": "¿Cuál de las siguientes NO es una función propia de un sistema operativo?",
+      "opciones": [
+        { "texto": "La gestión de procesos y de memoria.", "correcta": false },
+        { "texto": "La gestión del sistema de archivos.", "correcta": false },
+        { "texto": "La compilación del código fuente de las aplicaciones.", "correcta": true },
+        { "texto": "La gestión de la entrada/salida.", "correcta": false }
+      ],
+      "razonamiento": "Compilar es tarea de un compilador, herramienta de desarrollo, no del SO. Las funciones del SO son gestión de procesos, memoria, E/S, sistema de archivos, seguridad y usuarios, e interfaz de usuario.",
+      "origen": "T9 §1",
+      "dificultad": "Media", "tipo": "Detección de errores", "concepto": "Funciones del SO", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T9_003",
+      "pregunta": "¿Qué diferencia hay entre un sistema de tiempo compartido y uno de tiempo real?",
+      "opciones": [
+        { "texto": "El de tiempo real reparte la CPU entre usuarios; el de tiempo compartido garantiza plazos.", "correcta": false },
+        { "texto": "El de tiempo compartido reparte la CPU dando sensación de simultaneidad; el de tiempo real garantiza que una tarea se ejecute antes de un plazo determinado.", "correcta": true },
+        { "texto": "Son sinónimos: ambos reparten el tiempo de CPU.", "correcta": false },
+        { "texto": "El de tiempo real solo admite un usuario simultáneo.", "correcta": false }
+      ],
+      "razonamiento": "El tiempo compartido (time-sharing) es el modelo de cualquier SO de escritorio o servidor actual. En tiempo real lo decisivo no es repartir, sino cumplir plazos: es el modelo de los RTOS de control industrial.",
+      "origen": "T9 §2",
+      "dificultad": "Media", "tipo": "Diferenciación", "concepto": "Tiempo compartido vs tiempo real", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T9_004",
+      "pregunta": "En un sistema de tiempo real, ¿qué caracteriza al «tiempo real duro»?",
+      "opciones": [
+        { "texto": "Que incumplir un plazo degrada el servicio, pero no lo invalida.", "correcta": false },
+        { "texto": "Que no cumplir un plazo se considera un fallo del sistema (por ejemplo, el control de un airbag).", "correcta": true },
+        { "texto": "Que el sistema debe responder siempre en menos de un segundo.", "correcta": false },
+        { "texto": "Que solo puede ejecutar una tarea a la vez.", "correcta": false }
+      ],
+      "razonamiento": "En tiempo real duro, incumplir el plazo es un fallo (airbag, control industrial crítico); en tiempo real blando, degrada la calidad sin invalidar el sistema (streaming de vídeo). No es cuestión de una cifra concreta de tiempo.",
+      "origen": "T9 §2",
+      "dificultad": "Media", "tipo": "Diferenciación", "concepto": "Tiempo real duro vs blando", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T9_005",
+      "pregunta": "¿Qué caracteriza al modo núcleo (kernel mode) frente al modo usuario?",
+      "opciones": [
+        { "texto": "El modo núcleo tiene acceso completo al hardware y a todas las instrucciones del procesador; el modo usuario tiene acceso restringido.", "correcta": true },
+        { "texto": "El modo usuario es más rápido porque no pasa controles de seguridad.", "correcta": false },
+        { "texto": "En modo usuario se ejecuta el núcleo y en modo núcleo, las aplicaciones.", "correcta": false },
+        { "texto": "Ambos modos tienen los mismos privilegios, solo cambia la prioridad.", "correcta": false }
+      ],
+      "razonamiento": "El núcleo se ejecuta en modo privilegiado (acceso total al hardware); las aplicaciones, en modo usuario restringido, sin acceso directo al hardware ni a la memoria de otros procesos, lo que protege la estabilidad y la seguridad del sistema.",
+      "origen": "T9 §3",
+      "dificultad": "Media", "tipo": "Diferenciación", "concepto": "Modo núcleo vs modo usuario", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T9_006",
+      "pregunta": "Un programa en modo usuario necesita leer un fichero del disco. ¿Qué mecanismo utiliza?",
+      "opciones": [
+        { "texto": "Accede directamente al controlador del disco.", "correcta": false },
+        { "texto": "Realiza una llamada al sistema (system call), que provoca un cambio controlado a modo núcleo.", "correcta": true },
+        { "texto": "Solicita al usuario permisos de administrador.", "correcta": false },
+        { "texto": "Genera una interrupción de hardware dirigida a la CPU.", "correcta": false }
+      ],
+      "razonamiento": "La llamada al sistema es la vía formal por la que un programa pide un servicio al núcleo: cambia a modo núcleo, el SO atiende la petición y devuelve el control con el resultado. Un proceso en modo usuario nunca accede directamente al hardware.",
+      "origen": "T9 §3",
+      "dificultad": "Media", "tipo": "Aplicación", "concepto": "Llamada al sistema", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T9_007",
+      "pregunta": "¿Qué caracteriza a un núcleo monolítico?",
+      "opciones": [
+        { "texto": "Reduce el núcleo al mínimo y ejecuta los servicios en modo usuario.", "correcta": false },
+        { "texto": "Ejecuta todos los servicios del SO dentro de un único bloque de código en modo núcleo, lo que le da mayor rendimiento.", "correcta": true },
+        { "texto": "No admite módulos ni controladores de terceros.", "correcta": false },
+        { "texto": "Solo puede ejecutarse en sistemas de un único procesador.", "correcta": false }
+      ],
+      "razonamiento": "El monolítico integra gestión de procesos, memoria, sistemas de archivos y drivers en modo núcleo: se comunican por llamadas a función directas, sin cambios de modo, lo que lo hace más rápido pero menos aislado ante fallos.",
+      "origen": "T9 §3",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "Núcleo monolítico", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T9_008",
+      "pregunta": "¿Qué ventaja principal ofrece un microkernel frente a un núcleo monolítico?",
+      "opciones": [
+        { "texto": "Mayor rendimiento por evitar cambios de contexto.", "correcta": false },
+        { "texto": "Mayor robustez: al ejecutarse los servicios en modo usuario, el fallo de uno no tumba el sistema completo.", "correcta": true },
+        { "texto": "Menor consumo de memoria en cualquier escenario.", "correcta": false },
+        { "texto": "Compatibilidad automática con cualquier hardware.", "correcta": false }
+      ],
+      "razonamiento": "El microkernel gana en aislamiento ante fallos y modularidad, a costa de rendimiento (más comunicación entre procesos y cambios de contexto). El mayor rendimiento es propio del monolítico.",
+      "origen": "T9 §3",
+      "dificultad": "Media", "tipo": "Relación", "concepto": "Microkernel", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T9_009",
+      "pregunta": "El núcleo de Linux es modular (permite cargar y descargar módulos en caliente). ¿Eso lo convierte en un microkernel?",
+      "opciones": [
+        { "texto": "Sí: la modularidad es la definición de microkernel.", "correcta": false },
+        { "texto": "No: los módulos, una vez cargados, se ejecutan en modo núcleo, por lo que sigue siendo monolítico (aunque modular).", "correcta": true },
+        { "texto": "Sí, desde que incorporó soporte para contenedores.", "correcta": false },
+        { "texto": "No: Linux es un núcleo híbrido, como Windows NT.", "correcta": false }
+      ],
+      "razonamiento": "Es la confusión clásica: Linux es monolítico modular. Sus módulos corren en modo núcleo con acceso directo al sistema, a diferencia de los servicios de un microkernel real, que corren en modo usuario. Windows NT y macOS (XNU) sí se consideran híbridos.",
+      "origen": "T9 §3",
+      "dificultad": "Difícil", "tipo": "Detección de errores", "concepto": "Linux monolítico modular", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T9_010",
+      "pregunta": "¿Qué es la memoria virtual?",
+      "opciones": [
+        { "texto": "Una técnica que permite a cada proceso trabajar con un espacio de direcciones propio, continuo y aparentemente mayor que la memoria física disponible.", "correcta": true },
+        { "texto": "La memoria caché integrada en el procesador.", "correcta": false },
+        { "texto": "Una partición del disco reservada exclusivamente para el sistema operativo.", "correcta": false },
+        { "texto": "La memoria asignada a las máquinas virtuales de un hipervisor.", "correcta": false }
+      ],
+      "razonamiento": "La memoria virtual abstrae la memoria física: el SO traduce direcciones virtuales a físicas de forma transparente para el proceso, que ve un espacio continuo y propio aunque parte resida temporalmente en disco.",
+      "origen": "T9 §4",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "Memoria virtual", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T9_011",
+      "pregunta": "¿Qué tipo de fragmentación genera la paginación y por qué?",
+      "opciones": [
+        { "texto": "Externa, porque deja huecos libres dispersos.", "correcta": false },
+        { "texto": "Interna, porque al usar bloques de tamaño fijo puede sobrar espacio dentro del bloque asignado.", "correcta": true },
+        { "texto": "Ambas por igual.", "correcta": false },
+        { "texto": "Ninguna: la paginación elimina toda fragmentación.", "correcta": false }
+      ],
+      "razonamiento": "Paginación = bloques de tamaño fijo → fragmentación interna (sobra espacio dentro del bloque). Segmentación = bloques de tamaño variable → fragmentación externa (huecos libres dispersos demasiado pequeños para reutilizarse).",
+      "mnemotecnico": "🧠 Fija → interna · variable → externa.",
+      "origen": "T9 §4",
+      "dificultad": "Difícil", "tipo": "Relación", "concepto": "Paginación y fragmentación", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T9_012",
+      "pregunta": "En la paginación, ¿cómo se llaman los bloques en la memoria física?",
+      "opciones": [
+        { "texto": "Páginas.", "correcta": false },
+        { "texto": "Segmentos.", "correcta": false },
+        { "texto": "Marcos (frames).", "correcta": true },
+        { "texto": "Sectores.", "correcta": false }
+      ],
+      "razonamiento": "En la memoria lógica del proceso los bloques se llaman páginas; en la memoria física, marcos (frames). La tabla de páginas, mantenida por el SO, traduce cada página a su marco correspondiente.",
+      "origen": "T9 §4",
+      "dificultad": "Media", "tipo": "Precisión", "concepto": "Páginas y marcos", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T9_013",
+      "pregunta": "¿Qué caracteriza a la segmentación frente a la paginación?",
+      "opciones": [
+        { "texto": "Divide la memoria en bloques de tamaño variable correspondientes a unidades lógicas del programa (código, datos, pila).", "correcta": true },
+        { "texto": "Divide la memoria en bloques de tamaño fijo gestionados por una tabla de páginas.", "correcta": false },
+        { "texto": "Elimina la necesidad de memoria virtual.", "correcta": false },
+        { "texto": "Solo se aplica a la memoria caché.", "correcta": false }
+      ],
+      "razonamiento": "La segmentación respeta la estructura lógica del programa con bloques de tamaño variable, lo que complica la gestión del espacio libre y produce fragmentación externa. La mayoría de SO actuales combinan ambas ideas (segmentación paginada).",
+      "origen": "T9 §4",
+      "dificultad": "Media", "tipo": "Diferenciación", "concepto": "Segmentación", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T9_014",
+      "pregunta": "¿En qué consiste el swapping o intercambio?",
+      "opciones": [
+        { "texto": "En intercambiar la prioridad de dos procesos en la cola de listos.", "correcta": false },
+        { "texto": "En mover páginas o procesos completos entre la RAM y una zona reservada del disco cuando la memoria física es insuficiente.", "correcta": true },
+        { "texto": "En sustituir el sistema de archivos por otro más eficiente.", "correcta": false },
+        { "texto": "En alternar la ejecución entre varios núcleos del procesador.", "correcta": false }
+      ],
+      "razonamiento": "El swapping libera RAM llevando a disco lo que no se está usando. Funciona, pero penaliza el rendimiento porque el disco es mucho más lento que la RAM.",
+      "origen": "T9 §4",
+      "dificultad": "Fácil", "tipo": "Definición", "concepto": "Swapping", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T9_015",
+      "pregunta": "Un equipo con poca RAM «va lentísimo» y el disco no para de trabajar, aunque la CPU parece ocupada. ¿Qué fenómeno describe esta situación?",
+      "opciones": [
+        { "texto": "Interbloqueo (deadlock).", "correcta": false },
+        { "texto": "Inanición (starvation).", "correcta": false },
+        { "texto": "Hiperpaginación (thrashing).", "correcta": true },
+        { "texto": "Fragmentación externa.", "correcta": false }
+      ],
+      "razonamiento": "En el thrashing el sistema pasa más tiempo moviendo páginas entre RAM y disco que ejecutando trabajo útil. Es el diagnóstico típico de un equipo con RAM insuficiente; la solución de fondo es ampliar memoria o reducir la carga.",
+      "origen": "T9 §4",
+      "dificultad": "Difícil", "tipo": "Caso práctico", "concepto": "Hiperpaginación", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T9_016",
+      "pregunta": "¿Qué es un proceso?",
+      "opciones": [
+        { "texto": "El fichero ejecutable almacenado en el disco.", "correcta": false },
+        { "texto": "Una instancia de un programa en ejecución, con sus datos y los recursos que el SO le ha asignado.", "correcta": true },
+        { "texto": "La unidad mínima de ejecución dentro de un programa.", "correcta": false },
+        { "texto": "El bloque de control que almacena el estado del sistema.", "correcta": false }
+      ],
+      "razonamiento": "El proceso es el programa en ejecución (código + datos + recursos asignados). La unidad mínima de ejecución dentro de un proceso es el hilo; el bloque de control del proceso es el PCB.",
+      "origen": "T9 §5",
+      "dificultad": "Fácil", "tipo": "Definición", "concepto": "Proceso", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T9_017",
+      "pregunta": "¿Qué es el PCB (Process Control Block)?",
+      "opciones": [
+        { "texto": "La estructura de control donde el SO guarda el estado del proceso, sus registros y su contador de programa.", "correcta": true },
+        { "texto": "El bloque de memoria física asignado al proceso.", "correcta": false },
+        { "texto": "El planificador de procesos del núcleo.", "correcta": false },
+        { "texto": "La cola de procesos en estado listo.", "correcta": false }
+      ],
+      "razonamiento": "El PCB es la «ficha» de cada proceso: contiene toda la información que el SO necesita para gestionarlo y para restaurarlo tras un cambio de contexto.",
+      "origen": "T9 §5",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "PCB", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T9_018",
+      "pregunta": "Un proceso en ejecución solicita una operación de entrada/salida y debe esperar el resultado. ¿A qué estado transita?",
+      "opciones": [
+        { "texto": "A listo (ready).", "correcta": false },
+        { "texto": "A bloqueado o en espera (waiting).", "correcta": true },
+        { "texto": "A terminado.", "correcta": false },
+        { "texto": "A nuevo.", "correcta": false }
+      ],
+      "razonamiento": "Al esperar un evento externo (como una E/S), el proceso pasa de «en ejecución» a «bloqueado». Si simplemente se le retira la CPU por el planificador, pasaría a «listo», que es distinto: ahí sí podría ejecutarse, solo espera turno.",
+      "origen": "T9 §5",
+      "dificultad": "Media", "tipo": "Procedimiento", "concepto": "Estados de un proceso", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T9_019",
+      "pregunta": "¿Cuál es la diferencia principal entre un proceso y un hilo (thread)?",
+      "opciones": [
+        { "texto": "El hilo tiene su propio espacio de memoria independiente; el proceso lo comparte.", "correcta": false },
+        { "texto": "Los hilos de un mismo proceso comparten su espacio de memoria y recursos, mientras que cada proceso tiene el suyo propio e independiente.", "correcta": true },
+        { "texto": "El hilo es más costoso de crear que el proceso.", "correcta": false },
+        { "texto": "Un proceso solo puede tener un hilo.", "correcta": false }
+      ],
+      "razonamiento": "El proceso es la unidad de asignación de recursos (memoria propia, alto aislamiento); el hilo es la unidad de ejecución, más ligera, que comparte la memoria del proceso y por eso es más barata de crear y cambiar de contexto, a costa de menor aislamiento.",
+      "origen": "T9 §5",
+      "dificultad": "Media", "tipo": "Diferenciación", "concepto": "Proceso vs hilo", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T9_020",
+      "pregunta": "¿Qué elementos propios mantiene cada hilo dentro de un proceso?",
+      "opciones": [
+        { "texto": "Su propio espacio de memoria y sus archivos abiertos.", "correcta": false },
+        { "texto": "Su propia pila de ejecución y su propio contador de programa.", "correcta": true },
+        { "texto": "Su propio PCB independiente del proceso.", "correcta": false },
+        { "texto": "Su propia tabla de páginas.", "correcta": false }
+      ],
+      "razonamiento": "Los hilos comparten memoria y recursos del proceso (archivos abiertos, tabla de páginas), pero cada uno mantiene su pila y su contador de programa, lo que le permite avanzar de forma independiente.",
+      "origen": "T9 §5",
+      "dificultad": "Difícil", "tipo": "Precisión", "concepto": "Elementos propios del hilo", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T9_021",
+      "pregunta": "Dos procesos quedan bloqueados indefinidamente: A retiene la impresora y espera el escáner; B retiene el escáner y espera la impresora. ¿Qué situación se ha producido?",
+      "opciones": [
+        { "texto": "Inanición (starvation).", "correcta": false },
+        { "texto": "Interbloqueo (deadlock).", "correcta": true },
+        { "texto": "Hiperpaginación.", "correcta": false },
+        { "texto": "Cambio de contexto fallido.", "correcta": false }
+      ],
+      "razonamiento": "Es el interbloqueo clásico: espera circular en la que ningún proceso puede avanzar porque cada uno retiene lo que el otro necesita. El SO puede prevenirlo, evitarlo o detectarlo y resolverlo (por ejemplo, abortando uno de los procesos).",
+      "origen": "T9 §5",
+      "dificultad": "Media", "tipo": "Identificación", "concepto": "Interbloqueo", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T9_022",
+      "pregunta": "¿Qué diferencia hay entre interbloqueo e inanición?",
+      "opciones": [
+        { "texto": "En el interbloqueo los procesos se esperan mutuamente y ninguno avanzará nunca; en la inanición un proceso podría avanzar, pero nunca le llega el turno.", "correcta": true },
+        { "texto": "Son sinónimos: ambos bloquean el sistema.", "correcta": false },
+        { "texto": "El interbloqueo afecta a la memoria y la inanición a la CPU.", "correcta": false },
+        { "texto": "La inanición solo ocurre en sistemas monotarea.", "correcta": false }
+      ],
+      "razonamiento": "El interbloqueo es una espera circular sin salida; la inanición es un problema de planificación: el proceso es viable pero el planificador atiende siempre a otros de mayor prioridad. Distinguirlos es punto habitual de examen.",
+      "origen": "T9 §5",
+      "dificultad": "Difícil", "tipo": "Diferenciación", "concepto": "Interbloqueo vs inanición", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T9_023",
+      "pregunta": "¿Qué es el planificador (scheduler) del sistema operativo?",
+      "opciones": [
+        { "texto": "El componente que decide qué proceso o hilo de los que están listos ocupa la CPU en cada instante.", "correcta": true },
+        { "texto": "El componente que asigna memoria a cada proceso.", "correcta": false },
+        { "texto": "La herramienta que programa tareas para ejecutarlas a una hora concreta.", "correcta": false },
+        { "texto": "El módulo que traduce direcciones virtuales a físicas.", "correcta": false }
+      ],
+      "razonamiento": "El planificador reparte la CPU entre los procesos listos, alternándolos mediante cambios de contexto a gran velocidad. No debe confundirse con el programador de tareas (que ejecuta trabajos a una hora determinada) ni con el gestor de memoria.",
+      "origen": "T9 §6",
+      "dificultad": "Fácil", "tipo": "Definición", "concepto": "Planificador", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T9_024",
+      "pregunta": "¿Qué caracteriza a la multitarea expulsiva o apropiativa (preemptive)?",
+      "opciones": [
+        { "texto": "Cada proceso cede voluntariamente la CPU cuando lo considera oportuno.", "correcta": false },
+        { "texto": "El propio sistema operativo puede interrumpir un proceso en ejecución para ceder la CPU a otro, sin depender de su colaboración.", "correcta": true },
+        { "texto": "Solo permite un proceso activo por usuario.", "correcta": false },
+        { "texto": "Es el modelo típico de los sistemas por lotes históricos.", "correcta": false }
+      ],
+      "razonamiento": "La expulsiva es el modelo de todos los SO modernos (Windows, Linux, macOS) y aporta estabilidad: un proceso mal programado no puede bloquear el sistema. La cooperativa, donde cada proceso cede voluntariamente la CPU, era propia de sistemas antiguos como Windows 3.x.",
+      "origen": "T9 §6",
+      "dificultad": "Media", "tipo": "Diferenciación", "concepto": "Multitarea cooperativa vs expulsiva", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T9_025",
+      "pregunta": "¿Qué algoritmo de planificación asigna a cada proceso un turno fijo de CPU (quantum) y lo devuelve al final de la cola?",
+      "opciones": [
+        { "texto": "FCFS.", "correcta": false },
+        { "texto": "SJF.", "correcta": false },
+        { "texto": "Round Robin.", "correcta": true },
+        { "texto": "Planificación por prioridades.", "correcta": false }
+      ],
+      "razonamiento": "Round Robin reparte la CPU en turnos iguales (quantum), garantizando equidad. FCFS atiende por orden de llegada, SJF prioriza el trabajo más corto y la planificación por prioridades atiende primero al más prioritario.",
+      "origen": "T9 §6",
+      "dificultad": "Fácil", "tipo": "Identificación", "concepto": "Round Robin", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T9_026",
+      "pregunta": "En Round Robin, ¿qué ocurre si el quantum se configura demasiado largo?",
+      "opciones": [
+        { "texto": "Se multiplican los cambios de contexto y su coste.", "correcta": false },
+        { "texto": "El sistema se comporta casi como FCFS y pierde capacidad de respuesta.", "correcta": true },
+        { "texto": "Se produce inanición de los procesos de mayor prioridad.", "correcta": false },
+        { "texto": "El planificador deja de ser expulsivo.", "correcta": false }
+      ],
+      "razonamiento": "Con un quantum muy largo, cada proceso monopoliza la CPU casi hasta terminar y el comportamiento se aproxima a FCFS. Con un quantum muy corto ocurre lo contrario: demasiados cambios de contexto y su sobrecoste asociado.",
+      "origen": "T9 §6",
+      "dificultad": "Difícil", "tipo": "Relación", "concepto": "Quantum", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T9_027",
+      "pregunta": "¿Qué inconveniente principal tiene el algoritmo FCFS (First Come, First Served)?",
+      "opciones": [
+        { "texto": "Que exige conocer de antemano la duración de cada proceso.", "correcta": false },
+        { "texto": "Que un proceso largo puede bloquear a los demás (efecto convoy).", "correcta": true },
+        { "texto": "Que puede provocar inanición de los procesos de baja prioridad.", "correcta": false },
+        { "texto": "Que requiere ajustar cuidadosamente el quantum.", "correcta": false }
+      ],
+      "razonamiento": "En FCFS se atiende por orden de llegada, así que un proceso largo hace esperar a todos los que van detrás (efecto convoy). Conocer la duración es el requisito de SJF; la inanición es riesgo de la planificación por prioridades; el quantum es de Round Robin.",
+      "origen": "T9 §6",
+      "dificultad": "Media", "tipo": "Relación", "concepto": "FCFS y efecto convoy", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T9_028",
+      "pregunta": "¿Qué riesgo presenta la planificación por prioridades?",
+      "opciones": [
+        { "texto": "El interbloqueo entre procesos del mismo nivel.", "correcta": false },
+        { "texto": "La inanición de los procesos de baja prioridad, que pueden no ejecutarse nunca.", "correcta": true },
+        { "texto": "La fragmentación externa de la memoria.", "correcta": false },
+        { "texto": "La imposibilidad de aplicar multitarea expulsiva.", "correcta": false }
+      ],
+      "razonamiento": "Si siempre llegan procesos más prioritarios, los de baja prioridad pueden quedar postergados indefinidamente: eso es la inanición. Suele mitigarse con técnicas de envejecimiento (aumentar la prioridad con el tiempo de espera).",
+      "origen": "T9 §6",
+      "dificultad": "Media", "tipo": "Relación", "concepto": "Inanición por prioridades", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T9_029",
+      "pregunta": "¿Cuál de los métodos de entrada/salida ocupa MENOS a la CPU?",
+      "opciones": [
+        { "texto": "E/S programada (polling).", "correcta": false },
+        { "texto": "E/S por interrupciones.", "correcta": false },
+        { "texto": "DMA (Direct Memory Access).", "correcta": true },
+        { "texto": "Todos ocupan igual a la CPU.", "correcta": false }
+      ],
+      "razonamiento": "En DMA un controlador dedicado transfiere los datos directamente a memoria: la CPU solo interviene al configurar la operación y al recibir la interrupción final. El polling es el peor caso (la CPU queda bloqueada preguntando) y las interrupciones, intermedias.",
+      "origen": "T9 §7",
+      "dificultad": "Media", "tipo": "Conocimiento directo", "concepto": "DMA", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T9_030",
+      "pregunta": "En la E/S programada o polling, ¿qué hace la CPU?",
+      "opciones": [
+        { "texto": "Pregunta activa y repetidamente si el dispositivo ha terminado, quedando bloqueada esperando.", "correcta": true },
+        { "texto": "Recibe un aviso del dispositivo cuando la operación termina.", "correcta": false },
+        { "texto": "Delega la transferencia en un controlador dedicado.", "correcta": false },
+        { "texto": "Suspende el proceso y ejecuta otro mientras espera.", "correcta": false }
+      ],
+      "razonamiento": "El polling consiste en sondear repetidamente el estado del dispositivo, desperdiciando ciclos de CPU. El aviso del dispositivo es la E/S por interrupciones, y la delegación en un controlador es el DMA.",
+      "origen": "T9 §7",
+      "dificultad": "Media", "tipo": "Diferenciación", "concepto": "Polling", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T9_031",
+      "pregunta": "¿Para qué utiliza el sistema operativo los buffers en la entrada/salida?",
+      "opciones": [
+        { "texto": "Para cifrar los datos antes de enviarlos al dispositivo.", "correcta": false },
+        { "texto": "Para compensar la diferencia de velocidad entre la CPU y los dispositivos, acumulando datos en una zona de memoria intermedia.", "correcta": true },
+        { "texto": "Para almacenar permanentemente los datos del proceso.", "correcta": false },
+        { "texto": "Para traducir las órdenes del SO al lenguaje del dispositivo.", "correcta": false }
+      ],
+      "razonamiento": "El buffer es memoria intermedia que suaviza la enorme diferencia de velocidad entre la CPU y los periféricos. La traducción de órdenes corresponde al driver.",
+      "origen": "T9 §7",
+      "dificultad": "Fácil", "tipo": "Definición", "concepto": "Buffer", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T9_032",
+      "pregunta": "¿Qué diferencia el estudio de los «sistemas de archivo» de este tema respecto al Tema 4 (Ficheros)?",
+      "opciones": [
+        { "texto": "Ninguna: ambos estudian lo mismo con distinto nombre.", "correcta": false },
+        { "texto": "Aquí se estudia el papel del SO como gestor del conjunto de ficheros y directorios sobre el almacenamiento; en el Tema 4 se estudió la organización lógica interna de los datos (registros, claves, accesos).", "correcta": true },
+        { "texto": "Aquí se estudian los formatos de fichero y allí, los sistemas de archivo concretos.", "correcta": false },
+        { "texto": "Aquí se estudia el hardware de almacenamiento y allí, el software.", "correcta": false }
+      ],
+      "razonamiento": "El Tema 4 aborda la organización lógica de la información dentro del fichero (registros, claves, métodos de acceso); este tema, cómo el SO organiza, nombra, localiza y protege ficheros y directorios (estructura en árbol, metadatos, permisos). El detalle de NTFS, ext4 o APFS corresponde a los temas de cada SO concreto.",
+      "origen": "T9 §8",
+      "dificultad": "Difícil", "tipo": "Relación", "concepto": "Sistema de archivos vs organización de ficheros", "prioridad": "Media"
+    }
+  ]
+}

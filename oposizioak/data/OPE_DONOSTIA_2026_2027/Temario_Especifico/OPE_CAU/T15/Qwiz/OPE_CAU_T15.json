@@ -1,0 +1,309 @@
+{
+  "id": "OPE_CAU_T15",
+  "opeNombre": "OPE DonostiaTIK — Técnico/a de apoyo (CAU)",
+  "titulo": "T15 · Entorno Windows: supervisión del visor de eventos. Gestión de compartidos y permisos de red",
+  "descripcion": "23 preguntas tipo test con explicación didáctica, elaboradas a partir de los apuntes del Tema 15.",
+  "fuente": "Elaboración propia a partir de los apuntes del Tema 15 (web de estudio). Caracteres del tema: 12.454. Preguntas asignadas: 23.",
+  "preguntas": [
+    {
+      "id": "OPE_CAU_T15_001",
+      "pregunta": "¿Con qué comando se abre el Visor de eventos de Windows?",
+      "opciones": [
+        { "texto": "services.msc.", "correcta": false },
+        { "texto": "eventvwr.msc.", "correcta": true },
+        { "texto": "regedit.", "correcta": false },
+        { "texto": "fsmgmt.msc.", "correcta": false }
+      ],
+      "razonamiento": "eventvwr.msc abre el Visor de eventos. services.msc gestiona servicios, regedit edita el Registro y fsmgmt.msc administra las carpetas compartidas.",
+      "origen": "T15 §1",
+      "dificultad": "Fácil", "tipo": "Conocimiento directo", "concepto": "eventvwr.msc", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T15_002",
+      "pregunta": "¿Qué extensión tienen los archivos de registro del Visor de eventos?",
+      "opciones": [
+        { "texto": ".log.", "correcta": false },
+        { "texto": ".evtx.", "correcta": true },
+        { "texto": ".dat.", "correcta": false },
+        { "texto": ".msc.", "correcta": false }
+      ],
+      "razonamiento": "Los registros se almacenan en archivos .evtx. Cada suceso incluye, entre otros datos, el Event ID, el origen, la fecha y hora y una descripción.",
+      "origen": "T15 §1",
+      "dificultad": "Media", "tipo": "Precisión", "concepto": "Archivos .evtx", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T15_003",
+      "pregunta": "¿En qué registro del Visor de eventos se recogen los inicios y cierres de sesión y los accesos auditados?",
+      "opciones": [
+        { "texto": "Aplicación.", "correcta": false },
+        { "texto": "Sistema.", "correcta": false },
+        { "texto": "Seguridad.", "correcta": true },
+        { "texto": "Instalación.", "correcta": false }
+      ],
+      "razonamiento": "El registro de Seguridad recoge inicios y cierres de sesión, cambios de permisos y accesos a objetos auditados. Aplicación recoge los eventos de los programas y Sistema, los de componentes del SO (controladores, servicios, arranque).",
+      "origen": "T15 §1",
+      "dificultad": "Fácil", "tipo": "Clasificación", "concepto": "Registros del Visor de eventos", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T15_004",
+      "pregunta": "¿Qué se requiere para que el registro de Seguridad recoja los accesos a determinados objetos?",
+      "opciones": [
+        { "texto": "Nada: se registran siempre por defecto.", "correcta": false },
+        { "texto": "Que la auditoría correspondiente esté habilitada, normalmente mediante GPO.", "correcta": true },
+        { "texto": "Que el equipo tenga instalada la característica RSAT.", "correcta": false },
+        { "texto": "Que el usuario sea administrador local del equipo.", "correcta": false }
+      ],
+      "razonamiento": "La auditoría de accesos no está activa por defecto: debe habilitarse (habitualmente por Directiva de grupo) indicando qué objetos y qué tipo de acceso se auditan. Sin esa configuración, esos sucesos no se registran.",
+      "origen": "T15 §1",
+      "dificultad": "Media", "tipo": "Relación", "concepto": "Auditoría y registro de Seguridad", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T15_005",
+      "pregunta": "¿Qué niveles de gravedad son exclusivos del registro de Seguridad?",
+      "opciones": [
+        { "texto": "Información y Advertencia.", "correcta": false },
+        { "texto": "Error y Crítico.", "correcta": false },
+        { "texto": "Auditoría correcta y Auditoría con error.", "correcta": true },
+        { "texto": "Advertencia y Crítico.", "correcta": false }
+      ],
+      "razonamiento": "Los niveles generales son Información, Advertencia, Error y Crítico; «Auditoría correcta» y «Auditoría con error» (éxito o fracaso de una acción auditada, como un inicio de sesión) son específicos del registro de Seguridad.",
+      "origen": "T15 §2",
+      "dificultad": "Media", "tipo": "Precisión", "concepto": "Niveles de gravedad", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T15_006",
+      "pregunta": "Un suceso indica una situación que podría convertirse en un problema, sin ser aún crítica. ¿Qué nivel le corresponde?",
+      "opciones": [
+        { "texto": "Información.", "correcta": false },
+        { "texto": "Advertencia (Warning).", "correcta": true },
+        { "texto": "Error.", "correcta": false },
+        { "texto": "Crítico.", "correcta": false }
+      ],
+      "razonamiento": "Advertencia es el nivel de aviso preventivo. Error indica un fallo que ya ha afectado a una funcionalidad, y Crítico, un fallo grave con pérdida de datos o caída de un componente principal.",
+      "origen": "T15 §2",
+      "dificultad": "Fácil", "tipo": "Identificación", "concepto": "Nivel Advertencia", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T15_007",
+      "pregunta": "¿Para qué sirven las vistas personalizadas (Custom Views) del Visor de eventos?",
+      "opciones": [
+        { "texto": "Para exportar los registros a otro formato de archivo.", "correcta": false },
+        { "texto": "Para guardar filtros que muestren solo los eventos relevantes, evitando revisar manualmente todo el registro.", "correcta": true },
+        { "texto": "Para reenviar automáticamente los eventos a otro equipo.", "correcta": false },
+        { "texto": "Para modificar el nivel de gravedad asignado a un evento.", "correcta": false }
+      ],
+      "razonamiento": "Las vistas personalizadas son filtros guardados (por ejemplo, solo errores y críticos de las últimas 24 horas). El reenvío a otro equipo es WEF, que es otra funcionalidad distinta.",
+      "origen": "T15 §3",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "Vistas personalizadas", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T15_008",
+      "pregunta": "¿En qué consiste el reenvío de eventos de Windows (WEF)?",
+      "opciones": [
+        { "texto": "En enviar por correo electrónico una copia de cada evento registrado.", "correcta": false },
+        { "texto": "En centralizar en un equipo recolector los eventos generados en varios equipos de la red, apoyándose en el servicio WinRM.", "correcta": true },
+        { "texto": "En duplicar el registro de eventos en una segunda partición del disco.", "correcta": false },
+        { "texto": "En reenviar los eventos al fabricante para su análisis.", "correcta": false }
+      ],
+      "razonamiento": "WEF (Windows Event Forwarding) y sus suscripciones permiten supervisar muchos equipos desde un único punto, sin conectarse a cada uno. Es habitualmente el primer paso hacia soluciones SIEM de correlación de eventos.",
+      "origen": "T15 §3",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "WEF y WinRM", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T15_009",
+      "pregunta": "¿Qué permite «adjuntar una tarea a un evento»?",
+      "opciones": [
+        { "texto": "Automatizar una respuesta (enviar un correo, ejecutar un script) cada vez que se produzca un evento determinado.", "correcta": true },
+        { "texto": "Asignar el evento a un técnico para su revisión manual.", "correcta": false },
+        { "texto": "Elevar el nivel de gravedad del evento.", "correcta": false },
+        { "texto": "Impedir que ese evento vuelva a registrarse.", "correcta": false }
+      ],
+      "razonamiento": "Adjuntar una tarea permite reaccionar automáticamente ante un evento concreto sin supervisión manual continua, apoyándose en el Programador de tareas de Windows.",
+      "origen": "T15 §3",
+      "dificultad": "Media", "tipo": "Conocimiento directo", "concepto": "Tareas adjuntas a eventos", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T15_010",
+      "pregunta": "¿Qué formato tiene una ruta UNC para acceder a un recurso compartido?",
+      "opciones": [
+        { "texto": "C:\\servidor\\recurso.", "correcta": false },
+        { "texto": "\\\\servidor\\recurso.", "correcta": true },
+        { "texto": "//servidor/recurso:80.", "correcta": false },
+        { "texto": "smb://servidor.recurso.", "correcta": false }
+      ],
+      "razonamiento": "La ruta UNC (Universal Naming Convention) tiene la forma \\\\servidor\\recurso y utiliza el protocolo SMB/CIFS. La notación con letra de unidad es local, y smb:// es la sintaxis propia de otros sistemas.",
+      "origen": "T15 §4",
+      "dificultad": "Fácil", "tipo": "Precisión", "concepto": "Ruta UNC", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T15_011",
+      "pregunta": "¿Qué caracteriza a los recursos compartidos administrativos como C$ o ADMIN$?",
+      "opciones": [
+        { "texto": "Que son accesibles por cualquier usuario del dominio sin permisos especiales.", "correcta": false },
+        { "texto": "Que terminan en $, por lo que no aparecen al explorar la red, aunque siguen siendo accesibles conociendo su ruta y con los permisos adecuados.", "correcta": true },
+        { "texto": "Que están cifrados de forma automática.", "correcta": false },
+        { "texto": "Que solo existen en controladores de dominio.", "correcta": false }
+      ],
+      "razonamiento": "Windows crea automáticamente estos recursos ocultos para la administración remota. El símbolo $ los oculta de la exploración, pero no es un mecanismo de seguridad: el control real lo dan los permisos.",
+      "origen": "T15 §4",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "Recursos administrativos ocultos", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T15_012",
+      "pregunta": "¿Con qué consola MMC se gestionan las carpetas compartidas de un equipo?",
+      "opciones": [
+        { "texto": "fsmgmt.msc.", "correcta": true },
+        { "texto": "lusrmgr.msc.", "correcta": false },
+        { "texto": "eventvwr.msc.", "correcta": false },
+        { "texto": "dsa.msc.", "correcta": false }
+      ],
+      "razonamiento": "fsmgmt.msc («Carpetas compartidas», dentro de Administración de equipos) permite ver y gestionar los recursos compartidos, las sesiones y los archivos abiertos. También puede hacerse con PowerShell (New-SmbShare).",
+      "origen": "T15 §4",
+      "dificultad": "Media", "tipo": "Conocimiento directo", "concepto": "fsmgmt.msc", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T15_013",
+      "pregunta": "¿Cuáles son los tres permisos de recurso compartido (share)?",
+      "opciones": [
+        { "texto": "Lectura, Escritura y Ejecución.", "correcta": false },
+        { "texto": "Lectura, Cambiar y Control total.", "correcta": true },
+        { "texto": "Ver, Modificar y Administrar.", "correcta": false },
+        { "texto": "Consulta, Edición y Propiedad.", "correcta": false }
+      ],
+      "razonamiento": "Los permisos de recurso compartido son tres: Lectura (ver y abrir), Cambiar (además escribir, modificar y eliminar) y Control total (además modificar los propios permisos del recurso).",
+      "origen": "T15 §5",
+      "dificultad": "Media", "tipo": "Precisión", "concepto": "Permisos de share", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T15_014",
+      "pregunta": "¿Cuándo se aplican los permisos de recurso compartido?",
+      "opciones": [
+        { "texto": "Siempre, tanto en acceso local como por red.", "correcta": false },
+        { "texto": "Solo cuando se accede al recurso a través de la red, mediante su ruta UNC.", "correcta": true },
+        { "texto": "Solo cuando el usuario es administrador local.", "correcta": false },
+        { "texto": "Solo en volúmenes formateados con NTFS.", "correcta": false }
+      ],
+      "razonamiento": "Los permisos de share solo intervienen en el acceso por red; el acceso local a la carpeta se rige exclusivamente por los permisos NTFS. Esta diferencia de ámbito es clave para resolver los supuestos prácticos.",
+      "origen": "T15 §5",
+      "dificultad": "Media", "tipo": "Diferenciación", "concepto": "Ámbito de los permisos share", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T15_015",
+      "pregunta": "¿Qué caracteriza a los permisos NTFS frente a los de recurso compartido?",
+      "opciones": [
+        { "texto": "Se aplican solo por red y con menos granularidad.", "correcta": false },
+        { "texto": "Se aplican siempre (acceso local y por red) y con un nivel de detalle mucho mayor, a nivel de archivo o carpeta individual.", "correcta": true },
+        { "texto": "Solo pueden asignarse a grupos, nunca a usuarios.", "correcta": false },
+        { "texto": "No admiten denegaciones explícitas.", "correcta": false }
+      ],
+      "razonamiento": "Los permisos NTFS se definen sobre el sistema de archivos, se aplican siempre y permiten un control fino (permisos básicos y especiales) sobre cada archivo o carpeta.",
+      "origen": "T15 §6",
+      "dificultad": "Media", "tipo": "Diferenciación", "concepto": "Permisos NTFS", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T15_016",
+      "pregunta": "¿Qué es una ACL y de qué se compone?",
+      "opciones": [
+        { "texto": "Una lista de control de acceso formada por entradas individuales (ACE) que conceden o deniegan permisos a usuarios o grupos.", "correcta": true },
+        { "texto": "La lista de cuentas bloqueadas del dominio.", "correcta": false },
+        { "texto": "El catálogo de recursos compartidos del servidor.", "correcta": false },
+        { "texto": "El registro de accesos auditados a un archivo.", "correcta": false }
+      ],
+      "razonamiento": "Cada archivo o carpeta tiene una ACL (Access Control List) compuesta por ACE (Access Control Entry): cada ACE concede o deniega un permiso concreto a un usuario o grupo determinado.",
+      "origen": "T15 §6",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "ACL y ACE", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T15_017",
+      "pregunta": "¿Qué ocurre cuando un usuario tiene un permiso «Permitir» por un grupo y un «Denegar» por otro sobre el mismo recurso?",
+      "opciones": [
+        { "texto": "Prevalece el permiso más favorable (Permitir).", "correcta": false },
+        { "texto": "Prevalece la denegación: Denegar gana siempre sobre Permitir.", "correcta": true },
+        { "texto": "Se aplica el permiso del grupo con más miembros.", "correcta": false },
+        { "texto": "El sistema solicita al administrador que resuelva el conflicto.", "correcta": false }
+      ],
+      "razonamiento": "Basta una única denegación explícita en cualquier grupo al que pertenezca el usuario para bloquear el acceso, sin importar cuántos «Permitir» tenga por otras vías. Es uno de los puntos más preguntados del tema.",
+      "mnemotecnico": "🧠 Denegar > Permitir, siempre.",
+      "origen": "T15 §6",
+      "dificultad": "Media", "tipo": "Precisión", "concepto": "Denegar prevalece", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T15_018",
+      "pregunta": "¿Qué es la herencia de permisos NTFS?",
+      "opciones": [
+        { "texto": "Que los permisos definidos sobre una carpeta se propagan por defecto a sus subcarpetas y archivos, salvo que se rompa expresamente.", "correcta": true },
+        { "texto": "Que un usuario hereda los permisos de la persona a la que sustituye.", "correcta": false },
+        { "texto": "Que los permisos de share se copian a los permisos NTFS.", "correcta": false },
+        { "texto": "Que los permisos se transfieren al nuevo propietario del archivo.", "correcta": false }
+      ],
+      "razonamiento": "La herencia propaga los permisos hacia abajo en el árbol de carpetas; puede romperse en un punto concreto para definir permisos explícitos distintos, algo habitual en subcarpetas con acceso restringido.",
+      "origen": "T15 §6",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "Herencia de permisos", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T15_019",
+      "pregunta": "Al acceder por red a una carpeta compartida, ¿cómo se calcula el permiso efectivo?",
+      "opciones": [
+        { "texto": "Se aplica el permiso más permisivo entre share y NTFS.", "correcta": false },
+        { "texto": "Se aplica el permiso más restrictivo entre el de recurso compartido y el NTFS.", "correcta": true },
+        { "texto": "Se suman ambos permisos.", "correcta": false },
+        { "texto": "Solo se aplica el permiso de recurso compartido.", "correcta": false }
+      ],
+      "razonamiento": "El permiso efectivo por red es la intersección: siempre el más restrictivo de los dos. Por eso la práctica habitual es dejar el share en Control total y gestionar el control fino solo por NTFS.",
+      "origen": "T15 §7",
+      "dificultad": "Media", "tipo": "Procedimiento", "concepto": "Permiso efectivo", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T15_020",
+      "pregunta": "Una usuaria tiene permiso NTFS de Modificar sobre una carpeta, pero el recurso compartido concede solo Lectura a su grupo. Al acceder por \\\\servidor\\carpeta, ¿qué podrá hacer?",
+      "opciones": [
+        { "texto": "Abrir y modificar los documentos, porque NTFS es más específico.", "correcta": false },
+        { "texto": "Abrir los documentos pero no guardar cambios: el permiso efectivo es Lectura.", "correcta": true },
+        { "texto": "No podrá ni abrir la carpeta.", "correcta": false },
+        { "texto": "Podrá modificar solo los archivos que ella misma haya creado.", "correcta": false }
+      ],
+      "razonamiento": "Se aplica el más restrictivo de los dos: Lectura (share) frente a Modificar (NTFS) da como resultado Lectura. Si además existiera una denegación explícita en algún grupo, ni siquiera podría abrir la carpeta.",
+      "origen": "T15 §7",
+      "dificultad": "Difícil", "tipo": "Caso práctico", "concepto": "Cálculo del permiso efectivo", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T15_021",
+      "pregunta": "¿Cuál es la práctica habitual recomendada en la administración de carpetas compartidas Windows?",
+      "opciones": [
+        { "texto": "Configurar permisos restrictivos tanto en share como en NTFS, para doble seguridad.", "correcta": false },
+        { "texto": "Dejar el permiso de recurso compartido en Control total para el grupo relevante y gestionar todo el control fino mediante permisos NTFS.", "correcta": true },
+        { "texto": "Usar solo permisos de recurso compartido y prescindir de NTFS.", "correcta": false },
+        { "texto": "Asignar permisos individualmente a cada usuario en ambas capas.", "correcta": false }
+      ],
+      "razonamiento": "Gestionar dos capas restrictivas en paralelo genera inconsistencias difíciles de diagnosticar. Con el share en Control total y el control real en NTFS solo hay un conjunto de permisos que mantener.",
+      "origen": "T15 §7",
+      "dificultad": "Media", "tipo": "Aplicación", "concepto": "Buena práctica de permisos", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T15_022",
+      "pregunta": "Un usuario accede localmente (sentado ante el equipo) a una carpeta que además está compartida. ¿Qué permisos se le aplican?",
+      "opciones": [
+        { "texto": "Los de recurso compartido únicamente.", "correcta": false },
+        { "texto": "Los permisos NTFS únicamente: los de share no intervienen en el acceso local.", "correcta": true },
+        { "texto": "El más restrictivo entre share y NTFS, igual que por red.", "correcta": false },
+        { "texto": "Ninguno: el acceso local no está sujeto a permisos.", "correcta": false }
+      ],
+      "razonamiento": "Los permisos de recurso compartido solo actúan sobre el acceso a través de la red. En local rigen exclusivamente los NTFS, que se aplican siempre.",
+      "origen": "T15 §7",
+      "dificultad": "Media", "tipo": "Aplicación", "concepto": "Acceso local vs por red", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T15_023",
+      "pregunta": "¿Qué protocolo permite compartir carpetas e impresoras en una red Windows?",
+      "opciones": [
+        { "texto": "NFS.", "correcta": false },
+        { "texto": "SMB/CIFS.", "correcta": true },
+        { "texto": "iSCSI.", "correcta": false },
+        { "texto": "LDAP.", "correcta": false }
+      ],
+      "razonamiento": "SMB/CIFS es el protocolo de compartición de ficheros de Windows, ya citado en el Tema 7 al hablar de NAS. NFS es su equivalente en Unix/Linux, iSCSI es de bloque (SAN) y LDAP consulta el directorio.",
+      "origen": "T15 §4",
+      "dificultad": "Fácil", "tipo": "Conocimiento directo", "concepto": "Protocolo SMB/CIFS", "prioridad": "Alta"
+    }
+  ]
+}

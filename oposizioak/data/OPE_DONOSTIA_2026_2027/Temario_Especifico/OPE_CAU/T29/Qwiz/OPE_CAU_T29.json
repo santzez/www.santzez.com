@@ -1,0 +1,312 @@
+{
+  "id": "OPE_CAU_T29",
+  "opeNombre": "OPE DonostiaTIK — Técnico/a de apoyo (CAU)",
+  "titulo": "T29 · Seguridad: cortafuegos, protocolos seguros (IPSec, SSL…) y redes privadas virtuales",
+  "descripcion": "23 preguntas tipo test con explicación didáctica, elaboradas a partir de los apuntes del Tema 29.",
+  "fuente": "Elaboración propia a partir de los apuntes del Tema 29 (web de estudio). Caracteres del tema: 12.140. Preguntas asignadas: 23.",
+  "preguntas": [
+    {
+      "id": "OPE_CAU_T29_001",
+      "pregunta": "¿Qué es un cortafuegos (firewall)?",
+      "opciones": [
+        { "texto": "Un programa que detecta y elimina malware en el equipo.", "correcta": false },
+        { "texto": "Un sistema, hardware o software, que controla el tráfico de red entrante y saliente permitiéndolo o bloqueándolo según un conjunto de reglas predefinidas.", "correcta": true },
+        { "texto": "Un servidor que traduce nombres de dominio en direcciones IP.", "correcta": false },
+        { "texto": "Un dispositivo que segmenta lógicamente una red física en varias redes independientes.", "correcta": false }
+      ],
+      "razonamiento": "El cortafuegos filtra tráfico según reglas y se sitúa en la frontera entre una red de confianza y una no confiable. Eliminar malware es función del antivirus (Tema 25) y segmentar lógicamente, de las VLAN (Tema 28).",
+      "origen": "T29 §1",
+      "dificultad": "Fácil", "tipo": "Definición", "concepto": "Cortafuegos", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T29_002",
+      "pregunta": "¿En función de qué elementos se definen habitualmente las reglas de un cortafuegos?",
+      "opciones": [
+        { "texto": "Dirección IP de origen y destino, puerto, protocolo (TCP o UDP) y sentido del tráfico.", "correcta": true },
+        { "texto": "Nombre de usuario, contraseña y grupo de Active Directory.", "correcta": false },
+        { "texto": "Firma digital y certificado del emisor.", "correcta": false },
+        { "texto": "Tamaño del archivo y su extensión.", "correcta": false }
+      ],
+      "razonamiento": "Las reglas clásicas se expresan con IP origen/destino, puerto, protocolo y sentido (entrante o saliente). El filtrado por identidad de usuario o por contenido corresponde a modelos más avanzados (proxy de aplicación, NGFW).",
+      "origen": "T29 §1",
+      "dificultad": "Fácil", "tipo": "Conocimiento directo", "concepto": "Reglas de filtrado", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T29_003",
+      "pregunta": "¿Cuál es la política de cortafuegos considerada buena práctica de seguridad?",
+      "opciones": [
+        { "texto": "Permitir todo el tráfico salvo el expresamente bloqueado (lista negra), por comodidad de configuración.", "correcta": false },
+        { "texto": "Denegar por defecto todo el tráfico y permitir solo el autorizado de forma explícita (lista blanca).", "correcta": true },
+        { "texto": "Permitir todo el tráfico saliente y denegar todo el entrante, sin excepciones.", "correcta": false },
+        { "texto": "No definir política por defecto y resolver caso por caso cuando surja la incidencia.", "correcta": false }
+      ],
+      "razonamiento": "La denegación por defecto es coherente con el principio de mínimo privilegio: exige más trabajo inicial, pero reduce drásticamente la superficie de ataque frente al tráfico no previsto.",
+      "mnemotecnico": "🧠 Lo que no está expresamente permitido, está prohibido.",
+      "origen": "T29 §1",
+      "dificultad": "Media", "tipo": "Relación", "concepto": "Denegación por defecto", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T29_004",
+      "pregunta": "¿Qué caracteriza a un cortafuegos de filtrado de paquetes (packet filtering)?",
+      "opciones": [
+        { "texto": "Examina cada paquete de forma aislada, sin recordar el contexto de la conexión a la que pertenece.", "correcta": true },
+        { "texto": "Mantiene una tabla de las conexiones activas y su estado.", "correcta": false },
+        { "texto": "Inspecciona el contenido de la comunicación en la capa de aplicación.", "correcta": false },
+        { "texto": "Integra prevención de intrusiones e identificación de aplicaciones.", "correcta": false }
+      ],
+      "razonamiento": "Es el modelo más básico y antiguo: rápido, pero sin memoria del contexto. Recordar el estado de la conexión es propio del stateful; inspeccionar contenido, del proxy de aplicación; e integrar IPS y DPI, del NGFW.",
+      "origen": "T29 §2",
+      "dificultad": "Media", "tipo": "Identificación", "concepto": "Filtrado de paquetes", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T29_005",
+      "pregunta": "¿Cuál es la ventaja práctica de un cortafuegos de inspección de estado (stateful) frente a uno de filtrado de paquetes?",
+      "opciones": [
+        { "texto": "Que puede descifrar el tráfico HTTPS sin necesidad de certificados.", "correcta": false },
+        { "texto": "Que al mantener una tabla de conexiones activas puede permitir automáticamente el tráfico de respuesta a una conexión saliente ya autorizada, sin abrir manualmente esos puertos de vuelta.", "correcta": true },
+        { "texto": "Que no necesita reglas configuradas por el administrador.", "correcta": false },
+        { "texto": "Que funciona exclusivamente en la capa física.", "correcta": false }
+      ],
+      "razonamiento": "El stateful recuerda el estado de cada conexión, lo que le permite decisiones más inteligentes sin abrir reglas de entrada innecesarias. Es el modelo estándar en la mayoría de cortafuegos actuales.",
+      "origen": "T29 §2",
+      "dificultad": "Media", "tipo": "Diferenciación", "concepto": "Stateful inspection", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T29_006",
+      "pregunta": "¿Qué tipo de cortafuegos opera en la capa de aplicación, entendiendo protocolos concretos como HTTP o FTP e inspeccionando el contenido real de las comunicaciones?",
+      "opciones": [
+        { "texto": "El de filtrado de paquetes.", "correcta": false },
+        { "texto": "El de inspección de estado.", "correcta": false },
+        { "texto": "El cortafuegos de aplicación (proxy o application-level gateway).", "correcta": true },
+        { "texto": "El repetidor de nivel 1.", "correcta": false }
+      ],
+      "razonamiento": "El proxy de aplicación inspecciona el contenido, no solo las cabeceras: es más lento pero mucho más granular en el control.",
+      "origen": "T29 §2",
+      "dificultad": "Media", "tipo": "Identificación", "concepto": "Cortafuegos de aplicación", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T29_007",
+      "pregunta": "¿Qué funciones añade un cortafuegos de nueva generación (NGFW) respecto a los modelos anteriores?",
+      "opciones": [
+        { "texto": "Únicamente mayor velocidad de proceso de los mismos filtros.", "correcta": false },
+        { "texto": "Inspección profunda de paquetes (DPI), prevención de intrusiones integrada (IPS), identificación de aplicaciones más allá del puerto que usan y filtrado basado en inteligencia de amenazas.", "correcta": true },
+        { "texto": "Sustitución del router perimetral y del servidor DNS.", "correcta": false },
+        { "texto": "Cifrado obligatorio de todo el tráfico interno de la organización.", "correcta": false }
+      ],
+      "razonamiento": "El NGFW es hoy el estándar de referencia corporativo: combina las capacidades clásicas con DPI, IPS, identificación de aplicaciones e inteligencia de amenazas actualizada.",
+      "origen": "T29 §2",
+      "dificultad": "Media", "tipo": "Conocimiento directo", "concepto": "NGFW", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T29_008",
+      "pregunta": "¿Qué diferencia hay entre un cortafuegos personal y uno perimetral?",
+      "opciones": [
+        { "texto": "El personal protege un único equipo desde el propio equipo; el perimetral protege toda una red desde un punto centralizado.", "correcta": true },
+        { "texto": "El personal es siempre hardware y el perimetral siempre software.", "correcta": false },
+        { "texto": "El personal opera en capa 3 y el perimetral en capa 2.", "correcta": false },
+        { "texto": "El perimetral solo puede aplicar políticas de lista negra.", "correcta": false }
+      ],
+      "razonamiento": "El cortafuegos personal (host-based) forma parte de la seguridad integral del puesto (Tema 25); el de red (network-based) protege el conjunto desde la frontera. No son excluyentes: se complementan en una defensa en profundidad.",
+      "origen": "T29 §2",
+      "dificultad": "Fácil", "tipo": "Diferenciación", "concepto": "Host-based vs network-based", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T29_009",
+      "pregunta": "¿Qué es una DMZ?",
+      "opciones": [
+        { "texto": "Un segmento de red intermedio, aislado tanto de la red interna como de la externa, donde se ubican los servicios accesibles desde el exterior.", "correcta": true },
+        { "texto": "La zona de la red donde se sitúan los equipos de la dirección de la organización.", "correcta": false },
+        { "texto": "Un túnel cifrado entre dos sedes de una misma organización.", "correcta": false },
+        { "texto": "El rango de direcciones IP reservado para servidores DNS.", "correcta": false }
+      ],
+      "razonamiento": "La DMZ (zona desmilitarizada) permite publicar servicios (web público, correo) sin exponer directamente la red interna al tráfico de Internet.",
+      "origen": "T29 §3",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "DMZ", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T29_010",
+      "pregunta": "En una arquitectura de doble cortafuegos, ¿qué ocurre si un servidor situado en la DMZ resulta comprometido?",
+      "opciones": [
+        { "texto": "El atacante obtiene acceso inmediato a la red interna, porque la DMZ forma parte de ella.", "correcta": false },
+        { "texto": "El atacante queda contenido en ese segmento intermedio, sin obtener por ello acceso directo a la red interna.", "correcta": true },
+        { "texto": "El cortafuegos externo se desactiva automáticamente.", "correcta": false },
+        { "texto": "Todo el tráfico de la organización pasa a cifrarse con IPSec.", "correcta": false }
+      ],
+      "razonamiento": "Ese es precisamente el objetivo de la DMZ: contener el impacto. El esquema es Internet → cortafuegos externo → DMZ → cortafuegos interno → red interna.",
+      "origen": "T29 §3",
+      "dificultad": "Media", "tipo": "Caso práctico", "concepto": "Contención mediante DMZ", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T29_011",
+      "pregunta": "¿Cuál es la diferencia entre un IDS y un IPS?",
+      "opciones": [
+        { "texto": "El IDS bloquea el tráfico malicioso y el IPS solo lo registra.", "correcta": false },
+        { "texto": "El IDS detecta y alerta de actividad sospechosa sin bloquearla; el IPS además bloquea activamente el tráfico malicioso detectado.", "correcta": true },
+        { "texto": "El IDS opera en capa 2 y el IPS en capa 7.", "correcta": false },
+        { "texto": "El IDS es hardware y el IPS necesariamente software.", "correcta": false }
+      ],
+      "razonamiento": "IDS = Detection (detecta y alerta); IPS = Prevention (detecta y bloquea). Los NGFW actuales suelen integrar el IPS como una función más.",
+      "mnemotecnico": "🧠 D de Detectar (solo avisa) · P de Prevenir (además corta).",
+      "origen": "T29 §3",
+      "dificultad": "Media", "tipo": "Diferenciación", "concepto": "IDS vs IPS", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T29_012",
+      "pregunta": "¿Qué proporciona TLS a las comunicaciones sobre TCP?",
+      "opciones": [
+        { "texto": "Únicamente cifrado del contenido.", "correcta": false },
+        { "texto": "Cifrado, autenticación mediante certificados digitales e integridad.", "correcta": true },
+        { "texto": "Encaminamiento dinámico entre redes.", "correcta": false },
+        { "texto": "Copia de seguridad del tráfico transmitido.", "correcta": false }
+      ],
+      "razonamiento": "TLS aporta las tres propiedades: confidencialidad (cifrado), autenticación (certificados, Tema 24) e integridad. Opera conceptualmente entre la capa de Transporte y la de Aplicación.",
+      "origen": "T29 §4",
+      "dificultad": "Media", "tipo": "Conocimiento directo", "concepto": "TLS", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T29_013",
+      "pregunta": "En el handshake de TLS, ¿cómo se combinan la criptografía asimétrica y la simétrica?",
+      "opciones": [
+        { "texto": "Todo el intercambio se realiza con criptografía asimétrica, por ser más segura.", "correcta": false },
+        { "texto": "Se emplea criptografía asimétrica para autenticar y establecer la clave de sesión, y a partir de ahí cifrado simétrico, más rápido, para el resto de la comunicación.", "correcta": true },
+        { "texto": "Se usa cifrado simétrico para negociar y asimétrico para los datos.", "correcta": false },
+        { "texto": "No se emplea criptografía asimétrica en ningún momento.", "correcta": false }
+      ],
+      "razonamiento": "Es el modelo híbrido clásico: el asimétrico resuelve el problema de establecer la clave de forma segura, y el simétrico, mucho más eficiente, cifra el grueso del tráfico.",
+      "origen": "T29 §4",
+      "dificultad": "Difícil", "tipo": "Procedimiento", "concepto": "Handshake TLS", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T29_014",
+      "pregunta": "¿Qué precisión terminológica conviene tener clara sobre SSL y TLS?",
+      "opciones": [
+        { "texto": "SSL y TLS son dos protocolos vigentes que se usan de forma alternativa según el navegador.", "correcta": false },
+        { "texto": "SSL es el predecesor histórico de TLS y sus versiones están obsoletas; lo que protege las comunicaciones actuales es TLS (1.2 y 1.3), aunque coloquialmente se siga hablando de «certificado SSL».", "correcta": true },
+        { "texto": "TLS es el predecesor obsoleto y SSL la versión vigente.", "correcta": false },
+        { "texto": "SSL protege el correo y TLS únicamente la navegación web.", "correcta": false }
+      ],
+      "razonamiento": "Es el matiz terminológico clásico del tema: SSL está en desuso por vulnerabilidades conocidas; las versiones vigentes son TLS 1.2 y, cada vez más, TLS 1.3.",
+      "origen": "T29 §4",
+      "dificultad": "Media", "tipo": "Precisión", "concepto": "SSL obsoleto vs TLS vigente", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T29_015",
+      "pregunta": "¿En qué capa opera IPSec y qué consecuencia práctica tiene?",
+      "opciones": [
+        { "texto": "En la capa de Aplicación, por lo que cada programa debe implementarlo expresamente.", "correcta": false },
+        { "texto": "En la capa de Red (IP), por lo que protege cualquier tráfico IP con independencia de la aplicación que lo genere y de forma transparente para esta.", "correcta": true },
+        { "texto": "En la capa de Enlace, por lo que solo protege el tráfico dentro de una misma LAN.", "correcta": false },
+        { "texto": "En la capa Física, cifrando la señal eléctrica.", "correcta": false }
+      ],
+      "razonamiento": "Al actuar en la propia capa IP, IPSec es transparente para las aplicaciones, a diferencia de TLS, que opera en capas superiores. Es una comparación muy preguntable.",
+      "origen": "T29 §5",
+      "dificultad": "Media", "tipo": "Relación", "concepto": "IPSec en capa de Red", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T29_016",
+      "pregunta": "¿Qué diferencia hay entre el modo transporte y el modo túnel de IPSec?",
+      "opciones": [
+        { "texto": "El modo transporte cifra solo los datos manteniendo visibles las cabeceras IP originales; el modo túnel cifra el paquete IP completo, incluida su cabecera, y lo encapsula en un nuevo paquete IP.", "correcta": true },
+        { "texto": "El modo transporte cifra el paquete completo y el modo túnel solo los datos.", "correcta": false },
+        { "texto": "El modo transporte se usa con UDP y el modo túnel con TCP.", "correcta": false },
+        { "texto": "El modo túnel no aplica cifrado, únicamente autenticación.", "correcta": false }
+      ],
+      "razonamiento": "Transporte = extremo a extremo entre dos equipos; túnel = interconexión de redes completas, como en una VPN sitio a sitio. Es una confusión frecuente en examen.",
+      "mnemotecnico": "🧠 Túnel = se mete todo el paquete dentro de otro; transporte = solo viaja protegido el contenido.",
+      "origen": "T29 §5",
+      "dificultad": "Difícil", "tipo": "Diferenciación", "concepto": "Modo transporte vs túnel", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T29_017",
+      "pregunta": "¿Cuál es la diferencia entre los protocolos AH y ESP de IPSec?",
+      "opciones": [
+        { "texto": "AH cifra el contenido y ESP solo lo autentica.", "correcta": false },
+        { "texto": "AH garantiza autenticidad e integridad sin cifrar el contenido; ESP añade cifrado además de autenticidad e integridad, y es el más utilizado en la práctica.", "correcta": true },
+        { "texto": "Ambos son idénticos y se usan indistintamente.", "correcta": false },
+        { "texto": "AH se usa en modo túnel y ESP obligatoriamente en modo transporte.", "correcta": false }
+      ],
+      "razonamiento": "ESP (Encapsulating Security Payload) es el que cifra, y por eso es el habitual. AH (Authentication Header) solo aporta autenticidad e integridad.",
+      "mnemotecnico": "🧠 ESP = Es el que cifra, y el que Se usa.",
+      "origen": "T29 §5",
+      "dificultad": "Difícil", "tipo": "Diferenciación", "concepto": "AH vs ESP", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T29_018",
+      "pregunta": "¿Qué es una VPN?",
+      "opciones": [
+        { "texto": "La segmentación lógica de una red física en varias redes independientes de capa 2.", "correcta": false },
+        { "texto": "Una conexión cifrada —un «túnel»— a través de una red no confiable, típicamente Internet, que permite comunicarse como si los equipos estuvieran en la misma red privada.", "correcta": true },
+        { "texto": "Una línea física dedicada contratada a un operador entre dos sedes.", "correcta": false },
+        { "texto": "Un segmento aislado donde se publican los servidores accesibles desde el exterior.", "correcta": false }
+      ],
+      "razonamiento": "La VPN es un túnel cifrado sobre red no confiable. No confundir con la VLAN (segmentación lógica de capa 2, Tema 28), con la línea dedicada física ni con la DMZ.",
+      "origen": "T29 §6",
+      "dificultad": "Fácil", "tipo": "Definición", "concepto": "VPN", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T29_019",
+      "pregunta": "Una persona en teletrabajo se conecta desde su domicilio a los recursos internos del Ayuntamiento mediante un túnel cifrado. ¿Qué tipo de VPN está usando?",
+      "opciones": [
+        { "texto": "VPN sitio a sitio (site-to-site).", "correcta": false },
+        { "texto": "VPN de acceso remoto (client-to-site).", "correcta": true },
+        { "texto": "VPN de capa 2 sobre VLAN.", "correcta": false },
+        { "texto": "VPN de tipo DMZ.", "correcta": false }
+      ],
+      "razonamiento": "Client-to-site: una persona usuaria individual se conecta a la red de su organización. La sitio a sitio interconecta de forma permanente dos redes completas, por ejemplo dos sedes.",
+      "origen": "T29 §6",
+      "dificultad": "Fácil", "tipo": "Caso práctico", "concepto": "VPN de acceso remoto", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T29_020",
+      "pregunta": "¿Qué protocolo de VPN se asocia habitualmente a los escenarios sitio a sitio entre sedes?",
+      "opciones": [
+        { "texto": "SSL/TLS («SSL VPN»).", "correcta": false },
+        { "texto": "IPSec.", "correcta": true },
+        { "texto": "SNMP.", "correcta": false },
+        { "texto": "HTTPS.", "correcta": false }
+      ],
+      "razonamiento": "IPSec, al operar en capa de Red y disponer de modo túnel, es la base técnica habitual de las VPN sitio a sitio. Las «SSL VPN» basadas en navegador o cliente ligero son más propias del acceso remoto individual.",
+      "origen": "T29 §6",
+      "dificultad": "Media", "tipo": "Relación", "concepto": "IPSec en VPN site-to-site", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T29_021",
+      "pregunta": "¿Qué caracteriza a WireGuard?",
+      "opciones": [
+        { "texto": "Es el protocolo de VPN más antiguo y ya está obsoleto.", "correcta": false },
+        { "texto": "Es un protocolo de VPN moderno, incorporado al núcleo Linux en 2020, valorado por su diseño mucho más simple —base de código reducida y más fácil de auditar— y su mejor rendimiento.", "correcta": true },
+        { "texto": "Es un cortafuegos de nueva generación de código abierto.", "correcta": false },
+        { "texto": "Es el sustituto oficial de TLS aprobado por el ENS.", "correcta": false }
+      ],
+      "razonamiento": "WireGuard gana adopción con rapidez por simplicidad y rendimiento, aunque IPSec y OpenVPN siguen siendo mayoritarios en infraestructuras corporativas ya desplegadas.",
+      "origen": "T29 §6",
+      "dificultad": "Media", "tipo": "Conocimiento directo", "concepto": "WireGuard", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T29_022",
+      "pregunta": "¿Cuál de los siguientes NO es un beneficio propio de una VPN según el tema?",
+      "opciones": [
+        { "texto": "Confidencialidad e integridad de las comunicaciones sobre una red no confiable.", "correcta": false },
+        { "texto": "Acceso remoto seguro a recursos internos sin exponerlos directamente a Internet.", "correcta": false },
+        { "texto": "Ahorro económico frente a contratar líneas dedicadas físicas entre sedes.", "correcta": false },
+        { "texto": "Eliminación de la necesidad de antivirus y de cortafuegos en los equipos conectados.", "correcta": true }
+      ],
+      "razonamiento": "La VPN protege el tránsito de los datos, pero no sustituye a ninguna otra medida: el equipo remoto sigue necesitando antivirus, cortafuegos personal y actualizaciones (Tema 25).",
+      "origen": "T29 §6",
+      "dificultad": "Media", "tipo": "Detección de errores", "concepto": "Alcance real de una VPN", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T29_023",
+      "pregunta": "Ordena correctamente la evolución de los cortafuegos según su capacidad de inspección:",
+      "opciones": [
+        { "texto": "NGFW → proxy de aplicación → stateful → filtrado de paquetes.", "correcta": false },
+        { "texto": "Filtrado de paquetes → inspección de estado (stateful) → proxy de aplicación → NGFW.", "correcta": true },
+        { "texto": "Stateful → filtrado de paquetes → NGFW → proxy de aplicación.", "correcta": false },
+        { "texto": "Proxy de aplicación → NGFW → filtrado de paquetes → stateful.", "correcta": false }
+      ],
+      "razonamiento": "La secuencia va de menos a más capacidad de inspección y contexto: paquete aislado, estado de conexión, contenido de aplicación y, finalmente, NGFW con DPI, IPS e identificación de aplicaciones.",
+      "origen": "T29 §2",
+      "dificultad": "Media", "tipo": "Procedimiento", "concepto": "Evolución de los cortafuegos", "prioridad": "Alta"
+    }
+  ]
+}

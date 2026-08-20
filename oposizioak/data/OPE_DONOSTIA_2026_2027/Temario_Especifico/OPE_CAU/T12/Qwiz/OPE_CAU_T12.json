@@ -1,0 +1,349 @@
+{
+  "id": "OPE_CAU_T12",
+  "opeNombre": "OPE DonostiaTIK — Técnico/a de apoyo (CAU)",
+  "titulo": "T12 · Servidores Windows. Instalación, configuración y mantenimiento básico: actualizaciones y monitorización. Fundamentos de Directorio Activo",
+  "descripcion": "26 preguntas tipo test con explicación didáctica, elaboradas a partir de los apuntes del Tema 12.",
+  "fuente": "Elaboración propia a partir de los apuntes del Tema 12 (web de estudio). Caracteres del tema: 15.453. Preguntas asignadas: 26.",
+  "preguntas": [
+    {
+      "id": "OPE_CAU_T12_001",
+      "pregunta": "¿Qué caracteriza a la instalación de Windows Server en modo Server Core?",
+      "opciones": [
+        { "texto": "Instala el sistema con interfaz gráfica completa y todas las herramientas de administración.", "correcta": false },
+        { "texto": "Es una instalación mínima, sin entorno gráfico de escritorio, administrable por PowerShell o de forma remota.", "correcta": true },
+        { "texto": "Solo permite instalar el rol de Directorio Activo.", "correcta": false },
+        { "texto": "Se ejecuta obligatoriamente como máquina virtual.", "correcta": false }
+      ],
+      "razonamiento": "Server Core reduce la superficie de ataque y la necesidad de reinicios al prescindir del entorno gráfico. La instalación con interfaz gráfica completa se denomina Desktop Experience.",
+      "origen": "T12 §1",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "Server Core", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T12_002",
+      "pregunta": "¿Qué diferencia principal existe entre las ediciones Standard y Datacenter de Windows Server?",
+      "opciones": [
+        { "texto": "Standard permite hasta 2 máquinas virtuales por licencia; Datacenter ofrece virtualización ilimitada.", "correcta": true },
+        { "texto": "Standard no admite el rol de Directorio Activo.", "correcta": false },
+        { "texto": "Datacenter solo puede instalarse en modo Server Core.", "correcta": false },
+        { "texto": "Standard es gratuita y Datacenter, de pago.", "correcta": false }
+      ],
+      "razonamiento": "La diferencia clave es el derecho de virtualización: Standard incluye hasta 2 VM por licencia y Datacenter, ilimitadas, además de funciones avanzadas de almacenamiento y clúster para centros de datos muy virtualizados.",
+      "origen": "T12 §1",
+      "dificultad": "Media", "tipo": "Diferenciación", "concepto": "Standard vs Datacenter", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T12_003",
+      "pregunta": "¿Qué distingue a un rol de servidor de una característica (feature)?",
+      "opciones": [
+        { "texto": "El rol es software de terceros y la característica, de Microsoft.", "correcta": false },
+        { "texto": "El rol define el servicio principal que el servidor presta a la red; la característica es un componente auxiliar de soporte que no constituye por sí mismo un servicio de red.", "correcta": true },
+        { "texto": "Los roles se instalan por PowerShell y las características, solo gráficamente.", "correcta": false },
+        { "texto": "Solo puede instalarse un rol por servidor, pero varias características.", "correcta": false }
+      ],
+      "razonamiento": "Roles: AD DS, DNS, DHCP, IIS, Hyper-V, Servicios de archivos… Características: copias de seguridad, Failover Clustering, RSAT. Ambos se gestionan desde el Administrador del servidor o con Install-WindowsFeature.",
+      "origen": "T12 §2",
+      "dificultad": "Media", "tipo": "Diferenciación", "concepto": "Rol vs característica", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T12_004",
+      "pregunta": "¿Cuál de los siguientes es una característica (feature) y no un rol?",
+      "opciones": [
+        { "texto": "AD DS (Servicios de dominio de Directorio Activo).", "correcta": false },
+        { "texto": "Servidor DHCP.", "correcta": false },
+        { "texto": "Failover Clustering (clúster de conmutación por error).", "correcta": true },
+        { "texto": "Servidor web IIS.", "correcta": false }
+      ],
+      "razonamiento": "Failover Clustering es un componente de soporte que da alta disponibilidad a otros servicios, no un servicio de red en sí mismo: es una característica. AD DS, DHCP e IIS son roles.",
+      "origen": "T12 §2",
+      "dificultad": "Media", "tipo": "Clasificación", "concepto": "Roles y características", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T12_005",
+      "pregunta": "¿Qué es el «Patch Tuesday»?",
+      "opciones": [
+        { "texto": "El segundo martes de cada mes, día en que Microsoft publica sus actualizaciones de seguridad.", "correcta": true },
+        { "texto": "El día reservado para reiniciar los servidores tras aplicar parches.", "correcta": false },
+        { "texto": "La ventana semanal de mantenimiento recomendada por Microsoft.", "correcta": false },
+        { "texto": "El plazo máximo para aplicar un parche crítico.", "correcta": false }
+      ],
+      "razonamiento": "Microsoft publica sus actualizaciones de seguridad el segundo martes de cada mes. La buena práctica es probarlas antes en preproducción y aplicarlas en una ventana de mantenimiento planificada, con copia o snapshot previo.",
+      "origen": "T12 §3",
+      "dificultad": "Fácil", "tipo": "Precisión", "concepto": "Patch Tuesday", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T12_006",
+      "pregunta": "Antes de aplicar un parche en un servidor de producción, ¿cuál es la secuencia de buenas prácticas?",
+      "opciones": [
+        { "texto": "Aplicarlo directamente en producción y revertir si falla.", "correcta": false },
+        { "texto": "Probarlo en preproducción, aplicarlo en una ventana de mantenimiento planificada y disponer de copia de seguridad o snapshot previo.", "correcta": true },
+        { "texto": "Esperar seis meses a que otros lo prueben.", "correcta": false },
+        { "texto": "Instalarlo solo si el fabricante lo marca como crítico.", "correcta": false }
+      ],
+      "razonamiento": "La secuencia estándar es probar → planificar la ventana → asegurar la vuelta atrás (copia o instantánea, Tema 10) → aplicar. Evita tanto el riesgo de aplicar a ciegas como el de dejar el servidor sin parchear indefinidamente.",
+      "origen": "T12 §3",
+      "dificultad": "Media", "tipo": "Procedimiento", "concepto": "Gestión de parches en servidores", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T12_007",
+      "pregunta": "¿Qué es Windows Admin Center?",
+      "opciones": [
+        { "texto": "La consola clásica de administración basada en MMC.", "correcta": false },
+        { "texto": "Una consola de administración moderna basada en navegador web que centraliza la gestión de varios servidores, incluidos los instalados en Server Core.", "correcta": true },
+        { "texto": "El servicio de distribución de actualizaciones interno.", "correcta": false },
+        { "texto": "El portal de licenciamiento por volumen de Microsoft.", "correcta": false }
+      ],
+      "razonamiento": "Windows Admin Center se ejecuta en el navegador y va sustituyendo a distintas consolas MMC clásicas, resultando especialmente útil para administrar servidores Server Core, que carecen de interfaz gráfica local.",
+      "origen": "T12 §3",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "Windows Admin Center", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T12_008",
+      "pregunta": "¿Qué solución de monitorización está orientada a entornos empresariales con muchos servidores y alertado proactivo?",
+      "opciones": [
+        { "texto": "El Administrador de tareas.", "correcta": false },
+        { "texto": "El Monitor de recursos.", "correcta": false },
+        { "texto": "System Center Operations Manager (SCOM).", "correcta": true },
+        { "texto": "El Visor de eventos local.", "correcta": false }
+      ],
+      "razonamiento": "SCOM es la solución de monitorización a gran escala, con alertas proactivas ante problemas de rendimiento o disponibilidad. Administrador de tareas, Monitor de recursos y Visor de eventos son herramientas locales de cada servidor.",
+      "origen": "T12 §3",
+      "dificultad": "Media", "tipo": "Identificación", "concepto": "SCOM", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T12_009",
+      "pregunta": "¿Qué es el Directorio Activo (AD DS)?",
+      "opciones": [
+        { "texto": "Un servicio de directorio: base de datos centralizada y jerárquica de los objetos de la red que presta servicios de autenticación y autorización.", "correcta": true },
+        { "texto": "Un sistema de archivos distribuido para compartir carpetas.", "correcta": false },
+        { "texto": "El servicio que asigna direcciones IP automáticamente.", "correcta": false },
+        { "texto": "La consola de administración de servidores Windows.", "correcta": false }
+      ],
+      "razonamiento": "AD DS almacena usuarios, equipos, grupos e impresoras y centraliza la autenticación y autorización. Asignar direcciones IP es función de DHCP, otro rol distinto.",
+      "origen": "T12 §4",
+      "dificultad": "Fácil", "tipo": "Definición", "concepto": "AD DS", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T12_010",
+      "pregunta": "¿En qué dos protocolos estándar se apoya AD DS?",
+      "opciones": [
+        { "texto": "SMB para la consulta y NTLM para la autenticación.", "correcta": false },
+        { "texto": "LDAP para consultar y modificar el directorio, y Kerberos para la autenticación segura.", "correcta": true },
+        { "texto": "DNS para la consulta y RADIUS para la autenticación.", "correcta": false },
+        { "texto": "HTTP para la consulta y TLS para la autenticación.", "correcta": false }
+      ],
+      "razonamiento": "LDAP (Lightweight Directory Access Protocol) permite consultar y modificar los objetos del directorio; Kerberos autentica de forma segura a usuarios y equipos. Es una asociación muy preguntada.",
+      "mnemotecnico": "🧠 LDAP consulta · Kerberos autentica.",
+      "origen": "T12 §4",
+      "dificultad": "Media", "tipo": "Conocimiento directo", "concepto": "LDAP y Kerberos", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T12_011",
+      "pregunta": "¿Qué relación existe entre AD DS y DNS?",
+      "opciones": [
+        { "texto": "Ninguna: son servicios independientes.", "correcta": false },
+        { "texto": "AD DS depende de DNS para que los equipos localicen a los controladores de dominio; lo habitual es que el propio DC actúe también como servidor DNS.", "correcta": true },
+        { "texto": "DNS depende de AD DS para resolver nombres de Internet.", "correcta": false },
+        { "texto": "AD DS sustituye a DNS en las redes corporativas.", "correcta": false }
+      ],
+      "razonamiento": "Sin DNS, los clientes no pueden localizar los controladores de dominio y el inicio de sesión falla. Por eso los DC suelen alojar también el rol DNS, con zonas integradas en el directorio.",
+      "origen": "T12 §6",
+      "dificultad": "Media", "tipo": "Relación", "concepto": "AD DS y DNS", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T12_012",
+      "pregunta": "¿Qué diferencia a AD DS de Microsoft Entra ID (antes Azure AD)?",
+      "opciones": [
+        { "texto": "Entra ID es la versión local y AD DS la versión en la nube.", "correcta": false },
+        { "texto": "AD DS es el directorio local con dominios, árboles y bosques; Entra ID es un servicio de identidad en la nube, orientado a aplicaciones y servicios en línea, que no organiza los objetos en esa jerarquía.", "correcta": true },
+        { "texto": "Son exactamente el mismo producto con distinto nombre comercial.", "correcta": false },
+        { "texto": "Entra ID sustituye obligatoriamente a AD DS desde 2024.", "correcta": false }
+      ],
+      "razonamiento": "AD DS (on-premise) y Entra ID (nube) son servicios distintos, aunque suelen convivir en escenarios híbridos sincronizando cuentas mediante Entra Connect. El temario se centra en el AD DS clásico.",
+      "origen": "T12 §4",
+      "dificultad": "Difícil", "tipo": "Diferenciación", "concepto": "AD DS vs Entra ID", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T12_013",
+      "pregunta": "Ordena correctamente la jerarquía lógica del Directorio Activo, de menor a mayor alcance:",
+      "opciones": [
+        { "texto": "Bosque → árbol → dominio.", "correcta": false },
+        { "texto": "Dominio → árbol de dominios → bosque.", "correcta": true },
+        { "texto": "Dominio → sitio → bosque.", "correcta": false },
+        { "texto": "Unidad organizativa → dominio → sitio.", "correcta": false }
+      ],
+      "razonamiento": "El dominio es la unidad administrativa básica; un árbol agrupa dominios con espacio de nombres DNS contiguo; el bosque agrupa uno o más árboles y es el límite máximo de seguridad y administración. El sitio es estructura física, no lógica.",
+      "origen": "T12 §5",
+      "dificultad": "Media", "tipo": "Procedimiento", "concepto": "Jerarquía lógica de AD", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T12_014",
+      "pregunta": "¿Cuál es el límite máximo de seguridad y administración en un despliegue de Directorio Activo?",
+      "opciones": [
+        { "texto": "La unidad organizativa.", "correcta": false },
+        { "texto": "El dominio.", "correcta": false },
+        { "texto": "El bosque.", "correcta": true },
+        { "texto": "El sitio.", "correcta": false }
+      ],
+      "razonamiento": "El bosque es el límite de seguridad: comparte esquema y catálogo global, y todo lo que ocurre dentro está bajo una misma frontera administrativa. El dominio es la unidad administrativa básica, pero no el límite máximo.",
+      "origen": "T12 §5",
+      "dificultad": "Media", "tipo": "Precisión", "concepto": "Bosque como límite de seguridad", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T12_015",
+      "pregunta": "¿Para qué sirve una unidad organizativa (OU)?",
+      "opciones": [
+        { "texto": "Para organizar jerárquicamente los objetos dentro de un dominio y aplicarles Directivas de grupo de forma selectiva.", "correcta": true },
+        { "texto": "Para agrupar subredes IP bien conectadas entre sí.", "correcta": false },
+        { "texto": "Para definir qué clases de objetos pueden existir en el directorio.", "correcta": false },
+        { "texto": "Para establecer relaciones de confianza entre bosques.", "correcta": false }
+      ],
+      "razonamiento": "La OU es un contenedor dentro del dominio (por departamento, ubicación o función) que permite delegar administración y vincular GPO de forma selectiva. Agrupar subredes es el sitio; definir clases de objetos es el esquema.",
+      "origen": "T12 §5",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "Unidad organizativa", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T12_016",
+      "pregunta": "¿Qué diferencia hay entre un dominio y un sitio en Directorio Activo?",
+      "opciones": [
+        { "texto": "El dominio es una agrupación física y el sitio, lógica.", "correcta": false },
+        { "texto": "El dominio es una agrupación lógica de seguridad y administración; el sitio es una agrupación física basada en la conectividad de red (subredes bien conectadas).", "correcta": true },
+        { "texto": "Un dominio no puede extenderse por varios sitios.", "correcta": false },
+        { "texto": "Son sinónimos en la terminología de AD.", "correcta": false }
+      ],
+      "razonamiento": "Son conceptos independientes: un mismo dominio puede abarcar varios sitios (varias sedes) y un mismo sitio puede alojar controladores de más de un dominio. El sitio optimiza la replicación y el inicio de sesión contra el DC más cercano.",
+      "origen": "T12 §5",
+      "dificultad": "Difícil", "tipo": "Diferenciación", "concepto": "Dominio vs sitio", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T12_017",
+      "pregunta": "¿Qué permite una relación de confianza (trust)?",
+      "opciones": [
+        { "texto": "Que los usuarios de un dominio o bosque accedan a recursos de otro dominio o bosque distinto.", "correcta": true },
+        { "texto": "Que dos controladores de dominio repliquen su base de datos.", "correcta": false },
+        { "texto": "Que un equipo se una automáticamente al dominio.", "correcta": false },
+        { "texto": "Que se apliquen las GPO de una OU a otra.", "correcta": false }
+      ],
+      "razonamiento": "El trust vincula dominios o bosques para permitir el acceso a recursos entre ellos. La replicación entre controladores es otro mecanismo distinto, propio del funcionamiento interno del dominio.",
+      "origen": "T12 §5",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "Relaciones de confianza", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T12_018",
+      "pregunta": "¿Qué significa que AD DS funcione de forma «multimaestro»?",
+      "opciones": [
+        { "texto": "Que solo un controlador de dominio puede realizar cambios y el resto son copias de solo lectura.", "correcta": false },
+        { "texto": "Que un cambio puede realizarse en cualquier controlador de dominio y se replica al resto.", "correcta": true },
+        { "texto": "Que cada dominio necesita al menos cinco controladores.", "correcta": false },
+        { "texto": "Que el bosque puede tener varios esquemas simultáneos.", "correcta": false }
+      ],
+      "razonamiento": "AD es multimaestro para la mayoría de operaciones: cualquier DC admite cambios que después se replican. La excepción son las cinco operaciones FSMO, que solo puede realizar un DC concreto para evitar conflictos.",
+      "origen": "T12 §6",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "Replicación multimaestro", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T12_019",
+      "pregunta": "¿Qué es el catálogo global (Global Catalog)?",
+      "opciones": [
+        { "texto": "La definición de qué clases de objetos y atributos pueden existir en el directorio.", "correcta": false },
+        { "texto": "Una copia parcial, con los atributos más consultados, de todos los objetos de todos los dominios del bosque, para acelerar las búsquedas globales.", "correcta": true },
+        { "texto": "El listado de todas las GPO vinculadas en el dominio.", "correcta": false },
+        { "texto": "El inventario de software instalado en los equipos del dominio.", "correcta": false }
+      ],
+      "razonamiento": "El catálogo global almacena una copia parcial de todos los objetos del bosque para que las búsquedas que abarcan varios dominios sean rápidas. La definición de clases y atributos es el esquema.",
+      "origen": "T12 §6",
+      "dificultad": "Media", "tipo": "Diferenciación", "concepto": "Catálogo global vs esquema", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T12_020",
+      "pregunta": "¿Cómo se reparten los cinco roles FSMO?",
+      "opciones": [
+        { "texto": "3 a nivel de bosque y 2 a nivel de dominio.", "correcta": false },
+        { "texto": "2 a nivel de bosque (Esquema y Nomenclatura de dominios) y 3 a nivel de dominio (RID, PDC Emulator e Infraestructura).", "correcta": true },
+        { "texto": "Los 5 son de bosque, uno por cada dominio.", "correcta": false },
+        { "texto": "Los 5 son de dominio y se replican al bosque.", "correcta": false }
+      ],
+      "razonamiento": "Reparto FSMO: bosque → Maestro de esquema y Maestro de nomenclatura de dominios (únicos en todo el bosque); dominio → Maestro de RID, Emulador de PDC y Maestro de infraestructura (uno de cada por dominio).",
+      "mnemotecnico": "🧠 2 de bosque + 3 de dominio = 5 FSMO.",
+      "origen": "T12 §6",
+      "dificultad": "Difícil", "tipo": "Precisión", "concepto": "Roles FSMO", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T12_021",
+      "pregunta": "¿Qué rol FSMO es el único que puede modificar el esquema del directorio?",
+      "opciones": [
+        { "texto": "El Maestro de nomenclatura de dominios.", "correcta": false },
+        { "texto": "El Maestro de esquema (Schema Master).", "correcta": true },
+        { "texto": "El Maestro de RID.", "correcta": false },
+        { "texto": "El Emulador de PDC.", "correcta": false }
+      ],
+      "razonamiento": "El Schema Master, de ámbito de bosque, es el único DC que puede modificar el esquema (las clases y atributos posibles). El Maestro de nomenclatura, también de bosque, controla el alta y baja de dominios.",
+      "origen": "T12 §6",
+      "dificultad": "Media", "tipo": "Conocimiento directo", "concepto": "Schema Master", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T12_022",
+      "pregunta": "¿Qué rol FSMO actúa como referencia horaria del dominio y procesa con prioridad los cambios de contraseña?",
+      "opciones": [
+        { "texto": "El Maestro de infraestructura.", "correcta": false },
+        { "texto": "El Maestro de RID.", "correcta": false },
+        { "texto": "El Emulador de PDC (PDC Emulator).", "correcta": true },
+        { "texto": "El Maestro de esquema.", "correcta": false }
+      ],
+      "razonamiento": "El Emulador de PDC, de ámbito de dominio, sirve de referencia horaria, procesa con prioridad los cambios de contraseña y mantiene compatibilidad con clientes y versiones antiguas.",
+      "origen": "T12 §6",
+      "dificultad": "Difícil", "tipo": "Identificación", "concepto": "PDC Emulator", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T12_023",
+      "pregunta": "¿Qué función cumple el Maestro de RID?",
+      "opciones": [
+        { "texto": "Asignar bloques de identificadores relativos (RID) para que cada objeto nuevo tenga un SID único.", "correcta": true },
+        { "texto": "Controlar la adición y eliminación de dominios en el bosque.", "correcta": false },
+        { "texto": "Mantener las referencias a objetos de otros dominios.", "correcta": false },
+        { "texto": "Replicar el catálogo global entre sitios.", "correcta": false }
+      ],
+      "razonamiento": "El RID Master reparte bloques de identificadores relativos a los DC del dominio, garantizando que cada objeto creado reciba un SID único. Controlar el alta de dominios es el Maestro de nomenclatura (ámbito de bosque).",
+      "origen": "T12 §6",
+      "dificultad": "Difícil", "tipo": "Conocimiento directo", "concepto": "RID Master", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T12_024",
+      "pregunta": "¿Qué es una GPO (Group Policy Object)?",
+      "opciones": [
+        { "texto": "Un conjunto de configuraciones que se vincula a un dominio, sitio u OU y se aplica automáticamente a los usuarios y equipos de su ámbito.", "correcta": true },
+        { "texto": "Un grupo de seguridad con permisos delegados.", "correcta": false },
+        { "texto": "El objeto que representa a un controlador de dominio en el directorio.", "correcta": false },
+        { "texto": "Una plantilla de instalación desatendida del sistema operativo.", "correcta": false }
+      ],
+      "razonamiento": "La Directiva de grupo permite configurar de forma centralizada equipos y usuarios del dominio: se vincula a un dominio, sitio u OU y se aplica automáticamente a los objetos incluidos en ese ámbito.",
+      "origen": "T12 §6",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "GPO", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T12_025",
+      "pregunta": "¿Qué problema resuelve LAPS (Local Administrator Password Solution)?",
+      "opciones": [
+        { "texto": "La recuperación de contraseñas olvidadas de los usuarios del dominio.", "correcta": false },
+        { "texto": "La gestión centralizada y con rotación periódica de la contraseña de administrador local de cada equipo unido al dominio.", "correcta": true },
+        { "texto": "El cifrado del disco de los equipos portátiles.", "correcta": false },
+        { "texto": "La sincronización de contraseñas con Entra ID.", "correcta": false }
+      ],
+      "razonamiento": "LAPS evita el riesgo clásico de tener la misma contraseña de administrador local en todos los equipos: la gestiona de forma centralizada y la rota periódicamente. El cifrado de disco es BitLocker.",
+      "origen": "T12 §6",
+      "dificultad": "Difícil", "tipo": "Aplicación", "concepto": "LAPS", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T12_026",
+      "pregunta": "¿Qué caracteriza a un sistema operativo de servidor frente a uno de usuario?",
+      "opciones": [
+        { "texto": "Está optimizado para funcionar de forma continua (24/7), atender muchas conexiones simultáneas y administrar recursos compartidos de red.", "correcta": true },
+        { "texto": "Solo admite un usuario conectado a la vez.", "correcta": false },
+        { "texto": "No permite instalar interfaz gráfica en ningún caso.", "correcta": false },
+        { "texto": "Utiliza un núcleo completamente distinto al de las versiones de escritorio.", "correcta": false }
+      ],
+      "razonamiento": "El SO de servidor prioriza continuidad, concurrencia y servicios de red compartidos. Comparte núcleo NT con las versiones de usuario y sí admite interfaz gráfica (Desktop Experience), aunque se recomiende Server Core.",
+      "origen": "T12 §1",
+      "dificultad": "Fácil", "tipo": "Diferenciación", "concepto": "SO de servidor vs de usuario", "prioridad": "Media"
+    }
+  ]
+}

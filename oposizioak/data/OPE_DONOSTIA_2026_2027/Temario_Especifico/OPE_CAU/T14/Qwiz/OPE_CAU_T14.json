@@ -1,0 +1,322 @@
+{
+  "id": "OPE_CAU_T14",
+  "opeNombre": "OPE DonostiaTIK — Técnico/a de apoyo (CAU)",
+  "titulo": "T14 · Entorno Windows: administración de usuarios y grupos. Logon scripts",
+  "descripcion": "24 preguntas tipo test con explicación didáctica, elaboradas a partir de los apuntes del Tema 14.",
+  "fuente": "Elaboración propia a partir de los apuntes del Tema 14 (web de estudio). Caracteres del tema: 13.132. Preguntas asignadas: 24.",
+  "preguntas": [
+    {
+      "id": "OPE_CAU_T14_001",
+      "pregunta": "¿Dónde se almacena una cuenta de usuario local de Windows?",
+      "opciones": [
+        { "texto": "En la base de datos de Directorio Activo del dominio.", "correcta": false },
+        { "texto": "En el SAM (Security Accounts Manager), la base de datos de seguridad propia de cada equipo.", "correcta": true },
+        { "texto": "En el Registro de configuración de usuario NTUSER.DAT.", "correcta": false },
+        { "texto": "En la carpeta compartida NETLOGON del dominio.", "correcta": false }
+      ],
+      "razonamiento": "La cuenta local reside en el SAM del equipo y solo sirve para iniciar sesión en ese equipo. La cuenta de dominio se almacena de forma centralizada en AD DS y vale para cualquier equipo unido al dominio.",
+      "origen": "T14 §1",
+      "dificultad": "Media", "tipo": "Conocimiento directo", "concepto": "SAM y cuentas locales", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T14_002",
+      "pregunta": "Un técnico crea un usuario desde la configuración local de un equipo del dominio y espera que pueda iniciar sesión en cualquier otro equipo. ¿Qué ocurrirá?",
+      "opciones": [
+        { "texto": "Podrá iniciar sesión en cualquier equipo del dominio.", "correcta": false },
+        { "texto": "No podrá: al crearse en el equipo, es una cuenta local y solo sirve en ese equipo concreto.", "correcta": true },
+        { "texto": "Podrá, pero solo tras reiniciar el controlador de dominio.", "correcta": false },
+        { "texto": "La cuenta se replicará automáticamente al Directorio Activo.", "correcta": false }
+      ],
+      "razonamiento": "Es el error habitual: crear un usuario «en Windows» desde el propio equipo genera una cuenta local en su SAM, sin ninguna relación con el dominio. Para una cuenta de dominio hay que crearla en AD DS (por ejemplo, con ADUC).",
+      "origen": "T14 §1",
+      "dificultad": "Media", "tipo": "Caso práctico", "concepto": "Cuenta local vs de dominio", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T14_003",
+      "pregunta": "¿Qué identifica realmente a una cuenta en Windows a efectos de permisos?",
+      "opciones": [
+        { "texto": "Su nombre de usuario.", "correcta": false },
+        { "texto": "Su SID (Security Identifier), un identificador único generado al crear la cuenta.", "correcta": true },
+        { "texto": "Su dirección de correo electrónico.", "correcta": false },
+        { "texto": "El nombre del equipo donde se creó.", "correcta": false }
+      ],
+      "razonamiento": "Windows compara SID, no nombres, al conceder o denegar permisos. Por eso, si se elimina una cuenta y se crea otra con el mismo nombre, la nueva tiene un SID distinto y no hereda los permisos de la anterior.",
+      "origen": "T14 §1",
+      "dificultad": "Media", "tipo": "Precisión", "concepto": "SID", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T14_004",
+      "pregunta": "¿Qué dos cuentas locales integradas existen en todo equipo Windows y en qué estado están por defecto en las instalaciones modernas?",
+      "opciones": [
+        { "texto": "Administrador e Invitado, ambas deshabilitadas por defecto.", "correcta": true },
+        { "texto": "Administrador y Usuario estándar, ambas habilitadas.", "correcta": false },
+        { "texto": "Root e Invitado, ambas habilitadas.", "correcta": false },
+        { "texto": "Administrador y Sistema, solo la primera habilitada.", "correcta": false }
+      ],
+      "razonamiento": "Administrador (privilegios completos) e Invitado (muy limitados) están deshabilitadas por defecto en las instalaciones modernas, en aplicación del principio de mínimo privilegio. Root es la cuenta equivalente en Linux.",
+      "origen": "T14 §1",
+      "dificultad": "Media", "tipo": "Conocimiento directo", "concepto": "Cuentas integradas", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T14_005",
+      "pregunta": "¿Qué diferencia hay entre un grupo de seguridad y un grupo de distribución en Active Directory?",
+      "opciones": [
+        { "texto": "El de seguridad se usa para correo y el de distribución, para permisos.", "correcta": false },
+        { "texto": "El de seguridad puede recibir permisos sobre recursos; el de distribución solo sirve como lista de distribución de correo.", "correcta": true },
+        { "texto": "El de distribución solo puede contener equipos, no usuarios.", "correcta": false },
+        { "texto": "Ambos pueden recibir permisos, pero con distinto ámbito.", "correcta": false }
+      ],
+      "razonamiento": "Solo los grupos de seguridad pueden recibir permisos sobre carpetas, impresoras u otros recursos. Los de distribución se limitan al envío de correo y no participan en el control de accesos.",
+      "origen": "T14 §2",
+      "dificultad": "Media", "tipo": "Diferenciación", "concepto": "Grupo de seguridad vs distribución", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T14_006",
+      "pregunta": "¿Qué ámbito de grupo puede contener cuentas de cualquier dominio del bosque pero solo puede recibir permisos en su propio dominio?",
+      "opciones": [
+        { "texto": "Global.", "correcta": false },
+        { "texto": "Universal.", "correcta": false },
+        { "texto": "Local de dominio.", "correcta": true },
+        { "texto": "Local del equipo.", "correcta": false }
+      ],
+      "razonamiento": "El grupo local de dominio admite miembros de cualquier dominio del bosque, pero sus permisos solo son válidos en su propio dominio. El global es al revés (solo miembros propios, permisos en cualquier dominio con confianza) y el universal admite ambas cosas.",
+      "origen": "T14 §2",
+      "dificultad": "Difícil", "tipo": "Precisión", "concepto": "Ámbitos de grupo", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T14_007",
+      "pregunta": "¿Qué establece la regla AGDLP?",
+      "opciones": [
+        { "texto": "Las cuentas van en grupos Globales, estos en grupos Locales de Dominio, y a estos últimos se les asignan los Permisos.", "correcta": true },
+        { "texto": "Los permisos se asignan directamente a cada cuenta de usuario.", "correcta": false },
+        { "texto": "Los grupos Locales de Dominio se anidan dentro de los Globales.", "correcta": false },
+        { "texto": "Cada grupo debe pertenecer a una única unidad organizativa.", "correcta": false }
+      ],
+      "razonamiento": "AGDLP (Account → Global → Domain Local → Permissions), o AGUDLP si se usan grupos universales, es el patrón que hace mantenible la gestión de permisos: al cambiar las funciones de una persona basta con cambiarla de grupo global.",
+      "mnemotecnico": "🧠 A-G-DL-P: cuenta → global → local de dominio → permiso.",
+      "origen": "T14 §2",
+      "dificultad": "Difícil", "tipo": "Procedimiento", "concepto": "Regla AGDLP", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T14_008",
+      "pregunta": "¿Con qué consola se administran los usuarios y grupos del dominio?",
+      "opciones": [
+        { "texto": "lusrmgr.msc.", "correcta": false },
+        { "texto": "Usuarios y equipos de Active Directory (ADUC, dsa.msc).", "correcta": true },
+        { "texto": "services.msc.", "correcta": false },
+        { "texto": "eventvwr.msc.", "correcta": false }
+      ],
+      "razonamiento": "ADUC (dsa.msc) es la consola de referencia para crear, modificar y eliminar objetos del dominio y organizarlos en OU. lusrmgr.msc administra usuarios y grupos locales de un equipo concreto.",
+      "origen": "T14 §3",
+      "dificultad": "Fácil", "tipo": "Conocimiento directo", "concepto": "ADUC", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T14_009",
+      "pregunta": "Hay que dar de alta a 200 personas en el dominio al inicio de un curso. ¿Cuál es el método más adecuado?",
+      "opciones": [
+        { "texto": "Crearlas una a una desde ADUC.", "correcta": false },
+        { "texto": "Automatizar la creación con PowerShell y el módulo ActiveDirectory (cmdlets como New-ADUser).", "correcta": true },
+        { "texto": "Crear una única cuenta compartida para todo el grupo.", "correcta": false },
+        { "texto": "Crear las cuentas localmente en cada equipo.", "correcta": false }
+      ],
+      "razonamiento": "PowerShell con el módulo ActiveDirectory permite crear o modificar cuentas de forma masiva a partir de un fichero de datos, con menos errores y muchísimo menos tiempo. Las cuentas compartidas están desaconsejadas por trazabilidad.",
+      "origen": "T14 §3",
+      "dificultad": "Media", "tipo": "Caso práctico", "concepto": "Automatización con PowerShell", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T14_010",
+      "pregunta": "¿Qué formato de nombre de inicio de sesión corresponde al UPN (User Principal Name)?",
+      "opciones": [
+        { "texto": "DOMINIO\\usuario.", "correcta": false },
+        { "texto": "usuario@dominio.", "correcta": true },
+        { "texto": "\\\\servidor\\usuario.", "correcta": false },
+        { "texto": "CN=usuario,OU=departamento.", "correcta": false }
+      ],
+      "razonamiento": "El UPN tiene forma de dirección de correo (usuario@dominio); DOMINIO\\usuario es el formato heredado (NetBIOS). La notación CN=…,OU=… es el nombre distinguido LDAP del objeto.",
+      "origen": "T14 §3",
+      "dificultad": "Media", "tipo": "Precisión", "concepto": "UPN", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T14_011",
+      "pregunta": "¿Qué es el perfil de usuario en Windows?",
+      "opciones": [
+        { "texto": "El conjunto de carpetas y configuraciones personales asociado a una cuenta (escritorio, documentos, configuración de aplicaciones y su parte del Registro).", "correcta": true },
+        { "texto": "El grupo de seguridad al que pertenece la cuenta.", "correcta": false },
+        { "texto": "La política de contraseñas aplicada al usuario.", "correcta": false },
+        { "texto": "El conjunto de permisos NTFS de sus carpetas.", "correcta": false }
+      ],
+      "razonamiento": "El perfil reúne el entorno personal del usuario: escritorio, documentos, configuración de aplicaciones y la parte del Registro específica del usuario, almacenada en el archivo NTUSER.DAT.",
+      "origen": "T14 §4",
+      "dificultad": "Fácil", "tipo": "Definición", "concepto": "Perfil de usuario", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T14_012",
+      "pregunta": "¿Qué archivo contiene la parte del Registro específica de cada usuario dentro de su perfil?",
+      "opciones": [
+        { "texto": "SAM.", "correcta": false },
+        { "texto": "NTUSER.DAT.", "correcta": true },
+        { "texto": "NTDS.DIT.", "correcta": false },
+        { "texto": "BOOT.INI.", "correcta": false }
+      ],
+      "razonamiento": "NTUSER.DAT almacena la configuración de Registro propia del usuario dentro de su perfil. SAM es la base de cuentas locales del equipo y NTDS.DIT, la base de datos del Directorio Activo en un controlador de dominio.",
+      "origen": "T14 §4",
+      "dificultad": "Difícil", "tipo": "Precisión", "concepto": "NTUSER.DAT", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T14_013",
+      "pregunta": "¿Qué caracteriza a un perfil móvil o itinerante (roaming profile)?",
+      "opciones": [
+        { "texto": "Se almacena solo en el equipo y no viaja con el usuario.", "correcta": false },
+        { "texto": "Se almacena en red y se copia al equipo local al iniciar sesión y de vuelta al servidor al cerrarla, de modo que el usuario encuentra su entorno en cualquier equipo del dominio.", "correcta": true },
+        { "texto": "Es de solo lectura: los cambios no se guardan al cerrar sesión.", "correcta": false },
+        { "texto": "Solo puede usarse con cuentas locales.", "correcta": false }
+      ],
+      "razonamiento": "El perfil móvil viaja con el usuario copiándose en cada inicio y cierre de sesión, lo que puede ralentizarlos si el perfil es voluminoso. El perfil de solo lectura cuyos cambios no se guardan es el obligatorio (mandatory).",
+      "origen": "T14 §4",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "Perfil móvil", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T14_014",
+      "pregunta": "En un aula de formación con equipos compartidos, se quiere que cada sesión empiece siempre con la misma configuración y que los cambios del usuario no se conserven. ¿Qué tipo de perfil es el adecuado?",
+      "opciones": [
+        { "texto": "Perfil local.", "correcta": false },
+        { "texto": "Perfil móvil.", "correcta": false },
+        { "texto": "Perfil obligatorio (mandatory).", "correcta": true },
+        { "texto": "Perfil temporal.", "correcta": false }
+      ],
+      "razonamiento": "El perfil obligatorio es una variante de solo lectura del móvil: los cambios de la sesión no se guardan al cerrarla. Es la opción típica en aulas de formación y puestos de acceso público.",
+      "origen": "T14 §4",
+      "dificultad": "Media", "tipo": "Caso práctico", "concepto": "Perfil obligatorio", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T14_015",
+      "pregunta": "¿Qué ventaja aporta la redirección de carpetas frente al perfil móvil?",
+      "opciones": [
+        { "texto": "Que cifra automáticamente los documentos del usuario.", "correcta": false },
+        { "texto": "Que solo las carpetas configuradas residen en red y se accede a ellas directamente, sin copiar todo el perfil en cada inicio y cierre de sesión.", "correcta": true },
+        { "texto": "Que elimina la necesidad de que el usuario inicie sesión en el dominio.", "correcta": false },
+        { "texto": "Que permite trabajar sin conexión de red en cualquier caso.", "correcta": false }
+      ],
+      "razonamiento": "La redirección de carpetas (configurada por GPO) evita el trasiego completo del perfil: solo Documentos o Escritorio, por ejemplo, apuntan a la red y se accede a ellos directamente, agilizando el inicio de sesión.",
+      "origen": "T14 §4",
+      "dificultad": "Difícil", "tipo": "Diferenciación", "concepto": "Redirección de carpetas", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T14_016",
+      "pregunta": "Una persona se ausenta seis meses por una excedencia temporal. ¿Cuál es la actuación recomendada con su cuenta?",
+      "opciones": [
+        { "texto": "Eliminarla y volver a crearla a su regreso.", "correcta": false },
+        { "texto": "Deshabilitarla, para impedir el acceso sin perder el SID ni el histórico de permisos asociado.", "correcta": true },
+        { "texto": "Compartir sus credenciales con su sustituto.", "correcta": false },
+        { "texto": "Cambiar su cuenta de dominio por una cuenta local.", "correcta": false }
+      ],
+      "razonamiento": "Al eliminar una cuenta se pierde su SID y, con él, todos los permisos asociados; deshabilitarla impide el acceso conservando la información. Compartir credenciales destruiría la trazabilidad.",
+      "origen": "T14 §5",
+      "dificultad": "Media", "tipo": "Caso práctico", "concepto": "Deshabilitar vs eliminar", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T14_017",
+      "pregunta": "¿Por qué se desaconsejan las cuentas compartidas por varias personas?",
+      "opciones": [
+        { "texto": "Porque consumen más licencias del sistema operativo.", "correcta": false },
+        { "texto": "Porque dificultan enormemente la trazabilidad de quién ha hecho qué.", "correcta": true },
+        { "texto": "Porque no admiten perfiles móviles.", "correcta": false },
+        { "texto": "Porque no pueden pertenecer a grupos de seguridad.", "correcta": false }
+      ],
+      "razonamiento": "Sin cuentas individuales, el registro de sucesos (Tema 15) no permite atribuir acciones a personas concretas, lo que choca frontalmente con los requisitos de trazabilidad del ENS (Tema 21).",
+      "origen": "T14 §5",
+      "dificultad": "Media", "tipo": "Relación", "concepto": "Cuentas compartidas y trazabilidad", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T14_018",
+      "pregunta": "¿Cuál es la buena práctica al asignar permisos sobre recursos?",
+      "opciones": [
+        { "texto": "Asignarlos individualmente a cada cuenta, para mayor control.", "correcta": false },
+        { "texto": "Asignarlos a través de grupos, nunca cuenta a cuenta.", "correcta": true },
+        { "texto": "Conceder permisos de control total por defecto y restringir después.", "correcta": false },
+        { "texto": "Asignar los permisos a las unidades organizativas.", "correcta": false }
+      ],
+      "razonamiento": "Asignar permisos por grupo simplifica el mantenimiento: al cambiar de funciones una persona basta con cambiarla de grupo. Conceder control total por defecto vulneraría el principio de mínimo privilegio, y las OU sirven para organizar y aplicar GPO, no para recibir permisos.",
+      "origen": "T14 §5",
+      "dificultad": "Fácil", "tipo": "Aplicación", "concepto": "Permisos por grupo", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T14_019",
+      "pregunta": "¿Qué es un logon script?",
+      "opciones": [
+        { "texto": "Un programa que se ejecuta automáticamente al iniciar sesión un usuario, para preparar su entorno (mapear unidades, conectar impresoras...).", "correcta": true },
+        { "texto": "El registro de todos los inicios de sesión del dominio.", "correcta": false },
+        { "texto": "Una directiva que fuerza el cambio periódico de contraseña.", "correcta": false },
+        { "texto": "El proceso de autenticación mediante Kerberos.", "correcta": false }
+      ],
+      "razonamiento": "El logon script automatiza la preparación del entorno de trabajo al iniciar sesión: unidades de red, impresoras, variables de entorno. Tradicionalmente en .bat/.cmd y hoy cada vez más en PowerShell.",
+      "origen": "T14 §6",
+      "dificultad": "Fácil", "tipo": "Definición", "concepto": "Logon script", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T14_020",
+      "pregunta": "¿En qué carpeta compartida especial del dominio se almacenan habitualmente los logon scripts asignados desde la cuenta de usuario?",
+      "opciones": [
+        { "texto": "SYSVOL\\Policies.", "correcta": false },
+        { "texto": "NETLOGON.", "correcta": true },
+        { "texto": "ADMIN$.", "correcta": false },
+        { "texto": "C$.", "correcta": false }
+      ],
+      "razonamiento": "NETLOGON es la carpeta compartida especial que se replica automáticamente entre todos los controladores de dominio, lo que garantiza que el script esté disponible sea cual sea el DC que autentique al usuario. ADMIN$ y C$ son recursos administrativos ocultos.",
+      "origen": "T14 §6",
+      "dificultad": "Media", "tipo": "Precisión", "concepto": "Carpeta NETLOGON", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T14_021",
+      "pregunta": "¿Cuál es la ventaja de asignar un logon script mediante GPO frente a hacerlo en las propiedades de cada cuenta?",
+      "opciones": [
+        { "texto": "Que el script se ejecuta más rápido.", "correcta": false },
+        { "texto": "Que permite aplicarlo a todos los usuarios de una OU completa de una sola vez y controlar aspectos como el orden de ejecución.", "correcta": true },
+        { "texto": "Que no requiere que el equipo esté unido al dominio.", "correcta": false },
+        { "texto": "Que evita tener que almacenar el script en un servidor.", "correcta": false }
+      ],
+      "razonamiento": "La asignación por GPO es más flexible y escalable: se vincula a un dominio, sitio u OU y afecta a todos sus usuarios, permitiendo además gestionar el orden cuando hay varios scripts.",
+      "origen": "T14 §6",
+      "dificultad": "Media", "tipo": "Relación", "concepto": "Asignación de scripts por GPO", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T14_022",
+      "pregunta": "¿Qué hace la orden `net use Z: \\\\servidor\\recurso` dentro de un logon script?",
+      "opciones": [
+        { "texto": "Conecta una impresora de red en el puerto Z.", "correcta": false },
+        { "texto": "Mapea el recurso compartido como unidad de red Z: en el equipo del usuario.", "correcta": true },
+        { "texto": "Copia el contenido del recurso a la carpeta local Z.", "correcta": false },
+        { "texto": "Concede permisos de lectura sobre el recurso.", "correcta": false }
+      ],
+      "razonamiento": "`net use` asigna una letra de unidad a un recurso compartido (o conecta una impresora si se usa con un puerto tipo LPT1). No copia datos ni modifica permisos: solo establece la conexión.",
+      "origen": "T14 §6",
+      "dificultad": "Media", "tipo": "Aplicación", "concepto": "Comando net use", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T14_023",
+      "pregunta": "Una persona usuaria llama porque «ha desaparecido la unidad Z: del departamento». ¿Cuál es el diagnóstico más razonable?",
+      "opciones": [
+        { "texto": "Recrear la unidad manualmente en su equipo y dar el caso por cerrado.", "correcta": false },
+        { "texto": "Comprobar si el logon script se ejecutó (cerrar y volver a iniciar sesión), la conectividad con el servidor de ficheros y si la cuenta sigue en el grupo que da acceso al recurso.", "correcta": true },
+        { "texto": "Reinstalar el sistema operativo del equipo.", "correcta": false },
+        { "texto": "Solicitar la creación de una cuenta nueva para la persona usuaria.", "correcta": false }
+      ],
+      "razonamiento": "La unidad la mapea el logon script al iniciar sesión, así que el diagnóstico recorre esa cadena: ejecución del script, conectividad y pertenencia al grupo con permisos. Recrearla a mano ocultaría el problema real y volvería a fallar mañana.",
+      "origen": "T14 §6",
+      "dificultad": "Difícil", "tipo": "Caso práctico", "concepto": "Diagnóstico de unidad de red", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T14_024",
+      "pregunta": "¿Por qué PowerShell ha ido sustituyendo a los scripts .bat/.cmd para logon scripts y administración?",
+      "opciones": [
+        { "texto": "Porque es el único lenguaje admitido por las GPO.", "correcta": false },
+        { "texto": "Porque maneja objetos (no solo texto) y se integra mejor con el resto de la plataforma de gestión de Windows.", "correcta": true },
+        { "texto": "Porque los archivos .bat dejaron de ejecutarse en Windows 10.", "correcta": false },
+        { "texto": "Porque no requiere permisos de administrador para ninguna acción.", "correcta": false }
+      ],
+      "razonamiento": "La capacidad de trabajar con objetos y su integración con la administración moderna (módulos como ActiveDirectory, ejecución remota) hacen a PowerShell mucho más potente. Los .bat siguen funcionando, pero han quedado como opción heredada.",
+      "origen": "T14 §6",
+      "dificultad": "Media", "tipo": "Relación", "concepto": "PowerShell en scripts", "prioridad": "Media"
+    }
+  ]
+}

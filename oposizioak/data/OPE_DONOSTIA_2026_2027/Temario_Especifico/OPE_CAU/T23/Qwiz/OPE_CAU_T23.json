@@ -1,0 +1,297 @@
+{
+  "id": "OPE_CAU_T23",
+  "opeNombre": "OPE DonostiaTIK — Técnico/a de apoyo (CAU)",
+  "titulo": "T23 · Políticas de salvaguarda y recuperación de la información",
+  "descripcion": "22 preguntas tipo test con explicación didáctica, elaboradas a partir de los apuntes del Tema 23.",
+  "fuente": "Elaboración propia a partir de los apuntes del Tema 23 (web de estudio). Caracteres del tema: 11.694. Preguntas asignadas: 22.",
+  "preguntas": [
+    {
+      "id": "OPE_CAU_T23_001",
+      "pregunta": "¿Qué requisito mínimo del ENS ampara las políticas de copias de seguridad y recuperación?",
+      "opciones": [
+        { "texto": "El registro de la actividad (art. 24).", "correcta": false },
+        { "texto": "La continuidad de la actividad (art. 26).", "correcta": true },
+        { "texto": "La autorización y control de los accesos (art. 17).", "correcta": false },
+        { "texto": "La profesionalidad (art. 15).", "correcta": false }
+      ],
+      "razonamiento": "El artículo 26 recoge la continuidad de la actividad: los sistemas deben disponer de copias de seguridad y de mecanismos para garantizar la continuidad ante la pérdida de los medios habituales.",
+      "origen": "T23 §1",
+      "dificultad": "Media", "tipo": "Relación", "concepto": "Continuidad en el ENS", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T23_002",
+      "pregunta": "¿Qué caracteriza a una copia de seguridad completa (full backup)?",
+      "opciones": [
+        { "texto": "Copia solo los datos modificados desde la última copia.", "correcta": false },
+        { "texto": "Copia íntegramente todos los datos seleccionados; es la más lenta de generar y la que más espacio ocupa, pero la más sencilla de restaurar.", "correcta": true },
+        { "texto": "Copia los datos cambiados desde la última copia completa.", "correcta": false },
+        { "texto": "Solo puede realizarse sobre cinta magnética.", "correcta": false }
+      ],
+      "razonamiento": "La copia completa duplica todo el conjunto seleccionado: restaurar exige una única copia, pero su generación es lenta y consume mucho espacio.",
+      "origen": "T23 §2",
+      "dificultad": "Fácil", "tipo": "Definición", "concepto": "Copia completa", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T23_003",
+      "pregunta": "¿Cuál es la copia de referencia de una copia INCREMENTAL?",
+      "opciones": [
+        { "texto": "La última copia completa, siempre.", "correcta": false },
+        { "texto": "La última copia realizada, sea completa o incremental.", "correcta": true },
+        { "texto": "La primera copia del ciclo de retención.", "correcta": false },
+        { "texto": "No toma ninguna referencia: copia siempre todo.", "correcta": false }
+      ],
+      "razonamiento": "La incremental copia lo cambiado desde la última copia de cualquier tipo. Por eso su restauración exige la completa más todas las incrementales intermedias, en orden.",
+      "mnemotecnico": "🧠 Incremental → mira la copia anterior · diferencial → mira la última completa.",
+      "origen": "T23 §2",
+      "dificultad": "Media", "tipo": "Diferenciación", "concepto": "Copia incremental", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T23_004",
+      "pregunta": "¿Cuál es la copia de referencia de una copia DIFERENCIAL?",
+      "opciones": [
+        { "texto": "La última copia completa.", "correcta": true },
+        { "texto": "La última copia realizada, sea del tipo que sea.", "correcta": false },
+        { "texto": "La copia diferencial anterior.", "correcta": false },
+        { "texto": "La copia más antigua conservada.", "correcta": false }
+      ],
+      "razonamiento": "La diferencial copia todo lo cambiado desde la última copia completa, por lo que cada diferencial crece de tamaño conforme se aleja de ella, pero la restauración solo necesita dos copias.",
+      "origen": "T23 §2",
+      "dificultad": "Media", "tipo": "Diferenciación", "concepto": "Copia diferencial", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T23_005",
+      "pregunta": "Con copia completa el domingo e incrementales de lunes a viernes, el sistema falla el jueves por la tarde. ¿Cuántas copias se necesitan para restaurar?",
+      "opciones": [
+        { "texto": "2: la completa y la del jueves.", "correcta": false },
+        { "texto": "5: la completa y las incrementales de lunes a jueves.", "correcta": true },
+        { "texto": "1: basta la incremental del jueves.", "correcta": false },
+        { "texto": "4: solo las incrementales de la semana.", "correcta": false }
+      ],
+      "razonamiento": "Con incrementales hace falta la completa del domingo más las incrementales de lunes, martes, miércoles y jueves: 1 + 4 = 5 copias, aplicadas en orden. Con diferenciales bastarían 2.",
+      "origen": "T23 §2",
+      "dificultad": "Difícil", "tipo": "Caso práctico", "concepto": "Cálculo de restauración", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T23_006",
+      "pregunta": "Con el mismo calendario pero copias DIFERENCIALES, ¿cuántas copias hacen falta para restaurar el jueves?",
+      "opciones": [
+        { "texto": "5.", "correcta": false },
+        { "texto": "4.", "correcta": false },
+        { "texto": "2: la completa del domingo y la diferencial del jueves.", "correcta": true },
+        { "texto": "1: solo la diferencial del jueves.", "correcta": false }
+      ],
+      "razonamiento": "La diferencial del jueves ya contiene todo lo cambiado desde la completa del domingo, así que no se necesitan las diferenciales intermedias: solo 2 copias.",
+      "origen": "T23 §2",
+      "dificultad": "Difícil", "tipo": "Caso práctico", "concepto": "Restauración con diferenciales", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T23_007",
+      "pregunta": "¿Qué tipo de copia es la más rápida de generar y la que menos espacio ocupa?",
+      "opciones": [
+        { "texto": "La completa.", "correcta": false },
+        { "texto": "La incremental.", "correcta": true },
+        { "texto": "La diferencial.", "correcta": false },
+        { "texto": "Todas ocupan lo mismo.", "correcta": false }
+      ],
+      "razonamiento": "La incremental solo copia lo cambiado desde la última copia, sea del tipo que sea: es la más rápida y compacta, a costa de una restauración más compleja.",
+      "origen": "T23 §2",
+      "dificultad": "Media", "tipo": "Relación", "concepto": "Comparativa de tipos de copia", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T23_008",
+      "pregunta": "¿Qué define una política de retención?",
+      "opciones": [
+        { "texto": "Qué datos deben incluirse en la copia de seguridad.", "correcta": false },
+        { "texto": "Durante cuánto tiempo se conservan las copias antes de sobrescribirlas o eliminarlas.", "correcta": true },
+        { "texto": "Quién está autorizado a restaurar una copia.", "correcta": false },
+        { "texto": "El tiempo máximo aceptable de parada del servicio.", "correcta": false }
+      ],
+      "razonamiento": "La retención equilibra la necesidad de recuperar información antigua con el coste de almacenamiento. El tiempo máximo de parada es el RTO, otro concepto distinto.",
+      "origen": "T23 §3",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "Política de retención", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T23_009",
+      "pregunta": "En el esquema de rotación abuelo-padre-hijo (GFS), ¿a qué corresponde el «hijo»?",
+      "opciones": [
+        { "texto": "A las copias mensuales, conservadas un año o más.", "correcta": false },
+        { "texto": "A las copias semanales, conservadas durante un mes.", "correcta": false },
+        { "texto": "A las copias diarias, que se sobrescriben cada semana.", "correcta": true },
+        { "texto": "A las copias completas trimestrales.", "correcta": false }
+      ],
+      "razonamiento": "En GFS: hijo = copias diarias (se sobrescriben semanalmente), padre = semanales (se conservan un mes) y abuelo = mensuales (un año o más). Ofrece puntos de recuperación en varias escalas de tiempo sin almacenar todo indefinidamente.",
+      "origen": "T23 §3",
+      "dificultad": "Media", "tipo": "Precisión", "concepto": "Esquema GFS", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T23_010",
+      "pregunta": "¿Qué establece la regla 3-2-1?",
+      "opciones": [
+        { "texto": "3 copias, 2 tipos de soporte distintos y 1 copia fuera de las instalaciones.", "correcta": true },
+        { "texto": "3 copias diarias, 2 semanales y 1 mensual.", "correcta": false },
+        { "texto": "3 responsables, 2 procedimientos y 1 auditoría anual.", "correcta": false },
+        { "texto": "3 días de retención, 2 servidores y 1 restauración de prueba.", "correcta": false }
+      ],
+      "razonamiento": "La regla 3-2-1 exige al menos 3 copias de los datos (el original más dos), en 2 tipos de soporte distintos, con 1 de ellas fuera de las instalaciones (offsite) para sobrevivir a un desastre que afecte a toda la ubicación.",
+      "origen": "T23 §4",
+      "dificultad": "Fácil", "tipo": "Precisión", "concepto": "Regla 3-2-1", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T23_011",
+      "pregunta": "¿Qué añade la evolución 3-2-1-1-0 respecto a la regla clásica?",
+      "opciones": [
+        { "texto": "Una copia adicional en la nube y cero papeles.", "correcta": false },
+        { "texto": "1 copia offline o inmutable y 0 errores, es decir, la verificación activa de que las copias son realmente recuperables.", "correcta": true },
+        { "texto": "1 responsable designado y 0 accesos externos.", "correcta": false },
+        { "texto": "1 restauración mensual y 0 copias incrementales.", "correcta": false }
+      ],
+      "razonamiento": "La 3-2-1-1-0 responde a la amenaza del ransomware: exige al menos una copia aislada de la red o inmutable, y verificar que las copias existentes se restauran sin fallos.",
+      "origen": "T23 §4",
+      "dificultad": "Media", "tipo": "Precisión", "concepto": "Regla 3-2-1-1-0", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T23_012",
+      "pregunta": "¿Por qué se recomienda mantener al menos una copia offline o inmutable?",
+      "opciones": [
+        { "texto": "Porque ocupa menos espacio que una copia en línea.", "correcta": false },
+        { "texto": "Porque el ransomware moderno ataca deliberadamente las copias accesibles desde la red para impedir la recuperación sin pagar el rescate.", "correcta": true },
+        { "texto": "Porque la normativa prohíbe almacenar copias en línea.", "correcta": false },
+        { "texto": "Porque las copias en línea no pueden cifrarse.", "correcta": false }
+      ],
+      "razonamiento": "Si el atacante puede alcanzar y cifrar también las copias, la organización queda sin capacidad de recuperación. Una copia verdaderamente aislada o inmutable es la última línea de defensa frente al ransomware (Tema 25).",
+      "origen": "T23 §4",
+      "dificultad": "Media", "tipo": "Relación", "concepto": "Copia offline frente al ransomware", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T23_013",
+      "pregunta": "¿Por qué deben cifrarse especialmente las copias que salen de las instalaciones o se almacenan en la nube?",
+      "opciones": [
+        { "texto": "Porque el cifrado reduce su tamaño.", "correcta": false },
+        { "texto": "Porque constituyen en sí mismas una copia completa y potencialmente accesible de toda la información de la organización.", "correcta": true },
+        { "texto": "Porque el cifrado acelera la restauración.", "correcta": false },
+        { "texto": "Porque de lo contrario no podrían verificarse.", "correcta": false }
+      ],
+      "razonamiento": "Una copia offsite sin cifrar es un volcado completo de la información de la organización expuesto fuera de su perímetro: el cifrado es imprescindible para mantener la confidencialidad.",
+      "origen": "T23 §4",
+      "dificultad": "Media", "tipo": "Relación", "concepto": "Cifrado de copias", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T23_014",
+      "pregunta": "¿Qué mide el RTO (Recovery Time Objective)?",
+      "opciones": [
+        { "texto": "La cantidad máxima de datos que puede perderse, medida en tiempo.", "correcta": false },
+        { "texto": "El tiempo máximo aceptable que un servicio puede permanecer caído hasta su restauración completa.", "correcta": true },
+        { "texto": "El tiempo que tarda en completarse una copia de seguridad.", "correcta": false },
+        { "texto": "El periodo de retención de las copias mensuales.", "correcta": false }
+      ],
+      "razonamiento": "El RTO mira «hacia delante»: ¿cuánto tiempo podemos permitirnos estar caídos? Cuanto menor sea, más costosa debe ser la solución técnica (clúster de alta disponibilidad frente a restaurar desde cinta).",
+      "mnemotecnico": "🧠 RTO = Tiempo de parada · RPO = Pérdida de datos.",
+      "origen": "T23 §5",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "RTO", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T23_015",
+      "pregunta": "¿Qué mide el RPO (Recovery Point Objective)?",
+      "opciones": [
+        { "texto": "El tiempo máximo de parada aceptable.", "correcta": false },
+        { "texto": "La cantidad máxima de datos, medida en tiempo, que la organización puede permitirse perder; en la práctica, la antigüedad máxima aceptable de la última copia recuperable.", "correcta": true },
+        { "texto": "El número de copias que deben conservarse.", "correcta": false },
+        { "texto": "El plazo para notificar un incidente al CCN-CERT.", "correcta": false }
+      ],
+      "razonamiento": "El RPO mira «hacia atrás»: ¿cuánta información podemos permitirnos perder? Un RPO de una hora exige copiar o replicar los datos al menos cada hora.",
+      "origen": "T23 §5",
+      "dificultad": "Media", "tipo": "Definición", "concepto": "RPO", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T23_016",
+      "pregunta": "Un servicio establece un RPO de 15 minutos. ¿Qué implica en la práctica?",
+      "opciones": [
+        { "texto": "Que debe restaurarse en menos de 15 minutos tras una caída.", "correcta": false },
+        { "texto": "Que los datos deben copiarse o replicarse al menos cada 15 minutos.", "correcta": true },
+        { "texto": "Que las copias deben conservarse solo 15 minutos.", "correcta": false },
+        { "texto": "Que el incidente debe notificarse en 15 minutos.", "correcta": false }
+      ],
+      "razonamiento": "Cuanto menor es el RPO, mayor debe ser la frecuencia de copia o replicación: es la traducción práctica de «cuántos datos podemos permitirnos perder». Restaurar en menos de 15 minutos sería un RTO de 15 minutos.",
+      "origen": "T23 §5",
+      "dificultad": "Difícil", "tipo": "Aplicación", "concepto": "Implicaciones del RPO", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T23_017",
+      "pregunta": "¿Pueden un RPO muy exigente y un RTO más laxo coexistir en el mismo sistema?",
+      "opciones": [
+        { "texto": "No: ambos objetivos deben tener siempre el mismo valor.", "correcta": false },
+        { "texto": "Sí: son objetivos independientes; un sistema puede perder solo unos minutos de datos y, aun así, tardar horas en volver a estar operativo.", "correcta": true },
+        { "texto": "No: un RPO bajo obliga automáticamente a un RTO bajo.", "correcta": false },
+        { "texto": "Solo en sistemas de categoría BÁSICA del ENS.", "correcta": false }
+      ],
+      "razonamiento": "RTO y RPO se fijan por separado según las necesidades del negocio: uno mide tiempo de indisponibilidad y otro, pérdida de datos. Pueden combinarse en cualquier proporción.",
+      "origen": "T23 §5",
+      "dificultad": "Difícil", "tipo": "Relación", "concepto": "Independencia RTO/RPO", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T23_018",
+      "pregunta": "¿Qué documento detalla los procedimientos, recursos y responsabilidades para restaurar los servicios críticos tras un incidente grave?",
+      "opciones": [
+        { "texto": "La Declaración de Aplicabilidad.", "correcta": false },
+        { "texto": "El Plan de Recuperación ante Desastres (DRP), dentro del Plan de Continuidad de Negocio (BCP).", "correcta": true },
+        { "texto": "La política de retención de copias.", "correcta": false },
+        { "texto": "El inventario de activos.", "correcta": false }
+      ],
+      "razonamiento": "El BCP cubre la continuidad del negocio en su conjunto y el DRP, específicamente, la recuperación de los servicios tras un desastre, dentro de los objetivos de RTO y RPO definidos.",
+      "origen": "T23 §6",
+      "dificultad": "Media", "tipo": "Identificación", "concepto": "BCP y DRP", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T23_019",
+      "pregunta": "¿Qué exige el Anexo II del ENS dentro de las medidas de continuidad del servicio?",
+      "opciones": [
+        { "texto": "Únicamente la realización de copias diarias.", "correcta": false },
+        { "texto": "Análisis de impacto, elaboración del plan, pruebas periódicas y disposición de medios alternativos.", "correcta": true },
+        { "texto": "La contratación de un seguro de ciberriesgo.", "correcta": false },
+        { "texto": "La externalización de la recuperación en un tercero certificado.", "correcta": false }
+      ],
+      "razonamiento": "Las medidas de continuidad del Anexo II incluyen análisis de impacto, plan de continuidad, pruebas periódicas y medios alternativos: no basta con hacer copias.",
+      "origen": "T23 §6",
+      "dificultad": "Difícil", "tipo": "Conocimiento directo", "concepto": "Continuidad en el Anexo II", "prioridad": "Media"
+    },
+    {
+      "id": "OPE_CAU_T23_020",
+      "pregunta": "Una organización realiza copias diarias desde hace años, pero nunca ha probado a restaurarlas. ¿Qué puede afirmarse?",
+      "opciones": [
+        { "texto": "Que la información está garantizada por el mero hecho de copiarse.", "correcta": false },
+        { "texto": "Que no hay garantía real: la copia puede estar corrupta o incompleta, o el procedimiento puede fallar justo cuando se necesita.", "correcta": true },
+        { "texto": "Que cumple el ENS siempre que las copias estén cifradas.", "correcta": false },
+        { "texto": "Que basta con verificar el tamaño de los ficheros de copia.", "correcta": false }
+      ],
+      "razonamiento": "Es el error más habitual del tema: una copia nunca probada no ofrece ninguna garantía. Las pruebas periódicas de restauración son tan esenciales como la propia realización de las copias.",
+      "origen": "T23 §6",
+      "dificultad": "Media", "tipo": "Caso práctico", "concepto": "Pruebas de restauración", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T23_021",
+      "pregunta": "Un servicio crítico necesita un RTO muy bajo (minutos). ¿Qué tipo de solución técnica es coherente?",
+      "opciones": [
+        { "texto": "Restaurar manualmente desde cintas almacenadas fuera de las instalaciones.", "correcta": false },
+        { "texto": "Un clúster de alta disponibilidad con conmutación automática por error.", "correcta": true },
+        { "texto": "Copias completas semanales con retención anual.", "correcta": false },
+        { "texto": "Ampliar el periodo de retención de las copias diarias.", "correcta": false }
+      ],
+      "razonamiento": "Cuanto menor es el RTO exigido, más sofisticada y costosa debe ser la solución: la conmutación automática permite recuperar el servicio en minutos, mientras que restaurar desde cinta lleva horas.",
+      "origen": "T23 §5",
+      "dificultad": "Difícil", "tipo": "Aplicación", "concepto": "RTO y soluciones técnicas", "prioridad": "Alta"
+    },
+    {
+      "id": "OPE_CAU_T23_022",
+      "pregunta": "¿Frente a qué tipo de incidentes protege una política de salvaguarda de la información?",
+      "opciones": [
+        { "texto": "Solo frente a fallos de hardware.", "correcta": false },
+        { "texto": "Frente a fallos de hardware, errores humanos, ciberataques como el ransomware y desastres físicos sobre las instalaciones.", "correcta": true },
+        { "texto": "Únicamente frente a ataques externos deliberados.", "correcta": false },
+        { "texto": "Exclusivamente frente a incidentes que afecten a datos personales.", "correcta": false }
+      ],
+      "razonamiento": "La política de salvaguarda cubre cualquier incidente que ponga en riesgo la información: averías, errores humanos, ataques y desastres físicos, en línea con la clasificación de amenazas del Tema 22.",
+      "origen": "T23 §1",
+      "dificultad": "Fácil", "tipo": "Conocimiento directo", "concepto": "Alcance de la salvaguarda", "prioridad": "Media"
+    }
+  ]
+}
