@@ -7,320 +7,612 @@
 
   <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
 <li><a href="#1-concepto-y-funciones-de-un-sistema-operativo">1. Concepto y funciones de un sistema operativo</a></li>
-<li><a href="#2-clasificación-de-los-sistemas-operativos">2. Clasificación de los sistemas operativos</a></li>
+<li><a href="#2-clasificacion-de-los-sistemas-operativos">2. Clasificación de los sistemas operativos</a></li>
 <li><a href="#3-arquitectura-de-un-sistema-operativo">3. Arquitectura de un sistema operativo</a></li>
-<li><a href="#4-administración-de-memoria">4. Administración de memoria</a></li>
+<li><a href="#4-administracion-de-memoria">4. Administración de memoria</a></li>
 <li><a href="#5-procesos-y-subprocesos">5. Procesos y subprocesos</a></li>
-<li><a href="#6-planificación-y-gestión-multitarea">6. Planificación y gestión multitarea</a></li>
-<li><a href="#7-entradasalida">7. Entrada/salida</a></li>
+<li><a href="#6-planificacion-y-gestion-multitarea">6. Planificación y gestión multitarea</a></li>
+<li><a href="#7-entrada-salida">7. Entrada/salida</a></li>
 <li><a href="#8-sistemas-de-archivo">8. Sistemas de archivo</a></li>
-<li><a href="#9-resumen-para-estudiar">9. Resumen para estudiar</a></li>
-<li><a href="#10-conceptos-clave">10. Conceptos clave</a></li>
-<li><a href="#11-posibles-puntos-de-examen">11. Posibles puntos de examen</a></li>
+<li><a href="#9-datos-y-anclas-de-memoria">9. Datos y anclas de memoria</a></li>
+<li><a href="#10-no-confundir">10. No confundir</a></li>
+<li><a href="#11-posibles-trampas-de-examen">11. Posibles trampas de examen</a></li>
+<li><a href="#12-posibles-preguntas-tipo-test">12. Posibles preguntas tipo test</a></li>
+<li><a href="#13-posibles-preguntas-cortas">13. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#14-supuestos-practicos">14. Supuestos prácticos</a></li>
+<li><a href="#15-matriz-de-memorizacion">15. Matriz de memorización</a></li>
+<li><a href="#16-resumen-final">16. Resumen final: si mañana fuera el examen</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
 
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>Este tema estudia los conceptos generales, comunes a cualquier sistema operativo. No es el lugar para el detalle de un sistema operativo concreto: Windows de usuario se estudia en el Tema 11, Windows Server en el Tema 12 y Linux de servidor en el Tema 13.<br>Tampoco es el lugar para la organización lógica de la información dentro de los ficheros (registros, claves, métodos de acceso), que se vio en el Tema 4, ni para la virtualización de sistemas operativos completos, que se estudia en el Tema 10.</th>
+<th><strong>⚠️ No confundir — fronteras del tema</strong><br>Este tema estudia los conceptos generales, comunes a cualquier sistema operativo. No es el lugar para el detalle de un SO concreto: Windows de usuario es el <strong>Tema 11</strong>, Windows Server el <strong>Tema 12</strong> y Linux de servidor el <strong>Tema 13</strong>. Tampoco para la organización lógica de la información dentro de los ficheros (<strong>Tema 4</strong>), el hardware (<strong>Temas 3, 6 y 8</strong>) ni la virtualización (<strong>Tema 10</strong>).</th>
 </tr>
 </table></div>
+
 <h2 id="1-concepto-y-funciones-de-un-sistema-operativo" class="tema-h2">1. Concepto y funciones de un sistema operativo</h2>
-<p>Un <strong>sistema operativo (SO)</strong> es el software de sistema que actúa de intermediario entre el hardware del ordenador y el usuario o las aplicaciones que se ejecutan sobre él. Se carga al arrancar el equipo y permanece en ejecución mientras este funciona, gestionando todos sus recursos: la CPU, la memoria, los dispositivos periféricos (Tema 8) y el almacenamiento.</p>
-<p>Clásicamente se explica el papel de un SO desde dos puntos de vista complementarios:</p>
+<p>Un <strong>sistema operativo (SO)</strong> es el <strong>software de sistema que gestiona los recursos del ordenador y proporciona servicios a las aplicaciones</strong>, actuando de intermediario entre el hardware y los programas o las personas usuarias. Se carga al arrancar el equipo y permanece en ejecución mientras este funciona.</p>
+<p>Clásicamente se explica su papel desde dos visiones complementarias:</p>
 <ul class="tema-lista">
-<li><strong>SO como gestor de recursos</strong>: reparte de forma ordenada y eficiente los recursos limitados del sistema (tiempo de CPU, espacio en memoria, acceso a dispositivos) entre los distintos programas que compiten por ellos, evitando conflictos entre procesos.</li>
-<li><strong>SO como máquina virtual extendida (o «máquina abstracta»)</strong>: oculta al programador y al usuario la complejidad real del hardware, ofreciendo una interfaz más sencilla y uniforme (por ejemplo, «guardar un fichero» en lugar de tener que manejar directamente el controlador del disco).</li>
+<li><strong>SO como gestor de recursos</strong>: reparte de forma ordenada y eficiente los recursos limitados (tiempo de CPU, memoria, dispositivos) entre los programas que compiten por ellos, evitando conflictos.</li>
+<li><strong>SO como máquina virtual extendida (máquina abstracta)</strong>: oculta la complejidad real del hardware, ofreciendo una interfaz más sencilla y uniforme («guardar un fichero» en lugar de manejar el controlador del disco).</li>
 </ul>
-<p>De estas dos funciones generales se derivan las funciones concretas que cualquier sistema operativo cumple: gestión de procesos, gestión de memoria, gestión de la entrada/salida, gestión del sistema de archivos, gestión de la seguridad y de los usuarios, y provisión de una interfaz de usuario (de línea de comandos o gráfica) para interactuar con el sistema.</p>
+<h4 class="tema-h4">Funciones</h4>
+<ul class="tema-lista">
+<li><strong>Gestión de procesos</strong>: crear, planificar y terminar procesos (apartados 5 y 6).</li>
+<li><strong>Gestión de memoria</strong>: asignar, proteger y liberar la memoria (apartado 4).</li>
+<li><strong>Gestión de la entrada/salida</strong>: intermediar con los dispositivos (apartado 7).</li>
+<li><strong>Sistema de archivos</strong>: organizar la información persistente (apartado 8).</li>
+<li><strong>Usuarios y seguridad</strong>: identificar usuarios y controlar el acceso a los recursos.</li>
+<li><strong>Interfaz de usuario</strong>: línea de comandos o interfaz gráfica para interactuar con el sistema.</li>
+</ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Piensa en el sistema operativo como en el personal de un hotel: los huéspedes (los programas) piden recursos (una habitación, el ascensor, el comedor) y el personal (el SO) organiza el acceso a esos recursos compartidos para que todos puedan usarlos sin chocar entre sí, sin que el huésped necesite saber cómo funciona la caldera o el sistema eléctrico del edificio.</th>
+<th><strong>💡 Analogía</strong><br>El SO es como el personal de un hotel: los huéspedes (los programas) piden recursos (habitación, ascensor, comedor) y el personal organiza el acceso a lo compartido para que todos lo usen sin chocar, sin que el huésped necesite saber cómo funciona la caldera. Útil para entender; las definiciones formales son las de arriba.</th>
 </tr>
 </table></div>
-<h2 id="2-clasificación-de-los-sistemas-operativos" class="tema-h2">2. Clasificación de los sistemas operativos</h2>
-<p>No existe un único criterio para clasificar los sistemas operativos: se combinan varios ejes, y un mismo SO puede describirse con varias de estas etiquetas a la vez (por ejemplo, Linux de servidor es multiusuario, multitarea y de tiempo compartido).</p>
+
+<h2 id="2-clasificacion-de-los-sistemas-operativos" class="tema-h2">2. Clasificación de los sistemas operativos</h2>
+<p>Se combinan varios criterios independientes — <strong>no deben mezclarse entre sí</strong> — y un mismo SO puede describirse con varias etiquetas a la vez:</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>Criterio</strong></th>
 <th><strong>Tipos</strong></th>
-<th><strong>Ejemplo / comentario</strong></th>
+<th><strong>Idea clave</strong></th>
 </tr>
 <tr>
-<td>Nº de usuarios simultáneos</td>
+<td><strong>Número de usuarios</strong></td>
 <td>Monousuario / Multiusuario</td>
-<td>MS-DOS (monousuario); Linux, Windows Server (multiusuario)</td>
+<td>Cuántos usuarios puede atender simultáneamente</td>
 </tr>
 <tr>
-<td>Nº de tareas simultáneas</td>
+<td><strong>Número de tareas</strong></td>
 <td>Monotarea / Multitarea</td>
-<td>MS-DOS (monotarea); Windows, Linux, macOS actuales (multitarea)</td>
+<td>Cuántos programas puede ejecutar «a la vez»</td>
 </tr>
 <tr>
-<td>Nº de procesadores gestionados</td>
+<td><strong>Número de procesadores</strong></td>
 <td>Uniprocesador / Multiprocesador</td>
-<td>SMP (multiprocesador simétrico); sistemas distribuidos</td>
+<td>Cuántas CPU/núcleos es capaz de gestionar</td>
 </tr>
 <tr>
-<td>Gestión del tiempo</td>
+<td><strong>Gestión del tiempo</strong></td>
 <td>Por lotes / Tiempo compartido / Tiempo real</td>
-<td>Batch (histórico); time-sharing (uso interactivo actual); RTOS (control industrial)</td>
+<td>Cómo organiza el tiempo de proceso</td>
 </tr>
 <tr>
-<td>Ámbito de uso</td>
+<td><strong>Ámbito de uso</strong></td>
 <td>Escritorio / Servidor / Embebido / Móvil</td>
-<td>Windows 11 (escritorio); Windows Server, Linux (servidor); Android, iOS (móvil)</td>
+<td>Para qué entorno está diseñado</td>
 </tr>
 </table></div>
-<p>Dentro de los sistemas de <strong>tiempo real (RTOS, Real-Time Operating System)</strong> se distingue, además, entre tiempo real <strong>duro</strong>, donde no cumplir un plazo se considera un fallo del sistema (por ejemplo, el control de un airbag), y tiempo real <strong>blando</strong>, donde incumplir el plazo degrada el servicio pero no lo invalida (por ejemplo, la reproducción de vídeo en streaming).</p>
+<p>Como ejemplo histórico útil: <strong>MS-DOS es un ejemplo clásico de sistema monousuario y monotarea</strong>. Los sistemas de escritorio y servidor actuales son multitarea y, en general, multiusuario y de tiempo compartido.</p>
+<h4 class="tema-h4">Tiempo compartido frente a tiempo real</h4>
+<ul class="tema-lista">
+<li><strong>Tiempo compartido (time-sharing)</strong>: la CPU se reparte entre usuarios/procesos para proporcionar <strong>interacción y capacidad de respuesta</strong>; es el modelo habitual de escritorio y servidor.</li>
+<li><strong>Tiempo real (RTOS)</strong>: lo esencial es el <strong>cumplimiento de restricciones temporales</strong> — que la tarea se complete antes de su plazo.</li>
+</ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>No debe confundirse «tiempo compartido» (time-sharing, el modelo habitual de cualquier SO de escritorio o servidor actual, que reparte la CPU entre varios usuarios o procesos dando sensación de simultaneidad) con «tiempo real» (donde lo importante no es repartir el tiempo, sino garantizar que una tarea concreta se ejecuta antes de un plazo determinado).</th>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>Tiempo real duro</strong>: incumplir el plazo puede implicar un <strong>fallo del sistema</strong> (control de un airbag, sistemas industriales críticos).<br><strong>Tiempo real blando</strong>: el incumplimiento <strong>degrada el servicio</strong>, pero no lo invalida (reproducción de vídeo en streaming).</th>
 </tr>
 </table></div>
+
 <h2 id="3-arquitectura-de-un-sistema-operativo" class="tema-h2">3. Arquitectura de un sistema operativo</h2>
-<p>El <strong>núcleo o kernel</strong> es la parte central del sistema operativo: el componente que se ejecuta con el máximo nivel de privilegio y que tiene acceso directo al hardware. El resto del software (aplicaciones de usuario, e incluso parte de las utilidades del propio SO) se ejecuta con privilegios más restringidos.</p>
-<h4 class="tema-h4">Modos de ejecución</h4>
+<p>El <strong>núcleo o kernel</strong> es la parte central del SO: el componente que se ejecuta con el máximo nivel de privilegio y accede directamente al hardware.</p>
+<h4 class="tema-h4">Modos de ejecución y llamadas al sistema</h4>
 <ul class="tema-lista">
-<li><strong>Modo núcleo (kernel mode o modo supervisor)</strong>: acceso completo al hardware y a todas las instrucciones del procesador. Es el modo en el que se ejecuta el núcleo del SO.</li>
-<li><strong>Modo usuario (user mode)</strong>: acceso restringido; un programa en modo usuario no puede acceder directamente al hardware ni a la memoria de otros procesos, lo que protege la estabilidad y la seguridad del sistema.</li>
+<li><strong>Modo usuario (user mode)</strong>: <strong>privilegios restringidos</strong> — un programa no puede acceder directamente al hardware ni a la memoria de otros procesos.</li>
+<li><strong>Modo núcleo (kernel mode)</strong>: <strong>privilegios elevados</strong> y acceso a los recursos protegidos del sistema.</li>
+<li><strong>Llamada al sistema (system call)</strong>: el mecanismo mediante el que una aplicación <strong>solicita servicios al SO</strong> (leer un fichero, reservar memoria): provoca un cambio controlado a modo núcleo, el SO atiende la petición y se retorna a modo usuario con el resultado.</li>
 </ul>
-<p>Cuando un programa en modo usuario necesita un servicio que solo el núcleo puede ofrecer (leer un fichero, reservar memoria, enviar datos por red), realiza una <strong>llamada al sistema (system call)</strong>: una petición formal que provoca un cambio controlado a modo núcleo, donde el SO atiende la petición, y un retorno posterior a modo usuario con el resultado.</p>
-<h4 class="tema-h4">Tipos de arquitectura del núcleo</h4>
+<p>Matiz de precisión: no todo el software del SO se ejecuta en modo núcleo — muchas utilidades y servicios del propio sistema funcionan en modo usuario; el reparto exacto depende de la arquitectura.</p>
+<h4 class="tema-h4">Tipos de kernel</h4>
 <ul class="tema-lista">
-<li><strong>Monolítico</strong>: todos los servicios del SO (gestión de procesos, memoria, sistemas de archivos, drivers…) se ejecutan dentro de un único bloque de código en modo núcleo. Es el diseño más rápido, porque los componentes se comunican mediante llamadas a función directas, sin cambios de modo.</li>
-<li><strong>Microkernel</strong>: el núcleo se reduce al mínimo imprescindible (comunicación entre procesos y planificación básica) y el resto de servicios se ejecutan como procesos independientes en modo usuario. Es más robusto ante fallos (un servicio que falla no tumba el sistema completo) pero más lento, al requerir más comunicación entre procesos.</li>
-<li><strong>Híbrido</strong>: combina ambos enfoques, manteniendo en el núcleo los servicios más críticos por rendimiento y externalizando otros. Es el diseño más habitual en los sistemas operativos comerciales actuales.</li>
+<li><strong>Monolítico</strong>: la mayor parte de los servicios (procesos, memoria, sistemas de archivos, drivers) se ejecutan en espacio de núcleo. <strong>Puede reducir la sobrecarga de comunicación</strong> entre servicios al mantenerlos juntos en el núcleo; a cambio, un fallo puede afectar a más componentes y el núcleo tiende a crecer.</li>
+<li><strong>Microkernel</strong>: el núcleo se reduce al mínimo (comunicación entre procesos, planificación básica) y el resto de servicios se ejecutan como procesos en modo usuario. <strong>Puede introducir sobrecostes de comunicación</strong> entre servicios, aunque proporciona <strong>mayor aislamiento y modularidad</strong> (un servicio que falla no arrastra necesariamente al sistema).</li>
+<li><strong>Híbrido</strong>: combina ambos enfoques, manteniendo en el núcleo los servicios críticos y externalizando otros.</li>
 </ul>
+<p>Estas categorías describen diseños, <strong>no leyes universales de rendimiento</strong>: el resultado real depende de cada implementación.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>Criterio</strong></th>
-<th><strong>Monolítico</strong></th>
-<th><strong>Microkernel</strong></th>
-</tr>
-<tr>
-<td>Rendimiento</td>
-<td>Mayor (comunicación directa)</td>
-<td>Menor (más cambios de contexto)</td>
-</tr>
-<tr>
-<td>Aislamiento ante fallos</td>
-<td>Menor: un fallo puede afectar a todo el núcleo</td>
-<td>Mayor: un servicio puede fallar de forma aislada</td>
-</tr>
-<tr>
-<td>Complejidad de mantenimiento</td>
-<td>Mayor con el tiempo, al crecer el núcleo</td>
-<td>Menor: servicios independientes y modulares</td>
+<th><strong>🔍 Para ampliar — ejemplos (no núcleo del tema)</strong><br><strong>Linux</strong> → monolítico <strong>modular</strong>: admite cargar y descargar módulos (p. ej., drivers) sin recompilar; los módulos cargados se ejecutan en modo núcleo, así que no es un microkernel. <strong>Windows NT</strong> → generalmente clasificado como <strong>híbrido</strong>. <strong>XNU (macOS)</strong> → híbrido. El detalle de estos sistemas pertenece a los Temas 11-13.</th>
 </tr>
 </table></div>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>⚠️ No confundir</strong><br>El núcleo de Linux es monolítico, aunque modular: admite cargar y descargar módulos (por ejemplo, drivers) en caliente sin recompilar el núcleo. Esto no lo convierte en un microkernel: los módulos, una vez cargados, se ejecutan igualmente en modo núcleo y con acceso directo al resto del sistema, a diferencia de los servicios de un microkernel real, que se ejecutan en modo usuario. El núcleo de Windows (NT) y el de macOS (XNU) se consideran híbridos.</th>
-</tr>
-</table></div>
-<h2 id="4-administración-de-memoria" class="tema-h2">4. Administración de memoria</h2>
-<p>Uno de los cometidos más importantes del SO es gestionar la memoria principal (RAM): decidir qué procesos residen en memoria, en qué dirección, y proteger el espacio de memoria de cada proceso frente al de los demás.</p>
+
+<h2 id="4-administracion-de-memoria" class="tema-h2">4. Administración de memoria</h2>
+<p>El SO gestiona la memoria principal: decide la <strong>asignación</strong> (qué procesos residen en memoria y dónde), garantiza la <strong>protección</strong> (el espacio de cada proceso queda aislado del resto) y administra el <strong>espacio de direcciones</strong> de cada proceso.</p>
 <h4 class="tema-h4">Memoria virtual</h4>
-<p>La <strong>memoria virtual</strong> es una técnica que permite a cada proceso trabajar con un espacio de direcciones propio, continuo y aparentemente mayor que la memoria física disponible, con independencia de cómo esté distribuida realmente en la RAM o de si parte de ella reside temporalmente en disco. El SO se encarga de traducir esas direcciones «virtuales» a direcciones físicas reales de forma transparente para el proceso.</p>
+<p>La <strong>memoria virtual</strong> es una técnica de gestión que da a cada proceso un <strong>espacio de direcciones virtual</strong> propio y continuo, que el SO <strong>traduce a memoria física</strong> de forma transparente. Aporta <strong>aislamiento entre procesos</strong> y permite utilizar <strong>almacenamiento secundario</strong> como extensión cuando corresponde.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>MEMORIA VIRTUAL ≠ RAM FÍSICA ADICIONAL.</strong> Es una <strong>abstracción/técnica de gestión</strong>: no añade memoria real, organiza y traduce la existente (y puede apoyarse en disco, mucho más lento).</th>
+</tr>
+</table></div>
 <h4 class="tema-h4">Paginación y segmentación</h4>
 <ul class="tema-lista">
-<li><strong>Paginación</strong>: la memoria se divide en bloques de tamaño fijo. En la memoria lógica del proceso se llaman páginas, y en la memoria física, marcos (frames). Una tabla de páginas, mantenida por el SO, traduce cada página a su marco físico correspondiente.</li>
-<li><strong>Segmentación</strong>: la memoria se divide en bloques de tamaño variable, cada uno correspondiente a una unidad lógica del programa (código, datos, pila…), lo que respeta mejor la estructura del programa, pero complica la gestión del espacio libre.</li>
+<li><strong>Paginación</strong>: divide la memoria en <strong>bloques de tamaño fijo</strong> — <strong>páginas</strong> (en el espacio lógico del proceso) y <strong>marcos</strong> (en la memoria física); una tabla de páginas traduce unas a otros. Puede generar <strong>fragmentación interna</strong> (espacio sobrante dentro del bloque asignado).</li>
+<li><strong>Segmentación</strong>: divide la memoria en <strong>bloques lógicos de tamaño variable</strong> (código, datos, pila...), fieles a la estructura del programa. Puede generar <strong>fragmentación externa</strong> (huecos libres dispersos demasiado pequeños).</li>
 </ul>
-<p>Cuando el tamaño de los bloques no encaja exactamente con lo que necesita un proceso, aparece la <strong>fragmentación</strong>: <strong>interna</strong>, cuando sobra espacio dentro de un bloque asignado (típica de la paginación, al usar bloques de tamaño fijo), y <strong>externa</strong>, cuando queda espacio libre disperso en huecos demasiado pequeños para ser reutilizados (típica de la segmentación, al usar bloques de tamaño variable).</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Paginación = bloques de tamaño fijo → puede generar fragmentación interna, pero no externa. Segmentación = bloques de tamaño variable, ajustados a la lógica del programa → puede generar fragmentación externa, pero no interna. La mayoría de sistemas operativos actuales combinan ambas ideas (segmentación paginada).</th>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>PÁGINA = FIJA → fragmentación interna posible · SEGMENTO = VARIABLE → fragmentación externa posible.</strong><br>Y la formulación actual: <strong>la paginación es fundamental en la memoria virtual de muchos sistemas actuales; la segmentación clásica tiene hoy un papel más limitado</strong> que en los modelos tradicionales.</th>
 </tr>
 </table></div>
-<p>Cuando la memoria física no es suficiente para todos los procesos activos, el SO recurre al <strong>swapping</strong> o intercambio: mover páginas o procesos completos entre la RAM y una zona reservada del disco (memoria de intercambio o swap), liberando así RAM para lo que se está usando en cada momento a costa de una pérdida de rendimiento, ya que el disco es mucho más lento que la RAM.</p>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Si el sistema pasa más tiempo moviendo páginas entre RAM y disco que ejecutando trabajo útil, se produce la <strong>hiperpaginación (thrashing)</strong>: el rendimiento se desploma aunque la CPU parezca ocupada. Es el diagnóstico típico de un equipo con poca RAM «que va lentísimo y el disco no para de trabajar» — situación que un técnico de CAU reconoce a menudo, y cuya solución de fondo es ampliar la RAM o reducir la carga.</th>
-</tr>
-</table></div>
-<h2 id="5-procesos-y-subprocesos" class="tema-h2">5. Procesos y subprocesos</h2>
-<p>Un <strong>proceso</strong> es una instancia de un programa en ejecución: el propio código, más los datos que maneja, más el conjunto de recursos que el SO le ha asignado (memoria, archivos abiertos, tiempo de CPU…). El SO representa cada proceso mediante una estructura de control llamada <strong>PCB (Process Control Block)</strong>, donde guarda su estado, el valor de sus registros, su contador de programa y demás información necesaria para gestionarlo.</p>
-<h4 class="tema-h4">Estados de un proceso</h4>
-<p>A lo largo de su vida, un proceso transita por distintos estados, gestionados por el SO:</p>
+<h4 class="tema-h4">Swapping y thrashing</h4>
 <ul class="tema-lista">
-<li><strong>Nuevo</strong>: el proceso se está creando.</li>
-<li><strong>Listo (ready)</strong>: el proceso está preparado para ejecutarse y espera a que el planificador le asigne la CPU.</li>
-<li><strong>En ejecución (running)</strong>: el proceso está usando la CPU en ese instante.</li>
-<li><strong>Bloqueado o en espera (waiting)</strong>: el proceso no puede continuar porque espera un evento externo (por ejemplo, el resultado de una operación de E/S).</li>
-<li><strong>Terminado</strong>: el proceso ha finalizado su ejecución y el SO libera los recursos que tenía asignados.</li>
+<li><strong>Swapping (intercambio)</strong>: traslado temporal de información entre la RAM y el almacenamiento (zona de intercambio o swap) para <strong>liberar RAM</strong>. Según el esquema, lo que se mueve pueden ser páginas o procesos completos — no son términos equivalentes. Tiene un <strong>coste de rendimiento</strong>: el disco es mucho más lento que la RAM.</li>
+<li><strong>Thrashing (hiperpaginación)</strong>: el sistema dedica una parte <strong>excesiva del tiempo a paginación/intercambio</strong> en lugar de a trabajo útil; el rendimiento se desploma.</li>
 </ul>
-<p>El tránsito típico es: nuevo → listo → en ejecución → (listo, si se le retira la CPU, o bloqueado, si espera E/S) → en ejecución de nuevo → terminado.</p>
-<h4 class="tema-h4">Subprocesos o hilos (threads)</h4>
-<p>Un <strong>subproceso o hilo (thread)</strong> es la unidad más pequeña de ejecución dentro de un proceso. Todos los hilos de un mismo proceso comparten su espacio de memoria y sus recursos (archivos abiertos, por ejemplo), pero cada hilo mantiene su propia pila de ejecución y su propio contador de programa, lo que le permite avanzar de forma independiente.</p>
-<p>La <strong>multihebra o multithreading</strong> permite que un mismo proceso realice varias tareas de forma concurrente (por ejemplo, un editor de texto que revisa la ortografía mientras el usuario sigue escribiendo) sin necesidad de crear procesos independientes, que serían más costosos de crear y no compartirían memoria entre sí.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Caso CAU</strong><br>Equipo con poca RAM, <strong>disco constantemente activo</strong> y respuesta lentísima: cuadro típico de thrashing. Las vías de mejora habituales son ampliar la RAM o reducir la carga simultánea (también puede influir el estado del propio sistema); no hay una única solución universal.</th>
+</tr>
+</table></div>
+
+<h2 id="5-procesos-y-subprocesos" class="tema-h2">5. Procesos y subprocesos</h2>
+<p>Un <strong>proceso</strong> es una <strong>instancia de un programa en ejecución junto con los recursos que tiene asignados</strong> (memoria, archivos abiertos, tiempo de CPU...). El SO representa cada proceso mediante el <strong>PCB (Process Control Block)</strong>: la estructura donde guarda su <strong>estado</strong>, su <strong>contador de programa</strong>, sus <strong>registros</strong> y demás <strong>información de gestión</strong>.</p>
+<h4 class="tema-h4">Estados de un proceso</h4>
+<ul class="tema-lista">
+<li><strong>Nuevo</strong>: en creación.</li>
+<li><strong>Listo (ready)</strong>: preparado, esperando a que el planificador le asigne la CPU.</li>
+<li><strong>En ejecución (running)</strong>: usando la CPU.</li>
+<li><strong>Bloqueado / en espera (waiting)</strong>: no puede continuar; espera un evento externo.</li>
+<li><strong>Terminado</strong>: finalizado; el SO libera sus recursos.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br>La transición estrella: <strong>EJECUCIÓN → BLOQUEADO cuando el proceso espera una operación de E/S</strong>. (Y de bloqueado pasa a <strong>listo</strong> cuando el evento llega — no directamente a ejecución.)</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Hilos (subprocesos, threads)</h4>
+<p>Un <strong>hilo</strong> es una <strong>unidad de ejecución dentro de un proceso</strong>. Los hilos de un mismo proceso <strong>comparten el espacio de memoria y los recursos</strong> del proceso, pero cada hilo mantiene información propia de ejecución, como su <strong>contador de programa</strong> y su <strong>pila</strong>.</p>
+<p><strong>Multithreading (multihebra)</strong>: ejecución concurrente de varios hilos dentro de un mismo proceso — por ejemplo, un editor que corrige la ortografía mientras el usuario escribe.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>Criterio</strong></th>
 <th><strong>Proceso</strong></th>
-<th><strong>Hilo (thread)</strong></th>
+<th><strong>Hilo</strong></th>
 </tr>
 <tr>
-<td>Espacio de memoria</td>
-<td>Propio e independiente</td>
-<td>Compartido con el resto de hilos del proceso</td>
+<td>Papel</td>
+<td>Unidad de asignación de <strong>recursos</strong></td>
+<td>Unidad de <strong>ejecución</strong> dentro del proceso</td>
 </tr>
 <tr>
-<td>Coste de creación</td>
+<td>Memoria</td>
+<td>Espacio propio e independiente</td>
+<td>Compartida con los demás hilos del proceso</td>
+</tr>
+<tr>
+<td>Coste de creación y cambio</td>
 <td>Alto</td>
 <td>Bajo</td>
 </tr>
 <tr>
-<td>Coste de cambio de contexto</td>
-<td>Alto</td>
-<td>Bajo (menos información que guardar/restaurar)</td>
-</tr>
-<tr>
 <td>Aislamiento ante fallos</td>
-<td>Alto: un proceso no afecta a otro</td>
+<td>Alto</td>
 <td>Bajo: un fallo puede afectar a todo el proceso</td>
 </tr>
 </table></div>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>⚠️ No confundir</strong><br>No debe confundirse la multitarea entre procesos (varios programas distintos ejecutándose «a la vez») con la multihebra dentro de un proceso (un mismo programa dividiendo su trabajo en varios hilos). Ambas se apoyan en el mismo mecanismo de planificación del SO, pero operan a niveles distintos: el proceso es la unidad de asignación de recursos; el hilo, la unidad de ejecución sobre la CPU.</th>
-</tr>
-</table></div>
-<h4 class="tema-h4">Concurrencia e interbloqueo (deadlock)</h4>
-<p>Cuando varios procesos compiten por recursos compartidos puede producirse un <strong>interbloqueo (deadlock)</strong>: dos o más procesos quedan bloqueados <strong>indefinidamente</strong>, cada uno esperando un recurso que retiene otro. El ejemplo clásico: el proceso A tiene la impresora y espera el escáner; el proceso B tiene el escáner y espera la impresora — ninguno avanzará jamás. El SO puede prevenir, evitar o detectar y resolver los interbloqueos (por ejemplo, abortando uno de los procesos implicados).</p>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>⚠️ No confundir</strong><br><strong>Interbloqueo (deadlock)</strong> ≠ <strong>inanición (starvation)</strong>: en el interbloqueo los procesos se esperan mutuamente y ninguno puede avanzar nunca; en la inanición un proceso sí podría avanzar, pero nunca le llega el turno porque el planificador atiende siempre a otros de mayor prioridad.</th>
-</tr>
-</table></div>
+<h4 class="tema-h4">Deadlock y starvation</h4>
+<ul class="tema-lista">
+<li><strong>Interbloqueo (deadlock)</strong>: procesos bloqueados esperando recursos <strong>de manera circular</strong>: A tiene la impresora y espera el escáner; B tiene el escáner y espera la impresora — ninguno avanzará. El SO puede prevenir, evitar o detectar y resolver (por ejemplo, abortando un proceso).</li>
+<li><strong>Inanición (starvation)</strong>: un proceso espera <strong>indefinidamente porque otros obtienen los recursos o turnos de forma continuada</strong> — podría avanzar, pero nunca le llega la vez (típico con prioridades mal gestionadas).</li>
+</ul>
 
-<h2 id="6-planificación-y-gestión-multitarea" class="tema-h2">6. Planificación y gestión multitarea</h2>
-<p>El <strong>planificador (scheduler)</strong> es el componente del SO que decide, en cada instante, qué proceso o hilo de entre los que están en estado «listo» pasa a ocupar la CPU. Gracias a él, un sistema con una única CPU puede dar la sensación de ejecutar varios programas a la vez: en realidad los va alternando a gran velocidad, en operaciones llamadas <strong>cambios de contexto (context switch)</strong>, en las que el SO guarda el estado del proceso saliente y restaura el del proceso entrante.</p>
+<h2 id="6-planificacion-y-gestion-multitarea" class="tema-h2">6. Planificación y gestión multitarea</h2>
+<p>El <strong>planificador (scheduler)</strong> decide qué proceso o hilo <strong>listo</strong> recibe la CPU en cada momento. El <strong>cambio de contexto (context switch)</strong> guarda el estado de ejecución del saliente y restaura el del entrante; gracias a esa alternancia rápida, una única CPU da sensación de simultaneidad.</p>
 <h4 class="tema-h4">Multitarea cooperativa frente a expulsiva</h4>
 <ul class="tema-lista">
-<li><strong>Multitarea cooperativa</strong>: cada proceso cede voluntariamente el control de la CPU cuando lo considera oportuno. Un proceso mal programado que no cede el control puede bloquear todo el sistema. Modelo típico de sistemas antiguos, como Windows 3.x.</li>
-<li><strong>Multitarea expulsiva o apropiativa (preemptive)</strong>: el propio SO puede interrumpir un proceso en ejecución para cederle la CPU a otro, sin depender de su colaboración. Es el modelo de todos los sistemas operativos modernos (Windows, Linux, macOS), y ofrece mucha más estabilidad y capacidad de respuesta.</li>
+<li><strong>Cooperativa</strong>: cada proceso <strong>cede voluntariamente</strong> la CPU; uno mal programado puede bloquear el sistema.</li>
+<li><strong>Expulsiva/apropiativa (preemptive)</strong>: <strong>el SO puede interrumpir</strong> al proceso en ejecución. Es el modelo de los sistemas modernos.</li>
 </ul>
-<h4 class="tema-h4">Algoritmos de planificación clásicos</h4>
+<h4 class="tema-h4">Algoritmos clásicos de planificación</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>Algoritmo</strong></th>
-<th><strong>Funcionamiento</strong></th>
-<th><strong>Ventaja / inconveniente</strong></th>
+<th><strong>Criterio</strong></th>
+<th><strong>Observación</strong></th>
 </tr>
 <tr>
-<td>FCFS (First Come, First Served)</td>
-<td>Se atiende a los procesos por orden de llegada</td>
-<td>Sencillo, pero un proceso largo bloquea a los demás (efecto convoy)</td>
+<td><strong>FCFS</strong> (First Come, First Served)</td>
+<td>Orden de llegada</td>
+<td>Sencillo; un proceso largo retrasa a los demás (efecto convoy)</td>
 </tr>
 <tr>
-<td>SJF (Shortest Job First)</td>
-<td>Se prioriza el proceso con menor tiempo de ejecución estimado</td>
-<td>Minimiza el tiempo medio de espera, pero requiere conocer o estimar la duración</td>
+<td><strong>SJF</strong> (Shortest Job First)</td>
+<td>Menor duración estimada primero</td>
+<td>Puede minimizar el tiempo medio de espera <strong>bajo las condiciones clásicas del algoritmo y con estimaciones apropiadas</strong> de duración</td>
 </tr>
 <tr>
-<td>Round Robin</td>
-<td>Cada proceso recibe un turno fijo de CPU (quantum) y vuelve al final de la cola</td>
-<td>Reparto equitativo; el rendimiento depende de ajustar bien el quantum</td>
+<td><strong>Round Robin</strong></td>
+<td>Turnos rotatorios con <strong>quantum</strong></td>
+<td>Reparto equitativo; el rendimiento depende del quantum</td>
 </tr>
 <tr>
-<td>Por prioridades</td>
-<td>Se ejecuta primero el proceso de mayor prioridad</td>
-<td>Da respuesta rápida a lo importante, pero puede provocar inanición de procesos de baja prioridad</td>
+<td><strong>Por prioridades</strong></td>
+<td>Prioridad del proceso</td>
+<td>Respuesta rápida a lo importante; riesgo de inanición de los de baja prioridad</td>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>El quantum es el intervalo de tiempo máximo que Round Robin concede a cada proceso antes de forzar un cambio de contexto. Un quantum demasiado corto multiplica los cambios de contexto (y su coste); uno demasiado largo hace que el sistema se comporte casi como FCFS, perdiendo capacidad de respuesta.</th>
+<th><strong>📌 Imprescindible para el examen — el quantum</strong><br><strong>QUANTUM</strong> → intervalo de CPU asignado a un proceso antes de producirse la expulsión/cambio.<br><strong>Demasiado corto</strong> → muchos cambios de contexto (sobrecoste).<br><strong>Demasiado largo</strong> → comportamiento parecido a FCFS (pierde capacidad de respuesta).</th>
 </tr>
 </table></div>
-<h2 id="7-entradasalida" class="tema-h2">7. Entrada/salida</h2>
-<p>El SO también actúa de intermediario entre los procesos y los periféricos (Tema 8), a través de los <strong>controladores de dispositivo (drivers)</strong>: programas específicos para cada dispositivo que traducen las operaciones genéricas del SO a las órdenes concretas que entiende ese hardware.</p>
-<p>Para compensar la diferencia de velocidad entre la CPU y los dispositivos (mucho más lentos), el SO utiliza <strong>buffers</strong>: zonas de memoria intermedia donde se acumulan los datos mientras se transfieren entre el dispositivo y el proceso.</p>
-<h4 class="tema-h4">Métodos de entrada/salida</h4>
+
+<h2 id="7-entrada-salida" class="tema-h2">7. Entrada/salida</h2>
+<p>El SO intermedia entre los procesos y los dispositivos mediante los <strong>drivers</strong> (controladores específicos de cada dispositivo) y utiliza <strong>buffers</strong> — zonas de memoria intermedia — para compensar la diferencia de velocidad entre la CPU y los periféricos.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>Método</strong></th>
-<th><strong>Funcionamiento</strong></th>
-<th><strong>Ocupación de la CPU</strong></th>
+<th><strong>Qué ocurre</strong></th>
+<th><strong>Intervención de la CPU</strong></th>
 </tr>
 <tr>
-<td>E/S programada (polling)</td>
-<td>La CPU pregunta activamente y de forma repetida si el dispositivo ha terminado</td>
-<td>Alta: la CPU queda bloqueada esperando</td>
+<td><strong>Polling</strong> (E/S programada)</td>
+<td>La CPU pregunta repetidamente al dispositivo si ha terminado</td>
+<td>Alta</td>
 </tr>
 <tr>
-<td>E/S por interrupciones</td>
-<td>El dispositivo avisa a la CPU (mediante una interrupción) cuando termina la operación</td>
-<td>Media: la CPU puede hacer otras tareas mientras espera</td>
+<td><strong>Interrupciones</strong></td>
+<td>El dispositivo avisa a la CPU cuando termina</td>
+<td>Menor: la CPU hace otras tareas mientras tanto</td>
 </tr>
 <tr>
-<td>DMA (Direct Memory Access)</td>
-<td>El dispositivo transfiere los datos directamente a memoria, sin pasar por la CPU</td>
-<td>Mínima: la CPU solo interviene al inicio y al final de la transferencia</td>
+<td><strong>DMA</strong> (Direct Memory Access)</td>
+<td>Transferencia directa entre dispositivo y memoria mediante un controlador DMA</td>
+<td>Muy baja durante la transferencia (configura al inicio, interrupción al final)</td>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>El DMA (acceso directo a memoria) es el mecanismo más eficiente porque libera a la CPU de la propia transferencia de datos, que se gestiona mediante un controlador DMA dedicado: la CPU solo configura la operación al principio y recibe una interrupción al finalizar. Es un concepto que aparece con frecuencia en preguntas de examen sobre rendimiento de E/S.</th>
+<th><strong>📌 Imprescindible para el examen</strong><br>El <strong>DMA reduce de forma significativa la intervención de la CPU en las transferencias de bloques</strong>: un controlador dedicado mueve los datos entre el dispositivo y la memoria, y la CPU solo configura la operación y recibe la interrupción final. Formúlalo así — no como «el método más eficiente en cualquier circunstancia».</th>
 </tr>
 </table></div>
+
 <h2 id="8-sistemas-de-archivo" class="tema-h2">8. Sistemas de archivo</h2>
-<p>El <strong>sistema de archivos (file system)</strong> es el componente del SO responsable de organizar la información persistente sobre un dispositivo de almacenamiento: cómo se nombran, almacenan, localizan y protegen los ficheros y directorios.</p>
-<p>Habitualmente organiza los ficheros en una estructura jerárquica en árbol, a partir de un directorio raíz, y mantiene para cada fichero unos metadatos: tamaño, fechas de creación/modificación, propietario y permisos de acceso.</p>
+<p>El <strong>sistema de archivos (file system)</strong> es el componente del SO responsable de la <strong>organización persistente</strong> de la información sobre el almacenamiento: cómo se nombran, almacenan, localizan y protegen los <strong>ficheros</strong> y <strong>directorios</strong>.</p>
+<ul class="tema-lista">
+<li>Organiza los ficheros en una <strong>jerarquía</strong> en árbol a partir de un directorio raíz.</li>
+<li>Mantiene los <strong>metadatos</strong> de cada fichero: tamaño, fechas, propietario, permisos.</li>
+</ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Cada sistema operativo implementa sus propios sistemas de archivo: NTFS y, más recientemente, ReFS en Windows; ext4 en muchas distribuciones Linux; APFS en macOS. Cada uno se estudia con más detalle en el tema del sistema operativo correspondiente (Windows de usuario en el Tema 11, Linux de servidor en el Tema 13). De igual forma, el modelo de permisos de tipo Unix (lectura/escritura/ejecución para propietario, grupo y resto) y las listas de control de acceso (ACL) de Windows se tratan en esos temas.</th>
+<th><strong>⚠️ No confundir</strong><br><strong>Tema 4</strong> → la estructura lógica de la información <strong>dentro</strong> del fichero (registros, claves, métodos de acceso).<br><strong>Tema 9</strong> → la función del sistema de archivos del SO para <strong>gestionar ficheros y directorios</strong> sobre el almacenamiento.<br>Como ejemplos de sistemas de archivos pueden citarse NTFS (Windows), ext4 (Linux) o APFS (macOS); su desarrollo, y el de los permisos y ACL, corresponde a los temas de cada sistema concreto.</th>
 </tr>
 </table></div>
+
+<h2 id="9-datos-y-anclas-de-memoria" class="tema-h2">9. Datos y anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>SO = GESTIONA RECURSOS + CREA UNA ABSTRACCIÓN</strong> (gestor de recursos · máquina virtual extendida).</li>
+<li><strong>USER = LIMITADO · KERNEL = PRIVILEGIADO · SYSTEM CALL = pedir servicios al SO</strong> (cambio controlado de modo).</li>
+<li>Kernels: monolítico (junto en el núcleo) · microkernel (mínimo + servicios en modo usuario) · híbrido — diseños, no leyes de rendimiento.</li>
+<li><strong>Memoria virtual = abstracción, NO RAM extra</strong>.</li>
+<li><strong>PÁGINA = FIJA (fragmentación interna) · SEGMENTO = VARIABLE (fragmentación externa)</strong>.</li>
+<li>Swapping = RAM ↔ disco (coste) · <strong>Thrashing = paginar más que trabajar</strong>.</li>
+<li><strong>PROCESO = RECURSOS (PCB) · HILO = EJECUCIÓN</strong> (comparte memoria; pila y contador propios).</li>
+<li>Estados: nuevo → listo → ejecución → bloqueado/terminado; <strong>E/S ⇒ ejecución → bloqueado</strong>.</li>
+<li><strong>DEADLOCK = ESPERA CIRCULAR · STARVATION = NO LE LLEGA EL TURNO</strong>.</li>
+<li>Multitarea: cooperativa (cede) · expulsiva (el SO interrumpe — la moderna).</li>
+<li>Algoritmos: FCFS (llegada) · SJF (más corto) · <strong>ROUND ROBIN = QUANTUM</strong> · prioridades (riesgo de inanición).</li>
+<li><strong>POLLING = PREGUNTA · INTERRUPCIÓN = AVISA · DMA = TRANSFIERE</strong> (controlador dedicado).</li>
+<li>Sistema de archivos = ficheros + directorios + jerarquía + metadatos.</li>
+</ul>
+
+<h2 id="10-no-confundir" class="tema-h2">10. No confundir</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>Este punto no debe confundirse con el Tema 4 (Ficheros): allí se estudió la organización lógica de la información dentro de un fichero (registros, claves, métodos de inserción y acceso) desde el punto de vista de los datos; aquí se estudia el papel del sistema operativo como gestor del conjunto de ficheros y directorios sobre el almacenamiento.</th>
+<th><strong>Concepto A</strong></th>
+<th><strong>Concepto B</strong></th>
+<th><strong>Diferencia clave</strong></th>
+</tr>
+<tr>
+<td><strong>Tiempo compartido</strong>: repartir CPU para interactividad</td>
+<td><strong>Tiempo real</strong>: cumplir plazos (duro = fallo; blando = degradación)</td>
+<td>Repartir tiempo ≠ garantizar plazos</td>
+</tr>
+<tr>
+<td><strong>Kernel mode</strong>: privilegios elevados</td>
+<td><strong>User mode</strong>: privilegios restringidos</td>
+<td>La system call es el puente controlado entre ambos</td>
+</tr>
+<tr>
+<td><strong>Monolítico</strong>: servicios en el núcleo</td>
+<td><strong>Microkernel</strong>: mínimo en el núcleo · <strong>híbrido</strong>: combinación</td>
+<td>Diseños con compromisos; no leyes universales de rendimiento</td>
+</tr>
+<tr>
+<td><strong>Memoria virtual</strong>: abstracción de gestión</td>
+<td><strong>RAM</strong>: la memoria física real</td>
+<td>La virtual organiza y traduce; no añade RAM</td>
+</tr>
+<tr>
+<td><strong>Paginación</strong>: bloques fijos (páginas/marcos)</td>
+<td><strong>Segmentación</strong>: bloques lógicos variables</td>
+<td>Fija → posible frag. interna · variable → posible frag. externa</td>
+</tr>
+<tr>
+<td><strong>Fragmentación interna</strong>: sobra espacio dentro del bloque</td>
+<td><strong>Externa</strong>: huecos libres dispersos e inutilizables</td>
+<td>Interna = dentro · externa = entre bloques</td>
+</tr>
+<tr>
+<td><strong>Proceso</strong>: unidad de recursos (memoria propia, PCB)</td>
+<td><strong>Hilo</strong>: unidad de ejecución (memoria compartida)</td>
+<td>El proceso posee; el hilo ejecuta</td>
+</tr>
+<tr>
+<td><strong>Multitarea</strong>: varios procesos alternándose</td>
+<td><strong>Multithreading</strong>: varios hilos dentro de un proceso</td>
+<td>Niveles distintos del mismo mecanismo de planificación</td>
+</tr>
+<tr>
+<td><strong>Deadlock</strong>: espera circular, nadie puede avanzar</td>
+<td><strong>Starvation</strong>: podría avanzar, pero nunca le toca</td>
+<td>Bloqueo mutuo vs. postergación indefinida</td>
+</tr>
+<tr>
+<td><strong>Polling</strong>: la CPU pregunta</td>
+<td><strong>Interrupción</strong>: el dispositivo avisa · <strong>DMA</strong>: controlador transfiere</td>
+<td>De más a menos intervención de la CPU</td>
+</tr>
+<tr>
+<td><strong>Fichero</strong>: la unidad de información (T4)</td>
+<td><strong>Sistema de archivos</strong>: el gestor del conjunto (SO)</td>
+<td>Contenido vs. organización persistente</td>
+</tr>
+<tr>
+<td><strong>Almacenamiento</strong>: los dispositivos físicos (T6)</td>
+<td><strong>Memoria virtual</strong>: técnica que puede apoyarse en ellos</td>
+<td>El swap usa disco; no convierte el disco en RAM</td>
 </tr>
 </table></div>
-<h2 id="9-resumen-para-estudiar" class="tema-h2">9. Resumen para estudiar</h2>
+
+<h2 id="11-posibles-trampas-de-examen" class="tema-h2">11. Posibles trampas de examen</h2>
 <ul class="tema-lista">
-<li><strong>Sistema operativo</strong>: intermediario entre hardware y programas; gestor de recursos y máquina virtual extendida.</li>
-<li><strong>Clasificación</strong>: monousuario/multiusuario, monotarea/multitarea, uniprocesador/multiprocesador, por lotes/tiempo compartido/tiempo real, y por ámbito (escritorio, servidor, embebido, móvil).</li>
-<li><strong>Arquitectura</strong>: núcleo en modo privilegiado, resto en modo usuario, comunicados mediante llamadas al sistema; núcleos monolíticos (rápidos), microkernel (robustos) e híbridos (combinación habitual hoy).</li>
-<li><strong>Memoria</strong>: memoria virtual como abstracción; paginación (bloques fijos, fragmentación interna) frente a segmentación (bloques variables, fragmentación externa); swapping cuando falta RAM.</li>
-<li><strong>Procesos y subprocesos</strong>: el proceso como unidad de recursos (PCB, estados: nuevo, listo, ejecución, bloqueado, terminado); el hilo como unidad de ejecución, más ligero y compartiendo memoria dentro del proceso.</li>
-<li><strong>Planificación</strong>: cooperativa frente a expulsiva (estándar actual); algoritmos FCFS, SJF, Round Robin (con quantum) y por prioridades.</li>
-<li><strong>Entrada/salida</strong>: drivers y buffers; polling, interrupciones y DMA (el más eficiente, libera a la CPU).</li>
-<li><strong>Sistemas de archivo</strong>: organización jerárquica de ficheros y metadatos; el detalle de cada sistema de archivos concreto se estudia en el tema del SO correspondiente.</li>
-<li><strong>Concurrencia</strong>: interbloqueo (espera circular indefinida) vs. inanición (nunca llega el turno); hiperpaginación (thrashing) cuando el swapping domina el sistema.</li>
+<li><strong>«El tiempo real consiste en repartir la CPU equitativamente»</strong> — falso: eso es tiempo compartido; el tiempo real va de cumplir plazos.</li>
+<li><strong>«La memoria virtual añade RAM al equipo»</strong> — falso: es una abstracción de gestión; puede apoyarse en disco, mucho más lento.</li>
+<li><strong>«Proceso e hilo son sinónimos»</strong> — falso: el proceso es la unidad de recursos; el hilo, la de ejecución, y comparte la memoria del proceso.</li>
+<li><strong>«Multitarea y multithreading son lo mismo»</strong> — falso: procesos alternándose vs. hilos dentro de un proceso.</li>
+<li><strong>«La paginación usa bloques variables»</strong> — invertido: la paginación es de bloques fijos; la segmentación, variables.</li>
+<li><strong>«La fragmentación interna es típica de la segmentación»</strong> — invertido: interna → paginación; externa → segmentación.</li>
+<li><strong>«En un deadlock, los procesos avanzan lentamente»</strong> — falso: no avanzan en absoluto (espera circular); avanzar «cuando le toque» es la inanición.</li>
+<li><strong>«Las aplicaciones acceden directamente al hardware en modo usuario»</strong> — falso: necesitan una system call que cambie a modo núcleo.</li>
+<li><strong>«En el polling, el dispositivo avisa a la CPU»</strong> — invertido: en polling pregunta la CPU; el aviso es la interrupción.</li>
+<li><strong>«Con DMA, la CPU realiza la transferencia de datos»</strong> — falso: la realiza el controlador DMA; la CPU configura y recibe la interrupción final.</li>
+<li><strong>«Fichero y sistema de archivos son lo mismo»</strong> — falso: el fichero es la unidad; el sistema de archivos, el componente del SO que gestiona el conjunto.</li>
+<li><strong>«Linux es un microkernel porque es modular»</strong> — falso: es monolítico modular; sus módulos se ejecutan en modo núcleo.</li>
+<li><strong>«El monolítico es siempre más rápido y el microkernel siempre más lento»</strong> — matiz: son compromisos de diseño, no leyes universales.</li>
 </ul>
 
-<h2 id="10-conceptos-clave" class="tema-h2">10. Conceptos clave</h2>
+<h2 id="12-posibles-preguntas-tipo-test" class="tema-h2">12. Posibles preguntas tipo test</h2>
 <ul class="tema-lista">
-<li><strong>SO como gestor de recursos y máquina virtual extendida</strong>.</li>
-<li><strong>Clasificaciones</strong>: mono/multiusuario, mono/multitarea, lotes / tiempo compartido / tiempo real (duro y blando).</li>
-<li><strong>Kernel, modo núcleo vs. modo usuario, llamada al sistema</strong>.</li>
-<li><strong>Monolítico vs. microkernel vs. híbrido</strong> (Linux monolítico modular; Windows NT y macOS híbridos).</li>
-<li><strong>Memoria virtual, paginación (fija/interna) vs. segmentación (variable/externa), swapping, thrashing</strong>.</li>
-<li><strong>Proceso, PCB, estados</strong> (nuevo, listo, ejecución, bloqueado, terminado).</li>
-<li><strong>Hilo (thread)</strong> vs. proceso; multithreading.</li>
-<li><strong>Interbloqueo vs. inanición</strong>.</li>
-<li><strong>Planificador, cambio de contexto, multitarea cooperativa vs. expulsiva</strong>.</li>
-<li><strong>FCFS, SJF, Round Robin (quantum), prioridades</strong>.</li>
-<li><strong>Drivers, buffers, polling, interrupciones, DMA</strong>.</li>
-<li><strong>Sistema de archivos</strong> y metadatos.</li>
-</ul>
-
-<h2 id="11-posibles-puntos-de-examen" class="tema-h2">11. Posibles puntos de examen</h2>
-<ul class="tema-lista">
-<li>Los dos papeles del SO: <strong>gestor de recursos</strong> y <strong>máquina virtual extendida</strong>.</li>
-<li>Distinguir <strong>tiempo compartido de tiempo real</strong> (y tiempo real duro vs. blando).</li>
-<li>Qué ocurre en una <strong>llamada al sistema</strong> (cambio controlado de modo usuario a modo núcleo).</li>
-<li>Emparejar arquitectura de núcleo con su propiedad: monolítico → rendimiento; microkernel → robustez; híbrido → lo habitual hoy.</li>
+<li>Las dos visiones clásicas del SO: <strong>gestor de recursos</strong> y <strong>máquina virtual extendida</strong>.</li>
+<li>Enumerar las <strong>funciones</strong> de un SO (procesos, memoria, E/S, archivos, seguridad, interfaz).</li>
+<li>Clasificar un SO según cada <strong>criterio</strong> (usuarios, tareas, procesadores, tiempo, ámbito) sin mezclar ejes.</li>
+<li>Distinguir <strong>tiempo compartido de tiempo real</strong>, y tiempo real <strong>duro de blando</strong> con un ejemplo.</li>
+<li>¿Qué es una <strong>system call</strong> y qué cambio de modo provoca?</li>
+<li>¿Qué diferencia el <strong>modo usuario</strong> del <strong>modo núcleo</strong>?</li>
+<li>Emparejar tipo de kernel con su rasgo: monolítico (menos comunicación entre servicios) · microkernel (aislamiento/modularidad) · híbrido (combinación).</li>
+<li>¿Qué es la <strong>memoria virtual</strong> y qué NO es (RAM adicional)?</li>
 <li><strong>Paginación vs. segmentación</strong> y el tipo de fragmentación de cada una — pregunta clásica.</li>
-<li>El <strong>orden de los estados de un proceso</strong> y qué transición provoca una espera de E/S (ejecución → bloqueado).</li>
-<li>Diferencias <strong>proceso vs. hilo</strong> (memoria propia vs. compartida).</li>
-<li>Reconocer un <strong>interbloqueo</strong> en un supuesto y distinguirlo de la inanición.</li>
-<li>Qué es el <strong>quantum</strong> de Round Robin y el efecto de elegirlo mal.</li>
-<li>Cuál es el método de E/S <strong>más eficiente</strong> para la CPU (DMA) y por qué.</li>
+<li>¿Qué es el <strong>thrashing</strong> y cómo se manifiesta?</li>
+<li>El <strong>orden de los estados</strong> de un proceso y la transición <strong>ejecución → bloqueado</strong> por E/S.</li>
+<li>¿Qué contiene el <strong>PCB</strong>?</li>
+<li>Diferencias <strong>proceso vs. hilo</strong> (qué comparten los hilos y qué mantienen propio).</li>
+<li>Reconocer un <strong>deadlock</strong> en un supuesto y distinguirlo de la <strong>starvation</strong>.</li>
+<li>¿Qué es el <strong>quantum</strong> y qué ocurre si es demasiado corto o demasiado largo?</li>
+<li>Emparejar algoritmo y criterio: FCFS → llegada · SJF → duración estimada · RR → quantum · prioridades → prioridad.</li>
+<li>Ordenar <strong>polling / interrupciones / DMA</strong> por intervención de la CPU.</li>
+<li>Función del <strong>sistema de archivos</strong> y qué son los metadatos.</li>
+</ul>
+
+<h2 id="13-posibles-preguntas-cortas" class="tema-h2">13. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<h4 class="tema-h4">1. Explique el concepto y las funciones de un sistema operativo</h4>
+<ul class="tema-lista">
+<li>Definición y las dos visiones (gestor de recursos, máquina virtual extendida).</li>
+<li>Las seis funciones, una frase por cada una.</li>
+</ul>
+<h4 class="tema-h4">2. Clasifique los sistemas operativos</h4>
+<ul class="tema-lista">
+<li>Los cinco criterios independientes con sus tipos.</li>
+<li>Tiempo compartido vs. tiempo real (duro/blando); MS-DOS como ejemplo histórico mono/mono.</li>
+</ul>
+<h4 class="tema-h4">3. Explique los modos de ejecución y las llamadas al sistema</h4>
+<ul class="tema-lista">
+<li>User mode (restringido) vs. kernel mode (privilegiado); por qué existe la separación (protección).</li>
+<li>System call: petición de servicio, cambio controlado de modo y retorno.</li>
+</ul>
+<h4 class="tema-h4">4. Explique la memoria virtual</h4>
+<ul class="tema-lista">
+<li>Espacio de direcciones virtual por proceso; traducción a memoria física; aislamiento.</li>
+<li>Uso de almacenamiento secundario cuando corresponde; memoria virtual ≠ RAM adicional.</li>
+</ul>
+<h4 class="tema-h4">5. Diferencie paginación y segmentación</h4>
+<ul class="tema-lista">
+<li>Fijos (páginas/marcos, tabla de páginas) vs. variables (unidades lógicas).</li>
+<li>Fragmentación interna vs. externa; papel actual de cada técnica (paginación central; segmentación clásica más limitada).</li>
+</ul>
+<h4 class="tema-h4">6. Diferencie proceso e hilo</h4>
+<ul class="tema-lista">
+<li>Proceso: instancia + recursos + PCB; estados.</li>
+<li>Hilo: unidad de ejecución; comparte memoria/recursos; pila y contador propios; multithreading.</li>
+</ul>
+<h4 class="tema-h4">7. Explique la planificación de procesos y la multitarea</h4>
+<ul class="tema-lista">
+<li>Scheduler y cambio de contexto.</li>
+<li>Cooperativa vs. expulsiva (la moderna); los cuatro algoritmos con su criterio; el quantum de Round Robin.</li>
+</ul>
+<h4 class="tema-h4">8. Explique los métodos de entrada/salida</h4>
+<ul class="tema-lista">
+<li>Drivers y buffers.</li>
+<li>Polling (pregunta) → interrupciones (avisa) → DMA (controlador transfiere; CPU casi liberada).</li>
+</ul>
+<h4 class="tema-h4">9. Explique la función del sistema de archivos</h4>
+<ul class="tema-lista">
+<li>Organización persistente: ficheros, directorios, jerarquía, metadatos.</li>
+<li>Delimitación con el Tema 4 (dentro del fichero vs. gestión del conjunto); ejemplos citables (NTFS, ext4) sin desarrollo.</li>
+</ul>
+
+<h2 id="14-supuestos-practicos" class="tema-h2">14. Supuestos prácticos</h2>
+<h4 class="tema-h4">Supuesto 1 — El equipo lentísimo con el disco al 100 %</h4>
+<p><strong>Escenario</strong>: un usuario reporta que su equipo «va a pedales»; observas poca RAM libre y el disco trabajando sin descanso.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué fenómeno encaja?</strong> Thrashing: el sistema pasa más tiempo paginando (RAM ↔ swap) que ejecutando trabajo útil.</li>
+<li><strong>b) ¿Por qué el disco «no para»?</strong> El swapping traslada continuamente páginas entre RAM y almacenamiento, mucho más lento que la RAM.</li>
+<li><strong>c) ¿Vías de mejora?</strong> Ampliar RAM o reducir la carga simultánea (cerrar aplicaciones, revisar procesos), valorando el estado del sistema — no hay una única solución universal.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 2 — La aplicación «congelada» que espera al disco</h4>
+<p><strong>Escenario</strong>: una aplicación deja de responder unos segundos mientras guarda un archivo muy grande.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿En qué estado está su proceso (o hilo) mientras tanto?</strong> Bloqueado/en espera: aguarda el resultado de la operación de E/S.</li>
+<li><strong>b) ¿Qué transición se ha producido y cuál vendrá?</strong> Ejecución → bloqueado; al completarse la E/S, bloqueado → listo (y el planificador le devolverá la CPU).</li>
+<li><strong>c) ¿Cómo evitaría el programa «congelarse»?</strong> Con multithreading: un hilo atiende la interfaz mientras otro realiza la escritura.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 3 — Dos procesos que se esperan mutuamente</h4>
+<p><strong>Escenario</strong>: el proceso A retiene la impresora y solicita el escáner; el proceso B retiene el escáner y solicita la impresora. Ninguno avanza.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué situación es?</strong> Interbloqueo (deadlock): espera circular de recursos.</li>
+<li><strong>b) ¿Es lo mismo que si un proceso de baja prioridad nunca recibe la CPU?</strong> No: eso sería inanición (starvation) — podría avanzar, pero no le llega el turno.</li>
+<li><strong>c) ¿Qué puede hacer el SO?</strong> Prevenir, evitar, o detectar y resolver (por ejemplo, abortando uno de los procesos implicados).</li>
+</ul>
+<h4 class="tema-h4">Supuesto 4 — Transferencia masiva sin ahogar la CPU</h4>
+<p><strong>Escenario</strong>: hay que volcar grandes bloques de datos desde un dispositivo de captura a memoria sin degradar el resto del sistema.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué mecanismo de E/S conviene?</strong> DMA: un controlador dedicado transfiere directamente entre dispositivo y memoria.</li>
+<li><strong>b) ¿Qué papel juega la CPU?</strong> Configura la operación al inicio y atiende la interrupción final — interviene mínimamente durante la transferencia.</li>
+<li><strong>c) ¿Por qué no polling?</strong> Mantendría a la CPU preguntando continuamente, con alta ocupación improductiva.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 5 — Repartir la CPU con justicia</h4>
+<p><strong>Escenario</strong>: en un sistema interactivo, varios procesos de importancia similar deben compartir la CPU sin que ninguno monopolice.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué algoritmo encaja?</strong> Round Robin: turnos rotatorios con quantum.</li>
+<li><strong>b) ¿Qué pasa si el quantum es muy corto? ¿Y muy largo?</strong> Corto → demasiados cambios de contexto (sobrecoste); largo → comportamiento casi FCFS, peor respuesta interactiva.</li>
+<li><strong>c) ¿Qué riesgo tendría planificar solo por prioridades?</strong> Inanición de los procesos de baja prioridad.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 6 — El programa que necesita un servicio privilegiado</h4>
+<p><strong>Escenario</strong>: una aplicación de usuario necesita leer un fichero del disco.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Puede acceder directamente al hardware del disco?</strong> No: en modo usuario los privilegios están restringidos.</li>
+<li><strong>b) ¿Qué mecanismo utiliza?</strong> Una llamada al sistema (system call): cambio controlado a modo núcleo, el SO atiende la petición (vía sistema de archivos y driver) y retorna el resultado.</li>
+<li><strong>c) ¿Qué gana el sistema con esta separación?</strong> Protección y estabilidad: las aplicaciones no pueden corromper el hardware ni la memoria de otros procesos.</li>
+</ul>
+
+<h2 id="15-matriz-de-memorizacion" class="tema-h2">15. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Lo que debo recordar</strong></th>
+</tr>
+<tr>
+<td>SO</td>
+<td>Software de sistema que gestiona recursos y da servicios a las aplicaciones</td>
+</tr>
+<tr>
+<td>Gestor de recursos</td>
+<td>Reparte CPU, memoria y dispositivos entre programas que compiten</td>
+</tr>
+<tr>
+<td>Máquina virtual extendida</td>
+<td>Oculta la complejidad del hardware tras una interfaz sencilla</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>Parte central del SO; máximo privilegio, acceso al hardware</td>
+</tr>
+<tr>
+<td>User mode</td>
+<td>Privilegios restringidos; sin acceso directo al hardware</td>
+</tr>
+<tr>
+<td>System call</td>
+<td>Petición de servicios al SO; cambio controlado a modo núcleo</td>
+</tr>
+<tr>
+<td>Monolítico</td>
+<td>Servicios en el núcleo; puede reducir la sobrecarga de comunicación</td>
+</tr>
+<tr>
+<td>Microkernel</td>
+<td>Núcleo mínimo + servicios en modo usuario; más aislamiento/modularidad</td>
+</tr>
+<tr>
+<td>Memoria virtual</td>
+<td>Espacio virtual por proceso, traducido a físico; NO es RAM adicional</td>
+</tr>
+<tr>
+<td>Paginación</td>
+<td>Bloques fijos (páginas/marcos); posible fragmentación interna; central hoy</td>
+</tr>
+<tr>
+<td>Segmentación</td>
+<td>Bloques lógicos variables; posible fragmentación externa; papel hoy limitado</td>
+</tr>
+<tr>
+<td>Thrashing</td>
+<td>Exceso de paginación/intercambio frente a trabajo útil; disco sin parar, sistema lentísimo</td>
+</tr>
+<tr>
+<td>Proceso</td>
+<td>Programa en ejecución + recursos asignados</td>
+</tr>
+<tr>
+<td>PCB</td>
+<td>Estructura de control: estado, contador de programa, registros, gestión</td>
+</tr>
+<tr>
+<td>Hilo</td>
+<td>Unidad de ejecución dentro del proceso; comparte memoria; pila y contador propios</td>
+</tr>
+<tr>
+<td>Deadlock</td>
+<td>Espera circular de recursos; nadie avanza</td>
+</tr>
+<tr>
+<td>Starvation</td>
+<td>Espera indefinida porque otros acaparan turnos/recursos</td>
+</tr>
+<tr>
+<td>Scheduler</td>
+<td>Decide qué proceso/hilo listo recibe la CPU; cambio de contexto</td>
+</tr>
+<tr>
+<td>Quantum</td>
+<td>Intervalo de CPU en Round Robin; corto = muchos cambios; largo ≈ FCFS</td>
+</tr>
+<tr>
+<td>Polling</td>
+<td>La CPU pregunta repetidamente; alta ocupación</td>
+</tr>
+<tr>
+<td>Interrupciones</td>
+<td>El dispositivo avisa; la CPU trabaja mientras tanto</td>
+</tr>
+<tr>
+<td>DMA</td>
+<td>Controlador dedicado transfiere dispositivo ↔ memoria; CPU casi liberada</td>
+</tr>
+<tr>
+<td>Sistema de archivos</td>
+<td>Gestiona ficheros/directorios sobre el almacenamiento: jerarquía + metadatos</td>
+</tr>
+</table></div>
+
+<h2 id="16-resumen-final" class="tema-h2">16. Resumen final: si mañana fuera el examen</h2>
+<ul class="tema-lista">
+<li><strong>SO</strong> = gestor de recursos + máquina virtual extendida; funciones: procesos, memoria, E/S, archivos, seguridad, interfaz.</li>
+<li><strong>Clasificación</strong> por criterios independientes: usuarios, tareas, procesadores, tiempo (lotes/compartido/real — duro vs. blando), ámbito. MS-DOS = ejemplo histórico mono/mono.</li>
+<li><strong>Arquitectura</strong>: kernel privilegiado; user mode restringido; <strong>system call</strong> como puente. Kernels monolítico/microkernel/híbrido — compromisos de diseño, sin absolutismos (Linux = monolítico modular; NT y XNU = híbridos, como ejemplos).</li>
+<li><strong>Memoria</strong>: memoria virtual = abstracción (≠ RAM extra); <strong>página fija → frag. interna · segmento variable → frag. externa</strong>; la paginación es central hoy, la segmentación clásica tiene papel limitado. Swapping con coste; <strong>thrashing</strong> cuando la paginación domina.</li>
+<li><strong>Procesos</strong>: instancia + recursos, con PCB; estados nuevo/listo/ejecución/bloqueado/terminado; <strong>E/S ⇒ ejecución → bloqueado</strong>. <strong>Hilo</strong> = unidad de ejecución dentro del proceso (memoria compartida; pila y contador propios); multithreading.</li>
+<li><strong>Deadlock</strong> (espera circular) ≠ <strong>starvation</strong> (nunca le toca).</li>
+<li><strong>Planificación</strong>: scheduler + cambio de contexto; cooperativa vs. <strong>expulsiva (moderna)</strong>; FCFS · SJF (condicionado a estimaciones) · <strong>Round Robin con quantum</strong> · prioridades (riesgo de inanición).</li>
+<li><strong>E/S</strong>: drivers y buffers; <strong>polling (pregunta) → interrupciones (avisa) → DMA (controlador transfiere, CPU casi liberada)</strong>.</li>
+<li><strong>Sistema de archivos</strong>: ficheros, directorios, jerarquía, metadatos; los concretos (NTFS, ext4...) en los Temas 11-13; la organización interna del fichero, en el Tema 4.</li>
 </ul>
   </div>
 </article>

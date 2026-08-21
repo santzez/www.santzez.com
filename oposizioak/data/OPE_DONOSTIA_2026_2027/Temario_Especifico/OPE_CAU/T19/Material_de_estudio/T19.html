@@ -6,127 +6,739 @@
   </header>
 
   <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
-<li><a href="#1-interfaz-de-usuario-y-experiencia-de-usuario">1. Interfaz de usuario y experiencia de usuario</a></li>
-<li><a href="#2-principios-de-diseño-de-interfaces">2. Principios de diseño de interfaces</a></li>
-<li><a href="#3-usabilidad-concepto-y-heurísticas-de-nielsen">3. Usabilidad: concepto y heurísticas de Nielsen</a></li>
-<li><a href="#4-accesibilidad-concepto-y-principios-pour">4. Accesibilidad: concepto y principios POUR</a></li>
-<li><a href="#5-marco-normativo-de-accesibilidad-en-la-administración-públ">5. Marco normativo de accesibilidad en la Administración Pública</a></li>
-<li><a href="#6-técnicas-y-buenas-prácticas-de-accesibilidad">6. Técnicas y buenas prácticas de accesibilidad</a></li>
-<li><a href="#7-resumen-para-estudiar">7. Resumen para estudiar</a></li>
-<li><a href="#8-conceptos-clave">8. Conceptos clave</a></li>
-<li><a href="#9-posibles-puntos-de-examen">9. Posibles puntos de examen</a></li>
+<li><a href="#1-ui-y-ux">1. Interfaz de usuario (UI) y experiencia de usuario (UX)</a></li>
+<li><a href="#2-principios-de-diseno">2. Principios de diseño de interfaces</a></li>
+<li><a href="#3-usabilidad">3. Usabilidad: definición ISO 9241-11</a></li>
+<li><a href="#4-heuristicas-de-nielsen">4. Las diez heurísticas de Nielsen</a></li>
+<li><a href="#5-accesibilidad">5. Accesibilidad: concepto</a></li>
+<li><a href="#6-w3c-wai-wcag-y-pour">6. W3C, WAI, WCAG y los principios POUR</a></li>
+<li><a href="#7-marco-normativo">7. Marco normativo: EN 301 549 y RD 1112/2018</a></li>
+<li><a href="#8-tecnicas-de-accesibilidad">8. Técnicas y buenas prácticas de accesibilidad</a></li>
+<li><a href="#9-datos-y-anclas-de-memoria">9. Datos y anclas de memoria</a></li>
+<li><a href="#10-no-confundir">10. No confundir</a></li>
+<li><a href="#11-posibles-trampas-de-examen">11. Posibles trampas de examen</a></li>
+<li><a href="#12-posibles-preguntas-tipo-test">12. Posibles preguntas tipo test</a></li>
+<li><a href="#13-posibles-preguntas-cortas">13. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#14-supuestos-practicos">14. Supuestos prácticos</a></li>
+<li><a href="#15-matriz-de-memorizacion">15. Matriz de memorización</a></li>
+<li><a href="#16-resumen-final">16. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#17-actualidad-accesibilidad">17. Actualidad de accesibilidad — datos fechados</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
 
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>Este tema aborda el diseño de interfaz desde una perspectiva conceptual, transversal a cualquier tipo de aplicación (de escritorio, web o móvil). El funcionamiento de los navegadores web, sobre los que se ejecutan la mayoría de las interfaces web actuales, se estudia específicamente en el Tema 20.</th>
+<th><strong>⚠️ No confundir — fronteras del tema</strong><br>Este tema trata <strong>diseño de interfaz, usabilidad y accesibilidad</strong>. Los navegadores y los servicios web son el <strong>Tema 20</strong>; el ENS y la seguridad, el <strong>Tema 21</strong>; la criptografía, el <strong>Tema 24</strong>. HTML, CSS, JavaScript o el funcionamiento interno del navegador solo aparecen aquí <strong>como ejemplos de accesibilidad</strong>, nunca como contenido a desarrollar.</th>
 </tr>
 </table></div>
-<h2 id="1-interfaz-de-usuario-y-experiencia-de-usuario" class="tema-h2">1. Interfaz de usuario y experiencia de usuario</h2>
-<p>La <strong>interfaz de usuario (UI, User Interface)</strong> es el conjunto de elementos visuales y de interacción a través de los cuales una persona se comunica con un sistema: pantallas, botones, formularios, iconos, menús. La <strong>experiencia de usuario (UX, User Experience)</strong> es un concepto más amplio: engloba la percepción y la respuesta global de una persona al usar un producto o servicio —su satisfacción, la eficiencia con la que logra sus objetivos, incluso su respuesta emocional—, de la que la interfaz es solo una parte, aunque sea la más visible.</p>
+
+<h2 id="1-ui-y-ux" class="tema-h2">1. Interfaz de usuario (UI) y experiencia de usuario (UX)</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Puede resultar útil pensar en la UI como el volante, los pedales y el salpicadero de un coche, y en la UX como la sensación global de conducir ese coche: su comodidad, la seguridad que transmite, lo intuitivo que resulta. Se puede tener una UI visualmente atractiva y, aun así, ofrecer una mala UX si el sistema es lento, confuso o no ayuda a las personas usuarias a cumplir su objetivo.</th>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>UI (User Interface)</strong> → <strong>conjunto de elementos visuales y de interacción</strong> mediante los que una persona utiliza un sistema: pantallas, botones, formularios, iconos, menús.<br><strong>UX (User Experience)</strong> → <strong>experiencia global</strong> de la persona al utilizar un producto o servicio: si logra su objetivo, con qué esfuerzo y con qué percepción.<br><strong>UI = INTERFAZ · UX = EXPERIENCIA.</strong></th>
 </tr>
 </table></div>
-<h2 id="2-principios-de-diseño-de-interfaces" class="tema-h2">2. Principios de diseño de interfaces</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Ejemplo</strong><br>Una interfaz puede ser <strong>visualmente atractiva</strong> y, sin embargo, ofrecer una <strong>mala experiencia</strong> si es <strong>lenta, confusa o difícil de utilizar</strong>. La UI es una parte de la UX, no toda la UX: también influyen el rendimiento, la claridad del proceso y la ayuda disponible.</th>
+</tr>
+</table></div>
+
+<h2 id="2-principios-de-diseno" class="tema-h2">2. Principios de diseño de interfaces</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Principio</strong></th>
+<th><strong>Idea</strong></th>
+<th><strong>Ejemplo</strong></th>
+</tr>
+<tr>
+<td><strong>Consistencia</strong></td>
+<td>Elementos similares se presentan y comportan igual en toda la aplicación</td>
+<td>El mismo icono para «guardar» en todas las pantallas; el menú siempre en el mismo sitio</td>
+</tr>
+<tr>
+<td><strong>Retroalimentación</strong></td>
+<td>El sistema informa del resultado de cada acción</td>
+<td>Confirmación al guardar; barra de progreso durante una carga</td>
+</tr>
+<tr>
+<td><strong>Visibilidad del estado</strong></td>
+<td>La persona sabe dónde está y qué está ocurriendo</td>
+<td>Migas de pan; indicador del paso 2 de 4 en un trámite</td>
+</tr>
+<tr>
+<td><strong>Prevención de errores</strong></td>
+<td>Diseñar para que sea difícil equivocarse</td>
+<td>Botón «Enviar» deshabilitado hasta que el formulario es válido; confirmación antes de borrar</td>
+</tr>
+<tr>
+<td><strong>Reconocimiento antes que recuerdo</strong></td>
+<td>Mostrar las opciones en lugar de exigir memorizarlas</td>
+<td>Desplegable de provincias en vez de pedir un código que hay que recordar</td>
+</tr>
+<tr>
+<td><strong>Jerarquía visual</strong></td>
+<td>Ordenar los elementos por importancia guiando la atención</td>
+<td>La acción principal destacada; los datos secundarios con menor peso visual</td>
+</tr>
+<tr>
+<td><strong>Simplicidad</strong></td>
+<td>Evitar elementos innecesarios que compiten por la atención</td>
+<td>Formulario con solo los campos imprescindibles para el trámite</td>
+</tr>
+</table></div>
+
+<h2 id="3-usabilidad" class="tema-h2">3. Usabilidad: definición ISO 9241-11</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición literal</strong><br><strong>Usabilidad (ISO 9241-11)</strong>: <strong>grado en que un producto puede ser utilizado por usuarios concretos para alcanzar objetivos concretos con efectividad, eficiencia y satisfacción en un contexto de uso determinado</strong>.<br>Los cinco elementos de la definición son preguntables: <strong>usuarios concretos · objetivos concretos · efectividad · eficiencia · satisfacción · contexto de uso</strong>.</th>
+</tr>
+</table></div>
 <ul class="tema-lista">
-<li><strong>Consistencia</strong>: elementos similares deben comportarse y presentarse de forma coherente en toda la aplicación (los mismos iconos para las mismas acciones, los elementos recurrentes siempre en el mismo lugar).</li>
-<li><strong>Retroalimentación (feedback)</strong>: el sistema debe informar siempre a la persona usuaria del resultado de sus acciones (una confirmación visual al guardar, un indicador de progreso, un mensaje de error comprensible).</li>
-<li><strong>Visibilidad del estado del sistema</strong>: la persona usuaria debe poder saber en todo momento en qué parte de la aplicación se encuentra y qué está ocurriendo.</li>
-<li><strong>Prevención de errores</strong>: diseñar de forma que sea difícil equivocarse (por ejemplo, deshabilitando un botón «Guardar» hasta que el formulario sea válido) y, cuando el error ocurra, facilitar deshacerlo.</li>
-<li><strong>Reconocimiento antes que recuerdo</strong>: mostrar las opciones disponibles en lugar de exigir que la persona usuaria las memorice (por ejemplo, un menú desplegable frente a tener que recordar un comando concreto).</li>
-<li><strong>Jerarquía visual</strong>: organizar los elementos según su importancia, guiando la atención mediante el tamaño, el color, el contraste y la posición.</li>
-<li><strong>Simplicidad</strong>: evitar información o elementos innecesarios que compitan por la atención y dificulten centrarse en la tarea principal.</li>
-</ul>
-<h2 id="3-usabilidad-concepto-y-heurísticas-de-nielsen" class="tema-h2">3. Usabilidad: concepto y heurísticas de Nielsen</h2>
-<p>La norma ISO 9241-11 define la <strong>usabilidad</strong> como el grado en que un producto puede ser usado por usuarios concretos para alcanzar objetivos concretos, con efectividad, eficiencia y satisfacción, en un contexto de uso determinado. Mientras que los principios del punto anterior orientan el diseño, las <strong>diez heurísticas de usabilidad de Jakob Nielsen</strong> (1994) son el marco de referencia más citado para evaluar si una interfaz ya construida los cumple:</p>
-<ul class="tema-lista">
-<li>1. Visibilidad del estado del sistema.</li>
-<li>2. Correspondencia entre el sistema y el mundo real (lenguaje familiar a la persona usuaria, no jerga técnica).</li>
-<li>3. Control y libertad del usuario (deshacer/rehacer, salidas claras ante una acción no deseada).</li>
-<li>4. Consistencia y estándares.</li>
-<li>5. Prevención de errores.</li>
-<li>6. Reconocimiento antes que recuerdo.</li>
-<li>7. Flexibilidad y eficiencia de uso (atajos para usuarios expertos, sin penalizar a quienes empiezan).</li>
-<li>8. Diseño estético y minimalista.</li>
-<li>9. Ayudar a reconocer, diagnosticar y recuperarse de errores (mensajes de error claros, en lenguaje sencillo, con una solución propuesta).</li>
-<li>10. Ayuda y documentación (aunque lo deseable es que la interfaz se entienda sin necesitarla).</li>
+<li><strong>Efectividad</strong>: ¿se consigue el objetivo? (¿el trámite se completa?).</li>
+<li><strong>Eficiencia</strong>: ¿con qué esfuerzo y en cuánto tiempo?</li>
+<li><strong>Satisfacción</strong>: ¿cómo percibe la persona esa experiencia?</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Como puede apreciarse, buena parte de las heurísticas de Nielsen retoman los mismos principios señalados en el punto 2: no es casualidad, porque las heurísticas son, precisamente, la forma en que esos principios generales de diseño se formalizan en un marco evaluable, usado habitualmente para realizar evaluaciones heurísticas de interfaces ya construidas.</th>
+<th><strong>🧠 Para memorizar</strong><br><strong>USABILIDAD = EFECTIVIDAD + EFICIENCIA + SATISFACCIÓN</strong> (para usuarios y objetivos concretos, en un contexto de uso determinado).<br>No la reduzcas a «facilidad de uso»: esa formulación deja fuera la efectividad, la satisfacción y el contexto.</th>
 </tr>
 </table></div>
-<h2 id="4-accesibilidad-concepto-y-principios-pour" class="tema-h2">4. Accesibilidad: concepto y principios POUR</h2>
-<p>La <strong>accesibilidad</strong> es la capacidad de un producto o servicio de ser utilizado por el mayor número posible de personas, incluidas aquellas con algún tipo de discapacidad (visual, auditiva, motora o cognitiva) o que se encuentran en una situación de limitación temporal o contextual (luz solar directa sobre la pantalla, uso con una sola mano, conexión a internet muy lenta).</p>
-<p>El marco de referencia internacional lo establece la <strong>WAI (Web Accessibility Initiative)</strong> del W3C, a través de las <strong>WCAG (Web Content Accessibility Guidelines)</strong>, actualmente en su versión 2.1/2.2. Las WCAG se organizan en torno a cuatro principios, conocidos por el acrónimo <strong>POUR</strong>:</p>
-<ul class="tema-lista">
-<li><strong>Perceptible</strong>: la información debe presentarse de forma que las personas usuarias puedan percibirla, sea cual sea su capacidad sensorial (texto alternativo en imágenes, subtítulos en vídeo, contraste de color suficiente).</li>
-<li><strong>Operable</strong>: los componentes de la interfaz deben poder manejarse (navegación completa por teclado, tiempo suficiente para completar una tarea, ausencia de contenido que provoque convulsiones, como parpadeos intensos).</li>
-<li><strong>Comprensible</strong>: tanto la información como el manejo de la interfaz deben resultar comprensibles (lenguaje claro, comportamiento predecible, ayuda para corregir errores de entrada).</li>
-<li><strong>Robusto</strong>: el contenido debe poder interpretarse de forma fiable por una amplia variedad de agentes de usuario, incluidas las tecnologías de asistencia (lectores de pantalla).</li>
-</ul>
-<p>Las WCAG definen además tres niveles de conformidad crecientes: <strong>A</strong> (nivel mínimo), <strong>AA</strong> (nivel intermedio, el exigido habitualmente por la normativa, punto 5) y <strong>AAA</strong> (nivel máximo, no siempre alcanzable para la totalidad de un contenido).</p>
+
+<h2 id="4-heuristicas-de-nielsen" class="tema-h2">4. Las diez heurísticas de Nielsen</h2>
+<p>Son el marco de referencia más citado para <strong>evaluar</strong> una interfaz ya construida (evaluación heurística).</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br><strong>Usabilidad ≠ accesibilidad</strong>: la usabilidad busca que el producto sea fácil y eficiente de usar para su público objetivo; la accesibilidad busca que pueda usarlo el mayor número posible de personas, incluidas las que tienen alguna discapacidad. Un sitio puede ser muy usable para la mayoría y, aun así, inaccesible para una persona que navega con lector de pantalla — y mejorar la accesibilidad suele mejorar también la usabilidad de todos.</th>
+<th><strong>Nº</strong></th>
+<th><strong>Heurística</strong></th>
+<th><strong>Idea fundamental</strong></th>
+<th><strong>Ejemplo</strong></th>
+</tr>
+<tr>
+<td>1</td>
+<td><strong>Visibilidad del estado del sistema</strong></td>
+<td>Informar de lo que ocurre en un tiempo razonable</td>
+<td>«Guardando…» / paso 3 de 5</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Correspondencia entre sistema y mundo real</strong></td>
+<td>Lenguaje y conceptos familiares, no jerga técnica</td>
+<td>«Solicitud enviada» en lugar de «transacción 0 OK»</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Control y libertad del usuario</strong></td>
+<td>Salidas claras, deshacer y cancelar</td>
+<td>«Cancelar» visible; deshacer el último cambio</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Consistencia y estándares</strong></td>
+<td>Mismas palabras y patrones para las mismas cosas</td>
+<td>El botón principal siempre a la derecha, con el mismo texto</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Prevención de errores</strong></td>
+<td>Mejor evitar el error que gestionarlo</td>
+<td>Validar el formato del DNI al escribirlo</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Reconocimiento antes que recuerdo</strong></td>
+<td>Minimizar la carga de memoria mostrando lo necesario</td>
+<td>Opciones visibles en pantalla, no memorizadas del paso anterior</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Flexibilidad y eficiencia de uso</strong></td>
+<td>Atajos para expertos sin penalizar a quien empieza</td>
+<td>Atajos de teclado y búsquedas guardadas</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Diseño estético y minimalista</strong></td>
+<td>Solo la información relevante; lo accesorio resta</td>
+<td>Pantalla sin textos ni adornos que compitan con la tarea</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Ayudar a reconocer, diagnosticar y recuperarse de errores</strong></td>
+<td>Mensajes claros que digan qué pasó y cómo resolverlo</td>
+<td>«La fecha debe ser posterior a hoy» en lugar de «Error 42»</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Ayuda y documentación</strong></td>
+<td>Disponible y localizable, aunque lo ideal es no necesitarla</td>
+<td>Ayuda contextual junto al campo que la requiere</td>
 </tr>
 </table></div>
-<h2 id="5-marco-normativo-de-accesibilidad-en-la-administración-públ" class="tema-h2">5. Marco normativo de accesibilidad en la Administración Pública</h2>
-<p>En España, el <strong>Real Decreto 1112/2018</strong>, sobre accesibilidad de los sitios web y aplicaciones para dispositivos móviles del sector público, obliga a que estos cumplan un nivel de accesibilidad determinado. Como referencia técnica, adopta la norma <strong>UNE-EN 301549</strong> («Requisitos de accesibilidad para productos y servicios TIC»), versión española de la norma europea equivalente, que a su vez se alinea con el nivel <strong>WCAG 2.1 AA</strong>.</p>
-<p>El Real Decreto exige, además, que cada sitio web o aplicación móvil del sector público publique una <strong>declaración de accesibilidad</strong>, en la que se detalla su grado de cumplimiento, y que ofrezca un canal de comunicación para que la ciudadanía pueda plantear quejas o sugerencias relacionadas con la accesibilidad.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Para un puesto de CAU en la Administración Pública, esta normativa no es una cuestión meramente técnica u opcional: al dar soporte a aplicaciones y sitios web del organismo, o al participar en su despliegue o configuración, debe tenerse presente que existe una obligación legal de cumplir unos requisitos mínimos de accesibilidad, con las mismas consecuencias de incumplimiento que cualquier otra obligación normativa de la Administración.</th>
+<th><strong>🧠 Memorización rápida — las 10 en una línea cada una</strong><br><strong>1 Estado · 2 Mundo real · 3 Control · 4 Consistencia · 5 Prevención · 6 Reconocimiento · 7 Flexibilidad · 8 Minimalismo · 9 Recuperación de errores · 10 Ayuda.</strong><br>Ojo a la pareja más confundida: <strong>5 previene</strong> el error; <strong>9 ayuda a salir</strong> de él cuando ya ha ocurrido.</th>
 </tr>
 </table></div>
-<h2 id="6-técnicas-y-buenas-prácticas-de-accesibilidad" class="tema-h2">6. Técnicas y buenas prácticas de accesibilidad</h2>
+
+<h2 id="5-accesibilidad" class="tema-h2">5. Accesibilidad: concepto</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>Accesibilidad</strong> → <strong>capacidad de que un producto o servicio pueda ser utilizado por un amplio conjunto de personas</strong>, incluidas <strong>personas con discapacidad</strong> y <strong>personas que encuentran limitaciones temporales o contextuales</strong>.<br>No la limites a la discapacidad permanente: también contempla situaciones pasajeras y de contexto.</th>
+</tr>
+</table></div>
 <ul class="tema-lista">
-<li><strong>Texto alternativo (atributo alt)</strong> en las imágenes, para que los lectores de pantalla puedan describir su contenido a personas con discapacidad visual.</li>
-<li><strong>Contraste de color suficiente</strong> entre el texto y el fondo (las WCAG establecen ratios mínimos concretos, por ejemplo 4,5:1 para texto normal en nivel AA).</li>
-<li><strong>Navegación completa por teclado</strong>, sin depender exclusivamente del ratón, para personas con dificultades motoras.</li>
-<li><strong>Etiquetas asociadas a los campos de formulario</strong> (label), de forma que un lector de pantalla pueda anunciar claramente qué dato se solicita en cada campo.</li>
-<li><strong>Estructura semántica correcta</strong> (encabezados jerárquicos, marcado HTML semántico), para que las tecnologías de asistencia puedan interpretar y navegar la página de forma ordenada.</li>
-<li><strong>Subtítulos y transcripciones</strong> para el contenido en audio o vídeo.</li>
-<li><strong>Diseño adaptable</strong> a distintos tamaños de pantalla y niveles de zoom, sin pérdida de contenido ni de funcionalidad.</li>
+<li><strong>Discapacidad visual</strong>: uso de lector de pantalla, ampliación, baja visión, daltonismo.</li>
+<li><strong>Discapacidad auditiva</strong>: necesidad de subtítulos o transcripciones.</li>
+<li><strong>Discapacidad motora</strong>: uso de teclado o dispositivos alternativos en lugar del ratón.</li>
+<li><strong>Discapacidad cognitiva</strong>: necesidad de lenguaje claro y procesos predecibles.</li>
+<li><strong>Limitaciones contextuales o temporales</strong>: <strong>luz solar</strong> sobre la pantalla, <strong>conexión lenta</strong>, <strong>uso con una sola mano</strong>, un brazo escayolado, un entorno ruidoso.</li>
 </ul>
-<h2 id="7-resumen-para-estudiar" class="tema-h2">7. Resumen para estudiar</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — usabilidad y accesibilidad</strong><br><strong>Usabilidad</strong>: que el producto permita alcanzar objetivos con efectividad, eficiencia y satisfacción para <strong>usuarios concretos</strong>.<br><strong>Accesibilidad</strong>: que pueda utilizarlo un <strong>amplio conjunto de personas</strong>, incluidas las que tienen discapacidad o limitaciones.<br>Un sitio puede ser muy usable para la mayoría y, aun así, <strong>inaccesible</strong> con lector de pantalla. Mejorar la accesibilidad suele mejorar la usabilidad de todos.</th>
+</tr>
+</table></div>
+
+<h2 id="6-w3c-wai-wcag-y-pour" class="tema-h2">6. W3C, WAI, WCAG y los principios POUR</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Elemento</strong></th>
+<th><strong>Qué es</strong></th>
+</tr>
+<tr>
+<td><strong>W3C</strong></td>
+<td><strong>Organización que desarrolla estándares web</strong></td>
+</tr>
+<tr>
+<td><strong>WAI</strong></td>
+<td><strong>Iniciativa del W3C dedicada a accesibilidad</strong> (Web Accessibility Initiative)</td>
+</tr>
+<tr>
+<td><strong>WCAG</strong></td>
+<td><strong>Pautas/requisitos de accesibilidad para contenido web</strong> (Web Content Accessibility Guidelines)</td>
+</tr>
+</table></div>
+<p>Precisión de alcance: <strong>las WCAG son pautas para el contenido web</strong>. Aunque sus principios se utilizan ampliamente como referencia, <strong>no son «el estándar de toda la accesibilidad TIC»</strong> — ese ámbito más amplio corresponde a la norma técnica europea (apartado 7).</p>
+<h4 class="tema-h4">Los cuatro principios POUR</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Principio</strong></th>
+<th><strong>Significa</strong></th>
+<th><strong>Ejemplos</strong></th>
+</tr>
+<tr>
+<td><strong>P — Perceptible</strong></td>
+<td>La información debe poder percibirse</td>
+<td><strong>Texto alternativo</strong> en imágenes · <strong>subtítulos</strong> en vídeo · contraste suficiente</td>
+</tr>
+<tr>
+<td><strong>O — Operable</strong></td>
+<td>La interfaz debe poder manejarse</td>
+<td><strong>Navegación por teclado</strong> · <strong>foco visible</strong> · tiempo suficiente para completar una tarea</td>
+</tr>
+<tr>
+<td><strong>U — Comprensible</strong></td>
+<td>Información y manejo deben entenderse</td>
+<td><strong>Mensajes claros</strong> de error · <strong>lenguaje sencillo</strong> · comportamiento predecible</td>
+</tr>
+<tr>
+<td><strong>R — Robusto</strong></td>
+<td>El contenido debe interpretarse de forma fiable</td>
+<td><strong>Compatibilidad con tecnologías de asistencia</strong> (lectores de pantalla) · marcado correcto</td>
+</tr>
+</table></div>
+<h4 class="tema-h4">Niveles de conformidad</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Nivel</strong></th>
+<th><strong>Alcance</strong></th>
+</tr>
+<tr>
+<td><strong>A</strong></td>
+<td>Mínimo</td>
+</tr>
+<tr>
+<td><strong>AA</strong></td>
+<td>Intermedio — el habitualmente utilizado como referencia de conformidad</td>
+</tr>
+<tr>
+<td><strong>AAA</strong></td>
+<td>Máximo — <strong>no se plantea como obligatorio con carácter general</strong> para todo un sitio</td>
+</tr>
+</table></div>
+
+<h2 id="7-marco-normativo" class="tema-h2">7. Marco normativo: EN 301 549 y RD 1112/2018</h2>
+<h4 class="tema-h4">EN 301 549 — norma técnica europea</h4>
 <ul class="tema-lista">
-<li><strong>UI frente a UX</strong>: la interfaz (elementos visuales y de interacción) es solo una parte de la experiencia global del usuario con el sistema.</li>
-<li><strong>Principios de diseño</strong>: consistencia, retroalimentación, visibilidad del estado, prevención de errores, reconocimiento antes que recuerdo, jerarquía visual y simplicidad.</li>
-<li><strong>Usabilidad</strong>: grado en que un producto permite lograr objetivos con efectividad, eficiencia y satisfacción (ISO 9241-11); evaluada habitualmente con las diez heurísticas de Nielsen.</li>
-<li><strong>Accesibilidad</strong>: uso por el mayor número posible de personas; principios POUR (Perceptible, Operable, Comprensible, Robusto) de las WCAG del W3C, con niveles de conformidad A, AA y AAA.</li>
-<li><strong>Normativa española</strong>: RD 1112/2018 exige a los sitios web y apps del sector público cumplir la norma UNE-EN 301549 (equivalente a WCAG 2.1 AA) y publicar una declaración de accesibilidad.</li>
-<li><strong>Buenas prácticas</strong>: texto alternativo, contraste suficiente, navegación por teclado, etiquetado de formularios, estructura semántica, subtítulos y diseño adaptable.</li>
+<li><strong>EN 301 549</strong> es la <strong>norma técnica europea de requisitos de accesibilidad para productos y servicios TIC</strong>.</li>
+<li>Para <strong>contenido web</strong>, la versión <strong>EN 301 549 V3.2.1 incorpora requisitos basados en WCAG 2.1</strong>, y el <strong>nivel de conformidad utilizado es AA</strong>.</li>
+<li><strong>Su alcance es más amplio que el de las WCAG</strong>: cubre productos y servicios TIC en general (hardware, software, documentos, aplicaciones), no solo contenido web. <strong>No son equivalentes.</strong></li>
+</ul>
+<h4 class="tema-h4">RD 1112/2018 — marco jurídico español</h4>
+<ul class="tema-lista">
+<li>El <strong>Real Decreto 1112/2018</strong> constituye el <strong>marco jurídico español sobre accesibilidad de los sitios web y aplicaciones para dispositivos móviles del sector público</strong>.</li>
+<li>Alcanza, entre otros sujetos incluidos por la norma, a la <strong>Administración General del Estado</strong>, las <strong>comunidades autónomas</strong>, las <strong>entidades locales</strong> y el <strong>sector público institucional</strong>.</li>
+</ul>
+<h4 class="tema-h4">Qué obliga a hacer</h4>
+<ul class="tema-lista">
+<li><strong>Accesibilidad desde el diseño</strong>: no como añadido posterior.</li>
+<li><strong>Mantenimiento y actualización</strong> de la accesibilidad a lo largo del ciclo de vida.</li>
+<li><strong>Declaración de accesibilidad</strong> publicada.</li>
+<li><strong>Mecanismo de comunicación</strong> para que cualquier persona pueda trasladar problemas de accesibilidad.</li>
+<li><strong>Mecanismo de reclamación</strong>.</li>
+<li><strong>Revisiones periódicas</strong> del cumplimiento.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>Las revisiones deben considerar tanto comprobaciones automáticas como revisión manual experta.</strong> Las herramientas automáticas detectan una parte de los problemas, pero <strong>no sustituyen</strong> la revisión humana (por ejemplo, si un texto alternativo es <em>correcto</em>, si el orden de lectura tiene sentido o si un mensaje de error es realmente comprensible).</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Declaración de accesibilidad</h4>
+<p>Es la <strong>declaración pública sobre el estado de accesibilidad</strong> del sitio web o de la aplicación. En términos generales debe incluir:</p>
+<ul class="tema-lista">
+<li>La <strong>situación de conformidad</strong> (por ejemplo, plena, parcial o no conforme).</li>
+<li>Los <strong>contenidos no accesibles</strong> o <strong>exclusiones</strong>, cuando corresponda.</li>
+<li>El <strong>mecanismo de contacto y comunicación</strong> disponible.</li>
+</ul>
+<p>Existe además un <strong>mecanismo de reclamación</strong> previsto por la norma.</p>
+<h4 class="tema-h4">Cuándo revisar</h4>
+<ul class="tema-lista">
+<li>Durante el <strong>diseño</strong>.</li>
+<li><strong>Antes de la puesta en funcionamiento</strong>.</li>
+<li><strong>Periódicamente durante el ciclo de vida</strong>.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Elemento</strong></th>
+<th><strong>Qué es</strong></th>
+</tr>
+<tr>
+<td><strong>W3C</strong></td>
+<td>Organismo de estandarización web</td>
+</tr>
+<tr>
+<td><strong>WAI</strong></td>
+<td>Iniciativa de accesibilidad del W3C</td>
+</tr>
+<tr>
+<td><strong>WCAG</strong></td>
+<td>Pautas de accesibilidad web</td>
+</tr>
+<tr>
+<td><strong>EN 301 549</strong></td>
+<td>Norma técnica europea de accesibilidad TIC</td>
+</tr>
+<tr>
+<td><strong>RD 1112/2018</strong></td>
+<td>Norma jurídica española aplicable al sector público</td>
+</tr>
+</table></div>
+
+<h2 id="8-tecnicas-de-accesibilidad" class="tema-h2">8. Técnicas y buenas prácticas de accesibilidad</h2>
+<h4 class="tema-h4">Contraste</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — regla básica (WCAG AA)</strong><br><strong>Texto normal → contraste mínimo 4,5:1.</strong><br><strong>Texto grande → contraste mínimo 3:1.</strong><br>(Existen excepciones que no es necesario desarrollar aquí.)</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Texto alternativo</h4>
+<ul class="tema-lista">
+<li><strong>Imagen informativa</strong> → <strong>alt descriptivo</strong>, que transmita la información que aporta la imagen.</li>
+<li><strong>Imagen decorativa</strong> → <strong>alt vacío</strong> cuando corresponda, para que las tecnologías de asistencia la ignoren y no añadan ruido.</li>
+</ul>
+<h4 class="tema-h4">Teclado y foco</h4>
+<ul class="tema-lista">
+<li><strong>Navegación completa por teclado</strong>: toda la funcionalidad debe poder utilizarse sin ratón.</li>
+<li><strong>Foco visible</strong>: debe verse en qué elemento se está en cada momento.</li>
+<li>Una interfaz <strong>no debe depender exclusivamente del ratón</strong>. (WCAG 2.2 incorpora criterios relacionados con el foco; su detalle no es objeto de este tema.)</li>
+</ul>
+<h4 class="tema-h4">Formularios</h4>
+<ul class="tema-lista">
+<li><strong>Etiqueta (label) asociada</strong> a cada campo.</li>
+<li><strong>Instrucciones claras</strong> sobre lo que se pide y el formato esperado.</li>
+<li><strong>Identificación de errores</strong>: señalar qué campo falla.</li>
+<li><strong>Mensajes comprensibles</strong> y <strong>posibilidad de corregir</strong> el error.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Ejemplo</strong><br>No basta con mostrar <strong>«Error 42»</strong>: hay que indicar <strong>qué campo es incorrecto y cómo corregirlo</strong> — por ejemplo, «La fecha de nacimiento debe tener el formato DD/MM/AAAA».</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Estructura semántica</h4>
+<ul class="tema-lista">
+<li><strong>Encabezados jerárquicos</strong> correctamente anidados.</li>
+<li><strong>Estructura lógica</strong> del contenido y orden de lectura coherente.</li>
+<li><strong>HTML semántico</strong>: usar el elemento adecuado para cada cosa.</li>
+<li>Objetivo: <strong>permitir que las tecnologías de asistencia comprendan y recorran el contenido</strong>.</li>
+</ul>
+<h4 class="tema-h4">Multimedia</h4>
+<ul class="tema-lista">
+<li><strong>Subtítulos</strong> para el contenido con audio.</li>
+<li><strong>Transcripciones</strong> del contenido hablado.</li>
+<li><strong>Alternativas accesibles</strong> equivalentes al contenido audiovisual.</li>
+</ul>
+<h4 class="tema-h4">Adaptación y zoom</h4>
+<ul class="tema-lista">
+<li><strong>Adaptación a distintos tamaños</strong> de pantalla y ventana.</li>
+<li>Soporte de <strong>zoom</strong> o ampliación.</li>
+<li><strong>Conservación del contenido y de la funcionalidad</strong> al ampliar o reducir: nada debe perderse ni quedar inutilizable.</li>
 </ul>
 
-<h2 id="8-conceptos-clave" class="tema-h2">8. Conceptos clave</h2>
+<h2 id="9-datos-y-anclas-de-memoria" class="tema-h2">9. Datos y anclas de memoria</h2>
 <ul class="tema-lista">
-<li><strong>UI vs. UX</strong>.</li>
-<li><strong>Principios de diseño</strong>: consistencia, feedback, visibilidad del estado, prevención de errores, reconocimiento vs. recuerdo, jerarquía visual, simplicidad.</li>
-<li><strong>Usabilidad (ISO 9241-11)</strong>: efectividad + eficiencia + satisfacción.</li>
-<li><strong>Las 10 heurísticas de Nielsen</strong> (1994).</li>
-<li><strong>Accesibilidad; usabilidad ≠ accesibilidad</strong>.</li>
-<li><strong>W3C / WAI / WCAG 2.1-2.2</strong>; principios <strong>POUR</strong>; niveles <strong>A / AA / AAA</strong>.</li>
-<li><strong>RD 1112/2018</strong>; norma <strong>UNE-EN 301549</strong>; nivel exigido <strong>WCAG 2.1 AA</strong>; declaración de accesibilidad.</li>
-<li>Técnicas: <strong>alt, contraste 4,5:1, teclado, label, semántica, subtítulos, diseño adaptable</strong>; lectores de pantalla.</li>
+<li><strong>UI → INTERFAZ · UX → EXPERIENCIA</strong>.</li>
+<li><strong>USABILIDAD = EFECTIVIDAD + EFICIENCIA + SATISFACCIÓN</strong> (ISO 9241-11, para usuarios y objetivos concretos en un contexto de uso).</li>
+<li>Nielsen, las 10: <strong>estado · mundo real · control · consistencia · prevención · reconocimiento · flexibilidad · minimalismo · recuperación de errores · ayuda</strong>.</li>
+<li><strong>POUR</strong>: <strong>P → PERCEPTIBLE · O → OPERABLE · U → COMPRENSIBLE · R → ROBUSTO</strong>.</li>
+<li><strong>A → MÍNIMO · AA → INTERMEDIO · AAA → MÁXIMO</strong> (AAA no como obligación general).</li>
+<li><strong>W3C</strong> = estándares web · <strong>WAI</strong> = iniciativa de accesibilidad · <strong>WCAG</strong> = pautas de contenido web.</li>
+<li><strong>EN 301 549 → NORMA TÉCNICA</strong> europea de accesibilidad TIC (más amplia que WCAG) · <strong>RD 1112/2018 → MARCO JURÍDICO</strong> español del sector público.</li>
+<li>Obligaciones del RD: <strong>accesibilidad desde el diseño · mantenimiento · declaración · comunicación · reclamación · revisiones</strong> (automáticas <strong>y</strong> manuales expertas).</li>
+<li>Contraste AA: <strong>4,5:1 texto normal · 3:1 texto grande</strong>.</li>
+<li><strong>alt descriptivo</strong> si la imagen es informativa · <strong>alt vacío</strong> si es decorativa.</li>
+<li><strong>Teclado + foco visible</strong>; <strong>label</strong> en cada campo; <strong>subtítulos y transcripciones</strong>; <strong>zoom sin pérdida</strong> de contenido ni funcionalidad.</li>
 </ul>
 
-<h2 id="9-posibles-puntos-de-examen" class="tema-h2">9. Posibles puntos de examen</h2>
+<h2 id="10-no-confundir" class="tema-h2">10. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto A</strong></th>
+<th><strong>Concepto B</strong></th>
+<th><strong>Diferencia clave</strong></th>
+</tr>
+<tr>
+<td><strong>UI</strong>: elementos visuales y de interacción</td>
+<td><strong>UX</strong>: experiencia global de uso</td>
+<td>La UI es parte de la UX, no toda la UX</td>
+</tr>
+<tr>
+<td><strong>Usabilidad</strong>: efectividad, eficiencia y satisfacción</td>
+<td><strong>Accesibilidad</strong>: que pueda usarlo un amplio conjunto de personas</td>
+<td>Se puede ser usable para la mayoría e inaccesible para algunas personas</td>
+</tr>
+<tr>
+<td><strong>W3C</strong>: organismo de estandarización web</td>
+<td><strong>WAI</strong>: su iniciativa de accesibilidad</td>
+<td>Organización vs. iniciativa dentro de ella</td>
+</tr>
+<tr>
+<td><strong>WAI</strong>: la iniciativa</td>
+<td><strong>WCAG</strong>: las pautas que publica</td>
+<td>Quién lo hace vs. qué documento resulta</td>
+</tr>
+<tr>
+<td><strong>WCAG</strong>: pautas para contenido web</td>
+<td><strong>EN 301 549</strong>: norma técnica europea de accesibilidad TIC</td>
+<td>La norma europea es más amplia; no son equivalentes</td>
+</tr>
+<tr>
+<td><strong>EN 301 549</strong>: norma técnica</td>
+<td><strong>RD 1112/2018</strong>: norma jurídica española</td>
+<td>Requisitos técnicos vs. obligación legal para el sector público</td>
+</tr>
+<tr>
+<td><strong>WCAG 2.1</strong></td>
+<td><strong>WCAG 2.2</strong></td>
+<td>2.2 es la más reciente de la familia WCAG 2 y mantiene compatibilidad hacia atrás con 2.1</td>
+</tr>
+<tr>
+<td><strong>A</strong>: mínimo</td>
+<td><strong>AA</strong>: intermedio · <strong>AAA</strong>: máximo</td>
+<td>AAA no se plantea como obligatorio con carácter general</td>
+</tr>
+<tr>
+<td><strong>Perceptible</strong>: poder percibir la información</td>
+<td><strong>Operable</strong>: poder manejar la interfaz</td>
+<td>Percibir (ver/oír) vs. manejar (teclado, tiempo)</td>
+</tr>
+<tr>
+<td><strong>alt</strong>: alternativa textual para tecnologías de asistencia</td>
+<td><strong>Etiqueta visible</strong> (título, pie, label)</td>
+<td>El alt no siempre se muestra; la etiqueta visible sí</td>
+</tr>
+<tr>
+<td><strong>Revisión automática</strong>: herramientas de análisis</td>
+<td><strong>Revisión manual experta</strong></td>
+<td>La automática detecta parte de los problemas; no sustituye a la humana</td>
+</tr>
+<tr>
+<td><strong>Prevención de errores</strong> (heurística 5)</td>
+<td><strong>Recuperación de errores</strong> (heurística 9)</td>
+<td>Evitar que ocurra vs. ayudar a salir cuando ya ocurrió</td>
+</tr>
+</table></div>
+
+<h2 id="11-posibles-trampas-de-examen" class="tema-h2">11. Posibles trampas de examen</h2>
 <ul class="tema-lista">
-<li>Diferencia entre <strong>UI y UX</strong>.</li>
-<li>Los tres componentes de la definición de <strong>usabilidad ISO 9241-11</strong> (efectividad, eficiencia, satisfacción).</li>
-<li>Reconocer una <strong>heurística de Nielsen</strong> por su descripción (p. ej., «reconocimiento antes que recuerdo»).</li>
-<li>El significado del acrónimo <strong>POUR</strong> y emparejar cada principio con un ejemplo.</li>
-<li>Los <strong>niveles de conformidad WCAG</strong> y cuál exige la normativa (AA).</li>
-<li>Qué regula el <strong>RD 1112/2018</strong> y a quién obliga (sitios web y apps del sector público).</li>
-<li>Qué norma técnica adopta España (<strong>UNE-EN 301549</strong>).</li>
-<li>Qué es la <strong>declaración de accesibilidad</strong> y qué debe ofrecer el sitio (canal de quejas).</li>
-<li>Para qué sirve el atributo <strong>alt</strong> y el ratio de contraste mínimo AA (4,5:1).</li>
-<li>Distinguir <strong>usabilidad de accesibilidad</strong> en un supuesto.</li>
+<li><strong>«UI y UX son sinónimos»</strong> — falso: interfaz vs. experiencia global.</li>
+<li><strong>«Usabilidad es lo mismo que accesibilidad»</strong> — falso: objetivos distintos, aunque relacionados.</li>
+<li><strong>«Usabilidad es simplemente facilidad de uso»</strong> — incompleto: la definición ISO incluye <strong>efectividad, eficiencia y satisfacción</strong>, con usuarios, objetivos y contexto concretos.</li>
+<li><strong>«WCAG y EN 301 549 son lo mismo»</strong> — falso: la norma europea es más amplia (TIC en general) e <strong>incorpora</strong> requisitos basados en WCAG para contenido web.</li>
+<li><strong>«EN 301 549 y RD 1112/2018 son equivalentes»</strong> — falso: norma técnica vs. norma jurídica.</li>
+<li><strong>«Como WCAG 2.2 es la versión más reciente, la normativa española exige automáticamente WCAG 2.2»</strong> — falso: hay que distinguir <strong>actualidad técnica</strong> de <strong>marco jurídico</strong>.</li>
+<li><strong>«El nivel AA garantiza accesibilidad perfecta»</strong> — falso: es un nivel de conformidad, no una garantía absoluta de que todas las personas puedan usarlo sin barreras.</li>
+<li><strong>«AAA es el nivel obligatorio»</strong> — falso: no se plantea como obligatorio con carácter general.</li>
+<li><strong>«Con una herramienta automática basta para acreditar accesibilidad»</strong> — falso: las revisiones deben considerar <strong>comprobaciones automáticas y revisión manual experta</strong>.</li>
+<li><strong>«Toda imagen debe llevar alt descriptivo»</strong> — impreciso: la <strong>informativa</strong> sí; la <strong>decorativa</strong> lleva alt vacío cuando corresponda.</li>
+<li><strong>«El contraste mínimo es siempre 4,5:1»</strong> — impreciso: 4,5:1 para texto normal en AA; <strong>3:1 para texto grande</strong>.</li>
+<li><strong>«Perceptible y Operable son lo mismo»</strong> — falso: percibir la información vs. poder manejar la interfaz.</li>
+<li><strong>«La accesibilidad solo afecta a personas con discapacidad permanente»</strong> — falso: incluye limitaciones temporales y contextuales.</li>
+<li><strong>Colar contenido ajeno</strong>: el ENI (interoperabilidad, Tema 16) y el ENS (seguridad, Tema 21) no pertenecen a este tema.</li>
+</ul>
+
+<h2 id="12-posibles-preguntas-tipo-test" class="tema-h2">12. Posibles preguntas tipo test</h2>
+<ul class="tema-lista">
+<li>Diferencia entre <strong>UI</strong> y <strong>UX</strong>.</li>
+<li>Identificar un <strong>principio de diseño</strong> a partir de un ejemplo (consistencia, feedback, prevención...).</li>
+<li>Los tres componentes de la definición de <strong>usabilidad ISO 9241-11</strong>.</li>
+<li>¿Qué añade la definición ISO además de efectividad, eficiencia y satisfacción? (usuarios, objetivos y <strong>contexto de uso</strong> concretos).</li>
+<li><strong>Descripción → heurística</strong>: «mostrar las opciones en lugar de exigir memorizarlas».</li>
+<li><strong>Descripción → heurística</strong>: «el mensaje debe decir qué falló y cómo resolverlo».</li>
+<li>¿Cuántas son las heurísticas de <strong>Nielsen</strong> y cuál es la diferencia entre la 5 y la 9?</li>
+<li>Definición de <strong>accesibilidad</strong>: ¿incluye limitaciones temporales o contextuales?</li>
+<li><strong>Norma → función</strong>: W3C, WAI, WCAG, EN 301 549, RD 1112/2018.</li>
+<li>¿Cuál es el <strong>ámbito</strong> de las WCAG? ¿Y el de EN 301 549?</li>
+<li><strong>Ejemplo → principio POUR</strong>: texto alternativo · navegación por teclado · mensajes claros · compatibilidad con lectores de pantalla.</li>
+<li>Los <strong>niveles de conformidad</strong> y cuál se utiliza habitualmente como referencia.</li>
+<li>¿Qué obliga a publicar el <strong>RD 1112/2018</strong> y qué mecanismos debe ofrecer?</li>
+<li>¿Qué debe incluir, en términos generales, la <strong>declaración de accesibilidad</strong>?</li>
+<li>¿Basta con la <strong>revisión automática</strong>?</li>
+<li>Ratios de <strong>contraste</strong> en AA para texto normal y texto grande.</li>
+<li>¿Qué <strong>alt</strong> corresponde a una imagen decorativa?</li>
+<li>¿Qué exige la accesibilidad respecto al <strong>teclado</strong> y al <strong>foco</strong>?</li>
+<li>¿Qué elementos debe tener un <strong>formulario</strong> accesible?</li>
+<li>¿Qué debe ocurrir con el contenido al aplicar <strong>zoom</strong>?</li>
+</ul>
+
+<h2 id="13-posibles-preguntas-cortas" class="tema-h2">13. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<h4 class="tema-h4">1. Diferencie UI y UX</h4>
+<ul class="tema-lista">
+<li>UI: elementos visuales y de interacción del sistema.</li>
+<li>UX: experiencia global de la persona al utilizar el producto o servicio.</li>
+<li>Cierre: ejemplo de interfaz atractiva con mala experiencia (lenta o confusa).</li>
+</ul>
+<h4 class="tema-h4">2. Defina usabilidad</h4>
+<ul class="tema-lista">
+<li>Definición ISO 9241-11 completa (usuarios y objetivos concretos, contexto de uso).</li>
+<li>Los tres componentes: efectividad, eficiencia, satisfacción, con una frase cada uno.</li>
+<li>Cierre: no reducirla a «facilidad de uso».</li>
+</ul>
+<h4 class="tema-h4">3. Explique las diez heurísticas de Nielsen</h4>
+<ul class="tema-lista">
+<li>Encuadre: marco de referencia para la evaluación heurística de interfaces.</li>
+<li>Enumerar las diez con su idea en una línea.</li>
+<li>Cierre: relación con los principios de diseño y matiz entre prevención (5) y recuperación (9) de errores.</li>
+</ul>
+<h4 class="tema-h4">4. Explique los principios POUR</h4>
+<ul class="tema-lista">
+<li>Origen: principios en torno a los que se organizan las WCAG.</li>
+<li>Perceptible, Operable, Comprensible y Robusto, con dos ejemplos cada uno.</li>
+<li>Cierre: niveles de conformidad A, AA y AAA.</li>
+</ul>
+<h4 class="tema-h4">5. Diferencie usabilidad y accesibilidad</h4>
+<ul class="tema-lista">
+<li>Definición de cada una.</li>
+<li>Público y objetivo de cada concepto.</li>
+<li>Cierre: son complementarias; mejorar la accesibilidad suele mejorar la usabilidad general.</li>
+</ul>
+<h4 class="tema-h4">6. Explique el marco normativo de accesibilidad del sector público español</h4>
+<ul class="tema-lista">
+<li>RD 1112/2018: objeto (sitios web y apps móviles del sector público) y sujetos alcanzados.</li>
+<li>Obligaciones: accesibilidad desde el diseño, mantenimiento, declaración, comunicación, reclamación y revisiones.</li>
+<li>Cierre: las revisiones combinan comprobaciones automáticas y revisión manual experta.</li>
+</ul>
+<h4 class="tema-h4">7. Diferencie WCAG, EN 301 549 y RD 1112/2018</h4>
+<ul class="tema-lista">
+<li>WCAG: pautas de accesibilidad para contenido web (W3C/WAI).</li>
+<li>EN 301 549: norma técnica europea de accesibilidad TIC, más amplia; para web incorpora requisitos basados en WCAG 2.1, nivel AA.</li>
+<li>RD 1112/2018: marco jurídico español aplicable al sector público.</li>
+<li>Cierre: tres planos distintos — pautas, norma técnica y norma jurídica.</li>
+</ul>
+<h4 class="tema-h4">8. Explique la declaración de accesibilidad</h4>
+<ul class="tema-lista">
+<li>Qué es: declaración pública sobre el estado de accesibilidad del sitio o app.</li>
+<li>Contenido general: situación de conformidad, contenidos no accesibles o exclusiones cuando corresponda, y mecanismo de contacto/comunicación.</li>
+<li>Cierre: existe además un mecanismo de reclamación.</li>
+</ul>
+<h4 class="tema-h4">9. Enumere medidas concretas para hacer accesible una interfaz</h4>
+<ul class="tema-lista">
+<li>Contraste (4,5:1 texto normal, 3:1 texto grande) y texto alternativo según sea imagen informativa o decorativa.</li>
+<li>Navegación por teclado con foco visible; formularios con label, instrucciones, identificación de errores y posibilidad de corregir.</li>
+<li>Estructura semántica con encabezados jerárquicos; subtítulos y transcripciones; adaptación y zoom sin pérdida de contenido ni funcionalidad.</li>
+</ul>
+
+<h2 id="14-supuestos-practicos" class="tema-h2">14. Supuestos prácticos</h2>
+<h4 class="tema-h4">Supuesto 1 — Imágenes sin texto alternativo</h4>
+<p><strong>Escenario</strong>: la web municipal publica infografías con información de plazos, sin texto alternativo. Una persona que navega con lector de pantalla no accede a esa información.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué principio POUR se incumple?</strong> <strong>Perceptible</strong>: la información no puede percibirse por vías alternativas a la vista.</li>
+<li><strong>b) ¿Qué medida corresponde?</strong> Añadir <strong>alt descriptivo</strong> a las imágenes <strong>informativas</strong> (y alt vacío en las meramente decorativas).</li>
+<li><strong>c) ¿Bastaría con una herramienta automática?</strong> Detectaría la <strong>ausencia</strong> de alt, pero no si el texto alternativo es <strong>adecuado</strong>: hace falta <strong>revisión manual experta</strong>.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 2 — Un formulario que solo funciona con ratón</h4>
+<p><strong>Escenario</strong>: en un trámite, ciertos controles solo responden al clic y no puede completarse usando el teclado.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué principio POUR se incumple?</strong> <strong>Operable</strong>: la interfaz no puede manejarse sin ratón.</li>
+<li><strong>b) ¿Qué debe corregirse?</strong> Garantizar <strong>navegación completa por teclado</strong> y <strong>foco visible</strong> en cada elemento.</li>
+<li><strong>c) ¿A quién afecta?</strong> A personas con discapacidad motora, a quienes usan tecnologías de asistencia y también a situaciones temporales (un ratón averiado, uso con una sola mano).</li>
+</ul>
+<h4 class="tema-h4">Supuesto 3 — «Error 42»</h4>
+<p><strong>Escenario</strong>: al enviar una solicitud, la aplicación muestra el mensaje «Error 42» y no indica nada más.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué principio POUR se incumple?</strong> <strong>Comprensible</strong>: ni la información ni el manejo resultan comprensibles.</li>
+<li><strong>b) ¿Qué heurística de Nielsen se vulnera?</strong> La <strong>9</strong>: ayudar a <strong>reconocer, diagnosticar y recuperarse</strong> de los errores (y, en parte, la <strong>2</strong>, lenguaje del mundo real).</li>
+<li><strong>c) ¿Cómo se corrige?</strong> Indicando <strong>qué campo es incorrecto y cómo corregirlo</strong>, en lenguaje claro.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 4 — Vídeo institucional sin subtítulos</h4>
+<p><strong>Escenario</strong>: se publica un vídeo con información sobre una convocatoria, sin subtítulos ni transcripción.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué principio POUR se incumple?</strong> <strong>Perceptible</strong>: el contenido sonoro no tiene alternativa para quien no puede oírlo.</li>
+<li><strong>b) ¿Qué medidas corresponden?</strong> <strong>Subtítulos</strong>, <strong>transcripción</strong> y, en su caso, otras <strong>alternativas accesibles</strong>.</li>
+<li><strong>c) ¿A quién más beneficia?</strong> A quien consulta el vídeo en un entorno ruidoso o sin sonido — un caso claro de limitación contextual.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 5 — El contenido desaparece al ampliar</h4>
+<p><strong>Escenario</strong>: al aumentar el zoom al 200 %, parte del texto se solapa y algunos botones quedan fuera de la pantalla, sin posibilidad de alcanzarlos.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué exige la accesibilidad?</strong> Que el diseño se <strong>adapte a distintos tamaños</strong> y admita <strong>zoom</strong> <strong>conservando el contenido y la funcionalidad</strong>.</li>
+<li><strong>b) ¿A quién afecta?</strong> A personas con baja visión que amplían habitualmente, y a quienes usan pantallas pequeñas.</li>
+<li><strong>c) ¿Es un problema de diseño o de accesibilidad?</strong> De ambos: es un fallo de <strong>adaptación</strong> con consecuencias directas de accesibilidad.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 6 — Web pública sin declaración de accesibilidad</h4>
+<p><strong>Escenario</strong>: un portal de una entidad local no publica ninguna declaración de accesibilidad ni ofrece vía para comunicar problemas.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué norma resulta aplicable?</strong> El <strong>RD 1112/2018</strong>, marco jurídico español para sitios web y aplicaciones móviles del sector público (incluidas las entidades locales).</li>
+<li><strong>b) ¿Qué obligaciones se están incumpliendo?</strong> La publicación de la <strong>declaración de accesibilidad</strong> y la disposición de un <strong>mecanismo de comunicación</strong> (además del <strong>mecanismo de reclamación</strong>).</li>
+<li><strong>c) ¿Qué más exige la norma?</strong> Accesibilidad <strong>desde el diseño</strong>, <strong>mantenimiento</strong> y <strong>revisiones periódicas</strong>.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 7 — «Hemos pasado el validador automático»</h4>
+<p><strong>Escenario</strong>: un proveedor acredita la accesibilidad de un portal aportando únicamente el informe de una herramienta automática sin errores.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Es suficiente?</strong> No: las revisiones deben considerar <strong>tanto comprobaciones automáticas como revisión manual experta</strong>.</li>
+<li><strong>b) ¿Qué no detecta lo automático?</strong> Si el <strong>alt</strong> describe realmente la imagen, si el <strong>orden de lectura</strong> tiene sentido, si los <strong>mensajes de error</strong> son comprensibles o si el <strong>flujo</strong> es utilizable con lector de pantalla.</li>
+<li><strong>c) ¿Cuándo debe revisarse?</strong> Durante el <strong>diseño</strong>, <strong>antes de la puesta en funcionamiento</strong> y <strong>periódicamente</strong> a lo largo del ciclo de vida.</li>
+</ul>
+
+<h2 id="15-matriz-de-memorizacion" class="tema-h2">15. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Lo que debo recordar</strong></th>
+</tr>
+<tr>
+<td>UI</td>
+<td>Elementos visuales y de interacción del sistema</td>
+</tr>
+<tr>
+<td>UX</td>
+<td>Experiencia global de la persona al usar el producto o servicio</td>
+</tr>
+<tr>
+<td>Usabilidad</td>
+<td>Efectividad + eficiencia + satisfacción, con usuarios, objetivos y contexto concretos</td>
+</tr>
+<tr>
+<td>ISO 9241-11</td>
+<td>Norma que define la usabilidad</td>
+</tr>
+<tr>
+<td>Nielsen</td>
+<td>Diez heurísticas de usabilidad para evaluar interfaces</td>
+</tr>
+<tr>
+<td>Accesibilidad</td>
+<td>Uso por un amplio conjunto de personas, incluidas discapacidades y limitaciones temporales o contextuales</td>
+</tr>
+<tr>
+<td>W3C</td>
+<td>Organización que desarrolla estándares web</td>
+</tr>
+<tr>
+<td>WAI</td>
+<td>Iniciativa de accesibilidad del W3C</td>
+</tr>
+<tr>
+<td>WCAG</td>
+<td>Pautas de accesibilidad para contenido web</td>
+</tr>
+<tr>
+<td>POUR</td>
+<td>Perceptible, Operable, Comprensible, Robusto</td>
+</tr>
+<tr>
+<td>A</td>
+<td>Nivel de conformidad mínimo</td>
+</tr>
+<tr>
+<td>AA</td>
+<td>Nivel intermedio, el habitual como referencia</td>
+</tr>
+<tr>
+<td>AAA</td>
+<td>Nivel máximo; no obligatorio con carácter general</td>
+</tr>
+<tr>
+<td>RD 1112/2018</td>
+<td>Marco jurídico español: webs y apps móviles del sector público</td>
+</tr>
+<tr>
+<td>EN 301 549</td>
+<td>Norma técnica europea de accesibilidad TIC; para web, requisitos basados en WCAG 2.1, nivel AA</td>
+</tr>
+<tr>
+<td>Declaración</td>
+<td>Estado de accesibilidad: conformidad, contenidos no accesibles y mecanismo de contacto</td>
+</tr>
+<tr>
+<td>alt</td>
+<td>Descriptivo si la imagen es informativa; vacío si es decorativa</td>
+</tr>
+<tr>
+<td>Contraste</td>
+<td>AA: 4,5:1 texto normal · 3:1 texto grande</td>
+</tr>
+<tr>
+<td>Teclado</td>
+<td>Navegación completa sin ratón, con foco visible</td>
+</tr>
+<tr>
+<td>label</td>
+<td>Etiqueta asociada a cada campo del formulario</td>
+</tr>
+<tr>
+<td>Semántica</td>
+<td>Encabezados jerárquicos y estructura lógica para tecnologías de asistencia</td>
+</tr>
+<tr>
+<td>Subtítulos</td>
+<td>Y transcripciones: alternativas accesibles al contenido multimedia</td>
+</tr>
+</table></div>
+
+<h2 id="16-resumen-final" class="tema-h2">16. Resumen final: si mañana fuera el examen</h2>
+<ul class="tema-lista">
+<li><strong>UI = interfaz · UX = experiencia</strong>. Una interfaz atractiva puede dar mala experiencia si es lenta o confusa.</li>
+<li><strong>Principios de diseño</strong>: consistencia · retroalimentación · visibilidad del estado · prevención de errores · reconocimiento antes que recuerdo · jerarquía visual · simplicidad.</li>
+<li><strong>Usabilidad (ISO 9241-11)</strong> = <strong>efectividad + eficiencia + satisfacción</strong>, para usuarios y objetivos concretos en un contexto de uso determinado.</li>
+<li><strong>Nielsen (10)</strong>: estado · mundo real · control · consistencia · prevención · reconocimiento · flexibilidad · minimalismo · recuperación de errores · ayuda. <strong>5 previene, 9 rescata</strong>.</li>
+<li><strong>Accesibilidad</strong> = uso por un amplio conjunto de personas, incluidas discapacidades y <strong>limitaciones temporales o contextuales</strong>. <strong>Usabilidad ≠ accesibilidad</strong>.</li>
+<li><strong>W3C</strong> (estándares) → <strong>WAI</strong> (iniciativa) → <strong>WCAG</strong> (pautas de contenido web). <strong>POUR</strong>: Perceptible · Operable · Comprensible · Robusto. Niveles <strong>A / AA / AAA</strong> (AAA no obligatorio con carácter general).</li>
+<li><strong>EN 301 549</strong> = norma <strong>técnica</strong> europea de accesibilidad <strong>TIC</strong>, más amplia que WCAG; para web, V3.2.1 incorpora requisitos basados en <strong>WCAG 2.1</strong>, nivel <strong>AA</strong>. <strong>RD 1112/2018</strong> = marco <strong>jurídico</strong> español del sector público.</li>
+<li>Obligaciones del RD: accesibilidad <strong>desde el diseño</strong>, mantenimiento, <strong>declaración de accesibilidad</strong>, <strong>mecanismo de comunicación</strong>, <strong>mecanismo de reclamación</strong> y <strong>revisiones periódicas</strong> — <strong>automáticas y manuales expertas</strong>.</li>
+<li><strong>Técnicas</strong>: contraste <strong>4,5:1 / 3:1</strong> · <strong>alt</strong> descriptivo (informativa) o vacío (decorativa) · <strong>teclado y foco visible</strong> · formularios con <strong>label</strong>, errores identificados y corregibles · <strong>estructura semántica</strong> · <strong>subtítulos y transcripciones</strong> · <strong>zoom sin pérdida</strong> de contenido ni funcionalidad.</li>
+</ul>
+
+<h2 id="17-actualidad-accesibilidad" class="tema-h2">17. Actualidad de accesibilidad — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Información sujeta a cambio · Fecha de actualización de estos apuntes: agosto de 2026</strong><br>Distingue siempre <strong>actualidad técnica</strong> (versiones de WCAG y de la norma europea) de <strong>marco jurídico</strong> (RD 1112/2018). Lo primero evoluciona; lo segundo se modifica por vía normativa.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>WCAG</strong>: <strong>WCAG 2.2 es actualmente la versión más reciente de la familia WCAG 2</strong> y fue publicada como <strong>W3C Recommendation en 2023</strong>. <strong>WCAG 2.1 y 2.2 siguen siendo estándares existentes</strong>, y <strong>2.2 mantiene compatibilidad hacia atrás con 2.1</strong>.</li>
+<li><strong>EN 301 549</strong>: norma técnica europea de accesibilidad TIC. En su versión <strong>V3.2.1</strong>, los requisitos de contenido web se basan en <strong>WCAG 2.1</strong>, nivel <strong>AA</strong>. Cualquier evolución posterior de la norma debe tratarse como <strong>borrador o propuesta</strong> mientras no esté publicada como versión vigente, y no como norma en vigor.</li>
+<li><strong>RD 1112/2018</strong>: marco jurídico español vigente para la accesibilidad de sitios web y aplicaciones móviles del sector público. <strong>Que WCAG 2.2 sea la versión técnica más reciente no implica automáticamente su exigencia jurídica</strong>: la referencia aplicable es la que establezca la normativa.</li>
 </ul>
   </div>
 </article>

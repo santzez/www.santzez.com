@@ -6,139 +6,902 @@
   </header>
 
   <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
-<li><a href="#1-qué-es-un-navegador-web">1. Qué es un navegador web</a></li>
-<li><a href="#2-motores-de-renderizado-y-de-javascript">2. Motores de renderizado y de JavaScript</a></li>
-<li><a href="#3-navegadores-habituales">3. Navegadores habituales</a></li>
-<li><a href="#4-funcionalidades-básicas-de-un-navegador">4. Funcionalidades básicas de un navegador</a></li>
-<li><a href="#5-configuración-extensiones-y-perfiles">5. Configuración: extensiones y perfiles</a></li>
-<li><a href="#6-privacidad-y-seguridad-básica-en-el-navegador">6. Privacidad y seguridad básica en el navegador</a></li>
-<li><a href="#7-resumen-para-estudiar">7. Resumen para estudiar</a></li>
-<li><a href="#8-conceptos-clave">8. Conceptos clave</a></li>
-<li><a href="#9-posibles-puntos-de-examen">9. Posibles puntos de examen</a></li>
+<li><a href="#1-el-navegador-como-cliente">1. El navegador como aplicación cliente</a></li>
+<li><a href="#2-motores-de-renderizado">2. Motores de renderizado</a></li>
+<li><a href="#3-motores-javascript">3. Motores JavaScript</a></li>
+<li><a href="#4-navegadores-habituales">4. Navegadores habituales</a></li>
+<li><a href="#5-funcionalidades-basicas">5. Funcionalidades básicas</a></li>
+<li><a href="#6-navegacion-privada">6. Navegación privada (incógnito)</a></li>
+<li><a href="#7-extensiones">7. Extensiones</a></li>
+<li><a href="#8-perfiles">8. Perfiles</a></li>
+<li><a href="#9-devtools">9. DevTools: la herramienta del CAU</a></li>
+<li><a href="#10-https">10. HTTPS y certificados en el navegador</a></li>
+<li><a href="#11-cookies">11. Cookies y datos del sitio</a></li>
+<li><a href="#12-actualizacion-y-privacidad">12. Actualización, sincronización y privacidad</a></li>
+<li><a href="#13-diagnostico-cau">13. Procedimiento de diagnóstico CAU de una incidencia web</a></li>
+<li><a href="#14-navegador-vs-buscador">14. Navegador frente a buscador</a></li>
+<li><a href="#15-anclas-de-memoria">15. Anclas de memoria</a></li>
+<li><a href="#16-no-confundir">16. No confundir</a></li>
+<li><a href="#17-trampas-de-examen">17. Posibles trampas de examen</a></li>
+<li><a href="#18-preguntas-tipo-test">18. Posibles preguntas tipo test</a></li>
+<li><a href="#19-preguntas-cortas">19. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#20-supuestos-practicos">20. Supuestos prácticos</a></li>
+<li><a href="#21-matriz-de-memorizacion">21. Matriz de memorización</a></li>
+<li><a href="#22-resumen-final">22. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#23-actualidad-navegadores">23. Actualidad de navegadores — datos fechados</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
 
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>Este tema se centra en el navegador como aplicación cliente. El protocolo HTTP/HTTPS sobre el que se comunica con los servidores web, y el resto de protocolos y arquitectura de Internet, se estudian con más detalle en el Bloque IV (Tema 31). Aquí basta con reconocer que el navegador actúa como cliente frente a un servidor web.</th>
+<th><strong>⚠️ No confundir — fronteras del tema</strong><br>Este tema trata el <strong>navegador web como aplicación cliente</strong>: sus motores, sus funcionalidades y su uso y diagnóstico en un CAU.<br><strong>Tema 19</strong> → diseño de interfaz, usabilidad y accesibilidad. <strong>Tema 24</strong> → certificados y criptografía. <strong>Tema 25</strong> → phishing, malware y seguridad. <strong>Tema 31</strong> → HTTP/HTTPS y arquitectura y protocolos de Internet.<br>Aquí <strong>no</strong> se desarrollan TCP/IP, DNS en profundidad, servidores web, el funcionamiento interno de HTTP ni HTML, CSS o JavaScript avanzados.</th>
 </tr>
 </table></div>
-<h2 id="1-qué-es-un-navegador-web" class="tema-h2">1. Qué es un navegador web</h2>
-<p>Un <strong>navegador web</strong> es una aplicación que permite acceder, interpretar y mostrar recursos alojados en un servidor web, comunicándose con él mediante el protocolo HTTP o su variante cifrada HTTPS. El navegador actúa como <strong>cliente</strong>: solicita al servidor un recurso identificado por una <strong>URL (Uniform Resource Locator)</strong>, recibe el código correspondiente (fundamentalmente HTML, CSS y JavaScript) y lo procesa para presentarlo visualmente a la persona usuaria, en un proceso conocido como <strong>renderizado</strong>.</p>
-<h2 id="2-motores-de-renderizado-y-de-javascript" class="tema-h2">2. Motores de renderizado y de JavaScript</h2>
-<p>Todo navegador se construye alrededor de dos motores principales:</p>
-<ul class="tema-lista">
-<li><strong>Motor de renderizado (rendering engine)</strong>: interpreta el HTML y el CSS de la página y construye su representación visual. Los principales son <strong>Blink</strong> (desarrollado por Google, derivado de WebKit, usado por Chrome, Edge, Opera y Brave), <strong>WebKit</strong> (desarrollado por Apple, usado por Safari) y <strong>Gecko</strong> (desarrollado por Mozilla, usado por Firefox).</li>
-<li><strong>Motor de JavaScript</strong>: ejecuta el código JavaScript que aporta interactividad a la página. Los principales son <strong>V8</strong> (Google, usado por Chrome, Edge y también por Node.js fuera del navegador), <strong>JavaScriptCore</strong> (Apple, usado por Safari) y <strong>SpiderMonkey</strong> (Mozilla, usado por Firefox).</li>
-</ul>
+
+<h2 id="1-el-navegador-como-cliente" class="tema-h2">1. El navegador como aplicación cliente</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Desde que Microsoft Edge abandonó en 2020 su antiguo motor propio (EdgeHTML) para adoptar Chromium/Blink, el ecosistema de navegadores de escritorio está dominado de forma abrumadora por Blink: se estima que en torno al 78% de las sesiones web mundiales se renderizan con este motor (a través de Chrome, Edge, Opera y otros navegadores basados en Chromium). Esta concentración genera cierta preocupación en el sector sobre la pérdida de diversidad de motores, dado que un único motor dominante condiciona en la práctica qué estándares web acaban imponiéndose de facto.</th>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>Navegador web</strong> → <strong>aplicación cliente que solicita recursos web y los procesa y renderiza para mostrarlos a la persona usuaria</strong>.<br>Dos verbos clave: <strong>SOLICITA</strong> (es cliente) y <strong>RENDERIZA</strong> (transforma código en representación visual).</th>
 </tr>
 </table></div>
-<h2 id="3-navegadores-habituales" class="tema-h2">3. Navegadores habituales</h2>
+<h4 class="tema-h4">El triángulo básico</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Elemento</strong></th>
+<th><strong>Papel</strong></th>
+</tr>
+<tr>
+<td><strong>Navegador</strong></td>
+<td><strong>Cliente</strong>: pide el recurso y lo presenta</td>
+</tr>
+<tr>
+<td><strong>Servidor web</strong></td>
+<td><strong>Recurso</strong>: entrega el contenido solicitado</td>
+</tr>
+<tr>
+<td><strong>URL</strong></td>
+<td><strong>Identifica el recurso solicitado</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Ejemplo</strong><br>Cuando una persona escribe una dirección y pulsa Intro, el <strong>navegador</strong> actúa como <strong>cliente</strong> y solicita el recurso identificado por esa <strong>URL</strong>; el <strong>servidor web</strong> lo entrega; el navegador lo <strong>procesa y renderiza</strong>. El <strong>cómo viaja</strong> esa petición (protocolos, direccionamiento, resolución de nombres) corresponde al <strong>Tema 31</strong>.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Qué hace un navegador, en orden</h4>
+<ul class="tema-lista">
+<li>Permite <strong>introducir una URL</strong> o seleccionar un enlace.</li>
+<li><strong>Solicita los recursos</strong> correspondientes.</li>
+<li><strong>Procesa HTML, CSS y JavaScript</strong>.</li>
+<li><strong>Renderiza el contenido</strong> en pantalla.</li>
+<li><strong>Gestiona la navegación y las sesiones</strong> (pestañas, historial, cookies, credenciales de sesión).</li>
+</ul>
+
+<h2 id="2-motores-de-renderizado" class="tema-h2">2. Motores de renderizado</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>Motor de renderizado</strong> → componente que <strong>interpreta HTML y CSS y construye la representación visual</strong> de la página.<br>Es <strong>el que dibuja</strong>. No ejecuta JavaScript: de eso se encarga otro motor distinto (apartado 3).</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Motor de renderizado</strong></th>
+<th><strong>Navegadores que lo utilizan</strong></th>
+</tr>
+<tr>
+<td><strong>Blink</strong></td>
+<td><strong>Chrome, Edge, Opera, Brave</strong></td>
+</tr>
+<tr>
+<td><strong>WebKit</strong></td>
+<td><strong>Safari</strong></td>
+</tr>
+<tr>
+<td><strong>Gecko</strong></td>
+<td><strong>Firefox</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br><strong>Muchos navegadores comparten motor.</strong> Chrome, Edge, Opera y Brave usan <strong>Blink</strong>: son productos distintos con el mismo motor. Por eso una página puede comportarse igual en todos ellos y distinto en <strong>Firefox</strong> (Gecko) o <strong>Safari</strong> (WebKit).</th>
+</tr>
+</table></div>
+
+<h2 id="3-motores-javascript" class="tema-h2">3. Motores JavaScript</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — la distinción más preguntable del tema</strong><br><strong>MOTOR DE RENDERIZADO</strong> → <strong>interpreta HTML/CSS y construye la representación visual</strong>.<br><strong>MOTOR JAVASCRIPT</strong> → <strong>ejecuta JavaScript</strong>.<br><strong>Son componentes distintos con funciones distintas.</strong> Un navegador incorpora los dos.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Motor JavaScript</strong></th>
+<th><strong>Dónde se utiliza</strong></th>
+</tr>
+<tr>
+<td><strong>V8</strong></td>
+<td><strong>Chrome</strong> y <strong>Edge</strong>; también el entorno <strong>Node.js</strong>, fuera del navegador</td>
+</tr>
+<tr>
+<td><strong>JavaScriptCore</strong></td>
+<td><strong>Safari</strong></td>
+</tr>
+<tr>
+<td><strong>SpiderMonkey</strong></td>
+<td><strong>Firefox</strong></td>
+</tr>
+</table></div>
+<h4 class="tema-h4">Tabla combinada — navegador, motor de renderizado y motor JavaScript</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>Navegador</strong></th>
-<th><strong>Fabricante</strong></th>
 <th><strong>Motor de renderizado</strong></th>
+<th><strong>Motor JavaScript</strong></th>
 </tr>
 <tr>
-<td>Google Chrome</td>
-<td>Google</td>
+<td><strong>Chrome</strong></td>
 <td>Blink</td>
+<td>V8</td>
 </tr>
 <tr>
-<td>Safari</td>
-<td>Apple</td>
-<td>WebKit (mayoritario en iOS y macOS)</td>
+<td><strong>Edge</strong></td>
+<td>Blink</td>
+<td>V8</td>
 </tr>
 <tr>
-<td>Microsoft Edge</td>
-<td>Microsoft</td>
-<td>Blink (Chromium, desde 2020)</td>
+<td><strong>Opera</strong></td>
+<td>Blink</td>
+<td>V8</td>
 </tr>
 <tr>
-<td>Mozilla Firefox</td>
-<td>Mozilla</td>
+<td><strong>Brave</strong></td>
+<td>Blink</td>
+<td>V8</td>
+</tr>
+<tr>
+<td><strong>Safari</strong></td>
+<td>WebKit</td>
+<td>JavaScriptCore</td>
+</tr>
+<tr>
+<td><strong>Firefox</strong></td>
 <td>Gecko</td>
-</tr>
-<tr>
-<td>Opera</td>
-<td>Opera Software</td>
-<td>Blink</td>
+<td>SpiderMonkey</td>
 </tr>
 </table></div>
-<p>Chrome es, con notable diferencia, el navegador más usado a nivel mundial en equipos de escritorio, seguido de Safari (impulsado sobre todo por su presencia exclusiva en dispositivos Apple) y, a más distancia, Edge y Firefox.</p>
-<h2 id="4-funcionalidades-básicas-de-un-navegador" class="tema-h2">4. Funcionalidades básicas de un navegador</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Ejemplo</strong><br>Que <strong>V8</strong> se utilice también en <strong>Node.js</strong> demuestra que un motor JavaScript <strong>no es exclusivo del navegador</strong>: es un componente que ejecuta código JavaScript y puede integrarse en otros entornos. Un motor de renderizado, en cambio, está ligado a la presentación de contenido web.</th>
+</tr>
+</table></div>
+
+<h2 id="4-navegadores-habituales" class="tema-h2">4. Navegadores habituales</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Navegador</strong></th>
+<th><strong>Rasgos relevantes para el CAU</strong></th>
+</tr>
+<tr>
+<td><strong>Chrome</strong></td>
+<td>Multiplataforma; motor Blink + V8; ecosistema amplio de extensiones; perfiles y sincronización con cuenta</td>
+</tr>
+<tr>
+<td><strong>Edge</strong></td>
+<td>Navegador de Microsoft; <strong>desde 2020 utiliza Blink</strong> (anteriormente EdgeHTML); habitual en entornos Windows corporativos, con opciones de gestión por directiva</td>
+</tr>
+<tr>
+<td><strong>Firefox</strong></td>
+<td>Desarrollado por Mozilla; motor Gecko + SpiderMonkey; útil como <strong>segundo navegador de contraste</strong> porque su motor es distinto</td>
+</tr>
+<tr>
+<td><strong>Safari</strong></td>
+<td>Navegador de Apple; motor WebKit + JavaScriptCore; propio de los entornos macOS e iOS</td>
+</tr>
+<tr>
+<td><strong>Opera</strong></td>
+<td>Basado en Blink; incorpora funcionalidades propias añadidas sobre ese motor</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — Edge y EdgeHTML</strong><br><strong>Desde 2020, Edge utiliza Blink.</strong> El motor anterior, <strong>EdgeHTML</strong>, corresponde a la etapa previa del producto. Es una asociación clásica de examen: si una opción dice «Edge → EdgeHTML» como situación actual, es incorrecta.<br>Tampoco confundas Edge con <strong>Internet Explorer</strong>, que es un producto distinto y anterior.</th>
+</tr>
+</table></div>
+<p>Las <strong>cuotas de mercado</strong> no son contenido nuclear de este tema: cambian con el tiempo y no aportan nada a la comprensión del navegador como cliente. Si aparecen, deben tratarse como <strong>actualidad fechada</strong> (apartado 23).</p>
+
+<h2 id="5-funcionalidades-basicas" class="tema-h2">5. Funcionalidades básicas</h2>
+<h4 class="tema-h4">5.1 Omnibox</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>Omnibox</strong> → <strong>barra que permite tanto introducir una URL como realizar una búsqueda</strong>.<br>Es decir, <strong>unifica</strong> la barra de direcciones y la de búsqueda en un único campo. Término preguntable de forma directa.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">5.2 Pestañas</h4>
+<p>Permiten <strong>mantener varias páginas abiertas dentro de una misma ventana</strong>, alternando entre ellas sin abrir ventanas independientes.</p>
+<h4 class="tema-h4">5.3 Historial</h4>
+<p><strong>Registro local de las páginas visitadas.</strong> Permite recuperar una página consultada anteriormente y, en su caso, eliminar ese registro.</p>
+<h4 class="tema-h4">5.4 Marcadores (favoritos)</h4>
+<p><strong>Enlaces guardados por la persona usuaria para acceso rápido</strong>, normalmente organizados en carpetas o en una barra de marcadores.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — marcadores, historial, cookies y caché</strong><br><strong>Marcador</strong> → enlace <strong>guardado deliberadamente</strong> por la persona usuaria.<br><strong>Historial</strong> → registro <strong>automático</strong> de páginas visitadas.<br><strong>Cookie</strong> → <strong>dato</strong> que un sitio utiliza para mantener información entre solicitudes o visitas (sesión, preferencias).<br><strong>Caché</strong> → <strong>copia local de recursos</strong> (imágenes, hojas de estilo, scripts) que evita descargarlos de nuevo y acelera la carga.<br>Son cuatro cosas distintas y es una confusión de examen muy frecuente.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">5.5 Gestor de descargas</h4>
+<p>Permite <strong>consultar y controlar las descargas</strong> realizadas y <strong>su destino</strong> en el equipo. La gestión avanzada de archivos no forma parte de este tema.</p>
+<h4 class="tema-h4">5.6 Otras funcionalidades habituales</h4>
 <ul class="tema-lista">
-<li><strong>Barra de direcciones</strong>: además de escribir una URL directamente, hoy actúa también como buscador integrado («omnibox»), lanzando una búsqueda si lo introducido no es una dirección web reconocible.</li>
-<li><strong>Pestañas (tabs)</strong>: permiten mantener abiertas varias páginas dentro de una misma ventana del navegador.</li>
-<li><strong>Historial de navegación</strong>: registro de las páginas visitadas.</li>
-<li><strong>Marcadores o favoritos</strong>: enlaces guardados de acceso rápido a páginas de interés.</li>
-<li><strong>Gestor de descargas</strong>: panel donde se controla el progreso y el destino de los archivos descargados.</li>
-<li><strong>Modo incógnito o de navegación privada</strong>: al cerrar esa ventana, el navegador no conserva en el dispositivo el historial, las cookies ni los datos de formularios de esa sesión.</li>
-<li><strong>Herramientas de desarrollador (DevTools)</strong>: panel que permite inspeccionar el código HTML/CSS/JavaScript de una página, revisar las peticiones de red y depurar errores; de gran utilidad para un técnico de CAU a la hora de diagnosticar por qué una aplicación web no funciona correctamente.</li>
-<li><strong>Sincronización de cuenta</strong>: vincular el navegador a una cuenta permite sincronizar marcadores, contraseñas, historial y extensiones entre varios dispositivos.</li>
-</ul>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>⚠️ No confundir</strong><br>El modo incógnito o privado no equivale a navegar de forma anónima por Internet: únicamente evita que el propio navegador guarde el historial, las cookies o los datos introducidos en esa sesión, en ese dispositivo. No oculta la actividad frente al proveedor de acceso a Internet, frente a la red de la organización, ni frente a los propios sitios web visitados, que pueden seguir identificando al usuario por otras vías (dirección IP, cuenta iniciada en el propio sitio, huella digital del dispositivo).</th>
-</tr>
-</table></div>
-<h2 id="5-configuración-extensiones-y-perfiles" class="tema-h2">5. Configuración: extensiones y perfiles</h2>
-<p>Las <strong>extensiones o complementos</strong> son pequeños programas que añaden funcionalidad adicional al navegador: bloqueadores de anuncios, gestores de contraseñas, correctores ortográficos, entre muchos otros. Instalar una extensión de origen no confiable, o que solicita más permisos de los que su función justificaría, supone un riesgo de seguridad, ya que muchas extensiones tienen acceso al contenido de las páginas visitadas.</p>
-<p>Los <strong>perfiles</strong> permiten mantener separadas, dentro del mismo navegador, distintas configuraciones, sesiones, cookies, extensiones e historiales (por ejemplo, un perfil personal y un perfil de trabajo), evitando que se mezclen entre sí.</p>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>En los navegadores basados en Chromium, el cambio a Manifest V3 —la especificación técnica que regula qué pueden hacer las extensiones— ha restringido la capacidad de las extensiones para interceptar y bloquear peticiones de red de forma tan flexible como antes, lo que ha afectado particularmente a los bloqueadores de anuncios más avanzados. Es un ejemplo de cómo la evolución técnica de un navegador puede alterar el funcionamiento de las extensiones instaladas en él.</th>
-</tr>
-</table></div>
-<h2 id="6-privacidad-y-seguridad-básica-en-el-navegador" class="tema-h2">6. Privacidad y seguridad básica en el navegador</h2>
-<p>El icono de <strong>candado</strong> en la barra de direcciones indica que la conexión con el sitio está cifrada mediante TLS (HTTPS) y que su certificado digital es válido (Tema 24). Es importante no sobreinterpretar este indicador: certifica que la comunicación está cifrada y que el sitio es quien dice ser según su certificado, pero <strong>no garantiza que el contenido del sitio sea legítimo, fiable o esté libre de intenciones maliciosas</strong> (Tema 25); hoy en día la inmensa mayoría de los sitios de phishing también utilizan HTTPS.</p>
-<p>Las <strong>cookies</strong> son pequeños archivos que un sitio web almacena en el navegador para recordar información entre visitas: una sesión iniciada, preferencias de idioma, o el seguimiento de la actividad del usuario con fines publicitarios. Se distingue entre <strong>cookies propias</strong> (first-party, del propio sitio visitado) y <strong>cookies de terceros</strong> (third-party, utilizadas habitualmente para el seguimiento publicitario entre distintos sitios web), estas últimas cada vez más restringidas por defecto en los navegadores modernos por motivos de privacidad.</p>
-<p>Mantener el navegador <strong>actualizado</strong> a su última versión es una de las medidas de seguridad más básicas y efectivas: buena parte de sus actualizaciones corrigen vulnerabilidades que podrían ser aprovechadas por un sitio malicioso (Tema 25).</p>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>💡 Ejemplo</strong><br>Diagnóstico clásico de CAU con una aplicación web corporativa que «no funciona»: probar en <strong>modo incógnito</strong> (descarta extensiones y cookies corruptas), <strong>borrar caché y cookies</strong> del sitio, probar en <strong>otro navegador</strong> (descarta un problema del motor concreto) y revisar la consola de <strong>DevTools</strong> (F12) por errores. Esta secuencia resuelve o acota la gran mayoría de incidencias «de navegador».</th>
-</tr>
-</table></div>
-<h2 id="7-resumen-para-estudiar" class="tema-h2">7. Resumen para estudiar</h2>
-<ul class="tema-lista">
-<li><strong>Navegador</strong>: cliente HTTP/HTTPS que solicita recursos mediante una URL y los renderiza para la persona usuaria.</li>
-<li><strong>Motores</strong>: de renderizado (Blink, WebKit, Gecko) y de JavaScript (V8, JavaScriptCore, SpiderMonkey); dominio actual muy marcado de Blink/Chromium.</li>
-<li><strong>Navegadores habituales</strong>: Chrome (líder), Safari (dominante en Apple), Edge (Chromium desde 2020), Firefox (Gecko) y Opera.</li>
-<li><strong>Funcionalidades básicas</strong>: pestañas, historial, marcadores, descargas, modo incógnito (no es anonimato real), DevTools y sincronización de cuenta.</li>
-<li><strong>Extensiones y perfiles</strong>: amplían funcionalidad (con riesgo de seguridad si no son de confianza) y separan configuraciones/sesiones respectivamente.</li>
-<li><strong>Privacidad y seguridad</strong>: el candado/HTTPS certifica cifrado, no legitimidad del sitio; cookies propias frente a cookies de terceros; mantener el navegador actualizado como medida de seguridad básica.</li>
+<li><strong>Zoom</strong> y ajustes de presentación del contenido.</li>
+<li><strong>Búsqueda dentro de la página</strong>.</li>
+<li><strong>Impresión</strong> y generación de PDF desde la página.</li>
+<li><strong>Gestión de contraseñas</strong> y autocompletado de formularios.</li>
+<li><strong>Configuración de permisos por sitio</strong>: cámara, micrófono, ubicación, notificaciones.</li>
 </ul>
 
-<h2 id="8-conceptos-clave" class="tema-h2">8. Conceptos clave</h2>
+<h2 id="6-navegacion-privada" class="tema-h2">6. Navegación privada (incógnito)</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición precisa</strong><br><strong>Modo privado o incógnito</strong> → modo que <strong>limita los datos de navegación que el navegador guarda localmente durante esa sesión</strong>.<br>Formulación cuidadosa: <strong>limita lo que se guarda en local</strong>. No conviene afirmar que elimina absolutamente todo dato local de cualquier tipo, porque el comportamiento concreto depende del navegador y de qué datos se trate.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — INCÓGNITO ≠ ANONIMATO</strong><br>El modo privado <strong>no oculta la actividad</strong> frente a:<br>· el <strong>proveedor de acceso a Internet</strong>;<br>· la <strong>red corporativa</strong> u organización desde la que se navega;<br>· los <strong>sitios web</strong> visitados;<br>· los <strong>servicios de seguridad</strong> o de monitorización que puedan estar en uso.<br><strong>Regla: INCÓGNITO → MENOS RASTRO LOCAL. NO → ANONIMATO EN LA RED.</strong></th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Por qué le interesa al CAU</h4>
+<p>Más allá de la privacidad, el modo privado es una <strong>herramienta de diagnóstico</strong>: al abrirse con un estado de sesión limpio, ayuda a distinguir si un problema procede de <strong>datos del sitio, cookies o sesión previa</strong> o si es un problema de la propia aplicación web. Su papel en el procedimiento de diagnóstico se detalla en el apartado 13.</p>
+
+<h2 id="7-extensiones" class="tema-h2">7. Extensiones</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>Extensión</strong> (o complemento) → <strong>componente que añade funcionalidades al navegador</strong>.</th>
+</tr>
+</table></div>
 <ul class="tema-lista">
-<li><strong>Navegador = cliente HTTP/HTTPS</strong>; URL; renderizado.</li>
-<li><strong>Motores de renderizado</strong>: Blink (Chrome/Edge/Opera), WebKit (Safari), Gecko (Firefox).</li>
-<li><strong>Motores JavaScript</strong>: V8, JavaScriptCore, SpiderMonkey.</li>
-<li><strong>Omnibox, pestañas, historial, marcadores, descargas, sincronización</strong>.</li>
-<li><strong>Modo incógnito</strong> (qué protege y qué no).</li>
-<li><strong>DevTools (F12)</strong>.</li>
-<li><strong>Extensiones</strong> (riesgos, Manifest V3) y <strong>perfiles</strong>.</li>
-<li><strong>Candado/HTTPS ≠ sitio legítimo</strong>; certificado TLS (Tema 24).</li>
-<li><strong>Cookies propias vs. de terceros</strong>.</li>
+<li><strong>Bloqueador de anuncios</strong>.</li>
+<li><strong>Gestor de contraseñas</strong>.</li>
+<li><strong>Corrector</strong> ortográfico o de estilo.</li>
+</ul>
+<h4 class="tema-h4">Permisos y riesgos</h4>
+<p>Una extensión <strong>puede solicitar permisos con acceso a las páginas y a su contenido</strong>. Ese acceso es lo que le permite funcionar, pero también lo que la convierte en un vector de riesgo.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Riesgo</strong></th>
+<th><strong>En qué consiste</strong></th>
+</tr>
+<tr>
+<td><strong>Origen no confiable</strong></td>
+<td>Instalación desde fuentes no verificadas o fuera de las tiendas oficiales del navegador</td>
+</tr>
+<tr>
+<td><strong>Permisos excesivos</strong></td>
+<td>La extensión pide más acceso del que su función justifica</td>
+</tr>
+<tr>
+<td><strong>Código malicioso</strong></td>
+<td>La extensión ejecuta comportamiento dañino, a veces introducido en una actualización posterior</td>
+</tr>
+<tr>
+<td><strong>Filtración de información</strong></td>
+<td>Envío de datos de las páginas visitadas o del formulario a terceros</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br>Criterio práctico de CAU ante una extensión: <strong>origen · permisos · necesidad real</strong>. Si el origen no es confiable, si los permisos exceden la función declarada o si la funcionalidad no es realmente necesaria, procede <strong>no instalarla o retirarla</strong> conforme a la política de la organización.</th>
+</tr>
+</table></div>
+<p>El modelo de permisos y su evolución técnica (por ejemplo, los cambios de manifiesto de las extensiones) se tratan como <strong>actualidad</strong> en el apartado 23, no como contenido nuclear.</p>
+
+<h2 id="8-perfiles" class="tema-h2">8. Perfiles</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>Perfil de navegador</strong> → <strong>conjunto separado de configuración, cookies, sesiones, extensiones, historial y otros datos</strong> dentro del mismo navegador.<br>Cada perfil se comporta como un entorno independiente.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Ejemplo</strong><br><strong>Perfil personal</strong> y <strong>perfil laboral</strong>: sesiones distintas en el mismo servicio sin cerrar una para abrir la otra, extensiones distintas y marcadores separados. Es el escenario típico de quien atiende dos entornos (por ejemplo, una aplicación corporativa y una sede electrónica) con credenciales diferentes.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — perfil de navegador y cuenta del sistema operativo</strong><br><strong>Perfil de navegador</strong> → separación <strong>dentro del navegador</strong>: sus datos, sus extensiones, sus sesiones.<br><strong>Cuenta de usuario del sistema operativo</strong> → separación <strong>a nivel del equipo</strong>: sesión del sistema, permisos, ficheros y perfil de usuario del SO (Temas 14 y 15).<br>Tampoco es lo mismo un <strong>perfil</strong> que una <strong>ventana de incógnito</strong>: el perfil es persistente y se mantiene entre sesiones; el incógnito es temporal.</th>
+</tr>
+</table></div>
+
+<h2 id="9-devtools" class="tema-h2">9. DevTools: la herramienta del CAU</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>DevTools</strong> (herramientas para desarrolladores) → <strong>herramientas integradas en el navegador para inspeccionar y diagnosticar aplicaciones web</strong>.<br><strong>Ancla: F12 → DevTools.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Panel</strong></th>
+<th><strong>Para qué sirve</strong></th>
+<th><strong>Qué responde en el CAU</strong></th>
+</tr>
+<tr>
+<td><strong>Elements</strong> (HTML/CSS)</td>
+<td>Inspeccionar la estructura de la página y sus estilos</td>
+<td>¿El elemento existe? ¿Está oculto o mal presentado?</td>
+</tr>
+<tr>
+<td><strong>Console</strong></td>
+<td>Ver mensajes y errores de ejecución de la página</td>
+<td>¿Hay un error que impide que funcione un botón o una acción?</td>
+</tr>
+<tr>
+<td><strong>Network</strong></td>
+<td>Ver las peticiones de recursos y su resultado</td>
+<td>¿Falta un recurso? ¿Alguna petición falla o no llega a completarse?</td>
+</tr>
+<tr>
+<td><strong>Almacenamiento</strong></td>
+<td>Consultar cookies y datos que el sitio guarda en el navegador</td>
+<td>¿Hay datos de sesión o del sitio que estén provocando el problema?</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — regla de oro del diagnóstico</strong><br><strong>CONSOLE → algo falla al ejecutarse.</strong><br><strong>NETWORK → algo falla al pedirse o al llegar.</strong><br>Si la página <strong>carga pero un control no responde</strong> → <strong>Console</strong>. Si la página <strong>carga incompleta o faltan recursos</strong> → <strong>Network</strong>.</th>
+</tr>
+</table></div>
+<p>DevTools sirve para <strong>observar y diagnosticar</strong>; el desarrollo web como tal no pertenece a este tema.</p>
+
+<h2 id="10-https" class="tema-h2">10. HTTPS y certificados en el navegador</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>HTTPS</strong> → <strong>comunicación HTTP protegida mediante TLS</strong>.<br>El navegador <strong>valida el certificado del sitio según las reglas de confianza correspondientes</strong> y advierte cuando esa validación no es satisfactoria.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — HTTPS ≠ SITIO SEGURO</strong><br><strong>HTTPS y un certificado válido NO garantizan:</strong><br>· que el <strong>sitio sea legítimo</strong>;<br>· que el <strong>contenido sea seguro</strong>;<br>· que <strong>no sea phishing</strong>.<br><strong>Regla: HTTPS → PROTEGE LA COMUNICACIÓN. NO → GARANTIZA LA LEGITIMIDAD DEL CONTENIDO.</strong><br>Un sitio fraudulento puede disponer de certificado y mostrar HTTPS: la comunicación estará protegida, pero el sitio seguirá siendo fraudulento.</th>
+</tr>
+</table></div>
+<p>El razonamiento correcto ante una persona usuaria no debe apoyarse en la presencia o ausencia de un <strong>icono</strong> concreto en la barra de direcciones, porque la señalización visual varía entre navegadores y entre versiones. Lo que debe explicarse es <strong>qué protege HTTPS y qué no</strong>, y verificar la <strong>identidad real del sitio</strong> (dominio, origen del enlace, canal por el que llegó).</p>
+<p>El funcionamiento de TLS y de los certificados corresponde al <strong>Tema 24</strong>; el phishing y la seguridad frente a fraude, al <strong>Tema 25</strong>; HTTP y HTTPS como protocolos, al <strong>Tema 31</strong>.</p>
+
+<h2 id="11-cookies" class="tema-h2">11. Cookies y datos del sitio</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>Cookie</strong> → <strong>pequeño dato que un sitio utiliza para mantener información entre solicitudes o entre visitas</strong>.<br>Su función esencial es <strong>mantener estado</strong>: sin ella, cada petición sería independiente de la anterior.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Sesión</strong>: mantener a la persona identificada mientras navega por el sitio.</li>
+<li><strong>Preferencias</strong>: idioma, tamaño de texto, opciones de presentación.</li>
+<li><strong>Identificación</strong>: reconocer al visitante entre visitas.</li>
+</ul>
+<h4 class="tema-h4">First-party y third-party</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Tipo</strong></th>
+<th><strong>Definición</strong></th>
+<th><strong>Ejemplo</strong></th>
+</tr>
+<tr>
+<td><strong>First-party</strong> (propia)</td>
+<td><strong>Asociada al sitio visitado</strong></td>
+<td>La cookie de sesión del portal en el que se ha iniciado sesión</td>
+</tr>
+<tr>
+<td><strong>Third-party</strong> (de terceros)</td>
+<td><strong>Asociada a otro dominio o servicio incluido en la página</strong></td>
+<td>Una cookie de un servicio externo insertado en la página que se está visitando</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>La distinción <strong>first-party / third-party</strong> depende de <strong>a qué dominio está asociada la cookie</strong> respecto del sitio que se visita, <strong>no</strong> de para qué se use ni de si es «buena» o «mala».<br>Las <strong>restricciones que los navegadores aplican a las cookies de terceros</strong> son materia cambiante: se tratan como <strong>actualidad fechada</strong> (apartado 23), nunca como contenido estable.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Borrar datos: criterio práctico de CAU</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible — criterio de actuación</strong><br><strong>Cuando sea posible, es preferible borrar los datos del sitio afectado en lugar de eliminar indiscriminadamente todo el historial y los datos del navegador.</strong><br><strong>Advertencia:</strong> borrar cookies <strong>puede cerrar sesiones</strong> abiertas y <strong>eliminar preferencias</strong> guardadas. Conviene avisar a la persona usuaria antes de hacerlo, porque tendrá que volver a identificarse.</th>
+</tr>
+</table></div>
+
+<h2 id="12-actualizacion-y-privacidad" class="tema-h2">12. Actualización, sincronización y privacidad</h2>
+<h4 class="tema-h4">Actualización</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>Actualizar el navegador es una medida básica de seguridad porque las nuevas versiones corrigen vulnerabilidades.</strong><br>Las <strong>versiones concretas</strong> de Chrome, Firefox o Edge no son materia de examen: lo relevante es <strong>el principio</strong>.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Sincronización</h4>
+<p>Muchos navegadores permiten <strong>sincronizar datos</strong> (marcadores, historial, contraseñas, extensiones, configuración) <strong>asociados a una cuenta</strong>, de modo que estén disponibles en varios dispositivos. En entornos corporativos, su uso suele estar sujeto a la <strong>política de la organización</strong>, por las implicaciones que tiene almacenar y replicar credenciales y datos de navegación.</p>
+<h4 class="tema-h4">Privacidad y permisos por sitio</h4>
+<ul class="tema-lista">
+<li>Gestión de <strong>permisos por sitio</strong>: cámara, micrófono, ubicación, notificaciones.</li>
+<li>Control de <strong>cookies y datos de sitios</strong>.</li>
+<li>Opciones de <strong>bloqueo de contenido</strong> y de seguimiento, cuyo alcance concreto <strong>depende del navegador y de su configuración</strong>.</li>
 </ul>
 
-<h2 id="9-posibles-puntos-de-examen" class="tema-h2">9. Posibles puntos de examen</h2>
+<h2 id="13-diagnostico-cau" class="tema-h2">13. Procedimiento de diagnóstico CAU de una incidencia web</h2>
+<p>Este es el apartado más orientado al puesto: convierte todo lo anterior en un <strong>método de trabajo ordenado</strong>. La lógica es ir <strong>de lo simple a lo complejo</strong> y <strong>aislar variables una a una</strong>.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Paso</strong></th>
+<th><strong>Acción</strong></th>
+<th><strong>Qué permite descartar o confirmar</strong></th>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td><strong>Reproducir el problema</strong></td>
+<td>Confirmar que el fallo existe, en qué pasos exactos y si es constante o intermitente</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td><strong>Probar en modo privado / incógnito</strong></td>
+<td>Aislar el efecto de datos de sesión y del sitio (y, según la configuración, de las extensiones)</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td><strong>Comprobar datos del sitio, caché y cookies</strong></td>
+<td>Detectar si el problema procede de datos locales antiguos o corruptos</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td><strong>Desactivar o descartar extensiones</strong> cuando proceda</td>
+<td>Identificar una extensión que interfiere con la página</td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td><strong>Probar otro perfil</strong> si es necesario</td>
+<td>Separar la configuración y los datos del perfil actual del comportamiento de la aplicación</td>
+</tr>
+<tr>
+<td><strong>6</strong></td>
+<td><strong>Probar otro navegador</strong></td>
+<td>Determinar si el problema se limita a un navegador o afecta a todos</td>
+</tr>
+<tr>
+<td><strong>7</strong></td>
+<td><strong>Abrir DevTools</strong> (F12)</td>
+<td>Pasar de la observación a la evidencia técnica</td>
+</tr>
+<tr>
+<td><strong>8</strong></td>
+<td><strong>Revisar Console</strong></td>
+<td>Ver errores de ejecución que expliquen que algo no responda</td>
+</tr>
+<tr>
+<td><strong>9</strong></td>
+<td><strong>Revisar Network</strong></td>
+<td>Ver peticiones que fallan o recursos que no llegan</td>
+</tr>
+<tr>
+<td><strong>10</strong></td>
+<td><strong>Determinar dónde está el problema</strong></td>
+<td>Cliente (equipo), navegador, aplicación web o servicio remoto — y escalar en consecuencia</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — dos cautelas del procedimiento</strong><br><strong>1) «El modo incógnito siempre desactiva las extensiones»: NO.</strong> <strong>Depende de la configuración del navegador</strong>, ya que las extensiones pueden habilitarse expresamente para el modo privado. Por eso el paso 4 (desactivar extensiones) <strong>no es redundante</strong> con el paso 2.<br><strong>2) Probar otro navegador ayuda a aislar el problema, pero no demuestra automáticamente que sea un problema del motor.</strong> La diferencia puede deberse a extensiones, perfil, configuración, versión o datos locales del primer navegador.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — la lógica en cuatro capas</strong><br><strong>DATOS</strong> (incógnito, caché, cookies) → <strong>ENTORNO</strong> (extensiones, perfil) → <strong>PRODUCTO</strong> (otro navegador) → <strong>EVIDENCIA</strong> (DevTools: Console y Network).<br>Y una conclusión final obligada: <strong>¿cliente, navegador, aplicación web o servicio remoto?</strong></th>
+</tr>
+</table></div>
+
+<h2 id="14-navegador-vs-buscador" class="tema-h2">14. Navegador frente a buscador</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Navegador</strong></th>
+<th><strong>Buscador</strong></th>
+</tr>
+<tr>
+<td><strong>Aplicación cliente</strong> instalada o disponible en el dispositivo</td>
+<td><strong>Servicio web</strong> al que se accede a través del navegador</td>
+</tr>
+<tr>
+<td><strong>Chrome, Edge, Firefox, Safari</strong></td>
+<td><strong>Google, Bing, DuckDuckGo</strong></td>
+</tr>
+<tr>
+<td>Solicita y renderiza recursos web</td>
+<td>Localiza y devuelve resultados de búsqueda</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Trampa de examen clásica</strong><br>Que <strong>Google</strong> sea a la vez el nombre de un <strong>buscador</strong> y de la empresa que desarrolla <strong>Chrome</strong> favorece la confusión. En una pregunta que pida identificar <strong>navegadores</strong>, «Google» como opción se refiere al <strong>buscador</strong> y sería incorrecta.<br><strong>Regla: se navega CON un navegador; se busca EN un buscador.</strong></th>
+</tr>
+</table></div>
+
+<h2 id="15-anclas-de-memoria" class="tema-h2">15. Anclas de memoria</h2>
 <ul class="tema-lista">
-<li>Emparejar <strong>navegador con su motor de renderizado</strong> (Chrome-Blink, Safari-WebKit, Firefox-Gecko) — pregunta clásica.</li>
-<li>Qué motor adoptó <strong>Edge desde 2020</strong> (Chromium/Blink).</li>
-<li>Qué es el motor <strong>V8</strong> y dónde se usa (Chrome/Edge, y Node.js).</li>
-<li>Qué protege realmente el <strong>modo incógnito</strong> (y qué no oculta) — muy preguntable.</li>
-<li>Qué significa el <strong>candado HTTPS</strong> y por qué no garantiza legitimidad (phishing con HTTPS).</li>
-<li>Diferencia entre <strong>cookies propias y de terceros</strong>.</li>
-<li>Riesgos de las <strong>extensiones</strong> y para qué sirven los <strong>perfiles</strong>.</li>
-<li>Para qué sirven las <strong>DevTools</strong> en el diagnóstico de una web.</li>
-<li>Qué es la <strong>omnibox</strong> (barra de direcciones + buscador).</li>
-<li>Por qué es clave mantener el navegador <strong>actualizado</strong>.</li>
+<li><strong>CHROME → BLINK + V8</strong>.</li>
+<li><strong>EDGE → BLINK</strong> (V8) — <strong>desde 2020</strong>; antes EdgeHTML.</li>
+<li><strong>SAFARI → WEBKIT + JavaScriptCore</strong>.</li>
+<li><strong>FIREFOX → GECKO + SpiderMonkey</strong>.</li>
+<li><strong>OPERA → BLINK</strong>.</li>
+<li><strong>DEVTOOLS → F12</strong>.</li>
+<li><strong>INCÓGNITO → NO ANONIMATO</strong>.</li>
+<li><strong>HTTPS → TLS</strong> (protege la comunicación, no acredita legitimidad).</li>
+<li><strong>COOKIE → ESTADO</strong>.</li>
+<li><strong>PERFIL → CONFIGURACIÓN SEPARADA</strong>.</li>
+<li><strong>CONSOLE → EJECUCIÓN · NETWORK → PETICIONES</strong>.</li>
+</ul>
+
+<h2 id="16-no-confundir" class="tema-h2">16. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto A</strong></th>
+<th><strong>Concepto B</strong></th>
+<th><strong>Diferencia clave</strong></th>
+</tr>
+<tr>
+<td><strong>Navegador</strong>: aplicación cliente</td>
+<td><strong>Servidor web</strong>: entrega el recurso</td>
+<td>Quien pide y presenta vs. quien sirve</td>
+</tr>
+<tr>
+<td><strong>Navegador</strong>: Chrome, Edge, Firefox, Safari</td>
+<td><strong>Buscador</strong>: Google, Bing, DuckDuckGo</td>
+<td>Aplicación cliente vs. servicio web de búsqueda</td>
+</tr>
+<tr>
+<td><strong>Navegador</strong>: el producto completo</td>
+<td><strong>Motor de renderizado</strong>: un componente suyo</td>
+<td>Varios navegadores pueden compartir el mismo motor</td>
+</tr>
+<tr>
+<td><strong>Motor de renderizado</strong>: interpreta HTML/CSS y construye lo visual</td>
+<td><strong>Motor JavaScript</strong>: ejecuta JavaScript</td>
+<td>Dibujar vs. ejecutar código</td>
+</tr>
+<tr>
+<td><strong>Historial</strong>: páginas visitadas</td>
+<td><strong>Cookies</strong>: datos de estado · <strong>Caché</strong>: copia local de recursos</td>
+<td>Registro vs. datos del sitio vs. copia para acelerar la carga</td>
+</tr>
+<tr>
+<td><strong>Marcadores</strong>: enlaces guardados a propósito</td>
+<td><strong>Historial</strong>: registro automático</td>
+<td>Acción deliberada vs. registro automático</td>
+</tr>
+<tr>
+<td><strong>Incógnito</strong>: menos rastro local</td>
+<td><strong>Anonimato</strong>: no ser identificable en la red</td>
+<td>No oculta la actividad ante proveedor, red, sitios ni servicios de seguridad</td>
+</tr>
+<tr>
+<td><strong>HTTPS</strong>: comunicación protegida con TLS</td>
+<td><strong>Legitimidad</strong> del sitio o del contenido</td>
+<td>Protege el canal; no acredita quién hay al otro lado ni qué ofrece</td>
+</tr>
+<tr>
+<td><strong>Extensión</strong>: añade funcionalidad</td>
+<td><strong>Perfil</strong>: conjunto separado de datos y configuración</td>
+<td>Complemento vs. entorno; un perfil puede tener sus propias extensiones</td>
+</tr>
+<tr>
+<td><strong>Cookie first-party</strong>: del sitio visitado</td>
+<td><strong>Cookie third-party</strong>: de otro dominio incluido en la página</td>
+<td>Depende del dominio al que está asociada</td>
+</tr>
+<tr>
+<td><strong>Chrome</strong>: navegador</td>
+<td><strong>Blink</strong>: motor de renderizado · <strong>V8</strong>: motor JavaScript</td>
+<td>Producto vs. sus dos componentes, que son distintos entre sí</td>
+</tr>
+<tr>
+<td><strong>Perfil</strong>: persistente</td>
+<td><strong>Ventana de incógnito</strong>: temporal</td>
+<td>El perfil se conserva entre sesiones; el incógnito no</td>
+</tr>
+</table></div>
+
+<h2 id="17-trampas-de-examen" class="tema-h2">17. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li><strong>«Chrome es un motor de renderizado»</strong> — falso: Chrome es el <strong>navegador</strong>; <strong>Blink</strong> es su motor de renderizado.</li>
+<li><strong>«Blink y V8 son lo mismo»</strong> — falso: <strong>Blink</strong> renderiza HTML/CSS; <strong>V8</strong> ejecuta JavaScript.</li>
+<li><strong>«Safari utiliza Gecko»</strong> — falso: Safari usa <strong>WebKit</strong>; <strong>Gecko</strong> es de Firefox.</li>
+<li><strong>«Edge usa EdgeHTML»</strong> — falso como afirmación actual: <strong>desde 2020, Edge utiliza Blink</strong>.</li>
+<li><strong>«Firefox usa V8»</strong> — falso: Firefox usa <strong>SpiderMonkey</strong>.</li>
+<li><strong>«Google es un navegador»</strong> — falso: es un <strong>buscador</strong>; el navegador es Chrome.</li>
+<li><strong>«El modo incógnito hace anónima la navegación»</strong> — falso: <strong>incógnito ≠ anonimato</strong>.</li>
+<li><strong>«En incógnito no se guarda absolutamente ningún dato»</strong> — impreciso: <strong>limita</strong> los datos de navegación guardados localmente durante esa sesión.</li>
+<li><strong>«El modo incógnito siempre desactiva las extensiones»</strong> — falso: <strong>depende de la configuración del navegador</strong>.</li>
+<li><strong>«Si aparece HTTPS, el sitio es seguro»</strong> — falso: HTTPS <strong>protege la comunicación</strong>, no acredita la legitimidad del sitio.</li>
+<li><strong>«Un certificado válido garantiza que el contenido es legítimo»</strong> — falso: son cosas distintas; un sitio fraudulento puede tener certificado.</li>
+<li><strong>«Las cookies son el historial»</strong> — falso: la cookie mantiene <strong>estado</strong>; el historial es el <strong>registro de páginas visitadas</strong>.</li>
+<li><strong>«El historial es la caché»</strong> — falso: la caché es una <strong>copia local de recursos</strong> para acelerar la carga.</li>
+<li><strong>«Una extensión y un perfil son equivalentes»</strong> — falso: complemento funcional vs. entorno de datos separado.</li>
+<li><strong>«Abrir DevTools equivale a probar en otro navegador»</strong> — falso: DevTools <strong>inspecciona</strong> el mismo navegador; no cambia de entorno.</li>
+<li><strong>«Si funciona en otro navegador, el problema es del motor»</strong> — no automáticamente: ayuda a <strong>aislar</strong>, pero la causa puede ser extensiones, perfil, configuración o datos locales.</li>
+<li><strong>«Ante cualquier problema, borrar todo el historial y los datos»</strong> — mala práctica: <strong>preferible borrar los datos del sitio afectado</strong>, avisando de que se pueden cerrar sesiones y perder preferencias.</li>
+<li><strong>Colar contenido ajeno</strong>: cómo funciona TLS (T24), phishing y malware (T25) o HTTP como protocolo (T31) no se desarrollan aquí.</li>
+</ul>
+
+<h2 id="18-preguntas-tipo-test" class="tema-h2">18. Posibles preguntas tipo test</h2>
+<ul class="tema-lista">
+<li><strong>Definición</strong> de navegador web como aplicación cliente.</li>
+<li><strong>Asociación navegador → motor de renderizado</strong>: Chrome, Edge, Firefox, Safari, Opera.</li>
+<li><strong>Asociación navegador → motor JavaScript</strong>: V8, JavaScriptCore, SpiderMonkey.</li>
+<li><strong>Motor → función</strong>: ¿cuál interpreta HTML/CSS y cuál ejecuta JavaScript?</li>
+<li>¿Qué motor JavaScript se utiliza también <strong>fuera del navegador</strong>, en Node.js?</li>
+<li>¿Qué motor de renderizado utiliza <strong>Edge</strong> en la actualidad y cuál utilizaba antes de 2020?</li>
+<li>¿Qué es la <strong>Omnibox</strong>?</li>
+<li>Diferenciar <strong>historial, cookies, caché y marcadores</strong> a partir de una descripción.</li>
+<li>¿Qué limita realmente el <strong>modo incógnito</strong> y frente a quién <strong>no</strong> oculta la actividad?</li>
+<li>¿Desactiva el modo incógnito las <strong>extensiones</strong> en todos los casos?</li>
+<li>¿Qué es una <strong>extensión</strong> y cuáles son sus principales <strong>riesgos</strong>?</li>
+<li>¿Qué incluye un <strong>perfil</strong> de navegador? Diferencia con la cuenta del sistema operativo.</li>
+<li>¿Qué son las <strong>DevTools</strong> y con qué tecla se abren habitualmente?</li>
+<li><strong>Panel → uso</strong>: Console, Network, Elements, almacenamiento.</li>
+<li>Un botón no responde pero la página carga: ¿qué panel se revisa primero?</li>
+<li>Faltan imágenes y recursos: ¿qué panel se revisa primero?</li>
+<li>¿Qué protege <strong>HTTPS</strong> y qué <strong>no</strong> garantiza?</li>
+<li>Diferencia entre cookie <strong>first-party</strong> y <strong>third-party</strong>.</li>
+<li>¿Por qué es una medida de seguridad <strong>actualizar el navegador</strong>?</li>
+<li>Ante una incidencia web, ¿cuál es el <strong>orden correcto</strong> de los pasos de diagnóstico?</li>
+<li><strong>Navegador o buscador</strong>: clasificar Chrome, Google, Firefox, Bing, Safari, DuckDuckGo.</li>
+</ul>
+
+<h2 id="19-preguntas-cortas" class="tema-h2">19. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<h4 class="tema-h4">1. Defina navegador web</h4>
+<ul class="tema-lista">
+<li>Definición: aplicación cliente que solicita recursos web y los procesa y renderiza.</li>
+<li>Triángulo: navegador (cliente) — servidor web (recurso) — URL (identifica el recurso).</li>
+<li>Cierre: funciones principales (URL, solicitud, procesado, renderizado, navegación y sesiones).</li>
+</ul>
+<h4 class="tema-h4">2. Diferencie motor de renderizado y motor JavaScript</h4>
+<ul class="tema-lista">
+<li>Motor de renderizado: interpreta HTML/CSS y construye la representación visual (Blink, WebKit, Gecko).</li>
+<li>Motor JavaScript: ejecuta JavaScript (V8, JavaScriptCore, SpiderMonkey).</li>
+<li>Cierre: un navegador incorpora ambos; V8 se usa además en Node.js, fuera del navegador.</li>
+</ul>
+<h4 class="tema-h4">3. Explique las principales funcionalidades de un navegador</h4>
+<ul class="tema-lista">
+<li>Omnibox, pestañas, historial, marcadores, gestor de descargas.</li>
+<li>Navegación privada, extensiones, perfiles, gestión de contraseñas y permisos por sitio.</li>
+<li>Cierre: DevTools como herramienta de inspección y diagnóstico.</li>
+</ul>
+<h4 class="tema-h4">4. Explique la navegación privada</h4>
+<ul class="tema-lista">
+<li>Qué es: limita los datos de navegación que el navegador guarda localmente durante esa sesión.</li>
+<li>Qué no es: no oculta la actividad ante el proveedor de acceso, la red corporativa, los sitios web ni los servicios de seguridad.</li>
+<li>Cierre: utilidad como paso de diagnóstico en el CAU, con la cautela de que las extensiones pueden seguir activas según la configuración.</li>
+</ul>
+<h4 class="tema-h4">5. Explique las funciones y riesgos de las extensiones</h4>
+<ul class="tema-lista">
+<li>Qué son: componentes que añaden funcionalidades (bloqueador de anuncios, gestor de contraseñas, corrector).</li>
+<li>Permisos: pueden solicitar acceso a las páginas y a su contenido.</li>
+<li>Riesgos: origen no confiable, permisos excesivos, código malicioso, filtración de información.</li>
+<li>Cierre: criterio de valoración — origen, permisos y necesidad real, conforme a la política de la organización.</li>
+</ul>
+<h4 class="tema-h4">6. Explique los perfiles de navegador</h4>
+<ul class="tema-lista">
+<li>Qué son: conjunto separado de configuración, cookies, sesiones, extensiones, historial y otros datos.</li>
+<li>Ejemplo: perfil personal y perfil laboral, con sesiones y extensiones independientes.</li>
+<li>Cierre: no confundir con la cuenta del sistema operativo ni con una ventana de incógnito.</li>
+</ul>
+<h4 class="tema-h4">7. Explique qué indica HTTPS</h4>
+<ul class="tema-lista">
+<li>Qué es: comunicación HTTP protegida mediante TLS; el navegador valida el certificado según las reglas de confianza correspondientes.</li>
+<li>Qué no garantiza: legitimidad del sitio, seguridad del contenido ni ausencia de phishing.</li>
+<li>Cierre: regla — protege la comunicación, no acredita la legitimidad; el razonamiento no debe apoyarse en un icono concreto.</li>
+</ul>
+<h4 class="tema-h4">8. Explique el procedimiento básico de diagnóstico de una incidencia web</h4>
+<ul class="tema-lista">
+<li>Reproducir; probar en incógnito; comprobar datos del sitio, caché y cookies.</li>
+<li>Descartar extensiones; probar otro perfil; probar otro navegador.</li>
+<li>Abrir DevTools: Console (errores de ejecución) y Network (peticiones y recursos).</li>
+<li>Cierre: concluir si el problema está en el cliente, el navegador, la aplicación web o el servicio remoto, y escalar.</li>
+</ul>
+<h4 class="tema-h4">9. Explique las cookies y su clasificación</h4>
+<ul class="tema-lista">
+<li>Qué son: pequeño dato que un sitio utiliza para mantener información entre solicitudes o visitas (sesión, preferencias, identificación).</li>
+<li>First-party (asociada al sitio visitado) frente a third-party (asociada a otro dominio incluido en la página).</li>
+<li>Cierre: al borrarlas pueden cerrarse sesiones y perderse preferencias; es preferible actuar sobre el sitio afectado.</li>
+</ul>
+<h4 class="tema-h4">10. Diferencie navegador y buscador</h4>
+<ul class="tema-lista">
+<li>Navegador: aplicación cliente (Chrome, Edge, Firefox, Safari).</li>
+<li>Buscador: servicio web al que se accede desde el navegador (Google, Bing, DuckDuckGo).</li>
+<li>Cierre: se navega con un navegador; se busca en un buscador.</li>
+</ul>
+
+<h2 id="20-supuestos-practicos" class="tema-h2">20. Supuestos prácticos</h2>
+<h4 class="tema-h4">Supuesto 1 — Funciona en incógnito pero no en navegación normal</h4>
+<p><strong>Escenario</strong>: una persona usuaria no puede completar un trámite en la aplicación web corporativa; en una ventana de incógnito, el mismo trámite funciona.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué indica ese comportamiento?</strong> Que la causa está muy probablemente en el <strong>entorno del perfil normal</strong>: <strong>datos del sitio, cookies o sesión previa</strong>, o bien alguna <strong>extensión</strong>.</li>
+<li><strong>b) ¿Cómo se continúa?</strong> Comprobar y, en su caso, <strong>borrar los datos del sitio afectado</strong>; después <strong>desactivar extensiones</strong> y, si es necesario, <strong>probar otro perfil</strong>.</li>
+<li><strong>c) Cautela.</strong> No cabe concluir que las extensiones estén descartadas por el hecho de que funcione en incógnito: <strong>pueden estar habilitadas en modo privado según la configuración</strong>.</li>
+<li><strong>d) Aviso a la persona usuaria.</strong> Al borrar cookies <strong>se cerrará la sesión</strong> y podrá perder preferencias del sitio.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 2 — Funciona en Chrome pero no en Firefox</h4>
+<p><strong>Escenario</strong>: una aplicación web se comporta correctamente en Chrome y presenta errores en Firefox.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué aporta el dato?</strong> <strong>Aísla</strong> el problema a un entorno concreto y descarta que el servicio esté caído para todos.</li>
+<li><strong>b) ¿Se puede concluir que es un problema del motor?</strong> <strong>No automáticamente</strong>: puede deberse a <strong>extensiones, perfil, configuración, versión o datos locales</strong> de Firefox.</li>
+<li><strong>c) ¿Cómo se comprueba?</strong> Probar Firefox <strong>en incógnito y con un perfil limpio</strong>; si persiste, abrir <strong>DevTools</strong> y revisar <strong>Console</strong> y <strong>Network</strong> para documentar el error.</li>
+<li><strong>d) Escalado.</strong> Si el error es reproducible en un perfil limpio, se documenta como <strong>incompatibilidad de la aplicación con ese navegador</strong> y se traslada a quien corresponda.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 3 — La página carga pero un botón no responde</h4>
+<p><strong>Escenario</strong>: el formulario se muestra correctamente, pero al pulsar «Enviar» no ocurre nada.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué panel de DevTools se revisa primero?</strong> <strong>Console</strong>: un botón que no responde apunta a un <strong>error de ejecución</strong> de JavaScript.</li>
+<li><strong>b) ¿Qué se recoge?</strong> El <strong>mensaje de error</strong> completo, el <strong>momento</strong> en que aparece y los <strong>pasos exactos</strong> de reproducción.</li>
+<li><strong>c) ¿Qué se comprueba después?</strong> Si el error se reproduce <strong>en incógnito y sin extensiones</strong>; si es así, apunta a la <strong>aplicación web</strong>.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 4 — La página carga parcialmente y faltan recursos</h4>
+<p><strong>Escenario</strong>: el portal se ve sin estilos y faltan imágenes.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué panel se revisa primero?</strong> <strong>Network</strong>: el síntoma indica <strong>peticiones que fallan o recursos que no llegan</strong>.</li>
+<li><strong>b) ¿Qué se busca?</strong> Peticiones <strong>fallidas o incompletas</strong> y qué recursos concretos no se obtienen.</li>
+<li><strong>c) ¿Qué se descarta antes de escalar?</strong> <strong>Caché y datos del sitio</strong> desactualizados, y una <strong>extensión</strong> que bloquee contenido (por ejemplo, un bloqueador que filtre recursos).</li>
+<li><strong>d) Conclusión.</strong> Si falla igual en otro perfil y otro navegador, el problema apunta a la <strong>aplicación web o al servicio remoto</strong>.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 5 — «Tiene candado, luego la web es segura»</h4>
+<p><strong>Escenario</strong>: una persona usuaria ha introducido credenciales en un sitio al que llegó por un enlace recibido, argumentando que «tenía el candado».</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué hay que explicarle?</strong> Que <strong>HTTPS es comunicación HTTP protegida mediante TLS</strong>: <strong>protege la comunicación</strong>, pero <strong>no garantiza que el sitio sea legítimo</strong>, que el contenido sea seguro ni que no sea phishing.</li>
+<li><strong>b) ¿Por qué no basta el icono?</strong> Porque la <strong>señalización visual varía</strong> entre navegadores y versiones, y un sitio fraudulento <strong>puede disponer de certificado</strong>.</li>
+<li><strong>c) ¿Qué debe verificarse?</strong> La <strong>identidad real del sitio</strong>: dominio exacto, origen del enlace y canal por el que llegó.</li>
+<li><strong>d) Actuación.</strong> Tratarlo como <strong>posible compromiso de credenciales</strong> conforme al procedimiento de la organización (el desarrollo del fraude y su respuesta corresponde al Tema 25).</li>
+</ul>
+<h4 class="tema-h4">Supuesto 6 — Dos entornos con configuraciones separadas</h4>
+<p><strong>Escenario</strong>: una persona necesita trabajar simultáneamente con dos sesiones distintas del mismo servicio y pierde continuamente la sesión al alternar.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué solución corresponde?</strong> Utilizar <strong>dos perfiles de navegador</strong>, cada uno con su configuración, cookies, sesiones y extensiones.</li>
+<li><strong>b) ¿Por qué no basta el modo incógnito?</strong> Porque es <strong>temporal</strong> y no conserva configuración ni datos entre sesiones; el perfil es <strong>persistente</strong>.</li>
+<li><strong>c) ¿Es lo mismo que crear otra cuenta en el equipo?</strong> No: el <strong>perfil</strong> separa datos <strong>dentro del navegador</strong>; la <strong>cuenta del sistema operativo</strong> separa la sesión del equipo.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 7 — Extensión con permisos excesivos</h4>
+<p><strong>Escenario</strong>: una persona solicita instalar una extensión descargada de un sitio no oficial que pide acceso a los datos de todas las páginas visitadas.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué riesgos concurren?</strong> <strong>Origen no confiable</strong>, <strong>permisos excesivos</strong> respecto a la función declarada, posible <strong>código malicioso</strong> y <strong>filtración de información</strong>.</li>
+<li><strong>b) ¿Qué criterio se aplica?</strong> <strong>Origen, permisos y necesidad real</strong>, y siempre conforme a la <strong>política de la organización</strong> sobre instalación de software.</li>
+<li><strong>c) ¿Qué alternativa se ofrece?</strong> Valorar una extensión equivalente de <strong>fuente oficial</strong> con permisos proporcionados, o una funcionalidad ya disponible en el navegador.</li>
+<li><strong>d) Cautela adicional.</strong> Una extensión puede volverse maliciosa <strong>en una actualización posterior</strong>: conviene revisar periódicamente las instaladas y retirar las que no se usan.</li>
+</ul>
+
+<h2 id="21-matriz-de-memorizacion" class="tema-h2">21. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Lo que debo recordar</strong></th>
+</tr>
+<tr>
+<td><strong>Navegador</strong></td>
+<td>Aplicación cliente que solicita recursos web y los procesa y renderiza</td>
+</tr>
+<tr>
+<td><strong>URL</strong></td>
+<td>Identifica el recurso solicitado</td>
+</tr>
+<tr>
+<td><strong>Renderizado</strong></td>
+<td>Interpretar HTML/CSS y construir la representación visual</td>
+</tr>
+<tr>
+<td><strong>Blink</strong></td>
+<td>Motor de renderizado de Chrome, Edge, Opera y Brave</td>
+</tr>
+<tr>
+<td><strong>WebKit</strong></td>
+<td>Motor de renderizado de Safari</td>
+</tr>
+<tr>
+<td><strong>Gecko</strong></td>
+<td>Motor de renderizado de Firefox</td>
+</tr>
+<tr>
+<td><strong>V8</strong></td>
+<td>Motor JavaScript de Chrome y Edge; también en Node.js, fuera del navegador</td>
+</tr>
+<tr>
+<td><strong>JavaScriptCore</strong></td>
+<td>Motor JavaScript de Safari</td>
+</tr>
+<tr>
+<td><strong>SpiderMonkey</strong></td>
+<td>Motor JavaScript de Firefox</td>
+</tr>
+<tr>
+<td><strong>Omnibox</strong></td>
+<td>Barra que permite introducir una URL o realizar una búsqueda</td>
+</tr>
+<tr>
+<td><strong>Historial</strong></td>
+<td>Registro local de páginas visitadas</td>
+</tr>
+<tr>
+<td><strong>Cookies</strong></td>
+<td>Dato que un sitio usa para mantener información entre solicitudes o visitas</td>
+</tr>
+<tr>
+<td><strong>Caché</strong></td>
+<td>Copia local de recursos para acelerar la carga</td>
+</tr>
+<tr>
+<td><strong>Marcadores</strong></td>
+<td>Enlaces guardados para acceso rápido</td>
+</tr>
+<tr>
+<td><strong>Incógnito</strong></td>
+<td>Limita los datos guardados localmente en esa sesión; no es anonimato</td>
+</tr>
+<tr>
+<td><strong>Extensión</strong></td>
+<td>Componente que añade funcionalidades; puede pedir acceso a páginas y contenido</td>
+</tr>
+<tr>
+<td><strong>Perfil</strong></td>
+<td>Conjunto separado de configuración, cookies, sesiones, extensiones e historial</td>
+</tr>
+<tr>
+<td><strong>DevTools</strong></td>
+<td>Herramientas integradas de inspección y diagnóstico; F12</td>
+</tr>
+<tr>
+<td><strong>Console</strong></td>
+<td>Errores de ejecución de la página</td>
+</tr>
+<tr>
+<td><strong>Network</strong></td>
+<td>Peticiones de recursos y su resultado</td>
+</tr>
+<tr>
+<td><strong>HTTPS</strong></td>
+<td>HTTP protegido mediante TLS; protege la comunicación, no acredita legitimidad</td>
+</tr>
+<tr>
+<td><strong>First-party</strong></td>
+<td>Cookie asociada al sitio visitado</td>
+</tr>
+<tr>
+<td><strong>Third-party</strong></td>
+<td>Cookie asociada a otro dominio o servicio incluido en la página</td>
+</tr>
+<tr>
+<td><strong>Actualización</strong></td>
+<td>Medida básica de seguridad: las nuevas versiones corrigen vulnerabilidades</td>
+</tr>
+</table></div>
+
+<h2 id="22-resumen-final" class="tema-h2">22. Resumen final: si mañana fuera el examen</h2>
+<ul class="tema-lista">
+<li><strong>Navegador</strong> = <strong>aplicación cliente</strong> que solicita recursos y los procesa y renderiza. <strong>Navegador → cliente · servidor web → recurso · URL → identifica el recurso.</strong></li>
+<li><strong>Motor de renderizado</strong> (HTML/CSS → representación visual): <strong>Blink</strong> (Chrome, Edge, Opera, Brave) · <strong>WebKit</strong> (Safari) · <strong>Gecko</strong> (Firefox).</li>
+<li><strong>Motor JavaScript</strong> (ejecuta JS): <strong>V8</strong> (Chrome, Edge; también Node.js) · <strong>JavaScriptCore</strong> (Safari) · <strong>SpiderMonkey</strong> (Firefox). <strong>No son la misma cosa que el motor de renderizado.</strong></li>
+<li><strong>Edge usa Blink desde 2020</strong> (antes EdgeHTML). <strong>Google es buscador; Chrome es navegador.</strong></li>
+<li><strong>Funcionalidades</strong>: Omnibox (URL o búsqueda) · pestañas · historial · marcadores · descargas · permisos por sitio. <strong>Historial ≠ cookies ≠ caché ≠ marcadores.</strong></li>
+<li><strong>Incógnito</strong> = limita los datos guardados <strong>localmente</strong> en esa sesión. <strong>NO es anonimato</strong> frente a proveedor, red corporativa, sitios web ni servicios de seguridad. <strong>No siempre desactiva las extensiones</strong>: depende de la configuración.</li>
+<li><strong>Extensión</strong> = añade funcionalidad y <strong>puede pedir acceso a páginas y contenido</strong>. Riesgos: <strong>origen no confiable, permisos excesivos, código malicioso, filtración</strong>.</li>
+<li><strong>Perfil</strong> = conjunto separado de <strong>configuración, cookies, sesiones, extensiones e historial</strong>. No es la cuenta del SO ni una ventana de incógnito.</li>
+<li><strong>DevTools (F12)</strong>: <strong>Elements</strong> (estructura y estilos) · <strong>Console</strong> (errores de ejecución) · <strong>Network</strong> (peticiones y recursos) · <strong>almacenamiento</strong> (cookies y datos del sitio).</li>
+<li><strong>HTTPS = HTTP + TLS</strong>: <strong>protege la comunicación</strong>; <strong>no garantiza legitimidad</strong> del sitio ni del contenido, ni ausencia de phishing.</li>
+<li><strong>Cookie</strong> = mantiene <strong>estado</strong>. <strong>First-party</strong> (sitio visitado) vs. <strong>third-party</strong> (otro dominio incluido en la página).</li>
+<li><strong>Diagnóstico CAU</strong>: reproducir → incógnito → datos del sitio/caché/cookies → extensiones → otro perfil → otro navegador → DevTools → Console → Network → <strong>¿cliente, navegador, aplicación web o servicio remoto?</strong></li>
+<li><strong>Borrado selectivo</strong>: mejor los <strong>datos del sitio afectado</strong> que todo el historial; avisar de que <strong>se cerrarán sesiones y se perderán preferencias</strong>.</li>
+</ul>
+
+<h2 id="23-actualidad-navegadores" class="tema-h2">23. Actualidad de navegadores — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Información sujeta a cambio · Fecha de actualización de estos apuntes: agosto de 2026</strong><br>Nada de este apartado desplaza a los conceptos estables. Las <strong>versiones concretas</strong> y las <strong>cuotas de mercado</strong> no son materia de examen; se recogen aquí solo para situar el contexto.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Evolución de motores</strong>: la tendencia consolidada es la <strong>concentración en torno a Blink</strong> (Chrome, Edge, Opera, Brave), frente a <strong>WebKit</strong> en Safari y <strong>Gecko</strong> en Firefox. La migración de <strong>Edge a Blink en 2020</strong> es el hito que explica esta situación y es el único dato de fecha realmente preguntable.</li>
+<li><strong>Extensiones</strong>: el modelo de manifiesto de las extensiones ha evolucionado hacia esquemas con <strong>permisos más acotados</strong> (el llamado <strong>Manifest V3</strong> en los navegadores basados en Blink). Es materia de ampliación: para la OPE basta con el <strong>principio</strong> — las extensiones piden permisos, y unos permisos excesivos son un riesgo.</li>
+<li><strong>Cookies de terceros</strong>: los navegadores han venido aplicando <strong>restricciones crecientes</strong> a las cookies <strong>third-party</strong>, con calendarios y decisiones que <strong>han cambiado varias veces</strong> y que difieren entre productos. Debe tratarse siempre como <strong>situación cambiante</strong>, nunca como regla estable. Lo que <strong>sí</strong> es estable es la <strong>definición</strong> de first-party y third-party.</li>
+<li><strong>Cuotas de mercado</strong>: varían por periodo, país y tipo de dispositivo. <strong>No deben afirmarse en un examen</strong> como dato absoluto ni como parte del contenido nuclear.</li>
+<li><strong>Versiones</strong>: los navegadores habituales siguen ciclos de <strong>actualización frecuente y en gran medida automática</strong>. Lo relevante para la OPE es el principio del apartado 12: <strong>actualizar corrige vulnerabilidades</strong>.</li>
 </ul>
   </div>
 </article>

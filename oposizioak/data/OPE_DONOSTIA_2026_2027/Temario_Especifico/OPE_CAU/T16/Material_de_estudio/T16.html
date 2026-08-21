@@ -6,154 +6,575 @@
   </header>
 
   <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
-<li><a href="#1-herramientas-ofimáticas-concepto-y-suites-habituales">1. Herramientas ofimáticas: concepto y suites habituales</a></li>
-<li><a href="#2-libreoffice-conceptos-básicos-y-generalidades">2. LibreOffice: conceptos básicos y generalidades</a></li>
-<li><a href="#3-formatos-de-documento-opendocument-y-compatibilidad">3. Formatos de documento: OpenDocument y compatibilidad</a></li>
-<li><a href="#4-distribución-de-software-en-un-entorno-distribuido-concept">4. Distribución de software en un entorno distribuido: conceptos</a></li>
-<li><a href="#5-actualización-de-software-en-un-entorno-distribuido">5. Actualización de software en un entorno distribuido</a></li>
-<li><a href="#6-resumen-para-estudiar">6. Resumen para estudiar</a></li>
-<li><a href="#7-conceptos-clave">7. Conceptos clave</a></li>
-<li><a href="#8-posibles-puntos-de-examen">8. Posibles puntos de examen</a></li>
+<li><a href="#1-ofimatica-y-suites">1. Ofimática y suites ofimáticas</a></li>
+<li><a href="#2-libreoffice">2. LibreOffice: conceptos básicos y generalidades</a></li>
+<li><a href="#3-formatos-de-documento">3. Formatos de documento: ODF, OOXML y PDF</a></li>
+<li><a href="#4-distribucion-de-software">4. Distribución de software en un entorno distribuido</a></li>
+<li><a href="#5-actualizacion-distribuida">5. Actualización de software en un entorno distribuido</a></li>
+<li><a href="#6-datos-y-anclas-de-memoria">6. Datos y anclas de memoria</a></li>
+<li><a href="#7-no-confundir">7. No confundir</a></li>
+<li><a href="#8-posibles-trampas-de-examen">8. Posibles trampas de examen</a></li>
+<li><a href="#9-posibles-preguntas-tipo-test">9. Posibles preguntas tipo test</a></li>
+<li><a href="#10-posibles-preguntas-cortas">10. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#11-supuestos-practicos-cau">11. Supuestos prácticos CAU</a></li>
+<li><a href="#12-matriz-de-memorizacion">12. Matriz de memorización</a></li>
+<li><a href="#13-resumen-final">13. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#14-actualidad-libreoffice">14. Actualidad LibreOffice — dato fechado</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
 
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>Los formatos de instalación de software (MSI, EXE, APPX/MSIX) y su instalación o desinstalación en un único equipo ya se vieron en el Tema 11; aquí el foco es distinto: cómo se lleva ese mismo software a muchos equipos a la vez, de forma centralizada, y cómo se mantiene actualizado. No se repiten aquí los conceptos generales de gestión de parches del sistema operativo, vistos en los Temas 11, 12 y 13.</th>
+<th><strong>⚠️ No confundir — fronteras del tema</strong><br>La instalación y desinstalación en <strong>un equipo</strong> (MSI, MSIX, winget) es el <strong>Tema 11</strong>; Windows Server, GPO y WSUS, el <strong>Tema 12</strong>; los gestores de paquetes de Linux, el <strong>Tema 13</strong>; usuarios y grupos, el <strong>Tema 14</strong>; y el ENS, el <strong>Tema 21</strong>. Este tema responde a otra pregunta: <strong>cómo gestionar y distribuir software en muchos equipos</strong>.</th>
 </tr>
 </table></div>
-<h2 id="1-herramientas-ofimáticas-concepto-y-suites-habituales" class="tema-h2">1. Herramientas ofimáticas: concepto y suites habituales</h2>
-<p>La <strong>ofimática</strong> engloba el conjunto de técnicas, aplicaciones y herramientas informáticas orientadas a las tareas habituales de una oficina: redactar documentos, elaborar hojas de cálculo, preparar presentaciones, gestionar pequeñas bases de datos y comunicarse por correo electrónico. Estas aplicaciones se agrupan habitualmente en <strong>suites ofimáticas</strong>, paquetes que integran varios programas con una interfaz y unos formatos coherentes entre sí.</p>
+
+<h2 id="1-ofimatica-y-suites" class="tema-h2">1. Ofimática y suites ofimáticas</h2>
+<p>La <strong>ofimática</strong> es el <strong>conjunto de técnicas, herramientas y aplicaciones destinadas a las tareas habituales de oficina</strong>: redactar documentos, elaborar hojas de cálculo, preparar presentaciones, gestionar bases de datos sencillas o comunicarse por correo.</p>
+<p>Una <strong>suite ofimática</strong> es un paquete que <strong>integra varias de esas aplicaciones</strong> con una interfaz y unos formatos coherentes entre sí. Ejemplos habituales:</p>
 <ul class="tema-lista">
-<li><strong>Microsoft 365 / Microsoft Office</strong>: la suite comercial más extendida, con Word (texto), Excel (hoja de cálculo), PowerPoint (presentaciones), Outlook (correo) y Access (bases de datos).</li>
-<li><strong>LibreOffice</strong>: suite de software libre y gratuito, alternativa de referencia a Microsoft Office (punto 2).</li>
-<li><strong>Google Workspace</strong>: suite basada en navegador y en la nube (Documentos, Hojas de cálculo, Presentaciones de Google), con edición colaborativa en tiempo real como característica distintiva.</li>
-<li><strong>Apache OpenOffice</strong>: predecesor histórico de LibreOffice, del que este se independizó (punto 2); mantiene hoy un desarrollo mucho más reducido.</li>
+<li><strong>LibreOffice</strong> — el foco de este tema.</li>
+<li><strong>Microsoft 365 / Office</strong> (Word, Excel, PowerPoint...).</li>
+<li><strong>Google Workspace</strong> (suite en navegador, con edición colaborativa).</li>
+<li><strong>Apache OpenOffice</strong> (proyecto del que se bifurcó LibreOffice).</li>
 </ul>
-<p>En el ámbito de la Administración Pública es habitual promover el uso de suites de software libre como LibreOffice, tanto por razones de coste de licenciamiento como de independencia tecnológica respecto a un fabricante concreto y de compatibilidad con formatos de documento abiertos y estandarizados (punto 3).</p>
-<h2 id="2-libreoffice-conceptos-básicos-y-generalidades" class="tema-h2">2. LibreOffice: conceptos básicos y generalidades</h2>
-<p><strong>LibreOffice</strong> nació en 2010 como una bifurcación (fork) de OpenOffice.org, impulsada por <strong>The Document Foundation (TDF)</strong> tras la adquisición de Sun Microsystems —entonces responsable de OpenOffice.org— por parte de Oracle, ante la incertidumbre sobre el futuro del proyecto. Desde entonces se ha consolidado como la suite ofimática libre de referencia, con un ritmo de desarrollo muy superior al de OpenOffice.</p>
-<h4 class="tema-h4">Módulos</h4>
+<p>En la Administración Pública es habitual promover suites de software libre y <strong>formatos de documento abiertos y estandarizados</strong>, por coste, independencia tecnológica e interoperabilidad (apartado 3).</p>
+
+<h2 id="2-libreoffice" class="tema-h2">2. LibreOffice: conceptos básicos y generalidades</h2>
+<ul class="tema-lista">
+<li><strong>Qué es</strong>: una <strong>suite ofimática</strong> completa y <strong>multiplataforma</strong> (Windows, Linux, macOS).</li>
+<li><strong>Naturaleza</strong>: es <strong>software libre</strong> y <strong>puede descargarse y utilizarse gratuitamente</strong>.</li>
+<li><strong>Quién lo impulsa</strong>: <strong>The Document Foundation</strong>.</li>
+<li><strong>Origen</strong>: nació en <strong>2010 como fork (bifurcación) de OpenOffice.org</strong>.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — libre no es lo mismo que gratuito</strong><br><strong>LIBRE</strong> → <strong>libertades de uso, estudio, modificación y distribución</strong> según la licencia.<br><strong>GRATUITO</strong> → <strong>sin coste de adquisición</strong>.<br>Un programa puede ser gratuito sin ser libre (y, en teoría, libre sin distribuirse gratis). LibreOffice reúne ambas condiciones: es libre y puede obtenerse gratuitamente.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Módulos y formatos nativos</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>Módulo</strong></th>
 <th><strong>Función</strong></th>
-<th><strong>Formato nativo</strong></th>
+<th><strong>Extensión nativa</strong></th>
+</tr>
+<tr>
+<td><strong>Writer</strong></td>
+<td>Procesador de textos</td>
+<td><strong>.odt</strong></td>
+</tr>
+<tr>
+<td><strong>Calc</strong></td>
+<td>Hoja de cálculo</td>
+<td><strong>.ods</strong></td>
+</tr>
+<tr>
+<td><strong>Impress</strong></td>
+<td>Presentaciones</td>
+<td><strong>.odp</strong></td>
+</tr>
+<tr>
+<td><strong>Base</strong></td>
+<td>Bases de datos</td>
+<td><strong>.odb</strong></td>
+</tr>
+<tr>
+<td><strong>Draw</strong></td>
+<td>Dibujo y diagramación</td>
+<td><strong>.odg</strong></td>
+</tr>
+<tr>
+<td><strong>Math</strong></td>
+<td>Fórmulas matemáticas</td>
+<td><strong>.odf</strong></td>
+</tr>
+</table></div>
+<h4 class="tema-h4">Licencia y versionado</h4>
+<ul class="tema-lista">
+<li><strong>Licencia</strong>: LibreOffice <strong>se distribuye principalmente bajo la Mozilla Public License (MPL 2.0)</strong>, junto con <strong>otros componentes de código abierto sujetos a sus respectivas licencias</strong>. Como dato de estudio, retén <strong>MPL 2.0</strong>.</li>
+<li><strong>Versionado</strong>: utiliza un esquema <strong>AÑO.MES</strong> — por ejemplo, <strong>26.2 → febrero de 2026</strong>. Es el <strong>esquema</strong> lo memorizable; la versión concreta vigente es dato de actualidad (apartado 14).</li>
+</ul>
+
+<h2 id="3-formatos-de-documento" class="tema-h2">3. Formatos de documento: ODF, OOXML y PDF</h2>
+<h4 class="tema-h4">ODF</h4>
+<ul class="tema-lista">
+<li><strong>ODF = OpenDocument Format</strong>: <strong>estándar abierto</strong> y <strong>formato nativo de LibreOffice</strong>.</li>
+<li>Normalizado como <strong>ISO/IEC 26300</strong>.</li>
+<li>Extensiones: <strong>.odt</strong> (Writer) · <strong>.ods</strong> (Calc) · <strong>.odp</strong> (Impress) · <strong>.odb</strong> (Base).</li>
+</ul>
+<h4 class="tema-h4">OOXML</h4>
+<ul class="tema-lista">
+<li><strong>OOXML = Office Open XML</strong>: formato utilizado por <strong>Microsoft Office</strong> para <strong>.docx</strong>, <strong>.xlsx</strong> y <strong>.pptx</strong>.</li>
+<li>Normalizado como <strong>ISO/IEC 29500</strong>.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th></th>
+<th><strong>ODF</strong></th>
+<th><strong>OOXML</strong></th>
+</tr>
+<tr>
+<td><strong>Suite de referencia</strong></td>
+<td>LibreOffice</td>
+<td>Microsoft Office</td>
+</tr>
+<tr>
+<td><strong>Estándar</strong></td>
+<td>ISO/IEC 26300</td>
+<td>ISO/IEC 29500</td>
+</tr>
+<tr>
+<td><strong>Extensiones</strong></td>
+<td>.odt / .ods / .odp</td>
+<td>.docx / .xlsx / .pptx</td>
+</tr>
+<tr>
+<td><strong>Carácter</strong></td>
+<td>Abierto y estandarizado</td>
+<td>Abierto y estandarizado</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br><strong>OOXML no es simplemente «un formato propietario»</strong>: es un <strong>estándar internacional</strong> (ISO/IEC 29500), aunque esté <strong>asociado a Microsoft Office</strong> como suite de referencia. La diferencia con ODF no es «abierto frente a cerrado», sino <strong>dos estándares distintos con distinta suite nativa</strong>.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Compatibilidad</h4>
+<p>LibreOffice <strong>puede abrir y guardar documentos OOXML</strong>. Ahora bien, <strong>la compatibilidad puede presentar diferencias de formato</strong>, especialmente con elementos complejos o específicos de cada suite: <strong>fuentes</strong>, <strong>saltos de página</strong>, <strong>objetos</strong> incrustados o <strong>funciones avanzadas</strong>. Conviene comprobar el resultado en documentos críticos.</p>
+<h4 class="tema-h4">PDF</h4>
+<p>El <strong>PDF</strong> es el formato <strong>adecuado para conservar la presentación y la maquetación final</strong> de un documento cuando ya no se necesita editarlo. No debe afirmarse que garantice una representación idéntica en absolutamente cualquier entorno, pero es la vía habitual para fijar el aspecto de entrega.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — ENI ≠ ENS</strong><br><strong>ENI = Esquema Nacional de Interoperabilidad</strong>: establece <strong>principios y directrices para la interoperabilidad de la información electrónica</strong> de las Administraciones Públicas. Los <strong>formatos abiertos y estandarizados favorecen la interoperabilidad</strong>, de ahí su promoción en el sector público.<br><strong>ENI → interoperabilidad · ENS → seguridad</strong> (el ENS se estudia en el Tema 21). Confundirlos es trampa habitual.</th>
+</tr>
+</table></div>
+
+<h2 id="4-distribucion-de-software" class="tema-h2">4. Distribución de software en un entorno distribuido</h2>
+<p>En una organización con decenas o cientos de equipos, instalar y mantener el software manualmente es inviable. La <strong>distribución centralizada</strong> persigue:</p>
+<ul class="tema-lista">
+<li><strong>Consistencia</strong>: el mismo software y la misma configuración en todos los equipos.</li>
+<li><strong>Control</strong>: solo software aprobado, en las versiones aprobadas.</li>
+<li><strong>Inventario</strong>: saber qué hay instalado y dónde.</li>
+<li><strong>Reducción del trabajo manual</strong>: menos desplazamientos y menos intervención del CAU equipo a equipo.</li>
+</ul>
+<h4 class="tema-h4">Conceptos básicos</h4>
+<ul class="tema-lista">
+<li><strong>Instalación silenciosa</strong>: <strong>instalación sin intervención del usuario</strong>. El formato <strong>MSI</strong> es <strong>muy habitual en entornos Windows corporativos y apropiado para despliegues automatizados</strong>, pero <strong>también existen otros formatos y métodos</strong> de instalación silenciosa.</li>
+<li><strong>Imagen maestra</strong>: un <strong>equipo de referencia</strong> con sistema operativo, aplicaciones y configuración, que se <strong>generaliza con Sysprep</strong> (Tema 11) y se <strong>despliega en múltiples equipos</strong>.</li>
+<li><strong>Catálogo de software</strong>: <strong>repositorio central de aplicaciones aprobadas</strong>. Puede permitir <strong>solicitud, instalación, autoservicio y control de versiones</strong>, descargando al CAU de instalaciones rutinarias.</li>
+</ul>
+<h4 class="tema-h4">Herramientas de distribución (Windows)</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Herramienta</strong></th>
+<th><strong>Papel</strong></th>
+</tr>
+<tr>
+<td><strong>GPO</strong></td>
+<td>Mecanismo de <strong>distribución/asignación de software</strong> en entornos Windows de dominio</td>
+</tr>
+<tr>
+<td><strong>Microsoft Configuration Manager</strong></td>
+<td><strong>Despliegue empresarial</strong> de sistemas, aplicaciones y actualizaciones, con <strong>inventario</strong></td>
+</tr>
+<tr>
+<td><strong>Microsoft Intune</strong></td>
+<td><strong>Gestión cloud de endpoints</strong>, aplicaciones y políticas — útil para equipos fuera de la red corporativa</td>
+</tr>
+</table></div>
+<h4 class="tema-h4">Distribución en Linux</h4>
+<p>En entornos Linux, la vía habitual son los <strong>repositorios internos o mirrors</strong> de la organización, que permiten <strong>controlar las versiones</strong> que se despliegan, <strong>reducir la dependencia de Internet</strong> en cada instalación y <strong>centralizar los paquetes</strong> (el uso concreto de apt/dnf corresponde al Tema 13).</p>
+<h4 class="tema-h4">Modelos de distribución</h4>
+<ul class="tema-lista">
+<li><strong>Modelo basado en cliente/agente</strong>: el equipo <strong>consulta o sincroniza periódicamente</strong> políticas o tareas pendientes con un servicio central.</li>
+<li><strong>Modelo iniciado centralmente</strong>: el administrador o un servicio central <strong>asigna u ordena una acción</strong> a un conjunto de equipos.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — pull y push como conceptos, no como etiquetas de producto</strong><br>Los términos <strong>pull</strong> (el cliente consulta) y <strong>push</strong> (se ordena desde el centro) son <strong>conceptos generales</strong> útiles para razonar. <strong>No constituyen una clasificación rígida de cada herramienta</strong>: los sistemas modernos combinan <strong>agentes, sincronización periódica, políticas y mecanismos mixtos</strong>. Evita afirmaciones del tipo «tal producto es siempre push».</th>
+</tr>
+</table></div>
+
+<h2 id="5-actualizacion-distribuida" class="tema-h2">5. Actualización de software en un entorno distribuido</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — el ciclo</strong><br><strong>1. INVENTARIO → 2. IDENTIFICACIÓN de actualizaciones → 3. PRUEBAS → 4. DESPLIEGUE → 5. VERIFICACIÓN.</strong></th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>1. Inventario</strong>: saber qué software y qué versión hay en cada equipo. <strong>No puede gestionarse correctamente una actualización distribuida sin conocer qué software y qué versión están instalados</strong>. El inventario debe identificar al menos <strong>equipo, software y versión</strong>.</li>
+<li><strong>2. Identificación de actualizaciones</strong>: contrastar el inventario con las actualizaciones publicadas por cada fabricante y decidir cuáles aplican.</li>
+<li><strong>3. Pruebas</strong>: validar en un <strong>entorno controlado o piloto</strong> antes del despliegue general — se comprueba la <strong>compatibilidad</strong>, se detectan <strong>regresiones</strong> y se realiza la <strong>validación funcional</strong>.</li>
+<li><strong>4. Despliegue</strong>: aplicar la actualización de forma planificada, minimizando la afección al trabajo diario.</li>
+<li><strong>5. Verificación</strong>: <strong>comprobar la instalación</strong>, <strong>comprobar la versión</strong>, <strong>identificar fallos</strong> y <strong>corregir los equipos que no hayan actualizado</strong>. El objetivo es <strong>confirmar que el despliegue se ha realizado correctamente</strong>.</li>
+</ul>
+<h4 class="tema-h4">Anillos de despliegue</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — ancla del tema</strong><br><strong>PILOTO → OBSERVAR → AMPLIAR → GENERALIZAR.</strong><br>La actualización se aplica primero a un grupo reducido; si tras un periodo de observación no aparecen problemas, se extiende progresivamente. <strong>Ventaja: reduce el impacto de una actualización defectuosa.</strong> El número concreto de anillos no es una regla fija.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — winget</strong><br><strong>winget</strong> permite gestionar aplicaciones <strong>desde la línea de comandos en un equipo Windows</strong> (Tema 11). No debe confundirse el ámbito: <strong>winget → gestión individual del endpoint</strong>; <strong>Configuration Manager / Intune → gestión del parque</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="6-datos-y-anclas-de-memoria" class="tema-h2">6. Datos y anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>WRITER → .ODT · CALC → .ODS · IMPRESS → .ODP · BASE → .ODB · DRAW → .ODG · MATH → .ODF</strong>.</li>
+<li><strong>ODF → LIBREOFFICE (ISO/IEC 26300) · OOXML → MICROSOFT OFFICE (ISO/IEC 29500)</strong>.</li>
+<li><strong>Libre</strong> = libertades de uso, estudio, modificación y distribución · <strong>gratuito</strong> = sin coste de adquisición.</li>
+<li>LibreOffice: <strong>The Document Foundation</strong>, fork de <strong>OpenOffice.org en 2010</strong>, multiplataforma, <strong>MPL 2.0</strong> (junto a otros componentes con sus licencias), versionado <strong>AÑO.MES</strong>.</li>
+<li><strong>PDF → fija la maquetación final</strong> (no es formato de edición convencional).</li>
+<li><strong>ENI → INTEROPERABILIDAD · ENS → SEGURIDAD</strong>.</li>
+<li>Distribución: <strong>instalación silenciosa</strong> (sin intervención del usuario) · <strong>imagen maestra</strong> (referencia + Sysprep) · <strong>catálogo</strong> (aplicaciones aprobadas, autoservicio).</li>
+<li>Herramientas Windows: <strong>GPO</strong> (dominio) · <strong>Configuration Manager</strong> (parque empresarial + inventario) · <strong>Intune</strong> (cloud, equipos fuera de la red). Linux: <strong>repositorios/mirrors internos</strong>.</li>
+<li><strong>CICLO: INVENTARIO → IDENTIFICACIÓN → PRUEBAS → DESPLIEGUE → VERIFICACIÓN</strong>.</li>
+<li><strong>ANILLOS: PILOTO → OBSERVAR → AMPLIAR → GENERALIZAR</strong>.</li>
+</ul>
+
+<h2 id="7-no-confundir" class="tema-h2">7. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto A</strong></th>
+<th><strong>Concepto B</strong></th>
+<th><strong>Diferencia clave</strong></th>
+</tr>
+<tr>
+<td><strong>Software libre</strong>: libertades según licencia</td>
+<td><strong>Software gratuito</strong>: sin coste de adquisición</td>
+<td>Son criterios distintos; LibreOffice cumple ambos</td>
+</tr>
+<tr>
+<td><strong>LibreOffice</strong>: fork de 2010, TDF</td>
+<td><strong>Apache OpenOffice</strong>: proyecto de origen</td>
+<td>Suites distintas con historia común</td>
+</tr>
+<tr>
+<td><strong>Writer</strong> (textos)</td>
+<td><strong>Calc</strong> (hoja de cálculo) · <strong>Impress</strong> (presentaciones)</td>
+<td>Cada módulo, su función y su extensión</td>
+</tr>
+<tr>
+<td><strong>ODF</strong>: nativo de LibreOffice, ISO/IEC 26300</td>
+<td><strong>OOXML</strong>: de Microsoft Office, ISO/IEC 29500</td>
+<td>Dos estándares distintos, ambos normalizados</td>
+</tr>
+<tr>
+<td><strong>.odt</strong>: documento de Writer</td>
+<td><strong>.docx</strong>: documento OOXML</td>
+<td>LibreOffice abre ambos; el nativo es .odt</td>
+</tr>
+<tr>
+<td><strong>PDF</strong>: fija la maquetación final</td>
+<td><strong>Formato editable</strong> (.odt, .docx)</td>
+<td>Entrega vs. trabajo sobre el documento</td>
+</tr>
+<tr>
+<td><strong>ENI</strong>: interoperabilidad</td>
+<td><strong>ENS</strong>: seguridad (Tema 21)</td>
+<td>Dos marcos distintos; no mezclar</td>
+</tr>
+<tr>
+<td><strong>Instalación silenciosa</strong>: sin intervención del usuario</td>
+<td><strong>Instalación manual</strong>: asistida por el técnico o el usuario</td>
+<td>La silenciosa es la base del despliegue automatizado</td>
+</tr>
+<tr>
+<td><strong>Imagen maestra</strong>: equipo tipo que se clona</td>
+<td><strong>Catálogo de software</strong>: aplicaciones aprobadas disponibles</td>
+<td>Punto de partida del equipo vs. oferta continua de software</td>
+</tr>
+<tr>
+<td><strong>GPO</strong>: distribución en dominio</td>
+<td><strong>Configuration Manager</strong>: despliegue empresarial e inventario · <strong>Intune</strong>: gestión cloud</td>
+<td>Distinto alcance y escenario de uso</td>
+</tr>
+<tr>
+<td><strong>Distribución individual</strong>: equipo a equipo</td>
+<td><strong>Distribución centralizada</strong>: a todo el parque</td>
+<td>Escalabilidad y control</td>
+</tr>
+<tr>
+<td><strong>Inventario</strong>: saber qué hay instalado</td>
+<td><strong>Actualización</strong>: aplicar nuevas versiones</td>
+<td>Sin inventario no puede planificarse la actualización</td>
+</tr>
+<tr>
+<td><strong>Prueba piloto</strong>: grupo reducido</td>
+<td><strong>Despliegue general</strong>: toda la organización</td>
+<td>El piloto acota el impacto de un fallo</td>
+</tr>
+<tr>
+<td><strong>Push</strong>: acción iniciada centralmente</td>
+<td><strong>Pull</strong>: el cliente consulta/sincroniza</td>
+<td>Conceptos generales; los productos suelen combinar mecanismos</td>
+</tr>
+</table></div>
+
+<h2 id="8-posibles-trampas-de-examen" class="tema-h2">8. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li><strong>«Software libre y gratuito son sinónimos»</strong> — falso: libertades de la licencia vs. coste de adquisición.</li>
+<li><strong>«LibreOffice y OpenOffice son el mismo producto»</strong> — falso: LibreOffice es un fork de 2010 impulsado por The Document Foundation.</li>
+<li><strong>«El formato nativo de LibreOffice es .docx»</strong> — falso: es <strong>ODF</strong> (.odt, .ods, .odp, .odb).</li>
+<li><strong>«OOXML es simplemente un formato propietario»</strong> — impreciso: es un <strong>estándar internacional</strong> (ISO/IEC 29500) asociado a Microsoft Office.</li>
+<li><strong>Cruzar las normas ISO</strong>: ODF es ISO/IEC <strong>26300</strong> y OOXML, ISO/IEC <strong>29500</strong>.</li>
+<li><strong>«LibreOffice abre cualquier .docx sin ninguna diferencia»</strong> — matiz: puede haber <strong>diferencias de formato</strong> con elementos complejos (fuentes, saltos, objetos, funciones avanzadas).</li>
+<li><strong>«MSI es imprescindible para cualquier despliegue automatizado»</strong> — falso: es muy habitual y apropiado, pero existen otros formatos y métodos de instalación silenciosa.</li>
+<li><strong>«Distribución centralizada equivale a instalar en cada equipo»</strong> — falso: precisamente evita la instalación manual equipo a equipo.</li>
+<li><strong>«El inventario es lo mismo que actualizar»</strong> — falso: el inventario es el paso previo que hace posible planificar.</li>
+<li><strong>«La prueba piloto es el despliegue general en fase inicial»</strong> — falso: son fases distintas; el piloto acota el riesgo.</li>
+<li><strong>«Tal herramienta es siempre push y tal otra siempre pull»</strong> — falso: son conceptos generales; los sistemas modernos usan mecanismos mixtos.</li>
+<li><strong>«ENI y ENS son lo mismo»</strong> — falso: interoperabilidad vs. seguridad.</li>
+<li><strong>«El PDF es el formato adecuado para seguir editando el documento»</strong> — falso: está pensado para fijar la presentación final.</li>
+<li><strong>Colar contenido ajeno</strong>: los dispositivos USB o el detalle de apt/dnf no son objeto de este tema.</li>
+</ul>
+
+<h2 id="9-posibles-preguntas-tipo-test" class="tema-h2">9. Posibles preguntas tipo test</h2>
+<ul class="tema-lista">
+<li>Emparejar <strong>módulo de LibreOffice → función → extensión</strong> (la pregunta más probable).</li>
+<li>¿Qué módulo utiliza <strong>.odg</strong>? ¿Y <strong>.odb</strong>?</li>
+<li>Origen de LibreOffice: <strong>fork de OpenOffice.org (2010)</strong> y organización que lo impulsa.</li>
+<li>¿Qué licencia se cita principalmente para LibreOffice? (<strong>MPL 2.0</strong>, junto a otros componentes de código abierto).</li>
+<li>¿Qué esquema de <strong>versionado</strong> usa LibreOffice?</li>
+<li>Diferencia entre <strong>software libre y gratuito</strong>.</li>
+<li>¿Cuál es el formato <strong>nativo</strong> de LibreOffice y cuál el de Microsoft Office?</li>
+<li>Asociar norma ISO: <strong>ODF → ISO/IEC 26300 · OOXML → ISO/IEC 29500</strong>.</li>
+<li>¿Es OOXML un formato estandarizado? (sí, aunque asociado a Microsoft Office).</li>
+<li>¿Qué formato conviene para <strong>fijar la maquetación final</strong>?</li>
+<li>¿Qué persigue el <strong>ENI</strong> y en qué se diferencia del <strong>ENS</strong>?</li>
+<li>¿Qué es una <strong>instalación silenciosa</strong>?</li>
+<li>¿Qué es una <strong>imagen maestra</strong> y qué papel juega Sysprep?</li>
+<li>¿Qué permite un <strong>catálogo de software</strong>?</li>
+<li>Concepto → herramienta: dominio Windows (<strong>GPO</strong>) · parque empresarial con inventario (<strong>Configuration Manager</strong>) · equipos fuera de la red (<strong>Intune</strong>) · Linux (<strong>repositorio/mirror interno</strong>).</li>
+<li>Ordenar el <strong>ciclo de actualización</strong>: inventario → identificación → pruebas → despliegue → verificación.</li>
+<li>¿Qué se comprueba en la fase de <strong>pruebas</strong>? ¿Y en la de <strong>verificación</strong>?</li>
+<li>¿Qué son los <strong>anillos de despliegue</strong> y qué riesgo mitigan?</li>
+</ul>
+
+<h2 id="10-posibles-preguntas-cortas" class="tema-h2">10. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<h4 class="tema-h4">1. Explique qué es una suite ofimática</h4>
+<ul class="tema-lista">
+<li>Definición de ofimática y de suite (aplicaciones integradas con interfaz y formatos coherentes).</li>
+<li>Ejemplos: LibreOffice, Microsoft 365/Office, Google Workspace, Apache OpenOffice.</li>
+<li>Cierre: preferencia del sector público por software libre y formatos abiertos.</li>
+</ul>
+<h4 class="tema-h4">2. Explique LibreOffice y sus principales módulos</h4>
+<ul class="tema-lista">
+<li>Qué es: suite libre, multiplataforma, impulsada por The Document Foundation; fork de OpenOffice.org (2010).</li>
+<li>Los seis módulos con su función y extensión nativa.</li>
+<li>Licencia (principalmente MPL 2.0) y versionado AÑO.MES.</li>
+</ul>
+<h4 class="tema-h4">3. Diferencie ODF y OOXML</h4>
+<ul class="tema-lista">
+<li>ODF: nativo de LibreOffice, ISO/IEC 26300, extensiones .odt/.ods/.odp.</li>
+<li>OOXML: de Microsoft Office, ISO/IEC 29500, extensiones .docx/.xlsx/.pptx.</li>
+<li>Ambos estandarizados; matices de compatibilidad al intercambiar documentos.</li>
+</ul>
+<h4 class="tema-h4">4. Explique la importancia de los formatos abiertos para la interoperabilidad</h4>
+<ul class="tema-lista">
+<li>Qué aporta un formato abierto: acceso con distintas aplicaciones, sin dependencia de un fabricante.</li>
+<li>Relación con el ENI (principios y directrices de interoperabilidad de la información electrónica).</li>
+<li>Cierre: ENI ≠ ENS; y el PDF para conservar la presentación final.</li>
+</ul>
+<h4 class="tema-h4">5. Explique qué es la distribución centralizada de software</h4>
+<ul class="tema-lista">
+<li>Problema que resuelve: parque amplio, instalación manual inviable.</li>
+<li>Objetivos: consistencia, control, inventario, menos trabajo manual.</li>
+<li>Conceptos: instalación silenciosa, imagen maestra, catálogo de software.</li>
+<li>Herramientas: GPO, Configuration Manager, Intune; repositorios internos en Linux.</li>
+</ul>
+<h4 class="tema-h4">6. Explique el ciclo de actualización de software en una organización</h4>
+<ul class="tema-lista">
+<li>Las cinco fases en orden, con una frase por fase.</li>
+<li>Énfasis en el inventario como requisito previo y en la verificación como cierre.</li>
+<li>Mención de los anillos como estrategia de despliegue.</li>
+</ul>
+<h4 class="tema-h4">7. Explique los anillos de despliegue</h4>
+<ul class="tema-lista">
+<li>Idea: despliegue progresivo — piloto, observación, ampliación, generalización.</li>
+<li>Ventaja: acotar el impacto de una actualización defectuosa.</li>
+<li>Matiz: el número de anillos no es fijo; depende de la organización.</li>
+</ul>
+<h4 class="tema-h4">8. Diferencie GPO, Configuration Manager e Intune</h4>
+<ul class="tema-lista">
+<li>GPO: distribución/asignación de software en dominio Windows.</li>
+<li>Configuration Manager: despliegue empresarial de sistemas, aplicaciones y actualizaciones, con inventario.</li>
+<li>Intune: gestión cloud de endpoints, aplicaciones y políticas, útil fuera de la red corporativa.</li>
+<li>Cierre: elección según escenario (dominio, parque conectado, movilidad).</li>
+</ul>
+
+<h2 id="11-supuestos-practicos-cau" class="tema-h2">11. Supuestos prácticos CAU</h2>
+<h4 class="tema-h4">Supuesto 1 — Desplegar LibreOffice en 300 equipos</h4>
+<p><strong>Escenario</strong>: el ayuntamiento decide implantar LibreOffice en todos los puestos.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Cómo se plantea?</strong> Preparar el <strong>paquete</strong> para <strong>instalación silenciosa</strong>, elegir la <strong>herramienta de distribución</strong> (GPO, Configuration Manager o Intune según el escenario) y partir del <strong>inventario</strong> del parque.</li>
+<li><strong>b) ¿Se despliega a todos a la vez?</strong> No: primero un <strong>piloto</strong>, se <strong>observa</strong>, se <strong>amplía</strong> y finalmente se <strong>generaliza</strong>.</li>
+<li><strong>c) ¿Cómo se cierra?</strong> Con la <strong>verificación</strong>: comprobar instalación y versión, detectar fallos y corregir los equipos que no hayan actualizado.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 2 — El DOCX que se ve distinto</h4>
+<p><strong>Escenario</strong>: un documento .docx recibido de otra administración se descuadra al abrirlo en LibreOffice Writer.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Por qué ocurre?</strong> LibreOffice abre OOXML, pero la <strong>compatibilidad puede presentar diferencias de formato</strong> con elementos complejos: fuentes, saltos de página, objetos o funciones avanzadas.</li>
+<li><strong>b) ¿Qué hacer si el documento debe conservar su aspecto?</strong> Exportarlo a <strong>PDF</strong>, formato adecuado para conservar la maquetación final.</li>
+<li><strong>c) ¿Y si hay que seguir editándolo entre organismos?</strong> Acordar el formato de intercambio y, si es posible, trabajar en <strong>formatos abiertos</strong> (ODF), en línea con los principios de interoperabilidad del ENI.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 3 — Una actualización que rompe una aplicación</h4>
+<p><strong>Escenario</strong>: tras actualizar una aplicación corporativa, varios usuarios reportan errores.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué falló en el procedimiento?</strong> Probablemente la fase de <strong>pruebas</strong>: la validación en entorno controlado permite detectar <strong>incompatibilidades y regresiones</strong> antes del despliegue general.</li>
+<li><strong>b) ¿Qué habría limitado el daño?</strong> Los <strong>anillos de despliegue</strong>: el fallo se habría manifestado en el <strong>piloto</strong>, afectando a pocos equipos.</li>
+<li><strong>c) ¿Y ahora?</strong> Verificar el alcance con el <strong>inventario</strong>, revertir o corregir en los equipos afectados y documentar el caso para el siguiente ciclo.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 4 — Equipos fuera de la red corporativa</h4>
+<p><strong>Escenario</strong>: parte de la plantilla trabaja con portátiles que rara vez se conectan a la red interna.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué opción encaja?</strong> Una <strong>gestión cloud de endpoints</strong> como <strong>Intune</strong>, que no depende de que el equipo esté en la red corporativa.</li>
+<li><strong>b) ¿Por qué no basta la GPO?</strong> Porque el mecanismo de dominio presupone contacto con la infraestructura interna.</li>
+<li><strong>c) ¿Qué se mantiene igual?</strong> El <strong>ciclo</strong>: inventario, identificación, pruebas, despliegue y verificación.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 5 — «No sabemos qué versión tiene cada equipo»</h4>
+<p><strong>Escenario</strong>: se quiere actualizar una aplicación, pero no consta qué versión está instalada en cada puesto.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Primer paso?</strong> El <strong>inventario</strong>: sin conocer equipo, software y versión no puede planificarse la actualización.</li>
+<li><strong>b) ¿Qué herramientas lo facilitan?</strong> Las plataformas de gestión de parque (por ejemplo, Configuration Manager) incluyen inventario de software.</li>
+<li><strong>c) ¿Y después?</strong> Identificar actualizaciones aplicables, probar, desplegar por anillos y verificar.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 6 — Software aprobado sin llamar al CAU</h4>
+<p><strong>Escenario</strong>: el CAU recibe muchas peticiones para instalar aplicaciones habituales ya autorizadas.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué solución conceptual?</strong> Un <strong>catálogo de software</strong> con las aplicaciones aprobadas, que permita <strong>solicitud, instalación y autoservicio</strong>.</li>
+<li><strong>b) ¿Qué se gana?</strong> Control de versiones, consistencia y menos trabajo manual repetitivo del CAU.</li>
+<li><strong>c) ¿Qué se mantiene bajo control?</strong> Solo se ofrece software <strong>aprobado</strong> por la organización.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 7 — Paquetes Linux sin depender de Internet</h4>
+<p><strong>Escenario</strong>: varios servidores Linux deben instalar y actualizar paquetes con versiones controladas y sin salir a Internet en cada operación.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué solución encaja?</strong> Un <strong>repositorio interno o mirror</strong> de la organización.</li>
+<li><strong>b) ¿Qué aporta?</strong> <strong>Control de versiones</strong>, <strong>menor dependencia de Internet</strong> y <strong>centralización</strong> de los paquetes.</li>
+<li><strong>c) ¿Dónde se estudia el uso concreto de apt/dnf?</strong> En el Tema 13: aquí interesa el concepto de distribución centralizada.</li>
+</ul>
+
+<h2 id="12-matriz-de-memorizacion" class="tema-h2">12. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Lo que debo recordar</strong></th>
+</tr>
+<tr>
+<td>Ofimática</td>
+<td>Técnicas, herramientas y aplicaciones para las tareas habituales de oficina</td>
+</tr>
+<tr>
+<td>LibreOffice</td>
+<td>Suite libre y multiplataforma de The Document Foundation; fork de OpenOffice.org (2010); MPL 2.0</td>
 </tr>
 <tr>
 <td>Writer</td>
-<td>Procesador de textos</td>
-<td>.odt</td>
+<td>Procesador de textos — .odt</td>
 </tr>
 <tr>
 <td>Calc</td>
-<td>Hoja de cálculo</td>
-<td>.ods</td>
+<td>Hoja de cálculo — .ods</td>
 </tr>
 <tr>
 <td>Impress</td>
-<td>Presentaciones</td>
-<td>.odp</td>
+<td>Presentaciones — .odp</td>
 </tr>
 <tr>
 <td>Base</td>
-<td>Gestor de bases de datos</td>
-<td>.odb</td>
+<td>Bases de datos — .odb</td>
 </tr>
 <tr>
 <td>Draw</td>
-<td>Dibujo vectorial y diagramación</td>
-<td>.odg</td>
+<td>Dibujo y diagramación — .odg</td>
 </tr>
 <tr>
 <td>Math</td>
-<td>Editor de fórmulas matemáticas</td>
-<td>.odf</td>
+<td>Fórmulas matemáticas — .odf</td>
 </tr>
-</table></div>
-<p>LibreOffice es <strong>software libre y gratuito</strong>, publicado bajo licencia MPL 2.0 (Mozilla Public License), con código fuente abierto y disponible para Windows, Linux y macOS. Desde la versión 24.8, el proyecto adoptó un esquema de <strong>versionado por año y mes</strong> (por ejemplo, la versión 26.2 corresponde a febrero de 2026), publicando habitualmente dos versiones mayores al año, cada una con varias actualizaciones de mantenimiento posteriores.</p>
-<h2 id="3-formatos-de-documento-opendocument-y-compatibilidad" class="tema-h2">3. Formatos de documento: OpenDocument y compatibilidad</h2>
-<p><strong>ODF (OpenDocument Format)</strong> es un formato de documento estándar y abierto, normalizado internacionalmente como ISO/IEC 26300, y es el formato nativo de LibreOffice: <code>.odt</code> (Writer), <code>.ods</code> (Calc), <code>.odp</code> (Impress), <code>.odb</code> (Base).</p>
-<p><strong>OOXML (Office Open XML)</strong> es el formato empleado por Microsoft Office desde la versión 2007 —<code>.docx</code>, <code>.xlsx</code>, <code>.pptx</code>—, también normalizado internacionalmente (ISO/IEC 29500). LibreOffice puede abrir y guardar documentos en formato OOXML con un alto grado de compatibilidad, aunque no sea su formato nativo; igualmente, sigue siendo capaz de abrir los antiguos formatos binarios propietarios anteriores a 2007 (<code>.doc</code>, <code>.xls</code>, <code>.ppt</code>).</p>
-<div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>Trabajar con formatos distintos al nativo de cada suite (por ejemplo, abrir y guardar un .docx en LibreOffice Writer) puede producir pequeñas diferencias de formato —renderizado de fuentes, ajuste de saltos de página, comportamiento de ciertos elementos avanzados— porque cada suite implementa el estándar correspondiente con matices propios. Cuando un documento debe conservar exactamente el mismo aspecto en cualquier programa o dispositivo, la recomendación es exportarlo a <strong>PDF</strong>, un formato pensado precisamente para fijar la maquetación final.</th>
+<td>ODF</td>
+<td>Formato nativo de LibreOffice; estándar abierto ISO/IEC 26300</td>
 </tr>
-</table></div>
-<div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>El uso de formatos de documento abiertos y estandarizados, como el ODF, está alineado con los principios del Esquema Nacional de Interoperabilidad (ENI) en la Administración Pública española, que persigue que los documentos e información generados por las administraciones sean accesibles con cualquier aplicación compatible, sin obligar a la ciudadanía ni a otras administraciones a depender de un fabricante concreto de software. El ENI es un marco normativo distinto del Esquema Nacional de Seguridad (ENS), que se estudia en el Tema 21.</th>
+<td>OOXML</td>
+<td>Formato de Microsoft Office (.docx/.xlsx/.pptx); ISO/IEC 29500</td>
 </tr>
-</table></div>
-<h2 id="4-distribución-de-software-en-un-entorno-distribuido-concept" class="tema-h2">4. Distribución de software en un entorno distribuido: conceptos</h2>
-<p>En una organización con decenas o cientos de equipos, instalar y mantener el software manualmente, equipo a equipo, resulta inviable. Se necesitan mecanismos de <strong>distribución centralizada</strong> que permitan desplegar el mismo software, de forma coherente y controlada, sobre muchos equipos a la vez.</p>
-<ul class="tema-lista">
-<li><strong>Instalación silenciosa</strong>: instalación que se ejecuta sin intervención del usuario, típicamente a partir de un paquete MSI (Tema 11), imprescindible para cualquier despliegue automatizado.</li>
-<li><strong>Imagen o plantilla maestra</strong>: un equipo de referencia, preparado con el sistema operativo, las aplicaciones y la configuración deseadas, que se generaliza (Sysprep, Tema 11) y se despliega de forma idéntica en muchos equipos nuevos.</li>
-<li><strong>Catálogo de software</strong>: repositorio central de aplicaciones aprobadas por la organización, desde el que los equipos o los propios usuarios pueden solicitar la instalación de un programa concreto sin necesidad de intervención manual de un técnico.</li>
-</ul>
-<h4 class="tema-h4">Herramientas de distribución</h4>
-<ul class="tema-lista">
-<li><strong>GPO (Directiva de grupo, Tema 12)</strong>: permite asignar o publicar paquetes MSI sencillos a los equipos o usuarios de una unidad organizativa; es un mecanismo funcional pero limitado para escenarios complejos.</li>
-<li><strong>Microsoft Configuration Manager (antes SCCM)</strong>: solución empresarial completa para el despliegue de sistemas operativos, aplicaciones, actualizaciones e inventario de software y hardware, pensada para organizaciones con un parque de equipos amplio y conectado a la red corporativa.</li>
-<li><strong>Microsoft Intune</strong>: alternativa moderna en la nube (Tema 11), especialmente adecuada para equipos que no están siempre conectados a la red corporativa (portátiles, teletrabajo).</li>
-<li><strong>Repositorios internos en entornos Linux</strong>: un espejo (mirror) propio de los repositorios de paquetes (Tema 13), que permite controlar exactamente qué versiones de software se despliegan en la organización sin depender de Internet en el momento de la instalación.</li>
-</ul>
-<div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Conviene distinguir dos modelos de distribución: en el modelo «pull», es el propio equipo cliente el que consulta periódicamente si hay novedades disponibles y las descarga (por ejemplo, WSUS del Tema 12 o los gestores de paquetes apt/dnf del Tema 13); en el modelo «push», es el servidor central el que empuja activamente la instalación hacia los equipos, sin esperar a que estos la soliciten (por ejemplo, la instalación de software mediante GPO o Configuration Manager).</th>
+<td>PDF</td>
+<td>Conserva la presentación/maquetación final; no es formato de edición convencional</td>
 </tr>
-</table></div>
-<h2 id="5-actualización-de-software-en-un-entorno-distribuido" class="tema-h2">5. Actualización de software en un entorno distribuido</h2>
-<p>La gestión de parches (patch management) no se limita al sistema operativo (Temas 11, 12 y 13): las aplicaciones de terceros —el propio paquete ofimático incluido— son también un vector habitual de vulnerabilidades, por lo que deben integrarse en el mismo ciclo de actualización controlada.</p>
-<ul class="tema-lista">
-<li><strong>Inventario</strong>: conocer con precisión qué software, y en qué versión, está instalado en cada equipo de la organización.</li>
-<li><strong>Identificación de actualizaciones disponibles</strong>: comparar el inventario con los catálogos de actualizaciones publicados por cada fabricante.</li>
-<li><strong>Pruebas en un entorno controlado</strong>: verificar que la actualización no introduce problemas de compatibilidad antes de desplegarla de forma general (el mismo principio señalado para servidores en el Tema 12).</li>
-<li><strong>Despliegue programado</strong>: aplicar la actualización en una ventana de mantenimiento planificada, minimizando la afección al trabajo diario de las personas usuarias.</li>
-<li><strong>Verificación posterior</strong>: comprobar que la actualización se ha aplicado correctamente y que no ha generado incidencias nuevas.</li>
-</ul>
-<p>Una estrategia habitual para reducir el riesgo de una actualización defectuosa son los <strong>anillos de despliegue (deployment rings)</strong>: la actualización se aplica primero a un grupo reducido de equipos «piloto», y solo si tras un periodo de observación no se detectan problemas, se va extendiendo progresivamente al resto de la organización, en lugar de desplegarla de golpe sobre todos los equipos a la vez.</p>
-<div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Para el equipo individual, herramientas como winget (Tema 11) permiten actualizar aplicaciones desde la línea de comandos; en el conjunto de una organización, ese mismo trabajo lo automatizan las herramientas de gestión centralizada citadas en el punto anterior (Configuration Manager, Intune/Windows Autopatch), que aplican estos anillos de despliegue de forma sistemática sobre todo el parque de equipos.</th>
+<td>ENI</td>
+<td>Esquema Nacional de Interoperabilidad; formatos abiertos la favorecen (≠ ENS)</td>
+</tr>
+<tr>
+<td>Instalación silenciosa</td>
+<td>Sin intervención del usuario; MSI muy habitual, no el único método</td>
+</tr>
+<tr>
+<td>Imagen maestra</td>
+<td>Equipo de referencia generalizado (Sysprep) y desplegado en muchos equipos</td>
+</tr>
+<tr>
+<td>Catálogo de software</td>
+<td>Repositorio central de aplicaciones aprobadas; solicitud y autoservicio</td>
+</tr>
+<tr>
+<td>GPO</td>
+<td>Distribución/asignación de software en dominio Windows</td>
+</tr>
+<tr>
+<td>Configuration Manager</td>
+<td>Despliegue empresarial de sistemas, aplicaciones y actualizaciones; inventario</td>
+</tr>
+<tr>
+<td>Intune</td>
+<td>Gestión cloud de endpoints, aplicaciones y políticas</td>
+</tr>
+<tr>
+<td>Inventario</td>
+<td>Equipo + software + versión; requisito previo de toda actualización</td>
+</tr>
+<tr>
+<td>Pruebas</td>
+<td>Entorno controlado/piloto: compatibilidad, regresiones, validación funcional</td>
+</tr>
+<tr>
+<td>Anillos</td>
+<td>Piloto → observar → ampliar → generalizar; acotan el impacto de un fallo</td>
+</tr>
+<tr>
+<td>Verificación</td>
+<td>Comprobar instalación y versión, detectar fallos y corregir equipos pendientes</td>
 </tr>
 </table></div>
-<h2 id="6-resumen-para-estudiar" class="tema-h2">6. Resumen para estudiar</h2>
+
+<h2 id="13-resumen-final" class="tema-h2">13. Resumen final: si mañana fuera el examen</h2>
 <ul class="tema-lista">
-<li><strong>Suites ofimáticas</strong>: Microsoft 365/Office, LibreOffice, Google Workspace y Apache OpenOffice (predecesor de LibreOffice); en la Administración Pública se promueve especialmente el software libre y los formatos abiertos.</li>
-<li><strong>LibreOffice</strong>: fork de OpenOffice.org (2010, The Document Foundation); módulos Writer, Calc, Impress, Base, Draw y Math; licencia libre MPL 2.0; versionado por año.mes (serie 26.2 en 2026).</li>
-<li><strong>Formatos</strong>: ODF (nativo de LibreOffice, ISO/IEC 26300) frente a OOXML (nativo de Microsoft Office, ISO/IEC 29500); ambos estandarizados pero con matices de compatibilidad entre suites; PDF para fijar el aspecto final; formatos abiertos alineados con el Esquema Nacional de Interoperabilidad (ENI).</li>
-<li><strong>Distribución de software</strong>: instalación silenciosa, imágenes maestras y catálogo de software; herramientas GPO, Configuration Manager e Intune en Windows, repositorios internos en Linux; modelos pull (el cliente consulta) frente a push (el servidor empuja).</li>
-<li><strong>Actualización en entorno distribuido</strong>: inventario, identificación de actualizaciones, pruebas, despliegue programado y verificación; anillos de despliegue para reducir el riesgo de una actualización defectuosa.</li>
+<li><strong>Ofimática</strong> = herramientas para tareas de oficina; <strong>suite</strong> = varias aplicaciones integradas. Ejemplos: LibreOffice, Microsoft 365/Office, Google Workspace, Apache OpenOffice.</li>
+<li><strong>LibreOffice</strong>: suite <strong>libre</strong> (y de descarga y uso gratuitos), <strong>multiplataforma</strong>, de <strong>The Document Foundation</strong>, <strong>fork de OpenOffice.org (2010)</strong>; principalmente bajo <strong>MPL 2.0</strong>; versionado <strong>AÑO.MES</strong>.</li>
+<li><strong>Módulos</strong>: <strong>Writer .odt · Calc .ods · Impress .odp · Base .odb · Draw .odg · Math .odf</strong>.</li>
+<li><strong>Formatos</strong>: <strong>ODF</strong> (nativo, <strong>ISO/IEC 26300</strong>) y <strong>OOXML</strong> (Microsoft Office, <strong>ISO/IEC 29500</strong>) — <strong>ambos estandarizados</strong>. La compatibilidad puede presentar <strong>diferencias de formato</strong> con elementos complejos. <strong>PDF</strong> para fijar la maquetación final. <strong>ENI = interoperabilidad ≠ ENS = seguridad</strong>.</li>
+<li><strong>Distribución centralizada</strong>: busca consistencia, control, inventario y menos trabajo manual. Conceptos: <strong>instalación silenciosa</strong> (MSI muy habitual, no el único método), <strong>imagen maestra</strong> (referencia + Sysprep) y <strong>catálogo de software</strong> (autoservicio). Herramientas: <strong>GPO</strong>, <strong>Configuration Manager</strong>, <strong>Intune</strong>; en Linux, <strong>repositorios internos</strong>. <strong>Push/pull</strong> son conceptos generales, no etiquetas rígidas de producto.</li>
+<li><strong>Ciclo de actualización</strong>: <strong>INVENTARIO → IDENTIFICACIÓN → PRUEBAS → DESPLIEGUE → VERIFICACIÓN</strong>. Sin inventario (equipo, software, versión) no puede planificarse.</li>
+<li><strong>Anillos de despliegue</strong>: <strong>piloto → observar → ampliar → generalizar</strong>; reducen el impacto de una actualización defectuosa. <strong>winget</strong> = endpoint; <strong>ConfigMgr/Intune</strong> = parque.</li>
 </ul>
 
-<h2 id="7-conceptos-clave" class="tema-h2">7. Conceptos clave</h2>
+<h2 id="14-actualidad-libreoffice" class="tema-h2">14. Actualidad LibreOffice — dato fechado</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Información sujeta a cambio · Fecha de actualización de estos apuntes: agosto de 2026</strong><br>El <strong>esquema</strong> de versionado (AÑO.MES) es contenido estable; la versión concreta, no.</th>
+</tr>
+</table></div>
 <ul class="tema-lista">
-<li><strong>Suite ofimática</strong>; Microsoft 365, LibreOffice, Google Workspace, OpenOffice.</li>
-<li><strong>LibreOffice: fork de OpenOffice.org (2010), The Document Foundation, licencia MPL 2.0</strong>.</li>
-<li><strong>Módulos y extensiones</strong>: Writer (.odt), Calc (.ods), Impress (.odp), Base (.odb), Draw (.odg), Math (.odf).</li>
-<li><strong>ODF (ISO/IEC 26300) vs. OOXML (ISO/IEC 29500)</strong>; PDF para maquetación fija.</li>
-<li><strong>ENI</strong> (interoperabilidad) ≠ ENS (seguridad, Tema 21).</li>
-<li><strong>Instalación silenciosa, imagen maestra, catálogo de software</strong>.</li>
-<li><strong>GPO, Configuration Manager (SCCM), Intune</strong>; repositorios internos Linux.</li>
-<li><strong>Modelo pull vs. push</strong>.</li>
-<li><strong>Ciclo de patch management</strong>: inventario → identificación → pruebas → despliegue → verificación; <strong>anillos de despliegue</strong>.</li>
-</ul>
-
-<h2 id="8-posibles-puntos-de-examen" class="tema-h2">8. Posibles puntos de examen</h2>
-<ul class="tema-lista">
-<li>Emparejar cada <strong>módulo de LibreOffice</strong> con su función y su extensión nativa — la pregunta más probable del tema.</li>
-<li>Origen de LibreOffice (<strong>fork de OpenOffice.org, 2010, The Document Foundation</strong>).</li>
-<li>Qué formato es el <strong>nativo</strong> de LibreOffice (ODF) y cuál el de Microsoft Office (OOXML), con sus normas ISO.</li>
-<li>Qué licencia tiene LibreOffice (<strong>MPL 2.0</strong>, software libre) y su esquema de versionado año.mes.</li>
-<li>Por qué la Administración promueve <strong>formatos abiertos</strong> (ENI, independencia del fabricante).</li>
-<li>Diferencia entre modelo <strong>pull y push</strong> con ejemplos (WSUS/apt vs. GPO/SCCM).</li>
-<li>Qué herramienta corresponde a cada escenario: parque conectado a la red (Configuration Manager) vs. equipos en movilidad (Intune).</li>
-<li>El <strong>orden del ciclo de gestión de parches</strong> y por qué se prueba antes de desplegar.</li>
-<li>Qué son los <strong>anillos de despliegue</strong> y qué riesgo mitigan.</li>
-<li>Qué requiere una <strong>instalación silenciosa</strong> (paquete adecuado, típicamente MSI).</li>
+<li><strong>Rama más reciente</strong> en la fecha de actualización: <strong>26.2</strong>.</li>
+<li><strong>Versión publicada más reciente</strong> según la información oficial consultada: <strong>LibreOffice 26.2.5</strong>.</li>
+<li>El proyecto publica habitualmente <strong>varias versiones mayores al año</strong>, cada una con actualizaciones de mantenimiento posteriores. No conviene memorizar versiones concretas salvo que la convocatoria lo exija.</li>
 </ul>
   </div>
 </article>

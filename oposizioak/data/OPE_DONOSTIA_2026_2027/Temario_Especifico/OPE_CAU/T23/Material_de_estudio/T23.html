@@ -6,132 +6,1000 @@
   </header>
 
   <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
-<li><a href="#1-política-de-salvaguarda-de-la-información-concepto">1. Política de salvaguarda de la información: concepto</a></li>
-<li><a href="#2-tipos-de-copias-de-seguridad">2. Tipos de copias de seguridad</a></li>
-<li><a href="#3-estrategias-de-rotación-y-retención">3. Estrategias de rotación y retención</a></li>
-<li><a href="#4-almacenamiento-de-las-copias-la-regla-3-2-1">4. Almacenamiento de las copias: la regla 3-2-1</a></li>
-<li><a href="#5-recuperación-ante-desastres-rto-y-rpo">5. Recuperación ante desastres: RTO y RPO</a></li>
-<li><a href="#6-planes-de-continuidad-y-pruebas-de-recuperación">6. Planes de continuidad y pruebas de recuperación</a></li>
-<li><a href="#7-resumen-para-estudiar">7. Resumen para estudiar</a></li>
-<li><a href="#8-conceptos-clave">8. Conceptos clave</a></li>
-<li><a href="#9-posibles-puntos-de-examen">9. Posibles puntos de examen</a></li>
+<li><a href="#1-politica-de-salvaguarda">1. La política de salvaguarda</a></li>
+<li><a href="#2-ens-y-copias">2. La salvaguarda en el ENS</a></li>
+<li><a href="#3-tipos-de-copia">3. Tipos de copia: completa, incremental y diferencial</a></li>
+<li><a href="#4-ejercicios-de-restauracion">4. Ejercicios de restauración</a></li>
+<li><a href="#5-retencion-y-rotacion">5. Retención y rotación</a></li>
+<li><a href="#6-gfs">6. El esquema GFS</a></li>
+<li><a href="#7-regla-3-2-1">7. La regla 3-2-1 y su evolución 3-2-1-1-0</a></li>
+<li><a href="#8-offline-e-inmutable">8. Copia offline y copia inmutable</a></li>
+<li><a href="#9-almacenamiento-y-cifrado">9. Almacenamiento y protección de las copias</a></li>
+<li><a href="#10-snapshot-y-replicacion">10. Snapshot y replicación frente a backup</a></li>
+<li><a href="#11-rto-y-rpo">11. RTO y RPO</a></li>
+<li><a href="#12-bcp-y-drp">12. BCP y DRP</a></li>
+<li><a href="#13-plan-de-continuidad">13. El plan de continuidad</a></li>
+<li><a href="#14-pruebas-de-recuperacion">14. Pruebas de recuperación</a></li>
+<li><a href="#15-anclas-de-memoria">15. Anclas de memoria</a></li>
+<li><a href="#16-no-confundir">16. No confundir</a></li>
+<li><a href="#17-trampas-de-examen">17. Posibles trampas de examen</a></li>
+<li><a href="#18-preguntas-tipo-test">18. Posibles preguntas tipo test</a></li>
+<li><a href="#19-preguntas-cortas">19. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#20-supuestos-practicos">20. Supuestos prácticos</a></li>
+<li><a href="#21-matriz-de-memorizacion">21. Matriz de memorización</a></li>
+<li><a href="#22-resumen-final">22. Resumen final: si mañana fuera el examen</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
 
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>Este tema da por conocidos los conceptos generales de seguridad (Tema 22) y el marco del ENS (Tema 21), que exige la continuidad de la actividad como uno de sus requisitos mínimos. Las tecnologías físicas de almacenamiento (discos, cintas) se estudiaron en el Tema 6, y la virtualización y sus instantáneas (snapshots), en el Tema 10; aquí se retoman solo como herramientas al servicio de la política de salvaguarda.</th>
+<th><strong>⚠️ No confundir — fronteras del tema</strong><br>Este tema trata la <strong>política de salvaguarda y la recuperación de la información</strong>.<br><strong>Tema 6</strong> → tecnologías de almacenamiento. <strong>Tema 10</strong> → virtualización y snapshots. <strong>Tema 21</strong> → ENS y marco normativo. <strong>Tema 22</strong> → amenazas y vulnerabilidades. <strong>Tema 24</strong> → criptografía. <strong>Tema 25</strong> → ransomware y malware.<br>Esos contenidos aparecen aquí <strong>solo en la medida necesaria</strong> para explicar la salvaguarda, nunca desarrollados.</th>
 </tr>
 </table></div>
-<h2 id="1-política-de-salvaguarda-de-la-información-concepto" class="tema-h2">1. Política de salvaguarda de la información: concepto</h2>
-<p>Una <strong>política de salvaguarda de la información</strong> es el conjunto de directrices, procedimientos y medidas orientadas a garantizar que la información pueda recuperarse ante cualquier incidente que la ponga en riesgo: un fallo de hardware, un error humano, un ciberataque (por ejemplo, un ransomware que cifra los datos) o un desastre físico sobre las instalaciones (Tema 22).</p>
-<p>El propio ENS (Tema 21) recoge la «continuidad de la actividad» como uno de sus requisitos mínimos (art. 26): los sistemas deben disponer de copias de seguridad y de los mecanismos necesarios para garantizar la continuidad de las operaciones en caso de pérdida de los medios habituales, desarrollado en el Anexo II a través de medidas específicas de copias de seguridad y de continuidad del servicio.</p>
-<h2 id="2-tipos-de-copias-de-seguridad" class="tema-h2">2. Tipos de copias de seguridad</h2>
+
+<h2 id="1-politica-de-salvaguarda" class="tema-h2">1. La política de salvaguarda</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>Política de salvaguarda</strong> → <strong>conjunto de directrices, procedimientos y medidas destinadas a garantizar que la información y los servicios puedan recuperarse tras una pérdida o un incidente</strong>.<br><strong>La salvaguarda NO se reduce a «hacer copias».</strong> Hacer copias es <strong>una parte</strong>; la política es el <strong>marco completo</strong> que define qué, cómo, cuándo, quién, dónde y con qué garantía de que funcionará.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Elemento de la política</strong></th>
+<th><strong>Qué define</strong></th>
+</tr>
+<tr>
+<td><strong>Qué se protege</strong></td>
+<td>Alcance: qué información, sistemas y servicios se incluyen, y cuáles quedan fuera y por qué</td>
+</tr>
+<tr>
+<td><strong>Frecuencia</strong></td>
+<td>Cada cuánto se realizan las copias de cada conjunto de datos</td>
+</tr>
+<tr>
+<td><strong>Retención</strong></td>
+<td>Durante cuánto tiempo se conservan antes de eliminarse o sobrescribirse</td>
+</tr>
+<tr>
+<td><strong>Tipos de copia</strong></td>
+<td>Combinación de copias completas, incrementales y diferenciales</td>
+</tr>
+<tr>
+<td><strong>Almacenamiento</strong></td>
+<td>Dónde se guardan: soportes, ubicaciones, separación respecto del sistema de origen</td>
+</tr>
+<tr>
+<td><strong>Protección</strong></td>
+<td>Control de acceso, cifrado, aislamiento o inmutabilidad de las copias</td>
+</tr>
+<tr>
+<td><strong>Responsables</strong></td>
+<td>Quién ejecuta, quién supervisa y quién autoriza una restauración</td>
+</tr>
+<tr>
+<td><strong>Procedimiento de restauración</strong></td>
+<td>Cómo se recupera: pasos, medios, orden y validación posterior</td>
+</tr>
+<tr>
+<td><strong>Pruebas</strong></td>
+<td>Verificación periódica de que la restauración funciona realmente</td>
+</tr>
+<tr>
+<td><strong>Revisión de la política</strong></td>
+<td>Actualización periódica conforme cambian los sistemas, los riesgos y las necesidades</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br>Una organización puede tener <strong>copias diarias impecables</strong> y, aun así, <strong>no tener política de salvaguarda</strong>: si nadie sabe quién restaura, con qué procedimiento, en cuánto tiempo y si alguna vez se ha comprobado que funciona, <strong>lo que hay es un proceso técnico, no una política</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="2-ens-y-copias" class="tema-h2">2. La salvaguarda en el ENS</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Referencia</strong></th>
+<th><strong>Contenido</strong></th>
+</tr>
+<tr>
+<td><strong>RD 311/2022, artículo 26</strong></td>
+<td><strong>Continuidad de la actividad</strong></td>
+</tr>
+<tr>
+<td><strong>Anexo II — mp.info.6</strong></td>
+<td><strong>Copias de seguridad</strong></td>
+</tr>
+<tr>
+<td><strong>mp.info.6.1</strong></td>
+<td>Copias que permitan <strong>recuperar los datos</strong></td>
+</tr>
+<tr>
+<td><strong>mp.info.6.2</strong></td>
+<td><strong>Frecuencia, almacenamiento y controles de acceso</strong></td>
+</tr>
+<tr>
+<td><strong>Refuerzo R1</strong></td>
+<td><strong>Pruebas de recuperación</strong></td>
+</tr>
+<tr>
+<td><strong>Refuerzo R2</strong></td>
+<td><strong>Protección y separación adicional</strong> según corresponda a la categoría</td>
+</tr>
+</table></div>
+<p>La idea normativa es directa: los sistemas deben disponer de <strong>copias de seguridad</strong> y de <strong>mecanismos que garanticen la continuidad</strong> cuando se pierdan los medios habituales de tratamiento de la información.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Trampa de examen — el ENS y la regla 3-2-1</strong><br><strong>La regla 3-2-1 NO es una obligación literal del ENS.</strong><br>Lo que el ENS exige, <strong>según corresponda a la categoría del sistema</strong>, es disponer de <strong>copias de seguridad</strong>, establecer su <strong>frecuencia y retención</strong>, definir su <strong>almacenamiento</strong>, aplicar <strong>controles de acceso</strong> y realizar <strong>pruebas</strong>.<br>La <strong>regla 3-2-1</strong> (y su evolución 3-2-1-1-0) es una <strong>buena práctica ampliamente utilizada</strong> que ayuda a satisfacer esas exigencias, <strong>pero no está formulada como requisito normativo literal</strong>.</th>
+</tr>
+</table></div>
+<p>El marco normativo completo del ENS —principios, dimensiones, categorías y responsables— corresponde al <strong>Tema 21</strong>.</p>
+
+<h2 id="3-tipos-de-copia" class="tema-h2">3. Tipos de copia: completa, incremental y diferencial</h2>
+<h4 class="tema-h4">3.1 Copia completa (full)</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>Copia completa</strong> → <strong>copia íntegra de los datos seleccionados</strong>.<br><strong>Ventaja</strong>: <strong>es la más sencilla de restaurar porque se necesita una única copia</strong>.<br><strong>Desventaja</strong>: requiere <strong>más tiempo de copia y más espacio</strong> de almacenamiento.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Matiz de precisión</strong><br>No debe afirmarse que la copia completa sea <strong>siempre la restauración más rápida en cualquier infraestructura</strong>: el tiempo real depende del volumen de datos, del medio, del ancho de banda y de la tecnología empleada.<br>La formulación correcta y segura es: <strong>«es la más sencilla de restaurar porque se necesita una única copia»</strong> — la ventaja está en el <strong>número de copias implicadas</strong>, no en una promesa de velocidad.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">3.2 Copia incremental</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición exacta</strong><br><strong>Copia incremental</strong> → copia únicamente de los datos <strong>modificados desde la ÚLTIMA COPIA REALIZADA</strong>, <strong>sea completa o incremental</strong>.<br><strong>Ventajas</strong>: es <strong>rápida</strong> y ocupa <strong>poco espacio</strong>.<br><strong>Desventaja</strong>: la <strong>restauración es más compleja</strong>.<br><strong>Restauración</strong>: <strong>ÚLTIMA COMPLETA + TODAS LAS INCREMENTALES POSTERIORES, EN ORDEN</strong>.<br><strong>ANCLA: INCREMENTAL → ÚLTIMA COPIA.</strong></th>
+</tr>
+</table></div>
+<h4 class="tema-h4">3.3 Copia diferencial</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición exacta</strong><br><strong>Copia diferencial</strong> → copia de los datos <strong>modificados desde la ÚLTIMA COPIA COMPLETA</strong>.<br><strong>Ventaja</strong>: <strong>restauración más sencilla que la incremental</strong>.<br><strong>Restauración</strong>: <strong>ÚLTIMA COMPLETA + ÚLTIMA DIFERENCIAL</strong>. Solo dos copias, siempre.<br><strong>ANCLA: DIFERENCIAL → ÚLTIMA COMPLETA.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ LA GRAN TRAMPA DEL TEMA</strong><br>La diferencia entre ambas está <strong>únicamente en la referencia</strong>:<br><strong>INCREMENTAL → referencia: la ÚLTIMA COPIA realizada</strong> (completa o incremental).<br><strong>DIFERENCIAL → referencia: la ÚLTIMA COPIA COMPLETA.</strong><br>Es la confusión más explotada del tema. Memoriza las dos frases <strong>por separado</strong> y no las mezcles.<br><em>Truco</em>: <strong>DIFERENCIAL</strong> y <strong>COMPLETA</strong> son las dos palabras largas — van juntas.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">3.4 Tabla comparativa</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th></th>
+<th><strong>Completa</strong></th>
+<th><strong>Incremental</strong></th>
+<th><strong>Diferencial</strong></th>
+</tr>
+<tr>
+<td><strong>Referencia</strong></td>
+<td>Ninguna</td>
+<td><strong>Última copia realizada</strong></td>
+<td><strong>Última completa</strong></td>
+</tr>
+<tr>
+<td><strong>Tamaño</strong></td>
+<td>Mayor</td>
+<td>Menor</td>
+<td>Intermedio y creciente entre completas</td>
+</tr>
+<tr>
+<td><strong>Velocidad de copia</strong></td>
+<td>Menor</td>
+<td>Mayor</td>
+<td>Intermedia</td>
+</tr>
+<tr>
+<td><strong>Restauración</strong></td>
+<td>Muy sencilla</td>
+<td>Más compleja</td>
+<td>Sencilla</td>
+</tr>
+<tr>
+<td><strong>Copias necesarias para restaurar</strong></td>
+<td><strong>1</strong></td>
+<td><strong>Completa + todas las posteriores</strong></td>
+<td><strong>Completa + última diferencial</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — por qué la diferencial crece</strong><br>Cada <strong>diferencial</strong> incluye <strong>todo lo cambiado desde la última completa</strong>, así que <strong>cada día es mayor que el anterior</strong> hasta la siguiente completa, cuando vuelve a partir de cero.<br>Cada <strong>incremental</strong>, en cambio, solo recoge <strong>lo cambiado desde ayer</strong>, por lo que se mantiene pequeña — pero exige <strong>encadenar todas</strong> para restaurar. Ahí está el intercambio: <strong>la incremental ahorra en la copia; la diferencial ahorra en la restauración</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="4-ejercicios-de-restauracion" class="tema-h2">4. Ejercicios de restauración</h2>
+<p>Este es el tipo de pregunta con mayor probabilidad de aparecer como <strong>caso práctico</strong> o como test de escenario. El método es siempre el mismo: identificar el <strong>esquema</strong> y aplicar la <strong>regla de la referencia</strong>.</p>
+<h4 class="tema-h4">Ejercicio A — Incrementales, fallo el jueves</h4>
+<p><strong>Esquema</strong>: copia <strong>completa el domingo</strong> e <strong>incrementales de lunes a viernes</strong>. El sistema <strong>falla el jueves</strong>, después de haberse ejecutado la incremental de ese día.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Solución</strong><br><strong>Domingo (completa) + lunes + martes + miércoles + jueves</strong> → <strong>5 copias</strong>, restauradas <strong>en ese orden</strong>.<br><strong>Razonamiento</strong>: cada incremental solo contiene lo modificado <strong>desde la copia anterior</strong>. Si falta un eslabón de la cadena, los cambios de ese día <strong>se pierden</strong>. Por eso hay que aplicar <strong>todas</strong> las incrementales posteriores a la completa, <strong>en orden cronológico</strong>.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Ejercicio B — Diferenciales, fallo el jueves</h4>
+<p><strong>Esquema</strong>: copia <strong>completa el domingo</strong> y <strong>diferenciales de lunes a viernes</strong>. El sistema <strong>falla el jueves</strong>, tras la diferencial de ese día.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Solución</strong><br><strong>Domingo (completa) + diferencial del jueves</strong> → <strong>2 copias</strong>.<br><strong>Razonamiento</strong>: la diferencial del jueves ya contiene <strong>todo lo modificado desde la completa del domingo</strong>, incluidos los cambios del lunes, martes y miércoles. Las diferenciales intermedias <strong>no son necesarias</strong>: quedan absorbidas por la última.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Ejercicio C — Incrementales, fallo el miércoles</h4>
+<p><strong>Esquema</strong>: <strong>completa el domingo</strong> e <strong>incrementales diarias</strong>. Fallo el <strong>miércoles</strong>, tras la incremental del día.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Solución</strong><br><strong>Domingo (completa) + lunes + martes + miércoles</strong> → <strong>4 copias</strong>, en orden.<br><strong>Razonamiento</strong>: idéntico al ejercicio A, con la cadena más corta. La regla no cambia: <strong>completa + todas las incrementales posteriores</strong>.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Ejercicio D — Diferenciales, fallo el miércoles</h4>
+<p><strong>Esquema</strong>: <strong>completa el domingo</strong> y <strong>diferenciales diarias</strong>. Fallo el <strong>miércoles</strong>, tras la diferencial del día.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Solución</strong><br><strong>Domingo (completa) + diferencial del miércoles</strong> → <strong>2 copias</strong>.<br><strong>Razonamiento</strong>: con diferenciales, el número de copias necesarias es <strong>siempre 2</strong>, con independencia del día en que ocurra el fallo. Es la gran ventaja del esquema.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Esquema</strong></th>
+<th><strong>Copias necesarias</strong></th>
+<th><strong>¿Depende del día del fallo?</strong></th>
+</tr>
+<tr>
+<td><strong>Completa sola</strong></td>
+<td><strong>1</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Completa + incrementales</strong></td>
+<td><strong>1 + n</strong> (todas las posteriores)</td>
+<td><strong>Sí</strong>: cuantos más días pasan, más copias</td>
+</tr>
+<tr>
+<td><strong>Completa + diferenciales</strong></td>
+<td><strong>2</strong> (completa + última diferencial)</td>
+<td><strong>No</strong>: siempre son dos</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Cautela al resolver el ejercicio</strong><br>Fíjate siempre en <strong>si la copia del día del fallo llegó a ejecutarse</strong>. Si el sistema cae <strong>antes</strong> de la copia del jueves, el punto de recuperación es el <strong>miércoles</strong>, y los cambios del jueves se pierden: ahí es donde entra en juego el <strong>RPO</strong> (apartado 11).</th>
+</tr>
+</table></div>
+
+<h2 id="5-retencion-y-rotacion" class="tema-h2">5. Retención y rotación</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — dos conceptos distintos</strong><br><strong>RETENCIÓN</strong> → <strong>tiempo durante el cual se conservan las copias antes de eliminarlas o sobrescribirlas</strong>. Responde a <strong>«¿CUÁNTO TIEMPO GUARDO?»</strong>.<br><strong>ROTACIÓN</strong> → <strong>mecanismo para reutilizar o sustituir los medios o las copias siguiendo un calendario de conservación</strong>. Responde a <strong>«¿CÓMO VOY SUSTITUYENDO O REUTILIZANDO?»</strong>.</th>
+</tr>
+</table></div>
+<p>La retención <strong>no tiene un valor universal</strong>. Depende de:</p>
 <ul class="tema-lista">
-<li><strong>Copia completa (full backup)</strong>: copia íntegra de todos los datos seleccionados. Es la más sencilla de restaurar, porque basta con una única copia, pero también la más lenta de generar y la que más espacio de almacenamiento ocupa.</li>
-<li><strong>Copia incremental</strong>: copia únicamente de los datos que han cambiado desde la última copia realizada, sea esta completa o incremental. Es rápida de generar y ocupa poco espacio, pero su restauración es más lenta y compleja: hay que aplicar la última copia completa y, después, todas las copias incrementales posteriores, en el orden correcto.</li>
-<li><strong>Copia diferencial</strong>: copia de todos los datos que han cambiado desde la última copia completa (no desde la última copia de cualquier tipo). Su restauración es más sencilla que la incremental —solo hace falta la última copia completa y la última diferencial—, aunque cada copia diferencial va creciendo de tamaño a medida que se aleja en el tiempo de la última copia completa.</li>
+<li><strong>Requisitos organizativos</strong> de la entidad.</li>
+<li><strong>Requisitos legales</strong> aplicables a la información de que se trate.</li>
+<li><strong>Requisitos operativos</strong>: hasta cuándo puede necesitarse recuperar un estado anterior.</li>
+<li><strong>Capacidad de almacenamiento</strong> disponible.</li>
+<li><strong>Necesidades de recuperación</strong> previstas.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>Tipo</strong></th>
-<th><strong>Velocidad y espacio del backup</strong></th>
-<th><strong>Complejidad de la restauración</strong></th>
+<th><strong>💡 Ejemplo que separa ambos conceptos</strong><br><strong>Retención</strong>: «las copias diarias se conservan durante cuatro semanas».<br><strong>Rotación</strong>: «se emplean cuatro juegos de soportes que se reutilizan cíclicamente, uno por semana».<br>La primera frase fija <strong>cuánto tiempo</strong>; la segunda, <strong>con qué mecanismo</strong> se materializa esa conservación.</th>
 </tr>
+</table></div>
+
+<h2 id="6-gfs" class="tema-h2">6. El esquema GFS</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<td>Completa</td>
-<td>Lenta, mucho espacio</td>
-<td>Muy simple: una sola copia</td>
-</tr>
-<tr>
-<td>Incremental</td>
-<td>Rápida, poco espacio</td>
-<td>Compleja: completa + todas las incrementales, en orden</td>
-</tr>
-<tr>
-<td>Diferencial</td>
-<td>Intermedia, crece hasta la siguiente completa</td>
-<td>Simple: completa + última diferencial</td>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>GFS = Grandfather-Father-Son</strong> (abuelo-padre-hijo): esquema clásico de <strong>rotación y retención</strong> en tres niveles.<br><strong>HIJO (Son)</strong> → copias <strong>diarias</strong>.<br><strong>PADRE (Father)</strong> → copias <strong>semanales</strong>.<br><strong>ABUELO (Grandfather)</strong> → copias <strong>mensuales o de largo plazo</strong>.</th>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>La diferencia entre copia incremental y diferencial es uno de los puntos que más se confunden en el examen: la incremental siempre toma como referencia la copia inmediatamente anterior, sea del tipo que sea (por eso, para restaurar, hacen falta todas las incrementales intermedias); la diferencial toma siempre como referencia la última copia completa (por eso, para restaurar, basta con la completa y la última diferencial, sin necesidad de las diferenciales intermedias).</th>
+<th><strong>Nivel</strong></th>
+<th><strong>Periodicidad</strong></th>
+<th><strong>Finalidad</strong></th>
+</tr>
+<tr>
+<td><strong>Hijo</strong></td>
+<td>Diaria</td>
+<td>Recuperación reciente y frecuente</td>
+</tr>
+<tr>
+<td><strong>Padre</strong></td>
+<td>Semanal</td>
+<td>Recuperar un estado de semanas anteriores</td>
+</tr>
+<tr>
+<td><strong>Abuelo</strong></td>
+<td>Mensual o de largo plazo</td>
+<td>Conservación prolongada</td>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>💡 Ejemplo</strong><br>Supuesto práctico habitual: copia completa el domingo e incrementales de lunes a viernes. Si el sistema falla el jueves por la tarde, para restaurar se necesita la <strong>completa del domingo + las incrementales de lunes, martes, miércoles y jueves</strong> (4 copias, en orden). Con el mismo calendario pero copias <strong>diferenciales</strong>, bastarían <strong>2</strong>: la completa del domingo y la diferencial del jueves. Saber contar cuántas copias hacen falta para restaurar es la pregunta de cálculo típica de este tema.</th>
+<th><strong>⚠️ Trampa de examen — no fijes periodos universales</strong><br>Es <strong>incorrecto</strong> afirmar como regla general que «el abuelo se guarda un año». La <strong>duración concreta de cada nivel es una decisión de la política de retención</strong> de cada organización, condicionada por requisitos legales, operativos y de capacidad.<br>Lo memorizable es la <strong>estructura de tres niveles</strong> y su <strong>periodicidad relativa</strong>: <strong>diario / semanal / mensual o de largo plazo</strong>.</th>
 </tr>
 </table></div>
-<h2 id="3-estrategias-de-rotación-y-retención" class="tema-h2">3. Estrategias de rotación y retención</h2>
-<p>La <strong>política de retención</strong> define durante cuánto tiempo se conservan las copias de seguridad antes de sobrescribirlas o eliminarlas, equilibrando la necesidad de poder recuperar información antigua con el coste de almacenamiento que supone conservar copias indefinidamente.</p>
-<p>Un esquema de rotación clásico es el denominado <strong>abuelo-padre-hijo (GFS, Grandfather-Father-Son)</strong>: las copias diarias («hijo») se sobrescriben cada semana; las copias semanales («padre») se conservan durante un mes; y las copias mensuales («abuelo») se conservan durante un año o más. De este modo se dispone de múltiples puntos de recuperación en distintas escalas de tiempo (reciente, del último mes, del último año) sin necesidad de almacenar todas las copias diarias de forma indefinida.</p>
-<h2 id="4-almacenamiento-de-las-copias-la-regla-3-2-1" class="tema-h2">4. Almacenamiento de las copias: la regla 3-2-1</h2>
-<p>La <strong>regla 3-2-1</strong>, ampliamente adoptada como estándar de referencia en la industria, resume en tres cifras cómo deben almacenarse las copias de seguridad para minimizar el riesgo de perderlas junto con los datos originales:</p>
+
+<h2 id="7-regla-3-2-1" class="tema-h2">7. La regla 3-2-1 y su evolución 3-2-1-1-0</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — REGLA 3-2-1 (buena práctica)</strong><br><strong>3</strong> → <strong>tres copias de los datos</strong>: el original más <strong>dos copias</strong>.<br><strong>2</strong> → almacenadas en <strong>dos soportes o medios diferentes</strong>.<br><strong>1</strong> → al menos <strong>una copia fuera de las instalaciones</strong> (offsite).<br>Es una <strong>buena práctica ampliamente utilizada</strong>, <strong>no un requisito literal del ENS</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Cifra</strong></th>
+<th><strong>Significado</strong></th>
+<th><strong>Riesgo que mitiga</strong></th>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>Original + 2 copias</td>
+<td>Fallo de una copia concreta</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>Soportes o medios diferentes</td>
+<td>Fallo sistemático de un tipo de soporte</td>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td>Una copia fuera de las instalaciones</td>
+<td>Desastre que afecte a todo el emplazamiento</td>
+</tr>
+</table></div>
+<h4 class="tema-h4">Evolución: 3-2-1-1-0</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — 3-2-1-1-0</strong><br>Evolución moderna de la regla anterior, orientada especialmente a la <strong>resiliencia frente a ransomware</strong>:<br><strong>3</strong> → copias · <strong>2</strong> → soportes diferentes · <strong>1</strong> → offsite · <strong>1</strong> → copia <strong>OFFLINE o INMUTABLE</strong> · <strong>0</strong> → <strong>cero errores detectados</strong> en las verificaciones y pruebas.<br><strong>Lo que añade respecto de 3-2-1: AISLAMIENTO + VERIFICACIÓN.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Trampa de examen</strong><br>Ni <strong>3-2-1</strong> ni <strong>3-2-1-1-0</strong> son <strong>normas jurídicas</strong> ni requisitos normativos literales: son <strong>buenas prácticas de resiliencia</strong>.<br>Lo que sí es normativo es que el ENS exige copias, frecuencia, almacenamiento, control de acceso y pruebas <strong>según corresponda a la categoría del sistema</strong> (apartado 2).</th>
+</tr>
+</table></div>
+
+<h2 id="8-offline-e-inmutable" class="tema-h2">8. Copia offline y copia inmutable</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — NO SON SINÓNIMOS</strong><br><strong>OFFLINE</strong> → copia <strong>aislada de la red</strong>, no accesible desde los sistemas en producción.<br><strong>INMUTABLE</strong> → copia que <strong>no puede modificarse ni eliminarse durante el periodo de protección definido</strong>, aunque siga siendo accesible.<br>Son <strong>propiedades distintas</strong>: una se refiere al <strong>aislamiento</strong>; la otra, a la <strong>imposibilidad de alteración</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Situación</strong></th>
+<th><strong>Descripción</strong></th>
+</tr>
+<tr>
+<td><strong>Copia offline</strong></td>
+<td>Desconectada de la red — por ejemplo, un soporte extraído y guardado aparte</td>
+</tr>
+<tr>
+<td><strong>Copia inmutable</strong></td>
+<td>Accesible, pero protegida contra modificación o borrado durante un plazo definido</td>
+</tr>
+<tr>
+<td><strong>Ambas a la vez</strong></td>
+<td>Copia aislada de la red <strong>y</strong> protegida contra alteración: es la combinación más robusta</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — por qué importa tanto</strong><br>La razón por la que ambas propiedades ganaron protagonismo es que un ataque que alcanza la red puede <strong>cifrar o borrar también el repositorio de copias</strong> si este es accesible y modificable.<br><strong>OFFLINE → NO SE ALCANZA. INMUTABLE → NO SE ALTERA.</strong> El detalle del ransomware corresponde al <strong>Tema 25</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="9-almacenamiento-y-cifrado" class="tema-h2">9. Almacenamiento y protección de las copias</h2>
 <ul class="tema-lista">
-<li><strong>3 copias</strong> de los datos, como mínimo: el original más dos copias de seguridad.</li>
-<li><strong>2 tipos de soporte distintos</strong>: por ejemplo, disco y cinta (Tema 6), para no depender de un único tipo de medio que pudiera fallar de forma sistemática.</li>
-<li><strong>1 copia fuera de las instalaciones (offsite)</strong>: en una ubicación física distinta a la del centro de datos principal, para proteger frente a un desastre que afecte a toda esa ubicación (incendio, inundación, robo).</li>
+<li><strong>Separación respecto del sistema de origen</strong>: una copia guardada en el mismo servidor que protege <strong>no cubre la pérdida de ese servidor</strong>.</li>
+<li><strong>Diversidad de soportes o medios</strong>, para no depender de un único tipo de fallo.</li>
+<li><strong>Ubicación externa (offsite)</strong>, que cubre el desastre que afecta al emplazamiento completo.</li>
+<li><strong>Control de acceso</strong> a las copias y al sistema que las gestiona.</li>
+<li><strong>Registro</strong> de las operaciones de copia y de restauración.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Una evolución más reciente de la regla, especialmente motivada por la amenaza del ransomware, es la <strong>3-2-1-1-0</strong>: añade <strong>1 copia offline o inmutable</strong> —aislada de la red, o protegida de forma que no pueda modificarse ni cifrarse ni siquiera por un atacante con acceso administrativo— y <strong>0 errores</strong>, es decir, la verificación activa de que las copias existentes son realmente recuperables sin fallos. El ransomware moderno ataca con frecuencia, de forma deliberada, las copias de seguridad accesibles desde la red, precisamente para impedir la recuperación sin pagar el rescate; de ahí la importancia de disponer de al menos una copia verdaderamente aislada.</th>
+<th><strong>📌 Imprescindible para el examen — cifrado de las copias</strong><br><strong>Las copias contienen información sensible y deben protegerse frente a accesos no autorizados.</strong> Una copia no cifrada reproduce íntegramente la información del sistema de origen, pero <strong>fuera de sus controles habituales</strong>.<br>El cifrado resulta especialmente importante en:<br>· copias <strong>offsite</strong>;<br>· <strong>soportes transportables</strong>;<br>· almacenamiento en la <strong>nube</strong>.</th>
 </tr>
 </table></div>
-<p>Las copias de seguridad, especialmente las que salen de las instalaciones o se almacenan en la nube, deben protegerse además mediante cifrado (Temas 22 y 24), ya que de otro modo constituyen en sí mismas una copia completa y potencialmente accesible de toda la información de la organización.</p>
-<h2 id="5-recuperación-ante-desastres-rto-y-rpo" class="tema-h2">5. Recuperación ante desastres: RTO y RPO</h2>
-<ul class="tema-lista">
-<li><strong>RTO (Recovery Time Objective, tiempo objetivo de recuperación)</strong>: el tiempo máximo aceptable que un servicio puede permanecer caído hasta que se restaura por completo. Cuanto menor sea el RTO exigido, más costosa y sofisticada debe ser la solución técnica necesaria para cumplirlo (por ejemplo, un clúster de alta disponibilidad con conmutación automática por error frente a restaurar manualmente desde una cinta).</li>
-<li><strong>RPO (Recovery Point Objective, punto objetivo de recuperación)</strong>: la cantidad máxima de datos, medida en tiempo, que la organización puede permitirse perder; en la práctica, la antigüedad máxima aceptable de la última copia recuperable. Cuanto menor sea el RPO exigido, con mayor frecuencia deben realizarse las copias de seguridad o la replicación de datos (un RPO de una hora exige, como mínimo, copiar o replicar los datos cada hora).</li>
-</ul>
+<p>El funcionamiento de los algoritmos y la gestión de claves corresponde al <strong>Tema 24</strong>; las tecnologías de almacenamiento, al <strong>Tema 6</strong>.</p>
+
+<h2 id="10-snapshot-y-replicacion" class="tema-h2">10. Snapshot y replicación frente a backup</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Una forma sencilla de no confundir ambos conceptos: el RPO mira «hacia atrás en el tiempo» y responde a la pregunta «¿cuánta información podemos permitirnos perder?»; el RTO mira «hacia delante» y responde a la pregunta «¿cuánto tiempo podemos permitirnos estar caídos?». Son dos objetivos independientes: un sistema puede tener un RPO muy exigente (perder solo unos minutos de datos) y, sin embargo, un RTO más laxo (tardar varias horas en volver a estar operativo), o viceversa.</th>
+<th><strong>⚠️ TRAMPA DE EXAMEN — SNAPSHOT NO ES BACKUP</strong><br><strong>Snapshot</strong> → <strong>captura del estado de una máquina virtual o de un sistema en un momento determinado</strong>.<br><strong>Backup</strong> → <strong>copia destinada a la recuperación de forma independiente</strong> del sistema de origen.<br>Una snapshot <strong>puede ayudar a recuperar un estado</strong>, pero <strong>no debe considerarse automáticamente una copia de seguridad</strong>: habitualmente depende de la misma infraestructura y del mismo almacenamiento que el sistema que pretende proteger. Si se pierde esa infraestructura, se pierde también la snapshot.</th>
 </tr>
 </table></div>
-<h2 id="6-planes-de-continuidad-y-pruebas-de-recuperación" class="tema-h2">6. Planes de continuidad y pruebas de recuperación</h2>
-<p>El <strong>Plan de Continuidad de Negocio (BCP, Business Continuity Plan)</strong> y, más específicamente, el <strong>Plan de Recuperación ante Desastres (DRP, Disaster Recovery Plan)</strong> son los documentos que detallan los procedimientos, los recursos necesarios y las responsabilidades de cada persona para restaurar los servicios críticos de una organización tras un incidente grave, dentro de los objetivos de RTO y RPO que se hayan definido previamente. El Anexo II del ENS recoge estas exigencias en la familia de medidas de continuidad del servicio: análisis de impacto, elaboración del propio plan, pruebas periódicas y disposición de medios alternativos.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>Uno de los errores más habituales —tanto en organizaciones reales como en respuestas de examen— es asumir que, por el hecho de realizar copias de seguridad de forma periódica, la información ya está protegida. Una copia de seguridad que nunca se ha probado a restaurar no ofrece ninguna garantía real: puede estar corrupta, incompleta, o el procedimiento de restauración puede no funcionar como se esperaba en el momento en que realmente se necesita. Las pruebas periódicas de restauración son, por tanto, una parte tan esencial de la política de salvaguarda como la propia realización de las copias.</th>
+<th><strong>⚠️ No confundir — REPLICACIÓN NO ES BACKUP</strong><br><strong>Replicación</strong> → <strong>mantener otra copia o estado sincronizado</strong> con el original.<br><strong>Backup</strong> → <strong>disponer de copias recuperables, normalmente con historial</strong> de estados anteriores.<br><strong>La replicación no sustituye automáticamente al backup.</strong> Su límite es evidente: si el dato original se corrompe, se borra o se cifra, <strong>ese mismo estado dañado se replica</strong> al destino. Sin historial, no hay punto anterior al que volver.</th>
 </tr>
 </table></div>
-<h2 id="7-resumen-para-estudiar" class="tema-h2">7. Resumen para estudiar</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th></th>
+<th><strong>Backup</strong></th>
+<th><strong>Snapshot</strong></th>
+<th><strong>Replicación</strong></th>
+</tr>
+<tr>
+<td><strong>Qué es</strong></td>
+<td>Copia recuperable, normalmente con historial</td>
+<td>Captura de un estado en un instante</td>
+<td>Copia o estado sincronizado</td>
+</tr>
+<tr>
+<td><strong>Independencia del origen</strong></td>
+<td>Sí, es su razón de ser</td>
+<td>Habitualmente no</td>
+<td>Depende de la arquitectura</td>
+</tr>
+<tr>
+<td><strong>Historial de versiones</strong></td>
+<td>Sí</td>
+<td>Limitado</td>
+<td>Normalmente no</td>
+</tr>
+<tr>
+<td><strong>Protege frente a corrupción o borrado del dato</strong></td>
+<td>Sí, si hay retención suficiente</td>
+<td>Parcialmente</td>
+<td>No: el daño se propaga</td>
+</tr>
+</table></div>
+<p>La tecnología de snapshots en entornos virtualizados se estudia en el <strong>Tema 10</strong>.</p>
+
+<h2 id="11-rto-y-rpo" class="tema-h2">11. RTO y RPO</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — RTO</strong><br><strong>RTO (Recovery Time Objective)</strong> → <strong>tiempo máximo objetivo aceptable para recuperar un servicio después de una interrupción</strong>.<br><strong>ANCLA: RTO → TIEMPO CAÍDO.</strong></th>
+</tr>
+</table></div>
+<p>Cuanto <strong>menor</strong> sea el RTO exigido, <strong>normalmente se requieren soluciones más rápidas, más sofisticadas y más costosas</strong>, según el contexto y la criticidad del servicio. No cabe afirmar que un RTO bajo <strong>implique siempre un clúster</strong> ni ninguna tecnología concreta: la solución depende del servicio, de la arquitectura y de los medios disponibles.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — RPO</strong><br><strong>RPO (Recovery Point Objective)</strong> → <strong>cantidad máxima de datos que la organización acepta perder, expresada como un punto temporal previo al incidente</strong>.<br><strong>ANCLA: RPO → DATOS PERDIDOS.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Trampa de examen — RPO NO ES «la frecuencia de backup»</strong><br>Es <strong>incorrecto</strong> definir el RPO como la frecuencia de las copias. El RPO es un <strong>OBJETIVO</strong>: cuántos datos se acepta perder.<br>La formulación correcta es: <strong>«la frecuencia de las copias o de la replicación es una posible forma de alcanzar el RPO»</strong>. Es el <strong>medio</strong>, no la definición.<br><em>Ejemplo</em>: <strong>RPO = 1 hora</strong> significa <strong>«el objetivo es poder recuperar un estado con una antigüedad máxima de aproximadamente una hora»</strong>. Copiar cada hora es <strong>una</strong> manera de conseguirlo; podría lograrse también con replicación u otros mecanismos.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th></th>
+<th><strong>RTO</strong></th>
+<th><strong>RPO</strong></th>
+</tr>
+<tr>
+<td><strong>Pregunta que responde</strong></td>
+<td><strong>¿Cuánto tiempo podemos estar caídos?</strong></td>
+<td><strong>¿Cuántos datos podemos perder?</strong></td>
+</tr>
+<tr>
+<td><strong>Se expresa como</strong></td>
+<td>Tiempo de recuperación</td>
+<td>Tiempo o volumen de datos de pérdida admisible</td>
+</tr>
+<tr>
+<td><strong>Influye en</strong></td>
+<td>Tecnología y procedimiento de <strong>recuperación</strong></td>
+<td><strong>Frecuencia</strong> y tecnología de <strong>copia o replicación</strong></td>
+</tr>
+<tr>
+<td><strong>Mira hacia</strong></td>
+<td><strong>Adelante</strong>: desde el incidente hasta la vuelta al servicio</td>
+<td><strong>Atrás</strong>: desde el incidente hasta el último punto recuperable</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — la línea temporal</strong><br>Sitúa el <strong>incidente</strong> en el centro de una línea de tiempo:<br><strong>← RPO ← [ÚLTIMO PUNTO RECUPERABLE] ······ [INCIDENTE] ······ [SERVICIO RESTABLECIDO] → RTO →</strong><br><strong>El RPO mira hacia atrás (datos). El RTO mira hacia adelante (tiempo).</strong></th>
+</tr>
+</table></div>
+
+<h2 id="12-bcp-y-drp" class="tema-h2">12. BCP y DRP</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>BCP (Business Continuity Plan) — plan de continuidad</strong> → <strong>plan amplio para mantener o recuperar las funciones críticas de la organización ante interrupciones</strong>. Abarca <strong>personas, procesos, recursos y servicios</strong>.<br><strong>DRP (Disaster Recovery Plan) — plan de recuperación ante desastres</strong> → <strong>plan específico para recuperar los sistemas y servicios TIC tras un desastre o incidente grave</strong>.<br><strong>BCP → LA ORGANIZACIÓN. DRP → LA TECNOLOGÍA.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th></th>
+<th><strong>BCP</strong></th>
+<th><strong>DRP</strong></th>
+</tr>
+<tr>
+<td><strong>Alcance</strong></td>
+<td>Toda la organización y sus funciones críticas</td>
+<td>Sistemas y servicios TIC</td>
+</tr>
+<tr>
+<td><strong>Incluye</strong></td>
+<td>Personas, procesos, recursos, servicios, sedes alternativas</td>
+<td>Recuperación de infraestructuras, datos y aplicaciones</td>
+</tr>
+<tr>
+<td><strong>Pregunta</strong></td>
+<td>¿Cómo sigue funcionando la organización?</td>
+<td>¿Cómo se recuperan los sistemas?</td>
+</tr>
+<tr>
+<td><strong>Relación</strong></td>
+<td colspan="2">El <strong>DRP</strong> puede entenderse como la <strong>parte tecnológica</strong> que da soporte al BCP</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br><strong>No son documentos necesariamente idénticos</strong> ni intercambiables. Una organización puede tener un DRP técnico impecable y carecer de BCP —sin previsión de cómo seguir atendiendo al público mientras se recupera—, o al revés.<br><em>Ejemplo</em>: el <strong>DRP</strong> dice cómo levantar el servidor de padrón en otra ubicación; el <strong>BCP</strong> dice cómo se atiende al ciudadano <strong>mientras tanto</strong> y quién comunica la incidencia.</th>
+</tr>
+</table></div>
+
+<h2 id="13-plan-de-continuidad" class="tema-h2">13. El plan de continuidad</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Elemento</strong></th>
+<th><strong>Contenido</strong></th>
+</tr>
+<tr>
+<td><strong>Análisis de impacto</strong></td>
+<td>Identificar funciones y servicios críticos y las consecuencias de su interrupción</td>
+</tr>
+<tr>
+<td><strong>Funciones</strong></td>
+<td>Qué debe mantenerse operativo y con qué prioridad</td>
+</tr>
+<tr>
+<td><strong>Responsabilidades</strong></td>
+<td>Quién decide, quién ejecuta y quién comunica</td>
+</tr>
+<tr>
+<td><strong>Procedimientos</strong></td>
+<td>Actuaciones concretas de respuesta y recuperación</td>
+</tr>
+<tr>
+<td><strong>Medios alternativos</strong></td>
+<td>Recursos, ubicaciones o procedimientos sustitutivos disponibles</td>
+</tr>
+<tr>
+<td><strong>Pruebas</strong></td>
+<td>Verificación periódica de que el plan funciona</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — cómo se conecta todo</strong><br>El <strong>análisis de impacto</strong> determina qué servicios son críticos; de ahí se derivan el <strong>RTO</strong> y el <strong>RPO</strong> de cada uno; y esos dos objetivos <strong>condicionan la política de salvaguarda</strong>: frecuencia, tipo de copia, almacenamiento y tecnología de recuperación.<br><strong>CRITICIDAD → RTO/RPO → POLÍTICA DE COPIAS Y RECUPERACIÓN.</strong></th>
+</tr>
+</table></div>
+
+<h2 id="14-pruebas-de-recuperacion" class="tema-h2">14. Pruebas de recuperación</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 IDEA CENTRAL DEL TEMA</strong><br><strong>Una copia no probada NO garantiza que pueda restaurarse correctamente.</strong><br>La copia realizada es solo <strong>la mitad del proceso</strong>. Lo que protege a la organización no es <strong>hacer</strong> la copia, sino <strong>poder restaurarla</strong> — y eso solo se sabe <strong>probándolo</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Qué debe verificar la prueba</strong></th>
+<th><strong>Pregunta que responde</strong></th>
+</tr>
+<tr>
+<td><strong>Disponibilidad de la copia</strong></td>
+<td>¿Existe realmente y es accesible cuando se necesita?</td>
+</tr>
+<tr>
+<td><strong>Integridad suficiente</strong></td>
+<td>¿El contenido está completo y utilizable?</td>
+</tr>
+<tr>
+<td><strong>Procedimiento de restauración</strong></td>
+<td>¿Está documentado y puede ejecutarlo quien corresponda?</td>
+</tr>
+<tr>
+<td><strong>Tiempo de recuperación</strong></td>
+<td>¿Se cumple el <strong>RTO</strong> comprometido?</td>
+</tr>
+<tr>
+<td><strong>Compatibilidad de medios y procedimientos</strong></td>
+<td>¿Puede leerse el soporte y funciona el software o el entorno de destino?</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br><strong>BACKUP REALIZADO ≠ BACKUP RESTAURABLE.</strong> Es la distinción que resume todo el tema y la que con más frecuencia se pregunta como afirmación a valorar.<br>Por eso el ENS incorpora las <strong>pruebas de recuperación</strong> como refuerzo de la medida de copias (apartado 2), y por eso la regla <strong>3-2-1-1-0</strong> termina en <strong>0 errores detectados en las verificaciones</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="15-anclas-de-memoria" class="tema-h2">15. Anclas de memoria</h2>
 <ul class="tema-lista">
-<li><strong>Política de salvaguarda</strong>: procedimientos para garantizar la recuperación de la información; requisito mínimo del ENS (continuidad de la actividad).</li>
-<li><strong>Tipos de copia</strong>: completa (restauración simple, backup lento), incremental (respecto a la última copia de cualquier tipo; backup rápido, restauración compleja) y diferencial (respecto a la última completa; equilibrio intermedio).</li>
-<li><strong>Rotación</strong>: esquema abuelo-padre-hijo (GFS) para combinar puntos de recuperación diarios, semanales y mensuales sin acumular copias indefinidamente.</li>
-<li><strong>Regla 3-2-1</strong> (y su evolución 3-2-1-1-0): 3 copias, 2 soportes distintos, 1 copia offsite, 1 copia offline/inmutable frente al ransomware, 0 errores verificados; cifrado de las copias que salen de las instalaciones.</li>
-<li><strong>RTO frente a RPO</strong>: RTO = tiempo máximo de parada aceptable; RPO = cantidad máxima de datos (en tiempo) que se puede permitir perder; objetivos independientes entre sí.</li>
-<li><strong>Planes de continuidad (BCP/DRP)</strong>: procedimientos, recursos y responsabilidades para recuperar los servicios críticos dentro de los objetivos RTO/RPO; las pruebas periódicas de restauración son tan necesarias como las propias copias.</li>
+<li><strong>INCREMENTAL → ÚLTIMA COPIA</strong> realizada (completa o incremental).</li>
+<li><strong>DIFERENCIAL → ÚLTIMA COMPLETA</strong>.</li>
+<li><strong>Restaurar incremental</strong> = completa + <strong>todas</strong> las posteriores, en orden. <strong>Restaurar diferencial</strong> = completa + <strong>última</strong> diferencial (siempre <strong>2</strong>).</li>
+<li><strong>GFS → DIARIO / SEMANAL / MENSUAL</strong> (hijo / padre / abuelo), sin periodos universales.</li>
+<li><strong>RETENCIÓN → CUÁNTO TIEMPO GUARDO · ROTACIÓN → CÓMO SUSTITUYO O REUTILIZO</strong>.</li>
+<li><strong>3-2-1 → 3 copias / 2 soportes / 1 offsite</strong> — <strong>buena práctica</strong>, no requisito literal del ENS.</li>
+<li><strong>3-2-1-1-0 → AÑADE AISLAMIENTO (offline o inmutable) + VERIFICACIÓN (0 errores)</strong>.</li>
+<li><strong>OFFLINE → AISLADA DE LA RED · INMUTABLE → NO ALTERABLE</strong> durante el periodo de protección.</li>
+<li><strong>RTO → TIEMPO</strong> (mira adelante) · <strong>RPO → DATOS</strong> (mira atrás).</li>
+<li><strong>BCP → ORGANIZACIÓN · DRP → TECNOLOGÍA</strong>.</li>
+<li><strong>SNAPSHOT ≠ BACKUP · REPLICACIÓN ≠ BACKUP · BACKUP REALIZADO ≠ BACKUP RESTAURABLE</strong>.</li>
+<li><strong>ENS → art. 26 continuidad · mp.info.6 copias de seguridad</strong>.</li>
 </ul>
 
-<h2 id="8-conceptos-clave" class="tema-h2">8. Conceptos clave</h2>
+<h2 id="16-no-confundir" class="tema-h2">16. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto A</strong></th>
+<th><strong>Concepto B</strong></th>
+<th><strong>Diferencia clave</strong></th>
+</tr>
+<tr>
+<td><strong>Salvaguarda</strong>: política completa</td>
+<td><strong>Backup</strong>: la copia en sí</td>
+<td>La copia es una parte; la política incluye retención, responsables, procedimiento, pruebas y revisión</td>
+</tr>
+<tr>
+<td><strong>Backup</strong>: copia recuperable con historial</td>
+<td><strong>Snapshot</strong>: captura de un estado</td>
+<td>La snapshot suele depender de la misma infraestructura que protege</td>
+</tr>
+<tr>
+<td><strong>Backup</strong>: historial de estados</td>
+<td><strong>Replicación</strong>: estado sincronizado</td>
+<td>La replicación propaga también el dato corrupto o borrado</td>
+</tr>
+<tr>
+<td><strong>Completa</strong>: copia íntegra</td>
+<td><strong>Incremental</strong>: solo lo cambiado desde la última copia</td>
+<td>Una copia para restaurar vs. cadena completa</td>
+</tr>
+<tr>
+<td><strong>Incremental</strong>: referencia = última copia</td>
+<td><strong>Diferencial</strong>: referencia = última completa</td>
+<td><strong>La gran trampa del tema</strong></td>
+</tr>
+<tr>
+<td><strong>Retención</strong>: cuánto tiempo guardo</td>
+<td><strong>Rotación</strong>: cómo sustituyo o reutilizo</td>
+<td>Duración vs. mecanismo</td>
+</tr>
+<tr>
+<td><strong>Offline</strong>: aislada de la red</td>
+<td><strong>Inmutable</strong>: no alterable durante un plazo</td>
+<td>Aislamiento vs. imposibilidad de modificación; pueden coincidir</td>
+</tr>
+<tr>
+<td><strong>3-2-1</strong>: buena práctica</td>
+<td><strong>ENS</strong>: exigencias normativas</td>
+<td>El ENS exige copias, frecuencia, almacenamiento, control y pruebas; no la regla como tal</td>
+</tr>
+<tr>
+<td><strong>RTO</strong>: tiempo máximo de recuperación</td>
+<td><strong>RPO</strong>: datos máximos que se acepta perder</td>
+<td>Adelante (tiempo) vs. atrás (datos)</td>
+</tr>
+<tr>
+<td><strong>RPO</strong>: objetivo de pérdida admisible</td>
+<td><strong>Frecuencia de backup</strong>: medio para alcanzarlo</td>
+<td>Objetivo vs. instrumento</td>
+</tr>
+<tr>
+<td><strong>BCP</strong>: continuidad de la organización</td>
+<td><strong>DRP</strong>: recuperación tecnológica</td>
+<td>Personas y procesos vs. sistemas y datos</td>
+</tr>
+<tr>
+<td><strong>Backup</strong>: disponer de copias</td>
+<td><strong>Continuidad</strong>: seguir prestando el servicio</td>
+<td>Tener copias no equivale a tener continuidad</td>
+</tr>
+<tr>
+<td><strong>Backup realizado</strong></td>
+<td><strong>Backup restaurable</strong></td>
+<td>Solo la prueba de recuperación acredita lo segundo</td>
+</tr>
+</table></div>
+
+<h2 id="17-trampas-de-examen" class="tema-h2">17. Posibles trampas de examen</h2>
 <ul class="tema-lista">
-<li><strong>Política de salvaguarda</strong> y su encaje en el ENS (art. 26, continuidad).</li>
-<li><strong>Copia completa / incremental / diferencial</strong> y sus referencias de partida.</li>
-<li><strong>Retención</strong> y rotación <strong>GFS (abuelo-padre-hijo)</strong>.</li>
-<li><strong>Regla 3-2-1</strong> y evolución <strong>3-2-1-1-0</strong> (copia offline/inmutable, 0 errores).</li>
-<li><strong>Cifrado de las copias</strong> (especialmente offsite/nube).</li>
-<li><strong>RTO</strong> (tiempo de parada) vs. <strong>RPO</strong> (datos perdidos).</li>
-<li><strong>BCP y DRP</strong>; pruebas periódicas de restauración.</li>
-<li>Relación con <strong>ransomware</strong> (Tema 25) y snapshots (Tema 10).</li>
+<li><strong>«La incremental copia lo modificado desde la última completa»</strong> — <strong>FALSO</strong>: eso es la <strong>diferencial</strong>. La incremental toma como referencia la <strong>última copia realizada</strong>.</li>
+<li><strong>«La diferencial copia lo modificado desde la última copia realizada»</strong> — <strong>FALSO</strong>: eso es la <strong>incremental</strong>. La diferencial parte de la <strong>última completa</strong>.</li>
+<li><strong>«Para restaurar con diferenciales hacen falta todas las diferenciales»</strong> — falso: solo la <strong>completa y la última diferencial</strong>.</li>
+<li><strong>«Para restaurar con incrementales basta la última»</strong> — falso: hacen falta <strong>todas</strong> las posteriores a la completa, en orden.</li>
+<li><strong>«La copia completa siempre se restaura más rápido en cualquier infraestructura»</strong> — impreciso: es <strong>la más sencilla</strong> porque solo se necesita <strong>una copia</strong>; el tiempo real depende del volumen y de la tecnología.</li>
+<li><strong>«La regla 3-2-1 es una obligación del ENS»</strong> — falso: es una <strong>buena práctica</strong>.</li>
+<li><strong>«3-2-1-1-0 es una norma jurídica»</strong> — falso: es una práctica de <strong>resiliencia</strong>.</li>
+<li><strong>«En GFS el abuelo se guarda siempre un año»</strong> — falso: la duración la fija la <strong>política de retención</strong>.</li>
+<li><strong>«Retención y rotación son lo mismo»</strong> — falso: <strong>cuánto tiempo</strong> frente a <strong>cómo se sustituye o reutiliza</strong>.</li>
+<li><strong>«Offline e inmutable son sinónimos»</strong> — falso: <strong>aislamiento</strong> frente a <strong>imposibilidad de alteración</strong>.</li>
+<li><strong>«Una snapshot es una copia de seguridad»</strong> — falso: puede ayudar a recuperar un estado, pero <strong>no debe considerarse automáticamente un backup</strong>.</li>
+<li><strong>«Con replicación no hacen falta copias»</strong> — falso: la replicación <strong>propaga el daño</strong> y normalmente no aporta historial.</li>
+<li><strong>«RPO es la frecuencia de las copias»</strong> — falso: el RPO es el <strong>objetivo de pérdida admisible</strong>; la frecuencia es <strong>una forma de alcanzarlo</strong>.</li>
+<li><strong>«RTO y RPO son lo mismo»</strong> — falso: <strong>tiempo</strong> frente a <strong>datos</strong>.</li>
+<li><strong>«Un RTO bajo implica siempre un clúster»</strong> — falso: exige soluciones más rápidas <strong>según el contexto</strong>, sin imponer una tecnología concreta.</li>
+<li><strong>«BCP y DRP son el mismo documento»</strong> — falso: <strong>organización</strong> frente a <strong>tecnología</strong>.</li>
+<li><strong>«Tener backup equivale a tener continuidad»</strong> — falso: la continuidad exige además procedimientos, responsables, medios alternativos y pruebas.</li>
+<li><strong>«Si la copia se ha ejecutado sin errores, se puede restaurar»</strong> — falso: <strong>backup realizado ≠ backup restaurable</strong>; solo la <strong>prueba de recuperación</strong> lo acredita.</li>
+<li><strong>«Guardar las copias en el mismo servidor es suficiente»</strong> — falso: no cubre la pérdida de ese servidor ni un incidente que alcance a todo el sistema.</li>
+<li><strong>Colar contenido ajeno</strong>: almacenamiento (T6), virtualización (T10), ENS en profundidad (T21), amenazas (T22), criptografía (T24) y ransomware (T25) no se desarrollan aquí.</li>
 </ul>
 
-<h2 id="9-posibles-puntos-de-examen" class="tema-h2">9. Posibles puntos de examen</h2>
+<h2 id="18-preguntas-tipo-test" class="tema-h2">18. Posibles preguntas tipo test</h2>
 <ul class="tema-lista">
-<li>Distinguir <strong>incremental de diferencial</strong> por su copia de referencia — la pregunta estrella del tema.</li>
-<li><strong>Calcular cuántas copias</strong> hacen falta para restaurar en un calendario dado (supuesto práctico).</li>
-<li>Qué tipo de copia ocupa más espacio y cuál restaura más rápido.</li>
-<li>El significado de cada cifra de la <strong>regla 3-2-1</strong> (y de la 3-2-1-1-0).</li>
-<li>Por qué se exige una copia <strong>offline/inmutable</strong> (ransomware que ataca los backups).</li>
-<li>Definiciones de <strong>RTO y RPO</strong> y no confundirlos (¿cuánto tiempo caídos? vs. ¿cuántos datos perdidos?).</li>
-<li>Qué implica reducir el RPO (copias/replicación más frecuentes) o el RTO (soluciones de alta disponibilidad).</li>
-<li>Diferencia entre <strong>BCP y DRP</strong>.</li>
-<li>Qué es el esquema <strong>GFS</strong> y qué conserva cada «generación».</li>
-<li>Por qué una copia <strong>no probada</strong> no garantiza nada (pruebas de restauración).</li>
+<li><strong>Definición</strong> de política de salvaguarda: ¿se reduce a realizar copias?</li>
+<li>Elementos que debe incluir una política de salvaguarda.</li>
+<li>¿Qué artículo del RD 311/2022 regula la <strong>continuidad de la actividad</strong>?</li>
+<li>¿Qué medida del Anexo II corresponde a las <strong>copias de seguridad</strong>?</li>
+<li>¿Es la <strong>regla 3-2-1</strong> una obligación literal del ENS?</li>
+<li><strong>Definición</strong> de copia completa y su principal ventaja correctamente formulada.</li>
+<li><strong>Definición</strong> de copia incremental: ¿cuál es su referencia?</li>
+<li><strong>Definición</strong> de copia diferencial: ¿cuál es su referencia?</li>
+<li><strong>Escenario</strong>: completa el domingo + incrementales diarias, fallo el jueves. ¿Cuántas copias se necesitan?</li>
+<li><strong>Escenario</strong>: completa el domingo + diferenciales diarias, fallo el jueves. ¿Cuántas copias?</li>
+<li><strong>Escenario</strong>: con diferenciales, ¿varía el número de copias según el día del fallo?</li>
+<li>¿Qué esquema ocupa <strong>menos espacio</strong> por copia y cuál permite una <strong>restauración más sencilla</strong>?</li>
+<li>¿Por qué crece el tamaño de las <strong>diferenciales</strong> a lo largo de la semana?</li>
+<li>Diferencia entre <strong>retención</strong> y <strong>rotación</strong>.</li>
+<li>¿Qué significan las siglas <strong>GFS</strong> y a qué periodicidad corresponde cada nivel?</li>
+<li>¿Establece GFS periodos de conservación universales?</li>
+<li>¿Qué significa cada cifra de la <strong>regla 3-2-1</strong>?</li>
+<li>¿Qué añade <strong>3-2-1-1-0</strong> respecto de 3-2-1?</li>
+<li>Diferencia entre copia <strong>offline</strong> e <strong>inmutable</strong>. ¿Pueden coincidir?</li>
+<li>¿Por qué es especialmente importante <strong>cifrar</strong> las copias offsite y los soportes transportables?</li>
+<li>¿Puede considerarse una <strong>snapshot</strong> una copia de seguridad?</li>
+<li>¿Sustituye la <strong>replicación</strong> al backup? ¿Por qué no, ante una corrupción de datos?</li>
+<li><strong>Definición</strong> de RTO y de RPO.</li>
+<li>¿Es correcto definir el <strong>RPO</strong> como la frecuencia de las copias?</li>
+<li><strong>Escenario</strong>: RPO de 1 hora. ¿Qué significa exactamente?</li>
+<li>¿Cuál de los dos objetivos influye en la <strong>frecuencia</strong> de copia y cuál en la <strong>tecnología de recuperación</strong>?</li>
+<li>Diferencia entre <strong>BCP</strong> y <strong>DRP</strong>.</li>
+<li>Elementos de un <strong>plan de continuidad</strong>.</li>
+<li>¿Qué debe verificar una <strong>prueba de recuperación</strong>?</li>
+<li>¿Garantiza una copia realizada correctamente que pueda restaurarse?</li>
+</ul>
+
+<h2 id="19-preguntas-cortas" class="tema-h2">19. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<h4 class="tema-h4">1. Explique qué es una política de salvaguarda</h4>
+<ul class="tema-lista">
+<li>Definición: directrices, procedimientos y medidas para garantizar la recuperación de la información y los servicios tras una pérdida o incidente.</li>
+<li>Elementos: alcance, frecuencia, retención, tipos de copia, almacenamiento, protección, responsables, procedimiento de restauración, pruebas y revisión.</li>
+<li>Cierre: no se reduce a hacer copias; sin procedimiento, responsables y pruebas no hay política.</li>
+</ul>
+<h4 class="tema-h4">2. Diferencie los tres tipos de copia</h4>
+<ul class="tema-lista">
+<li>Completa: copia íntegra; la más sencilla de restaurar porque se necesita una única copia; mayor tiempo y espacio.</li>
+<li>Incremental: lo modificado desde la última copia realizada; rápida y pequeña; restauración = completa + todas las posteriores en orden.</li>
+<li>Diferencial: lo modificado desde la última completa; restauración = completa + última diferencial.</li>
+<li>Cierre: la incremental ahorra en la copia; la diferencial ahorra en la restauración.</li>
+</ul>
+<h4 class="tema-h4">3. Explique el esquema GFS</h4>
+<ul class="tema-lista">
+<li>Grandfather-Father-Son: esquema de rotación y retención en tres niveles.</li>
+<li>Hijo diario, padre semanal, abuelo mensual o de largo plazo.</li>
+<li>Cierre: la duración concreta de cada nivel la fija la política de retención; no hay periodos universales.</li>
+</ul>
+<h4 class="tema-h4">4. Explique la regla 3-2-1</h4>
+<ul class="tema-lista">
+<li>3 copias (original + 2), 2 soportes o medios diferentes, 1 copia fuera de las instalaciones.</li>
+<li>Cada cifra mitiga un riesgo distinto: fallo de una copia, fallo sistemático de un soporte, desastre del emplazamiento.</li>
+<li>Evolución 3-2-1-1-0: añade copia offline o inmutable y cero errores en las verificaciones.</li>
+<li>Cierre: son buenas prácticas, no requisitos normativos literales del ENS.</li>
+</ul>
+<h4 class="tema-h4">5. Diferencie RTO y RPO</h4>
+<ul class="tema-lista">
+<li>RTO: tiempo máximo objetivo aceptable para recuperar un servicio tras una interrupción.</li>
+<li>RPO: cantidad máxima de datos que se acepta perder, expresada como punto temporal previo al incidente.</li>
+<li>RTO mira hacia adelante y condiciona la tecnología de recuperación; RPO mira hacia atrás y condiciona la frecuencia de copia o replicación.</li>
+<li>Cierre: el RPO no es la frecuencia de backup; la frecuencia es una forma de alcanzarlo.</li>
+</ul>
+<h4 class="tema-h4">6. Diferencie BCP y DRP</h4>
+<ul class="tema-lista">
+<li>BCP: plan amplio para mantener o recuperar las funciones críticas de la organización; incluye personas, procesos, recursos y servicios.</li>
+<li>DRP: plan específico de recuperación de sistemas y servicios TIC tras un desastre o incidente grave.</li>
+<li>Cierre: el DRP es la parte tecnológica que da soporte al BCP; no son documentos idénticos.</li>
+</ul>
+<h4 class="tema-h4">7. Explique la importancia de las pruebas de restauración</h4>
+<ul class="tema-lista">
+<li>Idea central: una copia no probada no garantiza que pueda restaurarse correctamente.</li>
+<li>Qué verifican: disponibilidad, integridad suficiente, procedimiento, tiempo de recuperación y compatibilidad de medios y procedimientos.</li>
+<li>Cierre: backup realizado no equivale a backup restaurable; por eso el ENS incorpora las pruebas y la regla 3-2-1-1-0 termina en cero errores.</li>
+</ul>
+<h4 class="tema-h4">8. Explique la relación de la salvaguarda con el ENS</h4>
+<ul class="tema-lista">
+<li>RD 311/2022, artículo 26: continuidad de la actividad.</li>
+<li>Anexo II, mp.info.6: copias de seguridad — recuperación de datos, frecuencia, almacenamiento y controles de acceso; refuerzos de pruebas de recuperación y de protección o separación adicional.</li>
+<li>Cierre: las exigencias se aplican según la categoría del sistema; la regla 3-2-1 es buena práctica, no requisito literal.</li>
+</ul>
+<h4 class="tema-h4">9. Diferencie backup, snapshot y replicación</h4>
+<ul class="tema-lista">
+<li>Backup: copia recuperable de forma independiente, normalmente con historial.</li>
+<li>Snapshot: captura de un estado en un instante, habitualmente dependiente de la misma infraestructura.</li>
+<li>Replicación: copia o estado sincronizado, que propaga también corrupciones y borrados.</li>
+<li>Cierre: ni la snapshot ni la replicación sustituyen automáticamente al backup.</li>
+</ul>
+<h4 class="tema-h4">10. Diferencie retención y rotación, y explique offline e inmutable</h4>
+<ul class="tema-lista">
+<li>Retención: tiempo de conservación antes de eliminar o sobrescribir; depende de requisitos organizativos, legales, operativos, capacidad y necesidades de recuperación.</li>
+<li>Rotación: mecanismo de reutilización o sustitución de medios conforme a un calendario.</li>
+<li>Offline: aislada de la red. Inmutable: no modificable ni eliminable durante el periodo de protección definido.</li>
+<li>Cierre: no son sinónimos y una copia puede ser ambas cosas a la vez.</li>
+</ul>
+
+<h2 id="20-supuestos-practicos" class="tema-h2">20. Supuestos prácticos</h2>
+<h4 class="tema-h4">Caso 1 — Esquema incremental</h4>
+<p><strong>Escenario</strong>: en un ayuntamiento se realiza copia <strong>completa el domingo</strong> e <strong>incrementales de lunes a jueves</strong>. El <strong>jueves por la tarde</strong>, tras ejecutarse la copia de ese día, se pierde el volumen de datos.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué copias se necesitan?</strong> <strong>Completa del domingo + incrementales del lunes, martes, miércoles y jueves</strong> → <strong>5 copias</strong>.</li>
+<li><strong>b) ¿En qué orden?</strong> Primero la <strong>completa</strong> y después las incrementales en <strong>orden cronológico</strong>.</li>
+<li><strong>c) ¿Qué ocurre si falta la del martes?</strong> Se pierden los cambios de ese día y <strong>la cadena queda rota</strong>: no puede reconstruirse el estado del jueves de forma fiable. Es el principal riesgo del esquema incremental.</li>
+<li><strong>d) ¿Qué ventaja tiene entonces?</strong> Las copias diarias son <strong>rápidas y pequeñas</strong>, lo que reduce la ventana de copia y el consumo de almacenamiento.</li>
+</ul>
+<h4 class="tema-h4">Caso 2 — Esquema diferencial</h4>
+<p><strong>Escenario</strong>: mismo calendario, pero con <strong>diferenciales de lunes a jueves</strong>. Fallo el <strong>jueves</strong>, tras la copia del día.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué copias se necesitan?</strong> <strong>Completa del domingo + diferencial del jueves</strong> → <strong>2 copias</strong>.</li>
+<li><strong>b) ¿Por qué no hacen falta las de lunes a miércoles?</strong> Porque la diferencial del jueves contiene <strong>todo lo modificado desde la completa</strong>, incluidos esos días.</li>
+<li><strong>c) ¿Cambiaría el número si el fallo fuese el miércoles?</strong> <strong>No</strong>: seguirían siendo <strong>2 copias</strong> (completa + diferencial del miércoles). Con diferenciales, el número no depende del día.</li>
+<li><strong>d) ¿Qué se paga a cambio?</strong> Cada diferencial es <strong>mayor que la anterior</strong>, por lo que consume más espacio y más ventana de copia conforme avanza la semana.</li>
+</ul>
+<h4 class="tema-h4">Caso 3 — Servicio con RTO de 30 minutos y RPO de 15 minutos</h4>
+<p><strong>Escenario</strong>: para la sede electrónica se fijan un <strong>RTO de 30 minutos</strong> y un <strong>RPO de 15 minutos</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué significa el RTO de 30 minutos?</strong> Que el <strong>tiempo máximo objetivo aceptable</strong> para volver a prestar el servicio tras una interrupción es de <strong>media hora</strong>.</li>
+<li><strong>b) ¿Qué significa el RPO de 15 minutos?</strong> Que se acepta perder, como máximo, <strong>los datos correspondientes a los últimos 15 minutos</strong> anteriores al incidente.</li>
+<li><strong>c) ¿Bastaría una copia diaria?</strong> <strong>No.</strong> Una copia diaria implicaría un punto de recuperación de hasta 24 horas de antigüedad, muy por encima del RPO comprometido.</li>
+<li><strong>d) ¿Qué implica cada objetivo?</strong> El <strong>RPO</strong> condiciona la <strong>frecuencia y la tecnología de copia o replicación</strong>; el <strong>RTO</strong> condiciona la <strong>tecnología y el procedimiento de recuperación</strong>. Un RTO bajo exige soluciones más rápidas, <strong>sin que ello imponga una tecnología concreta</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 4 — Copias en el mismo servidor</h4>
+<p><strong>Escenario</strong>: se realizan copias diarias, pero <strong>todas se almacenan en el mismo servidor</strong> que aloja los datos de producción.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Cuál es el problema?</strong> La <strong>falta de separación</strong>: si se pierde el servidor —por avería, incendio o robo—, se pierden <strong>a la vez los datos y sus copias</strong>.</li>
+<li><strong>b) ¿Qué buena práctica lo corrige?</strong> La <strong>regla 3-2-1</strong>: al menos <strong>tres copias</strong>, en <strong>dos soportes o medios diferentes</strong>, con <strong>una fuera de las instalaciones</strong>.</li>
+<li><strong>c) ¿Qué exige el ENS al respecto?</strong> Definir el <strong>almacenamiento</strong> de las copias y sus <strong>controles de acceso</strong> (mp.info.6.2), con la <strong>protección y separación adicional</strong> que corresponda a la categoría del sistema.</li>
+<li><strong>d) ¿Es suficiente con moverlas a otra carpeta?</strong> No: la separación debe ser <strong>real</strong> respecto del sistema de origen, no solo lógica dentro del mismo equipo.</li>
+</ul>
+<h4 class="tema-h4">Caso 5 — Cifrado del entorno y del repositorio de copias</h4>
+<p><strong>Escenario</strong>: un incidente cifra los datos de producción <strong>y también el repositorio de copias</strong>, que estaba accesible desde la red y permitía escritura.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué falló en la política de salvaguarda?</strong> Que <strong>todas las copias eran alcanzables y modificables</strong> desde el entorno comprometido.</li>
+<li><strong>b) ¿Qué habría evitado la pérdida total?</strong> Disponer de al menos una copia <strong>OFFLINE</strong> (aislada de la red) o <strong>INMUTABLE</strong> (no modificable ni eliminable durante el periodo de protección).</li>
+<li><strong>c) ¿Son lo mismo?</strong> <strong>No.</strong> <strong>Offline → no se alcanza. Inmutable → no se altera.</strong> Pueden aplicarse por separado o combinarse.</li>
+<li><strong>d) ¿Qué buena práctica lo recoge?</strong> La regla <strong>3-2-1-1-0</strong>, cuyo cuarto elemento es precisamente <strong>una copia offline o inmutable</strong>. El estudio del ransomware corresponde al <strong>Tema 25</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 6 — Años de copias sin probar</h4>
+<p><strong>Escenario</strong>: una entidad conserva copias desde hace años, con registro de ejecución sin errores, pero <strong>nunca se ha realizado una prueba de restauración</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Cuál es el riesgo?</strong> Que la <strong>recuperación no esté verificada</strong>: no se sabe si las copias son restaurables, ni en cuánto tiempo, ni por quién.</li>
+<li><strong>b) ¿Basta con que la copia se haya ejecutado sin errores?</strong> <strong>No</strong>: <strong>backup realizado ≠ backup restaurable</strong>.</li>
+<li><strong>c) ¿Qué debe comprobar la prueba?</strong> <strong>Disponibilidad</strong> de la copia, <strong>integridad suficiente</strong>, <strong>procedimiento de restauración</strong>, <strong>tiempo de recuperación</strong> frente al RTO y <strong>compatibilidad de medios y procedimientos</strong>.</li>
+<li><strong>d) ¿Tiene reflejo normativo?</strong> Sí: el ENS contempla las <strong>pruebas de recuperación</strong> como refuerzo de la medida de copias de seguridad.</li>
+</ul>
+<h4 class="tema-h4">Caso 7 — Snapshot propuesta como único backup</h4>
+<p><strong>Escenario</strong>: para una máquina virtual crítica se propone <strong>tomar una snapshot diaria</strong> como <strong>única</strong> medida de salvaguarda.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Cuál es el error conceptual?</strong> Confundir <strong>snapshot</strong> con <strong>backup</strong>. La snapshot es una <strong>captura de un estado</strong>; el backup es una <strong>copia destinada a la recuperación de forma independiente</strong>.</li>
+<li><strong>b) ¿Por qué no basta?</strong> Porque la snapshot <strong>depende habitualmente de la misma infraestructura y del mismo almacenamiento</strong> que la máquina que pretende proteger: si se pierde el sistema, se pierde también la snapshot.</li>
+<li><strong>c) ¿Es entonces inútil?</strong> No: <strong>puede ayudar a recuperar un estado</strong> —por ejemplo, antes de un cambio— pero <strong>no debe considerarse automáticamente una copia de seguridad</strong>.</li>
+<li><strong>d) ¿Qué procede?</strong> Complementarla con copias que cumplan la política: separación real, retención definida, protección y <strong>pruebas de restauración</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 8 — Copias sin procedimiento de recuperación</h4>
+<p><strong>Escenario</strong>: la entidad dispone de copias correctas y separadas, pero <strong>no existe procedimiento documentado de recuperación</strong> ni están definidos responsables ni tiempos.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué diferencia hay entre tener backup y tener continuidad?</strong> <strong>Tener copias no equivale a tener continuidad</strong>: la continuidad exige además <strong>procedimientos, responsables, medios alternativos, objetivos de tiempo y pruebas</strong>.</li>
+<li><strong>b) ¿Qué documento cubre la parte tecnológica?</strong> El <strong>DRP</strong>: plan específico de recuperación de sistemas y servicios TIC.</li>
+<li><strong>c) ¿Y la organizativa?</strong> El <strong>BCP</strong>: cómo mantiene la organización sus funciones críticas —incluida la atención al público— mientras se recupera el servicio.</li>
+<li><strong>d) ¿Qué falta en la política de salvaguarda?</strong> El <strong>procedimiento de restauración</strong>, los <strong>responsables</strong>, las <strong>pruebas</strong> y la <strong>revisión periódica</strong>: sin ellos hay copias, pero no política.</li>
+</ul>
+
+<h2 id="21-matriz-de-memorizacion" class="tema-h2">21. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Lo que debo recordar</strong></th>
+</tr>
+<tr>
+<td><strong>Política de salvaguarda</strong></td>
+<td>Directrices, procedimientos y medidas para poder recuperar información y servicios; no se reduce a hacer copias</td>
+</tr>
+<tr>
+<td><strong>Copia completa (full)</strong></td>
+<td>Copia íntegra; la más sencilla de restaurar porque se necesita una única copia; más tiempo y espacio</td>
+</tr>
+<tr>
+<td><strong>Incremental</strong></td>
+<td>Lo modificado desde la <strong>última copia realizada</strong>; restaurar = completa + todas las posteriores en orden</td>
+</tr>
+<tr>
+<td><strong>Diferencial</strong></td>
+<td>Lo modificado desde la <strong>última completa</strong>; restaurar = completa + última diferencial (2 copias)</td>
+</tr>
+<tr>
+<td><strong>Retención</strong></td>
+<td>Cuánto tiempo se conservan las copias antes de eliminarlas o sobrescribirlas</td>
+</tr>
+<tr>
+<td><strong>Rotación</strong></td>
+<td>Mecanismo de reutilización o sustitución de medios según calendario</td>
+</tr>
+<tr>
+<td><strong>GFS</strong></td>
+<td>Grandfather-Father-Son: hijo diario, padre semanal, abuelo mensual o de largo plazo; sin periodos universales</td>
+</tr>
+<tr>
+<td><strong>3-2-1</strong></td>
+<td>3 copias, 2 soportes diferentes, 1 offsite. Buena práctica, no requisito literal del ENS</td>
+</tr>
+<tr>
+<td><strong>3-2-1-1-0</strong></td>
+<td>Añade 1 copia offline o inmutable y 0 errores en las verificaciones</td>
+</tr>
+<tr>
+<td><strong>Offline</strong></td>
+<td>Copia aislada de la red</td>
+</tr>
+<tr>
+<td><strong>Inmutable</strong></td>
+<td>Copia no modificable ni eliminable durante el periodo de protección definido</td>
+</tr>
+<tr>
+<td><strong>Snapshot</strong></td>
+<td>Captura de un estado; no es automáticamente un backup</td>
+</tr>
+<tr>
+<td><strong>Replicación</strong></td>
+<td>Estado sincronizado; propaga corrupciones y borrados; no sustituye al backup</td>
+</tr>
+<tr>
+<td><strong>RTO</strong></td>
+<td>Tiempo máximo objetivo para recuperar el servicio. <strong>Tiempo</strong></td>
+</tr>
+<tr>
+<td><strong>RPO</strong></td>
+<td>Datos máximos que se acepta perder, como punto temporal previo. <strong>Datos</strong>. No es la frecuencia de backup</td>
+</tr>
+<tr>
+<td><strong>BCP</strong></td>
+<td>Plan de continuidad de la organización: personas, procesos, recursos y servicios</td>
+</tr>
+<tr>
+<td><strong>DRP</strong></td>
+<td>Plan de recuperación tecnológica de sistemas y servicios TIC</td>
+</tr>
+<tr>
+<td><strong>Prueba de recuperación</strong></td>
+<td>Verifica disponibilidad, integridad, procedimiento, tiempo y compatibilidad. Backup realizado ≠ restaurable</td>
+</tr>
+<tr>
+<td><strong>Art. 26 RD 311/2022</strong></td>
+<td>Continuidad de la actividad</td>
+</tr>
+<tr>
+<td><strong>mp.info.6</strong></td>
+<td>Copias de seguridad: recuperación de datos, frecuencia, almacenamiento y controles de acceso; refuerzos de pruebas y separación</td>
+</tr>
+</table></div>
+
+<h2 id="22-resumen-final" class="tema-h2">22. Resumen final: si mañana fuera el examen</h2>
+<ul class="tema-lista">
+<li><strong>Política de salvaguarda</strong> = directrices, procedimientos y medidas para <strong>poder recuperar</strong>. Incluye alcance, frecuencia, retención, tipos de copia, almacenamiento, protección, responsables, procedimiento, <strong>pruebas</strong> y revisión. <strong>No es solo «hacer backups».</strong></li>
+<li><strong>ENS</strong>: <strong>art. 26</strong> continuidad de la actividad · <strong>mp.info.6</strong> copias de seguridad (recuperación de datos, frecuencia, almacenamiento y control de acceso; refuerzos de <strong>pruebas</strong> y de <strong>protección y separación</strong>).</li>
+<li><strong>Completa</strong>: copia íntegra; <strong>la más sencilla de restaurar porque se necesita una única copia</strong> (no «siempre la más rápida»).</li>
+<li><strong>INCREMENTAL → ÚLTIMA COPIA</strong> realizada. Restaurar = <strong>completa + TODAS las posteriores en orden</strong>.</li>
+<li><strong>DIFERENCIAL → ÚLTIMA COMPLETA</strong>. Restaurar = <strong>completa + ÚLTIMA diferencial</strong>, siempre <strong>2 copias</strong>.</li>
+<li><strong>Ejercicios</strong>: completa domingo + incrementales, fallo jueves → <strong>5 copias</strong>; con diferenciales → <strong>2</strong>. Fallo miércoles → <strong>4</strong> con incrementales, <strong>2</strong> con diferenciales.</li>
+<li><strong>RETENCIÓN</strong> = cuánto tiempo guardo · <strong>ROTACIÓN</strong> = cómo sustituyo o reutilizo. <strong>GFS</strong> = hijo diario, padre semanal, abuelo mensual o de largo plazo, <strong>sin periodos universales</strong>.</li>
+<li><strong>3-2-1</strong> = 3 copias / 2 soportes / 1 offsite. <strong>3-2-1-1-0</strong> añade <strong>1 offline o inmutable</strong> y <strong>0 errores</strong>. Ambas son <strong>buenas prácticas</strong>, <strong>no obligaciones literales del ENS</strong>.</li>
+<li><strong>OFFLINE</strong> = aislada de la red · <strong>INMUTABLE</strong> = no alterable durante el periodo de protección. <strong>No son sinónimos</strong> y pueden coincidir.</li>
+<li><strong>Cifrado</strong> de copias: especialmente relevante en <strong>offsite, soportes transportables y nube</strong>.</li>
+<li><strong>SNAPSHOT ≠ BACKUP</strong> (depende de la misma infraestructura) · <strong>REPLICACIÓN ≠ BACKUP</strong> (propaga el daño y no aporta historial).</li>
+<li><strong>RTO</strong> = tiempo máximo para recuperar el <strong>servicio</strong> — mira <strong>adelante</strong>. <strong>RPO</strong> = <strong>datos</strong> máximos que se acepta perder — mira <strong>atrás</strong>. <strong>El RPO NO es la frecuencia de backup</strong>: la frecuencia es una forma de alcanzarlo.</li>
+<li><strong>BCP → ORGANIZACIÓN</strong> (personas, procesos, recursos, servicios) · <strong>DRP → TECNOLOGÍA</strong>. No son el mismo documento.</li>
+<li><strong>Plan de continuidad</strong>: análisis de impacto · funciones · responsabilidades · procedimientos · medios alternativos · pruebas. <strong>CRITICIDAD → RTO/RPO → POLÍTICA DE COPIAS.</strong></li>
+<li><strong>LA IDEA CENTRAL</strong>: <strong>una copia no probada no garantiza que pueda restaurarse</strong>. <strong>BACKUP REALIZADO ≠ BACKUP RESTAURABLE.</strong> Y <strong>tener backup ≠ tener continuidad</strong>.</li>
 </ul>
   </div>
 </article>

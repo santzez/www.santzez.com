@@ -1,176 +1,997 @@
 <article class="tema-articulo">
   <header class="tema-cabecera">
     <div class="tema-cabecera__id">T22</div>
-    <h1 class="tema-cabecera__titulo">Conceptos básicos de seguridad de los sistemas de información. Seguridad física. Seguridad Lógica. Amenazas y vulnerabilidades</h1>
+    <h1 class="tema-cabecera__titulo">Conceptos básicos de seguridad de los sistemas de información. Seguridad física. Seguridad lógica. Amenazas y vulnerabilidades</h1>
     <div class="tema-cabecera__meta">Bloque III · Seguridad — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
   </header>
 
   <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
-<li><a href="#1-seguridad-de-la-información-conceptos-básicos">1. Seguridad de la información: conceptos básicos</a></li>
-<li><a href="#2-seguridad-física">2. Seguridad física</a></li>
-<li><a href="#3-seguridad-lógica">3. Seguridad lógica</a></li>
-<li><a href="#4-amenazas-concepto-y-clasificación">4. Amenazas: concepto y clasificación</a></li>
-<li><a href="#5-vulnerabilidades-concepto">5. Vulnerabilidades: concepto</a></li>
-<li><a href="#6-relación-entre-amenaza-vulnerabilidad-riesgo-e-impacto">6. Relación entre amenaza, vulnerabilidad, riesgo e impacto</a></li>
-<li><a href="#7-resumen-para-estudiar">7. Resumen para estudiar</a></li>
-<li><a href="#8-conceptos-clave">8. Conceptos clave</a></li>
-<li><a href="#9-posibles-puntos-de-examen">9. Posibles puntos de examen</a></li>
+<li><a href="#1-seguridad-de-la-informacion">1. Seguridad de la información: concepto y alcance</a></li>
+<li><a href="#2-triada-cid">2. La tríada CID y su relación con el ENS</a></li>
+<li><a href="#3-activo">3. El activo: qué se protege</a></li>
+<li><a href="#4-no-repudio">4. El no repudio</a></li>
+<li><a href="#5-seguridad-fisica">5. Seguridad física</a></li>
+<li><a href="#6-seguridad-logica">6. Seguridad lógica</a></li>
+<li><a href="#7-fisica-vs-logica">7. Seguridad física frente a seguridad lógica</a></li>
+<li><a href="#8-amenaza">8. Amenaza: concepto y clasificación</a></li>
+<li><a href="#9-interna-externa">9. Dos criterios distintos: origen e intencionalidad</a></li>
+<li><a href="#10-vulnerabilidad">10. Vulnerabilidad</a></li>
+<li><a href="#11-hardening">11. Hardening</a></li>
+<li><a href="#12-cve-cvss">12. CVE y CVSS</a></li>
+<li><a href="#13-riesgo-e-impacto">13. Riesgo e impacto</a></li>
+<li><a href="#14-modelo-de-relacion">14. El modelo de relación entre conceptos</a></li>
+<li><a href="#15-gestion-del-riesgo">15. Gestión del riesgo</a></li>
+<li><a href="#16-matriz-central">16. Matriz central de conceptos</a></li>
+<li><a href="#17-anclas-de-memoria">17. Anclas de memoria</a></li>
+<li><a href="#18-no-confundir">18. No confundir</a></li>
+<li><a href="#19-trampas-de-examen">19. Posibles trampas de examen</a></li>
+<li><a href="#20-preguntas-tipo-test">20. Posibles preguntas tipo test</a></li>
+<li><a href="#21-preguntas-cortas">21. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#22-supuestos-practicos">22. Supuestos prácticos</a></li>
+<li><a href="#23-matriz-de-memorizacion">23. Matriz de memorización</a></li>
+<li><a href="#24-resumen-final">24. Resumen final: si mañana fuera el examen</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
 
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>Este tema da por conocido el marco legal del ENS (Tema 21). Las políticas de salvaguarda y recuperación de la información se estudian con detalle en el Tema 23; los virus y el resto de tipos de malware, en el Tema 25; las técnicas de autenticación y firma digital, en el Tema 24. Aquí se sientan los conceptos generales sobre los que se apoyan todos esos temas.</th>
+<th><strong>⚠️ No confundir — fronteras del tema</strong><br>Este tema aporta los <strong>conceptos generales</strong> que permiten entender todos los demás temas de seguridad. Aquí se <strong>definen y relacionan</strong>; no se desarrollan.<br><strong>Tema 21</strong> → ENS y marco normativo. <strong>Tema 23</strong> → salvaguarda y recuperación de la información. <strong>Tema 24</strong> → autenticación, criptografía y firma digital. <strong>Tema 25</strong> → malware, phishing y seguridad del puesto. <strong>Tema 29</strong> → cortafuegos, VPN y seguridad de redes.</th>
 </tr>
 </table></div>
-<h2 id="1-seguridad-de-la-información-conceptos-básicos" class="tema-h2">1. Seguridad de la información: conceptos básicos</h2>
-<p>La <strong>seguridad de la información</strong> es el conjunto de medidas orientadas a proteger la información y los sistemas que la tratan frente a accesos, usos, divulgaciones, interrupciones o destrucciones no autorizados. Es un concepto más amplio que el de <strong>seguridad informática o ciberseguridad</strong>, centrado más estrictamente en los sistemas y redes electrónicas: la seguridad de la información abarca también la información en soporte no electrónico, a las personas y a los procesos organizativos.</p>
-<p>El modelo clásico internacional para describir los objetivos de la seguridad de la información es la conocida como <strong>tríada CIA</strong> (o <strong>CID</strong> en español): <strong>Confidencialidad</strong>, <strong>Integridad</strong> y <strong>Disponibilidad</strong>. El ENS (Tema 21) amplía este modelo clásico con dos dimensiones adicionales, <strong>Autenticidad</strong> y <strong>Trazabilidad</strong>, dando lugar a las cinco dimensiones de seguridad ya estudiadas.</p>
-<p>Otros dos términos básicos completan el vocabulario del tema: un <strong>activo</strong> es cualquier elemento con valor para la organización que deba protegerse (información, hardware, software, servicios, personas, instalaciones); y el <strong>no repudio</strong> es la garantía de que quien ha realizado una acción (por ejemplo, firmar o enviar un documento) <strong>no pueda negar posteriormente haberla realizado</strong>, propiedad estrechamente ligada a la autenticidad y a la firma digital (Tema 24).</p>
+
+<h2 id="1-seguridad-de-la-informacion" class="tema-h2">1. Seguridad de la información: concepto y alcance</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>No hay contradicción entre la tríada CIA clásica y las cinco dimensiones del ENS: son el mismo concepto, con el ENS añadiendo dos dimensiones (autenticidad y trazabilidad) especialmente relevantes en el contexto de la Administración electrónica, donde resulta crítico poder demostrar quién ha hecho una gestión y cuándo.</th>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>Seguridad de la información</strong> → <strong>conjunto de medidas destinadas a proteger la información y los sistemas que la tratan frente a amenazas y acciones no autorizadas</strong>.</th>
 </tr>
 </table></div>
-<h2 id="2-seguridad-física" class="tema-h2">2. Seguridad física</h2>
-<p>La <strong>seguridad física</strong> es el conjunto de medidas orientadas a proteger los activos físicos de un sistema de información —equipos, servidores, instalaciones, soportes de almacenamiento— frente a amenazas del entorno físico: accesos no autorizados, incendios, inundaciones, cortes de suministro eléctrico, robos o desastres naturales.</p>
+<p>Es un concepto <strong>más amplio</strong> que el de <strong>seguridad informática</strong> o <strong>ciberseguridad</strong>, porque no se limita a la tecnología: alcanza también a</p>
 <ul class="tema-lista">
-<li><strong>Control de acceso físico</strong>: tarjetas de acceso, sistemas biométricos o videovigilancia en las salas técnicas y centros de proceso de datos (CPD).</li>
-<li><strong>Protección contra incendios</strong>: detección temprana de humo y sistemas de extinción adecuados a un entorno con equipamiento eléctrico.</li>
-<li><strong>Sistemas de alimentación ininterrumpida (SAI/UPS)</strong> y, en instalaciones críticas, <strong>generadores eléctricos</strong> de respaldo, para garantizar la continuidad del suministro eléctrico ante un corte.</li>
-<li><strong>Climatización controlada</strong> del CPD, manteniendo la temperatura y la humedad dentro de los márgenes que requiere el equipamiento electrónico.</li>
-<li><strong>Ubicación adecuada</strong>: evitar emplazamientos con riesgo elevado de inundación (sótanos) u otros riesgos ambientales conocidos de la zona.</li>
-</ul>
-<p>El propio ENS recoge estas medidas como requisito mínimo de «protección de las instalaciones» (art. 18, Tema 21), desarrollado en el Anexo II dentro de la familia de medidas de protección de las instalaciones.</p>
-<h2 id="3-seguridad-lógica" class="tema-h2">3. Seguridad lógica</h2>
-<p>La <strong>seguridad lógica</strong> es el conjunto de medidas, implementadas mediante software y configuración, orientadas a proteger la información y los sistemas: quién puede acceder a qué datos y aplicaciones, y en qué condiciones.</p>
-<ul class="tema-lista">
-<li><strong>Autenticación</strong>: verificación de la identidad de quien accede al sistema (usuario y contraseña, doble factor, certificados; se desarrolla en el Tema 24).</li>
-<li><strong>Control de acceso basado en permisos</strong>: asignación de derechos concretos sobre recursos (permisos NTFS y de recurso compartido, Tema 15; grupos de Directorio Activo, Tema 14).</li>
-<li><strong>Cifrado</strong>: protección de la información almacenada (en reposo) o transmitida por la red (en tránsito) frente a un acceso no autorizado que consiguiera sortear el resto de controles.</li>
-<li><strong>Protección frente a código dañino</strong>: antivirus y demás herramientas antimalware (Tema 25).</li>
-<li><strong>Cortafuegos (firewalls)</strong> y segmentación de redes: control del tráfico que entra y sale de la red (se desarrolla en el Bloque IV, Tema 29).</li>
-<li><strong>Registro y auditoría de accesos</strong>: constancia de quién ha accedido a qué y cuándo (Visor de eventos, Tema 15), imprescindible para la dimensión de trazabilidad del ENS.</li>
+<li>las <strong>personas</strong> — formación, concienciación, conducta;</li>
+<li>los <strong>procesos</strong> — procedimientos, controles, responsabilidades;</li>
+<li>la <strong>información no electrónica</strong> — documentación en papel, conversaciones, soportes físicos;</li>
+<li>la <strong>organización</strong> — estructura, roles, normativa interna.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>Criterio</strong></th>
+<th><strong>⚠️ No confundir — información frente a informática</strong><br><strong>Seguridad de la información</strong> → protege <strong>la información en cualquier forma y soporte</strong>, con medidas técnicas, organizativas, físicas y humanas.<br><strong>Seguridad informática / ciberseguridad</strong> → se centra en los <strong>sistemas, equipos y redes</strong>, es decir, en el ámbito <strong>tecnológico</strong>.<br>Relación correcta: la seguridad informática es <strong>una parte</strong> de la seguridad de la información, no un sinónimo.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Ejemplo</strong><br>Un expediente municipal cifrado en el servidor puede estar perfectamente protegido desde el punto de vista <strong>informático</strong> y, sin embargo, quedar comprometido si se <strong>imprime y se abandona en una impresora compartida</strong>. El fallo no es tecnológico: es de <strong>seguridad de la información</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="2-triada-cid" class="tema-h2">2. La tríada CID y su relación con el ENS</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Letra</strong></th>
+<th><strong>Propiedad</strong></th>
+<th><strong>Qué persigue</strong></th>
+<th><strong>Ejemplo de fallo</strong></th>
+</tr>
+<tr>
+<td><strong>C</strong></td>
+<td><strong>Confidencialidad</strong></td>
+<td><strong>Evitar el acceso o la divulgación no autorizada</strong> de la información</td>
+<td>Una persona sin autorización consulta datos personales de un expediente</td>
+</tr>
+<tr>
+<td><strong>I</strong></td>
+<td><strong>Integridad</strong></td>
+<td><strong>Evitar modificaciones no autorizadas</strong> de la información</td>
+<td>Un importe se altera sin control ni registro</td>
+</tr>
+<tr>
+<td><strong>D</strong></td>
+<td><strong>Disponibilidad</strong></td>
+<td><strong>Garantizar el acceso cuando se necesita</strong></td>
+<td>La sede electrónica no responde el último día de plazo</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — la gran comparación</strong><br><strong>CID (o CIA en inglés) → MODELO CLÁSICO</strong> de la seguridad de la información: <strong>Confidencialidad, Integridad, Disponibilidad</strong>.<br><strong>CITAD → DIMENSIONES DEL ENS</strong>: el <strong>ENS añade AUTENTICIDAD y TRAZABILIDAD</strong> a la tríada clásica.<br><strong>CITAD = CID + A + T.</strong> Cinco dimensiones, no tres — y no seis.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Autenticidad</strong> → poder <strong>acreditar la identidad</strong> de quien actúa o el <strong>origen</strong> del dato.</li>
+<li><strong>Trazabilidad</strong> → poder <strong>determinar quién hizo qué y cuándo</strong>.</li>
+</ul>
+<p>El detalle normativo de las dimensiones, las categorías y las medidas corresponde al <strong>Tema 21</strong>. Aquí interesa únicamente la <strong>relación conceptual</strong> entre el modelo clásico y el del ENS.</p>
+
+<h2 id="3-activo" class="tema-h2">3. El activo: qué se protege</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>Activo</strong> → <strong>cualquier elemento que tenga valor para la organización y que deba protegerse</strong>.<br>La clave está en el <strong>valor</strong>: no es activo solo el equipamiento, sino todo aquello cuya pérdida o deterioro afecta a la organización.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Tipo de activo</strong></th>
+<th><strong>Ejemplos en una entidad local</strong></th>
+</tr>
+<tr>
+<td><strong>Información</strong></td>
+<td>Padrón, expedientes, bases de datos, copias de seguridad</td>
+</tr>
+<tr>
+<td><strong>Hardware</strong></td>
+<td>Servidores, equipos de puesto, portátiles, cabinas de almacenamiento, electrónica de red</td>
+</tr>
+<tr>
+<td><strong>Software</strong></td>
+<td>Sistemas operativos, aplicaciones de gestión, ofimática</td>
+</tr>
+<tr>
+<td><strong>Servicios</strong></td>
+<td>Sede electrónica, correo electrónico, cita previa, servicios contratados a terceros</td>
+</tr>
+<tr>
+<td><strong>Personas</strong></td>
+<td>Personal técnico y usuario, con su conocimiento y sus credenciales</td>
+</tr>
+<tr>
+<td><strong>Instalaciones</strong></td>
+<td>CPD, salas técnicas, cableado, suministro eléctrico, dependencias</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br>Regla práctica: <strong>lo que no se identifica como activo no se protege</strong>. Por eso el <strong>inventario</strong> es el punto de partida de cualquier planteamiento de seguridad — y también la primera medida de explotación del ENS (Tema 21).</th>
+</tr>
+</table></div>
+
+<h2 id="4-no-repudio" class="tema-h2">4. El no repudio</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>No repudio</strong> → <strong>propiedad que permite aportar evidencias sobre la autoría de una acción y dificultar que quien la realizó pueda negarla posteriormente</strong>.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li>Se apoya en la <strong>autenticidad</strong> (acreditar quién actúa) y en la <strong>trazabilidad</strong> (dejar constancia de lo ocurrido).</li>
+<li>Su instrumento técnico habitual es la <strong>firma digital</strong>, cuyo funcionamiento corresponde al <strong>Tema 24</strong>.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Trampa de examen — NO REPUDIO NO ES UNA DIMENSIÓN DEL ENS</strong><br>Las dimensiones del ENS son <strong>CINCO: C, I, T, A, D</strong>. El <strong>no repudio NO es una sexta dimensión</strong>: es una <strong>propiedad de seguridad</strong> relacionada con la autenticidad y la trazabilidad, pero no figura como dimensión en el ENS.<br>Si una opción de test presenta «confidencialidad, integridad, disponibilidad, autenticidad, trazabilidad y no repudio» como dimensiones del ENS, es <strong>incorrecta</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — autenticidad y no repudio</strong><br><strong>Autenticidad</strong> → <strong>acreditar quién es</strong> quien actúa o de dónde procede el dato. Mira al <strong>momento de la acción</strong>.<br><strong>No repudio</strong> → <strong>poder demostrarlo después</strong> frente a la negativa del autor. Mira al <strong>momento posterior</strong>, cuando hay que probarlo.<br>Sin autenticidad no hay no repudio, pero no son lo mismo.</th>
+</tr>
+</table></div>
+
+<h2 id="5-seguridad-fisica" class="tema-h2">5. Seguridad física</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>Seguridad física</strong> → <strong>conjunto de medidas destinadas a proteger los activos físicos, las instalaciones y el entorno</strong> en el que se ubican los sistemas de información.<br>Palabra clave: <strong>ENTORNO</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Medida</strong></th>
+<th><strong>Para qué</strong></th>
+</tr>
+<tr>
+<td><strong>Control de acceso físico</strong></td>
+<td>Impedir la entrada de personas no autorizadas: cerraduras, tarjetas, registro de visitas, salas técnicas cerradas</td>
+</tr>
+<tr>
+<td><strong>Videovigilancia</strong></td>
+<td>Disuadir y permitir verificar accesos y actuaciones en las zonas protegidas</td>
+</tr>
+<tr>
+<td><strong>Protección contra incendios</strong></td>
+<td>Detección y extinción adecuadas al entorno técnico</td>
+</tr>
+<tr>
+<td><strong>SAI / UPS</strong></td>
+<td>Alimentación temporal y protección frente a determinadas perturbaciones eléctricas</td>
+</tr>
+<tr>
+<td><strong>Generadores</strong></td>
+<td>Autonomía prolongada cuando existe la infraestructura adecuada</td>
+</tr>
+<tr>
+<td><strong>Climatización</strong></td>
+<td>Mantener temperatura y humedad dentro de los márgenes de funcionamiento del equipamiento</td>
+</tr>
+<tr>
+<td><strong>Ubicación adecuada</strong></td>
+<td>Evitar emplazamientos con riesgo de inundación, filtraciones, tránsito no controlado o condiciones ambientales adversas</td>
+</tr>
+</table></div>
+<h4 class="tema-h4">5.1 SAI/UPS y generador</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>SAI (Sistema de Alimentación Ininterrumpida) / UPS</strong> → <strong>sistema que proporciona alimentación temporal y protección frente a determinadas perturbaciones eléctricas</strong>.<br>Permite, según su dimensionamiento:<br>· <strong>evitar apagados bruscos</strong> del equipamiento;<br>· <strong>mantener el servicio temporalmente</strong> durante un corte breve;<br>· realizar un <strong>apagado controlado</strong> y ordenado de los sistemas.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — SAI y generador</strong><br><strong>El SAI NO garantiza continuidad indefinida.</strong> Su autonomía es <strong>limitada</strong> y depende de su capacidad y de la carga conectada. Afirmar que «con un SAI el servicio no se cae nunca» es <strong>incorrecto</strong>.<br><strong>Generador</strong> → <strong>puede proporcionar autonomía prolongada cuando existe la infraestructura adecuada</strong> (combustible, mantenimiento, conmutación).<br>Regla: <strong>SAI → PUENTE TEMPORAL. GENERADOR → AUTONOMÍA PROLONGADA.</strong> Suelen combinarse: el SAI cubre el intervalo hasta que el generador arranca.</th>
+</tr>
+</table></div>
+<p>Las medidas de <strong>continuidad</strong> y <strong>recuperación</strong> de la información se estudian en el <strong>Tema 23</strong>.</p>
+
+<h2 id="6-seguridad-logica" class="tema-h2">6. Seguridad lógica</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>Seguridad lógica</strong> → <strong>conjunto de medidas destinadas a proteger los datos, el acceso a ellos y el funcionamiento de los sistemas</strong>, mediante controles no materiales.<br>Palabra clave: <strong>DATOS Y ACCESO</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Medida</strong></th>
+<th><strong>En qué consiste</strong></th>
+<th><strong>Se desarrolla en</strong></th>
+</tr>
+<tr>
+<td><strong>Autenticación</strong></td>
+<td>Comprobar que quien accede es realmente quien dice ser</td>
+<td>Tema 24</td>
+</tr>
+<tr>
+<td><strong>Control de acceso y permisos</strong></td>
+<td>Determinar qué puede hacer cada usuario sobre cada recurso</td>
+<td>Temas 14 y 15</td>
+</tr>
+<tr>
+<td><strong>Cifrado</strong></td>
+<td>Transformar la información para que solo sea legible por quien dispone de la clave</td>
+<td>Tema 24</td>
+</tr>
+<tr>
+<td><strong>Protección antimalware</strong></td>
+<td>Prevenir, detectar y eliminar código dañino</td>
+<td>Tema 25</td>
+</tr>
+<tr>
+<td><strong>Cortafuegos</strong></td>
+<td>Filtrar el tráfico permitido entre redes o hacia un sistema</td>
+<td>Tema 29</td>
+</tr>
+<tr>
+<td><strong>Registro y auditoría</strong></td>
+<td>Dejar constancia de la actividad para poder investigarla después</td>
+<td>Tema 15</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — cifrado y control de acceso</strong><br><strong>Control de acceso</strong> → decide <strong>quién puede entrar y qué puede hacer</strong>. Si el control se elude (por ejemplo, robando el disco), la información queda expuesta.<br><strong>Cifrado</strong> → hace la información <strong>ilegible sin la clave</strong>, con independencia de quién obtenga el soporte.<br>Son <strong>complementarios</strong>: el cifrado protege el dato incluso cuando el control de acceso ha sido superado.</th>
+</tr>
+</table></div>
+
+<h2 id="7-fisica-vs-logica" class="tema-h2">7. Seguridad física frente a seguridad lógica</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th></th>
 <th><strong>Seguridad física</strong></th>
 <th><strong>Seguridad lógica</strong></th>
 </tr>
 <tr>
-<td>Qué protege</td>
-<td>El hardware, las instalaciones y el entorno</td>
-<td>Los datos y el acceso a ellos</td>
+<td><strong>Protege</strong></td>
+<td>Instalaciones, hardware y entorno</td>
+<td>Datos, acceso y sistemas</td>
 </tr>
 <tr>
-<td>Cómo actúa</td>
-<td>Medidas materiales (accesos, incendios, climatización)</td>
-<td>Medidas software (autenticación, permisos, cifrado)</td>
+<td><strong>Medidas</strong></td>
+<td>Control de accesos, incendios, SAI, climatización, videovigilancia, ubicación</td>
+<td>Autenticación, permisos, cifrado, antimalware, cortafuegos, registro</td>
 </tr>
 <tr>
-<td>Ejemplo de medida</td>
-<td>Control de acceso a la sala del CPD</td>
-<td>Contraseña y permisos sobre una carpeta compartida</td>
+<td><strong>Ejemplo</strong></td>
+<td>Acceso restringido al CPD</td>
+<td>Permisos sobre una carpeta compartida</td>
+</tr>
+<tr>
+<td><strong>Naturaleza del control</strong></td>
+<td>Material y ambiental</td>
+<td>Configuración, software y procedimientos</td>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>La seguridad física y la seguridad lógica son complementarias, no alternativas, y un sistema no está realmente protegido si solo cubre una de las dos: la mejor configuración de permisos y cifrado (seguridad lógica) resulta inútil si cualquier persona no autorizada puede entrar físicamente en el CPD y llevarse un disco o un servidor completo (fallo de seguridad física); igualmente, un CPD con excelente seguridad física puede seguir siendo vulnerable si sus sistemas usan contraseñas débiles o carecen de control de acceso lógico.</th>
+<th><strong>🧠 Para memorizar — la gran regla</strong><br><strong>FÍSICA → ENTORNO. LÓGICA → DATOS Y ACCESO.</strong><br>Y sobre todo: <strong>SON COMPLEMENTARIAS, NO ALTERNATIVAS</strong>. Ninguna sustituye a la otra.<br><em>Ejemplo que lo demuestra</em>: los mejores permisos NTFS no sirven de nada si alguien <strong>se lleva físicamente el disco</strong>; y una sala blindada no impide que un usuario con credenciales <strong>copie indebidamente un fichero</strong>. Se necesitan ambas: es la lógica de las <strong>líneas de defensa</strong> del ENS.</th>
 </tr>
 </table></div>
-<h2 id="4-amenazas-concepto-y-clasificación" class="tema-h2">4. Amenazas: concepto y clasificación</h2>
-<p>Una <strong>amenaza</strong> es cualquier circunstancia o evento con potencial de causar daño a un sistema de información, mediante la explotación de una vulnerabilidad (punto 5).</p>
+
+<h2 id="8-amenaza" class="tema-h2">8. Amenaza: concepto y clasificación</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>Tipo de amenaza</strong></th>
+<th><strong>📌 Imprescindible para el examen — definición precisa</strong><br><strong>Amenaza</strong> → <strong>circunstancia, evento o agente con capacidad potencial de causar daño a un activo o a un sistema</strong>.<br>Formulación cuidadosa: la amenaza se define por su <strong>capacidad potencial de causar daño</strong>, <strong>no</strong> por explotar una vulnerabilidad. Una amenaza <strong>existe con independencia</strong> de que haya o no una debilidad concreta que aprovechar.<br>Relación correcta: <strong>una vulnerabilidad puede facilitar que una amenaza se materialice</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Trampa de examen — definición circular</strong><br>Es <strong>incorrecto</strong> definir la amenaza como «evento que <strong>necesariamente</strong> explota una vulnerabilidad»: eso haría que la amenaza dependiera de la vulnerabilidad y viceversa, en una definición <strong>circular</strong>.<br>Un incendio o una inundación son amenazas <strong>aunque no exista ninguna debilidad técnica</strong> que explotar.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Clasificación por naturaleza</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Tipo</strong></th>
 <th><strong>Descripción</strong></th>
 <th><strong>Ejemplos</strong></th>
 </tr>
 <tr>
-<td>Naturales o ambientales</td>
-<td>Fenómenos del entorno físico, ajenos a la voluntad humana</td>
-<td>Incendio, inundación, terremoto, corte eléctrico</td>
+<td><strong>Naturales o ambientales</strong></td>
+<td>Fenómenos del entorno, ajenos a la voluntad humana</td>
+<td><strong>Incendio, inundación, terremoto</strong>, temperatura extrema, tormenta eléctrica</td>
 </tr>
 <tr>
-<td>Humanas no intencionadas</td>
-<td>Errores accidentales de las personas que operan o usan el sistema</td>
-<td>Borrado accidental de datos, error de configuración</td>
+<td><strong>Humanas no intencionadas</strong></td>
+<td>Acciones de personas sin voluntad de causar daño</td>
+<td><strong>Errores</strong> de operación, <strong>borrados accidentales</strong>, <strong>configuraciones incorrectas</strong>, envío de información a un destinatario equivocado</td>
 </tr>
 <tr>
-<td>Humanas intencionadas</td>
-<td>Acciones deliberadas dirigidas a causar daño o obtener beneficio</td>
-<td>Ataques de malware, ingeniería social, robo, sabotaje</td>
+<td><strong>Humanas intencionadas</strong></td>
+<td>Acciones deliberadas dirigidas a causar daño o a obtener un beneficio indebido</td>
+<td><strong>Sabotaje, robo, ingeniería social, ataques</strong>, acceso no autorizado</td>
 </tr>
 <tr>
-<td>Lógicas o técnicas</td>
-<td>Fallos inherentes al propio software o hardware</td>
-<td>Vulnerabilidades de diseño, obsolescencia tecnológica</td>
+<td><strong>Lógicas o técnicas</strong></td>
+<td>Fallos del propio equipamiento o del software</td>
+<td><strong>Fallos de hardware o software, defectos de diseño, obsolescencia</strong>, agotamiento de recursos</td>
+</tr>
+</table></div>
+<p>El estudio del <strong>código dañino</strong> (virus, ransomware, troyanos) y de las técnicas de <strong>phishing</strong> corresponde al <strong>Tema 25</strong>: aquí basta con situarlos como <strong>amenazas humanas intencionadas</strong>.</p>
+
+<h2 id="9-interna-externa" class="tema-h2">9. Dos criterios distintos: origen e intencionalidad</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — son DOS clasificaciones independientes</strong><br><strong>CRITERIO DEL ORIGEN</strong><br>· <strong>Interna</strong> → origen <strong>dentro de la organización</strong> o en personas <strong>con acceso legítimo</strong>.<br>· <strong>Externa</strong> → origen <strong>fuera de la organización</strong> o en quien <strong>no tiene acceso legítimo previo</strong>.<br><strong>CRITERIO DE LA INTENCIONALIDAD</strong><br>· <strong>Intencionada</strong> → acción <strong>deliberada</strong>.<br>· <strong>No intencionada</strong> → <strong>accidente o error</strong>.<br><strong>No son la misma clasificación</strong> y no deben mezclarse: una amenaza se sitúa <strong>en las dos a la vez</strong>.</th>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Dentro de las amenazas humanas intencionadas conviene distinguir entre amenazas externas (una persona ajena a la organización, sin acceso legítimo previo) y amenazas internas (una persona con acceso legítimo al sistema —empleado, colaborador— que actúa de forma malintencionada, o que comete un error grave). Las amenazas internas suelen subestimarse frente a las externas, pese a que numerosos estudios de seguridad las señalan como una fuente muy relevante de incidentes, precisamente por el nivel de acceso y confianza previos con el que ya cuenta quien las protagoniza.</th>
+<th></th>
+<th><strong>No intencionada</strong></th>
+<th><strong>Intencionada</strong></th>
+</tr>
+<tr>
+<td><strong>Interna</strong></td>
+<td>Un empleado <strong>borra por error</strong> una carpeta compartida</td>
+<td>Un empleado <strong>elimina deliberadamente</strong> información o sustrae datos</td>
+</tr>
+<tr>
+<td><strong>Externa</strong></td>
+<td>Un proveedor <strong>configura mal</strong> un servicio contratado y provoca una caída</td>
+<td>Un <strong>atacante externo</strong> intenta acceder al sistema o suplantar a un usuario</td>
 </tr>
 </table></div>
-<h2 id="5-vulnerabilidades-concepto" class="tema-h2">5. Vulnerabilidades: concepto</h2>
-<p>Una <strong>vulnerabilidad</strong> es una debilidad o un fallo en un activo —software, hardware, un proceso organizativo o incluso una persona— que puede ser aprovechado por una amenaza para materializarse y causar daño. Sin una vulnerabilidad que explotar, una amenaza no supone, en la práctica, ningún riesgo real.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Trampa de examen</strong><br>El error más frecuente es asumir que <strong>«interna» equivale a «no intencionada»</strong> y <strong>«externa» a «intencionada»</strong>. Es <strong>falso</strong>: las cuatro combinaciones existen, como muestra la tabla anterior.<br>Además, la <strong>amenaza interna</strong> es especialmente relevante porque parte de quien <strong>ya dispone de acceso legítimo</strong>, lo que reduce el número de barreras que debe superar.</th>
+</tr>
+</table></div>
+
+<h2 id="10-vulnerabilidad" class="tema-h2">10. Vulnerabilidad</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>Vulnerabilidad</strong> → <strong>debilidad o fallo en un activo, sistema, proceso o factor humano que puede ser aprovechado por una amenaza</strong>.<br>Formulación correcta de su efecto: <strong>«la existencia de una vulnerabilidad puede aumentar la probabilidad de que una amenaza provoque daño»</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Trampa de examen — la formulación absoluta</strong><br>Es <strong>incorrecto</strong> afirmar que <strong>«sin vulnerabilidad no existe ningún riesgo real»</strong>. Hay amenazas que causan daño <strong>sin necesidad de una debilidad identificable</strong> — un incendio o una inundación dañan un CPD perfectamente configurado.<br>La formulación segura es la <strong>probabilística</strong>: la vulnerabilidad <strong>aumenta la probabilidad</strong> de que la amenaza provoque daño; no es una condición necesaria del riesgo.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Ejemplos de vulnerabilidad</h4>
 <ul class="tema-lista">
-<li>Software desactualizado, sin los parches de seguridad correspondientes (Temas 11, 12, 13 y 16).</li>
-<li>Contraseñas débiles o reutilizadas entre distintos sistemas.</li>
-<li>Configuraciones por defecto que no se han revisado ni endurecido (hardening).</li>
-<li>Falta de formación o concienciación del personal, que facilita el éxito de la ingeniería social (Tema 25).</li>
-<li>Ausencia o insuficiencia de medidas de control de acceso físico.</li>
+<li><strong>Software sin parches</strong> o en versión no soportada.</li>
+<li><strong>Contraseñas débiles o reutilizadas</strong> entre servicios.</li>
+<li><strong>Configuración insegura</strong> de un sistema o servicio.</li>
+<li><strong>Valores por defecto</strong> no modificados (credenciales, puertos, servicios activos).</li>
+<li><strong>Falta de formación</strong> o de concienciación del personal.</li>
+<li><strong>Controles físicos insuficientes</strong>: salas abiertas, ausencia de registro de accesos.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Las vulnerabilidades de software conocidas públicamente se catalogan de forma estandarizada mediante identificadores <strong>CVE (Common Vulnerabilities and Exposures)</strong>, del tipo CVE-año-número, gestionados de forma coordinada a nivel internacional. Su gravedad se puntúa habitualmente con el sistema <strong>CVSS (Common Vulnerability Scoring System)</strong>, una escala numérica que facilita priorizar qué vulnerabilidades corregir primero. Consultar estos catálogos no es una tarea del día a día de un puesto de CAU, pero es útil reconocer estos términos si aparecen en un aviso de seguridad o en la documentación de un fabricante.</th>
+<th><strong>🧠 Para memorizar — la vulnerabilidad tiene cuatro caras</strong><br><strong>Una vulnerabilidad puede ser TÉCNICA, FÍSICA, HUMANA U ORGANIZATIVA.</strong><br>· <strong>Técnica</strong>: un fallo del software sin corregir.<br>· <strong>Física</strong>: una sala técnica sin control de acceso.<br>· <strong>Humana</strong>: personal sin formación que cede sus credenciales.<br>· <strong>Organizativa</strong>: ausencia de procedimiento de altas y bajas de usuarios.<br>Reducir la vulnerabilidad a «un fallo de software» es un error de examen habitual.</th>
 </tr>
 </table></div>
-<h2 id="6-relación-entre-amenaza-vulnerabilidad-riesgo-e-impacto" class="tema-h2">6. Relación entre amenaza, vulnerabilidad, riesgo e impacto</h2>
-<p>Estos cuatro conceptos se relacionan de forma encadenada: una <strong>amenaza</strong> explota una <strong>vulnerabilidad</strong> existente en un activo; si lo consigue, se produce un <strong>impacto</strong> (el daño o la consecuencia concreta: pérdida económica, interrupción del servicio, pérdida de reputación, sanción legal). El <strong>riesgo</strong> es la estimación previa de esa cadena: una combinación de la probabilidad de que la amenaza llegue a explotar la vulnerabilidad y la magnitud del impacto que produciría si lo consiguiera.</p>
+
+<h2 id="11-hardening" class="tema-h2">11. Hardening</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Un símil sencillo: la amenaza es «que llueva»; la vulnerabilidad es «tener el tejado agujereado»; el riesgo es el resultado de combinar la probabilidad de que llueva con el daño que causaría esa lluvia dado el agujero existente; y el impacto es el daño realmente sufrido si finalmente llueve y el agua entra en la casa. Si no existiera el agujero (la vulnerabilidad), la lluvia (la amenaza) podría seguir produciéndose, pero no generaría ningún riesgo real para el interior de la casa.</th>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>Hardening</strong> (endurecimiento) → <strong>proceso de endurecer la configuración de un sistema para reducir su superficie de ataque y eliminar la exposición innecesaria</strong>.<br>Palabra clave: <strong>ENDURECE</strong>. Idea central: <strong>lo que no se necesita, se quita</strong>.</th>
 </tr>
 </table></div>
-<p>Gestionar el riesgo consiste, precisamente, en actuar sobre alguno de estos elementos: reducir la probabilidad de que la amenaza se materialice, corregir o mitigar la vulnerabilidad, o limitar el impacto en caso de que el incidente llegue a producirse. Esta gestión de riesgos es, como se vio en el Tema 21, uno de los principios básicos y requisitos mínimos exigidos por el ENS.</p>
-<h2 id="7-resumen-para-estudiar" class="tema-h2">7. Resumen para estudiar</h2>
 <ul class="tema-lista">
-<li><strong>Seguridad de la información</strong>: protección de la información y los sistemas; tríada CIA clásica (Confidencialidad, Integridad, Disponibilidad), ampliada por el ENS con Autenticidad y Trazabilidad.</li>
-<li><strong>Seguridad física</strong>: protege el entorno material (accesos, incendios, SAI, climatización, ubicación del CPD).</li>
-<li><strong>Seguridad lógica</strong>: protege el acceso a los datos mediante software (autenticación, permisos, cifrado, antimalware, cortafuegos, auditoría); ambas son complementarias, no sustitutivas entre sí.</li>
-<li><strong>Amenazas</strong>: naturales, humanas no intencionadas, humanas intencionadas (internas y externas) y lógicas/técnicas.</li>
-<li><strong>Vulnerabilidades</strong>: debilidades explotables por una amenaza; catalogadas públicamente como CVE y puntuadas con CVSS.</li>
-<li><strong>Cadena amenaza → vulnerabilidad → riesgo → impacto</strong>: la amenaza explota la vulnerabilidad; el riesgo combina probabilidad e impacto potencial; gestionar el riesgo significa actuar sobre la probabilidad, la vulnerabilidad o el impacto.</li>
-<li><strong>Activo</strong> = todo lo que tiene valor y debe protegerse; <strong>no repudio</strong> = no poder negar una acción realizada (ligado a la firma digital, Tema 24).</li>
+<li><strong>Deshabilitar servicios y funciones no utilizados</strong>.</li>
+<li><strong>Eliminar configuraciones por defecto inseguras</strong>: credenciales, cuentas y ajustes de fábrica.</li>
+<li><strong>Aplicar el principio de mínimo privilegio</strong> a cuentas y permisos.</li>
+<li>Retirar software innecesario y cerrar accesos que no respondan a una necesidad.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — hardening y antivirus</strong><br><strong>Hardening</strong> → actúa sobre la <strong>configuración</strong> del sistema para <strong>reducir la exposición</strong>. Es <strong>preventivo y estructural</strong>.<br><strong>Antivirus / antimalware</strong> → <strong>detecta y elimina código dañino</strong>. Es <strong>reactivo frente a una amenaza concreta</strong>.<br>Un sistema puede tener antivirus y estar <strong>mal endurecido</strong>, y al revés. No son sustitutivos.</th>
+</tr>
+</table></div>
+<p>Los procedimientos concretos de bastionado por sistema operativo no forman parte de este tema.</p>
+
+<h2 id="12-cve-cvss" class="tema-h2">12. CVE y CVSS</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — la gran pareja</strong><br><strong>CVE</strong> (Common Vulnerabilities and Exposures) → <strong>identificador estandarizado de una vulnerabilidad conocida</strong>. Formato conceptual: <strong>CVE-año-número</strong>.<br><strong>CVSS</strong> (Common Vulnerability Scoring System) → <strong>sistema de puntuación utilizado para valorar la gravedad o severidad</strong> de una vulnerabilidad.<br><strong>CVE → IDENTIFICA. CVSS → PUNTÚA.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th></th>
+<th><strong>CVE</strong></th>
+<th><strong>CVSS</strong></th>
+</tr>
+<tr>
+<td><strong>Qué es</strong></td>
+<td>Identificador estandarizado</td>
+<td>Sistema de puntuación</td>
+</tr>
+<tr>
+<td><strong>Función</strong></td>
+<td><strong>Nombrar</strong> de forma única una vulnerabilidad conocida</td>
+<td><strong>Valorar</strong> su gravedad</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>Un <strong>código</strong> (CVE-año-número)</td>
+<td>Una <strong>puntuación</strong> de severidad</td>
+</tr>
+<tr>
+<td><strong>Utilidad práctica</strong></td>
+<td>Referirse a la misma vulnerabilidad sin ambigüedad</td>
+<td><strong>Priorizar</strong> qué corregir antes</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Trampa de examen</strong><br><strong>El CVE identifica; NO mide directamente la gravedad.</strong> Que una vulnerabilidad tenga un CVE asignado no dice <strong>nada</strong> sobre su severidad: para eso está el <strong>CVSS</strong>.<br>Es incorrecto afirmar que «el CVE indica el nivel de peligrosidad» o que «un CVE alto es más grave»: los CVE <strong>no son altos ni bajos</strong>, son <strong>identificadores</strong>.</th>
+</tr>
+</table></div>
+<p>El cálculo matemático de la puntuación CVSS no es objeto de este tema.</p>
+
+<h2 id="13-riesgo-e-impacto" class="tema-h2">13. Riesgo e impacto</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición de riesgo</strong><br><strong>Riesgo</strong> → <strong>estimación que combina la probabilidad de materialización de una amenaza y las consecuencias o impacto potencial sobre los activos o la organización</strong>.<br>Es una <strong>estimación</strong>, no una medida exacta.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Trampa de examen — el riesgo no es una simple multiplicación</strong><br>No debe presentarse como definición universal que <strong>«riesgo = probabilidad × impacto»</strong>.<br>La formulación correcta es: <strong>en algunos modelos simplificados se representa como probabilidad × impacto</strong>, pero el riesgo es una <strong>estimación</strong> que puede valorarse con criterios cualitativos, escalas o matrices, y que integra otros factores.<br>Presentarlo como una igualdad universal es un error conceptual frecuente.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición de impacto</strong><br><strong>Impacto</strong> → <strong>daño o consecuencia que produciría la materialización de un riesgo o incidente</strong>.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Pérdida de información</strong>.</li>
+<li><strong>Interrupción del servicio</strong>.</li>
+<li><strong>Daño económico</strong>.</li>
+<li><strong>Daño reputacional</strong>.</li>
+<li><strong>Consecuencias legales</strong>.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — riesgo e impacto</strong><br><strong>RIESGO → ANTES.</strong> Es una <strong>estimación previa</strong>: mide lo que <strong>podría ocurrir</strong>.<br><strong>IMPACTO → DESPUÉS.</strong> Es la <strong>consecuencia efectiva</strong> cuando el evento <strong>ya se ha materializado</strong>.<br>Con un matiz importante: el <strong>impacto potencial</strong> es uno de los <strong>componentes</strong> de la estimación del riesgo. Por eso el impacto aparece dos veces — como <strong>elemento del cálculo</strong> (potencial) y como <strong>resultado</strong> (efectivo).</th>
+</tr>
+</table></div>
+
+<h2 id="14-modelo-de-relacion" class="tema-h2">14. El modelo de relación entre conceptos</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — el esquema correcto</strong><br><strong>ACTIVO + AMENAZA + VULNERABILIDAD → RIESGO</strong><br>Si la amenaza <strong>se materializa</strong>:<br><strong>INCIDENTE → IMPACTO / CONSECUENCIAS</strong><br>Dos afirmaciones que resumen todo el tema:<br>· <strong>El RIESGO es PREVIO al incidente.</strong><br>· <strong>El IMPACTO es la CONSECUENCIA cuando el evento se materializa.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Trampa de examen — no es una secuencia temporal</strong><br>Es <strong>incorrecto</strong> presentar <strong>«amenaza → vulnerabilidad → riesgo → impacto»</strong> como una <strong>secuencia temporal obligatoria</strong>, como si una cosa llevara necesariamente a la siguiente.<br>La realidad es distinta: <strong>activo, amenaza y vulnerabilidad coexisten</strong> y de su concurrencia <strong>resulta una estimación</strong>, el riesgo. El <strong>impacto</strong> solo aparece <strong>si el evento llega a materializarse</strong> — y puede no llegar a hacerlo nunca.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">El símil del tejado</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>En el símil</strong></th>
+</tr>
+<tr>
+<td><strong>Activo</strong></td>
+<td>La casa y lo que hay dentro</td>
+</tr>
+<tr>
+<td><strong>Amenaza</strong></td>
+<td>La <strong>lluvia</strong></td>
+</tr>
+<tr>
+<td><strong>Vulnerabilidad</strong></td>
+<td>El <strong>agujero</strong> en el tejado</td>
+</tr>
+<tr>
+<td><strong>Riesgo</strong></td>
+<td>La <strong>combinación</strong> de la probabilidad de que llueva y del daño que causaría</td>
+</tr>
+<tr>
+<td><strong>Impacto</strong></td>
+<td>El <strong>agua que entra</strong> y el daño efectivamente causado</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — la clave del símil</strong><br><strong>EL RIESGO EXISTE ANTES DE QUE LLUEVA.</strong> Mientras haya un agujero y sea posible que llueva, hay riesgo — aunque no caiga una gota en todo el año.<br>Y la lluvia (la amenaza) <strong>existe con independencia</strong> de que el tejado tenga o no agujero: lo que hace el agujero es <strong>aumentar la probabilidad</strong> de que la lluvia cause daño.</th>
+</tr>
+</table></div>
+
+<h2 id="15-gestion-del-riesgo" class="tema-h2">15. Gestión del riesgo</h2>
+<p>El riesgo <strong>no se elimina</strong>: se <strong>gestiona</strong>. Se puede reducir actuando sobre <strong>tres palancas</strong>.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Palanca</strong></th>
+<th><strong>Cómo se actúa</strong></th>
+<th><strong>Ejemplos</strong></th>
+</tr>
+<tr>
+<td><strong>1. Probabilidad</strong></td>
+<td><strong>Controles preventivos</strong> que hagan menos probable que la amenaza se materialice</td>
+<td>Control de acceso físico, filtrado, concienciación, segmentación</td>
+</tr>
+<tr>
+<td><strong>2. Vulnerabilidades</strong></td>
+<td><strong>Corregir o reducir las debilidades</strong> existentes</td>
+<td><strong>Parchear</strong>, <strong>hardening</strong>, <strong>formación</strong> del personal, revisión de configuraciones</td>
+</tr>
+<tr>
+<td><strong>3. Impacto</strong></td>
+<td><strong>Limitar las consecuencias</strong> si el evento llega a producirse</td>
+<td><strong>Redundancia</strong>, medidas de <strong>continuidad</strong> y de <strong>recuperación</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br><strong>MENOS PROBABILIDAD · MENOS VULNERABILIDAD · MENOS IMPACTO.</strong><br>Obsérvese que la <strong>amenaza en sí no se puede eliminar</strong>: no se puede impedir que llueva ni que existan atacantes. Lo que sí se puede es <strong>reducir la probabilidad de daño, tapar los agujeros y limitar las consecuencias</strong>.</th>
+</tr>
+</table></div>
+<p>Las medidas concretas de <strong>copias de seguridad, continuidad y recuperación</strong> se estudian en el <strong>Tema 23</strong>.</p>
+
+<h2 id="16-matriz-central" class="tema-h2">16. Matriz central de conceptos</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Pregunta que responde</strong></th>
+<th><strong>Ejemplo (CPD municipal)</strong></th>
+</tr>
+<tr>
+<td><strong>Activo</strong></td>
+<td><strong>¿Qué protejo?</strong></td>
+<td>El servidor de expedientes y la información que contiene</td>
+</tr>
+<tr>
+<td><strong>Amenaza</strong></td>
+<td><strong>¿Qué puede dañarlo?</strong></td>
+<td>Un corte de suministro eléctrico</td>
+</tr>
+<tr>
+<td><strong>Vulnerabilidad</strong></td>
+<td><strong>¿Qué debilidad puede aprovecharse?</strong></td>
+<td>La ausencia de SAI en la sala técnica</td>
+</tr>
+<tr>
+<td><strong>Riesgo</strong></td>
+<td><strong>¿Qué probabilidad y qué consecuencia existen?</strong></td>
+<td>Estimación combinada de que haya un corte y del daño que causaría</td>
+</tr>
+<tr>
+<td><strong>Impacto</strong></td>
+<td><strong>¿Qué daño se produciría?</strong></td>
+<td>Apagado brusco, posible corrupción de datos e interrupción del servicio</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — las cinco preguntas</strong><br><strong>¿QUÉ PROTEJO? → ¿QUÉ PUEDE DAÑARLO? → ¿QUÉ DEBILIDAD HAY? → ¿QUÉ PROBABILIDAD Y CONSECUENCIA? → ¿QUÉ DAÑO SE PRODUCIRÍA?</strong><br>Si en un caso práctico se responde a estas cinco preguntas en orden, el planteamiento está completo. Es la herramienta más rentable de todo el tema.</th>
+</tr>
+</table></div>
+
+<h2 id="17-anclas-de-memoria" class="tema-h2">17. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>CID → CONFIDENCIALIDAD + INTEGRIDAD + DISPONIBILIDAD</strong> (modelo clásico).</li>
+<li><strong>CITAD → CID + AUTENTICIDAD + TRAZABILIDAD</strong> (dimensiones del ENS, <strong>cinco</strong>).</li>
+<li><strong>NO REPUDIO → NO ES DIMENSIÓN DEL ENS</strong>.</li>
+<li><strong>FÍSICA → ENTORNO · LÓGICA → DATOS Y ACCESO</strong>; son <strong>complementarias</strong>.</li>
+<li><strong>SAI → PUENTE TEMPORAL · GENERADOR → AUTONOMÍA PROLONGADA</strong>.</li>
+<li><strong>AMENAZA → CAPACIDAD POTENCIAL DE DAÑO</strong> (no se define por la vulnerabilidad).</li>
+<li><strong>VULNERABILIDAD → DEBILIDAD</strong>; puede ser <strong>técnica, física, humana u organizativa</strong>.</li>
+<li><strong>ORIGEN → INTERNA/EXTERNA · INTENCIONALIDAD → INTENCIONADA/NO INTENCIONADA</strong>: dos criterios distintos.</li>
+<li><strong>HARDENING → ENDURECE</strong> la configuración y reduce la superficie de ataque.</li>
+<li><strong>CVE → IDENTIFICA · CVSS → PUNTÚA</strong>.</li>
+<li><strong>RIESGO → PROBABILIDAD + CONSECUENCIA</strong>, y es <strong>PREVIO</strong>. <strong>IMPACTO → CONSECUENCIA</strong>, y es <strong>POSTERIOR</strong>.</li>
 </ul>
 
-<h2 id="8-conceptos-clave" class="tema-h2">8. Conceptos clave</h2>
+<h2 id="18-no-confundir" class="tema-h2">18. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto A</strong></th>
+<th><strong>Concepto B</strong></th>
+<th><strong>Diferencia clave</strong></th>
+</tr>
+<tr>
+<td><strong>Seguridad de la información</strong></td>
+<td><strong>Seguridad informática / ciberseguridad</strong></td>
+<td>La primera es más amplia: incluye personas, procesos, información no electrónica y organización</td>
+</tr>
+<tr>
+<td><strong>CID</strong>: modelo clásico (3)</td>
+<td><strong>CITAD</strong>: dimensiones del ENS (5)</td>
+<td>El ENS añade autenticidad y trazabilidad</td>
+</tr>
+<tr>
+<td><strong>Autenticidad</strong>: acreditar quién actúa</td>
+<td><strong>No repudio</strong>: poder demostrarlo después</td>
+<td>Momento de la acción vs. prueba posterior; el no repudio <strong>no es dimensión del ENS</strong></td>
+</tr>
+<tr>
+<td><strong>Seguridad física</strong>: entorno</td>
+<td><strong>Seguridad lógica</strong>: datos y acceso</td>
+<td>Complementarias, nunca alternativas</td>
+</tr>
+<tr>
+<td><strong>Amenaza</strong>: capacidad potencial de dañar</td>
+<td><strong>Vulnerabilidad</strong>: debilidad aprovechable</td>
+<td>La amenaza existe por sí misma; la vulnerabilidad facilita que se materialice</td>
+</tr>
+<tr>
+<td><strong>Amenaza interna</strong>: dentro o con acceso legítimo</td>
+<td><strong>Amenaza externa</strong>: fuera o sin acceso legítimo previo</td>
+<td>Criterio de <strong>origen</strong></td>
+</tr>
+<tr>
+<td><strong>Amenaza intencionada</strong>: deliberada</td>
+<td><strong>No intencionada</strong>: accidente o error</td>
+<td>Criterio de <strong>intencionalidad</strong>, distinto del anterior</td>
+</tr>
+<tr>
+<td><strong>Riesgo</strong>: estimación previa</td>
+<td><strong>Impacto</strong>: consecuencia efectiva</td>
+<td>Antes vs. después de la materialización</td>
+</tr>
+<tr>
+<td><strong>CVE</strong>: identificador</td>
+<td><strong>CVSS</strong>: puntuación de gravedad</td>
+<td>Nombrar vs. valorar</td>
+</tr>
+<tr>
+<td><strong>Activo</strong>: lo que se protege</td>
+<td><strong>Amenaza</strong>: lo que puede dañarlo</td>
+<td>Objeto de protección vs. agente o evento dañino</td>
+</tr>
+<tr>
+<td><strong>Vulnerabilidad</strong>: debilidad existente</td>
+<td><strong>Incidente</strong>: evento ya materializado</td>
+<td>Condición latente vs. hecho ocurrido</td>
+</tr>
+<tr>
+<td><strong>Seguridad</strong>: protección global (CID)</td>
+<td><strong>Disponibilidad</strong>: una de sus propiedades</td>
+<td>Un sistema disponible pero sin confidencialidad no es seguro</td>
+</tr>
+<tr>
+<td><strong>Cifrado</strong>: hace ilegible el dato</td>
+<td><strong>Control de acceso</strong>: decide quién entra</td>
+<td>El cifrado protege incluso si el control se ha superado</td>
+</tr>
+<tr>
+<td><strong>Hardening</strong>: endurece la configuración</td>
+<td><strong>Antivirus</strong>: detecta y elimina código dañino</td>
+<td>Preventivo y estructural vs. reactivo frente a una amenaza concreta</td>
+</tr>
+<tr>
+<td><strong>SAI</strong>: alimentación temporal</td>
+<td><strong>Generador</strong>: autonomía prolongada</td>
+<td>El SAI no garantiza continuidad indefinida</td>
+</tr>
+</table></div>
+
+<h2 id="19-trampas-de-examen" class="tema-h2">19. Posibles trampas de examen</h2>
 <ul class="tema-lista">
-<li><strong>Seguridad de la información vs. seguridad informática/ciberseguridad</strong>.</li>
-<li><strong>Tríada CIA/CID</strong> y su ampliación ENS (+ autenticidad y trazabilidad).</li>
-<li><strong>Activo</strong> y <strong>no repudio</strong>.</li>
-<li><strong>Seguridad física</strong>: CPD, SAI/UPS, climatización, control de acceso físico.</li>
-<li><strong>Seguridad lógica</strong>: autenticación, permisos, cifrado (reposo/tránsito), antimalware, cortafuegos, auditoría.</li>
-<li><strong>Amenaza</strong> (naturales / humanas no intencionadas / intencionadas / técnicas; internas vs. externas).</li>
-<li><strong>Vulnerabilidad</strong>; hardening; <strong>CVE y CVSS</strong>.</li>
-<li><strong>Riesgo = probabilidad × impacto</strong>; la cadena amenaza-vulnerabilidad-riesgo-impacto.</li>
+<li><strong>«Seguridad de la información y seguridad informática son sinónimos»</strong> — falso: la primera es <strong>más amplia</strong>.</li>
+<li><strong>«El no repudio es la sexta dimensión del ENS»</strong> — falso: las dimensiones son <strong>cinco (CITAD)</strong>; el no repudio es una <strong>propiedad</strong>, no una dimensión.</li>
+<li><strong>«Las dimensiones del ENS son tres»</strong> — falso: tres son las de la <strong>tríada clásica CID</strong>.</li>
+<li><strong>«Amenaza es un evento que necesariamente explota una vulnerabilidad»</strong> — falso y <strong>circular</strong>: la amenaza es una <strong>circunstancia, evento o agente con capacidad potencial de causar daño</strong>.</li>
+<li><strong>«Sin vulnerabilidad no existe ningún riesgo real»</strong> — falso: la vulnerabilidad <strong>aumenta la probabilidad</strong> de daño, pero no es condición necesaria del riesgo.</li>
+<li><strong>«Amenaza y vulnerabilidad son lo mismo»</strong> — falso: agente o evento dañino vs. debilidad aprovechable.</li>
+<li><strong>«Interna equivale a no intencionada y externa a intencionada»</strong> — falso: son <strong>dos criterios independientes</strong> y existen las cuatro combinaciones.</li>
+<li><strong>«Riesgo = probabilidad × impacto» como definición universal</strong> — incorrecto: es una <strong>representación de algunos modelos simplificados</strong>; el riesgo es una <strong>estimación</strong>.</li>
+<li><strong>«El riesgo aparece después del incidente»</strong> — falso: el <strong>riesgo es previo</strong>; el <strong>impacto</strong> es la consecuencia posterior.</li>
+<li><strong>«Riesgo e impacto son sinónimos»</strong> — falso: estimación previa vs. daño efectivo.</li>
+<li><strong>«El CVE indica la gravedad de la vulnerabilidad»</strong> — falso: el CVE <strong>identifica</strong>; quien puntúa la gravedad es el <strong>CVSS</strong>.</li>
+<li><strong>«CVE y CVSS son lo mismo»</strong> — falso: identificador frente a sistema de puntuación.</li>
+<li><strong>«La seguridad física puede sustituir a la lógica»</strong> — falso: son <strong>complementarias</strong>.</li>
+<li><strong>«Un SAI garantiza que el servicio nunca se interrumpa»</strong> — falso: su autonomía es <strong>limitada</strong>; la autonomía prolongada corresponde al <strong>generador</strong> con la infraestructura adecuada.</li>
+<li><strong>«Cifrar equivale a controlar el acceso»</strong> — falso: son medidas distintas y complementarias.</li>
+<li><strong>«Hardening es lo mismo que instalar un antivirus»</strong> — falso: endurecer la configuración vs. detectar código dañino.</li>
+<li><strong>«Un sistema disponible es un sistema seguro»</strong> — falso: la disponibilidad es <strong>una</strong> de las propiedades, no la seguridad completa.</li>
+<li><strong>«Una vulnerabilidad es siempre un fallo de software»</strong> — falso: puede ser <strong>técnica, física, humana u organizativa</strong>.</li>
+<li><strong>Colar contenido ajeno</strong>: ENS (T21), copias y recuperación (T23), criptografía y firma (T24), malware y phishing (T25) y cortafuegos y redes (T29) no se desarrollan aquí.</li>
 </ul>
 
-<h2 id="9-posibles-puntos-de-examen" class="tema-h2">9. Posibles puntos de examen</h2>
+<h2 id="20-preguntas-tipo-test" class="tema-h2">20. Posibles preguntas tipo test</h2>
 <ul class="tema-lista">
-<li>Los componentes de la <strong>tríada CIA</strong> y qué dos dimensiones añade el ENS — pregunta casi segura.</li>
-<li>Clasificar medidas concretas como de <strong>seguridad física o lógica</strong> (supuesto práctico típico).</li>
-<li>Qué es un <strong>SAI/UPS</strong> y qué riesgo mitiga.</li>
-<li>Definiciones precisas de <strong>amenaza, vulnerabilidad, riesgo e impacto</strong> — y no confundirlas entre sí.</li>
-<li>Clasificar una amenaza por su tipo (natural / error humano / intencionada / técnica) y por su origen (interna/externa).</li>
-<li>Qué es una amenaza <strong>interna</strong> y por qué se subestima.</li>
-<li>Qué significa <strong>CVE</strong> y para qué sirve <strong>CVSS</strong>.</li>
-<li>Qué es el <strong>no repudio</strong> y con qué dimensión y tecnología se relaciona.</li>
-<li>Sobre qué tres elementos puede actuar la <strong>gestión del riesgo</strong> (probabilidad, vulnerabilidad, impacto).</li>
-<li>Qué es el <strong>hardening</strong> (endurecer configuraciones por defecto).</li>
+<li><strong>Definición</strong> de seguridad de la información y diferencia con la seguridad informática.</li>
+<li>¿Qué elementos incluye la seguridad de la información además de la tecnología?</li>
+<li>¿Qué significan las siglas <strong>CID</strong> y qué persigue cada propiedad?</li>
+<li><strong>Propiedad → definición</strong>: evitar la divulgación no autorizada / evitar modificaciones no autorizadas / garantizar el acceso.</li>
+<li>¿Qué dimensiones <strong>añade el ENS</strong> a la tríada clásica?</li>
+<li>¿Es el <strong>no repudio</strong> una dimensión del ENS?</li>
+<li><strong>Definición</strong> de activo y <strong>clasificación</strong>: ¿son activos las personas y las instalaciones?</li>
+<li><strong>Clasificar como física o lógica</strong>: control de acceso al CPD, permisos de carpeta, climatización, cifrado, videovigilancia, cortafuegos.</li>
+<li>¿Qué proporciona un <strong>SAI</strong> y qué <strong>no</strong> garantiza?</li>
+<li>Diferencia entre <strong>SAI</strong> y <strong>generador</strong>.</li>
+<li><strong>Definición correcta</strong> de amenaza (identificar la formulación circular como incorrecta).</li>
+<li><strong>Clasificar la amenaza</strong>: incendio · borrado accidental · sabotaje · fallo de hardware · ingeniería social · obsolescencia.</li>
+<li>Un empleado borra por error una carpeta: <strong>¿interna o externa? ¿intencionada o no?</strong></li>
+<li>Un atacante externo intenta acceder al sistema: <strong>clasificación doble</strong>.</li>
+<li>¿Son «interna/externa» e «intencionada/no intencionada» la <strong>misma clasificación</strong>?</li>
+<li><strong>Definición</strong> de vulnerabilidad y su efecto correcto sobre el riesgo.</li>
+<li><strong>Identificar vulnerabilidades</strong>: software sin parches, credenciales por defecto, falta de formación, sala sin control de acceso.</li>
+<li>¿Puede una vulnerabilidad ser <strong>humana u organizativa</strong>?</li>
+<li>¿Qué es el <strong>hardening</strong> y qué acciones lo integran?</li>
+<li>Diferencia entre <strong>hardening</strong> y <strong>antivirus</strong>.</li>
+<li>¿Qué es un <strong>CVE</strong> y cuál es su formato conceptual?</li>
+<li>¿Mide el CVE la <strong>gravedad</strong>? ¿Quién la puntúa?</li>
+<li><strong>Definición</strong> de riesgo: identificar por qué «probabilidad × impacto» no es una definición universal.</li>
+<li><strong>Definición</strong> de impacto y ejemplos de consecuencias.</li>
+<li>¿Es el riesgo <strong>anterior o posterior</strong> al incidente?</li>
+<li><strong>Relación</strong>: activo, amenaza, vulnerabilidad, riesgo e impacto.</li>
+<li>En el símil del tejado, ¿qué representa el agujero y qué el agua que entra?</li>
+<li>¿Sobre qué <strong>tres palancas</strong> se puede reducir el riesgo?</li>
+</ul>
+
+<h2 id="21-preguntas-cortas" class="tema-h2">21. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<h4 class="tema-h4">1. Diferencie seguridad de la información y seguridad informática</h4>
+<ul class="tema-lista">
+<li>Seguridad de la información: medidas para proteger la información y los sistemas que la tratan frente a amenazas y acciones no autorizadas.</li>
+<li>Alcance más amplio: personas, procesos, información no electrónica y organización.</li>
+<li>Cierre: la seguridad informática o ciberseguridad es la parte tecnológica del conjunto.</li>
+</ul>
+<h4 class="tema-h4">2. Explique la tríada CID</h4>
+<ul class="tema-lista">
+<li>Confidencialidad: evitar el acceso o la divulgación no autorizada.</li>
+<li>Integridad: evitar modificaciones no autorizadas. Disponibilidad: garantizar el acceso cuando se necesita.</li>
+<li>Cierre: el ENS añade autenticidad y trazabilidad — CITAD, cinco dimensiones.</li>
+</ul>
+<h4 class="tema-h4">3. Explique la seguridad física y la seguridad lógica</h4>
+<ul class="tema-lista">
+<li>Física: protege instalaciones, hardware y entorno — accesos, incendios, SAI, climatización, ubicación.</li>
+<li>Lógica: protege datos, acceso y sistemas — autenticación, permisos, cifrado, antimalware, cortafuegos, registro.</li>
+<li>Cierre: son complementarias; ninguna sustituye a la otra (lógica de líneas de defensa).</li>
+</ul>
+<h4 class="tema-h4">4. Defina activo, amenaza y vulnerabilidad</h4>
+<ul class="tema-lista">
+<li>Activo: elemento con valor para la organización que debe protegerse (información, hardware, software, servicios, personas, instalaciones).</li>
+<li>Amenaza: circunstancia, evento o agente con capacidad potencial de causar daño.</li>
+<li>Vulnerabilidad: debilidad o fallo en un activo, sistema, proceso o factor humano que puede ser aprovechado por una amenaza.</li>
+<li>Cierre: la vulnerabilidad puede aumentar la probabilidad de que la amenaza provoque daño.</li>
+</ul>
+<h4 class="tema-h4">5. Diferencie amenaza interna y externa</h4>
+<ul class="tema-lista">
+<li>Interna: origen dentro de la organización o en personas con acceso legítimo.</li>
+<li>Externa: origen fuera de la organización o en quien no tiene acceso legítimo previo.</li>
+<li>Cierre: la interna es especialmente relevante porque parte de quien ya ha superado las barreras de acceso.</li>
+</ul>
+<h4 class="tema-h4">6. Diferencie amenaza intencionada y no intencionada</h4>
+<ul class="tema-lista">
+<li>Intencionada: acción deliberada (sabotaje, robo, ingeniería social, ataque).</li>
+<li>No intencionada: accidente o error (borrado accidental, configuración incorrecta).</li>
+<li>Cierre: es un criterio distinto del de origen; existen las cuatro combinaciones de la matriz 2×2.</li>
+</ul>
+<h4 class="tema-h4">7. Explique CVE y CVSS</h4>
+<ul class="tema-lista">
+<li>CVE: identificador estandarizado de una vulnerabilidad conocida, con formato CVE-año-número.</li>
+<li>CVSS: sistema de puntuación de la gravedad o severidad de una vulnerabilidad.</li>
+<li>Cierre: CVE identifica, CVSS puntúa; el CVE no mide directamente la gravedad, y el CVSS permite priorizar.</li>
+</ul>
+<h4 class="tema-h4">8. Explique riesgo e impacto</h4>
+<ul class="tema-lista">
+<li>Riesgo: estimación que combina la probabilidad de materialización de una amenaza y las consecuencias o impacto potencial.</li>
+<li>Matiz: en algunos modelos simplificados se representa como probabilidad × impacto, pero no es una igualdad universal.</li>
+<li>Impacto: daño o consecuencia que produciría la materialización del riesgo o incidente (pérdida de información, interrupción, daño económico, reputacional, legal).</li>
+<li>Cierre: el riesgo es previo; el impacto es la consecuencia efectiva.</li>
+</ul>
+<h4 class="tema-h4">9. Explique el hardening</h4>
+<ul class="tema-lista">
+<li>Qué es: endurecimiento de la configuración para reducir la superficie de ataque y la exposición innecesaria.</li>
+<li>Acciones: deshabilitar servicios no utilizados, eliminar configuraciones por defecto inseguras, aplicar mínimo privilegio.</li>
+<li>Cierre: es preventivo y estructural; no sustituye a la protección antimalware.</li>
+</ul>
+<h4 class="tema-h4">10. Explique la relación entre amenaza, vulnerabilidad, riesgo e impacto</h4>
+<ul class="tema-lista">
+<li>Modelo: activo + amenaza + vulnerabilidad dan lugar a una estimación, el riesgo.</li>
+<li>Si la amenaza se materializa se produce un incidente, cuya consecuencia es el impacto.</li>
+<li>Matiz: no es una secuencia temporal obligatoria; el riesgo es previo y puede no llegar a materializarse nunca.</li>
+<li>Cierre: símil del tejado — lluvia, agujero, riesgo antes de que llueva, agua que entra.</li>
+</ul>
+
+<h2 id="22-supuestos-practicos" class="tema-h2">22. Supuestos prácticos</h2>
+<h4 class="tema-h4">Caso 1 — CPD sin SAI</h4>
+<p><strong>Escenario</strong>: la sala técnica de un ayuntamiento aloja el servidor de expedientes y <strong>no dispone de SAI</strong>. Ante un microcorte, los equipos se apagan de forma brusca.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué tipo de seguridad está en juego?</strong> <strong>Seguridad física</strong>: se trata de la protección del <strong>entorno</strong> y del suministro eléctrico.</li>
+<li><strong>b) ¿Qué propiedad se ve comprometida?</strong> Principalmente la <strong>disponibilidad</strong>, y de forma indirecta la <strong>integridad</strong> si un apagado brusco corrompe datos en curso.</li>
+<li><strong>c) Identifique los elementos.</strong> <strong>Activo</strong>: servidor e información. <strong>Amenaza</strong>: corte de suministro (natural o técnica). <strong>Vulnerabilidad</strong>: ausencia de SAI. <strong>Riesgo</strong>: estimación combinada. <strong>Impacto</strong>: interrupción del servicio y posible pérdida de datos.</li>
+<li><strong>d) ¿Basta con instalar un SAI?</strong> El SAI <strong>no garantiza continuidad indefinida</strong>: permite evitar apagados bruscos, mantener el servicio temporalmente y realizar un <strong>apagado controlado</strong>. Para autonomía prolongada haría falta un <strong>generador</strong> con la infraestructura adecuada.</li>
+</ul>
+<h4 class="tema-h4">Caso 2 — Servidores con software desactualizado</h4>
+<p><strong>Escenario</strong>: varios servidores llevan meses sin recibir actualizaciones de seguridad.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Es una amenaza o una vulnerabilidad?</strong> Una <strong>vulnerabilidad</strong>: es una <strong>debilidad</strong> del sistema, no un agente ni un evento dañino.</li>
+<li><strong>b) ¿Qué efecto tiene sobre el riesgo?</strong> <strong>Aumenta la probabilidad</strong> de que una amenaza provoque daño. No cabe decir que «sin ella no habría riesgo».</li>
+<li><strong>c) ¿De qué tipo de vulnerabilidad se trata?</strong> <strong>Técnica</strong>. Si además no existe procedimiento de actualización, hay también una vulnerabilidad <strong>organizativa</strong>.</li>
+<li><strong>d) ¿Cómo se reduce?</strong> Actuando sobre la palanca de las <strong>vulnerabilidades</strong>: <strong>parchear</strong> y aplicar <strong>hardening</strong>. La operativa de actualización corresponde a los Temas 11 a 13 y 16.</li>
+</ul>
+<h4 class="tema-h4">Caso 3 — Borrado accidental de una carpeta</h4>
+<p><strong>Escenario</strong>: una persona del área de gestión <strong>elimina por error</strong> una carpeta compartida con documentación de un expediente.</p>
+<ul class="tema-lista">
+<li><strong>a) Clasifique la amenaza por su naturaleza.</strong> <strong>Humana no intencionada</strong>.</li>
+<li><strong>b) Clasifíquela por origen e intencionalidad.</strong> <strong>Interna</strong> (persona con acceso legítimo) y <strong>no intencionada</strong> (error).</li>
+<li><strong>c) ¿Qué propiedades se ven afectadas?</strong> <strong>Disponibilidad</strong> de la información y, si no puede reconstruirse, también su <strong>integridad</strong> como conjunto documental.</li>
+<li><strong>d) ¿Sobre qué palanca se actúa para limitar el daño?</strong> Sobre el <strong>impacto</strong>: existencia de copias y de un procedimiento de restauración — materia del <strong>Tema 23</strong>. Y sobre la <strong>probabilidad</strong>, mediante permisos ajustados al <strong>mínimo privilegio</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 4 — Borrado deliberado de información</h4>
+<p><strong>Escenario</strong>: una persona empleada <strong>elimina deliberadamente</strong> información antes de cesar en su puesto.</p>
+<ul class="tema-lista">
+<li><strong>a) Clasifique la amenaza.</strong> <strong>Humana intencionada</strong>, de origen <strong>interno</strong>.</li>
+<li><strong>b) ¿En qué se diferencia del caso anterior?</strong> Solo en el <strong>criterio de intencionalidad</strong>: ambas son <strong>internas</strong>, pero una es <strong>accidental</strong> y la otra <strong>deliberada</strong>. Demuestra que los dos criterios son independientes.</li>
+<li><strong>c) ¿Qué propiedad permite atribuir la acción?</strong> La <strong>trazabilidad</strong>, apoyada en la <strong>autenticidad</strong>; el <strong>no repudio</strong> es lo que dificulta que la persona niegue después la autoría.</li>
+<li><strong>d) ¿Qué medidas resultan relevantes?</strong> <strong>Registro de actividad</strong>, <strong>mínimo privilegio</strong> y un <strong>procedimiento de bajas</strong> que revoque accesos a tiempo — una vulnerabilidad <strong>organizativa</strong> si no existe.</li>
+</ul>
+<h4 class="tema-h4">Caso 5 — Intento de explotación desde el exterior</h4>
+<p><strong>Escenario</strong>: se detectan intentos reiterados de acceder a un servicio publicado, aprovechando un fallo conocido del software.</p>
+<ul class="tema-lista">
+<li><strong>a) Identifique amenaza y vulnerabilidad.</strong> <strong>Amenaza</strong>: atacante externo (humana intencionada, externa). <strong>Vulnerabilidad</strong>: el fallo del software sin corregir.</li>
+<li><strong>b) ¿Existiría la amenaza sin la vulnerabilidad?</strong> <strong>Sí.</strong> La amenaza <strong>existe con independencia</strong>; lo que hace la vulnerabilidad es <strong>aumentar la probabilidad</strong> de que cause daño.</li>
+<li><strong>c) ¿Cómo se reduce el riesgo?</strong> <strong>Probabilidad</strong>: controles preventivos y filtrado. <strong>Vulnerabilidad</strong>: parcheo y hardening. <strong>Impacto</strong>: redundancia y capacidad de recuperación.</li>
+<li><strong>d) Delimitación.</strong> El detalle de los mecanismos de filtrado corresponde al <strong>Tema 29</strong> y el del código dañino al <strong>Tema 25</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 6 — Publicación de un CVE con alta puntuación CVSS</h4>
+<p><strong>Escenario</strong>: el fabricante de una aplicación utilizada en el ayuntamiento publica una vulnerabilidad identificada con un <strong>CVE</strong> y una <strong>puntuación CVSS elevada</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué aporta el CVE?</strong> <strong>Identifica</strong> la vulnerabilidad de forma unívoca, para que todos hablen de la misma. <strong>No informa de su gravedad.</strong></li>
+<li><strong>b) ¿Qué aporta el CVSS?</strong> <strong>Puntúa su severidad</strong>, lo que permite <strong>priorizar</strong> frente a otras vulnerabilidades pendientes.</li>
+<li><strong>c) ¿Basta la puntuación para decidir?</strong> Ayuda a priorizar, pero la decisión debe considerar también <strong>si el producto está en uso</strong>, <strong>cómo está expuesto</strong> y <strong>qué activos afecta</strong>.</li>
+<li><strong>d) ¿Qué actuación procede en el CAU?</strong> <strong>Comprobar el inventario</strong> para saber dónde está instalado el producto, <strong>aplicar la actualización</strong> conforme al procedimiento de cambios y <strong>documentar</strong> la actuación.</li>
+</ul>
+<h4 class="tema-h4">Caso 7 — Servidor con servicios innecesarios y credenciales por defecto</h4>
+<p><strong>Escenario</strong>: al revisar un servidor se observa que tiene <strong>servicios activos que nadie utiliza</strong> y conserva <strong>credenciales de fábrica</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué concepto describe la actuación necesaria?</strong> El <strong>hardening</strong>: endurecer la configuración para <strong>reducir la superficie de ataque</strong>.</li>
+<li><strong>b) ¿Qué acciones concretas?</strong> <strong>Deshabilitar los servicios no utilizados</strong>, <strong>eliminar las configuraciones por defecto inseguras</strong> y <strong>aplicar mínimo privilegio</strong> a cuentas y permisos.</li>
+<li><strong>c) ¿Basta con el antivirus?</strong> <strong>No.</strong> El antivirus detecta y elimina código dañino, pero <strong>no reduce la exposición</strong> derivada de una configuración innecesariamente abierta.</li>
+<li><strong>d) ¿Qué tipo de vulnerabilidad hay aquí?</strong> <strong>Técnica</strong> (configuración insegura y valores por defecto) y, si no existe una línea base de configuración aprobada, también <strong>organizativa</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 8 — Valorar el riesgo de un fallo</h4>
+<p><strong>Escenario</strong>: se pide al CAU que <strong>valore el riesgo</strong> asociado a la posible avería del único conmutador que da servicio a una dependencia municipal.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué protejo?</strong> <strong>Activo</strong>: el conmutador y, a través de él, la conectividad y los servicios de la dependencia.</li>
+<li><strong>b) ¿Qué puede dañarlo?</strong> <strong>Amenaza</strong>: fallo de hardware (amenaza <strong>técnica</strong>), y también amenazas ambientales como el calor excesivo.</li>
+<li><strong>c) ¿Qué debilidad existe?</strong> <strong>Vulnerabilidad</strong>: <strong>ausencia de redundancia</strong> y, en su caso, falta de repuesto o de climatización adecuada.</li>
+<li><strong>d) ¿Qué probabilidad y qué consecuencia?</strong> <strong>Riesgo</strong>: estimación que combina la probabilidad del fallo con el daño previsible; puede expresarse con escalas o matrices, sin necesidad de una fórmula.</li>
+<li><strong>e) ¿Qué daño se produciría?</strong> <strong>Impacto</strong>: interrupción del servicio en la dependencia, imposibilidad de atender al público y posible daño reputacional.</li>
+<li><strong>f) ¿Cómo se reduce?</strong> <strong>Probabilidad</strong>: mantenimiento y climatización. <strong>Vulnerabilidad</strong>: redundancia o repuesto disponible. <strong>Impacto</strong>: procedimiento de sustitución rápida y alternativas de conectividad.</li>
+</ul>
+
+<h2 id="23-matriz-de-memorizacion" class="tema-h2">23. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Lo que debo recordar</strong></th>
+</tr>
+<tr>
+<td><strong>Seguridad de la información</strong></td>
+<td>Medidas para proteger la información y los sistemas que la tratan frente a amenazas y acciones no autorizadas; más amplia que la seguridad informática</td>
+</tr>
+<tr>
+<td><strong>CID</strong></td>
+<td>Modelo clásico: confidencialidad, integridad, disponibilidad</td>
+</tr>
+<tr>
+<td><strong>CITAD</strong></td>
+<td>Dimensiones del ENS: CID + autenticidad + trazabilidad (cinco)</td>
+</tr>
+<tr>
+<td><strong>Activo</strong></td>
+<td>Elemento con valor para la organización que debe protegerse</td>
+</tr>
+<tr>
+<td><strong>No repudio</strong></td>
+<td>Aportar evidencias de la autoría y dificultar su negación; <strong>no es dimensión del ENS</strong></td>
+</tr>
+<tr>
+<td><strong>Seguridad física</strong></td>
+<td>Protege activos físicos, instalaciones y entorno</td>
+</tr>
+<tr>
+<td><strong>Seguridad lógica</strong></td>
+<td>Protege datos, acceso y sistemas mediante controles no materiales</td>
+</tr>
+<tr>
+<td><strong>Amenaza</strong></td>
+<td>Circunstancia, evento o agente con capacidad potencial de causar daño</td>
+</tr>
+<tr>
+<td><strong>Vulnerabilidad</strong></td>
+<td>Debilidad o fallo aprovechable; técnica, física, humana u organizativa</td>
+</tr>
+<tr>
+<td><strong>Interna / externa</strong></td>
+<td>Criterio de <strong>origen</strong>: con acceso legítimo o desde fuera</td>
+</tr>
+<tr>
+<td><strong>Intencionada / no intencionada</strong></td>
+<td>Criterio de <strong>intencionalidad</strong>: deliberada o accidental</td>
+</tr>
+<tr>
+<td><strong>Riesgo</strong></td>
+<td>Estimación que combina probabilidad de materialización y consecuencias potenciales; es <strong>previo</strong></td>
+</tr>
+<tr>
+<td><strong>Impacto</strong></td>
+<td>Daño o consecuencia si el riesgo o incidente se materializa; es <strong>posterior</strong></td>
+</tr>
+<tr>
+<td><strong>Incidente</strong></td>
+<td>Evento ya materializado, del que resulta el impacto</td>
+</tr>
+<tr>
+<td><strong>Hardening</strong></td>
+<td>Endurecer la configuración para reducir superficie de ataque y exposición innecesaria</td>
+</tr>
+<tr>
+<td><strong>CVE</strong></td>
+<td>Identificador estandarizado de vulnerabilidad conocida (CVE-año-número); <strong>no mide gravedad</strong></td>
+</tr>
+<tr>
+<td><strong>CVSS</strong></td>
+<td>Sistema de puntuación de la gravedad; permite priorizar</td>
+</tr>
+<tr>
+<td><strong>SAI / UPS</strong></td>
+<td>Alimentación temporal y protección eléctrica; evita apagados bruscos y permite apagado controlado. No da continuidad indefinida</td>
+</tr>
+<tr>
+<td><strong>Generador</strong></td>
+<td>Autonomía prolongada cuando existe la infraestructura adecuada</td>
+</tr>
+<tr>
+<td><strong>Gestión del riesgo</strong></td>
+<td>Actuar sobre probabilidad, vulnerabilidades e impacto</td>
+</tr>
+</table></div>
+
+<h2 id="24-resumen-final" class="tema-h2">24. Resumen final: si mañana fuera el examen</h2>
+<ul class="tema-lista">
+<li><strong>Seguridad de la información</strong> = medidas para proteger la información y los sistemas que la tratan. Es <strong>más amplia</strong> que la seguridad informática: incluye <strong>personas, procesos, información no electrónica y organización</strong>.</li>
+<li><strong>CID</strong> = <strong>confidencialidad, integridad, disponibilidad</strong> (modelo clásico). <strong>CITAD</strong> = CID + <strong>autenticidad + trazabilidad</strong> (dimensiones del ENS, cinco). <strong>El no repudio NO es dimensión del ENS.</strong></li>
+<li><strong>Activo</strong> = elemento con <strong>valor</strong> para la organización: información, hardware, software, servicios, <strong>personas</strong> e instalaciones.</li>
+<li><strong>Seguridad física → ENTORNO</strong> (accesos, incendios, SAI, generador, climatización, ubicación). <strong>Seguridad lógica → DATOS Y ACCESO</strong> (autenticación, permisos, cifrado, antimalware, cortafuegos, registro). <strong>Son complementarias.</strong></li>
+<li><strong>SAI</strong> = alimentación <strong>temporal</strong>: evita apagados bruscos, mantiene el servicio un tiempo y permite apagado controlado. <strong>No garantiza continuidad indefinida</strong>; para eso, <strong>generador</strong>.</li>
+<li><strong>Amenaza</strong> = <strong>circunstancia, evento o agente con capacidad potencial de causar daño</strong>. <strong>No se define por explotar una vulnerabilidad.</strong> Tipos: <strong>naturales/ambientales · humanas no intencionadas · humanas intencionadas · lógicas/técnicas</strong>.</li>
+<li><strong>Dos criterios independientes</strong>: <strong>origen</strong> (interna/externa) e <strong>intencionalidad</strong> (intencionada/no intencionada). Existen las <strong>cuatro combinaciones</strong>.</li>
+<li><strong>Vulnerabilidad</strong> = <strong>debilidad o fallo aprovechable</strong> por una amenaza; <strong>aumenta la probabilidad</strong> de daño, pero <strong>no es condición necesaria del riesgo</strong>. Puede ser <strong>técnica, física, humana u organizativa</strong>.</li>
+<li><strong>Hardening</strong> = <strong>endurecer la configuración</strong> para reducir superficie de ataque: deshabilitar servicios, quitar valores por defecto, mínimo privilegio. <strong>No es un antivirus.</strong></li>
+<li><strong>CVE → IDENTIFICA</strong> (CVE-año-número, <strong>no mide gravedad</strong>). <strong>CVSS → PUNTÚA</strong> la severidad y permite <strong>priorizar</strong>.</li>
+<li><strong>Riesgo</strong> = <strong>estimación</strong> que combina <strong>probabilidad</strong> y <strong>consecuencias potenciales</strong>. Solo <strong>en modelos simplificados</strong> se representa como probabilidad × impacto: <strong>no es una igualdad universal</strong>.</li>
+<li><strong>Impacto</strong> = <strong>daño o consecuencia</strong> si se materializa: pérdida de información, interrupción, daño económico, reputacional o legal.</li>
+<li><strong>Modelo</strong>: <strong>ACTIVO + AMENAZA + VULNERABILIDAD → RIESGO</strong>; si se materializa, <strong>INCIDENTE → IMPACTO</strong>. <strong>El riesgo es PREVIO; el impacto es POSTERIOR.</strong> No es una secuencia temporal obligatoria.</li>
+<li><strong>Tejado</strong>: lluvia = amenaza · agujero = vulnerabilidad · riesgo = probabilidad + daño potencial · agua que entra = impacto. <strong>El riesgo existe antes de que llueva.</strong></li>
+<li><strong>Gestión del riesgo</strong>: reducir <strong>probabilidad</strong> (controles preventivos), <strong>vulnerabilidades</strong> (parchear, hardening, formación) e <strong>impacto</strong> (redundancia, continuidad, recuperación).</li>
+<li><strong>Las cinco preguntas</strong>: ¿qué protejo? · ¿qué puede dañarlo? · ¿qué debilidad hay? · ¿qué probabilidad y consecuencia? · ¿qué daño se produciría?</li>
 </ul>
   </div>
 </article>

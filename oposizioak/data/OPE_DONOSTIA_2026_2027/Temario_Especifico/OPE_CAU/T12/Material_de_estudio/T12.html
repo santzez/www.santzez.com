@@ -1,190 +1,649 @@
 <article class="tema-articulo">
   <header class="tema-cabecera">
     <div class="tema-cabecera__id">T12</div>
-    <h1 class="tema-cabecera__titulo">Servidores Windows. Instalación, configuración y mantenimiento básico: Actualizaciones y monitorización. Fundamentos de Directorio Activo</h1>
+    <h1 class="tema-cabecera__titulo">Servidores Windows. Instalación, configuración y mantenimiento básico: actualizaciones y monitorización. Fundamentos de Directorio Activo</h1>
     <div class="tema-cabecera__meta">Bloque II · Tecnología básica — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
   </header>
 
   <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
-<li><a href="#1-sistemas-operativos-de-servidor-la-familia-windows-server">1. Sistemas operativos de servidor: la familia Windows Server</a></li>
-<li><a href="#2-instalación-y-configuración-roles-y-características">2. Instalación y configuración: roles y características</a></li>
-<li><a href="#3-mantenimiento-básico-actualizaciones-y-monitorización">3. Mantenimiento básico: actualizaciones y monitorización</a></li>
-<li><a href="#4-fundamentos-de-directorio-activo">4. Fundamentos de Directorio Activo</a></li>
-<li><a href="#5-estructura-lógica-y-física-del-directorio-activo">5. Estructura lógica y física del Directorio Activo</a></li>
-<li><a href="#6-componentes-técnicos-controladores-de-dominio-y-roles-fsmo">6. Componentes técnicos: controladores de dominio y roles FSMO</a></li>
-<li><a href="#7-resumen-para-estudiar">7. Resumen para estudiar</a></li>
-<li><a href="#8-conceptos-clave">8. Conceptos clave</a></li>
-<li><a href="#9-posibles-puntos-de-examen">9. Posibles puntos de examen</a></li>
+<li><a href="#1-windows-server-caracteristicas-y-ediciones">1. Windows Server: características y ediciones</a></li>
+<li><a href="#2-instalacion-roles-y-caracteristicas">2. Instalación, roles y características</a></li>
+<li><a href="#3-mantenimiento-actualizaciones-y-monitorizacion">3. Mantenimiento: actualizaciones y monitorización</a></li>
+<li><a href="#4-fundamentos-de-directorio-activo">4. Fundamentos de Directorio Activo (AD DS)</a></li>
+<li><a href="#5-estructura-logica-y-fisica">5. Estructura lógica y física del Directorio Activo</a></li>
+<li><a href="#6-controladores-de-dominio-gc-esquema-y-fsmo">6. Controladores de dominio, catálogo global, esquema y FSMO</a></li>
+<li><a href="#7-datos-y-anclas-de-memoria">7. Datos y anclas de memoria</a></li>
+<li><a href="#8-no-confundir">8. No confundir</a></li>
+<li><a href="#9-posibles-trampas-de-examen">9. Posibles trampas de examen</a></li>
+<li><a href="#10-posibles-preguntas-tipo-test">10. Posibles preguntas tipo test</a></li>
+<li><a href="#11-posibles-preguntas-cortas">11. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#12-supuestos-practicos">12. Supuestos prácticos</a></li>
+<li><a href="#13-matriz-de-memorizacion">13. Matriz de memorización</a></li>
+<li><a href="#14-resumen-final">14. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#15-actualidad-windows-server">15. Actualidad Windows Server — datos fechados</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
 
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>Este tema se centra en Windows Server y en el Directorio Activo «clásico» (AD DS, on-premise). El sistema operativo de usuario (Windows 10/11) se estudió en el Tema 11, y los servidores Linux se estudian en el Tema 13. La administración de usuarios y grupos, los logon scripts y la supervisión del visor de eventos en un entorno Windows se desarrollan con detalle en los Temas 14 y 15; aquí se citan solo como parte del conjunto de Directorio Activo, sin repetir ese contenido.</th>
+<th><strong>⚠️ No confundir — fronteras del tema</strong><br>Este tema cubre <strong>Windows Server</strong> y los <strong>fundamentos de Directorio Activo</strong> (AD DS, on-premise). Windows cliente es el <strong>Tema 11</strong>; Linux Server, el <strong>Tema 13</strong>; usuarios, grupos y logon scripts, el <strong>Tema 14</strong>; Visor de eventos, comparticiones y permisos, el <strong>Tema 15</strong>; distribución de software, el <strong>Tema 16</strong>; y redes y seguridad de red, los <strong>Temas 27-29</strong>.</th>
 </tr>
 </table></div>
-<h2 id="1-sistemas-operativos-de-servidor-la-familia-windows-server" class="tema-h2">1. Sistemas operativos de servidor: la familia Windows Server</h2>
-<p>Un sistema operativo de <strong>servidor</strong> está optimizado para permanecer en funcionamiento de forma continua (24/7), atender muchas conexiones simultáneas y administrar recursos compartidos de red, frente a un sistema operativo de usuario (Tema 11), pensado para el uso individual de un único puesto de trabajo. Windows Server admite además una modalidad de instalación mínima, <strong>Server Core</strong>, sin entorno gráfico de escritorio, administrable por PowerShell o de forma remota, que reduce la superficie de ataque y la necesidad de reinicios frente a la instalación con <strong>Desktop Experience</strong> (interfaz gráfica completa).</p>
-<p>La versión más reciente de la familia es <strong>Windows Server 2025</strong> (disponible desde finales de 2024), que convive todavía con un parque muy amplio de servidores en <strong>Windows Server 2022</strong> y versiones anteriores. Entre las novedades más relevantes de Windows Server 2025 destacan mejoras de fondo en Directorio Activo (punto 4), soporte de NUMA para más de 64 núcleos por servidor, cifrado y firma LDAP obligatorios por defecto, TLS 1.3 como protocolo por defecto, y —en su edición Azure— la posibilidad de aplicar parches de seguridad sin reiniciar el servidor (hotpatching).</p>
-<h4 class="tema-h4">Ediciones principales</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Cómo leer este tema — conceptos estables vs. actualidad</strong><br>El <strong>núcleo memorizable</strong> (servidor, Server Core, roles, AD DS, dominio/árbol/bosque, OU, sitio, DC, GC, esquema, FSMO, LDAP, Kerberos, DNS) no cambia con las versiones. Los datos que sí cambian (versión vigente de Windows Server, novedades concretas, estado de WSUS) están reunidos y fechados en el <strong>apartado 15</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="1-windows-server-caracteristicas-y-ediciones" class="tema-h2">1. Windows Server: características y ediciones</h2>
+<p>Un <strong>sistema operativo de servidor</strong> está <strong>optimizado para prestar servicios, atender múltiples conexiones simultáneas y administrar recursos compartidos</strong>, con vocación de funcionamiento continuo. Se diferencia del sistema operativo <strong>cliente</strong> (Tema 11), pensado para el trabajo individual en un puesto: cambian el propósito, el modelo de licenciamiento, las funciones disponibles y las herramientas de administración.</p>
+<h4 class="tema-h4">Server Core y Desktop Experience</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th></th>
+<th><strong>Server Core</strong></th>
+<th><strong>Desktop Experience</strong></th>
+</tr>
+<tr>
+<td><strong>Interfaz</strong></td>
+<td>Instalación mínima, <strong>sin escritorio gráfico completo</strong></td>
+<td><strong>Entorno gráfico completo</strong></td>
+</tr>
+<tr>
+<td><strong>Administración</strong></td>
+<td>Consola local, <strong>PowerShell</strong> o administración remota</td>
+<td>Consolas gráficas locales, además de remota y PowerShell</td>
+</tr>
+<tr>
+<td><strong>Ventajas</strong></td>
+<td><strong>Menor superficie de ataque</strong>, menos componentes instalados y menor mantenimiento asociado a la interfaz gráfica</td>
+<td>Mayor comodidad para tareas puntuales y herramientas que exigen GUI</td>
+</tr>
+</table></div>
+<p>Server Core reduce componentes y mantenimiento asociado a la interfaz, pero <strong>no elimina automáticamente todos los reinicios ni los problemas de mantenimiento</strong>: el servidor sigue necesitando actualizaciones y ventanas de servicio.</p>
+<h4 class="tema-h4">Ediciones Standard y Datacenter</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>Edición</strong></th>
-<th><strong>Virtualización incluida</strong></th>
-<th><strong>Uso típico</strong></th>
+<th><strong>Orientación</strong></th>
+<th><strong>Derechos de virtualización (por licencia)</strong></th>
+</tr>
+<tr>
+<td><strong>Standard</strong></td>
+<td>Entornos con <strong>virtualización limitada</strong></td>
+<td>Derecho a ejecutar <strong>2 OSE/VM virtuales</strong> por licencia</td>
+</tr>
+<tr>
+<td><strong>Datacenter</strong></td>
+<td>Entornos <strong>altamente virtualizados</strong> y funciones avanzadas</td>
+<td><strong>OSE/VM virtuales ilimitadas</strong> por licencia</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br>Las «2 VM» de Standard son un <strong>derecho por licencia</strong>, <strong>no un límite absoluto del servidor</strong>: pueden asignarse licencias adicionales conforme al modelo de licenciamiento para ejecutar más máquinas virtuales. El detalle del licenciamiento no es objeto de este tema.</th>
+</tr>
+</table></div>
+
+<h2 id="2-instalacion-roles-y-caracteristicas" class="tema-h2">2. Instalación, roles y características</h2>
+<p>La instalación admite los mismos métodos vistos para el cliente en el Tema 11 —<strong>medios físicos, instalación por red, imágenes con Sysprep y DISM</strong>—, eligiendo además entre <strong>Server Core</strong> o <strong>Desktop Experience</strong>. La diferencia esencial llega después:</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br>Tras instalar Windows Server, el sistema base <strong>se especializa mediante roles y características</strong>. Un servidor «recién instalado» no hace nada en particular hasta que se le añade el rol correspondiente.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th></th>
+<th><strong>Rol</strong></th>
+<th><strong>Característica</strong></th>
+</tr>
+<tr>
+<td><strong>Qué es</strong></td>
+<td><strong>Función principal que presta el servidor</strong> a la red</td>
+<td><strong>Componente de soporte</strong> que amplía o complementa funcionalidades</td>
+</tr>
+<tr>
+<td><strong>Ejemplos</strong></td>
+<td>AD DS · DNS · DHCP · IIS · Hyper-V · RDS</td>
+<td>Herramientas de copia de seguridad · Failover Clustering · RSAT</td>
+</tr>
+<tr>
+<td><strong>Idea clave</strong></td>
+<td>Define <strong>qué servicio ofrece</strong> el servidor</td>
+<td>Da <strong>apoyo</strong> al sistema o a otros roles</td>
+</tr>
+</table></div>
+<h4 class="tema-h4">Administración</h4>
+<ul class="tema-lista">
+<li><strong>Server Manager (Administrador del servidor)</strong>: administración de <strong>roles, características y servidores</strong>, incluida la gestión de varios servidores desde un único punto.</li>
+<li><strong>PowerShell</strong>: administración y <strong>automatización</strong>, especialmente útil en Server Core y en tareas repetitivas.</li>
+<li>Ambas vías admiten <strong>administración remota</strong> del servidor.</li>
+</ul>
+
+<h2 id="3-mantenimiento-actualizaciones-y-monitorizacion" class="tema-h2">3. Mantenimiento: actualizaciones y monitorización</h2>
+<h4 class="tema-h4">Actualizaciones</h4>
+<ul class="tema-lista">
+<li>Microsoft publica <strong>actualizaciones mensuales</strong>; el <strong>Patch Tuesday</strong> (segundo martes) es la referencia habitual del ciclo, aunque no toda actualización sigue ese calendario (existen publicaciones fuera de ciclo).</li>
+<li>Buena práctica en servidores: <strong>probar previamente</strong> en un entorno de preproducción, aplicar en una <strong>ventana de mantenimiento</strong> planificada y disponer de <strong>copia de seguridad o snapshot previo</strong> cuando proceda, para poder revertir.</li>
+</ul>
+<h4 class="tema-h4">WSUS</h4>
+<p><strong>WSUS (Windows Server Update Services)</strong> es el <strong>rol de Windows Server</strong> que permite <strong>gestionar centralizadamente las actualizaciones</strong> de los equipos de la organización: se descargan una vez, se aprueban y se distribuyen de forma controlada.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — el estado de WSUS</strong><br>WSUS está <strong>deprecated (deprecado)</strong>: no recibirá nuevas funcionalidades. Pero <strong>sigue soportado para despliegues en producción</strong> y continúa recibiendo actualizaciones de seguridad y calidad conforme a su ciclo de vida. <strong>«Deprecated» no significa «fuera de servicio»</strong>, ni implica que haya sido simplemente sustituido por otra herramienta. (Como ampliación, existen alternativas modernas de gestión en la nube.)</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Monitorización</h4>
+<ul class="tema-lista">
+<li><strong>Monitor de rendimiento (Performance Monitor)</strong>: contadores de rendimiento en tiempo real e histórico — prioridad alta.</li>
+<li><strong>Monitor de recursos (Resource Monitor)</strong>: uso detallado de CPU, memoria, disco y red <strong>por proceso</strong> — prioridad alta.</li>
+<li><strong>Visor de eventos</strong>: registros de sistema, seguridad y aplicaciones (su manejo detallado, en el Tema 15) — prioridad alta.</li>
+<li><strong>Administrador de tareas</strong>: vista rápida del consumo de recursos y procesos.</li>
+<li><strong>Windows Admin Center</strong>: consola moderna basada en navegador para administrar varios servidores, incluido Server Core — prioridad media.</li>
+<li><strong>SCOM (System Center Operations Manager)</strong>: solución de monitorización a gran escala con alertado proactivo, propia de entornos con muchos servidores — prioridad media, sin desarrollo.</li>
+</ul>
+
+<h2 id="4-fundamentos-de-directorio-activo" class="tema-h2">4. Fundamentos de Directorio Activo (AD DS)</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición precisa</strong><br><strong>AD DS (Active Directory Domain Services)</strong> es un <strong>servicio de directorio basado en una base de datos distribuida y jerárquica</strong> que <strong>almacena y administra información sobre los objetos de la red</strong> (usuarios, equipos, grupos, impresoras...). Es el servicio de Windows Server que implementa el Directorio Activo clásico/on-premise.<br>Evita describirlo como «una base de datos centralizada» sin más: la información se <strong>replica entre varios controladores de dominio</strong>, de modo que es <strong>distribuida y replicada</strong>, aunque la administración sea centralizada.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Para qué sirve</h4>
+<ul class="tema-lista">
+<li><strong>Autenticación</strong>: verificar la identidad de usuarios y equipos del dominio.</li>
+<li><strong>Autorización</strong>: determinar a qué recursos puede acceder cada identidad.</li>
+<li><strong>Organización de objetos</strong>: estructurar usuarios, equipos y grupos de forma jerárquica.</li>
+<li><strong>Gestión centralizada</strong>: aplicar configuraciones y políticas de forma homogénea en lugar de equipo por equipo.</li>
+</ul>
+<h4 class="tema-h4">Protocolos: LDAP y Kerberos</h4>
+<ul class="tema-lista">
+<li><strong>LDAP (Lightweight Directory Access Protocol)</strong>: protocolo de <strong>acceso, consulta y modificación del directorio</strong>.</li>
+<li><strong>Kerberos</strong>: protocolo de <strong>autenticación</strong> en el dominio.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br><strong>LDAP → DIRECTORIO · KERBEROS → AUTENTICACIÓN.</strong></th>
+</tr>
+</table></div>
+<h4 class="tema-h4">AD DS y DNS</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>AD DS depende de DNS</strong>: los equipos localizan los <strong>controladores de dominio</strong> y los servicios relacionados mediante consultas DNS. Sin un DNS correctamente configurado, el dominio no funciona (inicios de sesión, aplicación de directivas, replicación). Por eso es habitual que los propios controladores de dominio actúen también como servidores DNS. <strong>AD DS + DNS van estrechamente ligados</strong> (el detalle de DNS, en el bloque de redes).</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — AD DS y Microsoft Entra ID</strong><br><strong>AD DS</strong> → servicio de directorio <strong>clásico/on-premise</strong>, basado en <strong>dominios, árboles y bosques</strong>.<br><strong>Microsoft Entra ID</strong> → servicio de <strong>identidad en la nube</strong>, orientado a aplicaciones y servicios en línea, que no organiza los objetos en esa estructura.<br>Pueden <strong>coexistir en escenarios híbridos</strong>. Este tema trata los fundamentos de AD DS, no la administración de Entra ID.</th>
+</tr>
+</table></div>
+
+<h2 id="5-estructura-logica-y-fisica" class="tema-h2">5. Estructura lógica y física del Directorio Activo</h2>
+<h4 class="tema-h4">Estructura lógica</h4>
+<ul class="tema-lista">
+<li><strong>Dominio</strong>: <strong>unidad lógica de administración y seguridad</strong>; agrupa objetos que comparten directorio y políticas.</li>
+<li><strong>Árbol</strong>: conjunto de dominios con <strong>espacio de nombres DNS contiguo</strong> (por ejemplo, <code>organizacion.local</code> y <code>sedes.organizacion.local</code>).</li>
+<li><strong>Bosque</strong>: conjunto de uno o más árboles que <strong>comparten elementos estructurales del directorio</strong> (esquema y catálogo global comunes). Es el <strong>límite de seguridad</strong> del despliegue.</li>
+<li><strong>OU (unidad organizativa)</strong>: <strong>contenedor administrativo</strong> dentro de un dominio para <strong>organizar objetos y aplicar GPO</strong> de forma selectiva. <strong>No es un dominio</strong>: no tiene directorio propio ni es límite de seguridad.</li>
+<li><strong>Trust (relación de confianza)</strong>: vínculo que permite el acceso a recursos <strong>entre dominios o bosques</strong> distintos.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — la gran ancla del tema</strong><br><strong>DOMINIO → ÁRBOL → BOSQUE</strong> (de menor a mayor).<br><strong>OU → organiza y permite aplicar GPO</strong> · <strong>BOSQUE → límite de seguridad</strong>.<br>Una OU <strong>no</strong> es un dominio.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Estructura física</h4>
+<ul class="tema-lista">
+<li><strong>Sitio (site)</strong>: agrupación de <strong>una o varias subredes bien conectadas</strong>, habitualmente correspondiente a una ubicación física. Finalidad: <strong>optimizar la replicación</strong> entre controladores y <strong>favorecer el uso del DC adecuado o más cercano</strong> por parte de los clientes.</li>
+<li><strong>Controlador de dominio (DC)</strong>: servidor que <strong>aloja una réplica de la información de AD DS</strong> y presta los <strong>servicios de autenticación y directorio</strong>.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — dominio vs. sitio</strong><br><strong>DOMINIO</strong> → concepto <strong>lógico</strong>: administración y seguridad.<br><strong>SITIO</strong> → concepto <strong>físico/topológico</strong>: subredes y conectividad.<br>Un <strong>dominio puede abarcar varios sitios</strong> (varias sedes), y un mismo sitio puede alojar controladores de más de un dominio del bosque.</th>
+</tr>
+</table></div>
+
+<h2 id="6-controladores-de-dominio-gc-esquema-y-fsmo" class="tema-h2">6. Controladores de dominio, catálogo global, esquema y FSMO</h2>
+<h4 class="tema-h4">Replicación multimaestro</h4>
+<p>Un dominio suele contar con <strong>varios controladores de dominio</strong> que se replican entre sí. La mayoría de las operaciones de AD DS se gestionan de forma <strong>multimaestro</strong>: <strong>un cambio puede realizarse en un DC y replicarse a los demás</strong>. Solo <strong>determinados cambios están reservados a los roles FSMO</strong>.</p>
+<h4 class="tema-h4">Catálogo global y esquema</h4>
+<ul class="tema-lista">
+<li><strong>Catálogo global (Global Catalog, GC)</strong>: <strong>réplica parcial</strong> de los objetos <strong>del bosque</strong>, disponible en determinados controladores de dominio. Finalidad: <strong>acelerar las búsquedas a escala de bosque</strong>.</li>
+<li><strong>Esquema (schema)</strong>: <strong>define las clases de objetos y los atributos</strong> que pueden existir en AD DS. Es <strong>común a todo el bosque</strong>.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — GC vs. esquema</strong><br><strong>GC → BÚSQUEDA</strong>: qué objetos hay (réplica parcial para localizarlos rápido en todo el bosque).<br><strong>ESQUEMA → CLASES + ATRIBUTOS</strong>: qué tipos de objeto pueden existir y qué características tienen.<br>Uno guarda contenido resumido; el otro define la estructura.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">GPO (concepto)</h4>
+<p>Una <strong>GPO (directiva de grupo)</strong> es un <strong>conjunto de configuraciones</strong> que puede <strong>vincularse a un sitio, a un dominio o a una OU</strong>, y se aplica a los usuarios y equipos incluidos en su ámbito. (El detalle de usuarios y grupos corresponde al Tema 14.)</p>
+<h4 class="tema-h4">Los cinco roles FSMO</h4>
+<p>Aunque AD DS es multimaestro para la mayoría de operaciones, existen <strong>cinco roles con responsabilidades únicas</strong> —<strong>FSMO (Flexible Single Master Operations)</strong>—, que residen en un solo controlador de dominio a la vez: <strong>dos de bosque y tres de dominio</strong>.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Rol</strong></th>
+<th><strong>Ámbito</strong></th>
+<th><strong>Idea clave</strong></th>
+</tr>
+<tr>
+<td><strong>Schema Master</strong></td>
+<td>Bosque</td>
+<td>Modifica el <strong>esquema</strong></td>
+</tr>
+<tr>
+<td><strong>Domain Naming Master</strong></td>
+<td>Bosque</td>
+<td><strong>Añade y elimina dominios</strong> del bosque</td>
+</tr>
+<tr>
+<td><strong>RID Master</strong></td>
+<td>Dominio</td>
+<td>Asigna <strong>bloques de RID</strong> (identificadores para crear objetos)</td>
+</tr>
+<tr>
+<td><strong>PDC Emulator</strong></td>
+<td>Dominio</td>
+<td><strong>Tiempo, contraseñas y compatibilidad</strong></td>
+</tr>
+<tr>
+<td><strong>Infrastructure Master</strong></td>
+<td>Dominio</td>
+<td><strong>Referencias entre dominios</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — el ancla FSMO</strong><br><strong>2 BOSQUE + 3 DOMINIO = 5 FSMO.</strong><br>Bosque: <strong>Schema</strong> (estructura) y <strong>Naming</strong> (dominios).<br>Dominio: <strong>RID</strong> (identificadores), <strong>PDC</strong> (tiempo/contraseñas), <strong>Infrastructure</strong> (referencias).</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — LAPS</strong><br><strong>LAPS (Local Administrator Password Solution)</strong> permite <strong>administrar y rotar de forma controlada las contraseñas de los administradores locales</strong> de los equipos del dominio, evitando contraseñas idénticas y estáticas en todo el parque. Contenido de ampliación.</th>
+</tr>
+</table></div>
+
+<h2 id="7-datos-y-anclas-de-memoria" class="tema-h2">7. Datos y anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>SERVER CORE → MENOS INTERFAZ</strong> (menor superficie de ataque; administración por PowerShell/remota).</li>
+<li><strong>ROL → SERVICIO</strong> (AD DS, DNS, DHCP, IIS, Hyper-V, RDS) · <strong>CARACTERÍSTICA → APOYO</strong> (Backup, Failover Clustering, RSAT).</li>
+<li><strong>Standard → 2 OSE/VM por licencia · Datacenter → ilimitadas</strong> (derecho por licencia, no límite del servidor).</li>
+<li><strong>LDAP → DIRECTORIO · KERBEROS → AUTENTICACIÓN</strong>.</li>
+<li><strong>DOMINIO → ÁRBOL → BOSQUE</strong>; <strong>OU → ORGANIZA/GPO</strong>; <strong>BOSQUE → límite de seguridad</strong>.</li>
+<li><strong>SITE → RED/UBICACIÓN</strong> (subredes bien conectadas); dominio = lógico, sitio = físico.</li>
+<li><strong>DC</strong> = réplica de AD DS + autenticación y directorio; AD DS es <strong>multimaestro</strong> salvo FSMO.</li>
+<li><strong>GC → BÚSQUEDA</strong> (réplica parcial del bosque) · <strong>SCHEMA → CLASES + ATRIBUTOS</strong> (común al bosque).</li>
+<li><strong>FSMO → 2 BOSQUE + 3 DOMINIO</strong>: Schema → estructura · Naming → dominios · RID → identificadores · PDC → tiempo/contraseñas · Infrastructure → referencias.</li>
+<li><strong>AD DS depende de DNS</strong> para localizar los controladores de dominio.</li>
+<li><strong>WSUS</strong> = rol de gestión centralizada de actualizaciones; <strong>deprecated pero soportado</strong>.</li>
+<li>Monitorización: <strong>Performance Monitor · Resource Monitor · Visor de eventos</strong> (alta) · Windows Admin Center · SCOM (media).</li>
+</ul>
+
+<h2 id="8-no-confundir" class="tema-h2">8. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto A</strong></th>
+<th><strong>Concepto B</strong></th>
+<th><strong>Diferencia clave</strong></th>
+</tr>
+<tr>
+<td><strong>Windows Server</strong>: presta servicios a la red</td>
+<td><strong>Windows cliente</strong>: puesto de trabajo individual (T11)</td>
+<td>Propósito, funciones y licenciamiento distintos</td>
+</tr>
+<tr>
+<td><strong>Server Core</strong>: sin escritorio gráfico completo</td>
+<td><strong>Desktop Experience</strong>: entorno gráfico completo</td>
+<td>Menos componentes y superficie de ataque vs. comodidad de GUI</td>
+</tr>
+<tr>
+<td><strong>Rol</strong>: función principal que presta el servidor</td>
+<td><strong>Característica</strong>: componente de apoyo</td>
+<td>AD DS/DNS/DHCP vs. Backup/Clustering/RSAT</td>
+</tr>
+<tr>
+<td><strong>Standard</strong>: 2 OSE/VM por licencia</td>
+<td><strong>Datacenter</strong>: OSE/VM ilimitadas por licencia</td>
+<td>Es un derecho por licencia, ampliable con licencias adicionales</td>
+</tr>
+<tr>
+<td><strong>AD DS</strong>: directorio clásico on-premise (dominios/árboles/bosques)</td>
+<td><strong>Microsoft Entra ID</strong>: identidad en la nube</td>
+<td>Pueden coexistir en escenarios híbridos</td>
+</tr>
+<tr>
+<td><strong>Dominio</strong>: lógico (administración y seguridad)</td>
+<td><strong>Sitio</strong>: físico (subredes y conectividad)</td>
+<td>Un dominio puede abarcar varios sitios</td>
+</tr>
+<tr>
+<td><strong>Dominio</strong>: unidad con su propio directorio y políticas</td>
+<td><strong>OU</strong>: contenedor dentro del dominio para organizar y aplicar GPO</td>
+<td>La OU no es un dominio ni límite de seguridad</td>
+</tr>
+<tr>
+<td><strong>Árbol</strong>: dominios con espacio de nombres DNS contiguo</td>
+<td><strong>Bosque</strong>: uno o más árboles con estructura común</td>
+<td>El bosque es el límite de seguridad</td>
+</tr>
+<tr>
+<td><strong>Sitio</strong>: agrupación de subredes bien conectadas</td>
+<td><strong>Subred</strong>: el rango de direcciones concreto</td>
+<td>Un sitio puede incluir varias subredes</td>
+</tr>
+<tr>
+<td><strong>Catálogo global</strong>: réplica parcial del bosque para buscar</td>
+<td><strong>Esquema</strong>: clases y atributos posibles</td>
+<td>Contenido resumido vs. definición de la estructura</td>
+</tr>
+<tr>
+<td><strong>LDAP</strong>: acceso/consulta/modificación del directorio</td>
+<td><strong>Kerberos</strong>: autenticación en el dominio</td>
+<td>Directorio vs. autenticación</td>
+</tr>
+<tr>
+<td><strong>Multimaestro</strong>: la mayoría de cambios en cualquier DC</td>
+<td><strong>FSMO</strong>: operaciones reservadas a un único DC</td>
+<td>Cinco roles con responsabilidades únicas</td>
+</tr>
+<tr>
+<td><strong>Schema Master</strong>: modifica el esquema</td>
+<td><strong>Domain Naming Master</strong>: añade/elimina dominios</td>
+<td>Los dos son de bosque, con funciones distintas</td>
+</tr>
+<tr>
+<td><strong>RID Master</strong>: bloques de identificadores</td>
+<td><strong>PDC Emulator</strong>: tiempo/contraseñas · <strong>Infrastructure</strong>: referencias entre dominios</td>
+<td>Los tres son de dominio, con funciones distintas</td>
+</tr>
+<tr>
+<td><strong>WSUS deprecated</strong>: sin nuevas funciones</td>
+<td><strong>WSUS fuera de servicio</strong>: afirmación falsa</td>
+<td>Sigue soportado en producción</td>
+</tr>
+</table></div>
+
+<h2 id="9-posibles-trampas-de-examen" class="tema-h2">9. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li><strong>«AD DS es una base de datos centralizada»</strong> — impreciso: es un servicio de directorio basado en información <strong>distribuida y replicada</strong> entre controladores de dominio.</li>
+<li><strong>«Dominio y sitio son sinónimos»</strong> — falso: lógico/administrativo vs. físico/topológico.</li>
+<li><strong>«Una OU es un tipo de dominio»</strong> — falso: es un contenedor dentro del dominio para organizar y aplicar GPO.</li>
+<li><strong>«Árbol y bosque son lo mismo»</strong> — falso: el árbol comparte espacio de nombres contiguo; el bosque agrupa árboles y es el límite de seguridad.</li>
+<li><strong>«El catálogo global define las clases de objetos»</strong> — falso: eso es el esquema; el GC es una réplica parcial para búsquedas.</li>
+<li><strong>«LDAP autentica a los usuarios del dominio»</strong> — impreciso: LDAP es el protocolo de directorio; la autenticación en el dominio es de Kerberos.</li>
+<li><strong>«Failover Clustering es un rol»</strong> — falso: es una característica; los roles son AD DS, DNS, DHCP, IIS...</li>
+<li><strong>«Standard no permite más de 2 máquinas virtuales»</strong> — impreciso: son 2 OSE/VM <strong>por licencia</strong>; pueden asignarse licencias adicionales.</li>
+<li><strong>«WSUS está obsoleto y ya no funciona»</strong> — falso: deprecated, pero soportado y operativo en producción.</li>
+<li><strong>«Los roles FSMO son cuatro / seis»</strong> — son <strong>cinco</strong>: 2 de bosque + 3 de dominio.</li>
+<li><strong>«Schema Master añade dominios al bosque»</strong> — falso: eso es el Domain Naming Master.</li>
+<li><strong>«El RID Master sincroniza la hora del dominio»</strong> — falso: la referencia horaria y los cambios de contraseña con prioridad son del PDC Emulator.</li>
+<li><strong>«AD DS puede funcionar sin DNS»</strong> — falso: depende de DNS para localizar los controladores de dominio y los servicios asociados.</li>
+<li><strong>«Server Core elimina los reinicios y el mantenimiento»</strong> — falso: reduce componentes y superficie de ataque, no elimina el mantenimiento.</li>
+</ul>
+
+<h2 id="10-posibles-preguntas-tipo-test" class="tema-h2">10. Posibles preguntas tipo test</h2>
+<ul class="tema-lista">
+<li>Diferencia entre <strong>Server Core y Desktop Experience</strong> y ventajas del primero.</li>
+<li>Clasificar como <strong>rol o característica</strong>: AD DS, DNS, DHCP, IIS, Hyper-V, RDS · Backup, Failover Clustering, RSAT.</li>
+<li>Diferencia entre las ediciones <strong>Standard y Datacenter</strong> en derechos de virtualización.</li>
+<li>¿Con qué herramientas se añaden roles y características? (<strong>Server Manager</strong>, PowerShell).</li>
+<li>Definición precisa de <strong>AD DS</strong> (servicio de directorio, información distribuida y jerárquica).</li>
+<li>¿Qué protocolo <strong>consulta el directorio</strong> y cuál <strong>autentica</strong> en el dominio?</li>
+<li>Ordenar la jerarquía lógica: <strong>dominio → árbol → bosque</strong>; ¿cuál es el límite de seguridad?</li>
+<li>¿Para qué sirve una <strong>OU</strong> y en qué se diferencia de un dominio?</li>
+<li>¿Qué es un <strong>sitio</strong> y para qué lo usa AD DS?</li>
+<li>¿Qué es un <strong>controlador de dominio</strong> y qué significa que AD DS sea <strong>multimaestro</strong>?</li>
+<li>¿Qué es el <strong>catálogo global</strong>? ¿Y el <strong>esquema</strong>? ¿En qué se diferencian?</li>
+<li>¿A qué elementos puede vincularse una <strong>GPO</strong>? (sitio, dominio, OU).</li>
+<li>¿Cuántos <strong>FSMO</strong> hay y cómo se reparten? (5 = 2 bosque + 3 dominio).</li>
+<li>Clasificar cada FSMO por ámbito: Schema, Naming, RID, PDC, Infrastructure.</li>
+<li>Asociar función y rol FSMO: «añadir un dominio» → Naming; «modificar clases y atributos» → Schema; «asignar identificadores» → RID.</li>
+<li>¿Por qué <strong>AD DS depende de DNS</strong>?</li>
+<li>Estado actual de <strong>WSUS</strong> y su función como rol.</li>
+<li>Herramientas de <strong>monitorización</strong> del servidor y para qué sirve cada una.</li>
+</ul>
+
+<h2 id="11-posibles-preguntas-cortas" class="tema-h2">11. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<h4 class="tema-h4">1. Diferencie Server Core y Desktop Experience</h4>
+<ul class="tema-lista">
+<li>Definición de cada modalidad de instalación.</li>
+<li>Ventajas de Server Core: menor superficie de ataque, menos componentes, menor mantenimiento de la interfaz; administración por consola/PowerShell o remota.</li>
+<li>Matiz: no elimina reinicios ni mantenimiento.</li>
+</ul>
+<h4 class="tema-h4">2. Diferencie roles y características</h4>
+<ul class="tema-lista">
+<li>Rol: función principal que presta el servidor (ejemplos).</li>
+<li>Característica: componente de apoyo (ejemplos).</li>
+<li>Cierre: se añaden desde Server Manager o PowerShell; el servidor «se especializa» tras la instalación.</li>
+</ul>
+<h4 class="tema-h4">3. Explique qué es AD DS</h4>
+<ul class="tema-lista">
+<li>Definición precisa (servicio de directorio, base distribuida y jerárquica de objetos de red).</li>
+<li>Funciones: autenticación, autorización, organización de objetos, gestión centralizada.</li>
+<li>Protocolos: LDAP (directorio) y Kerberos (autenticación); dependencia de DNS.</li>
+</ul>
+<h4 class="tema-h4">4. Explique dominio, árbol y bosque</h4>
+<ul class="tema-lista">
+<li>Dominio: unidad lógica de administración y seguridad.</li>
+<li>Árbol: dominios con espacio de nombres DNS contiguo.</li>
+<li>Bosque: uno o más árboles con estructura común (esquema, GC); límite de seguridad.</li>
+<li>Cierre: papel de las relaciones de confianza.</li>
+</ul>
+<h4 class="tema-h4">5. Diferencie dominio y sitio</h4>
+<ul class="tema-lista">
+<li>Dominio: lógico (administración, seguridad).</li>
+<li>Sitio: físico (subredes bien conectadas); finalidad de replicación y localización del DC adecuado.</li>
+<li>Cierre: un dominio puede abarcar varios sitios y viceversa.</li>
+</ul>
+<h4 class="tema-h4">6. Explique el papel de un controlador de dominio</h4>
+<ul class="tema-lista">
+<li>Aloja una réplica de AD DS; presta autenticación y servicios de directorio.</li>
+<li>Varios DC por dominio; replicación multimaestro para la mayoría de operaciones.</li>
+<li>Cierre: algunos alojan el catálogo global y/o roles FSMO.</li>
+</ul>
+<h4 class="tema-h4">7. Explique el catálogo global y el esquema</h4>
+<ul class="tema-lista">
+<li>GC: réplica parcial de los objetos del bosque en determinados DC; acelera búsquedas de bosque.</li>
+<li>Esquema: define clases de objetos y atributos; común al bosque; su modificación corresponde al Schema Master.</li>
+<li>Cierre: no confundir contenido (GC) con definición estructural (esquema).</li>
+</ul>
+<h4 class="tema-h4">8. Explique LDAP y Kerberos</h4>
+<ul class="tema-lista">
+<li>LDAP: acceso, consulta y modificación del directorio.</li>
+<li>Kerberos: autenticación de usuarios y equipos del dominio.</li>
+<li>Cierre: ambos son estándares en los que se apoya AD DS.</li>
+</ul>
+<h4 class="tema-h4">9. Enumere y explique los cinco roles FSMO</h4>
+<ul class="tema-lista">
+<li>Punto de partida: AD DS es multimaestro salvo estas cinco operaciones.</li>
+<li>Bosque: Schema Master (esquema) y Domain Naming Master (añadir/eliminar dominios).</li>
+<li>Dominio: RID Master (bloques de RID), PDC Emulator (tiempo, contraseñas, compatibilidad) e Infrastructure Master (referencias entre dominios).</li>
+<li>Cierre: reparto 2 + 3 = 5.</li>
+</ul>
+
+<h2 id="12-supuestos-practicos" class="tema-h2">12. Supuestos prácticos</h2>
+<h4 class="tema-h4">Supuesto 1 — Varias sedes con enlaces desiguales</h4>
+<p><strong>Escenario</strong>: un ayuntamiento tiene la sede central y cuatro sedes de barrio, algunas con enlaces lentos. Los usuarios de las sedes se quejan de inicios de sesión lentos.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué elemento de AD DS interviene?</strong> Los <strong>sitios</strong>: agrupan subredes bien conectadas y permiten que los clientes se autentiquen contra el <strong>DC más adecuado/cercano</strong> en lugar de contra uno remoto.</li>
+<li><strong>b) ¿Qué otra ventaja aportan?</strong> Optimizan el <strong>tráfico de replicación</strong> entre controladores de dominio a través de los enlaces.</li>
+<li><strong>c) ¿Implica esto crear un dominio por sede?</strong> No: el dominio es lógico y puede abarcar varios sitios; multiplicar dominios no resuelve un problema de topología física.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 2 — Configuraciones distintas por departamento</h4>
+<p><strong>Escenario</strong>: se quiere aplicar una configuración concreta a los equipos de Recaudación y otra distinta a los de Biblioteca.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Cómo se organiza?</strong> Creando <strong>OU</strong> por departamento y colocando en ellas los objetos correspondientes.</li>
+<li><strong>b) ¿Cómo se aplican las configuraciones?</strong> Vinculando una <strong>GPO</strong> a cada OU; la directiva se aplica a los usuarios y equipos de su ámbito.</li>
+<li><strong>c) ¿A qué otros elementos puede vincularse una GPO?</strong> A un <strong>sitio</strong> y a un <strong>dominio</strong>, además de a OU. (El detalle de usuarios y grupos, en el Tema 14.)</li>
+</ul>
+<h4 class="tema-h4">Supuesto 3 — Añadir un dominio nuevo al bosque</h4>
+<p><strong>Escenario</strong>: por motivos organizativos se va a incorporar un nuevo dominio al bosque existente.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué rol FSMO es imprescindible?</strong> El <strong>Domain Naming Master</strong>, único que controla la adición y eliminación de dominios; es rol <strong>de bosque</strong>.</li>
+<li><strong>b) ¿Y si en vez de añadir un dominio hubiera que modificar clases o atributos del directorio?</strong> Sería el <strong>Schema Master</strong>, el otro rol de bosque.</li>
+<li><strong>c) ¿Podría hacerse desde cualquier DC?</strong> No: son operaciones reservadas a un único titular del rol, aunque el resto de cambios sí sea multimaestro.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 4 — Problemas al crear objetos nuevos</h4>
+<p><strong>Escenario</strong>: en un dominio empiezan a fallar las altas de usuarios y equipos con errores relacionados con la asignación de identificadores.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué rol conviene revisar?</strong> El <strong>RID Master</strong> del dominio: asigna los <strong>bloques de RID</strong> que los DC necesitan para crear objetos con identificador único.</li>
+<li><strong>b) ¿Es un rol de bosque o de dominio?</strong> De <strong>dominio</strong> — como PDC Emulator e Infrastructure Master.</li>
+<li><strong>c) ¿Qué otros síntomas apuntarían al PDC Emulator?</strong> Problemas de <strong>hora</strong> en el dominio o de <strong>cambios de contraseña</strong>.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 5 — Usuarios que no pueden iniciar sesión</h4>
+<p><strong>Escenario</strong>: varios usuarios de una sede no consiguen iniciar sesión en el dominio, mientras que otros sí.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué comprobaciones básicas plantea el tema?</strong> Disponibilidad y alcance del <strong>controlador de dominio</strong> desde esa sede; configuración de <strong>DNS</strong> en los clientes (AD DS depende de DNS para localizar los DC); estado del servicio de <strong>autenticación Kerberos</strong> y sincronización horaria.</li>
+<li><strong>b) ¿Por qué la hora es relevante?</strong> Porque la autenticación Kerberos es sensible al desfase horario; el <strong>PDC Emulator</strong> actúa como referencia de tiempo del dominio.</li>
+<li><strong>c) ¿Dónde buscar evidencias?</strong> En el <strong>Visor de eventos</strong> del cliente y del DC (su análisis detallado, en el Tema 15).</li>
+</ul>
+<h4 class="tema-h4">Supuesto 6 — Buscar objetos en todo el bosque</h4>
+<p><strong>Escenario</strong>: una aplicación necesita localizar objetos que pueden estar en cualquiera de los dominios del bosque.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué componente lo hace posible?</strong> El <strong>catálogo global</strong>: réplica parcial de los objetos del bosque alojada en determinados DC, pensada para acelerar esas búsquedas.</li>
+<li><strong>b) ¿Contiene todos los atributos?</strong> No: es una réplica <strong>parcial</strong>, con los atributos más consultados.</li>
+<li><strong>c) ¿Sería el esquema el responsable?</strong> No: el esquema define <strong>qué clases y atributos pueden existir</strong>, no almacena el contenido para búsquedas.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 7 — Actualizaciones controladas en los servidores</h4>
+<p><strong>Escenario</strong>: se quiere aprobar y distribuir las actualizaciones desde la propia organización, evitando que cada servidor se actualice por su cuenta.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué rol encaja?</strong> <strong>WSUS</strong>: descarga y aprobación centralizada, con distribución controlada.</li>
+<li><strong>b) ¿Sigue siendo una opción válida?</strong> Sí: está <strong>deprecated</strong> (sin nuevas funciones) pero <strong>soportado</strong> para producción — no está fuera de servicio.</li>
+<li><strong>c) ¿Qué buena práctica acompaña al despliegue?</strong> Probar en preproducción, aplicar en ventana de mantenimiento y disponer de copia/snapshot previo para poder revertir.</li>
+</ul>
+
+<h2 id="13-matriz-de-memorizacion" class="tema-h2">13. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Lo que debo recordar</strong></th>
+</tr>
+<tr>
+<td>Windows Server</td>
+<td>SO optimizado para prestar servicios, múltiples conexiones y recursos compartidos</td>
+</tr>
+<tr>
+<td>Server Core</td>
+<td>Instalación mínima sin escritorio completo; menor superficie de ataque; PowerShell/remota</td>
+</tr>
+<tr>
+<td>Desktop Experience</td>
+<td>Entorno gráfico completo</td>
 </tr>
 <tr>
 <td>Standard</td>
-<td>Hasta 2 máquinas virtuales por licencia</td>
-<td>Entornos físicos o poco virtualizados</td>
+<td>Virtualización limitada: 2 OSE/VM por licencia</td>
 </tr>
 <tr>
 <td>Datacenter</td>
-<td>Virtualización ilimitada</td>
-<td>Centros de datos muy virtualizados, funciones avanzadas de almacenamiento y clúster</td>
-</tr>
-</table></div>
-<h2 id="2-instalación-y-configuración-roles-y-características" class="tema-h2">2. Instalación y configuración: roles y características</h2>
-<p>La instalación de Windows Server admite los mismos métodos vistos para Windows cliente en el Tema 11 (medio físico, despliegue por red, imágenes personalizadas con Sysprep y DISM), eligiendo además entre instalación Server Core o con Desktop Experience.</p>
-<p>Una vez instalado, el sistema base se especializa añadiendo <strong>roles</strong> y <strong>características</strong> desde el <strong>Administrador del servidor (Server Manager)</strong> o mediante PowerShell (cmdlet <code>Install-WindowsFeature</code>), y estas mismas herramientas permiten gestionar de forma centralizada varios servidores a la vez desde un único punto.</p>
-<ul class="tema-lista">
-<li><strong>Rol (server role)</strong>: función principal que el servidor presta a la red. Ejemplos: AD DS (Servicios de dominio de Directorio Activo), servidor DNS, servidor DHCP, Servicios de archivos y almacenamiento, servidor web (IIS), Hyper-V, Servicios de escritorio remoto.</li>
-<li><strong>Característica (feature)</strong>: componente de soporte que complementa al sistema, sin constituir por sí mismo un servicio de red independiente. Ejemplos: herramientas de copia de seguridad de Windows Server, Failover Clustering (clúster de conmutación por error), las herramientas de administración remota del servidor (RSAT).</li>
-</ul>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>⚠️ No confundir</strong><br>Un rol y una característica no son lo mismo, y el examen puede pedir distinguirlos: el rol define qué servicio presta el servidor hacia la red (por ejemplo, ser controlador de dominio o servidor DNS); la característica es un componente auxiliar que da soporte al sistema o a otros roles, pero no ofrece por sí solo un servicio de red identificable.</th>
-</tr>
-</table></div>
-<h2 id="3-mantenimiento-básico-actualizaciones-y-monitorización" class="tema-h2">3. Mantenimiento básico: actualizaciones y monitorización</h2>
-<h4 class="tema-h4">Actualizaciones</h4>
-<p>Microsoft publica sus actualizaciones de seguridad de forma mensual, el segundo martes de cada mes («Patch Tuesday»). En un entorno de servidores, la buena práctica habitual es no instalar los parches directamente en producción: se prueban antes en un entorno de preproducción y se aplican en una ventana de mantenimiento planificada, con una copia de seguridad o una instantánea (snapshot, Tema 10) previa por si es necesario revertir el cambio.</p>
-<p>Para la distribución centralizada de actualizaciones, <strong>WSUS (Windows Server Update Services)</strong> sigue disponible como rol en Windows Server 2025, aunque Microsoft lo declaró en <strong>deprecación desde 2024</strong>: continúa soportado, pero sin nuevas funciones, y la orientación de Microsoft es ir migrando la gestión de parches hacia herramientas en la nube, como <strong>Azure Update Manager</strong>.</p>
-<h4 class="tema-h4">Monitorización</h4>
-<ul class="tema-lista">
-<li><strong>Administrador de tareas</strong> y <strong>Monitor de rendimiento</strong>: igual que en el equipo de usuario (Tema 11), permiten supervisar el consumo de CPU, memoria, disco y red en tiempo real.</li>
-<li><strong>Visor de eventos</strong>: recopila los registros de sistema, seguridad y aplicaciones también en el servidor; su manejo detallado se estudia en el Tema 15.</li>
-<li><strong>Monitor de recursos (Resource Monitor)</strong>: vista más detallada del uso de recursos por proceso, útil para diagnosticar cuellos de botella.</li>
-<li><strong>Windows Admin Center</strong>: consola de administración moderna, basada en navegador web, que centraliza la gestión de varios servidores (Server Core incluido) sustituyendo progresivamente a distintas consolas MMC clásicas.</li>
-<li><strong>System Center Operations Manager (SCOM)</strong>: solución de monitorización a gran escala para entornos empresariales con muchos servidores, con alertado proactivo ante problemas de rendimiento o disponibilidad.</li>
-</ul>
-<h2 id="4-fundamentos-de-directorio-activo" class="tema-h2">4. Fundamentos de Directorio Activo</h2>
-<p><strong>Directorio Activo (Active Directory, AD)</strong> es el servicio de directorio de Microsoft: una base de datos centralizada y jerárquica que almacena información sobre los objetos de una red —usuarios, equipos, grupos, impresoras compartidas— y ofrece los servicios de autenticación y autorización necesarios para que esos objetos puedan identificarse y acceder a los recursos de la red de forma centralizada y segura. El servicio concreto que implementa el Directorio Activo en Windows Server se llama <strong>AD DS (Active Directory Domain Services)</strong>.</p>
-<p>AD DS se apoya en dos protocolos estándar: <strong>LDAP (Lightweight Directory Access Protocol)</strong>, para consultar y modificar los objetos del directorio, y <strong>Kerberos</strong>, para la autenticación segura de usuarios y equipos.</p>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Un Directorio Activo funciona como una gran guía y organigrama centralizado de toda la red: en lugar de que cada equipo mantenga su propia lista de usuarios y contraseñas, existe un único punto central que sabe quién es cada usuario, a qué grupos pertenece, qué equipos existen y qué permisos tiene cada cual sobre los recursos compartidos.</th>
-</tr>
-</table></div>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>No debe confundirse AD DS con <strong>Microsoft Entra ID</strong> (el nuevo nombre, desde 2023-2024, de Azure Active Directory): Entra ID es un servicio de identidad en la nube, orientado a aplicaciones y servicios en línea, que no organiza los objetos en dominios, árboles y bosques como AD DS. Es habitual un escenario híbrido, en el que las cuentas de un AD DS local se sincronizan con Entra ID (mediante Entra Connect) para que los usuarios puedan acceder tanto a recursos locales como a servicios en la nube con una única identidad. El temario de este tema se centra en los fundamentos del Directorio Activo «clásico» (AD DS), no en Entra ID.</th>
-</tr>
-</table></div>
-<h2 id="5-estructura-lógica-y-física-del-directorio-activo" class="tema-h2">5. Estructura lógica y física del Directorio Activo</h2>
-<h4 class="tema-h4">Estructura lógica</h4>
-<ul class="tema-lista">
-<li><strong>Dominio</strong>: unidad administrativa básica de AD; un conjunto de objetos (usuarios, equipos, grupos) que comparten una misma base de datos de directorio y unas mismas políticas de seguridad.</li>
-<li><strong>Árbol de dominios</strong>: conjunto de uno o más dominios que comparten un espacio de nombres DNS contiguo (por ejemplo, <code>donostiatik.local</code> y <code>sedes.donostiatik.local</code>).</li>
-<li><strong>Bosque (forest)</strong>: conjunto de uno o más árboles de dominios; no exige un espacio de nombres común, pero sí comparte un mismo esquema y catálogo global. Es el límite máximo de seguridad y de administración dentro de un despliegue de AD.</li>
-<li><strong>Unidad organizativa (OU, Organizational Unit)</strong>: contenedor dentro de un dominio que permite organizar los objetos de forma jerárquica (por departamento, ubicación, función) y aplicarles Directivas de grupo (GPO) de forma selectiva.</li>
-<li><strong>Relación de confianza (trust)</strong>: vínculo que permite que los usuarios de un dominio o bosque accedan a recursos de otro dominio o bosque distinto.</li>
-</ul>
-<h4 class="tema-h4">Estructura física</h4>
-<ul class="tema-lista">
-<li><strong>Sitio (site)</strong>: agrupación de una o varias subredes IP bien conectadas entre sí (habitualmente correspondiente a una ubicación física, como un edificio o un centro de datos), que AD utiliza para optimizar el tráfico de replicación entre controladores de dominio y para que un usuario inicie sesión contra el controlador de dominio más cercano en vez de contra uno remoto.</li>
-<li><strong>Controlador de dominio (Domain Controller, DC)</strong>: servidor que aloja una copia de la base de datos de AD de su dominio y presta los servicios de autenticación y consulta del directorio.</li>
-</ul>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>⚠️ No confundir</strong><br>Dominio y sitio son conceptos independientes y no deben confundirse: el dominio es una agrupación lógica de seguridad y administración; el sitio es una agrupación física basada en la conectividad de red. Un mismo dominio puede extenderse por varios sitios (por ejemplo, varias sedes de un organismo), y un mismo sitio puede alojar controladores de dominio de más de un dominio del bosque.</th>
-</tr>
-</table></div>
-<h2 id="6-componentes-técnicos-controladores-de-dominio-y-roles-fsmo" class="tema-h2">6. Componentes técnicos: controladores de dominio y roles FSMO</h2>
-<p>Para dar continuidad de servicio, un dominio suele contar con <strong>varios controladores de dominio</strong>, que se replican entre sí. AD funciona de forma <strong>multimaestro</strong> para la mayoría de las operaciones: un cambio puede hacerse en cualquier controlador de dominio y se replica hacia el resto.</p>
-<ul class="tema-lista">
-<li><strong>Catálogo global (Global Catalog)</strong>: copia parcial —con los atributos más consultados— de todos los objetos de todos los dominios del bosque, alojada en determinados controladores de dominio, para acelerar las búsquedas que abarcan todo el bosque.</li>
-<li><strong>Esquema (schema)</strong>: definición de qué clases de objetos (usuario, equipo, grupo…) y qué atributos pueden existir en el directorio; es común a todo el bosque.</li>
-<li><strong>GPO (Group Policy Object, Directiva de grupo)</strong>: conjunto de configuraciones que se vincula a un dominio, un sitio o una OU, y se aplica automáticamente a los usuarios y equipos incluidos en su ámbito, tal y como se introdujo en el Tema 11.</li>
-<li><strong>LAPS (Local Administrator Password Solution)</strong>: solución, reforzada en Windows Server 2025, para gestionar de forma centralizada y con rotación periódica la contraseña de la cuenta de administrador local de cada equipo unido al dominio.</li>
-</ul>
-<p>Aunque AD DS es multimaestro para la mayoría de cambios, existen <strong>cinco operaciones</strong> que, para evitar conflictos, solo puede realizar un único controlador de dominio a la vez. Son los roles <strong>FSMO (Flexible Single Master Operations)</strong>: dos a nivel de bosque y tres a nivel de dominio.</p>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>Rol FSMO</strong></th>
-<th><strong>Ámbito</strong></th>
-<th><strong>Función</strong></th>
+<td>Entornos altamente virtualizados: OSE/VM ilimitadas por licencia</td>
 </tr>
 <tr>
-<td>Maestro de esquema (Schema Master)</td>
+<td>Rol</td>
+<td>Función principal del servidor: AD DS, DNS, DHCP, IIS, Hyper-V, RDS</td>
+</tr>
+<tr>
+<td>Característica</td>
+<td>Componente de apoyo: Backup, Failover Clustering, RSAT</td>
+</tr>
+<tr>
+<td>AD DS</td>
+<td>Servicio de directorio con base distribuida y jerárquica de objetos de red</td>
+</tr>
+<tr>
+<td>LDAP</td>
+<td>Acceso, consulta y modificación del directorio</td>
+</tr>
+<tr>
+<td>Kerberos</td>
+<td>Autenticación en el dominio</td>
+</tr>
+<tr>
+<td>Dominio</td>
+<td>Unidad lógica de administración y seguridad</td>
+</tr>
+<tr>
+<td>Árbol</td>
+<td>Dominios con espacio de nombres DNS contiguo</td>
+</tr>
+<tr>
 <td>Bosque</td>
-<td>Único controlador que puede modificar el esquema del directorio</td>
+<td>Uno o más árboles con estructura común; límite de seguridad</td>
 </tr>
 <tr>
-<td>Maestro de nomenclatura de dominios (Domain Naming Master)</td>
-<td>Bosque</td>
-<td>Controla la adición y eliminación de dominios en el bosque</td>
+<td>OU</td>
+<td>Contenedor administrativo para organizar objetos y aplicar GPO</td>
 </tr>
 <tr>
-<td>Maestro de RID (RID Master)</td>
-<td>Dominio</td>
-<td>Asigna bloques de identificadores relativos (RID) para crear nuevos objetos con SID único</td>
+<td>Sitio</td>
+<td>Subredes bien conectadas; optimiza replicación y elección de DC</td>
 </tr>
 <tr>
-<td>Emulador de PDC (PDC Emulator)</td>
-<td>Dominio</td>
-<td>Referencia horaria y compatibilidad con versiones y clientes antiguos; procesa cambios de contraseña con prioridad</td>
+<td>DC</td>
+<td>Servidor con réplica de AD DS; autenticación y directorio</td>
 </tr>
 <tr>
-<td>Maestro de infraestructura (Infrastructure Master)</td>
-<td>Dominio</td>
-<td>Mantiene actualizadas las referencias a objetos de otros dominios (por ejemplo, en pertenencia a grupos)</td>
+<td>Global Catalog</td>
+<td>Réplica parcial de objetos del bosque; acelera búsquedas</td>
+</tr>
+<tr>
+<td>Esquema</td>
+<td>Clases de objetos y atributos posibles; común al bosque</td>
+</tr>
+<tr>
+<td>GPO</td>
+<td>Configuraciones vinculables a sitio, dominio u OU</td>
+</tr>
+<tr>
+<td>Schema Master</td>
+<td>Bosque: modifica el esquema</td>
+</tr>
+<tr>
+<td>Domain Naming Master</td>
+<td>Bosque: añade y elimina dominios</td>
+</tr>
+<tr>
+<td>RID Master</td>
+<td>Dominio: asigna bloques de RID</td>
+</tr>
+<tr>
+<td>PDC Emulator</td>
+<td>Dominio: tiempo, contraseñas y compatibilidad</td>
+</tr>
+<tr>
+<td>Infrastructure Master</td>
+<td>Dominio: referencias entre dominios</td>
+</tr>
+<tr>
+<td>DNS</td>
+<td>AD DS depende de él para localizar controladores de dominio y servicios</td>
 </tr>
 </table></div>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Para recordar el reparto de los roles FSMO: el bosque tiene dos roles únicos (Esquema y Nomenclatura de dominios), y cada dominio del bosque tiene sus propios tres roles (RID, Emulador de PDC e Infraestructura). Si un dominio de AD se apoya también en DNS —y siempre lo hace, porque AD DS depende de DNS para que los equipos localicen a los controladores de dominio— lo habitual es que el propio controlador de dominio actúe también como servidor DNS, con zonas integradas en el directorio.</th>
-</tr>
-</table></div>
-<h2 id="7-resumen-para-estudiar" class="tema-h2">7. Resumen para estudiar</h2>
+
+<h2 id="14-resumen-final" class="tema-h2">14. Resumen final: si mañana fuera el examen</h2>
 <ul class="tema-lista">
-<li><strong>Windows Server</strong>: sistema operativo de servidor, con instalación Server Core (sin GUI) o Desktop Experience; versión actual Windows Server 2025, muy extendido aún Windows Server 2022; ediciones Standard (virtualización limitada) y Datacenter (ilimitada).</li>
-<li><strong>Roles y características</strong>: el rol presta un servicio de red (AD DS, DNS, DHCP, IIS…); la característica da soporte auxiliar (backup, clustering, RSAT); se gestionan desde el Administrador del servidor o PowerShell.</li>
-<li><strong>Actualizaciones</strong>: Patch Tuesday mensual, prueba en preproducción antes de producción; WSUS deprecado desde 2024 (sigue soportado) frente a Azure Update Manager como alternativa en la nube.</li>
-<li><strong>Monitorización</strong>: Administrador de tareas, Monitor de rendimiento y de recursos, Visor de eventos (Tema 15), Windows Admin Center y SCOM para entornos grandes.</li>
-<li><strong>Directorio Activo (AD DS)</strong>: servicio de directorio centralizado sobre LDAP y Kerberos; distinto de Microsoft Entra ID (identidad en la nube), aunque pueden convivir en modo híbrido.</li>
-<li><strong>Estructura lógica</strong>: dominio, árbol de dominios, bosque (límite de seguridad), unidad organizativa (OU) y relaciones de confianza.</li>
-<li><strong>Estructura física</strong>: sitios (subredes bien conectadas) y controladores de dominio (DC).</li>
-<li><strong>Componentes técnicos</strong>: catálogo global, esquema, GPO, LAPS y los cinco roles FSMO (2 de bosque: Esquema y Nomenclatura de dominios; 3 de dominio: RID, PDC Emulator e Infraestructura).</li>
+<li><strong>Windows Server</strong>: SO orientado a servicios y conexiones múltiples. <strong>Server Core</strong> (sin GUI completa; menos superficie de ataque) vs. <strong>Desktop Experience</strong>. Ediciones <strong>Standard</strong> (2 OSE/VM por licencia) y <strong>Datacenter</strong> (ilimitadas) — derechos por licencia, no límite del servidor.</li>
+<li>Tras instalar, el servidor <strong>se especializa con roles y características</strong>: <strong>rol = servicio</strong> (AD DS, DNS, DHCP, IIS, Hyper-V, RDS) · <strong>característica = apoyo</strong> (Backup, Clustering, RSAT). Administración con <strong>Server Manager</strong> y <strong>PowerShell</strong>.</li>
+<li><strong>Actualizaciones</strong>: ciclo mensual (Patch Tuesday como referencia), pruebas previas, ventana de mantenimiento y copia/snapshot. <strong>WSUS</strong> = rol de gestión centralizada; <strong>deprecated pero soportado</strong>. <strong>Monitorización</strong>: Performance Monitor, Resource Monitor y Visor de eventos (alta); Windows Admin Center y SCOM (media).</li>
+<li><strong>AD DS</strong> = servicio de directorio con base <strong>distribuida y jerárquica</strong> de objetos de red; hace autenticación, autorización, organización y gestión centralizada. <strong>LDAP → directorio · Kerberos → autenticación</strong>. <strong>Depende de DNS</strong>.</li>
+<li><strong>Estructura lógica</strong>: <strong>dominio → árbol → bosque</strong> (límite de seguridad); <strong>OU</strong> organiza y permite aplicar GPO (no es un dominio); <strong>trusts</strong> entre dominios/bosques. <strong>Estructura física</strong>: <strong>sitios</strong> (subredes bien conectadas) y <strong>DC</strong>.</li>
+<li><strong>Multimaestro</strong> salvo los <strong>5 FSMO</strong>: <strong>2 de bosque</strong> (Schema → estructura; Naming → dominios) + <strong>3 de dominio</strong> (RID → identificadores; PDC → tiempo/contraseñas; Infrastructure → referencias).</li>
+<li><strong>GC → búsqueda</strong> (réplica parcial del bosque) · <strong>esquema → clases y atributos</strong> (común al bosque). <strong>GPO</strong> se vincula a sitio, dominio u OU.</li>
 </ul>
 
-<h2 id="8-conceptos-clave" class="tema-h2">8. Conceptos clave</h2>
+<h2 id="15-actualidad-windows-server" class="tema-h2">15. Actualidad Windows Server — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Información sujeta a cambio · Fecha de actualización de estos apuntes: agosto de 2026</strong><br>Estos datos pueden variar con nuevas versiones. El resto del tema no depende de ellos.</th>
+</tr>
+</table></div>
 <ul class="tema-lista">
-<li><strong>Server Core vs. Desktop Experience</strong>; ediciones <strong>Standard vs. Datacenter</strong>.</li>
-<li><strong>Rol vs. característica</strong>; Administrador del servidor y PowerShell.</li>
-<li><strong>Patch Tuesday</strong>; WSUS (deprecado) y Azure Update Manager.</li>
-<li><strong>Windows Admin Center</strong> y SCOM.</li>
-<li><strong>AD DS</strong>: servicio de directorio; protocolos <strong>LDAP y Kerberos</strong>.</li>
-<li><strong>AD DS vs. Microsoft Entra ID</strong> (antes Azure AD) y el modo híbrido.</li>
-<li><strong>Dominio → árbol → bosque</strong>; OU; relaciones de confianza.</li>
-<li><strong>Sitio vs. dominio</strong> (físico vs. lógico); controlador de dominio; replicación multimaestro.</li>
-<li><strong>Catálogo global, esquema, GPO, LAPS</strong>.</li>
-<li><strong>Los 5 roles FSMO</strong> y su reparto 2 (bosque) + 3 (dominio).</li>
-</ul>
-
-<h2 id="9-posibles-puntos-de-examen" class="tema-h2">9. Posibles puntos de examen</h2>
-<ul class="tema-lista">
-<li>Distinguir <strong>rol de característica</strong> con ejemplos (AD DS/DNS/DHCP vs. clustering/RSAT).</li>
-<li>Qué es <strong>Server Core</strong> y sus ventajas (menor superficie de ataque).</li>
-<li>Diferencia de virtualización entre las ediciones <strong>Standard (2 VM) y Datacenter (ilimitada)</strong>.</li>
-<li>Qué protocolos sustentan AD DS: <strong>LDAP (consulta) y Kerberos (autenticación)</strong>.</li>
-<li>La jerarquía lógica <strong>dominio → árbol → bosque</strong> y qué es el límite de seguridad (el bosque).</li>
-<li>Para qué sirve una <strong>OU</strong> (organizar y aplicar GPO selectivamente).</li>
-<li><strong>Sitio ≠ dominio</strong>: físico (subredes) vs. lógico (seguridad/administración).</li>
-<li>Enumerar los <strong>5 roles FSMO</strong> y clasificar cada uno por ámbito (bosque/dominio) — pregunta clásica.</li>
-<li>Qué es el <strong>catálogo global</strong> y en qué se diferencia del esquema.</li>
-<li>Relación AD DS-DNS (AD depende de DNS para localizar controladores de dominio) y qué es <strong>Entra ID</strong>.</li>
+<li><strong>Versión vigente</strong>: <strong>Windows Server 2025</strong> (disponible desde finales de 2024), conviviendo con un parque amplio de <strong>Windows Server 2022</strong> y versiones anteriores.</li>
+<li><strong>Novedades relevantes de Windows Server 2025</strong> (ampliación, no núcleo del tema): requisitos más exigentes de <strong>firma/cifrado LDAP</strong> en nuevas implementaciones, soporte de <strong>TLS 1.3</strong> para LDAP sobre TLS, nuevas funciones de seguridad del directorio y <strong>hotpatch</strong> (aplicar parches sin reiniciar) en determinados escenarios de Azure.</li>
+<li><strong>Estado de WSUS</strong>: <strong>deprecado desde 2024</strong> — sin nuevas funcionalidades — pero <strong>sigue soportado</strong> para despliegues de producción y recibiendo actualizaciones de seguridad y calidad conforme a su ciclo de vida. Como alternativa moderna existen herramientas de gestión de actualizaciones en la nube.</li>
+<li><strong>LAPS</strong>: solución de gestión y rotación de contraseñas de administrador local, reforzada en las versiones recientes de Windows Server.</li>
 </ul>
   </div>
 </article>

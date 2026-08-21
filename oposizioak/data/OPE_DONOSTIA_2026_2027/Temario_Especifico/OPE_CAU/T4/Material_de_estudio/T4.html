@@ -11,233 +11,509 @@
 <li><a href="#3-metodos-de-insercion-y-de-acceso">3. Métodos de inserción y de acceso</a></li>
 <li><a href="#4-indexacion">4. Indexación</a></li>
 <li><a href="#5-formatos-y-caracteristicas-de-los-ficheros">5. Formatos y características de los ficheros</a></li>
-<li><a href="#6-operaciones-sobre-ficheros">6. Operaciones sobre ficheros</a></li>
-<li><a href="#7-resumen-para-estudiar">7. Resumen para estudiar</a></li>
-<li><a href="#8-conceptos-clave">8. Conceptos clave</a></li>
-<li><a href="#9-posibles-puntos-de-examen">9. Posibles puntos de examen</a></li>
+<li><a href="#6-operaciones-sobre-ficheros">6. Operaciones sobre ficheros y sobre registros</a></li>
+<li><a href="#7-datos-y-anclas-de-memoria">7. Datos y anclas de memoria</a></li>
+<li><a href="#8-no-confundir">8. No confundir</a></li>
+<li><a href="#9-posibles-trampas-de-examen">9. Posibles trampas de examen</a></li>
+<li><a href="#10-posibles-preguntas-tipo-test">10. Posibles preguntas tipo test</a></li>
+<li><a href="#11-posibles-preguntas-cortas">11. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#12-supuestos-practicos">12. Supuestos prácticos</a></li>
+<li><a href="#13-matriz-de-memorizacion">13. Matriz de memorización</a></li>
+<li><a href="#14-resumen-final">14. Resumen final: si mañana fuera el examen</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
 
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>Este tema trata los ficheros desde un punto de vista lógico y conceptual: cómo se organiza la información dentro de ellos, con independencia del soporte físico o del sistema operativo concreto.<br>No profundices aquí en los dispositivos de almacenamiento (discos, discos sólidos, memorias flash...), que es el Tema 6, ni en los sistemas de archivos de un sistema operativo concreto (NTFS, ext4...), que se estudian en el Tema 9.<br>Tampoco es el momento de entrar en las bases de datos relacionales: eso es el Tema 5. Aquí se sientan las bases conceptuales (registro, clave, índice...) que luego se reutilizan allí.</th>
+<th><strong>⚠️ No confundir — fronteras del tema</strong><br>Este tema trata los ficheros desde un punto de vista <strong>lógico y conceptual</strong>: cómo se organiza la información dentro de ellos, con independencia del soporte físico o del sistema operativo concreto.<br>No desarrolles aquí los dispositivos de almacenamiento (<strong>Tema 6</strong>), los sistemas de archivos concretos como NTFS o ext4 (<strong>Tema 9</strong>), los permisos avanzados (<strong>Tema 15</strong>) ni las bases de datos y el modelo relacional (<strong>Tema 5</strong>). Aquí se sientan las bases conceptuales (registro, clave, índice) que luego se reutilizan allí.</th>
 </tr>
 </table></div>
 
 <h2 id="1-concepto-de-fichero-y-jerarquia-de-la-informacion" class="tema-h2">1. Concepto de fichero y jerarquía de la información</h2>
-<p>Un fichero (o archivo) es un conjunto organizado de información relacionada, almacenado como una unidad con un nombre propio en un dispositivo de almacenamiento (Tema 6), que puede ser tratado por un programa o por una persona usuaria. Para entender cómo se organiza esa información dentro del fichero conviene tener clara la jerarquía clásica de estructuración de datos:</p>
+<p>Un <strong>fichero (o archivo)</strong> es un conjunto organizado de información relacionada, almacenado como una <strong>unidad con nombre propio</strong> en un soporte de almacenamiento, que puede ser tratado por un programa o por una persona usuaria. Su contenido, cuando almacena datos estructurados, se compone de <strong>registros</strong>.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — prioridad de memorización</strong><br>Jerarquía clásica de estructuración de la información: <strong>CARÁCTER → CAMPO → REGISTRO → FICHERO</strong>.</th>
+</tr>
+</table></div>
 <ul class="tema-lista">
-<li>Carácter: la unidad más pequeña de información con la que se trabaja (una letra, un dígito, un símbolo).</li>
-<li>Campo: uno o varios caracteres que representan un dato con significado propio (por ejemplo, el DNI o el nombre de una persona).</li>
-<li>Registro: conjunto de campos relacionados entre sí, referidos a una misma entidad u ocurrencia (por ejemplo, todos los datos de una persona usuaria).</li>
-<li>Fichero: conjunto de registros del mismo tipo, relacionados entre sí (por ejemplo, el fichero completo de personas usuarias).</li>
+<li><strong>Carácter</strong>: la unidad más pequeña de información con la que se trabaja (una letra, un dígito, un símbolo). Ejemplo: la «A» de un nombre.</li>
+<li><strong>Campo</strong>: uno o varios caracteres que representan un dato con significado propio. Ejemplo: el DNI, o el apellido de una persona.</li>
+<li><strong>Registro</strong>: conjunto de campos relacionados, referidos a una misma entidad u ocurrencia. Ejemplo: todos los datos de una persona usuaria (DNI + nombre + departamento + extensión).</li>
+<li><strong>Fichero</strong>: conjunto de registros del mismo tipo. Ejemplo: el fichero completo de personas usuarias del ayuntamiento.</li>
+</ul>
+<h4 class="tema-h4">Claves en la organización de ficheros</h4>
+<p>Dentro de un registro, uno o varios campos actúan como <strong>clave</strong>: el valor que permite <strong>identificar y localizar</strong> un registro concreto. En el modelo de ficheros que estudia este tema:</p>
+<ul class="tema-lista">
+<li>La <strong>clave primaria</strong> (en el contexto de la organización de ficheros) es el campo cuyo valor identifica de forma única cada registro y que suele emplearse para organizar o indexar el fichero (por ejemplo, el DNI).</li>
+<li>Una <strong>clave secundaria</strong> es un campo que también se usa para buscar u ordenar, pero cuyo valor puede repetirse en varios registros (por ejemplo, el «departamento»).</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>La jerarquía carácter → campo → registro → fichero es una de las preguntas más directas y habituales sobre este tema: conviene tener clara la definición y un ejemplo de cada nivel.<br>Dentro de un registro, uno o varios campos actúan como clave: el valor que permite identificar y localizar un registro concreto. La clave primaria identifica de forma única e inequívoca cada registro (no puede repetirse), mientras que una clave secundaria es un campo que también se usa para buscar u ordenar, pero cuyo valor puede repetirse en varios registros (por ejemplo, el «departamento» de una plantilla de personal).</th>
+<th><strong>⚠️ No confundir</strong><br>La «clave primaria» de este tema pertenece al <strong>modelo de organización e indexación de ficheros</strong>. La <strong>clave primaria del modelo relacional</strong> (con sus restricciones de integridad, claves foráneas, etc.) es un concepto propio de las <strong>bases de datos</strong> y se estudia en el <strong>Tema 5</strong>. Comparten nombre e idea de unicidad, pero no los desarrolles como si fueran lo mismo.</th>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Un nivel más arriba estaría la base de datos, como conjunto organizado de ficheros relacionados entre sí — pero ese salto conceptual, con sus ventajas frente al fichero plano, es propiamente el contenido del Tema 5.</th>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Un nivel más arriba estaría la <strong>base de datos</strong>, como conjunto organizado de datos relacionados gestionado por un SGBD — pero ese salto conceptual, con sus ventajas frente al fichero plano, es propiamente el contenido del Tema 5.</th>
 </tr>
 </table></div>
 
 <h2 id="2-organizacion-de-la-informacion-en-un-fichero" class="tema-h2">2. Organización de la información en un fichero</h2>
-<p>La organización de un fichero es la forma en que se disponen físicamente sus registros en el soporte de almacenamiento, y condiciona directamente qué métodos de inserción y de acceso pueden emplearse sobre él. Existen tres tipos fundamentales:</p>
+<p>La <strong>organización</strong> de un fichero es la forma en que están <strong>dispuestos y estructurados sus registros</strong> en el soporte. Condiciona qué métodos de inserción y de acceso resultan naturales sobre él, aunque —como se verá— organización y acceso son conceptos distintos. Los tres tipos fundamentales:</p>
 <h4 class="tema-h4">Organización secuencial</h4>
 <ul class="tema-lista">
-<li>Los registros se almacenan uno a continuación de otro, normalmente en el orden de entrada o según el valor de un campo clave.</li>
-<li>Es la más sencilla de implementar y la más eficiente para procesar el fichero de principio a fin (por ejemplo, para generar un listado completo).</li>
-<li>Es poco eficiente cuando se necesita acceder a un único registro concreto, porque obliga a recorrer el fichero desde el principio hasta encontrarlo.</li>
+<li>Los registros se almacenan <strong>uno a continuación de otro</strong>, habitualmente en el orden de llegada o, si el diseño lo exige, según el valor de un campo clave (no es obligatorio que todo fichero secuencial esté ordenado por clave).</li>
+<li>Es la más sencilla de implementar y la más eficiente para <strong>procesar el fichero de principio a fin</strong> (por ejemplo, generar un listado completo).</li>
+<li>Es <strong>menos eficiente para localizar un registro individual</strong>, porque en general obliga a recorrer el fichero desde el principio.</li>
 </ul>
-<h4 class="tema-h4">Organización directa (o relativa, hash)</h4>
+<h4 class="tema-h4">Organización directa (o relativa)</h4>
 <ul class="tema-lista">
-<li>La posición física de cada registro se calcula matemáticamente a partir de su clave, normalmente mediante una <strong>función de dispersión (hash)</strong> que transforma el valor de la clave en una dirección de almacenamiento.</li>
-<li>Su gran ventaja es la velocidad de acceso a un registro concreto, sin necesidad de recorrer los anteriores.</li>
-<li>Su inconveniente principal son las colisiones: cuando la función hash asigna la misma posición a dos claves distintas, hace falta una estrategia de resolución (por ejemplo, encadenar los registros en conflicto o usar una zona de desbordamiento).</li>
+<li>Permite <strong>localizar un registro directamente</strong> a partir de su clave o de su posición relativa dentro del fichero, sin recorrer los anteriores.</li>
+<li>Su gran ventaja es la <strong>rapidez de acceso a registros concretos</strong>.</li>
+<li>El <strong>hashing</strong> es <strong>una técnica que puede utilizarse</strong> en esta organización: una <strong>función de dispersión (hash)</strong> calcula la posición a partir del valor de la clave. No toda organización directa/relativa usa hashing (la posición puede derivarse también directamente de un identificador o número relativo de registro).</li>
+<li>Cuando se usa hashing pueden producirse <strong>colisiones</strong>: la función asigna la misma posición a dos claves distintas, y hace falta una estrategia de resolución (encadenamiento de registros, zona de desbordamiento...).</li>
 </ul>
 <h4 class="tema-h4">Organización secuencial indexada</h4>
 <ul class="tema-lista">
-<li>Combina lo mejor de las dos anteriores: mantiene los registros ordenados secuencialmente, pero añade un índice (punto 4) que permite localizar directamente la zona aproximada donde se encuentra un registro.</li>
-<li>Permite tanto el acceso secuencial completo como el acceso más o menos directo a un registro concreto.</li>
-<li>Es la organización más habitual en los sistemas que necesitan ambos tipos de acceso.</li>
+<li>Los registros se mantienen en <strong>organización secuencial</strong> (habitualmente ordenados por la clave) y se añade un <strong>índice</strong> (apartado 4) que permite <strong>localizar la zona</strong> del fichero donde se encuentra el registro buscado.</li>
+<li>La búsqueda tiene dos pasos: consultar el índice para situarse en la zona adecuada, y completar con una <strong>búsqueda secuencial corta</strong> dentro de ella.</li>
+<li>Permite tanto el recorrido secuencial completo como el acceso razonablemente rápido a registros concretos, a costa de mantener el índice.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>Organización</strong></th>
-<th><strong>Acceso a un registro concreto</strong></th>
-<th><strong>Recorrido completo del fichero</strong></th>
+<th><strong>Cómo organiza</strong></th>
+<th><strong>Acceso característico</strong></th>
+<th><strong>Ventaja</strong></th>
+<th><strong>Inconveniente</strong></th>
 </tr>
 <tr>
-<td>Secuencial</td>
-<td>Lento (recorre desde el inicio)</td>
-<td>Muy eficiente</td>
+<td><strong>Secuencial</strong></td>
+<td>Registros consecutivos, uno tras otro</td>
+<td>Recorrido secuencial</td>
+<td>Muy eficiente para procesar todo el fichero</td>
+<td>Lenta para localizar un registro concreto</td>
 </tr>
 <tr>
-<td>Directa (hash)</td>
-<td>Muy rápido</td>
-<td>Poco práctico</td>
+<td><strong>Directa / relativa</strong></td>
+<td>Cada registro en una posición derivable de su clave o número relativo (a veces mediante hash)</td>
+<td>Acceso directo</td>
+<td>Localización muy rápida de registros concretos</td>
+<td>Recorrido ordenado poco natural; colisiones si se usa hash</td>
 </tr>
 <tr>
-<td>Secuencial indexada</td>
-<td>Rápido (a través del índice)</td>
-<td>Eficiente</td>
+<td><strong>Secuencial indexada</strong></td>
+<td>Registros secuenciales + índice auxiliar</td>
+<td>Índice + búsqueda secuencial corta</td>
+<td>Sirve tanto para recorridos como para consultas puntuales</td>
+<td>Coste de mantener el índice; necesita reorganizaciones</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir: ORGANIZACIÓN ≠ ACCESO</strong><br><strong>Organización</strong> → cómo están <strong>dispuestos/estructurados</strong> los registros en el fichero.<br><strong>Método de acceso</strong> → cómo un programa <strong>localiza y recupera o modifica</strong> los registros.<br>Están relacionados (cada organización tiene un acceso característico), pero <strong>no son lo mismo</strong>: una organización puede admitir distintas formas de acceso según el sistema. Ejemplo: un fichero secuencial indexado admite tanto acceso por índice como recorrido secuencial completo.</th>
 </tr>
 </table></div>
 
 <h2 id="3-metodos-de-insercion-y-de-acceso" class="tema-h2">3. Métodos de inserción y de acceso</h2>
 <h4 class="tema-h4">Métodos de inserción</h4>
-<p>La forma de insertar un nuevo registro depende de la organización del fichero:</p>
+<p>La forma de insertar un nuevo registro depende de la organización y del diseño del fichero:</p>
 <ul class="tema-lista">
-<li>Inserción al final (append): el nuevo registro se añade tras el último existente; es la forma más sencilla, adecuada en ficheros secuenciales sin un orden exigido.</li>
-<li>Inserción ordenada: si el fichero debe mantenerse ordenado por su clave, insertar un registro implica desplazar físicamente los registros posteriores para dejarle su hueco correspondiente.</li>
-<li>Inserción con zona de desbordamiento (overflow): para evitar el coste de desplazar registros en cada inserción, el nuevo registro se escribe en una zona auxiliar y se enlaza lógicamente con el resto del fichero; esta zona debe reorganizarse periódicamente (punto 6) para no perder eficiencia.</li>
-<li>Inserción por cálculo de posición: en ficheros de organización directa, la función hash determina directamente la posición donde debe escribirse el nuevo registro.</li>
+<li><strong>Inserción al final (append)</strong>: el nuevo registro se añade tras el último; la forma más sencilla, adecuada en ficheros secuenciales sin orden exigido.</li>
+<li><strong>Inserción ordenada</strong>: si el fichero debe mantenerse ordenado por su clave, insertar un registro <strong>puede implicar, en determinados esquemas, desplazar registros</strong> para dejarle su hueco.</li>
+<li><strong>Inserción con zona de desbordamiento (overflow)</strong>: para evitar el coste de desplazar registros en cada inserción, el nuevo registro se escribe en una zona auxiliar y se enlaza lógicamente con el resto; esa zona conviene reorganizarla periódicamente (apartado 6) para no perder eficiencia.</li>
+<li><strong>Inserción por cálculo de posición</strong>: en ficheros de organización directa, la posición del nuevo registro se deriva de su clave (por ejemplo, mediante la función hash, con su estrategia de colisiones).</li>
 </ul>
 <h4 class="tema-h4">Métodos de acceso</h4>
-<p>Determinan cómo se localiza un registro dentro del fichero una vez almacenado:</p>
 <ul class="tema-lista">
-<li>Acceso secuencial: se recorren los registros uno a uno, en orden, desde el principio, hasta encontrar el buscado o llegar al final.</li>
-<li>Acceso directo (o aleatorio): permite llegar a un registro concreto sin pasar por los anteriores, calculando directamente su posición (organización directa) o mediante un puntero conocido.</li>
-<li>Acceso secuencial indexado (ISAM, Indexed Sequential Access Method): se consulta primero el índice para situarse cerca del registro buscado, y a partir de ahí se completa la búsqueda con un recorrido secuencial corto.</li>
+<li><strong>Acceso secuencial</strong>: se recorren los registros uno a uno, en orden, hasta encontrar el buscado o llegar al final.</li>
+<li><strong>Acceso directo (o aleatorio)</strong>: se llega a un registro concreto <strong>sin pasar por los anteriores</strong>, derivando su posición de la clave o del número relativo de registro.</li>
+<li><strong>Acceso secuencial indexado</strong>: se consulta primero el <strong>índice</strong> para situarse en la zona del registro buscado y se termina con un recorrido secuencial corto.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>Método de acceso</strong></th>
-<th><strong>Cómo localiza el registro</strong></th>
-<th><strong>Cuándo conviene</strong></th>
-</tr>
-<tr>
-<td>Secuencial</td>
-<td>Recorre los registros uno a uno desde el principio</td>
-<td>Ficheros pequeños o que se procesan siempre en bloque</td>
-</tr>
-<tr>
-<td>Directo (aleatorio)</td>
-<td>Calcula la posición a partir de la clave (hash) y accede sin recorrer los anteriores</td>
-<td>Consultas puntuales sobre un registro concreto</td>
-</tr>
-<tr>
-<td>Indexado-secuencial (ISAM)</td>
-<td>Usa un índice para saltar a la zona aproximada y termina con una búsqueda secuencial corta</td>
-<td>Ficheros que necesitan tanto accesos puntuales como recorridos secuenciales</td>
+<th><strong>🧠 Para memorizar</strong><br><strong>SECUENCIAL → RECORRO · DIRECTO → LOCALIZO · INDEXADO → BUSCO MEDIANTE ÍNDICE.</strong></th>
 </tr>
 </table></div>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Fíjate en la correspondencia directa entre organización (punto 2) y método de acceso: cada organización permite, de forma natural, el método de acceso del mismo nombre. No son conceptos independientes, sino dos caras de la misma decisión de diseño.</th>
-</tr>
-</table></div>
+<h4 class="tema-h4">ISAM</h4>
+<p><strong>ISAM (Indexed Sequential Access Method)</strong> es el <strong>método clásico</strong> asociado al acceso secuencial indexado: <strong>ÍNDICE → ZONA → BÚSQUEDA SECUENCIAL</strong>. Es un concepto histórico de referencia; no debe presentarse como sinónimo universal de cualquier implementación secuencial indexada actual.</p>
 
 <h2 id="4-indexacion" class="tema-h2">4. Indexación</h2>
-<p>Un índice es una estructura de datos auxiliar que asocia el valor de una clave con la posición física del registro correspondiente en el fichero de datos, de forma parecida al índice alfabético de un libro: en vez de leer todas las páginas para encontrar un tema, consultas el índice y vas directo a la página correcta.</p>
-<h4 class="tema-h4">Según la clave sobre la que se construyen</h4>
+<p>Un <strong>índice</strong> es una estructura de datos auxiliar que asocia el valor de una clave con la <strong>posición</strong> del registro correspondiente en el fichero de datos — como el índice alfabético de un libro: en vez de leer todas las páginas, consultas el índice y vas directo a la página correcta. Sirve para <strong>acelerar las búsquedas</strong> a costa de espacio adicional y de mantenimiento (cada inserción o borrado obliga a actualizarlo).</p>
+<h4 class="tema-h4">Clasificación por función o rol</h4>
 <ul class="tema-lista">
-<li>Índice primario: se construye sobre el campo clave que determina el orden físico de los registros en el fichero (solo puede haber uno).</li>
-<li>Índice secundario: se construye sobre un campo distinto al que determina el orden físico, para permitir búsquedas rápidas por otros criterios sin necesidad de reordenar el fichero (puede haber varios).</li>
+<li><strong>Índice primario</strong>: se construye sobre el campo clave que determina el <strong>orden físico</strong> de los registros en el fichero (solo puede haber uno).</li>
+<li><strong>Índice secundario</strong>: se construye sobre un campo <strong>distinto</strong> al que determina el orden físico, para permitir búsquedas rápidas por otros criterios sin reordenar el fichero (puede haber varios).</li>
 </ul>
-<h4 class="tema-h4">Según su densidad</h4>
+<h4 class="tema-h4">Clasificación por densidad</h4>
 <ul class="tema-lista">
-<li>Índice denso: contiene una entrada por cada registro del fichero. Es más grande, pero garantiza la localización directa de cualquier registro.</li>
-<li>Índice disperso (o no denso): contiene una entrada solo para algunos registros (por ejemplo, el primero de cada bloque físico de almacenamiento), lo que lo hace más compacto a costa de requerir una pequeña búsqueda secuencial adicional dentro del bloque.</li>
-<li>Índice multinivel: cuando el propio índice crece demasiado para consultarlo con rapidez, se construye a su vez un índice sobre el índice, formando varios niveles jerárquicos de indexación.</li>
+<li><strong>Índice denso</strong>: contiene <strong>una entrada por cada registro</strong>. Más grande, pero garantiza localización directa de cualquier registro.</li>
+<li><strong>Índice disperso (no denso)</strong>: contiene entradas <strong>solo para algunos registros</strong> (por ejemplo, el primero de cada bloque), lo que lo hace más compacto a costa de una pequeña búsqueda secuencial adicional dentro del bloque.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>Es habitual confundir el criterio de densidad (denso/disperso: cuántas entradas tiene el índice) con el criterio de rol (primario/secundario: sobre qué campo se construye). Son dos clasificaciones independientes: un índice puede ser, por ejemplo, secundario y a la vez denso.</th>
+<th><strong>📌 Imprescindible para el examen — criterios independientes</strong><br><strong>Primario/secundario</strong> clasifica por <strong>función o rol</strong> (sobre qué campo se construye).<br><strong>Denso/disperso</strong> clasifica por <strong>densidad</strong> (cuántas entradas tiene).<br>Son criterios <strong>independientes</strong> y combinables: <strong>un índice puede ser secundario y denso</strong> a la vez.</th>
 </tr>
 </table></div>
+<h4 class="tema-h4">Índices multinivel</h4>
+<p>Cuando el propio índice crece demasiado para consultarlo con rapidez, se construye <strong>un índice sobre el índice</strong>, formando varios niveles jerárquicos. Es la solución natural para índices grandes.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>En sistemas reales, los índices multinivel no suelen ser una simple tabla, sino estructuras en árbol (como los árboles B o B+), pensadas para mantener tiempos de acceso rápidos y predecibles incluso cuando el índice crece mucho. No hace falta memorizar su funcionamiento interno para este tema: basta con saber que existen y para qué se usan.</th>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>En sistemas reales, los índices multinivel suelen materializarse como estructuras en árbol (<strong>árboles B o B+</strong>), pensadas para mantener tiempos de acceso rápidos y predecibles aunque el índice crezca mucho. No hace falta memorizar su funcionamiento interno: basta con saber que existen y para qué se usan.</th>
 </tr>
 </table></div>
 
 <h2 id="5-formatos-y-caracteristicas-de-los-ficheros" class="tema-h2">5. Formatos y características de los ficheros</h2>
-<h4 class="tema-h4">Formato de texto frente a formato binario</h4>
-<p>Un fichero de texto codifica la información como caracteres directamente legibles (por ejemplo, con codificación UTF-8), lo que facilita su intercambio e inspección manual. Un fichero binario codifica la información de forma optimizada para el programa que la genera y consume, ocupando normalmente menos espacio y procesándose más rápido, pero sin ser directamente legible por una persona.</p>
-<h4 class="tema-h4">Registros de longitud fija frente a longitud variable</h4>
-<p>En los ficheros de registros de longitud fija, todos los registros ocupan siempre el mismo número de bytes, lo que simplifica enormemente el cálculo de la posición de cualquier registro (imprescindible, por ejemplo, en la organización directa). En los de longitud variable, cada registro puede ocupar un tamaño distinto, lo que ahorra espacio pero complica el cálculo directo de posiciones.</p>
-<h4 class="tema-h4">Otros formatos y conceptos relacionados</h4>
+<h4 class="tema-h4">Texto frente a binario</h4>
 <ul class="tema-lista">
-<li>Ficheros con campos delimitados: los valores de cada registro se separan mediante un carácter reservado (por ejemplo, una coma en un fichero CSV), en lugar de reservar un ancho fijo para cada campo.</li>
-<li>Ficheros maestros y ficheros de movimientos: el fichero maestro guarda los datos relativamente estables de una entidad (por ejemplo, el catálogo de personas empleadas), mientras que el fichero de movimientos recoge las novedades o transacciones (altas, bajas, modificaciones) que se aplicarán sobre el maestro en un proceso posterior, un esquema clásico del procesamiento por lotes (batch).</li>
-<li>Hoy es habitual intercambiar datos entre sistemas mediante formatos de texto estructurados y estandarizados como CSV, JSON o XML, que combinan la legibilidad del texto plano con una estructura definida y fácil de procesar por distintos programas.</li>
+<li>Un fichero de <strong>texto</strong> codifica la información como caracteres directamente legibles (por ejemplo, en UTF-8), lo que facilita su intercambio e inspección manual.</li>
+<li>Un fichero <strong>binario</strong> codifica la información en el formato interno del programa que la genera y consume; no es directamente legible por una persona y <strong>puede ofrecer ventajas de tamaño o velocidad en determinados casos</strong> (no necesariamente en todos).</li>
 </ul>
-<h4 class="tema-h4">Características de un fichero</h4>
-<p>Con independencia de su contenido, todo fichero tiene asociada una serie de características o metadatos que lo describen, gestionados habitualmente por el sistema de archivos del sistema operativo (Tema 9):</p>
+<h4 class="tema-h4">Longitud fija frente a longitud variable</h4>
 <ul class="tema-lista">
-<li>Nombre y extensión (esta última suele indicar el tipo o formato del contenido).</li>
-<li>Tamaño, expresado en la unidad de medida correspondiente.</li>
-<li>Fechas de creación, última modificación y último acceso.</li>
-<li>Atributos: por ejemplo, de solo lectura, oculto, de sistema o comprimido.</li>
-<li>Ubicación (ruta) dentro de la estructura de carpetas donde reside.</li>
-<li>Permisos: quién puede leerlo, modificarlo o ejecutarlo (concepto que se retoma, aplicado a un entorno de red, en el Tema 15).</li>
+<li><strong>Longitud fija</strong>: todos los registros ocupan el mismo número de bytes, lo que simplifica el <strong>cálculo directo de posiciones</strong> (muy conveniente, por ejemplo, en la organización directa/relativa).</li>
+<li><strong>Longitud variable</strong>: cada registro puede ocupar un tamaño distinto; ahorra espacio, pero complica el cálculo directo de posiciones.</li>
+</ul>
+<h4 class="tema-h4">Campos delimitados y formatos de intercambio</h4>
+<ul class="tema-lista">
+<li><strong>Campos delimitados</strong>: los valores se separan con un carácter reservado en lugar de reservar un ancho fijo por campo. El <strong>CSV</strong> (valores separados por comas) es el ejemplo típico de <strong>formato delimitado</strong>.</li>
+<li><strong>JSON y XML</strong>: ejemplos de <strong>formatos de texto estructurados de intercambio</strong> entre sistemas, que combinan legibilidad con una estructura definida (no es objeto de este tema desarrollar su sintaxis).</li>
+</ul>
+<h4 class="tema-h4">Ficheros maestros y de movimientos</h4>
+<ul class="tema-lista">
+<li><strong>Fichero maestro</strong>: guarda los datos <strong>relativamente estables</strong> de una entidad (por ejemplo, el catálogo de personas empleadas).</li>
+<li><strong>Fichero de movimientos</strong>: recoge las <strong>novedades o transacciones</strong> (altas, bajas, modificaciones) que se aplicarán sobre el maestro en un proceso posterior — esquema clásico del <strong>procesamiento por lotes (batch)</strong>.</li>
+</ul>
+<h4 class="tema-h4">Características y metadatos de un fichero</h4>
+<p>Con independencia de su contenido, todo fichero tiene asociados metadatos que lo describen, gestionados habitualmente por el sistema de archivos del sistema operativo (su estudio concreto corresponde al Tema 9):</p>
+<ul class="tema-lista">
+<li><strong>Nombre y extensión</strong> (esta última suele indicar el tipo o formato del contenido).</li>
+<li><strong>Tamaño</strong>, en la unidad de medida correspondiente.</li>
+<li><strong>Fechas</strong> de creación, última modificación y último acceso.</li>
+<li><strong>Atributos</strong>: habitualmente, solo lectura, oculto, de sistema, comprimido... (según el sistema de archivos).</li>
+<li><strong>Ubicación (ruta)</strong> dentro de la estructura de carpetas.</li>
+<li><strong>Permisos</strong>: quién puede leerlo, modificarlo o ejecutarlo (su gestión detallada, incluida la de red, se estudia en los Temas 9 y 15).</li>
 </ul>
 
-<h2 id="6-operaciones-sobre-ficheros" class="tema-h2">6. Operaciones sobre ficheros</h2>
-<h4 class="tema-h4">A nivel de fichero completo</h4>
+<h2 id="6-operaciones-sobre-ficheros" class="tema-h2">6. Operaciones sobre ficheros y sobre registros</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Operaciones sobre el FICHERO (como unidad)</strong></th>
+<th><strong>Operaciones sobre los REGISTROS (contenido)</strong></th>
+</tr>
+<tr>
+<td>Crear · abrir · cerrar · eliminar · renombrar · copiar · mover · ordenar · fusionar · reorganizar</td>
+<td>Leer · insertar · actualizar · buscar · borrar</td>
+</tr>
+</table></div>
+<h4 class="tema-h4">Sobre el fichero completo</h4>
 <ul class="tema-lista">
-<li>Crear / abrir / cerrar: operaciones necesarias para dar de alta un fichero y para que un programa pueda empezar y terminar de trabajar con él, asegurando que los cambios se guardan correctamente.</li>
-<li>Eliminar (borrar), renombrar, copiar y mover: operaciones de gestión sobre el fichero como unidad completa.</li>
-<li>Ordenar: reorganizar los registros del fichero según el valor de un campo.</li>
-<li>Fusionar (mezclar): combinar dos o más ficheros, ya ordenados por la misma clave, en un único fichero resultante manteniendo dicho orden.</li>
-<li>Reorganizar (compactar): eliminar físicamente los registros marcados como borrados y recuperar el espacio de las zonas de desbordamiento (punto 3), devolviendo al fichero su eficiencia original.</li>
+<li><strong>Crear / abrir / cerrar</strong>: dar de alta el fichero y permitir que un programa empiece y termine de trabajar con él, asegurando que los cambios quedan correctamente guardados.</li>
+<li><strong>Eliminar, renombrar, copiar y mover</strong>: gestión del fichero como unidad completa.</li>
+<li><strong>Ordenar</strong>: reorganizar los registros según el valor de un campo.</li>
+<li><strong>Fusionar (mezclar)</strong>: combinar dos o más ficheros, ya ordenados por la misma clave, en uno solo manteniendo el orden.</li>
+<li><strong>Reorganizar (compactar)</strong>: en los modelos que acumulan borrados lógicos y zonas de desbordamiento, reestructurar el fichero para eliminar efectivamente los registros marcados y recuperar espacio y eficiencia.</li>
 </ul>
-<h4 class="tema-h4">A nivel de registro</h4>
+<h4 class="tema-h4">Sobre los registros</h4>
 <ul class="tema-lista">
-<li>Leer: recuperar el contenido de uno o varios registros.</li>
-<li>Insertar (escribir): añadir un nuevo registro al fichero.</li>
-<li>Actualizar (modificar): cambiar el valor de uno o varios campos de un registro ya existente.</li>
-<li>Buscar (consultar): localizar uno o varios registros que cumplen un criterio determinado.</li>
-<li>Borrar: eliminar un registro, ya sea de forma física (se elimina realmente del fichero) o lógica (se marca como borrado, pero sigue ocupando espacio hasta la siguiente reorganización).</li>
+<li><strong>Leer</strong>: recuperar el contenido de uno o varios registros.</li>
+<li><strong>Insertar (escribir)</strong>: añadir un nuevo registro (según los métodos del apartado 3).</li>
+<li><strong>Actualizar (modificar)</strong>: cambiar el valor de uno o varios campos de un registro existente.</li>
+<li><strong>Buscar (consultar)</strong>: localizar los registros que cumplen un criterio.</li>
+<li><strong>Borrar</strong>: eliminar un registro, de forma lógica o física.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Borrado lógico: el registro se marca como eliminado, pero sigue ocupando espacio en el fichero. Es rápido y reversible mientras no se reorganice el fichero.<br>Borrado físico: el registro se elimina realmente y su espacio se libera de inmediato. Es irreversible.<br>La reorganización periódica de un fichero suele ser el momento en el que los borrados lógicos acumulados se convierten en liberación física real del espacio.</th>
+<th><strong>📌 Imprescindible para el examen — borrado lógico vs. físico</strong><br><strong>Borrado lógico</strong>: el registro se <strong>marca como eliminado</strong>; puede conservarse físicamente en el fichero hasta una reorganización o proceso posterior.<br><strong>Borrado físico</strong>: <strong>eliminación efectiva</strong> del registro, según el mecanismo utilizado.<br>La <strong>reorganización</strong> periódica suele ser el momento en que los borrados lógicos acumulados se traducen en recuperación real del espacio. Evita las etiquetas absolutas «reversible/irreversible»: lo definitorio es <strong>marca</strong> frente a <strong>eliminación efectiva</strong>.</th>
 </tr>
 </table></div>
 
-<h2 id="7-resumen-para-estudiar" class="tema-h2">7. Resumen para estudiar</h2>
+<h2 id="7-datos-y-anclas-de-memoria" class="tema-h2">7. Datos y anclas de memoria</h2>
 <ul class="tema-lista">
-<li>Jerarquía de la información: carácter → campo → registro → fichero (→ base de datos, en el Tema 5); clave primaria (identifica de forma única) frente a clave secundaria (de búsqueda).</li>
-<li>Organización: secuencial (eficiente para recorrer todo, lenta para un registro concreto), directa/hash (acceso muy rápido, con riesgo de colisiones) y secuencial indexada (combina ambas mediante un índice).</li>
-<li>Inserción: al final, ordenada (con desplazamientos), con zona de desbordamiento, o por cálculo de posición (hash).</li>
-<li>Acceso: secuencial, directo y secuencial indexado (ISAM).</li>
-<li>Indexación: por rol —primario (define el orden físico) o secundario— y por densidad —denso (una entrada por registro) o disperso—; el índice multinivel indexa a su vez el propio índice.</li>
-<li>Formatos: texto vs. binario; longitud fija vs. variable; campos delimitados (CSV); ficheros maestros y de movimientos; formatos modernos de intercambio (CSV, JSON, XML).</li>
-<li>Características de fichero: nombre, extensión, tamaño, fechas, atributos, ubicación y permisos.</li>
-<li>Operaciones: de fichero completo (crear, abrir, cerrar, eliminar, renombrar, ordenar, fusionar, reorganizar) y de registro (leer, insertar, actualizar, buscar, borrar física o lógicamente).</li>
-<li>Este tema sienta las bases conceptuales (registro, clave, índice) que se reutilizan en el Tema 5 (bases de datos); el soporte físico se estudia en el Tema 6 y los sistemas de archivos concretos, en el Tema 9.</li>
+<li><strong>CARÁCTER → CAMPO → REGISTRO → FICHERO</strong> (la jerarquía, prioridad nº 1).</li>
+<li><strong>Organización = cómo están dispuestos · Acceso = cómo se localizan</strong>.</li>
+<li><strong>SECUENCIAL → RECORRO · DIRECTO → LOCALIZO · INDEXADO → ÍNDICE</strong>.</li>
+<li><strong>Hash = técnica posible</strong> de la organización directa (no sinónimo); con hash puede haber <strong>colisiones</strong>.</li>
+<li><strong>ISAM</strong>: índice → zona → búsqueda secuencial (método clásico).</li>
+<li>Índices: <strong>primario/secundario = rol · denso/disperso = densidad</strong> — criterios independientes (puede haber «secundario y denso»).</li>
+<li><strong>DENSO → una entrada por registro · DISPERSO → menos entradas</strong> (una por bloque).</li>
+<li><strong>Longitud fija → posiciones calculables · variable → ahorra espacio</strong>.</li>
+<li><strong>MAESTRO → estable · MOVIMIENTOS → cambios</strong> (procesamiento por lotes).</li>
+<li><strong>Borrado lógico → marca · físico → eliminación efectiva</strong>; la reorganización compacta.</li>
+<li>Operaciones: <strong>fichero</strong> (crear, abrir, cerrar, eliminar, renombrar, copiar, mover, ordenar, fusionar, reorganizar) · <strong>registro</strong> (leer, insertar, actualizar, buscar, borrar).</li>
 </ul>
 
-<h2 id="8-conceptos-clave" class="tema-h2">8. Conceptos clave</h2>
+<h2 id="8-no-confundir" class="tema-h2">8. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto A</strong></th>
+<th><strong>Concepto B</strong></th>
+<th><strong>Diferencia clave</strong></th>
+</tr>
+<tr>
+<td><strong>Campo</strong>: un dato con significado (DNI)</td>
+<td><strong>Registro</strong>: conjunto de campos de una entidad · <strong>fichero</strong>: conjunto de registros</td>
+<td>Jerarquía: carácter → campo → registro → fichero</td>
+</tr>
+<tr>
+<td><strong>Organización</strong>: cómo están dispuestos los registros</td>
+<td><strong>Método de acceso</strong>: cómo se localizan y recuperan</td>
+<td>Relacionados pero distintos: una organización puede admitir varios accesos</td>
+</tr>
+<tr>
+<td><strong>Organización directa/relativa</strong>: posición derivable de la clave o número relativo</td>
+<td><strong>Hashing</strong>: técnica concreta de cálculo de posición por dispersión</td>
+<td>El hash es <strong>un mecanismo posible</strong>, no un sinónimo de toda organización directa</td>
+</tr>
+<tr>
+<td><strong>Secuencial</strong>: solo registros consecutivos</td>
+<td><strong>Secuencial indexada</strong>: secuencial + índice auxiliar</td>
+<td>La indexada paga mantenimiento del índice a cambio de consultas rápidas</td>
+</tr>
+<tr>
+<td><strong>Índice primario</strong>: sobre la clave que fija el orden físico (uno)</td>
+<td><strong>Índice secundario</strong>: sobre otro campo (varios)</td>
+<td>Criterio de <strong>rol</strong>: sobre qué campo se construye</td>
+</tr>
+<tr>
+<td><strong>Índice denso</strong>: una entrada por registro</td>
+<td><strong>Índice disperso</strong>: entradas solo para algunos registros</td>
+<td>Criterio de <strong>densidad</strong> — independiente del rol</td>
+</tr>
+<tr>
+<td><strong>Fichero de texto</strong>: caracteres legibles</td>
+<td><strong>Fichero binario</strong>: formato interno del programa</td>
+<td>El binario <strong>puede</strong> ofrecer ventajas en determinados casos; no «siempre es más pequeño»</td>
+</tr>
+<tr>
+<td><strong>Longitud fija</strong>: todos los registros iguales</td>
+<td><strong>Longitud variable</strong>: cada registro con su tamaño</td>
+<td>Fija = posiciones calculables · variable = ahorro de espacio</td>
+</tr>
+<tr>
+<td><strong>Fichero maestro</strong>: datos estables</td>
+<td><strong>Fichero de movimientos</strong>: transacciones que modifican el estado</td>
+<td>El maestro se actualiza aplicándole los movimientos (batch)</td>
+</tr>
+<tr>
+<td><strong>Borrado lógico</strong>: marca de eliminado</td>
+<td><strong>Borrado físico</strong>: eliminación efectiva</td>
+<td>El lógico puede conservarse hasta la reorganización</td>
+</tr>
+<tr>
+<td><strong>Fichero</strong>: unidad de información con registros</td>
+<td><strong>Base de datos</strong>: conjunto organizado gestionado por un SGBD (Tema 5)</td>
+<td>La BD añade gestión centralizada, integridad y acceso concurrente</td>
+</tr>
+</table></div>
+
+<h2 id="9-posibles-trampas-de-examen" class="tema-h2">9. Posibles trampas de examen</h2>
 <ul class="tema-lista">
-<li><strong>Jerarquía</strong>: carácter → campo → registro → fichero.</li>
-<li><strong>Clave primaria vs. clave secundaria</strong>.</li>
-<li><strong>Organización secuencial, directa (hash) y secuencial indexada</strong>.</li>
-<li><strong>Colisión</strong> (hash) y <strong>zona de desbordamiento (overflow)</strong>.</li>
-<li><strong>Acceso secuencial, directo e ISAM</strong>.</li>
-<li><strong>Índice primario/secundario</strong> y <strong>denso/disperso</strong>; índice multinivel.</li>
-<li><strong>Longitud fija vs. variable</strong>; texto vs. binario; CSV/JSON/XML.</li>
-<li><strong>Fichero maestro vs. de movimientos</strong> (procesamiento batch).</li>
-<li><strong>Borrado lógico vs. físico</strong>; reorganización/compactación.</li>
+<li><strong>Presentar organización y acceso como sinónimos</strong>: la organización describe la disposición; el acceso, la localización. Una organización puede admitir varios accesos.</li>
+<li><strong>«Organización directa = hash»</strong> — matiz: el hashing es una técnica que <strong>puede</strong> usarse en la organización directa, no su definición.</li>
+<li><strong>«ISAM es cualquier sistema con índices»</strong> — falso: ISAM es el método clásico de acceso secuencial indexado (índice → zona → búsqueda secuencial).</li>
+<li><strong>Mezclar los criterios de clasificación de índices</strong>: primario/secundario (rol) no es lo mismo que denso/disperso (densidad); «un índice secundario no puede ser denso» es falso.</li>
+<li><strong>«El binario siempre es más pequeño y rápido que el texto»</strong> — falso como universal: puede ofrecer ventajas en determinados casos.</li>
+<li><strong>«El borrado lógico es reversible y el físico irreversible»</strong> — formulación imprecisa: lo definitorio es marca vs. eliminación efectiva; la conservación depende del mecanismo y de la reorganización.</li>
+<li><strong>Colar administración de NTFS/permisos avanzados</strong> como «características del fichero»: los metadatos genéricos son de este tema; su gestión concreta es de los Temas 9 y 15.</li>
+<li><strong>«Todo fichero secuencial está ordenado por clave»</strong> — falso: puede estar simplemente en orden de llegada.</li>
+<li><strong>«La secuencial indexada es siempre la mejor/más habitual»</strong> — falso: cada organización tiene su caso de uso; la indexada paga el mantenimiento del índice.</li>
+<li><strong>Confundir fichero con base de datos</strong>: el salto al modelo relacional (SGBD, integridad, concurrencia) es del Tema 5.</li>
+<li><strong>Atribuir las colisiones a cualquier organización</strong>: las colisiones son propias del uso de funciones hash.</li>
 </ul>
 
-<h2 id="9-posibles-puntos-de-examen" class="tema-h2">9. Posibles puntos de examen</h2>
+<h2 id="10-posibles-preguntas-tipo-test" class="tema-h2">10. Posibles preguntas tipo test</h2>
 <ul class="tema-lista">
 <li>El orden correcto de la <strong>jerarquía de la información</strong> (carácter → campo → registro → fichero).</li>
-<li>Reconocer la <strong>organización</strong> adecuada para un caso dado (recorridos completos → secuencial; consultas puntuales → directa; ambos → indexada).</li>
-<li>Qué es una <strong>colisión</strong> y en qué organización se produce.</li>
-<li>Diferencia entre <strong>índice denso y disperso</strong>, y entre <strong>primario y secundario</strong> (dos clasificaciones independientes).</li>
-<li>Qué formato exige registros de <strong>longitud fija</strong> para calcular posiciones (organización directa).</li>
-<li>Identificar un <strong>fichero maestro</strong> frente a uno <strong>de movimientos</strong> en un supuesto.</li>
-<li>Diferencia entre <strong>borrado lógico y físico</strong>, y para qué sirve la <strong>reorganización</strong>.</li>
-<li>Qué significa <strong>ISAM</strong> y cómo combina índice y recorrido secuencial.</li>
-<li>Ejemplos de <strong>formatos de intercambio</strong>: CSV (delimitado), JSON, XML.</li>
+<li>Definición de <strong>campo</strong>, <strong>registro</strong> y <strong>clave</strong> en el contexto de ficheros.</li>
+<li>¿Qué diferencia hay entre <strong>organización</strong> y <strong>método de acceso</strong>?</li>
+<li>Supuesto: «una aplicación consulta constantemente registros individuales por su clave» → ¿qué organización/acceso conviene? (directa/acceso directo).</li>
+<li>Supuesto: «se genera un listado completo cada noche y apenas hay consultas puntuales» → ¿qué organización basta? (secuencial).</li>
+<li>¿Qué es una <strong>colisión</strong>, cuándo puede producirse y cómo se resuelve?</li>
+<li>¿Qué dos pasos sigue la búsqueda en una organización <strong>secuencial indexada</strong>? ¿Qué significa <strong>ISAM</strong>?</li>
+<li>¿Qué método de inserción usa una <strong>zona de desbordamiento</strong> y qué operación la compacta después?</li>
+<li>Diferencia entre índice <strong>primario y secundario</strong>; ¿cuántos primarios puede haber?</li>
+<li>Diferencia entre índice <strong>denso y disperso</strong>; ¿puede un índice ser secundario y denso? (sí).</li>
+<li>¿Para qué sirve un <strong>índice multinivel</strong>?</li>
+<li>¿Qué formato de registro facilita el <strong>cálculo directo de posiciones</strong>? (longitud fija).</li>
+<li>¿Qué es un formato <strong>delimitado</strong> y qué ejemplo típico lo representa? (CSV).</li>
+<li>Identificar en un supuesto el <strong>fichero maestro</strong> y el <strong>de movimientos</strong>.</li>
+<li>Diferencia entre <strong>borrado lógico y físico</strong>, y papel de la <strong>reorganización</strong>.</li>
 </ul>
 
+<h2 id="11-posibles-preguntas-cortas" class="tema-h2">11. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<h4 class="tema-h4">1. Explique la jerarquía de organización de la información</h4>
+<ul class="tema-lista">
+<li>Los cuatro niveles con definición y ejemplo: carácter → campo → registro → fichero.</li>
+<li>El papel de la clave dentro del registro (identificar y localizar).</li>
+<li>Cierre: la base de datos como nivel superior, remitiendo al Tema 5.</li>
+</ul>
+<h4 class="tema-h4">2. Diferencie las organizaciones secuencial, directa y secuencial indexada</h4>
+<ul class="tema-lista">
+<li>Definición de organización (disposición de los registros).</li>
+<li>Una por una: secuencial (consecutivos; recorrer sí, localizar no), directa/relativa (posición derivable de la clave; hash como técnica posible, colisiones), secuencial indexada (secuencial + índice; dos pasos de búsqueda).</li>
+<li>Cierre: elección según el patrón de uso (recorridos, consultas puntuales o ambos).</li>
+</ul>
+<h4 class="tema-h4">3. Explique qué es un índice y sus principales clasificaciones</h4>
+<ul class="tema-lista">
+<li>Definición y para qué sirve (acelerar búsquedas; coste de espacio y mantenimiento).</li>
+<li>Clasificación por rol: primario (orden físico, único) / secundario (otros campos, varios).</li>
+<li>Clasificación por densidad: denso / disperso — criterios independientes (ejemplo: secundario y denso).</li>
+<li>Índice multinivel como solución para índices grandes (B/B+ como ampliación).</li>
+</ul>
+<h4 class="tema-h4">4. Diferencie índice denso e índice disperso</h4>
+<ul class="tema-lista">
+<li>Denso: una entrada por registro; mayor tamaño, localización directa.</li>
+<li>Disperso: entradas para algunos registros (por bloque); compacto, exige búsqueda adicional corta.</li>
+<li>Cierre: es un criterio de densidad, independiente de primario/secundario.</li>
+</ul>
+<h4 class="tema-h4">5. Explique la diferencia entre acceso secuencial y acceso directo</h4>
+<ul class="tema-lista">
+<li>Secuencial: recorrer uno a uno desde el principio; cuándo conviene.</li>
+<li>Directo: llegar sin pasar por los anteriores (posición derivada de la clave o número relativo).</li>
+<li>Cierre: el secuencial indexado como vía intermedia (índice + tramo secuencial), y la distinción organización ≠ acceso.</li>
+</ul>
+<h4 class="tema-h4">6. Explique los formatos de registro de longitud fija y variable</h4>
+<ul class="tema-lista">
+<li>Fija: mismo tamaño; posiciones calculables (clave en organización directa).</li>
+<li>Variable: tamaños distintos; ahorro de espacio, cálculo de posiciones más complejo.</li>
+<li>Cierre: mención de campos delimitados (CSV) como alternativa al ancho fijo.</li>
+</ul>
+<h4 class="tema-h4">7. Diferencie borrado lógico y borrado físico</h4>
+<ul class="tema-lista">
+<li>Lógico: marca de eliminado; el registro puede conservarse hasta una reorganización.</li>
+<li>Físico: eliminación efectiva según el mecanismo.</li>
+<li>Cierre: papel de la reorganización/compactación para recuperar espacio y eficiencia.</li>
+</ul>
+
+<h2 id="12-supuestos-practicos" class="tema-h2">12. Supuestos prácticos</h2>
+<h4 class="tema-h4">Supuesto 1 — Consultas individuales constantes</h4>
+<p><strong>Escenario</strong>: una aplicación municipal consulta constantemente registros individuales de un fichero de personas usuarias a partir del DNI. Apenas se hacen recorridos completos.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué organización y acceso convienen?</strong> Organización directa/relativa con acceso directo: la posición se deriva de la clave (DNI), por ejemplo mediante una función hash, y se localiza el registro sin recorrer los anteriores.</li>
+<li><strong>b) ¿Qué problema puede aparecer y cómo se gestiona?</strong> Si se usa hashing, colisiones: dos claves que caen en la misma posición. Se resuelven con encadenamiento o zona de desbordamiento.</li>
+<li><strong>c) ¿Qué formato de registro facilita este esquema?</strong> Longitud fija: hace calculable la posición de cada registro.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 2 — Listados completos y consultas puntuales</h4>
+<p><strong>Escenario</strong>: un fichero de expedientes se recorre íntegro cada noche para generar informes, pero durante el día también se consultan expedientes concretos por su número.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué organización encaja?</strong> Secuencial indexada: mantiene los registros en secuencia (recorridos nocturnos eficientes) y el índice permite localizar la zona del expediente buscado durante el día.</li>
+<li><strong>b) ¿Cómo funciona la búsqueda de un expediente?</strong> Dos pasos: consulta del índice (situarse en la zona) + búsqueda secuencial corta dentro de ella — el esquema clásico ISAM.</li>
+<li><strong>c) ¿Qué coste tiene el esquema?</strong> Mantener el índice actualizado en cada inserción/borrado, y reorganizar periódicamente si se usan zonas de desbordamiento.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 3 — Maestro y movimientos</h4>
+<p><strong>Escenario</strong>: la nómina municipal se calcula mensualmente: existe un fichero con los datos estables de la plantilla y otro donde se van anotando altas, bajas y variaciones del mes.</p>
+<ul class="tema-lista">
+<li><strong>a) Identifica cada fichero.</strong> El de datos estables es el <strong>maestro</strong>; el de altas/bajas/variaciones, el <strong>de movimientos</strong>.</li>
+<li><strong>b) ¿Cómo se relacionan?</strong> En un proceso por lotes (batch), los movimientos se aplican ordenadamente sobre el maestro, generando el maestro actualizado del mes siguiente.</li>
+<li><strong>c) ¿Qué operación de ficheros interviene si ambos están ordenados por la misma clave?</strong> La fusión (mezcla) y la actualización del maestro manteniendo el orden.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 4 — El fichero degradado</h4>
+<p><strong>Escenario</strong>: con el paso del tiempo, un fichero acumula muchos registros marcados como borrados y una zona de desbordamiento creciente; las búsquedas son cada vez más lentas.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué está pasando?</strong> Los borrados lógicos siguen ocupando espacio y la zona de overflow alarga las búsquedas: el fichero ha perdido la eficiencia de su organización original.</li>
+<li><strong>b) ¿Qué operación procede?</strong> La <strong>reorganización (compactación)</strong>: eliminar efectivamente los registros marcados, reintegrar el overflow en la zona principal y reconstruir los índices si los hay.</li>
+<li><strong>c) ¿Qué se recupera con ella?</strong> Espacio y tiempos de acceso — en los modelos que acumulan borrados lógicos y desbordamientos, es una tarea periódica de mantenimiento.</li>
+</ul>
+
+<h2 id="13-matriz-de-memorizacion" class="tema-h2">13. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Lo que debo recordar</strong></th>
+</tr>
+<tr>
+<td>Fichero</td>
+<td>Unidad de información con nombre propio, formada por registros del mismo tipo</td>
+</tr>
+<tr>
+<td>Jerarquía</td>
+<td>Carácter → campo → registro → fichero</td>
+</tr>
+<tr>
+<td>Secuencial</td>
+<td>Registros consecutivos; eficiente para recorrer, lenta para localizar</td>
+</tr>
+<tr>
+<td>Directa/relativa</td>
+<td>Posición derivable de la clave o número relativo; acceso muy rápido a registros concretos</td>
+</tr>
+<tr>
+<td>Hash</td>
+<td>Técnica posible de la directa: función de dispersión clave → posición; colisiones</td>
+</tr>
+<tr>
+<td>Secuencial indexada</td>
+<td>Secuencial + índice; búsqueda en dos pasos (índice → zona → secuencial corta)</td>
+</tr>
+<tr>
+<td>Acceso secuencial</td>
+<td>Recorro uno a uno desde el principio</td>
+</tr>
+<tr>
+<td>Acceso directo</td>
+<td>Localizo sin pasar por los anteriores</td>
+</tr>
+<tr>
+<td>ISAM</td>
+<td>Método clásico del acceso secuencial indexado: índice → zona → búsqueda secuencial</td>
+</tr>
+<tr>
+<td>Índice primario</td>
+<td>Sobre la clave que fija el orden físico; solo uno</td>
+</tr>
+<tr>
+<td>Índice secundario</td>
+<td>Sobre otro campo; puede haber varios</td>
+</tr>
+<tr>
+<td>Índice denso</td>
+<td>Una entrada por registro</td>
+</tr>
+<tr>
+<td>Índice disperso</td>
+<td>Entradas solo para algunos registros (p. ej., uno por bloque)</td>
+</tr>
+<tr>
+<td>Longitud fija</td>
+<td>Registros del mismo tamaño; posiciones calculables</td>
+</tr>
+<tr>
+<td>Longitud variable</td>
+<td>Tamaños distintos; ahorra espacio, complica el cálculo de posiciones</td>
+</tr>
+<tr>
+<td>Maestro</td>
+<td>Datos relativamente estables</td>
+</tr>
+<tr>
+<td>Movimientos</td>
+<td>Transacciones que se aplican al maestro (batch)</td>
+</tr>
+<tr>
+<td>Borrado lógico</td>
+<td>Marca de eliminado; puede conservarse hasta la reorganización</td>
+</tr>
+<tr>
+<td>Borrado físico</td>
+<td>Eliminación efectiva del registro</td>
+</tr>
+</table></div>
+
+<h2 id="14-resumen-final" class="tema-h2">14. Resumen final: si mañana fuera el examen</h2>
+<ul class="tema-lista">
+<li><strong>Fichero</strong> = unidad de información con registros del mismo tipo. Jerarquía: <strong>carácter → campo → registro → fichero</strong>; la clave identifica y localiza registros (la clave primaria del modelo relacional es del Tema 5).</li>
+<li><strong>Organización ≠ acceso</strong>: disposición de los registros vs. forma de localizarlos; una organización puede admitir varios accesos.</li>
+<li>Organizaciones: <strong>secuencial</strong> (consecutivos; recorrer sí, localizar no), <strong>directa/relativa</strong> (posición derivable de la clave; el hash es una técnica posible, con colisiones), <strong>secuencial indexada</strong> (secuencial + índice; búsqueda en dos pasos).</li>
+<li>Inserción: al final · ordenada (posibles desplazamientos según el esquema) · con overflow · por cálculo de posición. Acceso: <strong>secuencial → recorro · directo → localizo · indexado → índice</strong> (ISAM como método clásico).</li>
+<li><strong>Índices</strong>: aceleran búsquedas a costa de espacio y mantenimiento. Rol: primario (orden físico, único) / secundario (varios). Densidad: denso (entrada por registro) / disperso. <strong>Criterios independientes</strong> — puede haber un índice secundario y denso. Multinivel para índices grandes (B/B+ como ampliación).</li>
+<li><strong>Formatos</strong>: texto vs. binario (este puede ofrecer ventajas en determinados casos); longitud fija (posiciones calculables) vs. variable (ahorro); delimitados (CSV); JSON/XML como formatos estructurados de intercambio.</li>
+<li><strong>Maestro</strong> (estable) y <strong>movimientos</strong> (transacciones) — procesamiento por lotes.</li>
+<li><strong>Metadatos</strong>: nombre, extensión, tamaño, fechas, atributos, ruta, permisos (gestión concreta en Temas 9 y 15).</li>
+<li><strong>Operaciones</strong>: sobre el fichero (crear, abrir, cerrar, eliminar, renombrar, copiar, mover, ordenar, fusionar, reorganizar) y sobre los registros (leer, insertar, actualizar, buscar, borrar).</li>
+<li><strong>Borrado lógico</strong> (marca) vs. <strong>físico</strong> (eliminación efectiva); la <strong>reorganización</strong> compacta el fichero y recupera espacio y eficiencia.</li>
+</ul>
   </div>
 </article>

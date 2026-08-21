@@ -10,194 +10,526 @@
 <li><a href="#2-memorias-flash-y-discos-de-estado-solido-ssd">2. Memorias flash y discos de estado sólido (SSD)</a></li>
 <li><a href="#3-soportes-opticos-y-magneto-opticos">3. Soportes ópticos y magneto-ópticos</a></li>
 <li><a href="#4-cintas-magneticas">4. Cintas magnéticas</a></li>
-<li><a href="#5-interfaces-y-velocidades-de-conexion">5. Interfaces y velocidades de conexión</a></li>
-<li><a href="#6-resumen-para-estudiar">6. Resumen para estudiar</a></li>
-<li><a href="#7-conceptos-clave">7. Conceptos clave</a></li>
-<li><a href="#8-posibles-puntos-de-examen">8. Posibles puntos de examen</a></li>
+<li><a href="#5-tecnologias-interfaces-y-velocidades">5. Tecnologías, interfaces y velocidades</a></li>
+<li><a href="#6-datos-y-anclas-de-memoria">6. Datos y anclas de memoria</a></li>
+<li><a href="#7-no-confundir">7. No confundir</a></li>
+<li><a href="#8-posibles-trampas-de-examen">8. Posibles trampas de examen</a></li>
+<li><a href="#9-posibles-preguntas-tipo-test">9. Posibles preguntas tipo test</a></li>
+<li><a href="#10-posibles-preguntas-cortas">10. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#11-supuestos-practicos">11. Supuestos prácticos</a></li>
+<li><a href="#12-matriz-de-memorizacion">12. Matriz de memorización</a></li>
+<li><a href="#13-resumen-final">13. Resumen final: si mañana fuera el examen</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
 
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>Este tema trata los dispositivos de almacenamiento en sí mismos —el soporte físico donde se guardan los datos—, no cómo se organiza la información dentro de ellos (fichero, registro, clave: <strong>Tema 4</strong>) ni cómo el sistema operativo gestiona esos ficheros (sistemas de archivos concretos: <strong>Tema 9</strong>).<br>Tampoco profundices aquí en las arquitecturas que combinan varios discos en red (NAS y SAN): eso es el <strong>Tema 7</strong>. Aquí nos quedamos en el dispositivo individual y su tecnología. El almacenamiento es <strong>memoria secundaria</strong>: no la confundas con la memoria principal (RAM/ROM/caché) vista en el Tema 3.</th>
+<th><strong>⚠️ No confundir — fronteras del tema</strong><br>Este tema trata los dispositivos de almacenamiento en sí mismos —el soporte físico—, no cómo se organiza la información dentro de ellos (<strong>Tema 4</strong>) ni cómo el sistema operativo gestiona los ficheros (<strong>Tema 9</strong>). Las arquitecturas que combinan discos en red (NAS/SAN) son el <strong>Tema 7</strong>, y los buses e interfaces generales de periféricos (USB, FireWire, SCSI, Bluetooth), el <strong>Tema 8</strong>. El almacenamiento es <strong>memoria secundaria</strong>: no confundirla con la memoria principal (RAM/ROM/caché) del Tema 3.</th>
 </tr>
 </table></div>
 
 <h2 id="1-discos-duros-magneticos-hdd" class="tema-h2">1. Discos duros magnéticos (HDD)</h2>
-<p>El <strong>disco duro (HDD — Hard Disk Drive)</strong> ha sido durante décadas el dispositivo de almacenamiento secundario por excelencia. Es un dispositivo <strong>electromecánico</strong>: guarda la información en forma de campos magnéticos sobre la superficie de unos platos que giran a gran velocidad.</p>
+<p>El <strong>disco duro (HDD — Hard Disk Drive)</strong> ha sido durante décadas el dispositivo de almacenamiento secundario por excelencia. Es un dispositivo <strong>electromecánico</strong>: guarda la información en forma de campos magnéticos sobre platos que giran a gran velocidad.</p>
+<h4 class="tema-h4">Componentes</h4>
 <ul class="tema-lista">
 <li><strong>Platos</strong>: discos rígidos recubiertos de material magnético, apilados sobre un mismo eje, donde se graba la información.</li>
-<li><strong>Cabezal de lectura/escritura</strong>: se desplaza sobre la superficie de los platos (sin llegar a tocarlos) para leer o grabar los datos.</li>
-<li><strong>Brazo actuador</strong>: mueve el cabezal hasta la posición exacta donde está el dato que se necesita.</li>
-<li><strong>Motor</strong>: hace girar los platos a una velocidad constante, medida en <strong>revoluciones por minuto (RPM)</strong>.</li>
+<li><strong>Cabezales de lectura/escritura</strong>: se desplazan sobre la superficie de los platos (sin tocarlos) para leer o grabar.</li>
+<li><strong>Brazo actuador</strong>: mueve los cabezales hasta la posición del dato.</li>
+<li><strong>Motor</strong>: hace girar los platos a velocidad constante, medida en <strong>revoluciones por minuto (RPM)</strong>.</li>
 </ul>
-<h4 class="tema-h4">Geometría del disco y factores de velocidad</h4>
-<p>Los datos se organizan sobre el plato en <strong>pistas</strong> (círculos concéntricos) divididas en <strong>sectores</strong>; el conjunto de pistas situadas a la misma distancia del eje en todos los platos forma un <strong>cilindro</strong>. La velocidad de un HDD depende de tres factores:</p>
+<h4 class="tema-h4">Geometría</h4>
+<p>Los datos se organizan sobre el plato en <strong>pistas</strong> (círculos concéntricos) divididas en <strong>sectores</strong>; el conjunto de pistas situadas a la misma distancia del eje en todos los platos forma un <strong>cilindro</strong>.</p>
+<h4 class="tema-h4">Factores de velocidad</h4>
 <ul class="tema-lista">
-<li><strong>Velocidad de rotación</strong>: habitualmente <strong>5.400 o 7.200 RPM</strong> en equipos de usuario, y 10.000 o 15.000 RPM en discos de servidor.</li>
-<li><strong>Tiempo de acceso</strong>: suma del <strong>tiempo de búsqueda (seek)</strong> —lo que tarda el cabezal en posicionarse en la pista— y la <strong>latencia rotacional</strong> —la espera hasta que el sector pasa por debajo del cabezal—. Se mide en milisegundos (ms).</li>
-<li><strong>Tasa de transferencia</strong>: la cantidad de datos que se puede leer o escribir por segundo una vez posicionado (MB/s).</li>
+<li><strong>Velocidad de rotación (RPM)</strong>: como referencias orientativas, <strong>5.400 y 7.200 RPM</strong> son habituales en HDD de consumo, y <strong>10.000 o 15.000 RPM</strong> en determinados discos de servidor. Son valores de referencia, no categorías obligatorias.</li>
+<li><strong>Tiempo de búsqueda (seek)</strong>: lo que tarda el cabezal en <strong>posicionarse</strong> en la pista correcta.</li>
+<li><strong>Latencia rotacional</strong>: la <strong>espera</strong> hasta que el sector buscado pasa bajo el cabezal (depende de las RPM).</li>
+<li><strong>Tasa de transferencia</strong>: los <strong>datos por unidad de tiempo</strong> que pueden leerse o escribirse una vez posicionado (MB/s).</li>
 </ul>
+<p>El tiempo de acceso suele describirse como la suma de búsqueda y latencia rotacional; en el rendimiento real influyen además otros factores (caché del disco, interfaz, patrón de acceso...).</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>El HDD es tecnología <strong>mecánica</strong>: tiene partes móviles (platos que giran, un cabezal que se desplaza). Eso lo hace más lento y más sensible a golpes que un SSD, pero también <strong>más barato por gigabyte</strong>, lo que lo mantiene vigente para almacenamiento masivo de bajo coste (servidores de archivos, videovigilancia, copias de datos poco consultados).</th>
+<th><strong>🧠 Para memorizar</strong><br><strong>SEEK → el cabezal se posiciona · LATENCIA ROTACIONAL → el sector llega · TRANSFERENCIA → los datos fluyen.</strong> Tres relojes distintos, en ese orden.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br>El HDD es tecnología <strong>magnética y mecánica</strong>: partes móviles → más lento y más sensible a golpes que un SSD, pero <strong>generalmente más barato por gigabyte</strong>, lo que lo mantiene vigente para almacenamiento masivo de bajo coste (archivo, videovigilancia, datos poco consultados).</th>
 </tr>
 </table></div>
 
 <h2 id="2-memorias-flash-y-discos-de-estado-solido-ssd" class="tema-h2">2. Memorias flash y discos de estado sólido (SSD)</h2>
-<p>La <strong>memoria flash</strong> es un tipo de memoria <strong>no volátil de estado sólido</strong>: no tiene partes móviles, almacena la información mediante cargas eléctricas en celdas de memoria (tecnología <strong>NAND</strong>) y conserva los datos aunque se corte la alimentación.</p>
-<ul class="tema-lista">
-<li><strong>SSD (Solid State Drive)</strong>: unidad de almacenamiento construida enteramente con memoria flash. Al no depender de partes mecánicas, es <strong>mucho más rápida</strong> que un HDD, más resistente a golpes y vibraciones, y consume menos energía.</li>
-<li><strong>Otros dispositivos de memoria flash</strong>: los pendrives o memorias USB y las tarjetas de memoria (SD, microSD...), pensados sobre todo para almacenamiento portátil e intercambio de datos.</li>
-</ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>Criterio</strong></th>
-<th><strong>HDD (magnético)</strong></th>
-<th><strong>SSD (memoria flash)</strong></th>
+<th><strong>📌 Imprescindible para el examen — flash ≠ SSD</strong><br><strong>Memoria flash</strong> → la <strong>tecnología</strong>: memoria <strong>no volátil de estado sólido</strong> que almacena la información mediante cargas eléctricas en celdas (tecnología <strong>NAND</strong>) y conserva los datos sin alimentación.<br><strong>SSD</strong> → el <strong>dispositivo</strong>: unidad de almacenamiento que utiliza normalmente memoria flash NAND.<br>Otros dispositivos flash: <strong>pendrives</strong> y <strong>tarjetas SD/microSD</strong>. Todo SSD usa flash, pero no todo dispositivo flash es un SSD.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">HDD vs. SSD (tabla central)</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Característica</strong></th>
+<th><strong>HDD</strong></th>
+<th><strong>SSD</strong></th>
 </tr>
 <tr>
-<td>Velocidad</td>
-<td>Menor: limitada por la parte mecánica (rotación y posicionamiento del cabezal)</td>
-<td>Mucho mayor: acceso electrónico, sin latencia mecánica</td>
+<td>Tecnología</td>
+<td>Magnética / mecánica</td>
+<td>Estado sólido / flash</td>
 </tr>
 <tr>
-<td>Precio por GB</td>
-<td>Más barato</td>
-<td>Más caro</td>
+<td>Partes móviles</td>
+<td>Sí (platos, cabezales)</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Latencia</td>
+<td>Mayor (mecánica)</td>
+<td>Mucho menor (electrónica)</td>
+</tr>
+<tr>
+<td>Rendimiento</td>
+<td>Menor</td>
+<td>Mayor</td>
+</tr>
+<tr>
+<td>Precio/GB</td>
+<td>Generalmente menor</td>
+<td>Generalmente mayor</td>
 </tr>
 <tr>
 <td>Resistencia a golpes</td>
-<td>Baja (piezas móviles)</td>
-<td>Alta (sin piezas móviles)</td>
+<td>Menor</td>
+<td>Mayor</td>
 </tr>
 <tr>
-<td>Consumo y ruido</td>
-<td>Mayor consumo, genera ruido y vibración</td>
-<td>Menor consumo, silencioso</td>
+<td>Ruido</td>
+<td>Sí (rotación, vibración)</td>
+<td>Muy bajo / sin partes móviles</td>
 </tr>
 <tr>
-<td>Desgaste característico</td>
-<td>Mecánico (motor, cabezal)</td>
-<td>Ciclos de escritura limitados por celda (gestionado por wear leveling)</td>
+<td>Consumo</td>
+<td>Generalmente mayor</td>
+<td>Generalmente menor</td>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>💡 Ejemplo</strong><br>Es la actualización de hardware con mejor relación coste/beneficio que puede vivir una persona usuaria: sustituir el HDD de un equipo antiguo por un SSD reduce el arranque de Windows de varios minutos a segundos. Por eso, en los puestos de trabajo corporativos actuales el disco del sistema es prácticamente siempre un SSD, y el HDD queda relegado a almacenamiento masivo.</th>
+<th><strong>💡 Ejemplo</strong><br>Sustituir el HDD de un equipo antiguo por un SSD es una de las mejoras con mejor relación coste/beneficio que un CAU puede proponer: el arranque y la apertura de aplicaciones pasan de minutos a segundos, porque desaparece la latencia mecánica.</th>
 </tr>
 </table></div>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Según cuántos bits almacena cada celda de memoria flash, se habla de celdas <strong>SLC</strong> (1 bit, más rápidas y duraderas, más caras), <strong>MLC</strong> (2 bits), <strong>TLC</strong> (3 bits) y <strong>QLC</strong> (4 bits, más baratas pero con menor vida útil). Cada celda soporta un número limitado de ciclos de escritura; el controlador del SSD reparte el desgaste entre todas las celdas (<strong>wear leveling</strong>) y las órdenes <strong>TRIM</strong> del sistema operativo le ayudan a mantener el rendimiento. Basta con conocer la idea general: compromiso entre coste, velocidad y durabilidad.</th>
-</tr>
-</table></div>
+<h4 class="tema-h4">Ampliación: tipos de celda, wear leveling y TRIM</h4>
+<ul class="tema-lista">
+<li>Según los bits por celda: <strong>SLC (1 bit) · MLC (2 bits) · TLC (3 bits) · QLC (4 bits)</strong>. El compromiso general: a más bits por celda, <strong>más densidad y menor coste</strong>, pero <strong>menor rendimiento y resistencia</strong> (ciclos de escritura).</li>
+<li><strong>Wear leveling</strong>: el controlador del SSD <strong>distribuye las escrituras</strong> entre las celdas para evitar un desgaste concentrado.</li>
+<li><strong>TRIM</strong>: permite <strong>comunicar al SSD qué bloques ya no contienen datos útiles</strong>, ayudándole a gestionar el espacio y el rendimiento. (Su configuración por el sistema operativo no es objeto de este tema.)</li>
+</ul>
 
 <h2 id="3-soportes-opticos-y-magneto-opticos" class="tema-h2">3. Soportes ópticos y magneto-ópticos</h2>
-<p>Los <strong>soportes ópticos</strong> almacenan la información en una superficie que un <strong>láser</strong> lee (y, si el disco es grabable, también escribe) detectando variaciones en la reflectividad de la superficie.</p>
-<ul class="tema-lista">
-<li><strong>CD (Compact Disc)</strong>: capacidad típica de unos <strong>700 MB</strong>.</li>
-<li><strong>DVD (Digital Versatile Disc)</strong>: capacidad típica de <strong>4,7 GB</strong> en capa simple y <strong>8,5 GB</strong> en doble capa.</li>
-<li><strong>Blu-ray</strong>: usa un láser de menor longitud de onda (azul), lo que permite mayor densidad de grabación: <strong>25 GB por capa</strong> (50 GB en doble capa).</li>
-</ul>
-<p>En cada formato existen variantes según su capacidad de grabación: <strong>-ROM</strong> (solo lectura, grabado de fábrica), <strong>-R</strong> (grabable una sola vez) y <strong>-RW / -RE</strong> (regrabable múltiples veces).</p>
-<p>Los <strong>discos magneto-ópticos</strong> combinan ambas tecnologías: la <strong>escritura</strong> se realiza aplicando calor con un láser junto con un <strong>campo magnético</strong>, mientras que la <strong>lectura es puramente óptica</strong>. Fueron relevantes en su momento por su alta fiabilidad y regrababilidad, aunque hoy están en desuso frente a la memoria flash.</p>
+<p>Los <strong>soportes ópticos</strong> almacenan la información en una superficie que un <strong>láser</strong> lee (y, en los grabables, escribe) detectando variaciones de reflectividad.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🧠 Para memorizar</strong><br>Capacidades ópticas en escala: <strong>CD 700 MB → DVD 4,7 GB → Blu-ray 25 GB</strong> (por capa). Y la regla de las siglas: <strong>ROM = solo lectura · R = una grabación · RW = regrabable</strong>.</th>
+<th><strong>Soporte</strong></th>
+<th><strong>Capacidad (datos de memorización)</strong></th>
+</tr>
+<tr>
+<td><strong>CD</strong></td>
+<td>~<strong>700 MB</strong></td>
+</tr>
+<tr>
+<td><strong>DVD</strong></td>
+<td><strong>4,7 GB</strong> capa simple · <strong>8,5 GB</strong> doble capa</td>
+</tr>
+<tr>
+<td><strong>Blu-ray</strong></td>
+<td><strong>25 GB</strong> por capa · <strong>50 GB</strong> doble capa</td>
 </tr>
 </table></div>
+<p>Variantes según capacidad de grabación: <strong>-ROM</strong> (solo lectura, grabado de fábrica) · <strong>-R</strong> (grabable una sola vez) · <strong>-RW / -RE</strong> (regrabable).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br>Escala óptica: <strong>CD 700 MB → DVD 4,7/8,5 GB → Blu-ray 25/50 GB</strong>. Siglas: <strong>ROM = solo lectura · R = una vez · RW/RE = regrabable</strong>.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Discos magneto-ópticos</h4>
+<p>Combinan ambas tecnologías: la <strong>escritura</strong> se realiza mediante la combinación de un <strong>láser</strong> (calor) y un <strong>campo magnético</strong>; la <strong>lectura es óptica</strong>. Tuvieron uso histórico por su fiabilidad y regrababilidad; hoy su uso es reducido.</p>
 
 <h2 id="4-cintas-magneticas" class="tema-h2">4. Cintas magnéticas</h2>
-<p>La <strong>cinta magnética</strong> es uno de los soportes de almacenamiento más antiguos que se siguen usando hoy, sobre todo para <strong>copias de seguridad y archivo a largo plazo</strong>: ofrece un coste por gigabyte muy bajo y una gran capacidad, a cambio de un acceso mucho más lento que un disco.</p>
+<p>La <strong>cinta magnética</strong> es un soporte de <strong>almacenamiento magnético</strong> que sigue plenamente vigente para <strong>copias de seguridad y archivo a largo plazo</strong>: ofrece <strong>gran capacidad</strong> y un <strong>coste por gigabyte muy bajo</strong>, a cambio de un acceso mucho más lento que el disco.</p>
 <ul class="tema-lista">
-<li><strong>LTO (Linear Tape-Open)</strong>: el estándar de cinta magnética más extendido en el ámbito profesional, con generaciones sucesivas (LTO-7, LTO-8, LTO-9...) que van aumentando capacidad y velocidad de transferencia.</li>
-<li>Ventaja adicional para la seguridad: una cinta extraída y guardada está <strong>desconectada (offline)</strong>, fuera del alcance de un ataque por red — cualidad valiosa frente al ransomware (Temas 23 y 25).</li>
+<li><strong>La cinta utiliza acceso secuencial a los datos</strong>: para llegar a una posición hay que avanzar o rebobinar hasta ella.</li>
+<li><strong>LTO (Linear Tape-Open)</strong>: el estándar de cinta más extendido en el ámbito profesional, con generaciones sucesivas que aumentan capacidad y velocidad.</li>
+<li>Valor añadido de seguridad: una cinta extraída y guardada es un soporte <strong>offline</strong>, fuera del alcance de un ataque por red (idea que se retoma en los Temas 23 y 25, sin desarrollarla aquí).</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>El acceso a una cinta es puramente <strong>secuencial</strong>: para llegar a un dato hay que rebobinar o avanzar la cinta hasta la posición correcta, sin posibilidad de «saltar» directamente como en un disco.<br>No es casualidad que esto conecte con la organización secuencial de ficheros del Tema 4: las cintas fueron durante décadas el soporte físico típico de los ficheros con organización secuencial.</th>
+<th><strong>⚠️ No confundir</strong><br>Cinta = <strong>acceso secuencial</strong>; disco = acceso directo. Conecta con la organización secuencial de ficheros del Tema 4: las cintas fueron durante décadas su soporte físico típico.</th>
 </tr>
 </table></div>
 
-<h2 id="5-interfaces-y-velocidades-de-conexion" class="tema-h2">5. Interfaces y velocidades de conexión</h2>
-<p>Además de la tecnología del propio dispositivo, su velocidad real depende de la <strong>interfaz</strong> que lo conecta al resto del ordenador:</p>
+<h2 id="5-tecnologias-interfaces-y-velocidades" class="tema-h2">5. Tecnologías, interfaces y velocidades</h2>
+<p>El enunciado oficial incluye «tecnologías y velocidades»: esta parte es central. La clave está en <strong>no mezclar planos</strong>: una cosa es cómo se almacenan los datos (tecnología), otra el aparato (dispositivo), otra cómo se comunica (interfaz/protocolo), otra el medio (bus) y otra la forma física (factor de forma).</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>Interfaz</strong></th>
-<th><strong>Uso típico</strong></th>
-<th><strong>Velocidad orientativa</strong></th>
+<th><strong>Concepto</strong></th>
+<th><strong>Ejemplo</strong></th>
+<th><strong>Qué representa</strong></th>
 </tr>
 <tr>
-<td><strong>SATA</strong> (Serial ATA)</td>
-<td>HDD y SSD internos de uso general</td>
-<td>Hasta <strong>6 Gbps</strong> (SATA III) ≈ 600 MB/s</td>
+<td><strong>Tecnología de almacenamiento</strong></td>
+<td>NAND flash, grabación magnética</td>
+<td>Cómo se almacenan los datos</td>
 </tr>
 <tr>
-<td><strong>SAS</strong> (Serial Attached SCSI)</td>
-<td>Discos de servidor, gama profesional</td>
-<td>12-24 Gbps, mayor fiabilidad que SATA</td>
+<td><strong>Dispositivo</strong></td>
+<td>SSD, HDD, pendrive</td>
+<td>La unidad física de almacenamiento</td>
 </tr>
 <tr>
-<td><strong>NVMe</strong> (Non-Volatile Memory Express)</td>
-<td>SSD de alto rendimiento sobre el bus <strong>PCIe</strong> (formato M.2 habitual)</td>
-<td>Varios GB/s — muy superior a SATA</td>
+<td><strong>Interfaz</strong></td>
+<td>SATA, SAS</td>
+<td>Cómo se comunica el dispositivo con el equipo</td>
 </tr>
 <tr>
-<td><strong>USB</strong></td>
-<td>Almacenamiento externo (discos portátiles, pendrives)</td>
-<td>Según versión (Tema 8)</td>
+<td><strong>Protocolo / especificación</strong></td>
+<td>NVMe</td>
+<td>Cómo se accede al dispositivo de memoria no volátil</td>
+</tr>
+<tr>
+<td><strong>Bus / transporte</strong></td>
+<td>PCIe</td>
+<td>El medio de interconexión de alta velocidad</td>
+</tr>
+<tr>
+<td><strong>Factor de forma</strong></td>
+<td>M.2, 2,5"</td>
+<td>La forma física / el conector</td>
 </tr>
 </table></div>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br><strong>NVMe no es un tipo de memoria, sino un protocolo/interfaz</strong> diseñado para que los SSD aprovechen el bus PCIe sin el cuello de botella de SATA. Un mismo SSD «de estado sólido» puede ser SATA (más lento) o NVMe (más rápido): la tecnología de almacenamiento (flash) es la misma; cambia la interfaz.</th>
-</tr>
-</table></div>
-<p>El detalle de estas interfaces como buses genéricos de conexión de periféricos (USB, Firewire, SCSI, Bluetooth...) se estudia en el <strong>Tema 8</strong>; aquí basta con reconocerlas aplicadas específicamente al almacenamiento.</p>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Cuando se necesita combinar varios discos físicos para ganar rendimiento y/o tolerancia a fallos, se recurre a <strong>RAID (Redundant Array of Independent Disks)</strong>, con distintos niveles (RAID 0, 1, 5, 10...) según el equilibrio que se busque entre velocidad y seguridad. RAID es la base de muchas arquitecturas de almacenamiento en red, que se estudian en el <strong>Tema 7</strong>.</th>
-</tr>
-</table></div>
-
-<h2 id="6-resumen-para-estudiar" class="tema-h2">6. Resumen para estudiar</h2>
+<h4 class="tema-h4">SATA</h4>
 <ul class="tema-lista">
-<li><strong>HDD</strong>: magnético y mecánico (platos, cabezal, brazo, motor); geometría: pistas → sectores → cilindros; velocidad = RPM (5.400/7.200; 10k/15k en servidor) + tiempo de acceso (seek + latencia rotacional) + tasa de transferencia; barato por GB, lento y sensible a golpes.</li>
-<li><strong>SSD</strong>: memoria flash NAND, no volátil, sin partes móviles; mucho más rápido, resistente y silencioso; más caro por GB; desgaste por ciclos de escritura (wear leveling, TRIM).</li>
-<li>Flash también en pendrives y tarjetas SD; celdas SLC/MLC/TLC/QLC (coste vs. velocidad vs. durabilidad).</li>
-<li>Ópticos (láser): <strong>CD ~700 MB · DVD 4,7-8,5 GB · Blu-ray 25-50 GB</strong>; variantes ROM / R / RW. Magneto-ópticos: escritura láser+campo magnético, lectura óptica; en desuso.</li>
-<li><strong>Cintas (LTO)</strong>: bajo coste por GB, gran capacidad, acceso <strong>secuencial</strong>; uso en backup y archivo; ventaja offline frente a ransomware.</li>
-<li>Interfaces: <strong>SATA</strong> (6 Gbps, general) · <strong>SAS</strong> (servidores) · <strong>NVMe sobre PCIe</strong> (SSD rápidos, formato M.2) · <strong>USB</strong> (externo).</li>
-<li>NVMe es interfaz/protocolo, no tipo de memoria: SSD SATA vs. SSD NVMe.</li>
-<li><strong>RAID</strong> combina discos para rendimiento y/o redundancia → base de NAS/SAN (Tema 7).</li>
+<li><strong>SATA (Serial ATA)</strong>: interfaz de almacenamiento de uso general con HDD y SSD SATA.</li>
+<li>Denominación recomendada: <strong>SATA Revision 3.x / SATA 6 Gb/s</strong> (mejor que «SATA III»), con enlace de <strong>hasta 6 Gb/s</strong>.</li>
+<li>Matiz: la <strong>velocidad de enlace</strong> no equivale al <strong>rendimiento útil real</strong>, que es inferior por la sobrecarga de codificación y protocolo.</li>
+</ul>
+<h4 class="tema-h4">SAS</h4>
+<ul class="tema-lista">
+<li><strong>SAS (Serial Attached SCSI)</strong>: interfaz orientada al <strong>almacenamiento profesional y de servidores</strong>, de uso habitual empresarial.</li>
+<li>Aporta características de <strong>fiabilidad y gestión</strong> propias del entorno profesional (conexión de muchos dispositivos, doble puerto, colas de mando).</li>
+<li>Las velocidades corresponden a <strong>generaciones concretas</strong> (12 o 24 Gb/s en las recientes); no son una propiedad universal de SAS ni es necesario memorizar el catálogo completo.</li>
+</ul>
+<h4 class="tema-h4">NVMe y PCIe</h4>
+<ul class="tema-lista">
+<li><strong>NVMe (Non-Volatile Memory Express)</strong>: <strong>especificación/protocolo para acceder a dispositivos de memoria no volátil</strong>, diseñada para explotar la baja latencia y el paralelismo de los SSD. <strong>No es un tipo de memoria</strong>.</li>
+<li>En los equipos convencionales, NVMe se utiliza <strong>habitualmente sobre PCIe</strong>; la especificación contempla NVMe sobre distintos transportes, así que tampoco es sinónimo exclusivo de PCIe.</li>
+<li><strong>PCIe (PCI Express)</strong>: <strong>bus/interconexión de alta velocidad</strong> del equipo, que NVMe puede usar como transporte. Un SSD NVMe sobre PCIe alcanza varios GB/s, muy por encima de SATA.</li>
+</ul>
+<h4 class="tema-h4">M.2</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir: M.2 / NVMe / PCIe / SATA — concepto trampa nº 1 del tema</strong><br><strong>M.2 → factor de forma / conector físico</strong>, no una interfaz de almacenamiento por sí mismo.<br><strong>SATA → interfaz</strong>.<br><strong>PCIe → bus/interconexión</strong>.<br><strong>NVMe → protocolo/especificación</strong>.<br>Un dispositivo M.2 puede utilizar <strong>distintas interfaces según su diseño</strong>: existen SSD M.2 <strong>SATA</strong> y SSD M.2 <strong>PCIe/NVMe</strong>. Ver el conector M.2 no basta para saber qué interfaz usa.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">USB y RAID (delimitación)</h4>
+<ul class="tema-lista">
+<li><strong>USB</strong>: la conectividad habitual del <strong>almacenamiento externo</strong> (discos portátiles, pendrives). Sus versiones y velocidades se estudian en el <strong>Tema 8</strong>.</li>
+<li><strong>RAID</strong>: combinación de varios discos para conseguir determinadas características de <strong>rendimiento, disponibilidad y/o redundancia</strong>. Puede utilizarse en múltiples arquitecturas de almacenamiento; el detalle de las arquitecturas de almacenamiento masivo (y de los niveles RAID) corresponde al <strong>Tema 7</strong>.</li>
 </ul>
 
-<h2 id="7-conceptos-clave" class="tema-h2">7. Conceptos clave</h2>
+<h2 id="6-datos-y-anclas-de-memoria" class="tema-h2">6. Datos y anclas de memoria</h2>
 <ul class="tema-lista">
-<li><strong>HDD</strong>: platos, cabezal, pistas, sectores, cilindros, RPM, tiempo de acceso, latencia rotacional.</li>
-<li><strong>SSD y memoria flash NAND</strong>; no volatilidad; wear leveling y TRIM.</li>
-<li><strong>SLC / MLC / TLC / QLC</strong> (idea general).</li>
-<li><strong>CD / DVD / Blu-ray</strong> y sus capacidades; ROM / R / RW.</li>
-<li><strong>Discos magneto-ópticos</strong> (escritura mixta, lectura óptica).</li>
-<li><strong>Cinta magnética y LTO</strong>; acceso secuencial.</li>
-<li><strong>SATA, SAS, NVMe, PCIe, M.2, USB</strong>.</li>
-<li><strong>RAID</strong> (concepto general; detalle en Tema 7).</li>
+<li><strong>HDD → magnético + mecánico · SSD → flash + estado sólido · Cinta → secuencial</strong>.</li>
+<li>HDD: platos · cabezales · brazo · motor; pistas → sectores → cilindros; <strong>seek (posicionarse) + latencia rotacional (esperar el sector) + transferencia (datos/segundo)</strong>.</li>
+<li>RPM orientativas: <strong>5.400/7.200</strong> consumo · <strong>10.000/15.000</strong> ciertos discos de servidor.</li>
+<li><strong>Flash = tecnología · SSD = dispositivo</strong>; también pendrives y SD. Celdas: <strong>SLC 1 · MLC 2 · TLC 3 · QLC 4</strong> bits (más bits = más densidad y menos coste, menos rendimiento y resistencia).</li>
+<li><strong>Wear leveling → reparte escrituras · TRIM → avisa de bloques sin datos útiles</strong>.</li>
+<li>Ópticos: <strong>CD 700 MB · DVD 4,7/8,5 GB · Blu-ray 25/50 GB</strong>; <strong>ROM/R/RW</strong>. Magneto-óptico: escribe láser+campo, lee óptico.</li>
+<li>Cinta: <strong>LTO</strong>, gran capacidad, bajo coste/GB, backup y archivo, ventaja offline.</li>
+<li><strong>SATA → interfaz (Revision 3.x, 6 Gb/s) · SAS → servidores/profesional · NVMe → protocolo · PCIe → bus · M.2 → forma</strong>.</li>
+<li>Escalera conceptual: <strong>tecnología → dispositivo → interfaz → protocolo → bus → factor de forma</strong>.</li>
+<li><strong>RAID</strong> = combinar discos (rendimiento/disponibilidad/redundancia); detalle en el Tema 7.</li>
 </ul>
 
-<h2 id="8-posibles-puntos-de-examen" class="tema-h2">8. Posibles puntos de examen</h2>
+<h2 id="7-no-confundir" class="tema-h2">7. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto A</strong></th>
+<th><strong>Concepto B</strong></th>
+<th><strong>Diferencia clave</strong></th>
+</tr>
+<tr>
+<td><strong>HDD</strong>: magnético, mecánico, partes móviles</td>
+<td><strong>SSD</strong>: flash, estado sólido, sin partes móviles</td>
+<td>Mecánica vs. electrónica: latencia, resistencia, ruido, precio/GB</td>
+</tr>
+<tr>
+<td><strong>Memoria flash</strong>: la tecnología (NAND)</td>
+<td><strong>SSD</strong>: el dispositivo que la utiliza</td>
+<td>Pendrives y SD también son flash sin ser SSD</td>
+</tr>
+<tr>
+<td><strong>RPM</strong>: velocidad de rotación de los platos</td>
+<td><strong>Tasa de transferencia</strong>: datos por segundo</td>
+<td>Relacionadas, pero no son la misma magnitud</td>
+</tr>
+<tr>
+<td><strong>Seek</strong>: el cabezal se posiciona en la pista</td>
+<td><strong>Latencia rotacional</strong>: espera a que llegue el sector</td>
+<td>Dos componentes distintos del tiempo de acceso</td>
+</tr>
+<tr>
+<td><strong>CD</strong>: 700 MB</td>
+<td><strong>DVD</strong>: 4,7/8,5 GB · <strong>Blu-ray</strong>: 25/50 GB</td>
+<td>La escala de capacidades es dato directo de examen</td>
+</tr>
+<tr>
+<td><strong>ROM</strong>: solo lectura</td>
+<td><strong>R</strong>: una grabación · <strong>RW/RE</strong>: regrabable</td>
+<td>Tres variantes por soporte</td>
+</tr>
+<tr>
+<td><strong>SATA</strong>: interfaz de uso general</td>
+<td><strong>SAS</strong>: interfaz del entorno profesional/servidores</td>
+<td>SAS añade fiabilidad y gestión de clase empresarial</td>
+</tr>
+<tr>
+<td><strong>SATA</strong>: interfaz clásica de almacenamiento</td>
+<td><strong>NVMe</strong>: protocolo para memoria no volátil (habitualmente sobre PCIe)</td>
+<td>Un mismo SSD puede ser SATA o NVMe: cambia cómo se comunica</td>
+</tr>
+<tr>
+<td><strong>NVMe</strong>: protocolo/especificación</td>
+<td><strong>PCIe</strong>: bus/transporte que NVMe suele usar</td>
+<td>NVMe no es PCIe ni un tipo de memoria</td>
+</tr>
+<tr>
+<td><strong>M.2</strong>: factor de forma/conector</td>
+<td><strong>NVMe</strong>: protocolo</td>
+<td>Hay M.2 SATA y M.2 NVMe: la forma no determina la interfaz</td>
+</tr>
+<tr>
+<td><strong>Tecnología</strong> (NAND, magnética)</td>
+<td><strong>Interfaz</strong> (SATA, SAS)</td>
+<td>Cómo se almacena vs. cómo se comunica</td>
+</tr>
+<tr>
+<td><strong>RAID</strong>: combinación de discos</td>
+<td><strong>NAS/SAN</strong>: arquitecturas de almacenamiento en red (Tema 7)</td>
+<td>RAID puede usarse en muchas arquitecturas; no equivale a NAS/SAN</td>
+</tr>
+</table></div>
+
+<h2 id="8-posibles-trampas-de-examen" class="tema-h2">8. Posibles trampas de examen</h2>
 <ul class="tema-lista">
-<li>Diferencias <strong>HDD vs. SSD</strong> (velocidad, precio/GB, resistencia, partes móviles) — pregunta casi segura.</li>
-<li>Componentes del HDD y su geometría (<strong>pista, sector, cilindro</strong>).</li>
-<li>Qué compone el <strong>tiempo de acceso</strong> de un HDD (búsqueda + latencia rotacional).</li>
-<li>Velocidades de rotación típicas (5.400/7.200 RPM; 10.000/15.000 en servidores).</li>
-<li>Capacidades de <strong>CD (700 MB), DVD (4,7 GB) y Blu-ray (25 GB/capa)</strong>.</li>
-<li>Significado de <strong>-ROM, -R y -RW</strong>.</li>
-<li>Característica distintiva de la <strong>cinta</strong>: acceso secuencial; estándar <strong>LTO</strong>; uso en backup.</li>
-<li>Qué es <strong>NVMe</strong> y en qué se diferencia de SATA (interfaz sobre PCIe, no tipo de memoria).</li>
-<li>Qué interfaz corresponde a cada escenario: puesto de usuario (SATA/NVMe), servidor (SAS), externo (USB).</li>
-<li>Cómo escribe y lee un disco <strong>magneto-óptico</strong>.</li>
+<li><strong>«SSD y memoria flash son el mismo concepto»</strong> — falso: flash es la tecnología; SSD, un dispositivo que la usa (como el pendrive o la SD).</li>
+<li><strong>«Todo SSD M.2 es NVMe»</strong> — falso: M.2 es un factor de forma; existen SSD M.2 SATA y M.2 NVMe.</li>
+<li><strong>«NVMe es un tipo de memoria»</strong> — falso: es una especificación/protocolo de acceso a memoria no volátil.</li>
+<li><strong>«NVMe y PCIe son lo mismo»</strong> — falso: NVMe es el protocolo; PCIe, el bus que habitualmente usa como transporte (y no el único contemplado).</li>
+<li><strong>«La denominación correcta es SATA III»</strong> — matiz: la denominación recomendada es SATA Revision 3.x / SATA 6 Gb/s.</li>
+<li><strong>«SATA a 6 Gb/s transfiere 600 MB/s reales en toda circunstancia»</strong> — falso: la velocidad de enlace no equivale al rendimiento útil real.</li>
+<li><strong>«La cinta permite acceso directo a cualquier dato»</strong> — falso: el acceso a cinta es secuencial.</li>
+<li><strong>«RAID es lo mismo que NAS/SAN»</strong> (o «la base de») — impreciso: RAID combina discos y puede usarse en múltiples arquitecturas; NAS/SAN son arquitecturas de red (Tema 7).</li>
+<li><strong>«Las RPM miden la velocidad de transferencia»</strong> — falso: miden la rotación; la transferencia se mide en MB/s.</li>
+<li><strong>«Los HDD de consumo son siempre de 7.200 RPM»</strong> — falso: 5.400/7.200 son referencias habituales, no categorías obligatorias.</li>
+<li><strong>«El Blu-ray usa mayor longitud de onda que el DVD»</strong> — invertido: usa un láser de menor longitud de onda (azul), lo que permite más densidad.</li>
+</ul>
+
+<h2 id="9-posibles-preguntas-tipo-test" class="tema-h2">9. Posibles preguntas tipo test</h2>
+<ul class="tema-lista">
+<li>Diferencias <strong>HDD vs. SSD</strong> (tecnología, partes móviles, latencia, precio/GB, resistencia) — pregunta casi segura.</li>
+<li>Identificar los <strong>componentes del HDD</strong> (platos, cabezales, brazo actuador, motor) y su <strong>geometría</strong> (pista, sector, cilindro).</li>
+<li>¿Qué es el <strong>seek</strong> y qué la <strong>latencia rotacional</strong>? ¿Qué mide la tasa de transferencia?</li>
+<li>Valores <strong>orientativos de RPM</strong> en consumo y en servidores.</li>
+<li>¿Qué es la <strong>memoria flash</strong> y qué relación tiene con el SSD, el pendrive y la tarjeta SD?</li>
+<li>Ordenar <strong>SLC/MLC/TLC/QLC</strong> por bits por celda y reconocer el compromiso densidad-coste-resistencia.</li>
+<li>¿Qué hace el <strong>wear leveling</strong>? ¿Y <strong>TRIM</strong>?</li>
+<li>Capacidades de <strong>CD (700 MB), DVD (4,7/8,5 GB) y Blu-ray (25/50 GB)</strong>; significado de ROM/R/RW.</li>
+<li>¿Cómo escribe y cómo lee un disco <strong>magneto-óptico</strong>?</li>
+<li>Característica de acceso de la <strong>cinta</strong> (secuencial), su estándar (<strong>LTO</strong>) y sus usos (backup/archivo).</li>
+<li>Clasificar: <strong>SATA → interfaz · SAS → interfaz profesional · NVMe → protocolo · PCIe → bus · M.2 → factor de forma</strong>.</li>
+<li>¿Puede saberse la interfaz de un SSD por ser M.2? (No: puede ser SATA o PCIe/NVMe.)</li>
+<li>¿Qué es <strong>RAID</strong> a nivel conceptual y dónde se estudia su detalle? (Tema 7.)</li>
+<li>¿Qué interfaz encaja en cada escenario: puesto de usuario, servidor, almacenamiento externo?</li>
+</ul>
+
+<h2 id="10-posibles-preguntas-cortas" class="tema-h2">10. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<h4 class="tema-h4">1. Explique el funcionamiento básico de un HDD</h4>
+<ul class="tema-lista">
+<li>Naturaleza: dispositivo electromecánico de grabación magnética.</li>
+<li>Componentes: platos, cabezales, brazo actuador, motor (RPM).</li>
+<li>Geometría: pistas, sectores, cilindros.</li>
+<li>Velocidad: seek + latencia rotacional + tasa de transferencia (y RPM como factor).</li>
+</ul>
+<h4 class="tema-h4">2. Compare HDD y SSD</h4>
+<ul class="tema-lista">
+<li>Tecnologías: magnética/mecánica vs. flash/estado sólido.</li>
+<li>Recorrer la tabla: partes móviles, latencia, rendimiento, precio/GB, resistencia, ruido, consumo.</li>
+<li>Cierre: casos de uso — SSD para sistema y rendimiento; HDD para capacidad masiva barata.</li>
+</ul>
+<h4 class="tema-h4">3. Explique qué es la memoria flash y su relación con el SSD</h4>
+<ul class="tema-lista">
+<li>Definición: memoria no volátil de estado sólido, celdas NAND, conserva datos sin alimentación.</li>
+<li>Relación: flash = tecnología; SSD = dispositivo que la utiliza; otros ejemplos (pendrive, SD).</li>
+<li>Ampliación breve: SLC/MLC/TLC/QLC y el compromiso; wear leveling y TRIM.</li>
+</ul>
+<h4 class="tema-h4">4. Compare los principales soportes ópticos</h4>
+<ul class="tema-lista">
+<li>Principio: lectura (y escritura) por láser.</li>
+<li>Capacidades: CD 700 MB · DVD 4,7/8,5 GB · Blu-ray 25/50 GB (menor longitud de onda → más densidad).</li>
+<li>Variantes ROM/R/RW; mención del magneto-óptico (escritura mixta, lectura óptica, uso reducido).</li>
+</ul>
+<h4 class="tema-h4">5. Explique las características de las cintas magnéticas</h4>
+<ul class="tema-lista">
+<li>Almacenamiento magnético; gran capacidad y bajo coste/GB.</li>
+<li>Acceso secuencial como rasgo definitorio.</li>
+<li>Usos: backup y archivo a largo plazo; estándar LTO; valor del soporte offline.</li>
+</ul>
+<h4 class="tema-h4">6. Diferencie SATA, SAS y NVMe</h4>
+<ul class="tema-lista">
+<li>SATA: interfaz de uso general (Revision 3.x, 6 Gb/s de enlace).</li>
+<li>SAS: interfaz del entorno profesional/servidores, con fiabilidad y gestión añadidas.</li>
+<li>NVMe: protocolo/especificación para memoria no volátil, habitualmente sobre PCIe; no es una memoria ni un conector.</li>
+</ul>
+<h4 class="tema-h4">7. Diferencie M.2, PCIe y NVMe</h4>
+<ul class="tema-lista">
+<li>M.2: factor de forma/conector físico.</li>
+<li>PCIe: bus/interconexión de alta velocidad.</li>
+<li>NVMe: protocolo que suele viajar sobre PCIe.</li>
+<li>Cierre: un M.2 puede ser SATA o PCIe/NVMe — la forma no determina la interfaz.</li>
+</ul>
+
+<h2 id="11-supuestos-practicos" class="tema-h2">11. Supuestos prácticos</h2>
+<h4 class="tema-h4">Supuesto 1 — El PC lento que arranca en minutos</h4>
+<p><strong>Escenario</strong>: un equipo municipal antiguo con HDD tarda varios minutos en arrancar y abrir aplicaciones. Se plantea si merece la pena migrarlo a SSD.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué explica la lentitud?</strong> La latencia mecánica del HDD: seek + latencia rotacional en cada acceso, multiplicados por los miles de accesos pequeños del arranque.</li>
+<li><strong>b) ¿Qué aporta el SSD?</strong> Acceso electrónico sin partes móviles: latencia muy inferior, además de mayor resistencia, menor consumo y silencio.</li>
+<li><strong>c) ¿Algún inconveniente a valorar?</strong> Mayor precio por GB: si el equipo almacena mucho dato frío, puede combinarse SSD (sistema) + HDD (datos masivos).</li>
+</ul>
+<h4 class="tema-h4">Supuesto 2 — Almacenamiento para un servidor</h4>
+<p><strong>Escenario</strong>: se equipa un servidor que exige fiabilidad y gestión profesional del almacenamiento. Se duda entre discos SATA y SAS.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué orientación dar?</strong> SAS es la interfaz orientada al entorno profesional/servidores: fiabilidad, doble puerto y capacidades de gestión pensadas para ese uso; SATA es la opción general de puesto de trabajo y almacenamiento económico.</li>
+<li><strong>b) ¿Qué papel podrían jugar SSD NVMe?</strong> Para máxima velocidad (bases de datos, virtualización), SSD accedidos con el protocolo NVMe sobre PCIe superan con mucho el enlace SATA.</li>
+<li><strong>c) ¿Y si se necesitara redundancia?</strong> Combinar varios discos (concepto RAID) para disponibilidad/rendimiento — su detalle y las arquitecturas de red, en el Tema 7.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 3 — El SSD M.2 misterioso</h4>
+<p><strong>Escenario</strong>: un compañero afirma: «este portátil lleva un SSD M.2, así que es NVMe y rapidísimo».</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Es correcta la deducción?</strong> No necesariamente: M.2 es un factor de forma; ese SSD puede ser M.2 <strong>SATA</strong> (limitado al enlace de 6 Gb/s) o M.2 <strong>PCIe/NVMe</strong> (varios GB/s).</li>
+<li><strong>b) ¿Cómo se sabría?</strong> Consultando las especificaciones del módulo o del equipo (interfaz declarada), no por la forma del conector.</li>
+<li><strong>c) ¿Qué distinción conceptual evalúa el caso?</strong> Forma física (M.2) ≠ interfaz (SATA) ≠ bus (PCIe) ≠ protocolo (NVMe) — el concepto trampa del tema.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 4 — Copias de gran volumen a largo plazo</h4>
+<p><strong>Escenario</strong>: una organización necesita conservar copias de seguridad de decenas de terabytes durante años, con el menor coste posible.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué soporte valorar y por qué?</strong> La cinta (LTO): gran capacidad, coste por GB muy bajo y buena conservación a largo plazo.</li>
+<li><strong>b) ¿Qué limitación se asume?</strong> Acceso secuencial: recuperar un dato concreto es lento; la cinta es idónea para archivo, no para acceso frecuente.</li>
+<li><strong>c) ¿Qué ventaja adicional aporta frente a un disco conectado?</strong> El soporte extraído queda offline, fuera del alcance de ataques por red — argumento de seguridad (Temas 23 y 25).</li>
+</ul>
+
+<h2 id="12-matriz-de-memorizacion" class="tema-h2">12. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Lo que debo recordar</strong></th>
+</tr>
+<tr>
+<td>HDD</td>
+<td>Magnético y mecánico; barato por GB; sensible a golpes; más lento</td>
+</tr>
+<tr>
+<td>Plato</td>
+<td>Disco rígido magnético donde se graba la información</td>
+</tr>
+<tr>
+<td>Cabezal</td>
+<td>Lee/escribe desplazándose sobre el plato (movido por el brazo actuador)</td>
+</tr>
+<tr>
+<td>Pista</td>
+<td>Círculo concéntrico del plato</td>
+</tr>
+<tr>
+<td>Sector</td>
+<td>División de la pista</td>
+</tr>
+<tr>
+<td>Cilindro</td>
+<td>Pistas a la misma distancia del eje en todos los platos</td>
+</tr>
+<tr>
+<td>Seek</td>
+<td>Tiempo de posicionamiento del cabezal en la pista</td>
+</tr>
+<tr>
+<td>Latencia</td>
+<td>Espera hasta que el sector llega al cabezal (depende de RPM)</td>
+</tr>
+<tr>
+<td>SSD</td>
+<td>Dispositivo de estado sólido con flash NAND; rápido, resistente, más caro/GB</td>
+</tr>
+<tr>
+<td>Flash NAND</td>
+<td>Tecnología no volátil de celdas; también en pendrives y SD</td>
+</tr>
+<tr>
+<td>SLC/MLC/TLC/QLC</td>
+<td>1/2/3/4 bits por celda; más bits = más densidad, menos resistencia</td>
+</tr>
+<tr>
+<td>Wear leveling / TRIM</td>
+<td>Reparte escrituras / avisa de bloques sin datos útiles</td>
+</tr>
+<tr>
+<td>CD/DVD/Blu-ray</td>
+<td>700 MB · 4,7/8,5 GB · 25/50 GB; ROM/R/RW</td>
+</tr>
+<tr>
+<td>Magneto-óptico</td>
+<td>Escribe con láser + campo magnético; lee óptico; uso reducido</td>
+</tr>
+<tr>
+<td>Cinta / LTO</td>
+<td>Magnética, gran capacidad, bajo coste/GB, acceso secuencial; backup/archivo; offline</td>
+</tr>
+<tr>
+<td>SATA</td>
+<td>Interfaz general; SATA Revision 3.x / 6 Gb/s (enlace ≠ rendimiento útil)</td>
+</tr>
+<tr>
+<td>SAS</td>
+<td>Interfaz profesional/servidores; fiabilidad y gestión empresarial</td>
+</tr>
+<tr>
+<td>NVMe</td>
+<td>Protocolo/especificación de acceso a memoria no volátil; no es memoria; habitualmente sobre PCIe</td>
+</tr>
+<tr>
+<td>PCIe</td>
+<td>Bus/interconexión de alta velocidad; transporte habitual de NVMe</td>
+</tr>
+<tr>
+<td>M.2</td>
+<td>Factor de forma/conector; puede ser SATA o PCIe/NVMe</td>
+</tr>
+<tr>
+<td>RAID</td>
+<td>Combinar discos para rendimiento/disponibilidad/redundancia; detalle en Tema 7</td>
+</tr>
+</table></div>
+
+<h2 id="13-resumen-final" class="tema-h2">13. Resumen final: si mañana fuera el examen</h2>
+<ul class="tema-lista">
+<li><strong>HDD</strong>: magnético y mecánico — platos, cabezales, brazo, motor; pistas/sectores/cilindros; velocidad = RPM (5.400/7.200 orientativas; 10k/15k en ciertos servidores) + <strong>seek + latencia rotacional</strong> + transferencia. Barato por GB.</li>
+<li><strong>Flash</strong> = tecnología no volátil de estado sólido (NAND) · <strong>SSD</strong> = dispositivo que la usa (también pendrives y SD). Celdas SLC/MLC/TLC/QLC; wear leveling y TRIM como ampliación.</li>
+<li><strong>HDD vs. SSD</strong>: partes móviles, latencia, rendimiento, precio/GB, resistencia, ruido, consumo — la tabla central del tema.</li>
+<li><strong>Ópticos</strong>: CD 700 MB · DVD 4,7/8,5 GB · Blu-ray 25/50 GB; ROM/R/RW. <strong>Magneto-óptico</strong>: escribe láser+campo, lee óptico; uso reducido.</li>
+<li><strong>Cinta</strong>: acceso <strong>secuencial</strong>, gran capacidad, mínimo coste/GB; LTO; backup y archivo; ventaja offline.</li>
+<li><strong>Planos que no se mezclan</strong>: tecnología (NAND) · dispositivo (SSD) · interfaz (SATA Rev 3.x 6 Gb/s, SAS profesional) · protocolo (NVMe — no es memoria) · bus (PCIe) · factor de forma (M.2 — puede ser SATA o NVMe).</li>
+<li>Enlace ≠ rendimiento útil: 6 Gb/s de SATA no son 600 MB/s reales en toda circunstancia.</li>
+<li><strong>USB</strong> = conectividad del almacenamiento externo (detalle en T8). <strong>RAID</strong> = combinar discos para rendimiento/disponibilidad/redundancia (detalle y NAS/SAN en T7).</li>
 </ul>
   </div>
 </article>

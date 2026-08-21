@@ -6,112 +6,186 @@
   </header>
 
   <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
-<li><a href="#1-de-los-ficheros-al-sistema-gestor-de-bases-de-datos-sgbd">1. De los ficheros al Sistema Gestor de Bases de Datos (SGBD)</a></li>
+<li><a href="#1-de-los-ficheros-al-sistema-gestor-de-bases-de-datos-sgbd">1. Base de datos y SGBD: del fichero a la gestión de datos</a></li>
 <li><a href="#2-tipos-de-bases-de-datos">2. Tipos de bases de datos</a></li>
 <li><a href="#3-el-modelo-relacional-conceptos-basicos">3. El modelo relacional: conceptos básicos</a></li>
-<li><a href="#4-claves-y-relaciones-entre-tablas">4. Claves y relaciones entre tablas</a></li>
-<li><a href="#5-el-lenguaje-sql-y-las-transacciones">5. El lenguaje SQL y las transacciones</a></li>
-<li><a href="#6-estandares-de-conectividad">6. Estándares de conectividad</a></li>
-<li><a href="#7-resumen-para-estudiar">7. Resumen para estudiar</a></li>
-<li><a href="#8-conceptos-clave">8. Conceptos clave</a></li>
-<li><a href="#9-posibles-puntos-de-examen">9. Posibles puntos de examen</a></li>
+<li><a href="#4-claves-integridad-y-relaciones-entre-tablas">4. Claves, integridad y relaciones entre tablas</a></li>
+<li><a href="#5-estandares-de-conectividad">5. Estándares de conectividad: ODBC y JDBC</a></li>
+<li><a href="#6-ampliacion-sql-y-transacciones">6. Ampliación: SQL básico y transacciones (ACID)</a></li>
+<li><a href="#7-datos-y-anclas-de-memoria">7. Datos y anclas de memoria</a></li>
+<li><a href="#8-no-confundir">8. No confundir</a></li>
+<li><a href="#9-posibles-trampas-de-examen">9. Posibles trampas de examen</a></li>
+<li><a href="#10-posibles-preguntas-tipo-test">10. Posibles preguntas tipo test</a></li>
+<li><a href="#11-posibles-preguntas-cortas">11. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#12-supuestos-practicos">12. Supuestos prácticos</a></li>
+<li><a href="#13-matriz-de-memorizacion">13. Matriz de memorización</a></li>
+<li><a href="#14-resumen-final">14. Resumen final: si mañana fuera el examen</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
 
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>Este tema construye sobre el vocabulario ya visto en el <strong>Tema 4</strong> (fichero, registro, campo, clave, índice): aquí ese mismo vocabulario se traslada al modelo relacional (tabla, fila, columna, clave primaria/foránea).<br>El temario no dedica ningún tema aparte al lenguaje SQL ni al diseño avanzado de bases de datos (formas normales, normalización): quédate con los conceptos básicos de tabla, clave, relación y las nociones elementales de SQL que se explican aquí, sin profundizar en sintaxis de consultas complejas.</th>
+<th><strong>⚠️ No confundir — fronteras del tema</strong><br>Este tema construye sobre el vocabulario del <strong>Tema 4</strong> (fichero, registro, campo, clave), pero no lo repite: aquí el foco es la base de datos, sus tipos, el <strong>modelo relacional</strong> y los <strong>estándares de conectividad</strong> — los tres bloques del enunciado oficial. No entran en este tema la normalización y formas normales, el SQL avanzado, la administración de SGBD (copias, replicación, tuning) ni el soporte físico (Temas 6, 7 y 9).</th>
 </tr>
 </table></div>
 
-<h2 id="1-de-los-ficheros-al-sistema-gestor-de-bases-de-datos-sgbd" class="tema-h2">1. De los ficheros al Sistema Gestor de Bases de Datos (SGBD)</h2>
-<p>En el Tema 4 vimos los ficheros como forma de almacenar información de manera persistente. Cuando varias aplicaciones necesitan compartir esos datos, gestionar ficheros por separado empieza a dar problemas: la misma información se acaba duplicando en varios sitios (<strong>redundancia</strong>), esas copias se desincronizan entre sí (<strong>inconsistencia</strong>), y resulta difícil controlar quién accede a qué y evitar que dos procesos escriban a la vez sobre el mismo dato.</p>
-<p>Para resolver esto surge el <strong>Sistema Gestor de Bases de Datos (SGBD o DBMS — Database Management System)</strong>: el software que se sitúa entre las aplicaciones y los datos, centralizando su almacenamiento y ofreciendo mecanismos de control que un conjunto de ficheros sueltos no puede garantizar por sí mismo.</p>
-<ul class="tema-lista">
-<li><strong>Base de datos</strong>: conjunto organizado de datos, estructurados y relacionados entre sí, almacenados de forma centralizada y gestionados por un SGBD.</li>
-<li><strong>SGBD</strong>: el software que crea, mantiene y controla el acceso a la base de datos, actuando de <strong>intermediario</strong> entre las aplicaciones y los datos.</li>
-</ul>
-<h4 class="tema-h4">Ventajas de una base de datos frente a ficheros independientes</h4>
-<ul class="tema-lista">
-<li><strong>Menor redundancia</strong>: los datos se almacenan una sola vez y se comparten entre aplicaciones.</li>
-<li><strong>Mayor integridad y consistencia</strong>: el SGBD aplica reglas que evitan datos contradictorios.</li>
-<li><strong>Control centralizado y seguridad</strong>: se puede definir con detalle quién accede a qué información y con qué permisos.</li>
-<li><strong>Acceso concurrente controlado</strong>: varios usuarios o procesos pueden trabajar a la vez sin pisarse los cambios.</li>
-<li><strong>Independencia entre datos y programas</strong>: las aplicaciones no necesitan conocer cómo se almacenan físicamente los datos para poder usarlos.</li>
-</ul>
+<h2 id="1-de-los-ficheros-al-sistema-gestor-de-bases-de-datos-sgbd" class="tema-h2">1. Base de datos y SGBD: del fichero a la gestión de datos</h2>
+<p>En el Tema 4 vimos los ficheros como forma de almacenar información, cada uno gestionado por sus aplicaciones individuales. Cuando varias aplicaciones necesitan compartir datos, ese esquema da problemas: la misma información se duplica (<strong>redundancia</strong>), las copias se desincronizan (<strong>inconsistencia</strong>) y resulta difícil controlar accesos y escrituras simultáneas. La base de datos con su SGBD supone el salto conceptual: una gestión más <strong>estructurada y administrada</strong> de los datos, compartida entre aplicaciones.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>SGBD relacionales muy extendidos: <strong>Oracle Database, Microsoft SQL Server, MySQL, MariaDB, PostgreSQL</strong> y, como base de datos ligera embebida en aplicaciones, <strong>SQLite</strong>. En un entorno corporativo, el SGBD suele funcionar en modo <strong>cliente-servidor</strong>: la base de datos reside en un servidor y las aplicaciones (clientes) se conectan a él a través de la red.</th>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>Base de datos</strong>: conjunto organizado de <strong>datos relacionados</strong>, gestionados de forma que puedan ser utilizados por aplicaciones y usuarios. Su arquitectura <strong>puede ser centralizada o distribuida</strong>: la centralización no forma parte de la definición.<br><strong>SGBD (Sistema Gestor de Bases de Datos, DBMS)</strong>: el <strong>software</strong> que permite crear, gestionar, consultar y controlar el acceso a bases de datos, actuando de intermediario entre las aplicaciones y los datos. <strong>SGBD ≠ base de datos</strong>: uno es el software; la otra, los datos.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Ventajas frente a los ficheros independientes</h4>
+<ul class="tema-lista">
+<li><strong>Reducción de la redundancia</strong>: los datos se almacenan de forma controlada y se comparten entre aplicaciones.</li>
+<li><strong>Integridad y consistencia</strong>: el SGBD puede aplicar reglas que evitan datos contradictorios.</li>
+<li><strong>Control de acceso</strong>: puede definirse quién accede a qué información y con qué permisos.</li>
+<li><strong>Concurrencia</strong>: varios usuarios o procesos pueden trabajar a la vez de forma controlada.</li>
+<li><strong>Independencia entre datos y aplicaciones</strong>: los programas no necesitan conocer el almacenamiento físico de los datos.</li>
+</ul>
+<p>Estas propiedades no son garantías automáticas de cualquier SGBD: dependen del <strong>diseño, la configuración y las capacidades concretas</strong> de cada sistema.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>SGBD relacionales muy extendidos: Oracle Database, Microsoft SQL Server, MySQL, MariaDB, PostgreSQL y, como base de datos ligera embebida, SQLite. En entornos corporativos el SGBD suele funcionar en modo <strong>cliente-servidor</strong>: la base de datos reside en un servidor y las aplicaciones se conectan por red. No es necesario memorizar productos.</th>
 </tr>
 </table></div>
 
 <h2 id="2-tipos-de-bases-de-datos" class="tema-h2">2. Tipos de bases de datos</h2>
-<p>No todas las bases de datos organizan la información del mismo modo. Los modelos más habituales son:</p>
 <ul class="tema-lista">
-<li><strong>Jerárquica</strong>: organiza los datos en forma de <strong>árbol</strong>, con relaciones de padre a hijo (un padre puede tener varios hijos, pero cada hijo tiene un <strong>único padre</strong>).</li>
-<li><strong>En red</strong>: similar a la jerárquica, pero permite que un registro tenga <strong>varios «padres»</strong>, representando relaciones más complejas mediante punteros.</li>
-<li><strong>Relacional</strong>: organiza los datos en <strong>tablas</strong> vinculadas mediante claves. Es, con diferencia, el modelo más extendido hoy en día, y el que se desarrolla en el resto de este tema.</li>
-<li><strong>Orientada a objetos</strong>: almacena los datos como objetos, con sus atributos y comportamientos, de forma coherente con la programación orientada a objetos.</li>
-<li><strong>NoSQL («Not Only SQL»)</strong>: familia de bases de datos no relacionales, pensadas para grandes volúmenes de datos, alta disponibilidad y esquemas más flexibles que el rígido esquema de tablas del modelo relacional.</li>
+<li><strong>Jerárquica</strong>: organiza los datos en forma de <strong>árbol</strong>, con relaciones padre-hijo (cada hijo tiene un <strong>único padre</strong>).</li>
+<li><strong>En red</strong>: similar, pero permite que un registro tenga <strong>varios «padres»</strong>, representando relaciones más complejas.</li>
+<li><strong>Relacional</strong>: organiza los datos en <strong>tablas</strong> vinculadas mediante claves. Es el modelo más extendido y el que desarrolla el resto del tema — <strong>prioridad máxima</strong>.</li>
+<li><strong>Orientada a objetos</strong>: almacena los datos como <strong>objetos</strong>, con sus atributos y comportamiento, en coherencia con la programación orientada a objetos.</li>
+<li><strong>NoSQL («Not Only SQL»)</strong>: <strong>familia de enfoques no relacionales</strong>, pensados para grandes volúmenes, alta disponibilidad y esquemas flexibles. No es un único modelo.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Para el examen, lo importante es identificar el modelo dominante: la base de datos <strong>relacional</strong> organiza la información en <strong>tablas con filas y columnas, relacionadas mediante claves</strong>.<br>El resto de modelos (jerárquico, en red, orientado a objetos, NoSQL) conviene reconocerlos por su idea general y diferenciarlos del relacional. Truco: jerárquica = árbol con un solo padre; en red = permite varios padres.</th>
-</tr>
-</table></div>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Dentro de NoSQL existen varias familias según cómo almacenan la información: <strong>clave-valor</strong> (por ejemplo, Redis), <strong>documental</strong> (por ejemplo, MongoDB), <strong>columnar</strong> (por ejemplo, Cassandra) y <strong>de grafos</strong> (por ejemplo, Neo4j).<br>No hace falta memorizar estos ejemplos concretos: basta con saber que NoSQL no es un único modelo, sino una familia de alternativas al modelo relacional.</th>
+<th><strong>🧠 Para memorizar</strong><br><strong>Jerárquica = árbol, un solo padre · En red = varios padres · Relacional = tablas + claves · Objetos = atributos y comportamiento · NoSQL = familia de alternativas</strong>. Como ejemplo de familias NoSQL (sin memorizar productos): clave-valor, documental, columnar y de grafos.</th>
 </tr>
 </table></div>
 
 <h2 id="3-el-modelo-relacional-conceptos-basicos" class="tema-h2">3. El modelo relacional: conceptos básicos</h2>
-<p>El modelo relacional fue propuesto por <strong>Edgar F. Codd en 1970</strong> y se basa en representar toda la información mediante <strong>tablas</strong> (también llamadas <strong>relaciones</strong>), cada una de ellas dedicada a un tipo de entidad (por ejemplo, «empleados» o «departamentos»).</p>
+<p>El modelo relacional fue propuesto por <strong>Edgar F. Codd en 1970</strong> (dato de contexto susceptible de pregunta) y representa toda la información mediante <strong>tablas</strong>, cada una dedicada a un tipo de entidad («empleados», «departamentos»).</p>
 <ul class="tema-lista">
 <li><strong>Tabla (o relación)</strong>: estructura bidimensional que almacena los datos de una entidad, organizados en filas y columnas.</li>
-<li><strong>Fila (o tupla, o registro)</strong>: cada una de las ocurrencias concretas almacenadas en la tabla.</li>
-<li><strong>Columna (o atributo, o campo)</strong>: cada una de las características que describen a la entidad.</li>
-<li><strong>Dominio</strong>: el conjunto de valores posibles que puede tomar un atributo (por ejemplo, el dominio del atributo «edad» son los números enteros positivos razonables para una persona).</li>
-<li><strong>Valor NULL (nulo)</strong>: ausencia de valor en un atributo; no es lo mismo que cero ni que una cadena vacía, significa «desconocido o no aplicable».</li>
+<li><strong>Fila (o tupla)</strong>: cada una de las ocurrencias concretas almacenadas en la tabla.</li>
+<li><strong>Columna (o atributo)</strong>: cada una de las características que describen a la entidad.</li>
+<li><strong>Dominio</strong>: el conjunto de valores posibles o permitidos para un atributo. Ejemplo: el dominio del atributo «mes» son los valores 1 a 12; el del atributo «letra del NIF», las letras válidas del algoritmo.</li>
+<li><strong>NULL</strong>: representa la <strong>ausencia de un valor</strong> en un atributo; su significado concreto <strong>depende del contexto</strong> (puede no conocerse el valor, no ser aplicable, no haberse introducido aún...).</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>El modelo relacional reutiliza, con otro nombre, el mismo vocabulario del Tema 4: <strong>tabla = fichero, fila (tupla) = registro, columna (atributo) = campo</strong>.<br>Pensarlo así ayuda a no tratar este tema como algo completamente nuevo, sino como una forma más estructurada y potente de organizar la misma idea de fondo. Los emparejamientos «tupla-fila-registro» y «atributo-columna-campo» son pregunta directa de test.</th>
+<th><strong>📌 Imprescindible para el examen — NULL</strong><br><strong>NULL ≠ 0 y NULL ≠ cadena vacía.</strong> Cero y «cadena vacía» son valores; NULL es la ausencia de valor. Trampa clásica de test.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — analogía didáctica con el Tema 4</strong><br><strong>TABLA ≈ fichero · FILA/TUPLA ≈ registro · COLUMNA/ATRIBUTO ≈ campo.</strong><br>Es una <strong>analogía para estudiar</strong>, no una equivalencia conceptual absoluta: la tabla relacional añade restricciones, integridad y relaciones que un fichero no tiene. Los emparejamientos «tupla-fila» y «atributo-columna» son pregunta directa de test.</th>
 </tr>
 </table></div>
 
-<h2 id="4-claves-y-relaciones-entre-tablas" class="tema-h2">4. Claves y relaciones entre tablas</h2>
+<h2 id="4-claves-integridad-y-relaciones-entre-tablas" class="tema-h2">4. Claves, integridad y relaciones entre tablas</h2>
+<h4 class="tema-h4">Claves</h4>
 <ul class="tema-lista">
-<li><strong>Clave candidata</strong>: cualquier campo (o combinación) que podría identificar de forma única cada fila; de entre ellas se elige la primaria.</li>
-<li><strong>Clave primaria (PK — Primary Key)</strong>: campo, o conjunto de campos, que identifica de forma única cada fila de una tabla. <strong>No puede repetirse ni quedar vacía (nula)</strong> — es la llamada <strong>integridad de entidad</strong>.</li>
-<li><strong>Clave foránea (o ajena, FK — Foreign Key)</strong>: campo de una tabla que referencia la clave primaria de otra tabla (o de la misma), estableciendo así una relación entre ambas.</li>
-<li><strong>Integridad referencial</strong>: regla que garantiza que el valor de una clave foránea corresponde siempre a un valor existente en la clave primaria a la que hace referencia (o que queda vacío, si eso está permitido).</li>
+<li><strong>Clave candidata</strong>: atributo o conjunto de atributos que <strong>podría</strong> identificar unívocamente cada fila (en EMPLEADOS: el DNI y el número de empleado son candidatas).</li>
+<li><strong>Clave primaria (PK — Primary Key)</strong>: la candidata <strong>elegida</strong> para identificar de forma única cada fila.</li>
+<li><strong>Clave foránea (o ajena, FK — Foreign Key)</strong>: atributo o conjunto de atributos que <strong>referencia la clave de otra tabla</strong> (o de la misma) y permite establecer relaciones.</li>
+</ul>
+<h4 class="tema-h4">Integridad</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Regla</strong></th>
+<th><strong>Qué garantiza</strong></th>
+<th><strong>Sobre qué clave actúa</strong></th>
+</tr>
+<tr>
+<td><strong>Integridad de entidad</strong></td>
+<td>La clave primaria identifica inequívocamente cada fila: no puede repetirse y <strong>no debe admitir NULL</strong></td>
+<td>PK</td>
+</tr>
+<tr>
+<td><strong>Integridad referencial</strong></td>
+<td>Toda referencia mediante clave foránea es <strong>coherente</strong> con la clave referenciada, conforme a las reglas establecidas (el valor existe en la tabla referenciada, o queda sin valor si se permite)</td>
+<td>FK</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Ejemplo</strong><br>En una base de datos municipal: EMPLEADOS tiene como PK el número de empleado y una FK «código de departamento» que apunta a la PK de DEPARTAMENTOS. La integridad referencial impide asignar a alguien un departamento inexistente, y las reglas establecidas determinan qué ocurre si se intenta borrar un departamento con personal asignado.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Tipos de relación entre tablas (prioridad de memorización)</h4>
+<ul class="tema-lista">
+<li><strong>Uno a uno (1:1)</strong>: cada fila de una tabla se relaciona con, como mucho, una fila de la otra (un empleado ↔ su credencial personal única).</li>
+<li><strong>Uno a muchos (1:N)</strong>: una fila puede relacionarse con varias de la otra tabla, pero no al revés. Ejemplo municipal: <strong>un DEPARTAMENTO tiene muchos EMPLEADOS, y cada empleado pertenece a un único departamento</strong> — la FK «departamento» vive en EMPLEADOS.</li>
+<li><strong>Muchos a muchos (N:M)</strong>: varias filas de cada tabla se relacionan entre sí. Ejemplo: <strong>un EMPLEADO realiza varios CURSOS y cada curso lo realizan varios empleados</strong>.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>💡 Ejemplo</strong><br>En una base de datos municipal: la tabla EMPLEADOS tiene como PK el número de empleado, y una FK «código de departamento» que apunta a la PK de la tabla DEPARTAMENTOS. La integridad referencial impide asignar a alguien un departamento que no existe, y evita borrar un departamento mientras tenga personal asignado.</th>
-</tr>
-</table></div>
-<h4 class="tema-h4">Tipos de relación entre tablas</h4>
-<ul class="tema-lista">
-<li><strong>Uno a uno (1:1)</strong>: cada fila de una tabla se relaciona con, como mucho, una fila de la otra.</li>
-<li><strong>Uno a muchos (1:N)</strong>: una fila de una tabla puede relacionarse con varias filas de otra, pero cada fila de la segunda solo se relaciona con una de la primera (un departamento tiene varios empleados, pero cada empleado pertenece a un único departamento).</li>
-<li><strong>Muchos a muchos (N:M)</strong>: varias filas de una tabla pueden relacionarse con varias filas de otra. Se resuelve mediante una <strong>tabla intermedia</strong> que combina las claves primarias de ambas tablas.</li>
-</ul>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>La relación <strong>N:M no puede representarse directamente</strong> en el modelo relacional: exige siempre una <strong>tabla intermedia</strong> (por ejemplo, EMPLEADOS ↔ CURSOS se resuelve con una tabla EMPLEADO-CURSO). Es uno de los detalles más preguntados de este tema.</th>
-</tr>
-</table></div>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>⚠️ No confundir</strong><br>El diseño detallado de bases de datos (normalización, formas normales, sintaxis SQL avanzada) no forma parte de un tema específico de este temario.<br>Quédate con la idea de fondo: cómo se identifica de forma única una fila (clave primaria) y cómo se conectan las tablas entre sí (clave foránea y tipos de relación), sin entrar a diseñar ni consultar bases de datos reales.</th>
+<th><strong>📌 Imprescindible para el examen</strong><br>La relación <strong>N:M no puede representarse directamente</strong> en el modelo relacional: se implementa mediante una <strong>tabla intermedia</strong> que incorpora las claves necesarias de ambas tablas. EMPLEADOS ↔ CURSOS se resuelve con la tabla EMPLEADO-CURSO (FK a empleado + FK a curso). Es uno de los detalles más preguntados del tema.</th>
 </tr>
 </table></div>
 
-<h2 id="5-el-lenguaje-sql-y-las-transacciones" class="tema-h2">5. El lenguaje SQL y las transacciones</h2>
-<p><strong>SQL (Structured Query Language)</strong> es el lenguaje estándar para definir, consultar y manipular bases de datos relacionales. Sin necesidad de dominar su sintaxis, conviene conocer sus <strong>tres grandes grupos de sentencias</strong>:</p>
+<h2 id="5-estandares-de-conectividad" class="tema-h2">5. Estándares de conectividad: ODBC y JDBC</h2>
+<p>El enunciado oficial cita expresamente los estándares de conectividad: son un <strong>bloque principal</strong> del tema. El problema que resuelven: una aplicación necesita acceder a bases de datos <strong>sin quedar atada a un SGBD concreto</strong>. La solución es una arquitectura de dos piezas:</p>
+<ul class="tema-lista">
+<li><strong>API (interfaz de programación)</strong>: el conjunto <strong>común y estandarizado</strong> de funciones que la aplicación utiliza para conectarse, consultar y modificar datos — el mismo sea cual sea el motor.</li>
+<li><strong>Driver (controlador)</strong>: el componente <strong>específico de cada SGBD</strong> que traduce esas llamadas comunes a las particularidades del motor concreto.</li>
+</ul>
+<p>Resultado: <strong>independencia respecto del SGBD</strong> — cambiar de motor implica, en lo esencial, cambiar de driver, no reescribir la aplicación.</p>
+<h4 class="tema-h4">ODBC</h4>
+<ul class="tema-lista">
+<li><strong>ODBC (Open Database Connectivity)</strong>: estándar/API de conectividad <strong>de propósito general</strong> con SGBD mediante drivers. La aplicación usa la interfaz común ODBC y el driver se ocupa de las particularidades del motor.</li>
+<li>Ejemplo práctico CAU: en los equipos Windows corporativos, los orígenes de datos ODBC (<strong>DSN</strong>) se configuran desde el «Administrador de orígenes de datos ODBC» — algo que un técnico puede encontrarse al instalar o reparar aplicaciones que consultan bases de datos.</li>
+</ul>
+<h4 class="tema-h4">JDBC</h4>
+<ul class="tema-lista">
+<li><strong>JDBC (Java Database Connectivity)</strong>: la <strong>API estándar de Java</strong> para acceder a bases de datos mediante drivers JDBC, con la misma filosofía (API común + driver por motor) aplicada al ecosistema Java.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th></th>
+<th><strong>ODBC</strong></th>
+<th><strong>JDBC</strong></th>
+</tr>
+<tr>
+<td><strong>Finalidad</strong></td>
+<td>Conectividad general con SGBD</td>
+<td>Conectividad con SGBD desde Java</td>
+</tr>
+<tr>
+<td><strong>API</strong></td>
+<td>ODBC (interfaz común)</td>
+<td>JDBC (API de Java)</td>
+</tr>
+<tr>
+<td><strong>Driver</strong></td>
+<td>Específico para cada SGBD</td>
+<td>Específico para cada SGBD</td>
+</tr>
+<tr>
+<td><strong>Asociado especialmente a</strong></td>
+<td>Aplicaciones generales (p. ej., configurables vía DSN en Windows)</td>
+<td>Aplicaciones Java</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br><strong>ODBC → conectividad general · JDBC → Java.</strong> Ambos: <strong>API común + driver específico</strong> del SGBD. Si la pregunta menciona Java, la respuesta es JDBC.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Muchas aplicaciones actuales añaden por encima una capa de <strong>ORM</strong> (mapeo objeto-relacional), y han existido puentes ODBC-JDBC. No hace falta profundizar para este tema.</th>
+</tr>
+</table></div>
+
+<h2 id="6-ampliacion-sql-y-transacciones" class="tema-h2">6. Ampliación: SQL básico y transacciones (ACID)</h2>
+<p>Ampliación útil relacionada con el uso de bases de datos relacionales — contenido secundario frente al modelo relacional y la conectividad.</p>
+<h4 class="tema-h4">SQL: los tres grupos de sentencias</h4>
+<p><strong>SQL (Structured Query Language)</strong> es el lenguaje estándar para definir, consultar y manipular bases de datos relacionales. Sin dominar sintaxis, conviene reconocer sus tres grupos:</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>Grupo</strong></th>
@@ -120,89 +194,315 @@
 </tr>
 <tr>
 <td><strong>DDL</strong> (Data Definition Language)</td>
-<td>Definir la estructura (tablas, índices)</td>
+<td><strong>Definir</strong> la estructura (tablas, índices)</td>
 <td>CREATE, ALTER, DROP</td>
 </tr>
 <tr>
 <td><strong>DML</strong> (Data Manipulation Language)</td>
-<td>Consultar y modificar los datos</td>
+<td><strong>Consultar y manipular</strong> los datos</td>
 <td>SELECT, INSERT, UPDATE, DELETE</td>
 </tr>
 <tr>
 <td><strong>DCL</strong> (Data Control Language)</td>
-<td>Controlar permisos de acceso</td>
+<td><strong>Controlar</strong> permisos de acceso</td>
 <td>GRANT, REVOKE</td>
 </tr>
 </table></div>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>🧠 Para memorizar</strong><br><strong>DDL define</strong> la estructura (Create/Alter/Drop) · <strong>DML manipula</strong> los datos (Select/Insert/Update/Delete) · <strong>DCL controla</strong> los permisos (Grant/Revoke). Emparejar cada sentencia con su grupo es pregunta habitual de test.</th>
-</tr>
-</table></div>
 <h4 class="tema-h4">Transacciones y propiedades ACID</h4>
-<p>Una <strong>transacción</strong> es un conjunto de operaciones que se ejecutan como una <strong>unidad indivisible</strong>: o se completan todas, o no se aplica ninguna. El ejemplo clásico es una transferencia bancaria (restar de una cuenta y sumar en otra: nunca debe quedarse a medias). Las transacciones de un SGBD relacional cumplen las propiedades <strong>ACID</strong>:</p>
+<p>Una <strong>transacción</strong> es un conjunto de operaciones que se ejecuta como <strong>unidad indivisible</strong>: o se completan todas, o no se aplica ninguna (el ejemplo clásico: una transferencia que resta de una cuenta y suma en otra). Las propiedades <strong>ACID</strong>:</p>
 <ul class="tema-lista">
-<li><strong>Atomicidad</strong>: la transacción se ejecuta entera o no se ejecuta («todo o nada»).</li>
-<li><strong>Consistencia</strong>: la base de datos pasa de un estado válido a otro estado válido, respetando todas sus reglas de integridad.</li>
-<li><strong>Aislamiento (Isolation)</strong>: las transacciones concurrentes no interfieren entre sí; cada una «cree» que trabaja sola.</li>
-<li><strong>Durabilidad</strong>: una vez confirmada (commit), la transacción persiste aunque falle el sistema inmediatamente después.</li>
+<li><strong>Atomicidad</strong>: todo o nada.</li>
+<li><strong>Consistencia</strong>: de un estado válido a otro estado válido, respetando las reglas de integridad.</li>
+<li><strong>Aislamiento (Isolation)</strong>: las transacciones concurrentes no interfieren entre sí.</li>
+<li><strong>Durabilidad</strong>: una vez confirmada (commit), persiste aunque el sistema falle después.</li>
 </ul>
 
-<h2 id="6-estandares-de-conectividad" class="tema-h2">6. Estándares de conectividad</h2>
-<p>Una aplicación no siempre está escrita en el mismo entorno que el motor de base de datos al que necesita acceder. Para no depender de un SGBD concreto, existen <strong>estándares de conectividad</strong>: interfaces comunes que permiten a una aplicación dialogar con distintos motores de base de datos de manera uniforme, delegando en un <strong>driver</strong> específico las particularidades de cada uno.</p>
+<h2 id="7-datos-y-anclas-de-memoria" class="tema-h2">7. Datos y anclas de memoria</h2>
 <ul class="tema-lista">
-<li><strong>ODBC (Open Database Connectivity)</strong>: estándar de conectividad de <strong>propósito general</strong>, que permite a cualquier aplicación acceder a distintos SGBD a través de un driver ODBC específico para cada motor, usando siempre la misma API común. En los equipos Windows corporativos se administra desde el «Administrador de orígenes de datos ODBC» (DSN), algo que un técnico de CAU puede encontrarse al configurar aplicaciones antiguas.</li>
-<li><strong>JDBC (Java Database Connectivity)</strong>: el equivalente a ODBC pensado específicamente para aplicaciones <strong>Java</strong>, mediante drivers JDBC que permiten conectar con distintos motores de base de datos desde código Java.</li>
+<li><strong>TABLA → filas + columnas · FILA → tupla · COLUMNA → atributo</strong> (analogía con T4: ≈ fichero/registro/campo).</li>
+<li><strong>PK → identifica · FK → relaciona</strong>.</li>
+<li><strong>Integridad de ENTIDAD → PK</strong> (única, sin NULL) · <strong>REFERENCIAL → FK</strong> (referencia coherente).</li>
+<li><strong>1:N → un padre, muchos hijos · N:M → tabla intermedia</strong> (siempre).</li>
+<li><strong>NULL = ausencia de valor</strong> (≠ 0, ≠ cadena vacía); su significado depende del contexto.</li>
+<li><strong>Dominio = valores permitidos</strong> de un atributo.</li>
+<li><strong>ODBC → general · JDBC → Java</strong>; ambos = API común + driver específico.</li>
+<li><strong>DDL → define · DML → manipula · DCL → controla</strong>.</li>
+<li><strong>ACID</strong> = Atomicidad · Consistencia · Aislamiento · Durabilidad.</li>
+<li>Modelo relacional: <strong>Codd, 1970</strong>.</li>
+<li>Tipos: jerárquica (árbol) · en red (varios padres) · relacional (tablas) · objetos · NoSQL (familia).</li>
 </ul>
+
+<h2 id="8-no-confundir" class="tema-h2">8. No confundir</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br><strong>ODBC = estándar general (origen Microsoft) · JDBC = específico de Java.</strong> Ambos comparten la misma arquitectura: <strong>API común + driver específico</strong> de cada SGBD. Si la pregunta menciona Java, la respuesta es JDBC.</th>
+<th><strong>Concepto A</strong></th>
+<th><strong>Concepto B</strong></th>
+<th><strong>Diferencia clave</strong></th>
 </tr>
-</table></div>
-<div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Hoy en día muchas aplicaciones añaden una capa adicional (<strong>ORM</strong>, mapeo objeto-relacional) por encima de estos estándares, y existen también puentes como ODBC-JDBC. No hace falta profundizar en ello para este tema.</th>
+<td><strong>Base de datos</strong>: los datos organizados y relacionados</td>
+<td><strong>SGBD</strong>: el software que los gestiona</td>
+<td>Uno es el <strong>contenido</strong>; el otro, el <strong>gestor</strong></td>
+</tr>
+<tr>
+<td><strong>Tabla</strong>: la estructura completa</td>
+<td><strong>Fila</strong>: una ocurrencia · <strong>columna</strong>: una característica</td>
+<td>La tabla contiene filas (horizontales) y columnas (verticales)</td>
+</tr>
+<tr>
+<td><strong>Fila / tupla</strong> (modelo relacional)</td>
+<td><strong>Registro</strong> (modelo de ficheros, T4)</td>
+<td>Analogía didáctica, no equivalencia absoluta</td>
+</tr>
+<tr>
+<td><strong>Columna / atributo</strong> (modelo relacional)</td>
+<td><strong>Campo</strong> (modelo de ficheros, T4)</td>
+<td>Mismo papel conceptual en modelos distintos</td>
+</tr>
+<tr>
+<td><strong>Clave candidata</strong>: podría identificar unívocamente</td>
+<td><strong>Clave primaria</strong>: la candidata elegida</td>
+<td>Todas las PK fueron candidatas; no todas las candidatas son PK</td>
+</tr>
+<tr>
+<td><strong>PK</strong>: identifica cada fila de su tabla</td>
+<td><strong>FK</strong>: referencia la clave de otra tabla</td>
+<td>PK <strong>identifica</strong> · FK <strong>relaciona</strong></td>
+</tr>
+<tr>
+<td><strong>Integridad de entidad</strong>: PK única y sin NULL</td>
+<td><strong>Integridad referencial</strong>: FK coherente con la clave referenciada</td>
+<td>Entidad → PK · Referencial → FK</td>
+</tr>
+<tr>
+<td><strong>1:N</strong>: la FK vive en la tabla del lado «muchos»</td>
+<td><strong>N:M</strong>: exige tabla intermedia con las claves de ambas</td>
+<td>Si ambos lados son «muchos», hay tabla intermedia</td>
+</tr>
+<tr>
+<td><strong>NULL</strong>: ausencia de valor</td>
+<td><strong>0 / cadena vacía</strong>: valores concretos</td>
+<td>NULL no es un valor; 0 y «» sí lo son</td>
+</tr>
+<tr>
+<td><strong>ODBC</strong>: estándar de conectividad general</td>
+<td><strong>JDBC</strong>: API de conectividad de Java</td>
+<td>Java → JDBC; ambos usan driver específico por SGBD</td>
+</tr>
+<tr>
+<td><strong>DDL</strong>: define estructura (CREATE/ALTER/DROP)</td>
+<td><strong>DML</strong>: manipula datos (SELECT/INSERT/UPDATE/DELETE) · <strong>DCL</strong>: permisos (GRANT/REVOKE)</td>
+<td>Define · manipula · controla</td>
 </tr>
 </table></div>
 
-<h2 id="7-resumen-para-estudiar" class="tema-h2">7. Resumen para estudiar</h2>
+<h2 id="9-posibles-trampas-de-examen" class="tema-h2">9. Posibles trampas de examen</h2>
 <ul class="tema-lista">
-<li><strong>Base de datos</strong> = datos centralizados y compartidos, gestionados por un <strong>SGBD</strong>; ventajas frente a ficheros: menos redundancia, integridad, seguridad, concurrencia, independencia datos-programas.</li>
-<li>Tipos: jerárquica (árbol, un padre), en red (varios padres), <strong>relacional</strong> (tablas + claves, la dominante), orientada a objetos, NoSQL (clave-valor, documental, columnar, grafos).</li>
-<li>Modelo relacional (<strong>Codd, 1970</strong>): tabla/relación = fichero · fila/tupla = registro · columna/atributo = campo · dominio = valores posibles · NULL = ausencia de valor.</li>
-<li><strong>PK</strong>: única y no nula (integridad de entidad) · <strong>FK</strong>: referencia una PK y crea la relación · <strong>integridad referencial</strong>: la FK siempre apunta a un valor existente.</li>
-<li>Relaciones: 1:1, 1:N, N:M (esta última exige <strong>tabla intermedia</strong>).</li>
-<li><strong>SQL</strong>: DDL (Create/Alter/Drop), DML (Select/Insert/Update/Delete), DCL (Grant/Revoke).</li>
-<li><strong>Transacción</strong> = unidad todo-o-nada; propiedades <strong>ACID</strong>: Atomicidad, Consistencia, Aislamiento, Durabilidad.</li>
-<li>Conectividad: <strong>ODBC</strong> (general) y <strong>JDBC</strong> (Java); arquitectura API común + driver por SGBD.</li>
+<li><strong>«NULL equivale a 0»</strong> o <strong>«NULL es la cadena vacía»</strong> — falso: NULL es ausencia de valor; 0 y «» son valores.</li>
+<li><strong>«La clave foránea identifica de forma única cada fila»</strong> — falso: eso es la PK; la FK relaciona tablas y puede repetirse.</li>
+<li><strong>«La integridad referencial exige que la PK no sea nula»</strong> — cruce de conceptos: eso es la integridad de <strong>entidad</strong>; la referencial afecta a las FK.</li>
+<li><strong>«Una relación N:M se implementa con una FK en una de las dos tablas»</strong> — falso: exige <strong>tabla intermedia</strong>.</li>
+<li><strong>«ODBC es el estándar de conectividad de Java»</strong> — invertido: el de Java es JDBC; ODBC es de propósito general.</li>
+<li><strong>«DDL sirve para insertar y modificar datos»</strong> — falso: DDL define estructura; manipular datos es DML.</li>
+<li><strong>«DCL agrupa las sentencias de consulta»</strong> — falso: DCL controla permisos (GRANT/REVOKE); SELECT es DML.</li>
+<li><strong>«Una base de datos es, por definición, centralizada»</strong> — falso: puede ser centralizada o distribuida.</li>
+<li><strong>«NoSQL es un modelo concreto de base de datos»</strong> — falso: es una familia de enfoques no relacionales (clave-valor, documental, columnar, grafos).</li>
+<li><strong>«SGBD y base de datos son sinónimos»</strong> — falso: software gestor vs. conjunto de datos.</li>
+<li><strong>«Toda clave candidata es la clave primaria»</strong> — falso: la PK es la candidata <strong>elegida</strong>; puede haber varias candidatas.</li>
+<li><strong>«El driver es igual para todos los SGBD»</strong> — falso: la API es común; el driver es específico de cada motor.</li>
 </ul>
 
-<h2 id="8-conceptos-clave" class="tema-h2">8. Conceptos clave</h2>
+<h2 id="10-posibles-preguntas-tipo-test" class="tema-h2">10. Posibles preguntas tipo test</h2>
 <ul class="tema-lista">
-<li><strong>SGBD / DBMS</strong> y sus ventajas frente a ficheros.</li>
-<li><strong>Modelos de bases de datos</strong> (jerárquico, red, relacional, objetos, NoSQL).</li>
-<li><strong>Tabla-fila-columna</strong> y sus sinónimos (relación-tupla-atributo).</li>
-<li><strong>Dominio</strong> y <strong>NULL</strong>.</li>
-<li><strong>PK, FK, clave candidata</strong>.</li>
-<li><strong>Integridad de entidad e integridad referencial</strong>.</li>
-<li><strong>Relaciones 1:1, 1:N, N:M</strong> y la tabla intermedia.</li>
-<li><strong>SQL: DDL / DML / DCL</strong>.</li>
-<li><strong>Transacción y ACID</strong>.</li>
-<li><strong>ODBC vs. JDBC</strong>.</li>
-</ul>
-
-<h2 id="9-posibles-puntos-de-examen" class="tema-h2">9. Posibles puntos de examen</h2>
-<ul class="tema-lista">
-<li>Emparejar sinónimos del modelo relacional: <strong>tupla = fila = registro; atributo = columna = campo</strong>.</li>
-<li>Propiedades de la <strong>clave primaria</strong> (única y no nula).</li>
-<li>Qué garantiza la <strong>integridad referencial</strong> y qué la de entidad.</li>
-<li>Cómo se resuelve una relación <strong>N:M</strong> (tabla intermedia).</li>
-<li>Reconocer el modelo de BD por su descripción (árbol → jerárquica; varios padres → en red; tablas → relacional; esquema flexible → NoSQL).</li>
-<li>Clasificar una sentencia SQL en su grupo: CREATE → DDL, SELECT → DML, GRANT → DCL.</li>
+<li>Definición de <strong>base de datos</strong> y de <strong>SGBD</strong>, y diferencia entre ambos.</li>
+<li>Reconocer el <strong>tipo de base de datos</strong> por su descripción (árbol → jerárquica; varios padres → en red; tablas y claves → relacional; esquema flexible → NoSQL).</li>
+<li>Emparejar sinónimos del modelo relacional: <strong>tupla = fila; atributo = columna</strong> (y la analogía con registro/campo).</li>
+<li>¿Qué es el <strong>dominio</strong> de un atributo?</li>
+<li>¿Qué representa <strong>NULL</strong> y qué NO es (0, cadena vacía)?</li>
+<li>Diferencia entre <strong>clave candidata y clave primaria</strong>.</li>
+<li>Propiedades de la <strong>PK</strong> (única, sin NULL) y función de la <strong>FK</strong>.</li>
+<li>¿Qué garantiza la <strong>integridad de entidad</strong> y qué la <strong>referencial</strong>?</li>
+<li>Supuesto: departamento-empleados → identificar la relación <strong>1:N</strong> y dónde vive la FK.</li>
+<li>Supuesto: empleados-cursos → identificar la relación <strong>N:M</strong> y su <strong>tabla intermedia</strong>.</li>
+<li>¿Qué problema resuelven los <strong>estándares de conectividad</strong> y qué papel cumple el <strong>driver</strong>?</li>
+<li>Diferencias <strong>ODBC vs. JDBC</strong> (general vs. Java).</li>
+<li>Clasificar sentencias SQL: CREATE → DDL · SELECT → DML · GRANT → DCL.</li>
 <li>El significado de cada letra de <strong>ACID</strong>.</li>
-<li>Diferencia entre <strong>ODBC y JDBC</strong> (general vs. Java) y el papel del driver.</li>
 <li>Autor y año del modelo relacional (<strong>Codd, 1970</strong>).</li>
-<li>Qué significa el valor <strong>NULL</strong> (no es cero ni cadena vacía).</li>
+</ul>
+
+<h2 id="11-posibles-preguntas-cortas" class="tema-h2">11. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<h4 class="tema-h4">1. Explique qué es una base de datos y qué función cumple un SGBD</h4>
+<ul class="tema-lista">
+<li>Definición de base de datos (datos organizados y relacionados; arquitectura centralizada o distribuida).</li>
+<li>Definición de SGBD (software intermediario: crear, gestionar, consultar, controlar el acceso).</li>
+<li>Ventajas frente a ficheros: redundancia, integridad, control de acceso, concurrencia, independencia — señalando que dependen del diseño y configuración.</li>
+</ul>
+<h4 class="tema-h4">2. Explique los conceptos básicos del modelo relacional</h4>
+<ul class="tema-lista">
+<li>Origen (Codd, 1970) e idea central: todo en tablas.</li>
+<li>Tabla/relación, fila/tupla, columna/atributo, dominio, NULL — una frase por concepto.</li>
+<li>Cierre: la analogía didáctica con fichero/registro/campo del Tema 4.</li>
+</ul>
+<h4 class="tema-h4">3. Diferencie clave candidata, primaria y foránea</h4>
+<ul class="tema-lista">
+<li>Candidata: podría identificar unívocamente. Primaria: la elegida (única, sin NULL). Foránea: referencia la clave de otra tabla.</li>
+<li>Acrónimos PK/FK y ejemplo (número de empleado como PK; código de departamento como FK).</li>
+</ul>
+<h4 class="tema-h4">4. Explique la integridad de entidad y la integridad referencial</h4>
+<ul class="tema-lista">
+<li>Entidad: la PK identifica inequívocamente y no admite NULL.</li>
+<li>Referencial: las FK deben ser coherentes con la clave referenciada, según las reglas establecidas.</li>
+<li>Ejemplo municipal (no asignar departamentos inexistentes).</li>
+</ul>
+<h4 class="tema-h4">5. Explique los tipos de relaciones entre tablas</h4>
+<ul class="tema-lista">
+<li>1:1, 1:N y N:M, con un ejemplo de cada (credencial · departamento-empleados · empleados-cursos).</li>
+<li>Dónde vive la FK en la 1:N; la tabla intermedia como implementación obligada de la N:M.</li>
+</ul>
+<h4 class="tema-h4">6. Explique qué son ODBC y JDBC y sus diferencias</h4>
+<ul class="tema-lista">
+<li>El problema: independencia respecto del SGBD. La arquitectura: API común + driver específico.</li>
+<li>ODBC: estándar general (DSN en Windows como ejemplo práctico). JDBC: API de Java.</li>
+<li>Cierre: la regla «Java → JDBC»; en lo demás, misma filosofía.</li>
+</ul>
+
+<h2 id="12-supuestos-practicos" class="tema-h2">12. Supuestos prácticos</h2>
+<h4 class="tema-h4">Supuesto 1 — Empleados, departamentos y cursos</h4>
+<p><strong>Escenario</strong>: una aplicación municipal debe gestionar empleados, departamentos y cursos de formación. Cada empleado pertenece a un departamento; cada empleado puede realizar varios cursos y cada curso lo realizan varios empleados.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué tablas hacen falta y con qué PK?</strong> EMPLEADOS (PK: número de empleado), DEPARTAMENTOS (PK: código de departamento), CURSOS (PK: código de curso) — y una cuarta, intermedia, para la relación N:M.</li>
+<li><strong>b) ¿Cómo se modela «cada empleado pertenece a un departamento»?</strong> Relación <strong>1:N</strong>: FK «código de departamento» en la tabla EMPLEADOS, apuntando a la PK de DEPARTAMENTOS.</li>
+<li><strong>c) ¿Y «empleados realizan cursos»?</strong> Relación <strong>N:M</strong> → tabla intermedia EMPLEADO-CURSO con FK al empleado y FK al curso (juntas pueden formar su PK).</li>
+<li><strong>d) ¿Qué protege la integridad referencial aquí?</strong> Que no se asigne un departamento o un curso inexistente, y que el borrado de un departamento o curso con referencias se resuelva conforme a las reglas establecidas.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 2 — Conectividad estándar</h4>
+<p><strong>Escenario</strong>: una aplicación de escritorio Windows del ayuntamiento debe consultar datos que hoy están en un SGBD y que el año próximo migrarán a otro motor distinto.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué estándar podría utilizar y por qué?</strong> ODBC: la aplicación programa contra la API común y no contra el motor concreto, ganando independencia del SGBD.</li>
+<li><strong>b) ¿Qué función cumple el driver?</strong> Traducir las llamadas de la API común a las particularidades del motor; al migrar, se sustituye el driver (y el origen de datos DSN), no la aplicación.</li>
+<li><strong>c) ¿Cuándo tendría sentido JDBC?</strong> Si la aplicación estuviera desarrollada en Java: JDBC es la API estándar de Java para bases de datos, con la misma arquitectura de drivers.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 3 — El NULL conflictivo</h4>
+<p><strong>Escenario</strong>: en la tabla EMPLEADOS, la columna «teléfono de contacto» presenta tres situaciones: un empleado con valor «943...», otro con cadena vacía y otro con NULL. Un informe cuenta «empleados sin teléfono» y da resultados extraños.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Son equivalentes las tres situaciones?</strong> No: «943...» es un valor; la cadena vacía también es un valor (vacío); NULL es ausencia de valor, cuyo significado depende del contexto (no facilitado, desconocido...).</li>
+<li><strong>b) ¿Por qué falla el informe?</strong> Si solo cuenta cadenas vacías (o solo NULL), ignora la otra situación: hay que decidir qué representa «sin teléfono» y tratar ambos casos.</li>
+<li><strong>c) ¿Qué concepto del tema lo explica?</strong> NULL ≠ 0 ≠ cadena vacía — la trampa clásica del modelo relacional.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 4 — Elegir el tipo de base de datos</h4>
+<p><strong>Escenario</strong>: se evalúan sistemas para tres necesidades: (1) expedientes con estructura tabular estable y relaciones claras; (2) un catálogo de documentos con estructura muy variable; (3) representar la red de relaciones entre entidades municipales.</p>
+<ul class="tema-lista">
+<li><strong>a) Asigna el modelo adecuado a cada caso.</strong> (1) Relacional: tablas, claves e integridad. (2) NoSQL documental: esquema flexible. (3) NoSQL de grafos: nodos y relaciones.</li>
+<li><strong>b) ¿Qué debe recordarse de NoSQL?</strong> Que no es un modelo único sino una familia (clave-valor, documental, columnar, grafos), y que el relacional sigue siendo el dominante para datos estructurados con relaciones.</li>
+</ul>
+
+<h2 id="13-matriz-de-memorizacion" class="tema-h2">13. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Lo que debo recordar</strong></th>
+</tr>
+<tr>
+<td>Base de datos</td>
+<td>Datos organizados y relacionados, usables por aplicaciones y usuarios; centralizada o distribuida</td>
+</tr>
+<tr>
+<td>SGBD</td>
+<td>Software que crea, gestiona, consulta y controla el acceso; intermediario aplicaciones-datos</td>
+</tr>
+<tr>
+<td>Relacional</td>
+<td>Tablas vinculadas por claves; el modelo dominante (Codd, 1970)</td>
+</tr>
+<tr>
+<td>Tabla</td>
+<td>Relación: filas + columnas, una entidad</td>
+</tr>
+<tr>
+<td>Tupla</td>
+<td>= fila; una ocurrencia concreta</td>
+</tr>
+<tr>
+<td>Atributo</td>
+<td>= columna; una característica de la entidad</td>
+</tr>
+<tr>
+<td>Dominio</td>
+<td>Conjunto de valores permitidos de un atributo</td>
+</tr>
+<tr>
+<td>NULL</td>
+<td>Ausencia de valor (≠ 0, ≠ cadena vacía); significado según contexto</td>
+</tr>
+<tr>
+<td>Clave candidata</td>
+<td>Podría identificar unívocamente cada fila</td>
+</tr>
+<tr>
+<td>PK</td>
+<td>Candidata elegida; única y sin NULL</td>
+</tr>
+<tr>
+<td>FK</td>
+<td>Referencia la clave de otra tabla; establece relaciones</td>
+</tr>
+<tr>
+<td>Integridad de entidad</td>
+<td>PK identifica inequívocamente; sin NULL</td>
+</tr>
+<tr>
+<td>Integridad referencial</td>
+<td>FK coherente con la clave referenciada, según las reglas</td>
+</tr>
+<tr>
+<td>1:1</td>
+<td>Una fila ↔ como mucho una fila</td>
+</tr>
+<tr>
+<td>1:N</td>
+<td>Un padre, muchos hijos; la FK vive en el lado «muchos»</td>
+</tr>
+<tr>
+<td>N:M</td>
+<td>Muchos con muchos; exige tabla intermedia</td>
+</tr>
+<tr>
+<td>ODBC</td>
+<td>Estándar de conectividad general; API común + driver; DSN en Windows</td>
+</tr>
+<tr>
+<td>JDBC</td>
+<td>API estándar de Java para bases de datos, con drivers</td>
+</tr>
+<tr>
+<td>DDL</td>
+<td>Define estructura: CREATE, ALTER, DROP</td>
+</tr>
+<tr>
+<td>DML</td>
+<td>Manipula datos: SELECT, INSERT, UPDATE, DELETE</td>
+</tr>
+<tr>
+<td>DCL</td>
+<td>Controla permisos: GRANT, REVOKE</td>
+</tr>
+<tr>
+<td>ACID</td>
+<td>Atomicidad, Consistencia, Aislamiento, Durabilidad (transacciones)</td>
+</tr>
+</table></div>
+
+<h2 id="14-resumen-final" class="tema-h2">14. Resumen final: si mañana fuera el examen</h2>
+<ul class="tema-lista">
+<li><strong>Base de datos</strong> = datos organizados y relacionados (centralizada o distribuida) · <strong>SGBD</strong> = el software que los gestiona. Ventajas frente a ficheros: redundancia, integridad, control de acceso, concurrencia, independencia — según diseño y configuración.</li>
+<li><strong>Tipos</strong>: jerárquica (árbol, un padre) · en red (varios padres) · <strong>relacional (dominante)</strong> · orientada a objetos · NoSQL (familia: clave-valor, documental, columnar, grafos).</li>
+<li><strong>Modelo relacional</strong> (Codd, 1970): tabla/relación · fila/tupla · columna/atributo · dominio (valores permitidos) · <strong>NULL = ausencia de valor ≠ 0 ≠ cadena vacía</strong>. Analogía didáctica con T4: tabla ≈ fichero, fila ≈ registro, columna ≈ campo.</li>
+<li><strong>Claves</strong>: candidata (podría) → <strong>PK</strong> (elegida; única, sin NULL) · <strong>FK</strong> (referencia y relaciona). <strong>Integridad de entidad → PK · referencial → FK</strong>.</li>
+<li><strong>Relaciones</strong>: 1:1 · 1:N (FK en el lado «muchos»; departamento-empleados) · <strong>N:M → tabla intermedia</strong> (empleados-cursos).</li>
+<li><strong>Conectividad (bloque principal)</strong>: el problema es la independencia del SGBD; la solución, <strong>API común + driver específico</strong>. <strong>ODBC = general</strong> (DSN en Windows) · <strong>JDBC = Java</strong>.</li>
+<li>Ampliación: <strong>SQL</strong> — DDL define (CREATE/ALTER/DROP) · DML manipula (SELECT/INSERT/UPDATE/DELETE) · DCL controla (GRANT/REVOKE). <strong>Transacción</strong> = todo o nada; <strong>ACID</strong>.</li>
+<li>Fuera del tema: normalización, SQL avanzado, administración de SGBD, y el contenido de los Temas 4, 6, 7 y 9.</li>
 </ul>
   </div>
 </article>
