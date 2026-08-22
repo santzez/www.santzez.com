@@ -1,151 +1,1199 @@
 <article class="tema-articulo">
   <header class="tema-cabecera">
     <div class="tema-cabecera__id">T25</div>
-    <h1 class="tema-cabecera__titulo">Virus. Tipos (Malware, Spyware, Ransomware, etc.). Medios preventivos y reactivos. Programas antivirus: instalación, actualización y mantenimiento. Los paquetes de seguridad integral del puesto de trabajo</h1>
+    <h1 class="tema-cabecera__titulo">Virus. Tipos (malware, spyware, ransomware, etc.). Medios preventivos y reactivos. Programas antivirus: instalación, actualización y mantenimiento. Los paquetes de seguridad integral del puesto de trabajo</h1>
     <div class="tema-cabecera__meta">Bloque III · Seguridad — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
   </header>
 
   <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
-<li><a href="#1-malware-concepto-y-evolución-del-término-virus">1. Malware: concepto y evolución del término «virus»</a></li>
+<li><a href="#1-malware-y-virus">1. Malware y virus: la distinción de partida</a></li>
 <li><a href="#2-tipos-de-malware">2. Tipos de malware</a></li>
-<li><a href="#3-medios-preventivos">3. Medios preventivos</a></li>
-<li><a href="#4-medios-reactivos">4. Medios reactivos</a></li>
-<li><a href="#5-programas-antivirus-funcionamiento-instalación-actualizaci">5. Programas antivirus: funcionamiento, instalación, actualización y mantenimiento</a></li>
-<li><a href="#6-paquetes-de-seguridad-integral-del-puesto-de-trabajo">6. Paquetes de seguridad integral del puesto de trabajo</a></li>
-<li><a href="#7-resumen-para-estudiar">7. Resumen para estudiar</a></li>
-<li><a href="#8-conceptos-clave">8. Conceptos clave</a></li>
-<li><a href="#9-posibles-puntos-de-examen">9. Posibles puntos de examen</a></li>
+<li><a href="#3-matriz-de-malware">3. Matriz de malware: identificación por rasgo distintivo</a></li>
+<li><a href="#4-ingenieria-social">4. Ingeniería social</a></li>
+<li><a href="#5-phishing">5. Phishing y sus variantes</a></li>
+<li><a href="#6-caso-de-phishing">6. Caso práctico de phishing en un CAU</a></li>
+<li><a href="#7-medios-preventivos">7. Medios preventivos</a></li>
+<li><a href="#8-medios-reactivos">8. Medios reactivos: el ciclo de respuesta</a></li>
+<li><a href="#9-cuarentena-y-aislamiento">9. Cuarentena y aislamiento</a></li>
+<li><a href="#10-notificacion">10. Notificación del incidente</a></li>
+<li><a href="#11-tecnicas-de-deteccion">11. Técnicas de detección del antivirus</a></li>
+<li><a href="#12-zero-day">12. Malware desconocido y zero-day</a></li>
+<li><a href="#13-falsos-positivos-y-negativos">13. Falsos positivos y falsos negativos</a></li>
+<li><a href="#14-edr">14. EDR</a></li>
+<li><a href="#15-instalacion">15. Instalación del antivirus</a></li>
+<li><a href="#16-actualizacion">16. Actualización</a></li>
+<li><a href="#17-mantenimiento">17. Mantenimiento</a></li>
+<li><a href="#18-suites">18. Paquetes de seguridad integral</a></li>
+<li><a href="#19-entorno-administracion">19. La protección del puesto en la Administración Pública</a></li>
+<li><a href="#20-anclas-de-memoria">20. Anclas de memoria</a></li>
+<li><a href="#21-no-confundir">21. No confundir</a></li>
+<li><a href="#22-trampas-de-examen">22. Posibles trampas de examen</a></li>
+<li><a href="#23-preguntas-tipo-test">23. Posibles preguntas tipo test</a></li>
+<li><a href="#24-preguntas-cortas">24. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#25-supuestos-practicos">25. Supuestos prácticos</a></li>
+<li><a href="#26-matriz-de-memorizacion">26. Matriz de memorización</a></li>
+<li><a href="#27-resumen-final">27. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#28-actualidad">28. Actualidad de protección del endpoint — datos fechados</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
 
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>Este tema da por conocidos los conceptos generales de amenaza y vulnerabilidad (Tema 22) y la política de salvaguarda de la información (Tema 23), que aquí se aplican específicamente al malware. Los cortafuegos y las redes privadas virtuales, como medidas de seguridad perimetral y de red, se desarrollan con más detalle en el Tema 29.</th>
+<th><strong>⚠️ No confundir — fronteras del tema</strong><br>Este tema trata el <strong>malware, la protección del puesto de trabajo y los programas antivirus</strong>.<br><strong>Tema 21</strong> → ENS y gestión de incidentes. <strong>Tema 22</strong> → amenazas y vulnerabilidades. <strong>Tema 23</strong> → copias y recuperación. <strong>Tema 24</strong> → criptografía y autenticación. <strong>Tema 29</strong> → cortafuegos, VPN y seguridad de redes. <strong>Tema 17</strong> → seguridad del correo electrónico.<br>Esos contenidos se citan aquí <strong>solo como referencia</strong>, nunca desarrollados.</th>
 </tr>
 </table></div>
-<h2 id="1-malware-concepto-y-evolución-del-término-virus" class="tema-h2">1. Malware: concepto y evolución del término «virus»</h2>
-<p><strong>Malware</strong> (contracción del inglés «malicious software») es cualquier software diseñado deliberadamente para dañar, alterar el funcionamiento normal de, u obtener acceso no autorizado a un sistema informático, sin el consentimiento de su propietario. Es el término técnico correcto para referirse a toda esta familia de amenazas (Tema 22).</p>
+
+<h2 id="1-malware-y-virus" class="tema-h2">1. Malware y virus: la distinción de partida</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>En el lenguaje coloquial es habitual usar «virus» como sinónimo genérico de cualquier programa malicioso, pero, en sentido estricto, el virus es solo uno de los tipos de malware (punto 2), el que se propaga insertándose dentro de otros archivos o programas. Usar «virus» y «malware» como sinónimos es impreciso y puede ser objeto de una pregunta de examen centrada precisamente en esta distinción terminológica.</th>
+<th><strong>📌 Imprescindible para el examen — LA GRAN TRAMPA DEL TEMA</strong><br><strong>Malware</strong> → <strong>software malicioso diseñado para realizar acciones no autorizadas o perjudiciales</strong>.<br><strong>MALWARE ≠ VIRUS.</strong><br><strong>El virus es UN TIPO CONCRETO de malware</strong>, no un sinónimo. <strong>Malware</strong> es la <strong>familia</strong>; <strong>virus</strong>, uno de sus miembros.</th>
 </tr>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br><strong>MALWARE → FAMILIA. VIRUS → UN MIEMBRO.</strong><br>El uso coloquial ha convertido «virus» en sinónimo de cualquier infección informática, y de ahí procede el error. En un examen, decir que «el ransomware es un virus» o que «malware y virus son lo mismo» es <strong>incorrecto</strong>: el ransomware es <strong>malware</strong>, pero no <strong>virus</strong>.<br><em>Analogía</em>: <strong>malware</strong> es «vehículo»; <strong>virus</strong> es «turismo». No todo vehículo es un turismo.</th>
+</tr>
+</table></div>
+
 <h2 id="2-tipos-de-malware" class="tema-h2">2. Tipos de malware</h2>
-<ul class="tema-lista">
-<li><strong>Virus</strong>: código que se inserta dentro de un archivo o programa legítimo (su «anfitrión») y se activa y propaga cuando ese archivo se ejecuta. Requiere, por tanto, una acción humana —ejecutar el archivo infectado— para propagarse de un sistema a otro.</li>
-<li><strong>Gusano (worm)</strong>: programa capaz de replicarse y propagarse por sí mismo a través de una red, explotando vulnerabilidades directamente, sin necesidad de infectar un archivo anfitrión ni de que una persona ejecute nada.</li>
-<li><strong>Troyano (trojan horse)</strong>: programa que se presenta como legítimo o útil (un juego, una utilidad, un documento) pero que oculta una funcionalidad maliciosa. A diferencia del virus y el gusano, no se autorreplica: depende del engaño para que la propia víctima lo instale voluntariamente.</li>
-<li><strong>Spyware</strong>: software que recopila información sobre la persona usuaria o su actividad sin su conocimiento, y la envía a terceros (hábitos de navegación, credenciales, pulsaciones de teclado). Un <strong>keylogger</strong>, que registra todo lo que se escribe en el teclado, es un subtipo específico de spyware.</li>
-<li><strong>Ransomware</strong>: malware que cifra, o de otro modo bloquea el acceso a, los datos o el sistema de la víctima, exigiendo el pago de un rescate para restaurar el acceso. Es hoy una de las amenazas más relevantes para cualquier organización, incluida la Administración Pública, y el motivo principal por el que se recomienda disponer de al menos una copia de seguridad offline o inmutable (regla 3-2-1-1-0, Tema 23).</li>
-<li><strong>Adware</strong>: software que muestra publicidad no deseada, a veces integrado junto con funcionalidad legítima; resulta molesto más que directamente destructivo, aunque en ocasiones actúa como puerta de entrada para otras amenazas.</li>
-<li><strong>Rootkit</strong>: conjunto de herramientas diseñadas para ocultar la presencia de otro malware o de un acceso no autorizado en el sistema, operando a bajo nivel —a menudo con privilegios de núcleo, Tema 9— para evadir su detección.</li>
-<li><strong>Botnet</strong>: red de equipos infectados («zombis» o «bots»), controlados de forma remota y coordinada por un atacante sin conocimiento de sus propietarios legítimos, empleada habitualmente para lanzar ataques de denegación de servicio distribuido (DDoS, Tema 29) o para el envío masivo de correo no deseado.</li>
-</ul>
+<h4 class="tema-h4">2.1 Virus</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>El rasgo que mejor distingue a un virus de un gusano es la necesidad de intervención humana: el virus necesita que alguien ejecute el archivo infectado; el gusano se propaga solo, explotando vulnerabilidades de red. El troyano, por su parte, no se autorreplica en absoluto: su «arma» es el engaño, no la propagación automática.</th>
-</tr>
-</table></div>
-<h4 class="tema-h4">La puerta de entrada más habitual: ingeniería social y phishing</h4>
-<p>Buena parte del malware no entra explotando un fallo técnico, sino engañando a una persona. La <strong>ingeniería social</strong> es el conjunto de técnicas de manipulación psicológica orientadas a que la víctima haga algo que compromete la seguridad (abrir un adjunto, revelar una contraseña, pulsar un enlace). Su forma más extendida es el <strong>phishing</strong>: mensajes —habitualmente de correo electrónico— que suplantan a una entidad legítima (un banco, la propia organización, un servicio público) para robar credenciales o distribuir malware. Variantes que conviene reconocer: <strong>spear phishing</strong> (dirigido y personalizado contra una persona u organización concreta), <strong>smishing</strong> (por SMS) y <strong>vishing</strong> (por llamada de voz).</p>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>💡 Ejemplo</strong><br>Caso típico en un ayuntamiento: una persona usuaria recibe un correo aparentemente del «servicio de informática» pidiéndole «validar su cuenta» en un enlace. Detalles delatores: remitente con dominio extraño, sensación de urgencia («su cuenta será bloqueada en 24 h»), enlace cuyo destino real no coincide con el texto, y errores de redacción. El procedimiento correcto no es solo borrarlo: es <strong>reportarlo al CAU</strong>, para que se pueda avisar al resto de la plantilla y bloquear el dominio en el filtro de correo.</th>
-</tr>
-</table></div>
-<h2 id="3-medios-preventivos" class="tema-h2">3. Medios preventivos</h2>
-<ul class="tema-lista">
-<li><strong>Actualizaciones de seguridad</strong> del sistema operativo y de las aplicaciones (Temas 11, 12, 13 y 16): cerrar las vulnerabilidades conocidas antes de que puedan ser explotadas.</li>
-<li><strong>Software antivirus/antimalware actualizado</strong> (se desarrolla en el punto 5).</li>
-<li><strong>Cortafuegos (firewall)</strong>: control del tráfico de red que entra y sale del equipo o de la organización, como primera barrera perimetral (se desarrolla con detalle en el Tema 29).</li>
-<li><strong>Formación y concienciación del personal</strong>, requisito mínimo del ENS (mp.per, Tema 21), frente a técnicas de ingeniería social y phishing, que a menudo son la puerta de entrada real del malware, más que una vulnerabilidad puramente técnica.</li>
-<li><strong>Principio de mínimo privilegio</strong> (Temas 9, 12 y 14): limitar lo que cada usuario o proceso puede hacer, para reducir el daño potencial si llegara a verse comprometido.</li>
-<li><strong>Copias de seguridad periódicas</strong> (Tema 23): no evitan la infección, pero limitan drásticamente su impacto si se produce, especialmente frente al ransomware.</li>
-<li><strong>Control de dispositivos externos</strong> (unidades USB, Tema 8) y <strong>filtrado de correo y contenido web</strong>, para reducir los vectores de entrada más habituales.</li>
-</ul>
-<h2 id="4-medios-reactivos" class="tema-h2">4. Medios reactivos</h2>
-<ul class="tema-lista">
-<li><strong>Detección y eliminación por el propio antivirus</strong>: puesta en cuarentena (aislar el archivo sospechoso sin eliminarlo, por si es necesario recuperarlo) o eliminación directa, y desinfección de los archivos que pueda ser posible recuperar.</li>
-<li><strong>Aislamiento o contención del equipo afectado</strong>: desconectarlo de la red para evitar que la infección se propague a otros sistemas mientras se investiga y se resuelve el incidente.</li>
-<li><strong>Activación del procedimiento de gestión de incidentes</strong> (op.exp.7 y op.exp.9 del ENS, Tema 21): análisis del alcance, contención, erradicación del malware, recuperación del servicio y documentación de lecciones aprendidas.</li>
-<li><strong>Restauración desde copia de seguridad</strong> (Tema 23), cuando el malware ha dañado, cifrado o eliminado datos que no pueden recuperarse de otro modo.</li>
-<li><strong>Notificación del incidente</strong>, cuando corresponda, al CCN-CERT (Tema 21) o a la autoridad competente, especialmente si el incidente ha podido afectar a datos de carácter personal, en cuyo caso puede existir además la obligación de notificar una brecha de seguridad conforme a la normativa de protección de datos.</li>
-</ul>
-<h2 id="5-programas-antivirus-funcionamiento-instalación-actualizaci" class="tema-h2">5. Programas antivirus: funcionamiento, instalación, actualización y mantenimiento</h2>
-<h4 class="tema-h4">Funcionamiento</h4>
-<ul class="tema-lista">
-<li><strong>Detección basada en firmas</strong>: compara los archivos del sistema contra una base de datos de patrones (firmas) de malware ya conocido; es muy fiable frente a amenazas conocidas, pero no detecta amenazas nuevas todavía no catalogadas.</li>
-<li><strong>Detección heurística o basada en comportamiento</strong>: analiza el comportamiento de los programas en busca de patrones sospechosos (por ejemplo, cifrar masivamente archivos del usuario), lo que permite detectar amenazas nuevas o desconocidas («de día cero» o zero-day), a costa de un mayor riesgo de falsos positivos.</li>
-</ul>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>⚠️ No confundir</strong><br><strong>Falso positivo</strong>: el antivirus marca como malicioso un archivo legítimo (molesto, puede bloquear una aplicación de trabajo). <strong>Falso negativo</strong>: el antivirus deja pasar malware real (peligroso). La detección por firmas minimiza los falsos positivos pero sufre falsos negativos ante amenazas nuevas; la heurística, al revés.</th>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>Virus</strong> → <strong>malware que se inserta o adjunta a un archivo o programa anfitrión y necesita un mecanismo de ejecución para propagarse</strong>.<br><strong>ANCLA: VIRUS → ANFITRIÓN.</strong></th>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>La evolución más reciente del antivirus tradicional se conoce como <strong>EDR (Endpoint Detection and Response)</strong>: además de detectar comportamiento sospechoso en cada equipo (endpoint), ofrece capacidades de respuesta automatizada (aislar el equipo, detener un proceso) y una visibilidad centralizada de todos los endpoints de la organización desde una única consola, facilitando investigar un incidente que afecte a varios equipos a la vez. No sustituye necesariamente al antivirus clásico, sino que suele complementarlo con estas capacidades adicionales de detección y respuesta.</th>
+<th><strong>⚠️ Cautela de formulación</strong><br>No debe afirmarse de manera absoluta que un virus <strong>siempre requiere un clic humano concreto</strong>. Lo que lo caracteriza es que <strong>necesita un anfitrión y un mecanismo de ejecución</strong>; ese mecanismo puede variar según el caso.<br>Lo estable y preguntable: <strong>el virus depende de un archivo o programa que lo aloje</strong>.</th>
 </tr>
 </table></div>
-<h4 class="tema-h4">Instalación, actualización y mantenimiento</h4>
-<p>En una organización, el antivirus se despliega habitualmente de forma <strong>centralizada</strong> sobre todos los puestos de trabajo (apoyándose en las mismas herramientas de distribución de software vistas en los Temas 11 y 16), para asegurar una cobertura homogénea, en lugar de dejar su instalación a criterio de cada usuario.</p>
-<p>La <strong>base de firmas</strong> debe actualizarse de forma constante —a menudo varias veces al día— para poder reconocer las amenazas más recientes; el propio motor del antivirus también requiere actualizaciones periódicas, igual que cualquier otro software (Temas 11, 12 y 13).</p>
-<p>El mantenimiento habitual incluye programar <strong>análisis periódicos</strong> (completos y rápidos), revisar el contenido de la cuarentena, y configurar con cuidado las <strong>exclusiones</strong> necesarias (carpetas o procesos de confianza que no conviene escanear por motivos de rendimiento), evitando que esas exclusiones se conviertan en puntos ciegos aprovechables por un atacante. En organizaciones de cierto tamaño, todo ello se gestiona desde una <strong>consola de administración centralizada</strong>, que permite supervisar el estado del antivirus en todos los equipos desde un único punto.</p>
-<h2 id="6-paquetes-de-seguridad-integral-del-puesto-de-trabajo" class="tema-h2">6. Paquetes de seguridad integral del puesto de trabajo</h2>
-<p>Más allá del antivirus puro, es habitual encontrar <strong>paquetes o suites de seguridad integral</strong> (a veces comercializados como «Internet Security» o «Total Security») que combinan, en un mismo producto, varias capas de protección del puesto de trabajo:</p>
-<ul class="tema-lista">
-<li>Antivirus y antimalware.</li>
-<li>Cortafuegos personal (Tema 29).</li>
-<li>Filtro antispam para el correo electrónico (Tema 17).</li>
-<li>Control parental, en el ámbito de uso doméstico.</li>
-<li>Gestor de contraseñas.</li>
-<li>VPN integrada (Tema 29).</li>
-<li>Protección específica para operaciones de banca en línea.</li>
-<li>Copia de seguridad en la nube (Tema 23).</li>
-</ul>
-<p>La ventaja principal de estos paquetes integrales es disponer de una <strong>gestión centralizada</strong> de varias medidas de seguridad complementarias desde una única consola o producto, en lugar de tener que coordinar herramientas dispersas de distintos fabricantes, con el riesgo de solapamientos o de huecos entre ellas.</p>
+<h4 class="tema-h4">2.2 Gusano (worm)</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>En el puesto de trabajo de una Administración Pública, la solución de seguridad integral no suele quedar a elección de la persona usuaria: se despliega de forma corporativa y centralizada, coherente con la política de seguridad definida por la organización en aplicación del ENS (Tema 21) y con el principio de mínimo privilegio, igual que el resto del software base del puesto (Tema 11).</th>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>Gusano</strong> → <strong>malware que puede replicarse y propagarse autónomamente, especialmente a través de redes</strong>.<br><strong>ANCLA: GUSANO → SE PROPAGA SOLO.</strong></th>
 </tr>
 </table></div>
-<h2 id="7-resumen-para-estudiar" class="tema-h2">7. Resumen para estudiar</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — virus y gusano</strong><br><strong>VIRUS → necesita ANFITRIÓN</strong> y un mecanismo de ejecución.<br><strong>GUSANO → AUTORREPLICACIÓN</strong>: se propaga por sí mismo, sin necesidad de alojarse en otro programa.<br>Es la diferencia más preguntada de la clasificación. La palabra decisiva es <strong>autonomía</strong>: por eso un gusano puede extenderse rápidamente por una red sin intervención adicional.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">2.3 Troyano</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>Troyano</strong> → <strong>programa que se presenta como legítimo o útil y oculta una funcionalidad maliciosa</strong>.<br><strong>ANCLA: TROYANO → ENGAÑO.</strong><br>Se define por el <strong>engaño</strong>, <strong>no</strong> por la autorreplicación: un troyano no se caracteriza por reproducirse, sino por <strong>aparentar ser otra cosa</strong>.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">2.4 Spyware y keylogger</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>Spyware</strong> → <strong>malware que recopila información o monitoriza la actividad del usuario sin su autorización o conocimiento</strong>. <strong>ANCLA: SPYWARE → ESPÍA.</strong><br><strong>Keylogger</strong> → <strong>subtipo o herramienta que registra las pulsaciones de teclado</strong>. <strong>ANCLA: KEYLOGGER → TECLAS.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Por qué importa en un CAU</strong><br>Un <strong>keylogger</strong> es especialmente peligroso porque captura <strong>credenciales en el momento de teclearlas</strong>, antes de cualquier cifrado del canal. Por eso una sospecha de keylogger obliga a plantear el <strong>cambio de contraseñas desde un equipo distinto y limpio</strong>, no desde el equipo afectado.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">2.5 Ransomware</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>Ransomware</strong> → <strong>malware que bloquea o cifra datos o sistemas y busca extorsionar a la víctima para recuperar el acceso</strong>.<br><strong>ANCLA: RANSOMWARE → SECUESTRA / CIFRA + EXTORSIONA.</strong><br>Dos elementos combinados: <strong>privación del acceso</strong> y <strong>extorsión</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Cautela de formulación</strong><br>No debe afirmarse que <strong>todos los ransomware utilicen exactamente el mismo mecanismo</strong>: varían en cómo bloquean o cifran, en qué alcanzan y en cómo plantean la extorsión.<br>Lo estable es la <strong>combinación de privación de acceso y extorsión</strong>.</th>
+</tr>
+</table></div>
+<p>La defensa más eficaz frente a sus consecuencias son las <strong>copias de seguridad offline o inmutables</strong>, tratadas en el <strong>Tema 23</strong>. Aquí basta con retener la conexión: <strong>las copias no evitan la infección, pero permiten recuperarse de ella</strong>.</p>
+<h4 class="tema-h4">2.6 Adware</h4>
+<p><strong>Adware</strong> → malware que <strong>muestra publicidad no deseada</strong>. Es un tipo <strong>secundario</strong> en términos de prioridad de examen, aunque puede degradar el rendimiento y la experiencia de uso del puesto.</p>
+<h4 class="tema-h4">2.7 Rootkit</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición precisa</strong><br><strong>Rootkit</strong> → <strong>conjunto de técnicas o herramientas destinadas a ocultar malware, procesos, archivos o accesos y dificultar su detección</strong>.<br><strong>ANCLA: ROOTKIT → OCULTA.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Trampa de examen — el rootkit NO se define por el kernel</strong><br>Es <strong>incorrecto</strong> afirmar que un rootkit <strong>opera necesariamente a nivel de kernel</strong>. Puede actuar en distintos niveles del sistema.<br>Lo que lo define es su <strong>finalidad: OCULTAR</strong> —malware, procesos, archivos o accesos— y <strong>dificultar la detección</strong>, no el nivel técnico en que lo haga.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">2.8 Botnet</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>Botnet</strong> → <strong>red de dispositivos comprometidos controlados remotamente por un atacante</strong>.<br><strong>ANCLA: BOTNET → ZOMBIS.</strong> Los equipos infectados actúan como <strong>«zombis»</strong> que obedecen órdenes remotas, normalmente <strong>sin que su propietario lo advierta</strong>.</th>
+</tr>
+</table></div>
 <ul class="tema-lista">
-<li><strong>Malware</strong>: término correcto para cualquier software malicioso; «virus» es solo uno de sus tipos, no un sinónimo general.</li>
-<li><strong>Tipos</strong>: virus (requiere ejecutar el archivo anfitrión), gusano (se propaga solo por la red), troyano (se disfraza, no se autorreplica), spyware/keylogger (recopila información), ransomware (cifra y pide rescate), adware, rootkit (oculta otro malware) y botnet (red de equipos zombis).</li>
-<li><strong>Medios preventivos</strong>: actualizaciones, antivirus, cortafuegos, formación del personal, mínimo privilegio, copias de seguridad y control de dispositivos externos.</li>
-<li><strong>Medios reactivos</strong>: cuarentena/eliminación, aislamiento del equipo, procedimiento de gestión de incidentes, restauración desde copia de seguridad y notificación cuando corresponda.</li>
-<li><strong>Antivirus</strong>: detección por firmas (amenazas conocidas) y heurística/comportamiento (amenazas nuevas o «zero-day»); EDR como evolución con respuesta automatizada y visibilidad centralizada; despliegue, actualización y mantenimiento centralizados en la organización.</li>
-<li><strong>Paquetes de seguridad integral</strong>: antivirus + cortafuegos + antispam + gestor de contraseñas + VPN + copia de seguridad, entre otros, gestionados desde una única consola.</li>
-<li><strong>Ingeniería social y phishing</strong> (spear phishing, smishing, vishing): la puerta de entrada humana del malware; reportar al CAU, no solo borrar.</li>
+<li><strong>DDoS</strong>: ataques de denegación de servicio distribuidos (desarrollados en el <strong>Tema 29</strong>).</li>
+<li><strong>Envío masivo de spam</strong>.</li>
+<li><strong>Otras actividades maliciosas</strong> coordinadas.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — botnet y malware individual</strong><br>La <strong>botnet no es un tipo de malware</strong> en el mismo sentido que un virus o un troyano: es una <strong>estructura de control</strong> formada por <strong>muchos dispositivos comprometidos</strong>.<br>El malware es <strong>el medio</strong> que convierte un equipo en parte de la botnet; la <strong>botnet es el resultado colectivo</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="3-matriz-de-malware" class="tema-h2">3. Matriz de malware: identificación por rasgo distintivo</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Tipo</strong></th>
+<th><strong>Rasgo distintivo</strong></th>
+<th><strong>Pista de examen</strong></th>
+</tr>
+<tr>
+<td><strong>Virus</strong></td>
+<td><strong>Necesita y anida en un anfitrión</strong></td>
+<td>«se adjunta a un archivo o programa»</td>
+</tr>
+<tr>
+<td><strong>Gusano</strong></td>
+<td><strong>Autorreplicación</strong></td>
+<td>«se propaga por la red por sí mismo»</td>
+</tr>
+<tr>
+<td><strong>Troyano</strong></td>
+<td><strong>Engaño</strong></td>
+<td>«aparenta ser un programa legítimo o útil»</td>
+</tr>
+<tr>
+<td><strong>Spyware</strong></td>
+<td><strong>Espionaje</strong></td>
+<td>«recopila información sin conocimiento del usuario»</td>
+</tr>
+<tr>
+<td><strong>Keylogger</strong></td>
+<td><strong>Captura de teclas</strong></td>
+<td>«registra las pulsaciones del teclado»</td>
+</tr>
+<tr>
+<td><strong>Ransomware</strong></td>
+<td><strong>Bloqueo o cifrado + extorsión</strong></td>
+<td>«exige un pago para devolver el acceso»</td>
+</tr>
+<tr>
+<td><strong>Rootkit</strong></td>
+<td><strong>Ocultación</strong></td>
+<td>«dificulta la detección, esconde procesos o accesos»</td>
+</tr>
+<tr>
+<td><strong>Botnet</strong></td>
+<td><strong>Red de dispositivos controlados</strong></td>
+<td>«muchos equipos obedecen a un mando remoto»</td>
+</tr>
+<tr>
+<td><strong>Adware</strong></td>
+<td><strong>Publicidad no deseada</strong></td>
+<td>«muestra anuncios que el usuario no ha solicitado»</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — el método de clasificación</strong><br>Ante un enunciado que describa un comportamiento, pregúntate <strong>por qué rasgo se define</strong>:<br><strong>¿Necesita alojarse en algo? → VIRUS.</strong> <strong>¿Se propaga solo? → GUSANO.</strong> <strong>¿Engaña sobre lo que es? → TROYANO.</strong> <strong>¿Observa y recopila? → SPYWARE.</strong> <strong>¿Priva del acceso y exige algo? → RANSOMWARE.</strong> <strong>¿Se esconde? → ROOTKIT.</strong> <strong>¿Son muchos equipos obedeciendo? → BOTNET.</strong><br>Cada tipo se identifica por <strong>un</strong> rasgo, no por una acumulación de síntomas.</th>
+</tr>
+</table></div>
+
+<h2 id="4-ingenieria-social" class="tema-h2">4. Ingeniería social</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>Ingeniería social</strong> → <strong>manipulación psicológica para conseguir que una persona realice una acción que comprometa la seguridad</strong>.<br>Su objetivo no es el sistema, sino <strong>la persona</strong>: por eso no se combate únicamente con tecnología.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Revelar credenciales</strong> a quien las solicita.</li>
+<li><strong>Abrir un adjunto</strong> aparentemente inocuo.</li>
+<li><strong>Pulsar un enlace</strong> que conduce a un sitio fraudulento.</li>
+<li><strong>Instalar software</strong> facilitado por el atacante.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br>La ingeniería social explica por qué la <strong>formación y la concienciación</strong> figuran entre los <strong>medios preventivos</strong> (apartado 7) con el mismo rango que las medidas técnicas: si el ataque va dirigido a la persona, <strong>la persona es también parte de la defensa</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="5-phishing" class="tema-h2">5. Phishing y sus variantes</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>Phishing</strong> → <strong>suplantación de una entidad o persona para conseguir información o provocar una acción</strong>.<br>Es la forma más habitual de <strong>ingeniería social</strong> en el entorno administrativo.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Variante</strong></th>
+<th><strong>Rasgo distintivo</strong></th>
+</tr>
+<tr>
+<td><strong>Phishing</strong></td>
+<td>Suplantación <strong>genérica</strong>, dirigida a un conjunto amplio de destinatarios</td>
+</tr>
+<tr>
+<td><strong>Spear phishing</strong></td>
+<td>Ataque <strong>dirigido</strong> a una persona u organización concreta, con información personalizada</td>
+</tr>
+<tr>
+<td><strong>Smishing</strong></td>
+<td>Se realiza mediante <strong>mensajes SMS</strong> o de mensajería</td>
+</tr>
+<tr>
+<td><strong>Vishing</strong></td>
+<td>Se realiza mediante <strong>llamada de voz</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — el canal y la puntería</strong><br><strong>SPEAR → PUNTERÍA</strong> (dirigido). <strong>SMISHING → SMS.</strong> <strong>VISHING → VOZ.</strong><br>Las tres variantes se distinguen por <strong>el canal o el grado de personalización</strong>, no por una técnica distinta: en todas hay <strong>suplantación</strong>.</th>
+</tr>
+</table></div>
+<p>La protección técnica del correo (SPF, DKIM, DMARC, filtrado antispam) corresponde al <strong>Tema 17</strong>.</p>
+
+<h2 id="6-caso-de-phishing" class="tema-h2">6. Caso práctico de phishing en un CAU</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Escenario</strong><br>Una persona usuaria recibe un mensaje que <strong>aparenta proceder del servicio de informática</strong> del ayuntamiento y le solicita <strong>validar su cuenta</strong> pulsando un enlace e introduciendo sus credenciales, advirtiendo de que en caso contrario <strong>su cuenta será bloqueada hoy mismo</strong>.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Indicadores que deben alertar</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Indicador</strong></th>
+<th><strong>Qué observar</strong></th>
+</tr>
+<tr>
+<td><strong>Dominio sospechoso</strong></td>
+<td>El remitente no corresponde al dominio real de la organización</td>
+</tr>
+<tr>
+<td><strong>Urgencia</strong></td>
+<td>Presión temporal para impedir que la persona reflexione o consulte</td>
+</tr>
+<tr>
+<td><strong>Enlace distinto al texto</strong></td>
+<td>La dirección real no coincide con la que se muestra</td>
+</tr>
+<tr>
+<td><strong>Errores</strong></td>
+<td>Fallos de redacción, formato o imagen corporativa</td>
+</tr>
+<tr>
+<td><strong>Petición inusual</strong></td>
+<td>Solicitud de credenciales que el servicio de informática <strong>no pide por correo</strong></td>
+</tr>
+</table></div>
+<h4 class="tema-h4">Procedimiento de actuación</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Paso</strong></th>
+<th><strong>Actuación</strong></th>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td><strong>No pulsar</strong> el enlace ni abrir adjuntos</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td><strong>No proporcionar credenciales</strong> ni ningún otro dato</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td><strong>Reportar al CAU o al área de seguridad</strong></td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td><strong>Seguir el procedimiento corporativo</strong> establecido</td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td><strong>Bloquear indicadores cuando proceda</strong>, por quien tenga competencia para ello</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Cautela — el CAU no siempre puede bloquear</strong><br><strong>No debe asumirse que todo CAU pueda bloquear directamente un dominio</strong> o un remitente. Esa capacidad depende de la <strong>organización, de las herramientas disponibles y del reparto de competencias</strong>.<br>Lo que <strong>sí</strong> corresponde siempre al CAU es <strong>recoger la evidencia, no interactuar con el mensaje, informar a la persona usuaria y escalar</strong> conforme al procedimiento.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Si la persona ya introdujo sus credenciales</strong><br>El caso cambia: hay que tratarlo como <strong>posible compromiso de credenciales</strong> y actuar conforme al procedimiento de la organización — típicamente, <strong>cambio inmediato de contraseña</strong>, revisión de accesos y <strong>comunicación al área de seguridad</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="7-medios-preventivos" class="tema-h2">7. Medios preventivos</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — TRES CATEGORÍAS, NO DOS</strong><br><strong>PREVENCIÓN</strong> → <strong>reducir la probabilidad de infección</strong>.<br><strong>REACCIÓN</strong> → <strong>detectar, contener y erradicar</strong> lo que ya ha ocurrido.<br><strong>RESILIENCIA / RECUPERACIÓN</strong> → <strong>reducir el impacto y permitir recuperar</strong>.<br>Es un error frecuente meterlo todo en «preventivo» y «reactivo»: <strong>las copias de seguridad no previenen la infección</strong>, sino que permiten <strong>recuperarse</strong> de ella.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Medida</strong></th>
+<th><strong>Qué aporta</strong></th>
+<th><strong>Categoría</strong></th>
+</tr>
+<tr>
+<td><strong>Actualizaciones</strong></td>
+<td>Corrigen vulnerabilidades aprovechables por el malware</td>
+<td>Prevención</td>
+</tr>
+<tr>
+<td><strong>Antivirus / antimalware</strong></td>
+<td>Impide la ejecución de código malicioso conocido o sospechoso</td>
+<td>Prevención (y detección)</td>
+</tr>
+<tr>
+<td><strong>Formación y concienciación</strong></td>
+<td>Reduce la eficacia de la ingeniería social</td>
+<td>Prevención</td>
+</tr>
+<tr>
+<td><strong>Mínimo privilegio</strong></td>
+<td>Limita lo que el malware puede hacer si llega a ejecutarse</td>
+<td>Prevención y contención</td>
+</tr>
+<tr>
+<td><strong>Control de dispositivos</strong></td>
+<td>Restringe el uso de soportes extraíbles no autorizados</td>
+<td>Prevención</td>
+</tr>
+<tr>
+<td><strong>Filtrado de correo y web</strong></td>
+<td>Bloquea mensajes y sitios maliciosos antes de que lleguen al usuario</td>
+<td>Prevención</td>
+</tr>
+<tr>
+<td><strong>Cortafuegos</strong></td>
+<td>Filtra el tráfico permitido (referencia: <strong>Tema 29</strong>)</td>
+<td>Prevención</td>
+</tr>
+<tr>
+<td><strong>Copias de seguridad</strong></td>
+<td><strong>Permiten recuperar</strong> tras una infección</td>
+<td><strong>RESILIENCIA</strong>, no prevención</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Trampa de examen</strong><br><strong>«El backup previene la infección»</strong> → <strong>FALSO</strong>. Una copia de seguridad <strong>no impide</strong> que el malware entre ni que se ejecute: lo que hace es <strong>permitir recuperar</strong> la información después.<br>Formulación correcta: <strong>el backup es una medida de resiliencia que reduce el impacto</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="8-medios-reactivos" class="tema-h2">8. Medios reactivos: el ciclo de respuesta</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — LA SECUENCIA</strong><br><strong>DETECCIÓN → ANÁLISIS → CONTENCIÓN → ERRADICACIÓN → RECUPERACIÓN → LECCIONES APRENDIDAS.</strong><br>Seis fases en ese orden. Es una de las secuencias más preguntables del tema.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Fase</strong></th>
+<th><strong>Qué se hace</strong></th>
+</tr>
+<tr>
+<td><strong>1. Detección</strong></td>
+<td>Se identifica la actividad maliciosa, por alerta del antivirus, por comportamiento anómalo o por aviso de la persona usuaria</td>
+</tr>
+<tr>
+<td><strong>2. Análisis</strong></td>
+<td>Se determina qué ha ocurrido, su alcance y su gravedad</td>
+</tr>
+<tr>
+<td><strong>3. Contención</strong></td>
+<td>Se limita la propagación: <strong>aislamiento</strong> del equipo, <strong>cuarentena</strong> del objeto, corte de accesos</td>
+</tr>
+<tr>
+<td><strong>4. Erradicación</strong></td>
+<td>Se elimina o desinfecta lo que corresponda, y se cierra la vía de entrada</td>
+</tr>
+<tr>
+<td><strong>5. Recuperación</strong></td>
+<td>Se restablece el servicio y, si procede, se restauran datos desde copias (<strong>Tema 23</strong>)</td>
+</tr>
+<tr>
+<td><strong>6. Lecciones aprendidas</strong></td>
+<td>Se documenta el incidente y se corrigen las causas para evitar su repetición</td>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Detección</strong> por el antivirus, por indicadores de comportamiento o por comunicación de la persona usuaria.</li>
+<li><strong>Cuarentena</strong> del objeto sospechoso.</li>
+<li><strong>Eliminación o desinfección</strong> cuando proceda.</li>
+<li><strong>Aislamiento y contención</strong> del equipo afectado.</li>
+<li><strong>Gestión del incidente</strong> conforme al procedimiento (referencia: <strong>Tema 21</strong>).</li>
+<li><strong>Recuperación</strong> de información y servicio.</li>
+<li><strong>Notificación</strong> cuando corresponda (apartado 10).</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — por qué la contención va antes que la erradicación</strong><br>Primero se <strong>detiene la hemorragia</strong> y después se <strong>trata la herida</strong>. Intentar limpiar un equipo que sigue conectado y propagándose <strong>agrava el incidente</strong>: por eso <strong>contener precede a erradicar</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="9-cuarentena-y-aislamiento" class="tema-h2">9. Cuarentena y aislamiento</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — DOS COSAS DISTINTAS</strong><br><strong>CUARENTENA</strong> → <strong>aislar un ARCHIVO u objeto sospechoso</strong> para impedir que se ejecute o cause daño <strong>mientras se analiza</strong>.<br><strong>AISLAMIENTO</strong> → <strong>impedir que el EQUIPO infectado siga comunicándose</strong> con otros sistemas mientras se analiza.<br><strong>CUARENTENA → EL ARCHIVO. AISLAMIENTO → EL EQUIPO.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Trampa de examen — cuarentena NO es eliminación</strong><br>Poner un archivo en cuarentena <strong>no significa necesariamente borrarlo</strong>: se <strong>aparta y neutraliza</strong> para que no pueda ejecutarse, <strong>conservándolo</strong> mientras se analiza.<br>Esto es esencial ante un posible <strong>falso positivo</strong>: si el objeto se hubiera eliminado, no podría <strong>restaurarse</strong> un archivo legítimo detectado por error.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Formas de aislar un equipo</h4>
+<ul class="tema-lista">
+<li><strong>Desconexión física</strong> de la red.</li>
+<li><strong>Aislamiento lógico</strong> mediante configuración de red.</li>
+<li><strong>Herramientas centralizadas</strong> de gestión del puesto que permiten aislar remotamente.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Criterio práctico de CAU</strong><br>Aislar <strong>no</strong> equivale a <strong>apagar</strong>. Apagar un equipo puede <strong>destruir evidencia</strong> útil para el análisis. La actuación concreta —aislar, apagar o mantener bajo observación— debe seguir el <strong>procedimiento de la organización</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="10-notificacion" class="tema-h2">10. Notificación del incidente</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — formulación correcta</strong><br><strong>La notificación del incidente se realizará a los responsables u organismos correspondientes según el procedimiento aplicable y las obligaciones legales o sectoriales.</strong><br>Es <strong>incorrecto</strong> afirmar que <strong>«todo malware debe notificarse al CCN-CERT»</strong>: a quién y cuándo se notifica depende del <strong>tipo de entidad, del incidente y del marco aplicable</strong>.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Notificación interna</strong>: al responsable de seguridad y a quien determine el procedimiento de la organización.</li>
+<li><strong>Notificación externa</strong>: a los <strong>organismos que correspondan</strong> conforme a las obligaciones aplicables a la entidad.</li>
+<li>Si el incidente <strong>afecta a datos personales</strong>, <strong>puede existir obligación de notificación de brecha</strong> conforme al <strong>marco de protección de datos</strong>. Su desarrollo no corresponde a este tema.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br>La respuesta segura en un examen nunca es un destinatario único y automático, sino: <strong>«según el procedimiento aplicable y las obligaciones legales o sectoriales»</strong>, con la mención de que <strong>si hay datos personales puede activarse la notificación de brecha</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="11-tecnicas-de-deteccion" class="tema-h2">11. Técnicas de detección del antivirus</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — TRES TÉCNICAS DISTINTAS</strong><br><strong>FIRMAS</strong> → <strong>compara contra patrones conocidos</strong>. <strong>ANCLA: FIRMAS → CONOCIDO.</strong><br><strong>HEURÍSTICA</strong> → <strong>analiza características, reglas o patrones sospechosos</strong> para identificar posibles amenazas. <strong>ANCLA: HEURÍSTICA → SOSPECHOSO.</strong><br><strong>COMPORTAMIENTO</strong> → <strong>observa las acciones del proceso en ejecución</strong> para detectar actividad maliciosa. <strong>ANCLA: COMPORTAMIENTO → LO QUE HACE.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Técnica</strong></th>
+<th><strong>En qué se basa</strong></th>
+<th><strong>Fortaleza</strong></th>
+<th><strong>Limitación</strong></th>
+</tr>
+<tr>
+<td><strong>Firmas</strong></td>
+<td>Patrones de amenazas <strong>ya conocidas</strong></td>
+<td><strong>Muy eficaz frente a amenazas conocidas</strong>, con pocos errores</td>
+<td><strong>Puede no identificar amenazas sin firma previa</strong></td>
+</tr>
+<tr>
+<td><strong>Heurística</strong></td>
+<td><strong>Características, reglas o patrones sospechosos</strong></td>
+<td>Puede señalar amenazas <strong>sin firma conocida</strong></td>
+<td>No garantiza la detección</td>
+</tr>
+<tr>
+<td><strong>Comportamiento</strong></td>
+<td><strong>Acciones del proceso en ejecución</strong></td>
+<td>Detecta actividad maliciosa <strong>por lo que hace</strong>, no por lo que es</td>
+<td>Requiere que el proceso llegue a ejecutarse</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — heurística y comportamiento</strong><br><strong>No deben equipararse.</strong><br><strong>Heurística</strong> → examina <strong>cómo es</strong> el objeto: sus características, su estructura, sus patrones sospechosos.<br><strong>Comportamiento</strong> → examina <strong>qué hace</strong> el proceso <strong>mientras se ejecuta</strong>.<br>Son enfoques <strong>complementarios pero distintos</strong>, y los productos suelen combinarlos.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Ejemplo de detección por comportamiento</strong><br>Un proceso comienza a realizar <strong>cifrado masivo de archivos</strong> en poco tiempo. Ninguna firma lo identifica y su estructura puede no resultar llamativa, pero <strong>lo que está haciendo</strong> es característico del <strong>ransomware</strong>: la detección por comportamiento puede interrumpirlo.</th>
+</tr>
+</table></div>
+
+<h2 id="12-zero-day" class="tema-h2">12. Malware desconocido y zero-day</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — formulación exacta</strong><br><strong>Las técnicas heurísticas y de comportamiento pueden ayudar a detectar malware desconocido o sin firma previa, pero NO garantizan detectar todos los ataques zero-day.</strong><br>Es <strong>incorrecto</strong> afirmar que <strong>«la heurística detecta los zero-day»</strong>: puede <strong>ayudar</strong>, no <strong>garantizar</strong>.</th>
+</tr>
+</table></div>
+<p>De ahí la importancia de las <strong>capas</strong>: ninguna técnica de detección es suficiente por sí sola, y por eso la protección del puesto combina <strong>prevención, varias técnicas de detección y medidas de resiliencia</strong>.</p>
+
+<h2 id="13-falsos-positivos-y-negativos" class="tema-h2">13. Falsos positivos y falsos negativos</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>FALSO POSITIVO</strong> → <strong>archivo legítimo detectado como malicioso</strong>.<br><strong>FALSO NEGATIVO</strong> → <strong>malware que NO ha sido detectado</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th></th>
+<th><strong>Falso positivo</strong></th>
+<th><strong>Falso negativo</strong></th>
+</tr>
+<tr>
+<td><strong>Qué ocurre</strong></td>
+<td>Se detecta algo que <strong>era legítimo</strong></td>
+<td><strong>No</strong> se detecta algo que <strong>era malicioso</strong></td>
+</tr>
+<tr>
+<td><strong>Consecuencia típica</strong></td>
+<td>Interrupción del trabajo, bloqueo de una aplicación legítima</td>
+<td>Infección que pasa inadvertida</td>
+</tr>
+<tr>
+<td><strong>Actuación en el CAU</strong></td>
+<td>Revisar la detección y la cuarentena; valorar una <strong>exclusión controlada</strong> si se confirma</td>
+<td>Reforzar detección y revisar el incidente</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br><strong>POSITIVO = HUBO DETECCIÓN.</strong> Si además es <strong>falsa</strong>, es un <strong>falso positivo</strong>: se detectó lo que no debía.<br><strong>NEGATIVO = NO HUBO DETECCIÓN.</strong> Si es <strong>falsa</strong>, es un <strong>falso negativo</strong>: no se detectó lo que sí debía.<br>Fíjate primero en si <strong>hubo o no aviso</strong>, y después en si ese aviso <strong>acertó</strong>.</th>
+</tr>
+</table></div>
+<p>No cabe establecer reglas generales sobre qué técnica produce necesariamente más falsos positivos o más falsos negativos: <strong>depende del producto, de su configuración y del contexto</strong>.</p>
+
+<h2 id="14-edr" class="tema-h2">14. EDR</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>EDR = Endpoint Detection and Response</strong> — <strong>detección y respuesta en el endpoint</strong>.<br><strong>ANCLA: ANTIVIRUS → PROTECCIÓN. EDR → DETECCIÓN + INVESTIGACIÓN + RESPUESTA.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Capacidad</strong></th>
+<th><strong>En qué consiste</strong></th>
+</tr>
+<tr>
+<td><strong>Detección</strong></td>
+<td>Identificación de actividad maliciosa o sospechosa en el puesto</td>
+</tr>
+<tr>
+<td><strong>Investigación</strong></td>
+<td>Permite reconstruir qué ocurrió, cuándo y por qué vía</td>
+</tr>
+<tr>
+<td><strong>Correlación y visibilidad</strong></td>
+<td>Relaciona eventos de distintos equipos y ofrece visión de conjunto</td>
+</tr>
+<tr>
+<td><strong>Respuesta</strong></td>
+<td>Actuación sobre el incidente desde la propia herramienta</td>
+</tr>
+<tr>
+<td><strong>Aislamiento del endpoint</strong></td>
+<td>Corte remoto de las comunicaciones del equipo afectado</td>
+</tr>
+<tr>
+<td><strong>Detención de procesos</strong></td>
+<td>Interrupción de procesos maliciosos, <strong>según la solución</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Trampa de examen — EDR no es «un antivirus avanzado»</strong><br>La diferencia no es de <strong>grado</strong>, sino de <strong>función</strong>:<br><strong>Antivirus</strong> → orientado a <strong>PROTEGER</strong>: impedir que el código malicioso se ejecute.<br><strong>EDR</strong> → orientado a <strong>DETECTAR, INVESTIGAR Y RESPONDER</strong>: asume que algo puede haber ocurrido y aporta <strong>visibilidad y capacidad de actuación</strong>.<br>El EDR responde a la pregunta <strong>«¿qué ha pasado en este equipo y qué hago ahora?»</strong>, que el antivirus clásico no plantea.</th>
+</tr>
+</table></div>
+
+<h2 id="15-instalacion" class="tema-h2">15. Instalación del antivirus</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br>En una organización, el antivirus se instala mediante <strong>DESPLIEGUE CENTRALIZADO</strong>, no equipo por equipo ni a iniciativa de cada persona usuaria.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Objetivo del despliegue centralizado</strong></th>
+<th><strong>Por qué importa</strong></th>
+</tr>
+<tr>
+<td><strong>Cobertura homogénea</strong></td>
+<td>Todos los equipos protegidos, sin puestos olvidados</td>
+</tr>
+<tr>
+<td><strong>Configuración común</strong></td>
+<td>Mismas políticas y mismo nivel de protección</td>
+</tr>
+<tr>
+<td><strong>Control</strong></td>
+<td>La configuración no depende de decisiones individuales</td>
+</tr>
+<tr>
+<td><strong>Inventario y estado</strong></td>
+<td>Saber qué equipos están protegidos y en qué situación</td>
+</tr>
+<tr>
+<td><strong>Actualizaciones</strong></td>
+<td>Distribución controlada y verificable</td>
+</tr>
+</table></div>
+<p>Los mecanismos concretos de distribución de software y de gestión del puesto se estudian en los <strong>Temas 11 y 16</strong>; aquí interesa únicamente <strong>el criterio</strong>: la protección del puesto se gestiona <strong>corporativamente</strong>.</p>
+
+<h2 id="16-actualizacion" class="tema-h2">16. Actualización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Qué se actualiza</strong></th>
+<th><strong>Cómo</strong></th>
+</tr>
+<tr>
+<td><strong>Firmas e inteligencia de amenazas</strong></td>
+<td><strong>Actualización frecuente y automática</strong></td>
+</tr>
+<tr>
+<td><strong>Motor</strong> de detección</td>
+<td><strong>Actualizaciones periódicas</strong></td>
+</tr>
+<tr>
+<td><strong>Aplicación</strong></td>
+<td><strong>Actualización como cualquier otro software</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — firmas y motor</strong><br><strong>Actualizar las FIRMAS ≠ actualizar el MOTOR.</strong><br>Las <strong>firmas</strong> son los <strong>patrones</strong> de amenazas conocidas: cambian constantemente y se distribuyen de forma automática.<br>El <strong>motor</strong> es el <strong>componente que analiza</strong>: se actualiza con menor frecuencia y puede incorporar nuevas capacidades de detección.<br>Un equipo con firmas al día pero con un motor antiguo <strong>no está plenamente actualizado</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Cautela — no fijes frecuencias universales</strong><br>No debe escribirse <strong>«varias veces al día»</strong> como dato universal. La <strong>frecuencia exacta depende del producto y del proveedor</strong>.<br>Lo estable y preguntable: las <strong>firmas se actualizan de forma frecuente y automática</strong>; el <strong>motor</strong>, de forma <strong>periódica</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="17-mantenimiento" class="tema-h2">17. Mantenimiento</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Tarea</strong></th>
+<th><strong>En qué consiste</strong></th>
+</tr>
+<tr>
+<td><strong>Análisis periódicos</strong></td>
+<td>Exploraciones programadas complementarias a la protección en tiempo real</td>
+</tr>
+<tr>
+<td><strong>Revisión de la cuarentena</strong></td>
+<td>Comprobar qué se ha aislado, resolver falsos positivos y depurar</td>
+</tr>
+<tr>
+<td><strong>Control de exclusiones</strong></td>
+<td>Verificar que las exclusiones vigentes siguen siendo <strong>necesarias y justificadas</strong></td>
+</tr>
+<tr>
+<td><strong>Consola centralizada</strong></td>
+<td>Supervisar estado, cobertura, alertas y nivel de actualización del parque</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — las exclusiones son un riesgo</strong><br><strong>Las exclusiones deben ser MÍNIMAS y JUSTIFICADAS.</strong><br><strong>Una exclusión demasiado amplia puede crear un PUNTO CIEGO de seguridad</strong>: todo lo que quede dentro de ella deja de analizarse, incluido el malware que se aloje ahí.<br>Excluir «toda una unidad» o «una carpeta completa de trabajo» para resolver un problema puntual es una <strong>mala práctica</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Criterio práctico de CAU ante una exclusión</strong><br><strong>¿Es realmente necesaria? ¿Es lo más específica posible? ¿Está documentada y autorizada? ¿Tiene fecha de revisión?</strong><br>Una exclusión correcta apunta a <strong>un elemento concreto</strong>, no a un ámbito amplio, y se <strong>revisa periódicamente</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="18-suites" class="tema-h2">18. Paquetes de seguridad integral</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>Paquete o suite de seguridad integral</strong> → <strong>conjunto de soluciones que combinan varias capacidades de protección del puesto de trabajo (endpoint)</strong> en un producto gestionado de forma unificada.</th>
+</tr>
+</table></div>
+<p>Pueden incluir, <strong>según el producto</strong>:</p>
+<ul class="tema-lista">
+<li><strong>Antivirus / antimalware</strong>.</li>
+<li><strong>Cortafuegos</strong> del puesto.</li>
+<li><strong>Antispam</strong>.</li>
+<li><strong>Gestor de contraseñas</strong>.</li>
+<li><strong>VPN</strong>.</li>
+<li><strong>Protección de navegación y antiphishing</strong>.</li>
+<li><strong>Protección web</strong>.</li>
+<li><strong>Copia de seguridad en la nube</strong>.</li>
+<li><strong>Otras funciones</strong> según el fabricante y la licencia.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Trampa de examen — no todas incluyen lo mismo</strong><br><strong>Es incorrecto afirmar que todas las suites contienen siempre exactamente los mismos componentes.</strong> La composición <strong>varía según el producto, la edición y la licencia contratada</strong>.<br>Lo estable y preguntable es la <strong>idea</strong>: una suite <strong>combina varias capacidades de protección del endpoint</strong> bajo una gestión unificada. La <strong>lista concreta</strong> no es materia memorizable.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Ventaja e inconveniente</strong><br><strong>Ventaja</strong>: <strong>gestión unificada</strong>, configuración coherente y una sola consola.<br><strong>Inconveniente</strong>: <strong>dependencia de un único proveedor</strong> y presencia de funciones que la organización quizá no necesite.</th>
+</tr>
+</table></div>
+
+<h2 id="19-entorno-administracion" class="tema-h2">19. La protección del puesto en la Administración Pública</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — concepto esencial</strong><br>En una Administración Pública, la <strong>solución de seguridad del puesto se despliega y gestiona corporativamente</strong>.<br><strong>No queda normalmente a elección individual de cada persona usuaria</strong>: ni qué producto se instala, ni cómo se configura, ni si se desactiva.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Política de seguridad</strong>: la solución responde a lo que la organización ha aprobado, no a preferencias personales.</li>
+<li><strong>Mínimo privilegio</strong>: las personas usuarias no disponen normalmente de permisos para desinstalar o desactivar la protección.</li>
+<li><strong>Administración centralizada</strong>: despliegue, configuración, actualización y supervisión desde una <strong>consola común</strong>.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Consecuencia práctica en el CAU</strong><br>Ante una petición del tipo <strong>«desactívame el antivirus, que no me deja instalar este programa»</strong>, la respuesta correcta <strong>no</strong> es desactivar la protección, sino <strong>analizar la detección</strong>, verificar la legitimidad del software y, si procede, tramitar una <strong>exclusión controlada y justificada</strong> conforme al procedimiento.</th>
+</tr>
+</table></div>
+<p>El marco normativo que sustenta esta gestión corporativa —política de seguridad, medidas y responsables— corresponde al <strong>Tema 21</strong>.</p>
+
+<h2 id="20-anclas-de-memoria" class="tema-h2">20. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>MALWARE → FAMILIA · VIRUS → UN TIPO CONCRETO.</strong></li>
+<li><strong>VIRUS → ANFITRIÓN · GUSANO → SE PROPAGA SOLO · TROYANO → ENGAÑO.</strong></li>
+<li><strong>SPYWARE → ESPÍA · KEYLOGGER → TECLAS.</strong></li>
+<li><strong>RANSOMWARE → SECUESTRA O CIFRA + EXTORSIONA.</strong></li>
+<li><strong>ROOTKIT → OCULTA</strong> (no necesariamente en el kernel).</li>
+<li><strong>BOTNET → ZOMBIS</strong>: red de dispositivos controlados remotamente.</li>
+<li><strong>SPEAR → DIRIGIDO · SMISHING → SMS · VISHING → VOZ.</strong></li>
+<li><strong>PREVENCIÓN → menos probabilidad · REACCIÓN → contener y erradicar · RESILIENCIA → recuperar.</strong> <strong>El backup es resiliencia, no prevención.</strong></li>
+<li><strong>DETECCIÓN → ANÁLISIS → CONTENCIÓN → ERRADICACIÓN → RECUPERACIÓN → LECCIONES APRENDIDAS.</strong></li>
+<li><strong>CUARENTENA → EL ARCHIVO · AISLAMIENTO → EL EQUIPO.</strong> <strong>Cuarentena no es eliminación.</strong></li>
+<li><strong>FIRMAS → CONOCIDO · HEURÍSTICA → SOSPECHOSO · COMPORTAMIENTO → LO QUE HACE.</strong></li>
+<li><strong>FALSO POSITIVO → detectó lo legítimo · FALSO NEGATIVO → no detectó lo malicioso.</strong></li>
+<li><strong>ANTIVIRUS → PROTECCIÓN · EDR → DETECTA + INVESTIGA + RESPONDE.</strong></li>
+<li><strong>EXCLUSIONES → MÍNIMAS Y JUSTIFICADAS</strong> (riesgo de punto ciego).</li>
 </ul>
 
-<h2 id="8-conceptos-clave" class="tema-h2">8. Conceptos clave</h2>
+<h2 id="21-no-confundir" class="tema-h2">21. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto A</strong></th>
+<th><strong>Concepto B</strong></th>
+<th><strong>Diferencia clave</strong></th>
+</tr>
+<tr>
+<td><strong>Malware</strong>: familia</td>
+<td><strong>Virus</strong>: un tipo concreto</td>
+<td>Todo virus es malware; no todo malware es virus</td>
+</tr>
+<tr>
+<td><strong>Virus</strong>: necesita anfitrión</td>
+<td><strong>Gusano</strong>: se propaga autónomamente</td>
+<td>Dependencia frente a autorreplicación</td>
+</tr>
+<tr>
+<td><strong>Gusano</strong>: autorreplicación</td>
+<td><strong>Troyano</strong>: engaño</td>
+<td>El troyano no se define por reproducirse</td>
+</tr>
+<tr>
+<td><strong>Spyware</strong>: recopila información</td>
+<td><strong>Keylogger</strong>: registra pulsaciones</td>
+<td>El keylogger es un subtipo o herramienta específica</td>
+</tr>
+<tr>
+<td><strong>Ransomware</strong>: priva del acceso y extorsiona</td>
+<td><strong>Spyware</strong>: observa sin ser notado</td>
+<td>Uno se hace notar; el otro busca pasar inadvertido</td>
+</tr>
+<tr>
+<td><strong>Rootkit</strong>: técnica de ocultación</td>
+<td><strong>Antivirus</strong>: herramienta de protección</td>
+<td>El rootkit existe precisamente para eludir la detección</td>
+</tr>
+<tr>
+<td><strong>Botnet</strong>: red de dispositivos controlados</td>
+<td><strong>Malware individual</strong></td>
+<td>Estructura colectiva frente a pieza de software</td>
+</tr>
+<tr>
+<td><strong>Preventivo</strong>: reduce probabilidad</td>
+<td><strong>Reactivo</strong>: actúa tras el hecho · <strong>Resiliencia</strong>: reduce impacto</td>
+<td>Tres categorías, no dos</td>
+</tr>
+<tr>
+<td><strong>Cuarentena</strong>: aparta y neutraliza</td>
+<td><strong>Eliminación</strong>: borra</td>
+<td>La cuarentena conserva el objeto para poder restaurarlo</td>
+</tr>
+<tr>
+<td><strong>Cuarentena</strong>: sobre el archivo</td>
+<td><strong>Aislamiento</strong>: sobre el equipo</td>
+<td>Objeto frente a máquina</td>
+</tr>
+<tr>
+<td><strong>Firmas</strong>: patrones conocidos</td>
+<td><strong>Heurística</strong>: características sospechosas</td>
+<td>Lo ya catalogado frente a lo que parece sospechoso</td>
+</tr>
+<tr>
+<td><strong>Heurística</strong>: cómo es el objeto</td>
+<td><strong>Comportamiento</strong>: qué hace al ejecutarse</td>
+<td>No son sinónimos ni técnicas equivalentes</td>
+</tr>
+<tr>
+<td><strong>Falso positivo</strong>: legítimo detectado</td>
+<td><strong>Falso negativo</strong>: malicioso no detectado</td>
+<td>Hubo aviso erróneo frente a no hubo aviso</td>
+</tr>
+<tr>
+<td><strong>Antivirus</strong>: protección</td>
+<td><strong>EDR</strong>: detección, investigación y respuesta</td>
+<td>Diferencia de función, no de grado</td>
+</tr>
+<tr>
+<td><strong>Backup</strong>: permite recuperar</td>
+<td><strong>Antivirus</strong>: impide la ejecución</td>
+<td>El backup no previene la infección</td>
+</tr>
+<tr>
+<td><strong>Firmas</strong>: se actualizan constantemente</td>
+<td><strong>Motor</strong>: se actualiza periódicamente</td>
+<td>Son actualizaciones distintas</td>
+</tr>
+</table></div>
+
+<h2 id="22-trampas-de-examen" class="tema-h2">22. Posibles trampas de examen</h2>
 <ul class="tema-lista">
-<li><strong>Malware ≠ virus</strong> (el virus es un tipo).</li>
-<li><strong>Virus / gusano / troyano</strong> y su mecanismo de propagación.</li>
-<li><strong>Spyware, keylogger, ransomware, adware, rootkit, botnet (zombis, DDoS)</strong>.</li>
-<li><strong>Ingeniería social; phishing / spear phishing / smishing / vishing</strong>.</li>
-<li><strong>Medios preventivos vs. reactivos</strong>; cuarentena; aislamiento del equipo.</li>
-<li><strong>Detección por firmas vs. heurística</strong>; zero-day; <strong>falso positivo vs. falso negativo</strong>.</li>
-<li><strong>EDR</strong> (detección y respuesta en el endpoint).</li>
-<li><strong>Suites de seguridad integral</strong> y gestión centralizada corporativa.</li>
-<li>Relación con la <strong>regla 3-2-1-1-0</strong> (Tema 23) frente al ransomware.</li>
+<li><strong>«Malware y virus son sinónimos»</strong> — falso: el <strong>virus es un tipo de malware</strong>.</li>
+<li><strong>«El ransomware es un virus»</strong> — falso: es <strong>malware</strong>, pero no virus.</li>
+<li><strong>«El virus se propaga solo por la red»</strong> — falso: eso es el <strong>gusano</strong>; el virus necesita <strong>anfitrión</strong>.</li>
+<li><strong>«El gusano necesita un archivo anfitrión»</strong> — falso: se caracteriza por la <strong>autorreplicación</strong>.</li>
+<li><strong>«El troyano se replica automáticamente»</strong> — falso: se define por el <strong>engaño</strong>.</li>
+<li><strong>«El spyware cifra los archivos y pide un rescate»</strong> — falso: eso es el <strong>ransomware</strong>; el spyware <strong>espía</strong>.</li>
+<li><strong>«El keylogger es cualquier software de vigilancia»</strong> — impreciso: es el que <strong>registra las pulsaciones de teclado</strong>.</li>
+<li><strong>«El rootkit opera siempre a nivel de kernel»</strong> — falso: se define por su <strong>finalidad de ocultación</strong>, no por el nivel técnico.</li>
+<li><strong>«La botnet es un tipo de virus»</strong> — falso: es una <strong>red de dispositivos comprometidos controlados remotamente</strong>.</li>
+<li><strong>«El backup previene la infección»</strong> — falso: es una medida de <strong>resiliencia</strong>, no de prevención.</li>
+<li><strong>«Poner en cuarentena es eliminar»</strong> — falso: se <strong>aparta y neutraliza</strong> conservando el objeto.</li>
+<li><strong>«Aislar el equipo y poner en cuarentena son lo mismo»</strong> — falso: <strong>equipo</strong> frente a <strong>archivo</strong>.</li>
+<li><strong>«Primero se limpia y luego se aísla»</strong> — falso: la <strong>contención precede a la erradicación</strong>.</li>
+<li><strong>«Todo malware debe notificarse al CCN-CERT»</strong> — falso: se notifica <strong>según el procedimiento aplicable y las obligaciones legales o sectoriales</strong>.</li>
+<li><strong>«La heurística detecta los zero-day»</strong> — falso: <strong>puede ayudar</strong> a detectar malware desconocido, pero <strong>no garantiza</strong> detectar todos los zero-day.</li>
+<li><strong>«Heurística y análisis de comportamiento son lo mismo»</strong> — falso: <strong>cómo es</strong> frente a <strong>qué hace</strong>.</li>
+<li><strong>«Falso positivo es que no se detecte el malware»</strong> — falso: eso es el <strong>falso negativo</strong>.</li>
+<li><strong>«El EDR es un antivirus avanzado»</strong> — falso: aporta <strong>detección, investigación y respuesta</strong>; es una función distinta.</li>
+<li><strong>«Actualizar el antivirus es actualizar las firmas»</strong> — incompleto: también se actualizan el <strong>motor</strong> y la <strong>aplicación</strong>.</li>
+<li><strong>«Las firmas se actualizan varias veces al día»</strong> — no como dato universal: la frecuencia <strong>depende del producto y del proveedor</strong>.</li>
+<li><strong>«Una exclusión amplia es una solución válida»</strong> — falso: puede crear un <strong>punto ciego</strong>; deben ser <strong>mínimas y justificadas</strong>.</li>
+<li><strong>«Todas las suites incluyen los mismos componentes»</strong> — falso: la composición <strong>varía según el producto</strong>.</li>
+<li><strong>«Cada usuario elige su antivirus»</strong> — falso en el ámbito administrativo: se <strong>despliega y gestiona corporativamente</strong>.</li>
+<li><strong>Colar contenido ajeno</strong>: ENS (T21), amenazas y vulnerabilidades (T22), copias (T23), criptografía (T24) y cortafuegos o VPN (T29) no se desarrollan aquí.</li>
 </ul>
 
-<h2 id="9-posibles-puntos-de-examen" class="tema-h2">9. Posibles puntos de examen</h2>
+<h2 id="23-preguntas-tipo-test" class="tema-h2">23. Posibles preguntas tipo test</h2>
 <ul class="tema-lista">
-<li>Distinguir <strong>virus, gusano y troyano</strong> por su forma de propagación — la pregunta estrella del tema.</li>
-<li>Identificar el tipo de malware descrito en un supuesto (cifra archivos → ransomware; registra teclas → keylogger; oculta accesos → rootkit; red de zombis → botnet).</li>
-<li>La distinción terminológica <strong>malware vs. virus</strong>.</li>
-<li>Clasificar medidas como <strong>preventivas o reactivas</strong>.</li>
-<li>Qué es la <strong>cuarentena</strong> y por qué se aísla de la red un equipo infectado.</li>
-<li>Diferencia entre detección <strong>por firmas y heurística</strong>, y cuál detecta el zero-day.</li>
-<li><strong>Falso positivo vs. falso negativo</strong>.</li>
-<li>Qué aporta un <strong>EDR</strong> frente al antivirus clásico.</li>
-<li>Reconocer un <strong>phishing</strong> y sus variantes (smishing, vishing, spear phishing).</li>
-<li>Qué componentes integra una <strong>suite de seguridad integral</strong> del puesto.</li>
+<li><strong>Definición</strong> de malware y relación con el concepto de virus.</li>
+<li>¿Es correcto afirmar que malware y virus son sinónimos?</li>
+<li><strong>Descripción → tipo</strong>: «se adjunta a un programa anfitrión».</li>
+<li><strong>Descripción → tipo</strong>: «se replica y propaga por la red sin necesidad de alojarse en otro archivo».</li>
+<li><strong>Descripción → tipo</strong>: «se presenta como una utilidad legítima y oculta funciones maliciosas».</li>
+<li><strong>Descripción → tipo</strong>: «registra todo lo que se teclea».</li>
+<li><strong>Descripción → tipo</strong>: «cifra los archivos y exige un pago».</li>
+<li><strong>Descripción → tipo</strong>: «oculta procesos y accesos para dificultar la detección».</li>
+<li><strong>Descripción → tipo</strong>: «muchos equipos infectados obedecen a un mando remoto».</li>
+<li>¿Opera un rootkit necesariamente a nivel de kernel?</li>
+<li><strong>Definición</strong> de ingeniería social y ejemplos de acciones que persigue.</li>
+<li><strong>Variante de phishing</strong>: dirigido a una persona concreta / por SMS / por llamada de voz.</li>
+<li>Indicadores que permiten sospechar de un correo de phishing.</li>
+<li>Actuación correcta ante un correo sospechoso que solicita credenciales.</li>
+<li>¿Puede todo CAU bloquear directamente un dominio?</li>
+<li><strong>Clasificar</strong> una medida como preventiva, reactiva o de resiliencia: actualizaciones · copias · cuarentena · formación · aislamiento · mínimo privilegio.</li>
+<li>¿Previene el backup la infección?</li>
+<li><strong>Orden</strong> correcto del ciclo de respuesta ante un incidente.</li>
+<li>¿Qué fase precede a la erradicación?</li>
+<li>Diferencia entre <strong>cuarentena</strong> y <strong>aislamiento</strong>.</li>
+<li>¿Implica la cuarentena la eliminación del archivo?</li>
+<li>¿A quién debe notificarse un incidente de malware?</li>
+<li><strong>Técnica → base</strong>: firmas · heurística · comportamiento.</li>
+<li>¿Qué técnica es muy eficaz frente a amenazas conocidas y cuál es su limitación?</li>
+<li>¿Garantizan las técnicas heurísticas la detección de todos los zero-day?</li>
+<li><strong>Definición</strong> de falso positivo y de falso negativo.</li>
+<li>Una aplicación legítima es bloqueada: ¿qué tipo de error es?</li>
+<li>¿Qué aporta un <strong>EDR</strong> respecto de un antivirus tradicional?</li>
+<li>¿Por qué se despliega el antivirus de forma <strong>centralizada</strong> en una organización?</li>
+<li>Diferencia entre actualizar las <strong>firmas</strong> y actualizar el <strong>motor</strong>.</li>
+<li>¿Qué riesgo comporta una <strong>exclusión</strong> demasiado amplia?</li>
+<li>¿Contienen todas las <strong>suites</strong> los mismos componentes?</li>
+</ul>
+
+<h2 id="24-preguntas-cortas" class="tema-h2">24. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<h4 class="tema-h4">1. Defina malware</h4>
+<ul class="tema-lista">
+<li>Definición: software malicioso diseñado para realizar acciones no autorizadas o perjudiciales.</li>
+<li>Relación con el virus: el virus es un tipo concreto de malware, no un sinónimo.</li>
+<li>Cierre: enumeración de los principales tipos por su rasgo distintivo.</li>
+</ul>
+<h4 class="tema-h4">2. Diferencie virus, gusano y troyano</h4>
+<ul class="tema-lista">
+<li>Virus: se inserta o adjunta a un archivo o programa anfitrión y necesita un mecanismo de ejecución.</li>
+<li>Gusano: se replica y propaga autónomamente, especialmente por redes.</li>
+<li>Troyano: se presenta como legítimo o útil y oculta funcionalidad maliciosa.</li>
+<li>Cierre: anfitrión, autorreplicación y engaño son los tres rasgos que los distinguen.</li>
+</ul>
+<h4 class="tema-h4">3. Explique el spyware y el keylogger</h4>
+<ul class="tema-lista">
+<li>Spyware: recopila información o monitoriza la actividad sin autorización ni conocimiento.</li>
+<li>Keylogger: subtipo o herramienta que registra las pulsaciones de teclado.</li>
+<li>Cierre: riesgo específico de captura de credenciales y necesidad de cambiarlas desde un equipo limpio.</li>
+</ul>
+<h4 class="tema-h4">4. Explique el ransomware</h4>
+<ul class="tema-lista">
+<li>Definición: bloquea o cifra datos o sistemas y busca extorsionar para recuperar el acceso.</li>
+<li>Matiz: no todos utilizan exactamente el mismo mecanismo.</li>
+<li>Cierre: la defensa frente a sus consecuencias son las copias offline o inmutables, que no evitan la infección pero permiten recuperarse.</li>
+</ul>
+<h4 class="tema-h4">5. Explique los medios preventivos</h4>
+<ul class="tema-lista">
+<li>Concepto: reducir la probabilidad de infección.</li>
+<li>Medidas: actualizaciones, antivirus, formación, mínimo privilegio, control de dispositivos, filtrado de correo y web, cortafuegos.</li>
+<li>Cierre: distinguir prevención de resiliencia — el backup reduce el impacto, no la probabilidad.</li>
+</ul>
+<h4 class="tema-h4">6. Explique el procedimiento de respuesta ante una infección</h4>
+<ul class="tema-lista">
+<li>Secuencia: detección, análisis, contención, erradicación, recuperación y lecciones aprendidas.</li>
+<li>Medidas asociadas: cuarentena del objeto, aislamiento del equipo, gestión del incidente y restauración desde copias.</li>
+<li>Cierre: la notificación se realiza según el procedimiento aplicable y las obligaciones legales o sectoriales.</li>
+</ul>
+<h4 class="tema-h4">7. Diferencie firmas, heurística y comportamiento</h4>
+<ul class="tema-lista">
+<li>Firmas: comparación con patrones conocidos; muy eficaz frente a lo conocido, pero puede no identificar amenazas sin firma previa.</li>
+<li>Heurística: análisis de características, reglas o patrones sospechosos.</li>
+<li>Comportamiento: observación de las acciones del proceso en ejecución, por ejemplo un cifrado masivo de archivos.</li>
+<li>Cierre: heurística y comportamiento no son equivalentes, y ninguna garantiza detectar todos los zero-day.</li>
+</ul>
+<h4 class="tema-h4">8. Diferencie falso positivo y falso negativo</h4>
+<ul class="tema-lista">
+<li>Falso positivo: archivo legítimo detectado como malicioso.</li>
+<li>Falso negativo: malware que no ha sido detectado.</li>
+<li>Cierre: consecuencias y actuación del CAU en cada caso; no cabe atribuir a una técnica concreta necesariamente más de uno u otro.</li>
+</ul>
+<h4 class="tema-h4">9. Explique el EDR</h4>
+<ul class="tema-lista">
+<li>Qué es: Endpoint Detection and Response.</li>
+<li>Capacidades: detección, investigación, correlación y visibilidad, respuesta, aislamiento del endpoint y detención de procesos según la solución.</li>
+<li>Cierre: no es un antivirus avanzado; el antivirus protege, el EDR detecta, investiga y responde.</li>
+</ul>
+<h4 class="tema-h4">10. Explique el despliegue y mantenimiento centralizado del antivirus</h4>
+<ul class="tema-lista">
+<li>Instalación: despliegue centralizado para lograr cobertura homogénea, configuración común, control, inventario y actualizaciones.</li>
+<li>Actualización: firmas de forma frecuente y automática, motor de forma periódica y aplicación como cualquier software.</li>
+<li>Mantenimiento: análisis periódicos, revisión de cuarentena, control de exclusiones y consola centralizada.</li>
+<li>Cierre: las exclusiones deben ser mínimas y justificadas para no crear puntos ciegos; en la Administración la solución no queda a elección individual.</li>
+</ul>
+
+<h2 id="25-supuestos-practicos" class="tema-h2">25. Supuestos prácticos</h2>
+<h4 class="tema-h4">Caso 1 — El antivirus detecta un archivo</h4>
+<p><strong>Escenario</strong>: el antivirus de un puesto alerta de un archivo detectado y lo pone en <strong>cuarentena</strong>. La persona usuaria pide que se le devuelva porque «lo necesita para trabajar».</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué significa que esté en cuarentena?</strong> Que ha sido <strong>apartado y neutralizado</strong> para que no pueda ejecutarse <strong>mientras se analiza</strong>. <strong>No ha sido necesariamente eliminado.</strong></li>
+<li><strong>b) ¿Qué se comprueba?</strong> El <strong>origen</strong> del archivo, si corresponde a <strong>software legítimo y autorizado</strong> y qué motivó la detección.</li>
+<li><strong>c) ¿Puede ser un falso positivo?</strong> Sí: un <strong>falso positivo</strong> es un <strong>archivo legítimo detectado como malicioso</strong>. Precisamente porque la cuarentena conserva el objeto, es posible <strong>restaurarlo</strong> si se confirma.</li>
+<li><strong>d) ¿Qué no procede?</strong> <strong>Desactivar el antivirus</strong> ni crear una <strong>exclusión amplia</strong> para salir del paso: si tras el análisis procede una exclusión, debe ser <strong>mínima, específica, justificada y documentada</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 2 — Equipo con comportamiento sospechoso</h4>
+<p><strong>Escenario</strong>: un equipo presenta <strong>lentitud extrema, conexiones inusuales y procesos desconocidos</strong>, sin que el antivirus haya emitido alerta.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Cuál es la primera actuación?</strong> <strong>Contener</strong>: <strong>aislar el equipo</strong> para impedir que siga comunicándose con otros sistemas mientras se analiza.</li>
+<li><strong>b) ¿Aislar es apagar?</strong> <strong>No.</strong> Apagar puede <strong>destruir evidencia</strong>. El aislamiento puede realizarse por <strong>desconexión física, aislamiento lógico o herramientas centralizadas</strong>, según el procedimiento.</li>
+<li><strong>c) ¿Qué explica que el antivirus no alertara?</strong> Puede tratarse de un <strong>falso negativo</strong>: malware <strong>no detectado</strong>, quizá <strong>sin firma previa</strong> o con técnicas de <strong>ocultación</strong> propias de un <strong>rootkit</strong>.</li>
+<li><strong>d) ¿Qué secuencia se sigue?</strong> <strong>Detección → análisis → contención → erradicación → recuperación → lecciones aprendidas</strong>, con la <strong>notificación</strong> que corresponda según el procedimiento aplicable.</li>
+</ul>
+<h4 class="tema-h4">Caso 3 — Muchos equipos con firmas desactualizadas</h4>
+<p><strong>Escenario</strong>: la consola muestra que <strong>un grupo amplio de puestos</strong> tiene las <strong>firmas desactualizadas</strong> desde hace días.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué se comprueba primero?</strong> El <strong>despliegue centralizado</strong> y el <strong>mecanismo de distribución de actualizaciones</strong>: si los equipos comunican con la consola y reciben las firmas.</li>
+<li><strong>b) ¿Es un problema equipo por equipo?</strong> Que afecte a <strong>muchos</strong> apunta a una causa <strong>común</strong>: fallo del servidor de distribución, conectividad, política mal aplicada o agentes que no reportan.</li>
+<li><strong>c) ¿Qué se revisa además de las firmas?</strong> El <strong>motor</strong> y la <strong>versión de la aplicación</strong>: son <strong>actualizaciones distintas</strong>, y unas firmas al día no garantizan un motor actualizado.</li>
+<li><strong>d) ¿Qué riesgo comporta?</strong> Menor capacidad de detección de amenazas <strong>conocidas</strong>, que es precisamente el punto fuerte de la detección por <strong>firmas</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 4 — Correo que dice ser de «Informática»</h4>
+<p><strong>Escenario</strong>: una persona usuaria comunica al CAU que ha recibido un correo del «<strong>Servicio de Informática</strong>» solicitando que valide su cuenta introduciendo usuario y contraseña, advirtiendo de un bloqueo inminente.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Ante qué estamos?</strong> Un caso de <strong>phishing</strong>: <strong>suplantación</strong> de una entidad para conseguir información. Es <strong>ingeniería social</strong>.</li>
+<li><strong>b) ¿Qué indicadores lo delatan?</strong> <strong>Dominio sospechoso</strong>, <strong>urgencia</strong>, <strong>enlace distinto al texto</strong>, <strong>errores</strong> y <strong>petición inusual</strong> — el servicio de informática <strong>no solicita credenciales por correo</strong>.</li>
+<li><strong>c) ¿Cómo se actúa?</strong> <strong>No pulsar</strong>, <strong>no proporcionar credenciales</strong>, <strong>reportar al CAU o a seguridad</strong>, <strong>seguir el procedimiento corporativo</strong> y <strong>bloquear indicadores cuando proceda</strong>, por quien tenga competencia.</li>
+<li><strong>d) ¿Y si ya introdujo la contraseña?</strong> Se trata como <strong>posible compromiso de credenciales</strong>: <strong>cambio inmediato</strong> de contraseña, revisión de accesos y <strong>comunicación al área de seguridad</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 5 — Ransomware que cifra recursos compartidos</h4>
+<p><strong>Escenario</strong>: se detecta que <strong>archivos de una unidad compartida están siendo cifrados</strong> y aparece una nota exigiendo un pago.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué tipo de malware es?</strong> <strong>Ransomware</strong>: <strong>bloquea o cifra</strong> datos y <strong>extorsiona</strong> para devolver el acceso.</li>
+<li><strong>b) ¿Cuál es la prioridad inmediata?</strong> La <strong>contención</strong>: <strong>aislar</strong> los equipos implicados y cortar el acceso a los recursos afectados para <strong>frenar la propagación</strong>.</li>
+<li><strong>c) ¿Cómo se recupera?</strong> Mediante <strong>restauración desde copias</strong>, preferentemente <strong>offline o inmutables</strong>, para que el propio incidente no las haya alcanzado (<strong>Tema 23</strong>).</li>
+<li><strong>d) ¿Qué más corresponde?</strong> <strong>Gestión del incidente</strong> conforme al procedimiento y <strong>notificación</strong> a los responsables u organismos que correspondan según las obligaciones aplicables; si hay <strong>datos personales</strong>, puede activarse la <strong>notificación de brecha</strong>.</li>
+<li><strong>e) ¿Habría evitado el backup la infección?</strong> <strong>No</strong>: el backup es <strong>resiliencia</strong>, permite <strong>recuperarse</strong>, pero <strong>no impide</strong> que el malware entre.</li>
+</ul>
+<h4 class="tema-h4">Caso 6 — El antivirus no detecta un comportamiento nuevo</h4>
+<p><strong>Escenario</strong>: un proceso desconocido comienza a <strong>modificar y cifrar archivos masivamente</strong> y el antivirus, basado principalmente en firmas, <strong>no lo identifica</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Por qué falla la detección por firmas?</strong> Porque <strong>compara contra patrones conocidos</strong> y <strong>puede no identificar amenazas sin firma previa</strong>.</li>
+<li><strong>b) ¿Qué técnica podría haberlo detectado?</strong> La <strong>detección por comportamiento</strong>, que observa <strong>lo que hace el proceso en ejecución</strong> — el <strong>cifrado masivo de archivos</strong> es un indicador característico.</li>
+<li><strong>c) ¿Y la heurística?</strong> Analiza <strong>características, reglas o patrones sospechosos</strong> del objeto: <strong>no es lo mismo</strong> que el análisis de comportamiento, aunque ambas puedan ayudar frente a amenazas sin firma.</li>
+<li><strong>d) ¿Garantizan detectar cualquier zero-day?</strong> <strong>No.</strong> Las técnicas heurísticas y de comportamiento <strong>pueden ayudar</strong> a detectar malware desconocido, pero <strong>no garantizan detectar todos los ataques zero-day</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 7 — Aplicación legítima bloqueada</h4>
+<p><strong>Escenario</strong>: una <strong>aplicación de gestión corporativa</strong>, instalada y autorizada, deja de funcionar porque el antivirus <strong>bloquea uno de sus componentes</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué error puede ser?</strong> Un <strong>falso positivo</strong>: un elemento <strong>legítimo detectado como malicioso</strong>.</li>
+<li><strong>b) ¿Cómo se comprueba?</strong> Revisando la <strong>detección</strong> y la <strong>cuarentena</strong>, confirmando el <strong>origen y la autorización</strong> del software y consultando la información del producto.</li>
+<li><strong>c) ¿Qué solución procede?</strong> Si se confirma, una <strong>exclusión controlada</strong>: <strong>lo más específica posible</strong>, <strong>justificada</strong>, <strong>documentada</strong> y <strong>con revisión</strong>.</li>
+<li><strong>d) ¿Qué no debe hacerse?</strong> <strong>Desactivar el antivirus</strong> o excluir <strong>una carpeta o unidad completa</strong>: sería crear un <strong>punto ciego de seguridad</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 8 — Exclusión demasiado amplia</h4>
+<p><strong>Escenario</strong>: al revisar la configuración se descubre que existe una <strong>exclusión de una carpeta completa de trabajo compartida</strong>, creada tiempo atrás para resolver una incidencia puntual.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Cuál es el problema?</strong> Que constituye un <strong>punto ciego de seguridad</strong>: <strong>todo</strong> lo que se aloje en esa carpeta <strong>deja de analizarse</strong>, incluido el malware.</li>
+<li><strong>b) ¿Cuál es el criterio correcto?</strong> Las exclusiones deben ser <strong>mínimas y justificadas</strong>, y apuntar a <strong>elementos concretos</strong>, no a ámbitos amplios.</li>
+<li><strong>c) ¿Qué agrava el caso?</strong> Que sea una <strong>carpeta compartida</strong>: el punto ciego afecta a <strong>múltiples personas usuarias</strong> y puede convertirse en vía de propagación.</li>
+<li><strong>d) ¿Qué actuación procede?</strong> <strong>Revisar si sigue siendo necesaria</strong>, <strong>acotarla</strong> al mínimo imprescindible o <strong>retirarla</strong>, <strong>documentar</strong> la decisión y establecer una <strong>revisión periódica</strong> de las exclusiones vigentes.</li>
+</ul>
+
+<h2 id="26-matriz-de-memorizacion" class="tema-h2">26. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Lo que debo recordar</strong></th>
+</tr>
+<tr>
+<td><strong>Malware</strong></td>
+<td>Software malicioso para acciones no autorizadas o perjudiciales; es la familia, no un sinónimo de virus</td>
+</tr>
+<tr>
+<td><strong>Virus</strong></td>
+<td>Se inserta o adjunta a un anfitrión y necesita un mecanismo de ejecución</td>
+</tr>
+<tr>
+<td><strong>Gusano</strong></td>
+<td>Se replica y propaga autónomamente, especialmente por redes</td>
+</tr>
+<tr>
+<td><strong>Troyano</strong></td>
+<td>Se presenta como legítimo o útil y oculta funcionalidad maliciosa</td>
+</tr>
+<tr>
+<td><strong>Spyware</strong></td>
+<td>Recopila información o monitoriza sin autorización ni conocimiento</td>
+</tr>
+<tr>
+<td><strong>Keylogger</strong></td>
+<td>Registra las pulsaciones de teclado</td>
+</tr>
+<tr>
+<td><strong>Ransomware</strong></td>
+<td>Bloquea o cifra datos o sistemas y extorsiona para devolver el acceso</td>
+</tr>
+<tr>
+<td><strong>Adware</strong></td>
+<td>Muestra publicidad no deseada</td>
+</tr>
+<tr>
+<td><strong>Rootkit</strong></td>
+<td>Técnicas o herramientas para ocultar malware, procesos, archivos o accesos; no implica necesariamente el kernel</td>
+</tr>
+<tr>
+<td><strong>Botnet</strong></td>
+<td>Red de dispositivos comprometidos controlados remotamente</td>
+</tr>
+<tr>
+<td><strong>Ingeniería social</strong></td>
+<td>Manipulación psicológica para que una persona comprometa la seguridad</td>
+</tr>
+<tr>
+<td><strong>Phishing</strong></td>
+<td>Suplantación de entidad o persona para obtener información o provocar una acción; spear, smishing y vishing</td>
+</tr>
+<tr>
+<td><strong>Prevención</strong></td>
+<td>Reduce la probabilidad de infección</td>
+</tr>
+<tr>
+<td><strong>Resiliencia</strong></td>
+<td>Reduce el impacto y permite recuperar; aquí entra el backup</td>
+</tr>
+<tr>
+<td><strong>Ciclo de respuesta</strong></td>
+<td>Detección, análisis, contención, erradicación, recuperación y lecciones aprendidas</td>
+</tr>
+<tr>
+<td><strong>Cuarentena</strong></td>
+<td>Aísla un archivo sospechoso para que no se ejecute mientras se analiza; no es eliminación</td>
+</tr>
+<tr>
+<td><strong>Aislamiento</strong></td>
+<td>Impide que el equipo infectado siga comunicándose</td>
+</tr>
+<tr>
+<td><strong>Notificación</strong></td>
+<td>A los responsables u organismos que correspondan según el procedimiento y las obligaciones aplicables</td>
+</tr>
+<tr>
+<td><strong>Firmas</strong></td>
+<td>Comparación con patrones conocidos; eficaz frente a lo conocido, puede no ver lo que carece de firma</td>
+</tr>
+<tr>
+<td><strong>Heurística</strong></td>
+<td>Análisis de características, reglas o patrones sospechosos</td>
+</tr>
+<tr>
+<td><strong>Comportamiento</strong></td>
+<td>Observa las acciones del proceso en ejecución (por ejemplo, cifrado masivo)</td>
+</tr>
+<tr>
+<td><strong>Zero-day</strong></td>
+<td>Heurística y comportamiento pueden ayudar, pero no garantizan detectarlos todos</td>
+</tr>
+<tr>
+<td><strong>Falso positivo</strong></td>
+<td>Archivo legítimo detectado como malicioso</td>
+</tr>
+<tr>
+<td><strong>Falso negativo</strong></td>
+<td>Malware que no ha sido detectado</td>
+</tr>
+<tr>
+<td><strong>EDR</strong></td>
+<td>Endpoint Detection and Response: detección, investigación y respuesta; no es un antivirus avanzado</td>
+</tr>
+<tr>
+<td><strong>Exclusiones</strong></td>
+<td>Mínimas y justificadas; una exclusión amplia crea un punto ciego</td>
+</tr>
+<tr>
+<td><strong>Suite de seguridad</strong></td>
+<td>Combina varias capacidades de protección del endpoint; su composición varía según el producto</td>
+</tr>
+</table></div>
+
+<h2 id="27-resumen-final" class="tema-h2">27. Resumen final: si mañana fuera el examen</h2>
+<ul class="tema-lista">
+<li><strong>MALWARE = FAMILIA · VIRUS = UN TIPO.</strong> No son sinónimos, y el ransomware <strong>no</strong> es un virus.</li>
+<li><strong>VIRUS → ANFITRIÓN · GUSANO → SE PROPAGA SOLO · TROYANO → ENGAÑO · SPYWARE → ESPÍA · KEYLOGGER → TECLAS · RANSOMWARE → CIFRA/BLOQUEA + EXTORSIONA · ROOTKIT → OCULTA · BOTNET → ZOMBIS · ADWARE → PUBLICIDAD.</strong></li>
+<li><strong>El rootkit NO se define por operar en el kernel</strong>, sino por su <strong>finalidad de ocultación</strong>.</li>
+<li><strong>Ingeniería social</strong> = manipulación de la <strong>persona</strong>. <strong>Phishing</strong> = suplantación; <strong>spear</strong> (dirigido), <strong>smishing</strong> (SMS), <strong>vishing</strong> (voz).</li>
+<li><strong>Ante un phishing</strong>: no pulsar · no dar credenciales · reportar · seguir el procedimiento · bloquear indicadores <strong>cuando proceda</strong> (no todo CAU puede hacerlo).</li>
+<li><strong>TRES CATEGORÍAS</strong>: <strong>prevención</strong> (menos probabilidad) · <strong>reacción</strong> (contener y erradicar) · <strong>resiliencia</strong> (recuperar). <strong>El backup NO previene la infección.</strong></li>
+<li><strong>CICLO DE RESPUESTA</strong>: <strong>detección → análisis → contención → erradicación → recuperación → lecciones aprendidas</strong>. <strong>Contener antes que erradicar.</strong></li>
+<li><strong>CUARENTENA → EL ARCHIVO</strong> (y <strong>no es eliminación</strong>) · <strong>AISLAMIENTO → EL EQUIPO</strong> (y <strong>no es apagar</strong>).</li>
+<li><strong>Notificación</strong>: <strong>a los responsables u organismos correspondientes según el procedimiento aplicable y las obligaciones legales o sectoriales</strong>. Si hay datos personales, <strong>puede</strong> haber notificación de brecha.</li>
+<li><strong>FIRMAS → CONOCIDO</strong> (muy eficaz, pero puede no ver lo que no tiene firma) · <strong>HEURÍSTICA → SOSPECHOSO</strong> (cómo es) · <strong>COMPORTAMIENTO → LO QUE HACE</strong> (en ejecución). <strong>Heurística ≠ comportamiento.</strong></li>
+<li><strong>Zero-day</strong>: heurística y comportamiento <strong>pueden ayudar</strong> a detectar malware desconocido, pero <strong>no garantizan detectarlos todos</strong>.</li>
+<li><strong>FALSO POSITIVO</strong> = legítimo <strong>detectado</strong> · <strong>FALSO NEGATIVO</strong> = malicioso <strong>no detectado</strong>.</li>
+<li><strong>ANTIVIRUS → PROTECCIÓN · EDR → DETECCIÓN + INVESTIGACIÓN + RESPUESTA</strong> (aislamiento del endpoint, correlación, detención de procesos según solución). <strong>No es «un antivirus avanzado».</strong></li>
+<li><strong>Instalación</strong>: <strong>despliegue centralizado</strong> — cobertura homogénea, configuración común, control, inventario y actualizaciones. <strong>Actualización</strong>: <strong>firmas</strong> frecuente y automática · <strong>motor</strong> periódica · <strong>aplicación</strong> como cualquier software (<strong>firmas ≠ motor</strong>).</li>
+<li><strong>Mantenimiento</strong>: análisis periódicos · revisión de cuarentena · <strong>control de exclusiones</strong> · consola centralizada. <strong>Exclusiones mínimas y justificadas: una exclusión amplia crea un PUNTO CIEGO.</strong></li>
+<li><strong>Suites</strong>: combinan varias capacidades del endpoint; <strong>no todas incluyen los mismos componentes</strong>. En la Administración, la solución del puesto <strong>se despliega y gestiona corporativamente</strong> y no queda a elección individual.</li>
+</ul>
+
+<h2 id="28-actualidad" class="tema-h2">28. Actualidad de protección del endpoint — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Información sujeta a cambio · Fecha de actualización de estos apuntes: agosto de 2026</strong><br>Nada de este apartado desplaza a los conceptos estables. <strong>Las marcas comerciales y las versiones de producto no son materia de examen</strong>.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Evolución del antivirus hacia EPP y EDR</strong>: la protección del puesto ha evolucionado desde el <strong>antivirus tradicional</strong> hacia soluciones de <strong>protección del endpoint (EPP)</strong> que integran varias capacidades, y hacia el <strong>EDR</strong>, que añade <strong>detección, investigación y respuesta</strong>. Lo <strong>estable</strong> es la distinción de funciones: <strong>proteger</strong> frente a <strong>detectar, investigar y responder</strong>.</li>
+<li><strong>Gestión centralizada</strong>: la tendencia consolidada es la <strong>administración desde consola única</strong>, con despliegue, configuración, inventario y respuesta remota. Es lo que sostiene el criterio del apartado 19: <strong>en la Administración, la protección del puesto se gestiona corporativamente</strong>.</li>
+<li><strong>Nuevas técnicas de detección</strong>: además de firmas, heurística y comportamiento, los productos incorporan <strong>análisis en la nube, inteligencia de amenazas y modelos automatizados de clasificación</strong>. Ninguna de ellas modifica la regla básica: <strong>ninguna técnica garantiza detectar todo</strong>, y por eso la protección se organiza <strong>en capas</strong>.</li>
+<li><strong>Productos y versiones</strong>: los nombres comerciales, las ediciones y la composición concreta de las <strong>suites</strong> cambian con frecuencia y difieren entre fabricantes. <strong>No deben memorizarse</strong> ni afirmarse como contenido estable.</li>
 </ul>
   </div>
 </article>

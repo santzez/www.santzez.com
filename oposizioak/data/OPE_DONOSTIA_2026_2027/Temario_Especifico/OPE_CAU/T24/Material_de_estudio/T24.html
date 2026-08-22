@@ -1,161 +1,1102 @@
 <article class="tema-articulo">
   <header class="tema-cabecera">
     <div class="tema-cabecera__id">T24</div>
-    <h1 class="tema-cabecera__titulo">Técnicas de autenticación y firma digital, certificado digital, certificado profesional, b@k-Q, Giltza, Viafirma, Izenpe, DNI electrónico</h1>
+    <h1 class="tema-cabecera__titulo">Técnicas de autenticación y firma digital. Certificado digital, certificado profesional, b@k-Q, Giltza, Viafirma, Izenpe, DNI electrónico</h1>
     <div class="tema-cabecera__meta">Bloque III · Seguridad — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
   </header>
 
   <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
-<li><a href="#1-autenticación-y-firma-digital-conceptos-básicos">1. Autenticación y firma digital: conceptos básicos</a></li>
-<li><a href="#2-fundamento-técnico-criptografía-asimétrica-y-pki">2. Fundamento técnico: criptografía asimétrica y PKI</a></li>
-<li><a href="#3-el-certificado-digital-qué-es-y-qué-tipos-existen">3. El certificado digital: qué es y qué tipos existen</a></li>
-<li><a href="#4-izenpe-la-autoridad-de-certificación-vasca">4. Izenpe: la autoridad de certificación vasca</a></li>
-<li><a href="#5-bk-q-identificación-electrónica-sin-certificado">5. b@k-Q: identificación electrónica sin certificado</a></li>
-<li><a href="#6-giltza-la-plataforma-de-identificación-de-las-aapp-vascas">6. Giltza: la plataforma de identificación de las AAPP vascas</a></li>
-<li><a href="#7-viafirma-plataforma-de-firma-electrónica">7. Viafirma: plataforma de firma electrónica</a></li>
-<li><a href="#8-el-dni-electrónico-dnie">8. El DNI electrónico (DNIe)</a></li>
-<li><a href="#9-resumen-para-estudiar">9. Resumen para estudiar</a></li>
-<li><a href="#10-conceptos-clave">10. Conceptos clave</a></li>
-<li><a href="#11-posibles-puntos-de-examen">11. Posibles puntos de examen</a></li>
+<li><a href="#1-identificacion-autenticacion-autorizacion">1. Identificación, autenticación y autorización</a></li>
+<li><a href="#2-factores-y-mfa">2. Factores de autenticación y MFA</a></li>
+<li><a href="#3-autenticacion-vs-firma">3. Autenticación frente a firma digital</a></li>
+<li><a href="#4-firma-digital">4. La firma digital</a></li>
+<li><a href="#5-eidas">5. Niveles de firma electrónica (eIDAS)</a></li>
+<li><a href="#6-criptografia-asimetrica">6. Criptografía asimétrica: el par de claves</a></li>
+<li><a href="#7-firma-vs-cifrado">7. Firma frente a cifrado: qué clave se usa en cada caso</a></li>
+<li><a href="#8-hash">8. El hash</a></li>
+<li><a href="#9-pki">9. PKI: infraestructura de clave pública</a></li>
+<li><a href="#10-certificado-digital">10. El certificado digital</a></li>
+<li><a href="#11-tipos-de-certificado">11. Tipos de certificado</a></li>
+<li><a href="#12-soportes">12. Soportes del certificado</a></li>
+<li><a href="#13-izenpe">13. Izenpe</a></li>
+<li><a href="#14-bakq">14. b@k-Q</a></li>
+<li><a href="#15-giltza">15. Giltza</a></li>
+<li><a href="#16-viafirma">16. Viafirma y los flujos de firma</a></li>
+<li><a href="#17-dnie">17. El DNI electrónico</a></li>
+<li><a href="#18-mapa-de-sistemas">18. Mapa de los sistemas: quién es quién</a></li>
+<li><a href="#19-anclas-de-memoria">19. Anclas de memoria</a></li>
+<li><a href="#20-no-confundir">20. No confundir</a></li>
+<li><a href="#21-trampas-de-examen">21. Posibles trampas de examen</a></li>
+<li><a href="#22-preguntas-tipo-test">22. Posibles preguntas tipo test</a></li>
+<li><a href="#23-preguntas-cortas">23. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#24-supuestos-practicos">24. Supuestos prácticos</a></li>
+<li><a href="#25-matriz-de-memorizacion">25. Matriz de memorización</a></li>
+<li><a href="#26-resumen-final">26. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#27-actualidad">27. Actualidad de sistemas de identificación y firma — datos fechados</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
 
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>Este tema da por conocidos los conceptos generales de seguridad lógica (Tema 22), sobre los que se apoya la autenticación. Aquí se profundiza específicamente en las técnicas y sistemas de autenticación y firma digital, con especial atención a los propios del ámbito de las administraciones públicas vascas (Izenpe, b@k-Q, Giltza), tal y como los recoge el temario específico de esta convocatoria.</th>
+<th><strong>⚠️ No confundir — fronteras del tema</strong><br>Este tema profundiza en <strong>técnicas de autenticación, firma electrónica, certificados</strong> y en los <strong>sistemas concretos de identificación y firma del ámbito vasco</strong>.<br><strong>Tema 21</strong> → ENS. <strong>Tema 22</strong> → seguridad lógica y autenticación como concepto general. <strong>Tema 23</strong> → salvaguarda y recuperación. <strong>Tema 25</strong> → malware y phishing.<br>No se desarrollan aquí ni la criptografía matemática, ni la normativa eIDAS completa, ni la administración avanzada de PKI.</th>
 </tr>
 </table></div>
-<h2 id="1-autenticación-y-firma-digital-conceptos-básicos" class="tema-h2">1. Autenticación y firma digital: conceptos básicos</h2>
-<p>La <strong>autenticación</strong> (ya introducida como medida de seguridad lógica en el Tema 22) es el proceso de verificar que una persona, proceso o sistema es realmente quien dice ser, habitualmente combinando factores de conocimiento (algo que se sabe, como una contraseña), posesión (algo que se tiene, como una tarjeta o un dispositivo) e inherencia (algo que se es, como una huella dactilar).</p>
+
+<h2 id="1-identificacion-autenticacion-autorizacion" class="tema-h2">1. Identificación, autenticación y autorización</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🧠 Para memorizar</strong><br>Los tres factores de autenticación: <strong>algo que SÉ</strong> (contraseña, PIN) · <strong>algo que TENGO</strong> (tarjeta, móvil, token) · <strong>algo que SOY</strong> (huella, cara). La <strong>autenticación multifactor (MFA/2FA)</strong> exige combinar al menos <strong>dos factores de tipo distinto</strong>: contraseña + código en el móvil sí es MFA; dos contraseñas, no.</th>
-</tr>
-</table></div>
-<p>La <strong>firma digital</strong> es un mecanismo criptográfico que permite garantizar, sobre un documento electrónico, tanto la <strong>autoría</strong> (quién lo ha firmado) como la <strong>integridad</strong> (que no ha sido modificado desde que se firmó), siendo el equivalente electrónico de la firma manuscrita, con garantías técnicas adicionales que esta última no ofrece por sí sola.</p>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>El Reglamento europeo eIDAS (Reglamento UE n.º 910/2014) distingue tres niveles de firma electrónica, de menor a mayor exigencia: <strong>firma electrónica simple</strong> (cualquier dato en formato electrónico que se adjunta a otros datos con la intención de firmar, por ejemplo un nombre escrito al final de un correo); <strong>firma electrónica avanzada</strong> (vinculada al firmante de forma única, permite identificarlo y detectar cualquier cambio posterior en los datos firmados); y <strong>firma electrónica cualificada</strong> (una firma avanzada basada en un certificado cualificado y creada con un dispositivo cualificado de creación de firma), a la que la normativa europea reconoce el mismo valor jurídico que una firma manuscrita. Los certificados y sistemas que se estudian en este tema (Izenpe, DNIe) se emplean habitualmente para generar firmas de nivel avanzado o cualificado.</th>
-</tr>
-</table></div>
-<h2 id="2-fundamento-técnico-criptografía-asimétrica-y-pki" class="tema-h2">2. Fundamento técnico: criptografía asimétrica y PKI</h2>
-<p>La firma digital se apoya en la <strong>criptografía asimétrica o de clave pública</strong>: cada titular dispone de un par de claves matemáticamente relacionadas entre sí, una <strong>clave privada</strong> (secreta, que solo su titular conoce y custodia) y una <strong>clave pública</strong> (que puede difundirse libremente). Lo que se cifra con una de las dos claves solo puede descifrarse con la otra.</p>
-<p>Para firmar un documento, el firmante cifra con su clave privada un resumen criptográfico (hash) de ese documento; cualquiera puede verificar la firma descifrando ese resumen con la clave pública correspondiente y comprobando que coincide con el hash del documento recibido. Si el documento se ha alterado, aunque sea mínimamente, su hash cambia y la verificación falla, lo que garantiza a la vez la autoría (solo el titular de la clave privada pudo generar esa firma concreta) y la integridad del contenido firmado.</p>
-<p>El conjunto de hardware, software, personas, políticas y procedimientos necesarios para crear, gestionar, distribuir, usar, almacenar y revocar certificados digitales se conoce como <strong>PKI (Public Key Infrastructure, infraestructura de clave pública)</strong>. Dentro de esa infraestructura, la <strong>Autoridad de Certificación (CA, Certification Authority)</strong> es la entidad de confianza que emite los certificados digitales, vinculando de forma fehaciente una clave pública con la identidad de su titular (por ejemplo, Izenpe en el ámbito vasco, punto 4); la <strong>Autoridad de Registro (RA)</strong> es quien verifica presencialmente o documentalmente la identidad del solicitante antes de la emisión; y la <strong>revocación</strong> permite invalidar un certificado antes de su caducidad (por pérdida, robo o compromiso de la clave), consultándose su estado mediante listas CRL o el protocolo OCSP.</p>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>⚠️ No confundir</strong><br><strong>Con qué clave se hace cada cosa</strong> es la pregunta trampa clásica: se <strong>firma con la clave PRIVADA</strong> (solo el titular puede) y se <strong>verifica con la PÚBLICA</strong> (cualquiera puede comprobar). En el cifrado para confidencialidad es al revés: se <strong>cifra con la clave PÚBLICA del destinatario</strong> y solo él puede <strong>descifrar con su PRIVADA</strong>.</th>
-</tr>
-</table></div>
-<h2 id="3-el-certificado-digital-qué-es-y-qué-tipos-existen" class="tema-h2">3. El certificado digital: qué es y qué tipos existen</h2>
-<p>Un <strong>certificado digital</strong> es un documento electrónico firmado por una Autoridad de Certificación que vincula unos datos de verificación de firma (la clave pública) con la identidad de su titular, permitiendo identificarlo de forma inequívoca en las relaciones telemáticas. Contiene, entre otros datos, la identidad del titular, su clave pública, el periodo de validez, la autoridad emisora, un número de serie único y la propia firma de la autoridad de certificación que lo avala.</p>
-<ul class="tema-lista">
-<li><strong>Certificado de persona física o ciudadano</strong>: identifica a un individuo concreto en sus relaciones personales con las administraciones y otras entidades.</li>
-<li><strong>Certificado profesional o de empleado público</strong>: identifica a la persona junto con su vinculación profesional o su cargo dentro de una organización, para actuar en el ejercicio de sus funciones (por ejemplo, el certificado de empleado público de Izenpe, punto 4).</li>
-<li><strong>Certificado de sede electrónica o de representante</strong>: identifica a una entidad (un organismo, una sede electrónica), no a una persona física concreta.</li>
-</ul>
-<p>Según el soporte en que se almacena la clave privada, un certificado puede emitirse <strong>en tarjeta física</strong> (con chip criptográfico, requiere un lector), <strong>en software</strong> (instalado directamente en el dispositivo del usuario) o <strong>en la nube</strong> (alojado de forma centralizada en un servidor remoto y accesible mediante autenticación, sin depender de un dispositivo o una tarjeta concretos); esta última modalidad ha ganado peso en los últimos años, especialmente entre el personal de las administraciones públicas, por la comodidad de poder firmar desde cualquier equipo autorizado.</p>
-<h2 id="4-izenpe-la-autoridad-de-certificación-vasca" class="tema-h2">4. Izenpe: la autoridad de certificación vasca</h2>
-<p><strong>Izenpe</strong> es el Prestador de Servicios de Certificación de referencia del sector público vasco, participado por el Gobierno Vasco, las tres diputaciones forales y Eudel (la asociación de municipios vascos). Actúa como Autoridad de Certificación (punto 2), emitiendo los certificados digitales que permiten identificarse y firmar electrónicamente en las relaciones con las administraciones públicas vascas.</p>
-<ul class="tema-lista">
-<li><strong>Certificado Ciudadano de Izenpe</strong>: emitido en tarjeta física con chip criptográfico, con una validez de cuatro años, permite identificarse y firmar electrónicamente con administraciones locales, forales, autonómicas y estatales.</li>
-<li><strong>Certificado profesional o de empleado público</strong>: dirigido específicamente al personal funcionario y empleado de las administraciones públicas vascas, disponible también en la modalidad en la nube, para firmar documentos en el ejercicio de sus funciones sin depender de una tarjeta física.</li>
-</ul>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Izenpe cumple, en el ámbito de las administraciones públicas vascas, un papel equivalente al que cumple la FNMT-RCM (Fábrica Nacional de Moneda y Timbre) a nivel estatal: ambas son Autoridades de Certificación de confianza que emiten certificados digitales reconocidos para relacionarse electrónicamente con la Administración.</th>
-</tr>
-</table></div>
-<h2 id="5-bk-q-identificación-electrónica-sin-certificado" class="tema-h2">5. b@k-Q: identificación electrónica sin certificado</h2>
-<p><strong>b@k-Q</strong> es un sistema de identificación electrónica gratuito, alternativo al certificado digital, impulsado igualmente en el ámbito de las administraciones públicas vascas. Se compone de tres elementos: el número de DNI o NIE de la persona usuaria, una contraseña alfanumérica de ocho caracteres elegida por ella misma, y una tarjeta de coordenadas (un conjunto de códigos numerados de los que el sistema solicita uno concreto en cada operación).</p>
-<p>A diferencia del certificado digital, b@k-Q no requiere tarjeta con chip criptográfico ni lector alguno, lo que lo hace más accesible para la ciudadanía que no dispone de un certificado digital, a cambio de un nivel de garantía de identificación menor, adecuado para trámites de exigencia baja o media.</p>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>b@k-Q es, conceptualmente, equivalente al sistema <strong>Cl@ve PIN</strong> del Estado: un sistema de claves concertadas, sin certificado digital, pensado para facilitar el acceso electrónico a trámites de menor exigencia a quien no dispone de un certificado o DNIe, o simplemente prefiere no usarlo.</th>
-</tr>
-</table></div>
-<h2 id="6-giltza-la-plataforma-de-identificación-de-las-aapp-vascas" class="tema-h2">6. Giltza: la plataforma de identificación de las AAPP vascas</h2>
-<p><strong>Giltza</strong> («llave», en euskera) es la plataforma común de identificación electrónica de las administraciones públicas vascas: actúa como intermediaria entre la persona usuaria y los distintos servicios y sedes electrónicas, verificando el método de identificación que esta elija —certificado digital (de Izenpe o de cualquier otra autoridad de certificación reconocida, incluido el DNIe) o b@k-Q— sin que cada servicio electrónico tenga que implementar por separado la verificación de cada uno de esos métodos.</p>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>Puede resultar útil imaginar Giltza como el portero único de un edificio con muchas salas (los distintos servicios y trámites electrónicos): el portero comprueba la identificación en la entrada, con el método que la persona prefiera, y a partir de ahí esta puede moverse por las salas del edificio sin que cada una de ellas tenga que volver a comprobar quién es.</th>
+<th><strong>📌 Imprescindible para el examen — la base de todo el tema</strong><br><strong>IDENTIFICACIÓN</strong> → <strong>¿quién dices ser?</strong><br><strong>AUTENTICACIÓN</strong> → <strong>¿cómo demuestras que eres esa identidad?</strong><br><strong>AUTORIZACIÓN</strong> → <strong>¿qué puedes hacer?</strong><br>Tres pasos <strong>sucesivos y distintos</strong>. Todo el tema se construye sobre esta secuencia.</th>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>Concepto</strong></th>
-<th><strong>Ámbito vasco</strong></th>
-<th><strong>Equivalente estatal</strong></th>
+<th><strong>Pregunta</strong></th>
+<th><strong>Ejemplo administrativo</strong></th>
 </tr>
 <tr>
-<td>Plataforma común de identificación</td>
-<td>Giltza</td>
-<td>Cl@ve</td>
+<td><strong>Identificación</strong></td>
+<td>¿Quién dices ser?</td>
+<td>Introducir el DNI o el usuario en la sede electrónica</td>
 </tr>
 <tr>
-<td>Certificado digital de referencia</td>
-<td>Izenpe (Certificado Ciudadano / Profesional)</td>
-<td>FNMT-RCM (Certificado de la FNMT)</td>
+<td><strong>Autenticación</strong></td>
+<td>¿Cómo lo demuestras?</td>
+<td>Presentar el certificado, la clave concertada o el segundo factor</td>
 </tr>
 <tr>
-<td>Identificación sin certificado (claves concertadas)</td>
-<td>b@k-Q</td>
-<td>Cl@ve PIN</td>
+<td><strong>Autorización</strong></td>
+<td>¿Qué puedes hacer?</td>
+<td>Consultar únicamente tus expedientes, no los de terceros</td>
 </tr>
 </table></div>
-<h2 id="7-viafirma-plataforma-de-firma-electrónica" class="tema-h2">7. Viafirma: plataforma de firma electrónica</h2>
-<p><strong>Viafirma</strong> es una plataforma privada de software de firma electrónica, ampliamente utilizada por administraciones públicas españolas —entre ellas, las vascas— como «portafirmas» electrónico: un punto centralizado desde el que el personal de la organización revisa y firma digitalmente los documentos que requieren su firma en el ejercicio de sus funciones.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br><strong>DECIR → DEMOSTRAR → PODER.</strong><br>La identificación <strong>afirma</strong>; la autenticación <strong>prueba</strong>; la autorización <strong>habilita</strong>. Confundir las dos primeras es la equivocación más frecuente del tema.</th>
+</tr>
+</table></div>
+
+<h2 id="2-factores-y-mfa" class="tema-h2">2. Factores de autenticación y MFA</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Categoría</strong></th>
+<th><strong>Ancla</strong></th>
+<th><strong>Ejemplos</strong></th>
+</tr>
+<tr>
+<td><strong>Algo que sé</strong> (conocimiento)</td>
+<td><strong>SÉ</strong></td>
+<td><strong>Contraseña, PIN</strong>, pregunta concertada</td>
+</tr>
+<tr>
+<td><strong>Algo que tengo</strong> (posesión)</td>
+<td><strong>TENGO</strong></td>
+<td><strong>Tarjeta criptográfica, teléfono, token</strong>, certificado en dispositivo</td>
+</tr>
+<tr>
+<td><strong>Algo que soy</strong> (inherencia)</td>
+<td><strong>SOY</strong></td>
+<td><strong>Huella dactilar, rostro</strong>, otras características biométricas</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — MFA</strong><br><strong>MFA (autenticación multifactor)</strong> → utiliza <strong>dos o más factores independientes de CATEGORÍAS DISTINTAS</strong>.<br>La palabra decisiva es <strong>categorías distintas</strong>: no basta con repetir dos veces el mismo tipo de prueba.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Trampa de examen — dos contraseñas NO son MFA</strong><br><strong>Contraseña + código recibido en el móvil</strong> → <strong>SÍ es MFA</strong>: combina <strong>algo que sé</strong> con <strong>algo que tengo</strong>.<br><strong>Dos contraseñas</strong> (o contraseña + pregunta secreta) → <strong>NO constituyen dos factores de categorías diferentes</strong>: ambas son <strong>algo que sé</strong>.<br>Regla: <strong>cuenta CATEGORÍAS, no pasos.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Ejemplo — el DNIe como MFA natural</strong><br>Utilizar el <strong>DNI electrónico</strong> combina <strong>algo que tengo</strong> (la tarjeta con su chip) y <strong>algo que sé</strong> (el PIN). Son <strong>dos categorías distintas</strong>: por eso su uso constituye una autenticación de dos factores por diseño.</th>
+</tr>
+</table></div>
+
+<h2 id="3-autenticacion-vs-firma" class="tema-h2">3. Autenticación frente a firma digital</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — LA GRAN PAREJA DEL TEMA</strong><br><strong>AUTENTICACIÓN</strong> → <strong>verificar la identidad</strong> de quien accede.<br><strong>FIRMA DIGITAL</strong> → <strong>vincular al firmante con un documento concreto y permitir verificar la integridad del contenido firmado</strong>.<br><strong>No son lo mismo, y la firma NO es «una autenticación avanzada».</strong> Persiguen objetivos distintos: una <strong>abre una sesión</strong>; la otra <strong>compromete a una persona con un contenido</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th></th>
+<th><strong>Autenticación</strong></th>
+<th><strong>Firma digital</strong></th>
+</tr>
+<tr>
+<td><strong>Objetivo</strong></td>
+<td>Comprobar quién accede</td>
+<td>Vincular al firmante con un documento y garantizar su integridad</td>
+</tr>
+<tr>
+<td><strong>Objeto</strong></td>
+<td>Una <strong>sesión</strong> o un acceso</td>
+<td>Un <strong>documento o contenido</strong> determinado</td>
+</tr>
+<tr>
+<td><strong>Resultado</strong></td>
+<td>Se entra o no se entra</td>
+<td>Se produce una <strong>firma verificable</strong> asociada al contenido</td>
+</tr>
+<tr>
+<td><strong>Permanencia</strong></td>
+<td>Temporal, dura la sesión</td>
+<td><strong>Persistente</strong>: acompaña al documento</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Ejemplo que lo aclara</strong><br>Una persona puede <strong>entrar en la sede electrónica</strong> (autenticación) y consultar sus datos <strong>sin firmar nada</strong>. Solo cuando <strong>presenta una solicitud</strong> se produce una <strong>firma</strong>, que queda vinculada a ese documento concreto.<br>Por eso muchos certificados incorporan <strong>dos usos diferenciados</strong>: uno para <strong>autenticación</strong> y otro para <strong>firma</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="4-firma-digital" class="tema-h2">4. La firma digital</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>Firma digital</strong> → <strong>mecanismo criptográfico que permite verificar la identidad o la atribución asociada a la firma y detectar modificaciones del contenido firmado</strong>.<br>Dos funciones simultáneas: <strong>ATRIBUCIÓN</strong> (a quién se vincula) e <strong>INTEGRIDAD</strong> (si el contenido ha cambiado).</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Cautela de formulación</strong><br>Debe evitarse afirmar que una firma digital <strong>demuestra por sí sola</strong> cualquier aspecto jurídico o personal <strong>fuera del contexto en que se utiliza</strong>. Lo que la firma acredita depende del <strong>tipo de firma</strong>, del <strong>certificado</strong> empleado, del <strong>procedimiento</strong> y del <strong>marco normativo</strong> aplicable.<br>Formulación segura: la firma permite <strong>verificar la atribución y la integridad</strong>; sus efectos concretos dependen del contexto.</th>
+</tr>
+</table></div>
+<p>La firma digital se relaciona directamente con el <strong>no repudio</strong> —la posibilidad de aportar evidencias sobre la autoría de una acción— tratado como concepto general en el <strong>Tema 22</strong>.</p>
+
+<h2 id="5-eidas" class="tema-h2">5. Niveles de firma electrónica (eIDAS)</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Nivel</strong></th>
+<th><strong>Caracterización</strong></th>
+</tr>
+<tr>
+<td><strong>1. Firma electrónica simple</strong></td>
+<td>Datos en formato electrónico que se utilizan para firmar, en su expresión más básica</td>
+</tr>
+<tr>
+<td><strong>2. Firma electrónica avanzada</strong></td>
+<td>Vinculada al firmante de manera única, permite su identificación y detecta modificaciones posteriores del contenido</td>
+</tr>
+<tr>
+<td><strong>3. Firma electrónica cualificada</strong></td>
+<td><strong>Firma avanzada</strong> basada en un <strong>certificado cualificado</strong> y creada mediante un <strong>dispositivo cualificado de creación de firma</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br>La <strong>firma electrónica cualificada</strong> tiene <strong>efecto jurídico equivalente al de una firma manuscrita</strong> en el marco de <strong>eIDAS</strong>.<br>Su definición encadena <strong>tres requisitos</strong>: <strong>avanzada + certificado cualificado + dispositivo cualificado de creación de firma</strong>. Si falta alguno, no es cualificada.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — la escalera</strong><br><strong>SIMPLE → AVANZADA → CUALIFICADA.</strong> Cada nivel <strong>incorpora</strong> el anterior y añade requisitos.<br>La <strong>cualificada</strong> es la única con la equivalencia expresa a la firma manuscrita: es el dato preguntable.</th>
+</tr>
+</table></div>
+
+<h2 id="6-criptografia-asimetrica" class="tema-h2">6. Criptografía asimétrica: el par de claves</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br>La criptografía asimétrica utiliza un <strong>par de claves matemáticamente relacionadas</strong>:<br><strong>CLAVE PRIVADA</strong> → <strong>secreta</strong>, custodiada exclusivamente por su titular. Nunca se comparte.<br><strong>CLAVE PÚBLICA</strong> → <strong>puede distribuirse</strong> libremente; es la que viaja dentro del certificado.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Cautela — no uses la simplificación rígida</strong><br>No conviene utilizar como definición la fórmula <strong>«todo lo cifrado con una clave se descifra con la otra»</strong>: es una <strong>simplificación</strong> que induce a error, porque <strong>firmar no es cifrar con la clave privada</strong>.<br>Lo correcto es describir <strong>qué operación se hace con cada clave en cada caso</strong> (apartado 7).</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Cómo funciona la firma, paso a paso</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Paso</strong></th>
+<th><strong>Operación</strong></th>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td>Se calcula un <strong>hash del documento</strong> (resumen de longitud fija)</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>Se genera una <strong>firma criptográfica utilizando la CLAVE PRIVADA</strong> del firmante</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>La firma se <strong>verifica utilizando la CLAVE PÚBLICA</strong> correspondiente</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td>Se <strong>comprueba la integridad</strong> del contenido: si el documento cambió, la verificación falla</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br><strong>FIRMA → CLAVE PRIVADA. VERIFICACIÓN → CLAVE PÚBLICA.</strong><br>Tiene toda la lógica: <strong>solo el titular puede firmar</strong> (solo él tiene la privada), pero <strong>cualquiera debe poder verificar</strong> (la pública está disponible para todos).</th>
+</tr>
+</table></div>
+
+<h2 id="7-firma-vs-cifrado" class="tema-h2">7. Firma frente a cifrado: qué clave se usa en cada caso</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 LA TABLA MÁS PREGUNTABLE DEL TEMA</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Objetivo</strong></th>
+<th><strong>Clave que se utiliza</strong></th>
+</tr>
+<tr>
+<td><strong>Firmar</strong></td>
+<td><strong>Clave PRIVADA del FIRMANTE</strong></td>
+</tr>
+<tr>
+<td><strong>Verificar la firma</strong></td>
+<td><strong>Clave PÚBLICA del FIRMANTE</strong></td>
+</tr>
+<tr>
+<td><strong>Cifrar para un destinatario</strong></td>
+<td><strong>Clave PÚBLICA del DESTINATARIO</strong></td>
+</tr>
+<tr>
+<td><strong>Descifrar</strong></td>
+<td><strong>Clave PRIVADA del DESTINATARIO</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — la regla que nunca falla</strong><br><strong>Lo que hago YO, con MI clave privada: FIRMAR.</strong><br><strong>Lo que hago PARA OTRO, con SU clave pública: CIFRAR.</strong><br>Dicho de otro modo: en la <strong>firma</strong> intervienen las claves del <strong>firmante</strong>; en el <strong>cifrado</strong>, las del <strong>destinatario</strong>. Identificar primero <strong>de quién</strong> es la clave resuelve la mitad de las preguntas.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Trampa de examen — FIRMAR NO ES CIFRAR</strong><br><strong>Firmar</strong> persigue <strong>atribución e integridad</strong>: el documento sigue siendo <strong>legible</strong> para cualquiera.<br><strong>Cifrar</strong> persigue <strong>confidencialidad</strong>: el documento resulta <strong>ilegible</strong> sin la clave adecuada.<br>Un documento puede estar <strong>firmado y no cifrado</strong> (lo habitual en la Administración electrónica), <strong>cifrado y no firmado</strong>, o <strong>ambas cosas</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="8-hash" class="tema-h2">8. El hash</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>Hash</strong> (función resumen) → <strong>resumen de longitud fija derivado del contenido</strong>.<br>Propiedad esencial: <strong>si el contenido cambia, cambia el hash</strong>.<br>Aplicación en este tema: <strong>detectar modificaciones</strong> del documento firmado.</th>
+</tr>
+</table></div>
 <ul class="tema-lista">
-<li><strong>Firma con certificado digital</strong>: integrando los certificados vistos en los puntos anteriores (Izenpe, DNIe, u otros reconocidos).</li>
-<li><strong>Firma mediante código OTP (One-Time Password)</strong>: un código de un solo uso enviado por SMS o correo electrónico, como alternativa que no requiere certificado digital.</li>
-<li><strong>Firma biométrica manuscrita</strong>: captura de la firma a mano en una pantalla táctil o tableta, registrando además datos biométricos del trazo (presión, velocidad) que refuerzan su validez probatoria.</li>
-<li><strong>Gestión de flujos de firma</strong>: permite definir circuitos con varios firmantes, en un orden determinado, antes de dar un documento por completamente firmado.</li>
+<li>La <strong>longitud del hash es fija</strong> con independencia del tamaño del documento: un fichero de una línea y otro de mil páginas producen resúmenes del mismo tamaño.</li>
+<li>Un cambio <strong>mínimo</strong> en el contenido produce un hash <strong>distinto</strong>: por eso sirve para verificar la integridad.</li>
+<li>Es el <strong>primer paso</strong> del proceso de firma (apartado 6): no se firma el documento entero, sino <strong>su resumen</strong>.</li>
 </ul>
-<p>Viafirma no sustituye a los certificados o sistemas de identificación de los puntos anteriores, sino que actúa como una capa intermedia: ofrece una interfaz común de firma electrónica, integrable en las aplicaciones de gestión de expedientes de la organización, con independencia del método concreto de autenticación o firma que finalmente emplee cada persona usuaria.</p>
-<h2 id="8-el-dni-electrónico-dnie" class="tema-h2">8. El DNI electrónico (DNIe)</h2>
-<p>El <strong>DNI electrónico (DNIe)</strong>, emitido por la Dirección General de la Policía, es el documento nacional de identidad español que incorpora un chip criptográfico con dos certificados digitales: un <strong>certificado de autenticación</strong>, que permite identificar de forma fehaciente a su titular, y un <strong>certificado de firma</strong>, que permite firmar electrónicamente con la misma validez legal que la firma manuscrita, además de conservar la información de identidad y biométrica habitual del DNI físico.</p>
-<p>Su uso requiere introducir un <strong>PIN</strong> conocido únicamente por el titular, y acceder al chip mediante un <strong>lector de tarjetas con contacto</strong>, o, en las versiones más recientes del documento (DNIe 4.0), mediante <strong>NFC (Near Field Communication)</strong>, que permite leer el chip sin contacto físico, incluso desde un smartphone compatible, sin necesidad de un lector dedicado.</p>
-<h2 id="9-resumen-para-estudiar" class="tema-h2">9. Resumen para estudiar</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Analogía</strong><br>El hash funciona como un <strong>precinto numerado</strong>: no revela el contenido del paquete, pero si alguien lo abre y lo vuelve a cerrar, <strong>el número ya no coincide</strong>. Al verificar la firma se recalcula el hash y se compara: si no coincide, <strong>el documento ha sido modificado</strong>.</th>
+</tr>
+</table></div>
+<p>Los algoritmos concretos de hash no son objeto de este tema.</p>
+
+<h2 id="9-pki" class="tema-h2">9. PKI: infraestructura de clave pública</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>PKI (Public Key Infrastructure)</strong> → <strong>infraestructura de clave pública que incluye tecnologías, sistemas, personas, políticas y procedimientos para gestionar certificados y claves</strong>.<br>Ojo al alcance: <strong>no es solo tecnología</strong> — incluye también <strong>personas, políticas y procedimientos</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Elemento</strong></th>
+<th><strong>Función</strong></th>
+<th><strong>Ancla</strong></th>
+</tr>
+<tr>
+<td><strong>CA</strong> (Autoridad de Certificación)</td>
+<td><strong>Emite los certificados</strong> y los firma con su propia clave</td>
+<td><strong>EMITE</strong></td>
+</tr>
+<tr>
+<td><strong>RA</strong> (Autoridad de Registro)</td>
+<td><strong>Verifica la identidad</strong> del solicitante y <strong>gestiona su registro</strong></td>
+<td><strong>VERIFICA IDENTIDAD / REGISTRA</strong></td>
+</tr>
+<tr>
+<td><strong>Revocación</strong></td>
+<td><strong>Invalida un certificado antes de su caducidad</strong> (pérdida, robo, cese, compromiso de la clave)</td>
+<td><strong>ANULA ANTES DE TIEMPO</strong></td>
+</tr>
+<tr>
+<td><strong>CRL</strong> (Certificate Revocation List)</td>
+<td><strong>Lista de certificados revocados</strong></td>
+<td><strong>LISTA</strong></td>
+</tr>
+<tr>
+<td><strong>OCSP</strong> (Online Certificate Status Protocol)</td>
+<td><strong>Consulta del estado de un certificado</strong></td>
+<td><strong>CONSULTA</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — CA y RA</strong><br><strong>RA → COMPRUEBA QUIÉN ERES.</strong> Es el punto de registro donde se acredita la identidad del solicitante.<br><strong>CA → EMITE EL CERTIFICADO.</strong> Es quien lo firma y responde de él.<br>Secuencia lógica: <strong>primero la RA identifica, después la CA emite</strong>. Y en la práctica, la RA suele ser una <strong>oficina de atención presencial</strong>, mientras que la CA es la <strong>entidad técnica y jurídica</strong> emisora.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — CRL y OCSP</strong><br>Ambas responden a la misma pregunta —<strong>¿sigue siendo válido este certificado?</strong>— pero de forma distinta:<br><strong>CRL → una LISTA</strong> de certificados revocados que se descarga y consulta.<br><strong>OCSP → una CONSULTA</strong> del estado de <strong>un certificado concreto</strong>.<br>Ninguna de las dos <strong>emite</strong> certificados: eso corresponde a la <strong>CA</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Ejemplo — revocación frente a caducidad</strong><br>Un certificado <strong>caduca</strong> por el mero transcurso de su periodo de validez. Se <strong>revoca</strong> cuando, <strong>antes de esa fecha</strong>, deja de ser fiable: se pierde la tarjeta, cesa la relación laboral que amparaba un certificado profesional o se sospecha que la clave privada ha quedado comprometida.<br><strong>Caducidad = tiempo. Revocación = decisión.</strong></th>
+</tr>
+</table></div>
+
+<h2 id="10-certificado-digital" class="tema-h2">10. El certificado digital</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>Certificado digital</strong> → <strong>documento electrónico firmado por una Autoridad de Certificación que vincula una clave pública con la identidad de su titular</strong>.<br><strong>ANCLA: CERTIFICADO → IDENTIDAD + CLAVE PÚBLICA + GARANTÍA DE LA CA.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Contenido</strong></th>
+<th><strong>Qué aporta</strong></th>
+</tr>
+<tr>
+<td><strong>Titular</strong></td>
+<td>Identidad a la que se vincula la clave</td>
+</tr>
+<tr>
+<td><strong>Clave pública</strong></td>
+<td>La que permitirá verificar sus firmas o cifrar para él</td>
+</tr>
+<tr>
+<td><strong>Emisor</strong></td>
+<td>Autoridad de Certificación que lo expide</td>
+</tr>
+<tr>
+<td><strong>Periodo de validez</strong></td>
+<td>Fechas entre las que el certificado es válido</td>
+</tr>
+<tr>
+<td><strong>Número de serie</strong></td>
+<td>Identificador único dentro de esa CA</td>
+</tr>
+<tr>
+<td><strong>Firma de la CA</strong></td>
+<td>Garantía de autenticidad e integridad del propio certificado</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — certificado y firma</strong><br><strong>Certificado</strong> → <strong>el instrumento de identidad</strong>: acredita a quién pertenece una clave pública.<br><strong>Firma</strong> → <strong>el resultado de una operación</strong> realizada sobre un documento con la clave privada.<br>El certificado <strong>no firma</strong>: es lo que permite <strong>verificar</strong> quién firmó. Ni el certificado contiene la clave privada: esa la custodia el titular en su soporte.</th>
+</tr>
+</table></div>
+
+<h2 id="11-tipos-de-certificado" class="tema-h2">11. Tipos de certificado</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Tipo</strong></th>
+<th><strong>A quién identifica</strong></th>
+<th><strong>Uso característico</strong></th>
+</tr>
+<tr>
+<td><strong>Persona física / ciudadanía</strong></td>
+<td><strong>Identifica a una persona</strong> en su condición de tal</td>
+<td>Trámites personales ante la Administración</td>
+</tr>
+<tr>
+<td><strong>Profesional / empleado público</strong></td>
+<td><strong>Identifica a la persona junto con su relación o cargo profesional</strong></td>
+<td>Actuación en el ejercicio de su puesto o profesión</td>
+</tr>
+<tr>
+<td><strong>Sede electrónica</strong></td>
+<td>Identifica una <strong>sede electrónica</strong> concreta</td>
+<td>Acreditar la sede ante quien la visita</td>
+</tr>
+<tr>
+<td><strong>Representante</strong></td>
+<td>Identifica a quien <strong>actúa en representación</strong> de una entidad, según el tipo concreto</td>
+<td>Actuar en nombre de una persona jurídica o entidad</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — sede y representante NO son lo mismo</strong><br><strong>Certificado de sede electrónica</strong> → identifica <strong>una sede</strong>, es decir, el <strong>punto de acceso electrónico</strong> de la Administración.<br><strong>Certificado de representante</strong> → identifica a una <strong>persona que actúa en representación</strong> de una entidad.<br>Uno identifica <strong>un sitio</strong>; el otro, <strong>a alguien que actúa por cuenta de otro</strong>. Presentarlos como equivalentes es un error de examen.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Ejemplo — persona física frente a empleado público</strong><br>Una misma persona puede disponer de <strong>dos certificados distintos</strong>: uno <strong>de ciudadanía</strong>, para solicitar una subvención a título particular, y otro <strong>de empleado público</strong>, para tramitar expedientes <strong>en el ejercicio de su puesto</strong>. El segundo <strong>añade a la identidad personal la vinculación con el cargo o la relación de servicio</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="12-soportes" class="tema-h2">12. Soportes del certificado</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Soporte</strong></th>
+<th><strong>En qué consiste</strong></th>
+<th><strong>Consideración práctica</strong></th>
+</tr>
+<tr>
+<td><strong>Tarjeta</strong></td>
+<td><strong>Chip criptográfico + lector</strong></td>
+<td>La clave privada no sale de la tarjeta; requiere lector y PIN</td>
+</tr>
+<tr>
+<td><strong>Software</strong></td>
+<td><strong>Certificado instalado en el dispositivo</strong></td>
+<td>Cómodo, pero ligado al equipo donde se instaló</td>
+</tr>
+<tr>
+<td><strong>Nube</strong></td>
+<td><strong>Custodia remota con autenticación</strong></td>
+<td>Accesible desde varios dispositivos, previa autenticación</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — el soporte no define el certificado</strong><br>El <strong>soporte</strong> es <strong>dónde reside</strong> el certificado y su clave privada; <strong>no es lo que el certificado es</strong>. Un mismo tipo de certificado —de ciudadanía o de empleado público— puede residir <strong>en tarjeta, en software o en la nube</strong>.<br>Confundir «certificado en tarjeta» con «tipo de certificado» es un error frecuente.</th>
+</tr>
+</table></div>
+
+<h2 id="13-izenpe" class="tema-h2">13. Izenpe</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>Izenpe</strong> → <strong>prestador de servicios de confianza y certificación de referencia del ámbito público vasco</strong>.<br>Función esencial: <strong>emitir certificados</strong> para su uso en <strong>identificación y firma electrónica</strong> ante las administraciones.</th>
+</tr>
+</table></div>
 <ul class="tema-lista">
-<li><strong>Autenticación frente a firma digital</strong>: verificar identidad frente a garantizar autoría e integridad de un documento; la normativa eIDAS distingue firma electrónica simple, avanzada y cualificada (esta última, equivalente legal a la manuscrita).</li>
-<li><strong>Fundamento técnico</strong>: criptografía asimétrica (clave privada/pública) y PKI; la Autoridad de Certificación vincula una clave pública con la identidad de su titular mediante un certificado digital.</li>
-<li><strong>Certificado digital</strong>: de persona física, profesional/empleado público o de sede electrónica; soportado en tarjeta, software o en la nube.</li>
-<li><strong>Izenpe</strong>: Autoridad de Certificación del sector público vasco; Certificado Ciudadano (tarjeta, 4 años) y certificado profesional/de empleado público (también en la nube).</li>
-<li><strong>b@k-Q</strong>: identificación electrónica gratuita sin certificado (DNI/NIE + contraseña + coordenadas), equivalente a Cl@ve PIN a nivel estatal.</li>
-<li><strong>Giltza</strong>: plataforma común de identificación de las AAPP vascas, verifica certificado digital o b@k-Q; equivalente a Cl@ve a nivel estatal.</li>
-<li><strong>Viafirma</strong>: plataforma privada de firma electrónica (portafirmas), con firma por certificado, OTP o biometría manuscrita, y gestión de flujos de firma.</li>
-<li><strong>DNIe</strong>: DNI con chip criptográfico, certificados de autenticación y de firma, acceso mediante PIN y lector de contacto o NFC (DNIe 4.0).</li>
-<li><strong>Factores de autenticación</strong>: sé / tengo / soy; MFA = dos factores de tipo distinto. <strong>Firmar = clave privada; verificar = clave pública</strong>.</li>
+<li><strong>Certificados para la ciudadanía</strong>: identifican a la persona física para sus trámites.</li>
+<li><strong>Certificado profesional o de empleado público</strong>: identifica a la persona <strong>junto con su relación o cargo</strong>.</li>
+<li>Uso: <strong>identificación y firma electrónica</strong> ante las administraciones vascas y, con carácter general, en el ámbito de la Administración electrónica.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Ancla comparativa — Izenpe ↔ FNMT-RCM</strong><br><strong>Izenpe</strong> desempeña en el <strong>ámbito público vasco</strong> una función <strong>funcionalmente análoga</strong> a la que la <strong>FNMT-RCM</strong> desempeña en el ámbito estatal: <strong>emitir certificados</strong> de identificación y firma.<br>Es una <strong>equivalencia funcional</strong> que ayuda a situar el papel de Izenpe, <strong>no una identidad de régimen ni de producto</strong>.</th>
+</tr>
+</table></div>
+<p>Los <strong>periodos de validez</strong>, los <strong>nombres comerciales</strong> de los productos y los <strong>soportes concretos</strong> ofrecidos en cada momento son <strong>datos operativos</strong> y se recogen en el apartado <strong>27 (actualidad)</strong>, no en el núcleo conceptual.</p>
+
+<h2 id="14-bakq" class="tema-h2">14. b@k-Q</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — concepto estable</strong><br><strong>b@k-Q</strong> → <strong>sistema vasco de identificación electrónica mediante claves concertadas, sin necesidad de utilizar un certificado digital</strong>.<br>Lo esencial y memorizable: <strong>IDENTIFICACIÓN SIN CERTIFICADO</strong>.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li>Se basa en <strong>claves concertadas</strong> previamente acordadas entre la persona usuaria y la Administración.</li>
+<li><strong>No requiere</strong> tarjeta con chip criptográfico ni lector, lo que lo hace <strong>más accesible</strong> para la ciudadanía en trámites habituales.</li>
+<li>Está pensado para <strong>identificarse</strong> ante servicios electrónicos; su admisión en cada trámite depende de lo que el <strong>servicio concreto</strong> establezca.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Cautela de precisión — dos afirmaciones que NO deben darse por hechas</strong><br><strong>1) La composición exacta</strong> del sistema (documento identificativo, contraseña con un número determinado de caracteres, tarjeta de coordenadas u otros elementos) es un <strong>DATO OPERATIVO</strong>: debe estudiarse conforme a la <strong>documentación oficial vigente</strong> de la convocatoria y no memorizarse como conocimiento permanente. Se recoge en el apartado <strong>27</strong>.<br><strong>2) El nivel de garantía</strong>: <strong>no debe afirmarse</strong> que b@k-Q tenga necesariamente un nivel «bajo» o «medio» <strong>salvo que la fuente normativa aplicable lo establezca expresamente</strong> para el caso concreto.<br>Lo que sí es estable: <strong>es identificación mediante claves concertadas, sin certificado</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Ancla comparativa — b@k-Q ↔ Cl@ve PIN</strong><br>b@k-Q guarda una <strong>equivalencia funcional aproximada</strong> con <strong>Cl@ve PIN</strong> del ámbito estatal: ambos permiten <strong>identificarse sin certificado digital</strong>.<br><strong>No son tecnológicamente idénticos</strong> ni intercambiables: la comparación es <strong>didáctica</strong>, para situar la función.</th>
+</tr>
+</table></div>
+
+<h2 id="15-giltza" class="tema-h2">15. Giltza</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>Giltza</strong> → <strong>plataforma común de identificación electrónica de las Administraciones Públicas vascas que actúa como intermediaria entre los servicios electrónicos y los distintos métodos de identificación admitidos</strong>.<br><strong>ANCLA: GILTZA → PLATAFORMA / INTERMEDIARIO.</strong></th>
+</tr>
+</table></div>
+<p>Puede <strong>integrar métodos</strong> como:</p>
+<ul class="tema-lista">
+<li><strong>Certificado digital</strong>.</li>
+<li><strong>b@k-Q</strong>.</li>
+<li><strong>Otros métodos reconocidos</strong>, según lo que admita cada servicio.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Trampa de examen — qué NO es Giltza</strong><br><strong>Giltza NO es un certificado.</strong><br><strong>Giltza NO es simplemente otro método de autenticación</strong> que se sume a la lista.<br>Es la <strong>capa intermedia</strong> que permite que un servicio electrónico acepte <strong>varios métodos</strong> —certificado, b@k-Q y los que correspondan— <strong>sin tener que implementar cada uno por separado</strong>.<br>Formulación segura: <strong>Giltza es el intermediario; los métodos son lo que Giltza integra.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Analogía</strong><br>Giltza funciona como un <strong>mostrador único de identificación</strong>: la persona se presenta con <strong>el documento que tenga</strong> —certificado, claves concertadas u otro método admitido— y el mostrador <strong>lo valida y comunica al servicio</strong> quién es. El servicio no necesita saber manejar cada documento por separado.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Ancla comparativa — Giltza ↔ Cl@ve</strong><br>Giltza guarda una <strong>equivalencia funcional aproximada</strong> con <strong>Cl@ve</strong> en el ámbito estatal: ambas actúan como <strong>plataformas comunes de identificación</strong>.<br><strong>No son sistemas técnicamente idénticos</strong>; la comparación sirve para <strong>situar la función</strong>, no para equipararlos.</th>
+</tr>
+</table></div>
+
+<h2 id="16-viafirma" class="tema-h2">16. Viafirma y los flujos de firma</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>Viafirma</strong> → <strong>plataforma privada de firma electrónica y portafirmas utilizada para gestionar procesos de firma en organizaciones</strong>.<br><strong>ANCLA: VIAFIRMA → PORTAFIRMAS / PLATAFORMA DE FIRMA.</strong> Esa es la función que hay que memorizar.</th>
+</tr>
+</table></div>
+<p>Según el producto y su configuración, puede permitir:</p>
+<ul class="tema-lista">
+<li><strong>Firma con certificado</strong>.</li>
+<li><strong>OTP</strong> (código de un solo uso), <strong>cuando el producto o la configuración lo permitan</strong>.</li>
+<li><strong>Biometría</strong>, <strong>cuando el producto o la configuración lo permitan</strong>.</li>
+<li><strong>Flujos de firma</strong> con varios intervinientes.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Cautela de precisión</strong><br>Estas modalidades <strong>no deben presentarse como características jurídicas universales</strong> de cualquier implementación de firma. Lo que una modalidad concreta acredite depende del <strong>producto, la configuración, el procedimiento y el marco normativo</strong> aplicable.<br>Lo estable y memorizable es la <strong>función</strong>: <strong>Viafirma es una plataforma de firma y portafirmas</strong>, no una autoridad de certificación.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Flujos de firma</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Concepto</strong><br><strong>Flujo de firma</strong> → <strong>circuito en el que intervienen varios firmantes en un orden determinado</strong>.<br><em>Ejemplo</em>: un documento pasa primero por <strong>A</strong>, que firma, y <strong>después</strong> por <strong>B</strong>, que firma a continuación. El sistema controla <strong>el orden, los avisos y el estado</strong> de cada firma.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — Viafirma no es una CA</strong><br><strong>Viafirma</strong> → <strong>gestiona el proceso</strong> de firma: quién firma, en qué orden, con qué método y con qué constancia.<br><strong>Izenpe</strong> (o la CA que corresponda) → <strong>emite los certificados</strong> con los que se firma.<br>Uno es <strong>el circuito</strong>; el otro, <strong>el instrumento de identidad</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="17-dnie" class="tema-h2">17. El DNI electrónico</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — núcleo estable</strong><br><strong>DNI electrónico (DNIe)</strong> → <strong>documento oficial español que incorpora un chip criptográfico y certificados digitales</strong>.<br>Núcleo memorizable: <strong>CHIP + CERTIFICADOS + PIN</strong>.<br><strong>ANCLA: DNIe → AUTENTICACIÓN + FIRMA.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Elemento</strong></th>
+<th><strong>Función</strong></th>
+</tr>
+<tr>
+<td><strong>Chip criptográfico</strong></td>
+<td>Custodia las claves y realiza las operaciones criptográficas</td>
+</tr>
+<tr>
+<td><strong>Certificado de autenticación</strong></td>
+<td>Permite <strong>identificarse</strong> ante servicios electrónicos</td>
+</tr>
+<tr>
+<td><strong>Certificado de firma</strong></td>
+<td>Permite <strong>firmar</strong> documentos electrónicamente</td>
+</tr>
+<tr>
+<td><strong>PIN</strong></td>
+<td>Clave que habilita el uso del chip: es el factor <strong>«algo que sé»</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — dos certificados con usos distintos</strong><br>El DNIe incorpora <strong>certificados diferenciados</strong> para <strong>autenticación</strong> y para <strong>firma</strong>. Es la materialización práctica de la distinción del apartado 3: <strong>identificarse no es firmar</strong>.<br>De ahí un escenario típico de CAU: una persona <strong>puede entrar</strong> en un servicio pero <strong>no puede firmar</strong>, porque el problema afecta al <strong>certificado o al uso de firma</strong>, no al de autenticación.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — el DNIe no es una simple tarjeta identificativa</strong><br>El DNIe <strong>no es solo un documento con fotografía</strong>: incorpora un <strong>chip criptográfico</strong> con <strong>certificados digitales</strong> que permiten <strong>identificarse y firmar</strong> electrónicamente.<br>Y no confundas el <strong>DNIe</strong> con el <strong>PIN</strong>: la tarjeta es <strong>algo que tengo</strong>; el PIN es <strong>algo que sé</strong>. Juntos constituyen <strong>dos factores</strong>.</th>
+</tr>
+</table></div>
+<p>Las <strong>versiones del documento</strong> y las <strong>vías de uso sin lector</strong> (NFC) se tratan como <strong>actualidad</strong> en el apartado <strong>27</strong>, no como concepto principal.</p>
+
+<h2 id="18-mapa-de-sistemas" class="tema-h2">18. Mapa de los sistemas: quién es quién</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Sistema</strong></th>
+<th><strong>Qué es</strong></th>
+<th><strong>Función en una palabra</strong></th>
+<th><strong>Equivalencia funcional aproximada</strong></th>
+</tr>
+<tr>
+<td><strong>Izenpe</strong></td>
+<td>Prestador de servicios de confianza y certificación del ámbito público vasco</td>
+<td><strong>EMITE CERTIFICADOS</strong></td>
+<td>FNMT-RCM en el ámbito estatal</td>
+</tr>
+<tr>
+<td><strong>b@k-Q</strong></td>
+<td>Sistema de identificación mediante claves concertadas</td>
+<td><strong>IDENTIFICA SIN CERTIFICADO</strong></td>
+<td>Cl@ve PIN en el ámbito estatal</td>
+</tr>
+<tr>
+<td><strong>Giltza</strong></td>
+<td>Plataforma común de identificación de las AAPP vascas</td>
+<td><strong>INTERMEDIA / INTEGRA MÉTODOS</strong></td>
+<td>Cl@ve en el ámbito estatal</td>
+</tr>
+<tr>
+<td><strong>Viafirma</strong></td>
+<td>Plataforma privada de firma electrónica y portafirmas</td>
+<td><strong>GESTIONA LA FIRMA</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>DNIe</strong></td>
+<td>Documento oficial con chip criptográfico y certificados</td>
+<td><strong>AUTENTICA Y FIRMA</strong></td>
+<td>—</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — el reparto de papeles</strong><br><strong>IZENPE da el instrumento</strong> (el certificado). <strong>B@K-Q es un método alternativo</strong> de identificarse sin él. <strong>GILTZA es el mostrador</strong> que acepta unos y otros. <strong>VIAFIRMA organiza el circuito</strong> de firma. <strong>EL DNIe es un documento</strong> que sirve para autenticar y firmar.<br>Todas las equivalencias con el ámbito estatal son <strong>funcionales y aproximadas</strong>, nunca identidades técnicas.</th>
+</tr>
+</table></div>
+
+<h2 id="19-anclas-de-memoria" class="tema-h2">19. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>IDENTIFICAR → decir quién eres · AUTENTICAR → demostrarlo · AUTORIZAR → qué puedes hacer.</strong></li>
+<li><strong>SÉ → contraseña/PIN · TENGO → móvil, tarjeta, token · SOY → biometría.</strong> <strong>MFA = categorías distintas.</strong></li>
+<li><strong>FIRMA → CLAVE PRIVADA · VERIFICACIÓN → CLAVE PÚBLICA.</strong></li>
+<li><strong>CIFRAR → CLAVE PÚBLICA DEL DESTINATARIO · DESCIFRAR → CLAVE PRIVADA DEL DESTINATARIO.</strong></li>
+<li><strong>HASH → resumen de longitud fija; si cambia el contenido, cambia el hash.</strong></li>
+<li><strong>CA → EMITE · RA → VERIFICA IDENTIDAD Y REGISTRA · CRL/OCSP → REVOCACIÓN Y ESTADO.</strong></li>
+<li><strong>CERTIFICADO → IDENTIDAD + CLAVE PÚBLICA + GARANTÍA DE LA CA.</strong></li>
+<li><strong>IZENPE → CERTIFICADOS VASCOS.</strong></li>
+<li><strong>B@K-Q → IDENTIFICACIÓN SIN CERTIFICADO.</strong></li>
+<li><strong>GILTZA → PLATAFORMA COMÚN / INTERMEDIARIO.</strong></li>
+<li><strong>VIAFIRMA → PORTAFIRMAS.</strong></li>
+<li><strong>DNIe → AUTENTICACIÓN + FIRMA</strong> (chip + certificados + PIN).</li>
+<li><strong>CUALIFICADA → avanzada + certificado cualificado + dispositivo cualificado</strong>; equivalente a firma manuscrita en el marco eIDAS.</li>
 </ul>
 
-<h2 id="10-conceptos-clave" class="tema-h2">10. Conceptos clave</h2>
+<h2 id="20-no-confundir" class="tema-h2">20. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto A</strong></th>
+<th><strong>Concepto B</strong></th>
+<th><strong>Diferencia clave</strong></th>
+</tr>
+<tr>
+<td><strong>Identificación</strong>: quién dices ser</td>
+<td><strong>Autenticación</strong>: cómo lo demuestras · <strong>Autorización</strong>: qué puedes hacer</td>
+<td>Tres pasos sucesivos y distintos</td>
+</tr>
+<tr>
+<td><strong>Autenticación</strong>: verificar identidad</td>
+<td><strong>Firma digital</strong>: vincular firmante y documento con integridad</td>
+<td>La firma no es «autenticación avanzada»</td>
+</tr>
+<tr>
+<td><strong>Firmar</strong>: atribución e integridad</td>
+<td><strong>Cifrar</strong>: confidencialidad</td>
+<td>Firmado sigue siendo legible; cifrado no</td>
+</tr>
+<tr>
+<td><strong>Clave privada</strong>: secreta, firma y descifra</td>
+<td><strong>Clave pública</strong>: distribuible, verifica y cifra</td>
+<td>Nunca se comparte la privada</td>
+</tr>
+<tr>
+<td><strong>Certificado</strong>: instrumento de identidad</td>
+<td><strong>Firma</strong>: resultado de una operación</td>
+<td>El certificado permite verificar quién firmó</td>
+</tr>
+<tr>
+<td><strong>CA</strong>: emite certificados</td>
+<td><strong>RA</strong>: verifica identidad y registra</td>
+<td>Primero la RA identifica, después la CA emite</td>
+</tr>
+<tr>
+<td><strong>CRL</strong>: lista de revocados</td>
+<td><strong>OCSP</strong>: consulta del estado de un certificado</td>
+<td>Lista frente a consulta puntual; ninguna emite</td>
+</tr>
+<tr>
+<td><strong>Caducidad</strong>: fin del periodo de validez</td>
+<td><strong>Revocación</strong>: invalidación anticipada</td>
+<td>Tiempo frente a decisión</td>
+</tr>
+<tr>
+<td><strong>Izenpe</strong>: prestador vasco</td>
+<td><strong>FNMT-RCM</strong>: ámbito estatal</td>
+<td>Equivalencia <strong>funcional</strong>, no identidad</td>
+</tr>
+<tr>
+<td><strong>Izenpe</strong>: emite certificados</td>
+<td><strong>Giltza</strong>: plataforma de identificación</td>
+<td>Instrumento frente a intermediario</td>
+</tr>
+<tr>
+<td><strong>b@k-Q</strong>: método de identificación</td>
+<td><strong>Giltza</strong>: plataforma que lo integra</td>
+<td>b@k-Q es uno de los métodos; Giltza, la capa común</td>
+</tr>
+<tr>
+<td><strong>b@k-Q</strong>: claves concertadas</td>
+<td><strong>Certificado digital</strong></td>
+<td>b@k-Q <strong>no</strong> es un certificado</td>
+</tr>
+<tr>
+<td><strong>Viafirma</strong>: portafirmas</td>
+<td><strong>Autoridad de certificación</strong></td>
+<td>Gestiona el proceso de firma; no emite certificados</td>
+</tr>
+<tr>
+<td><strong>DNIe</strong>: documento con chip y certificados</td>
+<td><strong>Certificado digital genérico</strong></td>
+<td>El DNIe es un soporte oficial que incorpora certificados</td>
+</tr>
+<tr>
+<td><strong>DNIe</strong>: algo que tengo</td>
+<td><strong>PIN</strong>: algo que sé</td>
+<td>Juntos constituyen dos factores</td>
+</tr>
+<tr>
+<td><strong>Contraseña</strong>: factor de conocimiento</td>
+<td><strong>Segundo factor</strong>: otra categoría</td>
+<td>Dos contraseñas no son MFA</td>
+</tr>
+<tr>
+<td><strong>Certificado de sede</strong>: identifica una sede</td>
+<td><strong>Certificado de representante</strong>: identifica a quien actúa por otro</td>
+<td>Un sitio frente a una persona en representación</td>
+</tr>
+</table></div>
+
+<h2 id="21-trampas-de-examen" class="tema-h2">21. Posibles trampas de examen</h2>
 <ul class="tema-lista">
-<li><strong>Los 3 factores de autenticación y MFA/2FA</strong>.</li>
-<li><strong>Firma digital</strong>: autoría + integridad (+ no repudio, Tema 22).</li>
-<li><strong>eIDAS</strong>: firma simple / avanzada / <strong>cualificada</strong> (= manuscrita).</li>
-<li><strong>Criptografía asimétrica</strong>: clave privada/pública; hash; con qué clave se firma y se verifica.</li>
-<li><strong>PKI, CA, RA, revocación (CRL/OCSP)</strong>.</li>
-<li><strong>Certificado digital</strong>: contenido y tipos (ciudadano / profesional-empleado público / sede); soportes tarjeta / software / nube.</li>
-<li><strong>Izenpe</strong> (CA vasca) ↔ FNMT (estatal); Certificado Ciudadano (tarjeta, 4 años).</li>
-<li><strong>b@k-Q</strong> (DNI/NIE + contraseña + coordenadas) ↔ Cl@ve PIN.</li>
-<li><strong>Giltza</strong> (plataforma común de identificación) ↔ Cl@ve.</li>
-<li><strong>Viafirma</strong>: portafirmas; certificado / OTP / biométrica; flujos de firma.</li>
-<li><strong>DNIe</strong>: 2 certificados (autenticación y firma), PIN, NFC en DNIe 4.0.</li>
+<li><strong>«Identificar y autenticar son lo mismo»</strong> — falso: <strong>decir quién eres</strong> frente a <strong>demostrarlo</strong>.</li>
+<li><strong>«Autenticar y autorizar son lo mismo»</strong> — falso: <strong>demostrar identidad</strong> frente a <strong>determinar qué se puede hacer</strong>.</li>
+<li><strong>«La firma digital es una autenticación avanzada»</strong> — falso: vincula al firmante <strong>con un documento</strong> y garantiza su <strong>integridad</strong>.</li>
+<li><strong>«Firmar es cifrar con la clave privada»</strong> — <strong>simplificación incorrecta</strong>: firmar produce <strong>atribución e integridad</strong>, no confidencialidad; el documento firmado sigue siendo legible.</li>
+<li><strong>«Se firma con la clave pública»</strong> — falso: se firma con la <strong>PRIVADA</strong> del firmante y se verifica con la <strong>PÚBLICA</strong>.</li>
+<li><strong>«Para cifrar a un destinatario se usa mi clave pública»</strong> — falso: se usa la <strong>clave PÚBLICA DEL DESTINATARIO</strong>.</li>
+<li><strong>«Dos contraseñas constituyen MFA»</strong> — falso: ambas son <strong>algo que sé</strong>; falta una <strong>categoría distinta</strong>.</li>
+<li><strong>«El certificado firma»</strong> — falso: el certificado <strong>vincula identidad y clave pública</strong>; quien firma es el titular con su <strong>clave privada</strong>.</li>
+<li><strong>«El certificado contiene la clave privada»</strong> — falso: contiene la <strong>pública</strong>; la privada la custodia el titular.</li>
+<li><strong>«La CA verifica la identidad del solicitante»</strong> — impreciso: esa es la función de la <strong>RA</strong>; la <strong>CA emite</strong>.</li>
+<li><strong>«CRL y OCSP emiten certificados»</strong> — falso: sirven para conocer la <strong>revocación o el estado</strong>.</li>
+<li><strong>«Caducado y revocado es lo mismo»</strong> — falso: <strong>tiempo</strong> frente a <strong>decisión anticipada</strong>.</li>
+<li><strong>«Giltza es un certificado»</strong> — falso: es una <strong>plataforma común de identificación</strong>.</li>
+<li><strong>«Giltza es simplemente otro método de autenticación»</strong> — falso: es el <strong>intermediario que integra</strong> los métodos.</li>
+<li><strong>«Izenpe y Giltza son lo mismo»</strong> — falso: <strong>emite certificados</strong> frente a <strong>plataforma de identificación</strong>.</li>
+<li><strong>«b@k-Q es un certificado digital»</strong> — falso: es <strong>identificación mediante claves concertadas, SIN certificado</strong>.</li>
+<li><strong>«b@k-Q y Cl@ve PIN son idénticos»</strong> — impreciso: <strong>equivalencia funcional aproximada</strong>, no identidad técnica. Lo mismo con <strong>Giltza y Cl@ve</strong>, y con <strong>Izenpe y FNMT</strong>.</li>
+<li><strong>«Viafirma es una autoridad de certificación»</strong> — falso: es una <strong>plataforma de firma y portafirmas</strong>.</li>
+<li><strong>«El DNIe es una simple tarjeta identificativa»</strong> — falso: incorpora <strong>chip criptográfico y certificados</strong> de autenticación y firma.</li>
+<li><strong>«El DNIe tiene un único certificado»</strong> — falso: incorpora certificados diferenciados de <strong>autenticación</strong> y de <strong>firma</strong>.</li>
+<li><strong>«Toda firma electrónica equivale a la manuscrita»</strong> — falso: esa equivalencia se predica de la <strong>firma electrónica cualificada</strong> en el marco eIDAS.</li>
+<li><strong>Colar contenido ajeno</strong>: ENS (T21), seguridad lógica general (T22), salvaguarda (T23) y phishing o malware (T25) no se desarrollan aquí.</li>
 </ul>
 
-<h2 id="11-posibles-puntos-de-examen" class="tema-h2">11. Posibles puntos de examen</h2>
+<h2 id="22-preguntas-tipo-test" class="tema-h2">22. Posibles preguntas tipo test</h2>
 <ul class="tema-lista">
-<li>Clasificar ejemplos en los <strong>tres factores de autenticación</strong> y decidir si un supuesto es MFA real.</li>
-<li><strong>Con qué clave se firma y con cuál se verifica</strong> — la trampa clásica del tema.</li>
-<li>Los <strong>tres niveles de firma eIDAS</strong> y cuál equivale a la manuscrita (cualificada).</li>
-<li>Qué garantiza la firma digital (<strong>autoría + integridad</strong>) y su relación con el hash.</li>
-<li>Funciones de <strong>CA y RA</strong>, y cómo se comprueba si un certificado está revocado (CRL/OCSP).</li>
-<li>Los <strong>equivalentes vasco-estatales</strong>: Giltza↔Cl@ve, Izenpe↔FNMT, b@k-Q↔Cl@ve PIN — tabla muy preguntable en esta convocatoria.</li>
-<li>Los <strong>tres elementos de b@k-Q</strong> (DNI/NIE + contraseña + tarjeta de coordenadas).</li>
-<li>Qué es <strong>Giltza</strong> y qué métodos de identificación admite.</li>
-<li>Qué modalidades de firma ofrece <strong>Viafirma</strong> (certificado, OTP, biométrica) y qué es un flujo de firma.</li>
-<li>Los <strong>dos certificados del DNIe</strong> y las novedades del DNIe 4.0 (NFC).</li>
+<li>Diferencia entre <strong>identificación, autenticación y autorización</strong>.</li>
+<li><strong>Concepto → pregunta</strong>: ¿quién dices ser? / ¿cómo lo demuestras? / ¿qué puedes hacer?</li>
+<li><strong>Ejemplo → factor</strong>: contraseña · tarjeta criptográfica · huella · token · PIN · rostro.</li>
+<li>¿Qué exige la <strong>MFA</strong> para considerarse tal?</li>
+<li>¿Constituyen MFA dos contraseñas? ¿Y contraseña más código en el móvil?</li>
+<li>¿Por qué el uso del <strong>DNIe</strong> combina dos factores?</li>
+<li>Diferencia entre <strong>autenticación</strong> y <strong>firma digital</strong>.</li>
+<li><strong>Definición</strong> de firma digital: ¿qué dos cosas permite verificar?</li>
+<li><strong>Niveles de firma</strong> en eIDAS y requisitos de la <strong>cualificada</strong>.</li>
+<li>¿Qué nivel de firma tiene <strong>efecto equivalente a la firma manuscrita</strong> en el marco eIDAS?</li>
+<li><strong>Clave → operación</strong>: firmar · verificar · cifrar para un destinatario · descifrar.</li>
+<li>¿Con qué clave se <strong>firma</strong>? ¿Con cuál se <strong>verifica</strong>?</li>
+<li>¿Con qué clave se <strong>cifra</strong> un documento dirigido a otra persona?</li>
+<li>¿Es correcto decir que firmar es «cifrar con la clave privada»?</li>
+<li>¿Qué es un <strong>hash</strong> y qué ocurre si cambia el contenido?</li>
+<li>¿Qué papel cumple el hash en el <strong>proceso de firma</strong>?</li>
+<li><strong>Definición</strong> de <strong>PKI</strong>: ¿incluye solo tecnología?</li>
+<li><strong>Elemento → función</strong>: CA · RA · CRL · OCSP.</li>
+<li>¿Quién <strong>verifica la identidad</strong> del solicitante y quién <strong>emite</strong> el certificado?</li>
+<li>Diferencia entre <strong>caducidad</strong> y <strong>revocación</strong>.</li>
+<li><strong>Definición</strong> y <strong>contenido</strong> de un certificado digital.</li>
+<li>¿Contiene el certificado la clave privada?</li>
+<li><strong>Tipo de certificado → titular</strong>: ciudadanía · empleado público · sede electrónica · representante.</li>
+<li>¿Son equivalentes el certificado de <strong>sede</strong> y el de <strong>representante</strong>?</li>
+<li><strong>Soportes</strong> del certificado: tarjeta, software y nube.</li>
+<li><strong>Sistema vasco → función</strong>: Izenpe · b@k-Q · Giltza · Viafirma.</li>
+<li>¿Qué es <strong>Izenpe</strong> y con qué entidad estatal guarda equivalencia funcional?</li>
+<li>¿Requiere <strong>b@k-Q</strong> un certificado digital?</li>
+<li>¿Es <strong>Giltza</strong> un certificado o una plataforma? ¿Qué métodos puede integrar?</li>
+<li>¿Cuál es la función principal de <strong>Viafirma</strong>? ¿Es una CA?</li>
+<li>¿Qué es un <strong>flujo de firma</strong>?</li>
+<li>Elementos del <strong>DNIe</strong> y sus dos certificados.</li>
+<li>¿Qué factor de autenticación representa el <strong>PIN</strong> del DNIe?</li>
+</ul>
+
+<h2 id="23-preguntas-cortas" class="tema-h2">23. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<h4 class="tema-h4">1. Diferencie identificación, autenticación y autorización</h4>
+<ul class="tema-lista">
+<li>Identificación: quién dices ser. Autenticación: cómo demuestras que eres esa identidad. Autorización: qué puedes hacer.</li>
+<li>Ejemplo administrativo con los tres pasos en una sede electrónica.</li>
+<li>Cierre: son pasos sucesivos; decir, demostrar y poder.</li>
+</ul>
+<h4 class="tema-h4">2. Explique los factores de autenticación y la MFA</h4>
+<ul class="tema-lista">
+<li>Algo que sé (contraseña, PIN), algo que tengo (tarjeta, teléfono, token), algo que soy (biometría).</li>
+<li>MFA: dos o más factores independientes de categorías distintas.</li>
+<li>Cierre: dos contraseñas no son MFA; contraseña más código en el móvil, sí.</li>
+</ul>
+<h4 class="tema-h4">3. Diferencie firma digital y autenticación</h4>
+<ul class="tema-lista">
+<li>Autenticación: verificar la identidad de quien accede; efecto sobre una sesión.</li>
+<li>Firma digital: vincular al firmante con un documento y permitir verificar su integridad; efecto persistente sobre el documento.</li>
+<li>Cierre: la firma no es una autenticación avanzada; por eso muchos certificados tienen usos diferenciados.</li>
+</ul>
+<h4 class="tema-h4">4. Explique la firma digital basada en criptografía asimétrica</h4>
+<ul class="tema-lista">
+<li>Par de claves: privada secreta, pública distribuible.</li>
+<li>Proceso: hash del documento, generación de la firma con la clave privada, verificación con la clave pública, comprobación de integridad.</li>
+<li>Cierre: firma con la privada, verificación con la pública; no debe describirse como «cifrar con la privada».</li>
+</ul>
+<h4 class="tema-h4">5. Explique la PKI</h4>
+<ul class="tema-lista">
+<li>Definición: infraestructura de clave pública con tecnologías, sistemas, personas, políticas y procedimientos para gestionar certificados y claves.</li>
+<li>Componentes: CA, RA, mecanismos de revocación, CRL y OCSP.</li>
+<li>Cierre: no es solo tecnología; incluye el marco organizativo y procedimental.</li>
+</ul>
+<h4 class="tema-h4">6. Diferencie CA y RA</h4>
+<ul class="tema-lista">
+<li>RA: verifica la identidad del solicitante y gestiona su registro.</li>
+<li>CA: emite el certificado y lo firma, respondiendo de él.</li>
+<li>Cierre: primero identifica la RA, después emite la CA.</li>
+</ul>
+<h4 class="tema-h4">7. Explique el certificado digital</h4>
+<ul class="tema-lista">
+<li>Definición: documento electrónico firmado por una CA que vincula una clave pública con la identidad de su titular.</li>
+<li>Contenido: titular, clave pública, emisor, validez, número de serie y firma de la CA.</li>
+<li>Tipos: ciudadanía, profesional o de empleado público, sede electrónica y representante.</li>
+<li>Cierre: certificado no es firma; y contiene la clave pública, no la privada.</li>
+</ul>
+<h4 class="tema-h4">8. Explique Izenpe</h4>
+<ul class="tema-lista">
+<li>Qué es: prestador de servicios de confianza y certificación de referencia del ámbito público vasco.</li>
+<li>Qué ofrece: certificados para la ciudadanía y certificado profesional o de empleado público, para identificación y firma electrónica.</li>
+<li>Cierre: equivalencia funcional con la FNMT-RCM en el ámbito estatal; los periodos de validez y productos concretos son datos operativos.</li>
+</ul>
+<h4 class="tema-h4">9. Explique b@k-Q</h4>
+<ul class="tema-lista">
+<li>Qué es: sistema vasco de identificación electrónica mediante claves concertadas, sin necesidad de certificado digital.</li>
+<li>Ventaja: no requiere tarjeta ni lector, lo que lo hace más accesible.</li>
+<li>Cierre: equivalencia funcional aproximada con Cl@ve PIN; su composición concreta y su nivel de garantía son datos que deben verificarse en la documentación vigente.</li>
+</ul>
+<h4 class="tema-h4">10. Explique Giltza</h4>
+<ul class="tema-lista">
+<li>Qué es: plataforma común de identificación electrónica de las Administraciones Públicas vascas.</li>
+<li>Función: intermediaria entre los servicios electrónicos y los métodos de identificación admitidos (certificado, b@k-Q y otros reconocidos).</li>
+<li>Cierre: no es un certificado ni un método más; equivalencia funcional aproximada con Cl@ve.</li>
+</ul>
+<h4 class="tema-h4">11. Explique Viafirma</h4>
+<ul class="tema-lista">
+<li>Qué es: plataforma privada de firma electrónica y portafirmas para gestionar procesos de firma en organizaciones.</li>
+<li>Puede permitir firma con certificado y, según producto y configuración, OTP o biometría, además de flujos de firma.</li>
+<li>Cierre: no es una autoridad de certificación; gestiona el proceso, no emite certificados.</li>
+</ul>
+<h4 class="tema-h4">12. Explique el DNI electrónico</h4>
+<ul class="tema-lista">
+<li>Qué es: documento oficial español que incorpora un chip criptográfico y certificados digitales.</li>
+<li>Elementos: chip, certificado de autenticación, certificado de firma y PIN.</li>
+<li>Cierre: sirve para autenticación y firma; combina algo que tengo (la tarjeta) y algo que sé (el PIN).</li>
+</ul>
+
+<h2 id="24-supuestos-practicos" class="tema-h2">24. Supuestos prácticos</h2>
+<h4 class="tema-h4">Caso 1 — No puede firmar con su certificado</h4>
+<p><strong>Escenario</strong>: una persona usuaria informa al CAU de que <strong>no consigue firmar</strong> un documento con su certificado.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué se comprueba primero?</strong> La <strong>vigencia</strong> del certificado: que no esté <strong>caducado</strong> ni <strong>revocado</strong>.</li>
+<li><strong>b) ¿Qué más debe revisarse?</strong> El <strong>dispositivo o almacenamiento</strong> donde reside (tarjeta y lector, almacén del equipo o custodia remota), la <strong>disponibilidad de la clave privada</strong>, el <strong>PIN</strong> —incluido si está bloqueado por intentos fallidos— y la <strong>aplicación de firma</strong> utilizada.</li>
+<li><strong>c) ¿Cómo se acota el problema?</strong> Comprobando si <strong>puede identificarse</strong> pero no firmar: eso apunta al <strong>certificado o uso de firma</strong>, no al de autenticación.</li>
+<li><strong>d) ¿Qué no procede?</strong> Concluir que «el certificado no sirve» sin verificar antes soporte, PIN y aplicación.</li>
+</ul>
+<h4 class="tema-h4">Caso 2 — Certificado caducado</h4>
+<p><strong>Escenario</strong>: al intentar acceder a un servicio, el sistema informa de que el certificado <strong>ha caducado</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué significa exactamente?</strong> Que ha <strong>concluido su periodo de validez</strong>. Es distinto de la <strong>revocación</strong>, que es una <strong>invalidación anticipada</strong> por decisión.</li>
+<li><strong>b) ¿Afecta igual a identificación y a firma?</strong> Un certificado caducado <strong>no es válido para ninguno de los dos usos</strong>. Conviene, no obstante, distinguir <strong>qué certificado</strong> ha caducado si el soporte incorpora varios con usos diferenciados.</li>
+<li><strong>c) ¿Qué procede?</strong> <strong>Renovar u obtener un nuevo certificado</strong> conforme al procedimiento del prestador, que exigirá la correspondiente <strong>verificación de identidad</strong> ante la <strong>RA</strong>.</li>
+<li><strong>d) ¿Se resuelve borrando y reinstalando?</strong> No: la caducidad es una <strong>condición del certificado</strong>, no un problema de instalación.</li>
+</ul>
+<h4 class="tema-h4">Caso 3 — DNIe sin lector físico</h4>
+<p><strong>Escenario</strong>: una persona quiere utilizar su <strong>DNIe</strong> pero <strong>no dispone de lector</strong> de tarjetas.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué alternativa existe?</strong> Valorar el uso mediante <strong>NFC</strong>, <strong>si el dispositivo, el documento y el escenario lo permiten</strong>. Es una vía de uso, no una característica que pueda darse por supuesta en todos los casos.</li>
+<li><strong>b) ¿Qué debe verificarse?</strong> Que el <strong>dispositivo disponga de NFC</strong>, que el <strong>documento lo admita</strong> y que el <strong>servicio y la aplicación</strong> soporten esa vía.</li>
+<li><strong>c) ¿Qué otras opciones caben?</strong> Utilizar <strong>otro método de identificación admitido</strong> por el servicio —por ejemplo, un certificado en otro soporte o <strong>b@k-Q</strong>, si el trámite lo acepta.</li>
+<li><strong>d) Delimitación.</strong> El núcleo del DNIe sigue siendo <strong>chip + certificados + PIN</strong>; el NFC es <strong>actualidad</strong>, no el concepto principal.</li>
+</ul>
+<h4 class="tema-h4">Caso 4 — Un servicio admite certificado y b@k-Q</h4>
+<p><strong>Escenario</strong>: una aplicación de la Administración vasca permite identificarse <strong>con certificado de Izenpe o con b@k-Q</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué elemento hace posible esa convivencia?</strong> <strong>Giltza</strong> puede actuar como <strong>plataforma común de identificación</strong>, intermediando entre el servicio y los distintos métodos admitidos.</li>
+<li><strong>b) ¿Es Giltza uno de esos métodos?</strong> <strong>No.</strong> Giltza es el <strong>intermediario</strong>; el certificado y b@k-Q son los <strong>métodos</strong> que integra.</li>
+<li><strong>c) ¿Qué ventaja aporta?</strong> Que el servicio <strong>no tenga que implementar por separado</strong> la verificación de cada método.</li>
+<li><strong>d) ¿Qué diferencia hay entre los dos métodos ofrecidos?</strong> El <strong>certificado</strong> es un instrumento emitido por una CA que vincula identidad y clave pública; <strong>b@k-Q</strong> es identificación mediante <strong>claves concertadas, sin certificado</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 5 — Documento que deben firmar varias personas en orden</h4>
+<p><strong>Escenario</strong>: un informe debe ser firmado <strong>primero por la persona técnica y después por la responsable del área</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué concepto describe la situación?</strong> Un <strong>flujo de firma</strong>: circuito con varios firmantes en un <strong>orden determinado</strong>.</li>
+<li><strong>b) ¿Qué herramienta lo gestiona?</strong> Una <strong>plataforma de firma o portafirmas</strong> como <strong>Viafirma</strong>, que controla orden, avisos y estado de cada firma.</li>
+<li><strong>c) ¿Emite Viafirma los certificados con los que se firma?</strong> <strong>No</strong>: los emite la <strong>CA</strong> correspondiente —por ejemplo, <strong>Izenpe</strong>. Viafirma <strong>gestiona el proceso</strong>.</li>
+<li><strong>d) ¿Qué certificado usaría cada firmante?</strong> Previsiblemente uno <strong>profesional o de empleado público</strong>, que identifica a la persona <strong>junto con su relación o cargo</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 6 — Un documento firmado ha sido modificado</h4>
+<p><strong>Escenario</strong>: se recibe un documento firmado y, al validarlo, la aplicación indica que <strong>la firma no es válida</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué explica ese resultado?</strong> Que <strong>la verificación de integridad falla</strong>: el contenido <strong>no coincide</strong> con el que se firmó.</li>
+<li><strong>b) ¿Por qué se detecta?</strong> Porque la firma se genera sobre el <strong>hash</strong> del documento y <strong>si el contenido cambia, cambia el hash</strong>: al recalcularlo en la verificación, ya no coincide.</li>
+<li><strong>c) ¿Significa necesariamente que hubo mala fe?</strong> No: puede deberse a una <strong>modificación posterior</strong> del fichero, incluso involuntaria. Lo que acredita la verificación es que <strong>el contenido no es el firmado</strong>.</li>
+<li><strong>d) ¿Qué procede?</strong> <strong>No dar por válido</strong> el documento y solicitar el <strong>original firmado</strong>, dejando constancia de la incidencia.</li>
+</ul>
+<h4 class="tema-h4">Caso 7 — Puede identificarse pero no firmar</h4>
+<p><strong>Escenario</strong>: una persona <strong>accede correctamente</strong> a la aplicación con su certificado, pero <strong>al firmar el trámite se produce un error</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué indica esa asimetría?</strong> Que el problema afecta al <strong>uso de firma</strong>, no al de <strong>autenticación</strong>: son <strong>funciones distintas</strong> y pueden apoyarse en <strong>certificados o usos diferenciados</strong>.</li>
+<li><strong>b) ¿Qué se revisa?</strong> El <strong>certificado de firma</strong> y su <strong>vigencia</strong>, el <strong>uso habilitado</strong> del certificado, la <strong>disponibilidad de la clave privada</strong>, el <strong>PIN de firma</strong> y la <strong>aplicación o componente de firma</strong>.</li>
+<li><strong>c) ¿Qué caso concreto lo ilustra?</strong> El <strong>DNIe</strong>, que incorpora <strong>un certificado de autenticación y otro de firma</strong>: un problema en el segundo permite entrar pero no firmar.</li>
+<li><strong>d) ¿Qué conclusión debe trasladarse?</strong> Que <strong>identificarse no es firmar</strong>, y que el diagnóstico debe separar ambos usos antes de escalar.</li>
+</ul>
+<h4 class="tema-h4">Caso 8 — Solicitud de un certificado de empleado público</h4>
+<p><strong>Escenario</strong>: una persona incorporada al ayuntamiento necesita un <strong>certificado de empleado público</strong> para tramitar expedientes.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿En qué se diferencia de su certificado de ciudadanía?</strong> El de <strong>empleado público</strong> identifica a la persona <strong>junto con su relación o cargo profesional</strong>; el de ciudadanía la identifica <strong>en su condición personal</strong>.</li>
+<li><strong>b) ¿Quién verifica la identidad y quién emite?</strong> La <strong>RA</strong> <strong>verifica la identidad y gestiona el registro</strong>; la <strong>CA</strong> —en el ámbito público vasco, típicamente <strong>Izenpe</strong>— <strong>emite el certificado</strong>.</li>
+<li><strong>c) ¿Qué ocurre si cesa en el puesto?</strong> Procede la <strong>revocación</strong> del certificado: invalidación <strong>anticipada</strong>, antes de su caducidad, porque desaparece la relación que lo amparaba.</li>
+<li><strong>d) ¿Cómo sabrá un tercero que está revocado?</strong> Consultando la <strong>CRL</strong> o mediante <strong>OCSP</strong>.</li>
+</ul>
+
+<h2 id="25-matriz-de-memorizacion" class="tema-h2">25. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Lo que debo recordar</strong></th>
+</tr>
+<tr>
+<td><strong>Identificación</strong></td>
+<td>¿Quién dices ser?</td>
+</tr>
+<tr>
+<td><strong>Autenticación</strong></td>
+<td>¿Cómo demuestras que eres esa identidad?</td>
+</tr>
+<tr>
+<td><strong>Autorización</strong></td>
+<td>¿Qué puedes hacer?</td>
+</tr>
+<tr>
+<td><strong>Factor conocimiento</strong></td>
+<td>Algo que sé: contraseña, PIN</td>
+</tr>
+<tr>
+<td><strong>Factor posesión</strong></td>
+<td>Algo que tengo: tarjeta, teléfono, token</td>
+</tr>
+<tr>
+<td><strong>Factor inherencia</strong></td>
+<td>Algo que soy: huella, rostro</td>
+</tr>
+<tr>
+<td><strong>MFA</strong></td>
+<td>Dos o más factores independientes de <strong>categorías distintas</strong></td>
+</tr>
+<tr>
+<td><strong>Firma digital</strong></td>
+<td>Vincula al firmante con un documento y permite verificar su integridad</td>
+</tr>
+<tr>
+<td><strong>Firma cualificada</strong></td>
+<td>Avanzada + certificado cualificado + dispositivo cualificado; equivalente a manuscrita en eIDAS</td>
+</tr>
+<tr>
+<td><strong>Clave privada</strong></td>
+<td>Secreta: <strong>firma</strong> y <strong>descifra</strong></td>
+</tr>
+<tr>
+<td><strong>Clave pública</strong></td>
+<td>Distribuible: <strong>verifica</strong> y <strong>cifra para su titular</strong></td>
+</tr>
+<tr>
+<td><strong>Hash</strong></td>
+<td>Resumen de longitud fija; si cambia el contenido, cambia el hash</td>
+</tr>
+<tr>
+<td><strong>PKI</strong></td>
+<td>Tecnologías, sistemas, personas, políticas y procedimientos para gestionar certificados y claves</td>
+</tr>
+<tr>
+<td><strong>CA</strong></td>
+<td>Emite los certificados</td>
+</tr>
+<tr>
+<td><strong>RA</strong></td>
+<td>Verifica la identidad y gestiona el registro del solicitante</td>
+</tr>
+<tr>
+<td><strong>Revocación</strong></td>
+<td>Invalida un certificado antes de su caducidad</td>
+</tr>
+<tr>
+<td><strong>CRL</strong></td>
+<td>Lista de certificados revocados</td>
+</tr>
+<tr>
+<td><strong>OCSP</strong></td>
+<td>Consulta del estado de un certificado</td>
+</tr>
+<tr>
+<td><strong>Certificado digital</strong></td>
+<td>Documento electrónico firmado por una CA que vincula clave pública e identidad del titular</td>
+</tr>
+<tr>
+<td><strong>Certificado profesional</strong></td>
+<td>Identifica a la persona junto con su relación o cargo profesional</td>
+</tr>
+<tr>
+<td><strong>Izenpe</strong></td>
+<td>Prestador de servicios de confianza y certificación del ámbito público vasco</td>
+</tr>
+<tr>
+<td><strong>b@k-Q</strong></td>
+<td>Identificación electrónica mediante claves concertadas, sin certificado</td>
+</tr>
+<tr>
+<td><strong>Giltza</strong></td>
+<td>Plataforma común de identificación de las AAPP vascas; intermediaria entre servicios y métodos</td>
+</tr>
+<tr>
+<td><strong>Viafirma</strong></td>
+<td>Plataforma privada de firma electrónica y portafirmas; no es una CA</td>
+</tr>
+<tr>
+<td><strong>DNIe</strong></td>
+<td>Documento oficial con chip criptográfico y certificados de autenticación y firma; PIN</td>
+</tr>
+</table></div>
+
+<h2 id="26-resumen-final" class="tema-h2">26. Resumen final: si mañana fuera el examen</h2>
+<ul class="tema-lista">
+<li><strong>IDENTIFICACIÓN</strong> (¿quién dices ser?) → <strong>AUTENTICACIÓN</strong> (¿cómo lo demuestras?) → <strong>AUTORIZACIÓN</strong> (¿qué puedes hacer?).</li>
+<li><strong>Factores</strong>: <strong>SÉ</strong> (contraseña, PIN) · <strong>TENGO</strong> (tarjeta, móvil, token) · <strong>SOY</strong> (biometría). <strong>MFA = dos o más factores de CATEGORÍAS DISTINTAS.</strong> Dos contraseñas <strong>no</strong> son MFA.</li>
+<li><strong>Autenticación ≠ firma digital</strong>: una verifica <strong>identidad</strong>; la otra <strong>vincula al firmante con un documento</strong> y permite comprobar su <strong>integridad</strong>.</li>
+<li><strong>eIDAS</strong>: <strong>simple → avanzada → cualificada</strong>. La <strong>cualificada</strong> = avanzada + <strong>certificado cualificado</strong> + <strong>dispositivo cualificado</strong>, con <strong>efecto equivalente a la firma manuscrita</strong>.</li>
+<li><strong>Proceso de firma</strong>: hash del documento → firma con la <strong>clave PRIVADA</strong> → verificación con la <strong>clave PÚBLICA</strong> → comprobación de <strong>integridad</strong>.</li>
+<li><strong>LA TABLA CLAVE</strong>: <strong>firmar → privada del firmante · verificar → pública del firmante · cifrar → pública del destinatario · descifrar → privada del destinatario</strong>. <strong>Firmar NO es cifrar.</strong></li>
+<li><strong>Hash</strong> = resumen de <strong>longitud fija</strong>; si cambia el contenido, <strong>cambia el hash</strong> — de ahí la detección de modificaciones.</li>
+<li><strong>PKI</strong> = tecnologías, sistemas, <strong>personas, políticas y procedimientos</strong>. <strong>CA emite · RA verifica identidad y registra · CRL lista revocados · OCSP consulta estado.</strong> <strong>Caducidad = tiempo; revocación = decisión anticipada.</strong></li>
+<li><strong>Certificado</strong> = <strong>identidad + clave pública + garantía de la CA</strong>; contiene la <strong>pública</strong>, nunca la privada. Tipos: <strong>ciudadanía · profesional o empleado público · sede electrónica · representante</strong> (sede y representante <strong>no</strong> son lo mismo). Soportes: <strong>tarjeta, software y nube</strong>.</li>
+<li><strong>IZENPE → EMITE CERTIFICADOS</strong> en el ámbito público vasco (equivalencia funcional con FNMT-RCM).</li>
+<li><strong>B@K-Q → IDENTIFICACIÓN SIN CERTIFICADO</strong>, mediante claves concertadas (equivalencia funcional aproximada con Cl@ve PIN).</li>
+<li><strong>GILTZA → PLATAFORMA COMÚN / INTERMEDIARIO</strong> que integra certificado, b@k-Q y otros métodos reconocidos. <strong>No es un certificado ni un método más</strong> (equivalencia funcional aproximada con Cl@ve).</li>
+<li><strong>VIAFIRMA → PORTAFIRMAS</strong>: gestiona procesos y <strong>flujos de firma</strong>. <strong>No es una autoridad de certificación.</strong></li>
+<li><strong>DNIe → AUTENTICACIÓN + FIRMA</strong>: <strong>chip + certificado de autenticación + certificado de firma + PIN</strong>. Tarjeta (<strong>tengo</strong>) + PIN (<strong>sé</strong>) = <strong>dos factores</strong>.</li>
+</ul>
+
+<h2 id="27-actualidad" class="tema-h2">27. Actualidad de sistemas de identificación y firma — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Información sujeta a cambio · Fecha de actualización de estos apuntes: agosto de 2026</strong><br>Todo lo recogido aquí es <strong>dato operativo</strong>, no núcleo conceptual. Cuando el <strong>documento o la guía oficial de la convocatoria</strong> establezca un dato concreto, ese dato es <strong>contenido de examen</strong>, pero debe estudiarse sabiendo que es <strong>susceptible de cambiar</strong> y contrastarse con la <strong>documentación oficial vigente</strong>.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Izenpe — vigencias y productos</strong>: los <strong>periodos de validez</strong> de los certificados de ciudadanía y de empleado público, sus <strong>denominaciones comerciales</strong> y los <strong>soportes ofrecidos</strong> (tarjeta, software, nube) son <strong>datos operativos</strong> que la entidad puede modificar. El material de estudio de la convocatoria ha venido recogiendo una vigencia de <strong>cuatro años</strong> para los certificados de ciudadanía y de empleado público: <strong>si la guía oficial mantiene ese dato, es exigible</strong>, pero conviene verificarlo antes del examen. Lo <strong>estable</strong> es la función: <strong>Izenpe emite certificados de identificación y firma en el ámbito público vasco</strong>.</li>
+<li><strong>b@k-Q — composición operativa</strong>: la combinación concreta de elementos del sistema (documento identificativo, contraseña con un número determinado de caracteres, tarjeta de coordenadas u otros mecanismos) es un <strong>dato operativo</strong>. Si el material oficial vigente de la convocatoria mantiene una composición determinada, <strong>debe estudiarse como tal</strong>, identificándola siempre como dato susceptible de cambio. Lo <strong>estable</strong> es: <strong>identificación mediante claves concertadas, sin certificado digital</strong>.</li>
+<li><strong>b@k-Q — nivel de garantía</strong>: <strong>no debe afirmarse</strong> que corresponda necesariamente a un nivel «bajo» o «medio» salvo que la <strong>fuente normativa aplicable</strong> lo establezca expresamente para el caso concreto. La admisión de b@k-Q en cada trámite depende de lo que <strong>el servicio</strong> determine.</li>
+<li><strong>Giltza — evolución</strong>: como plataforma común, puede <strong>incorporar o retirar métodos de identificación</strong> y modificar su integración con los servicios electrónicos. Lo <strong>estable</strong> es su papel de <strong>intermediario</strong>; la lista concreta de métodos admitidos en un momento dado es <strong>actualidad</strong>.</li>
+<li><strong>Viafirma — modalidades</strong>: las modalidades disponibles (firma con certificado, <strong>OTP</strong>, <strong>biometría</strong>, tipos de flujo) dependen del <strong>producto, la versión y la configuración</strong> contratada por cada organización. <strong>No son características universales</strong> ni deben presentarse como equivalencias jurídicas automáticas. Lo <strong>estable</strong> es su función de <strong>portafirmas y plataforma de firma</strong>.</li>
+<li><strong>DNIe — versiones y NFC</strong>: las sucesivas versiones del documento han incorporado la posibilidad de uso mediante <strong>NFC</strong> con dispositivos compatibles (habitualmente asociada al <strong>DNIe 4.0</strong>), lo que permite prescindir del lector físico <strong>cuando el dispositivo, el documento y el servicio lo permiten</strong>. Es <strong>ampliación</strong>: el <strong>núcleo</strong> sigue siendo <strong>chip + certificados de autenticación y firma + PIN</strong>.</li>
+<li><strong>Marco de firma electrónica</strong>: el marco europeo de identificación electrónica y servicios de confianza es objeto de <strong>desarrollo normativo continuado</strong>. Para este tema basta con los <strong>tres niveles de firma</strong> y con la equivalencia de la <strong>cualificada</strong> con la firma manuscrita; cualquier evolución posterior debe tratarse como <strong>actualidad</strong> y no como contenido nuclear.</li>
 </ul>
   </div>
 </article>
