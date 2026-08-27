@@ -1,144 +1,1093 @@
 <article class="tema-articulo">
   <header class="tema-cabecera">
     <div class="tema-cabecera__id">T29</div>
-    <h1 class="tema-cabecera__titulo">Seguridad: cortafuegos, protocolos seguros (IPSec, SSL…) redes privadas virtuales</h1>
-    <div class="tema-cabecera__meta">Bloque IV · Comunicaciones y redes — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
+    <h1 class="tema-cabecera__titulo">Seguridad: cortafuegos, protocolos seguros (IPSec, SSL…), redes privadas virtuales</h1>
+    <div class="tema-cabecera__meta">Bloque IV · Redes y comunicaciones — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
   </header>
 
   <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
-<li><a href="#1-cortafuegos-firewall-concepto-y-funcionamiento">1. Cortafuegos (firewall): concepto y funcionamiento</a></li>
-<li><a href="#2-tipos-de-cortafuegos-y-su-evolución">2. Tipos de cortafuegos y su evolución</a></li>
-<li><a href="#3-arquitecturas-de-red-con-cortafuegos-la-dmz">3. Arquitecturas de red con cortafuegos: la DMZ</a></li>
-<li><a href="#4-protocolos-seguros-ssltls">4. Protocolos seguros: SSL/TLS</a></li>
-<li><a href="#5-protocolos-seguros-ipsec">5. Protocolos seguros: IPSec</a></li>
-<li><a href="#6-redes-privadas-virtuales-vpn">6. Redes privadas virtuales (VPN)</a></li>
-<li><a href="#7-resumen-para-estudiar">7. Resumen para estudiar</a></li>
-<li><a href="#8-conceptos-clave">8. Conceptos clave</a></li>
-<li><a href="#9-posibles-puntos-de-examen">9. Posibles puntos de examen</a></li>
+<li><a href="#1-cortafuegos">1. El cortafuegos: concepto y reglas</a></li>
+<li><a href="#2-politica-por-defecto">2. La política por defecto</a></li>
+<li><a href="#3-tipos-de-firewall">3. Tipos de cortafuegos</a></li>
+<li><a href="#4-host-vs-perimetral">4. Cortafuegos de host y perimetral</a></li>
+<li><a href="#5-dmz">5. La DMZ</a></li>
+<li><a href="#6-ids-e-ips">6. IDS e IPS</a></li>
+<li><a href="#7-tls">7. TLS</a></li>
+<li><a href="#8-handshake">8. El handshake de TLS</a></li>
+<li><a href="#9-https">9. HTTPS</a></li>
+<li><a href="#10-ssl-vs-tls">10. SSL frente a TLS</a></li>
+<li><a href="#11-ipsec">11. IPSec</a></li>
+<li><a href="#12-modos-ipsec">12. Modo transporte y modo túnel</a></li>
+<li><a href="#13-ah-y-esp">13. AH y ESP</a></li>
+<li><a href="#14-vpn">14. Redes privadas virtuales (VPN)</a></li>
+<li><a href="#15-tipos-de-vpn">15. Client-to-site y site-to-site</a></li>
+<li><a href="#16-ipsec-vs-vpn">16. IPSec frente a VPN y firewall frente a VPN</a></li>
+<li><a href="#17-vpn-basada-en-tls">17. VPN basada en TLS: OpenVPN y WireGuard</a></li>
+<li><a href="#18-split-tunneling">18. Full tunnel y split tunneling</a></li>
+<li><a href="#19-anclas-de-memoria">19. Anclas de memoria</a></li>
+<li><a href="#20-no-confundir">20. No confundir</a></li>
+<li><a href="#21-trampas-de-examen">21. Posibles trampas de examen</a></li>
+<li><a href="#22-preguntas-tipo-test">22. Posibles preguntas tipo test</a></li>
+<li><a href="#23-preguntas-cortas">23. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#24-supuestos-practicos">24. Supuestos prácticos</a></li>
+<li><a href="#25-matriz-de-memorizacion">25. Matriz de memorización</a></li>
+<li><a href="#26-resumen-final">26. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#27-actualidad">27. Actualidad de protocolos seguros y VPN — datos fechados</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
 
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>Este tema aplica a la seguridad de red los conceptos generales ya vistos en los Temas 21 y 22 (amenazas, vulnerabilidades, requisitos del ENS) y se apoya en el modelo OSI/TCP/IP y en los equipos de interconexión estudiados en los Temas 27 y 28. Las redes inalámbricas y la movilidad, con sus propios mecanismos de seguridad, se desarrollan en el Tema 30.</th>
+<th><strong>⚠️ No confundir — fronteras del tema</strong><br>Este tema trata <strong>cortafuegos, protocolos seguros y VPN</strong>.<br><strong>Tema 21</strong> → ENS. <strong>Tema 22</strong> → amenazas y vulnerabilidades. <strong>Tema 24</strong> → certificados y criptografía. <strong>Tema 27</strong> → modelos OSI y TCP/IP. <strong>Tema 28</strong> → redes y equipos de interconexión. <strong>Tema 30</strong> → Wi-Fi y movilidad.<br>Esos contenidos solo se citan aquí <strong>para contextualizar</strong>.</th>
 </tr>
 </table></div>
-<h2 id="1-cortafuegos-firewall-concepto-y-funcionamiento" class="tema-h2">1. Cortafuegos (firewall): concepto y funcionamiento</h2>
-<p>Un <strong>cortafuegos (firewall)</strong> es un sistema, hardware o software, que controla el tráfico de red que entra y sale de una red o de un equipo, permitiendo o bloqueando ese tráfico según un conjunto de reglas predefinidas. Suele situarse en la frontera entre una red de confianza (la red interna de la organización) y una red no confiable (típicamente Internet).</p>
-<p>Las reglas de un cortafuegos se definen habitualmente en función de la dirección IP de origen y destino (Tema 27), el puerto, el protocolo (TCP o UDP) y el sentido del tráfico (entrante o saliente).</p>
+
+<h2 id="1-cortafuegos" class="tema-h2">1. El cortafuegos: concepto y reglas</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>La buena práctica de seguridad, coherente con el principio de mínimo privilegio ya visto en los Temas 9, 12, 14 y 21, es configurar el cortafuegos con una política por defecto de <strong>denegación</strong>: se bloquea todo el tráfico salvo el que se ha permitido de forma explícita (lista blanca), en lugar de permitir todo salvo lo expresamente bloqueado (lista negra). La primera política exige más trabajo de configuración inicial, pero reduce drásticamente la superficie de ataque frente a tráfico no previsto.</th>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>Cortafuegos o firewall</strong> → <strong>sistema hardware o software que controla el tráfico de red aplicando reglas de seguridad</strong>.<br><strong>ANCLA: FIREWALL → FILTRA.</strong></th>
 </tr>
 </table></div>
-<h2 id="2-tipos-de-cortafuegos-y-su-evolución" class="tema-h2">2. Tipos de cortafuegos y su evolución</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Criterio de la regla</strong></th>
+<th><strong>Qué examina</strong></th>
+</tr>
+<tr>
+<td><strong>IP origen</strong></td>
+<td>Desde dónde procede el tráfico</td>
+</tr>
+<tr>
+<td><strong>IP destino</strong></td>
+<td>Hacia dónde se dirige</td>
+</tr>
+<tr>
+<td><strong>Puerto</strong></td>
+<td>Qué servicio se pretende alcanzar</td>
+</tr>
+<tr>
+<td><strong>Protocolo</strong></td>
+<td>TCP, UDP, ICMP u otros</td>
+</tr>
+<tr>
+<td><strong>Sentido</strong></td>
+<td>Entrante o saliente</td>
+</tr>
+<tr>
+<td><strong>Estado de la conexión</strong></td>
+<td>Si forma parte de una conexión ya establecida</td>
+</tr>
+<tr>
+<td><strong>Aplicación</strong></td>
+<td>Qué aplicación genera el tráfico, <strong>según el tipo de firewall</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — la estructura de una regla</strong><br>Una regla responde siempre a la misma pregunta: <strong>¿QUIÉN, HACIA DÓNDE, POR QUÉ SERVICIO, EN QUÉ SENTIDO Y EN QUÉ ESTADO?</strong> — y decide <strong>PERMITIR o DENEGAR</strong>.<br>Los criterios disponibles <strong>dependen del tipo de cortafuegos</strong>: no todos pueden razonar sobre <strong>estado</strong> ni sobre <strong>aplicación</strong>.</th>
+</tr>
+</table></div>
+
+
+<h2 id="2-politica-por-defecto" class="tema-h2">2. La política por defecto</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>Deny by default</strong> (denegación por defecto) → <strong>bloquear todo salvo lo explícitamente permitido</strong>.<br>Es una <strong>buena práctica</strong> coherente con el principio de <strong>mínimo privilegio</strong>: se abre únicamente lo que hace falta y se justifica cada excepción.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Cautela — no es un dogma universal</strong><br>No debe afirmarse que <strong>«todo firewall debe obligatoriamente bloquear todo»</strong>.<br><strong>Deny by default es una política de diseño habitual y recomendable, no una regla universal</strong>: la política aplicable la determina la organización en función de su análisis de riesgos y de la función del segmento protegido.<br>Formulación segura: <strong>«la denegación por defecto es la buena práctica generalmente recomendada»</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Ejemplo</strong><br>Con <strong>deny by default</strong>, un servidor nuevo no acepta ninguna conexión hasta que <strong>alguien abre expresamente</strong> el puerto correspondiente. Con la política inversa —permitir salvo lo prohibido— <strong>cualquier servicio que se active queda accesible</strong> sin que nadie lo haya decidido.<br>La diferencia práctica: <strong>en un caso los errores se traducen en un servicio que no funciona; en el otro, en una exposición no advertida</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="3-tipos-de-firewall" class="tema-h2">3. Tipos de cortafuegos</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Tipo</strong></th>
+<th><strong>Qué hace</strong></th>
+<th><strong>Ancla</strong></th>
+</tr>
+<tr>
+<td><strong>Packet filtering</strong><br>(filtrado de paquetes)</td>
+<td><strong>Examina los paquetes individualmente</strong>, sin considerar el contexto de la conexión</td>
+<td><strong>PAQUETE A PAQUETE</strong></td>
+</tr>
+<tr>
+<td><strong>Stateful inspection</strong><br>(inspección de estado)</td>
+<td><strong>Mantiene el estado de las conexiones</strong> y decide en función de él</td>
+<td><strong>RECUERDA</strong></td>
+</tr>
+<tr>
+<td><strong>Proxy / application firewall</strong></td>
+<td><strong>Entiende e inspecciona el protocolo de aplicación</strong>, actuando como intermediario</td>
+<td><strong>ENTIENDE EL PROTOCOLO</strong></td>
+</tr>
+<tr>
+<td><strong>NGFW</strong><br>(next-generation firewall)</td>
+<td><strong>Combina el filtrado avanzado con funciones como DPI, IPS e identificación de aplicaciones</strong></td>
+<td><strong>COMBINA FUNCIONES</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Stateful inspection — la clave del apartado</strong><br>Un cortafuegos <strong>con estado</strong> <strong>recuerda las conexiones establecidas</strong>. Eso le permite <strong>permitir la respuesta a una conexión saliente</strong> sin necesidad de <strong>abrir un puerto de entrada de forma general</strong>.<br>Un <strong>filtrado de paquetes sin estado</strong> no puede distinguir si un paquete entrante es <strong>la respuesta a algo que salió</strong> o una <strong>conexión nueva no solicitada</strong>: tendría que abrir la puerta para ambos casos.<br><strong>ANCLA: STATEFUL → RECUERDA.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Cautela — NGFW no equivale a «firewall de capa 7»</strong><br>No debe definirse el <strong>NGFW</strong> simplemente como <strong>«un firewall de capa 7»</strong>.<br>Un NGFW se caracteriza por <strong>combinar el filtrado avanzado con funciones adicionales</strong> —<strong>DPI</strong> (inspección profunda de paquetes), <strong>IPS</strong> e <strong>identificación de aplicaciones</strong>—, integradas en un mismo sistema. La inspección a nivel de aplicación es <strong>una</strong> de sus capacidades, no su definición completa; además, un <strong>proxy</strong> también actúa sobre el protocolo de aplicación sin ser un NGFW.</th>
+</tr>
+</table></div>
+
+<h2 id="4-host-vs-perimetral" class="tema-h2">4. Cortafuegos de host y perimetral</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th></th>
+<th><strong>Host-based</strong></th>
+<th><strong>Network / perimetral</strong></th>
+</tr>
+<tr>
+<td><strong>Qué protege</strong></td>
+<td><strong>Un equipo concreto</strong></td>
+<td><strong>Una red, desde un punto central</strong></td>
+</tr>
+<tr>
+<td><strong>Dónde se ejecuta</strong></td>
+<td>En el propio sistema operativo del equipo</td>
+<td>En un equipo o dispositivo situado en el perímetro</td>
+</tr>
+<tr>
+<td><strong>Alcance de la regla</strong></td>
+<td>El tráfico que entra o sale de <strong>ese</strong> equipo</td>
+<td>El tráfico que atraviesa el <strong>punto de control</strong></td>
+</tr>
+<tr>
+<td><strong>Ejemplo en el CAU</strong></td>
+<td>El cortafuegos del puesto que bloquea una aplicación instalada</td>
+<td>El cortafuegos que impide alcanzar un servidor interno desde el exterior</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — son complementarios</strong><br>El <strong>perimetral</strong> no ve el tráfico que <strong>no pasa por él</strong>: la comunicación entre dos equipos de la misma red puede no atravesarlo.<br>El <strong>de host</strong> protege <strong>solo a su equipo</strong>, pero <strong>allí donde esté</strong> —incluido fuera de la organización, con un portátil en movilidad—.<br><strong>PERIMETRAL → LA PUERTA DEL EDIFICIO. HOST → LA CERRADURA DE CADA DESPACHO.</strong> Es la lógica de las <strong>líneas de defensa</strong> del ENS (Tema 21).</th>
+</tr>
+</table></div>
+
+<h2 id="5-dmz" class="tema-h2">5. La DMZ</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>DMZ</strong> (zona desmilitarizada) → <strong>segmento de red intermedio destinado a alojar servicios que deben ser accesibles desde redes externas sin exponer directamente la red interna</strong>.<br><strong>ANCLA: DMZ → EXPONE AISLANDO.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Esquema clásico</strong><br><strong>INTERNET</strong><br>↓<br><strong>FIREWALL EXTERNO</strong><br>↓<br><strong>DMZ</strong><br>↓<br><strong>FIREWALL INTERNO</strong><br>↓<br><strong>RED INTERNA</strong></th>
+</tr>
+</table></div>
+<figure class="tema-figura">
+<figcaption>Arquitectura con DMZ</figcaption>
+<svg viewBox="0 0 700 312" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at29bp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at29ba" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at29bv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at29bn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at29br" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at29bg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="185.0" y="4" width="330" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="24.0" text-anchor="middle" font-size="13" font-weight="600" fill="#ffffff" dominant-baseline="middle">INTERNET</text><text x="527.0" y="24.0" text-anchor="start" font-size="11.5" font-weight="500" fill="#4c5560" dominant-baseline="middle">no confiable</text><line x1="350.0" y1="48" x2="350.0" y2="66" stroke="#003da5" stroke-width="2" marker-end="url(#at29bp)"/><rect x="185.0" y="70" width="330" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="90.0" text-anchor="middle" font-size="13" font-weight="600" fill="#23272e" dominant-baseline="middle">FIREWALL EXTERNO</text><line x1="350.0" y1="114" x2="350.0" y2="132" stroke="#003da5" stroke-width="2" marker-end="url(#at29bp)"/><rect x="185.0" y="136" width="330" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="156.0" text-anchor="middle" font-size="13" font-weight="600" fill="#23272e" dominant-baseline="middle">DMZ</text><text x="527.0" y="156.0" text-anchor="start" font-size="11.5" font-weight="500" fill="#4c5560" dominant-baseline="middle">servicios expuestos</text><line x1="350.0" y1="180" x2="350.0" y2="198" stroke="#003da5" stroke-width="2" marker-end="url(#at29bp)"/><rect x="185.0" y="202" width="330" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="222.0" text-anchor="middle" font-size="13" font-weight="600" fill="#23272e" dominant-baseline="middle">FIREWALL INTERNO</text><line x1="350.0" y1="246" x2="350.0" y2="264" stroke="#003da5" stroke-width="2" marker-end="url(#at29bp)"/><rect x="185.0" y="268" width="330" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="288.0" text-anchor="middle" font-size="13" font-weight="600" fill="#23272e" dominant-baseline="middle">RED INTERNA</text><text x="527.0" y="288.0" text-anchor="start" font-size="11.5" font-weight="500" fill="#4c5560" dominant-baseline="middle">no expuesta</text></svg>
+<p class="tema-figura__nota">Limita el acceso directo a la red interna si la segmentación y las reglas son correctas.</p></figure>
+
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ TRAMPA DE EXAMEN — la DMZ no garantiza contención absoluta</strong><br>Es <strong>incorrecto</strong> afirmar que una DMZ <strong>garantiza que un atacante quede completamente contenido</strong>.<br>Formulación correcta: <strong>«limita el acceso directo a la red interna si la segmentación y las reglas están correctamente configuradas»</strong>.<br>La eficacia de la DMZ <strong>depende de la configuración</strong>: si las reglas del firewall interno permiten conexiones amplias desde la DMZ hacia la red interna, la separación pierde buena parte de su sentido.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Por qué existe</strong><br>Un <strong>servidor web público</strong> tiene que ser <strong>alcanzable desde Internet</strong>. Si se ubicara <strong>en la red interna</strong>, cualquier compromiso de ese servidor situaría al atacante <strong>dentro</strong>. La DMZ resuelve el dilema: el servicio es <strong>accesible</strong>, pero <strong>separado</strong> de la red interna por un segundo punto de control.</th>
+</tr>
+</table></div>
+
+<h2 id="6-ids-e-ips" class="tema-h2">6. IDS e IPS</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>IDS</strong> (Intrusion Detection System) → <strong>detecta y alerta</strong>.<br><strong>IPS</strong> (Intrusion Prevention System) → <strong>detecta y bloquea</strong>.<br><strong>ANCLA: IDS → AVISA · IPS → BLOQUEA.</strong></th>
+</tr>
+</table></div>
+<p>Un <strong>IPS puede integrarse en un NGFW</strong>, y de hecho es una de las funciones que caracterizan a estos sistemas.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — firewall e IDS</strong><br><strong>FIREWALL → APLICA REGLAS</strong> de permitir o denegar: decide <strong>qué puede pasar</strong>.<br><strong>IDS → OBSERVA Y AVISA</strong> ante actividad sospechosa: no decide el paso, <strong>informa</strong>.<br><strong>IPS → OBSERVA Y ACTÚA</strong>: además de detectar, <strong>interviene</strong> sobre el tráfico.<br>La diferencia entre IDS e IPS está en <strong>una sola letra y en una sola capacidad</strong>: <strong>D de detección</strong> frente a <strong>P de prevención</strong>.</th>
+</tr>
+</table></div>
+<figure class="tema-figura">
+<figcaption>IDS vs. IPS</figcaption>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at29cp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at29ca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at29cv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at29cn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at29cr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at29cg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">IDS</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">IPS</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">DETECTA</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">ALERTA</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">No interviene</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">DETECTA</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">BLOQUEA</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Actúa sobre el tráfico</text></svg>
+</figure>
+
+
+<h2 id="7-tls" class="tema-h2">7. TLS</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>TLS</strong> (Transport Layer Security) → <strong>protocolo criptográfico que proporciona confidencialidad, integridad y mecanismos de autenticación para las comunicaciones</strong>.<br><strong>ANCLA: TLS → PROTEGE LA COMUNICACIÓN.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Propiedad</strong></th>
+<th><strong>Qué aporta</strong></th>
+</tr>
+<tr>
+<td><strong>Confidencialidad</strong></td>
+<td>El contenido no resulta legible para terceros</td>
+</tr>
+<tr>
+<td><strong>Integridad</strong></td>
+<td>Puede detectarse la alteración del contenido en tránsito</td>
+</tr>
+<tr>
+<td><strong>Autenticación</strong></td>
+<td>Mecanismos para acreditar la identidad de los extremos <strong>cuando corresponde</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ TRAMPA DE EXAMEN — la autenticación no siempre es mutua</strong><br><strong>La autenticación mediante certificado suele ser la del SERVIDOR; la autenticación del CLIENTE es OPCIONAL.</strong><br>Es <strong>incorrecto</strong> afirmar que <strong>siempre ambas partes se autentican mediante certificados</strong>.<br>El caso habitual —una persona accediendo a una sede electrónica— consiste en que <strong>el servidor demuestra su identidad</strong> y el cliente <strong>no presenta certificado</strong>. La autenticación de cliente existe y se usa en determinados escenarios, pero <strong>no es la norma</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Cautela — TLS y el transporte</strong><br>No debe definirse TLS como <strong>«protocolo que opera sobre TCP y siempre»</strong>.<br>Formulación correcta: <strong>«TLS se utiliza habitualmente para proteger protocolos de aplicación basados en TCP, como HTTPS, SMTP e IMAP»</strong>.<br>Es una descripción de <strong>uso habitual</strong>, no una dependencia absoluta e indisociable.</th>
+</tr>
+</table></div>
+<p>El funcionamiento de los <strong>certificados</strong>, la <strong>PKI</strong> y las claves corresponde al <strong>Tema 24</strong>.</p>
+
+<h2 id="8-handshake" class="tema-h2">8. El handshake de TLS</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Paso</strong></th>
+<th><strong>Qué ocurre</strong></th>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td><strong>Cliente y servidor negocian los parámetros</strong> de la conexión</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>El <strong>servidor demuestra su identidad mediante certificado cuando corresponde</strong></td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>Se <strong>establecen las claves de sesión</strong></td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td>Se utiliza <strong>criptografía simétrica</strong> para proteger la comunicación de forma eficiente</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ TRAMPA DE EXAMEN — la simplificación excesiva</strong><br>Es <strong>incorrecto</strong> resumir el handshake diciendo simplemente <strong>«primero se cifra con asimétrico y después con simétrico»</strong>.<br>Esa fórmula <strong>simplifica en exceso</strong> lo que realmente ocurre: hay una <strong>negociación de parámetros</strong>, una <strong>acreditación de identidad</strong> mediante certificado cuando corresponde, un <strong>establecimiento de claves de sesión</strong> —que no consiste necesariamente en «cifrar una clave con la pública»— y, finalmente, el <strong>uso de criptografía simétrica</strong> para el intercambio de datos.<br>Responde con <strong>los cuatro pasos</strong>, no con la fórmula abreviada.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — por qué simétrica al final</strong><br>La <strong>criptografía simétrica es mucho más eficiente</strong> para proteger un volumen elevado de datos. Por eso el handshake sirve para <strong>llegar a unas claves de sesión compartidas</strong>, y a partir de ahí <strong>la comunicación se protege con criptografía simétrica</strong>.<br><strong>NEGOCIAR → ACREDITAR → ESTABLECER CLAVES → PROTEGER CON SIMÉTRICA.</strong></th>
+</tr>
+</table></div>
+<figure class="tema-figura">
+<figcaption>Handshake TLS</figcaption>
+<svg viewBox="0 0 700 58" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at29dp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at29da" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at29dv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at29dn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at29dr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at29dg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="6" width="151.5" height="46" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="83.75" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">NEGOCIAR</text><text x="83.75" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">parámetros</text><line x1="163.5" y1="29.0" x2="181.5" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at29dp)"/><rect x="185.5" y="6" width="151.5" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="261.25" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">ACREDITAR</text><text x="261.25" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">certificado</text><line x1="341.0" y1="29.0" x2="359.0" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at29dp)"/><rect x="363.0" y="6" width="151.5" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="438.75" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">CLAVES</text><text x="438.75" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">de sesión</text><line x1="518.5" y1="29.0" x2="536.5" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at29dp)"/><rect x="540.5" y="6" width="151.5" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="616.25" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">SIMÉTRICA</text><text x="616.25" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">protege datos</text></svg>
+<p class="tema-figura__nota">La autenticación del cliente mediante certificado es opcional.</p></figure>
+
+
+<h2 id="9-https" class="tema-h2">9. HTTPS</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>HTTPS</strong> → <strong>HTTP protegido mediante TLS</strong>.<br><strong>ANCLA: HTTPS → HTTP + TLS.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — HTTPS y «SSL»</strong><br>Sigue siendo frecuente oír <strong>«el certificado SSL»</strong> o <strong>«la web tiene SSL»</strong>. Es una <strong>denominación heredada</strong>: la tecnología vigente es <strong>TLS</strong>.<br>Y recuerda la regla del <strong>Tema 20</strong>: <strong>HTTPS protege la COMUNICACIÓN; no garantiza la legitimidad del sitio ni del contenido</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="10-ssl-vs-tls" class="tema-h2">10. SSL frente a TLS</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th></th>
+<th><strong>SSL</strong></th>
+<th><strong>TLS</strong></th>
+</tr>
+<tr>
+<td><strong>Situación</strong></td>
+<td><strong>Predecesor histórico, OBSOLETO</strong></td>
+<td><strong>Tecnología VIGENTE</strong></td>
+</tr>
+<tr>
+<td><strong>Uso</strong></td>
+<td>No debe emplearse</td>
+<td>Es lo que se utiliza actualmente</td>
+</tr>
+<tr>
+<td><strong>Versiones relevantes</strong></td>
+<td>—</td>
+<td><strong>TLS 1.2 y TLS 1.3</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br><strong>SSL → PASADO · TLS → PRESENTE.</strong><br>Las <strong>versiones concretas</strong> —TLS 1.2 y 1.3— <strong>no son contenido principal</strong>: se recogen como referencia y su evolución se trata en el apartado de <strong>actualidad</strong>. Lo preguntable es la <strong>relación</strong>: TLS <strong>sucede</strong> a SSL, y SSL <strong>está obsoleto</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="11-ipsec" class="tema-h2">11. IPSec</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición y ubicación</strong><br><strong>IPSec</strong> → <strong>conjunto de protocolos para proteger las comunicaciones IP a nivel de red</strong>.<br><strong>ANCLA: IPSec → CAPA IP / RED.</strong></th>
+</tr>
+</table></div>
+<p>Proporciona, según el mecanismo y la configuración empleados:</p>
 <ul class="tema-lista">
-<li><strong>Filtrado de paquetes (packet filtering)</strong>: el modelo más básico y antiguo; examina cada paquete de forma aislada (IP, puerto, protocolo) sin recordar el contexto de la conexión a la que pertenece. Es rápido, pero limitado.</li>
-<li><strong>Inspección de estado (stateful inspection)</strong>: mantiene una tabla de las conexiones activas y su estado, lo que permite tomar decisiones más inteligentes —por ejemplo, permitir automáticamente el tráfico de respuesta a una conexión saliente ya autorizada—, sin tener que abrir manualmente esos puertos de vuelta. Es el modelo estándar en la mayoría de cortafuegos actuales.</li>
-<li><strong>Cortafuegos de aplicación (proxy o application-level gateway)</strong>: opera en la capa de aplicación (Tema 27), entendiendo el protocolo concreto (HTTP, FTP…) e inspeccionando el contenido real de las comunicaciones, no solo sus cabeceras. Es más lento, pero ofrece un control mucho más granular.</li>
-<li><strong>Cortafuegos de nueva generación (NGFW, Next-Generation Firewall)</strong>: combina las capacidades anteriores con funciones adicionales, como la inspección profunda de paquetes (DPI, Deep Packet Inspection), la prevención de intrusiones integrada (IPS, Intrusion Prevention System), la identificación de aplicaciones concretas más allá del puerto que usan, y el filtrado basado en inteligencia de amenazas actualizada. Es el estándar de referencia en entornos corporativos actuales.</li>
+<li><strong>Autenticación</strong> del origen del tráfico.</li>
+<li><strong>Integridad</strong> del tráfico protegido.</li>
+<li><strong>Confidencialidad</strong>, mediante cifrado.</li>
 </ul>
-<p>Además de por su nivel de inspección, los cortafuegos se distinguen por su ubicación: un <strong>cortafuegos personal (host-based)</strong> se ejecuta en el propio equipo y lo protege de forma individual (ya citado como parte de los paquetes de seguridad integral del puesto de trabajo, Tema 25), mientras que un <strong>cortafuegos de red o perimetral (network-based)</strong> protege a toda una red desde un único punto centralizado.</p>
-<h2 id="3-arquitecturas-de-red-con-cortafuegos-la-dmz" class="tema-h2">3. Arquitecturas de red con cortafuegos: la DMZ</h2>
-<p>Una <strong>DMZ (DeMilitarized Zone, zona desmilitarizada)</strong> es un segmento de red intermedio, aislado tanto de la red interna como de la red externa mediante uno o varios cortafuegos, donde se ubican los servicios que deben ser accesibles desde el exterior (un servidor web público, un servidor de correo) sin necesidad de exponer directamente la red interna al tráfico de Internet.</p>
-<p>Una arquitectura típica sitúa un cortafuegos externo entre Internet y la DMZ, y un segundo cortafuegos interno entre la DMZ y la red interna:</p>
-<p><strong>Internet → [Cortafuegos externo] → DMZ (servidores públicos) → [Cortafuegos interno] → Red interna</strong></p>
-<p>Si un servidor de la DMZ sufriera un fallo de seguridad y llegara a ser comprometido, el atacante queda contenido en ese segmento intermedio, sin obtener por ello acceso directo a la red interna de la organización.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Junto al cortafuegos conviene reconocer dos siglas emparentadas: <strong>IDS (Intrusion Detection System)</strong>, que <strong>detecta y alerta</strong> de actividad sospechosa sin bloquearla, e <strong>IPS (Intrusion Prevention System)</strong>, que además <strong>bloquea</strong> activamente el tráfico malicioso detectado. Los NGFW actuales suelen integrar el IPS como una función más.</th>
+<th><strong>🧠 LA GRAN COMPARACIÓN DEL TEMA — TLS frente a IPSec</strong><br><strong>TLS → PROTEGE LA COMUNICACIÓN</strong> de protocolos de aplicación (HTTPS, SMTP, IMAP). Lo ve la aplicación.<br><strong>IPSec → PROTEGE IP</strong>, a <strong>nivel de red</strong>. Es <strong>transparente</strong> para las aplicaciones: protege <strong>todo lo que viaje sobre IP</strong> conforme a su configuración.<br>Diferencia de <strong>nivel</strong>, no de calidad: uno actúa <strong>arriba</strong>, junto a la aplicación; el otro, <strong>abajo</strong>, en el propio transporte de paquetes IP.</th>
 </tr>
 </table></div>
-<h2 id="4-protocolos-seguros-ssltls" class="tema-h2">4. Protocolos seguros: SSL/TLS</h2>
-<p><strong>TLS (Transport Layer Security)</strong> es el protocolo que proporciona cifrado, autenticación (mediante certificados digitales, Tema 24) e integridad a las comunicaciones sobre TCP. Opera conceptualmente entre la capa de Transporte y la de Aplicación del modelo TCP/IP (Tema 27).</p>
-<p>En un proceso simplificado de negociación (handshake), el cliente y el servidor acuerdan la versión del protocolo y los algoritmos de cifrado a usar; el servidor presenta su certificado digital para autenticarse frente al cliente; y ambos establecen una clave de sesión —apoyándose inicialmente en criptografía asimétrica (Tema 24) y, a partir de ahí, en cifrado simétrico, más rápido, para el resto de la comunicación—.</p>
-<p>Su uso más conocido es <strong>HTTPS</strong> (HTTP sobre TLS, Tema 20), aunque también protege otros protocolos, como las variantes seguras de SMTP e IMAP vistas en el Tema 17.</p>
+
+<h2 id="12-modos-ipsec" class="tema-h2">12. Modo transporte y modo túnel</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br><strong>SSL (Secure Sockets Layer)</strong> es el predecesor histórico de TLS; sus versiones están obsoletas y en desuso desde hace años por vulnerabilidades conocidas, y las versiones vigentes en uso hoy son TLS 1.2 y, cada vez más, TLS 1.3. Aun así, es habitual en el lenguaje cotidiano seguir hablando de «certificado SSL» o «conexión SSL» para referirse, en realidad, a TLS. A efectos de examen conviene tener clara esta precisión: lo que protege las comunicaciones actuales es TLS, no SSL.</th>
+<th><strong>📌 Imprescindible para el examen — LOS DOS MODOS</strong><br><strong>MODO TRANSPORTE</strong> → <strong>protege la carga útil del paquete IP original</strong>. Uso típico: <strong>comunicación extremo a extremo entre hosts</strong>. <strong>ANCLA: TRANSPORTE → HOST ↔ HOST.</strong><br><strong>MODO TÚNEL</strong> → <strong>encapsula el paquete IP original completo dentro de un nuevo paquete IP protegido</strong>. Uso típico: <strong>interconexión de redes completas</strong>. <strong>ANCLA: TÚNEL → RED ↔ RED.</strong></th>
 </tr>
 </table></div>
-<h2 id="5-protocolos-seguros-ipsec" class="tema-h2">5. Protocolos seguros: IPSec</h2>
-<p><strong>IPSec (Internet Protocol Security)</strong> es un conjunto de protocolos que proporciona autenticación y cifrado a nivel de la capa de Red (IP, Tema 27), a diferencia de TLS, que opera en capas superiores. Al actuar en la propia capa IP, IPSec protege cualquier tráfico IP con independencia de la aplicación que lo genere, de forma transparente para esta.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th></th>
+<th><strong>Modo transporte</strong></th>
+<th><strong>Modo túnel</strong></th>
+</tr>
+<tr>
+<td><strong>Qué protege</strong></td>
+<td>La <strong>carga útil</strong> del paquete IP original</td>
+<td>El <strong>paquete IP original completo</strong></td>
+</tr>
+<tr>
+<td><strong>Qué hace con el paquete</strong></td>
+<td>Lo protege <strong>manteniendo su cabecera original</strong></td>
+<td>Lo <strong>encapsula dentro de un nuevo paquete IP</strong></td>
+</tr>
+<tr>
+<td><strong>Uso típico</strong></td>
+<td><strong>Host ↔ host</strong>, extremo a extremo</td>
+<td><strong>Red ↔ red</strong>, interconexión de redes completas</td>
+</tr>
+<tr>
+<td><strong>Escenario</strong></td>
+<td>Dos equipos que se comunican directamente de forma protegida</td>
+<td><strong>VPN site-to-site</strong> entre dos sedes</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Truco para no confundirlos</strong><br><strong>TÚNEL = ENVOLVER ENTERO.</strong> Un túnel <strong>mete el paquete completo dentro de otro</strong>, con una <strong>nueva cabecera IP</strong>. Por eso sirve para unir <strong>redes</strong>: los extremos del túnel son los <strong>equipos de frontera</strong>, no los hosts finales.<br><strong>TRANSPORTE = PROTEGER EL CONTENIDO.</strong> Mantiene la cabecera original, así que los <strong>extremos siguen siendo los hosts</strong>.<br><strong>Si la pregunta habla de dos SEDES o dos REDES → TÚNEL.</strong></th>
+</tr>
+</table></div>
+<figure class="tema-figura">
+<figcaption>IPSec: transporte vs. túnel</figcaption>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at29ep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at29ea" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at29ev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at29en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at29er" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at29eg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">TRANSPORTE</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">TÚNEL</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Protege la CARGA ÚTIL</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="103.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Mantiene la</text><text x="176.0" y="118.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">cabecera original</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">HOST ↔ HOST</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="63.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Encapsula el PAQUETE</text><text x="524.0" y="78.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">COMPLETO</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Nueva cabecera IP</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">RED ↔ RED</text></svg>
+</figure>
+
+
+<h2 id="13-ah-y-esp" class="tema-h2">13. AH y ESP</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>AH</strong> (Authentication Header) → proporciona <strong>autenticación del origen e integridad del tráfico protegido</strong>. <strong>NO proporciona confidencialidad mediante cifrado.</strong><br><strong>ESP</strong> (Encapsulating Security Payload) → proporciona <strong>confidencialidad mediante cifrado</strong> y <strong>también puede proporcionar autenticación e integridad</strong>. Es el mecanismo de IPSec <strong>utilizado con mayor frecuencia en despliegues modernos</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th></th>
+<th><strong>AH</strong></th>
+<th><strong>ESP</strong></th>
+</tr>
+<tr>
+<td><strong>Autenticidad e integridad</strong></td>
+<td><strong>Sí</strong></td>
+<td><strong>Sí</strong> (puede proporcionarlas)</td>
+</tr>
+<tr>
+<td><strong>Confidencialidad</strong></td>
+<td><strong>No</strong></td>
+<td><strong>Sí</strong></td>
+</tr>
+<tr>
+<td><strong>Uso actual</strong></td>
+<td><strong>Limitado</strong></td>
+<td><strong>Principal</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Dos precisiones</strong><br><strong>1) AH NO CIFRA.</strong> Es el dato más preguntable del apartado: aporta <strong>autenticidad e integridad</strong>, pero el contenido <strong>viaja legible</strong>.<br><strong>2) ESP no «siempre autentica» al margen de su configuración.</strong> Lo correcto es decir que <strong>puede proporcionar</strong> autenticación e integridad además del cifrado: sus funciones concretas <strong>dependen de la configuración</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br><strong>AH → AUTENTICIDAD E INTEGRIDAD (sin cifrado).</strong><br><strong>ESP → CIFRADO + AUTENTICIDAD/INTEGRIDAD.</strong><br>Truco: la <strong>E de ESP</strong> es la de <strong>Encrypting</strong> — <strong>ESP es el que cifra</strong>. Y el que cifra es el que se usa: <strong>ESP → uso principal · AH → uso limitado</strong>.</th>
+</tr>
+</table></div>
+<figure class="tema-figura">
+<figcaption>AH vs. ESP</figcaption>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at29fp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at29fa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at29fv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at29fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at29fr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at29fg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">AH</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">ESP</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Autenticidad e integridad</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">NO cifra</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Uso limitado</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">CIFRA</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="103.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Puede aportar además</text><text x="524.0" y="118.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">autenticidad e integridad</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Uso principal</text></svg>
+</figure>
+
+
+<h2 id="14-vpn" class="tema-h2">14. Redes privadas virtuales (VPN)</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>VPN</strong> (Virtual Private Network) → <strong>mecanismo que crea un canal lógico protegido sobre una red no confiable</strong>.<br>Tres palabras clave: <strong>CANAL LÓGICO · PROTEGIDO · SOBRE RED NO CONFIABLE</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Cautela — no toda VPN equivale sin más a «conexión cifrada»</strong><br>No debe afirmarse simplemente que <strong>«toda VPN es una conexión cifrada»</strong>.<br>Formulación correcta: <strong>«las propiedades concretas de protección dependen del protocolo y de la configuración empleados»</strong>.<br>El elemento definitorio es la creación de un <strong>canal lógico protegido sobre una red no confiable</strong>; <strong>qué</strong> protección concreta ofrece —confidencialidad, integridad, autenticación— <strong>depende de cómo se implemente</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — VPN y línea dedicada</strong><br><strong>VPN → canal LÓGICO</strong> establecido <strong>sobre una infraestructura compartida</strong>, típicamente Internet. La palabra <strong>«virtual»</strong> es literal.<br><strong>Línea dedicada → enlace FÍSICO</strong> contratado en exclusiva.<br>La VPN <strong>simula</strong> las propiedades de un enlace privado <strong>sin serlo físicamente</strong>: de ahí «red privada <strong>virtual</strong>».</th>
+</tr>
+</table></div>
+
+<h2 id="15-tipos-de-vpn" class="tema-h2">15. Client-to-site y site-to-site</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — LOS DOS TIPOS</strong><br><strong>CLIENT-TO-SITE</strong> → un <strong>usuario individual accede de forma segura a los recursos de la organización desde Internet</strong>. Ejemplo: <strong>teletrabajo</strong>. <strong>ANCLA: PERSONA ↔ ORGANIZACIÓN.</strong><br><strong>SITE-TO-SITE</strong> → <strong>conecta las redes completas de dos ubicaciones</strong>. Ejemplo: <strong>sede A ↔ sede B</strong>. <strong>ANCLA: RED ↔ RED.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th></th>
+<th><strong>Client-to-site</strong></th>
+<th><strong>Site-to-site</strong></th>
+</tr>
+<tr>
+<td><strong>Quién se conecta</strong></td>
+<td>Un <strong>usuario individual</strong> con su equipo</td>
+<td>Dos <strong>redes completas</strong></td>
+</tr>
+<tr>
+<td><strong>Extremos del canal</strong></td>
+<td>Equipo del usuario ↔ organización</td>
+<td>Equipo de frontera ↔ equipo de frontera</td>
+</tr>
+<tr>
+<td><strong>Escenario típico</strong></td>
+<td><strong>Teletrabajo</strong>, movilidad</td>
+<td><strong>Interconexión permanente de sedes</strong></td>
+</tr>
+<tr>
+<td><strong>Percepción del usuario</strong></td>
+<td>Debe <strong>iniciar la conexión</strong> con un cliente VPN</td>
+<td><strong>Transparente</strong>: el usuario no hace nada</td>
+</tr>
+<tr>
+<td><strong>Si se implanta con IPSec</strong></td>
+<td>—</td>
+<td>Habitualmente <strong>modo TÚNEL</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — la pista del enunciado</strong><br>Si el caso habla de <strong>una persona</strong> que necesita acceder desde fuera → <strong>CLIENT-TO-SITE</strong>.<br>Si habla de <strong>dos sedes, dos oficinas o dos redes</strong> que deben comunicarse → <strong>SITE-TO-SITE</strong>, y si es IPSec, <strong>modo túnel</strong>.</th>
+</tr>
+</table></div>
+<figure class="tema-figura">
+<figcaption>Client-to-site vs. site-to-site</figcaption>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at29gp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at29ga" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at29gv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at29gn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at29gr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at29gg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">CLIENT-TO-SITE</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">SITE-TO-SITE</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">PERSONA ↔ organización</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Teletrabajo</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="143.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">El usuario inicia</text><text x="176.0" y="158.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">la conexión</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">RED ↔ RED</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Dos sedes</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="143.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Transparente; con</text><text x="524.0" y="158.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">IPSec, modo túnel</text></svg>
+</figure>
+
+
+<h2 id="16-ipsec-vs-vpn" class="tema-h2">16. IPSec frente a VPN y firewall frente a VPN</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ TRAMPA DE EXAMEN — IPSec NO ES SINÓNIMO DE VPN</strong><br><strong>IPSec</strong> → <strong>tecnología o conjunto de protocolos</strong> de seguridad IP.<br><strong>VPN</strong> → <strong>servicio o arquitectura</strong> de conexión protegida.<br><strong>No son sinónimos.</strong> <strong>IPSec puede utilizarse como base de una VPN</strong>, pero:<br>· hay <strong>VPN que no utilizan IPSec</strong> (por ejemplo, las <strong>basadas en TLS</strong>);<br>· e IPSec puede emplearse <strong>sin construir una VPN</strong> completa, para proteger comunicaciones IP concretas.<br>Relación correcta: <strong>IPSec es un MEDIO; la VPN es el RESULTADO</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ TRAMPA DE EXAMEN — FIREWALL Y VPN NO SON SUSTITUTOS</strong><br><strong>FIREWALL → CONTROLA Y FILTRA el tráfico.</strong> Decide <strong>qué pasa y qué no</strong>.<br><strong>VPN → CREA UN CANAL O TÚNEL PROTEGIDO.</strong> No decide qué se permite: <strong>protege el transporte</strong>.<br><strong>No son sustitutos</strong> y no cumplen la misma función. De hecho, <strong>un firewall puede controlar el tráfico de una VPN</strong>: que el canal esté protegido no significa que todo lo que circule por él deba permitirse.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Elemento</strong></th>
+<th><strong>Naturaleza</strong></th>
+<th><strong>Función</strong></th>
+</tr>
+<tr>
+<td><strong>Firewall</strong></td>
+<td>Sistema de control</td>
+<td><strong>Filtra</strong> según reglas</td>
+</tr>
+<tr>
+<td><strong>VPN</strong></td>
+<td>Servicio o arquitectura</td>
+<td><strong>Crea un canal protegido</strong></td>
+</tr>
+<tr>
+<td><strong>IPSec</strong></td>
+<td>Conjunto de protocolos</td>
+<td><strong>Protege comunicaciones IP</strong>; puede ser la base de una VPN</td>
+</tr>
+<tr>
+<td><strong>TLS</strong></td>
+<td>Protocolo criptográfico</td>
+<td><strong>Protege comunicaciones</strong> de aplicación; puede ser la base de una VPN</td>
+</tr>
+</table></div>
+
+<h2 id="17-vpn-basada-en-tls" class="tema-h2">17. VPN basada en TLS: OpenVPN y WireGuard</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Precisión terminológica</strong><br>Debe hablarse de <strong>«VPN basada en TLS»</strong>, no de «SSL VPN» como si utilizara SSL.<br>Puede aclararse que es la <strong>históricamente denominada «SSL VPN»</strong>, pero la tecnología empleada es <strong>TLS</strong> — coherente con el apartado 10: <strong>SSL está obsoleto</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Solución</strong></th>
+<th><strong>Qué es</strong></th>
+</tr>
+<tr>
+<td><strong>OpenVPN</strong></td>
+<td>Solución y protocolo <strong>VPN basado en TLS</strong></td>
+</tr>
+<tr>
+<td><strong>WireGuard</strong></td>
+<td>Protocolo VPN <strong>moderno y de diseño sencillo</strong></td>
+</tr>
+</table></div>
+<p>Ambos se citan como <strong>ejemplos</strong>. Su <strong>configuración</strong>, sus <strong>datos de adopción</strong>, su <strong>rendimiento</strong> y las <strong>fechas</strong> de su incorporación a distintos sistemas <strong>no son materia nuclear</strong>: se recogen, en su caso, en el apartado de <strong>actualidad</strong>.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — las dos grandes familias de VPN</strong><br><strong>VPN BASADA EN IPSec</strong> → protege a <strong>nivel IP</strong>; típica en <strong>site-to-site</strong> (modo <strong>túnel</strong>).<br><strong>VPN BASADA EN TLS</strong> → se apoya en <strong>TLS</strong>; frecuente en accesos <strong>client-to-site</strong>. Ejemplo: <strong>OpenVPN</strong>.<br>Y una tercera vía moderna: <strong>WireGuard</strong>, protocolo de <strong>diseño sencillo</strong>.<br>La pregunta de examen suele ser <strong>de asociación</strong>: <strong>OpenVPN → TLS · IPSec → nivel IP · WireGuard → moderno y sencillo</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="18-split-tunneling" class="tema-h2">18. Full tunnel y split tunneling</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Ampliación de interés para el CAU</strong><br><strong>FULL TUNNEL</strong> → <strong>todo el tráfico pasa por la VPN</strong>.<br><strong>SPLIT TUNNEL</strong> → <strong>solo el tráfico definido pasa por la VPN; el resto sale por la conexión local</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th></th>
+<th><strong>Full tunnel</strong></th>
+<th><strong>Split tunnel</strong></th>
+</tr>
+<tr>
+<td><strong>Tráfico por la VPN</strong></td>
+<td><strong>Todo</strong></td>
+<td><strong>Solo el definido</strong></td>
+</tr>
+<tr>
+<td><strong>Resto del tráfico</strong></td>
+<td>No existe: todo va por el túnel</td>
+<td>Sale por la <strong>conexión local</strong></td>
+</tr>
+<tr>
+<td><strong>Control de la organización</strong></td>
+<td>Mayor: todo el tráfico atraviesa sus controles</td>
+<td>Menor sobre el tráfico que no entra en el túnel</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Síntoma típico en el CAU</strong><br>Una persona en teletrabajo <strong>está conectada a la VPN</strong> y, sin embargo, su <strong>navegación personal no pasa por la organización</strong>. No es un fallo: es el comportamiento propio de un <strong>split tunneling</strong> configurado así.<br><strong>Estar conectado a la VPN no implica automáticamente que TODO el tráfico circule por ella.</strong></th>
+</tr>
+</table></div>
+
+<h2 id="19-anclas-de-memoria" class="tema-h2">19. Anclas de memoria</h2>
 <ul class="tema-lista">
-<li><strong>Modo transporte</strong>: cifra únicamente los datos del paquete IP, manteniendo visibles las cabeceras IP originales; se usa típicamente para proteger la comunicación extremo a extremo entre dos equipos concretos.</li>
-<li><strong>Modo túnel</strong>: cifra el paquete IP completo, incluida su cabecera original, y lo encapsula dentro de un nuevo paquete IP; se usa típicamente para interconectar redes completas entre sí, como en una VPN sitio a sitio (punto 6).</li>
-</ul>
-<p>IPSec se apoya en dos protocolos principales: <strong>AH (Authentication Header)</strong>, que garantiza autenticidad e integridad sin cifrar el contenido, y <strong>ESP (Encapsulating Security Payload)</strong>, que añade cifrado además de autenticidad e integridad, y es el más utilizado en la práctica. El uso más habitual de IPSec es servir de base técnica a muchas VPN, en especial las VPN sitio a sitio entre distintas sedes de una misma organización.</p>
-<h2 id="6-redes-privadas-virtuales-vpn" class="tema-h2">6. Redes privadas virtuales (VPN)</h2>
-<p>Una <strong>VPN (Virtual Private Network, red privada virtual)</strong> crea una conexión cifrada y segura —un «túnel»— a través de una red no confiable, típicamente Internet, de forma que los equipos conectados a través de ella se comunican como si estuvieran dentro de la misma red privada, con independencia de la distancia física real que los separe.</p>
-<ul class="tema-lista">
-<li><strong>VPN de acceso remoto (client-to-site)</strong>: una persona usuaria individual —por ejemplo, en teletrabajo— se conecta de forma segura a la red de su organización desde cualquier ubicación externa.</li>
-<li><strong>VPN sitio a sitio (site-to-site)</strong>: interconecta de forma permanente y segura dos redes completas —por ejemplo, dos sedes de un mismo organismo— a través de Internet, sin necesidad de contratar una línea dedicada física entre ambas ubicaciones.</li>
-</ul>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>Protocolo</strong></th>
-<th><strong>Capa / enfoque</strong></th>
-<th><strong>Uso habitual</strong></th>
-</tr>
-<tr>
-<td>IPSec</td>
-<td>Capa de Red; protege cualquier tráfico IP</td>
-<td>VPN sitio a sitio entre sedes</td>
-</tr>
-<tr>
-<td>SSL/TLS («SSL VPN»)</td>
-<td>Capas superiores; a menudo basada en navegador o cliente ligero</td>
-<td>VPN de acceso remoto para personas usuarias individuales</td>
-</tr>
-<tr>
-<td>OpenVPN</td>
-<td>Código abierto, basado en TLS</td>
-<td>Ambos escenarios, muy extendido</td>
-</tr>
-<tr>
-<td>WireGuard</td>
-<td>Diseño moderno, más simple</td>
-<td>Ambos escenarios, adopción creciente</td>
-</tr>
-</table></div>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br><strong>WireGuard</strong> es un protocolo de VPN relativamente reciente, incorporado al núcleo Linux en 2020 (Tema 13), que ha ganado adopción con rapidez frente a IPSec y OpenVPN por su diseño mucho más simple (una base de código muy reducida, más fácil de auditar) y su mejor rendimiento. Aun así, IPSec y OpenVPN siguen siendo mayoritarios en muchos entornos corporativos ya desplegados, por la inercia propia de una infraestructura ya en producción.</th>
-</tr>
-</table></div>
-<p>Entre los beneficios de una VPN destacan la confidencialidad e integridad de las comunicaciones que viajan sobre una red no confiable, la posibilidad de dar acceso remoto seguro a recursos internos sin exponerlos directamente a Internet, y el ahorro económico frente a contratar líneas dedicadas físicas para interconectar sedes distantes.</p>
-<h2 id="7-resumen-para-estudiar" class="tema-h2">7. Resumen para estudiar</h2>
-<ul class="tema-lista">
-<li><strong>Cortafuegos</strong>: filtra tráfico según reglas (IP, puerto, protocolo, sentido); política de denegación por defecto como buena práctica; evolución desde el filtrado de paquetes hasta los NGFW, pasando por la inspección de estado y los cortafuegos de aplicación; personal (host) frente a perimetral (red).</li>
-<li><strong>DMZ</strong>: segmento intermedio y aislado para exponer servicios públicos sin comprometer la red interna.</li>
-<li><strong>SSL/TLS</strong>: cifrado, autenticación e integridad sobre TCP; TLS es la versión vigente, SSL está obsoleto aunque el nombre perdura en el lenguaje común; base de HTTPS y de otros protocolos seguros.</li>
-<li><strong>IPSec</strong>: seguridad a nivel de capa de Red, transparente a las aplicaciones; modo transporte (extremo a extremo) frente a modo túnel (redes completas); AH (autenticidad) y ESP (autenticidad + cifrado).</li>
-<li><strong>VPN</strong>: acceso remoto (client-to-site) frente a sitio a sitio (site-to-site); protocolos IPSec, SSL/TLS, OpenVPN y WireGuard (este último, en auge por su simplicidad y rendimiento).</li>
-<li><strong>IDS detecta y alerta · IPS detecta y bloquea</strong>; el IPS suele venir integrado en los NGFW.</li>
+<li><strong>FIREWALL → FILTRA</strong> según reglas (IP origen y destino, puerto, protocolo, sentido, estado y, según el tipo, aplicación).</li>
+<li><strong>DENY BY DEFAULT → BUENA PRÁCTICA</strong> coherente con mínimo privilegio, no un dogma universal.</li>
+<li><strong>PACKET FILTERING → PAQUETE A PAQUETE · STATEFUL → RECUERDA · PROXY → ENTIENDE EL PROTOCOLO · NGFW → COMBINA FUNCIONES.</strong></li>
+<li><strong>HOST → UN EQUIPO · PERIMETRAL → UNA RED.</strong></li>
+<li><strong>DMZ → EXPONE AISLANDO</strong>: limita el acceso directo a la red interna <strong>si la configuración es correcta</strong>.</li>
+<li><strong>IDS → AVISA · IPS → BLOQUEA.</strong></li>
+<li><strong>TLS → PROTEGE LA COMUNICACIÓN</strong>: confidencialidad, integridad y autenticación cuando corresponde. <strong>Autenticación del cliente: opcional.</strong></li>
+<li><strong>HTTPS → HTTP + TLS.</strong> <strong>SSL → obsoleto · TLS → vigente</strong> (1.2 y 1.3).</li>
+<li><strong>IPSec → PROTEGE IP</strong>, a nivel de red.</li>
+<li><strong>TRANSPORTE → HOST ↔ HOST</strong> (protege la carga útil) · <strong>TÚNEL → RED ↔ RED</strong> (encapsula el paquete completo).</li>
+<li><strong>AH → AUTENTICIDAD E INTEGRIDAD, SIN CIFRADO · ESP → CIFRADO + AUTENTICIDAD/INTEGRIDAD.</strong></li>
+<li><strong>CLIENT-TO-SITE → PERSONA ↔ RED · SITE-TO-SITE → RED ↔ RED.</strong></li>
+<li><strong>IPSec ≠ VPN</strong> (medio frente a resultado) · <strong>FIREWALL ≠ VPN</strong> (filtrar frente a proteger el canal).</li>
+<li><strong>FULL TUNNEL → TODO · SPLIT TUNNEL → SOLO LO DEFINIDO.</strong></li>
 </ul>
 
-<h2 id="8-conceptos-clave" class="tema-h2">8. Conceptos clave</h2>
+<h2 id="20-no-confundir" class="tema-h2">20. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto A</strong></th>
+<th><strong>Concepto B</strong></th>
+<th><strong>Diferencia clave</strong></th>
+</tr>
+<tr>
+<td><strong>Firewall</strong>: filtra tráfico</td>
+<td><strong>VPN</strong>: crea un canal protegido</td>
+<td>No son sustitutos; el firewall puede filtrar el tráfico de la VPN</td>
+</tr>
+<tr>
+<td><strong>Firewall</strong>: aplica reglas</td>
+<td><strong>IDS</strong>: observa y alerta</td>
+<td>Decidir el paso frente a informar</td>
+</tr>
+<tr>
+<td><strong>IDS</strong>: detecta y alerta</td>
+<td><strong>IPS</strong>: detecta y bloquea</td>
+<td>Prevención añade la capacidad de actuar</td>
+</tr>
+<tr>
+<td><strong>DMZ</strong>: segmento intermedio expuesto</td>
+<td><strong>Red interna</strong></td>
+<td>La DMZ aloja servicios accesibles desde fuera sin exponer la interna</td>
+</tr>
+<tr>
+<td><strong>SSL</strong>: predecesor obsoleto</td>
+<td><strong>TLS</strong>: tecnología vigente</td>
+<td>Denominación heredada frente a tecnología actual</td>
+</tr>
+<tr>
+<td><strong>TLS</strong>: protocolo</td>
+<td><strong>Certificado</strong>: instrumento de identidad</td>
+<td>TLS usa el certificado; no son lo mismo (Tema 24)</td>
+</tr>
+<tr>
+<td><strong>TLS</strong>: protege comunicaciones de aplicación</td>
+<td><strong>IPSec</strong>: protege IP a nivel de red</td>
+<td>Diferencia de nivel; IPSec es transparente a la aplicación</td>
+</tr>
+<tr>
+<td><strong>IPSec</strong>: conjunto de protocolos</td>
+<td><strong>VPN</strong>: servicio o arquitectura</td>
+<td>Medio frente a resultado; no son sinónimos</td>
+</tr>
+<tr>
+<td><strong>Modo transporte</strong>: protege la carga útil</td>
+<td><strong>Modo túnel</strong>: encapsula el paquete completo</td>
+<td>Host ↔ host frente a red ↔ red</td>
+</tr>
+<tr>
+<td><strong>AH</strong>: autenticidad e integridad</td>
+<td><strong>ESP</strong>: cifrado y, además, autenticidad e integridad</td>
+<td><strong>AH no cifra</strong></td>
+</tr>
+<tr>
+<td><strong>Client-to-site</strong>: persona ↔ organización</td>
+<td><strong>Site-to-site</strong>: red ↔ red</td>
+<td>Un usuario frente a dos sedes</td>
+</tr>
+<tr>
+<td><strong>VPN</strong>: canal lógico sobre red compartida</td>
+<td><strong>Línea dedicada</strong>: enlace físico exclusivo</td>
+<td>«Virtual» es literal</td>
+</tr>
+<tr>
+<td><strong>HTTPS</strong>: HTTP sobre TLS</td>
+<td><strong>«SSL»</strong> en el lenguaje corriente</td>
+<td>Denominación heredada; la tecnología es TLS</td>
+</tr>
+<tr>
+<td><strong>OpenVPN</strong>: VPN basada en TLS</td>
+<td><strong>IPSec</strong>: protección a nivel IP</td>
+<td>Dos bases tecnológicas distintas para una VPN</td>
+</tr>
+<tr>
+<td><strong>WireGuard</strong>: protocolo VPN moderno y sencillo</td>
+<td><strong>IPSec</strong>: conjunto de protocolos de seguridad IP</td>
+<td>Alternativas distintas para construir una VPN</td>
+</tr>
+<tr>
+<td><strong>Full tunnel</strong>: todo el tráfico</td>
+<td><strong>Split tunnel</strong>: solo el definido</td>
+<td>Estar en VPN no implica que todo circule por ella</td>
+</tr>
+</table></div>
+
+<h2 id="21-trampas-de-examen" class="tema-h2">21. Posibles trampas de examen</h2>
 <ul class="tema-lista">
-<li><strong>Cortafuegos</strong>: reglas (IP, puerto, protocolo, sentido); <strong>denegación por defecto</strong> (lista blanca).</li>
-<li><strong>Evolución</strong>: filtrado de paquetes → stateful → proxy de aplicación → <strong>NGFW</strong> (DPI, IPS, identificación de aplicaciones).</li>
-<li><strong>Personal (host) vs. perimetral (red)</strong>.</li>
-<li><strong>DMZ</strong> y arquitectura de doble cortafuegos.</li>
-<li><strong>IDS vs. IPS</strong>.</li>
-<li><strong>TLS</strong> (vigente: 1.2/1.3) vs. <strong>SSL</strong> (obsoleto); handshake; asimétrico para negociar, simétrico para la sesión; HTTPS.</li>
-<li><strong>IPSec</strong>: capa de Red; modo transporte vs. túnel; <strong>AH vs. ESP</strong>.</li>
-<li><strong>VPN</strong>: client-to-site vs. site-to-site; OpenVPN, WireGuard.</li>
+<li><strong>«El firewall es un antivirus»</strong> — falso: <strong>filtra tráfico según reglas</strong>; no detecta ni elimina código dañino (Tema 25).</li>
+<li><strong>«El firewall y la VPN son sustitutos»</strong> — falso: <strong>filtrar</strong> frente a <strong>crear un canal protegido</strong>.</li>
+<li><strong>«Todo firewall debe bloquear todo por defecto»</strong> — impreciso: <strong>deny by default es una buena práctica</strong>, no una regla universal.</li>
+<li><strong>«El filtrado de paquetes distingue si un paquete es respuesta a una conexión saliente»</strong> — falso: eso requiere <strong>inspección de estado</strong>.</li>
+<li><strong>«NGFW es simplemente un firewall de capa 7»</strong> — impreciso: <strong>combina filtrado avanzado con DPI, IPS e identificación de aplicaciones</strong>.</li>
+<li><strong>«La DMZ garantiza que el atacante quede contenido»</strong> — falso: <strong>limita el acceso directo a la red interna si la segmentación y las reglas están correctamente configuradas</strong>.</li>
+<li><strong>«El IDS bloquea el ataque»</strong> — falso: <strong>detecta y alerta</strong>; quien bloquea es el <strong>IPS</strong>.</li>
+<li><strong>«SSL es la tecnología actual»</strong> — falso: <strong>SSL está obsoleto</strong>; la vigente es <strong>TLS</strong>.</li>
+<li><strong>«HTTPS y SSL son lo mismo»</strong> — impreciso: <strong>HTTPS = HTTP sobre TLS</strong>.</li>
+<li><strong>«El certificado es TLS»</strong> — falso: el certificado es un <strong>instrumento de identidad</strong> que TLS utiliza (Tema 24).</li>
+<li><strong>«En TLS siempre se autentican ambas partes con certificado»</strong> — falso: la autenticación suele ser la del <strong>servidor</strong>; la del <strong>cliente es opcional</strong>.</li>
+<li><strong>«TLS opera obligatoriamente sobre TCP»</strong> — formulación insegura: se <strong>utiliza habitualmente</strong> para proteger protocolos de aplicación basados en TCP.</li>
+<li><strong>«El handshake es cifrar con asimétrico y luego con simétrico»</strong> — <strong>simplificación excesiva</strong>: negociación, acreditación mediante certificado cuando corresponde, establecimiento de claves de sesión y uso de criptografía simétrica.</li>
+<li><strong>«IPSec y VPN son sinónimos»</strong> — falso: <strong>IPSec es un conjunto de protocolos</strong>; la <strong>VPN es un servicio o arquitectura</strong>.</li>
+<li><strong>«IPSec protege a nivel de aplicación»</strong> — falso: protege las comunicaciones <strong>IP, a nivel de red</strong>.</li>
+<li><strong>«AH cifra el tráfico»</strong> — <strong>FALSO</strong>: AH aporta <strong>autenticidad e integridad</strong>, <strong>no confidencialidad mediante cifrado</strong>.</li>
+<li><strong>«ESP solo cifra»</strong> — incompleto: <strong>también puede proporcionar autenticación e integridad</strong>, según la configuración.</li>
+<li><strong>«Modo transporte y modo túnel son equivalentes»</strong> — falso: <strong>carga útil</strong> frente a <strong>paquete completo encapsulado</strong>; <strong>host ↔ host</strong> frente a <strong>red ↔ red</strong>.</li>
+<li><strong>«Una VPN entre dos sedes usa modo transporte»</strong> — falso: lo habitual es el <strong>modo túnel</strong>.</li>
+<li><strong>«Client-to-site y site-to-site son lo mismo»</strong> — falso: <strong>persona ↔ organización</strong> frente a <strong>red ↔ red</strong>.</li>
+<li><strong>«Una VPN es una línea física dedicada»</strong> — falso: es un <strong>canal lógico</strong> sobre una red no confiable.</li>
+<li><strong>«Toda VPN es una conexión cifrada»</strong> — impreciso: las <strong>propiedades concretas dependen del protocolo y de la configuración</strong>.</li>
+<li><strong>«Si estoy conectado a la VPN, todo mi tráfico pasa por ella»</strong> — falso con <strong>split tunneling</strong>: solo pasa <strong>el tráfico definido</strong>.</li>
+<li><strong>Colar contenido ajeno</strong>: ENS (T21), amenazas (T22), certificados y criptografía (T24), OSI/TCP-IP (T27), equipos de red (T28) y Wi-Fi (T30) no se desarrollan aquí.</li>
 </ul>
 
-<h2 id="9-posibles-puntos-de-examen" class="tema-h2">9. Posibles puntos de examen</h2>
+<h2 id="22-preguntas-tipo-test" class="tema-h2">22. Posibles preguntas tipo test</h2>
 <ul class="tema-lista">
-<li>Qué política de cortafuegos es la buena práctica (<strong>denegar por defecto</strong>) y por qué.</li>
-<li>Distinguir <strong>filtrado de paquetes, stateful, proxy y NGFW</strong> por su descripción.</li>
-<li>Qué es una <strong>DMZ</strong>, qué se coloca en ella y qué contiene un compromiso de un servidor público.</li>
-<li><strong>IDS vs. IPS</strong>: cuál solo alerta y cuál bloquea.</li>
-<li>Estado de <strong>SSL</strong> (obsoleto) frente a <strong>TLS</strong> (vigente) — matiz terminológico clásico.</li>
-<li>En qué capa opera <strong>IPSec</strong> frente a TLS.</li>
-<li><strong>Modo transporte vs. modo túnel</strong> de IPSec y cuál usa una VPN sitio a sitio.</li>
-<li><strong>AH vs. ESP</strong>: cuál cifra el contenido (ESP).</li>
-<li>Distinguir <strong>VPN de acceso remoto y sitio a sitio</strong> en un supuesto (teletrabajo vs. unir sedes).</li>
-<li>Qué caracteriza a <strong>WireGuard</strong> (simplicidad, rendimiento, kernel Linux 2020).</li>
+<li><strong>Definición</strong> de cortafuegos y elementos sobre los que pueden basarse sus reglas.</li>
+<li>¿Qué es la política <strong>deny by default</strong>? ¿Es una obligación universal?</li>
+<li><strong>Tipo de firewall → característica</strong>: packet filtering · stateful · proxy · NGFW.</li>
+<li>¿Qué tipo de cortafuegos <strong>mantiene el estado</strong> de las conexiones?</li>
+<li><strong>Supuesto</strong>: permitir la respuesta a una conexión saliente sin abrir un puerto de entrada general. ¿Qué tipo se necesita?</li>
+<li>¿Se define un <strong>NGFW</strong> simplemente como firewall de capa 7?</li>
+<li>Diferencia entre cortafuegos <strong>host-based</strong> y <strong>perimetral</strong>.</li>
+<li><strong>Definición</strong> de DMZ y esquema en el que se sitúa.</li>
+<li>¿Garantiza una DMZ la <strong>contención absoluta</strong> de un atacante?</li>
+<li>Diferencia entre <strong>IDS</strong> e <strong>IPS</strong>.</li>
+<li>¿Puede integrarse un IPS en un <strong>NGFW</strong>?</li>
+<li>¿Qué propiedades proporciona <strong>TLS</strong>?</li>
+<li>En TLS, ¿es obligatoria la <strong>autenticación del cliente</strong> mediante certificado?</li>
+<li>Ordenar los <strong>pasos conceptuales</strong> del handshake de TLS.</li>
+<li>¿Es correcto describir el handshake como «asimétrico y luego simétrico»?</li>
+<li>¿Qué es <strong>HTTPS</strong>?</li>
+<li>Relación entre <strong>SSL</strong> y <strong>TLS</strong>: ¿cuál está obsoleto?</li>
+<li>¿Qué versiones de TLS son las <strong>relevantes actualmente</strong>?</li>
+<li><strong>Definición</strong> de IPSec y <strong>nivel</strong> en el que actúa.</li>
+<li><strong>Modo → uso</strong>: transporte y túnel.</li>
+<li>¿Qué modo <strong>encapsula el paquete IP original completo</strong>?</li>
+<li><strong>Mecanismo → funciones</strong>: AH y ESP.</li>
+<li>¿Proporciona <strong>AH</strong> confidencialidad mediante cifrado?</li>
+<li>¿Cuál de los dos mecanismos de IPSec es el de <strong>uso principal</strong> en despliegues modernos?</li>
+<li><strong>Definición</strong> de VPN: ¿es toda VPN una conexión cifrada?</li>
+<li><strong>Tipo de VPN → escenario</strong>: teletrabajo · interconexión de dos sedes.</li>
+<li>Diferencia entre <strong>IPSec</strong> y <strong>VPN</strong>.</li>
+<li>Diferencia entre <strong>firewall</strong> y <strong>VPN</strong>.</li>
+<li>¿En qué se basa <strong>OpenVPN</strong>?</li>
+<li>¿Qué es <strong>WireGuard</strong>?</li>
+<li>Diferencia entre <strong>full tunnel</strong> y <strong>split tunneling</strong>.</li>
+<li><strong>Supuesto</strong>: VPN site-to-site con IPSec. ¿Qué modo se emplea habitualmente?</li>
+</ul>
+
+<h2 id="23-preguntas-cortas" class="tema-h2">23. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<h4 class="tema-h4">1. Explique qué es un cortafuegos</h4>
+<ul class="tema-lista">
+<li>Definición: sistema hardware o software que controla el tráfico de red aplicando reglas de seguridad.</li>
+<li>Criterios de las reglas: IP origen y destino, puerto, protocolo, sentido, estado de la conexión y, según el tipo, aplicación.</li>
+<li>Cierre: la política deny by default es la buena práctica recomendada, coherente con el mínimo privilegio.</li>
+</ul>
+<h4 class="tema-h4">2. Explique el filtrado de paquetes</h4>
+<ul class="tema-lista">
+<li>Examina los paquetes individualmente, sin considerar el contexto de la conexión.</li>
+<li>Limitación: no distingue si un paquete entrante responde a una conexión saliente o inicia una nueva.</li>
+<li>Cierre: para esa distinción se requiere inspección de estado.</li>
+</ul>
+<h4 class="tema-h4">3. Explique la inspección de estado</h4>
+<ul class="tema-lista">
+<li>Mantiene el estado de las conexiones y decide en función de él.</li>
+<li>Ventaja: permite la respuesta a una conexión saliente sin abrir un puerto de entrada de forma general.</li>
+<li>Cierre: es la base de los cortafuegos actuales; el NGFW añade DPI, IPS e identificación de aplicaciones.</li>
+</ul>
+<h4 class="tema-h4">4. Explique una DMZ</h4>
+<ul class="tema-lista">
+<li>Definición: segmento de red intermedio para alojar servicios accesibles desde redes externas sin exponer directamente la red interna.</li>
+<li>Esquema: Internet, firewall externo, DMZ, firewall interno, red interna.</li>
+<li>Cierre: limita el acceso directo a la red interna si la segmentación y las reglas están correctamente configuradas; no garantiza contención absoluta.</li>
+</ul>
+<h4 class="tema-h4">5. Diferencie IDS e IPS</h4>
+<ul class="tema-lista">
+<li>IDS: detecta y alerta ante actividad sospechosa.</li>
+<li>IPS: detecta y bloquea, interviniendo sobre el tráfico.</li>
+<li>Cierre: un IPS puede integrarse en un NGFW; ninguno sustituye al cortafuegos, que aplica las reglas de permitir o denegar.</li>
+</ul>
+<h4 class="tema-h4">6. Explique TLS</h4>
+<ul class="tema-lista">
+<li>Protocolo criptográfico que proporciona confidencialidad, integridad y mecanismos de autenticación para las comunicaciones.</li>
+<li>Uso habitual: proteger protocolos de aplicación basados en TCP, como HTTPS, SMTP e IMAP.</li>
+<li>Handshake: negociación de parámetros, acreditación de identidad del servidor mediante certificado cuando corresponde, establecimiento de claves de sesión y protección mediante criptografía simétrica.</li>
+<li>Cierre: la autenticación del cliente mediante certificado es opcional.</li>
+</ul>
+<h4 class="tema-h4">7. Diferencie SSL y TLS</h4>
+<ul class="tema-lista">
+<li>SSL: predecesor histórico, obsoleto; no debe emplearse.</li>
+<li>TLS: tecnología vigente; versiones relevantes actuales, TLS 1.2 y TLS 1.3.</li>
+<li>Cierre: expresiones como «certificado SSL» son denominaciones heredadas; la tecnología es TLS.</li>
+</ul>
+<h4 class="tema-h4">8. Explique IPSec</h4>
+<ul class="tema-lista">
+<li>Conjunto de protocolos para proteger las comunicaciones IP a nivel de red.</li>
+<li>Proporciona autenticación, integridad y confidencialidad según el mecanismo y la configuración.</li>
+<li>Modos: transporte y túnel. Mecanismos: AH y ESP.</li>
+<li>Cierre: es transparente para las aplicaciones, a diferencia de TLS, que protege protocolos de aplicación.</li>
+</ul>
+<h4 class="tema-h4">9. Diferencie modo transporte y modo túnel</h4>
+<ul class="tema-lista">
+<li>Transporte: protege la carga útil del paquete IP original; uso típico host a host.</li>
+<li>Túnel: encapsula el paquete IP original completo dentro de un nuevo paquete IP protegido; uso típico para interconectar redes completas.</li>
+<li>Cierre: una VPN site-to-site basada en IPSec emplea habitualmente el modo túnel.</li>
+</ul>
+<h4 class="tema-h4">10. Diferencie AH y ESP</h4>
+<ul class="tema-lista">
+<li>AH: autenticación del origen e integridad del tráfico protegido; no proporciona confidencialidad mediante cifrado.</li>
+<li>ESP: confidencialidad mediante cifrado y, además, puede proporcionar autenticación e integridad.</li>
+<li>Cierre: ESP es el mecanismo de uso principal en despliegues modernos; el de AH es limitado.</li>
+</ul>
+<h4 class="tema-h4">11. Diferencie client-to-site y site-to-site</h4>
+<ul class="tema-lista">
+<li>Client-to-site: un usuario individual accede de forma segura a los recursos de la organización desde Internet; caso típico, el teletrabajo.</li>
+<li>Site-to-site: conecta las redes completas de dos ubicaciones, por ejemplo dos sedes.</li>
+<li>Cierre: en el segundo caso la conexión es transparente para el usuario y, con IPSec, se emplea habitualmente el modo túnel.</li>
+</ul>
+<h4 class="tema-h4">12. Diferencie firewall y VPN</h4>
+<ul class="tema-lista">
+<li>Firewall: controla y filtra el tráfico aplicando reglas; decide qué pasa.</li>
+<li>VPN: crea un canal lógico protegido sobre una red no confiable; protege el transporte.</li>
+<li>No son sustitutos: un firewall puede controlar el tráfico de una VPN.</li>
+<li>Cierre: tampoco deben confundirse IPSec y VPN — IPSec es un conjunto de protocolos que puede servir de base a una VPN.</li>
+</ul>
+
+<h2 id="24-supuestos-practicos" class="tema-h2">24. Supuestos prácticos</h2>
+<h4 class="tema-h4">Caso 1 — Servidor web público</h4>
+<p><strong>Escenario</strong>: el ayuntamiento va a publicar un <strong>servidor web accesible desde Internet</strong> y hay que decidir dónde ubicarlo.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Dónde se ubica?</strong> En la <strong>DMZ</strong>: segmento intermedio para servicios que deben ser <strong>accesibles desde redes externas</strong> sin exponer directamente la red interna.</li>
+<li><strong>b) ¿Por qué no en la red interna?</strong> Porque un compromiso del servidor situaría al atacante <strong>dentro</strong> de la red interna.</li>
+<li><strong>c) ¿Qué esquema se aplica?</strong> <strong>Internet → firewall externo → DMZ → firewall interno → red interna</strong>.</li>
+<li><strong>d) ¿Queda garantizada la contención?</strong> <strong>No.</strong> La DMZ <strong>limita el acceso directo a la red interna si la segmentación y las reglas están correctamente configuradas</strong>; no ofrece una garantía absoluta.</li>
+</ul>
+<h4 class="tema-h4">Caso 2 — Servidor interno accesible solo desde una IP y un puerto</h4>
+<p><strong>Escenario</strong>: un servidor interno <strong>solo debe aceptar conexiones desde una IP concreta y por un puerto determinado</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué mecanismo lo resuelve?</strong> Una <strong>regla de cortafuegos</strong>.</li>
+<li><strong>b) ¿Sobre qué elementos se construye la regla?</strong> <strong>IP origen</strong> (la autorizada), <strong>IP destino</strong> (el servidor), <strong>puerto</strong>, <strong>protocolo</strong> y <strong>sentido</strong>.</li>
+<li><strong>c) ¿Qué política acompaña a esa regla?</strong> <strong>Deny by default</strong>: se deniega todo y se abre <strong>únicamente</strong> lo autorizado, conforme al <strong>mínimo privilegio</strong>.</li>
+<li><strong>d) ¿Dónde puede aplicarse?</strong> En el <strong>cortafuegos perimetral</strong> y, complementariamente, en el <strong>cortafuegos de host</strong> del propio servidor.</li>
+</ul>
+<h4 class="tema-h4">Caso 3 — Permitir la respuesta sin abrir un puerto de entrada</h4>
+<p><strong>Escenario</strong>: los equipos internos deben poder <strong>iniciar conexiones hacia el exterior</strong> y recibir la respuesta, <strong>sin abrir un puerto de entrada de forma general</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué tipo de cortafuegos se necesita?</strong> Uno con <strong>stateful inspection</strong>.</li>
+<li><strong>b) ¿Por qué?</strong> Porque <strong>mantiene el estado de las conexiones</strong> y puede reconocer que un paquete entrante es <strong>la respuesta a una conexión establecida</strong>.</li>
+<li><strong>c) ¿Por qué no basta el filtrado de paquetes?</strong> Porque <strong>examina los paquetes individualmente</strong> y no distingue una respuesta legítima de una <strong>conexión nueva no solicitada</strong>.</li>
+<li><strong>d) Ancla.</strong> <strong>STATEFUL → RECUERDA.</strong></li>
+</ul>
+<h4 class="tema-h4">Caso 4 — Teletrabajo</h4>
+<p><strong>Escenario</strong>: una persona trabaja desde su domicilio y necesita <strong>acceder a recursos internos</strong> de la organización.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué solución corresponde?</strong> Una <strong>VPN client-to-site</strong>: <strong>persona ↔ organización</strong>.</li>
+<li><strong>b) ¿Qué proporciona?</strong> Un <strong>canal lógico protegido sobre una red no confiable</strong> —Internet—, con las propiedades que determinen <strong>el protocolo y la configuración</strong>.</li>
+<li><strong>c) ¿Qué tecnologías pueden emplearse?</strong> <strong>IPSec</strong> o una <strong>VPN basada en TLS</strong> (por ejemplo, <strong>OpenVPN</strong>); también protocolos modernos como <strong>WireGuard</strong>.</li>
+<li><strong>d) ¿Sustituye la VPN al cortafuegos?</strong> <strong>No.</strong> La VPN <strong>protege el canal</strong>; el cortafuegos <strong>decide qué tráfico se permite</strong>, incluido el que llega por la VPN.</li>
+</ul>
+<h4 class="tema-h4">Caso 5 — Dos sedes que deben comunicarse permanentemente</h4>
+<p><strong>Escenario</strong>: dos dependencias municipales situadas en ubicaciones distintas necesitan que <strong>sus redes se comuniquen de forma permanente</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué tipo de VPN?</strong> <strong>Site-to-site</strong>: <strong>red ↔ red</strong>.</li>
+<li><strong>b) ¿Quiénes son los extremos del canal?</strong> Los <strong>equipos de frontera</strong> de cada sede, no los equipos de las personas usuarias.</li>
+<li><strong>c) ¿Qué percibe el usuario?</strong> <strong>Nada</strong>: la conexión es <strong>transparente</strong>, a diferencia de la client-to-site, que exige iniciar la conexión.</li>
+<li><strong>d) ¿Es lo mismo que contratar una línea dedicada?</strong> <strong>No.</strong> La VPN es un <strong>canal lógico</strong> sobre una infraestructura compartida; la línea dedicada es un <strong>enlace físico exclusivo</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 6 — VPN site-to-site basada en IPSec</h4>
+<p><strong>Escenario</strong>: la VPN entre las dos sedes del caso anterior se implanta con <strong>IPSec</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué modo se emplea?</strong> El <strong>modo TÚNEL</strong>.</li>
+<li><strong>b) ¿Por qué?</strong> Porque <strong>encapsula el paquete IP original completo dentro de un nuevo paquete IP protegido</strong>, que es lo que permite <strong>interconectar redes completas</strong>.</li>
+<li><strong>c) ¿Y el modo transporte?</strong> Protege <strong>la carga útil</strong> del paquete original y su uso típico es la comunicación <strong>host ↔ host</strong>, no la unión de redes.</li>
+<li><strong>d) ¿Qué mecanismo aportaría el cifrado?</strong> <strong>ESP</strong>, que además puede proporcionar autenticación e integridad.</li>
+</ul>
+<h4 class="tema-h4">Caso 7 — Aplicación web que debe ir protegida</h4>
+<p><strong>Escenario</strong>: una aplicación web municipal debe publicarse de modo que la comunicación con la ciudadanía esté protegida.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué se emplea?</strong> <strong>HTTPS</strong>, es decir, <strong>HTTP protegido mediante TLS</strong>.</li>
+<li><strong>b) ¿Qué aporta TLS?</strong> <strong>Confidencialidad, integridad y mecanismos de autenticación</strong> cuando corresponde.</li>
+<li><strong>c) ¿Quién se autentica?</strong> Habitualmente el <strong>servidor</strong>, mediante certificado; la <strong>autenticación del cliente es opcional</strong>.</li>
+<li><strong>d) ¿Garantiza que el sitio sea legítimo?</strong> <strong>No.</strong> HTTPS <strong>protege la comunicación</strong>; no acredita la legitimidad del contenido (Tema 20).</li>
+</ul>
+<h4 class="tema-h4">Caso 8 — Autenticidad e integridad sin cifrado</h4>
+<p><strong>Escenario</strong>: en un escenario con IPSec se requiere <strong>autenticidad e integridad del tráfico</strong>, pero <strong>no cifrado</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué mecanismo corresponde?</strong> <strong>AH</strong>: proporciona <strong>autenticación del origen e integridad</strong>.</li>
+<li><strong>b) ¿Cifra AH?</strong> <strong>No.</strong> <strong>No proporciona confidencialidad mediante cifrado</strong>: el contenido viaja legible.</li>
+<li><strong>c) ¿Es habitual?</strong> Su <strong>uso actual es limitado</strong>: en despliegues modernos predomina <strong>ESP</strong>.</li>
+<li><strong>d) ¿Qué habría que usar si además se quisiera confidencialidad?</strong> <strong>ESP</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 9 — Se necesita cifrado del tráfico IP</h4>
+<p><strong>Escenario</strong>: se exige que el tráfico IP entre dos puntos viaje <strong>cifrado</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué mecanismo de IPSec?</strong> <strong>ESP</strong>, que proporciona <strong>confidencialidad mediante cifrado</strong>.</li>
+<li><strong>b) ¿Aporta algo más?</strong> <strong>También puede proporcionar autenticación e integridad</strong>, según la configuración.</li>
+<li><strong>c) ¿Y si además hay que unir dos redes?</strong> Se combinará con el <strong>modo túnel</strong>.</li>
+<li><strong>d) ¿Sería equivalente usar TLS?</strong> No exactamente: <strong>TLS protege protocolos de aplicación</strong>; <strong>IPSec protege IP a nivel de red</strong> y es <strong>transparente</strong> para las aplicaciones.</li>
+</ul>
+<h4 class="tema-h4">Caso 10 — Conectado a la VPN, pero navegando por fuera</h4>
+<p><strong>Escenario</strong>: una persona en teletrabajo <strong>está conectada a la VPN</strong> y accede sin problema a los recursos internos, pero se observa que su <strong>navegación general no pasa por la organización</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Es un fallo?</strong> <strong>No necesariamente</strong>: es el comportamiento propio de un <strong>split tunneling</strong>.</li>
+<li><strong>b) ¿Qué significa?</strong> Que <strong>solo el tráfico definido pasa por la VPN</strong> y <strong>el resto sale por la conexión local</strong>.</li>
+<li><strong>c) ¿Cuál es la alternativa?</strong> El <strong>full tunnel</strong>, en el que <strong>todo el tráfico pasa por la VPN</strong> y, por tanto, atraviesa los controles de la organización.</li>
+<li><strong>d) ¿Qué conclusión debe trasladarse?</strong> Que <strong>estar conectado a la VPN no implica automáticamente que todo el tráfico circule por ella</strong>: depende de la configuración.</li>
+</ul>
+
+<h2 id="25-matriz-de-memorizacion" class="tema-h2">25. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Lo que debo recordar</strong></th>
+</tr>
+<tr>
+<td><strong>Firewall</strong></td>
+<td>Sistema hardware o software que controla el tráfico aplicando reglas de seguridad</td>
+</tr>
+<tr>
+<td><strong>Deny by default</strong></td>
+<td>Bloquear salvo lo permitido; buena práctica coherente con mínimo privilegio, no dogma universal</td>
+</tr>
+<tr>
+<td><strong>Packet filtering</strong></td>
+<td>Examina los paquetes individualmente, sin contexto de conexión</td>
+</tr>
+<tr>
+<td><strong>Stateful</strong></td>
+<td>Mantiene el estado de las conexiones; permite la respuesta sin abrir puerto de entrada general</td>
+</tr>
+<tr>
+<td><strong>Proxy</strong></td>
+<td>Entiende e inspecciona el protocolo de aplicación, actuando como intermediario</td>
+</tr>
+<tr>
+<td><strong>NGFW</strong></td>
+<td>Combina filtrado avanzado con DPI, IPS e identificación de aplicaciones</td>
+</tr>
+<tr>
+<td><strong>Host firewall</strong></td>
+<td>Protege un equipo concreto, allí donde esté</td>
+</tr>
+<tr>
+<td><strong>Perimetral</strong></td>
+<td>Protege una red desde un punto central</td>
+</tr>
+<tr>
+<td><strong>DMZ</strong></td>
+<td>Segmento intermedio para servicios accesibles desde fuera sin exponer la red interna; no garantiza contención absoluta</td>
+</tr>
+<tr>
+<td><strong>IDS</strong></td>
+<td>Detecta y alerta</td>
+</tr>
+<tr>
+<td><strong>IPS</strong></td>
+<td>Detecta y bloquea; puede integrarse en un NGFW</td>
+</tr>
+<tr>
+<td><strong>TLS</strong></td>
+<td>Protocolo criptográfico: confidencialidad, integridad y autenticación cuando corresponde; autenticación del cliente opcional</td>
+</tr>
+<tr>
+<td><strong>Handshake TLS</strong></td>
+<td>Negociar parámetros, acreditar identidad con certificado cuando corresponde, establecer claves de sesión y proteger con criptografía simétrica</td>
+</tr>
+<tr>
+<td><strong>SSL</strong></td>
+<td>Predecesor histórico, obsoleto</td>
+</tr>
+<tr>
+<td><strong>HTTPS</strong></td>
+<td>HTTP protegido mediante TLS</td>
+</tr>
+<tr>
+<td><strong>IPSec</strong></td>
+<td>Conjunto de protocolos para proteger las comunicaciones IP a nivel de red</td>
+</tr>
+<tr>
+<td><strong>Modo transporte</strong></td>
+<td>Protege la carga útil del paquete IP original; host ↔ host</td>
+</tr>
+<tr>
+<td><strong>Modo túnel</strong></td>
+<td>Encapsula el paquete IP completo en uno nuevo protegido; red ↔ red</td>
+</tr>
+<tr>
+<td><strong>AH</strong></td>
+<td>Autenticación del origen e integridad; <strong>no cifra</strong>; uso limitado</td>
+</tr>
+<tr>
+<td><strong>ESP</strong></td>
+<td>Confidencialidad mediante cifrado y, además, puede aportar autenticación e integridad; uso principal</td>
+</tr>
+<tr>
+<td><strong>VPN</strong></td>
+<td>Canal lógico protegido sobre una red no confiable; sus propiedades dependen del protocolo y la configuración</td>
+</tr>
+<tr>
+<td><strong>Client-to-site</strong></td>
+<td>Usuario individual accede a los recursos de la organización; teletrabajo</td>
+</tr>
+<tr>
+<td><strong>Site-to-site</strong></td>
+<td>Conecta redes completas de dos ubicaciones; con IPSec, modo túnel</td>
+</tr>
+<tr>
+<td><strong>OpenVPN</strong></td>
+<td>Solución y protocolo VPN basado en TLS</td>
+</tr>
+<tr>
+<td><strong>WireGuard</strong></td>
+<td>Protocolo VPN moderno y de diseño sencillo</td>
+</tr>
+<tr>
+<td><strong>Full / split tunnel</strong></td>
+<td>Todo el tráfico por la VPN frente a solo el tráfico definido</td>
+</tr>
+</table></div>
+
+<h2 id="26-resumen-final" class="tema-h2">26. Resumen final: si mañana fuera el examen</h2>
+<ul class="tema-lista">
+<li><strong>Firewall</strong> = sistema hardware o software que <strong>controla el tráfico aplicando reglas</strong>: IP origen y destino, puerto, protocolo, sentido, <strong>estado</strong> y, según el tipo, <strong>aplicación</strong>. <strong>FIREWALL → FILTRA.</strong></li>
+<li><strong>Deny by default</strong> = bloquear salvo lo permitido. <strong>Buena práctica</strong> coherente con mínimo privilegio, <strong>no una regla universal</strong>.</li>
+<li><strong>Tipos</strong>: <strong>packet filtering</strong> (paquete a paquete) · <strong>stateful</strong> (recuerda las conexiones) · <strong>proxy</strong> (entiende el protocolo de aplicación) · <strong>NGFW</strong> (combina filtrado avanzado con <strong>DPI, IPS e identificación de aplicaciones</strong> — <strong>no es simplemente «capa 7»</strong>).</li>
+<li><strong>Host-based</strong> protege <strong>un equipo</strong>; <strong>perimetral</strong> protege <strong>una red</strong> desde un punto central. Son <strong>complementarios</strong>.</li>
+<li><strong>DMZ</strong> = segmento intermedio para servicios <strong>accesibles desde fuera</strong> sin exponer la red interna. <strong>Internet → firewall externo → DMZ → firewall interno → red interna.</strong> <strong>No garantiza contención absoluta</strong>: limita el acceso directo <strong>si la configuración es correcta</strong>.</li>
+<li><strong>IDS → detecta y AVISA · IPS → detecta y BLOQUEA.</strong> El IPS puede integrarse en un NGFW.</li>
+<li><strong>TLS</strong> = protocolo criptográfico con <strong>confidencialidad, integridad y autenticación</strong>. Se usa <strong>habitualmente</strong> sobre protocolos de aplicación basados en TCP (HTTPS, SMTP, IMAP). <strong>La autenticación del cliente es OPCIONAL.</strong></li>
+<li><strong>Handshake</strong>: <strong>negociar parámetros → acreditar identidad con certificado cuando corresponde → establecer claves de sesión → proteger con criptografía simétrica</strong>. <strong>No lo resumas como «asimétrico y luego simétrico».</strong></li>
+<li><strong>HTTPS = HTTP + TLS.</strong> <strong>SSL obsoleto · TLS vigente</strong> (1.2 y 1.3).</li>
+<li><strong>IPSec</strong> = conjunto de protocolos para proteger las comunicaciones <strong>IP a nivel de RED</strong>: autenticación, integridad y confidencialidad según mecanismo y configuración. Es <strong>transparente</strong> para las aplicaciones.</li>
+<li><strong>TRANSPORTE → protege la carga útil → HOST ↔ HOST.</strong> <strong>TÚNEL → encapsula el paquete completo → RED ↔ RED.</strong></li>
+<li><strong>AH → autenticidad e integridad, NO CIFRA</strong>, uso limitado. <strong>ESP → cifrado y, además, puede aportar autenticidad e integridad</strong>, uso principal.</li>
+<li><strong>VPN</strong> = <strong>canal lógico protegido sobre una red no confiable</strong>. Sus propiedades <strong>dependen del protocolo y la configuración</strong>. <strong>No es una línea física dedicada.</strong></li>
+<li><strong>CLIENT-TO-SITE → persona ↔ organización</strong> (teletrabajo) · <strong>SITE-TO-SITE → red ↔ red</strong> (dos sedes; con IPSec, <strong>modo túnel</strong>).</li>
+<li><strong>IPSec ≠ VPN</strong>: conjunto de protocolos frente a servicio o arquitectura; IPSec <strong>puede ser la base</strong> de una VPN. <strong>FIREWALL ≠ VPN</strong>: filtrar frente a crear un canal protegido; el firewall <strong>puede controlar el tráfico de la VPN</strong>.</li>
+<li><strong>VPN basada en TLS</strong> (históricamente «SSL VPN»): <strong>OpenVPN</strong>. <strong>WireGuard</strong>: protocolo moderno y de diseño sencillo.</li>
+<li><strong>FULL TUNNEL → todo el tráfico · SPLIT TUNNEL → solo el definido.</strong> Estar en VPN <strong>no implica</strong> que todo circule por ella.</li>
+</ul>
+
+<h2 id="27-actualidad" class="tema-h2">27. Actualidad de protocolos seguros y VPN — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Información sujeta a cambio · Fecha de actualización de estos apuntes: agosto de 2026</strong><br>Nada de este apartado desplaza al núcleo. <strong>Las versiones concretas, los datos de adopción y el rendimiento de los productos no son materia de examen.</strong></th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Evolución de TLS</strong>: las versiones <strong>antiguas de SSL y TLS han quedado desaconsejadas o retiradas</strong> progresivamente. Las <strong>relevantes actualmente son TLS 1.2 y TLS 1.3</strong>. Lo <strong>estable</strong> para el examen es la relación <strong>SSL obsoleto / TLS vigente</strong> y las <strong>propiedades</strong> que TLS proporciona.</li>
+<li><strong>Adopción de TLS 1.3</strong>: su despliegue ha ido <strong>creciendo de forma sostenida</strong>, conviviendo con TLS 1.2 en la mayoría de los entornos. Cualquier <strong>porcentaje concreto</strong> es un dato temporal que debe citarse con <strong>fuente y fecha</strong> y <strong>no afirmarse</strong> como contenido cerrado.</li>
+<li><strong>Evolución de WireGuard</strong>: se ha consolidado como <strong>alternativa moderna</strong> por su <strong>diseño sencillo</strong>, y está disponible en los principales sistemas. Las <strong>fechas de incorporación</strong>, los datos de <strong>adopción</strong> y las comparativas de <strong>rendimiento</strong> <strong>no son materia nuclear</strong>.</li>
+<li><strong>Cortafuegos</strong>: la tendencia consolidada es la <strong>integración de funciones</strong> en un mismo sistema —filtrado con estado, DPI, IPS e identificación de aplicaciones—, que es precisamente lo que caracteriza al <strong>NGFW</strong>. Los <strong>productos y fabricantes concretos</strong> no son objeto de este tema.</li>
+<li><strong>Terminología</strong>: sigue siendo habitual la expresión <strong>«SSL VPN»</strong> o <strong>«certificado SSL»</strong> por inercia comercial. Lo correcto es hablar de <strong>VPN basada en TLS</strong> y de <strong>certificado</strong> a secas: la tecnología empleada es <strong>TLS</strong>.</li>
 </ul>
   </div>
 </article>

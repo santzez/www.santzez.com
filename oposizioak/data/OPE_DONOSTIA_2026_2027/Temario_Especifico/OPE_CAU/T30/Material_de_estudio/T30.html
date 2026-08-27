@@ -2,175 +2,1199 @@
   <header class="tema-cabecera">
     <div class="tema-cabecera__id">T30</div>
     <h1 class="tema-cabecera__titulo">Sistemas de movilidad y redes inalámbricas. Tecnologías, componentes y securización de dispositivos. Conceptos de la gestión de dispositivos móviles (MDM)</h1>
-    <div class="tema-cabecera__meta">Bloque IV · Comunicaciones y redes — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
+    <div class="tema-cabecera__meta">Bloque IV · Redes y comunicaciones — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
   </header>
 
   <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
-<li><a href="#1-sistemas-de-movilidad-redes-celulares">1. Sistemas de movilidad: redes celulares</a></li>
-<li><a href="#2-redes-inalámbricas-wi-fi-componentes">2. Redes inalámbricas Wi-Fi: componentes</a></li>
-<li><a href="#3-estándares-wi-fi-evolución">3. Estándares Wi-Fi: evolución</a></li>
-<li><a href="#4-seguridad-en-redes-wi-fi">4. Seguridad en redes Wi-Fi</a></li>
-<li><a href="#5-securización-de-dispositivos-móviles-amenazas-y-medidas">5. Securización de dispositivos móviles: amenazas y medidas</a></li>
-<li><a href="#6-gestión-de-dispositivos-móviles-mdm">6. Gestión de dispositivos móviles (MDM)</a></li>
-<li><a href="#7-resumen-para-estudiar">7. Resumen para estudiar</a></li>
-<li><a href="#8-conceptos-clave">8. Conceptos clave</a></li>
-<li><a href="#9-posibles-puntos-de-examen">9. Posibles puntos de examen</a></li>
+<li><a href="#1-redes-celulares">1. Redes celulares</a></li>
+<li><a href="#2-generaciones">2. Generaciones de telefonía móvil</a></li>
+<li><a href="#3-wifi">3. Wi-Fi: concepto y modos</a></li>
+<li><a href="#4-ssid-roaming-mesh">4. SSID, roaming y mesh</a></li>
+<li><a href="#5-estandares-wifi">5. Estándares Wi-Fi</a></li>
+<li><a href="#6-bandas">6. Bandas de frecuencia</a></li>
+<li><a href="#7-seguridad-wifi">7. Seguridad Wi-Fi: WEP, WPA, WPA2 y WPA3</a></li>
+<li><a href="#8-falsas-medidas">8. Dos falsas medidas de seguridad</a></li>
+<li><a href="#9-red-de-invitados">9. La red de invitados</a></li>
+<li><a href="#10-amenazas-moviles">10. Amenazas sobre el dispositivo móvil</a></li>
+<li><a href="#11-medidas-securizacion">11. Medidas de securización del dispositivo</a></li>
+<li><a href="#12-vpn-en-movilidad">12. VPN en movilidad</a></li>
+<li><a href="#13-mdm">13. MDM: concepto</a></li>
+<li><a href="#14-ciclo-de-vida">14. El ciclo de vida MDM</a></li>
+<li><a href="#15-politicas-y-apps">15. Políticas, aplicaciones e inventario</a></li>
+<li><a href="#16-separacion-de-datos">16. Separación de datos y borrado remoto</a></li>
+<li><a href="#17-modelos-de-propiedad">17. Modelos de propiedad: COPE, BYOD y COBO</a></li>
+<li><a href="#18-mdm-mam-uem">18. MDM, MAM y UEM</a></li>
+<li><a href="#19-anclas-de-memoria">19. Anclas de memoria</a></li>
+<li><a href="#20-no-confundir">20. No confundir</a></li>
+<li><a href="#21-trampas-de-examen">21. Posibles trampas de examen</a></li>
+<li><a href="#22-preguntas-tipo-test">22. Posibles preguntas tipo test</a></li>
+<li><a href="#23-preguntas-cortas">23. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#24-supuestos-practicos">24. Supuestos prácticos</a></li>
+<li><a href="#25-matriz-de-memorizacion">25. Matriz de memorización</a></li>
+<li><a href="#26-resumen-final">26. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#27-actualidad">27. Actualidad de movilidad y Wi-Fi — datos fechados</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
 
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>Este tema da por conocidos el modelo OSI/TCP/IP (Tema 27), los equipos de interconexión y el punto de acceso como puente entre red cableada e inalámbrica (Tema 28), y los cortafuegos y VPN (Tema 29), que aquí se aplican al contexto específico de la movilidad. Bluetooth, como tecnología inalámbrica de conectividad de periféricos de corto alcance, ya se estudió en el Tema 8 y no se repite aquí.</th>
+<th><strong>⚠️ No confundir — fronteras del tema</strong><br>El peso de este tema recae en <strong>MOVILIDAD + WI-FI + SEGURIDAD MÓVIL + MDM</strong>.<br><strong>Tema 8</strong> → Bluetooth. <strong>Tema 16</strong> → distribución general de software. <strong>Tema 25</strong> → malware. <strong>Tema 27</strong> → OSI y TCP/IP. <strong>Tema 28</strong> → equipos de red, AP y VLAN. <strong>Tema 29</strong> → cortafuegos y VPN.<br>Esos contenidos solo se citan aquí <strong>para contextualizar</strong>.</th>
 </tr>
 </table></div>
-<h2 id="1-sistemas-de-movilidad-redes-celulares" class="tema-h2">1. Sistemas de movilidad: redes celulares</h2>
-<p>Una <strong>red celular</strong> ofrece cobertura mediante «células» geográficas, cada una servida por una estación base (antena), lo que permite reutilizar las mismas frecuencias en células no adyacentes y realizar un <strong>traspaso (handover)</strong> automático entre células a medida que el dispositivo se desplaza, sin interrumpir la comunicación.</p>
+
+<h2 id="1-redes-celulares" class="tema-h2">1. Redes celulares</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>Red celular</strong> → red cuya <strong>cobertura se divide en células</strong>, cada una de ellas <strong>atendida por una estación base</strong>.<br><strong>ANCLA: CELULAR → CÉLULAS + ESTACIONES BASE + HANDOVER.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>En qué consiste</strong></th>
+</tr>
+<tr>
+<td><strong>Célula</strong></td>
+<td>Área de cobertura atendida por una <strong>estación base</strong></td>
+</tr>
+<tr>
+<td><strong>Reutilización de frecuencias</strong></td>
+<td>Las mismas frecuencias pueden <strong>reutilizarse en células no adyacentes</strong>, multiplicando la capacidad del sistema</td>
+</tr>
+<tr>
+<td><strong>Handover</strong></td>
+<td><strong>Traspaso de la comunicación</strong> de una célula a otra cuando el terminal se desplaza, <strong>manteniendo la conexión</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — la idea de fondo</strong><br>Dividir el territorio en <strong>células pequeñas</strong> permite <strong>reutilizar las frecuencias</strong> una y otra vez: es lo que hace posible dar servicio a millones de terminales con un espectro limitado.<br>Y el <strong>handover</strong> es lo que convierte esa división en <strong>movilidad real</strong>: sin él, cambiar de célula significaría <strong>cortar la comunicación</strong>.</th>
+</tr>
+</table></div>
+<figure class="tema-figura">
+<figcaption>Generaciones móviles</figcaption>
+<svg viewBox="0 0 700 229" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at30ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at30aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at30av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at30an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at30ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at30ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">1G</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at30ag)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Voz analógica</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">2G</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at30ag)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Digital + SMS</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">3G</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at30aa)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Datos móviles</text><rect x="8" y="139" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">4G</text><line x1="264" y1="157.0" x2="356" y2="157.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at30aa)"/><rect x="362" y="139" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Banda ancha móvil</text><rect x="8" y="184" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="202.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">5G</text><line x1="264" y1="202.0" x2="356" y2="202.0" stroke="#003da5" stroke-width="2" marker-end="url(#at30ap)"/><rect x="362" y="184" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="202.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Velocidad + baja latencia + densidad</text></svg>
+<p class="tema-figura__nota">Red celular = células + estaciones base + handover.</p></figure>
+
+
+<h2 id="2-generaciones" class="tema-h2">2. Generaciones de telefonía móvil</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>Generación</strong></th>
-<th><strong>Qué aportó</strong></th>
+<th><strong>Idea principal</strong></th>
 </tr>
 <tr>
-<td>1G</td>
-<td>Telefonía móvil analógica, solo voz (años 80)</td>
+<td><strong>1G</strong></td>
+<td><strong>Voz analógica</strong></td>
 </tr>
 <tr>
-<td>2G (GSM)</td>
-<td>Digitalización de la voz y aparición de los SMS</td>
+<td><strong>2G</strong></td>
+<td><strong>Digital + SMS</strong></td>
 </tr>
 <tr>
-<td>3G (UMTS)</td>
-<td>Datos móviles y navegación web básica</td>
+<td><strong>3G</strong></td>
+<td><strong>Datos móviles</strong></td>
 </tr>
 <tr>
-<td>4G (LTE)</td>
-<td>Banda ancha móvil: streaming de vídeo, VoIP de calidad</td>
+<td><strong>4G</strong></td>
+<td><strong>Banda ancha móvil</strong></td>
 </tr>
 <tr>
-<td>5G</td>
-<td>Mayor velocidad, menor latencia y mayor densidad de dispositivos conectados por célula</td>
+<td><strong>5G</strong></td>
+<td><strong>Velocidad + baja latencia + alta densidad</strong> de dispositivos</td>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>El 5G se diseñó para tres tipos de caso de uso diferenciados: <strong>eMBB</strong> (enhanced Mobile Broadband, banda ancha móvil mejorada, para más velocidad y capacidad), <strong>URLLC</strong> (Ultra-Reliable Low-Latency Communications, comunicaciones ultra fiables de baja latencia, pensadas para aplicaciones críticas) y <strong>mMTC</strong> (massive Machine-Type Communications, comunicación masiva tipo máquina, pensada para desplegar un número muy elevado de dispositivos IoT en una misma zona). El 6G se encuentra todavía en fase de investigación y estandarización, sin despliegue comercial en el momento de redactar este tema.</th>
+<th><strong>🧠 Para memorizar — una palabra por generación</strong><br><strong>1G ANALÓGICA · 2G SMS · 3G DATOS · 4G BANDA ANCHA · 5G VELOCIDAD, LATENCIA Y DENSIDAD.</strong><br>El salto conceptual clave es <strong>1G → 2G</strong> (de analógico a <strong>digital</strong>) y <strong>2G → 3G</strong> (aparición de los <strong>datos móviles</strong>).</th>
 </tr>
 </table></div>
-<h2 id="2-redes-inalámbricas-wi-fi-componentes" class="tema-h2">2. Redes inalámbricas Wi-Fi: componentes</h2>
-<p>Una red Wi-Fi (basada en la familia de estándares IEEE 802.11) funciona habitualmente en <strong>modo infraestructura</strong>: los dispositivos se conectan a través de uno o varios <strong>puntos de acceso (AP)</strong> ya introducidos en el Tema 28, que hacen de puente entre el medio inalámbrico y la red cableada. El <strong>modo ad-hoc</strong>, en el que los dispositivos se conectan directamente entre sí sin ningún punto de acceso intermedio, ha quedado prácticamente en desuso.</p>
+<h4 class="tema-h4">2.1 Los tres escenarios de 5G</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Sigla</strong></th>
+<th><strong>Escenario</strong></th>
+</tr>
+<tr>
+<td><strong>eMBB</strong></td>
+<td><strong>Banda ancha móvil</strong> mejorada</td>
+</tr>
+<tr>
+<td><strong>URLLC</strong></td>
+<td><strong>Baja latencia y alta fiabilidad</strong></td>
+</tr>
+<tr>
+<td><strong>mMTC</strong></td>
+<td><strong>Muchos dispositivos</strong> conectados (IoT masivo)</td>
+</tr>
+</table></div>
+<p>Estos tres escenarios son <strong>prioridad secundaria</strong>. Lo esencial de 5G para el examen es la tríada <strong>velocidad + latencia + densidad</strong>.</p>
+
+<h2 id="3-wifi" class="tema-h2">3. Wi-Fi: concepto y modos</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>Wi-Fi</strong> → <strong>familia de estándares IEEE 802.11 para redes de área local inalámbricas (WLAN)</strong>.<br><strong>ANCLA: WI-FI → 802.11.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Modo</strong></th>
+<th><strong>En qué consiste</strong></th>
+</tr>
+<tr>
+<td><strong>Infraestructura</strong></td>
+<td>Los dispositivos se conectan <strong>mediante un punto de acceso (AP)</strong>. Es el modo habitual en organizaciones</td>
+</tr>
+<tr>
+<td><strong>Ad-hoc</strong></td>
+<td>Los dispositivos se conectan <strong>directamente entre sí</strong>, sin AP</td>
+</tr>
+</table></div>
+<p>El <strong>punto de acceso (AP)</strong> es el equipo que <strong>conecta los clientes inalámbricos con la infraestructura de red</strong>. Sus características como equipo de interconexión se estudian en el <strong>Tema 28</strong>.</p>
+
+<h2 id="4-ssid-roaming-mesh" class="tema-h2">4. SSID, roaming y mesh</h2>
+<h4 class="tema-h4">4.1 SSID</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>SSID</strong> (Service Set Identifier) → <strong>identificador o nombre de la red Wi-Fi</strong>.<br><strong>SSID ≠ CONTRASEÑA.</strong> El SSID <strong>identifica</strong> la red; la <strong>clave</strong> es un elemento distinto que permite <strong>acceder</strong> a ella.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">4.2 Roaming</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición precisa</strong><br><strong>Roaming Wi-Fi</strong> → <strong>transición del dispositivo entre distintos AP manteniendo la conectividad, cuando la infraestructura y la configuración lo permiten</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ TRAMPA DE EXAMEN — mismo SSID no garantiza roaming</strong><br>Es <strong>incorrecto</strong> afirmar que <strong>«configurar el mismo SSID garantiza el roaming»</strong>.<br>Compartir el nombre de red es <strong>necesario</strong> para que el cliente reconozca los AP como parte de la misma red, pero el roaming <strong>efectivo depende de la infraestructura y de la configuración</strong>: coherencia de seguridad, diseño de cobertura, solapamiento entre AP y comportamiento del propio cliente.<br>Formulación segura: <strong>«cuando la infraestructura y la configuración lo permiten»</strong>.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">4.3 Wi-Fi mesh</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición precisa</strong><br><strong>Wi-Fi mesh</strong> → <strong>conjunto de nodos o AP que colaboran mediante enlaces inalámbricos de backhaul para ampliar la cobertura</strong>.<br>Lo definitorio es el <strong>backhaul inalámbrico entre nodos</strong>, no el nombre de la red.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — mesh y varios AP con el mismo SSID</strong><br>Es <strong>incorrecto</strong> definir mesh simplemente como <strong>«varios AP con el mismo SSID»</strong>.<br>Varios AP <strong>cableados</strong> que comparten SSID forman una <strong>WLAN con infraestructura convencional</strong>, no una red mesh.<br><strong>MESH → LOS NODOS SE ENLAZAN ENTRE SÍ DE FORMA INALÁMBRICA.</strong> Esa es la diferencia.</th>
+</tr>
+</table></div>
+
+<h2 id="5-estandares-wifi" class="tema-h2">5. Estándares Wi-Fi</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 UNA DE LAS PRINCIPALES ASOCIACIONES DE TEST DEL TEMA</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Denominación</strong></th>
+<th><strong>Estándar IEEE</strong></th>
+</tr>
+<tr>
+<td><strong>Wi-Fi 4</strong></td>
+<td><strong>802.11n</strong></td>
+</tr>
+<tr>
+<td><strong>Wi-Fi 5</strong></td>
+<td><strong>802.11ac</strong></td>
+</tr>
+<tr>
+<td><strong>Wi-Fi 6</strong></td>
+<td><strong>802.11ax</strong></td>
+</tr>
+<tr>
+<td><strong>Wi-Fi 6E</strong></td>
+<td><strong>802.11ax + banda de 6 GHz</strong></td>
+</tr>
+<tr>
+<td><strong>Wi-Fi 7</strong></td>
+<td><strong>802.11be</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — la secuencia de letras</strong><br><strong>n → ac → ax → be.</strong> Cuatro letras en orden: <strong>Wi-Fi 4, 5, 6 y 7</strong>.<br>Y el caso especial: <strong>Wi-Fi 6E NO es un estándar nuevo</strong>. Es <strong>el mismo 802.11ax</strong> con la <strong>extensión a la banda de 6 GHz</strong> — la <strong>E</strong> es de <strong>Extended</strong>.<br><strong>Wi-Fi 6E = Wi-Fi 6 + 6 GHz.</strong></th>
+</tr>
+</table></div>
+<figure class="tema-figura">
+<figcaption>Estándares Wi-Fi</figcaption>
+<svg viewBox="0 0 700 229" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at30bp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at30ba" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at30bv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at30bn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at30br" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at30bg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">Wi-Fi 4</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at30bg)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">802.11n</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">Wi-Fi 5</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at30ba)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">802.11ac</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">Wi-Fi 6</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at30ba)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">802.11ax</text><rect x="8" y="139" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">Wi-Fi 6E</text><line x1="264" y1="157.0" x2="356" y2="157.0" stroke="#003da5" stroke-width="2" marker-end="url(#at30bp)"/><rect x="362" y="139" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">802.11ax + banda de 6 GHz</text><rect x="8" y="184" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="202.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">Wi-Fi 7</text><line x1="264" y1="202.0" x2="356" y2="202.0" stroke="#003da5" stroke-width="2" marker-end="url(#at30bp)"/><rect x="362" y="184" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="202.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">802.11be</text></svg>
+<p class="tema-figura__nota">Wi-Fi 6 no implica 6 GHz: el «6» es el número de generación.</p></figure>
+
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Trampa de examen — Wi-Fi 6 no implica 6 GHz</strong><br>El «6» de <strong>Wi-Fi 6</strong> es el <strong>número de generación</strong>, no la banda. <strong>Wi-Fi 6 no opera automáticamente en 6 GHz</strong>: quien incorpora esa banda es <strong>Wi-Fi 6E</strong>.<br>Es una confusión inducida por la coincidencia numérica y aparece con frecuencia en test.</th>
+</tr>
+</table></div>
+<p>En el ámbito de IEEE, <strong>802.11be-2024</strong> figura como estándar activo de <strong>Extremely High Throughput</strong>, correspondiente a <strong>Wi-Fi 7</strong>. Los datos de <strong>adopción comercial</strong> no forman parte del núcleo y se recogen en el apartado <strong>27</strong>.</p>
+
+<h2 id="6-bandas" class="tema-h2">6. Bandas de frecuencia</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Banda</strong></th>
+<th><strong>Regla general de estudio</strong></th>
+</tr>
+<tr>
+<td><strong>2,4 GHz</strong></td>
+<td><strong>Mayor alcance</strong>, pero <strong>mayor interferencia</strong></td>
+</tr>
+<tr>
+<td><strong>5 GHz</strong></td>
+<td><strong>Mayor capacidad y velocidad</strong>, pero <strong>menor alcance</strong></td>
+</tr>
+<tr>
+<td><strong>6 GHz</strong></td>
+<td><strong>Espectro adicional y amplio</strong>, con <strong>menor congestión relativa</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Cautela — son reglas generales</strong><br>Estas relaciones son <strong>reglas generales de estudio</strong> y <strong>dependen del entorno</strong>: materiales de construcción, obstáculos, densidad de dispositivos, potencia y configuración influyen decisivamente en el resultado real.<br>Formulación segura para un examen: <strong>«en términos generales, a mayor frecuencia, mayor capacidad y menor alcance»</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br><strong>MÁS FRECUENCIA → MÁS CAPACIDAD, MENOS ALCANCE.</strong><br>Por eso <strong>2,4 GHz llega más lejos</strong> pero está <strong>más saturada</strong> —la comparten muchos dispositivos—, y <strong>5 y 6 GHz</strong> ofrecen <strong>más capacidad</strong> a costa de <strong>cubrir menos distancia</strong>.</th>
+</tr>
+</table></div>
+
+
+<h2 id="7-seguridad-wifi" class="tema-h2">7. Seguridad Wi-Fi: WEP, WPA, WPA2 y WPA3</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Mecanismo</strong></th>
+<th><strong>Situación</strong></th>
+</tr>
+<tr>
+<td><strong>WEP</strong></td>
+<td><strong>OBSOLETO E INSEGURO.</strong> No debe utilizarse</td>
+</tr>
+<tr>
+<td><strong>WPA</strong></td>
+<td><strong>Mecanismo de transición; obsoleto para nuevos despliegues</strong></td>
+</tr>
+<tr>
+<td><strong>WPA2</strong></td>
+<td><strong>Ampliamente utilizado</strong>; basado en <strong>AES</strong> en sus modos robustos</td>
+</tr>
+<tr>
+<td><strong>WPA3</strong></td>
+<td><strong>Estándar recomendado para nuevos despliegues</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — la escalera</strong><br><strong>WEP → NO · WPA → NO · WPA2 → AES · WPA3 → SAE.</strong><br>Orden cronológico y de robustez: <strong>WEP, WPA, WPA2, WPA3</strong>. Los dos primeros están <strong>fuera de juego</strong>; <strong>WPA2</strong> es el <strong>ampliamente desplegado</strong>; <strong>WPA3</strong> es el <strong>recomendado para lo nuevo</strong>.</th>
+</tr>
+</table></div>
+<figure class="tema-figura">
+<figcaption>Seguridad Wi-Fi</figcaption>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at30dp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at30da" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at30dv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at30dn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at30dr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at30dg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="684" height="36" rx="6" fill="#fbe6e6" stroke="#c62828" stroke-width="1.6"/><rect x="8" y="4" width="48" height="36" rx="6" fill="#c62828"/><rect x="50" y="4" width="6" height="36" fill="#c62828"/><text x="32.0" y="22.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">NO</text><text x="70" y="22.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">WEP</text><text x="680" y="22.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">obsoleto e inseguro</text><rect x="8" y="47" width="684" height="36" rx="6" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><rect x="8" y="47" width="48" height="36" rx="6" fill="#b26a00"/><rect x="50" y="47" width="6" height="36" fill="#b26a00"/><text x="32.0" y="65.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">NO</text><text x="70" y="65.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">WPA</text><text x="680" y="65.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">obsoleto para nuevos despliegues</text><rect x="8" y="90" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="90" width="48" height="36" rx="6" fill="#1f5b9e"/><rect x="50" y="90" width="6" height="36" fill="#1f5b9e"/><text x="32.0" y="108.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">SÍ</text><text x="70" y="108.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">WPA2</text><text x="680" y="108.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">ampliamente utilizado — AES</text><rect x="8" y="133" width="684" height="36" rx="6" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><rect x="8" y="133" width="48" height="36" rx="6" fill="#2e7d3c"/><rect x="50" y="133" width="6" height="36" fill="#2e7d3c"/><text x="32.0" y="151.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">SÍ+</text><text x="70" y="151.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">WPA3</text><text x="680" y="151.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">recomendado — SAE en modo Personal</text></svg>
+<p class="tema-figura__nota">Ocultar el SSID y filtrar por MAC no son seguridad fuerte.</p></figure>
+
+<h4 class="tema-h4">7.1 SAE</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>SAE</strong> (Simultaneous Authentication of Equals) → <strong>mecanismo de autenticación de WPA3-Personal que mejora la resistencia frente a ataques de diccionario offline</strong>.<br><strong>ANCLA: SAE → WPA3-PERSONAL.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Trampa de examen — WPA3 no es «WPA2 más potente»</strong><br>WPA3 <strong>no consiste simplemente en aumentar la fortaleza de WPA2</strong>: introduce <strong>mecanismos distintos</strong>, y el más preguntable es <strong>SAE</strong> en su modalidad <strong>Personal</strong>, que mejora la resistencia frente a <strong>ataques de diccionario offline</strong>.<br>La criptografía interna de SAE <strong>no es materia de este tema</strong>.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">7.2 WPA3 y redes abiertas</h4>
+<p>WPA3 incorpora mecanismos como <strong>Enhanced Open / OWE</strong> para <strong>proteger el tráfico en determinadas redes abiertas</strong>.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Cautela — «Wi-Fi abierto» no equivale a «seguro con WPA3»</strong><br>No debe afirmarse que una red abierta sea <strong>«siempre segura con WPA3»</strong>.<br>Enhanced Open <strong>protege el tráfico</strong> en determinados escenarios, pero <strong>no autentica la red</strong> ni sustituye a las demás medidas: seguir aplicando <strong>HTTPS</strong>, protección del dispositivo y, cuando proceda, <strong>VPN</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="8-falsas-medidas" class="tema-h2">8. Dos falsas medidas de seguridad</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ TRAMPA CLÁSICA DEL TEMA</strong><br><strong>OCULTAR EL SSID → NO proporciona seguridad fuerte.</strong> La red sigue siendo detectable por otros medios y el SSID viaja igualmente en la comunicación.<br><strong>FILTRAR POR MAC → NO proporciona seguridad fuerte, porque la dirección MAC puede falsificarse.</strong><br><strong>Ninguna de las dos sustituye a un WPA2 o WPA3 correctamente configurado.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br>Ambas son <strong>medidas de ofuscación</strong>, no de seguridad: <strong>estorban</strong>, pero <strong>no protegen</strong>. Pueden emplearse como <strong>complemento</strong> menor, nunca como <strong>sustituto</strong> del cifrado y la autenticación.<br><strong>LA SEGURIDAD WI-FI ESTÁ EN WPA2/WPA3 BIEN CONFIGURADO</strong>, no en esconder el nombre ni en listar direcciones.</th>
+</tr>
+</table></div>
+
+<h2 id="9-red-de-invitados" class="tema-h2">9. La red de invitados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Elemento</strong></th>
+<th><strong>Qué aporta</strong></th>
+</tr>
+<tr>
+<td><strong>SSID o red separada</strong></td>
+<td>Identidad de red distinta de la corporativa</td>
+</tr>
+<tr>
+<td><strong>VLAN dedicada</strong></td>
+<td>Segmentación lógica del tráfico, <strong>cuando corresponda</strong></td>
+</tr>
+<tr>
+<td><strong>Reglas de aislamiento</strong></td>
+<td>Impiden el acceso desde la red de invitados a los recursos internos</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ TRAMPA DE EXAMEN — VLAN ≠ seguridad automática</strong><br>Crear una <strong>VLAN</strong> para los invitados <strong>no garantiza por sí solo</strong> el aislamiento.<br><strong>Debe existir una política de routing y de cortafuegos adecuada</strong> que impida el acceso indebido a la red interna.<br>Es exactamente la misma advertencia del <strong>Tema 28</strong>: la VLAN <strong>segmenta en capa 2</strong>; la <strong>seguridad entre segmentos</strong> depende del <strong>routing, las ACL y el cortafuegos</strong> (Tema 29).</th>
+</tr>
+</table></div>
+
+<h2 id="10-amenazas-moviles" class="tema-h2">10. Amenazas sobre el dispositivo móvil</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Amenaza</strong></th>
+<th><strong>Por qué es específica de la movilidad</strong></th>
+</tr>
+<tr>
+<td><strong>Pérdida o robo</strong></td>
+<td>El dispositivo <strong>sale físicamente</strong> de las dependencias; es la amenaza más característica</td>
+</tr>
+<tr>
+<td><strong>Redes Wi-Fi públicas</strong></td>
+<td>El dispositivo se conecta a <strong>redes no confiables</strong> fuera del control de la organización</td>
+</tr>
+<tr>
+<td><strong>Aplicaciones maliciosas</strong></td>
+<td>Instalación de software desde <strong>fuentes no verificadas</strong></td>
+</tr>
+<tr>
+<td><strong>Phishing</strong></td>
+<td>Pantalla pequeña y uso en movilidad <strong>dificultan verificar</strong> remitentes y enlaces</td>
+</tr>
+<tr>
+<td><strong>Dispositivo fuera del perímetro</strong></td>
+<td>No pasa por los <strong>controles perimetrales</strong> de la organización</td>
+</tr>
+<tr>
+<td><strong>Sistema operativo desactualizado</strong></td>
+<td>Vulnerabilidades sin corregir en un equipo <strong>expuesto</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — qué cambia respecto de un puesto fijo</strong><br>El móvil <strong>se pierde</strong>, <strong>se conecta a redes ajenas</strong> y <strong>opera fuera del perímetro</strong>. Esas tres circunstancias explican por sí solas todas las medidas del apartado siguiente.<br>El estudio del <strong>malware</strong> y del <strong>phishing</strong> corresponde al <strong>Tema 25</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="11-medidas-securizacion" class="tema-h2">11. Medidas de securización del dispositivo</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Medida</strong></th>
+<th><strong>Frente a qué protege</strong></th>
+</tr>
+<tr>
+<td><strong>Cifrado del almacenamiento</strong></td>
+<td><strong>Pérdida o robo</strong>: los datos no resultan legibles sin las credenciales</td>
+</tr>
+<tr>
+<td><strong>PIN, contraseña o biometría</strong></td>
+<td>Acceso no autorizado al dispositivo</td>
+</tr>
+<tr>
+<td><strong>Bloqueo automático</strong></td>
+<td>Dispositivo desatendido</td>
+</tr>
+<tr>
+<td><strong>Actualizaciones</strong></td>
+<td>Vulnerabilidades conocidas del sistema y las aplicaciones</td>
+</tr>
+<tr>
+<td><strong>Aplicaciones de fuentes confiables</strong></td>
+<td>Aplicaciones maliciosas</td>
+</tr>
+<tr>
+<td><strong>VPN cuando proceda</strong></td>
+<td>Uso de redes no confiables</td>
+</tr>
+<tr>
+<td><strong>Borrado remoto</strong></td>
+<td>Pérdida o robo, cuando el dispositivo no se recupera</td>
+</tr>
+<tr>
+<td><strong>Copia y recuperación</strong></td>
+<td>Pérdida de información, <strong>según la política corporativa</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — la pareja clave ante una pérdida</strong><br><strong>CIFRADO + BLOQUEO</strong> protegen los datos <strong>mientras el dispositivo esté perdido</strong>; el <strong>BORRADO REMOTO</strong> actúa <strong>cuando ya se da por perdido</strong>.<br>Sin cifrado, el borrado remoto puede llegar tarde —o no llegar, si el dispositivo no vuelve a conectarse—. <strong>El cifrado es la medida que no depende de que el dispositivo esté accesible.</strong></th>
+</tr>
+</table></div>
+
+<h2 id="12-vpn-en-movilidad" class="tema-h2">12. VPN en movilidad</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Formulación correcta</strong><br>La <strong>VPN puede proteger el tráfico entre el dispositivo y el extremo VPN cuando se utiliza una red no confiable</strong>.<br>Eso es exactamente lo que hace: <strong>proteger ese tramo de comunicación</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ TRAMPA DE EXAMEN — la VPN no «convierte en segura» una Wi-Fi pública</strong><br>Es <strong>incorrecto</strong> afirmar que <strong>«la VPN convierte una Wi-Fi pública en segura»</strong>.<br><strong>La VPN NO sustituye a</strong>:<br>· <strong>HTTPS</strong>;<br>· la <strong>autenticación</strong>;<br>· la <strong>protección del propio dispositivo</strong> (cifrado, bloqueo, actualizaciones);<br>· la <strong>prevención del phishing</strong>.<br>Un dispositivo comprometido <strong>sigue estándolo dentro del túnel</strong>: la VPN protege el <strong>transporte</strong>, no el <strong>endpoint</strong> ni al usuario frente a un engaño.</th>
+</tr>
+</table></div>
+<p>El funcionamiento de las VPN, sus tipos y sus tecnologías se estudian en el <strong>Tema 29</strong>.</p>
+
+<h2 id="13-mdm" class="tema-h2">13. MDM: concepto</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 EL NÚCLEO PRINCIPAL DEL TEMA — definición</strong><br><strong>MDM</strong> (Mobile Device Management) → <strong>conjunto de herramientas y políticas para gestionar, configurar, proteger y supervisar dispositivos móviles de forma centralizada</strong>.<br><strong>ANCLA: MDM → GESTIONAR + CONFIGURAR + PROTEGER + SUPERVISAR.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — MDM no es un antivirus</strong><br><strong>MDM → GESTIONA EL DISPOSITIVO</strong>: lo inscribe, lo configura, le aplica políticas, distribuye aplicaciones, comprueba su cumplimiento y puede borrarlo.<br><strong>Antivirus / antimalware → DETECTA Y ELIMINA código dañino</strong> (Tema 25).<br>Son funciones <strong>distintas y complementarias</strong>: un MDM puede <strong>exigir</strong> que exista protección antimalware, pero <strong>no la sustituye</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Por qué existe el MDM</strong><br>Sin una plataforma central, cada dispositivo dependería de que <strong>cada persona</strong> configurase correctamente su PIN, su cifrado, sus actualizaciones y sus aplicaciones. El MDM traslada esas decisiones a la <strong>política de la organización</strong> y permite <strong>comprobar que se cumplen</strong>.<br>Es, en el ámbito móvil, la misma lógica de <strong>gestión corporativa del puesto</strong> vista en el Tema 25.</th>
+</tr>
+</table></div>
+
+<h2 id="14-ciclo-de-vida" class="tema-h2">14. El ciclo de vida MDM</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 ESQUEMA PRINCIPAL DE MEMORIZACIÓN</strong><br><strong>INSCRIPCIÓN (enrollment)</strong><br>↓<br><strong>CONFIGURACIÓN</strong><br>↓<br><strong>APLICACIÓN DE POLÍTICAS</strong><br>↓<br><strong>DISTRIBUCIÓN DE APLICACIONES</strong><br>↓<br><strong>MONITORIZACIÓN / COMPLIANCE</strong><br>↓<br><strong>ACTUALIZACIÓN</strong><br>↓<br><strong>RETIRADA / BORRADO</strong></th>
+</tr>
+</table></div>
+<figure class="tema-figura">
+<figcaption>Ciclo de vida MDM</figcaption>
+<svg viewBox="0 0 700 305" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at30ep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at30ea" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at30ev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at30en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at30er" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at30eg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="684" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><rect x="8" y="4" width="54" height="36" rx="6" fill="#003da5"/><rect x="56" y="4" width="6" height="36" fill="#003da5"/><text x="35.0" y="22.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">1</text><text x="76" y="22.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">INSCRIPCIÓN (enrollment)</text><text x="680" y="22.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">primer paso de la gestión</text><rect x="8" y="47" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="47" width="54" height="36" rx="6" fill="#1f5b9e"/><rect x="56" y="47" width="6" height="36" fill="#1f5b9e"/><text x="35.0" y="65.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">2</text><text x="76" y="65.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">CONFIGURACIÓN</text><text x="680" y="65.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">red, correo, certificados</text><rect x="8" y="90" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="90" width="54" height="36" rx="6" fill="#1f5b9e"/><rect x="56" y="90" width="6" height="36" fill="#1f5b9e"/><text x="35.0" y="108.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">3</text><text x="76" y="108.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">POLÍTICAS</text><text x="680" y="108.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">PIN, cifrado, bloqueo, restricciones</text><rect x="8" y="133" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="133" width="54" height="36" rx="6" fill="#1f5b9e"/><rect x="56" y="133" width="6" height="36" fill="#1f5b9e"/><text x="35.0" y="151.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">4</text><text x="76" y="151.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">APLICACIONES</text><text x="680" y="151.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">catálogo corporativo</text><rect x="8" y="176" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="176" width="54" height="36" rx="6" fill="#1f5b9e"/><rect x="56" y="176" width="6" height="36" fill="#1f5b9e"/><text x="35.0" y="194.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">5</text><text x="76" y="194.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">MONITORIZACIÓN / COMPLIANCE</text><text x="680" y="194.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">estado de cumplimiento</text><rect x="8" y="219" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="219" width="54" height="36" rx="6" fill="#1f5b9e"/><rect x="56" y="219" width="6" height="36" fill="#1f5b9e"/><text x="35.0" y="237.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">6</text><text x="76" y="237.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">ACTUALIZACIÓN</text><text x="680" y="237.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">versiones del sistema y apps</text><rect x="8" y="262" width="684" height="36" rx="6" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><rect x="8" y="262" width="54" height="36" rx="6" fill="#b26a00"/><rect x="56" y="262" width="6" height="36" fill="#b26a00"/><text x="35.0" y="280.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">7</text><text x="76" y="280.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">RETIRADA / BORRADO</text><text x="680" y="280.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">selectivo o completo</text></svg>
+</figure>
+
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Fase</strong></th>
+<th><strong>Qué ocurre</strong></th>
+</tr>
+<tr>
+<td><strong>1. Inscripción</strong></td>
+<td><strong>Incorporación del dispositivo a la plataforma MDM</strong> para poder aplicarle las políticas</td>
+</tr>
+<tr>
+<td><strong>2. Configuración</strong></td>
+<td>Ajustes de red, correo, certificados y perfiles</td>
+</tr>
+<tr>
+<td><strong>3. Aplicación de políticas</strong></td>
+<td>PIN, cifrado, bloqueo, restricciones</td>
+</tr>
+<tr>
+<td><strong>4. Distribución de aplicaciones</strong></td>
+<td>Catálogo corporativo e instalación controlada</td>
+</tr>
+<tr>
+<td><strong>5. Monitorización y compliance</strong></td>
+<td>Comprobación del <strong>estado de cumplimiento</strong> de cada dispositivo</td>
+</tr>
+<tr>
+<td><strong>6. Actualización</strong></td>
+<td>Control de versiones del sistema y de las aplicaciones</td>
+</tr>
+<tr>
+<td><strong>7. Retirada o borrado</strong></td>
+<td><strong>Baja del dispositivo</strong> y <strong>borrado</strong> selectivo o completo</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Enrollment — el primer paso</strong><br><strong>Enrollment o inscripción</strong> → <strong>incorporación del dispositivo a la plataforma MDM para poder aplicarle las políticas</strong>.<br><strong>ANCLA: ENROLLMENT → PRIMER PASO DE GESTIÓN.</strong><br>Sin inscripción <strong>no hay gestión posible</strong>: es la puerta de entrada de todo el ciclo.</th>
+</tr>
+</table></div>
+
+<h2 id="15-politicas-y-apps" class="tema-h2">15. Políticas, aplicaciones e inventario</h2>
+<h4 class="tema-h4">15.1 Políticas MDM</h4>
 <ul class="tema-lista">
-<li><strong>SSID (Service Set Identifier)</strong>: el nombre que identifica una red Wi-Fi concreta y que ven las personas usuarias al buscar redes disponibles.</li>
-<li><strong>Roaming Wi-Fi</strong>: la capacidad de un dispositivo de moverse entre distintos puntos de acceso que comparten el mismo SSID, sin perder la conectividad, relevante en cualquier entorno con más de un punto de acceso (una oficina grande, un edificio de varias plantas).</li>
-<li><strong>Wi-Fi mesh</strong>: un conjunto de puntos de acceso que colaboran entre sí formando una topología en malla (Tema 28), gestionados de forma centralizada bajo un único SSID, lo que simplifica notablemente la cobertura de espacios grandes frente a configurar cada punto de acceso por separado.</li>
+<li><strong>PIN</strong> o credencial mínima exigida.</li>
+<li><strong>Cifrado</strong> del dispositivo.</li>
+<li><strong>Bloqueo</strong> automático.</li>
+<li><strong>Restricciones</strong> de cámara u otras funciones.</li>
+<li><strong>Aplicaciones</strong> permitidas o prohibidas.</li>
+<li><strong>Wi-Fi</strong>: perfiles y redes configuradas.</li>
+<li><strong>VPN</strong>: configuración de acceso corporativo.</li>
+<li><strong>Actualizaciones</strong> del sistema y de las aplicaciones.</li>
+<li><strong>Cumplimiento</strong> (compliance): condiciones que el dispositivo debe satisfacer.</li>
 </ul>
-<h2 id="3-estándares-wi-fi-evolución" class="tema-h2">3. Estándares Wi-Fi: evolución</h2>
+<h4 class="tema-h4">15.2 Distribución de aplicaciones</h4>
+<p>El MDM permite disponer de un <strong>catálogo corporativo</strong> y realizar la <strong>instalación y el control centralizado</strong> de las aplicaciones.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>Nombre comercial</strong></th>
-<th><strong>Estándar IEEE 802.11</strong></th>
-<th><strong>Novedad principal</strong></th>
+<th><strong>🧠 Relación con otros temas</strong><br><strong>Tema 16 → distribución general de software</strong> en el puesto.<br><strong>Tema 30 → distribución en dispositivos móviles mediante MDM.</strong><br>Es la misma idea —<strong>despliegue centralizado y controlado</strong>— aplicada a un tipo de dispositivo distinto.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">15.3 Inventario</h4>
+<p>El MDM permite <strong>inventariar</strong>:</p>
+<ul class="tema-lista">
+<li><strong>Dispositivos</strong>.</li>
+<li><strong>Usuarios</strong> asociados.</li>
+<li><strong>Sistema operativo</strong>.</li>
+<li><strong>Versión</strong>.</li>
+<li><strong>Estado de cumplimiento</strong>.</li>
+</ul>
+<p>Se trata del <strong>inventario de los dispositivos gestionados</strong>, no del inventario de la infraestructura de red (Tema 28).</p>
+
+<h2 id="16-separacion-de-datos" class="tema-h2">16. Separación de datos y borrado remoto</h2>
+<h4 class="tema-h4">16.1 Datos personales y corporativos</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br>El MDM permite establecer un <strong>contenedor o perfil de trabajo</strong> que <strong>separa la información corporativa de la personal</strong> dentro del mismo dispositivo.<br>Esta separación es <strong>especialmente importante en BYOD</strong>, donde el dispositivo <strong>pertenece a la persona</strong>.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">16.2 Borrado remoto</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 LOS DOS TIPOS DE BORRADO</strong><br><strong>SELECTIVE WIPE</strong> (borrado selectivo) → <strong>elimina los datos y las aplicaciones CORPORATIVOS</strong>.<br><strong>FULL WIPE</strong> (borrado completo) → <strong>borra TODO el dispositivo</strong>.<br><strong>ANCLA: SELECTIVE WIPE → LO DE LA EMPRESA · FULL WIPE → TODO.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th></th>
+<th><strong>Selective wipe</strong></th>
+<th><strong>Full wipe</strong></th>
 </tr>
 <tr>
-<td>Wi-Fi 4</td>
+<td><strong>Qué borra</strong></td>
+<td>Datos y aplicaciones <strong>corporativos</strong></td>
+<td><strong>Todo</strong> el contenido del dispositivo</td>
+</tr>
+<tr>
+<td><strong>Qué conserva</strong></td>
+<td>La información <strong>personal</strong></td>
+<td>Nada</td>
+</tr>
+<tr>
+<td><strong>Escenario típico</strong></td>
+<td><strong>BYOD</strong>, baja del empleado, retirada del perfil de trabajo</td>
+<td>Dispositivo <strong>corporativo</strong> perdido o robado</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Criterio en BYOD</strong><br>En <strong>BYOD</strong> debe <strong>preferirse el borrado selectivo cuando la política y la arquitectura lo permitan</strong>, <strong>respetando la privacidad y los procedimientos</strong> establecidos.<br>Borrar por completo un <strong>dispositivo personal</strong> destruiría información que <strong>no pertenece a la organización</strong>: de ahí la importancia del <strong>contenedor de trabajo</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="17-modelos-de-propiedad" class="tema-h2">17. Modelos de propiedad: COPE, BYOD y COBO</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Modelo</strong></th>
+<th><strong>Significado</strong></th>
+<th><strong>Propiedad y uso</strong></th>
+</tr>
+<tr>
+<td><strong>COPE</strong></td>
+<td><strong>Corporate Owned, Personally Enabled</strong></td>
+<td>Dispositivo <strong>propiedad de la organización</strong>, con <strong>uso personal permitido dentro de la política</strong></td>
+</tr>
+<tr>
+<td><strong>BYOD</strong></td>
+<td><strong>Bring Your Own Device</strong></td>
+<td>Dispositivo <strong>personal</strong> utilizado para <strong>trabajo corporativo</strong></td>
+</tr>
+<tr>
+<td><strong>COBO</strong></td>
+<td><strong>Corporate Owned, Business Only</strong></td>
+<td>Dispositivo <strong>corporativo destinado exclusivamente al uso laboral</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — el truco de las siglas</strong><br><strong>CO-</strong> al principio significa <strong>Corporate Owned</strong>: el dispositivo <strong>es de la organización</strong> (COPE y COBO).<br>La <strong>última letra</strong> indica el <strong>uso</strong>: <strong>PE = Personally Enabled</strong> (también personal) · <strong>BO = Business Only</strong> (solo trabajo).<br><strong>BYOD</strong> es el único en el que <strong>el dispositivo es de la persona</strong>.</th>
+</tr>
+</table></div>
+<figure class="tema-figura">
+<figcaption>COPE · BYOD · COBO</figcaption>
+<svg viewBox="0 0 700 139" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at30fp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at30fa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at30fv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at30fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at30fr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at30fg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">COPE</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at30fa)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Corporativo, con uso personal permitido</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">BYOD</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#b26a00" stroke-width="2" marker-end="url(#at30fn)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">PERSONAL, usado para trabajo</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">COBO</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at30fa)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Corporativo, solo uso laboral</text></svg>
+<p class="tema-figura__nota">En BYOD se prefiere el borrado SELECTIVO; el FULL WIPE borra todo el dispositivo.</p></figure>
+
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 BYOD — la dimensión de privacidad</strong><br>El BYOD introduce problemas específicos de:<br>· <strong>seguridad</strong>;<br>· <strong>privacidad</strong>;<br>· <strong>control</strong>;<br>· <strong>separación de datos</strong>;<br>· <strong>borrado selectivo</strong>.<br><strong>NIST destaca expresamente los riesgos adicionales de seguridad y privacidad que introduce el BYOD.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Trampa de examen — BYOD no da control ilimitado</strong><br>Es <strong>incorrecto</strong> afirmar que en BYOD <strong>«la empresa puede controlar ilimitadamente el dispositivo personal»</strong>.<br>El dispositivo es <strong>propiedad de la persona</strong> y su información personal <strong>queda al margen</strong> de la potestad de la organización. De ahí que las herramientas se orienten a <strong>separar</strong> (contenedor de trabajo) y a <strong>borrar selectivamente</strong>, <strong>respetando la privacidad y los procedimientos</strong>.<br>La contrapartida es evidente: <strong>más comodidad y menos coste para la organización, a cambio de menos control</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="18-mdm-mam-uem" class="tema-h2">18. MDM, MAM y UEM</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Sigla</strong></th>
+<th><strong>Qué gestiona</strong></th>
+</tr>
+<tr>
+<td><strong>MDM</strong></td>
+<td><strong>El DISPOSITIVO</strong></td>
+</tr>
+<tr>
+<td><strong>MAM</strong></td>
+<td><strong>Las APLICACIONES y los DATOS corporativos</strong>: aplica políticas sobre ellos</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th></th>
+<th><strong>MDM</strong></th>
+<th><strong>UEM</strong></th>
+</tr>
+<tr>
+<td><strong>Alcance</strong></td>
+<td><strong>Móviles y tabletas</strong></td>
+<td><strong>Múltiples endpoints</strong></td>
+</tr>
+<tr>
+<td><strong>Objetivo</strong></td>
+<td><strong>Gestión móvil</strong></td>
+<td><strong>Gestión unificada</strong></td>
+</tr>
+<tr>
+<td><strong>Ejemplo</strong></td>
+<td><strong>Smartphone</strong></td>
+<td><strong>PC + móvil + tableta</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 LAS TRES ANCLAS</strong><br><strong>MDM → EL MÓVIL</strong> (el dispositivo).<br><strong>MAM → LAS APPS Y LOS DATOS</strong> corporativos.<br><strong>UEM → TODO EL ENDPOINT</strong> (PC, móvil, tableta), de forma unificada.<br>Relación: <strong>UEM amplía el alcance de MDM</strong> a todo tipo de dispositivo final. <strong>MAM</strong> actúa a otro nivel: sobre <strong>lo que hay dentro</strong>, no sobre el aparato.</th>
+</tr>
+</table></div>
+<figure class="tema-figura">
+<figcaption>MDM · MAM · UEM</figcaption>
+<svg viewBox="0 0 700 136" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at30gp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at30ga" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at30gv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at30gn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at30gr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at30gg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="220.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="118.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">MDM</text><rect x="240.0" y="6" width="220.0" height="40" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="350.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">MAM</text><rect x="472.0" y="6" width="220.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="582.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">UEM</text><rect x="8.0" y="54" width="220.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="118.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">El DISPOSITIVO</text><rect x="8.0" y="94" width="220.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="118.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Móviles y tabletas</text><rect x="240.0" y="54" width="220.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="350.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">APPS y DATOS</text><rect x="240.0" y="94" width="220.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="350.0" y="103.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Políticas sobre</text><text x="350.0" y="118.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">el contenido</text><rect x="472.0" y="54" width="220.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="582.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">TODOS los endpoints</text><rect x="472.0" y="94" width="220.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="582.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">PC + móvil + tableta</text></svg>
+</figure>
+
+<p><strong>Microsoft Intune</strong> se cita únicamente como <strong>ejemplo</strong> de plataforma de gestión de dispositivos móviles y endpoints. Su administración concreta <strong>no es materia de examen</strong>.</p>
+
+<h2 id="19-anclas-de-memoria" class="tema-h2">19. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>CELULAR → CÉLULAS + ESTACIONES BASE + HANDOVER.</strong></li>
+<li><strong>1G analógica · 2G → SMS · 3G → datos · 4G → BANDA ANCHA · 5G → VELOCIDAD + LATENCIA + DENSIDAD.</strong></li>
+<li><strong>WI-FI → 802.11.</strong> <strong>Infraestructura → con AP · ad-hoc → directo.</strong></li>
+<li><strong>Wi-Fi 4 → n · Wi-Fi 5 → ac · Wi-Fi 6 → ax · Wi-Fi 6E → ax + 6 GHz · Wi-Fi 7 → be.</strong></li>
+<li><strong>2,4 GHz → más alcance, más interferencia · 5 GHz → más capacidad, menos alcance · 6 GHz → espectro amplio, menos congestión.</strong></li>
+<li><strong>WEP → NO · WPA → NO · WPA2 → AES · WPA3 → SAE.</strong></li>
+<li><strong>SSID → NOMBRE DE LA RED</strong>, no la contraseña. <strong>Ocultar SSID y filtrar MAC → NO son seguridad fuerte.</strong></li>
+<li><strong>MESH → BACKHAUL INALÁMBRICO ENTRE NODOS</strong>, no «varios AP con el mismo SSID».</li>
+<li><strong>MDM → GESTIONAR + CONFIGURAR + PROTEGER + SUPERVISAR.</strong></li>
+<li><strong>ENROLLMENT → PRIMER PASO DE GESTIÓN.</strong></li>
+<li><strong>CICLO MDM</strong>: <strong>inscripción → configuración → políticas → apps → monitorización/compliance → actualización → retirada/borrado</strong>.</li>
+<li><strong>SELECTIVE WIPE → LO DE LA EMPRESA · FULL WIPE → TODO.</strong></li>
+<li><strong>COPE → corporativo con uso personal · BYOD → personal para trabajo · COBO → corporativo solo trabajo.</strong></li>
+<li><strong>MDM → EL MÓVIL · MAM → APPS Y DATOS · UEM → TODO EL ENDPOINT.</strong></li>
+</ul>
+
+<h2 id="20-no-confundir" class="tema-h2">20. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto A</strong></th>
+<th><strong>Concepto B</strong></th>
+<th><strong>Diferencia clave</strong></th>
+</tr>
+<tr>
+<td><strong>SSID</strong>: nombre de la red</td>
+<td><strong>Contraseña</strong>: credencial de acceso</td>
+<td>Identificar frente a autorizar el acceso</td>
+</tr>
+<tr>
+<td><strong>Roaming</strong>: transición entre AP manteniendo la conexión</td>
+<td><strong>Mismo SSID</strong></td>
+<td>Compartir SSID no garantiza roaming: depende de infraestructura y configuración</td>
+</tr>
+<tr>
+<td><strong>Wi-Fi</strong>: WLAN según IEEE 802.11</td>
+<td><strong>Bluetooth</strong>: comunicación de corto alcance (Tema 8)</td>
+<td>Tecnologías y finalidades distintas</td>
+</tr>
+<tr>
+<td><strong>Wi-Fi mesh</strong>: nodos con backhaul inalámbrico</td>
+<td><strong>Varios AP cableados</strong> con el mismo SSID</td>
+<td>El enlace inalámbrico entre nodos es lo definitorio</td>
+</tr>
+<tr>
+<td><strong>Wi-Fi 6</strong>: 802.11ax</td>
+<td><strong>Wi-Fi 6E</strong>: 802.11ax + banda de 6 GHz</td>
+<td>Wi-Fi 6 no implica 6 GHz</td>
+</tr>
+<tr>
+<td><strong>Wi-Fi 6E</strong>: extensión de 802.11ax</td>
+<td><strong>Wi-Fi 7</strong>: 802.11be</td>
+<td>Estándares distintos</td>
+</tr>
+<tr>
+<td><strong>WEP</strong>: obsoleto e inseguro</td>
+<td><strong>WPA2</strong>: AES · <strong>WPA3</strong>: recomendado</td>
+<td>Escalera cronológica y de robustez</td>
+</tr>
+<tr>
+<td><strong>WPA3</strong>: mecanismo de seguridad</td>
+<td><strong>SAE</strong>: su método de autenticación en WPA3-Personal</td>
+<td>El todo frente a uno de sus componentes</td>
+</tr>
+<tr>
+<td><strong>SSID oculto</strong></td>
+<td><strong>Seguridad real</strong></td>
+<td>Ofuscación, no protección</td>
+</tr>
+<tr>
+<td><strong>Filtrado MAC</strong></td>
+<td><strong>Seguridad real</strong></td>
+<td>La MAC puede falsificarse</td>
+</tr>
+<tr>
+<td><strong>MDM</strong>: gestiona el dispositivo</td>
+<td><strong>MAM</strong>: gestiona apps y datos corporativos</td>
+<td>El aparato frente a su contenido</td>
+</tr>
+<tr>
+<td><strong>MDM</strong>: móviles y tabletas</td>
+<td><strong>UEM</strong>: múltiples endpoints</td>
+<td>UEM amplía el alcance de MDM</td>
+</tr>
+<tr>
+<td><strong>COPE</strong>: corporativo con uso personal</td>
+<td><strong>BYOD</strong>: personal usado para trabajo</td>
+<td>Quién es el propietario del dispositivo</td>
+</tr>
+<tr>
+<td><strong>Selective wipe</strong>: datos corporativos</td>
+<td><strong>Full wipe</strong>: todo el dispositivo</td>
+<td>En BYOD se prefiere el selectivo cuando es posible</td>
+</tr>
+<tr>
+<td><strong>VPN</strong>: protege el tráfico hasta el extremo VPN</td>
+<td><strong>Seguridad completa del móvil</strong></td>
+<td>No sustituye a HTTPS, autenticación, protección del dispositivo ni prevención de phishing</td>
+</tr>
+<tr>
+<td><strong>VLAN de invitados</strong>: segmentación</td>
+<td><strong>Aislamiento efectivo</strong></td>
+<td>Requiere política de routing y cortafuegos adecuada</td>
+</tr>
+</table></div>
+
+<h2 id="21-trampas-de-examen" class="tema-h2">21. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li><strong>«El SSID es la contraseña de la red»</strong> — falso: es el <strong>nombre o identificador</strong>.</li>
+<li><strong>«Configurar el mismo SSID garantiza el roaming»</strong> — falso: depende de la <strong>infraestructura y de la configuración</strong>.</li>
+<li><strong>«Ocultar el SSID protege la red»</strong> — falso: <strong>no proporciona seguridad fuerte</strong>.</li>
+<li><strong>«El filtrado por MAC es una medida de seguridad sólida»</strong> — falso: la <strong>MAC puede falsificarse</strong>.</li>
+<li><strong>«Wi-Fi mesh es simplemente varios AP con el mismo SSID»</strong> — falso: lo definitorio es el <strong>backhaul inalámbrico entre nodos</strong>.</li>
+<li><strong>«Wi-Fi 6 opera en la banda de 6 GHz»</strong> — falso: quien incorpora 6 GHz es <strong>Wi-Fi 6E</strong>.</li>
+<li><strong>«Wi-Fi 6E es un estándar distinto de 802.11ax»</strong> — falso: es <strong>802.11ax + banda de 6 GHz</strong>.</li>
+<li><strong>«Wi-Fi 7 es 802.11ax»</strong> — falso: es <strong>802.11be</strong>.</li>
+<li><strong>«Wi-Fi 5 es 802.11n»</strong> — falso: Wi-Fi 5 es <strong>802.11ac</strong>; <strong>802.11n es Wi-Fi 4</strong>.</li>
+<li><strong>«WEP sigue siendo válido si la clave es larga»</strong> — falso: <strong>WEP es obsoleto e inseguro</strong>.</li>
+<li><strong>«WPA3 es simplemente WPA2 más potente»</strong> — falso: introduce <strong>mecanismos distintos</strong>, como <strong>SAE</strong>.</li>
+<li><strong>«SAE pertenece a WPA2»</strong> — falso: es el mecanismo de autenticación de <strong>WPA3-Personal</strong>.</li>
+<li><strong>«Con WPA3 una red abierta es siempre segura»</strong> — falso: Enhanced Open <strong>protege el tráfico</strong> en determinados escenarios, pero no equivale a seguridad completa.</li>
+<li><strong>«Crear una VLAN de invitados garantiza el aislamiento»</strong> — falso: hace falta <strong>política de routing y cortafuegos</strong> adecuada.</li>
+<li><strong>«La VPN convierte una Wi-Fi pública en segura»</strong> — falso: <strong>no sustituye</strong> a HTTPS, autenticación, protección del dispositivo ni prevención de phishing.</li>
+<li><strong>«El MDM es un antivirus»</strong> — falso: <strong>gestiona el dispositivo</strong>; no detecta ni elimina código dañino.</li>
+<li><strong>«MDM y MAM son lo mismo»</strong> — falso: <strong>dispositivo</strong> frente a <strong>aplicaciones y datos</strong>.</li>
+<li><strong>«MDM y UEM son lo mismo»</strong> — falso: el <strong>UEM amplía el alcance</strong> a múltiples endpoints.</li>
+<li><strong>«COPE y BYOD son equivalentes»</strong> — falso: en COPE el dispositivo es <strong>de la organización</strong>; en BYOD, <strong>de la persona</strong>.</li>
+<li><strong>«El borrado selectivo borra el dispositivo»</strong> — falso: elimina <strong>datos y aplicaciones corporativos</strong>; el que borra todo es el <strong>full wipe</strong>.</li>
+<li><strong>«En BYOD la empresa puede controlar ilimitadamente el dispositivo»</strong> — falso: existen límites de <strong>privacidad</strong> y procedimientos que respetar.</li>
+<li><strong>«Sin inscripción se pueden aplicar políticas MDM»</strong> — falso: el <strong>enrollment es el primer paso</strong> de la gestión.</li>
+<li><strong>Colar contenido ajeno</strong>: Bluetooth (T8), distribución general de software (T16), malware (T25), OSI/TCP-IP (T27), AP y VLAN como equipamiento (T28) y VPN o cortafuegos (T29) no se desarrollan aquí.</li>
+</ul>
+
+<h2 id="22-preguntas-tipo-test" class="tema-h2">22. Posibles preguntas tipo test</h2>
+<ul class="tema-lista">
+<li><strong>Definición</strong> de red celular y elementos que la caracterizan.</li>
+<li>¿Qué es el <strong>handover</strong>?</li>
+<li>¿Para qué sirve la <strong>reutilización de frecuencias</strong>?</li>
+<li><strong>Generación → idea principal</strong>: 1G · 2G · 3G · 4G · 5G.</li>
+<li>¿Qué generación introdujo los <strong>SMS</strong>? ¿Y los <strong>datos móviles</strong>?</li>
+<li>Los tres rasgos característicos de <strong>5G</strong>.</li>
+<li><strong>Sigla → escenario 5G</strong>: eMBB · URLLC · mMTC.</li>
+<li>¿A qué familia de estándares corresponde <strong>Wi-Fi</strong>?</li>
+<li>Diferencia entre modo <strong>infraestructura</strong> y modo <strong>ad-hoc</strong>.</li>
+<li><strong>Definición</strong> de SSID. ¿Es la contraseña?</li>
+<li><strong>Definición</strong> de roaming Wi-Fi. ¿Basta el mismo SSID?</li>
+<li><strong>Definición</strong> de Wi-Fi mesh. ¿Es lo mismo que varios AP con el mismo SSID?</li>
+<li><strong>Denominación → estándar</strong>: Wi-Fi 4 · Wi-Fi 5 · Wi-Fi 6 · Wi-Fi 6E · Wi-Fi 7.</li>
+<li><strong>Estándar → denominación</strong>: 802.11n · 802.11ac · 802.11ax · 802.11be.</li>
+<li>¿En qué se diferencia <strong>Wi-Fi 6E</strong> de <strong>Wi-Fi 6</strong>?</li>
+<li>¿Opera <strong>Wi-Fi 6</strong> en la banda de 6 GHz?</li>
+<li><strong>Banda → característica</strong>: 2,4 GHz · 5 GHz · 6 GHz.</li>
+<li>¿Qué banda ofrece <strong>mayor alcance</strong>? ¿Y <strong>mayor capacidad</strong>?</li>
+<li><strong>Ordenar</strong> WEP, WPA, WPA2 y WPA3 por antigüedad y robustez.</li>
+<li>¿Cuál es el mecanismo <strong>obsoleto e inseguro</strong>? ¿Cuál el <strong>recomendado para nuevos despliegues</strong>?</li>
+<li>¿En qué se basa <strong>WPA2</strong> en sus modos robustos?</li>
+<li>¿Qué es <strong>SAE</strong> y a qué mecanismo pertenece?</li>
+<li>¿Proporciona seguridad fuerte <strong>ocultar el SSID</strong>?</li>
+<li>¿Y el <strong>filtrado por dirección MAC</strong>? ¿Por qué no?</li>
+<li>Elementos de una <strong>red de invitados</strong> correctamente planteada.</li>
+<li>¿Garantiza el aislamiento crear una <strong>VLAN</strong> de invitados?</li>
+<li>Principales <strong>amenazas</strong> sobre un dispositivo móvil.</li>
+<li><strong>Medida → amenaza</strong>: cifrado · bloqueo automático · borrado remoto · actualizaciones.</li>
+<li>¿Convierte la <strong>VPN</strong> una Wi-Fi pública en segura? ¿A qué no sustituye?</li>
+<li><strong>Definición</strong> de MDM y sus cuatro verbos característicos.</li>
+<li>¿Qué es el <strong>enrollment</strong> y qué lugar ocupa en el ciclo?</li>
+<li><strong>Ordenar</strong> las fases del ciclo de vida MDM.</li>
+<li>Ejemplos de <strong>políticas</strong> aplicables desde un MDM.</li>
+<li>¿Qué permite <strong>inventariar</strong> un MDM?</li>
+<li>Diferencia entre <strong>selective wipe</strong> y <strong>full wipe</strong>.</li>
+<li>¿Qué tipo de borrado se prefiere en <strong>BYOD</strong> y por qué?</li>
+<li><strong>Sigla → modelo</strong>: COPE · BYOD · COBO.</li>
+<li>¿Qué riesgos adicionales introduce el <strong>BYOD</strong>?</li>
+<li>Diferencia entre <strong>MDM</strong>, <strong>MAM</strong> y <strong>UEM</strong>.</li>
+<li><strong>Supuesto</strong>: gestionar PC y móviles desde una única consola. ¿Qué corresponde?</li>
+</ul>
+
+<h2 id="23-preguntas-cortas" class="tema-h2">23. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<h4 class="tema-h4">1. Explique cómo funcionan las redes celulares</h4>
+<ul class="tema-lista">
+<li>Definición: cobertura dividida en células, cada una atendida por una estación base.</li>
+<li>Reutilización de frecuencias en células no adyacentes para multiplicar la capacidad.</li>
+<li>Handover para mantener la conexión al desplazarse entre células.</li>
+<li>Cierre: es la combinación de células, estaciones base y handover lo que hace posible la movilidad.</li>
+</ul>
+<h4 class="tema-h4">2. Explique el handover</h4>
+<ul class="tema-lista">
+<li>Traspaso de la comunicación de una célula a otra cuando el terminal se desplaza.</li>
+<li>Objetivo: mantener la conexión sin interrupción.</li>
+<li>Cierre: sin handover, cambiar de célula supondría cortar la comunicación.</li>
+</ul>
+<h4 class="tema-h4">3. Diferencie Wi-Fi 4, 5, 6, 6E y 7</h4>
+<ul class="tema-lista">
+<li>Wi-Fi 4 es 802.11n; Wi-Fi 5 es 802.11ac; Wi-Fi 6 es 802.11ax.</li>
+<li>Wi-Fi 6E es 802.11ax con la extensión a la banda de 6 GHz; Wi-Fi 7 es 802.11be.</li>
+<li>Cierre: Wi-Fi 6 no implica 6 GHz; el «6» es el número de generación.</li>
+</ul>
+<h4 class="tema-h4">4. Explique el SSID y el roaming</h4>
+<ul class="tema-lista">
+<li>SSID: identificador o nombre de la red Wi-Fi; no es la contraseña.</li>
+<li>Roaming: transición del dispositivo entre distintos AP manteniendo la conectividad, cuando la infraestructura y la configuración lo permiten.</li>
+<li>Cierre: compartir SSID no garantiza por sí solo el roaming.</li>
+</ul>
+<h4 class="tema-h4">5. Explique las bandas Wi-Fi</h4>
+<ul class="tema-lista">
+<li>2,4 GHz: mayor alcance, mayor interferencia.</li>
+<li>5 GHz: mayor capacidad y velocidad, menor alcance.</li>
+<li>6 GHz: espectro adicional y amplio, con menor congestión relativa.</li>
+<li>Cierre: son reglas generales que dependen del entorno; a mayor frecuencia, más capacidad y menos alcance.</li>
+</ul>
+<h4 class="tema-h4">6. Diferencie WEP, WPA2 y WPA3</h4>
+<ul class="tema-lista">
+<li>WEP: obsoleto e inseguro; no debe utilizarse. WPA: transición, obsoleto para nuevos despliegues.</li>
+<li>WPA2: ampliamente utilizado, basado en AES en sus modos robustos.</li>
+<li>WPA3: estándar recomendado para nuevos despliegues; incorpora SAE en su modalidad Personal.</li>
+<li>Cierre: ocultar el SSID y filtrar por MAC no sustituyen a un WPA2 o WPA3 bien configurado.</li>
+</ul>
+<h4 class="tema-h4">7. Explique SAE</h4>
+<ul class="tema-lista">
+<li>Mecanismo de autenticación de WPA3-Personal.</li>
+<li>Finalidad: mejorar la resistencia frente a ataques de diccionario offline.</li>
+<li>Cierre: WPA3 no es simplemente WPA2 más potente; introduce mecanismos distintos.</li>
+</ul>
+<h4 class="tema-h4">8. Enumere medidas de securización de un dispositivo móvil</h4>
+<ul class="tema-lista">
+<li>Cifrado del almacenamiento; PIN, contraseña o biometría; bloqueo automático.</li>
+<li>Actualizaciones; aplicaciones de fuentes confiables; VPN cuando proceda.</li>
+<li>Borrado remoto; copia y recuperación según la política corporativa.</li>
+<li>Cierre: responden a las tres circunstancias propias de la movilidad — el dispositivo se pierde, se conecta a redes ajenas y opera fuera del perímetro.</li>
+</ul>
+<h4 class="tema-h4">9. Defina MDM</h4>
+<ul class="tema-lista">
+<li>Conjunto de herramientas y políticas para gestionar, configurar, proteger y supervisar dispositivos móviles de forma centralizada.</li>
+<li>Permite trasladar las decisiones de seguridad a la política de la organización y comprobar su cumplimiento.</li>
+<li>Cierre: no es un antivirus; puede exigir protección antimalware, pero no la sustituye.</li>
+</ul>
+<h4 class="tema-h4">10. Explique las funciones de un MDM</h4>
+<ul class="tema-lista">
+<li>Ciclo: inscripción, configuración, aplicación de políticas, distribución de aplicaciones, monitorización y compliance, actualización y retirada o borrado.</li>
+<li>Políticas: PIN, cifrado, bloqueo, restricciones, aplicaciones, Wi-Fi, VPN, actualizaciones y cumplimiento.</li>
+<li>Inventario: dispositivos, usuarios, sistema operativo, versión y estado de cumplimiento.</li>
+<li>Cierre: separación de datos mediante contenedor de trabajo y borrado selectivo o completo.</li>
+</ul>
+<h4 class="tema-h4">11. Diferencie COPE y BYOD</h4>
+<ul class="tema-lista">
+<li>COPE: dispositivo propiedad de la organización con uso personal permitido dentro de la política.</li>
+<li>BYOD: dispositivo personal utilizado para trabajo corporativo.</li>
+<li>BYOD introduce problemas específicos de seguridad, privacidad, control, separación de datos y borrado selectivo; NIST destaca expresamente esos riesgos adicionales.</li>
+<li>Cierre: COBO como variante corporativa destinada exclusivamente al uso laboral.</li>
+</ul>
+<h4 class="tema-h4">12. Diferencie MDM, MAM y UEM</h4>
+<ul class="tema-lista">
+<li>MDM: gestiona el dispositivo (móviles y tabletas).</li>
+<li>MAM: gestiona y aplica políticas sobre las aplicaciones y los datos corporativos.</li>
+<li>UEM: gestión unificada de múltiples endpoints — PC, móvil y tableta.</li>
+<li>Cierre: el UEM amplía el alcance del MDM; el MAM actúa sobre el contenido, no sobre el aparato.</li>
+</ul>
+
+<h2 id="24-supuestos-practicos" class="tema-h2">24. Supuestos prácticos</h2>
+<h4 class="tema-h4">Caso 1 — Pérdida de un móvil corporativo</h4>
+<p><strong>Escenario</strong>: una persona comunica al CAU que ha <strong>perdido su móvil corporativo</strong>, en el que tenía acceso al correo y a aplicaciones de gestión.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué actuación inmediata procede?</strong> <strong>Bloqueo</strong> del dispositivo y, si no se recupera, <strong>borrado remoto</strong> desde la plataforma MDM.</li>
+<li><strong>b) ¿Qué medida protege los datos mientras tanto?</strong> El <strong>cifrado del almacenamiento</strong>: es la única que <strong>no depende</strong> de que el dispositivo vuelva a conectarse.</li>
+<li><strong>c) ¿Qué tipo de borrado corresponde?</strong> Al ser <strong>corporativo</strong>, cabe el <strong>full wipe</strong>: borra <strong>todo el dispositivo</strong>.</li>
+<li><strong>d) ¿Algo más?</strong> Tratarlo como <strong>incidente</strong> conforme al procedimiento de la organización y revisar los accesos asociados.</li>
+</ul>
+<h4 class="tema-h4">Caso 2 — Pérdida de un móvil personal en BYOD</h4>
+<p><strong>Escenario</strong>: la persona que pierde el dispositivo lo utilizaba en régimen de <strong>BYOD</strong>: es <strong>suyo</strong> y contiene también información personal.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Cambia la actuación?</strong> Sí. Debe <strong>revisarse la política</strong> aplicable al BYOD antes de actuar.</li>
+<li><strong>b) ¿Qué borrado corresponde?</strong> Debe <strong>preferirse el borrado selectivo cuando la política y la arquitectura lo permitan</strong>: elimina <strong>datos y aplicaciones corporativos</strong> y <strong>conserva lo personal</strong>.</li>
+<li><strong>c) ¿Qué lo hace posible?</strong> La existencia de un <strong>contenedor o perfil de trabajo</strong> que <strong>separa la información corporativa de la personal</strong>.</li>
+<li><strong>d) ¿Puede la organización borrarlo todo sin más?</strong> <strong>No</strong>: el dispositivo es <strong>propiedad de la persona</strong> y deben <strong>respetarse la privacidad y los procedimientos</strong>. Es uno de los <strong>riesgos adicionales de privacidad</strong> que NIST destaca en BYOD.</li>
+</ul>
+<h4 class="tema-h4">Caso 3 — Dispositivo con sistema desactualizado</h4>
+<p><strong>Escenario</strong>: la consola detecta varios móviles con el <strong>sistema operativo desactualizado</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué función del MDM lo detecta?</strong> La <strong>monitorización y el control de cumplimiento (compliance)</strong>, apoyada en el <strong>inventario</strong>: dispositivo, usuario, sistema operativo, versión y estado.</li>
+<li><strong>b) ¿Qué riesgo comporta?</strong> <strong>Vulnerabilidades sin corregir</strong> en un dispositivo que <strong>opera fuera del perímetro</strong>.</li>
+<li><strong>c) ¿Qué procede?</strong> Aplicar la <strong>política de actualizaciones</strong> y, si el incumplimiento persiste, las <strong>consecuencias previstas</strong> por la política de cumplimiento.</li>
+<li><strong>d) ¿En qué fase del ciclo estamos?</strong> En <strong>monitorización/compliance</strong> y <strong>actualización</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 4 — Instalar una aplicación en cien móviles</h4>
+<p><strong>Escenario</strong>: hay que instalar una <strong>aplicación corporativa en 100 dispositivos</strong> repartidos por varias dependencias.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Cómo se resuelve?</strong> Mediante la <strong>distribución de aplicaciones</strong> del MDM: <strong>catálogo corporativo</strong> e <strong>instalación y control centralizado</strong>.</li>
+<li><strong>b) ¿Qué se evita?</strong> Tener que <strong>intervenir dispositivo a dispositivo</strong> y depender de que cada persona la instale correctamente.</li>
+<li><strong>c) ¿Qué requisito previo hay?</strong> Que los dispositivos estén <strong>inscritos (enrollment)</strong>: sin inscripción no hay gestión posible.</li>
+<li><strong>d) Relación con otros temas.</strong> Es la misma lógica de <strong>despliegue centralizado</strong> del <strong>Tema 16</strong>, aplicada aquí a dispositivos móviles.</li>
+</ul>
+<h4 class="tema-h4">Caso 5 — Dispositivo que no cumple el PIN mínimo</h4>
+<p><strong>Escenario</strong>: un dispositivo aparece marcado como <strong>no conforme</strong> porque su credencial <strong>no cumple el PIN mínimo</strong> exigido.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué mecanismo lo determina?</strong> Una <strong>política MDM</strong> de credencial mínima, comprobada mediante <strong>compliance</strong>.</li>
+<li><strong>b) ¿Qué otras políticas suelen acompañarla?</strong> <strong>Cifrado</strong>, <strong>bloqueo automático</strong>, restricciones, control de aplicaciones y actualizaciones.</li>
+<li><strong>c) ¿Qué efecto puede tener el incumplimiento?</strong> El previsto en la política: desde la <strong>advertencia</strong> hasta la <strong>restricción de acceso</strong> a recursos corporativos.</li>
+<li><strong>d) ¿Basta con avisar a la persona?</strong> El MDM permite <strong>exigir</strong> la política, no solo recomendarla: ahí reside su valor frente a la configuración manual.</li>
+</ul>
+<h4 class="tema-h4">Caso 6 — Dos AP en un edificio</h4>
+<p><strong>Escenario</strong>: se instalan <strong>dos puntos de acceso</strong> en un edificio y se pretende que las personas puedan <strong>desplazarse sin perder la conexión</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué concepto está en juego?</strong> El <strong>roaming</strong>: transición entre AP <strong>manteniendo la conectividad</strong>.</li>
+<li><strong>b) ¿Basta con poner el mismo SSID?</strong> <strong>No.</strong> Es necesario, pero el roaming efectivo <strong>depende de la infraestructura y de la configuración</strong>: coherencia de seguridad, diseño de cobertura y solapamiento adecuado.</li>
+<li><strong>c) ¿Sería esto una red mesh?</strong> <strong>No</strong>, si los AP están <strong>cableados</strong>. El <strong>mesh</strong> requiere <strong>backhaul inalámbrico entre nodos</strong>.</li>
+<li><strong>d) ¿Qué más conviene revisar?</strong> Que ambos AP compartan la <strong>configuración de seguridad</strong> (WPA2/WPA3) y que la <strong>cobertura</strong> solape lo suficiente.</li>
+</ul>
+<h4 class="tema-h4">Caso 7 — Crear una red Wi-Fi de invitados</h4>
+<p><strong>Escenario</strong>: se quiere ofrecer <strong>Wi-Fi a visitantes</strong> sin darles acceso a los recursos internos.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué elementos se necesitan?</strong> Un <strong>SSID o red separada</strong>, una <strong>VLAN dedicada</strong> cuando corresponda y <strong>reglas de aislamiento</strong>.</li>
+<li><strong>b) ¿Basta con la VLAN?</strong> <strong>No.</strong> <strong>VLAN no es seguridad automática</strong>: debe existir una <strong>política de routing y de cortafuegos adecuada</strong> que impida el acceso indebido a la red interna.</li>
+<li><strong>c) ¿Qué seguridad Wi-Fi corresponde?</strong> <strong>WPA2 o WPA3</strong> bien configurado; si se plantea una red abierta, valorar los mecanismos de <strong>Enhanced Open</strong>, sin considerarla por ello «segura».</li>
+<li><strong>d) ¿Sirve ocultar el SSID?</strong> <strong>No como medida de seguridad</strong>: no proporciona protección fuerte.</li>
+</ul>
+<h4 class="tema-h4">Caso 8 — Una red Wi-Fi que todavía usa WEP</h4>
+<p><strong>Escenario</strong>: al revisar una dependencia se descubre un punto de acceso configurado con <strong>WEP</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Cuál es el problema?</strong> <strong>WEP es obsoleto e inseguro</strong>: no ofrece protección efectiva.</li>
+<li><strong>b) ¿Qué procede?</strong> <strong>Migrar a una configuración moderna: WPA2 o WPA3</strong>, según la <strong>compatibilidad de los dispositivos y la política</strong> de la organización.</li>
+<li><strong>c) ¿Cuál es el recomendado para lo nuevo?</strong> <strong>WPA3</strong>, que incorpora <strong>SAE</strong> en su modalidad Personal.</li>
+<li><strong>d) ¿Puede compensarse WEP con otras medidas?</strong> <strong>No</strong>: ni ocultar el SSID ni filtrar por MAC proporcionan <strong>seguridad fuerte</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 9 — Conexión a una Wi-Fi pública</h4>
+<p><strong>Escenario</strong>: una persona en desplazamiento va a conectar su móvil corporativo a la <strong>Wi-Fi abierta</strong> de un establecimiento.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué se recomienda?</strong> Utilizar <strong>VPN</strong>, que <strong>protege el tráfico entre el dispositivo y el extremo VPN</strong> al emplear una <strong>red no confiable</strong>.</li>
+<li><strong>b) ¿Queda así el escenario resuelto?</strong> <strong>No.</strong> La VPN <strong>no convierte una Wi-Fi pública en segura</strong> ni sustituye a <strong>HTTPS</strong>, a la <strong>autenticación</strong>, a la <strong>protección del dispositivo</strong> ni a la <strong>prevención del phishing</strong>.</li>
+<li><strong>c) ¿Qué otras medidas se aplican?</strong> <strong>Cifrado</strong>, <strong>bloqueo</strong>, <strong>actualizaciones</strong> al día y <strong>aplicaciones de fuentes confiables</strong>.</li>
+<li><strong>d) ¿Qué criterio general trasladar?</strong> <strong>No confiar en la red</strong>: la protección debe residir en el <strong>dispositivo</strong> y en las <strong>comunicaciones protegidas extremo a extremo</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 10 — Gestionar PC y móviles desde una única consola</h4>
+<p><strong>Escenario</strong>: la organización quiere <strong>gestionar de forma unificada</strong> los ordenadores del puesto, las tabletas y los móviles.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué corresponde?</strong> Una solución <strong>UEM</strong>: <strong>gestión unificada de múltiples endpoints</strong>.</li>
+<li><strong>b) ¿En qué se diferencia del MDM?</strong> El <strong>MDM</strong> alcanza a <strong>móviles y tabletas</strong>; el <strong>UEM amplía el alcance</strong> a <strong>PC, móvil y tableta</strong>.</li>
+<li><strong>c) ¿Y el MAM?</strong> Actúa a otro nivel: <strong>gestiona las aplicaciones y los datos corporativos</strong>, no el dispositivo.</li>
+<li><strong>d) ¿Cambia el ciclo de gestión?</strong> No en lo esencial: <strong>inscripción → configuración → políticas → aplicaciones → compliance → actualización → retirada</strong>, aplicado a más tipos de dispositivo.</li>
+</ul>
+
+<h2 id="25-matriz-de-memorizacion" class="tema-h2">25. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Lo que debo recordar</strong></th>
+</tr>
+<tr>
+<td><strong>Red celular</strong></td>
+<td>Cobertura dividida en células, cada una atendida por una estación base</td>
+</tr>
+<tr>
+<td><strong>Handover</strong></td>
+<td>Traspaso de la comunicación entre células manteniendo la conexión</td>
+</tr>
+<tr>
+<td><strong>1G</strong></td>
+<td>Voz analógica</td>
+</tr>
+<tr>
+<td><strong>2G</strong></td>
+<td>Digital y SMS</td>
+</tr>
+<tr>
+<td><strong>3G</strong></td>
+<td>Datos móviles</td>
+</tr>
+<tr>
+<td><strong>4G</strong></td>
+<td>Banda ancha móvil</td>
+</tr>
+<tr>
+<td><strong>5G</strong></td>
+<td>Velocidad, baja latencia y alta densidad de dispositivos</td>
+</tr>
+<tr>
+<td><strong>Wi-Fi</strong></td>
+<td>Familia de estándares IEEE 802.11 para WLAN; modos infraestructura y ad-hoc</td>
+</tr>
+<tr>
+<td><strong>AP</strong></td>
+<td>Conecta los clientes inalámbricos con la infraestructura de red</td>
+</tr>
+<tr>
+<td><strong>SSID</strong></td>
+<td>Identificador o nombre de la red; <strong>no es la contraseña</strong></td>
+</tr>
+<tr>
+<td><strong>Roaming</strong></td>
+<td>Transición entre AP manteniendo la conectividad, si infraestructura y configuración lo permiten</td>
+</tr>
+<tr>
+<td><strong>Mesh</strong></td>
+<td>Nodos que colaboran mediante enlaces inalámbricos de backhaul para ampliar cobertura</td>
+</tr>
+<tr>
+<td><strong>Wi-Fi 4</strong></td>
 <td>802.11n</td>
-<td>Primer uso de MIMO (múltiples antenas) para mejorar velocidad y alcance</td>
 </tr>
 <tr>
-<td>Wi-Fi 5</td>
+<td><strong>Wi-Fi 5</strong></td>
 <td>802.11ac</td>
-<td>Uso exclusivo de la banda de 5 GHz, mayor velocidad</td>
 </tr>
 <tr>
-<td>Wi-Fi 6 / 6E</td>
+<td><strong>Wi-Fi 6</strong></td>
 <td>802.11ax</td>
-<td>Mayor eficiencia con muchos dispositivos simultáneos; 6E añade la banda de 6 GHz</td>
 </tr>
 <tr>
-<td>Wi-Fi 7</td>
+<td><strong>Wi-Fi 6E</strong></td>
+<td>802.11ax + banda de 6 GHz</td>
+</tr>
+<tr>
+<td><strong>Wi-Fi 7</strong></td>
 <td>802.11be</td>
-<td>Canales de hasta 320 MHz y operación simultánea en varias bandas (Multi-Link Operation); estándar finalizado en 2025, con adopción empresarial creciente en 2026</td>
 </tr>
-</table></div>
-<p>Las distintas bandas de frecuencia ofrecen un compromiso distinto entre alcance y velocidad: la banda de <strong>2,4 GHz</strong> ofrece mayor alcance pero está más congestionada y sufre más interferencias (comparte espectro con otros muchos dispositivos); la banda de <strong>5 GHz</strong> ofrece mayor velocidad con menor alcance y menos interferencias; y la banda de <strong>6 GHz</strong>, disponible desde Wi-Fi 6E, aporta un espectro mucho más amplio y todavía poco saturado.</p>
-<div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🧠 Para memorizar</strong><br>Correspondencias Wi-Fi más preguntadas: <strong>Wi-Fi 4 = n · Wi-Fi 5 = ac · Wi-Fi 6 = ax · Wi-Fi 7 = be</strong>. Y las bandas: <strong>2,4 GHz = alcance · 5 GHz = velocidad · 6 GHz = espectro nuevo (desde 6E)</strong>.</th>
+<td><strong>Bandas</strong></td>
+<td>2,4 GHz más alcance; 5 GHz más capacidad; 6 GHz espectro amplio y menos congestión</td>
 </tr>
-</table></div>
-<h2 id="4-seguridad-en-redes-wi-fi" class="tema-h2">4. Seguridad en redes Wi-Fi</h2>
-<ul class="tema-lista">
-<li><strong>WEP (Wired Equivalent Privacy)</strong>: el primer protocolo de cifrado Wi-Fi; se considera obsoleto e inseguro desde hace años, con vulnerabilidades conocidas que permiten romperlo en minutos. No debe utilizarse.</li>
-<li><strong>WPA (Wi-Fi Protected Access)</strong>: protocolo de transición, mejora WEP pero también superado por sus sucesores.</li>
-<li><strong>WPA2</strong>: basado en el algoritmo de cifrado AES, ha sido el estándar de facto durante más de una década.</li>
-<li><strong>WPA3</strong>: el estándar de seguridad Wi-Fi vigente y recomendado en la actualidad, que incorpora SAE (Simultaneous Authentication of Equals), un proceso de autenticación resistente a los ataques de diccionario realizados fuera de línea (offline), y ofrece cifrado individualizado incluso en redes abiertas sin contraseña.</li>
-</ul>
-<div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>WEP y, en menor medida, WPA se consideran obsoletos y no deben emplearse en un despliegue actual; WPA2 sigue siendo ampliamente usado y razonablemente seguro si está bien configurado, pero WPA3 es el estándar vigente recomendado para cualquier despliegue nuevo. Otras medidas populares, como ocultar el SSID o filtrar por dirección MAC, ofrecen una protección muy débil («seguridad por oscuridad»): el SSID oculto puede detectarse igualmente con las herramientas adecuadas, y una dirección MAC puede falsificarse (spoofing) con facilidad; ninguna de las dos sustituye a un cifrado robusto como WPA3.</th>
+<td><strong>WEP</strong></td>
+<td>Obsoleto e inseguro</td>
 </tr>
-</table></div>
-<p>Una buena práctica adicional habitual es disponer de una <strong>red de invitados</strong> separada mediante una VLAN dedicada (Tema 28), que dé acceso a Internet a los visitantes sin exponer en ningún caso la red interna de la organización.</p>
-<h2 id="5-securización-de-dispositivos-móviles-amenazas-y-medidas" class="tema-h2">5. Securización de dispositivos móviles: amenazas y medidas</h2>
-<p>La movilidad introduce amenazas específicas, distintas de las de un equipo de escritorio fijo: la <strong>pérdida o el robo físico</strong> del dispositivo es mucho más probable; es habitual conectarse a <strong>redes Wi-Fi públicas</strong> de confianza desconocida; existe el riesgo de instalar <strong>aplicaciones maliciosas</strong> procedentes de fuera de las tiendas oficiales; y, en general, el dispositivo sale físicamente del perímetro de red tradicional de la organización, dificultando aplicarle las mismas protecciones perimetrales (Tema 29) que a un equipo que nunca sale de la oficina.</p>
-<ul class="tema-lista">
-<li><strong>Cifrado del almacenamiento</strong> del dispositivo, para que la información no sea legible si cae en manos ajenas.</li>
-<li><strong>Bloqueo de pantalla</strong> mediante PIN, patrón o biometría.</li>
-<li><strong>Mantener el sistema operativo móvil actualizado</strong>, con la misma lógica de gestión de parches vista en temas anteriores (Temas 11, 12, 13, 16 y 25).</li>
-<li><strong>Borrado remoto</strong> en caso de pérdida o robo, para eliminar la información del dispositivo aunque ya no esté en posesión de su propietario legítimo.</li>
-<li><strong>Restricción de la instalación de aplicaciones</strong> a fuentes o tiendas oficiales de confianza.</li>
-<li><strong>Uso de VPN</strong> (Tema 29) al conectarse desde redes Wi-Fi públicas o no confiables, para proteger la confidencialidad del tráfico.</li>
-</ul>
-<h2 id="6-gestión-de-dispositivos-móviles-mdm" class="tema-h2">6. Gestión de dispositivos móviles (MDM)</h2>
-<p><strong>MDM (Mobile Device Management, gestión de dispositivos móviles)</strong> es el conjunto de herramientas y políticas que permite a una organización gestionar, configurar, asegurar y supervisar de forma centralizada los dispositivos móviles —smartphones, tabletas— que acceden a sus recursos, sean propiedad de la organización o del propio personal.</p>
-<ul class="tema-lista">
-<li><strong>Inscripción (enrollment)</strong> del dispositivo en la plataforma de gestión, punto de partida para aplicarle el resto de políticas.</li>
-<li><strong>Aplicación de políticas de seguridad</strong>: exigir PIN, forzar el cifrado, restringir el uso de la cámara o la instalación de determinadas aplicaciones.</li>
-<li><strong>Distribución de aplicaciones corporativas</strong> desde un catálogo controlado por la organización (en la línea de lo ya visto en el Tema 16).</li>
-<li><strong>Separación de datos personales y corporativos</strong>, mediante contenedores o un perfil de trabajo independiente dentro del mismo dispositivo.</li>
-<li><strong>Borrado remoto selectivo</strong> (solo los datos y aplicaciones corporativos) o <strong>completo</strong> (todo el dispositivo), según el escenario y el modelo de propiedad.</li>
-<li><strong>Inventario centralizado</strong> de todos los dispositivos móviles gestionados por la organización.</li>
-</ul>
-<p>Según quién sea el propietario del dispositivo, se distinguen distintos modelos de gestión: <strong>COPE (Corporate Owned, Personally Enabled)</strong>, en el que el dispositivo es propiedad de la organización, pero se permite también un uso personal razonable; y <strong>BYOD (Bring Your Own Device)</strong>, en el que el dispositivo es propiedad de la persona empleada y se usa también con fines corporativos, bajo unas políticas de seguridad y privacidad pactadas de antemano. Cada modelo tiene implicaciones distintas en cuanto a la privacidad de la persona usuaria y al alcance real de las medidas de seguridad que la organización puede aplicar.</p>
-<div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Microsoft Intune, ya citado en los Temas 11 y 16 para la gestión de equipos de escritorio, es también una plataforma MDM para dispositivos móviles. En los últimos años, el concepto de MDM ha evolucionado hacia el de <strong>UEM (Unified Endpoint Management, gestión unificada de endpoints)</strong>: en lugar de gestionar por separado los equipos de escritorio y los dispositivos móviles con herramientas distintas, una plataforma UEM los gestiona todos —PC, portátiles, smartphones, tabletas e incluso dispositivos IoT— desde una única consola y con una política de seguridad coherente entre todos ellos.</th>
+<td><strong>WPA2</strong></td>
+<td>Ampliamente utilizado; basado en AES en sus modos robustos</td>
+</tr>
+<tr>
+<td><strong>WPA3</strong></td>
+<td>Recomendado para nuevos despliegues</td>
+</tr>
+<tr>
+<td><strong>SAE</strong></td>
+<td>Autenticación de WPA3-Personal; mejora la resistencia frente a diccionario offline</td>
+</tr>
+<tr>
+<td><strong>SSID oculto / MAC</strong></td>
+<td>No proporcionan seguridad fuerte; la MAC puede falsificarse</td>
+</tr>
+<tr>
+<td><strong>MDM</strong></td>
+<td>Gestionar, configurar, proteger y supervisar dispositivos móviles de forma centralizada</td>
+</tr>
+<tr>
+<td><strong>Enrollment</strong></td>
+<td>Inscripción del dispositivo en la plataforma; primer paso de la gestión</td>
+</tr>
+<tr>
+<td><strong>Ciclo MDM</strong></td>
+<td>Inscripción, configuración, políticas, apps, compliance, actualización y retirada o borrado</td>
+</tr>
+<tr>
+<td><strong>BYOD</strong></td>
+<td>Dispositivo personal para trabajo; riesgos añadidos de seguridad y privacidad</td>
+</tr>
+<tr>
+<td><strong>COPE</strong></td>
+<td>Dispositivo corporativo con uso personal permitido dentro de la política</td>
+</tr>
+<tr>
+<td><strong>COBO</strong></td>
+<td>Dispositivo corporativo destinado exclusivamente al uso laboral</td>
+</tr>
+<tr>
+<td><strong>MAM</strong></td>
+<td>Gestiona y aplica políticas sobre aplicaciones y datos corporativos</td>
+</tr>
+<tr>
+<td><strong>UEM</strong></td>
+<td>Gestión unificada de múltiples endpoints: PC, móvil y tableta</td>
+</tr>
+<tr>
+<td><strong>Selective wipe</strong></td>
+<td>Borra datos y aplicaciones corporativos</td>
+</tr>
+<tr>
+<td><strong>Full wipe</strong></td>
+<td>Borra todo el dispositivo</td>
 </tr>
 </table></div>
-<h2 id="7-resumen-para-estudiar" class="tema-h2">7. Resumen para estudiar</h2>
+
+<h2 id="26-resumen-final" class="tema-h2">26. Resumen final: si mañana fuera el examen</h2>
 <ul class="tema-lista">
-<li><strong>Redes celulares</strong>: evolución 1G (voz analógica) a 5G (alta velocidad, baja latencia, alta densidad de dispositivos: eMBB, URLLC, mMTC); 6G aún en investigación.</li>
-<li><strong>Wi-Fi</strong>: modo infraestructura con puntos de acceso; SSID, roaming entre AP y Wi-Fi mesh para cobertura de espacios grandes.</li>
-<li><strong>Estándares Wi-Fi</strong>: de Wi-Fi 4 (802.11n) a Wi-Fi 7 (802.11be, canales de 320 MHz); bandas de 2,4 GHz (alcance), 5 GHz (velocidad) y 6 GHz (más espectro disponible).</li>
-<li><strong>Seguridad Wi-Fi</strong>: WEP y WPA obsoletos; WPA2 muy extendido; WPA3 (con SAE) como estándar vigente recomendado; ocultar SSID y filtrar por MAC ofrecen protección débil.</li>
-<li><strong>Securización móvil</strong>: amenazas propias (pérdida/robo, redes públicas, apps maliciosas, salida del perímetro); medidas: cifrado, bloqueo de pantalla, actualizaciones, borrado remoto, restricción de fuentes de apps, VPN.</li>
-<li><strong>MDM</strong>: inscripción, políticas de seguridad, distribución de apps, separación de datos personales/corporativos, borrado remoto e inventario; modelos COPE y BYOD; evolución hacia UEM, que unifica la gestión de todo tipo de dispositivos.</li>
+<li><strong>Red celular</strong> = cobertura en <strong>células</strong> con <strong>estaciones base</strong>, <strong>reutilización de frecuencias</strong> y <strong>handover</strong>.</li>
+<li><strong>1G analógica · 2G SMS · 3G datos · 4G banda ancha · 5G velocidad + latencia + densidad</strong> (eMBB, URLLC, mMTC como ampliación).</li>
+<li><strong>Wi-Fi = IEEE 802.11.</strong> Modos <strong>infraestructura</strong> (con AP) y <strong>ad-hoc</strong> (directo).</li>
+<li><strong>SSID</strong> = nombre de la red, <strong>no la contraseña</strong>. <strong>Roaming</strong> = transición entre AP manteniendo la conexión, <strong>cuando la infraestructura y la configuración lo permiten</strong>. <strong>Mismo SSID no garantiza roaming.</strong></li>
+<li><strong>Mesh</strong> = nodos que colaboran mediante <strong>backhaul inalámbrico</strong>; <strong>no es «varios AP con el mismo SSID»</strong>.</li>
+<li><strong>Wi-Fi 4 → n · Wi-Fi 5 → ac · Wi-Fi 6 → ax · Wi-Fi 6E → ax + 6 GHz · Wi-Fi 7 → be.</strong> <strong>Wi-Fi 6 NO implica 6 GHz.</strong></li>
+<li><strong>Bandas</strong>: <strong>2,4 GHz</strong> más alcance y más interferencia · <strong>5 GHz</strong> más capacidad y menos alcance · <strong>6 GHz</strong> espectro amplio y menos congestión. Son <strong>reglas generales</strong>.</li>
+<li><strong>WEP obsoleto · WPA obsoleto para nuevos despliegues · WPA2 (AES) ampliamente utilizado · WPA3 recomendado</strong>, con <strong>SAE</strong> en su modalidad <strong>Personal</strong> frente a <strong>diccionario offline</strong>.</li>
+<li><strong>Ocultar el SSID y filtrar por MAC NO son seguridad fuerte</strong> (la MAC se falsifica) y <strong>no sustituyen</strong> a WPA2/WPA3 bien configurado.</li>
+<li><strong>Red de invitados</strong>: SSID separado + VLAN dedicada + <strong>reglas de aislamiento</strong>. <strong>La VLAN no basta</strong>: hace falta política de <strong>routing y cortafuegos</strong>.</li>
+<li><strong>Amenazas móviles</strong>: pérdida o robo · Wi-Fi públicas · apps maliciosas · phishing · fuera del perímetro · sistema desactualizado.</li>
+<li><strong>Medidas</strong>: <strong>cifrado</strong> · PIN/biometría · <strong>bloqueo automático</strong> · actualizaciones · apps de fuentes confiables · <strong>VPN cuando proceda</strong> · <strong>borrado remoto</strong> · copia según política.</li>
+<li><strong>La VPN protege el tráfico hasta el extremo VPN</strong>; <strong>NO convierte una Wi-Fi pública en segura</strong> ni sustituye a HTTPS, autenticación, protección del dispositivo ni prevención del phishing.</li>
+<li><strong>MDM = GESTIONAR + CONFIGURAR + PROTEGER + SUPERVISAR</strong> dispositivos móviles de forma centralizada. <strong>No es un antivirus.</strong></li>
+<li><strong>CICLO MDM</strong>: <strong>inscripción (enrollment) → configuración → políticas → distribución de apps → monitorización/compliance → actualización → retirada/borrado</strong>.</li>
+<li><strong>Contenedor o perfil de trabajo</strong> separa lo corporativo de lo personal. <strong>SELECTIVE WIPE → lo corporativo · FULL WIPE → todo.</strong> En <strong>BYOD</strong> se prefiere el <strong>selectivo</strong> cuando la política y la arquitectura lo permitan.</li>
+<li><strong>COPE</strong> corporativo con uso personal · <strong>BYOD</strong> personal para trabajo (riesgos añadidos de <strong>seguridad y privacidad</strong>, destacados por <strong>NIST</strong>) · <strong>COBO</strong> corporativo solo laboral.</li>
+<li><strong>MDM → el dispositivo · MAM → apps y datos · UEM → todos los endpoints.</strong> El <strong>UEM amplía el alcance del MDM</strong>.</li>
 </ul>
 
-<h2 id="8-conceptos-clave" class="tema-h2">8. Conceptos clave</h2>
+<h2 id="27-actualidad" class="tema-h2">27. Actualidad de movilidad y Wi-Fi — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Información sujeta a cambio · Fecha de actualización de estos apuntes: agosto de 2026</strong><br>Nada de este apartado desplaza al núcleo. Las <strong>cifras de adopción</strong>, los <strong>productos concretos</strong> y las <strong>fechas comerciales</strong> no son materia de examen.</th>
+</tr>
+</table></div>
 <ul class="tema-lista">
-<li><strong>Red celular</strong>: células, estación base, <strong>handover</strong>; generaciones 1G-5G; eMBB/URLLC/mMTC.</li>
-<li><strong>IEEE 802.11</strong>; modo infraestructura vs. ad-hoc; <strong>AP, SSID, roaming, Wi-Fi mesh</strong>.</li>
-<li><strong>Wi-Fi 4/n · 5/ac · 6-6E/ax · 7/be</strong>; bandas 2,4 / 5 / 6 GHz.</li>
-<li><strong>WEP → WPA → WPA2 (AES) → WPA3 (SAE)</strong>; debilidad de ocultar SSID y filtrar MAC.</li>
-<li><strong>Red de invitados</strong> con VLAN.</li>
-<li><strong>Amenazas móviles</strong>: pérdida/robo, Wi-Fi públicas, apps maliciosas, salida del perímetro.</li>
-<li><strong>MDM</strong>: enrollment, políticas, contenedores, borrado remoto selectivo/completo, inventario.</li>
-<li><strong>COPE vs. BYOD</strong>; <strong>UEM</strong>; Intune como ejemplo.</li>
-</ul>
-
-<h2 id="9-posibles-puntos-de-examen" class="tema-h2">9. Posibles puntos de examen</h2>
-<ul class="tema-lista">
-<li>Qué aportó cada <strong>generación celular</strong> (2G-SMS, 4G-banda ancha, 5G-latencia/densidad).</li>
-<li>Qué es el <strong>handover</strong> y por qué se llaman «celulares» estas redes.</li>
-<li>Emparejar <strong>nombre comercial Wi-Fi con su estándar 802.11</strong> — pregunta casi segura.</li>
-<li>Compromiso de las <strong>bandas</strong>: 2,4 GHz (alcance) vs. 5 GHz (velocidad) vs. 6 GHz (Wi-Fi 6E).</li>
-<li>Ordenar los protocolos de seguridad Wi-Fi y cuál es el vigente (<strong>WPA3/SAE</strong>).</li>
-<li>Por qué <strong>ocultar el SSID o filtrar por MAC no protege</strong> realmente.</li>
-<li>Qué método de acceso usa Wi-Fi (<strong>CSMA/CA</strong>, Tema 28).</li>
-<li>Medidas de <strong>securización móvil</strong> ante pérdida/robo (cifrado + bloqueo + borrado remoto).</li>
-<li>Funciones de un <strong>MDM</strong> y diferencia entre borrado selectivo y completo.</li>
-<li><strong>COPE vs. BYOD</strong> y qué es UEM.</li>
+<li><strong>Wi-Fi 7</strong>: en el ámbito de IEEE, <strong>802.11be-2024</strong> figura como estándar activo de <strong>Extremely High Throughput</strong>. Su <strong>adopción comercial</strong> avanza de forma progresiva y convive con <strong>Wi-Fi 6 y 6E</strong> en la mayoría de los entornos. Lo <strong>estable</strong> es la asociación <strong>Wi-Fi 7 → 802.11be</strong>.</li>
+<li><strong>5G y 6G</strong>: el despliegue de <strong>5G</strong> continúa extendiéndose, y <strong>6G</strong> se encuentra en fase de <strong>investigación y definición</strong>. <strong>6G no es contenido nuclear</strong> de este tema: debe tratarse como <strong>actualidad tecnológica</strong> y no afirmarse nada sobre características o plazos como si estuvieran consolidados.</li>
+<li><strong>Evolución MDM → UEM</strong>: la tendencia consolidada es la <strong>integración de la gestión móvil en plataformas UEM</strong> que abarcan <strong>todos los endpoints</strong>. Lo estable es la <strong>distinción de alcance</strong>: <strong>MDM móviles y tabletas · UEM múltiples endpoints</strong>.</li>
+<li><strong>Seguridad Wi-Fi</strong>: <strong>WPA3</strong> se consolida como recomendación para nuevos despliegues, conviviendo con <strong>WPA2</strong> por razones de compatibilidad. Mecanismos como <strong>Enhanced Open / OWE</strong> siguen incorporándose progresivamente. Lo estable es el <strong>orden WEP-WPA-WPA2-WPA3</strong> y la asociación <strong>SAE → WPA3-Personal</strong>.</li>
+<li><strong>Plataformas concretas</strong>: soluciones como <strong>Microsoft Intune</strong> se citan únicamente como <strong>ejemplo</strong>. Sus funcionalidades, versiones y denominaciones comerciales <strong>cambian con frecuencia</strong> y <strong>no deben memorizarse</strong>.</li>
 </ul>
   </div>
 </article>

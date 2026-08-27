@@ -2,166 +2,1106 @@
   <header class="tema-cabecera">
     <div class="tema-cabecera__id">T31</div>
     <h1 class="tema-cabecera__titulo">La red Internet. Conceptos elementales sobre protocolos y servicios en Internet. Estado actual</h1>
-    <div class="tema-cabecera__meta">Bloque IV · Comunicaciones y redes — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
+    <div class="tema-cabecera__meta">Bloque IV · Redes y comunicaciones — OPE DonostiaTIK, Técnico/a Auxiliar (perfil Atención a usuarios / CAU)</div>
   </header>
 
   <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
-<li><a href="#1-concepto-de-internet-la-red-de-redes">1. Concepto de Internet: la red de redes</a></li>
-<li><a href="#2-organismos-y-gobernanza-de-internet">2. Organismos y gobernanza de Internet</a></li>
-<li><a href="#3-el-sistema-de-nombres-de-dominio-dns">3. El sistema de nombres de dominio (DNS)</a></li>
-<li><a href="#4-la-web-y-el-protocolo-http-evolución-hasta-http3">4. La Web y el protocolo HTTP: evolución hasta HTTP/3</a></li>
-<li><a href="#5-otros-servicios-y-protocolos-de-internet">5. Otros servicios y protocolos de Internet</a></li>
-<li><a href="#6-direccionamiento-en-internet-estado-actual-de-ipv6">6. Direccionamiento en Internet: estado actual de IPv6</a></li>
-<li><a href="#7-estado-actual-de-internet-tendencias">7. Estado actual de Internet: tendencias</a></li>
-<li><a href="#8-resumen-para-estudiar">8. Resumen para estudiar</a></li>
-<li><a href="#9-conceptos-clave">9. Conceptos clave</a></li>
-<li><a href="#10-posibles-puntos-de-examen">10. Posibles puntos de examen</a></li>
+<li><a href="#1-internet">1. Internet: concepto</a></li>
+<li><a href="#2-gobernanza">2. Gobernanza: IETF, ICANN, IANA y RIR</a></li>
+<li><a href="#3-dns">3. El DNS</a></li>
+<li><a href="#4-jerarquia-dns">4. La jerarquía del DNS</a></li>
+<li><a href="#5-resolucion-dns">5. La resolución DNS</a></li>
+<li><a href="#6-registros-dns">6. Tipos de registro DNS</a></li>
+<li><a href="#7-web-vs-internet">7. Web frente a Internet</a></li>
+<li><a href="#8-http">8. HTTP y sus versiones</a></li>
+<li><a href="#9-https">9. HTTPS</a></li>
+<li><a href="#10-otros-servicios">10. Otros servicios y sus protocolos</a></li>
+<li><a href="#11-ftp-sftp-ftps">11. FTP, SFTP y FTPS</a></li>
+<li><a href="#12-ssh-telnet">12. SSH frente a Telnet</a></li>
+<li><a href="#13-ipv6">13. IPv6 y dual stack</a></li>
+<li><a href="#14-flujo-url">14. Flujo completo: de la URL a la página</a></li>
+<li><a href="#15-tendencias">15. Estado actual y tendencias</a></li>
+<li><a href="#16-anclas-de-memoria">16. Anclas de memoria</a></li>
+<li><a href="#17-no-confundir">17. No confundir</a></li>
+<li><a href="#18-trampas-de-examen">18. Posibles trampas de examen</a></li>
+<li><a href="#19-preguntas-tipo-test">19. Posibles preguntas tipo test</a></li>
+<li><a href="#20-preguntas-cortas">20. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#21-supuestos-practicos">21. Supuestos prácticos</a></li>
+<li><a href="#22-matriz-de-memorizacion">22. Matriz de memorización</a></li>
+<li><a href="#23-resumen-final">23. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#24-actualidad">24. Actualidad de Internet — datos fechados</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
 
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>Este tema da por conocidos el modelo TCP/IP, el direccionamiento IPv4/IPv6 y el encaminamiento (Tema 27), así como la arquitectura del correo electrónico (Tema 17) y las VPN (Tema 29), que aquí no se repiten. El objetivo de este tema es dar una visión general de Internet como red global de servicios, más que profundizar de nuevo en los protocolos de nivel de red ya estudiados.</th>
+<th><strong>⚠️ No confundir — fronteras del tema</strong><br>El objetivo aquí es <strong>comprender Internet como infraestructura global y como ecosistema de servicios</strong>.<br><strong>Tema 17</strong> → arquitectura del correo electrónico. <strong>Tema 20</strong> → navegadores. <strong>Tema 27</strong> → TCP/IP, direccionamiento y routing. <strong>Tema 29</strong> → TLS, VPN y seguridad de comunicaciones. <strong>Tema 32</strong> → nube.<br>Esos contenidos solo se citan aquí <strong>para contextualizar</strong>.</th>
 </tr>
 </table></div>
-<h2 id="1-concepto-de-internet-la-red-de-redes" class="tema-h2">1. Concepto de Internet: la red de redes</h2>
-<p><strong>Internet</strong> es una red de alcance mundial que interconecta millones de redes informáticas independientes —de operadores, empresas, universidades y administraciones públicas— utilizando un conjunto común de protocolos, fundamentalmente el <strong>modelo TCP/IP</strong> (Tema 27). Ninguna organización posee ni controla Internet en su conjunto: su funcionamiento depende de que todas las redes que la componen acuerden usar los mismos protocolos y de la coordinación de una serie de organismos internacionales que se describen en el siguiente punto.</p>
+
+<h2 id="1-internet" class="tema-h2">1. Internet: concepto</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Nivel básico — imprescindible para el examen</strong><br>La expresión habitual «Internet es la red de redes» resume bien su naturaleza: no es una única red física, sino la interconexión, mediante protocolos comunes, de innumerables redes distintas que siguen siendo, cada una, gestionadas por su propio operador u organización.</th>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>Internet</strong> → <strong>interconexión mundial de redes independientes que utilizan protocolos comunes para comunicarse</strong>.<br><strong>ANCLA: INTERNET = RED DE REDES.</strong></th>
 </tr>
 </table></div>
-<h2 id="2-organismos-y-gobernanza-de-internet" class="tema-h2">2. Organismos y gobernanza de Internet</h2>
-<ul class="tema-lista">
-<li><strong>IETF (Internet Engineering Task Force)</strong>: organismo que desarrolla y estandariza los protocolos técnicos de Internet (HTTP, TCP/IP, DNS…), publicados como documentos RFC (Request for Comments).</li>
-<li><strong>ICANN (Internet Corporation for Assigned Names and Numbers)</strong>: organización responsable de coordinar a nivel global el sistema de nombres de dominio y la asignación de direcciones IP e identificadores únicos de Internet.</li>
-<li><strong>IANA (Internet Assigned Numbers Authority)</strong>: función operada bajo el paraguas de ICANN, encargada de gestionar en la práctica los registros centrales de direcciones IP, números de puerto y dominios de primer nivel.</li>
-<li><strong>Registros regionales de Internet (RIR)</strong>: organizaciones como RIPE NCC (Europa), ARIN (Norteamérica) o LACNIC (Latinoamérica), que reciben de IANA bloques de direcciones IP y los distribuyen a los operadores y organizaciones de su región geográfica.</li>
-</ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir</strong><br>Es habitual confundir estos organismos entre sí. Para el examen conviene retener la idea general: el <strong>IETF estandariza los protocolos</strong> (el «cómo»), mientras que <strong>ICANN/IANA y los RIR coordinan la asignación de identificadores</strong> —nombres de dominio y direcciones IP— para que sean únicos en toda la red (el «quién usa qué»). Ninguno de estos organismos «es dueño» de Internet ni controla su contenido.</th>
+<th><strong>📌 Formulación precisa sobre su gobierno</strong><br><strong>No existe una única organización propietaria o gestora de Internet en su conjunto.</strong><br>Pero esto <strong>no equivale</strong> a decir que <strong>«nadie controla Internet»</strong>: existen <strong>diferentes organismos de coordinación, estandarización y gestión de identificadores</strong>, cada uno con una <strong>función delimitada</strong> (apartado 2).</th>
 </tr>
 </table></div>
-<h2 id="3-el-sistema-de-nombres-de-dominio-dns" class="tema-h2">3. El sistema de nombres de dominio (DNS)</h2>
-<p>El <strong>DNS (Domain Name System)</strong> es el servicio que traduce nombres de dominio legibles por personas (por ejemplo, www.gipuzkoa.eus) en las direcciones IP (Tema 27) que realmente identifican a los equipos en la red, y que son las que se usan para el encaminamiento del tráfico.</p>
-<p>El DNS se organiza como una <strong>jerarquía de espacios de nombres</strong>, de derecha a izquierda: el dominio raíz (representado por un punto final implícito), los dominios de primer nivel o TLD (Top Level Domain, como .com, .eus o .es), los dominios de segundo nivel (como gipuzkoa dentro de gipuzkoa.eus) y, opcionalmente, subdominios adicionales. La resolución de un nombre de dominio consiste en consultar, en cascada, distintos servidores DNS —empezando por los servidores raíz y descendiendo por la jerarquía— hasta obtener la dirección IP correspondiente; en la práctica, esta consulta suele resolverla directamente un servidor DNS «caché» o «recursivo» (a menudo el del propio operador de Internet), que mantiene en memoria las resoluciones más recientes para agilizar el proceso.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Entre los tipos de registro DNS más habituales están el registro <strong>A</strong> (asocia un nombre a una dirección IPv4), <strong>AAAA</strong> (asocia un nombre a una dirección IPv6), <strong>CNAME</strong> (define un alias de un nombre hacia otro nombre de dominio) y <strong>MX</strong> (indica qué servidores gestionan el correo de un dominio, relevante para el Tema 17).</th>
+<th><strong>🧠 Para memorizar — las dos ideas que sostienen el concepto</strong><br><strong>1) REDES INDEPENDIENTES</strong>: cada red tiene su propietario y su gestión. Internet no las absorbe, las <strong>interconecta</strong>.<br><strong>2) PROTOCOLOS COMUNES</strong>: lo que hace posible esa interconexión es que <strong>todas hablan el mismo idioma</strong>.<br>De ahí que la <strong>estandarización de protocolos</strong> (IETF) sea la pieza que hace viable el conjunto.</th>
 </tr>
 </table></div>
-<h2 id="4-la-web-y-el-protocolo-http-evolución-hasta-http3" class="tema-h2">4. La Web y el protocolo HTTP: evolución hasta HTTP/3</h2>
-<p>La <strong>World Wide Web (WWW)</strong>, o simplemente «la Web», es el servicio de Internet basado en documentos de hipertexto —enlazados entre sí mediante hiperenlaces— que se transmiten mediante el protocolo <strong>HTTP (HyperText Transfer Protocol)</strong>. No debe confundirse la Web, que es uno de los muchos servicios que ofrece Internet, con Internet en su conjunto, un error terminológico muy extendido en el lenguaje coloquial.</p>
+
+<h2 id="2-gobernanza" class="tema-h2">2. Gobernanza: IETF, ICANN, IANA y RIR</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>Versión</strong></th>
-<th><strong>Novedad principal</strong></th>
-</tr>
-<tr>
-<td>HTTP/1.1</td>
-<td>Versión clásica; una conexión TCP por cada petición (o reutilizada de forma limitada)</td>
-</tr>
-<tr>
-<td>HTTP/2</td>
-<td>Multiplexación de varias peticiones sobre una misma conexión TCP, cabeceras comprimidas</td>
-</tr>
-<tr>
-<td>HTTP/3</td>
-<td>Sustituye TCP por QUIC (sobre UDP), reduciendo la latencia de establecimiento de conexión y evitando el bloqueo de cabecera de línea (head-of-line blocking) entre peticiones</td>
+<th><strong>📌 UNA DE LAS PRINCIPALES HERRAMIENTAS DE MEMORIZACIÓN DEL TEMA</strong></th>
 </tr>
 </table></div>
-<p><strong>HTTPS (HTTP Secure)</strong> es la variante cifrada de HTTP, en la que el tráfico se protege mediante TLS (Tema 29) antes de transmitirse; hoy es el estándar de facto para prácticamente cualquier sitio web, y los navegadores actuales señalan de forma explícita los sitios que no lo utilizan como «no seguros».</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>A mediados de 2026, la adopción de HTTP/3 se sitúa aproximadamente entre el 20 % y el 40 % del tráfico web según la fuente de medición, con una adopción especialmente alta en mercados con un uso intensivo de conexiones móviles, donde QUIC ofrece más ventajas frente a redes con pérdida de paquetes. HTTP/2 y HTTP/1.1 siguen conviviendo con HTTP/3 en la mayoría de sitios, que negocian automáticamente la versión más adecuada con cada cliente.</th>
-</tr>
-</table></div>
-<h2 id="5-otros-servicios-y-protocolos-de-internet" class="tema-h2">5. Otros servicios y protocolos de Internet</h2>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th><strong>Servicio</strong></th>
-<th><strong>Protocolo(s)</strong></th>
+<th><strong>Organismo</strong></th>
 <th><strong>Función</strong></th>
 </tr>
 <tr>
-<td>Web</td>
-<td>HTTP / HTTPS</td>
-<td>Acceso a páginas y aplicaciones web</td>
+<td><strong>IETF</strong></td>
+<td><strong>Protocolos y estándares</strong></td>
 </tr>
 <tr>
-<td>Correo electrónico</td>
-<td>SMTP, IMAP, POP3 (Tema 17)</td>
-<td>Envío y recepción de mensajes de correo</td>
+<td><strong>ICANN</strong></td>
+<td><strong>Coordinación de identificadores</strong></td>
 </tr>
 <tr>
-<td>Transferencia de ficheros</td>
-<td>FTP / SFTP</td>
-<td>Subida y descarga de archivos entre equipos</td>
+<td><strong>IANA</strong></td>
+<td><strong>Registros y funciones centrales</strong></td>
 </tr>
 <tr>
-<td>Acceso remoto seguro</td>
-<td>SSH</td>
-<td>Conexión remota cifrada a la línea de comandos de un equipo</td>
+<td><strong>RIR</strong></td>
+<td><strong>Distribución regional de direcciones IP</strong></td>
 </tr>
 <tr>
-<td>Resolución de nombres</td>
-<td>DNS</td>
-<td>Traducción de nombres de dominio a direcciones IP</td>
+<td><strong>RIPE NCC</strong></td>
+<td><strong>RIR de la región europea</strong></td>
 </tr>
 </table></div>
-<p>El <strong>FTP (File Transfer Protocol)</strong> es uno de los protocolos más antiguos de Internet, diseñado para transferir archivos entre un cliente y un servidor; transmite las credenciales y los datos sin cifrar, por lo que en un contexto de administración pública actual se recomienda su sustitución por <strong>SFTP (SSH File Transfer Protocol)</strong>, que aporta cifrado sobre una conexión SSH, o por <strong>FTPS</strong>, que añade cifrado TLS al FTP tradicional.</p>
-<p><strong>SSH (Secure Shell)</strong> permite establecer una sesión remota cifrada con la línea de comandos de otro equipo —típicamente un servidor Linux (Tema 13)— y sustituye a protocolos antiguos sin cifrar como Telnet, hoy en desuso por motivos de seguridad.</p>
-<h2 id="6-direccionamiento-en-internet-estado-actual-de-ipv6" class="tema-h2">6. Direccionamiento en Internet: estado actual de IPv6</h2>
-<p>El direccionamiento IPv4 e IPv6 y el proceso de encaminamiento se explicaron en detalle en el Tema 27; aquí se retoma únicamente para situar su <strong>estado actual de adopción</strong>, dado que forma parte de la fotografía global de Internet que pide este tema.</p>
-<p>A mediados de 2026, la capacidad de acceder a Internet mediante IPv6 se sitúa a nivel mundial en el entorno del 45-50 % del tráfico, con una adopción muy desigual entre países: algunos operadores y países líderes superan el 70 %, mientras que otros —España entre ellos— permanecen todavía en cifras de un solo dígito o próximas al 10 %. La adopción de IPv6 avanza de forma especialmente rápida en las redes de datos móviles, donde los operadores lo han desplegado de forma agresiva para paliar el agotamiento de las direcciones IPv4 disponibles, con frecuencia por delante de la banda ancha fija en el mismo país.</p>
+<h4 class="tema-h4">2.1 IETF</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🔍 Para ampliar — contexto útil, menor probabilidad de pregunta directa</strong><br>Fuentes: <a href="https://pulse.internetsociety.org/en/blog/2026/04/18-years-later-ipv6-reaches-majority/" target="_blank" rel="noopener">ISOC Pulse — 18 Years Later, IPv6 Reaches Majority (2026)</a>; <a href="https://www.google.com/intl/en/ipv6/statistics.html" target="_blank" rel="noopener">Google — Estadísticas IPv6</a>.</th>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>IETF</strong> (Internet Engineering Task Force) → <strong>comunidad y organización que desarrolla y estandariza los protocolos y especificaciones técnicas de Internet</strong>.<br>Publica sus documentos como <strong>RFC</strong>.<br><strong>ANCLA: IETF → PROTOCOLOS.</strong></th>
 </tr>
 </table></div>
-<h2 id="7-estado-actual-de-internet-tendencias" class="tema-h2">7. Estado actual de Internet: tendencias</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ TRAMPA DE EXAMEN — RFC no equivale a estándar obligatorio</strong><br><strong>RFC</strong> (Request for Comments) → <strong>documento técnico</strong>.<br>Es <strong>incorrecto</strong> afirmar que <strong>«RFC = estándar obligatorio»</strong>. Bajo la denominación RFC se publican documentos de <strong>naturaleza muy distinta</strong>: propuestas, especificaciones, informes, buenas prácticas y también estándares. <strong>Ser un RFC no implica por sí mismo ser un estándar</strong>, ni menos aún de obligado cumplimiento.<br>Formulación segura: <strong>«el IETF publica documentos RFC»</strong>.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">2.2 ICANN</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>ICANN</strong> (Internet Corporation for Assigned Names and Numbers) → <strong>organización que coordina globalmente el sistema de identificadores únicos de Internet</strong>, especialmente los <strong>nombres de dominio</strong> y las <strong>direcciones IP</strong>, <strong>dentro de su misión</strong>.<br><strong>ANCLA: ICANN → IDENTIFICADORES.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Cautela — dos afirmaciones incorrectas</strong><br><strong>«ICANN controla Internet»</strong> → <strong>FALSO</strong>. Su misión se circunscribe a la <strong>coordinación de identificadores únicos</strong>.<br><strong>«ICANN controla el contenido de Internet»</strong> → <strong>FALSO</strong>. No tiene competencia alguna sobre los contenidos.<br>Formulación segura: <strong>coordina el sistema de identificadores únicos, dentro de su misión</strong>.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">2.3 IANA</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>IANA</strong> (Internet Assigned Numbers Authority) → <strong>función que gestiona los registros centrales de parámetros y recursos únicos de Internet, dentro del marco de ICANN</strong>.</th>
+</tr>
+</table></div>
 <ul class="tema-lista">
-<li><strong>Consolidación del cifrado</strong>: HTTPS es ya el estándar de facto en la Web, y el tráfico cifrado (incluidas las VPN, Tema 29) sigue creciendo frente al tráfico sin cifrar.</li>
-<li><strong>Migración progresiva a IPv6</strong>, impulsada sobre todo por el agotamiento de las direcciones IPv4 y el crecimiento de los dispositivos móviles y conectados.</li>
-<li><strong>Adopción creciente de HTTP/3 y QUIC</strong>, con mayor tracción en escenarios móviles y de red de peor calidad.</li>
-<li><strong>Migración de servicios a la nube</strong> (se desarrolla en detalle en el Tema 32), que traslada gran parte de las aplicaciones y de la infraestructura de las organizaciones a proveedores externos accesibles a través de Internet.</li>
-<li><strong>Crecimiento del número y variedad de dispositivos conectados</strong> (IoT), que multiplica el volumen de tráfico y la superficie de exposición a amenazas de seguridad (Temas 22 y 25).</li>
-<li><strong>Mayor exigencia normativa y de ciberseguridad</strong>, con marcos como el Esquema Nacional de Seguridad (Tema 21) que condicionan cómo las administraciones públicas prestan sus servicios a través de Internet.</li>
+<li><strong>Espacios de direcciones IP</strong>.</li>
+<li><strong>Números de protocolo y de puerto</strong>.</li>
+<li><strong>Parámetros de protocolo</strong>.</li>
+<li><strong>Zona raíz del DNS</strong>.</li>
 </ul>
-<h2 id="8-resumen-para-estudiar" class="tema-h2">8. Resumen para estudiar</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — ICANN e IANA</strong><br><strong>ICANN → COORDINA</strong> el sistema de identificadores únicos: es la <strong>organización</strong>.<br><strong>IANA → GESTIONA LOS REGISTROS CENTRALES</strong> de parámetros y recursos únicos: es una <strong>función dentro del marco de ICANN</strong>.<br>Relación: <strong>IANA es la función; ICANN, el marco organizativo</strong>. No son dos entidades independientes ni sinónimos.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">2.4 RIR</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>RIR</strong> (Regional Internet Registry) → <strong>registros regionales que reciben bloques de direcciones IP y los distribuyen y asignan en sus respectivas regiones</strong>.<br><strong>ANCLA: RIR → REPARTO REGIONAL.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>RIR</strong></th>
+<th><strong>Región</strong></th>
+</tr>
+<tr>
+<td><strong>RIPE NCC</strong></td>
+<td><strong>Europa, Oriente Medio y partes de Asia Central</strong></td>
+</tr>
+<tr>
+<td><strong>ARIN</strong></td>
+<td><strong>Norteamérica</strong></td>
+</tr>
+<tr>
+<td><strong>LACNIC</strong></td>
+<td><strong>Latinoamérica y Caribe</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — la cadena completa</strong><br><strong>IANA</strong> gestiona los <strong>registros centrales</strong> → los <strong>RIR</strong> reciben <strong>bloques</strong> y los <strong>reparten en su región</strong> → los operadores y organizaciones los <strong>asignan</strong> finalmente.<br>Es una estructura <strong>jerárquica y descentralizada</strong>: nadie reparte direcciones desde un único punto para todo el planeta.<br>Y el dato de examen para nuestro ámbito: <strong>Europa → RIPE NCC</strong>.</th>
+</tr>
+</table></div>
+<figure class="tema-figura">
+<figcaption>Quién es quién en Internet</figcaption>
+<svg viewBox="0 0 700 229" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at31ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at31aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at31av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at31an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at31ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at31ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">IETF</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#003da5" stroke-width="2" marker-end="url(#at31ap)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">PROTOCOLOS y estándares (publica RFC)</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">ICANN</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#003da5" stroke-width="2" marker-end="url(#at31ap)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Coordina los IDENTIFICADORES únicos</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">IANA</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at31aa)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">REGISTROS centrales, en el marco de ICANN</text><rect x="8" y="139" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">RIR</text><line x1="264" y1="157.0" x2="356" y2="157.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at31aa)"/><rect x="362" y="139" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Reparto REGIONAL de direcciones IP</text><rect x="8" y="184" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="202.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">RIPE NCC</text><line x1="264" y1="202.0" x2="356" y2="202.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at31ag)"/><rect x="362" y="184" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="202.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">RIR de la región europea</text></svg>
+<p class="tema-figura__nota">Un RFC es un documento técnico: no equivale a estándar obligatorio.</p></figure>
+
+
+<h2 id="3-dns" class="tema-h2">3. El DNS</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición completa</strong><br><strong>DNS</strong> (Domain Name System) → <strong>sistema jerárquico y distribuido de nombres que permite obtener información asociada a los dominios, especialmente sus direcciones IP</strong>.<br><strong>ANCLA: DNS → NOMBRES.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Cautela — no lo reduzcas a «traducir URL a IP»</strong><br>Es una definición <strong>insuficiente</strong>. El DNS es un <strong>sistema jerárquico y distribuido</strong> que permite obtener <strong>información asociada a los dominios</strong>: la dirección IP es <strong>la más habitual</strong>, pero también resuelve <strong>servidores de correo, alias y otros datos</strong> (apartado 6).<br>Y tampoco traduce <strong>URL</strong>, sino <strong>nombres de dominio</strong>: la URL es una cadena más amplia que incluye esquema, ruta y otros elementos.</th>
+</tr>
+</table></div>
+
+<h2 id="4-jerarquia-dns" class="tema-h2">4. La jerarquía del DNS</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Esquema jerárquico</strong><br><strong>RAÍZ (root)</strong><br>↓<br><strong>TLD</strong> (dominio de primer nivel)<br>↓<br><strong>DOMINIO</strong> (segundo nivel)<br>↓<br><strong>SUBDOMINIO</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Ejemplo — www.gipuzkoa.eus</strong></th>
+</tr>
+<tr>
+<td><strong>.eus</strong> → <strong>TLD</strong> (dominio de primer nivel)</td>
+</tr>
+<tr>
+<td><strong>gipuzkoa</strong> → <strong>dominio de segundo nivel</strong></td>
+</tr>
+<tr>
+<td><strong>www</strong> → <strong>subdominio o host</strong>, según el contexto</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — se lee de derecha a izquierda</strong><br>La jerarquía del DNS avanza <strong>de derecha a izquierda</strong>: lo más <strong>general</strong> está a la <strong>derecha</strong> (el TLD) y lo más <strong>concreto</strong> a la <strong>izquierda</strong> (el subdominio o host).<br>Es lo contrario de como se lee una dirección postal en castellano, y por eso resulta contraintuitivo.</th>
+</tr>
+</table></div>
+<figure class="tema-figura">
+<figcaption>Jerarquía del DNS</figcaption>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at31bp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at31ba" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at31bv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at31bn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at31br" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at31bg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="684" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><rect x="8" y="4" width="54" height="36" rx="6" fill="#003da5"/><rect x="56" y="4" width="6" height="36" fill="#003da5"/><text x="35.0" y="22.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">1</text><text x="76" y="22.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">RAÍZ (root)</text><rect x="8" y="47" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="47" width="54" height="36" rx="6" fill="#1f5b9e"/><rect x="56" y="47" width="6" height="36" fill="#1f5b9e"/><text x="35.0" y="65.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">2</text><text x="76" y="65.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">TLD</text><text x="680" y="65.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">ej.: .eus</text><rect x="8" y="90" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="90" width="54" height="36" rx="6" fill="#1f5b9e"/><rect x="56" y="90" width="6" height="36" fill="#1f5b9e"/><text x="35.0" y="108.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">3</text><text x="76" y="108.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">DOMINIO</text><text x="680" y="108.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">ej.: gipuzkoa</text><rect x="8" y="133" width="684" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><rect x="8" y="133" width="54" height="36" rx="6" fill="#5a5652"/><rect x="56" y="133" width="6" height="36" fill="#5a5652"/><text x="35.0" y="151.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">4</text><text x="76" y="151.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">SUBDOMINIO / HOST</text><text x="680" y="151.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">ej.: www</text></svg>
+</figure>
+
+
+<h2 id="5-resolucion-dns" class="tema-h2">5. La resolución DNS</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — DOS NIVELES DISTINTOS</strong><br><strong>RESOLVER RECURSIVO o de CACHÉ</strong> → <strong>recibe la consulta del cliente y resuelve en su nombre</strong>.<br><strong>SERVIDORES DNS AUTORITATIVOS</strong> → <strong>contienen la información oficial de las zonas</strong>.</th>
+</tr>
+</table></div>
+<p>Cuando <strong>no existe información en caché</strong>, la resolución puede recorrer:</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>ROOT → TLD → AUTORITATIVO</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ TRAMPA DE EXAMEN — quién recorre la cadena</strong><br>Es <strong>incorrecto</strong> afirmar que <strong>el cliente consulta siempre directamente root → TLD → autoritativo</strong>.<br>Lo habitual es que el <strong>cliente pregunte a un resolver recursivo</strong> y sea <strong>este</strong> quien, <strong>si no tiene la información en caché</strong>, recorra la cadena <strong>en su nombre</strong>.<br>Formulación segura: <strong>el resolver recursivo resuelve en nombre del cliente; la cadena root → TLD → autoritativo se recorre cuando no hay información en caché</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th></th>
+<th><strong>Resolver recursivo / caché</strong></th>
+<th><strong>Servidor autoritativo</strong></th>
+</tr>
+<tr>
+<td><strong>Qué hace</strong></td>
+<td><strong>Resuelve en nombre del cliente</strong></td>
+<td><strong>Custodia la información oficial</strong> de la zona</td>
+</tr>
+<tr>
+<td><strong>Origen del dato</strong></td>
+<td>Su <strong>caché</strong> o el resultado de consultar a otros</td>
+<td>La <strong>propia zona</strong> que gestiona</td>
+</tr>
+<tr>
+<td><strong>Quién lo usa</strong></td>
+<td>El <strong>cliente</strong> (equipo de la persona usuaria)</td>
+<td>El <strong>resolver</strong>, durante el proceso</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br><strong>RECURSIVO → PREGUNTA POR TI. AUTORITATIVO → TIENE LA VERDAD.</strong><br>El <strong>caché</strong> del recursivo explica dos fenómenos de CAU: que la resolución sea <strong>casi instantánea</strong> la segunda vez, y que un <strong>cambio reciente</strong> en un registro tarde en verse reflejado.</th>
+</tr>
+</table></div>
+<figure class="tema-figura">
+<figcaption>Resolución DNS</figcaption>
+<svg viewBox="0 0 700 58" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at31cp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at31ca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at31cv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at31cn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at31cr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at31cg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="6" width="116.0" height="46" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="66.0" y="29.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">CLIENTE</text><line x1="128.0" y1="29.0" x2="146.0" y2="29.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at31ca)"/><rect x="150.0" y="6" width="116.0" height="46" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="208.0" y="22.4" text-anchor="middle" font-size="10.1" font-weight="600" fill="#23272e" dominant-baseline="middle">RESOLVER</text><text x="208.0" y="35.5" text-anchor="middle" font-size="10.1" font-weight="600" fill="#23272e" dominant-baseline="middle">recursivo / caché</text><line x1="270.0" y1="29.0" x2="288.0" y2="29.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at31ca)"/><rect x="292.0" y="6" width="116.0" height="46" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="350.0" y="29.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">ROOT</text><line x1="412.0" y1="29.0" x2="430.0" y2="29.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at31ca)"/><rect x="434.0" y="6" width="116.0" height="46" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="492.0" y="29.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">TLD</text><line x1="554.0" y1="29.0" x2="572.0" y2="29.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at31ca)"/><rect x="576.0" y="6" width="116.0" height="46" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="634.0" y="29.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">AUTORITATIVO</text></svg>
+<p class="tema-figura__nota">El cliente pregunta al resolver; este recorre la cadena solo si no tiene el dato en caché.</p></figure>
+
+
+<h2 id="6-registros-dns" class="tema-h2">6. Tipos de registro DNS</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Registro</strong></th>
+<th><strong>Para qué sirve</strong></th>
+</tr>
+<tr>
+<td><strong>A</strong></td>
+<td>Dirección <strong>IPv4</strong></td>
+</tr>
+<tr>
+<td><strong>AAAA</strong></td>
+<td>Dirección <strong>IPv6</strong></td>
+</tr>
+<tr>
+<td><strong>CNAME</strong></td>
+<td><strong>Alias</strong> de nombre</td>
+</tr>
+<tr>
+<td><strong>MX</strong></td>
+<td><strong>Servidores de correo</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — las cuatro asociaciones</strong><br><strong>A → IPv4 (una A) · AAAA → IPv6 (cuatro A).</strong> El truco es directo: IPv6 tiene <strong>cuatro veces</strong> los bits de IPv4 (128 frente a 32) y su registro tiene <strong>cuatro veces</strong> la letra.<br><strong>CNAME → ALIAS · MX → CORREO</strong> (la <strong>M</strong> de <strong>Mail</strong>).<br>Esta tabla demuestra por qué el DNS <strong>no es solo «nombre a IP»</strong>: <strong>MX</strong> no devuelve la IP de una web, sino <strong>a qué servidores va el correo</strong> de ese dominio.</th>
+</tr>
+</table></div>
+
+
+<h2 id="7-web-vs-internet" class="tema-h2">7. Web frente a Internet</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ UNA DE LAS GRANDES TRAMPAS DEL TEMA</strong><br><strong>INTERNET</strong> → <strong>la infraestructura, la red global</strong>.<br><strong>WEB o WWW</strong> → <strong>un SERVICIO sobre Internet, basado en HTTP y en recursos enlazados</strong>.<br><strong>NO SON SINÓNIMOS.</strong> La Web es <strong>uno</strong> de los servicios que funcionan sobre Internet, junto al correo, la transferencia de ficheros, el acceso remoto y muchos otros.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th></th>
+<th><strong>Internet</strong></th>
+<th><strong>Web</strong></th>
+</tr>
+<tr>
+<td><strong>Qué es</strong></td>
+<td><strong>Infraestructura</strong>: red mundial de redes</td>
+<td><strong>Servicio</strong> que funciona sobre ella</td>
+</tr>
+<tr>
+<td><strong>Se apoya en</strong></td>
+<td>Protocolos comunes (familia TCP/IP)</td>
+<td><strong>HTTP</strong> y recursos enlazados</td>
+</tr>
+<tr>
+<td><strong>Aparición</strong></td>
+<td>Anterior</td>
+<td>Posterior: nace <strong>sobre</strong> Internet</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 La prueba que lo demuestra</strong><br>Una <strong>página web puede funcionar perfectamente</strong> aunque otro servicio de Internet —el correo, por ejemplo— esté caído. Y al revés.<br>Si Web e Internet fueran lo mismo, eso sería imposible: <strong>son servicios independientes sobre la misma infraestructura</strong>.</th>
+</tr>
+</table></div>
+<figure class="tema-figura">
+<figcaption>Internet vs. Web</figcaption>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at31ep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at31ea" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at31ev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at31en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at31er" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at31eg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">INTERNET</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">WEB</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">INFRAESTRUCTURA</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Red mundial de redes</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Protocolos comunes</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">SERVICIO sobre ella</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="103.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">HTTP + recursos</text><text x="524.0" y="118.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">enlazados</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Uno de tantos servicios</text></svg>
+</figure>
+
+
+<h2 id="8-http" class="tema-h2">8. HTTP y sus versiones</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>HTTP</strong> (HyperText Transfer Protocol) → <strong>protocolo de aplicación utilizado por la Web para transferir recursos y mensajes entre cliente y servidor</strong>.<br><strong>ANCLA: HTTP → WEB.</strong></th>
+</tr>
+</table></div>
+<h4 class="tema-h4">8.1 HTTP/1.1</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Formulación correcta</strong><br><strong>HTTP/1.1</strong> → utiliza <strong>TCP</strong> y <strong>permite conexiones persistentes para múltiples peticiones y respuestas</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ TRAMPA DE EXAMEN — «una conexión TCP por petición»</strong><br>Es <strong>incorrecto</strong> afirmar que HTTP/1.1 <strong>abre una conexión TCP nueva para cada petición</strong>.<br>Precisamente una de sus características es la <strong>conexión persistente</strong>: <strong>una misma conexión TCP sirve para múltiples peticiones y respuestas</strong>.<br>Es una confusión heredada del comportamiento de versiones anteriores.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">8.2 HTTP/2</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>HTTP/2</strong> → <strong>multiplexación de múltiples streams sobre una conexión TCP</strong> y <strong>compresión de cabeceras</strong>.<br><strong>ANCLA: HTTP/2 → MULTIPLEXACIÓN + TCP.</strong></th>
+</tr>
+</table></div>
+<h4 class="tema-h4">8.3 HTTP/3</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>HTTP/3</strong> → <strong>semántica HTTP transportada sobre QUIC</strong>.<br><strong>QUIC</strong> → funciona <strong>sobre UDP</strong>.<br><strong>ANCLA: HTTP/3 → QUIC + UDP.</strong></th>
+</tr>
+</table></div>
 <ul class="tema-lista">
-<li><strong>Internet</strong>: red de redes interconectadas mediante TCP/IP (Tema 27); no la controla ninguna organización única.</li>
-<li><strong>Gobernanza</strong>: IETF estandariza protocolos (RFC); ICANN/IANA y los RIR (RIPE NCC, ARIN…) coordinan la asignación de nombres de dominio y direcciones IP.</li>
-<li><strong>DNS</strong>: jerarquía de nombres (raíz → TLD → dominio → subdominio); registros A/AAAA/CNAME/MX; resolución en cascada, habitualmente cacheada.</li>
-<li><strong>HTTP</strong>: de HTTP/1.1 a HTTP/2 (multiplexación) y HTTP/3 (QUIC sobre UDP); HTTPS como estándar de cifrado de facto.</li>
-<li><strong>Otros servicios</strong>: correo (SMTP/IMAP/POP3, Tema 17), FTP/SFTP para ficheros, SSH para acceso remoto seguro.</li>
-<li><strong>Estado actual</strong>: IPv6 en torno al 45-50 % del tráfico mundial (España, en torno al 10 %); HTTP/3 entre el 20 % y el 40 % según la medición; migración a la nube y crecimiento del IoT como tendencias de fondo.</li>
+<li><strong>Multiplexación por streams</strong>.</li>
+<li><strong>Establecimiento de conexión de baja latencia</strong>.</li>
+<li><strong>Evita que la pérdida de paquetes de un stream bloquee los demás streams de la misma conexión</strong>.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ TRAMPA DE EXAMEN — el head-of-line blocking</strong><br>Es <strong>incorrecto</strong> afirmar sin matices que <strong>«HTTP/3 elimina todo el head-of-line blocking»</strong>.<br>Lo que evita, <strong>respecto de HTTP/2 sobre TCP</strong>, es que <strong>la pérdida de paquetes de un stream bloquee a los demás streams de la misma conexión</strong>.<br>Explicación: en <strong>HTTP/2</strong> los streams se multiplexan sobre <strong>una única conexión TCP</strong>; si se pierde un paquete, <strong>TCP retiene la entrega</strong> y <strong>todos</strong> los streams se ven afectados. En <strong>HTTP/3 sobre QUIC</strong>, los streams se gestionan de forma <strong>independiente</strong>, de modo que la pérdida afecta <strong>solo al stream implicado</strong>.<br>Referencia conceptual: <strong>RFC 9114</strong>.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">8.4 La pregunta estrella: versión y transporte</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Versión</strong></th>
+<th><strong>Transporte</strong></th>
+<th><strong>Rasgo característico</strong></th>
+</tr>
+<tr>
+<td><strong>HTTP/1.1</strong></td>
+<td><strong>TCP</strong></td>
+<td><strong>Conexiones persistentes</strong></td>
+</tr>
+<tr>
+<td><strong>HTTP/2</strong></td>
+<td><strong>TCP</strong></td>
+<td><strong>Multiplexación + compresión de cabeceras</strong></td>
+</tr>
+<tr>
+<td><strong>HTTP/3</strong></td>
+<td><strong>QUIC sobre UDP</strong></td>
+<td><strong>Streams independientes + baja latencia</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br><strong>1.1 → TCP · 2 → TCP · 3 → QUIC/UDP.</strong><br>El <strong>salto</strong> está entre la <strong>2 y la 3</strong>: es donde <strong>cambia el transporte</strong>. Si una opción de test asocia <strong>HTTP/3 con TCP</strong>, es <strong>incorrecta</strong>.</th>
+</tr>
+</table></div>
+<figure class="tema-figura">
+<figcaption>HTTP: versión y transporte</figcaption>
+<svg viewBox="0 0 700 139" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at31fp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at31fa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at31fv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at31fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at31fr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at31fg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">HTTP/1.1</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at31fa)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">TCP — conexiones persistentes</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">HTTP/2</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at31fa)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">TCP — multiplexación + compresión</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">HTTP/3</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#003da5" stroke-width="2" marker-end="url(#at31fp)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">QUIC sobre UDP — streams independientes</text></svg>
+</figure>
+
+
+<h2 id="9-https" class="tema-h2">9. HTTPS</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>HTTPS</strong> → <strong>HTTP protegido mediante TLS</strong>.<br><strong>ANCLA: HTTPS = HTTP + TLS.</strong></th>
+</tr>
+</table></div>
+<p>El funcionamiento de <strong>TLS</strong> —propiedades, handshake y certificados— corresponde al <strong>Tema 29</strong>; el comportamiento del navegador ante HTTPS, al <strong>Tema 20</strong>.</p>
+
+<h2 id="10-otros-servicios" class="tema-h2">10. Otros servicios y sus protocolos</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Servicio</strong></th>
+<th><strong>Protocolo</strong></th>
+</tr>
+<tr>
+<td><strong>Web</strong></td>
+<td><strong>HTTP / HTTPS</strong></td>
+</tr>
+<tr>
+<td><strong>Correo</strong></td>
+<td><strong>SMTP / IMAP / POP3</strong></td>
+</tr>
+<tr>
+<td><strong>Transferencia de ficheros</strong></td>
+<td><strong>FTP / SFTP / FTPS</strong></td>
+</tr>
+<tr>
+<td><strong>Acceso remoto</strong></td>
+<td><strong>SSH</strong></td>
+</tr>
+<tr>
+<td><strong>Resolución de nombres</strong></td>
+<td><strong>DNS</strong></td>
+</tr>
+</table></div>
+<p>La <strong>arquitectura del correo electrónico</strong> se estudia en el <strong>Tema 17</strong>.</p>
+
+<h2 id="11-ftp-sftp-ftps" class="tema-h2">11. FTP, SFTP y FTPS</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Protocolo</strong></th>
+<th><strong>Qué es</strong></th>
+</tr>
+<tr>
+<td><strong>FTP</strong></td>
+<td>Transferencia de archivos <strong>sin protección criptográfica por defecto</strong></td>
+</tr>
+<tr>
+<td><strong>SFTP</strong></td>
+<td>Transferencia de archivos <strong>mediante SSH</strong></td>
+</tr>
+<tr>
+<td><strong>FTPS</strong></td>
+<td><strong>FTP protegido mediante TLS</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ GRAN TRAMPA — SFTP ≠ FTPS</strong><br>La similitud de las siglas oculta una diferencia de fondo:<br><strong>SFTP → se apoya en SSH.</strong><br><strong>FTPS → es FTP protegido con TLS.</strong><br>No son «dos formas de decir lo mismo»: <strong>parten de tecnologías distintas</strong>. <strong>SFTP no es «FTP seguro»</strong> en el sentido de un FTP al que se le añade cifrado, sino un mecanismo de transferencia <strong>sobre SSH</strong>.<br><strong>Truco: la S de SFTP está al PRINCIPIO, como en SSH. La S de FTPS está al FINAL, como en HTTPS (TLS).</strong></th>
+</tr>
+</table></div>
+
+<h2 id="12-ssh-telnet" class="tema-h2">12. SSH frente a Telnet</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th></th>
+<th><strong>SSH</strong></th>
+<th><strong>Telnet</strong></th>
+</tr>
+<tr>
+<td><strong>Función</strong></td>
+<td><strong>Acceso remoto seguro y cifrado</strong></td>
+<td>Acceso remoto</td>
+</tr>
+<tr>
+<td><strong>Protección</strong></td>
+<td><strong>Cifrado</strong></td>
+<td><strong>Sin cifrado</strong></td>
+</tr>
+<tr>
+<td><strong>Uso recomendado</strong></td>
+<td><strong>Sí</strong></td>
+<td><strong>No</strong>, salvo escenarios muy concretos</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br><strong>SSH → SEGURO · TELNET → SIN CIFRAR.</strong><br>Con Telnet, <strong>las credenciales viajan legibles</strong>: es la razón por la que debe sustituirse. El uso de SSH en administración de sistemas corresponde al <strong>Tema 13</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="13-ipv6" class="tema-h2">13. IPv6 y dual stack</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Núcleo conceptual — lo único memorizable de este apartado</strong><br><strong>IPv4 → 32 BITS · IPv6 → 128 BITS.</strong><br><strong>DUAL STACK</strong> → <strong>coexistencia de IPv4 e IPv6</strong> en el mismo entorno o equipo.<br><strong>Idea de fondo</strong>: se produce una <strong>migración progresiva</strong>, motivada por el <strong>agotamiento de IPv4</strong> y por el <strong>crecimiento del número de dispositivos</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ TRAMPA DE EXAMEN — el dato de adopción no es una definición técnica</strong><br>Es <strong>incorrecto</strong> escribir como afirmación estructural que <strong>«IPv6 representa el 45-50 % del tráfico mundial»</strong>.<br><strong>El porcentaje de adopción depende de la fuente y de la metodología.</strong> No es lo mismo medir <strong>«porcentaje de usuarios que acceden a un servicio concreto mediante IPv6»</strong> que <strong>«porcentaje del tráfico mundial de Internet»</strong>: son <strong>métricas distintas</strong> y no deben mezclarse.<br>Cualquier cifra debe ir en el apartado de <strong>actualidad</strong>, siempre con <strong>fuente, fecha y métrica</strong>.</th>
+</tr>
+</table></div>
+<p>El direccionamiento IPv4 e IPv6 en detalle —notación, rangos privados, NAT, CIDR, ARP y NDP— corresponde al <strong>Tema 27</strong>.</p>
+
+<h2 id="14-flujo-url" class="tema-h2">14. Flujo completo: de la URL a la página</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 CONCEPTO INTEGRADOR DEL TEMA</strong><br>Cuando una persona introduce <strong>https://www.ejemplo.eus</strong>, de forma <strong>simplificada</strong> ocurre lo siguiente:</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Paso</strong></th>
+<th><strong>Qué ocurre</strong></th>
+<th><strong>Elemento implicado</strong></th>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td>El <strong>DNS resuelve el nombre</strong></td>
+<td><strong>DNS</strong></td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>Se <strong>determina la dirección IP</strong></td>
+<td>Registro <strong>A</strong> o <strong>AAAA</strong></td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>Se <strong>establece el transporte y la conectividad</strong></td>
+<td><strong>TCP</strong> o <strong>QUIC/UDP</strong> según la versión</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td>Se <strong>negocia y protege TLS</strong>, al tratarse de HTTPS</td>
+<td><strong>TLS</strong></td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td>Se realiza la <strong>petición HTTP</strong></td>
+<td><strong>HTTP</strong></td>
+</tr>
+<tr>
+<td><strong>6</strong></td>
+<td>El <strong>servidor devuelve los recursos</strong></td>
+<td><strong>Servidor web</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — por qué este flujo lo explica todo</strong><br><strong>DNS → IP → TRANSPORTE → TLS → HTTP → RECURSOS.</strong><br>Este esquema es la <strong>herramienta de diagnóstico</strong> más útil del tema: cada paso corresponde a <strong>un punto donde puede fallar</strong>.<br>· Falla el <strong>1</strong> → funciona por IP pero no por nombre: <strong>problema de DNS</strong>.<br>· Falla el <strong>3</strong> → ni siquiera hay conectividad: <strong>problema de red</strong>.<br>· Falla el <strong>4</strong> → aviso de certificado: <strong>problema de TLS</strong>.<br>· Falla el <strong>5</strong> o el <strong>6</strong> → conecta pero la página no responde: <strong>problema de aplicación</strong>.</th>
+</tr>
+</table></div>
+<figure class="tema-figura">
+<figcaption>De la URL a la página</figcaption>
+<svg viewBox="0 0 700 58" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at31gp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at31ga" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at31gv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at31gn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at31gr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at31gg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="6" width="92.33333333333333" height="46" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="54.166666666666664" y="29.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">DNS</text><line x1="104.33333333333333" y1="29.0" x2="122.33333333333333" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at31gp)"/><rect x="126.33333333333333" y="6" width="92.33333333333333" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="172.5" y="29.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">IP</text><line x1="222.66666666666666" y1="29.0" x2="240.66666666666666" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at31gp)"/><rect x="244.66666666666666" y="6" width="92.33333333333333" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="290.8333333333333" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">TRANSPORTE</text><text x="290.8333333333333" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">TCP o QUIC</text><line x1="341.0" y1="29.0" x2="359.0" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at31gp)"/><rect x="363.0" y="6" width="92.33333333333333" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="409.1666666666667" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">TLS</text><text x="409.1666666666667" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">si HTTPS</text><line x1="459.3333333333333" y1="29.0" x2="477.3333333333333" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at31gp)"/><rect x="481.3333333333333" y="6" width="92.33333333333333" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.5" y="29.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">HTTP</text><line x1="577.6666666666666" y1="29.0" x2="595.6666666666666" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at31gp)"/><rect x="599.6666666666666" y="6" width="92.33333333333333" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="645.8333333333333" y="29.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">RECURSOS</text></svg>
+</figure>
+
+
+<h2 id="15-tendencias" class="tema-h2">15. Estado actual y tendencias</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Tendencia</strong></th>
+<th><strong>En qué consiste</strong></th>
+</tr>
+<tr>
+<td><strong>Consolidación de HTTPS</strong></td>
+<td>El tráfico web protegido mediante TLS se ha convertido en la norma</td>
+</tr>
+<tr>
+<td><strong>Migración progresiva a IPv6</strong></td>
+<td>Avance sostenido, conviviendo con IPv4 mediante <strong>dual stack</strong></td>
+</tr>
+<tr>
+<td><strong>Crecimiento de HTTP/3 y QUIC</strong></td>
+<td><strong>HTTP/3 sigue extendiéndose y convive con HTTP/1.1 y HTTP/2</strong></td>
+</tr>
+<tr>
+<td><strong>Migración a la nube</strong></td>
+<td>Desplazamiento de servicios e infraestructura a modelos de nube (Tema 32)</td>
+</tr>
+<tr>
+<td><strong>Crecimiento del IoT</strong></td>
+<td>Aumento del número de dispositivos conectados</td>
+</tr>
+<tr>
+<td><strong>Mayores exigencias de ciberseguridad</strong></td>
+<td>Refuerzo normativo y técnico de la protección de servicios</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Cautela — las tendencias no son estadísticas</strong><br>Debe distinguirse entre la <strong>tendencia</strong> —que es estable y preguntable— y el <strong>porcentaje concreto</strong> —que es un dato temporal—.<br><strong>Núcleo estable</strong>: «HTTP/3 sigue extendiéndose y convive con HTTP/1.1 y HTTP/2»; «IPv6 avanza mediante una migración progresiva».<br><strong>Fuera del núcleo</strong>: cualquier cifra de adopción, que va al apartado <strong>24</strong> con <strong>fuente, fecha y métrica</strong>.</th>
+</tr>
+</table></div>
+
+<h2 id="16-anclas-de-memoria" class="tema-h2">16. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>INTERNET → RED DE REDES</strong>: interconexión mundial de redes independientes con protocolos comunes.</li>
+<li><strong>IETF → PROTOCOLOS</strong> (publica <strong>RFC</strong>, que <strong>no son sin más estándares obligatorios</strong>).</li>
+<li><strong>ICANN → IDENTIFICADORES · IANA → REGISTROS CENTRALES · RIR → REPARTO REGIONAL · RIPE NCC → EUROPA.</strong></li>
+<li><strong>DNS → NOMBRES</strong>: sistema jerárquico y distribuido, no solo «nombre a IP».</li>
+<li><strong>RAÍZ → TLD → DOMINIO → SUBDOMINIO</strong>, de derecha a izquierda.</li>
+<li><strong>RECURSIVO → PREGUNTA POR TI · AUTORITATIVO → TIENE LA INFORMACIÓN OFICIAL.</strong></li>
+<li><strong>A → IPv4 · AAAA → IPv6 · CNAME → ALIAS · MX → CORREO.</strong></li>
+<li><strong>INTERNET → INFRAESTRUCTURA · WEB → SERVICIO.</strong></li>
+<li><strong>HTTP → WEB · HTTPS = HTTP + TLS.</strong></li>
+<li><strong>HTTP/1.1 → TCP (persistentes) · HTTP/2 → TCP + MULTIPLEXACIÓN · HTTP/3 → QUIC + UDP.</strong></li>
+<li><strong>FTP → NO SEGURO · SFTP → SSH · FTPS → TLS.</strong></li>
+<li><strong>SSH → ACCESO REMOTO SEGURO · TELNET → SIN CIFRAR.</strong></li>
+<li><strong>IPv4 → 32 BITS · IPv6 → 128 BITS · DUAL STACK → COEXISTENCIA.</strong></li>
+<li><strong>FLUJO: DNS → IP → TRANSPORTE → TLS → HTTP → RECURSOS.</strong></li>
 </ul>
 
-<h2 id="9-conceptos-clave" class="tema-h2">9. Conceptos clave</h2>
+<h2 id="17-no-confundir" class="tema-h2">17. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto A</strong></th>
+<th><strong>Concepto B</strong></th>
+<th><strong>Diferencia clave</strong></th>
+</tr>
+<tr>
+<td><strong>Internet</strong>: infraestructura global</td>
+<td><strong>Web</strong>: servicio basado en HTTP</td>
+<td>La Web es uno de los servicios sobre Internet</td>
+</tr>
+<tr>
+<td><strong>IETF</strong>: protocolos y estándares</td>
+<td><strong>ICANN</strong>: coordinación de identificadores</td>
+<td>Especificaciones técnicas frente a nombres y direcciones</td>
+</tr>
+<tr>
+<td><strong>ICANN</strong>: organización coordinadora</td>
+<td><strong>IANA</strong>: función de registros centrales</td>
+<td>IANA opera dentro del marco de ICANN</td>
+</tr>
+<tr>
+<td><strong>IANA</strong>: registros centrales</td>
+<td><strong>RIR</strong>: distribución regional</td>
+<td>Central frente a regional</td>
+</tr>
+<tr>
+<td><strong>RFC</strong>: documento técnico</td>
+<td><strong>Estándar obligatorio</strong></td>
+<td>Ser RFC no implica ser estándar ni obligatorio</td>
+</tr>
+<tr>
+<td><strong>DNS</strong>: resolución de nombres</td>
+<td><strong>HTTP</strong>: transferencia de recursos web</td>
+<td>Encontrar el servidor frente a pedirle el contenido</td>
+</tr>
+<tr>
+<td><strong>Resolver recursivo</strong>: resuelve por el cliente</td>
+<td><strong>Autoritativo</strong>: custodia la zona</td>
+<td>Quien pregunta frente a quien tiene el dato oficial</td>
+</tr>
+<tr>
+<td><strong>Dominio</strong>: nombre jerárquico</td>
+<td><strong>URL</strong>: identificador completo del recurso</td>
+<td>La URL incluye esquema, dominio, ruta y otros elementos</td>
+</tr>
+<tr>
+<td><strong>A</strong>: IPv4</td>
+<td><strong>AAAA</strong>: IPv6</td>
+<td>Una A frente a cuatro</td>
+</tr>
+<tr>
+<td><strong>CNAME</strong>: alias de nombre</td>
+<td><strong>MX</strong>: servidores de correo</td>
+<td>Renombrar frente a enrutar el correo</td>
+</tr>
+<tr>
+<td><strong>HTTP</strong>: sin protección</td>
+<td><strong>HTTPS</strong>: HTTP protegido mediante TLS</td>
+<td>La S es TLS</td>
+</tr>
+<tr>
+<td><strong>HTTP/2</strong>: multiplexación sobre TCP</td>
+<td><strong>HTTP/3</strong>: semántica HTTP sobre QUIC</td>
+<td>Cambia el transporte</td>
+</tr>
+<tr>
+<td><strong>HTTP/3</strong>: QUIC sobre UDP</td>
+<td><strong>TCP</strong></td>
+<td>HTTP/3 no se transporta sobre TCP</td>
+</tr>
+<tr>
+<td><strong>QUIC</strong>: protocolo de transporte</td>
+<td><strong>UDP</strong>: sobre el que se apoya</td>
+<td>QUIC funciona sobre UDP</td>
+</tr>
+<tr>
+<td><strong>FTP</strong>: sin protección por defecto</td>
+<td><strong>SFTP</strong>: mediante SSH</td>
+<td>Tecnologías distintas</td>
+</tr>
+<tr>
+<td><strong>SFTP</strong>: sobre SSH</td>
+<td><strong>FTPS</strong>: FTP con TLS</td>
+<td>La confusión más habitual del apartado</td>
+</tr>
+<tr>
+<td><strong>SSH</strong>: acceso remoto cifrado</td>
+<td><strong>Telnet</strong>: sin cifrado</td>
+<td>Las credenciales de Telnet viajan legibles</td>
+</tr>
+<tr>
+<td><strong>IPv4</strong>: 32 bits</td>
+<td><strong>IPv6</strong>: 128 bits</td>
+<td>Espacio de direccionamiento</td>
+</tr>
+<tr>
+<td><strong>Estado actual</strong>: dato con fuente y fecha</td>
+<td><strong>Concepto permanente</strong></td>
+<td>Una estadística no es una definición técnica</td>
+</tr>
+</table></div>
+
+<h2 id="18-trampas-de-examen" class="tema-h2">18. Posibles trampas de examen</h2>
 <ul class="tema-lista">
-<li><strong>Internet = red de redes</strong> sobre TCP/IP; nadie la «posee».</li>
-<li><strong>IETF (protocolos, RFC) · ICANN/IANA (identificadores) · RIR (RIPE NCC, ARIN, LACNIC)</strong>.</li>
-<li><strong>DNS</strong>: jerarquía raíz → TLD → dominio → subdominio; servidor recursivo/caché; registros <strong>A, AAAA, CNAME, MX</strong>.</li>
-<li><strong>Web ≠ Internet</strong>; HTTP/1.1 → HTTP/2 (multiplexación) → <strong>HTTP/3 (QUIC sobre UDP)</strong>; HTTPS.</li>
-<li><strong>FTP vs. SFTP/FTPS</strong>; <strong>SSH</strong> (sustituye a Telnet).</li>
-<li><strong>Estado actual</strong>: IPv6 ~45-50 % mundial (~10 % España); dual stack; HTTP/3 en crecimiento; nube e IoT.</li>
+<li><strong>«Internet y la Web son lo mismo»</strong> — falso: <strong>infraestructura</strong> frente a <strong>servicio basado en HTTP</strong>.</li>
+<li><strong>«Nadie controla Internet»</strong> — impreciso: <strong>no hay una única organización propietaria o gestora del conjunto</strong>, pero existen <strong>organismos de coordinación, estandarización y gestión de identificadores</strong>.</li>
+<li><strong>«ICANN controla Internet» o «controla los contenidos»</strong> — falso: <strong>coordina el sistema de identificadores únicos</strong>, dentro de su misión.</li>
+<li><strong>«IETF e ICANN son lo mismo»</strong> — falso: <strong>protocolos</strong> frente a <strong>identificadores</strong>.</li>
+<li><strong>«ICANN e IANA son entidades independientes»</strong> — impreciso: <strong>IANA es una función dentro del marco de ICANN</strong>.</li>
+<li><strong>«Los RIR gestionan los registros centrales»</strong> — falso: eso es <strong>IANA</strong>; los <strong>RIR distribuyen y asignan en sus regiones</strong>.</li>
+<li><strong>«Todo RFC es un estándar obligatorio»</strong> — falso: es un <strong>documento técnico</strong>, y bajo esa denominación se publican textos de naturaleza muy distinta.</li>
+<li><strong>«El DNS solo traduce URL a IP»</strong> — incompleto: es un <strong>sistema jerárquico y distribuido</strong> que devuelve <strong>información asociada a los dominios</strong>, y resuelve <strong>nombres de dominio</strong>, no URL.</li>
+<li><strong>«El cliente consulta siempre root → TLD → autoritativo»</strong> — falso: normalmente pregunta a un <strong>resolver recursivo</strong>, que resuelve <strong>en su nombre</strong> si no tiene el dato en caché.</li>
+<li><strong>«El servidor autoritativo resuelve en nombre del cliente»</strong> — falso: eso lo hace el <strong>recursivo</strong>; el autoritativo <strong>custodia la información oficial</strong> de la zona.</li>
+<li><strong>«AAAA es el registro de IPv4»</strong> — falso: <strong>A → IPv4 · AAAA → IPv6</strong>.</li>
+<li><strong>«MX devuelve la dirección del servidor web»</strong> — falso: indica los <strong>servidores de correo</strong> del dominio.</li>
+<li><strong>«HTTP/1.1 abre una conexión TCP nueva para cada petición»</strong> — falso: <strong>permite conexiones persistentes</strong> para múltiples peticiones y respuestas.</li>
+<li><strong>«HTTP/2 utiliza QUIC»</strong> — falso: <strong>HTTP/2 usa TCP</strong>; QUIC corresponde a <strong>HTTP/3</strong>.</li>
+<li><strong>«HTTP/3 se transporta sobre TCP»</strong> — falso: sobre <strong>QUIC, que funciona sobre UDP</strong>.</li>
+<li><strong>«HTTP/3 elimina todo el head-of-line blocking»</strong> — impreciso: <strong>evita que la pérdida de paquetes de un stream bloquee los demás streams de la misma conexión</strong>, a diferencia de HTTP/2 sobre TCP.</li>
+<li><strong>«HTTPS es un protocolo distinto de HTTP»</strong> — impreciso: es <strong>HTTP protegido mediante TLS</strong>.</li>
+<li><strong>«SFTP y FTPS son lo mismo»</strong> — falso: <strong>SFTP → SSH · FTPS → FTP con TLS</strong>.</li>
+<li><strong>«FTP cifra la transferencia»</strong> — falso: <strong>no ofrece protección criptográfica por defecto</strong>.</li>
+<li><strong>«Telnet y SSH son equivalentes»</strong> — falso: <strong>Telnet no cifra</strong>.</li>
+<li><strong>«IPv6 representa el 45-50 % del tráfico mundial»</strong> como afirmación estructural — <strong>incorrecto</strong>: el porcentaje <strong>depende de la fuente y la metodología</strong>, y no debe confundirse <strong>porcentaje de usuarios de un servicio</strong> con <strong>porcentaje de tráfico mundial</strong>.</li>
+<li><strong>«HTTP/3 supone el 20-40 % del tráfico»</strong> como dato permanente — <strong>incorrecto</strong>: las cifras varían según fuente, muestra, recursos, CDN, región y metodología.</li>
+<li><strong>Colar contenido ajeno</strong>: correo (T17), navegadores (T20), TCP/IP y routing (T27), TLS y VPN (T29) y nube (T32) no se desarrollan aquí.</li>
 </ul>
 
-<h2 id="10-posibles-puntos-de-examen" class="tema-h2">10. Posibles puntos de examen</h2>
+<h2 id="19-preguntas-tipo-test" class="tema-h2">19. Posibles preguntas tipo test</h2>
 <ul class="tema-lista">
-<li>Emparejar cada <strong>organismo con su función</strong> (IETF-protocolos, ICANN/IANA-identificadores, RIR-reparto regional) — pregunta clásica.</li>
-<li>Qué es un <strong>RFC</strong>.</li>
-<li>El orden de la <strong>jerarquía DNS</strong> y qué es un TLD.</li>
-<li>Emparejar <strong>registros DNS</strong> con su función (A-IPv4, AAAA-IPv6, CNAME-alias, MX-correo).</li>
-<li>La distinción <strong>Web ≠ Internet</strong>.</li>
-<li>Qué transporte usa <strong>HTTP/3</strong> (QUIC sobre UDP, no TCP) — el dato moderno más preguntable.</li>
-<li>Por qué <strong>FTP</strong> se considera inseguro y sus sustitutos (SFTP/FTPS).</li>
-<li>Qué protocolo sustituyó a <strong>Telnet</strong> (SSH) y por qué.</li>
-<li>El papel del <strong>servidor DNS recursivo/caché</strong> en la resolución.</li>
-<li>Estado aproximado de adopción de <strong>IPv6</strong> (mayoría mundial reciente, España rezagada; dual stack).</li>
+<li><strong>Definición</strong> de Internet. ¿Existe una organización propietaria del conjunto?</li>
+<li><strong>Organismo → función</strong>: IETF · ICANN · IANA · RIR.</li>
+<li>¿Qué organismo <strong>estandariza los protocolos</strong> de Internet?</li>
+<li>¿Qué son los <strong>RFC</strong>? ¿Son todos estándares obligatorios?</li>
+<li>¿Cuál es la misión de <strong>ICANN</strong>? ¿Controla los contenidos?</li>
+<li>¿Qué gestiona la función <strong>IANA</strong>?</li>
+<li>¿Qué hacen los <strong>RIR</strong>? ¿Cuál corresponde a la región europea?</li>
+<li><strong>Definición</strong> de DNS. ¿Se limita a traducir nombres a IP?</li>
+<li>Ordenar la <strong>jerarquía DNS</strong>: raíz, TLD, dominio y subdominio.</li>
+<li>En <strong>www.gipuzkoa.eus</strong>, ¿qué es <strong>.eus</strong>? ¿Y <strong>gipuzkoa</strong>?</li>
+<li>Diferencia entre <strong>resolver recursivo</strong> y <strong>servidor autoritativo</strong>.</li>
+<li>¿Consulta el cliente directamente a los servidores raíz?</li>
+<li>¿Qué ruta puede recorrerse cuando <strong>no hay información en caché</strong>?</li>
+<li><strong>Registro → función</strong>: A · AAAA · CNAME · MX.</li>
+<li>¿Qué registro se utiliza para una dirección <strong>IPv6</strong>?</li>
+<li>¿Qué registro indica los <strong>servidores de correo</strong> de un dominio?</li>
+<li>Diferencia entre <strong>Internet</strong> y <strong>Web</strong>.</li>
+<li><strong>Definición</strong> de HTTP.</li>
+<li>¿Abre <strong>HTTP/1.1</strong> una conexión TCP por cada petición?</li>
+<li>¿Qué caracteriza a <strong>HTTP/2</strong>?</li>
+<li>¿Sobre qué se transporta <strong>HTTP/3</strong>? ¿Y sobre qué funciona QUIC?</li>
+<li><strong>Versión → transporte</strong>: HTTP/1.1 · HTTP/2 · HTTP/3.</li>
+<li>¿Qué evita HTTP/3 respecto de HTTP/2 sobre TCP?</li>
+<li>¿Qué es <strong>HTTPS</strong>?</li>
+<li><strong>Servicio → protocolo</strong>: web · correo · ficheros · acceso remoto · resolución de nombres.</li>
+<li>Diferencia entre <strong>FTP</strong>, <strong>SFTP</strong> y <strong>FTPS</strong>.</li>
+<li>¿Sobre qué se apoya <strong>SFTP</strong>? ¿Y <strong>FTPS</strong>?</li>
+<li>Diferencia entre <strong>SSH</strong> y <strong>Telnet</strong>.</li>
+<li>¿Cuántos bits tiene una dirección <strong>IPv4</strong>? ¿Y una <strong>IPv6</strong>?</li>
+<li>¿Qué es <strong>dual stack</strong>?</li>
+<li><strong>Ordenar</strong> los pasos que siguen a la introducción de una URL HTTPS.</li>
+<li>¿Puede afirmarse en un examen un <strong>porcentaje concreto</strong> de adopción de IPv6? ¿Por qué no?</li>
+</ul>
+
+<h2 id="20-preguntas-cortas" class="tema-h2">20. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<h4 class="tema-h4">1. Defina Internet</h4>
+<ul class="tema-lista">
+<li>Interconexión mundial de redes independientes que utilizan protocolos comunes para comunicarse.</li>
+<li>No existe una única organización propietaria o gestora del conjunto.</li>
+<li>Sí existen organismos de coordinación, estandarización y gestión de identificadores.</li>
+<li>Cierre: red de redes; lo que la hace posible son los protocolos comunes.</li>
+</ul>
+<h4 class="tema-h4">2. Explique la función del IETF</h4>
+<ul class="tema-lista">
+<li>Comunidad y organización que desarrolla y estandariza los protocolos y especificaciones técnicas de Internet.</li>
+<li>Publica sus documentos como RFC.</li>
+<li>Cierre: un RFC es un documento técnico; no todo RFC es un estándar obligatorio.</li>
+</ul>
+<h4 class="tema-h4">3. Diferencie IETF, ICANN, IANA y RIR</h4>
+<ul class="tema-lista">
+<li>IETF: protocolos y estándares. ICANN: coordinación de identificadores únicos, dentro de su misión.</li>
+<li>IANA: función que gestiona los registros centrales de parámetros y recursos únicos, en el marco de ICANN.</li>
+<li>RIR: registros regionales que reciben bloques de direcciones IP y los distribuyen y asignan en sus regiones; RIPE NCC en la región europea.</li>
+<li>Cierre: ninguno de ellos controla Internet ni sus contenidos.</li>
+</ul>
+<h4 class="tema-h4">4. Explique el DNS</h4>
+<ul class="tema-lista">
+<li>Sistema jerárquico y distribuido de nombres que permite obtener información asociada a los dominios, especialmente sus direcciones IP.</li>
+<li>Jerarquía: raíz, TLD, dominio y subdominio.</li>
+<li>Resolución: resolver recursivo o de caché y servidores autoritativos.</li>
+<li>Cierre: no se limita a traducir nombres a IP — véanse los registros MX o CNAME.</li>
+</ul>
+<h4 class="tema-h4">5. Explique la jerarquía DNS</h4>
+<ul class="tema-lista">
+<li>Estructura: raíz, TLD, dominio de segundo nivel y subdominio.</li>
+<li>Ejemplo: en www.gipuzkoa.eus, .eus es el TLD, gipuzkoa el dominio de segundo nivel y www el subdominio o host según el contexto.</li>
+<li>Cierre: se lee de derecha a izquierda, de lo general a lo concreto.</li>
+</ul>
+<h4 class="tema-h4">6. Diferencie DNS recursivo y autoritativo</h4>
+<ul class="tema-lista">
+<li>Resolver recursivo o de caché: recibe la consulta del cliente y resuelve en su nombre.</li>
+<li>Servidor autoritativo: contiene la información oficial de las zonas.</li>
+<li>Cuando no hay información en caché, la resolución puede recorrer root, TLD y autoritativo.</li>
+<li>Cierre: el cliente no consulta siempre directamente esa cadena.</li>
+</ul>
+<h4 class="tema-h4">7. Explique los registros A, AAAA, CNAME y MX</h4>
+<ul class="tema-lista">
+<li>A: dirección IPv4. AAAA: dirección IPv6.</li>
+<li>CNAME: alias de nombre. MX: servidores de correo del dominio.</li>
+<li>Cierre: demuestran que el DNS proporciona información asociada al dominio, no solo su dirección IP.</li>
+</ul>
+<h4 class="tema-h4">8. Diferencie Internet y Web</h4>
+<ul class="tema-lista">
+<li>Internet: infraestructura, red global de redes independientes con protocolos comunes.</li>
+<li>Web o WWW: servicio sobre Internet basado en HTTP y en recursos enlazados.</li>
+<li>Cierre: la Web es uno de los servicios de Internet; una web puede funcionar aunque otro servicio esté caído.</li>
+</ul>
+<h4 class="tema-h4">9. Compare HTTP/1.1, HTTP/2 y HTTP/3</h4>
+<ul class="tema-lista">
+<li>HTTP/1.1: utiliza TCP y permite conexiones persistentes para múltiples peticiones y respuestas.</li>
+<li>HTTP/2: multiplexación de múltiples streams sobre una conexión TCP y compresión de cabeceras.</li>
+<li>HTTP/3: semántica HTTP transportada sobre QUIC, que funciona sobre UDP.</li>
+<li>Cierre: el cambio de transporte se produce entre HTTP/2 y HTTP/3.</li>
+</ul>
+<h4 class="tema-h4">10. Explique HTTP/3 y QUIC</h4>
+<ul class="tema-lista">
+<li>HTTP/3 transporta la semántica HTTP sobre QUIC; QUIC funciona sobre UDP.</li>
+<li>Ventajas: multiplexación por streams, establecimiento de conexión de baja latencia y evitar que la pérdida de paquetes de un stream bloquee los demás streams de la misma conexión.</li>
+<li>Matiz: no elimina todo el head-of-line blocking; lo que evita es el bloqueo entre streams que se produce en HTTP/2 sobre TCP.</li>
+<li>Cierre: referencia conceptual, RFC 9114.</li>
+</ul>
+<h4 class="tema-h4">11. Diferencie FTP, SFTP y FTPS</h4>
+<ul class="tema-lista">
+<li>FTP: transferencia de archivos sin protección criptográfica por defecto.</li>
+<li>SFTP: transferencia de archivos mediante SSH.</li>
+<li>FTPS: FTP protegido mediante TLS.</li>
+<li>Cierre: SFTP y FTPS no son lo mismo; parten de tecnologías distintas.</li>
+</ul>
+<h4 class="tema-h4">12. Explique el estado actual de IPv6</h4>
+<ul class="tema-lista">
+<li>Núcleo conceptual: IPv4 de 32 bits, IPv6 de 128 bits y dual stack como coexistencia de ambos.</li>
+<li>Migración progresiva motivada por el agotamiento de IPv4 y el crecimiento del número de dispositivos.</li>
+<li>Los porcentajes de adopción dependen de la fuente y de la metodología, y no deben mezclarse métricas distintas.</li>
+<li>Cierre: cualquier cifra debe citarse con fuente, fecha y métrica, y no sustituye a la definición técnica.</li>
+</ul>
+
+<h2 id="21-supuestos-practicos" class="tema-h2">21. Supuestos prácticos</h2>
+<h4 class="tema-h4">Caso 1 — Funciona por IP pero no por nombre</h4>
+<p><strong>Escenario</strong>: una persona usuaria puede acceder a una aplicación <strong>escribiendo su dirección IP</strong>, pero <strong>no</strong> cuando utiliza el <strong>nombre de dominio</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Dónde está el problema?</strong> En la <strong>resolución DNS</strong>: la conectividad funciona (se llega por IP), pero <strong>el nombre no se resuelve</strong>.</li>
+<li><strong>b) ¿Qué paso del flujo falla?</strong> El <strong>paso 1</strong>: DNS resuelve el nombre. Los pasos de <strong>transporte, TLS y HTTP</strong> ni siquiera llegan a intentarse con la dirección correcta.</li>
+<li><strong>c) ¿Qué se comprueba?</strong> El <strong>resolver</strong> configurado en el equipo, si responde, y si el <strong>registro</strong> existe en el servidor <strong>autoritativo</strong>.</li>
+<li><strong>d) ¿Es un problema de red?</strong> <strong>No</strong>: la conectividad IP está demostrada. Es un problema del <strong>servicio de nombres</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 2 — Un nombre resuelve a una IP incorrecta</h4>
+<p><strong>Escenario</strong>: tras cambiar de servidor, un nombre de dominio <strong>sigue resolviendo a la dirección antigua</strong> para algunas personas.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué explica el comportamiento?</strong> La <strong>caché del resolver recursivo</strong>: conserva el dato anterior hasta que expira.</li>
+<li><strong>b) ¿Qué más debe revisarse?</strong> Que el <strong>registro</strong> en el servidor <strong>autoritativo</strong> se haya modificado correctamente: si el dato oficial es erróneo, el problema no es de caché.</li>
+<li><strong>c) ¿Por qué a unos sí y a otros no?</strong> Porque <strong>distintos resolvers</strong> tienen <strong>cachés distintas</strong> y no expiran a la vez.</li>
+<li><strong>d) ¿Qué registro está implicado?</strong> El <strong>A</strong> (IPv4) o el <strong>AAAA</strong> (IPv6) del nombre afectado.</li>
+</ul>
+<h4 class="tema-h4">Caso 3 — Qué ocurre al introducir una URL HTTPS</h4>
+<p><strong>Escenario</strong>: una persona pregunta al CAU <strong>qué sucede</strong> cuando escribe <strong>https://www.ejemplo.eus</strong> y pulsa Intro.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Cuál es la secuencia simplificada?</strong> <strong>1)</strong> el DNS resuelve el nombre; <strong>2)</strong> se determina la dirección IP; <strong>3)</strong> se establece el transporte y la conectividad; <strong>4)</strong> se negocia y protege <strong>TLS</strong> por tratarse de HTTPS; <strong>5)</strong> se realiza la <strong>petición HTTP</strong>; <strong>6)</strong> el servidor <strong>devuelve los recursos</strong>.</li>
+<li><strong>b) ¿Qué registro DNS interviene?</strong> El <strong>A</strong> o el <strong>AAAA</strong>, según se resuelva a IPv4 o IPv6.</li>
+<li><strong>c) ¿Qué transporte se emplea?</strong> <strong>TCP</strong> con HTTP/1.1 y HTTP/2; <strong>QUIC sobre UDP</strong> con HTTP/3.</li>
+<li><strong>d) ¿Para qué sirve conocer este flujo?</strong> Es la <strong>herramienta de diagnóstico</strong>: cada paso es un punto donde puede fallar, y localizarlo acota la incidencia.</li>
+</ul>
+<h4 class="tema-h4">Caso 4 — Transferencia segura de archivos</h4>
+<p><strong>Escenario</strong>: hay que intercambiar ficheros con una entidad externa y se exige que la transferencia esté <strong>protegida</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué opciones existen?</strong> <strong>SFTP</strong> (mediante SSH) o <strong>FTPS</strong> (FTP protegido mediante TLS).</li>
+<li><strong>b) ¿Vale FTP?</strong> <strong>No</strong>: <strong>no ofrece protección criptográfica por defecto</strong>.</li>
+<li><strong>c) ¿Son SFTP y FTPS lo mismo?</strong> <strong>No.</strong> <strong>SFTP se apoya en SSH; FTPS es FTP con TLS.</strong> La elección depende de lo que admita la contraparte.</li>
+<li><strong>d) ¿Cómo recordarlo?</strong> La <strong>S inicial</strong> de <strong>SFTP</strong> remite a <strong>SSH</strong>; la <strong>S final</strong> de <strong>FTPS</strong> remite a <strong>TLS</strong>, como en <strong>HTTPS</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 5 — Conexión mediante Telnet</h4>
+<p><strong>Escenario</strong>: se detecta que un servidor se administra habitualmente por <strong>Telnet</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Cuál es el problema?</strong> <strong>Telnet no cifra</strong>: las <strong>credenciales y la sesión viajan legibles</strong>.</li>
+<li><strong>b) ¿Qué procede?</strong> <strong>Sustituirlo por SSH</strong>, que proporciona <strong>acceso remoto seguro y cifrado</strong>.</li>
+<li><strong>c) ¿Basta con cambiar el puerto?</strong> <strong>No</strong>: el problema no es el puerto, sino la <strong>ausencia de cifrado</strong> del protocolo.</li>
+<li><strong>d) ¿Alguna medida adicional?</strong> Revisar si las <strong>credenciales</strong> utilizadas por Telnet han podido quedar comprometidas.</li>
+</ul>
+<h4 class="tema-h4">Caso 6 — Qué protocolo utiliza HTTP/3</h4>
+<p><strong>Escenario</strong>: al revisar el tráfico de una aplicación web se observa comunicación por <strong>UDP</strong> y se pregunta si es normal.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Puede ser normal?</strong> <strong>Sí</strong>: <strong>HTTP/3 transporta la semántica HTTP sobre QUIC</strong>, y <strong>QUIC funciona sobre UDP</strong>.</li>
+<li><strong>b) ¿Y las versiones anteriores?</strong> <strong>HTTP/1.1 y HTTP/2 utilizan TCP.</strong></li>
+<li><strong>c) ¿Qué aporta HTTP/3?</strong> <strong>Multiplexación por streams</strong>, <strong>establecimiento de conexión de baja latencia</strong> y <strong>evitar que la pérdida de paquetes de un stream bloquee los demás streams</strong> de la misma conexión.</li>
+<li><strong>d) ¿Elimina todo el head-of-line blocking?</strong> <strong>No debe afirmarse así</strong>: lo que evita es el <strong>bloqueo entre streams</strong> que sí se produce en HTTP/2 sobre TCP.</li>
+</ul>
+<h4 class="tema-h4">Caso 7 — Un sistema con IPv4 e IPv6 a la vez</h4>
+<p><strong>Escenario</strong>: un servidor dispone <strong>simultáneamente</strong> de direccionamiento <strong>IPv4 e IPv6</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Cómo se denomina esa situación?</strong> <strong>Dual stack</strong>: <strong>coexistencia de ambas pilas</strong>.</li>
+<li><strong>b) ¿Qué registros DNS tendrá?</strong> Un registro <strong>A</strong> para IPv4 y un registro <strong>AAAA</strong> para IPv6.</li>
+<li><strong>c) ¿Por qué se llega a esta situación?</strong> Por la <strong>migración progresiva</strong> derivada del <strong>agotamiento de IPv4</strong> y del <strong>crecimiento del número de dispositivos</strong>.</li>
+<li><strong>d) ¿Es un estado transitorio?</strong> Conceptualmente sí, pero la <strong>convivencia se ha consolidado</strong>: la sustitución completa de IPv4 no se ha producido.</li>
+</ul>
+<h4 class="tema-h4">Caso 8 — Quién estandariza HTTP</h4>
+<p><strong>Escenario</strong>: se pregunta <strong>qué organismo</strong> es responsable de la estandarización del protocolo <strong>HTTP</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Cuál es la respuesta?</strong> El <strong>IETF</strong>: desarrolla y estandariza los <strong>protocolos y especificaciones técnicas</strong> de Internet.</li>
+<li><strong>b) ¿Dónde se publica?</strong> En documentos <strong>RFC</strong> — por ejemplo, <strong>RFC 9114</strong> como referencia conceptual de HTTP/3.</li>
+<li><strong>c) ¿Sería ICANN?</strong> <strong>No.</strong> ICANN <strong>coordina identificadores únicos</strong> —nombres de dominio y direcciones IP—, no protocolos.</li>
+<li><strong>d) Cuidado con el matiz.</strong> Que algo se publique como <strong>RFC no lo convierte automáticamente en estándar obligatorio</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 9 — Reparto de direcciones en Europa</h4>
+<p><strong>Escenario</strong>: una organización europea necesita obtener un <strong>bloque de direcciones IP</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿A qué tipo de entidad corresponde?</strong> A un <strong>RIR</strong>: registro regional que <strong>recibe bloques de direcciones IP y los distribuye y asigna en su región</strong>.</li>
+<li><strong>b) ¿Cuál es el de nuestra región?</strong> <strong>RIPE NCC</strong> — Europa, Oriente Medio y partes de Asia Central.</li>
+<li><strong>c) ¿Y en otras regiones?</strong> <strong>ARIN</strong> en Norteamérica y <strong>LACNIC</strong> en Latinoamérica y Caribe, entre otros.</li>
+<li><strong>d) ¿Quién está por encima?</strong> La función <strong>IANA</strong>, que gestiona los <strong>registros centrales</strong> —incluidos los espacios de direcciones IP— en el marco de <strong>ICANN</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 10 — La web funciona pero otro servicio no</h4>
+<p><strong>Escenario</strong>: una persona usuaria informa de que <strong>«Internet no funciona»</strong>, pero navega sin problema por las páginas web; lo que no consigue es <strong>acceder a otro servicio</strong> de la organización.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Cómo se explica?</strong> Porque <strong>la Web es solo uno de los servicios de Internet</strong>: la infraestructura funciona y el resto de servicios pueden fallar de forma independiente.</li>
+<li><strong>b) ¿Qué distinción hay que trasladar?</strong> <strong>Internet es la infraestructura; la Web es un servicio</strong> basado en HTTP y recursos enlazados. <strong>No son sinónimos.</strong></li>
+<li><strong>c) ¿Qué se comprueba entonces?</strong> El <strong>servicio concreto</strong> afectado y su <strong>protocolo</strong>: correo (SMTP/IMAP/POP3), ficheros (FTP/SFTP/FTPS), acceso remoto (SSH) o resolución de nombres (DNS).</li>
+<li><strong>d) ¿Qué error habría que evitar?</strong> Concluir que <strong>«no hay Internet»</strong> cuando lo que falla es <strong>un servicio determinado</strong>.</li>
+</ul>
+
+<h2 id="22-matriz-de-memorizacion" class="tema-h2">22. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Lo que debo recordar</strong></th>
+</tr>
+<tr>
+<td><strong>Internet</strong></td>
+<td>Interconexión mundial de redes independientes con protocolos comunes; red de redes</td>
+</tr>
+<tr>
+<td><strong>IETF</strong></td>
+<td>Desarrolla y estandariza los protocolos y especificaciones técnicas de Internet</td>
+</tr>
+<tr>
+<td><strong>RFC</strong></td>
+<td>Documento técnico publicado por el IETF; no equivale a estándar obligatorio</td>
+</tr>
+<tr>
+<td><strong>ICANN</strong></td>
+<td>Coordina globalmente el sistema de identificadores únicos, dentro de su misión</td>
+</tr>
+<tr>
+<td><strong>IANA</strong></td>
+<td>Función que gestiona los registros centrales de parámetros y recursos únicos, en el marco de ICANN</td>
+</tr>
+<tr>
+<td><strong>RIR</strong></td>
+<td>Registros regionales que reciben bloques de IP y los distribuyen y asignan en su región</td>
+</tr>
+<tr>
+<td><strong>RIPE NCC</strong></td>
+<td>RIR de Europa, Oriente Medio y partes de Asia Central</td>
+</tr>
+<tr>
+<td><strong>DNS</strong></td>
+<td>Sistema jerárquico y distribuido de nombres que devuelve información asociada a los dominios</td>
+</tr>
+<tr>
+<td><strong>Raíz</strong></td>
+<td>Nivel superior de la jerarquía DNS</td>
+</tr>
+<tr>
+<td><strong>TLD</strong></td>
+<td>Dominio de primer nivel (por ejemplo, .eus)</td>
+</tr>
+<tr>
+<td><strong>Recursivo</strong></td>
+<td>Recibe la consulta del cliente y resuelve en su nombre; mantiene caché</td>
+</tr>
+<tr>
+<td><strong>Autoritativo</strong></td>
+<td>Contiene la información oficial de las zonas</td>
+</tr>
+<tr>
+<td><strong>A</strong></td>
+<td>Dirección IPv4</td>
+</tr>
+<tr>
+<td><strong>AAAA</strong></td>
+<td>Dirección IPv6</td>
+</tr>
+<tr>
+<td><strong>CNAME</strong></td>
+<td>Alias de nombre</td>
+</tr>
+<tr>
+<td><strong>MX</strong></td>
+<td>Servidores de correo del dominio</td>
+</tr>
+<tr>
+<td><strong>Web</strong></td>
+<td>Servicio sobre Internet basado en HTTP y recursos enlazados; no es Internet</td>
+</tr>
+<tr>
+<td><strong>HTTP/1.1</strong></td>
+<td>TCP con conexiones persistentes para múltiples peticiones y respuestas</td>
+</tr>
+<tr>
+<td><strong>HTTP/2</strong></td>
+<td>Multiplexación de streams sobre una conexión TCP y compresión de cabeceras</td>
+</tr>
+<tr>
+<td><strong>HTTP/3</strong></td>
+<td>Semántica HTTP sobre QUIC; streams independientes y baja latencia</td>
+</tr>
+<tr>
+<td><strong>QUIC</strong></td>
+<td>Funciona sobre UDP</td>
+</tr>
+<tr>
+<td><strong>HTTPS</strong></td>
+<td>HTTP protegido mediante TLS</td>
+</tr>
+<tr>
+<td><strong>FTP</strong></td>
+<td>Transferencia de archivos sin protección criptográfica por defecto</td>
+</tr>
+<tr>
+<td><strong>SFTP</strong></td>
+<td>Transferencia de archivos mediante SSH</td>
+</tr>
+<tr>
+<td><strong>FTPS</strong></td>
+<td>FTP protegido mediante TLS</td>
+</tr>
+<tr>
+<td><strong>SSH</strong></td>
+<td>Acceso remoto seguro y cifrado</td>
+</tr>
+<tr>
+<td><strong>Telnet</strong></td>
+<td>Acceso remoto sin cifrado</td>
+</tr>
+<tr>
+<td><strong>IPv4</strong></td>
+<td>32 bits</td>
+</tr>
+<tr>
+<td><strong>IPv6</strong></td>
+<td>128 bits</td>
+</tr>
+<tr>
+<td><strong>Dual stack</strong></td>
+<td>Coexistencia de IPv4 e IPv6</td>
+</tr>
+</table></div>
+
+<h2 id="23-resumen-final" class="tema-h2">23. Resumen final: si mañana fuera el examen</h2>
+<ul class="tema-lista">
+<li><strong>Internet</strong> = <strong>interconexión mundial de redes independientes con protocolos comunes</strong>. <strong>No hay una única organización propietaria o gestora del conjunto</strong>, pero <strong>sí organismos de coordinación, estandarización y gestión de identificadores</strong>.</li>
+<li><strong>IETF → PROTOCOLOS</strong> (publica <strong>RFC</strong>: documentos técnicos, <strong>no necesariamente estándares obligatorios</strong>). <strong>ICANN → IDENTIFICADORES</strong> (no controla Internet ni los contenidos). <strong>IANA → REGISTROS CENTRALES</strong>, en el marco de ICANN. <strong>RIR → REPARTO REGIONAL</strong>; <strong>RIPE NCC</strong> en Europa.</li>
+<li><strong>DNS</strong> = <strong>sistema jerárquico y distribuido de nombres</strong> que devuelve <strong>información asociada a los dominios</strong>, no solo su IP. Jerarquía: <strong>raíz → TLD → dominio → subdominio</strong>, de derecha a izquierda.</li>
+<li><strong>RECURSIVO</strong> resuelve <strong>en nombre del cliente</strong>; <strong>AUTORITATIVO</strong> guarda la <strong>información oficial</strong>. Sin caché, la resolución puede recorrer <strong>root → TLD → autoritativo</strong>; <strong>el cliente no consulta siempre esa cadena directamente</strong>.</li>
+<li><strong>A → IPv4 · AAAA → IPv6 · CNAME → ALIAS · MX → CORREO.</strong></li>
+<li><strong>INTERNET ≠ WEB</strong>: infraestructura frente a <strong>servicio basado en HTTP</strong> y recursos enlazados.</li>
+<li><strong>HTTP/1.1 → TCP con CONEXIONES PERSISTENTES</strong> (no una conexión por petición). <strong>HTTP/2 → TCP + MULTIPLEXACIÓN</strong> y compresión de cabeceras. <strong>HTTP/3 → QUIC, que va sobre UDP</strong>.</li>
+<li><strong>HTTP/3</strong>: multiplexación por streams, conexión de <strong>baja latencia</strong> y <strong>evita que la pérdida de paquetes de un stream bloquee los demás streams de la misma conexión</strong>. <strong>No digas «elimina todo el head-of-line blocking».</strong> (RFC 9114.)</li>
+<li><strong>HTTPS = HTTP + TLS.</strong></li>
+<li><strong>Servicios</strong>: web → HTTP/HTTPS · correo → SMTP/IMAP/POP3 · ficheros → FTP/SFTP/FTPS · acceso remoto → SSH · nombres → DNS.</li>
+<li><strong>FTP → sin protección por defecto · SFTP → mediante SSH · FTPS → FTP con TLS.</strong> <strong>SFTP ≠ FTPS.</strong></li>
+<li><strong>SSH → acceso remoto seguro · TELNET → sin cifrado.</strong></li>
+<li><strong>IPv4 → 32 bits · IPv6 → 128 bits · DUAL STACK → coexistencia.</strong> Migración progresiva por <strong>agotamiento de IPv4</strong> y crecimiento de dispositivos.</li>
+<li><strong>FLUJO INTEGRADOR</strong>: <strong>DNS resuelve → se determina la IP → se establece el transporte → se negocia TLS (si HTTPS) → petición HTTP → el servidor devuelve los recursos.</strong></li>
+<li><strong>Tendencias</strong>: consolidación de HTTPS · migración progresiva a IPv6 · crecimiento de HTTP/3 y QUIC · nube · IoT · mayores exigencias de ciberseguridad. <strong>Ninguna cifra de adopción es contenido nuclear</strong>: depende de <strong>fuente, fecha y métrica</strong>.</li>
+</ul>
+
+<h2 id="24-actualidad" class="tema-h2">24. Actualidad de Internet — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Información sujeta a cambio · Fecha de actualización de estos apuntes: agosto de 2026</strong><br><strong>Toda estadística debe indicar FUENTE, FECHA y MÉTRICA.</strong><br>Y una advertencia esencial: <strong>no debe mezclarse</strong> el «<strong>porcentaje de usuarios que acceden a un servicio concreto mediante IPv6</strong>» con el «<strong>porcentaje del tráfico mundial de Internet</strong>». <strong>Son métricas distintas</strong> y no son intercambiables.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Adopción de IPv6</strong>: el porcentaje <strong>depende de la fuente y de la metodología</strong>. A modo de ejemplo de <strong>una</strong> métrica concreta: <strong>Google mide el porcentaje de usuarios que acceden a Google mediante IPv6</strong>, y registró un <strong>48,68 % el 14 de junio de 2026</strong>. <strong>Ese dato no equivale al porcentaje de tráfico mundial de Internet</strong> ni debe presentarse como tal. En un examen, la respuesta segura es la <strong>tendencia</strong>: <strong>migración progresiva con coexistencia mediante dual stack</strong>.</li>
+<li><strong>Adopción de IPv6 por país</strong>: los datos nacionales <strong>varían notablemente</strong> entre países y entre fuentes. <strong>No debe fijarse ninguna cifra</strong> —tampoco para España— como dato permanente, salvo que proceda de una <strong>fuente actualizada</strong> y se indique expresamente <strong>fecha y métrica</strong>.</li>
+<li><strong>Adopción de HTTP/3</strong>: las cifras <strong>varían mucho</strong> según <strong>fuente, muestra, tipo de recursos, CDN, región y metodología</strong>. El <strong>núcleo estable</strong> es: <strong>«HTTP/3 sigue extendiéndose y convive con HTTP/1.1 y HTTP/2»</strong>. <strong>No debe afirmarse ningún porcentaje</strong> como dato permanente.</li>
+<li><strong>Evolución de QUIC</strong>: su despliegue continúa creciendo, impulsado por los grandes proveedores de contenido y las redes de distribución. Lo <strong>estable</strong> es la asociación <strong>HTTP/3 → QUIC → UDP</strong>.</li>
+<li><strong>Nube, edge e IoT</strong>: la migración de servicios a modelos de <strong>nube</strong> (Tema 32), la aproximación del procesamiento al usuario y el <strong>crecimiento del número de dispositivos conectados</strong> son tendencias sostenidas. Son <strong>tendencias</strong>, no cifras: no deben cuantificarse en un examen.</li>
+<li><strong>Gobernanza</strong>: el reparto de funciones entre <strong>IETF, ICANN, IANA y los RIR</strong> se mantiene estable en lo esencial. Cualquier cambio institucional debe tratarse como <strong>actualidad</strong> y no altera las <strong>asociaciones organismo-función</strong> que constituyen el núcleo del apartado 2.</li>
 </ul>
   </div>
 </article>
