@@ -1,0 +1,63 @@
+name: Supabase keepalive
+
+# Los proyectos gratis de Supabase se pausan tras 7 días de inactividad.
+# Este workflow hace un ping cada 3 días para mantener el proyecto activo.
+# La ANON key es pública por diseño (ya vive en el frontend), así que va
+# hardcodeada aquí para simplificar. Si prefieres meterla en Secrets, ver
+# el bloque comentado abajo.
+
+on:
+  schedule:
+    # 06:00 UTC cada 3 días (08:00 CEST verano / 07:00 CET invierno)
+    - cron: '0 6 */3 * *'
+  workflow_dispatch:   # botón "Run workflow" en la UI de GitHub Actions
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Ping REST endpoint (perfiles, 1 fila)
+        run: |
+          SUPABASE_URL="https://oitncmxtfgdfnwkpbcdz.supabase.co"
+          ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9pdG5jbXh0ZmdkZm53a3BiY2R6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc5MTQzNjMsImV4cCI6MjA5MzQ5MDM2M30.77SGCY6mB9gzOlDOiqXtTPIBRsuF8ZwTC3YhP2Nzi_o"
+
+          # Query a perfiles con RLS: no devuelve filas para anon (no
+          # autenticado), pero SÍ registra actividad y toca la base de datos.
+          echo "Pinging Supabase REST…"
+          HTTP=$(curl -s -o /tmp/body -w "%{http_code}" \
+            -H "apikey: $ANON_KEY" \
+            -H "Authorization: Bearer $ANON_KEY" \
+            "$SUPABASE_URL/rest/v1/perfiles?select=id&limit=1")
+          echo "HTTP status: $HTTP"
+          echo "Body:"
+          cat /tmp/body || true
+          echo ""
+
+          # Ping también al endpoint de Auth (por si acaso la Auth entra
+          # en un estado idle distinto que Postgres)
+          echo ""
+          echo "Pinging Supabase Auth…"
+          HTTP_AUTH=$(curl -s -o /tmp/auth_body -w "%{http_code}" \
+            -H "apikey: $ANON_KEY" \
+            "$SUPABASE_URL/auth/v1/settings")
+          echo "HTTP status Auth: $HTTP_AUTH"
+
+          # Consideramos OK cualquier respuesta 2xx o 4xx (el servidor
+          # responde). Solo fallamos si hay error de red (000) o 5xx.
+          if [ "$HTTP" = "000" ] || [ "$HTTP" -ge 500 ]; then
+            echo "❌ Supabase no responde correctamente (HTTP=$HTTP)"
+            exit 1
+          fi
+          echo "✅ Supabase responde correctamente"
+
+# ---------------------------------------------------------------
+# Alternativa con Secrets (más "correcta"):
+# En GitHub → repo → Settings → Secrets and variables → Actions →
+# New repository secret:
+#     SUPABASE_URL          = https://oitncmxtfgdfnwkpbcdz.supabase.co
+#     SUPABASE_ANON_KEY     = <tu-anon-key>
+# Y en el step, usa:
+#     SUPABASE_URL="${{ secrets.SUPABASE_URL }}"
+#     ANON_KEY="${{ secrets.SUPABASE_ANON_KEY }}"
+# ---------------------------------------------------------------
