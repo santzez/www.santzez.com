@@ -184,6 +184,9 @@
         if (opeDesc) opeDesc.hidden = true;
         if (opeInfoAmp) opeInfoAmp.hidden = true;
 
+        // Tab virtual "Claude" al final si hay Apuntes (tipo contenido)
+        const TAB_CLAUDE_ID = '__claude__';
+
         // Construir estructura de tabs
         const tabsWrap = document.createElement('div');
         tabsWrap.className = 'tabs';
@@ -195,6 +198,10 @@
                 ${h.nombre || h.id}
               </button>
             `).join('')}
+            <button type="button" role="tab" class="tabs__tab tabs__tab--claude"
+                    data-tab="${TAB_CLAUDE_ID}" aria-selected="false" hidden>
+              🤖 Claude
+            </button>
           </div>
           <div class="tabs__paneles">
             ${info.hijos.map((h, i) => `
@@ -206,6 +213,23 @@
                 </div>
               </div>
             `).join('')}
+            <div class="tabs__panel tabs__panel--claude" role="tabpanel" data-panel="${TAB_CLAUDE_ID}" hidden>
+              <aside class="chat-ia chat-ia--tab" id="chat-ia">
+                <div class="chat-ia__cabecera">
+                  <div class="chat-ia__titulo">🤖 Pregunta a Claude sobre este tema</div>
+                  <div class="chat-ia__cuota" id="chat-cuota">···</div>
+                </div>
+                <div class="chat-ia__mensajes" id="chat-mensajes">
+                  <div class="chat-ia__vacio">
+                    Escribe una duda sobre este tema y Claude te responderá usando los apuntes cargados.
+                  </div>
+                </div>
+                <form class="chat-ia__form" id="chat-form">
+                  <textarea id="chat-input" placeholder="¿Qué dice el art. 21 sobre…?" rows="2" required></textarea>
+                  <button type="submit" class="btn" id="chat-enviar">Enviar</button>
+                </form>
+              </aside>
+            </div>
           </div>
         `;
         cont.appendChild(tabsWrap);
@@ -267,48 +291,54 @@
             panel.innerHTML = `<div class="tarjeta">Error: ${e.message}</div>`;
           }
         }));
+
+        // === Tab Claude ===
+        // Si alguno de los hijos es tipo "contenido" (Apuntes), activamos la tab
+        // y montamos el chat perezosamente la primera vez que se abre.
+        const panelApuntes = Array.from(tabsWrap.querySelectorAll('.tabs__panel'))
+          .find(p => p.__contextoHtml);
+        if (panelApuntes) {
+          const btnClaude = tabsWrap.querySelector('.tabs__tab--claude');
+          const panelClaude = tabsWrap.querySelector('.tabs__panel--claude');
+          btnClaude.hidden = false;
+          let chatMontado = false;
+          const montarChatSiFalta = () => {
+            if (chatMontado || !window.ChatIA) return;
+            chatMontado = true;
+            ChatIA.montar({
+              contenedor: panelClaude.querySelector('#chat-ia'),
+              cliente: AuthSession.cliente(),
+              idTema: panelApuntes.__idTema,
+              contextoHtml: panelApuntes.__contextoHtml,
+            });
+          };
+          btnClaude.addEventListener('click', montarChatSiFalta);
+          // Si el usuario aterriza directo con hash #__claude__
+          if (decodeURIComponent(location.hash.replace('#', '')).toLowerCase() === TAB_CLAUDE_ID) {
+            montarChatSiFalta();
+          }
+        }
         return;
       }
 
-      // Tipo "contenido" → fragmento HTML con material de estudio + panel IA
+      // Tipo "contenido" → fragmento HTML con material de estudio.
+      // El chat IA vive en su propia pestaña "Claude" (inyectada por el modo tabs),
+      // por lo que aquí solo pintamos los apuntes a ancho completo.
       if (info.tipo === 'contenido' && info.html) {
         subtitulo.hidden = true;
         try {
           const r = await fetch(`data/${rutaOpe}/${info.html}`, { cache: 'no-store' });
           if (!r.ok) throw new Error('No se pudo cargar el contenido');
           const htmlFragmento = await r.text();
-          cont.classList.add('tema-contenedor', 'tema-con-chat');
-          // Envolvemos el contenido en un layout 2 columnas: apuntes + chat
-          cont.innerHTML = `
-            <div class="tema-columna-apuntes">${htmlFragmento}</div>
-            <aside class="chat-ia" id="chat-ia" data-tema="${rutaOpe.split('/').slice(-2)[0]}">
-              <div class="chat-ia__cabecera">
-                <div class="chat-ia__titulo">🤖 Pregunta a Claude</div>
-                <div class="chat-ia__cuota" id="chat-cuota">···</div>
-              </div>
-              <div class="chat-ia__mensajes" id="chat-mensajes">
-                <div class="chat-ia__vacio">
-                  Escribe una duda sobre este tema y Claude te responderá usando el material que tienes cargado.
-                </div>
-              </div>
-              <form class="chat-ia__form" id="chat-form">
-                <textarea id="chat-input" placeholder="¿Qué dice el art. 21 sobre…?" rows="2" required></textarea>
-                <button type="submit" class="btn" id="chat-enviar">Enviar</button>
-              </form>
-            </aside>
-          `;
+          cont.classList.add('tema-contenedor');
+          cont.innerHTML = htmlFragmento;
           document.getElementById('ope-titulo').hidden = true;
           document.getElementById('ope-descripcion').hidden = true;
-
-          // Inicializar el chat IA de este tema
-          if (window.ChatIA) {
-            ChatIA.montar({
-              contenedor: cont.querySelector('#chat-ia'),
-              cliente: AuthSession.cliente(),
-              idTema: rutaOpe.split('/').slice(-2)[0], // T{n}
-              contextoHtml: htmlFragmento,
-            });
-          }
+          // Guardamos el HTML en el propio contenedor para que la tab Claude
+          // hermana pueda leerlo como contexto (ver modo tabs más abajo).
+          cont.dataset.contextoHtml = 'listo';
+          cont.__contextoHtml = htmlFragmento;
+          cont.__idTema = rutaOpe.split('/').slice(-2)[0]; // T{n}
         } catch (e) {
           cont.innerHTML = `<div class="tarjeta">Error cargando el contenido: ${e.message}</div>`;
         }
