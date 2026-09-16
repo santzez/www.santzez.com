@@ -1507,6 +1507,181 @@ a.tarjeta:hover {
 }
 
 /* =============================================================
+   CHAT IA — panel lateral en Apuntes
+   Layout 2 columnas en desktop, apilado en móvil.
+   ============================================================= */
+
+.tema-con-chat {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 1.5rem;
+  align-items: start;
+}
+.tema-columna-apuntes { min-width: 0; }
+
+.chat-ia {
+  position: sticky;
+  top: 1rem;
+  height: calc(100vh - 2rem);
+  max-height: 720px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-grande);
+  overflow: hidden;
+  box-shadow: var(--sombra);
+}
+
+.chat-ia__cabecera {
+  padding: 0.75rem 1rem;
+  background: var(--color-primario);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.chat-ia__titulo {
+  font-family: var(--fuente-corporativa);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+.chat-ia__cuota { font-size: 0.72rem; opacity: 0.9; }
+.chat-cuota__badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.chat-cuota__badge.agotada { background: var(--color-error); }
+
+.chat-ia__mensajes {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: var(--color-fondo-alt);
+  scroll-behavior: smooth;
+}
+.chat-ia__vacio {
+  color: var(--color-texto-suave);
+  font-size: 0.85rem;
+  font-style: italic;
+  text-align: center;
+  margin: auto 0;
+  padding: 1rem;
+  line-height: 1.5;
+}
+
+.chat-burbuja {
+  max-width: 90%;
+  padding: 0.55rem 0.8rem;
+  border-radius: var(--radio-grande);
+  font-size: 0.88rem;
+  line-height: 1.45;
+  word-wrap: break-word;
+  animation: burbuja-entrar 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+@keyframes burbuja-entrar {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+.chat-burbuja--user {
+  align-self: flex-end;
+  background: var(--color-primario);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+  white-space: pre-wrap;
+}
+.chat-burbuja--assistant {
+  align-self: flex-start;
+  background: #fff;
+  color: var(--color-texto);
+  border: 1px solid var(--color-borde-claro);
+  border-bottom-left-radius: 4px;
+}
+.chat-burbuja--assistant p { margin: 0.25rem 0; }
+.chat-burbuja--assistant p:first-child { margin-top: 0; }
+.chat-burbuja--assistant p:last-child { margin-bottom: 0; }
+.chat-burbuja--assistant ul { margin: 0.35rem 0 0.4rem 1.25rem; padding: 0; }
+.chat-burbuja--assistant li { margin: 0.15rem 0; }
+.chat-burbuja--assistant strong { color: var(--color-primario); }
+.chat-burbuja--assistant code {
+  background: var(--color-primario-suave);
+  color: var(--color-primario);
+  padding: 0.05em 0.35em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+.chat-burbuja__spinner {
+  display: inline-block;
+  width: 6px; height: 6px;
+  background: currentColor;
+  border-radius: 50%;
+  box-shadow:
+    12px 0 0 -1px currentColor,
+    24px 0 0 -2px currentColor;
+  animation: spinner-parpadeo 1s ease-in-out infinite;
+  margin: 6px 0;
+}
+@keyframes spinner-parpadeo {
+  0%,100% { opacity: 0.4; }
+  50%     { opacity: 1;   }
+}
+.chat-burbuja__error {
+  color: var(--color-error);
+  font-size: 0.85rem;
+}
+
+.chat-ia__form {
+  display: flex;
+  gap: 0.35rem;
+  padding: 0.6rem;
+  background: #fff;
+  border-top: 1px solid var(--color-borde-claro);
+}
+.chat-ia__form textarea {
+  flex: 1;
+  resize: none;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  font-family: inherit;
+  font-size: 0.88rem;
+  line-height: 1.35;
+  min-height: 40px;
+  max-height: 100px;
+  transition: border-color 0.15s;
+}
+.chat-ia__form textarea:focus {
+  outline: none;
+  border-color: var(--color-primario);
+}
+.chat-ia__form .btn {
+  padding: 0.35rem 0.8rem;
+  font-size: 0.85rem;
+  align-self: flex-end;
+}
+
+/* Móvil / tablet: apilar y no sticky */
+@media (max-width: 900px) {
+  .tema-con-chat {
+    grid-template-columns: 1fr;
+  }
+  .chat-ia {
+    position: static;
+    height: auto;
+    max-height: 550px;
+    margin-top: 1rem;
+  }
+}
+
+/* =============================================================
    TABS — sub-secciones de un tema (Apuntes / Qwiz / Podcasts)
    Modo activado con renderComoTabs=true en el info.json del padre.
    ============================================================= */
