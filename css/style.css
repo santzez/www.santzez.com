@@ -1732,6 +1732,108 @@ a.tarjeta:hover {
 }
 
 /* =============================================================
+   BARRA DE CONTEXTO — "Bloque X · … ::: T{n} · Título"
+   Va justo debajo de las migas y se pega arriba al hacer scroll,
+   arrastrando consigo también la fila de tabs (que va inmediatamente
+   detrás en el DOM). Los dos iconos de la derecha son atajos rápidos
+   a Qwiz y Ask_Claude sin volver arriba del todo.
+   ============================================================= */
+.tema-contexto {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.55rem 0.9rem;
+  margin: 0.5rem 0 0;
+  background: #fff;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-grande);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  font-family: var(--fuente-corporativa);
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+.tema-contexto__info {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+.tema-contexto__bloque {
+  color: var(--color-primario);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.tema-contexto__sep {
+  color: var(--color-texto-suave);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  user-select: none;
+  opacity: 0.7;
+}
+.tema-contexto__tema {
+  color: var(--color-texto);
+  font-weight: 500;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tema-contexto__tema strong {
+  color: var(--color-primario);
+  margin-right: 0.35rem;
+}
+.tema-contexto__nav {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.tema-contexto__icono {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  background: transparent;
+  color: var(--color-texto-suave);
+  border: 1px solid var(--color-borde-claro);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.15s;
+}
+.tema-contexto__icono:hover {
+  color: var(--color-primario);
+  background: var(--color-primario-suave);
+  border-color: var(--color-primario);
+  transform: translateY(-1px);
+}
+.tema-contexto__icono svg { display: block; }
+@media (max-width: 640px) {
+  .tema-contexto { font-size: 0.82rem; padding: 0.5rem 0.7rem; }
+  .tema-contexto__sep { display: none; }   /* en móvil el "···" se come el ancho */
+  .tema-contexto__tema { white-space: normal; }
+}
+
+/* Icono en cada botón de tab (delante del texto) */
+.tabs__icono {
+  margin-right: 0.4rem;
+  flex-shrink: 0;
+  vertical-align: -3px;   /* alinea con el baseline del texto en mayúsculas */
+}
+.tabs .tabs__tab,
+button.tabs__tab {
+  /* nos aseguramos que el tab hospede correctamente icono + texto */
+  display: inline-flex;
+  align-items: center;
+}
+
+/* =============================================================
    TABS — sub-secciones de un tema (Apuntes / Qwiz / Ask_Claude)
    Modo activado con renderComoTabs=true en el info.json del padre.
    ============================================================= */

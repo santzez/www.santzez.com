@@ -187,6 +187,21 @@
         // Tab virtual "Claude" al final si hay Apuntes (tipo contenido)
         const TAB_CLAUDE_ID = '__claude__';
 
+        // Iconos SVG line-art para cada tab.
+        //  · Apuntes  → libro abierto
+        //  · Qwiz     → interrogante en círculo
+        //  · Claude   → chispa/estrella de 4 puntas
+        const ICONO_APUNTES = `<svg class="tabs__icono" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v16H6.5A2.5 2.5 0 0 1 4 16.5V5.5Z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H12v16h5.5A2.5 2.5 0 0 0 20 16.5V5.5Z"/></svg>`;
+        const ICONO_QWIZ = `<svg class="tabs__icono" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.2 9a2.9 2.9 0 0 1 5.7 0.8c0 1.9-2.9 2-2.9 3.9"/><circle cx="12" cy="17" r="0.9" fill="currentColor" stroke="none"/></svg>`;
+        const ICONO_CLAUDE = `<svg class="tabs__icono" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.6 5.8a2 2 0 0 0 1.6 1.6L21 12l-5.8 1.6a2 2 0 0 0-1.6 1.6L12 21l-1.6-5.8a2 2 0 0 0-1.6-1.6L3 12l5.8-1.6a2 2 0 0 0 1.6-1.6L12 3Z"/></svg>`;
+        const iconoDe = (h) => {
+          if (!h) return '';
+          if (h.id === 'Qwiz') return ICONO_QWIZ;
+          // Apuntes: hoy usa id "Material_de_estudio" con nombre "Apuntes"
+          if (h.id === 'Material_de_estudio' || h.nombre === 'Apuntes') return ICONO_APUNTES;
+          return '';
+        };
+
         // Construir estructura de tabs
         const tabsWrap = document.createElement('div');
         tabsWrap.className = 'tabs';
@@ -195,13 +210,13 @@
             ${info.hijos.map((h, i) => `
               <button type="button" role="tab" class="tabs__tab${i === 0 ? ' activo' : ''}"
                       data-tab="${h.id}" aria-selected="${i === 0}">
-                ${h.nombre || h.id}
+                ${iconoDe(h)}<span>${h.nombre || h.id}</span>
               </button>
             `).join('')}
             <button type="button" role="tab" class="tabs__tab tabs__tab--ia"
                     data-tab="${TAB_CLAUDE_ID}" aria-selected="false" hidden
                     title="Pregunta a la IA sobre este tema">
-              Ask_Claude
+              ${ICONO_CLAUDE}<span>Ask_Claude</span>
             </button>
           </div>
           <div class="tabs__paneles">
@@ -233,7 +248,62 @@
             </div>
           </div>
         `;
+        // -------- Barra de contexto sticky: "Bloque X · … ::: T{n} · Título" --------
+        // Se construye si el padre inmediato tiene tipo "bloques" y encontramos
+        // el T{n} actual dentro de uno de ellos. Queda pegada arriba al hacer scroll.
+        let barraContexto = null;
+        let cambiarTabRef = null; // asignada más abajo, referenciada en la barra
+        try {
+          const partesRuta = rutaOpe.split('/').filter(Boolean);
+          const idActual = partesRuta[partesRuta.length - 1];
+          const rutaPadre = partesRuta.slice(0, -1).join('/');
+          if (rutaPadre) {
+            const rP = await fetch(`data/${rutaPadre}/info.json`, { cache: 'no-store' });
+            if (rP.ok) {
+              const infoP = await rP.json();
+              if (infoP.tipo === 'bloques' && Array.isArray(infoP.bloques)) {
+                let bloqueMatch = null, temaMatch = null;
+                for (const b of infoP.bloques) {
+                  const t = (b.temas || []).find(x => x.id === idActual);
+                  if (t) { bloqueMatch = b; temaMatch = t; break; }
+                }
+                if (bloqueMatch && temaMatch) {
+                  barraContexto = document.createElement('div');
+                  barraContexto.className = 'tema-contexto';
+                  barraContexto.innerHTML = `
+                    <div class="tema-contexto__info">
+                      <span class="tema-contexto__bloque">${bloqueMatch.titulo || bloqueMatch.id}</span>
+                      <span class="tema-contexto__sep" aria-hidden="true">:::</span>
+                      <span class="tema-contexto__tema">
+                        <strong>${temaMatch.id}</strong> ${temaMatch.titulo || ''}
+                      </span>
+                    </div>
+                    <div class="tema-contexto__nav">
+                      <button type="button" class="tema-contexto__icono"
+                              data-goto="Qwiz" title="Ir a Qwiz" aria-label="Ir a Qwiz">
+                        ${ICONO_QWIZ}
+                      </button>
+                      <button type="button" class="tema-contexto__icono tema-contexto__icono--ia"
+                              data-goto="${TAB_CLAUDE_ID}" title="Ir a Ask_Claude" aria-label="Ir a Ask_Claude">
+                        ${ICONO_CLAUDE}
+                      </button>
+                    </div>`;
+                  cont.appendChild(barraContexto);
+                }
+              }
+            }
+          }
+        } catch { /* silencioso: si falla el lookup, no bloqueamos la vista */ }
+        // -----------------------------------------------------------------------
+
         cont.appendChild(tabsWrap);
+
+        // Cuando la barra existe, sus iconos disparan el cambio de tab
+        if (barraContexto) {
+          barraContexto.querySelectorAll('[data-goto]').forEach(btn => {
+            btn.addEventListener('click', () => cambiarTabRef && cambiarTabRef(btn.dataset.goto));
+          });
+        }
 
         // Handlers de cambio de tab (con hash en la URL para deep-link)
         const cambiarTab = (idTab) => {
@@ -254,6 +324,7 @@
             else                   QuizEngine.pausarCronometro();
           }
         };
+        cambiarTabRef = cambiarTab; // expone la función a la barra de contexto
         tabsWrap.querySelectorAll('.tabs__tab').forEach(btn => {
           btn.addEventListener('click', () => cambiarTab(btn.dataset.tab));
         });
