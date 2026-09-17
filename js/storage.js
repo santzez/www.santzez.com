@@ -82,5 +82,49 @@ const Storage = {
 
     stats.porcentaje = stats.total > 0 ? Math.round((stats.aciertos / stats.total) * 100) : 0;
     return stats;
+  },
+
+  /**
+   * Nº de intentos "completos" del tema: sesiones en modo 'todas' donde
+   * total == totalPreguntas del tema (i.e. hiciste el quiz entero, sin
+   * abandonar). Los repasos de fallos NO cuentan.
+   */
+  async intentosCompletos(usuarioId, opeRuta, temaId, totalPreguntas) {
+    const { count, error } = await this.cliente()
+      .from('sesiones_quiz')
+      .select('*', { count: 'exact', head: true })
+      .eq('usuario_id', usuarioId)
+      .eq('ope_id', opeRuta)
+      .eq('tema_id', temaId)
+      .eq('modo', 'todas')
+      .eq('total', totalPreguntas);
+    if (error) { console.error('Error intentosCompletos:', error); return 0; }
+    return count || 0;
+  },
+
+  /**
+   * Borra todo el progreso de un tema del usuario actual:
+   * - intentos: todas las respuestas a las preguntas del tema
+   * - sesiones_quiz: todas las tandas del tema
+   * preguntasIds: array de IDs de todas las preguntas del tema.
+   */
+  async borrarProgresoTema(usuarioId, opeRuta, temaId, preguntasIds) {
+    const cli = this.cliente();
+    // 1) Borrar intentos del usuario para esas preguntas
+    if (preguntasIds && preguntasIds.length > 0) {
+      const { error: e1 } = await cli.from('intentos')
+        .delete()
+        .eq('usuario_id', usuarioId)
+        .in('pregunta_id', preguntasIds);
+      if (e1) { console.error('Error borrando intentos:', e1); return { ok: false, motivo: e1.message }; }
+    }
+    // 2) Borrar sesiones del tema
+    const { error: e2 } = await cli.from('sesiones_quiz')
+      .delete()
+      .eq('usuario_id', usuarioId)
+      .eq('ope_id', opeRuta)
+      .eq('tema_id', temaId);
+    if (e2) { console.error('Error borrando sesiones:', e2); return { ok: false, motivo: e2.message }; }
+    return { ok: true };
   }
 };

@@ -1482,6 +1482,86 @@ a.tarjeta:hover {
 .qwiz-motor {
   animation: tab-entrar 0.2s ease-out;
 }
+
+/* -------------------------------------------------------------
+   QWIZ STATS — vista al entrar en la pestaña Qwiz
+   Título completo + 3 métricas + 3 acciones.
+   ------------------------------------------------------------- */
+.qwiz-stats {
+  background: #fff;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-grande);
+  padding: 1.5rem 1.75rem;
+  box-shadow: var(--sombra);
+}
+.qwiz-stats__titulo {
+  margin: 0 0 1.25rem;
+  font-family: var(--fuente-corporativa);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-primario);
+  line-height: 1.4;
+}
+.qwiz-stats__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+.qwiz-stats__celda {
+  padding: 1rem 0.5rem;
+  background: var(--color-fondo-alt);
+  border-radius: var(--radio);
+  text-align: center;
+}
+.qwiz-stats__valor {
+  font-family: var(--fuente-corporativa);
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--color-primario);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.qwiz-stats__valor--warning { color: var(--color-error); }
+.qwiz-stats__label {
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-texto-suave);
+  font-weight: 600;
+}
+.qwiz-stats__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.qwiz-stats__acciones .btn {
+  flex: 1 1 auto;
+  min-width: 160px;
+}
+.qwiz-stats__acciones .btn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+/* Botón de resetear en rojo tenue (solo para esta card) */
+.btn--peligro {
+  background: transparent;
+  color: var(--color-error);
+  border: 1px solid var(--color-error);
+}
+.btn--peligro:hover:not([disabled]) {
+  background: var(--color-error);
+  color: #fff;
+}
+@media (max-width: 640px) {
+  .qwiz-stats { padding: 1.1rem 1rem; }
+  .qwiz-stats__grid { grid-template-columns: repeat(3, 1fr); gap: 0.4rem; }
+  .qwiz-stats__valor { font-size: 1.6rem; }
+  .qwiz-stats__label { font-size: 0.7rem; }
+  .qwiz-stats__acciones .btn { min-width: 0; flex-basis: 100%; }
+}
+
 .qwiz-embed__titulo {
   margin: 0;
   font-size: 1.15rem;

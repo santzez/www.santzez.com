@@ -640,8 +640,9 @@
           });
         };
 
-        let indiceTema = 0;
-        for (const tema of info.temas || []) {
+        // Render de la card de estadísticas de un tema — la reusamos para
+        // repintar cuando se resetea el progreso.
+        const renderStatsTema = async (tema, contenedor, indice = 0) => {
           let preguntas = [];
           try {
             const r = await fetch(`data/${rutaOpe}/${tema.id}.json`, { cache: 'no-store' });
@@ -652,43 +653,81 @@
           } catch {}
           const numPreguntas = preguntas.length;
 
-          let numFalladas = 0;
+          let numFalladas = 0, intentosCompletos = 0;
           if (numPreguntas > 0) {
             try {
-              const falladas = await Storage.preguntasFalladas(sesion.user.id, preguntas);
+              const [falladas, ic] = await Promise.all([
+                Storage.preguntasFalladas(sesion.user.id, preguntas),
+                Storage.intentosCompletos(sesion.user.id, rutaOpe, tema.id, numPreguntas),
+              ]);
               numFalladas = falladas.length;
-            } catch (e) { console.warn('No se pudieron leer las falladas:', e); }
+              intentosCompletos = ic;
+            } catch (e) { console.warn('No se pudieron leer las stats:', e); }
           }
 
-          const div = document.createElement('div');
-          div.className = 'tarjeta tarjeta--clicable tarjeta--fila tarjeta--aparecer';
-          div.style.animationDelay = (indiceTema++ * 60) + 'ms';
-          div.innerHTML = `
-            <div class="tarjeta__principal">
-              <div class="tarjeta__titulo">${tema.id}</div>
-              <p class="tarjeta__descripcion">${tema.titulo || ''}</p>
+          const card = document.createElement('div');
+          card.className = 'qwiz-stats tarjeta--aparecer';
+          card.style.animationDelay = (indice * 60) + 'ms';
+          card.innerHTML = `
+            <h2 class="qwiz-stats__titulo">${tema.titulo || tema.id}</h2>
+            <div class="qwiz-stats__grid">
+              <div class="qwiz-stats__celda">
+                <div class="qwiz-stats__valor">${numPreguntas}</div>
+                <div class="qwiz-stats__label">preguntas</div>
+              </div>
+              <div class="qwiz-stats__celda">
+                <div class="qwiz-stats__valor">${intentosCompletos}</div>
+                <div class="qwiz-stats__label">intento${intentosCompletos === 1 ? '' : 's'} completo${intentosCompletos === 1 ? '' : 's'}</div>
+              </div>
+              <div class="qwiz-stats__celda">
+                <div class="qwiz-stats__valor ${numFalladas > 0 ? 'qwiz-stats__valor--warning' : ''}">${numFalladas}</div>
+                <div class="qwiz-stats__label">pendiente${numFalladas === 1 ? '' : 's'}</div>
+              </div>
             </div>
-            <div class="tarjeta__estado">
-              <span>${numPreguntas > 0 ? numPreguntas + ' preguntas' : 'Disponible'}</span>
-              ${numFalladas > 0
-                ? `<span class="tarjeta__badge tarjeta__badge--error">${numFalladas} fallada${numFalladas === 1 ? '' : 's'}</span>`
-                : ''}
-            </div>
-            <div class="tarjeta__cta">
-              ${numFalladas > 0
-                ? `<button type="button" class="btn btn--secundario" data-modo="falladas">Repasar fallos</button>`
-                : ''}
+            <div class="qwiz-stats__acciones">
+              <button type="button" class="btn" data-accion="todas" ${numPreguntas === 0 ? 'disabled' : ''}>
+                Empezar quiz completo
+              </button>
+              <button type="button" class="btn btn--secundario" data-accion="falladas" ${numFalladas === 0 ? 'disabled' : ''}>
+                Repasar Fallos${numFalladas > 0 ? ` (${numFalladas})` : ''}
+              </button>
+              <button type="button" class="btn btn--peligro" data-accion="reset"
+                      ${(numFalladas === 0 && intentosCompletos === 0) ? 'disabled' : ''}>
+                Resetear
+              </button>
             </div>
           `;
-          div.addEventListener('click', () => arrancarQuiz(tema.id, 'todas'));
-          const btnFall = div.querySelector('[data-modo="falladas"]');
-          if (btnFall) {
-            btnFall.addEventListener('click', (e) => {
-              e.stopPropagation();
-              arrancarQuiz(tema.id, 'falladas');
+
+          card.querySelector('[data-accion="todas"]')
+            ?.addEventListener('click', () => arrancarQuiz(tema.id, 'todas'));
+          card.querySelector('[data-accion="falladas"]')
+            ?.addEventListener('click', () => arrancarQuiz(tema.id, 'falladas'));
+          card.querySelector('[data-accion="reset"]')
+            ?.addEventListener('click', async () => {
+              const ok = confirm(
+                `¿Resetear todo el progreso de ${tema.id}?\n\n` +
+                'Se borrarán tus intentos, las sesiones y los fallos acumulados de este tema.\n' +
+                'Esta acción no se puede deshacer.'
+              );
+              if (!ok) return;
+              const ids = preguntas.map(p => p.id);
+              const res = await Storage.borrarProgresoTema(sesion.user.id, rutaOpe, tema.id, ids);
+              if (!res.ok) {
+                alert('No se pudo resetear: ' + (res.motivo || 'error desconocido'));
+                return;
+              }
+              // Repinta la card en su sitio (sustituye el nodo)
+              const nueva = await renderStatsTema(tema, contenedor, indice);
+              card.replaceWith(nueva);
             });
-          }
-          listaWrap.appendChild(div);
+
+          return card;
+        };
+
+        let indiceTema = 0;
+        for (const tema of info.temas || []) {
+          const card = await renderStatsTema(tema, listaWrap, indiceTema++);
+          listaWrap.appendChild(card);
         }
         if (!info.temas || info.temas.length === 0) {
           listaWrap.innerHTML = '<div class="tarjeta">No hay temas cargados todavía.</div>';
