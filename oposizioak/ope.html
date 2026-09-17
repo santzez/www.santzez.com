@@ -201,7 +201,7 @@
             <button type="button" role="tab" class="tabs__tab tabs__tab--ia"
                     data-tab="${TAB_CLAUDE_ID}" aria-selected="false" hidden
                     title="Pregunta a la IA sobre este tema">
-              <img src="/assets/claude-mark.jpg" alt="Pregunta a la IA" class="tabs__tab-logo" />
+              Ask_Claude
             </button>
           </div>
           <div class="tabs__paneles">
@@ -392,61 +392,6 @@
       // Tipo "material" → PDFs por tema en Supabase Storage
       if (info.tipo === 'material') {
         await renderMaterial(info, rutaOpe, cont, subtitulo);
-        return;
-      }
-
-      // Tipo "podcasts" → lista de reproductores HTML5
-      if (info.tipo === 'podcasts') {
-        subtitulo.textContent = 'Podcasts';
-        cont.classList.add('lista-podcasts');
-        const podcasts = info.podcasts || [];
-        const base = info.urlBase || '';
-        if (podcasts.length === 0) {
-          cont.innerHTML = '<div class="tarjeta">Todavía no hay podcasts publicados.</div>';
-          return;
-        }
-        // Formateador mm:ss
-        const mmss = s => {
-          if (!s || isNaN(s)) return '';
-          const m = Math.floor(s / 60);
-          const ss = Math.floor(s % 60).toString().padStart(2, '0');
-          return `${m}:${ss}`;
-        };
-        podcasts.forEach((pod, i) => {
-          const url = base + pod.archivo;
-          const div = document.createElement('div');
-          div.className = 'tarjeta tarjeta--podcast tarjeta--aparecer';
-          div.style.animationDelay = (i * 60) + 'ms';
-          div.innerHTML = `
-            <div class="podcast__cabecera">
-              <div>
-                <div class="tarjeta__titulo">
-                  ${pod.tema ? `<span class="podcast__tema">${pod.tema}</span> ` : ''}${pod.titulo || pod.archivo}
-                </div>
-                ${pod.descripcion ? `<p class="tarjeta__descripcion">${pod.descripcion}</p>` : ''}
-              </div>
-              <span class="podcast__duracion" data-duracion>${pod.duracion ? mmss(pod.duracion) : ''}</span>
-            </div>
-            <div class="podcast__linea">
-              <audio class="podcast__audio" controls preload="metadata" src="${url}"></audio>
-              <a class="podcast__descarga btn btn--secundario" href="${url}" download="${pod.archivo}" title="Descargar el archivo m4a">↓ Descargar</a>
-            </div>
-          `;
-          const audio = div.querySelector('audio');
-          // Duración automática desde metadata (si no venía en el JSON)
-          const badgeDuracion = div.querySelector('[data-duracion]');
-          audio.addEventListener('loadedmetadata', () => {
-            if (!badgeDuracion.textContent.trim() && audio.duration && !isNaN(audio.duration)) {
-              badgeDuracion.textContent = mmss(audio.duration);
-            }
-          });
-          audio.addEventListener('error', () => {
-            badgeDuracion.textContent = '⚠';
-            badgeDuracion.title = 'No se pudo cargar el audio (¿archivo subido a R2?)';
-            badgeDuracion.style.color = 'var(--color-error)';
-          });
-          cont.appendChild(div);
-        });
         return;
       }
 
@@ -731,7 +676,7 @@
         div.style.animationDelay = (i * 60) + 'ms';
         div.innerHTML = `
           <div class="material__cabecera">
-            <div class="tarjeta__titulo"><span class="podcast__tema">${tema.id}</span> ${tema.titulo || tema.id}</div>
+            <div class="tarjeta__titulo"><span class="tema-badge">${tema.id}</span> ${tema.titulo || tema.id}</div>
           </div>
           <div class="material__lista"></div>
           ${esAdmin ? `

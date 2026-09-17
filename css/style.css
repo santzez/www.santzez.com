@@ -1718,45 +1718,21 @@ a.tarjeta:hover {
   }
 }
 
-/* Pestaña IA (botón con imagen de marca a la derecha del strip) */
-.tabs__tab--ia {
-  margin-left: auto;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.35rem 0.8rem !important;
-  background: #fff;
-  min-height: 46px;
-}
-.tabs__tab-logo {
-  display: block;
-  height: 26px;
-  width: auto;
-  max-width: 130px;
-  object-fit: contain;
-  /* Animación de entrada: aparece con un giro suave y se queda fija */
-  animation: tab-logo-entrada 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
-  transform-origin: center center;
-  transition: transform 200ms ease;
-}
-.tabs__tab--ia:hover .tabs__tab-logo {
-  transform: scale(1.04);
-}
-.tabs__tab--ia.activo {
-  background: var(--color-primario-suave, #eef2fa);
-  border-bottom: 3px solid var(--color-primario);
-}
-@keyframes tab-logo-entrada {
-  0%   { opacity: 0; transform: rotate(-140deg) scale(0.4); }
-  60%  { opacity: 1; }
-  100% { opacity: 1; transform: rotate(0)      scale(1);   }
-}
-@media (prefers-reduced-motion: reduce) {
-  .tabs__tab-logo { animation: none; }
+/* Badge redondo con el ID del tema (T1, T2, …) usado en varias listas */
+.tema-badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  background: var(--color-primario-suave);
+  color: var(--color-primario);
+  border-radius: var(--radio);
+  font-size: 0.85em;
+  font-weight: 600;
+  margin-right: 0.25rem;
+  vertical-align: baseline;
 }
 
 /* =============================================================
-   TABS — sub-secciones de un tema (Apuntes / Qwiz / Podcasts)
+   TABS — sub-secciones de un tema (Apuntes / Qwiz / Ask_Claude)
    Modo activado con renderComoTabs=true en el info.json del padre.
    ============================================================= */
 
@@ -2361,80 +2337,6 @@ button.tabs__tab:focus-visible {
 @media (max-width: 640px) {
   .material-pdf { flex-wrap: wrap; }
   .material-pdf__acciones { width: 100%; justify-content: flex-end; }
-}
-
-/* =============================================================
-   PODCASTS — reproductor con controles adicionales
-   ============================================================= */
-
-.lista-podcasts {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.tarjeta--podcast {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  padding: 1.25rem;
-}
-
-.podcast__cabecera {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 1rem;
-}
-
-.podcast__tema {
-  display: inline-block;
-  padding: 0.15rem 0.5rem;
-  background: var(--color-primario-suave);
-  color: var(--color-primario);
-  border-radius: var(--radio);
-  font-size: 0.85em;
-  font-weight: 600;
-  margin-right: 0.25rem;
-  vertical-align: baseline;
-}
-
-.podcast__duracion {
-  font-variant-numeric: tabular-nums;
-  color: var(--color-texto-suave);
-  font-size: 0.9rem;
-  white-space: nowrap;
-  padding-top: 0.2rem;
-}
-
-.podcast__linea {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding-top: 0.25rem;
-}
-
-.podcast__audio {
-  flex: 1 1 auto;
-  min-width: 0;         /* permite al <audio> encogerse dentro del flex */
-  min-height: 40px;
-  width: 100%;
-}
-
-.podcast__descarga {
-  flex: 0 0 auto;
-  font-size: 0.85rem;
-  padding: 0.4rem 0.85rem;
-  white-space: nowrap;
-}
-
-@media (max-width: 640px) {
-  .podcast__linea {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.5rem;
-  }
-  .podcast__descarga { text-align: center; }
 }
 
 /* =============================================================
