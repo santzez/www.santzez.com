@@ -600,7 +600,6 @@
         motorWrap.className = 'qwiz-motor';
         motorWrap.hidden = true;
         motorWrap.innerHTML = `
-          <button type="button" class="btn btn--secundario qwiz-volver">← Volver a la lista de temas</button>
           <div class="quiz-cabecera">
             <h2 class="quiz-titulo qwiz-embed__titulo">Quiz</h2>
             <div class="quiz-info">
@@ -640,14 +639,6 @@
             },
           });
         };
-
-        // Botón "Volver a la lista" del contenedor del motor
-        motorWrap.querySelector('.qwiz-volver').addEventListener('click', () => {
-          if (!confirm('¿Salir del quiz? Se perderá el progreso.')) return;
-          motorWrap.hidden = true;
-          listaWrap.hidden = false;
-          QuizEngine.destruir();
-        });
 
         let indiceTema = 0;
         for (const tema of info.temas || []) {
