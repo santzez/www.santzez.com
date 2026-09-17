@@ -202,7 +202,7 @@
           return '';
         };
 
-        // Construir estructura de tabs
+        // Construir estructura de tabs (icono + texto en cada botón).
         const tabsWrap = document.createElement('div');
         tabsWrap.className = 'tabs';
         tabsWrap.innerHTML = `
@@ -272,6 +272,12 @@
                   if (t) { bloqueMatch = b; temaMatch = t; break; }
                 }
                 if (bloqueMatch && temaMatch) {
+                  // Sentinel de 1px justo antes de la barra: cuando sale del
+                  // viewport por arriba, sabemos que la barra está "stuck".
+                  const sentinel = document.createElement('div');
+                  sentinel.className = 'tema-contexto-sentinel';
+                  cont.appendChild(sentinel);
+
                   barraContexto = document.createElement('div');
                   barraContexto.className = 'tema-contexto';
                   barraContexto.innerHTML = `
@@ -284,6 +290,10 @@
                     </div>
                     <div class="tema-contexto__nav">
                       <button type="button" class="tema-contexto__icono"
+                              data-goto="Material_de_estudio" title="Ir a Apuntes" aria-label="Ir a Apuntes">
+                        ${ICONO_APUNTES}
+                      </button>
+                      <button type="button" class="tema-contexto__icono"
                               data-goto="Qwiz" title="Ir a Qwiz" aria-label="Ir a Qwiz">
                         ${ICONO_QWIZ}
                       </button>
@@ -293,6 +303,17 @@
                       </button>
                     </div>`;
                   cont.appendChild(barraContexto);
+
+                  // Detecta cuándo la barra pasa a estar "pegada" arriba:
+                  // cuando el sentinel sale del viewport, activamos --stuck.
+                  if ('IntersectionObserver' in window) {
+                    const io = new IntersectionObserver((entradas) => {
+                      for (const e of entradas) {
+                        barraContexto.classList.toggle('tema-contexto--stuck', !e.isIntersecting);
+                      }
+                    }, { threshold: 0, rootMargin: '0px 0px 0px 0px' });
+                    io.observe(sentinel);
+                  }
                 }
               }
             }

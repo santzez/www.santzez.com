@@ -1788,11 +1788,30 @@ a.tarjeta:hover {
   font-weight: 700;
   margin-right: 0.35rem;
 }
+/* Sentinel invisible que usa el IntersectionObserver para detectar
+   cuándo la barra ha quedado pegada arriba */
+.tema-contexto-sentinel {
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
 .tema-contexto__nav {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
+  /* Ocultos hasta que la barra queda anclada (los tabs completos siguen
+     visibles justo debajo, así que aquí no aportan valor todavía). */
+  opacity: 0;
+  transform: translateX(4px);
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.22s ease;
+}
+.tema-contexto--stuck .tema-contexto__nav {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
 }
 .tema-contexto__icono {
   display: inline-flex;
