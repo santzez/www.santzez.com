@@ -1821,6 +1821,56 @@ a.tarjeta:hover {
   .tema-contexto__tema { white-space: normal; }
 }
 
+/* -------------------------------------------------------------
+   MODO SPLIT — Apuntes/Qwiz a 2/3 + Ask_Claude a 1/3
+   Se activa cuando el usuario pulsa Ask_Claude viniendo de Apuntes o Qwiz.
+   ------------------------------------------------------------- */
+.tabs__paneles.modo-split {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+.tabs__paneles.modo-split > .tabs__panel {
+  min-width: 0;   /* evita que el contenido ancho rompa el grid */
+}
+/* En modo split el chat va sticky para que se quede visible al hacer scroll */
+.tabs__paneles.modo-split .tabs__panel--claude {
+  position: sticky;
+  top: 4.5rem;
+  align-self: start;
+}
+/* Botón cerrar (X) del chat: solo visible cuando estamos en modo split */
+.chat-ia__cerrar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  margin-left: 0.4rem;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.chat-ia__cerrar:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+.chat-ia__cerrar svg { display: block; }
+
+/* En móvil el split se apila: origen arriba, chat debajo */
+@media (max-width: 900px) {
+  .tabs__paneles.modo-split {
+    grid-template-columns: 1fr;
+  }
+  .tabs__paneles.modo-split .tabs__panel--claude {
+    position: static;
+  }
+}
+
 /* Icono en cada botón de tab (delante del texto) */
 .tabs__icono {
   margin-right: 0.4rem;

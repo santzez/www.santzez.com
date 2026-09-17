@@ -234,6 +234,10 @@
                 <div class="chat-ia__cabecera">
                   <div class="chat-ia__titulo">Pregunta a la IA sobre este tema</div>
                   <div class="chat-ia__cuota" id="chat-cuota">···</div>
+                  <button type="button" class="chat-ia__cerrar" id="chat-cerrar-split"
+                          aria-label="Cerrar el chat y volver al panel completo" title="Cerrar split" hidden>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6l-6 6-6 6"/></svg>
+                  </button>
                 </div>
                 <div class="chat-ia__mensajes" id="chat-mensajes">
                   <div class="chat-ia__vacio">
@@ -306,7 +310,61 @@
         }
 
         // Handlers de cambio de tab (con hash en la URL para deep-link)
+        // -------------------------------------------------------------
+        //  MODO SPLIT: si el usuario pulsa ASK_CLAUDE viniendo desde Apuntes
+        //  o Qwiz, no cambiamos de tab; en su lugar el panel origen queda a
+        //  2/3 a la izquierda y el chat aparece a 1/3 a la derecha. Al pulsar
+        //  Apuntes/Qwiz o el botón X del chat se sale del modo split.
+        // -------------------------------------------------------------
+        const panelesWrap = tabsWrap.querySelector('.tabs__paneles');
+        const btnCerrarSplit = tabsWrap.querySelector('#chat-cerrar-split');
+        const IDS_SPLIT_ORIGEN = new Set(['Material_de_estudio', 'Qwiz']);
+        let origenSplit = null;   // 'Material_de_estudio' | 'Qwiz' | null
+        // La función que monta el chat perezosamente se define más abajo, en
+        // el bloque panelApuntes. Aquí guardamos un placeholder no-op para
+        // poder llamarlo desde entrarEnSplit sin importar el orden.
+        let montarChatIA = () => {};
+
+        const salirDeSplit = () => {
+          if (!origenSplit) return;
+          origenSplit = null;
+          panelesWrap.classList.remove('modo-split');
+          if (btnCerrarSplit) btnCerrarSplit.hidden = true;
+        };
+
+        const entrarEnSplit = (origen) => {
+          origenSplit = origen;
+          panelesWrap.classList.add('modo-split');
+          if (btnCerrarSplit) btnCerrarSplit.hidden = false;
+          montarChatIA();
+          // Los dos paneles visibles son "origen" (2/3) y ASK_CLAUDE (1/3)
+          tabsWrap.querySelectorAll('.tabs__panel').forEach(p => {
+            const id = p.dataset.panel;
+            p.hidden = (id !== origen && id !== TAB_CLAUDE_ID);
+          });
+          // Marcamos como activos ambos tabs
+          tabsWrap.querySelectorAll('.tabs__tab').forEach(b => {
+            const activo = (b.dataset.tab === origen || b.dataset.tab === TAB_CLAUDE_ID);
+            b.classList.toggle('activo', activo);
+            b.setAttribute('aria-selected', activo);
+          });
+          history.replaceState(null, '', location.pathname + location.search + '#split-' + origen);
+        };
+
         const cambiarTab = (idTab) => {
+          // ¿Es una transición Apuntes/Qwiz -> ASK_CLAUDE? => activa split.
+          const activoActual = tabsWrap.querySelector('.tabs__tab.activo')?.dataset.tab;
+          if (idTab === TAB_CLAUDE_ID && IDS_SPLIT_ORIGEN.has(activoActual) && !origenSplit) {
+            entrarEnSplit(activoActual);
+            // Cronómetro de Qwiz: pausamos cuando dejamos de mirarlo activamente
+            if (activoActual === 'Qwiz' && window.QuizEngine && QuizEngine.estaActivo()) {
+              // seguimos "viendo" el Qwiz, así que dejamos el crono corriendo
+            }
+            return;
+          }
+          // Cualquier otro clic saca del split (si estamos en él)
+          if (origenSplit) salirDeSplit();
+
           tabsWrap.querySelectorAll('.tabs__tab').forEach(b => {
             const activo = b.dataset.tab === idTab;
             b.classList.toggle('activo', activo);
@@ -324,6 +382,13 @@
             else                   QuizEngine.pausarCronometro();
           }
         };
+
+        // Botón X del chat: sale del split y vuelve al origen a ancho completo
+        if (btnCerrarSplit) {
+          btnCerrarSplit.addEventListener('click', () => {
+            if (origenSplit) cambiarTab(origenSplit);
+          });
+        }
         cambiarTabRef = cambiarTab; // expone la función a la barra de contexto
         tabsWrap.querySelectorAll('.tabs__tab').forEach(btn => {
           btn.addEventListener('click', () => cambiarTab(btn.dataset.tab));
@@ -384,6 +449,8 @@
               contextoHtml: panelApuntes.__contextoHtml,
             });
           };
+          // Exponemos la función al closure de cambiarTab/entrarEnSplit
+          montarChatIA = montarChatSiFalta;
           btnClaude.addEventListener('click', montarChatSiFalta);
           // Si el usuario aterriza directo con hash #__claude__
           if (decodeURIComponent(location.hash.replace('#', '')).toLowerCase() === TAB_CLAUDE_ID) {
