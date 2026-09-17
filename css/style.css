@@ -1718,19 +1718,41 @@ a.tarjeta:hover {
   }
 }
 
-/* Pestaña IA (destaca ligeramente sobre las normales) */
+/* Pestaña IA (botón con imagen de marca a la derecha del strip) */
 .tabs__tab--ia {
   margin-left: auto;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  justify-content: center;
+  padding: 0.35rem 0.8rem !important;
+  background: #fff;
+  min-height: 46px;
 }
-.tabs__tab--ia .tabs__tab-icono {
-  flex: 0 0 auto;
+.tabs__tab-logo {
+  display: block;
+  height: 26px;
+  width: auto;
+  max-width: 130px;
+  object-fit: contain;
+  /* Animación de entrada: aparece con un giro suave y se queda fija */
+  animation: tab-logo-entrada 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  transform-origin: center center;
+  transition: transform 200ms ease;
+}
+.tabs__tab--ia:hover .tabs__tab-logo {
+  transform: scale(1.04);
 }
 .tabs__tab--ia.activo {
-  background: var(--color-primario);
-  color: #fff;
+  background: var(--color-primario-suave, #eef2fa);
+  border-bottom: 3px solid var(--color-primario);
+}
+@keyframes tab-logo-entrada {
+  0%   { opacity: 0; transform: rotate(-140deg) scale(0.4); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: rotate(0)      scale(1);   }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tabs__tab-logo { animation: none; }
 }
 
 /* =============================================================
