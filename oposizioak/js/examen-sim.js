@@ -11,9 +11,11 @@
      - tipo "desarrollo": respuesta libre; Claude corrige pregunta a
                           pregunta con los criterios del tribunal.
 
-   Flujo: resumen + "Empezar examen" → apartado 1 con temporizador →
-   "Terminar apartado" (o fin del tiempo) → corrección + campo para
-   pedir algo a Claude → "Iniciar siguiente apartado" → … → resumen.
+   Flujo: los apartados se listan como desplegables independientes
+   (contraídos muestran el progreso). Al desplegar uno → "Empezar" →
+   preguntas con temporizador → "Terminar" (o fin del tiempo) →
+   corrección + campo para pedir algo a Claude. Con los tres
+   terminados aparece el resultado global.
 
    El progreso se guarda en localStorage: si recargas, el examen y
    los temporizadores siguen donde estaban.
@@ -35,7 +37,7 @@
     const clave = 'santzez:examen:' + idExamen;
     let estado;
     try { estado = JSON.parse(localStorage.getItem(clave)) || null; } catch { estado = null; }
-    if (!estado) estado = { empezado: false, apartados: {} };
+    if (!estado) estado = { apartados: {}, abiertos: [] };
     return {
       estado,
       guardar() { try { localStorage.setItem(clave, JSON.stringify(estado)); } catch {} },
@@ -119,97 +121,98 @@
         return ns.every(n => typeof n === 'number') ? ns.reduce((a, b) => a + b, 0) : null;
       };
 
+      // Apartados desplegados (se recuerda al recargar)
+      if (!Array.isArray(est.abiertos)) est.abiertos = [];
+      const abierto = (id) => est.abiertos.includes(id);
+      const fijarAbierto = (id, si) => {
+        est.abiertos = est.abiertos.filter(x => x !== id);
+        if (si) est.abiertos.push(id);
+        alm.guardar();
+      };
+
       function pintar() {
         clearInterval(tic);
         contenedor.innerHTML = '';
         contenedor.appendChild(pintarCabecera());
-        if (!est.empezado) return;
-        for (const [idx, ap] of datos.apartados.entries()) {
-          const st = alm.apartado(ap.id);
-          if (!st.inicio) {
-            const prev = datos.apartados[idx - 1];
-            if (prev && !alm.apartado(prev.id).fin) break;
-            contenedor.appendChild(pintarBotonInicio(ap));
-            break;
-          }
-          contenedor.appendChild(pintarApartado(ap, st));
-          if (!st.fin) break;
-        }
+        for (const ap of datos.apartados) contenedor.appendChild(pintarApartado(ap, alm.apartado(ap.id)));
         if (datos.apartados.every(ap => alm.apartado(ap.id).fin)) contenedor.appendChild(pintarResumen());
         arrancarReloj();
       }
 
-      // ---------- Cabecera con los apartados ----------
+      // ---------- Cabecera ----------
       function pintarCabecera() {
         const div = document.createElement('section');
-        div.className = 'examen__cabecera tarjeta';
+        div.className = 'examen__cabecera';
         const total = datos.apartados.reduce((s, a) => s + a.minutos, 0);
+        const hayProgreso = datos.apartados.some(ap => alm.apartado(ap.id).inicio);
         div.innerHTML = `
           <div class="examen__titulo">${esc(datos.titulo)}</div>
-          <ol class="examen__indice">
-            ${datos.apartados.map(ap => {
-              const st = alm.apartado(ap.id);
-              const n = notaApartado(ap);
-              const estado = st.fin ? (n === null ? 'Terminado' : `${fmt(n)} / ${ap.maximo}`) : (st.inicio ? 'En curso' : '');
-              return `<li><span class="examen__indice-titulo">${esc(ap.titulo)}</span>
-                <span class="examen__indice-meta">${ap.preguntas.length} preguntas · ${ap.minutos} min · ${ap.maximo} puntos</span>
-                ${estado ? `<span class="examen__indice-estado">${estado}</span>` : ''}</li>`;
-            }).join('')}
-          </ol>
-          <p class="examen__nota-pie">Tiempo total: ${Math.floor(total / 60)} h ${total % 60} min. Los tiempos son orientativos.
-            ${datos.notaA ? esc(datos.notaA) : ''}</p>
-          <div class="examen__acciones">
-            ${est.empezado
-              ? '<button type="button" class="btn btn--secundario btn--pequeno" data-accion="reiniciar">Reiniciar simulacro</button>'
-              : '<button type="button" class="btn" data-accion="empezar">Empezar examen</button>'}
-          </div>`;
-        div.querySelector('[data-accion="empezar"]')?.addEventListener('click', () => {
-          est.empezado = true;
-          alm.apartado(datos.apartados[0].id).inicio = Date.now();
-          alm.guardar();
-          pintar();
-          contenedor.querySelector('.examen__apartado')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
+          <p class="examen__nota-pie">Elige el apartado que quieras hacer; cada uno tiene su propio tiempo
+            (${total} min en total, orientativos). ${datos.notaA ? esc(datos.notaA) : ''}</p>
+          ${hayProgreso ? '<div class="examen__acciones"><button type="button" class="btn btn--secundario btn--pequeno" data-accion="reiniciar">Reiniciar simulacro</button></div>' : ''}`;
         div.querySelector('[data-accion="reiniciar"]')?.addEventListener('click', () => {
-          if (!confirm('¿Reiniciar el simulacro? Se borrarán tus respuestas y correcciones.')) return;
+          if (!confirm('¿Reiniciar el simulacro completo? Se borrarán tus respuestas y correcciones de los tres apartados.')) return;
           alm.reiniciar();
           for (const k of Object.keys(est)) delete est[k];
-          Object.assign(est, { empezado: false, apartados: {} });
+          Object.assign(est, { apartados: {}, abiertos: [] });
           pintar();
         });
         return div;
       }
 
-      function pintarBotonInicio(ap) {
-        const div = document.createElement('div');
-        div.className = 'examen__siguiente';
-        div.innerHTML = `<button type="button" class="btn">Iniciar ${esc(ap.titulo)} · ${ap.minutos} min</button>`;
-        div.querySelector('button').addEventListener('click', () => {
-          alm.apartado(ap.id).inicio = Date.now();
-          alm.guardar();
-          pintar();
-          contenedor.querySelector(`[data-apartado="${ap.id}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-        return div;
+      // Resumen que se ve con el apartado contraído
+      function textoProgreso(ap, st) {
+        if (!st.inicio) return 'Sin empezar';
+        const respondidas = ap.preguntas.filter((_, i) => {
+          const r = st.respuestas[i];
+          return ap.tipo === 'test' ? (r !== undefined && r !== null && r !== '') : !!String(r || '').trim();
+        }).length;
+        if (!st.fin) {
+          const quedan = Math.max(0, Math.round((st.inicio + ap.minutos * 60000 - Date.now()) / 1000));
+          return `En curso · quedan ${Math.floor(quedan / 60)}:${String(quedan % 60).padStart(2, '0')} · ${respondidas}/${ap.preguntas.length} respondidas`;
+        }
+        const n = notaApartado(ap);
+        return n === null ? `Terminado · ${respondidas}/${ap.preguntas.length} respondidas · sin corregir` : `Nota ${fmt(n)} / ${ap.maximo}`;
       }
 
-      // ---------- Un apartado ----------
+      // ---------- Un apartado (desplegable) ----------
       function pintarApartado(ap, st) {
-        const sec = document.createElement('section');
-        sec.className = 'examen__apartado' + (st.fin ? ' examen__apartado--terminado' : '');
-        sec.dataset.apartado = ap.id;
-        sec.innerHTML = `
-          <header class="examen__barra">
-            <div>
-              <div class="examen__barra-titulo">${esc(ap.titulo)}</div>
-              <div class="examen__barra-meta">${ap.maximo} puntos${ap.minimo ? ` · mínimo ${ap.minimo}` : ''}</div>
-            </div>
+        const det = document.createElement('details');
+        det.className = 'examen__apartado' + (st.fin ? ' examen__apartado--terminado' : '') + (st.inicio && !st.fin ? ' examen__apartado--en-curso' : '');
+        det.dataset.apartado = ap.id;
+        det.open = abierto(ap.id);
+        det.innerHTML = `
+          <summary class="examen__cabeza">
+            <span class="examen__cabeza-titulo">${esc(ap.titulo)}</span>
+            <span class="examen__cabeza-meta">${ap.preguntas.length} preguntas · ${ap.minutos} min · ${ap.maximo} puntos${ap.minimo ? ` (mín. ${ap.minimo})` : ''}</span>
+            <span class="examen__cabeza-progreso" data-progreso="${ap.id}">${textoProgreso(ap, st)}</span>
+          </summary>
+          <div class="examen__cuerpo"></div>`;
+        det.addEventListener('toggle', () => fijarAbierto(ap.id, det.open));
+        const cuerpo = det.querySelector('.examen__cuerpo');
+
+        if (!st.inicio) {
+          cuerpo.innerHTML = `
+            <p class="examen__descripcion">${esc(ap.descripcion)}</p>
+            <div class="examen__acciones"><button type="button" class="btn">Empezar ${esc(ap.titulo)} · ${ap.minutos} min</button></div>`;
+          cuerpo.querySelector('button').addEventListener('click', () => {
+            st.inicio = Date.now();
+            fijarAbierto(ap.id, true);
+            pintar();
+            contenedor.querySelector(`[data-apartado="${ap.id}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+          return det;
+        }
+
+        cuerpo.innerHTML = `
+          <div class="examen__barra">
+            <div class="examen__barra-titulo">${esc(ap.titulo)}</div>
             <div class="examen__reloj" data-reloj="${ap.id}"></div>
-          </header>
+          </div>
           <p class="examen__descripcion">${esc(ap.descripcion)}</p>
           ${ap.enunciadoHtml ? `<details class="examen__enunciado" open><summary>Enunciado del caso</summary><div class="tema-cuerpo">${ap.enunciadoHtml}</div></details>` : ''}
           <div class="examen__preguntas"></div>`;
-        const lista = sec.querySelector('.examen__preguntas');
+        const lista = cuerpo.querySelector('.examen__preguntas');
         let fase = null;
         ap.preguntas.forEach((q, i) => {
           if (q.fase && q.fase !== fase) {
@@ -226,11 +229,11 @@
             if (!confirm(`¿Terminar ${ap.titulo}? Ya no podrás cambiar tus respuestas.`)) return;
             terminar(ap);
           });
-          sec.appendChild(fin);
+          cuerpo.appendChild(fin);
         } else {
-          sec.appendChild(pintarCorreccion(ap, st));
+          cuerpo.appendChild(pintarCorreccion(ap, st));
         }
-        return sec;
+        return det;
       }
 
       function pintarTest(ap, q, i, st) {
@@ -316,6 +319,16 @@
           div.querySelector('[data-accion="corregir"]').addEventListener('click', (e) => corregirDesarrollo(ap, st, e.target, div));
         }
         div.appendChild(pintarPreguntaLibre(ap, st));
+        const rep = document.createElement('div');
+        rep.className = 'examen__acciones';
+        rep.innerHTML = `<button type="button" class="btn btn--secundario btn--pequeno">Repetir este apartado</button>`;
+        rep.querySelector('button').addEventListener('click', () => {
+          if (!confirm(`¿Repetir ${ap.titulo}? Se borrarán tus respuestas y la corrección de este apartado.`)) return;
+          delete est.apartados[ap.id];
+          alm.guardar();
+          pintar();
+        });
+        div.appendChild(rep);
         return div;
       }
 
@@ -421,8 +434,19 @@
         const actualizar = () => {
           for (const ap of datos.apartados) {
             const st = alm.apartado(ap.id);
+            if (!st.inicio) continue;
+            const prog = contenedor.querySelector(`[data-progreso="${ap.id}"]`);
+            if (prog) prog.textContent = textoProgreso(ap, st);
             const nodo = contenedor.querySelector(`[data-reloj="${ap.id}"]`);
-            if (!nodo || !st.inicio) continue;
+            if (!nodo) {
+              // Contraído: el tiempo sigue corriendo aunque no se vea el reloj
+              if (!st.fin && Date.now() >= st.inicio + ap.minutos * 60000) {
+                alert(`Se acabó el tiempo de ${ap.titulo}.`);
+                terminar(ap);
+                return;
+              }
+              continue;
+            }
             const limite = st.inicio + ap.minutos * 60000;
             const fin = st.fin || Date.now();
             const quedan = Math.max(0, Math.round((limite - fin) / 1000));

@@ -2850,25 +2850,39 @@ html.anim-view-transitions::view-transition-new(root) {
    Simulacro de examen (oposizioak/js/examen-sim.js)
    ============================================================= */
 .examen { max-width: 820px; margin: 0 auto; }
-.examen__cabecera { padding: 1.5rem; }
+.examen__cabecera { margin-bottom: 0.5rem; }
 .examen__titulo { font-family: var(--fuente-corporativa); font-weight: 700; font-size: 1.2rem; color: var(--color-primario); margin-bottom: 1rem; }
-.examen__indice { margin: 0; padding-left: 1.25rem; display: grid; gap: 0.6rem; }
-.examen__indice li { display: flex; flex-wrap: wrap; gap: 0.25rem 0.75rem; align-items: baseline; }
-.examen__indice-titulo { font-weight: 600; }
-.examen__indice-meta { color: var(--color-texto-suave); font-size: 0.9rem; }
-.examen__indice-estado { margin-left: auto; font-weight: 600; color: var(--color-primario); font-size: 0.9rem; }
 .examen__nota-pie { color: var(--color-texto-suave); font-size: 0.85rem; margin: 1rem 0 0; }
 .examen__acciones { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.25rem; }
-.examen__siguiente { text-align: center; margin: 2rem 0; }
 
-.examen__apartado { margin-top: 2rem; border-top: 3px solid var(--color-primario); padding-top: 0.5rem; }
+.examen__apartado {
+  margin-top: 1rem; border: 1px solid var(--color-borde); border-radius: var(--radio-grande);
+  background: var(--color-fondo); box-shadow: var(--sombra);
+}
+.examen__apartado--en-curso { border-color: var(--color-primario); }
+.examen__cabeza {
+  list-style: none; cursor: pointer; padding: 1rem 1.25rem; display: grid;
+  grid-template-columns: 1fr auto; gap: 0.2rem 1rem; align-items: baseline;
+}
+.examen__cabeza::-webkit-details-marker { display: none; }
+.examen__cabeza::after {
+  content: '▸'; grid-column: 2; grid-row: 1; color: var(--color-primario); transition: transform 0.2s;
+}
+.examen__apartado[open] > .examen__cabeza::after { transform: rotate(90deg); }
+.examen__apartado[open] > .examen__cabeza { border-bottom: 1px solid var(--color-borde-claro); }
+.examen__cabeza-titulo { font-family: var(--fuente-corporativa); font-weight: 700; font-size: 1.1rem; color: var(--color-primario); text-transform: uppercase; }
+.examen__cabeza-meta { grid-column: 1; color: var(--color-texto-suave); font-size: 0.85rem; }
+.examen__cabeza-progreso { grid-column: 1 / -1; font-size: 0.9rem; font-weight: 600; color: var(--color-texto); }
+.examen__apartado--en-curso .examen__cabeza-progreso { color: var(--color-primario); }
+.examen__cuerpo { padding: 0 1.25rem 1.25rem; }
+.examen__apartado[open] > .examen__cuerpo { animation: examen-desplegar 0.25s ease-out; }
+@keyframes examen-desplegar { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
 .examen__barra {
   position: sticky; top: 0; z-index: 5;
   display: flex; justify-content: space-between; align-items: center; gap: 1rem;
   background: var(--color-fondo); padding: 0.75rem 0; border-bottom: 1px solid var(--color-borde-claro);
 }
 .examen__barra-titulo { font-family: var(--fuente-corporativa); font-weight: 700; font-size: 1.15rem; color: var(--color-primario); text-transform: uppercase; }
-.examen__barra-meta { color: var(--color-texto-suave); font-size: 0.85rem; }
 .examen__reloj {
   font-family: var(--fuente-corporativa); font-variant-numeric: tabular-nums; font-weight: 700; font-size: 1.4rem;
   color: var(--color-primario); background: var(--color-primario-suave); border-radius: var(--radio); padding: 0.3rem 0.8rem;
