@@ -80,6 +80,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="js/quiz-engine.js"></script>
 <script src="js/chat-ia.js"></script>
+<script src="js/examen-sim.js"></script>
 <script>
   /* -------------------------------------------------------------
      ope.html — navegación jerárquica de una oposición.
@@ -214,9 +215,11 @@
         const ICONO_APUNTES = `<svg class="tabs__icono" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v16H6.5A2.5 2.5 0 0 1 4 16.5V5.5Z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H12v16h5.5A2.5 2.5 0 0 0 20 16.5V5.5Z"/></svg>`;
         const ICONO_QWIZ = `<svg class="tabs__icono" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>`;
         const ICONO_CLAUDE = `<svg class="tabs__icono" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.6 5.8a2 2 0 0 0 1.6 1.6L21 12l-5.8 1.6a2 2 0 0 0-1.6 1.6L12 21l-1.6-5.8a2 2 0 0 0-1.6-1.6L3 12l5.8-1.6a2 2 0 0 0 1.6-1.6L12 3Z"/></svg>`;
+        const ICONO_EXAMEN = `<svg class="tabs__icono" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/><path d="M9 2h6"/></svg>`;
         const iconoDe = (h) => {
           if (!h) return '';
           if (h.id === 'Qwiz') return ICONO_QWIZ;
+          if (h.id === 'Examen') return ICONO_EXAMEN;
           // Apuntes: hoy usa id "Material_de_estudio" con nombre "Apuntes"
           if (h.id === 'Material_de_estudio' || h.nombre === 'Apuntes') return ICONO_APUNTES;
           return '';
@@ -531,6 +534,22 @@
           cont.__idTema = rutaOpe.split('/').slice(-2)[0]; // T{n}
         } catch (e) {
           cont.innerHTML = `<div class="tarjeta">Error cargando el contenido: ${e.message}</div>`;
+        }
+        return;
+      }
+
+      // Tipo "examen" → simulacro por apartados (datos en el bucket privado)
+      if (info.tipo === 'examen' && info.privado) {
+        subtitulo.hidden = true;
+        try {
+          const { data, error } = await AuthSession.cliente().storage
+            .from(info.privado.bucket).download(info.privado.ruta);
+          if (error) throw new Error('No se pudo cargar el examen');
+          const doc = new DOMParser().parseFromString(await data.text(), 'text/html');
+          const datos = JSON.parse(doc.getElementById('examen-datos').textContent);
+          ExamenSim.montar({ contenedor: cont, datos });
+        } catch (e) {
+          cont.innerHTML = `<div class="tarjeta">Error cargando el examen: ${e.message}</div>`;
         }
         return;
       }

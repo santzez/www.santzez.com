@@ -2845,3 +2845,70 @@ html.anim-view-transitions::view-transition-new(root) {
   .tema-figura { border-color: #bbb; break-inside: avoid; page-break-inside: avoid; }
   .tema-figura figcaption { color: #000; border-bottom-color: #ccc; }
 }
+
+/* =============================================================
+   Simulacro de examen (oposizioak/js/examen-sim.js)
+   ============================================================= */
+.examen { max-width: 820px; margin: 0 auto; }
+.examen__cabecera { padding: 1.5rem; }
+.examen__titulo { font-family: var(--fuente-corporativa); font-weight: 700; font-size: 1.2rem; color: var(--color-primario); margin-bottom: 1rem; }
+.examen__indice { margin: 0; padding-left: 1.25rem; display: grid; gap: 0.6rem; }
+.examen__indice li { display: flex; flex-wrap: wrap; gap: 0.25rem 0.75rem; align-items: baseline; }
+.examen__indice-titulo { font-weight: 600; }
+.examen__indice-meta { color: var(--color-texto-suave); font-size: 0.9rem; }
+.examen__indice-estado { margin-left: auto; font-weight: 600; color: var(--color-primario); font-size: 0.9rem; }
+.examen__nota-pie { color: var(--color-texto-suave); font-size: 0.85rem; margin: 1rem 0 0; }
+.examen__acciones { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.25rem; }
+.examen__siguiente { text-align: center; margin: 2rem 0; }
+
+.examen__apartado { margin-top: 2rem; border-top: 3px solid var(--color-primario); padding-top: 0.5rem; }
+.examen__barra {
+  position: sticky; top: 0; z-index: 5;
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  background: var(--color-fondo); padding: 0.75rem 0; border-bottom: 1px solid var(--color-borde-claro);
+}
+.examen__barra-titulo { font-family: var(--fuente-corporativa); font-weight: 700; font-size: 1.15rem; color: var(--color-primario); text-transform: uppercase; }
+.examen__barra-meta { color: var(--color-texto-suave); font-size: 0.85rem; }
+.examen__reloj {
+  font-family: var(--fuente-corporativa); font-variant-numeric: tabular-nums; font-weight: 700; font-size: 1.4rem;
+  color: var(--color-primario); background: var(--color-primario-suave); border-radius: var(--radio); padding: 0.3rem 0.8rem;
+}
+.examen__reloj--aviso { color: var(--color-error); background: var(--color-error-suave); }
+.examen__reloj--parado { font-size: 0.9rem; font-weight: 600; color: var(--color-texto-suave); background: var(--color-fondo-alt); }
+.examen__descripcion { color: var(--color-texto-suave); }
+.examen__enunciado { background: var(--color-fondo-alt); border: 1px solid var(--color-borde); border-radius: var(--radio); padding: 0.75rem 1rem; margin: 1rem 0; }
+.examen__enunciado summary { cursor: pointer; font-weight: 600; color: var(--color-primario); }
+.examen__fase { font-family: var(--fuente-corporativa); color: var(--color-primario); margin: 2rem 0 0.5rem; font-size: 1.05rem; }
+
+.examen__pregunta { padding: 1.25rem 0; border-bottom: 1px solid var(--color-borde-claro); }
+.examen__enunciado-pregunta { margin-bottom: 0.75rem; line-height: 1.5; }
+.examen__enunciado-pregunta .tema-cuerpo p:first-child { margin-top: 0; }
+.examen__puntos { color: var(--color-texto-suave); font-size: 0.9rem; }
+.examen__opcion {
+  display: flex; gap: 0.6rem; align-items: flex-start; padding: 0.5rem 0.75rem; margin: 0.3rem 0;
+  border: 1px solid var(--color-borde-claro); border-radius: var(--radio); cursor: pointer;
+}
+.examen__opcion:hover { background: var(--color-fondo-alt); }
+.examen__opcion input { margin-top: 0.25rem; }
+.examen__opcion--blanco { color: var(--color-texto-suave); font-size: 0.9rem; border-style: dashed; }
+.examen__opcion--correcta { border-color: var(--color-acierto); background: var(--color-acierto-suave); }
+.examen__opcion--fallo { border-color: var(--color-error); background: var(--color-error-suave); }
+.examen__aviso { font-size: 0.85rem; color: var(--color-texto-suave); font-style: italic; }
+.examen__texto {
+  width: 100%; box-sizing: border-box; font: inherit; line-height: 1.5; padding: 0.75rem;
+  border: 1px solid var(--color-borde); border-radius: var(--radio); resize: vertical; background: var(--color-fondo);
+}
+.examen__texto[readonly] { background: var(--color-fondo-alt); }
+.examen__criterios { font-size: 0.85rem; color: var(--color-texto-suave); }
+.examen__nota-pregunta { font-weight: 700; color: var(--color-primario); margin: 0.5rem 0; }
+.examen__claude { background: var(--color-primario-suave); border-radius: var(--radio); padding: 0.75rem 1rem; font-size: 0.95rem; }
+.examen__claude p { margin: 0.3rem 0; }
+
+.examen__correccion { margin-top: 1.5rem; padding: 1.5rem; }
+.examen__nota-grande { font-family: var(--fuente-corporativa); font-size: 2.2rem; font-weight: 700; color: var(--color-primario); }
+.examen__nota-grande small { font-size: 1rem; color: var(--color-texto-suave); }
+.examen__progreso { color: var(--color-texto-suave); font-size: 0.9rem; }
+.examen__pregunta-libre { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--color-borde-claro); }
+.examen__pregunta-libre-titulo { display: block; font-weight: 600; margin-bottom: 0.5rem; }
+.examen__conversacion { display: grid; gap: 0.5rem; margin-bottom: 0.75rem; }
+.examen__resumen { margin: 2rem 0; padding: 1.5rem; }

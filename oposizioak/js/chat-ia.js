@@ -69,6 +69,44 @@
   }
 
   window.ChatIA = {
+    markdown: renderMarkdownLigero,
+
+    /**
+     * Consulta suelta (sin UI de chat), p. ej. para corregir el simulacro de
+     * examen. Devuelve el texto completo; onTexto recibe el acumulado al vuelo.
+     */
+    async consultar({ cliente, pregunta, contexto, idTema, onTexto }) {
+      const supabaseUrl = (cliente.rest && cliente.rest.url)
+        ? cliente.rest.url.replace(/\/rest\/v1\/?$/, '')
+        : (typeof SUPABASE_URL !== 'undefined' ? SUPABASE_URL : '');
+      const { data: { session } } = await cliente.auth.getSession();
+      if (!session) throw new Error('No hay sesión');
+      const resp = await fetch(supabaseUrl + FN_URL_PATH, {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + session.access_token,
+          'Content-Type': 'application/json',
+          'apikey': (typeof SUPABASE_ANON_KEY !== 'undefined' ? SUPABASE_ANON_KEY : ''),
+        },
+        body: JSON.stringify({ pregunta, contextoTema: contexto.slice(0, 55000), historial: [], idTema }),
+      });
+      if (!resp.ok) {
+        let msg = 'Error ' + resp.status;
+        try { msg = (await resp.json()).error || msg; } catch {}
+        throw new Error(msg);
+      }
+      const reader = resp.body.getReader();
+      const decoder = new TextDecoder();
+      let acumulado = '';
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        acumulado += decoder.decode(value, { stream: true });
+        if (onTexto) onTexto(acumulado);
+      }
+      return acumulado;
+    },
+
     montar({ contenedor, cliente, idTema, contextoHtml }) {
       const mensajes = contenedor.querySelector('#chat-mensajes');
       const form = contenedor.querySelector('#chat-form');
