@@ -218,8 +218,19 @@
   });
 
   // ---------- Top 10 falladas ----------
+  // Ruta del JSON del tema a partir del ID de la pregunta
+  // (ej: OPE_CAU_T7_012 → .../OPE_CAU/T7/Qwiz/OPE_CAU_T7.json)
+  function rutaTema(id) {
+    let m = id.match(/^OPE_Donostia_Tema(\d+)_/);
+    if (m) return `OPE_DonostiaTIK_2024/Temario_General_C1/Qwiz/OPE_Donostia_Tema${m[1]}.json`;
+    m = id.match(/^OPE_CAU_T(\d+)_/);
+    if (m) return `OPE_DonostiaTIK_2024/Temario_Especifico/OPE_CAU/T${m[1]}/Qwiz/OPE_CAU_T${m[1]}.json`;
+    return null;
+  }
+
+  // Solo preguntas de temas que siguen en la web (las de OPE_1 se eliminaron)
   const top = Object.entries(statsPorPregunta)
-    .filter(([, s]) => s.fa > 0)
+    .filter(([id, s]) => s.fa > 0 && rutaTema(id))
     .sort((a, b) => {
       // Primero por (fallos - aciertos) descendente, desempate por fallos absolutos
       const da = a[1].fa - a[1].ac;
@@ -241,11 +252,10 @@
   } else {
     // Cargar textos de las preguntas (un fetch por tema único)
     const cacheTemas = {};
-    async function cargarTema(opeId, temaId) {
-      const k = `${opeId}/${temaId}`;
+    async function cargarTema(k) {
       if (cacheTemas[k]) return cacheTemas[k];
       try {
-        const r = await fetch(`data/${opeId}/${temaId}.json`, { cache: 'no-store' });
+        const r = await fetch(`data/${k}`, { cache: 'no-store' });
         if (r.ok) {
           const d = await r.json();
           cacheTemas[k] = d.preguntas || [];
@@ -257,19 +267,14 @@
       }
       return cacheTemas[k];
     }
-    function parseId(id) {
-      const m = id.match(/^(OPE_\d+)_(Tema\d+)_/);
-      if (!m) return null;
-      return { opeId: m[1], temaId: `${m[1]}_${m[2]}` };
-    }
 
     lista.innerHTML = '';
     let rank = 1;
     for (const [pId, s] of top) {
-      const ref = parseId(pId);
+      const ruta = rutaTema(pId);
       let texto = pId;
-      if (ref) {
-        const preguntas = await cargarTema(ref.opeId, ref.temaId);
+      if (ruta) {
+        const preguntas = await cargarTema(ruta);
         const p = preguntas.find(x => x.id === pId);
         if (p && p.pregunta) texto = p.pregunta;
       }

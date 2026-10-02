@@ -106,7 +106,8 @@
 
     // Construir migas de pan a partir de la ruta jerárquica.
     // Mostramos texto sin guiones bajos, pero la URL/href se mantiene con el ID técnico.
-    const formatear = id => id.replace(/_/g, ' ');
+    const NOMBRES = { Material_de_estudio: 'Apuntes' };
+    const formatear = id => NOMBRES[id] || id.replace(/_/g, ' ');
     const partes = rutaOpe.split('/').filter(Boolean);
     const migas = document.getElementById('migas-navegacion');
     let acumulada = '';
