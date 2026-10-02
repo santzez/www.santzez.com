@@ -95,9 +95,14 @@
     if (!sesion) return;
 
     const params = new URLSearchParams(location.search);
-    // Enlaces antiguos: la OPE se llamaba OPE_DONOSTIA_2026_2027 hasta oct-2026.
-    if ((params.get('ope') || '').startsWith('OPE_DONOSTIA_2026_2027')) {
-      params.set('ope', params.get('ope').replace('OPE_DONOSTIA_2026_2027', 'OPE_DonostiaTIK_2024'));
+    // Enlaces antiguos (oct-2026): la OPE se llamaba OPE_DONOSTIA_2026_2027
+    // y el temario de CAU colgaba de Temario_Especifico/OPE_CAU.
+    const opeAntigua = params.get('ope') || '';
+    const opeNueva = opeAntigua
+      .replace(/^OPE_DONOSTIA_2026_2027/, 'OPE_DonostiaTIK_2024')
+      .replace('/Temario_Especifico/OPE_CAU', '/Temario_Especifico');
+    if (opeNueva !== opeAntigua) {
+      params.set('ope', opeNueva);
       location.replace(`${location.pathname}?${params}`);
       return;
     }
