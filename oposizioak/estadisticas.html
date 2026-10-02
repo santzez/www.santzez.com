@@ -50,7 +50,7 @@
     <div id="bloque-vacio" style="display:none">
       <div class="tarjeta" style="margin-top:1.5rem">
         <h2 style="margin-top:0">Aún no hay datos</h2>
-        <p>Completa alguna tanda de preguntas y vuelve por aquí. Verás tu evolución, las preguntas que más fallas y todo el resto.</p>
+        <p>Responde algunas preguntas en cualquier Qwiz y vuelve por aquí. Verás tu evolución, las preguntas que más fallas y todo el resto.</p>
         <a class="btn" href="/oposizioak/index.html">Ir a las oposiciones</a>
       </div>
     </div>
@@ -81,6 +81,7 @@
       <h2 style="margin-top:2.5rem">Evolución por tanda</h2>
       <div class="tarjeta" style="padding:1.25rem">
         <canvas id="grafico-evolucion" height="120"></canvas>
+        <p id="evolucion-vacia" style="display:none;margin:0;opacity:0.7">Termina una tanda completa de algún Qwiz para ver aquí tu evolución.</p>
       </div>
 
       <!-- Top 10 falladas -->
@@ -130,16 +131,18 @@
 
   elCargando.style.display = 'none';
 
-  if (!sesiones || sesiones.length === 0) {
+  // Basta con haber respondido alguna pregunta, aunque no se haya terminado ninguna tanda
+  if ((!sesiones || sesiones.length === 0) && (!intentos || intentos.length === 0)) {
     elVacio.style.display = 'block';
     return;
   }
   elStats.style.display = 'block';
 
   // ---------- KPIs ----------
-  const totalTandas    = sesiones.length;
-  const totalPreguntas = sesiones.reduce((s, x) => s + (x.total || 0), 0);
-  const totalAciertos  = sesiones.reduce((s, x) => s + (x.aciertos || 0), 0);
+  // Preguntas y acierto salen de "intentos" (cada respuesta, se termine o no la tanda)
+  const totalTandas    = (sesiones || []).length;
+  const totalPreguntas = (intentos || []).length;
+  const totalAciertos  = (intentos || []).filter(i => i.acertada).length;
   const acierto        = totalPreguntas > 0 ? Math.round((totalAciertos / totalPreguntas) * 100) : 0;
 
   // Stats por pregunta a partir de la tabla intentos
@@ -157,65 +160,70 @@
   document.getElementById('kpi-falladas').textContent  = numFalladasNetas;
 
   // ---------- Gráfico de evolución ----------
-  const labels = sesiones.map((s, i) => `T${i + 1}`);
-  const datos  = sesiones.map(s => Number(s.porcentaje));
+  if (totalTandas === 0) {
+    document.getElementById('grafico-evolucion').style.display = 'none';
+    document.getElementById('evolucion-vacia').style.display = 'block';
+  } else {
+    const labels = sesiones.map((s, i) => `T${i + 1}`);
+    const datos  = sesiones.map(s => Number(s.porcentaje));
 
-  // Media móvil de 5 tandas
-  const media5 = datos.map((_, i) => {
-    const ini = Math.max(0, i - 4);
-    const slice = datos.slice(ini, i + 1);
-    return Math.round(slice.reduce((a, b) => a + b, 0) / slice.length);
-  });
+    // Media móvil de 5 tandas
+    const media5 = datos.map((_, i) => {
+      const ini = Math.max(0, i - 4);
+      const slice = datos.slice(ini, i + 1);
+      return Math.round(slice.reduce((a, b) => a + b, 0) / slice.length);
+    });
 
-  // eslint-disable-next-line no-undef
-  new Chart(document.getElementById('grafico-evolucion'), {
-    type: 'line',
-    data: {
-      labels,
-      datasets: [
-        {
-          label: '% Acierto por tanda',
-          data: datos,
-          borderColor: '#003da5',
-          backgroundColor: 'rgba(0, 61, 165, 0.10)',
-          borderWidth: 2,
-          fill: true,
-          tension: 0.25,
-          pointBackgroundColor: '#003da5',
-          pointRadius: 3,
-        },
-        {
-          label: 'Media móvil (5 últimas)',
-          data: media5,
-          borderColor: '#2d2926',
-          borderWidth: 1.5,
-          borderDash: [4, 4],
-          fill: false,
-          tension: 0.3,
-          pointRadius: 0,
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        y: { min: 0, max: 100, ticks: { callback: v => v + '%' } }
+    // eslint-disable-next-line no-undef
+    new Chart(document.getElementById('grafico-evolucion'), {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: '% Acierto por tanda',
+            data: datos,
+            borderColor: '#003da5',
+            backgroundColor: 'rgba(0, 61, 165, 0.10)',
+            borderWidth: 2,
+            fill: true,
+            tension: 0.25,
+            pointBackgroundColor: '#003da5',
+            pointRadius: 3,
+          },
+          {
+            label: 'Media móvil (5 últimas)',
+            data: media5,
+            borderColor: '#2d2926',
+            borderWidth: 1.5,
+            borderDash: [4, 4],
+            fill: false,
+            tension: 0.3,
+            pointRadius: 0,
+          }
+        ]
       },
-      plugins: {
-        legend: { position: 'bottom', labels: { font: { family: 'Barlow, Arial' } } },
-        tooltip: {
-          callbacks: {
-            afterLabel: (ctx) => {
-              const s = sesiones[ctx.dataIndex];
-              if (!s) return '';
-              const f = new Date(s.fecha).toLocaleDateString('es-ES');
-              return `${s.tema_id} · ${s.aciertos}/${s.total} · ${f}`;
+      options: {
+        responsive: true,
+        scales: {
+          y: { min: 0, max: 100, ticks: { callback: v => v + '%' } }
+        },
+        plugins: {
+          legend: { position: 'bottom', labels: { font: { family: 'Barlow, Arial' } } },
+          tooltip: {
+            callbacks: {
+              afterLabel: (ctx) => {
+                const s = sesiones[ctx.dataIndex];
+                if (!s) return '';
+                const f = new Date(s.fecha).toLocaleDateString('es-ES');
+                return `${s.tema_id} · ${s.aciertos}/${s.total} · ${f}`;
+              }
             }
           }
         }
       }
-    }
-  });
+    });
+  }
 
   // ---------- Top 10 falladas ----------
   // Ruta del JSON del tema a partir del ID de la pregunta
