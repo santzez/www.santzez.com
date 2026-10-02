@@ -95,6 +95,12 @@
     const sesion = await AuthSession.exigirLogin();
     if (!sesion) return;
     const params = new URLSearchParams(location.search);
+    // Enlaces antiguos: la OPE se llamaba OPE_DONOSTIA_2026_2027 hasta oct-2026.
+    if ((params.get('ope') || '').startsWith('OPE_DONOSTIA_2026_2027')) {
+      params.set('ope', params.get('ope').replace('OPE_DONOSTIA_2026_2027', 'OPE_DonostiaTIK_2024'));
+      location.replace(`${location.pathname}?${params}`);
+      return;
+    }
     const opeParam = params.get('ope') || '';
     const temaParam = params.get('tema') || '';
     const modoParam = params.get('modo') || 'todas';

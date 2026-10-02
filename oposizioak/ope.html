@@ -84,7 +84,7 @@
   /* -------------------------------------------------------------
      ope.html — navegación jerárquica de una oposición.
      Lee ?ope=<ruta> donde <ruta> puede ser una jerarquía separada
-     por "/" (ej: OPE_DONOSTIA_2026_2027/Temario_General_C1).
+     por "/" (ej: OPE_DonostiaTIK_2024/Temario_General_C1).
      Renderiza según info.tipo:
        - "grupo" → tarjetas de sub-navegación (hijos)
        - "temas" → tarjetas de temas para lanzar el quiz
@@ -95,6 +95,12 @@
     if (!sesion) return;
 
     const params = new URLSearchParams(location.search);
+    // Enlaces antiguos: la OPE se llamaba OPE_DONOSTIA_2026_2027 hasta oct-2026.
+    if ((params.get('ope') || '').startsWith('OPE_DONOSTIA_2026_2027')) {
+      params.set('ope', params.get('ope').replace('OPE_DONOSTIA_2026_2027', 'OPE_DonostiaTIK_2024'));
+      location.replace(`${location.pathname}?${params}`);
+      return;
+    }
     const rutaOpe = params.get('ope');
     if (!rutaOpe) { location.href = '/oposizioak/index.html'; return; }
 
@@ -758,7 +764,7 @@
       const bucket = info.bucket || 'material';
       // El prefijo es la propia ruta jerárquica quitando el último nivel
       // (Material_de_estudio). Así los PDFs viven en:
-      //   material/OPE_DONOSTIA_2026_2027/Temario_General_C1/T1/*.pdf
+      //   material/OPE_DonostiaTIK_2024/Temario_General_C1/T1/*.pdf
       const prefijoBase = rutaOpe.replace(/\/[^/]+$/, '');
       const cliente = AuthSession.cliente();
 
