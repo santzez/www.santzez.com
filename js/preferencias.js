@@ -9,7 +9,8 @@
      - identidad        (Categoría C) → gradiente header + bounce logo
      - viewTransitions  (Categoría D) → transiciones fluidas entre páginas
 
-   Por defecto TODAS las preferencias están DESACTIVADAS.
+   Por defecto TODAS las preferencias están ACTIVADAS; si el usuario
+   desactiva alguna, se recuerda (localStorage + user_metadata).
    Se aplican como clases al <html>: anim-quiz-feedback, anim-identidad,
    anim-view-transitions.
    ============================================================= */
@@ -17,9 +18,9 @@
 (function () {
   const CLAVE_LOCAL = 'santzez:preferencias';
   const DEFAULTS = {
-    quizFeedback: false,
-    identidad: false,
-    viewTransitions: false,
+    quizFeedback: true,
+    identidad: true,
+    viewTransitions: true,
   };
 
   const MAPA_CLASES = {
