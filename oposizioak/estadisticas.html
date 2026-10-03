@@ -184,6 +184,8 @@
     }
     const pct = (a) => (a.ac + a.fa) ? Math.round(100 * a.ac / (a.ac + a.fa)) : null;
     const grupos = [...new Set(indice.map(t => t.grupo))];
+    // Enlace al Qwiz del tema: la ruta del JSON es <tema>/Qwiz/<id>.json
+    const urlQwiz = (t) => 'ope.html?ope=' + encodeURIComponent(t.ruta.replace(/\/Qwiz\/[^/]+$/, '')) + '#Qwiz';
     document.getElementById('por-tema').innerHTML = grupos.map(g => `
       <h3 class="por-tema__grupo">${g}</h3>
       <div class="tabla-wrap"><table class="tabla-tema por-tema">
@@ -191,7 +193,7 @@
         <tbody>${indice.filter(t => t.grupo === g).map(t => {
           const a = porTema[t.id], p = a ? pct(a) : null;
           return `<tr class="${a ? '' : 'por-tema--sin'}">
-            <td><strong>${t.corto}</strong> <span class="por-tema__nombre">${t.nombre}</span></td>
+            <td><a href="${urlQwiz(t)}"><strong>${t.corto}</strong> <span class="por-tema__nombre">${t.nombre}</span></a></td>
             <td>${a ? a.vistas : 0}/${t.preguntas}<div class="por-tema__barra"><span style="width:${a ? Math.round(100 * a.vistas / t.preguntas) : 0}%"></span></div></td>
             <td class="${p === null ? '' : p >= 75 ? 'por-tema--bien' : p < 50 ? 'por-tema--mal' : ''}">${p === null ? '—' : p + '%'}</td>
             <td>${a && a.pend ? a.pend : '—'}</td></tr>`;
@@ -202,7 +204,7 @@
     if (candidatos.length) {
       const peor = candidatos.sort((x, y) => pct(x.a) - pct(y.a))[0];
       const el = document.getElementById('tema-flojo');
-      el.innerHTML = `Tu tema más flojo ahora mismo: <strong>${peor.t.grupo} · ${peor.t.corto}</strong> (${pct(peor.a)}% de acierto, ${peor.a.pend} pendiente${peor.a.pend === 1 ? '' : 's'}).`;
+      el.innerHTML = `Tu tema más flojo ahora mismo: <a href="${urlQwiz(peor.t)}"><strong>${peor.t.grupo} · ${peor.t.corto}</strong></a> (${pct(peor.a)}% de acierto, ${peor.a.pend} pendiente${peor.a.pend === 1 ? '' : 's'}).`;
       el.hidden = false;
     }
   }
