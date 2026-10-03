@@ -716,6 +716,8 @@
         info.bloques.forEach((bloque, iB) => {
           const details = document.createElement('details');
           details.className = 'bloque tarjeta--aparecer';
+          // Con un único bloque no tiene sentido obligar a desplegarlo
+          if (info.bloques.length === 1) details.open = true;
           details.style.animationDelay = (iB * 80) + 'ms';
           const nTemas = bloque.temas?.length || 0;
           details.innerHTML = `
