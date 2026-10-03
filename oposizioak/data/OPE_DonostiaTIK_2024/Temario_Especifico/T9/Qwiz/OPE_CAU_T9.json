@@ -10,7 +10,7 @@
       "pregunta": "Los dos puntos de vista clásicos desde los que se explica el papel de un sistema operativo son:",
       "opciones": [
         {
-          "texto": "Modo usuario y modo núcleo.",
+          "texto": "Modo usuario y modo núcleo (kernel mode).",
           "correcta": false
         },
         {
@@ -18,11 +18,11 @@
           "correcta": true
         },
         {
-          "texto": "Núcleo monolítico y microkernel.",
+          "texto": "Núcleo monolítico y núcleo microkernel.",
           "correcta": false
         },
         {
-          "texto": "Software de sistema y software de aplicación.",
+          "texto": "Software de sistema y software de aplicación del usuario.",
           "correcta": false
         }
       ],
@@ -38,15 +38,15 @@
       "pregunta": "¿Cuál de las siguientes NO es una función propia de un sistema operativo?",
       "opciones": [
         {
-          "texto": "La gestión del sistema de archivos.",
+          "texto": "La gestión del sistema de archivos y directorios.",
           "correcta": false
         },
         {
-          "texto": "La gestión de la entrada/salida.",
+          "texto": "La gestión de la entrada/salida de los dispositivos.",
           "correcta": false
         },
         {
-          "texto": "La gestión de procesos y de memoria.",
+          "texto": "La gestión de los procesos y de la memoria principal.",
           "correcta": false
         },
         {
@@ -66,7 +66,7 @@
       "pregunta": "¿Qué diferencia hay entre un sistema de tiempo compartido y uno de tiempo real?",
       "opciones": [
         {
-          "texto": "Son sinónimos: ambos reparten el tiempo de CPU.",
+          "texto": "Son sinónimos: ambos reparten la CPU entre varios procesos dando sensación de simultaneidad y garantizan que cada tarea termine antes de su plazo.",
           "correcta": false
         },
         {
@@ -74,11 +74,11 @@
           "correcta": true
         },
         {
-          "texto": "El de tiempo real solo admite un usuario simultáneo.",
+          "texto": "El de tiempo real solo admite un usuario y una tarea simultáneos; el de tiempo compartido admite varios usuarios repartiendo la CPU entre ellos.",
           "correcta": false
         },
         {
-          "texto": "El de tiempo real reparte la CPU entre usuarios; el de tiempo compartido garantiza plazos.",
+          "texto": "El de tiempo real reparte la CPU entre usuarios dando sensación de simultaneidad; el de tiempo compartido garantiza que cada tarea cumpla su plazo.",
           "correcta": false
         }
       ],
@@ -94,11 +94,11 @@
       "pregunta": "En un sistema de tiempo real, ¿qué caracteriza al «tiempo real duro»?",
       "opciones": [
         {
-          "texto": "Que el sistema debe responder siempre en menos de un segundo.",
+          "texto": "Que el sistema debe responder siempre en menos de un segundo, sea cual sea la carga de trabajo.",
           "correcta": false
         },
         {
-          "texto": "Que solo puede ejecutar una tarea a la vez.",
+          "texto": "Que solo puede ejecutar una tarea a la vez para garantizar que ninguna se retrase por otra.",
           "correcta": false
         },
         {
@@ -106,7 +106,7 @@
           "correcta": true
         },
         {
-          "texto": "Que incumplir un plazo degrada el servicio, pero no lo invalida.",
+          "texto": "Que incumplir un plazo degrada la calidad del servicio, pero no invalida el sistema (p. ej., el vídeo).",
           "correcta": false
         }
       ],
@@ -126,15 +126,15 @@
           "correcta": true
         },
         {
-          "texto": "En modo usuario se ejecuta el núcleo y en modo núcleo, las aplicaciones.",
+          "texto": "En modo usuario se ejecuta el núcleo con acceso completo al hardware; en modo núcleo, las aplicaciones con acceso restringido.",
           "correcta": false
         },
         {
-          "texto": "Ambos modos tienen los mismos privilegios, solo cambia la prioridad.",
+          "texto": "Ambos modos tienen acceso completo al hardware y a todas las instrucciones; solo cambia la prioridad con que se planifican.",
           "correcta": false
         },
         {
-          "texto": "El modo usuario es más rápido porque no pasa controles de seguridad.",
+          "texto": "El modo usuario tiene acceso completo al hardware y es más rápido porque no pasa los controles de seguridad del núcleo.",
           "correcta": false
         }
       ],
@@ -154,15 +154,15 @@
           "correcta": true
         },
         {
-          "texto": "Accede directamente al controlador del disco.",
+          "texto": "Accede directamente al controlador del disco mediante las instrucciones de E/S del procesador.",
           "correcta": false
         },
         {
-          "texto": "Genera una interrupción de hardware dirigida a la CPU.",
+          "texto": "Genera una interrupción de hardware dirigida a la CPU, que lee el fichero y se lo devuelve.",
           "correcta": false
         },
         {
-          "texto": "Solicita al usuario permisos de administrador.",
+          "texto": "Solicita a la persona usuaria permisos de administrador para leer el disco en modo núcleo.",
           "correcta": false
         }
       ],
@@ -178,7 +178,7 @@
       "pregunta": "¿Qué caracteriza a un núcleo monolítico?",
       "opciones": [
         {
-          "texto": "Solo puede ejecutarse en sistemas de un único procesador.",
+          "texto": "Solo puede ejecutarse en sistemas de un único procesador, porque todo el código del SO forma un solo bloque.",
           "correcta": false
         },
         {
@@ -186,11 +186,11 @@
           "correcta": true
         },
         {
-          "texto": "No admite módulos ni controladores de terceros.",
+          "texto": "No admite módulos ni controladores de terceros: cualquier cambio exige recompilar todo el núcleo del SO.",
           "correcta": false
         },
         {
-          "texto": "Reduce el núcleo al mínimo y ejecuta los servicios en modo usuario.",
+          "texto": "Reduce el núcleo al mínimo y ejecuta los servicios del SO en modo usuario, lo que le da mayor rendimiento.",
           "correcta": false
         }
       ],
@@ -206,15 +206,15 @@
       "pregunta": "¿Qué ventaja principal ofrece un microkernel frente a un núcleo monolítico?",
       "opciones": [
         {
-          "texto": "Menor consumo de memoria en cualquier escenario.",
+          "texto": "Menor consumo de memoria en cualquier escenario, porque el núcleo es más pequeño y carga menos servicios.",
           "correcta": false
         },
         {
-          "texto": "Compatibilidad automática con cualquier hardware.",
+          "texto": "Compatibilidad automática con cualquier hardware, porque los controladores se ejecutan dentro del núcleo.",
           "correcta": false
         },
         {
-          "texto": "Mayor rendimiento por evitar cambios de contexto.",
+          "texto": "Mayor rendimiento: al ejecutar los servicios en modo núcleo, evita los cambios de contexto y la comunicación.",
           "correcta": false
         },
         {
@@ -234,11 +234,11 @@
       "pregunta": "El núcleo de Linux es modular (permite cargar y descargar módulos en caliente). ¿Eso lo convierte en un microkernel?",
       "opciones": [
         {
-          "texto": "No: Linux es un núcleo híbrido, como Windows NT.",
+          "texto": "No: Linux es un núcleo híbrido, como Windows NT, porque combina servicios en modo núcleo y en modo usuario.",
           "correcta": false
         },
         {
-          "texto": "Sí, desde que incorporó soporte para contenedores.",
+          "texto": "Sí: desde que incorporó los contenedores, sus módulos se ejecutan aislados en modo usuario como en un microkernel.",
           "correcta": false
         },
         {
@@ -246,7 +246,7 @@
           "correcta": true
         },
         {
-          "texto": "Sí: la modularidad es la definición de microkernel.",
+          "texto": "Sí: la modularidad es precisamente la definición de microkernel, aunque los módulos se ejecuten en modo núcleo.",
           "correcta": false
         }
       ],
@@ -262,15 +262,15 @@
       "pregunta": "¿Qué es la memoria virtual?",
       "opciones": [
         {
-          "texto": "La memoria caché integrada en el procesador.",
+          "texto": "La memoria caché integrada en el procesador, que el SO usa para que cada proceso vea un espacio de direcciones mayor que la RAM.",
           "correcta": false
         },
         {
-          "texto": "La memoria asignada a las máquinas virtuales de un hipervisor.",
+          "texto": "La memoria asignada a las máquinas virtuales de un hipervisor, que se reparte de forma continua y aislada entre cada sistema invitado según su configuración.",
           "correcta": false
         },
         {
-          "texto": "Una partición del disco reservada exclusivamente para el sistema operativo.",
+          "texto": "Una partición del disco reservada exclusivamente para el sistema operativo, que sustituye a la RAM cuando esta se llena por completo.",
           "correcta": false
         },
         {
@@ -290,7 +290,7 @@
       "pregunta": "¿Qué tipo de fragmentación genera la paginación y por qué?",
       "opciones": [
         {
-          "texto": "Ambas por igual.",
+          "texto": "Ambas por igual, porque los bloques fijos dejan huecos dispersos y espacio sobrante.",
           "correcta": false
         },
         {
@@ -298,11 +298,11 @@
           "correcta": true
         },
         {
-          "texto": "Ninguna: la paginación elimina toda fragmentación.",
+          "texto": "Ninguna: la paginación elimina toda fragmentación al ajustar cada bloque al proceso.",
           "correcta": false
         },
         {
-          "texto": "Externa, porque deja huecos libres dispersos.",
+          "texto": "Externa, porque al usar bloques de tamaño fijo quedan huecos libres dispersos entre los bloques asignados.",
           "correcta": false
         }
       ],
@@ -319,11 +319,11 @@
       "pregunta": "En la paginación, ¿cómo se llaman los bloques en la memoria física?",
       "opciones": [
         {
-          "texto": "Sectores.",
+          "texto": "Sectores (sectors).",
           "correcta": false
         },
         {
-          "texto": "Segmentos.",
+          "texto": "Segmentos (segments).",
           "correcta": false
         },
         {
@@ -331,7 +331,7 @@
           "correcta": true
         },
         {
-          "texto": "Páginas.",
+          "texto": "Páginas (pages).",
           "correcta": false
         }
       ],
@@ -351,15 +351,15 @@
           "correcta": true
         },
         {
-          "texto": "Solo se aplica a la memoria caché.",
+          "texto": "Divide la memoria caché en bloques de tamaño variable según la frecuencia con que cada proceso los utiliza (código, datos, pila).",
           "correcta": false
         },
         {
-          "texto": "Divide la memoria en bloques de tamaño fijo gestionados por una tabla de páginas.",
+          "texto": "Divide la memoria en bloques de tamaño fijo, gestionados por una tabla de páginas que mantiene el SO.",
           "correcta": false
         },
         {
-          "texto": "Elimina la necesidad de memoria virtual.",
+          "texto": "Elimina la necesidad de memoria virtual al asignar a cada proceso un único bloque continuo en la RAM.",
           "correcta": false
         }
       ],
@@ -375,15 +375,15 @@
       "pregunta": "¿En qué consiste el swapping o intercambio?",
       "opciones": [
         {
-          "texto": "En alternar la ejecución entre varios núcleos del procesador.",
+          "texto": "En alternar la ejecución de los procesos entre varios núcleos del procesador cuando la memoria física es insuficiente.",
           "correcta": false
         },
         {
-          "texto": "En intercambiar la prioridad de dos procesos en la cola de listos.",
+          "texto": "En intercambiar la prioridad de dos procesos en la cola de listos cuando uno de ellos lleva demasiado tiempo esperando.",
           "correcta": false
         },
         {
-          "texto": "En sustituir el sistema de archivos por otro más eficiente.",
+          "texto": "En sustituir temporalmente el sistema de archivos por otro más eficiente para liberar espacio en el disco del sistema.",
           "correcta": false
         },
         {
@@ -407,15 +407,15 @@
           "correcta": true
         },
         {
-          "texto": "Interbloqueo (deadlock).",
+          "texto": "Interbloqueo de procesos (deadlock).",
           "correcta": false
         },
         {
-          "texto": "Fragmentación externa.",
+          "texto": "Fragmentación externa de la RAM.",
           "correcta": false
         },
         {
-          "texto": "Inanición (starvation).",
+          "texto": "Inanición de procesos (starvation).",
           "correcta": false
         }
       ],
@@ -431,7 +431,7 @@
       "pregunta": "¿Qué es un proceso?",
       "opciones": [
         {
-          "texto": "El fichero ejecutable almacenado en el disco.",
+          "texto": "El fichero ejecutable almacenado en el disco, con su código y los datos que necesita para ejecutarse.",
           "correcta": false
         },
         {
@@ -439,11 +439,11 @@
           "correcta": true
         },
         {
-          "texto": "El bloque de control que almacena el estado del sistema.",
+          "texto": "El bloque de control donde el SO guarda el estado, los registros y el contador de programa de una tarea.",
           "correcta": false
         },
         {
-          "texto": "La unidad mínima de ejecución dentro de un programa.",
+          "texto": "La unidad mínima de ejecución dentro de un programa, que comparte la memoria con otras del mismo programa.",
           "correcta": false
         }
       ],
@@ -459,11 +459,11 @@
       "pregunta": "¿Qué es el PCB (Process Control Block)?",
       "opciones": [
         {
-          "texto": "La cola de procesos en estado listo.",
+          "texto": "La cola en la que el planificador ordena los procesos en estado listo según su prioridad y turno.",
           "correcta": false
         },
         {
-          "texto": "El bloque de memoria física asignado al proceso.",
+          "texto": "El bloque de memoria física que el SO asigna a cada proceso para su código, sus datos y su pila.",
           "correcta": false
         },
         {
@@ -471,7 +471,7 @@
           "correcta": true
         },
         {
-          "texto": "El planificador de procesos del núcleo.",
+          "texto": "El planificador de procesos del núcleo, que decide qué proceso ocupa la CPU en cada instante.",
           "correcta": false
         }
       ],
@@ -491,15 +491,15 @@
           "correcta": true
         },
         {
-          "texto": "A terminado.",
+          "texto": "A terminado (terminated).",
           "correcta": false
         },
         {
-          "texto": "A nuevo.",
+          "texto": "A suspendido en disco (swapped).",
           "correcta": false
         },
         {
-          "texto": "A listo (ready).",
+          "texto": "A listo (ready) en la cola.",
           "correcta": false
         }
       ],
@@ -515,15 +515,15 @@
       "pregunta": "¿Cuál es la diferencia principal entre un proceso y un hilo (thread)?",
       "opciones": [
         {
-          "texto": "Un proceso solo puede tener un hilo.",
+          "texto": "Un proceso solo puede tener un hilo, y cada hilo adicional crea un proceso nuevo con su propio espacio de memoria y recursos.",
           "correcta": false
         },
         {
-          "texto": "El hilo tiene su propio espacio de memoria independiente; el proceso lo comparte.",
+          "texto": "Cada hilo tiene su propio espacio de memoria independiente, mientras que los procesos de un mismo programa comparten el suyo.",
           "correcta": false
         },
         {
-          "texto": "El hilo es más costoso de crear que el proceso.",
+          "texto": "El hilo es más costoso de crear y de cambiar de contexto que el proceso, porque duplica su memoria y sus recursos abiertos.",
           "correcta": false
         },
         {
@@ -543,7 +543,7 @@
       "pregunta": "¿Qué elementos propios mantiene cada hilo dentro de un proceso?",
       "opciones": [
         {
-          "texto": "Su propia tabla de páginas.",
+          "texto": "Su propia tabla de páginas y su propio contador de programa.",
           "correcta": false
         },
         {
@@ -551,11 +551,11 @@
           "correcta": true
         },
         {
-          "texto": "Su propio espacio de memoria y sus archivos abiertos.",
+          "texto": "Su propio espacio de memoria y su propia lista de archivos abiertos.",
           "correcta": false
         },
         {
-          "texto": "Su propio PCB independiente del proceso.",
+          "texto": "Su propio PCB independiente y sus propios descriptores de archivo.",
           "correcta": false
         }
       ],
@@ -599,11 +599,11 @@
       "pregunta": "¿Qué diferencia hay entre interbloqueo e inanición?",
       "opciones": [
         {
-          "texto": "La inanición solo ocurre en sistemas monotarea.",
+          "texto": "La inanición solo ocurre en sistemas monotarea, cuando un proceso no libera la CPU; el interbloqueo ocurre en sistemas multitarea al compartir memoria.",
           "correcta": false
         },
         {
-          "texto": "Son sinónimos: ambos bloquean el sistema.",
+          "texto": "Son sinónimos: en ambos casos los procesos se esperan mutuamente de forma circular y ninguno puede avanzar hasta que se reinicia el sistema.",
           "correcta": false
         },
         {
@@ -611,7 +611,7 @@
           "correcta": true
         },
         {
-          "texto": "El interbloqueo afecta a la memoria y la inanición a la CPU.",
+          "texto": "El interbloqueo afecta a la memoria, cuando no queda espacio libre; la inanición afecta a la CPU, cuando un proceso nunca recibe su turno.",
           "correcta": false
         }
       ],
@@ -627,15 +627,15 @@
       "pregunta": "¿Qué es el planificador (scheduler) del sistema operativo?",
       "opciones": [
         {
-          "texto": "La herramienta que programa tareas para ejecutarlas a una hora concreta.",
+          "texto": "La herramienta que programa tareas para ejecutarlas a una hora concreta (como el Programador de tareas).",
           "correcta": false
         },
         {
-          "texto": "El componente que asigna memoria a cada proceso.",
+          "texto": "El componente que decide qué bloque de memoria física ocupa cada proceso o hilo en cada instante.",
           "correcta": false
         },
         {
-          "texto": "El módulo que traduce direcciones virtuales a físicas.",
+          "texto": "El módulo que traduce las direcciones virtuales de cada proceso a direcciones físicas de la RAM.",
           "correcta": false
         },
         {
@@ -655,7 +655,7 @@
       "pregunta": "¿Qué caracteriza a la multitarea expulsiva o apropiativa (preemptive)?",
       "opciones": [
         {
-          "texto": "Es el modelo típico de los sistemas por lotes históricos.",
+          "texto": "Es el modelo típico de los sistemas por lotes históricos, en los que cada trabajo se ejecuta completo antes de pasar al siguiente.",
           "correcta": false
         },
         {
@@ -663,11 +663,11 @@
           "correcta": true
         },
         {
-          "texto": "Solo permite un proceso activo por usuario.",
+          "texto": "Solo permite un proceso activo por usuario, y el sistema operativo lo expulsa cuando otro usuario necesita la CPU.",
           "correcta": false
         },
         {
-          "texto": "Cada proceso cede voluntariamente la CPU cuando lo considera oportuno.",
+          "texto": "Cada proceso cede voluntariamente la CPU cuando lo considera oportuno, sin que el sistema operativo pueda interrumpirlo.",
           "correcta": false
         }
       ],
@@ -715,15 +715,15 @@
           "correcta": true
         },
         {
-          "texto": "Se produce inanición de los procesos de mayor prioridad.",
+          "texto": "Se produce inanición de los procesos de mayor prioridad, que esperan demasiado.",
           "correcta": false
         },
         {
-          "texto": "El planificador deja de ser expulsivo.",
+          "texto": "El planificador deja de ser expulsivo y pasa a ser cooperativo por definición.",
           "correcta": false
         },
         {
-          "texto": "Se multiplican los cambios de contexto y su coste.",
+          "texto": "Se multiplican los cambios de contexto y el sobrecoste asociado a cada uno.",
           "correcta": false
         }
       ],
@@ -767,11 +767,11 @@
       "pregunta": "¿Qué riesgo presenta la planificación por prioridades?",
       "opciones": [
         {
-          "texto": "La imposibilidad de aplicar multitarea expulsiva.",
+          "texto": "La imposibilidad de aplicar multitarea expulsiva, porque cada proceso cede la CPU por prioridad.",
           "correcta": false
         },
         {
-          "texto": "La fragmentación externa de la memoria.",
+          "texto": "La fragmentación externa de la memoria, porque los procesos prioritarios ocupan bloques grandes.",
           "correcta": false
         },
         {
@@ -779,7 +779,7 @@
           "correcta": true
         },
         {
-          "texto": "El interbloqueo entre procesos del mismo nivel.",
+          "texto": "El interbloqueo entre los procesos de un mismo nivel, que se esperan mutuamente sin avanzar.",
           "correcta": false
         }
       ],
@@ -823,11 +823,11 @@
       "pregunta": "En la E/S programada o polling, ¿qué hace la CPU?",
       "opciones": [
         {
-          "texto": "Delega la transferencia en un controlador dedicado.",
+          "texto": "Delega la transferencia en un controlador dedicado (DMA) y sigue ejecutando otros procesos.",
           "correcta": false
         },
         {
-          "texto": "Recibe un aviso del dispositivo cuando la operación termina.",
+          "texto": "Espera a que el dispositivo le envíe un aviso (interrupción) cuando la operación ha terminado.",
           "correcta": false
         },
         {
@@ -835,7 +835,7 @@
           "correcta": true
         },
         {
-          "texto": "Suspende el proceso y ejecuta otro mientras espera.",
+          "texto": "Suspende el proceso que pidió la operación y ejecuta otro mientras el dispositivo trabaja.",
           "correcta": false
         }
       ],
@@ -851,15 +851,15 @@
       "pregunta": "¿Para qué utiliza el sistema operativo los buffers en la entrada/salida?",
       "opciones": [
         {
-          "texto": "Para traducir las órdenes del SO al lenguaje del dispositivo.",
+          "texto": "Para traducir las órdenes genéricas del sistema operativo a las señales concretas que entiende cada dispositivo de entrada/salida.",
           "correcta": false
         },
         {
-          "texto": "Para cifrar los datos antes de enviarlos al dispositivo.",
+          "texto": "Para cifrar los datos en una zona de memoria intermedia antes de enviarlos al dispositivo, protegiéndolos de otros procesos.",
           "correcta": false
         },
         {
-          "texto": "Para almacenar permanentemente los datos del proceso.",
+          "texto": "Para almacenar de forma permanente los datos del proceso en una zona reservada, de modo que no se pierdan al apagar el equipo.",
           "correcta": false
         },
         {
@@ -879,7 +879,7 @@
       "pregunta": "¿Qué diferencia el estudio de los «sistemas de archivo» de este tema respecto al Tema 4 (Ficheros)?",
       "opciones": [
         {
-          "texto": "Aquí se estudian los formatos de fichero y allí, los sistemas de archivo concretos.",
+          "texto": "Aquí se estudian los formatos de fichero (texto, binario, CSV) y la organización interna de los registros; en el Tema 4 se estudiaron los sistemas de archivo concretos (NTFS, ext4) y sus directorios.",
           "correcta": false
         },
         {
@@ -887,11 +887,11 @@
           "correcta": true
         },
         {
-          "texto": "Ninguna: ambos estudian lo mismo con distinto nombre.",
+          "texto": "Ninguna: ambos temas estudian lo mismo, la organización de ficheros y directorios sobre el almacenamiento, con distinto nombre según el temario de cada convocatoria.",
           "correcta": false
         },
         {
-          "texto": "Aquí se estudia el hardware de almacenamiento y allí, el software.",
+          "texto": "Aquí se estudia el hardware de almacenamiento (discos, controladoras, particiones); en el Tema 4 se estudió el software que organiza ficheros, directorios y permisos.",
           "correcta": false
         }
       ],
@@ -911,15 +911,15 @@
           "correcta": true
         },
         {
-          "texto": "No, porque ambos modelos son idénticos salvo en el nombre.",
+          "texto": "No, porque ambos modelos ejecutan todos los servicios en modo núcleo y solo cambia el nombre.",
           "correcta": false
         },
         {
-          "texto": "Sí: el microkernel siempre es más rápido porque el núcleo es más pequeño.",
+          "texto": "Sí: el microkernel es siempre más rápido porque su núcleo es más pequeño y carga menos código.",
           "correcta": false
         },
         {
-          "texto": "Sí: el monolítico siempre supera en rendimiento al microkernel.",
+          "texto": "Sí: el monolítico siempre supera al microkernel, porque nunca necesita cambios de contexto.",
           "correcta": false
         }
       ],

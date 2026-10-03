@@ -71,15 +71,15 @@
           "correcta": true
         },
         {
-          "texto": "El registro A.",
+          "texto": "El registro A (Address) del dominio.",
           "correcta": false
         },
         {
-          "texto": "El registro AAAA.",
+          "texto": "El registro PTR (Pointer, inverso).",
           "correcta": false
         },
         {
-          "texto": "El registro CNAME.",
+          "texto": "El registro CNAME (Canonical Name).",
           "correcta": false
         }
       ],
@@ -95,7 +95,7 @@
       "pregunta": "¿Para qué sirve el estándar MIME?",
       "opciones": [
         {
-          "texto": "Para comprimir los archivos adjuntos.",
+          "texto": "Para comprimir los archivos adjuntos e imágenes del mensaje de modo que no superen el tamaño máximo que admite SMTP en cada servidor de correo.",
           "correcta": false
         },
         {
@@ -103,11 +103,11 @@
           "correcta": true
         },
         {
-          "texto": "Para cifrar el contenido de los mensajes de correo.",
+          "texto": "Para cifrar el contenido de los mensajes (texto, HTML y adjuntos) de modo que solo el destinatario pueda leerlo aunque viaje por servidores intermedios.",
           "correcta": false
         },
         {
-          "texto": "Para autenticar al remitente del mensaje.",
+          "texto": "Para autenticar al remitente del mensaje mediante una firma en la cabecera, de modo que el servidor receptor pueda comprobar que no ha sido suplantado.",
           "correcta": false
         }
       ],
@@ -151,11 +151,11 @@
       "pregunta": "¿Qué diferencia hay entre Cc y Cco (Bcc)?",
       "opciones": [
         {
-          "texto": "Cc envía copia oculta y Cco, copia visible.",
+          "texto": "Cc envía copia oculta, invisible para el resto; Cco envía copia visible para todos los destinatarios.",
           "correcta": false
         },
         {
-          "texto": "Cc admite un único destinatario y Cco, varios.",
+          "texto": "Cc admite un único destinatario visible para todos; Cco admite varios, pero visibles solo para el remitente.",
           "correcta": false
         },
         {
@@ -163,7 +163,7 @@
           "correcta": true
         },
         {
-          "texto": "Cco solo puede usarse con destinatarios internos.",
+          "texto": "Cco solo puede usarse con destinatarios internos de la organización; Cc, con destinatarios internos o externos.",
           "correcta": false
         }
       ],
@@ -267,15 +267,15 @@
           "correcta": true
         },
         {
-          "texto": "POP3 permite sincronizar carpetas e IMAP no.",
+          "texto": "POP3 sincroniza las carpetas y el estado de los mensajes entre todos los dispositivos; IMAP los descarga a un único dispositivo y, por defecto, los borra del servidor tras descargarlos.",
           "correcta": false
         },
         {
-          "texto": "POP3 mantiene los mensajes en el servidor e IMAP los descarga y borra.",
+          "texto": "POP3 mantiene los mensajes en el servidor sin sincronizar su estado; IMAP los descarga al dispositivo y los borra siempre del servidor tras leerlos.",
           "correcta": false
         },
         {
-          "texto": "Ambos protocolos sirven también para enviar correo.",
+          "texto": "Ambos protocolos sirven para enviar y recibir correo: POP3 se usa con los clientes de escritorio e IMAP, con los dispositivos móviles.",
           "correcta": false
         }
       ],
@@ -376,7 +376,7 @@
       "pregunta": "¿Por qué SMTP no garantiza por sí mismo que el remitente sea quien dice ser?",
       "opciones": [
         {
-          "texto": "Porque delega esa verificación en el protocolo MIME.",
+          "texto": "Porque delega esa verificación en el protocolo MIME, que solo comprueba el formato del mensaje y no la identidad del remitente.",
           "correcta": false
         },
         {
@@ -384,11 +384,11 @@
           "correcta": true
         },
         {
-          "texto": "Porque cifra la cabecera From y no puede verificarla.",
+          "texto": "Porque cifra la cabecera From durante el transporte y el servidor receptor no puede descifrarla para verificar la dirección.",
           "correcta": false
         },
         {
-          "texto": "Porque solo autentica al destinatario, no al remitente.",
+          "texto": "Porque solo autentica al destinatario frente a su servidor de entrada, y el remitente no necesita identificarse para enviar.",
           "correcta": false
         }
       ],
@@ -404,15 +404,15 @@
       "pregunta": "¿Qué mecanismo publica en el DNS la lista de servidores autorizados a enviar correo en nombre de un dominio?",
       "opciones": [
         {
-          "texto": "DKIM.",
+          "texto": "DKIM (DomainKeys Identified Mail).",
           "correcta": false
         },
         {
-          "texto": "MIME.",
+          "texto": "MTA-STS (política de transporte).",
           "correcta": false
         },
         {
-          "texto": "DMARC.",
+          "texto": "DMARC (política y alineamiento).",
           "correcta": false
         },
         {
@@ -433,15 +433,15 @@
       "pregunta": "¿Qué aporta DKIM a un mensaje de correo?",
       "opciones": [
         {
-          "texto": "El cifrado completo del cuerpo del mensaje.",
+          "texto": "El cifrado completo del cuerpo y los adjuntos del mensaje con la clave pública del dominio destinatario, para que nadie pueda leerlo en tránsito.",
           "correcta": false
         },
         {
-          "texto": "Una lista de servidores autorizados a enviar en nombre del dominio.",
+          "texto": "Una lista, publicada en el DNS del dominio, de los servidores autorizados a enviar correo en su nombre, que el receptor comprueba al recibirlo.",
           "correcta": false
         },
         {
-          "texto": "Una política de rechazo automático para los correos sospechosos.",
+          "texto": "Una política, publicada en el DNS del dominio, que indica al receptor si debe rechazar o poner en cuarentena los mensajes que no superan las comprobaciones.",
           "correcta": false
         },
         {
@@ -461,7 +461,7 @@
       "pregunta": "¿Qué función cumple DMARC?",
       "opciones": [
         {
-          "texto": "Autenticar al usuario ante su servidor de salida.",
+          "texto": "Autenticar al usuario ante su servidor de salida antes de enviar y registrar en un informe cada intento de envío fallido por credenciales incorrectas.",
           "correcta": false
         },
         {
@@ -469,11 +469,11 @@
           "correcta": true
         },
         {
-          "texto": "Cifrar la conexión entre el cliente y el servidor de correo.",
+          "texto": "Cifrar la conexión entre el cliente y el servidor de correo, e informar al remitente cuando un mensaje no ha podido entregarse por falta de cifrado.",
           "correcta": false
         },
         {
-          "texto": "Sustituir a SPF y DKIM con un único mecanismo de firma.",
+          "texto": "Sustituir a SPF y DKIM con un único mecanismo de firma criptográfica que el servidor receptor comprueba antes de aceptar cualquier mensaje.",
           "correcta": false
         }
       ],
@@ -489,11 +489,11 @@
       "pregunta": "¿Qué es el webmail?",
       "opciones": [
         {
-          "texto": "Un protocolo alternativo a IMAP para dispositivos móviles.",
+          "texto": "Un protocolo alternativo a IMAP, optimizado para los dispositivos móviles, que sincroniza el buzón a través de HTTPS sin instalar ningún programa cliente.",
           "correcta": false
         },
         {
-          "texto": "Un cliente de escritorio que se instala en el equipo del usuario.",
+          "texto": "Un cliente de correo de escritorio que se instala en el equipo de la persona usuaria y accede al servidor mediante la interfaz HTTP/HTTPS que este ofrece.",
           "correcta": false
         },
         {
@@ -501,7 +501,7 @@
           "correcta": true
         },
         {
-          "texto": "El servicio que traduce direcciones de correo en direcciones IP.",
+          "texto": "El servicio del servidor de correo que traduce las direcciones de correo en direcciones IP para entregar los mensajes a través del navegador.",
           "correcta": false
         }
       ],
@@ -521,15 +521,15 @@
           "correcta": true
         },
         {
-          "texto": "HTTP, que es el protocolo propietario de los clientes de escritorio.",
+          "texto": "HTTP, que es el protocolo propietario que utilizan los clientes de escritorio para integrar correo, calendario y contactos.",
           "correcta": false
         },
         {
-          "texto": "SPF, que los clientes utilizan para descargar el correo del servidor.",
+          "texto": "SPF, el protocolo propietario de Microsoft que los clientes utilizan para descargar el correo, el calendario y los contactos.",
           "correcta": false
         },
         {
-          "texto": "SMTP sobre TLS, que sustituye a IMAP en los clientes corporativos.",
+          "texto": "SMTP sobre TLS, una variante propietaria de Exchange que sustituye a IMAP en los clientes corporativos para el calendario.",
           "correcta": false
         }
       ],
@@ -545,7 +545,7 @@
       "pregunta": "Una persona usuaria dice que puede recibir correo pero no enviarlo. ¿Qué parte de la configuración debe revisarse en primer lugar?",
       "opciones": [
         {
-          "texto": "La configuración de recepción (IMAP/POP3).",
+          "texto": "La configuración de recepción (IMAP/POP3): servidor de entrada, puerto y cifrado.",
           "correcta": false
         },
         {
@@ -553,11 +553,11 @@
           "correcta": true
         },
         {
-          "texto": "El formato MIME de los mensajes.",
+          "texto": "El formato MIME de los mensajes y el tamaño máximo de los archivos adjuntos.",
           "correcta": false
         },
         {
-          "texto": "El registro MX del dominio del destinatario.",
+          "texto": "El registro MX del dominio del destinatario y los registros SPF del propio dominio.",
           "correcta": false
         }
       ],
@@ -601,11 +601,11 @@
       "pregunta": "¿Son los puertos 587 y 465 exactamente lo mismo?",
       "opciones": [
         {
-          "texto": "No: el 587 es de submission y el 465, de recepción en el buzón.",
+          "texto": "No: el 587 se utiliza para la submission del correo por parte del cliente con STARTTLS, y el 465 para la entrega final del mensaje en el buzón del destinatario con TLS implícito.",
           "correcta": false
         },
         {
-          "texto": "No: el 587 usa IMAP y el 465, POP3.",
+          "texto": "No: el 587 se utiliza para consultar el buzón mediante IMAP con STARTTLS sobre la conexión, y el 465 para descargar el correo mediante POP3 con TLS implícito desde el inicio.",
           "correcta": false
         },
         {
@@ -613,7 +613,7 @@
           "correcta": true
         },
         {
-          "texto": "Sí: son dos numeraciones alternativas del mismo mecanismo.",
+          "texto": "Sí: son dos numeraciones alternativas del mismo mecanismo de submission, con el mismo establecimiento del cifrado; el 465 se mantiene solo por compatibilidad con clientes antiguos.",
           "correcta": false
         }
       ],
@@ -633,15 +633,15 @@
           "correcta": true
         },
         {
-          "texto": "Sí, pero solo en los clientes web.",
+          "texto": "Sí, pero solo en los clientes web: el navegador consulta el buzón por SMTP y los clientes de escritorio lo hacen por POP3 e IMAP.",
           "correcta": false
         },
         {
-          "texto": "Sí: SMTP es el protocolo de consulta del buzón en los clientes modernos.",
+          "texto": "Sí: SMTP es el protocolo de consulta del buzón en los clientes modernos; POP3 e IMAP quedaron para la transferencia entre servidores.",
           "correcta": false
         },
         {
-          "texto": "No: para consultar el buzón se utiliza exclusivamente SMTP sobre TLS.",
+          "texto": "No: para consultar el buzón se utiliza exclusivamente SMTP sobre TLS (puerto 465), mientras que POP3 e IMAP se reservan para el envío.",
           "correcta": false
         }
       ],
@@ -661,11 +661,11 @@
           "correcta": false
         },
         {
-          "texto": "No: el MTA es el cliente de correo y el MDA, el servidor.",
+          "texto": "No: el MTA es el cliente de correo de la persona usuaria y el MDA, el servidor que lo recibe.",
           "correcta": false
         },
         {
-          "texto": "Sí: son dos siglas para el mismo componente del servidor de correo.",
+          "texto": "Sí: son dos siglas para el mismo componente del servidor, que transporta y entrega el correo.",
           "correcta": false
         },
         {
@@ -689,15 +689,15 @@
           "correcta": true
         },
         {
-          "texto": "Sí: el protocolo impide configurar la misma cuenta en más de un equipo.",
+          "texto": "Sí: el protocolo impide formalmente configurar la misma cuenta en más de un equipo, porque cada descarga bloquea el buzón para los demás.",
           "correcta": false
         },
         {
-          "texto": "Sí, salvo que se active la opción de sincronización de carpetas.",
+          "texto": "Sí, salvo que se active en el cliente la opción de sincronización de carpetas, que convierte la cuenta POP3 en una cuenta IMAP.",
           "correcta": false
         },
         {
-          "texto": "No: POP3 sincroniza carpetas y estados igual que IMAP.",
+          "texto": "No: POP3 sincroniza las carpetas, los mensajes y las marcas de leído entre dispositivos exactamente igual que IMAP.",
           "correcta": false
         }
       ],
@@ -712,7 +712,7 @@
       "pregunta": "¿Qué comprueba realmente SPF?",
       "opciones": [
         {
-          "texto": "Verifica que la dirección «De:» que ve la persona destinataria es auténtica.",
+          "texto": "Verifica que la dirección «De:» que ve la persona destinataria es auténtica, comparándola con la lista de remitentes autorizados que el dominio publica en su DNS, con independencia del origen de la conexión.",
           "correcta": false
         },
         {
@@ -720,11 +720,11 @@
           "correcta": true
         },
         {
-          "texto": "Cifra el mensaje de extremo a extremo entre remitente y destinatario.",
+          "texto": "Cifra el mensaje de extremo a extremo entre el remitente y el destinatario, de modo que solo los servidores autorizados del dominio puedan leerlo en tránsito.",
           "correcta": false
         },
         {
-          "texto": "Comprueba que el contenido del mensaje no ha sido modificado.",
+          "texto": "Comprueba, mediante una firma publicada en el DNS, que el contenido y las cabeceras del mensaje no han sido modificados desde que salió del servidor de origen.",
           "correcta": false
         }
       ],
@@ -739,11 +739,11 @@
       "pregunta": "¿Hacen lo mismo SPF y DKIM?",
       "opciones": [
         {
-          "texto": "Sí: ambos comprueban la autenticidad del remitente del mismo modo.",
+          "texto": "Sí: ambos comprueban la autenticidad del remitente del mismo modo, consultando una lista de servidores autorizados en el DNS del dominio emisor.",
           "correcta": false
         },
         {
-          "texto": "No: SPF firma criptográficamente y DKIM autoriza direcciones IP.",
+          "texto": "No: SPF firma el mensaje y protege la integridad de lo firmado; DKIM autoriza los orígenes desde los que puede enviarse correo del dominio.",
           "correcta": false
         },
         {
@@ -751,7 +751,7 @@
           "correcta": true
         },
         {
-          "texto": "Sí, pero DKIM solo se aplica al correo interno.",
+          "texto": "Sí, pero DKIM solo se aplica al correo interno de la organización, mientras que SPF protege el correo que se envía a dominios externos.",
           "correcta": false
         }
       ],

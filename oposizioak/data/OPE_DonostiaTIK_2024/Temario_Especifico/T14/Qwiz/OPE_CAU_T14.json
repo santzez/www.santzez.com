@@ -14,15 +14,15 @@
           "correcta": true
         },
         {
-          "texto": "En la carpeta compartida NETLOGON del dominio.",
+          "texto": "En la carpeta compartida NETLOGON del dominio, junto con los scripts de inicio de sesión.",
           "correcta": false
         },
         {
-          "texto": "En la base de datos de Directorio Activo del dominio.",
+          "texto": "En la base de datos de Directorio Activo (NTDS.DIT) del controlador de dominio más cercano.",
           "correcta": false
         },
         {
-          "texto": "En el Registro de configuración de usuario NTUSER.DAT.",
+          "texto": "En el archivo de Registro de usuario NTUSER.DAT, dentro de la carpeta del perfil del equipo.",
           "correcta": false
         }
       ],
@@ -38,7 +38,7 @@
       "pregunta": "Un técnico crea un usuario desde la configuración local de un equipo del dominio y espera que pueda iniciar sesión en cualquier otro equipo. ¿Qué ocurrirá?",
       "opciones": [
         {
-          "texto": "Podrá, pero solo tras reiniciar el controlador de dominio.",
+          "texto": "Podrá, pero solo después de que el controlador de dominio replique la cuenta en su próximo ciclo.",
           "correcta": false
         },
         {
@@ -46,11 +46,11 @@
           "correcta": true
         },
         {
-          "texto": "Podrá iniciar sesión en cualquier equipo del dominio.",
+          "texto": "Podrá iniciar sesión en cualquier equipo del dominio, porque el equipo ya pertenece a él.",
           "correcta": false
         },
         {
-          "texto": "La cuenta se replicará automáticamente al Directorio Activo.",
+          "texto": "La cuenta se replicará automáticamente al Directorio Activo al reiniciar el equipo donde se creó.",
           "correcta": false
         }
       ],
@@ -66,15 +66,15 @@
       "pregunta": "¿Qué identifica realmente a una cuenta en Windows a efectos de permisos?",
       "opciones": [
         {
-          "texto": "El nombre del equipo donde se creó.",
+          "texto": "El nombre del equipo donde se creó, combinado con el nombre de la cuenta.",
           "correcta": false
         },
         {
-          "texto": "Su dirección de correo electrónico.",
+          "texto": "Su dirección de correo electrónico o UPN (usuario@dominio), único en el bosque.",
           "correcta": false
         },
         {
-          "texto": "Su nombre de usuario.",
+          "texto": "Su nombre de usuario (sAMAccountName), que no puede repetirse en el dominio.",
           "correcta": false
         },
         {
@@ -94,11 +94,11 @@
       "pregunta": "¿Qué dos cuentas locales integradas existen en todo equipo Windows y en qué estado están por defecto en las instalaciones modernas?",
       "opciones": [
         {
-          "texto": "Root e Invitado, ambas habilitadas.",
+          "texto": "Root e Invitado, ambas deshabilitadas por defecto.",
           "correcta": false
         },
         {
-          "texto": "Administrador y Sistema, solo la primera habilitada.",
+          "texto": "Administrador y Sistema, ambas habilitadas por defecto.",
           "correcta": false
         },
         {
@@ -106,7 +106,7 @@
           "correcta": true
         },
         {
-          "texto": "Administrador y Usuario estándar, ambas habilitadas.",
+          "texto": "Administrador y Usuario estándar, solo la segunda habilitada.",
           "correcta": false
         }
       ],
@@ -126,15 +126,15 @@
           "correcta": true
         },
         {
-          "texto": "El de distribución solo puede contener equipos, no usuarios.",
+          "texto": "El de distribución solo puede contener equipos y recibe permisos sobre impresoras; el de seguridad contiene usuarios y recibe permisos sobre carpetas.",
           "correcta": false
         },
         {
-          "texto": "Ambos pueden recibir permisos, pero con distinto ámbito.",
+          "texto": "Ambos pueden recibir permisos sobre recursos y usarse como listas de correo; solo se diferencian en su ámbito (local, global o universal).",
           "correcta": false
         },
         {
-          "texto": "El de seguridad se usa para correo y el de distribución, para permisos.",
+          "texto": "El de seguridad solo sirve como lista de distribución de correo; el de distribución es el que puede recibir permisos sobre los recursos.",
           "correcta": false
         }
       ],
@@ -154,11 +154,11 @@
           "correcta": false
         },
         {
-          "texto": "Global.",
+          "texto": "Global (de dominio).",
           "correcta": false
         },
         {
-          "texto": "Universal.",
+          "texto": "Universal (de bosque).",
           "correcta": false
         },
         {
@@ -178,7 +178,7 @@
       "pregunta": "¿Qué establece la regla AGDLP?",
       "opciones": [
         {
-          "texto": "Los grupos Locales de Dominio se anidan dentro de los Globales.",
+          "texto": "Las cuentas van en grupos Locales de Dominio, estos se anidan dentro de los Globales, y a estos últimos se les asignan los Permisos.",
           "correcta": false
         },
         {
@@ -186,11 +186,11 @@
           "correcta": true
         },
         {
-          "texto": "Los permisos se asignan directamente a cada cuenta de usuario.",
+          "texto": "Los Permisos se asignan directamente a cada cuenta de usuario, y los grupos Globales y Locales de Dominio solo se usan para el correo.",
           "correcta": false
         },
         {
-          "texto": "Cada grupo debe pertenecer a una única unidad organizativa.",
+          "texto": "Cada grupo debe pertenecer a una única unidad organizativa, y los Permisos se asignan a la OU, no a los grupos ni a las cuentas.",
           "correcta": false
         }
       ],
@@ -207,7 +207,7 @@
       "pregunta": "¿Con qué consola se administran los usuarios y grupos del dominio?",
       "opciones": [
         {
-          "texto": "eventvwr.msc.",
+          "texto": "Visor de eventos del dominio (eventvwr.msc).",
           "correcta": false
         },
         {
@@ -215,11 +215,11 @@
           "correcta": true
         },
         {
-          "texto": "services.msc.",
+          "texto": "Administración de directivas de grupo del dominio (gpmc.msc).",
           "correcta": false
         },
         {
-          "texto": "lusrmgr.msc.",
+          "texto": "Usuarios y grupos locales (lusrmgr.msc).",
           "correcta": false
         }
       ],
@@ -239,15 +239,15 @@
           "correcta": true
         },
         {
-          "texto": "Crear las cuentas localmente en cada equipo.",
+          "texto": "Crear las cuentas localmente en cada equipo del aula y replicarlas después al dominio.",
           "correcta": false
         },
         {
-          "texto": "Crearlas una a una desde ADUC.",
+          "texto": "Crearlas una a una desde ADUC copiando una cuenta plantilla para cada persona.",
           "correcta": false
         },
         {
-          "texto": "Crear una única cuenta compartida para todo el grupo.",
+          "texto": "Crear una única cuenta de dominio compartida por todo el grupo y cambiar su contraseña cada curso.",
           "correcta": false
         }
       ],
@@ -291,15 +291,15 @@
       "pregunta": "¿Qué es el perfil de usuario en Windows?",
       "opciones": [
         {
-          "texto": "El grupo de seguridad al que pertenece la cuenta.",
+          "texto": "El conjunto de grupos de seguridad y unidades organizativas a los que pertenece la cuenta, que determina su configuración personal.",
           "correcta": false
         },
         {
-          "texto": "El conjunto de permisos NTFS de sus carpetas.",
+          "texto": "El conjunto de permisos NTFS que la cuenta tiene sobre sus carpetas personales (escritorio, documentos) en el equipo y en la red.",
           "correcta": false
         },
         {
-          "texto": "La política de contraseñas aplicada al usuario.",
+          "texto": "La política de contraseñas y de bloqueo aplicada a la cuenta, junto con sus permisos de escritorio y documentos y su parte del Registro en el controlador.",
           "correcta": false
         },
         {
@@ -327,11 +327,11 @@
           "correcta": true
         },
         {
-          "texto": "SAM.",
+          "texto": "SYSTEM.DAT.",
           "correcta": false
         },
         {
-          "texto": "BOOT.INI.",
+          "texto": "USRCLASS.INI.",
           "correcta": false
         }
       ],
@@ -347,15 +347,15 @@
       "pregunta": "¿Qué caracteriza a un perfil móvil o itinerante (roaming profile)?",
       "opciones": [
         {
-          "texto": "Solo puede usarse con cuentas locales.",
+          "texto": "Solo puede usarse con cuentas locales, que lo copian desde una carpeta compartida de la red al iniciar sesión y lo devuelven al cerrarla, sin necesidad de pertenecer al dominio.",
           "correcta": false
         },
         {
-          "texto": "Es de solo lectura: los cambios no se guardan al cerrar sesión.",
+          "texto": "Es de solo lectura: se copia desde la red al iniciar sesión, pero los cambios del usuario no se guardan al cerrarla.",
           "correcta": false
         },
         {
-          "texto": "Se almacena solo en el equipo y no viaja con el usuario.",
+          "texto": "Se almacena solo en el equipo local y no viaja con el usuario: al cambiar de equipo, se crea un perfil nuevo y vacío.",
           "correcta": false
         },
         {
@@ -379,15 +379,15 @@
           "correcta": true
         },
         {
-          "texto": "Perfil temporal.",
+          "texto": "Perfil temporal (temporary).",
           "correcta": false
         },
         {
-          "texto": "Perfil móvil.",
+          "texto": "Perfil móvil (roaming).",
           "correcta": false
         },
         {
-          "texto": "Perfil local.",
+          "texto": "Perfil local predeterminado.",
           "correcta": false
         }
       ],
@@ -403,11 +403,11 @@
       "pregunta": "¿Qué ventaja aporta la redirección de carpetas frente al perfil móvil?",
       "opciones": [
         {
-          "texto": "Que cifra automáticamente los documentos del usuario.",
+          "texto": "Que cifra automáticamente los documentos del usuario en el servidor, sin necesidad de copiar todo el perfil en cada sesión.",
           "correcta": false
         },
         {
-          "texto": "Que permite trabajar sin conexión de red en cualquier caso.",
+          "texto": "Que permite trabajar sin conexión de red en cualquier caso, porque las carpetas redirigidas se mantienen siempre en el equipo local.",
           "correcta": false
         },
         {
@@ -415,7 +415,7 @@
           "correcta": true
         },
         {
-          "texto": "Que elimina la necesidad de que el usuario inicie sesión en el dominio.",
+          "texto": "Que elimina la necesidad de que el usuario inicie sesión en el dominio, porque sus carpetas se montan desde la red automáticamente.",
           "correcta": false
         }
       ],
@@ -435,15 +435,15 @@
           "correcta": true
         },
         {
-          "texto": "Cambiar su cuenta de dominio por una cuenta local.",
+          "texto": "Convertir su cuenta de dominio en una cuenta local de su equipo, para conservar sus archivos sin acceso a la red.",
           "correcta": false
         },
         {
-          "texto": "Compartir sus credenciales con su sustituto.",
+          "texto": "Compartir sus credenciales con la persona que la sustituye, para que pueda acceder a sus carpetas y correo.",
           "correcta": false
         },
         {
-          "texto": "Eliminarla y volver a crearla a su regreso.",
+          "texto": "Eliminarla y volver a crearla con el mismo nombre a su regreso, recuperando así sus permisos anteriores.",
           "correcta": false
         }
       ],
@@ -459,11 +459,11 @@
       "pregunta": "¿Por qué se desaconsejan las cuentas compartidas por varias personas?",
       "opciones": [
         {
-          "texto": "Porque no admiten perfiles móviles.",
+          "texto": "Porque no admiten perfiles móviles ni redirección de carpetas por directiva.",
           "correcta": false
         },
         {
-          "texto": "Porque no pueden pertenecer a grupos de seguridad.",
+          "texto": "Porque no pueden pertenecer a grupos de seguridad ni recibir permisos sobre recursos.",
           "correcta": false
         },
         {
@@ -471,7 +471,7 @@
           "correcta": true
         },
         {
-          "texto": "Porque consumen más licencias del sistema operativo.",
+          "texto": "Porque consumen una licencia de sistema operativo por cada persona que las utiliza.",
           "correcta": false
         }
       ],
@@ -515,7 +515,7 @@
       "pregunta": "¿Qué es un logon script?",
       "opciones": [
         {
-          "texto": "El registro de todos los inicios de sesión del dominio.",
+          "texto": "El registro donde el controlador de dominio anota todos los inicios de sesión de los usuarios, con el equipo, la hora y las unidades que se mapearon.",
           "correcta": false
         },
         {
@@ -523,11 +523,11 @@
           "correcta": true
         },
         {
-          "texto": "Una directiva que fuerza el cambio periódico de contraseña.",
+          "texto": "Una directiva que se ejecuta al iniciar sesión para forzar el cambio periódico de contraseña y bloquear la cuenta.",
           "correcta": false
         },
         {
-          "texto": "El proceso de autenticación mediante Kerberos.",
+          "texto": "El proceso de autenticación mediante Kerberos que prepara el entorno del usuario al validar sus credenciales.",
           "correcta": false
         }
       ],
@@ -575,15 +575,15 @@
           "correcta": true
         },
         {
-          "texto": "Que evita tener que almacenar el script en un servidor.",
+          "texto": "Que evita tener que almacenar el script en un servidor del dominio, porque la GPO lo copia automáticamente a cada equipo de la OU al arrancar.",
           "correcta": false
         },
         {
-          "texto": "Que el script se ejecuta más rápido.",
+          "texto": "Que el script se ejecuta más rápido, porque la GPO lo lanza antes de cargar el perfil del usuario.",
           "correcta": false
         },
         {
-          "texto": "Que no requiere que el equipo esté unido al dominio.",
+          "texto": "Que no requiere que el equipo esté unido al dominio, porque la GPO se descarga al conectarse a la red.",
           "correcta": false
         }
       ],
@@ -599,15 +599,15 @@
       "pregunta": "¿Qué hace la orden `net use Z: \\\\servidor\\recurso` dentro de un logon script?",
       "opciones": [
         {
-          "texto": "Conecta una impresora de red en el puerto Z.",
+          "texto": "Conecta una impresora de red en el puerto Z: del equipo del usuario.",
           "correcta": false
         },
         {
-          "texto": "Copia el contenido del recurso a la carpeta local Z.",
+          "texto": "Copia el contenido del recurso compartido a la carpeta local Z: del usuario.",
           "correcta": false
         },
         {
-          "texto": "Concede permisos de lectura sobre el recurso.",
+          "texto": "Concede al usuario permisos de lectura sobre el recurso como unidad Z:.",
           "correcta": false
         },
         {
@@ -627,11 +627,11 @@
       "pregunta": "Una persona usuaria llama porque «ha desaparecido la unidad Z: del departamento». ¿Cuál es el diagnóstico más razonable?",
       "opciones": [
         {
-          "texto": "Recrear la unidad manualmente en su equipo y dar el caso por cerrado.",
+          "texto": "Recrear la unidad manualmente en su equipo con la ruta del recurso y dar el caso por cerrado, porque el logon script solo se ejecuta la primera vez que la cuenta inicia sesión.",
           "correcta": false
         },
         {
-          "texto": "Solicitar la creación de una cuenta nueva para la persona usuaria.",
+          "texto": "Solicitar una cuenta nueva para la persona usuaria, porque la desaparición de unidades indica que su perfil está dañado y no puede repararse.",
           "correcta": false
         },
         {
@@ -639,7 +639,7 @@
           "correcta": true
         },
         {
-          "texto": "Reinstalar el sistema operativo del equipo.",
+          "texto": "Reinstalar el sistema operativo del equipo, porque las unidades de red mapeadas se pierden cuando se corrompe el Registro del usuario.",
           "correcta": false
         }
       ],
@@ -659,15 +659,15 @@
           "correcta": true
         },
         {
-          "texto": "Porque los archivos .bat dejaron de ejecutarse en Windows 10.",
+          "texto": "Porque los archivos .bat y .cmd dejaron de ejecutarse en Windows 10 y en las versiones posteriores.",
           "correcta": false
         },
         {
-          "texto": "Porque es el único lenguaje admitido por las GPO.",
+          "texto": "Porque es el único lenguaje de script que admiten las directivas de grupo en los dominios actuales.",
           "correcta": false
         },
         {
-          "texto": "Porque no requiere permisos de administrador para ninguna acción.",
+          "texto": "Porque no requiere permisos de administrador para ninguna acción y se integra mejor con la plataforma.",
           "correcta": false
         }
       ],
@@ -683,7 +683,7 @@
       "pregunta": "¿Puede una cuenta de dominio utilizarse en cualquier equipo sin restricciones?",
       "opciones": [
         {
-          "texto": "Sí: una cuenta de dominio da acceso a cualquier equipo de la organización.",
+          "texto": "Sí: una cuenta de dominio da acceso a cualquier equipo de la organización, sin que las políticas puedan restringirlo.",
           "correcta": false
         },
         {
@@ -691,11 +691,11 @@
           "correcta": true
         },
         {
-          "texto": "No: cada cuenta de dominio queda vinculada de forma permanente a un único equipo.",
+          "texto": "No: cada cuenta de dominio queda vinculada de forma permanente al equipo donde inició sesión por primera vez.",
           "correcta": false
         },
         {
-          "texto": "Sí, salvo que la cuenta pertenezca a un grupo global.",
+          "texto": "Sí, salvo que la cuenta pertenezca a un grupo global, que restringe su uso a los equipos de su propio dominio.",
           "correcta": false
         }
       ],
@@ -710,15 +710,15 @@
       "pregunta": "¿Han sustituido los scripts de PowerShell a los ficheros .bat en los logon scripts?",
       "opciones": [
         {
-          "texto": "No: PowerShell no puede utilizarse en scripts de inicio de sesión.",
+          "texto": "No: PowerShell no puede utilizarse en scripts de inicio de sesión, que solo admiten ficheros por lotes.",
           "correcta": false
         },
         {
-          "texto": "Sí: los .bat ya no se ejecutan en las versiones actuales de Windows.",
+          "texto": "Sí: los .bat ya no se ejecutan en las versiones actuales de Windows y deben migrarse a PowerShell.",
           "correcta": false
         },
         {
-          "texto": "Sí: las directivas de grupo solo admiten PowerShell desde Windows Server 2016.",
+          "texto": "Sí: las directivas de grupo solo admiten scripts de PowerShell desde Windows Server 2016.",
           "correcta": false
         },
         {
@@ -737,11 +737,11 @@
       "pregunta": "En un enunciado sobre gestión de usuarios y grupos aparecen los dispositivos USB, los permisos NTFS avanzados y la estructura del bosque. ¿Qué procede?",
       "opciones": [
         {
-          "texto": "Desarrollarlos, porque forman parte del núcleo de la gestión de usuarios.",
+          "texto": "Desarrollarlos en detalle, porque los dispositivos USB, los permisos NTFS avanzados y la estructura del bosque forman parte del núcleo de la gestión de usuarios y grupos.",
           "correcta": false
         },
         {
-          "texto": "Remitirlos todos al Esquema Nacional de Seguridad.",
+          "texto": "Remitirlos todos al Esquema Nacional de Seguridad (Tema 21), que es la norma donde se regulan los dispositivos, los permisos y la estructura del directorio.",
           "correcta": false
         },
         {
@@ -749,7 +749,7 @@
           "correcta": true
         },
         {
-          "texto": "Considerar que el enunciado es erróneo porque esos conceptos no existen.",
+          "texto": "Considerar que el enunciado es erróneo, porque los permisos NTFS avanzados y la estructura del bosque no existen en las versiones actuales de Windows Server.",
           "correcta": false
         }
       ],

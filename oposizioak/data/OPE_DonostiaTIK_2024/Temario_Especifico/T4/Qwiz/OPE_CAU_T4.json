@@ -66,7 +66,7 @@
       "pregunta": "¿Qué organización de fichero calcula la posición física de cada registro a partir de su clave mediante una función hash?",
       "opciones": [
         {
-          "texto": "Jerárquica.",
+          "texto": "Jerárquica (en árbol).",
           "correcta": false
         },
         {
@@ -74,7 +74,7 @@
           "correcta": true
         },
         {
-          "texto": "Secuencial.",
+          "texto": "Secuencial (ordenada).",
           "correcta": false
         },
         {
@@ -94,15 +94,15 @@
       "pregunta": "¿Qué es una colisión en un fichero de organización directa?",
       "opciones": [
         {
-          "texto": "Que dos procesos intentan escribir el mismo registro a la vez.",
+          "texto": "Que dos procesos intentan escribir a la vez el mismo registro del fichero.",
           "correcta": false
         },
         {
-          "texto": "Que el índice y los datos quedan desincronizados.",
+          "texto": "Que la zona de índices y la de datos quedan desincronizadas tras un alta.",
           "correcta": false
         },
         {
-          "texto": "Que el fichero supera el tamaño máximo del disco.",
+          "texto": "Que la función hash devuelve una posición fuera del espacio del fichero.",
           "correcta": false
         },
         {
@@ -150,7 +150,7 @@
       "pregunta": "¿Qué significa la sigla ISAM?",
       "opciones": [
         {
-          "texto": "Internal Storage Access Mode.",
+          "texto": "Internal Storage Access Mode (modo de acceso al almacenamiento interno).",
           "correcta": false
         },
         {
@@ -158,11 +158,11 @@
           "correcta": true
         },
         {
-          "texto": "Index Sorting Algorithm Method.",
+          "texto": "Index Sorting Algorithm Method (método de ordenación de índices).",
           "correcta": false
         },
         {
-          "texto": "Integrated System for Archive Management.",
+          "texto": "Integrated System for Archive Management (sistema integrado de archivo).",
           "correcta": false
         }
       ],
@@ -178,15 +178,15 @@
       "pregunta": "Para evitar desplazar registros en cada alta en un fichero ordenado, el nuevo registro se escribe en una zona auxiliar enlazada lógicamente, pendiente de una reorganización posterior. ¿Cómo se llama este método de inserción?",
       "opciones": [
         {
-          "texto": "Inserción al final (append).",
+          "texto": "Inserción al final del fichero (append) con marca.",
           "correcta": false
         },
         {
-          "texto": "Inserción indexada multinivel.",
+          "texto": "Inserción indexada multinivel con árbol auxiliar.",
           "correcta": false
         },
         {
-          "texto": "Inserción por cálculo de posición.",
+          "texto": "Inserción por cálculo de posición con función hash.",
           "correcta": false
         },
         {
@@ -210,15 +210,15 @@
           "correcta": true
         },
         {
-          "texto": "El método de acceso es independiente de la organización del fichero.",
+          "texto": "El método de acceso es independiente de la organización: cualquier organización (secuencial, directa o indexada) admite de forma natural cualquier método de acceso.",
           "correcta": false
         },
         {
-          "texto": "Organización directa → acceso secuencial obligatorio.",
+          "texto": "Cada organización impone un único método: la directa obliga al acceso secuencial, la indexada al directo por hash y la secuencial al secuencial indexado.",
           "correcta": false
         },
         {
-          "texto": "Organización secuencial → acceso directo por hash.",
+          "texto": "La organización secuencial permite de forma natural el acceso directo por hash; la directa, el secuencial indexado; y la indexada, solo el secuencial.",
           "correcta": false
         }
       ],
@@ -262,11 +262,11 @@
       "pregunta": "¿Puede un índice ser a la vez secundario y denso?",
       "opciones": [
         {
-          "texto": "No: solo el índice primario puede ser denso.",
+          "texto": "No: solo el índice primario puede ser denso, porque es el único que sigue el orden físico.",
           "correcta": false
         },
         {
-          "texto": "Solo si el fichero tiene organización directa.",
+          "texto": "Solo si el fichero tiene organización directa, porque la función hash crea una entrada por registro.",
           "correcta": false
         },
         {
@@ -274,7 +274,7 @@
           "correcta": true
         },
         {
-          "texto": "No: los índices secundarios son siempre dispersos.",
+          "texto": "No: los índices secundarios son siempre dispersos, porque no determinan el orden físico del fichero.",
           "correcta": false
         }
       ],
@@ -318,7 +318,7 @@
       "pregunta": "¿Sobre qué campo se construye el índice primario de un fichero?",
       "opciones": [
         {
-          "texto": "Sobre el campo de mayor tamaño en bytes.",
+          "texto": "Sobre el campo de mayor tamaño en bytes, para reducir el número de entradas del índice.",
           "correcta": false
         },
         {
@@ -326,11 +326,11 @@
           "correcta": true
         },
         {
-          "texto": "Sobre un campo elegido aleatoriamente por el sistema.",
+          "texto": "Sobre cualquier campo de búsqueda frecuente (puede haber varios índices primarios por fichero).",
           "correcta": false
         },
         {
-          "texto": "Sobre cualquier campo de búsqueda frecuente.",
+          "texto": "Sobre un campo que no determina el orden físico, para poder buscar sin reordenar el fichero.",
           "correcta": false
         }
       ],
@@ -346,15 +346,15 @@
       "pregunta": "¿Qué ventaja aportan los registros de longitud fija frente a los de longitud variable?",
       "opciones": [
         {
-          "texto": "Ocupan siempre menos espacio en disco.",
+          "texto": "Ocupan siempre menos espacio en disco, porque no necesitan separadores ni marcas de fin de campo.",
           "correcta": false
         },
         {
-          "texto": "Evitan la necesidad de claves primarias.",
+          "texto": "Evitan la necesidad de claves primarias, porque cada registro se identifica por su posición física.",
           "correcta": false
         },
         {
-          "texto": "Permiten registrar datos de tipos distintos en cada registro.",
+          "texto": "Permiten guardar datos de tipos y tamaños distintos en cada registro sin reorganizar el fichero.",
           "correcta": false
         },
         {
@@ -374,7 +374,7 @@
       "pregunta": "Un fichero cuyos valores se separan mediante comas en cada línea es un ejemplo típico de:",
       "opciones": [
         {
-          "texto": "Fichero indexado.",
+          "texto": "Fichero indexado (secuencial indexado).",
           "correcta": false
         },
         {
@@ -382,11 +382,11 @@
           "correcta": true
         },
         {
-          "texto": "Fichero de longitud fija.",
+          "texto": "Fichero de longitud fija (campos de ancho fijo).",
           "correcta": false
         },
         {
-          "texto": "Fichero binario.",
+          "texto": "Fichero binario (registros serializados).",
           "correcta": false
         }
       ],
@@ -434,15 +434,15 @@
           "correcta": true
         },
         {
-          "texto": "El fichero de texto es siempre más compacto que el binario.",
+          "texto": "El fichero de texto es siempre más compacto que el binario, porque solo guarda caracteres legibles codificados (p. ej., en UTF-8).",
           "correcta": false
         },
         {
-          "texto": "El fichero binario es directamente legible por una persona.",
+          "texto": "El fichero binario es directamente legible por una persona; el de texto se optimiza para el programa que lo usa y requiere decodificarlo.",
           "correcta": false
         },
         {
-          "texto": "Los ficheros binarios no pueden contener datos numéricos.",
+          "texto": "Los ficheros binarios no pueden contener datos numéricos, que deben guardarse como texto legible para que el programa los interprete.",
           "correcta": false
         }
       ],
@@ -486,11 +486,11 @@
       "pregunta": "¿Qué diferencia hay entre el borrado lógico y el borrado físico de un registro?",
       "opciones": [
         {
-          "texto": "Son términos equivalentes.",
+          "texto": "Son términos equivalentes: ambos eliminan el registro y liberan su espacio, aunque el lógico deja constancia en el registro de auditoría.",
           "correcta": false
         },
         {
-          "texto": "El lógico lo realiza el usuario y el físico, el administrador.",
+          "texto": "El lógico lo realiza la persona usuaria desde la aplicación y el físico, el administrador desde el sistema; en ambos se libera el espacio.",
           "correcta": false
         },
         {
@@ -498,7 +498,7 @@
           "correcta": true
         },
         {
-          "texto": "El físico es reversible y el lógico, irreversible.",
+          "texto": "El físico elimina el registro de forma reversible hasta la siguiente copia; el lógico lo suprime realmente y libera el espacio de inmediato.",
           "correcta": false
         }
       ],
@@ -514,15 +514,15 @@
       "pregunta": "¿Qué operación elimina físicamente los registros marcados como borrados y recupera el espacio de las zonas de desbordamiento?",
       "opciones": [
         {
-          "texto": "Ordenación.",
+          "texto": "Ordenación (sort) del fichero.",
           "correcta": false
         },
         {
-          "texto": "Indexación.",
+          "texto": "Indexación (reconstrucción de índices).",
           "correcta": false
         },
         {
-          "texto": "Fusión.",
+          "texto": "Fusión (merge) con el fichero de movimientos.",
           "correcta": false
         },
         {
@@ -570,7 +570,7 @@
       "pregunta": "¿Cuál de las siguientes es una operación a nivel de registro (y no de fichero completo)?",
       "opciones": [
         {
-          "texto": "Fusionar.",
+          "texto": "Fusionar (combinar dos ficheros ordenados en uno).",
           "correcta": false
         },
         {
@@ -578,11 +578,11 @@
           "correcta": true
         },
         {
-          "texto": "Renombrar.",
+          "texto": "Renombrar (cambiar el nombre del fichero en el disco).",
           "correcta": false
         },
         {
-          "texto": "Reorganizar.",
+          "texto": "Reorganizar (compactar el fichero eliminando borrados).",
           "correcta": false
         }
       ],
@@ -598,15 +598,15 @@
       "pregunta": "¿Por qué la organización secuencial es poco adecuada para consultas puntuales de registros concretos?",
       "opciones": [
         {
-          "texto": "Porque sus registros deben ser de longitud variable.",
+          "texto": "Porque sus registros deben ser de longitud variable y no se puede calcular su posición en el disco.",
           "correcta": false
         },
         {
-          "texto": "Porque requiere resolver colisiones en cada consulta.",
+          "texto": "Porque requiere resolver colisiones en cada consulta cuando dos registros comparten la misma clave.",
           "correcta": false
         },
         {
-          "texto": "Porque no admite claves primarias.",
+          "texto": "Porque no admite claves primarias y el registro buscado debe identificarse por su contenido.",
           "correcta": false
         },
         {
@@ -658,15 +658,15 @@
           "correcta": true
         },
         {
-          "texto": "Ficheros de movimientos encadenados.",
+          "texto": "Ficheros de movimientos encadenados (logs).",
           "correcta": false
         },
         {
-          "texto": "Listas enlazadas simples.",
+          "texto": "Listas enlazadas simples ordenadas por clave.",
           "correcta": false
         },
         {
-          "texto": "Tablas hash sin colisiones.",
+          "texto": "Tablas hash de direccionamiento abierto.",
           "correcta": false
         }
       ],
@@ -738,11 +738,11 @@
       "pregunta": "¿Qué relación tiene este tema con el Tema 5 (bases de datos)?",
       "opciones": [
         {
-          "texto": "Ninguna: son ámbitos sin conexión.",
+          "texto": "Ninguna: las bases de datos relacionales almacenan la información en tablas en memoria y no utilizan ficheros, registros, claves ni índices.",
           "correcta": false
         },
         {
-          "texto": "Las bases de datos no usan índices, a diferencia de los ficheros.",
+          "texto": "Las bases de datos no usan índices, a diferencia de los ficheros; el modelo relacional localiza las filas recorriendo cada tabla de forma secuencial.",
           "correcta": false
         },
         {
@@ -750,7 +750,7 @@
           "correcta": true
         },
         {
-          "texto": "El Tema 5 sustituye los conceptos de este tema, que quedan obsoletos.",
+          "texto": "El Tema 5 sustituye los conceptos de este tema, que quedan obsoletos: en el modelo relacional, tabla = registro, fila = campo y columna = fichero.",
           "correcta": false
         }
       ],
@@ -766,7 +766,7 @@
       "pregunta": "¿Qué diferencia hay entre organización de un fichero y método de acceso?",
       "opciones": [
         {
-          "texto": "La organización la fija el usuario y el acceso, el fabricante del disco.",
+          "texto": "La organización la decide la persona usuaria al crear el fichero y el método de acceso lo fija el fabricante del disco; por eso cada organización admite un único método de acceso posible.",
           "correcta": false
         },
         {
@@ -774,11 +774,11 @@
           "correcta": true
         },
         {
-          "texto": "La organización se refiere al soporte físico y el acceso, al sistema de ficheros.",
+          "texto": "La organización se refiere al soporte físico (disco, cinta) y el método de acceso, al sistema de ficheros del sistema operativo que lo gestiona.",
           "correcta": false
         },
         {
-          "texto": "Son sinónimos: describen lo mismo con dos denominaciones distintas.",
+          "texto": "Son sinónimos: ambos describen cómo se disponen los registros en el soporte, y una misma organización solo puede admitir un método de acceso.",
           "correcta": false
         }
       ],
@@ -798,15 +798,15 @@
           "correcta": true
         },
         {
-          "texto": "El hashing solo puede utilizarse en la organización secuencial indexada.",
+          "texto": "El hashing solo puede utilizarse en la organización secuencial indexada, donde calcula la posición del índice a partir de la clave del registro.",
           "correcta": false
         },
         {
-          "texto": "Organización directa y hashing son exactamente lo mismo.",
+          "texto": "Organización directa y hashing son exactamente lo mismo: toda organización directa se define por usar una función de dispersión sobre la clave.",
           "correcta": false
         },
         {
-          "texto": "El hashing es un método de ordenación de registros, no de localización.",
+          "texto": "El hashing es un método de ordenación de registros por dispersión, no de localización; la organización directa usa en su lugar índices densos.",
           "correcta": false
         }
       ],
@@ -821,11 +821,11 @@
       "pregunta": "¿Puede afirmarse que un fichero binario siempre es más pequeño y más rápido que uno de texto?",
       "opciones": [
         {
-          "texto": "Sí: el binario es siempre más compacto y más rápido de procesar.",
+          "texto": "Sí: el binario es siempre más compacto y más rápido de procesar, porque no necesita convertir caracteres legibles en valores.",
           "correcta": false
         },
         {
-          "texto": "Sí, salvo que el fichero esté comprimido.",
+          "texto": "Sí, salvo que el fichero de texto esté comprimido, porque la compresión elimina la ventaja de tamaño del formato binario.",
           "correcta": false
         },
         {
@@ -833,7 +833,7 @@
           "correcta": true
         },
         {
-          "texto": "No, porque el binario es siempre mayor que el texto equivalente.",
+          "texto": "No, porque el binario es siempre mayor que el texto equivalente al tener que guardar la estructura interna de cada registro.",
           "correcta": false
         }
       ],
@@ -848,7 +848,7 @@
       "pregunta": "¿Cómo debe formularse la diferencia entre borrado lógico y borrado físico?",
       "opciones": [
         {
-          "texto": "Ambos son idénticos: cambia únicamente la terminología del fabricante.",
+          "texto": "Ambos suprimen realmente el registro y liberan su espacio; la diferencia es solo terminológica y depende del fabricante del sistema de ficheros.",
           "correcta": false
         },
         {
@@ -856,11 +856,11 @@
           "correcta": true
         },
         {
-          "texto": "El borrado lógico es siempre reversible y el físico, siempre irreversible.",
+          "texto": "El borrado lógico es siempre reversible y el físico, siempre irreversible: esa reversibilidad es precisamente lo que define y distingue a cada uno, con independencia del mecanismo concreto y de la reorganización.",
           "correcta": false
         },
         {
-          "texto": "El borrado lógico solo existe en bases de datos y el físico, solo en ficheros.",
+          "texto": "El borrado lógico solo existe en las bases de datos relacionales y el físico solo en los ficheros, por lo que no pueden darse en el mismo sistema.",
           "correcta": false
         }
       ],

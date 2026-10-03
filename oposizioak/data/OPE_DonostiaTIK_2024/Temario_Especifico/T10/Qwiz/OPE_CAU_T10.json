@@ -14,15 +14,15 @@
           "correcta": true
         },
         {
-          "texto": "El ordenador definido por software con CPU y disco virtuales.",
+          "texto": "El ordenador definido por software, con CPU, memoria y disco virtuales, sobre el que se instala cada SO.",
           "correcta": false
         },
         {
-          "texto": "La consola de administración del hipervisor.",
+          "texto": "La consola de administración del hipervisor desde la que se crean, arrancan y gestionan las VM.",
           "correcta": false
         },
         {
-          "texto": "Cada sistema operativo que se ejecuta virtualizado.",
+          "texto": "Cada sistema operativo que se ejecuta virtualizado dentro de una máquina virtual sobre el hipervisor.",
           "correcta": false
         }
       ],
@@ -38,7 +38,7 @@
       "pregunta": "¿Qué es el hipervisor?",
       "opciones": [
         {
-          "texto": "El conjunto de discos compartidos entre varias VM.",
+          "texto": "El conjunto de discos compartidos entre varias máquinas virtuales, que reparte el espacio físico del host y garantiza que cada VM solo vea el suyo.",
           "correcta": false
         },
         {
@@ -46,11 +46,11 @@
           "correcta": true
         },
         {
-          "texto": "El controlador que permite a la CPU ejecutar instrucciones virtualizadas.",
+          "texto": "El controlador del procesador que permite a la CPU ejecutar instrucciones virtualizadas, repartiendo los núcleos físicos entre las VM.",
           "correcta": false
         },
         {
-          "texto": "El sistema operativo invitado de una máquina virtual.",
+          "texto": "El sistema operativo invitado que se ejecuta dentro de cada máquina virtual y gestiona los recursos virtuales que esta tiene asignados.",
           "correcta": false
         }
       ],
@@ -66,15 +66,15 @@
       "pregunta": "¿Qué caracteriza a un hipervisor de tipo 1 (bare-metal)?",
       "opciones": [
         {
-          "texto": "Se instala como una aplicación sobre un sistema operativo convencional.",
+          "texto": "Se instala como una aplicación más sobre un sistema operativo convencional ya existente en el equipo.",
           "correcta": false
         },
         {
-          "texto": "Se ejecuta dentro de otra máquina virtual.",
+          "texto": "Se ejecuta dentro de otra máquina virtual (virtualización anidada) para aislar mejor a los invitados.",
           "correcta": false
         },
         {
-          "texto": "Solo puede ejecutar una máquina virtual simultáneamente.",
+          "texto": "Solo puede ejecutar una máquina virtual de forma simultánea, a la que cede todo el hardware del host.",
           "correcta": false
         },
         {
@@ -98,7 +98,7 @@
           "correcta": false
         },
         {
-          "texto": "KVM.",
+          "texto": "KVM (Kernel-based VM).",
           "correcta": false
         },
         {
@@ -106,7 +106,7 @@
           "correcta": true
         },
         {
-          "texto": "VMware ESXi.",
+          "texto": "Microsoft Hyper-V.",
           "correcta": false
         }
       ],
@@ -122,15 +122,15 @@
       "pregunta": "¿Por qué Microsoft Hyper-V se considera un hipervisor de tipo 1 aunque se active como rol dentro de Windows?",
       "opciones": [
         {
-          "texto": "Porque no permite ejecutar sistemas operativos invitados distintos de Windows.",
+          "texto": "Porque no permite ejecutar sistemas operativos invitados distintos de Windows, y todos ellos comparten el núcleo del Windows anfitrión, que es el que controla directamente el hardware.",
           "correcta": false
         },
         {
-          "texto": "Porque requiere obligatoriamente extensiones de virtualización por hardware.",
+          "texto": "Porque requiere obligatoriamente extensiones de virtualización por hardware (VT-x o AMD-V), y todo hipervisor que las exige se clasifica como tipo 1.",
           "correcta": false
         },
         {
-          "texto": "Porque solo puede instalarse en Windows Server.",
+          "texto": "Porque solo puede instalarse en Windows Server, donde se ejecuta como un servicio del sistema operativo anfitrión, que conserva el control del hardware.",
           "correcta": false
         },
         {
@@ -182,15 +182,15 @@
           "correcta": true
         },
         {
-          "texto": "Tipo 2, porque permite más máquinas virtuales simultáneas.",
+          "texto": "Tipo 2, porque permite ejecutar más máquinas virtuales simultáneas por host.",
           "correcta": false
         },
         {
-          "texto": "Indistintamente ambos: el rendimiento es idéntico.",
+          "texto": "Indistintamente ambos, porque con VT-x y AMD-V el rendimiento es idéntico.",
           "correcta": false
         },
         {
-          "texto": "Tipo 2, por su facilidad de instalación.",
+          "texto": "Tipo 2, por su facilidad de instalación sobre el sistema operativo existente.",
           "correcta": false
         }
       ],
@@ -206,7 +206,7 @@
       "pregunta": "¿Qué caracteriza a la virtualización completa (full virtualization)?",
       "opciones": [
         {
-          "texto": "El sistema operativo invitado debe modificarse para comunicarse con el hipervisor.",
+          "texto": "El sistema operativo invitado se modifica para comunicarse con el hipervisor mediante llamadas directas, sabiendo que está virtualizado.",
           "correcta": false
         },
         {
@@ -214,11 +214,11 @@
           "correcta": true
         },
         {
-          "texto": "Se aísla a nivel de procesos sobre un núcleo compartido.",
+          "texto": "Se aíslan los procesos de cada invitado sobre un núcleo compartido con el host, sin simular hardware ni ejecutar un SO completo.",
           "correcta": false
         },
         {
-          "texto": "Solo funciona con sistemas operativos de código abierto.",
+          "texto": "Solo funciona con sistemas operativos de código abierto, porque el hipervisor necesita modificar el núcleo del invitado para simularlo.",
           "correcta": false
         }
       ],
@@ -234,15 +234,15 @@
       "pregunta": "En la paravirtualización, ¿qué ocurre con el sistema operativo invitado?",
       "opciones": [
         {
-          "texto": "No necesita hipervisor alguno.",
+          "texto": "No necesita hipervisor alguno: se comunica directamente con el hardware del host mediante drivers específicos y llamadas optimizadas.",
           "correcta": false
         },
         {
-          "texto": "Comparte el núcleo con el sistema anfitrión.",
+          "texto": "Comparte el núcleo con el sistema anfitrión y se aísla a nivel de procesos, por lo que no necesita drivers específicos ni modificaciones.",
           "correcta": false
         },
         {
-          "texto": "Se ejecuta sin ninguna modificación, igual que en hardware físico.",
+          "texto": "Se ejecuta sin ninguna modificación, igual que en hardware físico, sin saber que está virtualizado, gracias a que las extensiones VT-x y AMD-V simulan el hardware completo.",
           "correcta": false
         },
         {
@@ -262,7 +262,7 @@
       "pregunta": "¿Qué son Intel VT-x y AMD-V?",
       "opciones": [
         {
-          "texto": "Dos hipervisores de tipo 1 de la competencia.",
+          "texto": "Dos hipervisores de tipo 1 de la competencia, uno de Intel y otro de AMD, para servidores.",
           "correcta": false
         },
         {
@@ -270,11 +270,11 @@
           "correcta": true
         },
         {
-          "texto": "Formatos de disco virtual.",
+          "texto": "Formatos de disco virtual (como VMDK o VHDX) optimizados para cada fabricante de procesador.",
           "correcta": false
         },
         {
-          "texto": "Protocolos de migración en caliente.",
+          "texto": "Protocolos de migración en caliente de máquinas virtuales entre hosts con distinto procesador.",
           "correcta": false
         }
       ],
@@ -290,11 +290,11 @@
       "pregunta": "¿Cuál es la diferencia esencial entre una máquina virtual y un contenedor?",
       "opciones": [
         {
-          "texto": "No hay diferencia técnica: son dos nombres comerciales del mismo concepto.",
+          "texto": "No hay diferencia técnica: ambos virtualizan el hardware y ejecutan un SO invitado completo; «contenedor» es el nombre comercial que reciben las VM ligeras.",
           "correcta": false
         },
         {
-          "texto": "Los contenedores solo funcionan en Windows y las VM solo en Linux.",
+          "texto": "La VM aísla procesos sobre un núcleo compartido y solo funciona en Linux; el contenedor virtualiza el hardware completo y solo funciona en Windows.",
           "correcta": false
         },
         {
@@ -302,7 +302,7 @@
           "correcta": true
         },
         {
-          "texto": "El contenedor virtualiza el hardware completo y la VM aísla procesos.",
+          "texto": "El contenedor virtualiza hardware y ejecuta un SO invitado completo; la VM aísla procesos sobre un núcleo compartido con el host, sin virtualizar hardware.",
           "correcta": false
         }
       ],
@@ -322,15 +322,15 @@
           "correcta": true
         },
         {
-          "texto": "Ambos requieren un hipervisor de tipo 1.",
+          "texto": "Ambos requieren un hipervisor de tipo 1 y ofrecen el mismo aislamiento, porque cada uno lleva su propio SO.",
           "correcta": false
         },
         {
-          "texto": "La VM arranca más rápido y ocupa menos que un contenedor.",
+          "texto": "La VM arranca más rápido y ocupa menos que un contenedor, porque no tiene que empaquetar las dependencias.",
           "correcta": false
         },
         {
-          "texto": "El contenedor ofrece mayor aislamiento que una VM.",
+          "texto": "El contenedor ofrece mayor aislamiento (núcleo propio); la VM es más ligera al compartir el núcleo del host.",
           "correcta": false
         }
       ],
@@ -374,11 +374,11 @@
       "pregunta": "¿Qué permite la migración en caliente (vMotion, Live Migration)?",
       "opciones": [
         {
-          "texto": "Convertir una máquina física en virtual sin apagarla.",
+          "texto": "Convertir una máquina física en virtual (P2V) sin apagarla ni interrumpir el servicio que presta.",
           "correcta": false
         },
         {
-          "texto": "Actualizar el sistema operativo invitado sin reiniciarlo.",
+          "texto": "Actualizar el sistema operativo invitado de una máquina virtual en ejecución sin necesidad de reiniciarla.",
           "correcta": false
         },
         {
@@ -386,7 +386,7 @@
           "correcta": true
         },
         {
-          "texto": "Replicar automáticamente los datos entre dos centros de datos.",
+          "texto": "Replicar de forma continua y automática los datos de una VM entre dos centros de datos para recuperarla.",
           "correcta": false
         }
       ],
@@ -402,7 +402,7 @@
       "pregunta": "¿Qué es una instantánea o snapshot de una máquina virtual?",
       "opciones": [
         {
-          "texto": "Un registro de los cambios de configuración del hipervisor.",
+          "texto": "Un registro de los cambios de configuración del hipervisor que permite deshacerlos uno a uno.",
           "correcta": false
         },
         {
@@ -410,11 +410,11 @@
           "correcta": true
         },
         {
-          "texto": "Una copia de seguridad completa y cifrada de la VM en un soporte externo.",
+          "texto": "Una copia de seguridad completa y cifrada de la VM en un soporte externo, que sustituye al backup.",
           "correcta": false
         },
         {
-          "texto": "Una réplica de la VM en otro centro de datos.",
+          "texto": "Una réplica de la VM en otro centro de datos que se activa automáticamente si falla el host.",
           "correcta": false
         }
       ],
@@ -430,15 +430,15 @@
       "pregunta": "Antes de aplicar una actualización arriesgada en un servidor virtualizado, ¿qué actuación es la más adecuada?",
       "opciones": [
         {
-          "texto": "Convertir la VM en contenedor para agilizar la vuelta atrás.",
+          "texto": "Convertir la VM en un contenedor para que la vuelta atrás sea más ágil si algo falla.",
           "correcta": false
         },
         {
-          "texto": "Migrar la VM a otro host antes de actualizar.",
+          "texto": "Migrar en caliente la VM a otro host antes de actualizar, para no afectar al hipervisor.",
           "correcta": false
         },
         {
-          "texto": "Desactivar temporalmente el hipervisor.",
+          "texto": "Desactivar temporalmente el hipervisor para que la actualización acceda al hardware real.",
           "correcta": false
         },
         {
@@ -458,7 +458,7 @@
       "pregunta": "¿Qué son los escritorios virtuales (VDI)?",
       "opciones": [
         {
-          "texto": "Aplicaciones web que simulan un escritorio en el navegador.",
+          "texto": "Aplicaciones web que simulan un escritorio completo en el navegador, sin máquinas virtuales en el centro de datos.",
           "correcta": false
         },
         {
@@ -466,11 +466,11 @@
           "correcta": true
         },
         {
-          "texto": "Perfiles de usuario móviles almacenados en red.",
+          "texto": "Perfiles de usuario móviles almacenados en red, que se descargan en el equipo físico al que se conecta la persona usuaria.",
           "correcta": false
         },
         {
-          "texto": "Equipos físicos de bajo coste sin disco duro.",
+          "texto": "Equipos físicos de bajo coste sin disco duro, que arrancan desde la red el sistema operativo instalado en el servidor.",
           "correcta": false
         }
       ],
@@ -490,15 +490,15 @@
           "correcta": true
         },
         {
-          "texto": "Que impide realizar copias de seguridad de las máquinas virtuales.",
+          "texto": "Que impide realizar copias de seguridad de las máquinas virtuales en funcionamiento, que deben apagarse para copiarlas.",
           "correcta": false
         },
         {
-          "texto": "Que obliga a usar siempre hardware del mismo fabricante.",
+          "texto": "Que obliga a usar siempre hardware del mismo fabricante en todos los hosts, porque las VM no pueden moverse entre marcas.",
           "correcta": false
         },
         {
-          "texto": "La imposibilidad de ejecutar sistemas operativos distintos en el mismo host.",
+          "texto": "Que impide ejecutar sistemas operativos distintos en el mismo host, porque todas las VM comparten el núcleo del hipervisor.",
           "correcta": false
         }
       ],
@@ -514,11 +514,11 @@
       "pregunta": "¿Qué es el overcommit en un entorno virtualizado?",
       "opciones": [
         {
-          "texto": "Migrar en caliente más VM de las permitidas simultáneamente.",
+          "texto": "Migrar en caliente más máquinas virtuales de las que el hipervisor permite mover a la vez.",
           "correcta": false
         },
         {
-          "texto": "Ejecutar más hipervisores de los soportados por la licencia.",
+          "texto": "Ejecutar en el mismo host más hipervisores o más VM de las que permite la licencia contratada.",
           "correcta": false
         },
         {
@@ -526,7 +526,7 @@
           "correcta": true
         },
         {
-          "texto": "Realizar demasiadas instantáneas de una misma VM.",
+          "texto": "Acumular demasiadas instantáneas de una misma VM, consumiendo más disco del que tiene el host.",
           "correcta": false
         }
       ],
@@ -542,15 +542,15 @@
       "pregunta": "¿Qué se entiende por overhead de virtualización?",
       "opciones": [
         {
-          "texto": "El coste de las licencias del software de virtualización.",
+          "texto": "El coste de las licencias del software de virtualización, que se suma al del hardware físico y al de los sistemas invitados.",
           "correcta": false
         },
         {
-          "texto": "El espacio en disco que ocupan las instantáneas.",
+          "texto": "El espacio adicional en disco que ocupan las instantáneas y los discos virtuales frente a una instalación física equivalente.",
           "correcta": false
         },
         {
-          "texto": "El tiempo necesario para crear una nueva máquina virtual.",
+          "texto": "El tiempo necesario para crear y arrancar una nueva máquina virtual frente al de poner en marcha un servidor físico.",
           "correcta": false
         },
         {
@@ -602,15 +602,15 @@
           "correcta": true
         },
         {
-          "texto": "Exige apagar previamente la máquina virtual y volver a arrancarla en el host de destino.",
+          "texto": "Exige apagar previamente la máquina virtual, copiar sus discos y volver a arrancarla en el host de destino; la expresión «en caliente» se refiere solo a que el host de origen sigue encendido durante todo el proceso de copia.",
           "correcta": false
         },
         {
-          "texto": "Garantiza siempre cero corte, con independencia de la infraestructura disponible.",
+          "texto": "Garantiza siempre cero corte en cualquier situación, con independencia de la infraestructura disponible, porque la memoria de la VM se copia antes de moverla.",
           "correcta": false
         },
         {
-          "texto": "Solo es posible entre hosts que ejecuten hipervisores de fabricantes distintos.",
+          "texto": "Solo es posible entre hosts que ejecuten hipervisores de fabricantes distintos y no necesita almacenamiento compartido, porque copia también los discos virtuales.",
           "correcta": false
         }
       ],
@@ -654,15 +654,15 @@
       "pregunta": "¿Qué relación existe entre la virtualización y la computación en la nube?",
       "opciones": [
         {
-          "texto": "Ninguna: son tecnologías independientes.",
+          "texto": "Ninguna: son tecnologías independientes, y los proveedores de nube pública basan sus servicios en servidores físicos dedicados a cada cliente.",
           "correcta": false
         },
         {
-          "texto": "La nube sustituyó a la virtualización, que quedó obsoleta.",
+          "texto": "La nube sustituyó a la virtualización, que quedó obsoleta al ofrecerse servidores bajo demanda.",
           "correcta": false
         },
         {
-          "texto": "La virtualización solo es posible dentro de una nube pública.",
+          "texto": "La virtualización solo es posible dentro de una nube pública, que alquila los hipervisores por horas.",
           "correcta": false
         },
         {
@@ -682,7 +682,7 @@
       "pregunta": "¿Reduce costes la virtualización en todo caso?",
       "opciones": [
         {
-          "texto": "Sí, salvo en el sector público, donde las licencias lo impiden.",
+          "texto": "Sí, salvo en el sector público, donde las licencias de los sistemas invitados impiden ahorrar respecto al modelo físico.",
           "correcta": false
         },
         {
@@ -690,11 +690,11 @@
           "correcta": true
         },
         {
-          "texto": "Sí: virtualizar siempre reduce el coste total respecto al modelo físico.",
+          "texto": "Sí: virtualizar siempre reduce el coste total respecto al modelo físico, sea cual sea la escala, las licencias necesarias o las soluciones de alta disponibilidad.",
           "correcta": false
         },
         {
-          "texto": "No: virtualizar siempre resulta más caro que mantener servidores físicos.",
+          "texto": "No: virtualizar siempre resulta más caro que mantener servidores físicos, por las licencias y la alta disponibilidad.",
           "correcta": false
         }
       ],
@@ -709,11 +709,11 @@
       "pregunta": "¿Es KVM un producto equivalente a VMware ESXi?",
       "opciones": [
         {
-          "texto": "No: KVM es un hipervisor de tipo 2 y ESXi, de tipo 1.",
+          "texto": "No: KVM es un hipervisor de tipo 2 que se instala como aplicación sobre Linux, mientras que ESXi es un producto de tipo 1 bare-metal.",
           "correcta": false
         },
         {
-          "texto": "Sí: KVM y ESXi son dos nombres comerciales del mismo hipervisor.",
+          "texto": "Sí: KVM y ESXi son dos nombres comerciales del mismo hipervisor, distribuido por VMware en versión libre y en versión empresarial.",
           "correcta": false
         },
         {
@@ -721,7 +721,7 @@
           "correcta": true
         },
         {
-          "texto": "No: KVM es una solución de contenedores y ESXi, de máquinas virtuales.",
+          "texto": "No: KVM es una solución de contenedores que comparte el núcleo Linux, mientras que ESXi ejecuta máquinas virtuales con SO completo.",
           "correcta": false
         }
       ],
@@ -736,15 +736,15 @@
       "pregunta": "¿Elimina la virtualización los puntos únicos de fallo?",
       "opciones": [
         {
-          "texto": "No, pero solo en hipervisores de tipo 2.",
+          "texto": "Sí en los hipervisores de tipo 1, porque se instalan sobre el hardware; no en los de tipo 2, que dependen del SO anfitrión.",
           "correcta": false
         },
         {
-          "texto": "Sí: al estar definido por software, el entorno virtual carece de puntos únicos de fallo.",
+          "texto": "Sí: al estar definido por software, el entorno virtual carece de puntos únicos de fallo aunque solo haya un host físico.",
           "correcta": false
         },
         {
-          "texto": "Sí, siempre que las máquinas virtuales tengan instantáneas recientes.",
+          "texto": "Sí, siempre que las máquinas virtuales tengan instantáneas recientes, que permiten arrancarlas en cualquier otro host.",
           "correcta": false
         },
         {
@@ -768,15 +768,15 @@
           "correcta": true
         },
         {
-          "texto": "Una distribución de escritorio orientada a la virtualización de tipo 2.",
+          "texto": "Una distribución Linux de escritorio orientada a la virtualización de tipo 2 con VirtualBox y Docker integrados.",
           "correcta": false
         },
         {
-          "texto": "Un sistema de contenedores equivalente a Docker.",
+          "texto": "Un sistema de contenedores equivalente a Docker que no permite ejecutar máquinas virtuales completas.",
           "correcta": false
         },
         {
-          "texto": "Simplemente un hipervisor de tipo 1, sin funciones de gestión.",
+          "texto": "Un hipervisor de tipo 1 propio, sin relación con KVM, que no incluye funciones de gestión ni de clúster.",
           "correcta": false
         }
       ],
