@@ -18,7 +18,9 @@
    terminados aparece el resultado global.
 
    El progreso se guarda en localStorage: si recargas, el examen y
-   los temporizadores siguen donde estaban.
+   los temporizadores siguen donde estaban. Cada apartado corregido
+   queda además en Supabase (tabla simulacros_intentos) para el
+   historial de intentos.
    ============================================================= */
 
 (function () {
@@ -113,6 +115,83 @@
 
       contenedor.classList.add('examen');
 
+      // ---------- Historial en Supabase ----------
+      // Una fila por apartado corregido; si se vuelve a corregir, se
+      // actualiza la misma fila (st.registroId).
+      async function registrarIntento(ap, st) {
+        const nota = notaApartado(ap);
+        if (nota === null) return;
+        const respondidas = ap.preguntas.filter((_, i) => {
+          const r = st.respuestas[i];
+          return ap.tipo === 'test' ? (r !== undefined && r !== null && r !== '') : !!String(r || '').trim();
+        }).length;
+        const fila = {
+          examen_id: datos.id, apartado_id: ap.id, nota, maximo: ap.maximo,
+          segundos: Math.round((Math.min(st.fin, st.inicio + ap.minutos * 60000) - st.inicio) / 1000),
+          respondidas, total: ap.preguntas.length,
+          detalle: { respuestas: st.respuestas, notas: Object.fromEntries(Object.entries(st.notas).map(([k, v]) => [k, v?.nota ?? null])) },
+        };
+        try {
+          const tabla = cliente.from('simulacros_intentos');
+          const { data, error } = st.registroId
+            ? await tabla.update(fila).eq('id', st.registroId).select('id').single()
+            : await tabla.insert(fila).select('id').single();
+          if (error) throw error;
+          st.registroId = data.id;
+          alm.guardar();
+          cargarHistorial();
+        } catch (e) {
+          console.warn('No se pudo guardar el intento en el historial:', e.message || e);
+        }
+      }
+
+      let historial = null;   // null = cargando / no disponible
+      async function cargarHistorial() {
+        try {
+          const { data, error } = await cliente.from('simulacros_intentos')
+            .select('id, apartado_id, nota, maximo, segundos, respondidas, total, fecha')
+            .eq('examen_id', datos.id).order('fecha', { ascending: false }).limit(200);
+          if (error) throw error;
+          historial = data || [];
+        } catch { historial = null; }
+        const nodo = contenedor.querySelector('.examen__historial');
+        if (nodo) nodo.replaceWith(pintarHistorial());
+      }
+
+      function pintarHistorial() {
+        const det = document.createElement('details');
+        det.className = 'examen__historial';
+        det.open = abierto('__historial');
+        det.addEventListener('toggle', () => fijarAbierto('__historial', det.open));
+        if (!historial || historial.length === 0) {
+          det.innerHTML = `<summary>Historial de intentos</summary>
+            <p class="examen__nota-pie">${historial ? 'Aún no hay intentos corregidos. Cada apartado que termines y corrijas quedará guardado aquí.' : 'Cargando…'}</p>`;
+          if (!historial) det.hidden = true;
+          return det;
+        }
+        const mmss = (s) => s == null ? '—' : `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+        const fecha = (f) => new Date(f).toLocaleString('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' });
+        const bloques = datos.apartados.map(ap => {
+          const filas = historial.filter(h => h.apartado_id === ap.id);
+          if (!filas.length) return '';
+          const notas = filas.map(h => Number(h.nota));
+          const media = notas.reduce((a, b) => a + b, 0) / notas.length;
+          return `
+            <h4 class="examen__historial-titulo">${esc(ap.titulo)} · ${filas.length} intento${filas.length > 1 ? 's' : ''} ·
+              media ${fmt(media)} · mejor ${fmt(Math.max(...notas))} / ${ap.maximo}</h4>
+            <div class="tabla-wrap"><table class="tabla-tema examen__historial-tabla">
+              <thead><tr><th>Fecha</th><th>Nota</th><th>Tiempo</th><th>Respondidas</th></tr></thead>
+              <tbody>${filas.map(h => `<tr>
+                <td>${fecha(h.fecha)}</td>
+                <td><strong>${fmt(Number(h.nota))}</strong> / ${fmt(Number(h.maximo))}${ap.minimo ? (Number(h.nota) >= ap.minimo ? ' ✅' : ' ❌') : ''}</td>
+                <td>${mmss(h.segundos)} / ${ap.minutos}:00</td>
+                <td>${h.respondidas ?? '—'}/${h.total ?? ap.preguntas.length}</td></tr>`).join('')}</tbody>
+            </table></div>`;
+        }).join('');
+        det.innerHTML = `<summary>Historial de intentos (${historial.length})</summary>${bloques}`;
+        return det;
+      }
+
       const notaApartado = (ap) => {
         const st = alm.apartado(ap.id);
         if (!st.fin) return null;
@@ -134,6 +213,7 @@
         clearInterval(tic);
         contenedor.innerHTML = '';
         contenedor.appendChild(pintarCabecera());
+        contenedor.appendChild(pintarHistorial());
         for (const ap of datos.apartados) contenedor.appendChild(pintarApartado(ap, alm.apartado(ap.id)));
         if (datos.apartados.every(ap => alm.apartado(ap.id).fin)) contenedor.appendChild(pintarResumen());
         arrancarReloj();
@@ -151,7 +231,7 @@
             (${total} min en total, orientativos). ${datos.notaA ? esc(datos.notaA) : ''}</p>
           ${hayProgreso ? '<div class="examen__acciones"><button type="button" class="btn btn--secundario btn--pequeno" data-accion="reiniciar">Reiniciar simulacro</button></div>' : ''}`;
         div.querySelector('[data-accion="reiniciar"]')?.addEventListener('click', () => {
-          if (!confirm('¿Reiniciar el simulacro completo? Se borrarán tus respuestas y correcciones de los tres apartados.')) return;
+          if (!confirm('¿Reiniciar el simulacro completo? Se borrarán tus respuestas y correcciones de los tres apartados (el historial de intentos se conserva).')) return;
           alm.reiniciar();
           for (const k of Object.keys(est)) delete est[k];
           Object.assign(est, { apartados: {}, abiertos: [] });
@@ -296,6 +376,7 @@
         contenedor.querySelectorAll(`[data-apartado="${ap.id}"] textarea`).forEach((ta, i) => { st.respuestas[i] = ta.value; });
         st.fin = Date.now();
         alm.guardar();
+        if (ap.tipo === 'test') registrarIntento(ap, st);
         pintar();
         contenedor.querySelector(`[data-apartado="${ap.id}"] .examen__correccion`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
@@ -323,7 +404,7 @@
         rep.className = 'examen__acciones';
         rep.innerHTML = `<button type="button" class="btn btn--secundario btn--pequeno">Repetir este apartado</button>`;
         rep.querySelector('button').addEventListener('click', () => {
-          if (!confirm(`¿Repetir ${ap.titulo}? Se borrarán tus respuestas y la corrección de este apartado.`)) return;
+          if (!confirm(`¿Repetir ${ap.titulo}? Se borrarán tus respuestas y la corrección de este apartado (el intento ya corregido se conserva en el historial).`)) return;
           delete est.apartados[ap.id];
           alm.guardar();
           pintar();
@@ -360,6 +441,7 @@
           pintarNotaPregunta(nodo, q, st.notas[i]);
           alm.guardar();
         }
+        registrarIntento(ap, st);
         pintar();
         contenedor.querySelector(`[data-apartado="${ap.id}"] .examen__correccion`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
@@ -471,6 +553,7 @@
       }
 
       pintar();
+      cargarHistorial();
     },
   };
 })();
