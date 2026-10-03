@@ -500,14 +500,15 @@
         }
         const A = aa + ab;
         const okA = A >= 16, okB = b >= 15;
+        const okT = !datos.minimoTotal || A + b >= datos.minimoTotal;
         div.innerHTML = `
           <div class="examen__titulo">Resultado del simulacro</div>
           <div class="tabla-wrap"><table class="tabla-tema"><tbody>
             <tr><td>Apartado A (test + cortas)</td><td><strong>${fmt(A)}</strong> / 40</td><td>${okA ? '✅' : '❌'} mínimo 16</td></tr>
             <tr><td>Apartado B (caso práctico)</td><td><strong>${fmt(b)}</strong> / 30</td><td>${okB ? '✅' : '❌'} mínimo 15</td></tr>
-            <tr><td><strong>Total 2.º ejercicio</strong></td><td><strong>${fmt(A + b)}</strong> / 70</td><td>${okA && okB ? '✅ Aprobado' : '❌ No aprobado'}</td></tr>
+            <tr><td><strong>Total</strong></td><td><strong>${fmt(A + b)}</strong> / 70</td><td>${okA && okB && okT ? '✅ Aprobado' : '❌ No aprobado'}${datos.minimoTotal ? ` (mínimo ${datos.minimoTotal})` : ''}</td></tr>
           </tbody></table></div>
-          <p class="examen__nota-pie">Hay que aprobar A y B por separado. Las notas de cortas y caso son orientativas (corregidas por Claude).</p>`;
+          <p class="examen__nota-pie">Hay que aprobar A y B por separado${datos.minimoTotal ? ` y sumar al menos ${datos.minimoTotal}` : ''}. Las notas de cortas y caso son orientativas (corregidas por Claude).</p>`;
         return div;
       }
 
