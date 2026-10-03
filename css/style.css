@@ -2953,3 +2953,38 @@ html.anim-view-transitions::view-transition-new(root) {
   font-size: 0.72rem; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase;
   color: #8a5300; background: #fff3dc; border: 1px solid #f0c46b; vertical-align: middle;
 }
+
+/* Navegación entre temas (al final de la página de cada tema) */
+.tema-nav {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  max-width: 780px; margin: 2.5rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--color-borde-claro);
+}
+.tema-nav__enlace {
+  display: flex; flex-direction: column; gap: 0.25rem; padding: 0.9rem 1rem; text-decoration: none;
+  border: 1px solid var(--color-borde); border-radius: var(--radio); color: var(--color-texto); background: var(--color-fondo);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.tema-nav__enlace:hover { border-color: var(--color-primario); box-shadow: var(--sombra); }
+.tema-nav__enlace--sig { text-align: right; }
+.tema-nav__dir { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--color-primario); letter-spacing: 0.03em; }
+.tema-nav__tema { font-size: 0.92rem; }
+@media (max-width: 640px) { .tema-nav { grid-template-columns: 1fr; } .tema-nav__enlace--sig { text-align: left; } }
+
+/* Buscador del temario por bloques */
+.buscador-temas { margin-bottom: 1.25rem; }
+.buscador-temas__input {
+  width: 100%; box-sizing: border-box; font: inherit; padding: 0.75rem 1rem;
+  border: 1px solid var(--color-borde); border-radius: var(--radio); background: var(--color-fondo); color: var(--color-texto);
+}
+.buscador-temas__input:focus { outline: 2px solid var(--color-primario); outline-offset: 1px; }
+.buscador-temas__resultados { display: grid; gap: 0.5rem; margin-top: 0.75rem; }
+.buscador-temas__item {
+  display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.75rem 1rem; text-decoration: none; color: var(--color-texto);
+  border: 1px solid var(--color-borde); border-radius: var(--radio); background: var(--color-fondo);
+}
+.buscador-temas__item:hover { border-color: var(--color-primario); }
+.buscador-temas__texto { display: grid; gap: 0.15rem; }
+.buscador-temas__titulo { font-weight: 600; }
+.buscador-temas__meta { font-size: 0.8rem; color: var(--color-texto-suave); }
+.buscador-temas__frag { font-size: 0.85rem; color: var(--color-texto-suave); font-style: italic; }
+.buscador-temas__vacio { color: var(--color-texto-suave); }

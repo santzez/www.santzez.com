@@ -227,6 +227,77 @@
       });
     }
 
+    // Buscador del temario por bloques: filtra por título al instante y, con
+    // 3+ caracteres, busca también dentro del texto de los apuntes de cada tema
+    // (se descargan una sola vez, la primera vez que hace falta).
+    function montarBuscadorTemas(info, cont, rutaOpe) {
+      const sinTildes = (t) => String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+      const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+      const temas = info.bloques.flatMap(b => (b.temas || []).map(t => ({ ...t, bloque: b.titulo || b.id })));
+      let textos = null;   // { T1: 'texto plano de los apuntes', ... }
+      const cargarTextos = async () => {
+        if (textos) return textos;
+        const pares = await Promise.all(temas.map(async t => {
+          try {
+            const r = await fetch(`data/${rutaOpe}/${t.id}/Material_de_estudio/${t.id}.html`);
+            const doc = new DOMParser().parseFromString(r.ok ? await r.text() : '', 'text/html');
+            return [t.id, doc.body.textContent.replace(/\s+/g, ' ')];
+          } catch { return [t.id, '']; }
+        }));
+        textos = Object.fromEntries(pares);
+        return textos;
+      };
+
+      const caja = document.createElement('div');
+      caja.className = 'buscador-temas';
+      caja.innerHTML = `
+        <input type="search" class="buscador-temas__input" placeholder="Buscar en el temario (p. ej. «DHCP», «RAID 5», «ITIL»)…" aria-label="Buscar en el temario">
+        <div class="buscador-temas__resultados" hidden></div>`;
+      cont.appendChild(caja);
+      const input = caja.querySelector('input');
+      const res = caja.querySelector('.buscador-temas__resultados');
+      let turno = 0, t0;
+
+      const buscar = async () => {
+        const q = sinTildes(input.value.trim());
+        const bloques = cont.querySelectorAll('.bloque');
+        if (!q) { res.hidden = true; bloques.forEach(b => b.hidden = false); return; }
+        bloques.forEach(b => b.hidden = true);
+        res.hidden = false;
+        const mio = ++turno;
+        const pintar = (txt) => {
+          const filas = temas.map(t => {
+            const enTitulo = sinTildes(`${t.id} ${t.titulo} ${t.tituloOficial}`).includes(q);
+            let n = 0, frag = '';
+            if (txt) {
+              const plano = txt[t.id] || '', bajo = sinTildes(plano);
+              for (let i = bajo.indexOf(q); i !== -1; i = bajo.indexOf(q, i + q.length)) {
+                if (!n) frag = plano.slice(Math.max(0, i - 60), i + q.length + 80);
+                n++;
+              }
+            }
+            return { t, enTitulo, n, frag };
+          }).filter(x => x.enTitulo || x.n).sort((a, b) => (b.enTitulo - a.enTitulo) || (b.n - a.n));
+          res.innerHTML = filas.length ? filas.map(({ t, enTitulo, n, frag }) => `
+            <a class="buscador-temas__item" href="ope.html?ope=${encodeURIComponent(`${rutaOpe}/${t.id}`)}#Material_de_estudio">
+              <span class="bloque-tema__id">${t.id}</span>
+              <span class="buscador-temas__texto">
+                <span class="buscador-temas__titulo">${esc(t.titulo || t.id)}</span>
+                <span class="buscador-temas__meta">${esc(t.bloque)}${n ? ` · ${n} coincidencia${n === 1 ? '' : 's'} en los apuntes` : ''}${enTitulo ? ' · en el título' : ''}</span>
+                ${frag ? `<span class="buscador-temas__frag">…${esc(frag)}…</span>` : ''}
+              </span>
+            </a>`).join('')
+            : `<p class="buscador-temas__vacio">${txt ? 'Ningún tema contiene «' + esc(input.value.trim()) + '».' : 'Buscando en los apuntes…'}</p>`;
+        };
+        pintar(textos);
+        if (q.length >= 3 && !textos) {
+          const txt = await cargarTextos();
+          if (mio === turno) pintar(txt);
+        }
+      };
+      input.addEventListener('input', () => { clearTimeout(t0); t0 = setTimeout(buscar, 250); });
+    }
+
     async function renderTipoEn(info, cont, subtitulo, rutaOpe) {
       // MODO TABS — grupo con renderComoTabs=true
       // Carga los N hijos en paralelo y los muestra como pestañas persistentes.
@@ -315,6 +386,7 @@
         // Se construye si el padre inmediato tiene tipo "bloques" y encontramos
         // el T{n} actual dentro de uno de ellos. Queda pegada arriba al hacer scroll.
         let barraContexto = null;
+        let navTemas = null;      // «← T1 · …   T3 · … →» al final de la página del tema
         let cambiarTabRef = null; // asignada más abajo, referenciada en la barra
         try {
           const partesRuta = rutaOpe.split('/').filter(Boolean);
@@ -363,6 +435,24 @@
                     </div>`;
                   cont.appendChild(barraContexto);
 
+                  // Navegación al tema anterior / siguiente del mismo temario
+                  const todos = infoP.bloques.flatMap(b => b.temas || []);
+                  const pos = todos.findIndex(t => t.id === idActual);
+                  const enlace = (t, dir) => t ? `
+                    <a class="tema-nav__enlace tema-nav__enlace--${dir}" href="ope.html?ope=${encodeURIComponent(`${rutaPadre}/${t.id}`)}">
+                      <span class="tema-nav__dir">${dir === 'ant' ? '← Anterior' : 'Siguiente →'}</span>
+                      <span class="tema-nav__tema"><strong>${t.id}</strong> ${t.titulo || ''}</span>
+                    </a>` : '<span></span>';
+                  navTemas = document.createElement('nav');
+                  navTemas.className = 'tema-nav';
+                  navTemas.setAttribute('aria-label', 'Navegación entre temas');
+                  navTemas.innerHTML = enlace(todos[pos - 1], 'ant') + enlace(todos[pos + 1], 'sig');
+                  // Se conserva la pestaña activa (Apuntes, Qwiz…) al cambiar de tema
+                  navTemas.addEventListener('click', (e) => {
+                    const a = e.target.closest('a');
+                    if (a && location.hash && !location.hash.startsWith('#split-')) a.href = a.href.split('#')[0] + location.hash;
+                  });
+
                   // Detecta cuándo la barra pasa a estar "pegada" arriba:
                   // cuando el sentinel sale del viewport, activamos --stuck.
                   if ('IntersectionObserver' in window) {
@@ -381,6 +471,7 @@
         // -----------------------------------------------------------------------
 
         cont.appendChild(tabsWrap);
+        if (navTemas) cont.appendChild(navTemas);
 
         // Cuando la barra existe, sus iconos disparan el cambio de tab
         if (barraContexto) {
@@ -616,6 +707,7 @@
       // Tipo "bloques" → acordeón: bloques colapsables con temas dentro
       if (info.tipo === 'bloques' && Array.isArray(info.bloques)) {
         subtitulo.textContent = 'Temario por bloques';
+        montarBuscadorTemas(info, cont, rutaOpe);
         info.bloques.forEach((bloque, iB) => {
           const details = document.createElement('details');
           details.className = 'bloque tarjeta--aparecer';
