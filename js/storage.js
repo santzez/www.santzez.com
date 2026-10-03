@@ -42,18 +42,47 @@ const Storage = {
   },
 
   /**
+   * Lee TODAS las filas de una consulta paginando de 1000 en 1000
+   * (PostgREST corta en 1000 filas por petición sin avisar).
+   * crear() debe devolver una consulta nueva cada vez.
+   */
+  async leerTodo(crear) {
+    const filas = [];
+    for (let desde = 0; ; desde += 1000) {
+      const { data, error } = await crear().range(desde, desde + 999);
+      if (error) throw error;
+      filas.push(...(data || []));
+      if (!data || data.length < 1000) return filas;
+    }
+  },
+
+  /** Intentos del usuario sobre esas preguntas (todas las filas). */
+  async intentosDe(usuarioId, ids) {
+    if (ids.length === 0) return [];
+    return this.leerTodo(() => this.cliente()
+      .from('intentos')
+      .select('pregunta_id, acertada')
+      .eq('usuario_id', usuarioId)
+      .in('pregunta_id', ids)
+      .order('id'));
+  },
+
+  /** IDs de las preguntas del tema que el usuario ya ha respondido alguna vez. */
+  async preguntasVistas(usuarioId, preguntasDelTema) {
+    try {
+      const filas = await this.intentosDe(usuarioId, preguntasDelTema.map(p => p.id));
+      return [...new Set(filas.map(f => f.pregunta_id))];
+    } catch (e) { console.error(e); return []; }
+  },
+
+  /**
    * Devuelve los IDs de preguntas (de las pasadas en preguntasDelTema)
    * cuyo numero de fallos del usuario es mayor al de aciertos.
    */
   async preguntasFalladas(usuarioId, preguntasDelTema) {
-    const ids = preguntasDelTema.map(p => p.id);
-    if (ids.length === 0) return [];
-    const { data, error } = await this.cliente()
-      .from('intentos')
-      .select('pregunta_id, acertada')
-      .eq('usuario_id', usuarioId)
-      .in('pregunta_id', ids);
-    if (error) { console.error(error); return []; }
+    let data;
+    try { data = await this.intentosDe(usuarioId, preguntasDelTema.map(p => p.id)); }
+    catch (error) { console.error(error); return []; }
 
     const stats = {};
     for (const intento of (data || [])) {

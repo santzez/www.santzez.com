@@ -12,6 +12,8 @@
      ope,              string  — ruta ope
      tema,             string  — tema id
      modo,             'todas' | 'falladas' (default 'todas')
+     limite,           número de preguntas de la tanda (opcional; sin él, todas).
+                       Prioriza las preguntas que el usuario aún no ha visto.
      usuarioId,        string  — auth uid
      cont,             HTMLElement — contenedor principal del quiz
      titulo,           HTMLElement — donde escribir el título del quiz
@@ -229,6 +231,15 @@
         }
       }
 
+      // Tanda de tamaño limitado: primero las no vistas, luego el resto
+      if (config.limite && config.limite < pool.length) {
+        const vistas = new Set(await Storage.preguntasVistas(config.usuarioId, pool));
+        pool = [
+          ...barajar(pool.filter(p => !vistas.has(p.id))),
+          ...barajar(pool.filter(p => vistas.has(p.id))),
+        ].slice(0, config.limite);
+      }
+
       estado.preguntas = barajar(pool).map(p => ({
         ...p,
         opcionesMezcladas: barajar(p.opciones),
@@ -391,7 +402,7 @@
           ${hayFalladas
             ? `<button type="button" class="btn" data-accion="repetir-falladas">Repetir sólo falladas (${estado.falladasIds.length})</button>`
             : ''}
-          <button type="button" class="btn ${hayFalladas ? 'btn--secundario' : ''}" data-accion="repetir-todas">Repetir todas</button>
+          <button type="button" class="btn ${hayFalladas ? 'btn--secundario' : ''}" data-accion="repetir-todas">${cfg.limite ? `Otra tanda de ${cfg.limite}` : 'Repetir todas'}</button>
           <button type="button" class="btn btn--secundario" data-accion="volver">Volver a los temas</button>
         </div>
       </div>`;

@@ -71,7 +71,7 @@
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2"></script>
 <script src="/js/supabase-config.js"></script>
 <script src="/js/preferencias.js"></script>
 <script src="/js/view-transitions.js"></script>
@@ -112,7 +112,12 @@
 
     // Construir migas de pan a partir de la ruta jerárquica.
     // Mostramos texto sin guiones bajos, pero la URL/href se mantiene con el ID técnico.
-    const NOMBRES = { Material_de_estudio: 'Apuntes' };
+    const NOMBRES = {
+      Material_de_estudio: 'Apuntes',
+      Temario_Especifico: 'Temario Específico',
+      Temario_General_C1: 'Temario General C-1',
+      Examenes_y_guia: 'Exámenes y guía',
+    };
     const formatear = id => NOMBRES[id] || id.replace(/_/g, ' ');
     const partes = rutaOpe.split('/').filter(Boolean);
     const migas = document.getElementById('migas-navegacion');
@@ -191,6 +196,37 @@
     // Renderizado por tipo — recibe (info, cont, subtitulo, rutaOpe)
     // para poder reusarse dentro del modo TABS.
     // =============================================================
+    // Título largo en móvil: muestra 3 líneas y, a los 3 s, desplaza el texto
+    // despacio hasta el final, espera y vuelve arriba. Al tocarlo se ve entero.
+    function tituloDesplazableEnMovil(el) {
+      if (!el || !matchMedia('(max-width: 640px)').matches) return;
+      el.classList.add('titulo-recortado');
+      requestAnimationFrame(() => {
+        const sobra = el.scrollHeight - el.clientHeight;
+        if (sobra <= 2) { el.classList.remove('titulo-recortado'); return; }
+        el.addEventListener('click', () => el.classList.remove('titulo-recortado'), { once: true });
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const desplazar = (hasta, ms) => new Promise(res => {
+          const desde = el.scrollTop, t0 = performance.now();
+          const paso = (t) => {
+            const k = Math.min(1, (t - t0) / ms);
+            el.scrollTop = desde + (hasta - desde) * k;
+            k < 1 ? requestAnimationFrame(paso) : res();
+          };
+          requestAnimationFrame(paso);
+        });
+        const espera = (ms) => new Promise(r => setTimeout(r, ms));
+        (async () => {
+          await espera(3000);
+          await desplazar(sobra, Math.max(2500, sobra * 45));
+          el.classList.add('titulo-final');
+          await espera(2500);
+          el.classList.remove('titulo-final');
+          await desplazar(0, 800);
+        })();
+      });
+    }
+
     async function renderTipoEn(info, cont, subtitulo, rutaOpe) {
       // MODO TABS — grupo con renderComoTabs=true
       // Carga los N hijos en paralelo y los muestra como pestañas persistentes.
@@ -363,6 +399,17 @@
         const panelesWrap = tabsWrap.querySelector('.tabs__paneles');
         const btnCerrarSplit = tabsWrap.querySelector('#chat-cerrar-split');
         const IDS_SPLIT_ORIGEN = new Set(['Material_de_estudio', 'Qwiz']);
+        const panelDe = (id) => tabsWrap.querySelector(`.tabs__panel[data-panel="${id}"]`);
+        const esOrigenSplit = (id) => IDS_SPLIT_ORIGEN.has(id) || !!panelDe(id)?.__contextoHtml;
+        // Último panel con contenido visitado: es el contexto de Ask_Claude
+        let panelContexto = null;
+        // En móvil la tira de pestañas se desplaza para que se vea la activa
+        const centrarTabActiva = () => {
+          const cab = tabsWrap.querySelector('.tabs__cabecera');
+          const btn = cab?.querySelector('.tabs__tab.activo:not(.tabs__tab--ia)') || cab?.querySelector('.tabs__tab.activo');
+          if (!cab || !btn || cab.scrollWidth <= cab.clientWidth) return;
+          cab.scrollTo({ left: btn.offsetLeft - (cab.clientWidth - btn.offsetWidth) / 2, behavior: 'smooth' });
+        };
         let origenSplit = null;   // 'Material_de_estudio' | 'Qwiz' | null
         // La función que monta el chat perezosamente se define más abajo, en
         // el bloque panelApuntes. Aquí guardamos un placeholder no-op para
@@ -393,12 +440,13 @@
             b.setAttribute('aria-selected', activo);
           });
           history.replaceState(null, '', location.pathname + location.search + '#split-' + origen);
+          centrarTabActiva();
         };
 
         const cambiarTab = (idTab) => {
           // ¿Es una transición Apuntes/Qwiz -> ASK_CLAUDE? => activa split.
           const activoActual = tabsWrap.querySelector('.tabs__tab.activo')?.dataset.tab;
-          if (idTab === TAB_CLAUDE_ID && IDS_SPLIT_ORIGEN.has(activoActual) && !origenSplit) {
+          if (idTab === TAB_CLAUDE_ID && esOrigenSplit(activoActual) && !origenSplit) {
             entrarEnSplit(activoActual);
             // Cronómetro de Qwiz: pausamos cuando dejamos de mirarlo activamente
             if (activoActual === 'Qwiz' && window.QuizEngine && QuizEngine.estaActivo()) {
@@ -419,6 +467,8 @@
           });
           // Actualiza la URL con hash (sin recargar)
           history.replaceState(null, '', location.pathname + location.search + '#' + idTab);
+          if (panelDe(idTab)?.__contextoHtml) panelContexto = panelDe(idTab);
+          centrarTabActiva();
 
           // Cronómetro del quiz: pausa si sales del tab Qwiz, reanuda si vuelves.
           if (window.QuizEngine && QuizEngine.estaActivo()) {
@@ -473,6 +523,14 @@
           }
         }));
 
+        // Con los paneles ya cargados: contexto de Ask_Claude = pestaña activa
+        // (si es de contenido) y la tira de pestañas centrada en la activa.
+        {
+          const activa = tabsWrap.querySelector('.tabs__tab.activo')?.dataset.tab;
+          if (panelDe(activa)?.__contextoHtml) panelContexto = panelDe(activa);
+          centrarTabActiva();
+        }
+
         // === Tab Claude ===
         // Si alguno de los hijos es tipo "contenido" (Apuntes), activamos la tab
         // y montamos el chat perezosamente la primera vez que se abre.
@@ -489,8 +547,8 @@
             ChatIA.montar({
               contenedor: panelClaude.querySelector('#chat-ia'),
               cliente: AuthSession.cliente(),
-              idTema: panelApuntes.__idTema,
-              contextoHtml: panelApuntes.__contextoHtml,
+              idTema: () => (panelContexto || panelApuntes).__idTema,
+              contextoHtml: () => (panelContexto || panelApuntes).__contextoHtml,
             });
           };
           // Exponemos la función al closure de cambiarTab/entrarEnSplit
@@ -529,6 +587,7 @@
           document.getElementById('ope-descripcion').hidden = true;
           // Guardamos el HTML en el propio contenedor para que la tab Claude
           // hermana pueda leerlo como contexto (ver modo tabs más abajo).
+          tituloDesplazableEnMovil(cont.querySelector('.tema-cabecera__titulo'));
           cont.dataset.contextoHtml = 'listo';
           cont.__contextoHtml = htmlFragmento;
           cont.__idTema = rutaOpe.split('/').slice(-2)[0]; // T{n}
@@ -669,13 +728,14 @@
         cont.appendChild(motorWrap);
 
         // Iniciar quiz embebido con el tema pulsado
-        const arrancarQuiz = (temaId, modo) => {
+        const arrancarQuiz = (temaId, modo, limite) => {
           listaWrap.hidden = true;
           motorWrap.hidden = false;
           QuizEngine.iniciar({
             ope: rutaOpe,
             tema: temaId,
             modo: modo || 'todas',
+            limite: limite || null,
             usuarioId: sesion.user.id,
             cont: motorWrap.querySelector('.qwiz-embed__raiz'),
             titulo: motorWrap.querySelector('.qwiz-embed__titulo'),
@@ -703,15 +763,17 @@
           } catch {}
           const numPreguntas = preguntas.length;
 
-          let numFalladas = 0, intentosCompletos = 0;
+          let numFalladas = 0, intentosCompletos = 0, numVistas = 0;
           if (numPreguntas > 0) {
             try {
-              const [falladas, ic] = await Promise.all([
+              const [falladas, ic, vistas] = await Promise.all([
                 Storage.preguntasFalladas(sesion.user.id, preguntas),
                 Storage.intentosCompletos(sesion.user.id, rutaOpe, tema.id, numPreguntas),
+                Storage.preguntasVistas(sesion.user.id, preguntas),
               ]);
               numFalladas = falladas.length;
               intentosCompletos = ic;
+              numVistas = vistas.length;
             } catch (e) { console.warn('No se pudieron leer las stats:', e); }
           }
 
@@ -726,6 +788,10 @@
                 <div class="qwiz-stats__label">preguntas</div>
               </div>
               <div class="qwiz-stats__celda">
+                <div class="qwiz-stats__valor">${numVistas}<small>/${numPreguntas}</small></div>
+                <div class="qwiz-stats__label">vistas</div>
+              </div>
+              <div class="qwiz-stats__celda">
                 <div class="qwiz-stats__valor">${intentosCompletos}</div>
                 <div class="qwiz-stats__label">intento${intentosCompletos === 1 ? '' : 's'} completo${intentosCompletos === 1 ? '' : 's'}</div>
               </div>
@@ -735,9 +801,14 @@
               </div>
             </div>
             <div class="qwiz-stats__acciones">
-              <button type="button" class="btn" data-accion="todas" ${numPreguntas === 0 ? 'disabled' : ''}>
-                Empezar quiz completo
-              </button>
+              <span class="qwiz-stats__tandas">
+                <span class="qwiz-stats__tandas-label">Empezar tanda:</span>
+                ${[20, 50].filter(n => n < numPreguntas).map(n =>
+                  `<button type="button" class="btn" data-accion="tanda" data-limite="${n}">${n}</button>`).join('')}
+                <button type="button" class="btn" data-accion="todas" ${numPreguntas === 0 ? 'disabled' : ''}>
+                  Todas (${numPreguntas})
+                </button>
+              </span>
               <button type="button" class="btn btn--secundario" data-accion="falladas" ${numFalladas === 0 ? 'disabled' : ''}>
                 Repasar Fallos${numFalladas > 0 ? ` (${numFalladas})` : ''}
               </button>
@@ -750,6 +821,8 @@
 
           card.querySelector('[data-accion="todas"]')
             ?.addEventListener('click', () => arrancarQuiz(tema.id, 'todas'));
+          card.querySelectorAll('[data-accion="tanda"]').forEach(b =>
+            b.addEventListener('click', () => arrancarQuiz(tema.id, 'todas', Number(b.dataset.limite))));
           card.querySelector('[data-accion="falladas"]')
             ?.addEventListener('click', () => arrancarQuiz(tema.id, 'falladas'));
           card.querySelector('[data-accion="reset"]')

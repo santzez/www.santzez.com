@@ -2,6 +2,7 @@
    chat-ia.js — Chat contextual con Claude Haiku (Edge Function)
    API:
      ChatIA.montar({ contenedor, cliente, idTema, contextoHtml })
+     (idTema y contextoHtml pueden ser funciones: se leen en cada pregunta)
    ============================================================= */
 
 (function () {
@@ -115,7 +116,11 @@
       const cuotaNodo = contenedor.querySelector('#chat-cuota');
       const historial = [];
 
-      const contextoTexto = extraerTextoDeHtml(contextoHtml).slice(0, 55000);
+      // El contexto puede cambiar (p. ej. Informe del examen: "Exámenes y guía"
+      // o "Mi informe"); si cambia, el historial deja de valer.
+      const leer = (v) => (typeof v === 'function' ? v() : v);
+      let htmlAnterior = null;
+      let contextoTexto = '';
       actualizarCuota(cliente, cuotaNodo);
 
       // Endpoint completo de la Edge Function
@@ -128,6 +133,12 @@
         ev.preventDefault();
         const pregunta = input.value.trim();
         if (pregunta.length < 3) return;
+        const htmlActual = leer(contextoHtml) || '';
+        if (htmlActual !== htmlAnterior) {
+          if (htmlAnterior !== null) historial.length = 0;
+          htmlAnterior = htmlActual;
+          contextoTexto = extraerTextoDeHtml(htmlActual).slice(0, 55000);
+        }
 
         // Limpiar mensaje "vacío" si existe
         mensajes.querySelector('.chat-ia__vacio')?.remove();
@@ -161,7 +172,7 @@
               pregunta,
               contextoTema: contextoTexto,
               historial: historial.slice(-MAX_HISTORIAL * 2),
-              idTema,
+              idTema: leer(idTema),
             }),
           });
 

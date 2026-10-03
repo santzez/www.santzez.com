@@ -1504,7 +1504,7 @@ a.tarjeta:hover {
 }
 .qwiz-stats__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 0.75rem;
   margin-bottom: 1.5rem;
 }
@@ -1556,7 +1556,7 @@ a.tarjeta:hover {
 }
 @media (max-width: 640px) {
   .qwiz-stats { padding: 1.1rem 1rem; }
-  .qwiz-stats__grid { grid-template-columns: repeat(3, 1fr); gap: 0.4rem; }
+  .qwiz-stats__grid { grid-template-columns: repeat(2, 1fr); gap: 0.4rem; }
   .qwiz-stats__valor { font-size: 1.6rem; }
   .qwiz-stats__label { font-size: 0.7rem; }
   .qwiz-stats__acciones .btn { min-width: 0; flex-basis: 100%; }
@@ -2926,3 +2926,23 @@ html.anim-view-transitions::view-transition-new(root) {
 .examen__pregunta-libre-titulo { display: block; font-weight: 600; margin-bottom: 0.5rem; }
 .examen__conversacion { display: grid; gap: 0.5rem; margin-bottom: 0.75rem; }
 .examen__resumen { margin: 2rem 0; padding: 1.5rem; }
+
+/* Título de tema largo en móvil: se ven 3 líneas y, a los 3 s, el texto
+   se desplaza solo hasta el final y vuelve (ver tituloDesplazableEnMovil
+   en ope.html). Al tocarlo se despliega entero. */
+@media (max-width: 640px) {
+  .tema-cabecera__titulo.titulo-recortado {
+    max-height: calc(3 * 1.25em);
+    overflow: hidden;
+    cursor: pointer;
+    -webkit-mask-image: linear-gradient(#000 75%, transparent);
+            mask-image: linear-gradient(#000 75%, transparent);
+  }
+  .tema-cabecera__titulo.titulo-recortado.titulo-final { -webkit-mask-image: none; mask-image: none; }
+}
+
+/* Qwiz: elegir tamaño de tanda (20 / 50 / todas) */
+.qwiz-stats__valor small { font-size: 0.5em; color: var(--color-texto-suave); font-weight: 600; }
+.qwiz-stats__tandas { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; flex: 1 1 100%; }
+.qwiz-stats__tandas-label { font-weight: 600; color: var(--color-texto-suave); font-size: 0.9rem; }
+.qwiz-stats__acciones .qwiz-stats__tandas .btn { flex: 0 1 auto; min-width: 72px; }
