@@ -273,7 +273,9 @@
 
     cfg.cont.innerHTML = `
       <article class="pregunta">
-        <div class="pregunta__numero">Pregunta ${i + 1}</div>
+        <div class="pregunta__numero">Pregunta ${i + 1}${pregunta.fueraTemario
+          ? ' <span class="pregunta__fuera" title="Procede de baterías de otras convocatorias y no entra en el temario oficial">Fuera de temario</span>'
+          : ''}</div>
         <p class="pregunta__enunciado"></p>
         <div class="opciones" role="list"></div>
         <div class="feedback">
