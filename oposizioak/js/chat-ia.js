@@ -28,29 +28,47 @@
   }
 
   function renderMarkdownLigero(texto) {
-    // Muy básico: **negrita**, *cursiva*, saltos de línea, viñetas
+    // Básico: **negrita**, *cursiva*, `código`, encabezados, viñetas,
+    // listas numeradas y tablas con barras verticales.
     let t = texto
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+      .replace(/\*([^*\n]+)\*/g, '<em>$1</em>')
       .replace(/`([^`]+)`/g, '<code>$1</code>');
-    // Líneas que empiezan por "- " o "* " → lista
     const lineas = t.split('\n');
     const out = [];
-    let enLista = false;
+    let lista = null;   // 'ul' | 'ol' | null
+    let tabla = null;   // filas acumuladas
+    const cerrarLista = () => { if (lista) { out.push(`</${lista}>`); lista = null; } };
+    const celdas = (l) => l.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map(c => c.trim());
+    const cerrarTabla = () => {
+      if (!tabla) return;
+      const [cab, ...resto] = tabla.filter(f => !/^\|?\s*:?-{2,}/.test(f.trim()));
+      out.push('<div class="chat-tabla"><table><thead><tr>' +
+        celdas(cab).map(c => `<th>${c}</th>`).join('') + '</tr></thead><tbody>' +
+        resto.map(f => '<tr>' + celdas(f).map(c => `<td>${c}</td>`).join('') + '</tr>').join('') +
+        '</tbody></table></div>');
+      tabla = null;
+    };
     for (const l of lineas) {
-      const m = l.match(/^\s*[-*]\s+(.*)$/);
-      if (m) {
-        if (!enLista) { out.push('<ul>'); enLista = true; }
-        out.push('<li>' + m[1] + '</li>');
-      } else {
-        if (enLista) { out.push('</ul>'); enLista = false; }
-        if (l.trim()) out.push('<p>' + l + '</p>');
+      if (/^\s*\|.*\|\s*$/.test(l)) { cerrarLista(); (tabla ||= []).push(l); continue; }
+      cerrarTabla();
+      const h = l.match(/^\s*(#{1,4})\s+(.*)$/);
+      const ul = l.match(/^\s*[-*]\s+(.*)$/);
+      const ol = l.match(/^\s*\d+[.)]\s+(.*)$/);
+      if (ul || ol) {
+        const tipo = ul ? 'ul' : 'ol';
+        if (lista !== tipo) { cerrarLista(); out.push(`<${tipo}>`); lista = tipo; }
+        out.push('<li>' + (ul || ol)[1] + '</li>');
+        continue;
       }
+      cerrarLista();
+      if (h) out.push(`<p class="chat-titulo">${h[2]}</p>`);
+      else if (l.trim()) out.push('<p>' + l + '</p>');
     }
-    if (enLista) out.push('</ul>');
+    cerrarLista(); cerrarTabla();
     return out.join('');
   }
 
@@ -75,8 +93,9 @@
     /**
      * Consulta suelta (sin UI de chat), p. ej. para corregir el simulacro de
      * examen. Devuelve el texto completo; onTexto recibe el acumulado al vuelo.
+     * modo 'corregir' usa en la función el modelo corrector (solo admin).
      */
-    async consultar({ cliente, pregunta, contexto, idTema, onTexto }) {
+    async consultar({ cliente, pregunta, contexto, idTema, onTexto, modo }) {
       const supabaseUrl = (cliente.rest && cliente.rest.url)
         ? cliente.rest.url.replace(/\/rest\/v1\/?$/, '')
         : (typeof SUPABASE_URL !== 'undefined' ? SUPABASE_URL : '');
@@ -89,7 +108,7 @@
           'Content-Type': 'application/json',
           'apikey': (typeof SUPABASE_ANON_KEY !== 'undefined' ? SUPABASE_ANON_KEY : ''),
         },
-        body: JSON.stringify({ pregunta, contextoTema: contexto.slice(0, 55000), historial: [], idTema }),
+        body: JSON.stringify({ pregunta, contextoTema: contexto.slice(0, 55000), historial: [], idTema, modo }),
       });
       if (!resp.ok) {
         let msg = 'Error ' + resp.status;

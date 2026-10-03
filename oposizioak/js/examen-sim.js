@@ -93,7 +93,7 @@
   const PROMPT_CORREGIR = (q) =>
     `Actúa como tribunal de la oposición y corrige la RESPUESTA DEL ASPIRANTE a esta pregunta ` +
     `aplicando estrictamente los CRITERIOS DE CORRECCIÓN DEL TRIBUNAL. Sé breve y concreto: ` +
-    `qué puntúa, qué falta para la nota máxima y una sugerencia de mejora. ` +
+    `qué elementos puntúan y cuánto, qué falta o es erróneo para la nota máxima y cómo mejorarla. ` +
     `Termina SIEMPRE con una última línea exacta con este formato: NOTA: x/${q.puntos} ` +
     `(x con decimales si hace falta, sin pasar de ${q.puntos}).`;
 
@@ -350,7 +350,7 @@
             nodo.innerHTML = '<span class="chat-burbuja__spinner"></span>';
             const texto = await ChatIA.consultar({
               cliente, idTema: `${datos.id}-${ap.id}-${i + 1}`,
-              pregunta: PROMPT_CORREGIR(q), contexto: contextoPregunta(ap, q, i, st),
+              pregunta: PROMPT_CORREGIR(q), contexto: contextoPregunta(ap, q, i, st), modo: 'corregir',
               onTexto: (t) => { nodo.innerHTML = `<div class="examen__claude">${ChatIA.markdown(t)}</div>`; },
             });
             st.notas[i] = { nota: extraerNota(texto, q.puntos), texto };
@@ -392,7 +392,7 @@
           try {
             const r = await ChatIA.consultar({
               cliente, idTema: `${datos.id}-${ap.id}`, pregunta: p.slice(0, 2000),
-              contexto: contextoApartado(ap, st, datos),
+              contexto: contextoApartado(ap, st, datos), modo: 'corregir',
               onTexto: (t) => { burbuja.innerHTML = ChatIA.markdown(t); },
             });
             st.claude.push({ p, r });
