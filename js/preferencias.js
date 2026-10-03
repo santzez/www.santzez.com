@@ -8,8 +8,10 @@
      - quizFeedback     (Categoría B) → ripple + feedback + confetti + contador
      - identidad        (Categoría C) → gradiente header + bounce logo
      - viewTransitions  (Categoría D) → transiciones fluidas entre páginas
+     - modoOscuro                     → paleta oscura (desactivado por defecto)
 
-   Por defecto TODAS las preferencias están ACTIVADAS; si el usuario
+   Por defecto las preferencias de animación están ACTIVADAS (el modo
+   oscuro no); si el usuario
    desactiva alguna, se recuerda (localStorage + user_metadata).
    Se aplican como clases al <html>: anim-quiz-feedback, anim-identidad,
    anim-view-transitions.
@@ -21,12 +23,14 @@
     quizFeedback: true,
     identidad: true,
     viewTransitions: true,
+    modoOscuro: false,
   };
 
   const MAPA_CLASES = {
     quizFeedback: 'anim-quiz-feedback',
     identidad: 'anim-identidad',
     viewTransitions: 'anim-view-transitions',
+    modoOscuro: 'modo-oscuro',
   };
 
   // Lectura inmediata del cache local (síncrona) para evitar FOUC.

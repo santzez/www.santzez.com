@@ -206,6 +206,7 @@ const AuthSession = {
         ${this._pintarToggle('quizFeedback', 'Quiz Feedback', 'Ripple, feedback verde/rojo, barra fluida, contador animado y confeti al ≥ 80%.')}
         ${this._pintarToggle('identidad', 'Identidad!', 'Gradiente animado en el header y logo con micro-bounce al hover.')}
         ${this._pintarToggle('viewTransitions', 'Antes muerta que sencilla', 'Transiciones nativas entre páginas. En navegadores viejos: sin efecto.')}
+        ${this._pintarToggle('modoOscuro', 'Modo oscuro', 'Fondo oscuro y colores suaves para estudiar de noche.')}
       </div>
       ${esAdmin ? `
       <div class="panel-usuarios" id="panel-usuarios" hidden>
