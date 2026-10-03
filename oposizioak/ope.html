@@ -101,7 +101,10 @@
     const opeAntigua = params.get('ope') || '';
     const opeNueva = opeAntigua
       .replace(/^OPE_DONOSTIA_2026_2027/, 'OPE_DonostiaTIK_2024')
-      .replace('/Temario_Especifico/OPE_CAU', '/Temario_Especifico');
+      .replace('/Temario_Especifico/OPE_CAU', '/Temario_Especifico')
+      // Temario General: antes Apuntes y Qwiz eran pestañas comunes; ahora
+      // cada tema (T1–T8) tiene sus propias pestañas.
+      .replace(/\/Temario_General_C1\/(Qwiz|Material_de_estudio)$/, '/Temario_General_C1');
     if (opeNueva !== opeAntigua) {
       params.set('ope', opeNueva);
       location.replace(`${location.pathname}?${params}`);
@@ -323,10 +326,12 @@
         const ICONO_QWIZ = `<svg class="tabs__icono" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>`;
         const ICONO_CLAUDE = `<svg class="tabs__icono" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.6 5.8a2 2 0 0 0 1.6 1.6L21 12l-5.8 1.6a2 2 0 0 0-1.6 1.6L12 21l-1.6-5.8a2 2 0 0 0-1.6-1.6L3 12l5.8-1.6a2 2 0 0 0 1.6-1.6L12 3Z"/></svg>`;
         const ICONO_EXAMEN = `<svg class="tabs__icono" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/><path d="M9 2h6"/></svg>`;
+        const ICONO_PDF = `<svg class="tabs__icono" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>`;
         const iconoDe = (h) => {
           if (!h) return '';
           if (h.id === 'Qwiz') return ICONO_QWIZ;
           if (h.id === 'Examen') return ICONO_EXAMEN;
+          if (h.id === 'PDF') return ICONO_PDF;
           // Apuntes: hoy usa id "Material_de_estudio" con nombre "Apuntes"
           if (h.id === 'Material_de_estudio' || h.nombre === 'Apuntes') return ICONO_APUNTES;
           return '';
@@ -974,7 +979,9 @@
       // El prefijo es la propia ruta jerárquica quitando el último nivel
       // (Material_de_estudio). Así los PDFs viven en:
       //   material/OPE_DonostiaTIK_2024/Temario_General_C1/T1/*.pdf
-      const prefijoBase = rutaOpe.replace(/\/[^/]+$/, '');
+      // info.prefijo permite apuntar a otra carpeta (p. ej. la pestaña PDF de
+      // cada tema del Temario General reutiliza la carpeta de siempre).
+      const prefijoBase = info.prefijo || rutaOpe.replace(/\/[^/]+$/, '');
       const cliente = AuthSession.cliente();
 
       // Detectar admin

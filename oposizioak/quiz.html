@@ -100,7 +100,12 @@
     const opeAntigua = params.get('ope') || '';
     const opeNueva = opeAntigua
       .replace(/^OPE_DONOSTIA_2026_2027/, 'OPE_DonostiaTIK_2024')
-      .replace('/Temario_Especifico/OPE_CAU', '/Temario_Especifico');
+      .replace('/Temario_Especifico/OPE_CAU', '/Temario_Especifico')
+      // Qwiz del Temario General: ahora cuelga de cada tema (T1–T8)
+      .replace(/\/Temario_General_C1\/Qwiz$/, () => {
+        const n = (params.get('tema') || '').match(/Tema(\d+)$/);
+        return n ? `/Temario_General_C1/T${n[1]}/Qwiz` : '/Temario_General_C1/Qwiz';
+      });
     if (opeNueva !== opeAntigua) {
       params.set('ope', opeNueva);
       location.replace(`${location.pathname}?${params}`);
