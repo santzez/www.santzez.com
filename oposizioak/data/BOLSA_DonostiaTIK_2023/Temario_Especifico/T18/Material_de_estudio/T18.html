@@ -1,0 +1,482 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T18</div>
+    <h1 class="tema-cabecera__titulo">Fundamentos de sistemas SCADA.</h1>
+    <div class="tema-cabecera__meta">Bloque 3 · Organización e integración · Bolsa DonostiaTIK 2023 · Instalaciones y Comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-que-es-un-sistema-scada">1. Qué es un sistema SCADA</a></li>
+<li><a href="#2-componentes">2. Componentes</a></li>
+<li><a href="#3-el-plc">3. El PLC</a></li>
+<li><a href="#4-arquitectura-por-niveles">4. Arquitectura por niveles</a></li>
+<li><a href="#5-protocolos-industriales">5. Protocolos industriales</a></li>
+<li><a href="#6-it-frente-a-ot">6. IT frente a OT</a></li>
+<li><a href="#7-ciberseguridad-industrial">7. Ciberseguridad industrial</a></li>
+<li><a href="#8-lo-que-cayo-en-el-examen-de-2023">8. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#9-anclas-de-memoria">9. Anclas de memoria</a></li>
+<li><a href="#10-no-confundir">10. No confundir</a></li>
+<li><a href="#11-posibles-trampas-de-examen">11. Posibles trampas de examen</a></li>
+<li><a href="#12-posibles-preguntas-tipo-test">12. Posibles preguntas tipo test</a></li>
+<li><a href="#13-posibles-preguntas-cortas-con-esquema-de-respuesta">13. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#14-supuesto-practico">14. Supuesto práctico</a></li>
+<li><a href="#15-matriz-de-memorizacion">15. Matriz de memorización</a></li>
+<li><a href="#16-resumen-final-si-manana-fuera-el-examen">16. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#17-actualidad-datos-fechados">17. Actualidad — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — fronteras del tema</strong><br>Este tema trata los <strong>sistemas de control industrial</strong>: <strong>SCADA</strong>, <strong>PLC</strong>, RTU, HMI, sus <strong>protocolos</strong> (Modbus, Profinet, DNP3, OPC UA, BACnet), las diferencias <strong>IT/OT</strong> y la <strong>ciberseguridad industrial</strong>.<br><strong>T8</strong> → IoT y M2M (sensores conectados en general). <strong>T14/T15</strong> → cortafuegos y VPN para proteger y dar acceso a estos sistemas. <strong>T19</strong> → monitorización de comunicaciones.</th>
+</tr>
+</table></div>
+<h2 id="1-que-es-un-sistema-scada" class="tema-h2">1. Qué es un sistema SCADA</h2>
+<p><strong>SCADA</strong> (<em>Supervisory Control And Data Acquisition</em>, <strong>supervisión, control y adquisición de datos</strong>) es un sistema de <strong>software y hardware</strong> que permite <strong>supervisar y controlar a distancia procesos e instalaciones</strong> —a menudo <strong>distribuidos geográficamente</strong>—, recogiendo datos de campo en tiempo real, mostrándolos a los operadores, generando <strong>alarmas</strong> y enviando <strong>órdenes</strong>.</p>
+<p>Ejemplos en un ayuntamiento y su entorno: <strong>abastecimiento y depuración de agua</strong> (bombeos, depósitos, depuradoras), <strong>alumbrado público</strong>, <strong>semáforos y tráfico</strong>, <strong>climatización y gestión técnica de los edificios</strong> (el <strong>PLC de telegestión</strong> del caso de 2023), túneles, aparcamientos, redes eléctricas y de gas, transporte.</p>
+<h2 id="2-componentes" class="tema-h2">2. Componentes</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Componente</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sensores y actuadores</strong> (nivel de campo)</td>
+<td>Miden (temperatura, presión, nivel, caudal, presencia) y actúan (bombas, válvulas, motores, relés)</td>
+</tr>
+<tr>
+<td><strong>PLC</strong> (autómata programable)</td>
+<td><strong>Controla localmente</strong> el proceso: lee las entradas, ejecuta su programa y actúa sobre las salidas</td>
+</tr>
+<tr>
+<td><strong>RTU</strong> (<em>Remote Terminal Unit</em>)</td>
+<td>Unidad remota que <strong>recoge datos</strong> de campo y los <strong>comunica</strong> al centro de control; pensada para ubicaciones remotas y comunicaciones de largo alcance (radio, móvil)</td>
+</tr>
+<tr>
+<td><strong>Red de comunicaciones</strong></td>
+<td>Une campo y centro: Ethernet industrial, fibra, radio, 4G/5G, buses de campo</td>
+</tr>
+<tr>
+<td><strong>Servidor SCADA / MTU</strong> (<em>Master Terminal Unit</em>)</td>
+<td><strong>Centro de mando</strong>: interroga a PLC y RTU, procesa los datos, gestiona alarmas y envía órdenes</td>
+</tr>
+<tr>
+<td><strong>HMI</strong> (<em>Human-Machine Interface</em>)</td>
+<td><strong>Interfaz con el operador</strong>: pantallas con <strong>sinópticos</strong> del proceso, alarmas, tendencias y mandos</td>
+</tr>
+<tr>
+<td><em><strong>Historian</strong></em></td>
+<td>Base de datos de <strong>series temporales</strong> para el histórico, informes y análisis</td>
+</tr>
+<tr>
+<td>Estación de ingeniería</td>
+<td>Para programar los PLC y configurar el SCADA</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — la idea clave de la corta 4 de 2023</strong><br>«<strong>Los PLC son microordenadores diseñados para recopilar datos industriales procedentes de entradas como sensores y comunicarlos a un centro de mando, mientras que un sistema SCADA actúa como ese centro de mando.</strong>»</th>
+</tr>
+</table></div>
+<h2 id="3-el-plc" class="tema-h2">3. El PLC</h2>
+<p>Un <strong>PLC</strong> (<em>Programmable Logic Controller</em>, <strong>autómata programable</strong>) es un <strong>ordenador industrial robusto</strong> (resistente a temperatura, vibraciones, ruido eléctrico) que controla máquinas o procesos <strong>en tiempo real</strong>.</p>
+<ul class="tema-lista">
+<li><strong>Partes</strong>: fuente de alimentación, <strong>CPU</strong>, memoria, <strong>módulos de entradas y salidas</strong> (<strong>digitales</strong>: on/off; <strong>analógicas</strong>: 4–20 mA, 0–10 V), <strong>módulos de comunicaciones</strong>.</li>
+<li><strong>Ciclo de <em>scan</em></strong>: 1) lee todas las <strong>entradas</strong>, 2) ejecuta el <strong>programa</strong>, 3) actualiza las <strong>salidas</strong>, 4) diagnósticos y comunicaciones; y vuelta a empezar, en milisegundos.</li>
+<li><strong>Lenguajes</strong> de la norma <strong>IEC 61131-3</strong>: <strong>diagrama de contactos (LD, <em>ladder</em>)</strong>, diagrama de bloques de funciones (<strong>FBD</strong>), texto estructurado (<strong>ST</strong>), lista de instrucciones (IL, en desuso) y gráfico secuencial (<strong>SFC</strong>, Grafcet).</li>
+<li><strong>Fabricantes</strong>: <strong>Siemens</strong> (SIMATIC S7-1200/1500), <strong>Schneider Electric</strong> (Modicon), <strong>Rockwell Automation</strong> (Allen-Bradley), Omron, Mitsubishi, ABB, Beckhoff; para edificios, controladores específicos (Siemens Desigo, Schneider EcoStruxure, Honeywell, Johnson Controls).</li>
+<li>Ejemplos de uso: control de una bomba según el nivel del depósito, secuencia de un semáforo, encendido del alumbrado según el horario o la luz, <strong>control de la climatización</strong> (enfriadoras, calderas, fancoils) de un edificio.</li>
+</ul>
+<h3 id="scada-frente-a-plc">SCADA frente a PLC</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th></th>
+<th><strong>PLC</strong></th>
+<th><strong>SCADA</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Qué es</td>
+<td><strong>Hardware</strong>: controlador industrial</td>
+<td><strong>Software</strong> (con servidores, HMI y comunicaciones)</td>
+</tr>
+<tr>
+<td>Nivel</td>
+<td><strong>Campo / control local</strong></td>
+<td><strong>Supervisión</strong> (centro de mando)</td>
+</tr>
+<tr>
+<td>Función</td>
+<td><strong>Ejecuta</strong> la lógica de control en tiempo real</td>
+<td><strong>Supervisa, visualiza, registra, alerta y da órdenes</strong> sobre muchos PLC/RTU</td>
+</tr>
+<tr>
+<td>Alcance</td>
+<td>Una máquina o una instalación</td>
+<td>Toda la planta o <strong>instalaciones dispersas</strong></td>
+</tr>
+<tr>
+<td>Si se cae</td>
+<td>El proceso se para (en esa parte)</td>
+<td><strong>El proceso sigue</strong> (los PLC siguen controlando), pero se pierde la supervisión</td>
+</tr>
+<tr>
+<td>Ejemplos</td>
+<td>Siemens S7, Allen-Bradley, Modicon</td>
+<td><strong>Siemens WinCC</strong>, <strong>AVEVA</strong> (Wonderware), <strong>Ignition</strong> (Inductive Automation), GE iFIX, Schneider EcoStruxure, Codesys</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Qué aporta el SCADA que no tiene el PLC</strong>: <strong>visión global</strong> de muchas instalaciones, <strong>HMI</strong> gráfica para los operadores, <strong>gestión centralizada de alarmas</strong> (con avisos por SMS o correo), <strong>histórico</strong> y tendencias, <strong>informes</strong>, <strong>control remoto</strong> centralizado, integración con otros sistemas (ERP, GIS, mantenimiento) y <strong>gestión de usuarios</strong> y registro de las acciones.</p>
+<p><strong>DCS</strong> (<em>Distributed Control System</em>): sistema de control distribuido, típico de <strong>una gran planta</strong> continua (química, refinería), con controladores y supervisión integrados de un mismo fabricante; el SCADA es más típico de instalaciones <strong>geográficamente dispersas</strong>.</p>
+<h2 id="4-arquitectura-por-niveles" class="tema-h2">4. Arquitectura por niveles</h2>
+<p>La <strong>pirámide de automatización</strong> (y el <strong>modelo Purdue / ISA-95</strong>) ordena los sistemas por niveles:</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Contenido</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>0 — Proceso / campo</strong></td>
+<td>Sensores y actuadores</td>
+<td>Sonda de temperatura, válvula</td>
+</tr>
+<tr>
+<td><strong>1 — Control</strong></td>
+<td><strong>PLC</strong>, RTU</td>
+<td>Autómata de la sala de calderas</td>
+</tr>
+<tr>
+<td><strong>2 — Supervisión</strong></td>
+<td><strong>SCADA, HMI</strong></td>
+<td>Puesto de operación del centro de control</td>
+</tr>
+<tr>
+<td><strong>3 — Operaciones</strong></td>
+<td>MES, <em>historian</em>, gestión de la producción</td>
+<td>Gestión del mantenimiento</td>
+</tr>
+<tr>
+<td><strong>4 — Empresa</strong></td>
+<td>ERP, red corporativa (<strong>IT</strong>)</td>
+<td>Red municipal de usuarios</td>
+</tr>
+</tbody>
+</table></div>
+<p>Entre la red corporativa (niveles 4–5) y la red industrial (0–3) se recomienda una <strong>DMZ industrial</strong> (nivel 3,5): <strong>ningún tráfico directo</strong> entre IT y OT.</p>
+<h2 id="5-protocolos-industriales" class="tema-h2">5. Protocolos industriales</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Protocolo</th>
+<th>Características</th>
+<th>Puerto TCP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Modbus</strong> (RTU por serie; <strong>Modbus TCP</strong>)</td>
+<td>El más extendido y sencillo; maestro-esclavo; <strong>sin autenticación ni cifrado</strong></td>
+<td><strong>502</strong></td>
+</tr>
+<tr>
+<td><strong>Profibus / Profinet</strong></td>
+<td>Siemens / PI; bus de campo y Ethernet industrial en tiempo real</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>EtherNet/IP</strong></td>
+<td>Rockwell (CIP sobre Ethernet)</td>
+<td>44818</td>
+</tr>
+<tr>
+<td><strong>DNP3</strong></td>
+<td>Sector eléctrico y agua (EE. UU.); para telecontrol</td>
+<td>20000</td>
+</tr>
+<tr>
+<td><strong>IEC 60870-5-104</strong></td>
+<td>Telecontrol eléctrico (Europa)</td>
+<td>2404</td>
+</tr>
+<tr>
+<td><strong>IEC 61850</strong></td>
+<td>Subestaciones eléctricas</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>OPC UA</strong></td>
+<td><strong>Estándar moderno</strong> de interoperabilidad entre fabricantes, <strong>con seguridad</strong> (autenticación, cifrado)</td>
+<td>4840</td>
+</tr>
+<tr>
+<td><strong>BACnet</strong></td>
+<td><strong>Automatización de edificios</strong> (climatización, iluminación)</td>
+<td>UDP 47808</td>
+</tr>
+<tr>
+<td><strong>KNX</strong></td>
+<td>Domótica e inmótica (iluminación, persianas, clima)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>MQTT</strong></td>
+<td>IoT industrial (T8)</td>
+<td>1883/8883</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>El gran problema de los protocolos industriales clásicos</strong><br><strong>Modbus, Profibus o BACnet nacieron sin seguridad</strong>: no autentican ni cifran. Cualquiera que llegue a la red puede <strong>leer y escribir</strong> en un PLC. Por eso la <strong>segmentación</strong> y el <strong>control de los accesos</strong> son vitales.</th>
+</tr>
+</table></div>
+<h2 id="6-it-frente-a-ot" class="tema-h2">6. IT frente a OT</h2>
+<p><strong>OT</strong> (<em>Operational Technology</em>) es la tecnología que <strong>controla procesos físicos</strong>; <strong>IT</strong> es la de la información.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th></th>
+<th><strong>IT</strong></th>
+<th><strong>OT</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prioridad</td>
+<td><strong>Confidencialidad</strong> → integridad → disponibilidad</td>
+<td><strong>Disponibilidad y seguridad física</strong> (de las personas) → integridad → confidencialidad</td>
+</tr>
+<tr>
+<td>Ciclo de vida</td>
+<td>3–5 años</td>
+<td><strong>15–25 años</strong></td>
+</tr>
+<tr>
+<td>Parches</td>
+<td>Frecuentes</td>
+<td><strong>Difíciles</strong>: no se puede parar, el fabricante debe certificar, sistemas obsoletos</td>
+</tr>
+<tr>
+<td>Tiempo real</td>
+<td>No crítico</td>
+<td><strong>Crítico</strong></td>
+</tr>
+<tr>
+<td>Consecuencia de un incidente</td>
+<td>Pérdida o robo de datos</td>
+<td><strong>Daño físico</strong>, medioambiental, riesgo para las personas, corte de servicios esenciales</td>
+</tr>
+<tr>
+<td>Antivirus / escaneos</td>
+<td>Habituales</td>
+<td>Con cuidado: pueden <strong>afectar al proceso</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="7-ciberseguridad-industrial" class="tema-h2">7. Ciberseguridad industrial</h2>
+<p>Incidentes de referencia: <strong>Stuxnet</strong> (2010, saboteó las centrifugadoras iraníes reprogramando PLC Siemens), los <strong>apagones de Ucrania</strong> (2015 y 2016), Triton (2017, sistemas de seguridad de una planta petroquímica), ataques a <strong>plantas de agua</strong> por accesos remotos mal protegidos (Oldsmar, EE. UU., 2021) y campañas contra <strong>PLC expuestos en Internet</strong> con contraseñas por defecto.</p>
+<p><strong>Medidas</strong> (norma <strong>IEC 62443</strong> y guías del CCN-CERT y el INCIBE):</p>
+<ol type="1">
+<li><strong>Inventario</strong> de todos los activos OT y de sus comunicaciones.</li>
+<li><strong>Segmentación</strong> en <strong>zonas y conductos</strong> (IEC 62443): red OT <strong>separada</strong> de la IT, <strong>DMZ industrial</strong>, cortafuegos con reglas de <strong>mínimo privilegio</strong> (en el caso de 2023, la <strong>VLAN de telegestión 94</strong>, protegida por el cortafuegos).</li>
+<li><strong>Nunca exponer un PLC o un HMI directamente a Internet.</strong></li>
+<li><strong>Accesos remotos de los mantenedores</strong>: por <strong>VPN</strong> nominativa con <strong>MFA</strong>, a través de un <strong>servidor de salto (<em>jump host</em>)</strong> o una plataforma de acceso privilegiado, <strong>activados bajo petición</strong> y <strong>registrados</strong> (y, si es posible, grabados).</li>
+<li><strong>Cambiar las credenciales por defecto</strong>, deshabilitar servicios innecesarios.</li>
+<li><strong>Copias</strong> de los programas de los PLC y de la configuración del SCADA.</li>
+<li><strong>Monitorización</strong> del tráfico OT con <strong>IDS industriales</strong> que entienden los protocolos (Nozomi Networks, Claroty, Dragos).</li>
+<li><strong>Gestión de parches</strong> planificada con el fabricante y ventanas de mantenimiento.</li>
+<li><strong>Concienciación</strong> del personal de mantenimiento y de los proveedores.</li>
+</ol>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>El PLC de telegestión del caso de 2023 (pregunta 4)</strong><br>El PLC que gestiona el frío y el calor del edificio es un <strong>activo OT</strong> mantenido por un <strong>tercero</strong>. Respuesta esperada: identificar que está en una <strong>red protegida por el cortafuegos</strong> (VLAN/DMZ de telegestión), ofrecer una <strong>VPN</strong> a nombre de la empresa mantenedora (o NAT de puerto restringido), con acceso <strong>solo al PLC</strong>, y <strong>coordinarse con DTIK-Sistemas</strong>.</th>
+</tr>
+</table></div>
+<h2 id="8-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">8. Lo que cayó en el examen de 2023</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Contenido</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Corta 4</td>
+<td>SCADA frente a PLC: descripción, ejemplos y qué aporta SCADA</td>
+<td>Ver apartados 2 y 3</td>
+</tr>
+<tr>
+<td>Caso 4</td>
+<td>Acceso remoto al PLC de telegestión</td>
+<td>VPN o NAT, red protegida, coordinación con Sistemas</td>
+</tr>
+<tr>
+<td>Caso (enunciado)</td>
+<td>VLAN de telegestión (94)</td>
+<td>Segmentación OT</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Criterios del tribunal (corta 4)</strong><br><strong>Descripción de SCADA</strong> (0,5) + <strong>2 ejemplos de SCADA</strong> (0,25) + <strong>descripción de PLC con ejemplos</strong> (0,5) + <strong>2 ejemplos de PLC</strong> (0,25) + <strong>qué aporta SCADA más que PLC</strong> (0,5). Quedarse en las siglas valía la mitad.</th>
+</tr>
+</table></div>
+<h2 id="9-anclas-de-memoria" class="tema-h2">9. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>SCADA = supervisión, control y adquisición de datos = el centro de mando (software).</strong></li>
+<li><strong>PLC = autómata = microordenador industrial que controla en tiempo real (hardware).</strong></li>
+<li><strong>Ciclo del PLC: leer entradas → ejecutar programa → escribir salidas.</strong> <strong>IEC 61131-3: LD, FBD, ST, IL, SFC.</strong></li>
+<li><strong>Componentes: sensores/actuadores · PLC/RTU · comunicaciones · servidor SCADA · HMI · historian.</strong></li>
+<li><strong>Modbus TCP 502 (sin seguridad) · OPC UA 4840 (con seguridad) · BACnet edificios · DNP3 / IEC 104 telecontrol.</strong></li>
+<li><strong>OT prioriza disponibilidad y seguridad física; IT, confidencialidad.</strong></li>
+<li><strong>IEC 62443: zonas y conductos · DMZ industrial · nunca PLC en Internet · VPN + jump host para mantenedores.</strong></li>
+<li><strong>Stuxnet 2010 (PLC Siemens).</strong></li>
+</ul>
+<h2 id="10-no-confundir" class="tema-h2">10. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Esto</th>
+<th>No es esto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PLC</strong> (control local, hardware)</td>
+<td><strong>SCADA</strong> (supervisión, software)</td>
+</tr>
+<tr>
+<td><strong>RTU</strong> (adquisición y comunicación remota)</td>
+<td><strong>PLC</strong> (control)</td>
+</tr>
+<tr>
+<td><strong>HMI</strong> (pantalla del operador)</td>
+<td><strong>Historian</strong> (base de datos histórica)</td>
+</tr>
+<tr>
+<td><strong>SCADA</strong> (instalaciones dispersas)</td>
+<td><strong>DCS</strong> (gran planta continua)</td>
+</tr>
+<tr>
+<td><strong>OT</strong> (procesos físicos)</td>
+<td><strong>IT</strong> (información)</td>
+</tr>
+<tr>
+<td><strong>Modbus</strong> (sin seguridad)</td>
+<td><strong>OPC UA</strong> (con seguridad)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="11-posibles-trampas-de-examen" class="tema-h2">11. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li>Decir que el SCADA ejecuta el control en tiempo real (lo hace el PLC).</li>
+<li>Pensar que si cae el SCADA se para el proceso.</li>
+<li>Creer que Modbus cifra la comunicación.</li>
+<li>Aplicar a OT las prioridades de IT (confidencialidad primero).</li>
+<li>Proponer exponer el PLC a Internet para que acceda el mantenedor.</li>
+</ul>
+<h2 id="12-posibles-preguntas-tipo-test" class="tema-h2">12. Posibles preguntas tipo test</h2>
+<ol type="1">
+<li>¿Qué significan las siglas SCADA? → <strong>Supervisory Control And Data Acquisition</strong>.</li>
+<li>¿Qué norma define los lenguajes de programación de los PLC? → <strong>IEC 61131-3</strong>.</li>
+<li>¿Qué puerto usa Modbus TCP? → <strong>502</strong>.</li>
+<li>¿Qué norma trata la ciberseguridad de los sistemas de control industrial? → <strong>IEC 62443</strong>.</li>
+<li>¿Qué protocolo se usa en la automatización de edificios? → <strong>BACnet</strong> (y KNX).</li>
+</ol>
+<h2 id="13-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">13. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. SCADA frente a PLC (2 puntos; examen de 2023).</strong></p>
+<ul class="tema-lista">
+<li><strong>SCADA</strong>: sistema de supervisión y adquisición de datos; centro de mando con servidor, HMI, alarmas e histórico. <strong>Ejemplos</strong>: control del abastecimiento de agua, del alumbrado o del tráfico; productos WinCC, AVEVA, Ignition.</li>
+<li><strong>PLC</strong>: autómata programable que lee sensores, ejecuta su programa y actúa. <strong>Ejemplos</strong>: control de una bomba, de la climatización de un edificio o de un semáforo; Siemens S7, Allen-Bradley, Modicon.</li>
+<li><strong>Qué aporta SCADA</strong>: visión global de muchas instalaciones, HMI, alarmas centralizadas, histórico, informes y control remoto; los PLC recogen y comunican, el SCADA supervisa.</li>
+</ul>
+<p><strong>2. Medidas de seguridad para un sistema de control industrial (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>Inventario y segmentación (zonas y conductos, DMZ industrial).</li>
+<li>Accesos remotos por VPN, MFA y jump host, bajo petición y registrados.</li>
+<li>Credenciales, copias de los programas, parches planificados.</li>
+<li>Monitorización con IDS industrial; IEC 62443.</li>
+</ul>
+<h2 id="14-supuesto-practico" class="tema-h2">14. Supuesto práctico</h2>
+<p><strong>Enunciado:</strong> el responsable de mantenimiento informa de que el SCADA de climatización de un edificio muestra los valores «congelados» desde hace dos horas, aunque la climatización funciona.</p>
+<p><strong>Esquema de respuesta:</strong></p>
+<ol type="1">
+<li><strong>Interpretación</strong>: el proceso funciona (los <strong>PLC siguen controlando</strong>); lo que se ha perdido es la <strong>comunicación</strong> entre el SCADA y el PLC o la adquisición de datos.</li>
+<li><strong>Comprobaciones de red</strong>: conectividad entre el servidor SCADA y el PLC (<strong>ping</strong> a la IP del PLC en la VLAN de telegestión), estado del <strong>puerto del switch</strong>, <strong>reglas del cortafuegos</strong> entre las zonas (puerto del protocolo: Modbus 502, BACnet 47808…), cambios recientes.</li>
+<li><strong>Comprobaciones del sistema</strong>: servicio de comunicaciones del SCADA, licencias, logs de alarmas; estado del PLC (en <em>run</em>, sin fallos).</li>
+<li><strong>Escalado</strong>: si la red está bien, al <strong>mantenedor</strong> del SCADA o del PLC (con acceso controlado si debe conectarse en remoto).</li>
+<li><strong>Registro</strong> y, una vez resuelto, revisar la <strong>monitorización</strong> para detectar antes la pérdida de comunicaciones (T19).</li>
+</ol>
+<h2 id="15-matriz-de-memorizacion" class="tema-h2">15. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Dato clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SCADA</td>
+<td>Supervisión + control + adquisición de datos · servidor/MTU · HMI · historian</td>
+</tr>
+<tr>
+<td>PLC</td>
+<td>Autómata · E/S digitales y analógicas · ciclo de scan · IEC 61131-3</td>
+</tr>
+<tr>
+<td>RTU</td>
+<td>Unidad remota de adquisición y comunicación</td>
+</tr>
+<tr>
+<td>Niveles</td>
+<td>0 campo · 1 control · 2 supervisión · 3 operaciones · 4 empresa</td>
+</tr>
+<tr>
+<td>Protocolos</td>
+<td>Modbus 502 · Profinet · EtherNet/IP 44818 · DNP3 20000 · IEC 104 2404 · OPC UA 4840 · BACnet 47808 · KNX</td>
+</tr>
+<tr>
+<td>IT vs OT</td>
+<td>OT: disponibilidad y seguridad física; ciclos de 20 años; parches difíciles</td>
+</tr>
+<tr>
+<td>Seguridad</td>
+<td>IEC 62443 · zonas y conductos · DMZ industrial · VPN + jump host · IDS industrial</td>
+</tr>
+<tr>
+<td>Incidentes</td>
+<td>Stuxnet 2010 · Ucrania 2015 · Triton 2017</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="16-resumen-final-si-manana-fuera-el-examen" class="tema-h2">16. Resumen final: si mañana fuera el examen</h2>
+<p>Un <strong>SCADA</strong> (<strong>supervisión, control y adquisición de datos</strong>) es el <strong>centro de mando</strong> que supervisa procesos —a menudo <strong>dispersos</strong>— con un <strong>servidor</strong>, <strong>HMI</strong>, <strong>alarmas</strong> e <strong>histórico</strong>, comunicándose con los <strong>PLC y RTU</strong> de campo. El <strong>PLC</strong> es un <strong>microordenador industrial</strong> que <strong>lee sensores, ejecuta su programa y actúa</strong> en tiempo real (lenguajes <strong>IEC 61131-3</strong>); si cae el SCADA, <strong>el proceso sigue</strong>. Los protocolos clásicos (<strong>Modbus TCP 502</strong>, Profinet, <strong>BACnet</strong> en edificios) <strong>no tienen seguridad</strong>; <strong>OPC UA</strong> sí. En <strong>OT</strong> prima la <strong>disponibilidad y la seguridad física</strong>, los sistemas duran décadas y no se parchean fácilmente: hay que <strong>segmentar</strong> (<strong>IEC 62443</strong>, DMZ industrial), <strong>no exponer nunca un PLC a Internet</strong> y dar a los mantenedores acceso solo por <strong>VPN con MFA</strong>, <strong>coordinado con Sistemas</strong>.</p>
+<h2 id="17-actualidad-datos-fechados" class="tema-h2">17. Actualidad — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong></th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li>Los ataques a <strong>infraestructuras de agua</strong> y a <strong>PLC expuestos en Internet</strong> (por ejemplo, contra controladores Unitronics en 2023) han llevado a las agencias de ciberseguridad a insistir en <strong>cambiar las contraseñas por defecto</strong> y <strong>retirar los HMI de Internet</strong>.</li>
+<li>La <strong>Directiva NIS2</strong> incluye a los operadores de <strong>agua potable y residual</strong> y a las administraciones públicas entre las entidades obligadas.</li>
+<li><strong>OPC UA</strong> y <strong>MQTT</strong> avanzan como base del IoT industrial y de la integración IT/OT.</li>
+</ul>
+
+  </div>
+</article>

@@ -1,0 +1,732 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T19</div>
+    <h1 class="tema-cabecera__titulo">Monitorización de comunicaciones. Detección y resolución de averías. Soporte técnico informático. Mantenimiento y localización de averías.</h1>
+    <div class="tema-cabecera__meta">Bloque 3 · Organización e integración · Bolsa DonostiaTIK 2023 · Instalaciones y Comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-monitorizacion-de-las-comunicaciones">1. Monitorización de las comunicaciones</a></li>
+<li><a href="#2-metodologia-de-resolucion-de-averias">2. Metodología de resolución de averías</a></li>
+<li><a href="#3-herramientas-de-diagnostico">3. Herramientas de diagnóstico</a></li>
+<li><a href="#4-averias-tipicas-y-como-localizarlas">4. Averías típicas y cómo localizarlas</a></li>
+<li><a href="#5-soporte-tecnico-informatico">5. Soporte técnico informático</a></li>
+<li><a href="#6-mantenimiento">6. Mantenimiento</a></li>
+<li><a href="#7-lo-que-cayo-en-el-examen-de-2023">7. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#8-anclas-de-memoria">8. Anclas de memoria</a></li>
+<li><a href="#9-no-confundir">9. No confundir</a></li>
+<li><a href="#10-posibles-trampas-de-examen">10. Posibles trampas de examen</a></li>
+<li><a href="#11-posibles-preguntas-tipo-test">11. Posibles preguntas tipo test</a></li>
+<li><a href="#12-posibles-preguntas-cortas-con-esquema-de-respuesta">12. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#13-supuesto-practico">13. Supuesto práctico</a></li>
+<li><a href="#14-matriz-de-memorizacion">14. Matriz de memorización</a></li>
+<li><a href="#15-resumen-final-si-manana-fuera-el-examen">15. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#16-actualidad-datos-fechados">16. Actualidad — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — fronteras del tema</strong><br>Este tema trata la <strong>monitorización</strong> de la red (SNMP, syslog, NetFlow, herramientas), la <strong>metodología y las herramientas de diagnóstico de averías</strong>, la <strong>organización del soporte técnico</strong> y los <strong>tipos de mantenimiento</strong>.<br><strong>T20</strong> → ITIL (gestión de incidencias, problemas y cambios como procesos). <strong>T1–T4</strong> → los conceptos técnicos de red que aquí se diagnostican. <strong>T17</strong> → SIEM y detección de seguridad.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>El tema más «de puesto de trabajo»</strong><br>Es la función principal del puesto 2314: <strong>atender las incidencias de instalaciones y comunicaciones, diagnosticarlas, resolverlas o escalarlas y hacer su seguimiento</strong>. En 2023 aportó <strong>3 preguntas de test</strong> (6, 14, 29) y <strong>la fase completa de asistencia técnica del caso</strong> (preguntas 7 a 10, 10 puntos).</th>
+</tr>
+</table></div>
+<h2 id="1-monitorizacion-de-las-comunicaciones" class="tema-h2">1. Monitorización de las comunicaciones</h2>
+<p><strong>Monitorizar</strong> es <strong>vigilar de forma continua</strong> el estado y el rendimiento de la red y los sistemas para <strong>detectar fallos o degradaciones antes que los usuarios</strong> (proactividad), avisar, analizar tendencias y planificar la capacidad.</p>
+<h3 id="qué-se-mide">Qué se mide</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Indicador</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Disponibilidad</strong></td>
+<td>¿Responde el equipo o el enlace? (ping, estado de la interfaz)</td>
+</tr>
+<tr>
+<td><strong>Uso / caudal</strong></td>
+<td>% de ocupación de enlaces y troncales (bps)</td>
+</tr>
+<tr>
+<td><strong>Latencia, jitter y pérdidas</strong></td>
+<td>Calidad de los enlaces, crítica para la voz (T9)</td>
+</tr>
+<tr>
+<td><strong>Errores</strong></td>
+<td>CRC, descartes, colisiones en las interfaces</td>
+</tr>
+<tr>
+<td><strong>Recursos de los equipos</strong></td>
+<td>CPU, memoria, temperatura, ventiladores, fuentes</td>
+</tr>
+<tr>
+<td><strong>PoE</strong></td>
+<td>Potencia consumida y presupuesto restante</td>
+</tr>
+<tr>
+<td><strong>Óptica</strong></td>
+<td>Potencia recibida y emitida de los transceptores (DOM)</td>
+</tr>
+<tr>
+<td><strong>Wifi</strong></td>
+<td>Clientes por AP, interferencias, ocupación del canal, AP caídos o <em>rogue</em></td>
+</tr>
+<tr>
+<td><strong>Servicios</strong></td>
+<td>DNS, DHCP, web, VPN, telefonía (registro de extensiones)</td>
+</tr>
+<tr>
+<td><strong>Entorno</strong></td>
+<td>Temperatura y humedad del CPD, estado de los SAI (T11)</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="snmp">SNMP</h3>
+<p><strong>SNMP</strong> (<em>Simple Network Management Protocol</em>) es el protocolo estándar de <strong>gestión y monitorización</strong> de equipos de red.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Qué es</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Gestor (<em>manager</em>, NMS)</strong></td>
+<td>El sistema de monitorización que consulta y recibe avisos</td>
+</tr>
+<tr>
+<td><strong>Agente</strong></td>
+<td>El software del equipo gestionado (switch, router, SAI, impresora)</td>
+</tr>
+<tr>
+<td><strong>MIB</strong> (<em>Management Information Base</em>)</td>
+<td>La <strong>base de datos</strong> de variables que ofrece el agente</td>
+</tr>
+<tr>
+<td><strong>OID</strong></td>
+<td>El <strong>identificador</strong> jerárquico de cada variable (p. ej., 1.3.6.1.2.1.1.3 = tiempo encendido)</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Operación</th>
+<th>Sentido</th>
+<th>Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GET / GETNEXT / GETBULK</strong></td>
+<td>Gestor → agente</td>
+<td><strong>Leer</strong> valores (sondeo periódico o <em>polling</em>)</td>
+</tr>
+<tr>
+<td><strong>SET</strong></td>
+<td>Gestor → agente</td>
+<td><strong>Modificar</strong> valores (configurar)</td>
+</tr>
+<tr>
+<td><strong>TRAP</strong></td>
+<td><strong>Agente → gestor</strong></td>
+<td><strong>Notificación asíncrona</strong> de un evento (puerto caído, fuente averiada) <strong>sin confirmación</strong></td>
+</tr>
+<tr>
+<td><strong>INFORM</strong></td>
+<td>Agente → gestor</td>
+<td>Como el trap, pero <strong>con confirmación</strong> (SNMPv2c/v3)</td>
+</tr>
+</tbody>
+</table></div>
+<ul class="tema-lista">
+<li>Puertos: <strong>UDP 161</strong> (consultas al agente) y <strong>UDP 162</strong> (<em>traps</em> hacia el gestor).</li>
+<li>Versiones: <strong>SNMPv1</strong> y <strong>SNMPv2c</strong> usan <em><strong>community strings</strong></em> (una «contraseña» en texto claro: <em>public</em>/<em>private</em> por defecto, ¡cámbialas!); <strong>SNMPv3</strong> (la última y recomendada) añade <strong>autenticación (SHA) y cifrado (AES)</strong> por usuario.</li>
+<li>SNMP es un protocolo de la <strong>capa de aplicación</strong> y lo soportan <strong>routers, switches, AP, SAI, servidores e impresoras</strong>.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 29</strong><br>Lo <strong>correcto</strong> sobre SNMP: <strong>los <em>traps</em> son notificaciones asíncronas de los agentes a los gestores</strong>. Falso: que su última versión sea la v2 (es la <strong>v3</strong>), que los switches no lo soporten o que sea de la capa de red (es de <strong>aplicación</strong>).</th>
+</tr>
+</table></div>
+<h3 id="otras-fuentes-de-monitorización">Otras fuentes de monitorización</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Fuente</th>
+<th>Qué aporta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ICMP (ping)</strong></td>
+<td>Disponibilidad y latencia básicas</td>
+</tr>
+<tr>
+<td><strong>Syslog</strong> (UDP 514)</td>
+<td><strong>Mensajes de log</strong> de los equipos (caídas de enlace, errores, inicios de sesión), centralizados en un servidor</td>
+</tr>
+<tr>
+<td><strong>NetFlow / sFlow / IPFIX</strong></td>
+<td><strong>Quién habla con quién, cuánto y con qué protocolo</strong> (análisis de tráfico, consumos, anomalías)</td>
+</tr>
+<tr>
+<td><strong>Telemetría en <em>streaming</em></strong></td>
+<td>Datos enviados por el equipo en tiempo casi real (gNMI)</td>
+</tr>
+<tr>
+<td><strong>APIs</strong> de las plataformas en la nube</td>
+<td>Estado de AP, switches y clientes (Aruba Central, Meraki)</td>
+</tr>
+<tr>
+<td><strong>Sondas activas</strong></td>
+<td>Pruebas sintéticas (transacciones web, llamadas de prueba, IP SLA)</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="herramientas">Herramientas</h3>
+<p><strong>Zabbix</strong>, <strong>Nagios</strong> / Icinga, <strong>PRTG</strong>, <strong>LibreNMS</strong> / Observium, Cacti, <strong>Grafana</strong> (paneles), SolarWinds, <strong>Centreon</strong>; plataformas de los fabricantes (Aruba Central, Cisco Catalyst Center, Meraki). Funciones: <strong>descubrimiento</strong> de la red, <strong>mapas</strong>, <strong>umbrales y alertas</strong> (correo, SMS, Teams), <strong>paneles</strong>, <strong>gráficas históricas</strong> y <strong>informes</strong> de disponibilidad.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>Buenas prácticas de alertas</strong><br>Alertar de lo que exige <strong>actuar</strong> (no de todo), con <strong>umbrales</strong> razonables y <strong>dependencias</strong> (si cae el switch de planta, no generar 50 alertas de los equipos que cuelgan de él), y que cada alerta crítica <strong>genere un ticket</strong>.</th>
+</tr>
+</table></div>
+<h2 id="2-metodologia-de-resolucion-de-averias" class="tema-h2">2. Metodología de resolución de averías</h2>
+<p><strong>Proceso general</strong> (válido para cualquier incidencia):</p>
+<ol type="1">
+<li><strong>Identificar el problema</strong>: qué falla, <strong>a quién</strong> afecta (un usuario, una planta, todos), <strong>desde cuándo</strong>, <strong>qué ha cambiado</strong> recientemente. Preguntar bien al usuario (en la OPE 2024 el tribunal puntuó <strong>«un interrogatorio serio inicial»</strong>).</li>
+<li><strong>Recoger información</strong>: monitorización, logs, configuración, documentación de la red.</li>
+<li><strong>Formular hipótesis</strong> sobre la causa más probable.</li>
+<li><strong>Probar</strong> la hipótesis (de lo más sencillo y probable a lo más complejo).</li>
+<li><strong>Plan de acción</strong> e <strong>implementación</strong> de la solución (con gestión de cambios si afecta a producción).</li>
+<li><strong>Verificar</strong> que funciona y que no se ha roto otra cosa (con el usuario).</li>
+<li><strong>Documentar</strong> el diagnóstico y la solución y <strong>cerrar</strong> la incidencia; si se repite, <strong>gestión de problemas</strong> (T20).</li>
+</ol>
+<p><strong>Enfoques</strong>:</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Enfoque</th>
+<th>Cómo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Abajo arriba (<em>bottom-up</em>)</strong></td>
+<td>Empezar por la <strong>capa física</strong> (cable, luces) y subir por el modelo OSI. El más habitual en averías de comunicaciones</td>
+</tr>
+<tr>
+<td><strong>Arriba abajo (<em>top-down</em>)</strong></td>
+<td>Empezar por la aplicación y bajar</td>
+</tr>
+<tr>
+<td><strong>Divide y vencerás</strong></td>
+<td>Empezar por una capa intermedia (p. ej., <code>ping</code> a la puerta de enlace) y subir o bajar según el resultado</td>
+</tr>
+<tr>
+<td><strong>Seguir el camino</strong></td>
+<td>Recorrer el trayecto del tráfico, equipo a equipo</td>
+</tr>
+<tr>
+<td><strong>Sustitución</strong></td>
+<td>Cambiar el elemento sospechoso por otro que funcione (latiguillo, transceptor, equipo)</td>
+</tr>
+<tr>
+<td><strong>Comparación</strong></td>
+<td>Comparar con un puesto que funciona</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar el orden físico de una LAN</strong><br><strong>Equipo → latiguillo → roseta → cableado horizontal → patch panel → latiguillo → puerto del switch → configuración (VLAN, PoE) → uplink → red.</strong></th>
+</tr>
+</table></div>
+<h2 id="3-herramientas-de-diagnostico" class="tema-h2">3. Herramientas de diagnóstico</h2>
+<h3 id="herramientas-físicas">Herramientas físicas</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Herramienta</th>
+<th>Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Comprobador de cables (<em>tester</em>)</strong></td>
+<td>Continuidad y mapa de cableado (pares cruzados, abiertos)</td>
+</tr>
+<tr>
+<td><strong>Certificador</strong> (Fluke DSX)</td>
+<td>Certificar el enlace frente a una categoría (T3)</td>
+</tr>
+<tr>
+<td><strong>Generador de tonos y sonda (<em>toner</em>)</strong></td>
+<td><strong>Localizar un cable</strong> sin seguirlo: se inyecta un tono en un extremo y se busca con la sonda en el otro (patch panel, techo)</td>
+</tr>
+<tr>
+<td><strong>Comprobador de PoE</strong></td>
+<td>Comprobar si el puerto da alimentación y cuánta</td>
+</tr>
+<tr>
+<td><strong>Analizador de red portátil</strong> (Fluke LinkSprinter, NetAlly)</td>
+<td>Conectado a una toma, informa del <strong>switch y puerto</strong> (por LLDP/CDP), la <strong>VLAN</strong>, si hay <strong>PoE</strong>, la IP obtenida por DHCP y la conectividad</td>
+</tr>
+<tr>
+<td><strong>VFL, power meter, OTDR</strong></td>
+<td>Fibra óptica (T3)</td>
+</tr>
+<tr>
+<td><strong>Multímetro</strong></td>
+<td>Tensiones, continuidad eléctrica</td>
+</tr>
+<tr>
+<td><strong>Analizador de wifi</strong></td>
+<td>Cobertura, canales, interferencias (Ekahau, apps)</td>
+</tr>
+<tr>
+<td><strong>Portátil de diagnóstico</strong></td>
+<td>Conectar en la toma o en el puerto del switch para probar</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="herramientas-lógicas">Herramientas lógicas</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Herramienta</th>
+<th>Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>ping</code></strong></td>
+<td>Alcanzabilidad y RTT (ICMP)</td>
+</tr>
+<tr>
+<td><strong><code>tracert</code> / <code>traceroute</code></strong></td>
+<td>Ruta salto a salto y dónde se corta</td>
+</tr>
+<tr>
+<td><strong><code>pathping</code> / <code>mtr</code></strong></td>
+<td>Ruta con <strong>pérdidas por salto</strong></td>
+</tr>
+<tr>
+<td><strong><code>ipconfig</code> / <code>ip</code></strong></td>
+<td>Configuración IP del equipo</td>
+</tr>
+<tr>
+<td><strong><code>nslookup</code> / <code>dig</code></strong></td>
+<td>DNS</td>
+</tr>
+<tr>
+<td><strong><code>arp -a</code></strong></td>
+<td>Caché IP–MAC</td>
+</tr>
+<tr>
+<td><strong><code>netstat</code> / <code>ss</code></strong></td>
+<td>Conexiones y puertos abiertos</td>
+</tr>
+<tr>
+<td><strong>iPerf</strong></td>
+<td><strong>Caudal real</strong> entre dos puntos, jitter y pérdidas</td>
+</tr>
+<tr>
+<td><strong>Wireshark</strong> / tcpdump</td>
+<td><strong>Captura y análisis de paquetes</strong> (protocolos, retransmisiones, errores)</td>
+</tr>
+<tr>
+<td><strong>Comandos del switch</strong></td>
+<td><code>show interfaces</code> (estado, velocidad, dúplex, errores), <code>show mac address-table</code>, <code>show lldp neighbors</code>, <code>show vlan</code>, <code>show power inline</code>, <code>show interfaces transceiver</code>, <code>show logging</code></td>
+</tr>
+<tr>
+<td><strong>Puerto espejo (SPAN)</strong></td>
+<td>Copiar el tráfico de un puerto para capturarlo</td>
+</tr>
+<tr>
+<td><strong>Nmap</strong></td>
+<td>Descubrir equipos y puertos abiertos (solo con autorización)</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 6 (cuál NO es herramienta de diagnóstico)</strong><br><strong>iPerf</strong>, <strong>Wireshark</strong> y <strong>tracert</strong> sí ayudan a diagnosticar averías en las comunicaciones. <strong><code>sudo</code></strong> <strong>no</strong>: es un comando de Linux para <strong>ejecutar órdenes con privilegios de otro usuario</strong> (normalmente administrador).</th>
+</tr>
+</table></div>
+<h2 id="4-averias-tipicas-y-como-localizarlas" class="tema-h2">4. Averías típicas y cómo localizarlas</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Síntoma</th>
+<th>Causas probables</th>
+<th>Comprobaciones</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sin luz de enlace</strong></td>
+<td>Cable, roseta, latiguillo, puerto apagado o averiado, tarjeta desactivada</td>
+<td>Cambiar latiguillo, tester, puerto en el switch (<code>shutdown</code>, <code>err-disabled</code>)</td>
+</tr>
+<tr>
+<td><strong>Enlace sí, sin IP (169.254)</strong></td>
+<td><strong>VLAN</strong> errónea en el puerto, DHCP o relay</td>
+<td>VLAN del puerto, <code>ipconfig /renew</code>, ámbito DHCP (T2)</td>
+</tr>
+<tr>
+<td><strong>IP correcta, sin salida</strong></td>
+<td>Puerta de enlace, routing, cortafuegos</td>
+<td><code>ping</code> a la puerta de enlace y fuera, <code>tracert</code></td>
+</tr>
+<tr>
+<td><strong>Navega por IP pero no por nombre</strong></td>
+<td>DNS</td>
+<td><code>nslookup</code></td>
+</tr>
+<tr>
+<td><strong>Lento</strong></td>
+<td><strong>Dúplex</strong>, errores CRC, saturación de enlace, wifi, bucle</td>
+<td>Contadores de la interfaz, monitorización del uso, iPerf</td>
+</tr>
+<tr>
+<td><strong>Cortes intermitentes</strong></td>
+<td>Cable dañado, <strong>bucle de capa 2</strong>, IP duplicada, wifi, PoE insuficiente</td>
+<td>Logs del switch (<em>flapping</em>, MAC moviéndose), STP</td>
+</tr>
+<tr>
+<td><strong>Toda una planta sin red</strong></td>
+<td>Switch de acceso, <strong>uplink</strong>, alimentación, bucle</td>
+<td>Estado del uplink, luces, SAI del armario</td>
+</tr>
+<tr>
+<td><strong>Fibra sin link</strong></td>
+<td><strong>Polaridad</strong>, transceptor, suciedad, latiguillo, troncal</td>
+<td>Ver T3 (§7)</td>
+</tr>
+<tr>
+<td><strong>Equipo PoE no arranca</strong></td>
+<td>Presupuesto PoE, puerto sin PoE, cable largo o dañado, clase PoE insuficiente</td>
+<td><code>show power inline</code>, comprobador de PoE</td>
+</tr>
+<tr>
+<td><strong>Teléfono sin registro</strong></td>
+<td>VLAN de voz, DHCP, centralita</td>
+<td>LLDP-MED, IP de voz, registro en la centralita (T9)</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="el-player-de-cartelería-sin-conexión-caso-2023-pregunta-7">El player de cartelería sin conexión (caso 2023, pregunta 7)</h3>
+<p>El player estaba <strong>en el techo</strong> y <strong>no se podía localizar su cable</strong>.</p>
+<p><strong>In situ:</strong></p>
+<ol type="1">
+<li>Comprobar que el player está <strong>encendido</strong> (alimentación, PoE si lo usa) y las <strong>luces de su tarjeta</strong> de red.</li>
+<li>Si se puede acceder: conectar un <strong>portátil</strong> en su lugar (o un <strong>analizador de red portátil</strong>) para ver si hay enlace, <strong>VLAN (Internet libre)</strong>, IP por DHCP y salida.</li>
+<li>Localizar el cable con un <strong>generador de tonos y sonda</strong> desde el player hasta el <strong>patch panel</strong>, o con el analizador (que indica switch y puerto por <strong>LLDP</strong>).</li>
+<li>Revisar el menú de red del propio player (IP, DNS, hora).</li>
+</ol>
+<p><strong>A través de la red:</strong></p>
+<ol type="1">
+<li>Buscar la <strong>MAC</strong> o la <strong>IP</strong> del player en la <strong>tabla MAC</strong> de los switches (<code>show mac address-table</code>), en la <strong>caché ARP</strong> del switch principal o cortafuegos y en las <strong>concesiones del DHCP</strong>: así se encuentra el <strong>puerto</strong> sin tocar el cable.</li>
+<li>Ver el <strong>estado del puerto</strong> (activo, velocidad, errores, VLAN, PoE) y los <strong>logs</strong>.</li>
+<li><strong><code>ping</code></strong> al player y comprobar su salida a Internet, el <strong>DNS</strong> y el <strong>puerto 443</strong> hacia la plataforma en el cortafuegos (T10).</li>
+<li>Revisar la <strong>monitorización</strong> (desde cuándo no responde) y, si la red está bien, <strong>escalar al proveedor</strong> de cartelería.</li>
+</ol>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Criterios del tribunal (preguntas 7–10)</strong><br>Cada una se valoraba por <strong>opciones in situ y por la red</strong> (o pasos de resolución) <strong>detalladas</strong> (1,5), <strong>desarrollo</strong> de las alternativas (0,75) y un <strong>supuesto innovador</strong> (0,25). Da <strong>varias alternativas</strong>, en <strong>orden</strong>, y termina con <strong>escalado y documentación</strong>.</th>
+</tr>
+</table></div>
+<h2 id="5-soporte-tecnico-informatico" class="tema-h2">5. Soporte técnico informático</h2>
+<h3 id="niveles-de-soporte">Niveles de soporte</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Quién</th>
+<th>Qué resuelve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>N0 — Autoservicio</strong></td>
+<td>El propio usuario</td>
+<td>Portal, base de conocimiento, restablecer contraseña</td>
+</tr>
+<tr>
+<td><strong>N1 — Primer nivel (CAU / <em>service desk</em>)</strong></td>
+<td>Técnicos de atención</td>
+<td>Registro, clasificación, <strong>resolución de lo conocido</strong> (procedimientos), <strong>escalado</strong></td>
+</tr>
+<tr>
+<td><strong>N2 — Segundo nivel</strong></td>
+<td><strong>Técnicos especialistas</strong> (como el puesto de <strong>Instalaciones y Comunicaciones</strong>)</td>
+<td>Incidencias técnicas que el N1 no resuelve; diagnóstico en profundidad; <strong>desplazamiento in situ</strong></td>
+</tr>
+<tr>
+<td><strong>N3 — Tercer nivel</strong></td>
+<td>Expertos, ingeniería, <strong>fabricantes y proveedores</strong></td>
+<td>Problemas complejos, errores de producto, cambios de diseño</td>
+</tr>
+</tbody>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Escalado funcional</strong>: pasar la incidencia a un grupo <strong>más especializado</strong> (N1 → N2 → N3, o a otro equipo: Sistemas, comunicaciones, el fabricante).</li>
+<li><strong>Escalado jerárquico</strong>: informar a los <strong>responsables</strong> cuando una incidencia es grave o se incumple el plazo (SLA).</li>
+</ul>
+<p><strong>Herramientas</strong>: <strong>gestión de tickets</strong> (GLPI, ServiceNow, Jira Service Management, OTRS), <strong>base de conocimiento</strong>, <strong>acceso remoto</strong> (T10), <strong>inventario y CMDB</strong>, monitorización.</p>
+<p><strong>Buenas prácticas</strong>: <strong>registrar todo</strong> (también lo resuelto por teléfono), <strong>priorizar</strong> por <strong>impacto y urgencia</strong>, <strong>comunicar</strong> al usuario el estado, <strong>cumplir los SLA</strong>, cerrar con la <strong>conformidad</strong> del usuario y alimentar la <strong>base de conocimiento</strong>.</p>
+<h2 id="6-mantenimiento" class="tema-h2">6. Mantenimiento</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Qué es</th>
+<th>Ejemplos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Correctivo</strong></td>
+<td><strong>Reparar</strong> tras una avería</td>
+<td>Sustituir un switch averiado, reterminar una toma</td>
+</tr>
+<tr>
+<td><strong>Preventivo</strong></td>
+<td><strong>Revisiones periódicas planificadas</strong> para evitar averías</td>
+<td>Limpieza de armarios y filtros, revisión de SAI y baterías, actualización de firmware, comprobación de copias, revisión de etiquetado</td>
+</tr>
+<tr>
+<td><strong>Predictivo</strong></td>
+<td>Actuar <strong>según el estado medido</strong> antes de que falle</td>
+<td>Sustituir un disco por sus alertas SMART, una fibra cuya potencia óptica baja, baterías de SAI que pierden autonomía</td>
+</tr>
+<tr>
+<td><strong>Evolutivo / perfectivo</strong></td>
+<td><strong>Mejorar</strong> o adaptar la instalación</td>
+<td>Ampliar puertos, migrar a Wi-Fi 7, renovar equipos al fin de soporte</td>
+</tr>
+<tr>
+<td>Adaptativo</td>
+<td>Ajustar a cambios del entorno o la normativa</td>
+<td>Nuevos requisitos del ENS</td>
+</tr>
+</tbody>
+</table></div>
+<p>Elementos de la gestión del mantenimiento: <strong>inventario</strong> actualizado de instalaciones y equipos, <strong>contratos de mantenimiento</strong> con los proveedores (con <strong>SLA</strong> y tiempos de respuesta), <strong>stock de repuestos</strong> (transceptores, latiguillos, fuentes, un switch de reserva), <strong>órdenes de trabajo</strong> para el personal externo y su <strong>seguimiento</strong>, y <strong>documentación</strong> (planos, etiquetado, configuraciones).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>Es exactamente el puesto</strong><br>Las funciones del puesto 2314 incluían el <strong>mantenimiento preventivo y correctivo</strong>, <strong>emitir y seguir órdenes de trabajo del personal externo</strong>, <strong>atender, diagnosticar y escalar incidencias</strong>, y llevar el <strong>inventario y el control de stock</strong>.</th>
+</tr>
+</table></div>
+<h2 id="7-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">7. Lo que cayó en el examen de 2023</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Contenido</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test 6</td>
+<td>Qué NO es herramienta de diagnóstico</td>
+<td><strong>sudo</strong></td>
+</tr>
+<tr>
+<td>Test 14</td>
+<td>Latencia</td>
+<td><strong>Tiempo de origen a destino</strong></td>
+</tr>
+<tr>
+<td>Test 29</td>
+<td>SNMP</td>
+<td><strong>Los traps son notificaciones asíncronas de los agentes a los gestores</strong></td>
+</tr>
+<tr>
+<td>Caso 7</td>
+<td>Player sin conectividad</td>
+<td>In situ (tonos, portátil, analizador) y por la red (MAC, LLDP, ARP, DHCP)</td>
+</tr>
+<tr>
+<td>Caso 8</td>
+<td>Fibra sin link</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>Caso 9</td>
+<td>PoE caído</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>Caso 10</td>
+<td>Puerto averiado</td>
+<td>T4</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="8-anclas-de-memoria" class="tema-h2">8. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>Monitorizar = detectar antes que el usuario.</strong></li>
+<li><strong>SNMP: gestor + agente + MIB + OID · GET/SET/TRAP/INFORM · UDP 161/162 · v3 con autenticación y cifrado · traps = asíncronos del agente al gestor.</strong></li>
+<li><strong>Syslog 514 · NetFlow = quién habla con quién.</strong></li>
+<li><strong>Método: identificar → información → hipótesis → probar → aplicar → verificar → documentar.</strong></li>
+<li><strong>Bottom-up en averías de red (empieza por el cable).</strong></li>
+<li><strong>Toner = localizar cables · iPerf = caudal · Wireshark = paquetes · tracert = ruta · sudo NO.</strong></li>
+<li><strong>N1 registra y resuelve lo conocido · N2 especialistas · N3 fabricantes.</strong> <strong>Escalado funcional (más especializado) / jerárquico (responsables).</strong></li>
+<li><strong>Mantenimiento correctivo · preventivo · predictivo · evolutivo.</strong></li>
+</ul>
+<h2 id="9-no-confundir" class="tema-h2">9. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Esto</th>
+<th>No es esto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TRAP</strong> (sin confirmación)</td>
+<td><strong>INFORM</strong> (con confirmación)</td>
+</tr>
+<tr>
+<td><strong>SNMP 161</strong> (consultas al agente)</td>
+<td><strong>SNMP 162</strong> (traps al gestor)</td>
+</tr>
+<tr>
+<td><strong>Community string</strong> (v1/v2c)</td>
+<td><strong>Usuario con autenticación y cifrado</strong> (v3)</td>
+</tr>
+<tr>
+<td><strong>Escalado funcional</strong></td>
+<td><strong>Escalado jerárquico</strong></td>
+</tr>
+<tr>
+<td><strong>Preventivo</strong> (planificado)</td>
+<td><strong>Predictivo</strong> (según el estado medido)</td>
+</tr>
+<tr>
+<td><strong>Monitorización</strong> (cómo está)</td>
+<td><strong>Inventario</strong> (qué hay)</td>
+</tr>
+<tr>
+<td><strong>Tester</strong> (continuidad)</td>
+<td><strong>Certificador</strong> (cumple la categoría)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="10-posibles-trampas-de-examen" class="tema-h2">10. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li>Decir que la última versión de SNMP es la v2.</li>
+<li>Pensar que los switches no soportan SNMP.</li>
+<li>Elegir Wireshark o iPerf como «no herramienta de diagnóstico».</li>
+<li>Empezar por la aplicación en una avería de cable.</li>
+<li>Cerrar una incidencia sin documentarla ni verificar con el usuario.</li>
+<li>Confundir el mantenimiento preventivo con el predictivo.</li>
+</ul>
+<h2 id="11-posibles-preguntas-tipo-test" class="tema-h2">11. Posibles preguntas tipo test</h2>
+<ol type="1">
+<li>¿Qué puerto usan los traps SNMP? → <strong>UDP 162</strong>.</li>
+<li>¿Qué versión de SNMP cifra la información? → <strong>SNMPv3</strong>.</li>
+<li>¿Qué herramienta localiza un cable sin seguirlo? → <strong>Generador de tonos y sonda</strong>.</li>
+<li>¿Qué protocolo informa de quién habla con quién y cuánto? → <strong>NetFlow (o sFlow/IPFIX)</strong>.</li>
+<li>¿Qué tipo de mantenimiento sustituye un componente por sus indicadores de desgaste? → <strong>Predictivo</strong>.</li>
+</ol>
+<h2 id="12-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">12. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. Funcionamiento de SNMP (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>Gestor, agente, MIB y OID.</li>
+<li>Operaciones GET/SET (gestor → agente, UDP 161) y TRAP/INFORM (agente → gestor, UDP 162).</li>
+<li>Versiones (v1/v2c con comunidades; v3 con autenticación y cifrado).</li>
+<li>Uso en la monitorización con ejemplos (Zabbix, PRTG).</li>
+</ul>
+<p><strong>2. Metodología para resolver una avería de comunicaciones (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>Identificar y preguntar al usuario; recoger información.</li>
+<li>Hipótesis y pruebas por capas (bottom-up, divide y vencerás, sustitución).</li>
+<li>Solución, verificación con el usuario.</li>
+<li>Escalado si procede y documentación.</li>
+</ul>
+<h2 id="13-supuesto-practico" class="tema-h2">13. Supuesto práctico</h2>
+<p><strong>Enunciado:</strong> la monitorización avisa de que el enlace entre el switch de planta primera y el principal tiene muchos errores CRC y los usuarios notan lentitud.</p>
+<p><strong>Esquema de respuesta:</strong></p>
+<ol type="1">
+<li><strong>Confirmar</strong> en el switch: contadores de errores de la interfaz (<code>show interfaces</code>), potencia óptica del transceptor (<strong>DOM</strong>), logs (<em>flapping</em>).</li>
+<li><strong>Hipótesis</strong>: suciedad o daño en el conector o el latiguillo de fibra, transceptor degradado, curva excesiva o fibra troncal dañada.</li>
+<li><strong>Pruebas</strong>: <strong>limpiar</strong> los conectores, <strong>cambiar el latiguillo</strong>, <strong>cambiar el transceptor</strong> (de repuesto), mover el enlace a <strong>otra fibra</strong> de las cuatro disponibles; con LACP, el tráfico sigue por el otro enlace mientras se actúa.</li>
+<li><strong>Verificación</strong>: contadores a cero tras limpiar estadísticas, potencia óptica en rango, prueba de caudal con iPerf.</li>
+<li><strong>Si la troncal está dañada</strong>: <strong>orden de trabajo</strong> a la empresa de cableado (medición con OTDR) y seguimiento.</li>
+<li><strong>Documentar</strong> la incidencia; si se repite, <strong>problema</strong> para buscar la causa raíz; revisar el <strong>stock</strong> de transceptores y latiguillos.</li>
+</ol>
+<h2 id="14-matriz-de-memorizacion" class="tema-h2">14. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Dato clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SNMP</td>
+<td>Gestor · agente · MIB · OID · GET/SET/TRAP/INFORM · UDP 161/162 · v3 segura</td>
+</tr>
+<tr>
+<td>Otras fuentes</td>
+<td>Ping · syslog 514 · NetFlow/sFlow/IPFIX · telemetría · sondas</td>
+</tr>
+<tr>
+<td>Herramientas de monitorización</td>
+<td>Zabbix · Nagios · PRTG · LibreNMS · Grafana</td>
+</tr>
+<tr>
+<td>Método</td>
+<td>Identificar · información · hipótesis · probar · aplicar · verificar · documentar</td>
+</tr>
+<tr>
+<td>Enfoques</td>
+<td>Bottom-up · top-down · divide y vencerás · seguir el camino · sustitución</td>
+</tr>
+<tr>
+<td>Herramientas físicas</td>
+<td>Tester · certificador · toner · comprobador PoE · analizador portátil · VFL/OTDR</td>
+</tr>
+<tr>
+<td>Herramientas lógicas</td>
+<td>ping · tracert · pathping · nslookup · arp · iPerf · Wireshark · show</td>
+</tr>
+<tr>
+<td>Soporte</td>
+<td>N0 · N1 (CAU) · N2 · N3 · escalado funcional/jerárquico · tickets · SLA</td>
+</tr>
+<tr>
+<td>Mantenimiento</td>
+<td>Correctivo · preventivo · predictivo · evolutivo</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="15-resumen-final-si-manana-fuera-el-examen" class="tema-h2">15. Resumen final: si mañana fuera el examen</h2>
+<p><strong>Monitorizar</strong> es vigilar disponibilidad, uso, latencia, errores y recursos para <strong>detectar los fallos antes que el usuario</strong>, con <strong>SNMP</strong> (gestor, agente, <strong>MIB</strong>, <strong>GET/SET</strong> por <strong>UDP 161</strong> y <strong>traps asíncronos del agente al gestor</strong> por <strong>UDP 162</strong>; <strong>v3</strong> con autenticación y cifrado), <strong>syslog</strong>, <strong>NetFlow</strong> y herramientas como <strong>Zabbix o PRTG</strong>. Las averías se resuelven con <strong>método</strong>: identificar, recoger información, hipótesis, probar (<strong>de abajo arriba</strong>), aplicar, <strong>verificar</strong> y <strong>documentar</strong>, con herramientas físicas (<strong>tester, toner, analizador, PoE, fibra</strong>) y lógicas (<strong>ping, tracert, iPerf, Wireshark, show</strong>); <strong>sudo no es</strong> de diagnóstico. El soporte se organiza en <strong>niveles (N1, N2, N3)</strong> con <strong>escalado funcional y jerárquico</strong>, tickets y <strong>SLA</strong>; y el mantenimiento puede ser <strong>correctivo, preventivo, predictivo o evolutivo</strong>, con inventario, repuestos y <strong>órdenes de trabajo</strong> para los externos.</p>
+<h2 id="16-actualidad-datos-fechados" class="tema-h2">16. Actualidad — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong></th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li>Las plataformas en la nube de los fabricantes incorporan <strong>AIOps</strong> (análisis con IA de la telemetría para detectar anomalías y sugerir la causa probable).</li>
+<li><strong>SNMPv1/v2c</strong> siguen muy presentes, pero las guías de seguridad (incluidas las del CCN) recomiendan <strong>SNMPv3</strong> y la telemetría en <em>streaming</em>.</li>
+<li><strong>Zabbix 7</strong> (LTS de 2024) y Grafana se han consolidado como opciones libres de referencia en las administraciones.</li>
+</ul>
+
+  </div>
+</article>
