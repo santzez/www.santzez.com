@@ -1,0 +1,527 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T6</div>
+    <h1 class="tema-cabecera__titulo">Las comunicaciones móviles. Generaciones de tecnologías de telefonía móvil.</h1>
+    <div class="tema-cabecera__meta">Bloque 1 · Redes, comunicaciones, internet · Bolsa DonostiaTIK 2023 · Instalaciones y Comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-la-red-celular">1. La red celular</a></li>
+<li><a href="#2-las-generaciones">2. Las generaciones</a></li>
+<li><a href="#3-arquitectura-general-de-una-red-movil">3. Arquitectura general de una red móvil</a></li>
+<li><a href="#4-bandas-en-espana">4. Bandas en España</a></li>
+<li><a href="#5-las-comunicaciones-moviles-en-la-empresa">5. Las comunicaciones móviles en la empresa</a></li>
+<li><a href="#6-seguridad-en-las-redes-moviles">6. Seguridad en las redes móviles</a></li>
+<li><a href="#7-lo-que-cayo-en-el-examen-de-2023">7. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#8-anclas-de-memoria">8. Anclas de memoria</a></li>
+<li><a href="#9-no-confundir">9. No confundir</a></li>
+<li><a href="#10-posibles-trampas-de-examen">10. Posibles trampas de examen</a></li>
+<li><a href="#11-posibles-preguntas-tipo-test">11. Posibles preguntas tipo test</a></li>
+<li><a href="#12-posibles-preguntas-cortas-con-esquema-de-respuesta">12. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#13-supuesto-practico">13. Supuesto práctico</a></li>
+<li><a href="#14-matriz-de-memorizacion">14. Matriz de memorización</a></li>
+<li><a href="#15-resumen-final-si-manana-fuera-el-examen">15. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#16-actualidad-datos-fechados">16. Actualidad — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — fronteras del tema</strong><br>Este tema trata la <strong>red celular de los operadores</strong>: principios, generaciones (1G a 5G), arquitectura, bandas y servicios para la empresa.<br><strong>T5</strong> → wifi y radioenlaces. <strong>T7</strong> → sistemas operativos de los móviles y su configuración. <strong>T8</strong> → IoT celular (NB-IoT, LTE-M) y M2M. <strong>T9</strong> → telefonía fija, DECT y centralitas. <strong>T16</strong> → gestión y seguridad de los terminales (MDM).</th>
+</tr>
+</table></div>
+<h2 id="1-la-red-celular" class="tema-h2">1. La red celular</h2>
+<p>Una red de telefonía móvil divide el territorio en <strong>celdas</strong> (<em>cells</em>), cada una atendida por una <strong>estación base</strong> con sus antenas. Ideas clave:</p>
+<ul class="tema-lista">
+<li><strong>Reutilización de frecuencias</strong>: el espectro es escaso y caro, así que las mismas frecuencias se reutilizan en celdas no adyacentes.</li>
+<li><strong>Tamaño de celda</strong> según la densidad: <strong>macroceldas</strong> (km, zonas rurales), <strong>microceldas</strong> y <strong>picoceldas</strong> (calles, edificios) y <strong>femtoceldas</strong> (interior). Más celdas pequeñas = <strong>más capacidad</strong>.</li>
+<li><strong>Handover / traspaso</strong>: la llamada o la sesión de datos pasa de una celda a otra sin cortarse al moverse.</li>
+<li><strong>Roaming / itinerancia</strong>: usar la red de otro operador (en otro país o, en algunos casos, en el mismo). En la UE, el roaming se factura como en casa (<em>Roam like at home</em>).</li>
+<li><strong>Espectro licenciado</strong>: el Estado <strong>subasta</strong> las bandas a los operadores, que pagan por usarlas en exclusiva. Por eso las redes móviles las despliega y gestiona <strong>un operador</strong> (a diferencia del wifi).</li>
+</ul>
+<p>Técnicas de <strong>acceso múltiple</strong> (cómo comparten muchos usuarios el espectro):</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Técnica</th>
+<th>Cómo reparte</th>
+<th>Generación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FDMA</strong></td>
+<td>Por frecuencias</td>
+<td>1G</td>
+</tr>
+<tr>
+<td><strong>TDMA</strong></td>
+<td>Por intervalos de tiempo en cada frecuencia</td>
+<td>2G (GSM)</td>
+</tr>
+<tr>
+<td><strong>CDMA / WCDMA</strong></td>
+<td>Por códigos: todos transmiten a la vez en la misma banda</td>
+<td>3G (UMTS)</td>
+</tr>
+<tr>
+<td><strong>OFDMA</strong></td>
+<td>Por subportadoras ortogonales (en tiempo y frecuencia)</td>
+<td><strong>4G y 5G</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="2-las-generaciones" class="tema-h2">2. Las generaciones</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Generación</th>
+<th>Tecnologías</th>
+<th>Años</th>
+<th>Servicios</th>
+<th>Velocidad orientativa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1G</strong></td>
+<td>AMPS, <strong>TACS</strong> (en España, MoviLine)</td>
+<td>1980</td>
+<td><strong>Voz analógica</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>2G</strong></td>
+<td><strong>GSM</strong> (TDMA)</td>
+<td>1990</td>
+<td><strong>Voz digital, SMS</strong>, tarjeta <strong>SIM</strong></td>
+<td>9,6 kbps (datos por circuito)</td>
+</tr>
+<tr>
+<td>2,5G / 2,75G</td>
+<td><strong>GPRS</strong> / <strong>EDGE</strong></td>
+<td>2000</td>
+<td><strong>Datos por paquetes</strong>, MMS, WAP</td>
+<td>40–170 / 200–400 kbps</td>
+</tr>
+<tr>
+<td><strong>3G</strong></td>
+<td><strong>UMTS</strong> (WCDMA)</td>
+<td>2004</td>
+<td><strong>Internet móvil</strong>, videollamada</td>
+<td>384 kbps – 2 Mbps</td>
+</tr>
+<tr>
+<td>3,5G</td>
+<td><strong>HSPA / HSPA+</strong></td>
+<td>2007</td>
+<td>Banda ancha móvil</td>
+<td>14–42 Mbps</td>
+</tr>
+<tr>
+<td><strong>4G</strong></td>
+<td><strong>LTE</strong>, <strong>LTE-Advanced</strong> (<em>carrier aggregation</em>)</td>
+<td>2012</td>
+<td><strong>Red todo IP</strong>, <strong>VoLTE</strong>, vídeo HD</td>
+<td>100 Mbps – 1 Gbps</td>
+</tr>
+<tr>
+<td><strong>5G</strong></td>
+<td><strong>5G NR</strong> (<em>New Radio</em>)</td>
+<td>2019</td>
+<td><strong>eMBB, URLLC, mMTC</strong>, <em>network slicing</em></td>
+<td>Hasta varios Gbps, latencia ≈ 1–10 ms</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar</strong><br><strong>1G analógica · 2G digital (GSM, SMS) · 3G Internet (UMTS) · 4G todo IP (LTE) · 5G servicios a medida (NR).</strong></th>
+</tr>
+</table></div>
+<h3 id="2g-gsm">2G: GSM</h3>
+<ul class="tema-lista">
+<li>Primer estándar digital europeo; <strong>TDMA</strong> con 8 intervalos por portadora.</li>
+<li>Introdujo la <strong>tarjeta SIM</strong> (identidad del abonado, separada del terminal), los <strong>SMS</strong> y el cifrado de la voz.</li>
+<li>Arquitectura: <strong>BTS</strong> (estación base) → <strong>BSC</strong> (controlador) → <strong>MSC</strong> (conmutación), con las bases de datos <strong>HLR</strong> (abonados propios) y <strong>VLR</strong> (visitantes).</li>
+<li><strong>GPRS</strong> (2,5G) añadió datos por paquetes (siempre conectado, se paga por volumen) y <strong>EDGE</strong> (2,75G) mejoró la modulación.</li>
+</ul>
+<h3 id="3g-umts">3G: UMTS</h3>
+<ul class="tema-lista">
+<li><strong>WCDMA</strong> con canales de 5 MHz; red de acceso UTRAN (<strong>NodeB</strong> + <strong>RNC</strong>).</li>
+<li>Servicios: Internet móvil, videollamada; <strong>HSPA/HSPA+</strong> (3,5G) multiplicó la velocidad de datos.</li>
+<li>La voz seguía yendo por <strong>conmutación de circuitos</strong>.</li>
+</ul>
+<h3 id="4g-lte">4G: LTE</h3>
+<ul class="tema-lista">
+<li><strong>Red totalmente IP</strong> (<em>all-IP</em>): la voz también va por paquetes (<strong>VoLTE</strong>, sobre IMS). Sin VoLTE, el móvil «cae» a 3G o 2G para llamar (<em>CSFB</em>).</li>
+<li>Radio: <strong>OFDMA</strong> en bajada y <strong>SC-FDMA</strong> en subida; <strong>MIMO</strong>; canales de hasta 20 MHz.</li>
+<li>Arquitectura simplificada: <strong>eNodeB</strong> (estación base, que ya incluye las funciones del controlador) y núcleo <strong>EPC</strong> (MME, S-GW, P-GW, <strong>HSS</strong>).</li>
+<li><strong>LTE-Advanced</strong>: <strong>agregación de portadoras</strong> (<em>carrier aggregation</em>), MIMO 4×4, hasta 1 Gbps.</li>
+<li><strong>VoWiFi</strong>: llamadas del operador a través de una red wifi cuando no hay cobertura móvil (útil en sótanos).</li>
+</ul>
+<h3 id="5g">5G</h3>
+<p>Tres <strong>escenarios de uso</strong> definidos por la UIT (IMT-2020):</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Escenario</th>
+<th>Significado</th>
+<th>Ejemplos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>eMBB</strong></td>
+<td><em>Enhanced Mobile Broadband</em>: banda ancha móvil mejorada</td>
+<td>Vídeo 4K/8K, realidad aumentada, acceso fijo inalámbrico (FWA)</td>
+</tr>
+<tr>
+<td><strong>URLLC</strong></td>
+<td><em>Ultra-Reliable Low-Latency Communications</em>: muy baja latencia y alta fiabilidad</td>
+<td>Industria, vehículos, telecirugía, control de procesos</td>
+</tr>
+<tr>
+<td><strong>mMTC</strong></td>
+<td><em>Massive Machine-Type Communications</em>: comunicaciones masivas entre máquinas</td>
+<td>Millones de sensores IoT por km² (T8)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Tecnologías clave:</p>
+<ul class="tema-lista">
+<li><strong>Massive MIMO</strong> y <strong>beamforming</strong> en las antenas.</li>
+<li><strong>Bandas</strong>: <strong>FR1</strong> (por debajo de 6 GHz; en España la principal es la de <strong>3,5 GHz</strong>, con <strong>700 MHz</strong> para cobertura) y <strong>FR2</strong> (<strong>ondas milimétricas, 26 GHz</strong>: mucho caudal, poco alcance).</li>
+<li><em><strong>Network slicing</strong></em>: dividir la red física en <strong>redes lógicas</strong> con características garantizadas (latencia, caudal) para cada servicio o cliente.</li>
+<li><strong>MEC</strong> (<em>Multi-access Edge Computing</em>): procesar los datos cerca de la antena para reducir la latencia.</li>
+<li><strong>NSA y SA</strong>: el 5G <strong>NSA</strong> (<em>Non-Standalone</em>) usa la radio 5G apoyándose en el núcleo 4G; el <strong>SA</strong> (<em>Standalone</em>) tiene núcleo 5G propio (<strong>5GC</strong>) y es el que permite <em>slicing</em> y URLLC de verdad.</li>
+<li>Estación base: <strong>gNodeB</strong>.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — ¿libre o de operador? (pregunta corta 1 de 2023)</strong><br><strong>4G/5G funcionan en espectro licenciado y los presta un operador</strong> (Movistar, Orange, Vodafone, Digi, Euskaltel…), salvo las <strong>redes 5G privadas</strong> que se despliegan con frecuencias específicas (en España se habilitó la banda de 3,8–4,2 GHz para usos locales) o mediante el operador. Su ventaja es la <strong>movilidad y la cobertura extensa</strong>; su inconveniente, la <strong>dependencia del operador y el coste por línea</strong>.</th>
+</tr>
+</table></div>
+<h2 id="3-arquitectura-general-de-una-red-movil" class="tema-h2">3. Arquitectura general de una red móvil</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Parte</th>
+<th>Qué hace</th>
+<th>2G</th>
+<th>3G</th>
+<th>4G</th>
+<th>5G</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Terminal (UE)</strong></td>
+<td>Móvil, router, módulo IoT, con <strong>SIM/eSIM</strong></td>
+<td>MS</td>
+<td>UE</td>
+<td>UE</td>
+<td>UE</td>
+</tr>
+<tr>
+<td><strong>Red de acceso radio (RAN)</strong></td>
+<td>Estaciones base y antenas</td>
+<td>BTS + BSC</td>
+<td>NodeB + RNC</td>
+<td><strong>eNodeB</strong></td>
+<td><strong>gNodeB</strong></td>
+</tr>
+<tr>
+<td><strong>Núcleo (<em>core</em>)</strong></td>
+<td>Autenticación, movilidad, sesiones, conexión a Internet y a la red telefónica</td>
+<td>MSC, HLR, VLR</td>
+<td>MSC, SGSN, GGSN</td>
+<td><strong>EPC</strong> (MME, S-GW, P-GW, HSS)</td>
+<td><strong>5GC</strong> (AMF, SMF, UPF, UDM)</td>
+</tr>
+<tr>
+<td><em><strong>Backhaul</strong></em></td>
+<td>Enlaza las estaciones base con el núcleo</td>
+<td>Radioenlaces, fibra</td>
+<td></td>
+<td></td>
+<td>Fibra (casi obligatoria)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Identificadores: <strong>IMSI</strong> (identidad del abonado, en la SIM), <strong>IMEI</strong> (identidad del terminal; sirve para bloquearlo si se roba), <strong>MSISDN</strong> (el número de teléfono) e <strong>ICCID</strong> (número de serie de la SIM).</p>
+<p>La <strong>eSIM</strong> es una SIM integrada en el terminal que se programa a distancia (perfil descargable); facilita cambiar de operador y gestionar flotas. La <strong>iSIM</strong> va integrada en el propio chip (IoT).</p>
+<h2 id="4-bandas-en-espana" class="tema-h2">4. Bandas en España</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Banda</th>
+<th>Uso principal</th>
+<th>Característica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>700 MHz</strong></td>
+<td>5G (cobertura)</td>
+<td>Liberada de la TDT (segundo dividendo digital); gran alcance y penetración en interiores</td>
+</tr>
+<tr>
+<td>800 MHz</td>
+<td>4G (cobertura)</td>
+<td>Primer dividendo digital</td>
+</tr>
+<tr>
+<td>900 MHz</td>
+<td>2G, 3G, 4G</td>
+<td>Cobertura rural</td>
+</tr>
+<tr>
+<td><strong>1.800 MHz</strong></td>
+<td><strong>4G</strong> (capacidad)</td>
+<td>La más usada en LTE</td>
+</tr>
+<tr>
+<td>2.100 MHz</td>
+<td>3G, 4G, 5G</td>
+<td></td>
+</tr>
+<tr>
+<td>2.600 MHz</td>
+<td>4G (capacidad en ciudades)</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>3.500 MHz (3,4–3,8 GHz)</strong></td>
+<td><strong>5G (banda principal)</strong></td>
+<td>Mucha capacidad, alcance medio</td>
+</tr>
+<tr>
+<td><strong>26 GHz</strong></td>
+<td>5G milimétrico</td>
+<td>Muy alta capacidad, muy poco alcance</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Regla general</strong><br><strong>Bandas bajas = cobertura y penetración en edificios. Bandas altas = capacidad, poco alcance.</strong></th>
+</tr>
+</table></div>
+<h2 id="5-las-comunicaciones-moviles-en-la-empresa" class="tema-h2">5. Las comunicaciones móviles en la empresa</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Servicio</th>
+<th>Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Telefonía móvil corporativa</strong></td>
+<td>Líneas de empleados, integradas a menudo con la <strong>centralita</strong> (extensión móvil, numeración corta, desvíos) (T9)</td>
+</tr>
+<tr>
+<td><strong>Router 4G/5G</strong></td>
+<td><strong>Acceso a Internet de respaldo</strong> (<em>backup</em> de la línea fija), <strong>sedes temporales</strong> (la <strong>carpa</strong> del caso de 2023), obras, eventos</td>
+</tr>
+<tr>
+<td><strong>APN privado</strong></td>
+<td>La SIM se conecta <strong>directamente a la red corporativa</strong> a través del operador, sin pasar por Internet (cajeros, terminales, IoT municipal)</td>
+</tr>
+<tr>
+<td><strong>SIM M2M / IoT</strong></td>
+<td>Tarjetas para máquinas (contadores, semáforos, alarmas, telegestión), con tarifas por volumen (T8)</td>
+</tr>
+<tr>
+<td><strong>FWA</strong> (<em>Fixed Wireless Access</em>)</td>
+<td>Internet «fijo» por 4G/5G donde no llega la fibra</td>
+</tr>
+<tr>
+<td><strong>5G privado</strong></td>
+<td>Red móvil propia en un recinto (puerto, fábrica, campus)</td>
+</tr>
+<tr>
+<td><strong>Redes de emergencia (TETRA)</strong></td>
+<td>Radiocomunicaciones digitales profesionales de policía, bomberos y emergencias; independientes de la red móvil pública</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>Router 4G/5G para la carpa (caso 2023, pregunta 6)</strong><br>El router con <strong>SIM de datos</strong> da Internet a la carpa sin obra. Para el <strong>PC con acceso a la red municipal</strong> no basta con Internet: hay que conectarlo mediante <strong>VPN</strong> al cortafuegos municipal (VPN <em>site-to-site</em> desde el router o VPN de cliente en el PC; T15), coordinado con <strong>Sistemas</strong>. El PC de <strong>Internet libre</strong> sale directamente. Comprobar antes la <strong>cobertura</strong> en la explanada, el <strong>caudal</strong> y el consumo de datos previsto.</th>
+</tr>
+</table></div>
+<h2 id="6-seguridad-en-las-redes-moviles" class="tema-h2">6. Seguridad en las redes móviles</h2>
+<ul class="tema-lista">
+<li><strong>Autenticación mutua</strong> entre la SIM y la red (desde 3G), con claves almacenadas en la SIM y en el núcleo.</li>
+<li><strong>Cifrado</strong> de la interfaz radio (A5 en GSM, ya débil; KASUMI/SNOW/AES en 3G-5G).</li>
+<li>En <strong>5G SA</strong>, el IMSI viaja cifrado (<strong>SUCI</strong>), lo que dificulta los <em><strong>IMSI catchers</strong></em> (falsas estaciones base que fuerzan al móvil a conectarse a 2G para interceptarlo).</li>
+<li>Riesgos para la organización: <strong>SIM swapping</strong> (duplicado fraudulento de la SIM para robar los SMS de doble factor), <strong>smishing</strong> (fraude por SMS; T13), robo o pérdida del terminal (<strong>MDM</strong>, T16) y dependencia de un único operador (redundancia con dos operadores en servicios críticos).</li>
+</ul>
+<h2 id="7-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">7. Lo que cayó en el examen de 2023</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Contenido</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Corta 1</td>
+<td>Características y usos de 4G/5G frente a wifi y LoRa</td>
+<td>Espectro licenciado, operador, movilidad, cobertura amplia</td>
+</tr>
+<tr>
+<td>Caso 6</td>
+<td>Carpa a 200 m</td>
+<td>Router 4G/5G como alternativa, con VPN para el PC municipal</td>
+</tr>
+<tr>
+<td>Test 31 (reserva)</td>
+<td>DECT</td>
+<td>Sistema de <strong>teléfonos inalámbricos</strong> (no es telefonía móvil; T9)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="8-anclas-de-memoria" class="tema-h2">8. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>Celdas + reutilización de frecuencias + handover.</strong></li>
+<li><strong>FDMA (1G) · TDMA (2G) · CDMA (3G) · OFDMA (4G/5G).</strong></li>
+<li><strong>2G = GSM, SIM, SMS · 3G = UMTS · 4G = LTE todo IP, VoLTE · 5G = NR, eMBB/URLLC/mMTC, slicing.</strong></li>
+<li><strong>BTS · NodeB · eNodeB · gNodeB.</strong></li>
+<li><strong>IMSI = abonado · IMEI = terminal · MSISDN = número.</strong></li>
+<li><strong>En España, 5G en 3,5 GHz (capacidad) y 700 MHz (cobertura); 26 GHz milimétrico.</strong></li>
+<li><strong>NSA = radio 5G con núcleo 4G · SA = núcleo 5G.</strong></li>
+</ul>
+<h2 id="9-no-confundir" class="tema-h2">9. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Esto</th>
+<th>No es esto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IMEI</strong> (terminal)</td>
+<td><strong>IMSI</strong> (abonado, en la SIM)</td>
+</tr>
+<tr>
+<td><strong>5G NSA</strong></td>
+<td><strong>5G SA</strong></td>
+</tr>
+<tr>
+<td><strong>URLLC</strong> (latencia)</td>
+<td><strong>mMTC</strong> (muchos dispositivos) y <strong>eMBB</strong> (caudal)</td>
+</tr>
+<tr>
+<td><strong>VoLTE</strong> (voz por 4G, IMS)</td>
+<td><strong>VoWiFi</strong> (voz del operador por wifi) y <strong>VoIP</strong> corporativa</td>
+</tr>
+<tr>
+<td><strong>DECT</strong> (teléfono inalámbrico de oficina)</td>
+<td><strong>GSM</strong> (red móvil)</td>
+</tr>
+<tr>
+<td><strong>Roaming</strong> (red de otro operador)</td>
+<td><strong>Handover</strong> (cambio de celda)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="10-posibles-trampas-de-examen" class="tema-h2">10. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li>Decir que 4G conmuta la voz por circuitos (es todo IP; la voz va por VoLTE).</li>
+<li>Creer que 5G en 26 GHz tiene más alcance que en 700 MHz.</li>
+<li>Pensar que el IMEI identifica al abonado.</li>
+<li>Confundir GPRS (datos por paquetes en 2G) con UMTS (3G).</li>
+<li>Pensar que <em>network slicing</em> es dividir la banda entre operadores.</li>
+</ul>
+<h2 id="11-posibles-preguntas-tipo-test" class="tema-h2">11. Posibles preguntas tipo test</h2>
+<ol type="1">
+<li>¿Qué generación introdujo los SMS y la SIM? → <strong>2G (GSM)</strong>.</li>
+<li>¿Qué técnica de acceso usa LTE en bajada? → <strong>OFDMA</strong>.</li>
+<li>¿Cómo se llama la estación base 5G? → <strong>gNodeB</strong>.</li>
+<li>¿Qué escenario 5G prioriza la latencia mínima? → <strong>URLLC</strong>.</li>
+<li>¿Qué identifica el IMEI? → <strong>El terminal</strong>.</li>
+</ol>
+<h2 id="12-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">12. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. Evolución de las generaciones de telefonía móvil (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>1G analógica (voz) → 2G GSM digital (SMS, SIM, TDMA; GPRS/EDGE) → 3G UMTS (Internet móvil, WCDMA; HSPA) → 4G LTE (todo IP, OFDMA, VoLTE) → 5G NR (eMBB, URLLC, mMTC, slicing, massive MIMO).</li>
+<li>Para cada una: técnica de acceso, servicio característico y velocidad orientativa.</li>
+</ul>
+<p><strong>2. Usos de las comunicaciones móviles en un ayuntamiento (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>Telefonía corporativa integrada con la centralita.</li>
+<li>Respaldo de Internet y sedes temporales con routers 4G/5G (con VPN).</li>
+<li>IoT municipal con SIM M2M y APN privado.</li>
+<li>Gestión y seguridad de los terminales con MDM.</li>
+</ul>
+<h2 id="13-supuesto-practico" class="tema-h2">13. Supuesto práctico</h2>
+<p><strong>Enunciado:</strong> la conexión de fibra de una sede municipal pequeña cae con frecuencia y deja sin servicio a la oficina de atención.</p>
+<p><strong>Esquema de respuesta:</strong></p>
+<ol type="1">
+<li><strong>Incidencia con el operador</strong> de la fibra (registro, seguimiento, SLA).</li>
+<li><strong>Solución de continuidad</strong>: instalar un <strong>router 4G/5G</strong> como <strong>línea de respaldo</strong> con conmutación automática (<em>failover</em>) en el router o cortafuegos de la sede.</li>
+<li><strong>Seguridad</strong>: la sede se une a la red municipal por <strong>VPN</strong> sobre la línea móvil (o con un <strong>APN privado</strong> del operador).</li>
+<li><strong>Comprobaciones previas</strong>: <strong>cobertura</strong> en el local (bandas bajas para interior), caudal suficiente para las aplicaciones y tarifa de datos.</li>
+<li><strong>Coordinación</strong> con comunicaciones (configuración del <em>failover</em> y la VPN), sistemas (reglas del cortafuegos) y el departamento (horarios de prueba); <strong>documentar</strong> y monitorizar ambos enlaces (T19).</li>
+</ol>
+<h2 id="14-matriz-de-memorizacion" class="tema-h2">14. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Dato clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2G</td>
+<td>GSM · TDMA · SIM, SMS · GPRS/EDGE</td>
+</tr>
+<tr>
+<td>3G</td>
+<td>UMTS · WCDMA · NodeB + RNC · HSPA</td>
+</tr>
+<tr>
+<td>4G</td>
+<td>LTE · OFDMA (bajada) / SC-FDMA (subida) · eNodeB · EPC · VoLTE</td>
+</tr>
+<tr>
+<td>5G</td>
+<td>NR · gNodeB · 5GC · eMBB/URLLC/mMTC · slicing · massive MIMO</td>
+</tr>
+<tr>
+<td>5G en España</td>
+<td>3,5 GHz (principal) · 700 MHz · 26 GHz</td>
+</tr>
+<tr>
+<td>Identificadores</td>
+<td>IMSI (abonado) · IMEI (terminal) · MSISDN (número)</td>
+</tr>
+<tr>
+<td>Empresa</td>
+<td>APN privado · SIM M2M · router 4G/5G de respaldo · FWA</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="15-resumen-final-si-manana-fuera-el-examen" class="tema-h2">15. Resumen final: si mañana fuera el examen</h2>
+<p>La red móvil divide el territorio en <strong>celdas</strong> que reutilizan frecuencias <strong>licenciadas</strong> del operador y traspasan la conexión al moverse (<strong>handover</strong>). <strong>1G</strong> fue analógica; <strong>2G (GSM)</strong> trajo la voz digital, la <strong>SIM</strong> y los <strong>SMS</strong> (con GPRS/EDGE para datos); <strong>3G (UMTS)</strong>, Internet móvil; <strong>4G (LTE)</strong>, una red <strong>todo IP</strong> con <strong>VoLTE</strong>; y <strong>5G (NR)</strong>, <strong>eMBB, URLLC y mMTC</strong>, con <strong>massive MIMO</strong> y <em><strong>network slicing</strong></em> (pleno en <strong>SA</strong>). En España el 5G usa sobre todo <strong>3,5 GHz</strong> y <strong>700 MHz</strong>. En la empresa sirven para telefonía corporativa, <strong>respaldo y sedes temporales con routers 4G/5G (con VPN)</strong> e <strong>IoT</strong> con SIM M2M.</p>
+<h2 id="16-actualidad-datos-fechados" class="tema-h2">16. Actualidad — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong></th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li>Los operadores españoles han ido <strong>apagando sus redes 3G</strong> entre 2023 y 2025 para reutilizar el espectro en 4G/5G; el <strong>2G se mantendrá más tiempo</strong> por los dispositivos M2M antiguos (alarmas, contadores). Las fechas concretas dependen de cada operador.</li>
+<li>El <strong>5G SA</strong> está en despliegue comercial y, con él, los primeros servicios de <em><strong>network slicing</strong></em>.</li>
+<li>El 3GPP trabaja en <strong>5G-Advanced</strong> (Release 18 y siguientes) y en las primeras especificaciones de <strong>6G</strong> (Release 20–21), con despliegues previstos hacia 2030.</li>
+</ul>
+
+  </div>
+</article>

@@ -1,0 +1,720 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T10</div>
+    <h1 class="tema-cabecera__titulo">La red Internet y conceptos básicos de servicios en red: correo electrónico, resolución de nombres, acceso remoto, transferencia de ficheros, servicios web, etc.</h1>
+    <div class="tema-cabecera__meta">Bloque 1 · Redes, comunicaciones, internet · Bolsa DonostiaTIK 2023 · Instalaciones y Comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-internet-organizacion">1. Internet: organización</a></li>
+<li><a href="#2-dns-resolucion-de-nombres">2. DNS: resolución de nombres</a></li>
+<li><a href="#3-correo-electronico">3. Correo electrónico</a></li>
+<li><a href="#4-acceso-remoto">4. Acceso remoto</a></li>
+<li><a href="#5-transferencia-y-comparticion-de-ficheros">5. Transferencia y compartición de ficheros</a></li>
+<li><a href="#6-servicios-web">6. Servicios web</a></li>
+<li><a href="#7-otros-servicios-de-infraestructura">7. Otros servicios de infraestructura</a></li>
+<li><a href="#8-lo-que-cayo-en-el-examen-de-2023">8. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#9-anclas-de-memoria">9. Anclas de memoria</a></li>
+<li><a href="#10-no-confundir">10. No confundir</a></li>
+<li><a href="#11-posibles-trampas-de-examen">11. Posibles trampas de examen</a></li>
+<li><a href="#12-posibles-preguntas-tipo-test">12. Posibles preguntas tipo test</a></li>
+<li><a href="#13-posibles-preguntas-cortas-con-esquema-de-respuesta">13. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#14-supuesto-practico">14. Supuesto práctico</a></li>
+<li><a href="#15-matriz-de-memorizacion">15. Matriz de memorización</a></li>
+<li><a href="#16-resumen-final-si-manana-fuera-el-examen">16. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#17-actualidad-datos-fechados">17. Actualidad — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — fronteras del tema</strong><br>Este tema trata <strong>cómo está organizada Internet</strong> y los <strong>servicios de aplicación</strong>: DNS, correo, acceso remoto, transferencia de ficheros, web, y otros servicios de infraestructura (DHCP, NTP, LDAP).<br><strong>T2</strong> → TCP/IP, direccionamiento y puertos en general. <strong>T7</strong> → configuración del correo en el móvil. <strong>T14/T15</strong> → cortafuegos y VPN. <strong>T17</strong> → filtrado web y antispam.</th>
+</tr>
+</table></div>
+<h2 id="1-internet-organizacion" class="tema-h2">1. Internet: organización</h2>
+<p><strong>Internet</strong> es una <strong>red de redes</strong>: miles de redes independientes (<strong>sistemas autónomos</strong>, AS) de operadores, empresas, universidades y administraciones, interconectadas con <strong>TCP/IP</strong> y que intercambian rutas con <strong>BGP</strong> (T4). Nació de <strong>ARPANET</strong> (1969) y adoptó TCP/IP el <strong>1 de enero de 1983</strong>.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Organismo</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ICANN</strong></td>
+<td>Coordina los identificadores únicos de Internet: nombres de dominio, direcciones IP y parámetros de protocolos</td>
+</tr>
+<tr>
+<td><strong>IANA</strong> (función gestionada por ICANN)</td>
+<td>Gestiona la <strong>zona raíz del DNS</strong>, asigna bloques de direcciones a los RIR y registra puertos y protocolos</td>
+</tr>
+<tr>
+<td><strong>RIR</strong> (registros regionales)</td>
+<td>Reparten las direcciones IP en su región: <strong>RIPE NCC</strong> (Europa y Oriente Medio), ARIN, LACNIC, APNIC, AFRINIC</td>
+</tr>
+<tr>
+<td><strong>IETF</strong></td>
+<td>Desarrolla los <strong>estándares</strong> de Internet, publicados como <strong>RFC</strong></td>
+</tr>
+<tr>
+<td><strong>W3C</strong></td>
+<td>Estándares de la <strong>web</strong> (HTML, CSS, accesibilidad WCAG)</td>
+</tr>
+<tr>
+<td><strong>Red.es</strong></td>
+<td>Gestiona el dominio <strong>.es</strong> en España</td>
+</tr>
+<tr>
+<td>PuntuEUS</td>
+<td>Gestiona el dominio <strong>.eus</strong></td>
+</tr>
+</tbody>
+</table></div>
+<ul class="tema-lista">
+<li><strong>ISP</strong> (proveedor de acceso): conecta a clientes con Internet.</li>
+<li><strong>Operadores de tránsito</strong> (<em>tier 1</em>): grandes redes globales.</li>
+<li><strong>IXP</strong> (punto neutro de intercambio): donde los operadores se interconectan directamente para intercambiar tráfico (<em>peering</em>); en España, <strong>ESpanix</strong> y <strong>DE-CIX Madrid</strong>; en Euskadi, <strong>Euskonix</strong>.</li>
+</ul>
+<h2 id="2-dns-resolucion-de-nombres" class="tema-h2">2. DNS: resolución de nombres</h2>
+<p>El <strong>DNS</strong> (<em>Domain Name System</em>) traduce <strong>nombres</strong> (<code>www.donostia.eus</code>) a <strong>direcciones IP</strong> (y otros datos). Es una <strong>base de datos distribuida y jerárquica</strong>.</p>
+<h3 id="jerarquía">Jerarquía</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Raíz</strong> («.»)</td>
+<td>13 identidades de servidores raíz (A a M), replicadas por <em>anycast</em> en cientos de ubicaciones</td>
+</tr>
+<tr>
+<td><strong>Dominio de primer nivel (TLD)</strong></td>
+<td>Genéricos (<strong>gTLD</strong>: .com, .org, .eus) y geográficos (<strong>ccTLD</strong>: .es, .fr)</td>
+</tr>
+<tr>
+<td><strong>Dominio de segundo nivel</strong></td>
+<td>donostia.eus</td>
+</tr>
+<tr>
+<td><strong>Subdominios</strong></td>
+<td><a href="http://www.donostia.eus">www.donostia.eus</a>, sede.donostia.eus</td>
+</tr>
+</tbody>
+</table></div>
+<p>Un <strong>FQDN</strong> (<em>Fully Qualified Domain Name</em>) es el nombre completo: <code>www.donostia.eus.</code></p>
+<h3 id="cómo-se-resuelve-un-nombre">Cómo se resuelve un nombre</h3>
+<ol type="1">
+<li>El equipo pregunta a su <strong>servidor DNS configurado</strong> (resolutor <strong>recursivo</strong>: el del operador, el corporativo, 8.8.8.8, 1.1.1.1).</li>
+<li>Si no lo tiene en <strong>caché</strong>, el resolutor pregunta de forma <strong>iterativa</strong>: a un servidor <strong>raíz</strong> (que le remite a los del TLD <strong>.eus</strong>), a estos (que le remiten a los <strong>autoritativos</strong> de donostia.eus) y a estos, que dan la respuesta.</li>
+<li>La respuesta se guarda en caché durante su <strong>TTL</strong>.</li>
+</ol>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar</strong><br><strong>Cliente → recursivo (hace todo el trabajo) → raíz → TLD → autoritativo.</strong> Pregunta <strong>recursiva</strong> del cliente; preguntas <strong>iterativas</strong> del resolutor.</th>
+</tr>
+</table></div>
+<h3 id="tipos-de-registro">Tipos de registro</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Registro</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A</strong></td>
+<td>Nombre → <strong>IPv4</strong></td>
+</tr>
+<tr>
+<td><strong>AAAA</strong></td>
+<td>Nombre → <strong>IPv6</strong></td>
+</tr>
+<tr>
+<td><strong>CNAME</strong></td>
+<td><strong>Alias</strong> de otro nombre</td>
+</tr>
+<tr>
+<td><strong>MX</strong></td>
+<td><strong>Servidor de correo</strong> del dominio (con prioridad)</td>
+</tr>
+<tr>
+<td><strong>NS</strong></td>
+<td>Servidores <strong>autoritativos</strong> de la zona</td>
+</tr>
+<tr>
+<td><strong>PTR</strong></td>
+<td><strong>Resolución inversa</strong>: IP → nombre (zona in-addr.arpa)</td>
+</tr>
+<tr>
+<td><strong>SOA</strong></td>
+<td>Datos de la zona (servidor principal, número de serie, tiempos)</td>
+</tr>
+<tr>
+<td><strong>TXT</strong></td>
+<td>Texto libre: <strong>SPF</strong>, <strong>DKIM</strong>, <strong>DMARC</strong>, verificaciones</td>
+</tr>
+<tr>
+<td><strong>SRV</strong></td>
+<td>Servicios (p. ej., <code>_sip._tcp</code>, <code>_ldap._tcp</code> para Active Directory)</td>
+</tr>
+<tr>
+<td>CAA</td>
+<td>Qué autoridades pueden emitir certificados para el dominio</td>
+</tr>
+</tbody>
+</table></div>
+<ul class="tema-lista">
+<li>El DNS usa <strong>UDP 53</strong> para las consultas y <strong>TCP 53</strong> para las <strong>transferencias de zona</strong> (entre servidor primario y secundarios) y las respuestas grandes.</li>
+<li><strong>DNSSEC</strong>: firma digitalmente las respuestas para evitar que se falsifiquen (<em>DNS spoofing</em>, envenenamiento de caché).</li>
+<li><strong>DoH / DoT</strong>: consultas DNS cifradas por HTTPS (443) o TLS (853): más privacidad, pero dificultan el filtrado corporativo.</li>
+<li>Comandos: <strong><code>nslookup</code></strong>, <strong><code>dig</code></strong>, <code>ipconfig /flushdns</code> (vaciar la caché local) y el fichero <strong>hosts</strong> (resolución local que tiene prioridad).</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br>El DNS <strong>no traduce direcciones MAC</strong> (eso lo hace ARP en la red local) ni la <strong>URL completa</strong>: resuelve el <strong>nombre del servidor</strong>. La ruta (<code>/tramites/padron</code>) la interpreta después el servidor web.</th>
+</tr>
+</table></div>
+<h2 id="3-correo-electronico" class="tema-h2">3. Correo electrónico</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Componente</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MUA</strong> (<em>Mail User Agent</em>)</td>
+<td>El <strong>cliente</strong> de correo (Outlook, Thunderbird, la app del móvil, el <em>webmail</em>)</td>
+</tr>
+<tr>
+<td><strong>MTA</strong> (<em>Mail Transfer Agent</em>)</td>
+<td>El <strong>servidor</strong> que envía y encamina el correo entre dominios (Exchange, Postfix, los de Microsoft 365 o Google)</td>
+</tr>
+<tr>
+<td><strong>MDA</strong> (<em>Mail Delivery Agent</em>)</td>
+<td>Entrega el mensaje en el buzón del destinatario</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Recorrido</strong>: el MUA envía por <strong>SMTP</strong> (envío autenticado por <strong>587</strong>) a su MTA → el MTA consulta el registro <strong>MX</strong> del dominio de destino → entrega por <strong>SMTP (25)</strong> al MTA de destino → el destinatario lee con <strong>IMAP</strong>, POP3, <strong>ActiveSync</strong> o webmail (T7).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Protocolo</th>
+<th>Puerto</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SMTP</strong></td>
+<td><strong>25</strong> (entre servidores) · <strong>587</strong> (envío de clientes con STARTTLS) · 465 (SMTPS)</td>
+<td>Envío</td>
+</tr>
+<tr>
+<td><strong>IMAP</strong></td>
+<td>143 · <strong>993</strong> (TLS)</td>
+<td>Lectura sincronizada</td>
+</tr>
+<tr>
+<td><strong>POP3</strong></td>
+<td>110 · <strong>995</strong> (TLS)</td>
+<td>Descarga</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="autenticación-del-correo-lucha-contra-la-suplantación">Autenticación del correo (lucha contra la suplantación)</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Mecanismo</th>
+<th>Qué hace</th>
+<th>Dónde se publica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SPF</strong></td>
+<td>Lista de <strong>servidores autorizados</strong> a enviar correo del dominio</td>
+<td>Registro TXT del dominio</td>
+</tr>
+<tr>
+<td><strong>DKIM</strong></td>
+<td><strong>Firma digital</strong> de los mensajes con la clave privada del dominio</td>
+<td>Clave pública en TXT</td>
+</tr>
+<tr>
+<td><strong>DMARC</strong></td>
+<td><strong>Política</strong> si fallan SPF/DKIM (<em>none</em>, <em>quarantine</em>, <em>reject</em>) e <strong>informes</strong></td>
+<td>TXT en <code>_dmarc.dominio</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Con los tres, a un atacante le cuesta mucho más <strong>suplantar</strong> el dominio del Ayuntamiento en correos de phishing. Además: <strong>antispam</strong> y <strong>antimalware</strong> en la pasarela de correo (T17), cifrado TLS entre servidores y <strong>S/MIME</strong> o PGP para cifrar y firmar mensajes de extremo a extremo.</p>
+<h2 id="4-acceso-remoto" class="tema-h2">4. Acceso remoto</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Servicio</th>
+<th>Puerto</th>
+<th>Descripción</th>
+<th>Seguridad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SSH</strong></td>
+<td><strong>TCP 22</strong></td>
+<td>Línea de comandos remota <strong>cifrada</strong>; también <strong>SFTP/SCP</strong> y túneles</td>
+<td>✅ Autenticación por contraseña o <strong>claves</strong></td>
+</tr>
+<tr>
+<td>Telnet</td>
+<td>TCP 23</td>
+<td>Línea de comandos remota <strong>en claro</strong></td>
+<td>❌ Obsoleto: lo sustituyó SSH</td>
+</tr>
+<tr>
+<td><strong>RDP</strong> (Escritorio remoto de Windows)</td>
+<td><strong>TCP/UDP 3389</strong></td>
+<td>Escritorio gráfico de un equipo Windows</td>
+<td>⚠️ Nunca expuesto a Internet: solo por <strong>VPN</strong> o pasarela RD Gateway, con NLA y MFA</td>
+</tr>
+<tr>
+<td><strong>VNC</strong> (TightVNC, UltraVNC, RealVNC)</td>
+<td>TCP <strong>5900</strong></td>
+<td>Escritorio gráfico multiplataforma (servidor + visor)</td>
+<td>⚠️ Cifrado débil en muchas versiones: usar por VPN o túnel SSH</td>
+</tr>
+<tr>
+<td><strong>Asistencia remota de Windows / Quick Assist</strong></td>
+<td>—</td>
+<td>Ayuda remota incluida en Windows, con invitación del usuario</td>
+<td>✅ Para soporte puntual</td>
+</tr>
+<tr>
+<td><strong>TeamViewer, AnyDesk, Splashtop, ConnectWise ScreenConnect</strong></td>
+<td>Por Internet (salen a sus servidores)</td>
+<td>Soporte remoto <strong>atendido</strong> (con ID y aceptación del usuario) o <strong>desatendido</strong></td>
+<td>⚠️ Las versiones gratuitas son para uso personal; muy usadas por estafadores</td>
+</tr>
+<tr>
+<td>Herramientas corporativas</td>
+<td>Integradas con el inventario o el MDM</td>
+<td><strong>Microsoft Intune Remote Help</strong>, SCCM, GLPI, herramientas de los propios CAU</td>
+<td>✅ Con registro y control de acceso</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Examen 2023, pregunta 8</strong>: para configurar remotamente un <strong>switch</strong> se usa <strong>SSH, puerto 22</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>Seguridad del acceso remoto</strong><br>El <strong>RDP expuesto a Internet</strong> es una de las principales vías de entrada del <strong>ransomware</strong>. Regla: acceso remoto <strong>solo a través de VPN</strong> o soluciones corporativas con <strong>MFA</strong>, registro de las sesiones y <strong>mínimo privilegio</strong> (T15).</th>
+</tr>
+</table></div>
+<h2 id="5-transferencia-y-comparticion-de-ficheros" class="tema-h2">5. Transferencia y compartición de ficheros</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Protocolo</th>
+<th>Puerto</th>
+<th>Características</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FTP</strong></td>
+<td><strong>TCP 21 (control) y 20 (datos, modo activo)</strong></td>
+<td>Credenciales y datos <strong>en claro</strong>. <strong>Modo activo</strong> (el servidor abre la conexión de datos hacia el cliente) y <strong>pasivo</strong> (el cliente la abre: mejor con NAT y cortafuegos)</td>
+</tr>
+<tr>
+<td><strong>FTPS</strong></td>
+<td>990 o 21 con TLS explícito</td>
+<td>FTP <strong>con TLS</strong></td>
+</tr>
+<tr>
+<td><strong>SFTP</strong></td>
+<td><strong>TCP 22</strong></td>
+<td>Transferencia sobre <strong>SSH</strong> (no es FTP, es otro protocolo)</td>
+</tr>
+<tr>
+<td>SCP</td>
+<td>TCP 22</td>
+<td>Copia de ficheros sobre SSH</td>
+</tr>
+<tr>
+<td><strong>TFTP</strong></td>
+<td><strong>UDP 69</strong></td>
+<td>Trivial: sin autenticación; se usa para <strong>firmware y configuraciones de equipos de red</strong>, <strong>arranque por red (PXE)</strong> y aprovisionamiento de teléfonos IP</td>
+</tr>
+<tr>
+<td><strong>SMB/CIFS</strong></td>
+<td><strong>TCP 445</strong></td>
+<td><strong>Carpetas compartidas de Windows</strong> (y Samba en Linux); SMBv1 es inseguro y debe desactivarse</td>
+</tr>
+<tr>
+<td><strong>NFS</strong></td>
+<td>TCP 2049</td>
+<td>Compartición de ficheros en Unix/Linux y almacenamiento NAS</td>
+</tr>
+<tr>
+<td><strong>WebDAV</strong></td>
+<td>80/443</td>
+<td>Ficheros sobre HTTP (SharePoint, Nextcloud)</td>
+</tr>
+<tr>
+<td>HTTPS (nube)</td>
+<td>443</td>
+<td>OneDrive, SharePoint, Google Drive</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br><strong>SFTP ≠ FTPS.</strong> SFTP es SSH (puerto 22); FTPS es FTP con TLS. Y <strong>TFTP</strong> no tiene autenticación: nunca para datos sensibles.</th>
+</tr>
+</table></div>
+<h2 id="6-servicios-web" class="tema-h2">6. Servicios web</h2>
+<p><strong>HTTP</strong> (<em>HyperText Transfer Protocol</em>) es el protocolo de la web: <strong>petición del cliente (navegador) → respuesta del servidor</strong>, sin estado (las <strong>cookies</strong> y las sesiones mantienen el estado).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Método</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GET</strong></td>
+<td>Obtener un recurso</td>
+</tr>
+<tr>
+<td><strong>POST</strong></td>
+<td>Enviar datos (formularios)</td>
+</tr>
+<tr>
+<td>PUT / PATCH</td>
+<td>Crear o modificar un recurso (APIs)</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>Borrar</td>
+</tr>
+<tr>
+<td>HEAD / OPTIONS</td>
+<td>Cabeceras / métodos permitidos</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Código</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1xx</strong></td>
+<td>Informativo</td>
+</tr>
+<tr>
+<td><strong>2xx</strong></td>
+<td>Éxito: <strong>200 OK</strong>, 201 Created</td>
+</tr>
+<tr>
+<td><strong>3xx</strong></td>
+<td>Redirección: <strong>301</strong> permanente, 302 temporal, 304 no modificado</td>
+</tr>
+<tr>
+<td><strong>4xx</strong></td>
+<td><strong>Error del cliente</strong>: 400 petición incorrecta, <strong>401 no autenticado</strong>, <strong>403 prohibido</strong>, <strong>404 no encontrado</strong></td>
+</tr>
+<tr>
+<td><strong>5xx</strong></td>
+<td><strong>Error del servidor</strong>: <strong>500</strong> error interno, 502 <em>bad gateway</em>, <strong>503 servicio no disponible</strong>, 504 <em>gateway timeout</em></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>HTTPS</strong> = HTTP sobre <strong>TLS</strong> (puerto <strong>443</strong>): cifra la comunicación y <strong>autentica al servidor</strong> con un <strong>certificado digital</strong> emitido por una <strong>autoridad de certificación (CA)</strong>. Versiones: TLS 1.2 y <strong>TLS 1.3</strong> (las anteriores, SSL y TLS 1.0/1.1, están obsoletas).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Versión de HTTP</th>
+<th>Novedad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HTTP/1.1</td>
+<td>Conexiones persistentes</td>
+</tr>
+<tr>
+<td><strong>HTTP/2</strong></td>
+<td><strong>Multiplexación</strong> de varias peticiones en una conexión, compresión de cabeceras</td>
+</tr>
+<tr>
+<td><strong>HTTP/3</strong></td>
+<td>Sobre <strong>QUIC</strong> (<strong>UDP 443</strong>): menos latencia y sin bloqueo de cabecera de línea</td>
+</tr>
+</tbody>
+</table></div>
+<p>Elementos de la infraestructura web:</p>
+<ul class="tema-lista">
+<li><strong>Servidor web</strong>: Apache, <strong>Nginx</strong>, IIS.</li>
+<li><strong>Proxy (directo)</strong>: intermediario de los usuarios para salir a Internet (filtrado, caché, registro; T17).</li>
+<li><strong>Proxy inverso</strong>: intermediario delante de los servidores (balanceo, terminación TLS, WAF).</li>
+<li><strong>CDN</strong>: red de servidores que entrega el contenido desde el punto más cercano al usuario.</li>
+<li><strong>WAF</strong> (<em>Web Application Firewall</em>): protege las aplicaciones web (inyección SQL, XSS).</li>
+</ul>
+<h2 id="7-otros-servicios-de-infraestructura" class="tema-h2">7. Otros servicios de infraestructura</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Servicio</th>
+<th>Puerto</th>
+<th>Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DHCP</strong></td>
+<td>UDP 67/68</td>
+<td>Configuración IP automática (T2)</td>
+</tr>
+<tr>
+<td><strong>NTP</strong></td>
+<td><strong>UDP 123</strong></td>
+<td><strong>Sincronización horaria</strong>: imprescindible para los logs, Kerberos (Active Directory tolera ≈ 5 min de diferencia) y los certificados</td>
+</tr>
+<tr>
+<td><strong>LDAP / LDAPS</strong></td>
+<td>389 / <strong>636</strong></td>
+<td>Directorio de usuarios (Active Directory, OpenLDAP)</td>
+</tr>
+<tr>
+<td>Kerberos</td>
+<td>88</td>
+<td>Autenticación en Active Directory</td>
+</tr>
+<tr>
+<td><strong>SNMP</strong></td>
+<td>UDP 161/162</td>
+<td>Monitorización (T19)</td>
+</tr>
+<tr>
+<td><strong>Syslog</strong></td>
+<td>UDP 514</td>
+<td>Envío centralizado de logs</td>
+</tr>
+<tr>
+<td>RADIUS</td>
+<td>UDP 1812/1813</td>
+<td>Autenticación de red (wifi, VPN, 802.1X)</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="servicios-multimedia">Servicios multimedia</h3>
+<p>La <strong>cartelería digital</strong> (el <strong>player de TV</strong> del caso de 2023) es un equipo que se conecta a una <strong>plataforma de gestión de contenidos</strong> (normalmente por HTTPS) para descargar y reproducir la programación. Necesita conectividad (en el caso, VLAN de <strong>Internet libre</strong>), DNS y <strong>hora correcta</strong>.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Examen 2023, pregunta 32 (reserva)</strong>: <strong>Full HD</strong> = <strong>1920 × 1080</strong> píxeles. HD (720p) = 1280 × 720; <strong>4K UHD</strong> = 3840 × 2160; 8K = 7680 × 4320.</th>
+</tr>
+</table></div>
+<h2 id="8-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">8. Lo que cayó en el examen de 2023</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Contenido</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test 8</td>
+<td>Puerto para gestionar un switch por SSH</td>
+<td><strong>22</strong></td>
+</tr>
+<tr>
+<td>Test 32 (reserva)</td>
+<td>Full HD</td>
+<td><strong>1920 × 1080</strong></td>
+</tr>
+<tr>
+<td>Corta 2</td>
+<td>Regla del cortafuegos hacia <strong>8.8.8.8 puerto 53</strong></td>
+<td>Es el <strong>DNS público de Google</strong> (consultas DNS)</td>
+</tr>
+<tr>
+<td>Caso 7</td>
+<td>Player sin conectividad con su plataforma</td>
+<td>Conectividad, DNS, puertos 443 y hora (T4, T19)</td>
+</tr>
+<tr>
+<td>Caso 4</td>
+<td>Acceso remoto del mantenedor del PLC</td>
+<td>VPN o NAT, nunca exposición directa (T14, T15)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="9-anclas-de-memoria" class="tema-h2">9. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>ICANN/IANA coordinan · RIPE NCC reparte IP en Europa · IETF publica RFC · W3C la web.</strong></li>
+<li><strong>DNS: raíz → TLD → autoritativo; recursivo + caché + TTL; UDP 53 (TCP en transferencias).</strong></li>
+<li><strong>A IPv4 · AAAA IPv6 · CNAME alias · MX correo · PTR inversa · TXT SPF/DKIM/DMARC.</strong></li>
+<li><strong>SMTP 25/587 · IMAP 993 · POP3 995.</strong></li>
+<li><strong>SSH 22 · Telnet 23 · RDP 3389 · VNC 5900.</strong></li>
+<li><strong>FTP 20/21 · SFTP 22 · TFTP UDP 69 · SMB 445.</strong></li>
+<li><strong>HTTP 80 · HTTPS 443 (TLS 1.3) · HTTP/3 = QUIC sobre UDP.</strong></li>
+<li><strong>4xx = culpa del cliente · 5xx = culpa del servidor.</strong></li>
+<li><strong>NTP 123 · LDAP 389/636 · Syslog 514.</strong></li>
+</ul>
+<h2 id="10-no-confundir" class="tema-h2">10. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Esto</th>
+<th>No es esto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SFTP</strong> (SSH)</td>
+<td><strong>FTPS</strong> (FTP + TLS)</td>
+</tr>
+<tr>
+<td><strong>Resolutor recursivo</strong></td>
+<td><strong>Servidor autoritativo</strong></td>
+</tr>
+<tr>
+<td><strong>SPF</strong> (quién puede enviar)</td>
+<td><strong>DKIM</strong> (firma) y <strong>DMARC</strong> (política)</td>
+</tr>
+<tr>
+<td><strong>401</strong> (no autenticado)</td>
+<td><strong>403</strong> (autenticado, pero sin permiso)</td>
+</tr>
+<tr>
+<td><strong>Proxy</strong> (de los usuarios)</td>
+<td><strong>Proxy inverso</strong> (de los servidores)</td>
+</tr>
+<tr>
+<td><strong>RDP</strong> (Windows)</td>
+<td><strong>VNC</strong> (multiplataforma)</td>
+</tr>
+<tr>
+<td><strong>ICANN</strong> (coordina)</td>
+<td><strong>IETF</strong> (estándares)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="11-posibles-trampas-de-examen" class="tema-h2">11. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li>Pensar que el DNS traduce MAC a IP.</li>
+<li>Decir que DNS solo usa UDP.</li>
+<li>Confundir SFTP con FTPS o creer que TFTP tiene autenticación.</li>
+<li>Exponer RDP a Internet «con una contraseña fuerte».</li>
+<li>Confundir el registro MX con el A del servidor web.</li>
+<li>Pensar que HTTPS garantiza que la web es legítima (solo cifra y autentica el dominio: una web de phishing también puede tener HTTPS).</li>
+</ul>
+<h2 id="12-posibles-preguntas-tipo-test" class="tema-h2">12. Posibles preguntas tipo test</h2>
+<ol type="1">
+<li>¿Qué registro DNS indica el servidor de correo de un dominio? → <strong>MX</strong>.</li>
+<li>¿Qué organismo regional asigna direcciones IP en Europa? → <strong>RIPE NCC</strong>.</li>
+<li>¿Qué puerto usa RDP? → <strong>3389</strong>.</li>
+<li>¿Qué protocolo sincroniza la hora de los equipos? → <strong>NTP (UDP 123)</strong>.</li>
+<li>¿Qué código HTTP indica «recurso no encontrado»? → <strong>404</strong>.</li>
+</ol>
+<h2 id="13-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">13. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. Funcionamiento del DNS (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>Qué es (nombres → IP) y jerarquía (raíz, TLD, autoritativos).</li>
+<li>Resolución recursiva e iterativa, caché y TTL.</li>
+<li>Tipos de registro (A, AAAA, CNAME, MX, NS, PTR, TXT).</li>
+<li>Puertos y seguridad (DNSSEC, DoH/DoT).</li>
+</ul>
+<p><strong>2. Soluciones de acceso remoto a equipos, con pros y contras (2 puntos; caso de la OPE 2024).</strong></p>
+<ul class="tema-lista">
+<li>Asistencia remota de Windows / Quick Assist: integrada, básica, requiere invitación.</li>
+<li>RDP: escritorio completo; solo por VPN y con MFA.</li>
+<li>VNC: multiplataforma; cifrado débil, mejor tunelado.</li>
+<li>TeamViewer/AnyDesk: fácil, atendido o desatendido; licencias corporativas y riesgo de fraude.</li>
+<li>SSH para equipos de red y servidores Linux.</li>
+</ul>
+<h2 id="14-supuesto-practico" class="tema-h2">14. Supuesto práctico</h2>
+<p><strong>Enunciado:</strong> el player de cartelería de la oficina muestra «sin conexión con el servidor» aunque tiene luz de red.</p>
+<p><strong>Esquema de respuesta:</strong></p>
+<ol type="1">
+<li><strong>Red local</strong>: ¿tiene IP de la VLAN correcta (Internet libre, 192.168.122.0/23)? Si tiene 169.254.x.x, falla el DHCP (VLAN del puerto). Localizar el puerto por MAC o LLDP (T4).</li>
+<li><strong>Salida</strong>: <code>ping</code> a la puerta de enlace y a una IP externa.</li>
+<li><strong>DNS</strong>: ¿resuelve el nombre de la plataforma? (<code>nslookup</code>). Sin DNS no conecta aunque haya red.</li>
+<li><strong>Puertos y filtrado</strong>: la plataforma suele usar <strong>HTTPS 443</strong>; comprobar que el cortafuegos o el filtrado web de la VLAN de Internet libre no la bloquean.</li>
+<li><strong>Hora</strong>: si el reloj del player está desfasado, el <strong>certificado TLS</strong> puede rechazarse; revisar NTP.</li>
+<li><strong>Plataforma</strong>: estado del servicio del proveedor y licencia del player; <strong>escalar al proveedor</strong> de cartelería si la red está bien. Registrar la incidencia.</li>
+</ol>
+<h2 id="15-matriz-de-memorizacion" class="tema-h2">15. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Dato clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gobernanza</td>
+<td>ICANN · IANA · RIPE NCC · IETF (RFC) · W3C · Red.es (.es)</td>
+</tr>
+<tr>
+<td>DNS</td>
+<td>UDP/TCP 53 · raíz-TLD-autoritativo · A, AAAA, CNAME, MX, NS, PTR, SOA, TXT, SRV</td>
+</tr>
+<tr>
+<td>Correo</td>
+<td>SMTP 25/587/465 · IMAP 143/993 · POP3 110/995 · SPF, DKIM, DMARC</td>
+</tr>
+<tr>
+<td>Acceso remoto</td>
+<td>SSH 22 · Telnet 23 · RDP 3389 · VNC 5900</td>
+</tr>
+<tr>
+<td>Ficheros</td>
+<td>FTP 20/21 · SFTP 22 · FTPS 990 · TFTP 69 · SMB 445 · NFS 2049</td>
+</tr>
+<tr>
+<td>Web</td>
+<td>HTTP 80 · HTTPS 443 · HTTP/3 QUIC · códigos 2xx/3xx/4xx/5xx</td>
+</tr>
+<tr>
+<td>Otros</td>
+<td>NTP 123 · LDAP 389/636 · Syslog 514 · RADIUS 1812</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="16-resumen-final-si-manana-fuera-el-examen" class="tema-h2">16. Resumen final: si mañana fuera el examen</h2>
+<p>Internet es una <strong>red de redes</strong> (sistemas autónomos unidos con BGP) coordinada por <strong>ICANN/IANA</strong>, con las IP repartidas por los <strong>RIR</strong> (<strong>RIPE NCC</strong> en Europa) y estándares del <strong>IETF (RFC)</strong>. El <strong>DNS</strong> resuelve nombres de forma jerárquica (<strong>raíz → TLD → autoritativo</strong>) con <strong>caché</strong> y registros <strong>A, AAAA, CNAME, MX, PTR, TXT</strong>, por <strong>UDP/TCP 53</strong>. El <strong>correo</strong> se envía por <strong>SMTP</strong> (25/587), se lee por <strong>IMAP</strong>/POP3 y se protege con <strong>SPF, DKIM y DMARC</strong>. El acceso remoto seguro es <strong>SSH (22)</strong>; <strong>RDP (3389)</strong> y <strong>VNC</strong>, solo por <strong>VPN</strong>. Para ficheros: <strong>SFTP</strong> (22), <strong>SMB</strong> (445) y <strong>TFTP</strong> (69, sin autenticación) para equipos de red. La web usa <strong>HTTP/HTTPS (80/443, TLS 1.3)</strong> y <strong>HTTP/3 sobre QUIC</strong>.</p>
+<h2 id="17-actualidad-datos-fechados" class="tema-h2">17. Actualidad — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong></th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li>Google y Yahoo exigen desde 2024 <strong>SPF, DKIM y DMARC</strong> a quienes envían correo masivo; Microsoft aplicó requisitos similares en 2025 para Outlook.com.</li>
+<li>La duración máxima de los <strong>certificados TLS</strong> se va a reducir progresivamente (acuerdo del CA/Browser Forum de 2025): de 398 días a <strong>200 días desde marzo de 2026</strong>, 100 días en 2027 y <strong>47 días en 2029</strong>. La renovación tendrá que automatizarse (ACME).</li>
+<li><strong>HTTP/3</strong> ya lo usan la mayoría de los grandes sitios y navegadores.</li>
+</ul>
+
+  </div>
+</article>

@@ -1,0 +1,385 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T7</div>
+    <h1 class="tema-cabecera__titulo">Sistemas operativos para dispositivos móviles. Configuración de distintos tipos de comunicaciones. Sincronización de correo electrónico.</h1>
+    <div class="tema-cabecera__meta">Bloque 1 · Redes, comunicaciones, internet · Bolsa DonostiaTIK 2023 · Instalaciones y Comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-sistemas-operativos-moviles">1. Sistemas operativos móviles</a></li>
+<li><a href="#2-configuracion-de-las-comunicaciones">2. Configuración de las comunicaciones</a></li>
+<li><a href="#3-sincronizacion-del-correo-electronico">3. Sincronización del correo electrónico</a></li>
+<li><a href="#4-puesta-en-marcha-de-un-dispositivo-corporativo">4. Puesta en marcha de un dispositivo corporativo</a></li>
+<li><a href="#5-lo-que-cayo-en-el-examen-de-2023">5. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#6-anclas-de-memoria">6. Anclas de memoria</a></li>
+<li><a href="#7-no-confundir">7. No confundir</a></li>
+<li><a href="#8-posibles-trampas-de-examen">8. Posibles trampas de examen</a></li>
+<li><a href="#9-posibles-preguntas-tipo-test">9. Posibles preguntas tipo test</a></li>
+<li><a href="#10-posibles-preguntas-cortas-con-esquema-de-respuesta">10. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#11-supuesto-practico">11. Supuesto práctico</a></li>
+<li><a href="#12-matriz-de-memorizacion">12. Matriz de memorización</a></li>
+<li><a href="#13-resumen-final-si-manana-fuera-el-examen">13. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#14-actualidad-datos-fechados">14. Actualidad — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — fronteras del tema</strong><br>Este tema trata <strong>Android e iOS/iPadOS</strong> (arquitectura, versiones, seguridad), <strong>cómo se configuran</strong> las comunicaciones de un móvil (wifi, datos, APN, VPN, bluetooth, NFC, punto de acceso) y la <strong>sincronización del correo</strong> (Exchange ActiveSync, IMAP, SMTP).<br><strong>T6</strong> → la red móvil del operador. <strong>T16</strong> → <strong>MDM y MTD</strong>: gestión centralizada y seguridad de la flota (es la continuación natural de este tema). <strong>T10</strong> → protocolos de correo en el servidor.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>En el examen de 2023 este tema no apareció en el test</strong>, pero sí en el <strong>caso práctico</strong> a través de las <strong>tabletas Android de registro</strong> conectadas por wifi y gestionadas con MDM (pregunta 5). Lo esencial aquí es saber configurar y preparar un dispositivo.</th>
+</tr>
+</table></div>
+<h2 id="1-sistemas-operativos-moviles" class="tema-h2">1. Sistemas operativos móviles</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th></th>
+<th><strong>Android</strong></th>
+<th><strong>iOS / iPadOS</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fabricante</td>
+<td><strong>Google</strong> (proyecto de código abierto <strong>AOSP</strong>)</td>
+<td><strong>Apple</strong></td>
+</tr>
+<tr>
+<td>Base</td>
+<td><strong>Núcleo Linux</strong> + máquina virtual ART</td>
+<td>Núcleo <strong>XNU</strong> (Darwin, Unix)</td>
+</tr>
+<tr>
+<td>Licencia</td>
+<td>Código abierto (AOSP) + servicios propietarios de Google (<strong>GMS</strong>: Play Store, Gmail, Maps)</td>
+<td>Cerrado</td>
+</tr>
+<tr>
+<td>Dispositivos</td>
+<td>Muchos fabricantes (Samsung, Xiaomi, Motorola, Google Pixel…)</td>
+<td>Solo Apple (iPhone, iPad)</td>
+</tr>
+<tr>
+<td>Tienda</td>
+<td><strong>Google Play</strong> (y tiendas alternativas, instalación manual de APK)</td>
+<td><strong>App Store</strong> (en la UE se permiten tiendas alternativas desde 2024 por la Ley de Mercados Digitales)</td>
+</tr>
+<tr>
+<td>Actualizaciones</td>
+<td>Dependen del <strong>fabricante</strong> y del modelo: <strong>fragmentación</strong></td>
+<td>Centralizadas por Apple durante muchos años</td>
+</tr>
+<tr>
+<td>Gestión empresarial</td>
+<td><strong>Android Enterprise</strong> (perfil de trabajo, dispositivo dedicado o totalmente gestionado); <strong>Samsung Knox</strong></td>
+<td><strong>Apple Business Manager</strong>, <strong>ADE</strong> (inscripción automática), modo <strong>supervisado</strong></td>
+</tr>
+<tr>
+<td>Formato de app</td>
+<td>APK / AAB</td>
+<td>IPA</td>
+</tr>
+</tbody>
+</table></div>
+<p>Otros sistemas: <strong>HarmonyOS</strong> (Huawei, sobre todo en China), y sistemas ya desaparecidos como Windows Phone, BlackBerry OS o Symbian.</p>
+<h3 id="arquitectura-de-android-de-abajo-arriba">Arquitectura de Android (de abajo arriba)</h3>
+<ol type="1">
+<li><strong>Núcleo Linux</strong>: controladores, gestión de memoria y energía, seguridad básica (usuarios y permisos de Linux: cada app es un usuario distinto).</li>
+<li><strong>HAL</strong> (<em>Hardware Abstraction Layer</em>): interfaz con el hardware (cámara, GPS, sensores).</li>
+<li><strong>Android Runtime (ART)</strong> y bibliotecas nativas.</li>
+<li><strong>Framework de Android</strong> (APIs para las apps).</li>
+<li><strong>Aplicaciones</strong>.</li>
+</ol>
+<h3 id="seguridad-de-los-sistemas-móviles">Seguridad de los sistemas móviles</h3>
+<ul class="tema-lista">
+<li><em><strong>Sandboxing</strong></em>: cada aplicación se ejecuta <strong>aislada</strong>, sin acceso a los datos de otras.</li>
+<li><strong>Permisos</strong> que el usuario concede en tiempo de ejecución (cámara, ubicación, contactos…).</li>
+<li><strong>Cifrado del almacenamiento</strong> activado por defecto en los sistemas actuales.</li>
+<li><strong>Arranque seguro</strong> (<em>Verified Boot</em> / <em>Secure Boot</em>) y chips de seguridad (<em>Secure Enclave</em> en Apple, <em>Titan M</em> en Pixel, <em>Knox Vault</em> en Samsung).</li>
+<li><strong>Bloqueo de pantalla</strong> con PIN o biometría (huella, rostro).</li>
+<li><strong>Actualizaciones de seguridad</strong> periódicas (los parches mensuales de Android).</li>
+<li>Riesgos: <strong>root</strong> (Android) y <em><strong>jailbreak</strong></em> (iOS) <strong>anulan</strong> gran parte de estas protecciones; las apps de origen desconocido, el phishing por SMS y las redes wifi públicas.</li>
+</ul>
+<h2 id="2-configuracion-de-las-comunicaciones" class="tema-h2">2. Configuración de las comunicaciones</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Comunicación</th>
+<th>Dónde se configura</th>
+<th>Datos que hay que conocer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Wifi</strong></td>
+<td>Ajustes → Conexiones/Wifi</td>
+<td><strong>SSID</strong>, seguridad (<strong>WPA2/WPA3-Personal</strong> con clave o <strong>Enterprise</strong>: método <strong>EAP</strong>, identidad y <strong>certificado CA</strong> para validar el servidor RADIUS); proxy; IP estática o DHCP; <strong>MAC aleatoria</strong> (privacidad)</td>
+</tr>
+<tr>
+<td><strong>Datos móviles</strong></td>
+<td>Ajustes → Red móvil</td>
+<td>SIM o eSIM, <strong>itinerancia</strong> sí/no, red preferida (5G/4G)</td>
+</tr>
+<tr>
+<td><strong>APN</strong></td>
+<td>Ajustes → Red móvil → APN</td>
+<td>Nombre del <strong>APN</strong> del operador o <strong>APN privado</strong> corporativo, usuario y contraseña si los hay</td>
+</tr>
+<tr>
+<td><strong>VPN</strong></td>
+<td>Ajustes → VPN (o app del fabricante del cortafuegos)</td>
+<td>Servidor, tipo (<strong>IPsec/IKEv2</strong>, <strong>SSL/TLS</strong> con app del fabricante, WireGuard), credenciales o certificado; <strong>VPN siempre activa</strong> o <strong>VPN por aplicación</strong></td>
+</tr>
+<tr>
+<td><strong>Bluetooth</strong></td>
+<td>Ajustes → Bluetooth</td>
+<td>Emparejamiento con PIN; desactivarlo si no se usa; perfiles (manos libres, audio)</td>
+</tr>
+<tr>
+<td><strong>NFC</strong></td>
+<td>Ajustes → Conexiones</td>
+<td>Pagos, lectura de DNIe y tarjetas, emparejamiento rápido</td>
+</tr>
+<tr>
+<td><strong>Punto de acceso / anclaje (<em>tethering</em>)</strong></td>
+<td>Ajustes → Zona wifi</td>
+<td>Compartir los datos móviles por wifi, USB o bluetooth (las políticas corporativas suelen prohibirlo)</td>
+</tr>
+<tr>
+<td><strong>GPS / ubicación</strong></td>
+<td>Ajustes → Ubicación</td>
+<td>Permisos por app</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>Configurar wifi Enterprise en una tableta</strong><br>Para un SSID <strong>WPA2/WPA3-Enterprise</strong> con <strong>EAP-TLS</strong> hay que instalar en la tableta el <strong>certificado del usuario o del dispositivo</strong> y el <strong>certificado de la CA</strong> que firma el certificado del servidor RADIUS. Hacerlo a mano en decenas de tabletas es inviable: por eso se <strong>despliega por perfil desde el MDM</strong> (T16).</th>
+</tr>
+</table></div>
+<h2 id="3-sincronizacion-del-correo-electronico" class="tema-h2">3. Sincronización del correo electrónico</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Protocolo</th>
+<th>Qué sincroniza</th>
+<th>Características</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Exchange ActiveSync (EAS)</strong></td>
+<td><strong>Correo, calendario, contactos, tareas</strong></td>
+<td>Protocolo de Microsoft sobre HTTPS; <strong>notificaciones <em>push</em></strong>; permite <strong>políticas</strong> (PIN obligatorio, cifrado) y <strong>borrado remoto</strong> del dispositivo</td>
+</tr>
+<tr>
+<td><strong>Microsoft 365 / Outlook móvil</strong></td>
+<td>Todo lo anterior</td>
+<td>Con autenticación moderna (OAuth 2.0, MFA), acceso condicional e <strong>Intune</strong></td>
+</tr>
+<tr>
+<td><strong>IMAP</strong> (143, IMAPS <strong>993</strong>)</td>
+<td><strong>Correo</strong>: los mensajes <strong>se quedan en el servidor</strong> y se sincronizan carpetas y estados (leído, enviado)</td>
+<td>El estándar para varios dispositivos</td>
+</tr>
+<tr>
+<td><strong>POP3</strong> (110, POP3S <strong>995</strong>)</td>
+<td><strong>Descarga</strong> el correo al dispositivo (y normalmente lo borra del servidor)</td>
+<td><strong>Desaconsejado con varios dispositivos</strong></td>
+</tr>
+<tr>
+<td><strong>SMTP</strong> (25, <strong>587</strong> con STARTTLS, 465 SMTPS)</td>
+<td><strong>Envío</strong> de correo</td>
+<td>Requiere autenticación</td>
+</tr>
+<tr>
+<td><strong>CalDAV / CardDAV</strong></td>
+<td>Calendario / contactos</td>
+<td>Estándares abiertos (iCloud, Nextcloud, Google)</td>
+</tr>
+<tr>
+<td><strong>Google Workspace</strong></td>
+<td>Gmail, calendario, contactos</td>
+<td>Por la app de Gmail o por cuenta de Google</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar</strong><br><strong>IMAP = el correo vive en el servidor (sincroniza) · POP3 = el correo se baja al dispositivo · SMTP = solo envía · ActiveSync = correo + calendario + contactos + políticas + borrado remoto.</strong></th>
+</tr>
+</table></div>
+<p><strong>Configurar una cuenta de correo corporativa</strong> en el móvil: dirección y contraseña (o inicio de sesión con <strong>autenticación moderna</strong> y <strong>MFA</strong>); si no se autodetecta, el <strong>servidor</strong> (p. ej., outlook.office365.com o el servidor de Exchange), el dominio y el usuario; aceptar las <strong>políticas de seguridad</strong> que pida el servidor (PIN, cifrado). En entornos gestionados, la cuenta llega <strong>preconfigurada por el MDM</strong> y con <strong>contenedor</strong> separado del correo personal (T16).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br><strong>POP3 no sincroniza</strong>: si un usuario lee el correo en el móvil por POP3, puede que luego <strong>no lo encuentre en el PC</strong>. La solución es <strong>IMAP o ActiveSync</strong>.</th>
+</tr>
+</table></div>
+<h2 id="4-puesta-en-marcha-de-un-dispositivo-corporativo" class="tema-h2">4. Puesta en marcha de un dispositivo corporativo</h2>
+<p>Pasos típicos para entregar un móvil o una tableta corporativa (en una organización con MDM, la mayoría son <strong>automáticos</strong>):</p>
+<ol type="1">
+<li><strong>Inventario</strong>: registrar IMEI, número de serie, usuario y línea (SIM/eSIM).</li>
+<li><strong>Inscripción en el MDM</strong>: <strong>Android Enterprise</strong> (código QR, <em>zero-touch</em> o Knox Mobile Enrollment) o <strong>Apple ADE</strong> a través de Apple Business Manager.</li>
+<li><strong>Perfil</strong> según el uso: <strong>totalmente gestionado</strong> (corporativo), <strong>perfil de trabajo</strong> (BYOD) o <strong>dispositivo dedicado / modo quiosco</strong> (una sola app, como la <strong>tableta de firma del registro</strong>).</li>
+<li><strong>Configuración de comunicaciones por perfil</strong>: wifi corporativa con certificado, VPN, APN, correo.</li>
+<li><strong>Aplicaciones</strong> corporativas desde la tienda gestionada.</li>
+<li><strong>Políticas de seguridad</strong>: PIN, cifrado, bloqueo de cámara o USB si procede, actualizaciones.</li>
+<li><strong>Pruebas</strong> con el usuario y <strong>entrega</strong> con las normas de uso firmadas.</li>
+</ol>
+<h2 id="5-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">5. Lo que cayó en el examen de 2023</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Contenido</th>
+<th>Relación con este tema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Caso 5</td>
+<td>Aprovisionar <strong>tabletas Android de registro</strong> por wifi con MDM</td>
+<td>Android Enterprise en <strong>modo dedicado (quiosco)</strong>, wifi del SSID de registro con certificado, app de firma (detalle en T16)</td>
+</tr>
+<tr>
+<td>Test 25</td>
+<td>Funciones de un MDM</td>
+<td>Ver T16</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="6-anclas-de-memoria" class="tema-h2">6. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>Android = núcleo Linux, AOSP + GMS, fragmentación · iOS = Apple, XNU, cerrado.</strong></li>
+<li><strong>Android Enterprise: perfil de trabajo, totalmente gestionado, dedicado.</strong> <strong>Apple: ABM + ADE + supervisado.</strong></li>
+<li><strong>Sandbox + permisos + cifrado + arranque seguro.</strong> <strong>Root/jailbreak = adiós a la seguridad.</strong></li>
+<li><strong>IMAP sincroniza · POP3 descarga · SMTP envía · EAS = todo + políticas + borrado remoto.</strong></li>
+<li><strong>IMAPS 993 · POP3S 995 · SMTP envío 587.</strong></li>
+</ul>
+<h2 id="7-no-confundir" class="tema-h2">7. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Esto</th>
+<th>No es esto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AOSP</strong> (código abierto)</td>
+<td><strong>GMS</strong> (servicios propietarios de Google)</td>
+</tr>
+<tr>
+<td><strong>Root</strong> (Android)</td>
+<td><strong>Jailbreak</strong> (iOS)</td>
+</tr>
+<tr>
+<td><strong>IMAP</strong> (sincroniza)</td>
+<td><strong>POP3</strong> (descarga)</td>
+</tr>
+<tr>
+<td><strong>ActiveSync</strong> (Microsoft, push)</td>
+<td><strong>CalDAV/CardDAV</strong> (estándares abiertos)</td>
+</tr>
+<tr>
+<td><strong>Perfil de trabajo</strong> (BYOD)</td>
+<td><strong>Dispositivo dedicado</strong> (quiosco)</td>
+</tr>
+<tr>
+<td><strong>APN</strong> (punto de acceso del operador)</td>
+<td><strong>Punto de acceso wifi</strong> (AP)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="8-posibles-trampas-de-examen" class="tema-h2">8. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li>Pensar que Android es un sistema cerrado de Google (su base, AOSP, es abierta).</li>
+<li>Creer que POP3 mantiene sincronizados varios dispositivos.</li>
+<li>Pensar que ocultar el SSID o usar MAC fija mejora la seguridad del móvil.</li>
+<li>Confundir el APN con el SSID.</li>
+<li>Olvidar el certificado de la CA al configurar wifi Enterprise.</li>
+</ul>
+<h2 id="9-posibles-preguntas-tipo-test" class="tema-h2">9. Posibles preguntas tipo test</h2>
+<ol type="1">
+<li>¿En qué núcleo se basa Android? → <strong>Linux</strong>.</li>
+<li>¿Qué protocolo sincroniza correo, calendario y contactos con políticas y borrado remoto? → <strong>Exchange ActiveSync</strong>.</li>
+<li>¿Qué puerto usa IMAP sobre TLS? → <strong>993</strong>.</li>
+<li>¿Cómo se llama el programa de Apple para inscribir dispositivos automáticamente? → <strong>ADE (Apple Business Manager)</strong>.</li>
+<li>¿Qué modo de Android Enterprise se usa para una tableta de una sola app? → <strong>Dispositivo dedicado (quiosco)</strong>.</li>
+</ol>
+<h2 id="10-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">10. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. Diferencias entre IMAP, POP3 y ActiveSync para el correo en el móvil (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>IMAP: el correo queda en el servidor y se sincroniza el estado entre dispositivos.</li>
+<li>POP3: descarga local; no apto para varios dispositivos.</li>
+<li>ActiveSync: correo + calendario + contactos, <em>push</em>, políticas de seguridad y borrado remoto.</li>
+<li>Puertos seguros y SMTP para el envío.</li>
+</ul>
+<p><strong>2. Medidas de seguridad de un móvil corporativo (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>Bloqueo con PIN o biometría, cifrado, actualizaciones.</li>
+<li>Apps solo de la tienda gestionada; sin root ni jailbreak.</li>
+<li>Separación de datos personales y corporativos; VPN; wifi segura.</li>
+<li>Gestión con MDM: localización, bloqueo y borrado remoto (T16).</li>
+</ul>
+<h2 id="11-supuesto-practico" class="tema-h2">11. Supuesto práctico</h2>
+<p><strong>Enunciado:</strong> un usuario recibe un móvil nuevo y dice que el correo corporativo no le aparece en el PC después de leerlo en el móvil, y que no ve las reuniones del calendario.</p>
+<p><strong>Esquema de respuesta:</strong></p>
+<ol type="1">
+<li><strong>Diagnóstico</strong>: la cuenta se ha configurado como <strong>POP3</strong> (descarga y borra del servidor) o como cuenta solo de correo IMAP.</li>
+<li><strong>Solución</strong>: eliminar la cuenta y configurarla con <strong>Exchange ActiveSync / Outlook</strong> (o el método corporativo), que sincroniza <strong>correo, calendario y contactos</strong>.</li>
+<li><strong>Recuperación</strong>: comprobar si los mensajes descargados por POP3 siguen en el servidor; si no, recuperarlos del móvil o de la papelera del servidor.</li>
+<li><strong>Prevención</strong>: desplegar la configuración de correo <strong>desde el MDM</strong> para que todos los dispositivos usen el mismo método y las políticas de seguridad.</li>
+<li><strong>Registro</strong> de la incidencia y, si se repite, petición de cambio para automatizar la configuración.</li>
+</ol>
+<h2 id="12-matriz-de-memorizacion" class="tema-h2">12. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Dato clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Android</td>
+<td>Linux · AOSP + GMS · Android Enterprise · Knox (Samsung)</td>
+</tr>
+<tr>
+<td>iOS</td>
+<td>XNU · App Store · Apple Business Manager · ADE · supervisado</td>
+</tr>
+<tr>
+<td>Seguridad</td>
+<td>Sandbox · permisos · cifrado · arranque seguro · sin root/jailbreak</td>
+</tr>
+<tr>
+<td>Correo</td>
+<td>IMAP 143/993 · POP3 110/995 · SMTP 25/587/465 · EAS (HTTPS)</td>
+</tr>
+<tr>
+<td>Comunicaciones</td>
+<td>Wifi (PSK/Enterprise + CA) · APN · VPN (IKEv2, SSL) · BT · NFC</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="13-resumen-final-si-manana-fuera-el-examen" class="tema-h2">13. Resumen final: si mañana fuera el examen</h2>
+<p><strong>Android</strong> (Google, núcleo Linux, AOSP + GMS, muy fragmentado) e <strong>iOS</strong> (Apple, cerrado) protegen las apps con <em><strong>sandbox</strong></em>, <strong>permisos</strong>, <strong>cifrado</strong> y <strong>arranque seguro</strong>, protecciones que se pierden con <strong>root o jailbreak</strong>. En la empresa se gestionan con <strong>Android Enterprise</strong> (perfil de trabajo, totalmente gestionado o <strong>dedicado</strong>) y <strong>Apple Business Manager/ADE</strong>. En el móvil se configuran <strong>wifi</strong> (con <strong>certificado de la CA</strong> en Enterprise), <strong>APN</strong>, <strong>VPN</strong>, bluetooth y NFC. El correo corporativo se sincroniza con <strong>Exchange ActiveSync/Outlook</strong> (correo, calendario, contactos, políticas y borrado remoto) o <strong>IMAP</strong>; <strong>POP3 no sincroniza</strong>.</p>
+<h2 id="14-actualidad-datos-fechados" class="tema-h2">14. Actualidad — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong></th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li>Las últimas versiones son <strong>Android 16</strong> (2025) e <strong>iOS/iPadOS 26</strong> (Apple pasó en 2025 a numerar sus sistemas por el año siguiente al de lanzamiento).</li>
+<li>En la UE, la <strong>Ley de Mercados Digitales (DMA)</strong> obliga a Apple desde 2024 a permitir tiendas de aplicaciones alternativas en el iPhone.</li>
+<li>Google anunció en 2025 la <strong>verificación obligatoria de los desarrolladores</strong> también para las apps instaladas fuera de Google Play, con una implantación progresiva por países a partir de 2026.</li>
+</ul>
+
+  </div>
+</article>

@@ -1,0 +1,540 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T8</div>
+    <h1 class="tema-cabecera__titulo">Conectividad móvil de las cosas. Conceptos M2M, 4G, 5G.</h1>
+    <div class="tema-cabecera__meta">Bloque 1 · Redes, comunicaciones, internet · Bolsa DonostiaTIK 2023 · Instalaciones y Comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-iot-y-m2m">1. IoT y M2M</a></li>
+<li><a href="#2-requisitos-de-la-conectividad-iot">2. Requisitos de la conectividad IoT</a></li>
+<li><a href="#3-tecnologias-de-conectividad">3. Tecnologías de conectividad</a></li>
+<li><a href="#4-protocolos-de-aplicacion-iot">4. Protocolos de aplicación IoT</a></li>
+<li><a href="#5-plataformas-gestion-y-seguridad-del-iot">5. Plataformas, gestión y seguridad del IoT</a></li>
+<li><a href="#6-lo-que-cayo-en-el-examen-de-2023">6. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#7-anclas-de-memoria">7. Anclas de memoria</a></li>
+<li><a href="#8-no-confundir">8. No confundir</a></li>
+<li><a href="#9-posibles-trampas-de-examen">9. Posibles trampas de examen</a></li>
+<li><a href="#10-posibles-preguntas-tipo-test">10. Posibles preguntas tipo test</a></li>
+<li><a href="#11-posibles-preguntas-cortas-con-esquema-de-respuesta">11. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#12-supuesto-practico">12. Supuesto práctico</a></li>
+<li><a href="#13-matriz-de-memorizacion">13. Matriz de memorización</a></li>
+<li><a href="#14-resumen-final-si-manana-fuera-el-examen">14. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#15-actualidad-datos-fechados">15. Actualidad — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — fronteras del tema</strong><br>Este tema trata el <strong>Internet de las cosas (IoT)</strong> y la comunicación <strong>máquina a máquina (M2M)</strong>: tecnologías de conectividad (<strong>LPWAN</strong>: LoRaWAN, Sigfox, NB-IoT, LTE-M; corto alcance: Zigbee, BLE), <strong>IoT sobre 4G/5G</strong> y los <strong>protocolos de aplicación</strong> (MQTT, CoAP).<br><strong>T6</strong> → generaciones móviles en general. <strong>T5</strong> → wifi. <strong>T18</strong> → SCADA y PLC (el IoT industrial clásico). <strong>T16/T17</strong> → seguridad de dispositivos.</th>
+</tr>
+</table></div>
+<h2 id="1-iot-y-m2m" class="tema-h2">1. IoT y M2M</h2>
+<ul class="tema-lista">
+<li><strong>M2M</strong> (<em>Machine to Machine</em>): comunicación <strong>directa entre máquinas</strong> sin intervención humana, normalmente punto a punto o hacia un servidor (un contador que envía su lectura, una alarma que avisa a la central). Es el concepto más antiguo, ligado a las <strong>SIM de datos</strong> de 2G/3G.</li>
+<li><strong>IoT</strong> (<em>Internet of Things</em>): <strong>objetos conectados a Internet</strong> (o a una red IP) que recogen datos con <strong>sensores</strong>, actúan con <strong>actuadores</strong> y se integran en <strong>plataformas</strong> en la nube para analizar y presentar la información. El IoT engloba al M2M.</li>
+<li><strong>IIoT</strong> (IoT industrial): sensores y máquinas en fábricas e infraestructuras (T18).</li>
+</ul>
+<h3 id="arquitectura-en-capas">Arquitectura en capas</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Capa</th>
+<th>Elementos</th>
+<th>Ejemplo municipal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Percepción / dispositivo</strong></td>
+<td>Sensores, actuadores, microcontroladores</td>
+<td>Sensor de ocupación de una plaza de aparcamiento, contador de agua, sensor de ruido</td>
+</tr>
+<tr>
+<td><strong>Red / conectividad</strong></td>
+<td>LPWAN, celular, wifi, Zigbee… y <strong>pasarelas (<em>gateways</em>)</strong></td>
+<td>Antena LoRaWAN en la azotea de un edificio municipal</td>
+</tr>
+<tr>
+<td><strong>Plataforma / middleware</strong></td>
+<td>Servidor de red, <em>broker</em> MQTT, bases de datos, gestión de dispositivos</td>
+<td>Plataforma de ciudad inteligente (<em>smart city</em>)</td>
+</tr>
+<tr>
+<td><strong>Aplicación</strong></td>
+<td>Paneles, alertas, análisis, integración con otros sistemas</td>
+<td>Mapa de aparcamientos libres, aviso de contenedor lleno</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Ejemplos de IoT en un ayuntamiento</strong>: aparcamiento inteligente, contenedores con sensor de llenado, <strong>lectura remota de contadores</strong> de agua, <strong>alumbrado</strong> público telegestionado, calidad del aire y ruido, riego de parques, control de aforos, <strong>telegestión de la climatización de los edificios</strong> (el PLC del caso de 2023, T18), cámaras y sensores de tráfico.</p>
+<h2 id="2-requisitos-de-la-conectividad-iot" class="tema-h2">2. Requisitos de la conectividad IoT</h2>
+<p>Un sensor IoT suele necesitar lo contrario que un usuario de oficina:</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Requisito</th>
+<th>Por qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Bajo consumo</strong></td>
+<td>Funcionar <strong>años con una pila</strong> (no hay enchufe en una farola o bajo el asfalto)</td>
+</tr>
+<tr>
+<td><strong>Largo alcance</strong></td>
+<td>Cubrir una ciudad con pocas antenas</td>
+</tr>
+<tr>
+<td><strong>Penetración</strong></td>
+<td>Llegar a sótanos y arquetas (contadores)</td>
+</tr>
+<tr>
+<td><strong>Bajo coste</strong> del módulo y de la conectividad</td>
+<td>Desplegar miles de unidades</td>
+</tr>
+<tr>
+<td><strong>Poco caudal</strong></td>
+<td>Mensajes de unos pocos bytes, unas cuantas veces al día</td>
+</tr>
+<tr>
+<td><strong>Escalabilidad</strong></td>
+<td>Muchísimos dispositivos por antena</td>
+</tr>
+</tbody>
+</table></div>
+<p>Por eso existen las <strong>LPWAN</strong> (<em>Low Power Wide Area Networks</em>): <strong>bajo consumo, largo alcance y poco caudal</strong>.</p>
+<h2 id="3-tecnologias-de-conectividad" class="tema-h2">3. Tecnologías de conectividad</h2>
+<h3 id="lpwan-sin-licencia">LPWAN sin licencia</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th></th>
+<th><strong>LoRa / LoRaWAN</strong></th>
+<th><strong>Sigfox</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Banda</td>
+<td><strong>868 MHz</strong> en Europa (uso común)</td>
+<td>868 MHz</td>
+</tr>
+<tr>
+<td>Modulación</td>
+<td><strong>CSS</strong> (<em>Chirp Spread Spectrum</em>), patentada por Semtech</td>
+<td>Banda ultraestrecha (UNB)</td>
+</tr>
+<tr>
+<td>Alcance</td>
+<td><strong>2–5 km en ciudad, más de 10–15 km en zona rural</strong></td>
+<td>Similar</td>
+</tr>
+<tr>
+<td>Caudal</td>
+<td><strong>0,3 a 50 kbps</strong></td>
+<td>100 bps; ≈ 140 mensajes de 12 bytes al día</td>
+</tr>
+<tr>
+<td>Topología</td>
+<td><strong>Estrella de estrellas</strong>: dispositivos → <em>gateways</em> → servidor de red</td>
+<td>Estrella, red del operador</td>
+</tr>
+<tr>
+<td>Despliegue</td>
+<td><strong>Red propia</strong> (la organización instala sus <em>gateways</em>) o de un operador LoRaWAN</td>
+<td>Solo red del operador Sigfox</td>
+</tr>
+<tr>
+<td>Clases de dispositivo</td>
+<td><strong>A</strong> (máximo ahorro: solo escucha tras transmitir), <strong>B</strong> (ventanas programadas), <strong>C</strong> (escucha continua)</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Seguridad</td>
+<td>Cifrado AES-128 de extremo a extremo (dos claves: de red y de aplicación)</td>
+<td>Autenticación y cifrado opcional</td>
+</tr>
+</tbody>
+</table></div>
+<ul class="tema-lista">
+<li><strong>LoRa</strong> es la <strong>capa física</strong> (la modulación) y <strong>LoRaWAN</strong> el <strong>protocolo de red</strong> (capa MAC) definido por la <strong>LoRa Alliance</strong>.</li>
+<li>Un <strong>gateway LoRaWAN</strong> recibe los mensajes de todos los sensores a su alcance y los reenvía por IP (Ethernet, 4G) al <strong>servidor de red</strong>; los dispositivos <strong>no se asocian</strong> a un gateway concreto.</li>
+<li><strong>No necesita visión directa</strong>: la modulación CSS es muy robusta y funciona con señales por debajo del nivel de ruido.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 16 (señale la FALSA)</strong><br>Es <strong>FALSO</strong> que LoRaWAN «utilice modulación DSSS» y que «precise de visión directa entre dispositivos y antenas»: usa <strong>CSS (chirp)</strong> y funciona <strong>sin visión directa</strong>.<br>Son ciertas las demás: velocidades de hasta <strong>50 kbps</strong>, <strong>topología en estrella</strong> y <strong>largas distancias (del orden de 10 km)</strong>.</th>
+</tr>
+</table></div>
+<h3 id="iot-celular-licenciado-con-operador">IoT celular (licenciado, con operador)</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th></th>
+<th><strong>NB-IoT</strong></th>
+<th><strong>LTE-M (Cat-M1)</strong></th>
+<th>4G/5G convencional</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Norma</td>
+<td>3GPP (Release 13)</td>
+<td>3GPP (Release 13)</td>
+<td>3GPP</td>
+</tr>
+<tr>
+<td>Ancho de banda</td>
+<td><strong>180–200 kHz</strong></td>
+<td>1,4 MHz</td>
+<td>20 MHz o más</td>
+</tr>
+<tr>
+<td>Caudal</td>
+<td>Decenas de kbps</td>
+<td>Hasta ≈ 1 Mbps</td>
+<td>Mbps a Gbps</td>
+</tr>
+<tr>
+<td>Movilidad</td>
+<td>Prácticamente fija</td>
+<td><strong>Sí</strong> (handover)</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>Voz</td>
+<td>No</td>
+<td><strong>Sí (VoLTE)</strong></td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>Cobertura en interiores</td>
+<td><strong>Excelente</strong> (contadores en sótanos)</td>
+<td>Muy buena</td>
+<td>Normal</td>
+</tr>
+<tr>
+<td>Usos</td>
+<td>Contadores, aparcamiento, sensores fijos</td>
+<td>Seguimiento de flotas, alarmas, wearables</td>
+<td>Cámaras, vídeo, routers</td>
+</tr>
+</tbody>
+</table></div>
+<ul class="tema-lista">
+<li>Ambas usan <strong>ahorro de energía</strong>: <strong>PSM</strong> (<em>Power Saving Mode</em>, el módulo «se duerme» durante horas) y <strong>eDRX</strong> (escucha la red con menos frecuencia).</li>
+<li>Funcionan sobre la red <strong>4G</strong> del operador y forman parte del <strong>5G</strong> como su solución de <strong>mMTC</strong> (comunicaciones masivas, T6). El 5G añade <strong>RedCap</strong> (<em>Reduced Capability</em>, Release 17): módulos 5G más sencillos para IoT de gama media (cámaras, wearables).</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>¿LoRaWAN o NB-IoT?</strong><br><strong>LoRaWAN</strong>: red <strong>propia</strong> (sin cuotas por dispositivo), ideal para muchos sensores en una zona concreta. <strong>NB-IoT/LTE-M</strong>: <strong>sin infraestructura propia</strong>, cobertura del operador en todo el territorio, pago por SIM. Ambas son LPWAN; la elección depende de la cobertura, el coste total y quién gestiona la red.</th>
+</tr>
+</table></div>
+<h3 id="corto-alcance">Corto alcance</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Tecnología</th>
+<th>Norma</th>
+<th>Alcance</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Bluetooth Low Energy (BLE)</strong></td>
+<td>Bluetooth SIG (802.15.1 en su origen)</td>
+<td>10–100 m</td>
+<td>Wearables, balizas (<em>beacons</em>), sensores cercanos</td>
+</tr>
+<tr>
+<td><strong>Zigbee</strong></td>
+<td>Sobre <strong>IEEE 802.15.4</strong></td>
+<td>10–100 m, <strong>red mallada</strong></td>
+<td>Domótica, iluminación, sensores de edificio</td>
+</tr>
+<tr>
+<td><strong>Thread / Matter</strong></td>
+<td>802.15.4 (Thread) + estándar de aplicación (Matter)</td>
+<td>Malla IPv6</td>
+<td>Hogar conectado interoperable</td>
+</tr>
+<tr>
+<td><strong>Z-Wave</strong></td>
+<td>Propietario (Sub-GHz)</td>
+<td>Malla</td>
+<td>Domótica</td>
+</tr>
+<tr>
+<td><strong>RFID / NFC</strong></td>
+<td>ISO 14443 y otras</td>
+<td>cm a metros</td>
+<td>Identificación, inventario, control de acceso</td>
+</tr>
+<tr>
+<td><strong>Wifi (HaLow, 802.11ah)</strong></td>
+<td>802.11 en Sub-GHz</td>
+<td>Hasta 1 km</td>
+<td>IoT con IP y más caudal</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="4-protocolos-de-aplicacion-iot" class="tema-h2">4. Protocolos de aplicación IoT</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Protocolo</th>
+<th>Modelo</th>
+<th>Transporte</th>
+<th>Características</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MQTT</strong></td>
+<td><strong>Publicación/suscripción</strong> con un <em><strong>broker</strong></em> central</td>
+<td><strong>TCP</strong> (1883; <strong>8883</strong> con TLS)</td>
+<td><strong>Ligero</strong>, ideal para M2M e IoT; <strong>temas</strong> (<em>topics</em>); <strong>QoS 0, 1 y 2</strong>; mensaje de última voluntad (<em>Last Will</em>)</td>
+</tr>
+<tr>
+<td><strong>CoAP</strong></td>
+<td>Petición/respuesta tipo REST (GET, PUT…)</td>
+<td><strong>UDP</strong> (5683; 5684 con DTLS)</td>
+<td>Para dispositivos muy limitados</td>
+</tr>
+<tr>
+<td>HTTP/REST</td>
+<td>Petición/respuesta</td>
+<td>TCP</td>
+<td>Pesado, pero universal</td>
+</tr>
+<tr>
+<td><strong>AMQP</strong></td>
+<td>Colas de mensajes</td>
+<td>TCP</td>
+<td>Integración empresarial</td>
+</tr>
+<tr>
+<td>LwM2M</td>
+<td>Gestión de dispositivos sobre CoAP</td>
+<td>UDP</td>
+<td>Configuración y actualización remota</td>
+</tr>
+<tr>
+<td><strong>OPC UA</strong></td>
+<td>Cliente/servidor y pub/sub</td>
+<td>TCP</td>
+<td>Estándar del <strong>IoT industrial</strong> (T18)</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="mqtt-en-detalle">MQTT en detalle</h3>
+<ul class="tema-lista">
+<li>Los dispositivos <strong>publican</strong> mensajes en un <strong>tema</strong> (p. ej., <code>donostia/edificio3/planta1/temperatura</code>) en el <strong>broker</strong> (Mosquitto, HiveMQ, EMQX…).</li>
+<li>Las aplicaciones se <strong>suscriben</strong> a los temas que les interesan (con comodines <code>+</code> y <code>#</code>) y reciben los mensajes.</li>
+<li>Publicador y suscriptor <strong>no se conocen</strong> ni tienen que estar conectados a la vez: el broker <strong>desacopla</strong>.</li>
+<li><strong>QoS 0</strong> = como mucho una vez (sin confirmación) · <strong>QoS 1</strong> = al menos una vez · <strong>QoS 2</strong> = exactamente una vez.</li>
+<li>Seguridad: <strong>TLS</strong> (puerto 8883), usuario y contraseña o certificados, y control de acceso por tema en el broker.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 17</strong><br>Un protocolo usado en la comunicación <strong>M2M en el IoT</strong> es <strong>MQTT</strong> (<em>Message Queuing Telemetry Transport</em>). Los demás eran distractores de otras épocas: <strong>ATP</strong> (AppleTalk), <strong>ACSE</strong> (OSI) y <strong>RSVP</strong> (reserva de recursos en redes IP).</th>
+</tr>
+</table></div>
+<h2 id="5-plataformas-gestion-y-seguridad-del-iot" class="tema-h2">5. Plataformas, gestión y seguridad del IoT</h2>
+<ul class="tema-lista">
+<li><strong>Plataformas IoT</strong>: reciben, almacenan y procesan los datos y gestionan los dispositivos (AWS IoT, Azure IoT, ThingsBoard, plataformas de <em>smart city</em> como <strong>FIWARE</strong>, estándar europeo de código abierto). Los servidores de red LoRaWAN más conocidos son The Things Stack o ChirpStack.</li>
+<li><strong>Gestión del ciclo de vida</strong>: alta (aprovisionamiento con claves únicas), monitorización (batería, cobertura), <strong>actualización del firmware a distancia (FOTA)</strong> y baja segura.</li>
+<li><strong>Edge computing</strong>: procesar los datos cerca del dispositivo (en la pasarela) para reducir latencia y tráfico.</li>
+</ul>
+<h3 id="seguridad-del-iot">Seguridad del IoT</h3>
+<p>El IoT es un objetivo frecuente: dispositivos baratos, <strong>contraseñas por defecto</strong>, firmware sin actualizar y miles de unidades expuestas. La botnet <strong>Mirai</strong> (2016) infectó cámaras y routers con credenciales de fábrica y lanzó ataques DDoS masivos.</p>
+<p>Medidas:</p>
+<ul class="tema-lista">
+<li><strong>Cambiar las credenciales por defecto</strong> y deshabilitar servicios innecesarios (Telnet).</li>
+<li><strong>Segmentar</strong>: los dispositivos IoT en <strong>VLAN propias</strong> (como las de <strong>cámaras</strong> y <strong>telegestión</strong> del caso de 2023), sin acceso a la red de usuarios y con <strong>reglas de cortafuegos</strong> estrictas (T14).</li>
+<li><strong>Cifrado</strong> de las comunicaciones (TLS, DTLS, AES en LoRaWAN).</li>
+<li><strong>Actualizaciones</strong> de firmware y <strong>inventario</strong> de todos los dispositivos.</li>
+<li><strong>Accesos remotos de mantenedores</strong> solo por <strong>VPN</strong> o accesos controlados (pregunta 4 del caso de 2023).</li>
+<li>Marco legal: el <strong>Reglamento europeo de ciberresiliencia (CRA)</strong> obligará a los fabricantes a garantizar la seguridad de los productos con elementos digitales.</li>
+</ul>
+<h2 id="6-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">6. Lo que cayó en el examen de 2023</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Contenido</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test 16</td>
+<td>Afirmación FALSA sobre LoRaWAN</td>
+<td><strong>Usa DSSS / precisa visión directa</strong> (es falso)</td>
+</tr>
+<tr>
+<td>Test 17</td>
+<td>Protocolo M2M en IoT</td>
+<td><strong>MQTT</strong></td>
+</tr>
+<tr>
+<td>Corta 1</td>
+<td>LoRa frente a wifi y 4G/5G</td>
+<td>LPWAN, largo alcance, bajo consumo, banda libre o red de operador</td>
+</tr>
+<tr>
+<td>Caso (enunciado)</td>
+<td>PLC de telegestión y cámaras en VLAN propias</td>
+<td>Segmentación del IoT</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="7-anclas-de-memoria" class="tema-h2">7. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>M2M = máquina a máquina · IoT = objetos en red + plataforma.</strong></li>
+<li><strong>LPWAN = bajo consumo + largo alcance + poco caudal.</strong></li>
+<li><strong>LoRa = CSS, 868 MHz, hasta 50 kbps, estrella, sin visión directa; LoRaWAN = protocolo de red.</strong></li>
+<li><strong>NB-IoT = fijo e interiores · LTE-M = movilidad y voz.</strong></li>
+<li><strong>Zigbee = 802.15.4, malla · BLE = corto alcance, wearables.</strong></li>
+<li><strong>MQTT = publicar/suscribir + broker, TCP 1883/8883, QoS 0-1-2 · CoAP = REST sobre UDP.</strong></li>
+<li><strong>IoT seguro = sin contraseñas por defecto + VLAN propia + cifrado + actualizaciones.</strong></li>
+</ul>
+<h2 id="8-no-confundir" class="tema-h2">8. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Esto</th>
+<th>No es esto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LoRa</strong> (modulación)</td>
+<td><strong>LoRaWAN</strong> (protocolo de red)</td>
+</tr>
+<tr>
+<td><strong>CSS</strong> (chirp, LoRa)</td>
+<td><strong>DSSS</strong> (espectro ensanchado de secuencia directa: 802.11b)</td>
+</tr>
+<tr>
+<td><strong>NB-IoT</strong></td>
+<td><strong>LTE-M</strong></td>
+</tr>
+<tr>
+<td><strong>MQTT</strong> (pub/sub, TCP)</td>
+<td><strong>CoAP</strong> (REST, UDP)</td>
+</tr>
+<tr>
+<td><strong>Zigbee</strong> (802.15.4)</td>
+<td><strong>Bluetooth</strong> (802.15.1)</td>
+</tr>
+<tr>
+<td><strong>M2M</strong></td>
+<td><strong>IoT</strong> (más amplio)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="9-posibles-trampas-de-examen" class="tema-h2">9. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li>Decir que LoRa necesita visión directa o que usa DSSS.</li>
+<li>Pensar que NB-IoT funciona sin operador.</li>
+<li>Creer que MQTT funciona sobre UDP (va sobre TCP; MQTT-SN sí puede ir sobre UDP).</li>
+<li>Confundir el broker MQTT con un servidor web.</li>
+<li>Pensar que el IoT no necesita segmentación porque «solo manda datos».</li>
+</ul>
+<h2 id="10-posibles-preguntas-tipo-test" class="tema-h2">10. Posibles preguntas tipo test</h2>
+<ol type="1">
+<li>¿En qué banda trabaja LoRa en Europa? → <strong>868 MHz</strong>.</li>
+<li>¿Qué tecnología LPWAN celular admite movilidad y voz? → <strong>LTE-M</strong>.</li>
+<li>¿Qué modelo de comunicación usa MQTT? → <strong>Publicación/suscripción con broker</strong>.</li>
+<li>¿Qué norma IEEE es la base de Zigbee? → <strong>802.15.4</strong>.</li>
+<li>¿Qué nivel de QoS de MQTT garantiza la entrega exactamente una vez? → <strong>QoS 2</strong>.</li>
+</ol>
+<h2 id="11-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">11. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. Qué es una red LPWAN y compara LoRaWAN y NB-IoT (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>Definición: bajo consumo, largo alcance, poco caudal; para sensores.</li>
+<li>LoRaWAN: 868 MHz sin licencia, CSS, red propia o de operador, gateways, estrella, AES.</li>
+<li>NB-IoT: espectro licenciado del operador (4G/5G), excelente penetración, pago por SIM.</li>
+<li>Ejemplos de uso en un ayuntamiento.</li>
+</ul>
+<p><strong>2. Medidas para integrar de forma segura dispositivos IoT en la red municipal (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>Inventario y credenciales únicas (sin las de fábrica).</li>
+<li>VLAN propias y reglas de cortafuegos de mínimo privilegio.</li>
+<li>Cifrado y actualizaciones de firmware.</li>
+<li>Accesos remotos de los mantenedores solo por VPN, coordinados con Sistemas; monitorización.</li>
+</ul>
+<h2 id="12-supuesto-practico" class="tema-h2">12. Supuesto práctico</h2>
+<p><strong>Enunciado:</strong> el Ayuntamiento quiere instalar 300 sensores de llenado en los contenedores de un barrio y pide una propuesta de conectividad.</p>
+<p><strong>Esquema de respuesta:</strong></p>
+<ol type="1">
+<li><strong>Requisitos</strong>: pocos bytes varias veces al día, <strong>batería de varios años</strong>, sensores en la calle (algunos en zonas con mala cobertura), coste por unidad.</li>
+<li><strong>Opción A — LoRaWAN propio</strong>: 2–4 <strong>gateways</strong> en azoteas de edificios municipales (con alimentación PoE y conexión a la red municipal o 4G), servidor de red LoRaWAN y plataforma. Sin cuotas por sensor.</li>
+<li><strong>Opción B — NB-IoT</strong>: SIM de un operador en cada sensor, sin infraestructura propia, coste mensual por SIM; comprobar la cobertura.</li>
+<li><strong>Integración</strong>: los datos llegan a la plataforma por <strong>MQTT</strong> con TLS; el servidor se sitúa en una VLAN/DMZ propia, con acceso controlado.</li>
+<li><strong>Seguridad y gestión</strong>: claves únicas por sensor, inventario, monitorización de baterías, actualizaciones (FOTA).</li>
+<li><strong>Coordinación</strong>: servicio de medio ambiente o limpieza (necesidades), mantenimiento de edificios (azoteas), comunicaciones y sistemas (red, cortafuegos), proveedor (instalación); <strong>piloto</strong> en una zona antes del despliegue completo.</li>
+</ol>
+<h2 id="13-matriz-de-memorizacion" class="tema-h2">13. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Dato clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LoRaWAN</td>
+<td>868 MHz · CSS · 0,3–50 kbps · 2–15 km · estrella · clases A/B/C · AES-128</td>
+</tr>
+<tr>
+<td>Sigfox</td>
+<td>UNB · 12 bytes · red del operador</td>
+</tr>
+<tr>
+<td>NB-IoT</td>
+<td>3GPP · 200 kHz · fijo · interiores</td>
+</tr>
+<tr>
+<td>LTE-M</td>
+<td>3GPP · 1,4 MHz · movilidad · VoLTE</td>
+</tr>
+<tr>
+<td>Zigbee</td>
+<td>802.15.4 · malla</td>
+</tr>
+<tr>
+<td>MQTT</td>
+<td>Pub/sub · broker · TCP 1883/8883 · QoS 0/1/2</td>
+</tr>
+<tr>
+<td>CoAP</td>
+<td>REST · UDP 5683</td>
+</tr>
+<tr>
+<td>Seguridad</td>
+<td>Mirai · credenciales · VLAN · TLS · FOTA · CRA</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="14-resumen-final-si-manana-fuera-el-examen" class="tema-h2">14. Resumen final: si mañana fuera el examen</h2>
+<p>El <strong>M2M</strong> comunica máquinas entre sí; el <strong>IoT</strong> conecta objetos a redes y plataformas. Los sensores necesitan <strong>bajo consumo, largo alcance y poco caudal</strong>: las <strong>LPWAN</strong>. <strong>LoRaWAN</strong> trabaja en <strong>868 MHz</strong> sin licencia, con modulación <strong>CSS</strong> (no DSSS), <strong>topología en estrella</strong>, <strong>hasta 50 kbps</strong> y <strong>kilómetros de alcance sin visión directa</strong>; <strong>NB-IoT</strong> y <strong>LTE-M</strong> son el IoT de los operadores 4G/5G (<strong>mMTC</strong>). En corto alcance, <strong>BLE</strong> y <strong>Zigbee</strong> (802.15.4, malla). El protocolo IoT más usado es <strong>MQTT</strong> (<strong>publicación/suscripción</strong> con <strong>broker</strong>, TCP 1883/8883). La seguridad pasa por <strong>eliminar las contraseñas por defecto, segmentar en VLAN, cifrar y actualizar</strong>.</p>
+<h2 id="15-actualidad-datos-fechados" class="tema-h2">15. Actualidad — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong></th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Sigfox</strong> quebró en 2022 y fue comprada por UnaBiz, que mantiene la red con una cobertura más reducida en algunos países.</li>
+<li>El <strong>Reglamento de Ciberresiliencia (CRA, Reglamento UE 2024/2847)</strong> entró en vigor en diciembre de 2024; la obligación de notificar vulnerabilidades explotadas se aplica desde septiembre de 2026 y el resto de requisitos, desde diciembre de 2027.</li>
+<li>El <strong>5G RedCap</strong> empieza a sustituir a los módulos 4G Cat-1/Cat-4 en dispositivos IoT de gama media.</li>
+</ul>
+
+  </div>
+</article>
