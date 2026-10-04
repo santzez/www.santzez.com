@@ -1,0 +1,560 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T12</div>
+    <h1 class="tema-cabecera__titulo">Seguridad de los sistemas de información. ENS: principios básicos, requisitos mínimos, categorías de los sistemas. Diagnóstico de la seguridad informática en una organización: análisis de riesgos y auditorías.</h1>
+    <div class="tema-cabecera__meta">Bloque 2 · Seguridad · Bolsa DonostiaTIK 2023 · Instalaciones y Comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-seguridad-de-la-informacion-conceptos">1. Seguridad de la información: conceptos</a></li>
+<li><a href="#2-el-esquema-nacional-de-seguridad-ens">2. El Esquema Nacional de Seguridad (ENS)</a></li>
+<li><a href="#3-analisis-y-gestion-de-riesgos">3. Análisis y gestión de riesgos</a></li>
+<li><a href="#4-auditorias-y-diagnostico-de-la-seguridad">4. Auditorías y diagnóstico de la seguridad</a></li>
+<li><a href="#5-otras-normas-relacionadas">5. Otras normas relacionadas</a></li>
+<li><a href="#6-lo-que-cayo-en-el-examen-de-2023">6. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#7-anclas-de-memoria">7. Anclas de memoria</a></li>
+<li><a href="#8-no-confundir">8. No confundir</a></li>
+<li><a href="#9-posibles-trampas-de-examen">9. Posibles trampas de examen</a></li>
+<li><a href="#10-posibles-preguntas-tipo-test">10. Posibles preguntas tipo test</a></li>
+<li><a href="#11-posibles-preguntas-cortas-con-esquema-de-respuesta">11. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#12-supuesto-practico">12. Supuesto práctico</a></li>
+<li><a href="#13-matriz-de-memorizacion">13. Matriz de memorización</a></li>
+<li><a href="#14-resumen-final-si-manana-fuera-el-examen">14. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#15-actualidad-datos-fechados">15. Actualidad — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — fronteras del tema</strong><br>Este tema trata el <strong>marco de gestión</strong> de la seguridad: el <strong>Esquema Nacional de Seguridad (ENS)</strong>, el <strong>análisis de riesgos</strong> (MAGERIT, PILAR) y las <strong>auditorías</strong> (ENS, ISO 27001, técnicas).<br><strong>T11</strong> → seguridad física del CPD. <strong>T13</strong> → malware. <strong>T14–T17</strong> → medidas técnicas de seguridad de red. <strong>T20</strong> → ITIL (gestión de servicios, incluida la gestión de la seguridad).</th>
+</tr>
+</table></div>
+<h2 id="1-seguridad-de-la-informacion-conceptos" class="tema-h2">1. Seguridad de la información: conceptos</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Definición</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Activo</strong></td>
+<td>Lo que tiene valor para la organización: información, servicios, aplicaciones, equipos, comunicaciones, instalaciones, personas</td>
+</tr>
+<tr>
+<td><strong>Amenaza</strong></td>
+<td>Evento que puede dañar un activo (incendio, ransomware, error humano)</td>
+</tr>
+<tr>
+<td><strong>Vulnerabilidad</strong></td>
+<td>Debilidad que facilita que la amenaza se materialice</td>
+</tr>
+<tr>
+<td><strong>Impacto</strong></td>
+<td>Daño que causaría la amenaza sobre el activo</td>
+</tr>
+<tr>
+<td><strong>Riesgo</strong></td>
+<td><strong>Probabilidad × impacto</strong>: estimación de lo que puede pasar</td>
+</tr>
+<tr>
+<td><strong>Salvaguarda / control</strong></td>
+<td>Medida que reduce el riesgo</td>
+</tr>
+<tr>
+<td><strong>Riesgo residual</strong></td>
+<td>El que queda tras aplicar las salvaguardas</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Dimensiones de la seguridad</strong> (las cinco del ENS):</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Dimensión</th>
+<th>Pregunta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Confidencialidad [C]</strong></td>
+<td>¿Solo acceden los autorizados?</td>
+</tr>
+<tr>
+<td><strong>Integridad [I]</strong></td>
+<td>¿La información es exacta y no se ha alterado?</td>
+</tr>
+<tr>
+<td><strong>Trazabilidad [T]</strong></td>
+<td>¿Se puede saber quién hizo qué y cuándo?</td>
+</tr>
+<tr>
+<td><strong>Autenticidad [A]</strong></td>
+<td>¿Es quien dice ser? ¿La información procede de donde dice?</td>
+</tr>
+<tr>
+<td><strong>Disponibilidad [D]</strong></td>
+<td>¿Está accesible cuando se necesita?</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar</strong><br>Las cinco dimensiones del ENS: <strong>C-I-T-A-D</strong> («<strong>citad</strong>»): Confidencialidad, Integridad, Trazabilidad, Autenticidad, Disponibilidad.</th>
+</tr>
+</table></div>
+<h2 id="2-el-esquema-nacional-de-seguridad-ens" class="tema-h2">2. El Esquema Nacional de Seguridad (ENS)</h2>
+<p>El <strong>ENS</strong> está regulado por el <strong>Real Decreto 311/2022, de 3 de mayo</strong>, que <strong>sustituyó al RD 3/2010</strong>. Desarrolla el art. 156 de la <strong>Ley 40/2015</strong> de Régimen Jurídico del Sector Público.</p>
+<ul class="tema-lista">
+<li><strong>Objeto</strong>: establecer la <strong>política de seguridad</strong> en la utilización de medios electrónicos del sector público, con <strong>principios básicos y requisitos mínimos</strong> que garanticen la seguridad de la información y los servicios.</li>
+<li><strong>Ámbito</strong>: <strong>todo el sector público</strong> (Administración General del Estado, comunidades autónomas, <strong>entidades locales</strong>, sus organismos y empresas públicas como <strong>DonostiaTIK</strong>), y también los <strong>proveedores privados</strong> que les prestan servicios (que deben cumplirlo en lo que les afecte).</li>
+<li>Organismo de referencia: el <strong>Centro Criptológico Nacional (CCN)</strong>, adscrito al CNI, y su <strong>CCN-CERT</strong> (equipo de respuesta a incidentes del sector público), que publica las <strong>guías CCN-STIC</strong> y las herramientas de apoyo.</li>
+</ul>
+<h3 id="principios-básicos-art-5-y-siguientes">Principios básicos (art. 5 y siguientes)</h3>
+<ol type="1">
+<li><strong>Seguridad como proceso integral</strong>: técnica, humana, material y organizativa, no solo tecnología.</li>
+<li><strong>Gestión de la seguridad basada en los riesgos</strong>.</li>
+<li><strong>Prevención, detección, respuesta y conservación</strong> (frente a incidentes).</li>
+<li><strong>Existencia de líneas de defensa</strong> (defensa en profundidad: varias capas).</li>
+<li><strong>Vigilancia continua</strong>.</li>
+<li><strong>Reevaluación periódica</strong> de las medidas.</li>
+<li><strong>Diferenciación de responsabilidades</strong> (quien opera no es quien supervisa).</li>
+</ol>
+<h3 id="requisitos-mínimos-art-12">Requisitos mínimos (art. 12)</h3>
+<p>La <strong>política de seguridad</strong> de cada organización debe desarrollar, entre otros: <strong>organización e implantación del proceso de seguridad</strong>; <strong>análisis y gestión de los riesgos</strong>; <strong>gestión de personal</strong>; <strong>profesionalidad</strong>; <strong>autorización y control de los accesos</strong>; <strong>protección de las instalaciones</strong>; <strong>adquisición de productos de seguridad</strong> y contratación de servicios; <strong>mínimo privilegio</strong>; <strong>integridad y actualización del sistema</strong>; <strong>protección de la información almacenada y en tránsito</strong>; <strong>prevención ante otros sistemas interconectados</strong>; <strong>registro de la actividad</strong> y detección de código dañino; <strong>incidentes de seguridad</strong>; <strong>continuidad de la actividad</strong>; y <strong>mejora continua</strong> del proceso de seguridad.</p>
+<h3 id="roles">Roles</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Rol</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Responsable de la información</strong></td>
+<td>Determina los <strong>requisitos</strong> (niveles) de la información</td>
+</tr>
+<tr>
+<td><strong>Responsable del servicio</strong></td>
+<td>Determina los requisitos de los <strong>servicios</strong></td>
+</tr>
+<tr>
+<td><strong>Responsable de la seguridad</strong></td>
+<td>Determina las <strong>decisiones</strong> para satisfacerlos; supervisa</td>
+</tr>
+<tr>
+<td><strong>Responsable del sistema</strong></td>
+<td>Opera el sistema; aplica las medidas</td>
+</tr>
+</tbody>
+</table></div>
+<p>La <strong>responsabilidad de la seguridad debe estar separada de la de la explotación</strong> (diferenciación de responsabilidades). Habitualmente hay además un <strong>Comité de Seguridad</strong>.</p>
+<h3 id="categorías-de-los-sistemas-anexo-i">Categorías de los sistemas (Anexo I)</h3>
+<ol type="1">
+<li>Para cada <strong>información y servicio</strong> se valora el impacto en cada <strong>dimensión</strong> (C, I, T, A, D) con un nivel <strong>BAJO, MEDIO o ALTO</strong> (perjuicio limitado, grave o muy grave).</li>
+<li>La <strong>categoría del sistema</strong> es el <strong>máximo</strong> de esos niveles:</li>
+</ol>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Categoría</th>
+<th>Cuándo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>BÁSICA</strong></td>
+<td>Todas las dimensiones como máximo en nivel BAJO</td>
+</tr>
+<tr>
+<td><strong>MEDIA</strong></td>
+<td>Alguna dimensión en nivel MEDIO y ninguna en ALTO</td>
+</tr>
+<tr>
+<td><strong>ALTA</strong></td>
+<td><strong>Alguna dimensión en nivel ALTO</strong></td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible</strong><br><strong>La categoría la marca la dimensión con el nivel más alto.</strong> Un sistema con todas las dimensiones bajas salvo la disponibilidad en ALTO es de <strong>categoría ALTA</strong>.</th>
+</tr>
+</table></div>
+<h3 id="medidas-de-seguridad-anexo-ii">Medidas de seguridad (Anexo II)</h3>
+<p>El Anexo II tiene <strong>73 medidas</strong> agrupadas en <strong>tres marcos</strong>:</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Marco</th>
+<th>Contenido</th>
+<th>Ejemplos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Organizativo [org]</strong></td>
+<td>Política, normativa, procedimientos, proceso de autorización</td>
+<td>Política de seguridad, normas de uso</td>
+</tr>
+<tr>
+<td><strong>Operacional [op]</strong></td>
+<td>Planificación, control de acceso, explotación, servicios externos, nube, continuidad, monitorización</td>
+<td>Análisis de riesgos, gestión de incidentes, copias, registro de la actividad</td>
+</tr>
+<tr>
+<td><strong>Medidas de protección [mp]</strong></td>
+<td>Instalaciones, personal, equipos, comunicaciones, soportes, aplicaciones, información, servicios</td>
+<td>Cortafuegos, cifrado, protección del correo, formación</td>
+</tr>
+</tbody>
+</table></div>
+<p>Se aplican según la <strong>categoría</strong> (y los niveles de cada dimensión), con <strong>refuerzos</strong> adicionales en los niveles superiores. La <strong>Declaración de Aplicabilidad</strong> recoge qué medidas aplica la organización y cómo.</p>
+<h3 id="conformidad-auditoría-e-informes">Conformidad, auditoría e informes</h3>
+<ul class="tema-lista">
+<li><strong>Categoría BÁSICA</strong>: basta una <strong>autoevaluación</strong> (aunque también puede auditarse).</li>
+<li><strong>Categorías MEDIA y ALTA</strong>: <strong>auditoría formal ordinaria al menos cada dos años</strong>, y extraordinaria si hay cambios sustanciales.</li>
+<li>Resultado: <strong>Declaración o Certificación de Conformidad con el ENS</strong>, que se publica en la sede electrónica.</li>
+<li><strong>Informe del estado de la seguridad</strong>: las entidades reportan al CCN con la herramienta <strong>INES</strong>.</li>
+<li><strong>Notificación de incidentes</strong> al <strong>CCN-CERT</strong> (herramienta <strong>LUCÍA</strong>).</li>
+<li><strong>Perfiles de cumplimiento específicos</strong>: adaptaciones del ENS para colectivos concretos (por ejemplo, para <strong>entidades locales</strong>).</li>
+</ul>
+<h3 id="herramientas-del-ccn">Herramientas del CCN</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Herramienta</th>
+<th>Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PILAR</strong></td>
+<td><strong>Análisis y gestión de riesgos</strong> (basada en MAGERIT); versión reducida µPILAR</td>
+</tr>
+<tr>
+<td><strong>INES</strong></td>
+<td>Informe del estado de la seguridad</td>
+</tr>
+<tr>
+<td><strong>LUCÍA</strong></td>
+<td>Gestión de incidentes y notificación</td>
+</tr>
+<tr>
+<td><strong>CLARA, CARMEN, microCLAUDIA</strong></td>
+<td>Cumplimiento de configuraciones, detección de amenazas persistentes, protección frente a ransomware</td>
+</tr>
+<tr>
+<td><strong>Guías CCN-STIC</strong></td>
+<td>Configuración segura (bastionado) y buenas prácticas (series 800 para el ENS)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="3-analisis-y-gestion-de-riesgos" class="tema-h2">3. Análisis y gestión de riesgos</h2>
+<p>El análisis de riesgos es el <strong>punto de partida</strong> del ENS y de ISO 27001. Metodología de referencia en las administraciones españolas: <strong>MAGERIT v3</strong> (Metodología de Análisis y Gestión de Riesgos de los Sistemas de Información), con la herramienta <strong>PILAR</strong>.</p>
+<p><strong>Pasos:</strong></p>
+<ol type="1">
+<li><strong>Identificar los activos</strong> y sus <strong>dependencias</strong> (el servicio depende de la aplicación, que depende del servidor, que depende del CPD…).</li>
+<li><strong>Valorarlos</strong> en cada dimensión (C, I, T, A, D).</li>
+<li><strong>Identificar las amenazas</strong> de cada activo, con su <strong>probabilidad</strong> (frecuencia) y su <strong>degradación</strong> (cuánto daño causa).</li>
+<li>Calcular el <strong>impacto</strong> y el <strong>riesgo potencial (intrínseco)</strong>, sin salvaguardas.</li>
+<li><strong>Evaluar las salvaguardas</strong> existentes y su eficacia.</li>
+<li>Calcular el <strong>riesgo residual</strong>.</li>
+<li><strong>Tratar</strong> el riesgo y aceptar formalmente el residual (dirección).</li>
+</ol>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Opción de tratamiento</th>
+<th>Qué es</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mitigar / reducir</strong></td>
+<td>Aplicar salvaguardas</td>
+<td>Instalar un SAI, cifrar, formar</td>
+</tr>
+<tr>
+<td><strong>Transferir / compartir</strong></td>
+<td>Pasar el riesgo a un tercero</td>
+<td>Seguro, contratar un servicio gestionado</td>
+</tr>
+<tr>
+<td><strong>Evitar / eliminar</strong></td>
+<td>Dejar de hacer la actividad de riesgo</td>
+<td>Retirar un servicio expuesto que no es necesario</td>
+</tr>
+<tr>
+<td><strong>Aceptar / asumir</strong></td>
+<td>Asumirlo conscientemente</td>
+<td>Riesgo bajo cuyo coste de mitigación es mayor</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar</strong><br><strong>Riesgo = probabilidad × impacto.</strong> Tratamiento: <strong>mitigar, transferir, evitar o aceptar.</strong> Lo que queda es el <strong>residual</strong>, y lo acepta la <strong>dirección</strong>.</th>
+</tr>
+</table></div>
+<p>Análisis <strong>cualitativo</strong> (escalas: alto, medio, bajo) frente a <strong>cuantitativo</strong> (valores económicos: pérdida anual esperada).</p>
+<h2 id="4-auditorias-y-diagnostico-de-la-seguridad" class="tema-h2">4. Auditorías y diagnóstico de la seguridad</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Qué revisa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Auditoría de cumplimiento del ENS</strong></td>
+<td>Que las medidas del Anexo II están implantadas y son eficaces; obligatoria cada 2 años (media y alta)</td>
+</tr>
+<tr>
+<td><strong>Auditoría ISO/IEC 27001</strong></td>
+<td>El <strong>SGSI</strong> (Sistema de Gestión de la Seguridad de la Información), para obtener o mantener la <strong>certificación</strong></td>
+</tr>
+<tr>
+<td><strong>Auditoría de protección de datos</strong></td>
+<td>Cumplimiento del RGPD y la LOPDGDD</td>
+</tr>
+<tr>
+<td><strong>Análisis de vulnerabilidades</strong></td>
+<td>Escaneo automatizado de equipos y aplicaciones (Nessus, OpenVAS, Qualys)</td>
+</tr>
+<tr>
+<td><strong>Test de intrusión (<em>pentest</em>)</strong></td>
+<td>Ataque simulado y autorizado para comprobar si las vulnerabilidades son explotables (caja negra, gris o blanca)</td>
+</tr>
+<tr>
+<td><strong>Red team</strong></td>
+<td>Simulación realista de un atacante durante semanas, incluida ingeniería social</td>
+</tr>
+<tr>
+<td><strong>Revisión de configuraciones</strong></td>
+<td>Comparar con las guías de bastionado (<strong>CCN-STIC</strong>, CIS Benchmarks)</td>
+</tr>
+<tr>
+<td><strong>Simulaciones de phishing</strong></td>
+<td>Medir la concienciación del personal</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Fases de una auditoría</strong>: <strong>planificación</strong> (alcance, criterios, equipo), <strong>recogida de evidencias</strong> (entrevistas, revisión documental, pruebas técnicas, muestreo), <strong>informe</strong> (hallazgos: <strong>no conformidades mayores y menores</strong>, observaciones, oportunidades de mejora) y <strong>seguimiento</strong> del <strong>plan de acciones correctivas</strong>.</p>
+<p>Las auditorías pueden ser <strong>internas</strong> (por personal propio independiente del área auditada) o <strong>externas</strong> (por una entidad independiente; las certificaciones del ENS las emiten <strong>entidades de certificación acreditadas por ENAC</strong>).</p>
+<h3 id="isoiec-27001-y-27002">ISO/IEC 27001 y 27002</h3>
+<ul class="tema-lista">
+<li><strong>ISO/IEC 27001</strong>: requisitos para establecer, implantar, mantener y <strong>mejorar un SGSI</strong>; es <strong>certificable</strong>. Sigue el ciclo de mejora continua <strong>PDCA</strong> (<em>Plan-Do-Check-Act</em>: planificar, hacer, verificar, actuar). Su anexo A incluye <strong>93 controles</strong> (versión de 2022) en <strong>4 temas</strong>: organizativos, de personas, físicos y tecnológicos.</li>
+<li><strong>ISO/IEC 27002</strong>: guía de buenas prácticas que <strong>desarrolla esos controles</strong> (no certificable).</li>
+<li>El ENS y la ISO 27001 son <strong>compatibles</strong>: el CCN publica correspondencias entre ambos.</li>
+</ul>
+<h2 id="5-otras-normas-relacionadas" class="tema-h2">5. Otras normas relacionadas</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Norma</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RGPD</strong> (Reglamento UE 2016/679) y <strong>LOPDGDD</strong> (LO 3/2018)</td>
+<td>Protección de datos personales; obliga a aplicar medidas de seguridad apropiadas al riesgo y a notificar brechas a la autoridad de control en 72 h</td>
+</tr>
+<tr>
+<td><strong>Directiva NIS2</strong> (UE 2022/2555)</td>
+<td>Ciberseguridad de entidades esenciales e importantes (incluidas administraciones públicas): gestión de riesgos, notificación de incidentes, responsabilidad de la dirección</td>
+</tr>
+<tr>
+<td><strong>Esquema Nacional de Interoperabilidad (ENI)</strong></td>
+<td>RD 4/2010: interoperabilidad entre administraciones</td>
+</tr>
+<tr>
+<td><strong>Ley 40/2015</strong></td>
+<td>Régimen jurídico del sector público (base del ENS y el ENI)</td>
+</tr>
+</tbody>
+</table></div>
+<p>En el País Vasco, el <strong>Basque Cybersecurity Centre (BCSC / Ziurtasun Zentroa)</strong> apoya a empresas y administraciones.</p>
+<h2 id="6-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">6. Lo que cayó en el examen de 2023</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Contenido</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test 23</td>
+<td>Doble fuente y doble SAI</td>
+<td><strong>Disponibilidad</strong> (una de las dimensiones del ENS)</td>
+</tr>
+<tr>
+<td>Caso 4</td>
+<td>Acceso remoto de un tercero al PLC</td>
+<td>Requisito ENS de <strong>prevención ante otros sistemas interconectados</strong> y <strong>control de accesos</strong>: VPN nominativa, mínimo privilegio, coordinación con Sistemas</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>Para el caso práctico</strong><br>Cuando una pregunta implique a <strong>terceros</strong> (mantenedores, empresas externas) o <strong>datos personales</strong> (cámaras, registro con firma), menciona el <strong>ENS</strong> (medidas de acceso, servicios externos, registro de actividad) y el <strong>RGPD</strong> (contrato de encargado de tratamiento). El tribunal valoraba la <strong>coordinación interna</strong> y los <strong>supuestos innovadores</strong>.</th>
+</tr>
+</table></div>
+<h2 id="7-anclas-de-memoria" class="tema-h2">7. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>ENS = RD 311/2022</strong> (sustituye al RD 3/2010) · ámbito: <strong>todo el sector público</strong> y sus proveedores.</li>
+<li><strong>Dimensiones C-I-T-A-D.</strong> <strong>Niveles BAJO/MEDIO/ALTO.</strong> <strong>Categoría = la dimensión más alta.</strong></li>
+<li><strong>7 principios básicos</strong> (proceso integral, riesgos, prevención-detección-respuesta-conservación, líneas de defensa, vigilancia continua, reevaluación, diferenciación de responsabilidades).</li>
+<li><strong>Anexo II: 73 medidas en org, op y mp.</strong></li>
+<li><strong>Auditoría cada 2 años (media y alta); básica = autoevaluación.</strong></li>
+<li><strong>MAGERIT + PILAR · INES · LUCÍA · CCN-CERT · CCN-STIC.</strong></li>
+<li><strong>Riesgo = probabilidad × impacto · mitigar, transferir, evitar, aceptar.</strong></li>
+<li><strong>ISO 27001 = SGSI certificable (PDCA, 93 controles) · 27002 = guía de controles.</strong></li>
+</ul>
+<h2 id="8-no-confundir" class="tema-h2">8. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Esto</th>
+<th>No es esto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ENS</strong> (sector público, obligatorio)</td>
+<td><strong>ISO 27001</strong> (voluntaria, certificable por cualquiera)</td>
+</tr>
+<tr>
+<td><strong>Riesgo potencial</strong> (sin salvaguardas)</td>
+<td><strong>Riesgo residual</strong> (con salvaguardas)</td>
+</tr>
+<tr>
+<td><strong>Amenaza</strong></td>
+<td><strong>Vulnerabilidad</strong></td>
+</tr>
+<tr>
+<td><strong>Análisis de vulnerabilidades</strong> (escaneo)</td>
+<td><strong>Pentest</strong> (explotación controlada)</td>
+</tr>
+<tr>
+<td><strong>ISO 27001</strong> (requisitos)</td>
+<td><strong>ISO 27002</strong> (guía de controles)</td>
+</tr>
+<tr>
+<td><strong>CCN-CERT</strong> (sector público)</td>
+<td><strong>INCIBE-CERT</strong> (ciudadanos y empresas)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="9-posibles-trampas-de-examen" class="tema-h2">9. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li>Citar el RD 3/2010 como el ENS vigente.</li>
+<li>Decir que el ENS solo afecta a la Administración del Estado (afecta a todo el sector público, incluidas las entidades locales).</li>
+<li>Calcular la categoría como la media de los niveles (es el máximo).</li>
+<li>Pensar que transferir un riesgo lo elimina.</li>
+<li>Confundir auditoría con pentest.</li>
+<li>Olvidar la trazabilidad y la autenticidad como dimensiones.</li>
+</ul>
+<h2 id="10-posibles-preguntas-tipo-test" class="tema-h2">10. Posibles preguntas tipo test</h2>
+<ol type="1">
+<li>¿Qué real decreto regula el ENS vigente? → <strong>RD 311/2022</strong>.</li>
+<li>¿Cuántas dimensiones de seguridad considera el ENS? → <strong>Cinco (C, I, T, A, D)</strong>.</li>
+<li>¿Cada cuánto deben auditarse los sistemas de categoría media y alta? → <strong>Al menos cada dos años</strong>.</li>
+<li>¿Qué herramienta del CCN se usa para el análisis de riesgos? → <strong>PILAR</strong>.</li>
+<li>¿Qué ciclo de mejora sigue la ISO 27001? → <strong>PDCA</strong>.</li>
+</ol>
+<h2 id="11-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">11. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. Explica cómo se determina la categoría de un sistema en el ENS (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>Valoración de la información y los servicios en C, I, T, A, D.</li>
+<li>Niveles BAJO, MEDIO y ALTO según el perjuicio.</li>
+<li>Categoría = máximo nivel: BÁSICA, MEDIA o ALTA.</li>
+<li>Consecuencias: medidas del Anexo II y tipo de conformidad (autoevaluación o auditoría bienal).</li>
+</ul>
+<p><strong>2. Fases de un análisis de riesgos (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>Activos y dependencias; valoración.</li>
+<li>Amenazas, probabilidad y degradación; impacto y riesgo potencial.</li>
+<li>Salvaguardas y riesgo residual.</li>
+<li>Tratamiento (mitigar, transferir, evitar, aceptar) y aceptación por la dirección; MAGERIT/PILAR.</li>
+</ul>
+<h2 id="12-supuesto-practico" class="tema-h2">12. Supuesto práctico</h2>
+<p><strong>Enunciado:</strong> el mantenedor del sistema de climatización pide acceso remoto al PLC de telegestión del edificio (caso de 2023, pregunta 4).</p>
+<p><strong>Esquema de respuesta (enfoque ENS):</strong></p>
+<ol type="1">
+<li><strong>Análisis</strong>: el PLC es un <strong>activo</strong> cuya disponibilidad e integridad afectan al edificio; el acceso de un tercero es una <strong>interconexión con otro sistema</strong>.</li>
+<li><strong>Solución técnica</strong>: <strong>VPN nominativa</strong> (un usuario por técnico del mantenedor, con MFA) que solo permite llegar al <strong>PLC en su VLAN de telegestión</strong>, con reglas de cortafuegos de <strong>mínimo privilegio</strong> y, si es posible, activada <strong>solo bajo petición</strong> y durante una ventana; alternativa: NAT de puerto restringido por IP de origen (T14, T15).</li>
+<li><strong>Registro de la actividad</strong>: logs de conexión y, si se puede, grabación de sesiones.</li>
+<li><strong>Contrato</strong>: cláusulas de seguridad y confidencialidad; si hay datos personales, <strong>encargo de tratamiento</strong> (RGPD).</li>
+<li><strong>Coordinación</strong> con <strong>DTIK-Sistemas</strong> (VPN, reglas), con el <strong>responsable de seguridad</strong> (autorización) y con mantenimiento de edificios; <strong>documentar</strong> el acceso y revisarlo periódicamente.</li>
+</ol>
+<h2 id="13-matriz-de-memorizacion" class="tema-h2">13. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Dato clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ENS</td>
+<td>RD 311/2022 · Ley 40/2015 art. 156 · sector público + proveedores</td>
+</tr>
+<tr>
+<td>Dimensiones</td>
+<td>C · I · T · A · D</td>
+</tr>
+<tr>
+<td>Categorías</td>
+<td>BÁSICA · MEDIA · ALTA = máximo nivel</td>
+</tr>
+<tr>
+<td>Anexo II</td>
+<td>73 medidas · org · op · mp</td>
+</tr>
+<tr>
+<td>Conformidad</td>
+<td>Básica: autoevaluación · Media/Alta: auditoría cada 2 años</td>
+</tr>
+<tr>
+<td>CCN</td>
+<td>CCN-CERT · CCN-STIC · PILAR · INES · LUCÍA</td>
+</tr>
+<tr>
+<td>Riesgos</td>
+<td>MAGERIT v3 · probabilidad × impacto · potencial → residual</td>
+</tr>
+<tr>
+<td>Tratamiento</td>
+<td>Mitigar · transferir · evitar · aceptar</td>
+</tr>
+<tr>
+<td>ISO</td>
+<td>27001 SGSI certificable (PDCA, 93 controles) · 27002 guía</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="14-resumen-final-si-manana-fuera-el-examen" class="tema-h2">14. Resumen final: si mañana fuera el examen</h2>
+<p>El <strong>ENS (RD 311/2022)</strong> obliga a <strong>todo el sector público</strong> (incluidas entidades locales como DonostiaTIK) y a sus proveedores. Se basa en <strong>siete principios básicos</strong> (proceso integral, gestión por riesgos, prevención-detección-respuesta-conservación, líneas de defensa, vigilancia continua, reevaluación y diferenciación de responsabilidades) y en <strong>requisitos mínimos</strong> desarrollados en la política de seguridad. Cada sistema se valora en las <strong>cinco dimensiones (C-I-T-A-D)</strong> con niveles <strong>bajo, medio o alto</strong>, y su <strong>categoría es el máximo</strong> (<strong>básica, media o alta</strong>), que determina las <strong>73 medidas del Anexo II</strong> (org, op, mp) y la <strong>auditoría bienal</strong> en media y alta. El <strong>análisis de riesgos</strong> (<strong>MAGERIT + PILAR</strong>) identifica activos, amenazas e impacto, calcula el <strong>riesgo potencial y residual</strong> y decide <strong>mitigar, transferir, evitar o aceptar</strong>. El diagnóstico se completa con <strong>auditorías</strong> (ENS, <strong>ISO 27001</strong>), <strong>análisis de vulnerabilidades</strong> y <strong>pentests</strong>.</p>
+<h2 id="15-actualidad-datos-fechados" class="tema-h2">15. Actualidad — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong></th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li>La <strong>Directiva NIS2</strong> debía transponerse antes del 17 de octubre de 2024; España tramita su transposición mediante una <strong>Ley de Coordinación y Gobernanza de la Ciberseguridad</strong> (anteproyecto aprobado en enero de 2025). Comprueba su estado en el momento del examen.</li>
+<li>El CCN ha publicado <strong>perfiles de cumplimiento específicos</strong> del ENS para entidades locales y adaptaciones para servicios en la nube.</li>
+<li>La certificación del ENS se ha extendido mucho entre los <strong>proveedores</strong> de las administraciones, que la exigen en los pliegos de contratación.</li>
+</ul>
+
+  </div>
+</article>

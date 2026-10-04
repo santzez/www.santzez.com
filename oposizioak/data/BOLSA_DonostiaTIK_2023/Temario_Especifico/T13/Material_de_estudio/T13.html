@@ -1,0 +1,582 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T13</div>
+    <h1 class="tema-cabecera__titulo">Seguridad de los sistemas de información. Virus y software maligno. Tipos. Métodos preventivos y reactivos. Sistemas antivirus y de protección. Sistemas de protección ante malware avanzado (soluciones de sandboxing…).</h1>
+    <div class="tema-cabecera__meta">Bloque 2 · Seguridad · Bolsa DonostiaTIK 2023 · Instalaciones y Comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-que-es-el-malware">1. Qué es el malware</a></li>
+<li><a href="#2-tipos-de-malware">2. Tipos de malware</a></li>
+<li><a href="#3-vectores-de-infeccion-e-ingenieria-social">3. Vectores de infección e ingeniería social</a></li>
+<li><a href="#4-metodos-preventivos">4. Métodos preventivos</a></li>
+<li><a href="#5-metodos-reactivos-respuesta-ante-una-infeccion">5. Métodos reactivos: respuesta ante una infección</a></li>
+<li><a href="#6-sistemas-antivirus-y-de-proteccion-del-puesto">6. Sistemas antivirus y de protección del puesto</a></li>
+<li><a href="#7-proteccion-ante-malware-avanzado-sandbox">7. Protección ante malware avanzado: sandbox</a></li>
+<li><a href="#8-lo-que-cayo-en-el-examen-de-2023">8. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#9-anclas-de-memoria">9. Anclas de memoria</a></li>
+<li><a href="#10-no-confundir">10. No confundir</a></li>
+<li><a href="#11-posibles-trampas-de-examen">11. Posibles trampas de examen</a></li>
+<li><a href="#12-posibles-preguntas-tipo-test">12. Posibles preguntas tipo test</a></li>
+<li><a href="#13-posibles-preguntas-cortas-con-esquema-de-respuesta">13. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#14-supuesto-practico">14. Supuesto práctico</a></li>
+<li><a href="#15-matriz-de-memorizacion">15. Matriz de memorización</a></li>
+<li><a href="#16-resumen-final-si-manana-fuera-el-examen">16. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#17-actualidad-datos-fechados">17. Actualidad — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — fronteras del tema</strong><br>Este tema trata el <strong>malware</strong> (tipos y vectores de infección), la <strong>ingeniería social</strong>, las medidas <strong>preventivas y reactivas</strong> y las soluciones <strong>antivirus, EPP, EDR/XDR y sandbox</strong>.<br><strong>T12</strong> → marco de gestión (ENS, riesgos). <strong>T14</strong> → cortafuegos. <strong>T17</strong> → IDS/IPS, filtrado web, antispam y sandbox <strong>de red</strong> (este tema se centra en el puesto). <strong>T16</strong> → MTD para móviles.</th>
+</tr>
+</table></div>
+<h2 id="1-que-es-el-malware" class="tema-h2">1. Qué es el malware</h2>
+<p><strong>Malware</strong> (<em>malicious software</em>) es cualquier software diseñado para <strong>dañar, espiar, robar, secuestrar o tomar el control</strong> de un sistema sin el consentimiento de su propietario. «Virus» se usa a menudo como sinónimo coloquial, pero es solo uno de sus tipos.</p>
+<h2 id="2-tipos-de-malware" class="tema-h2">2. Tipos de malware</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Qué hace</th>
+<th>Cómo se propaga</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Virus</strong></td>
+<td>Se <strong>adjunta a un fichero o programa</strong> legítimo y se ejecuta con él</td>
+<td><strong>Necesita que el usuario ejecute</strong> el fichero infectado</td>
+</tr>
+<tr>
+<td><strong>Gusano (<em>worm</em>)</strong></td>
+<td>Se <strong>replica solo</strong> por la red explotando vulnerabilidades</td>
+<td><strong>Sin intervención del usuario</strong> (WannaCry, 2017)</td>
+</tr>
+<tr>
+<td><strong>Troyano</strong></td>
+<td>Se <strong>disfraza de programa legítimo</strong> para que el usuario lo instale; abre la puerta a otras amenazas</td>
+<td>El usuario lo instala engañado</td>
+</tr>
+<tr>
+<td><strong>RAT</strong> (troyano de acceso remoto)</td>
+<td>Da al atacante <strong>control remoto</strong> del equipo</td>
+<td>Como un troyano</td>
+</tr>
+<tr>
+<td><em><strong>Backdoor</strong></em> (puerta trasera)</td>
+<td>Acceso oculto que evita la autenticación</td>
+<td>Instalado por otro malware o un atacante</td>
+</tr>
+<tr>
+<td><strong>Ransomware</strong></td>
+<td><strong>Cifra los ficheros</strong> (y a menudo <strong>roba los datos</strong>: doble extorsión) y pide un <strong>rescate</strong></td>
+<td>Phishing, RDP expuesto, vulnerabilidades</td>
+</tr>
+<tr>
+<td><strong>Spyware</strong></td>
+<td><strong>Espía</strong> la actividad y roba información</td>
+<td>Troyanos, apps</td>
+</tr>
+<tr>
+<td><em><strong>Keylogger</strong></em></td>
+<td><strong>Registra las pulsaciones</strong> del teclado (contraseñas)</td>
+<td>Troyanos</td>
+</tr>
+<tr>
+<td><em><strong>Infostealer</strong></em></td>
+<td>Roba <strong>credenciales, cookies de sesión y datos</strong> de navegadores</td>
+<td>Descargas falsas, <em>cracks</em></td>
+</tr>
+<tr>
+<td><strong>Adware</strong></td>
+<td>Muestra <strong>publicidad</strong> no deseada</td>
+<td>Programas gratuitos</td>
+</tr>
+<tr>
+<td><strong>Rootkit</strong></td>
+<td><strong>Se oculta</strong> en lo más profundo del sistema (núcleo) para esconder su actividad y la de otro malware</td>
+<td>Tras una intrusión; muy difícil de detectar</td>
+</tr>
+<tr>
+<td><strong>Bootkit</strong></td>
+<td>Rootkit que infecta el <strong>arranque</strong> (MBR/UEFI)</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Botnet</strong></td>
+<td>Red de equipos infectados (<strong>zombis</strong>) controlados por un servidor <strong>C&amp;C</strong> para lanzar <strong>DDoS</strong>, spam o fraude</td>
+<td>Gusanos, troyanos (Mirai en IoT, T8)</td>
+</tr>
+<tr>
+<td><strong>Cryptojacking</strong></td>
+<td>Usa los recursos del equipo para <strong>minar criptomonedas</strong></td>
+<td>Webs o malware</td>
+</tr>
+<tr>
+<td><em><strong>Wiper</strong></em></td>
+<td><strong>Destruye</strong> los datos (sin intención de rescate)</td>
+<td>Ataques de sabotaje</td>
+</tr>
+<tr>
+<td><strong>Malware sin ficheros (<em>fileless</em>)</strong></td>
+<td>Se ejecuta <strong>en memoria</strong> con herramientas legítimas del sistema (PowerShell, WMI)</td>
+<td>Difícil de detectar por firmas</td>
+</tr>
+<tr>
+<td><em><strong>Scareware</strong></em></td>
+<td>Falsos avisos de infección para que el usuario pague o instale algo</td>
+<td>Webs</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar la diferencia clave</strong><br><strong>Virus = necesita un anfitrión y que lo ejecutes. Gusano = se propaga solo por la red. Troyano = se disfraza de legítimo. Rootkit = se esconde.</strong></th>
+</tr>
+</table></div>
+<h3 id="amenazas-avanzadas">Amenazas avanzadas</h3>
+<ul class="tema-lista">
+<li><strong>Día cero (<em>zero-day</em>)</strong>: explota una vulnerabilidad <strong>aún no conocida o sin parche</strong>; las firmas no la detectan.</li>
+<li><strong>APT</strong> (<em>Advanced Persistent Threat</em>): ataque <strong>dirigido, sigiloso y prolongado</strong>, normalmente de grupos muy organizados o patrocinados por Estados, que busca permanecer dentro meses.</li>
+<li><strong>Ataque a la cadena de suministro</strong>: comprometer a un proveedor de software para llegar a sus clientes (SolarWinds, 2020).</li>
+<li><strong>Movimiento lateral</strong>: tras entrar en un equipo, el atacante salta a otros de la red.</li>
+</ul>
+<h2 id="3-vectores-de-infeccion-e-ingenieria-social" class="tema-h2">3. Vectores de infección e ingeniería social</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Vector</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Correo electrónico</strong></td>
+<td>Adjuntos maliciosos (Office con macros, ZIP, ISO), enlaces a webs falsas</td>
+</tr>
+<tr>
+<td><strong>Navegación</strong></td>
+<td>Descargas falsas, publicidad maliciosa (<em>malvertising</em>), <em><strong>drive-by download</strong></em> (infección al visitar una web vulnerable)</td>
+</tr>
+<tr>
+<td><strong>Soportes extraíbles</strong></td>
+<td>USB infectados</td>
+</tr>
+<tr>
+<td><strong>Vulnerabilidades</strong></td>
+<td>Software y sistemas sin parchear expuestos a Internet (VPN, servidores web)</td>
+</tr>
+<tr>
+<td><strong>Accesos remotos</strong></td>
+<td><strong>RDP</strong> expuesto, credenciales robadas</td>
+</tr>
+<tr>
+<td><strong>Mensajería</strong></td>
+<td>SMS, WhatsApp, redes sociales</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Ingeniería social</strong>: manipular a las personas para que revelen información o hagan algo que perjudica a la organización.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Técnica</th>
+<th>Qué es</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Phishing</strong></td>
+<td>Correo fraudulento que suplanta a una entidad para robar credenciales o instalar malware</td>
+</tr>
+<tr>
+<td><em><strong>Spear phishing</strong></em></td>
+<td>Phishing <strong>dirigido</strong> a una persona o un departamento concreto, con información personalizada</td>
+</tr>
+<tr>
+<td><em><strong>Whaling</strong></em></td>
+<td>Spear phishing dirigido a <strong>directivos</strong></td>
+</tr>
+<tr>
+<td><strong>Smishing</strong></td>
+<td><strong>Phishing por SMS</strong></td>
+</tr>
+<tr>
+<td><strong>Vishing</strong></td>
+<td>Phishing por <strong>llamada de voz</strong> (falso técnico, falso banco)</td>
+</tr>
+<tr>
+<td><strong>Fraude del CEO / BEC</strong></td>
+<td>Suplantación de un directivo o un proveedor para ordenar una <strong>transferencia</strong> o cambiar una cuenta bancaria</td>
+</tr>
+<tr>
+<td><em><strong>Pretexting</strong></em></td>
+<td>Inventar una historia para obtener información</td>
+</tr>
+<tr>
+<td><em><strong>Baiting</strong></em></td>
+<td>Dejar un cebo (USB «olvidado»)</td>
+</tr>
+<tr>
+<td><em><strong>Tailgating</strong></em></td>
+<td>Colarse físicamente detrás de un autorizado</td>
+</tr>
+<tr>
+<td><em><strong>Quishing</strong></em></td>
+<td>Phishing mediante <strong>códigos QR</strong></td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 28</strong><br>El <strong>smishing</strong> es un <strong>tipo de ciberataque basado en mensajería SMS</strong> (SMS + phishing). Las otras opciones mezclaban términos de cifrado, redes privadas virtuales y calidad de VoIP.</th>
+</tr>
+</table></div>
+<h2 id="4-metodos-preventivos" class="tema-h2">4. Métodos preventivos</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Medida</th>
+<th>Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Actualizaciones y parches</strong></td>
+<td>Cerrar las vulnerabilidades (sistemas, aplicaciones, firmware)</td>
+</tr>
+<tr>
+<td><strong>Protección del puesto</strong></td>
+<td>Antivirus/<strong>EPP</strong> y <strong>EDR</strong> en todos los equipos y servidores</td>
+</tr>
+<tr>
+<td><strong>Mínimo privilegio</strong></td>
+<td>Usuarios <strong>sin permisos de administrador</strong>; cuentas privilegiadas separadas</td>
+</tr>
+<tr>
+<td><strong>Control de aplicaciones</strong></td>
+<td>Solo se ejecuta software autorizado (listas blancas, AppLocker); bloquear macros de Office de Internet</td>
+</tr>
+<tr>
+<td><strong>Filtrado del correo</strong></td>
+<td>Antispam, antimalware, <strong>sandbox</strong> de adjuntos, reescritura de enlaces; <strong>SPF/DKIM/DMARC</strong> (T10, T17)</td>
+</tr>
+<tr>
+<td><strong>Filtrado web y DNS</strong></td>
+<td>Bloquear dominios maliciosos y categorías de riesgo (T17)</td>
+</tr>
+<tr>
+<td><strong>Segmentación</strong></td>
+<td>VLAN y cortafuegos internos para frenar el <strong>movimiento lateral</strong></td>
+</tr>
+<tr>
+<td><strong>MFA</strong></td>
+<td>Que una contraseña robada no baste</td>
+</tr>
+<tr>
+<td><strong>Copias de seguridad</strong></td>
+<td><strong>3-2-1</strong> con una copia <strong>inmutable o desconectada</strong>; probar la restauración</td>
+</tr>
+<tr>
+<td><strong>Bloqueo de USB</strong></td>
+<td>Por GPO o por el EDR</td>
+</tr>
+<tr>
+<td><strong>Concienciación y formación</strong></td>
+<td>El usuario es la primera línea de defensa: cursos y <strong>simulaciones de phishing</strong></td>
+</tr>
+<tr>
+<td><strong>Bastionado</strong></td>
+<td>Configuraciones seguras (guías CCN-STIC), desactivar servicios innecesarios (SMBv1, RDP expuesto)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="5-metodos-reactivos-respuesta-ante-una-infeccion" class="tema-h2">5. Métodos reactivos: respuesta ante una infección</h2>
+<p>Fases de la gestión de incidentes (NIST SP 800-61 y guía CCN-STIC 817):</p>
+<ol type="1">
+<li><strong>Preparación</strong>: procedimientos, herramientas, contactos, copias.</li>
+<li><strong>Detección y análisis</strong>: alertas del EDR, del SIEM o avisos de usuarios; determinar alcance y gravedad.</li>
+<li><strong>Contención</strong>: <strong>aislar el equipo de la red</strong> (desconectar el cable o el wifi, o aislarlo desde la consola del EDR) <strong>sin apagarlo</strong> (se perdería la evidencia en memoria); bloquear cuentas comprometidas, IP y dominios.</li>
+<li><strong>Erradicación</strong>: eliminar el malware y la causa (parchear, cambiar credenciales); en caso de duda, <strong>reinstalar desde cero</strong>.</li>
+<li><strong>Recuperación</strong>: <strong>restaurar desde copias limpias</strong>, vigilar que no reaparezca.</li>
+<li><strong>Lecciones aprendidas</strong>: informe, mejoras y <strong>notificación</strong> (al <strong>CCN-CERT</strong> en el sector público; a la <strong>AEPD</strong> en 72 h si hay datos personales afectados, T12).</li>
+</ol>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>ANTE UN RANSOMWARE</strong><br><strong>Aislar</strong> los equipos afectados (y desconectar las unidades de red), <strong>no pagar</strong> el rescate (no garantiza recuperar los datos y financia a los delincuentes), <strong>conservar las evidencias</strong>, <strong>avisar</strong> al responsable de seguridad y al CCN-CERT, <strong>comprobar las copias</strong> antes de restaurar (que no estén cifradas) y buscar el <strong>vector de entrada</strong> para cerrarlo. Recursos: <strong>No More Ransom</strong> (descifradores gratuitos) y la herramienta <strong>microCLAUDIA</strong> del CCN (vacunas contra ransomware).</th>
+</tr>
+</table></div>
+<h2 id="6-sistemas-antivirus-y-de-proteccion-del-puesto" class="tema-h2">6. Sistemas antivirus y de protección del puesto</h2>
+<h3 id="técnicas-de-detección">Técnicas de detección</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Técnica</th>
+<th>Cómo funciona</th>
+<th>Limitación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Firmas</strong></td>
+<td>Compara con una <strong>base de datos de malware conocido</strong> (patrones, hashes)</td>
+<td>No detecta lo nuevo (<strong>día cero</strong>)</td>
+</tr>
+<tr>
+<td><strong>Heurística</strong></td>
+<td>Busca <strong>características sospechosas</strong> en el código</td>
+<td>Falsos positivos</td>
+</tr>
+<tr>
+<td><strong>Comportamiento</strong></td>
+<td>Vigila <strong>lo que hace</strong> el programa en ejecución (cifrar ficheros en masa, inyectarse en procesos)</td>
+<td>Detecta después de que empiece la acción</td>
+</tr>
+<tr>
+<td><strong>Aprendizaje automático / nube</strong></td>
+<td>Modelos entrenados y reputación consultada en la nube</td>
+<td>Depende de la conectividad y del modelo</td>
+</tr>
+<tr>
+<td><em><strong>Sandboxing</strong></em></td>
+<td>Ejecuta el fichero sospechoso en un <strong>entorno aislado</strong> y observa su comportamiento antes de permitirlo</td>
+<td>Algunos malware detectan la sandbox y no se activan</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="epp-edr-xdr-y-mdr">EPP, EDR, XDR y MDR</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Solución</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Antivirus tradicional</strong></td>
+<td>Detección por firmas en el equipo</td>
+</tr>
+<tr>
+<td><strong>EPP</strong> (<em>Endpoint Protection Platform</em>)</td>
+<td><strong>Prevención</strong> en el puesto: antivirus de nueva generación (<strong>NGAV</strong>), cortafuegos del equipo, control de dispositivos y aplicaciones. <strong>Bloquea lo conocido</strong></td>
+</tr>
+<tr>
+<td><strong>EDR</strong> (<em>Endpoint Detection and Response</em>)</td>
+<td><strong>Detección y respuesta</strong>: registra continuamente la actividad del equipo (procesos, red, registro), <strong>detecta ataques en tiempo real</strong> por comportamiento, permite <strong>investigar (análisis forense)</strong>, <strong>aislar</strong> el equipo y <strong>responder</strong> de forma rápida</td>
+</tr>
+<tr>
+<td><strong>XDR</strong> (<em>Extended Detection and Response</em>)</td>
+<td>EDR <strong>ampliado</strong> a correo, red, nube e identidades, con correlación de todas las fuentes</td>
+</tr>
+<tr>
+<td><strong>MDR</strong> (<em>Managed Detection and Response</em>)</td>
+<td>EDR/XDR <strong>gestionado por un proveedor</strong> (un SOC 24×7)</td>
+</tr>
+<tr>
+<td><strong>MTD</strong> (<em>Mobile Threat Defense</em>)</td>
+<td>Equivalente para <strong>móviles</strong> (T16)</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 24</strong><br>Una herramienta para los <strong>puestos cliente</strong> que permita <strong>análisis forense</strong>, <strong>detectar ataques en tiempo real</strong> y <strong>responder de manera rápida y efectiva</strong> es un <strong>EDR</strong>. El <strong>EPP</strong> se centra en la <strong>prevención</strong>; el antivirus tradicional, en las firmas; la <strong>sandbox</strong> analiza ficheros en un entorno aislado.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar</strong><br><strong>EPP = Prevenir (P de prevención). EDR = Detectar y Responder (con forense). XDR = EDR eXtendido a todo. MDR = EDR gestionado.</strong></th>
+</tr>
+</table></div>
+<p>Productos de referencia (cambian con el tiempo): <strong>Microsoft Defender for Endpoint</strong>, CrowdStrike Falcon, SentinelOne, Sophos, Trend Micro, ESET, Palo Alto Cortex XDR, Bitdefender.</p>
+<h2 id="7-proteccion-ante-malware-avanzado-sandbox" class="tema-h2">7. Protección ante malware avanzado: sandbox</h2>
+<p>Una <strong>sandbox</strong> (caja de arena) es un <strong>entorno aislado y controlado</strong> (normalmente una máquina virtual instrumentada) donde se <strong>ejecuta o «detona»</strong> un fichero o una URL sospechosos para <strong>observar su comportamiento</strong> (qué ficheros crea, qué conexiones hace, si cifra datos) <strong>sin riesgo</strong> para la red real.</p>
+<ul class="tema-lista">
+<li>Detecta <strong>malware desconocido (día cero)</strong> que las firmas no ven.</li>
+<li>Se integra en el <strong>cortafuegos de nueva generación</strong>, la <strong>pasarela de correo</strong> (análisis de adjuntos antes de entregarlos) o el <strong>EDR</strong>.</li>
+<li>Variantes: <strong>CDR</strong> (<em>Content Disarm and Reconstruction</em>: «desinfecta» documentos reconstruyéndolos sin el contenido activo) y <strong>aislamiento del navegador</strong> (<em>browser isolation</em>).</li>
+<li>Limitaciones: añade <strong>latencia</strong> (el usuario espera unos minutos el adjunto) y hay malware que <strong>detecta</strong> que está en una sandbox y se queda inactivo.</li>
+</ul>
+<p>Productos: FortiSandbox, Palo Alto WildFire, Check Point SandBlast/Threat Emulation, Microsoft Defender for Office 365 (Safe Attachments).</p>
+<h3 id="marcos-de-referencia">Marcos de referencia</h3>
+<ul class="tema-lista">
+<li><strong>Cyber Kill Chain</strong> (Lockheed Martin): las fases de un ataque (reconocimiento, preparación del arma, entrega, explotación, instalación, mando y control, acciones sobre el objetivo). Romper cualquier eslabón detiene el ataque.</li>
+<li><strong>MITRE ATT&amp;CK</strong>: catálogo de <strong>tácticas y técnicas</strong> reales de los atacantes; lo usan los EDR y los SOC.</li>
+<li><strong>IOC</strong> (indicadores de compromiso): hashes, IP, dominios o ficheros que delatan una infección.</li>
+</ul>
+<h2 id="8-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">8. Lo que cayó en el examen de 2023</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Contenido</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test 24</td>
+<td>Herramienta de puesto con forense, detección en tiempo real y respuesta</td>
+<td><strong>EDR</strong></td>
+</tr>
+<tr>
+<td>Test 28</td>
+<td>Smishing</td>
+<td><strong>Ciberataque basado en mensajería SMS</strong></td>
+</tr>
+<tr>
+<td>Test 26 (relacionada)</td>
+<td>Sistemas que detectan indicios de ataque</td>
+<td>IDS (T17)</td>
+</tr>
+<tr>
+<td>OPE 2024, corta 4</td>
+<td>Cuatro ataques comunes y cómo protegerse</td>
+<td>Ransomware, phishing, troyanos, rootkit… con su protección específica</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="9-anclas-de-memoria" class="tema-h2">9. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>Virus = anfitrión + ejecución · gusano = solo, por la red · troyano = disfraz · rootkit = escondite · ransomware = cifra y extorsiona.</strong></li>
+<li><strong>Phishing (correo) · smishing (SMS) · vishing (voz) · spear (dirigido) · whaling (directivos) · BEC (fraude del CEO).</strong></li>
+<li><strong>Prevención: parches, mínimo privilegio, EPP/EDR, filtrado, MFA, copias 3-2-1, formación.</strong></li>
+<li><strong>Respuesta: preparar → detectar → contener (aislar sin apagar) → erradicar → recuperar → aprender.</strong></li>
+<li><strong>Firmas · heurística · comportamiento · sandbox.</strong></li>
+<li><strong>EPP previene · EDR detecta, investiga y responde · XDR extendido · MDR gestionado.</strong></li>
+</ul>
+<h2 id="10-no-confundir" class="tema-h2">10. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Esto</th>
+<th>No es esto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Virus</strong> (necesita ejecución)</td>
+<td><strong>Gusano</strong> (se propaga solo)</td>
+</tr>
+<tr>
+<td><strong>EPP</strong> (prevención)</td>
+<td><strong>EDR</strong> (detección, forense y respuesta)</td>
+</tr>
+<tr>
+<td><strong>Smishing</strong> (SMS)</td>
+<td><strong>Vishing</strong> (voz)</td>
+</tr>
+<tr>
+<td><strong>Sandbox</strong> (ejecutar aislado)</td>
+<td><strong>Cuarentena</strong> (aislar un fichero ya detectado)</td>
+</tr>
+<tr>
+<td><strong>Firma</strong> (malware conocido)</td>
+<td><strong>Comportamiento</strong> (lo desconocido)</td>
+</tr>
+<tr>
+<td><strong>IOC</strong> (evidencia de infección)</td>
+<td><strong>CVE</strong> (identificador de vulnerabilidad)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="11-posibles-trampas-de-examen" class="tema-h2">11. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li>Decir que el gusano necesita que el usuario lo ejecute.</li>
+<li>Confundir EPP y EDR.</li>
+<li>Apagar el equipo infectado (se pierde la memoria) en lugar de aislarlo.</li>
+<li>Pensar que pagar el rescate garantiza recuperar los datos.</li>
+<li>Creer que un antivirus por firmas detecta los ataques de día cero.</li>
+<li>Confundir smishing con un algoritmo o un protocolo.</li>
+</ul>
+<h2 id="12-posibles-preguntas-tipo-test" class="tema-h2">12. Posibles preguntas tipo test</h2>
+<ol type="1">
+<li>¿Qué malware se propaga sin intervención del usuario? → <strong>Gusano</strong>.</li>
+<li>¿Qué malware se oculta en el núcleo del sistema? → <strong>Rootkit</strong>.</li>
+<li>¿Cómo se llama el phishing por llamada telefónica? → <strong>Vishing</strong>.</li>
+<li>¿Qué técnica ejecuta un fichero en un entorno aislado para observarlo? → <strong>Sandboxing</strong>.</li>
+<li>¿Qué es lo primero que se hace con un equipo con ransomware? → <strong>Aislarlo de la red</strong>.</li>
+</ol>
+<h2 id="13-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">13. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. Describe 4 tipos de ataque comunes y cómo protegerse de cada uno (2 puntos; OPE 2024).</strong></p>
+<ul class="tema-lista">
+<li><strong>Ransomware</strong> → copias 3-2-1 inmutables, parches, EDR, sin RDP expuesto.</li>
+<li><strong>Phishing</strong> → formación, filtrado de correo, MFA, SPF/DKIM/DMARC.</li>
+<li><strong>Troyanos/infostealers</strong> → control de aplicaciones, sin permisos de administrador, EDR.</li>
+<li><strong>Fraude del CEO / BEC</strong> → verificación por otro canal de cualquier cambio de cuenta o transferencia.</li>
+<li>(La rúbrica premiaba <strong>4 tipos</strong>, <strong>detalle</strong> y <strong>protección específica de cada uno</strong>.)</li>
+</ul>
+<p><strong>2. Diferencias entre antivirus, EPP y EDR (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>Antivirus: firmas.</li>
+<li>EPP: prevención (NGAV, control de dispositivos y aplicaciones).</li>
+<li>EDR: telemetría continua, detección por comportamiento, forense, aislamiento y respuesta.</li>
+<li>XDR y MDR como evolución.</li>
+</ul>
+<h2 id="14-supuesto-practico" class="tema-h2">14. Supuesto práctico</h2>
+<p><strong>Enunciado:</strong> un usuario de la oficina avisa de que sus ficheros han cambiado de extensión y aparece una nota que pide un rescate.</p>
+<p><strong>Esquema de respuesta:</strong></p>
+<ol type="1">
+<li><strong>Contención inmediata</strong>: <strong>desconectar el equipo de la red</strong> (cable y wifi) o aislarlo desde la consola del <strong>EDR</strong>; <strong>no apagarlo</strong>. Desconectar las unidades de red compartidas y comprobar si otros equipos o servidores están afectados.</li>
+<li><strong>Aviso</strong>: al responsable de seguridad y a <strong>Sistemas</strong>; registro del incidente; <strong>notificación al CCN-CERT</strong> (y a la AEPD si hay datos personales).</li>
+<li><strong>Análisis</strong>: identificar la variante (nota de rescate, extensión), el <strong>vector de entrada</strong> (correo, descarga, RDP) y el alcance; revisar los logs del EDR, el cortafuegos y el correo.</li>
+<li><strong>Erradicación y recuperación</strong>: reinstalar el equipo, <strong>restaurar desde copias limpias</strong> (verificando que no estén cifradas), cambiar las credenciales del usuario; buscar descifradores en No More Ransom.</li>
+<li><strong>Lecciones aprendidas</strong>: cerrar el vector (bloqueo de adjuntos, formación, parches), revisar la estrategia de copias (inmutables) y documentar el incidente (gestión de problemas, T20).</li>
+</ol>
+<h2 id="15-matriz-de-memorizacion" class="tema-h2">15. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Dato clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tipos</td>
+<td>Virus · gusano · troyano · RAT · ransomware · spyware · keylogger · rootkit · botnet · fileless</td>
+</tr>
+<tr>
+<td>Ingeniería social</td>
+<td>Phishing · spear · whaling · smishing · vishing · BEC · quishing</td>
+</tr>
+<tr>
+<td>Prevención</td>
+<td>Parches · mínimo privilegio · EPP/EDR · filtrado · MFA · 3-2-1 · formación</td>
+</tr>
+<tr>
+<td>Respuesta</td>
+<td>Preparación · detección · contención · erradicación · recuperación · lecciones</td>
+</tr>
+<tr>
+<td>Detección</td>
+<td>Firmas · heurística · comportamiento · ML · sandbox</td>
+</tr>
+<tr>
+<td>Soluciones</td>
+<td>Antivirus · EPP (prevenir) · EDR (detectar y responder) · XDR · MDR · MTD</td>
+</tr>
+<tr>
+<td>Marcos</td>
+<td>Cyber Kill Chain · MITRE ATT&amp;CK · IOC</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="16-resumen-final-si-manana-fuera-el-examen" class="tema-h2">16. Resumen final: si mañana fuera el examen</h2>
+<p>El <strong>malware</strong> incluye <strong>virus</strong> (necesitan un anfitrión y ejecución), <strong>gusanos</strong> (se propagan solos), <strong>troyanos</strong> (disfrazados), <strong>ransomware</strong> (cifra y extorsiona), <strong>spyware</strong>, <strong>rootkits</strong> (se ocultan) y <strong>botnets</strong>. Entra sobre todo por <strong>ingeniería social</strong>: <strong>phishing</strong> (correo), <strong>smishing</strong> (SMS), <strong>vishing</strong> (voz) o <strong>BEC</strong>. Se <strong>previene</strong> con parches, <strong>mínimo privilegio</strong>, protección del puesto, filtrado de correo y web, <strong>MFA</strong>, <strong>copias 3-2-1 inmutables</strong> y <strong>formación</strong>; ante una infección se <strong>aísla sin apagar</strong>, se erradica, se <strong>restaura</strong> y se notifica. El <strong>antivirus</strong> usa firmas, heurística y comportamiento; el <strong>EPP</strong> previene, el <strong>EDR detecta en tiempo real, permite el forense y responde</strong>, y la <strong>sandbox</strong> detona lo sospechoso en un entorno aislado para cazar el <strong>día cero</strong>.</p>
+<h2 id="17-actualidad-datos-fechados" class="tema-h2">17. Actualidad — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong></th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li>El <strong>ransomware como servicio (RaaS)</strong> y la <strong>doble o triple extorsión</strong> (cifrado + filtración + DDoS o contacto con clientes) siguen siendo la principal amenaza para las administraciones locales.</li>
+<li>Crecen los <em><strong>infostealers</strong></em> y el robo de <strong>cookies de sesión</strong>, que permiten saltarse el MFA; las <strong>llaves de acceso (<em>passkeys</em>)</strong> y el MFA resistente a phishing (FIDO2) son la respuesta.</li>
+<li>La <strong>IA generativa</strong> facilita phishing más creíble y en euskera o castellano sin faltas, y fraudes con <strong>voz clonada</strong> (vishing).</li>
+</ul>
+
+  </div>
+</article>

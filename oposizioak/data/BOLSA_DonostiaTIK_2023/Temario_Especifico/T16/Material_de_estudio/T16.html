@@ -1,0 +1,451 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T16</div>
+    <h1 class="tema-cabecera__titulo">Plataformado y securización de terminales móviles. Conceptos sobre soluciones MDM y MTD.</h1>
+    <div class="tema-cabecera__meta">Bloque 2 · Seguridad · Bolsa DonostiaTIK 2023 · Instalaciones y Comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-plataformado-y-securizacion">1. Plataformado y securización</a></li>
+<li><a href="#2-mdm-mam-y-uem">2. MDM, MAM y UEM</a></li>
+<li><a href="#3-modelos-de-propiedad-y-uso">3. Modelos de propiedad y uso</a></li>
+<li><a href="#4-plataformas-de-inscripcion-por-sistema">4. Plataformas de inscripción por sistema</a></li>
+<li><a href="#5-mtd-proteccion-frente-a-amenazas-moviles">5. MTD: protección frente a amenazas móviles</a></li>
+<li><a href="#6-aprovisionar-las-tabletas-de-registro-caso-2023-pregunta-5">6. Aprovisionar las tabletas de registro (caso 2023, pregunta 5)</a></li>
+<li><a href="#7-buenas-practicas-de-la-movilidad-corporativa">7. Buenas prácticas de la movilidad corporativa</a></li>
+<li><a href="#8-lo-que-cayo-en-el-examen-de-2023">8. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#9-anclas-de-memoria">9. Anclas de memoria</a></li>
+<li><a href="#10-no-confundir">10. No confundir</a></li>
+<li><a href="#11-posibles-trampas-de-examen">11. Posibles trampas de examen</a></li>
+<li><a href="#12-posibles-preguntas-tipo-test">12. Posibles preguntas tipo test</a></li>
+<li><a href="#13-posibles-preguntas-cortas-con-esquema-de-respuesta">13. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#14-supuesto-practico">14. Supuesto práctico</a></li>
+<li><a href="#15-matriz-de-memorizacion">15. Matriz de memorización</a></li>
+<li><a href="#16-resumen-final-si-manana-fuera-el-examen">16. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#17-actualidad-datos-fechados">17. Actualidad — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — fronteras del tema</strong><br>Este tema trata la <strong>gestión centralizada (MDM/UEM)</strong> y la <strong>protección frente a amenazas (MTD)</strong> de móviles y tabletas, los <strong>modelos de propiedad</strong> (BYOD, COPE…) y el <strong>plataformado</strong> (preparación y puesta en servicio).<br><strong>T7</strong> → sistemas operativos móviles y su configuración manual. <strong>T13</strong> → malware en general y EDR. <strong>T5</strong> → wifi corporativa y 802.1X.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Uno de los temas más rentables de 2023</strong><br>Salió en el <strong>test (pregunta 25)</strong>, en las <strong>cortas (pregunta 5: MDM y BYOD)</strong> y en el <strong>caso (pregunta 5: aprovisionar las tabletas de registro)</strong>.</th>
+</tr>
+</table></div>
+<h2 id="1-plataformado-y-securizacion" class="tema-h2">1. Plataformado y securización</h2>
+<p><strong>Plataformar</strong> un terminal es <strong>prepararlo para su uso corporativo</strong>: dejarlo con el sistema actualizado, inscrito en la gestión centralizada, configurado (redes, correo, certificados), con las aplicaciones necesarias y las políticas de seguridad aplicadas, listo para entregar al usuario.</p>
+<p><strong>Securizar</strong> (bastionar) es <strong>reducir su superficie de ataque</strong>: bloqueo con PIN o biometría, cifrado, actualizaciones, restricciones (fuentes desconocidas, depuración USB, capturas o tethering según el caso), solo apps autorizadas y protección frente a amenazas. El CCN publica guías CCN-STIC de seguridad para Android e iOS.</p>
+<p>Hacerlo <strong>a mano en cada dispositivo</strong> es inviable en una flota: por eso existen las soluciones <strong>MDM</strong>.</p>
+<h2 id="2-mdm-mam-y-uem" class="tema-h2">2. MDM, MAM y UEM</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Sigla</th>
+<th>Significado</th>
+<th>Qué gestiona</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MDM</strong></td>
+<td><em>Mobile Device Management</em></td>
+<td>El <strong>dispositivo</strong>: inscripción, inventario, configuración, políticas, bloqueo y borrado</td>
+</tr>
+<tr>
+<td><strong>MAM</strong></td>
+<td><em>Mobile Application Management</em></td>
+<td>Las <strong>aplicaciones</strong>: distribución, configuración, actualización y protección de los datos dentro de las apps corporativas (sin gestionar todo el dispositivo)</td>
+</tr>
+<tr>
+<td><strong>MCM</strong></td>
+<td><em>Mobile Content Management</em></td>
+<td>Los <strong>documentos</strong> corporativos en el móvil</td>
+</tr>
+<tr>
+<td><strong>EMM</strong></td>
+<td><em>Enterprise Mobility Management</em></td>
+<td>MDM + MAM + MCM + identidad</td>
+</tr>
+<tr>
+<td><strong>UEM</strong></td>
+<td><em>Unified Endpoint Management</em></td>
+<td><strong>Todo tipo de equipos</strong> (móviles, Windows, macOS) desde una consola</td>
+</tr>
+</tbody>
+</table></div>
+<p>Productos de referencia: <strong>Microsoft Intune</strong>, <strong>Workspace ONE</strong> (antes VMware, hoy Omnissa), <strong>Ivanti (MobileIron)</strong>, IBM MaaS360, <strong>Jamf</strong> (Apple), <strong>Samsung Knox Suite</strong>, Google Endpoint Management.</p>
+<h3 id="funciones-de-un-mdm">Funciones de un MDM</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Área</th>
+<th>Funciones</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Inscripción (<em>enrollment</em>)</strong></td>
+<td>Alta del dispositivo: automática (<strong>Android Zero-touch, Samsung KME, Apple ADE</strong>) o manual (QR, app)</td>
+</tr>
+<tr>
+<td><strong>Inventario</strong></td>
+<td>Modelo, IMEI, número de serie, sistema y versión, aplicaciones instaladas, usuario, estado de cumplimiento</td>
+</tr>
+<tr>
+<td><strong>Configuración (perfiles)</strong></td>
+<td><strong>Wifi</strong> (incluido 802.1X con <strong>certificados</strong>), <strong>VPN</strong>, <strong>correo</strong> (ActiveSync/Outlook), APN, proxy, restricciones</td>
+</tr>
+<tr>
+<td><strong>Distribución de aplicaciones</strong></td>
+<td><strong>Tienda corporativa</strong> (Google Play gestionado, Apple VPP), instalación <strong>silenciosa</strong> u opcional, <strong>actualizaciones</strong>, configuración de las apps</td>
+</tr>
+<tr>
+<td><strong>Políticas de seguridad</strong></td>
+<td><strong>PIN</strong> y complejidad, <strong>cifrado</strong>, bloqueo por inactividad, actualizaciones obligatorias, <strong>restricciones</strong> (cámara, USB, tethering, capturas, fuentes desconocidas, root)</td>
+</tr>
+<tr>
+<td><strong>Separación de datos</strong></td>
+<td><strong>Contenedor</strong> o <strong>perfil de trabajo</strong>: apps y datos corporativos separados de los personales</td>
+</tr>
+<tr>
+<td><strong>Acciones remotas</strong></td>
+<td><strong>Localizar</strong>, <strong>bloquear</strong>, <strong>borrar</strong> (completo o <strong>selectivo</strong>: solo los datos corporativos), reiniciar, enviar mensajes</td>
+</tr>
+<tr>
+<td><strong>Modo quiosco</strong></td>
+<td>Bloquear el dispositivo en <strong>una o varias apps</strong> (dispositivo dedicado)</td>
+</tr>
+<tr>
+<td><strong>Cumplimiento y acceso condicional</strong></td>
+<td>Si el dispositivo <strong>no cumple</strong> (sin PIN, rooteado, sistema antiguo), se le <strong>bloquea el acceso</strong> al correo o las aplicaciones</td>
+</tr>
+<tr>
+<td><strong>Geolocalización y geovallas</strong></td>
+<td>Políticas según la ubicación</td>
+</tr>
+<tr>
+<td><strong>Informes</strong></td>
+<td>Estado de la flota, cumplimiento, inventario</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 25 (cuál NO es una función del MDM)</strong><br><strong>Plataformado remoto, bloqueo remoto y distribución de aplicaciones</strong> son funciones del <strong>MDM</strong>. La <strong>protección frente a virus</strong> <strong>no lo es</strong>: corresponde a la solución <strong>MTD</strong> (o a un antivirus móvil).</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar</strong><br><strong>MDM = gestionar (configurar, inventariar, controlar, bloquear, borrar). MTD = defender (detectar amenazas).</strong> Se complementan: el MTD detecta y el MDM actúa.</th>
+</tr>
+</table></div>
+<h2 id="3-modelos-de-propiedad-y-uso" class="tema-h2">3. Modelos de propiedad y uso</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Modelo</th>
+<th>Propiedad</th>
+<th>Uso personal</th>
+<th>Gestión típica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>BYOD</strong> (<em>Bring Your Own Device</em>)</td>
+<td><strong>Empleado</strong></td>
+<td>Sí (el dispositivo es suyo)</td>
+<td><strong>Perfil de trabajo</strong> / contenedor / MAM: la organización <strong>solo gestiona lo corporativo</strong> y <strong>solo puede borrar</strong> lo corporativo</td>
+</tr>
+<tr>
+<td><strong>CYOD</strong> (<em>Choose Your Own Device</em>)</td>
+<td>Organización (el empleado elige de un catálogo)</td>
+<td>Según política</td>
+<td>Gestión completa</td>
+</tr>
+<tr>
+<td><strong>COPE</strong> (<em>Corporate-Owned, Personally Enabled</em>)</td>
+<td><strong>Organización</strong></td>
+<td><strong>Permitido</strong></td>
+<td>Gestión completa + espacio personal</td>
+</tr>
+<tr>
+<td><strong>COBO</strong> (<em>Corporate-Owned, Business Only</em>)</td>
+<td><strong>Organización</strong></td>
+<td><strong>No</strong></td>
+<td><strong>Totalmente gestionado</strong>; incluye los <strong>dispositivos dedicados</strong> (quiosco)</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="byod-con-mdm-pregunta-corta-5-de-2023">BYOD con MDM (pregunta corta 5 de 2023)</h3>
+<p><strong>¿Qué aporta un MDM al BYOD?</strong> Permite que los empleados usen su móvil personal <strong>sin poner en riesgo la información corporativa</strong> y <strong>sin invadir su privacidad</strong>:</p>
+<ol type="1">
+<li><strong>Distribución sencilla de aplicaciones</strong> corporativas (tienda gestionada).</li>
+<li><strong>Ejecutar solo las aplicaciones aprobadas</strong> por la organización en el espacio de trabajo.</li>
+<li><strong>Gestionar el inventario</strong> de aplicaciones (versiones, actualizaciones, licencias).</li>
+<li><strong>Separar las aplicaciones y los datos corporativos de los personales</strong> (<strong>perfil de trabajo / contenedor</strong>): no se puede copiar del correo corporativo a una app personal.</li>
+<li>Exigir unos <strong>mínimos de seguridad</strong> (PIN, cifrado, sistema actualizado) para acceder (<strong>acceso condicional</strong>).</li>
+<li><strong>Borrado selectivo</strong>: si el empleado se va o pierde el móvil, se borra <strong>solo lo corporativo</strong>.</li>
+</ol>
+<p>Y lo que <strong>no</strong> hace en BYOD: no ve las fotos, los mensajes ni el historial personal, ni puede borrar los datos personales. Debe acompañarse de una <strong>política de uso</strong> firmada por el empleado (y respetar el RGPD).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Criterios del tribunal (corta 5)</strong><br><strong>Qué aporta el MDM</strong> con explicación detallada (1 punto) y <strong>al menos 4 conceptos operativos</strong> válidos (1 punto): distribución de apps, solo apps aprobadas, inventario de apps y <strong>separación corporativo/personal</strong>.</th>
+</tr>
+</table></div>
+<h2 id="4-plataformas-de-inscripcion-por-sistema" class="tema-h2">4. Plataformas de inscripción por sistema</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Sistema</th>
+<th>Inscripción automática</th>
+<th>Modos de gestión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Android</strong></td>
+<td><strong>Zero-touch</strong> (Google), <strong>Knox Mobile Enrollment</strong> (Samsung), código <strong>QR</strong>, NFC</td>
+<td><strong>Android Enterprise</strong>: totalmente gestionado (COBO), <strong>perfil de trabajo</strong> (BYOD/COPE), <strong>dispositivo dedicado</strong> (quiosco)</td>
+</tr>
+<tr>
+<td><strong>iOS / iPadOS</strong></td>
+<td><strong>Apple Business Manager + ADE</strong> (inscripción automática al encender)</td>
+<td><strong>Supervisado</strong> (corporativo, control completo), inscripción de usuario (BYOD), <strong>modo app única</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Apple Business Manager (ABM)</strong> y <strong>Google Play gestionado</strong> permiten además <strong>comprar y asignar licencias</strong> de apps (Apple VPP) y distribuirlas sin cuentas personales.</p>
+<h2 id="5-mtd-proteccion-frente-a-amenazas-moviles" class="tema-h2">5. MTD: protección frente a amenazas móviles</h2>
+<p>Un <strong>MTD</strong> (<em>Mobile Threat Defense</em>) es una solución de seguridad (normalmente una app en el dispositivo + un servicio en la nube) que <strong>detecta y responde a amenazas</strong> en móviles y tabletas:</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Amenazas que detecta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Dispositivo</strong></td>
+<td><strong>Root/jailbreak</strong>, sistema operativo vulnerable o desactualizado, configuraciones inseguras</td>
+</tr>
+<tr>
+<td><strong>Aplicaciones</strong></td>
+<td><strong>Apps maliciosas</strong> o de riesgo (permisos excesivos, fugas de datos), instalación desde fuentes desconocidas</td>
+</tr>
+<tr>
+<td><strong>Red</strong></td>
+<td><strong>Wifi maliciosas</strong>, ataques de intermediario (<em><strong>man-in-the-middle</strong></em>), certificados falsos, SSL stripping</td>
+</tr>
+<tr>
+<td><strong>Phishing</strong></td>
+<td>Enlaces maliciosos en <strong>SMS (smishing)</strong>, correo, mensajería y navegadores</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Integración MTD + MDM</strong>: el MTD <strong>calcula el nivel de riesgo</strong> del dispositivo y lo comunica al MDM, que aplica <strong>acciones automáticas</strong> (bloquear el acceso al correo o la VPN mediante <strong>acceso condicional</strong>, avisar al usuario, quitar el perfil corporativo).</p>
+<p>Productos: <strong>Lookout</strong>, <strong>Zimperium</strong>, <strong>Check Point Harmony Mobile</strong>, <strong>Microsoft Defender for Endpoint</strong> (para móviles), Jamf Protect, <strong>Samsung Knox</strong> (protección integrada).</p>
+<h2 id="6-aprovisionar-las-tabletas-de-registro-caso-2023-pregunta-5" class="tema-h2">6. Aprovisionar las tabletas de registro (caso 2023, pregunta 5)</h2>
+<p>Las tabletas de firma eran <strong>Android</strong>, por <strong>wifi</strong> (SSID de <strong>registro</strong>, VLAN 16), para <strong>una aplicación de registro</strong>, y <strong>ya existía una configuración MDM similar para otras oficinas</strong>. Pasos conceptuales, <strong>en orden</strong>:</p>
+<ol type="1">
+<li><strong>Planificación</strong>: número de tabletas, ubicación, <strong>app de firma</strong> y su configuración, <strong>reutilizar el perfil</strong> ya existente de otras oficinas (grupo, políticas, apps) y adaptar lo específico de esta sede.</li>
+<li><strong>Alta en el inventario y en el MDM</strong>: registrar números de serie o IMEI y <strong>pre-registrarlas</strong> para la <strong>inscripción automática</strong> (<strong>Zero-touch / Knox Mobile Enrollment</strong>) o preparar el <strong>código QR</strong> de Android Enterprise; asignarlas al <strong>grupo</strong> de tabletas de registro de la nueva oficina.</li>
+<li><strong>Perfil de configuración</strong>: modo <strong>dispositivo dedicado (quiosco)</strong> con la app de firma; <strong>wifi del SSID de registro</strong> (WPA2/WPA3-Enterprise con <strong>certificado</strong> de dispositivo o PSK según la configuración corporativa); restricciones (sin ajustes, sin otras apps, sin USB ni cámara si no se necesita); actualizaciones del sistema controladas.</li>
+<li><strong>Aplicaciones</strong>: <strong>distribuir la app de registro y firma</strong> desde Google Play gestionado con su <strong>configuración gestionada</strong> (servidor, oficina, puesto).</li>
+<li><strong>Red</strong>: comprobar con <strong>comunicaciones</strong> que el SSID de registro emite en los <strong>2 AP</strong> de la oficina, que la <strong>VLAN 16 (/28)</strong> tiene <strong>direcciones suficientes</strong> (14 hosts: AP, tabletas y puerta de enlace) y que el cortafuegos permite a esas tabletas llegar al servidor de la aplicación.</li>
+<li><strong>Inscripción y verificación</strong>: encender, conectar, comprobar que se inscriben, reciben el perfil, entran en quiosco y <strong>firman</strong> contra la aplicación; prueba con el personal de atención.</li>
+<li><strong>Entrega y documentación</strong>: asignación a cada <strong>puesto de atención</strong>, etiquetado, actualización del inventario y breve <strong>guía</strong> para el personal; registrar la tarea.</li>
+</ol>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>Puntos «extra» (supuesto innovador)</strong><br>Asignar las tabletas a cada <strong>puesto</strong> (y no a personas), <strong>geovalla</strong> en la oficina, <strong>bloqueo y borrado remoto</strong> si se pierde una, MTD si se conectan a otras redes, <strong>tableta de reserva</strong> preconfigurada para sustituir una averiada en minutos y alertas de <strong>batería y desconexión</strong> en el MDM.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Criterios del tribunal (caso, pregunta 5)</strong><br><strong>Enumerar y detallar todos los pasos</strong> para la puesta en marcha (2 puntos), <strong>con una secuencia temporal válida</strong> (0,75) y un <strong>supuesto innovador</strong> (0,25).</th>
+</tr>
+</table></div>
+<h2 id="7-buenas-practicas-de-la-movilidad-corporativa" class="tema-h2">7. Buenas prácticas de la movilidad corporativa</h2>
+<ul class="tema-lista">
+<li><strong>Política de uso</strong> de dispositivos móviles aprobada y aceptada por los usuarios.</li>
+<li><strong>Inscripción obligatoria</strong> de todo dispositivo que acceda a datos corporativos.</li>
+<li><strong>Actualizaciones</strong> del sistema y de las apps; retirar los modelos sin soporte.</li>
+<li><strong>Cifrado</strong>, PIN robusto o biometría, bloqueo automático.</li>
+<li><strong>Acceso condicional</strong>: sin cumplimiento, no hay acceso.</li>
+<li><strong>Borrado</strong> al dar de baja el dispositivo o cuando el empleado deja la organización.</li>
+<li><strong>Concienciación</strong> frente al smishing y las wifi públicas.</li>
+</ul>
+<h2 id="8-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">8. Lo que cayó en el examen de 2023</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Contenido</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test 25</td>
+<td>Qué NO es función de un MDM</td>
+<td><strong>Protección frente a virus</strong> (es del MTD)</td>
+</tr>
+<tr>
+<td>Corta 5</td>
+<td>MDM y BYOD</td>
+<td>Qué aporta + conceptos operativos (apps, apps aprobadas, inventario, separación)</td>
+</tr>
+<tr>
+<td>Caso 5</td>
+<td>Aprovisionamiento de tabletas Android de registro</td>
+<td>Pasos en orden con el MDM existente (apartado 6)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="9-anclas-de-memoria" class="tema-h2">9. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>Plataformar = preparar para el uso corporativo · securizar = reducir la superficie de ataque.</strong></li>
+<li><strong>MDM = dispositivo · MAM = apps · UEM = todos los equipos.</strong></li>
+<li><strong>MDM: inscripción, inventario, perfiles (wifi, VPN, correo, certificados), apps, políticas, localizar, bloquear, borrar, quiosco, cumplimiento.</strong></li>
+<li><strong>MDM NO es antivirus: eso es el MTD.</strong></li>
+<li><strong>BYOD (del empleado, perfil de trabajo, borrado selectivo) · COPE · COBO (solo trabajo, quiosco) · CYOD.</strong></li>
+<li><strong>Android: Zero-touch, KME, QR · Apple: ABM + ADE, supervisado.</strong></li>
+<li><strong>MTD: dispositivo, apps, red (MitM, wifi falsas) y phishing → riesgo → acceso condicional con el MDM.</strong></li>
+</ul>
+<h2 id="10-no-confundir" class="tema-h2">10. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Esto</th>
+<th>No es esto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MDM</strong> (gestiona)</td>
+<td><strong>MTD</strong> (defiende)</td>
+</tr>
+<tr>
+<td><strong>MDM</strong> (dispositivo)</td>
+<td><strong>MAM</strong> (aplicaciones)</td>
+</tr>
+<tr>
+<td><strong>BYOD</strong> (del empleado)</td>
+<td><strong>COPE</strong> (de la organización, uso personal permitido)</td>
+</tr>
+<tr>
+<td><strong>Borrado selectivo</strong> (solo lo corporativo)</td>
+<td><strong>Borrado completo</strong> (restablecer de fábrica)</td>
+</tr>
+<tr>
+<td><strong>Perfil de trabajo</strong> (BYOD)</td>
+<td><strong>Dispositivo dedicado</strong> (quiosco)</td>
+</tr>
+<tr>
+<td><strong>Zero-touch</strong> (Android)</td>
+<td><strong>ADE</strong> (Apple)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="11-posibles-trampas-de-examen" class="tema-h2">11. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li>Elegir «protección frente a virus» como función del MDM.</li>
+<li>Pensar que en BYOD la organización puede ver los datos personales o borrar todo el dispositivo.</li>
+<li>Confundir MDM con MAM.</li>
+<li>Olvidar la secuencia temporal en el caso práctico (inventario → MDM → perfil → apps → red → pruebas → entrega).</li>
+<li>Configurar la wifi de cada tableta a mano habiendo un MDM.</li>
+</ul>
+<h2 id="12-posibles-preguntas-tipo-test" class="tema-h2">12. Posibles preguntas tipo test</h2>
+<ol type="1">
+<li>¿Qué modelo permite a los empleados usar su propio dispositivo? → <strong>BYOD</strong>.</li>
+<li>¿Qué solución detecta wifi maliciosas y apps peligrosas en el móvil? → <strong>MTD</strong>.</li>
+<li>¿Qué programa de Apple inscribe automáticamente los dispositivos? → <strong>ADE (Apple Business Manager)</strong>.</li>
+<li>¿Qué tipo de borrado elimina solo los datos corporativos? → <strong>Borrado selectivo</strong>.</li>
+<li>¿Qué modo de Android Enterprise se usa para un quiosco? → <strong>Dispositivo dedicado</strong>.</li>
+</ol>
+<h2 id="13-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">13. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. Qué aporta un MDM a un modelo BYOD y conceptos operativos (2 puntos; examen de 2023).</strong></p>
+<ul class="tema-lista">
+<li>Uso de dispositivos personales con seguridad y respeto a la privacidad.</li>
+<li>Conceptos: distribución de apps, solo apps aprobadas, inventario de apps, separación corporativo/personal (contenedor), políticas mínimas y acceso condicional, borrado selectivo.</li>
+<li>Política de uso firmada.</li>
+</ul>
+<p><strong>2. Diferencias entre MDM y MTD (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>MDM: gestión y configuración, políticas, acciones remotas.</li>
+<li>MTD: detección de amenazas en dispositivo, apps, red y phishing.</li>
+<li>Integración: el MTD informa del riesgo y el MDM aplica el acceso condicional.</li>
+<li>Ejemplos de productos.</li>
+</ul>
+<h2 id="14-supuesto-practico" class="tema-h2">14. Supuesto práctico</h2>
+<p><strong>Enunciado:</strong> un trabajador avisa a las 22:00 de que ha perdido su móvil corporativo con el correo y la VPN configurados.</p>
+<p><strong>Esquema de respuesta:</strong></p>
+<ol type="1">
+<li><strong>Registro</strong> de la incidencia y verificación de la identidad del usuario.</li>
+<li>Desde el <strong>MDM</strong>: <strong>localizar</strong> el dispositivo y <strong>bloquearlo</strong> con un mensaje de contacto en pantalla.</li>
+<li>Si no se recupera en el plazo marcado por la política, <strong>borrado remoto</strong> (completo en un dispositivo corporativo; <strong>selectivo</strong> si es BYOD).</li>
+<li><strong>Revocar</strong> las credenciales y certificados del dispositivo, cerrar sus <strong>sesiones</strong> (correo, VPN) y cambiar la contraseña del usuario.</li>
+<li><strong>Bloquear la SIM</strong> con el operador y, si procede, el <strong>IMEI</strong>.</li>
+<li><strong>Evaluar</strong> si había datos personales sensibles sin cifrar (posible brecha de seguridad: notificación, T12).</li>
+<li><strong>Entregar un dispositivo de sustitución</strong> inscrito automáticamente en el MDM y cerrar la incidencia.</li>
+</ol>
+<h2 id="15-matriz-de-memorizacion" class="tema-h2">15. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Dato clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Siglas</td>
+<td>MDM · MAM · MCM · EMM · UEM · MTD</td>
+</tr>
+<tr>
+<td>Funciones MDM</td>
+<td>Inscripción · inventario · perfiles · apps · políticas · localizar/bloquear/borrar · quiosco · cumplimiento</td>
+</tr>
+<tr>
+<td>Modelos</td>
+<td>BYOD · CYOD · COPE · COBO</td>
+</tr>
+<tr>
+<td>Android</td>
+<td>Android Enterprise (gestionado, perfil de trabajo, dedicado) · Zero-touch · KME</td>
+</tr>
+<tr>
+<td>Apple</td>
+<td>ABM · ADE · supervisado · VPP</td>
+</tr>
+<tr>
+<td>MTD</td>
+<td>Dispositivo · apps · red (MitM) · phishing → acceso condicional</td>
+</tr>
+<tr>
+<td>Productos</td>
+<td>Intune · Workspace ONE · Ivanti · Jamf · Knox · Lookout · Zimperium</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="16-resumen-final-si-manana-fuera-el-examen" class="tema-h2">16. Resumen final: si mañana fuera el examen</h2>
+<p><strong>Plataformar</strong> es dejar el terminal listo para el uso corporativo y <strong>securizarlo</strong>, reducir su superficie de ataque; en una flota se hace con un <strong>MDM/UEM</strong>. El <strong>MDM</strong> <strong>inscribe</strong> (automáticamente con <strong>Zero-touch, KME o ADE</strong>), <strong>inventaría</strong>, <strong>configura</strong> (wifi con certificado, VPN, correo), <strong>distribuye apps</strong>, aplica <strong>políticas</strong>, permite <strong>localizar, bloquear y borrar</strong> y el <strong>modo quiosco</strong>; <strong>no es un antivirus</strong>: la <strong>protección frente a amenazas</strong> es del <strong>MTD</strong> (apps maliciosas, root/jailbreak, wifi falsas, phishing), que se integra con el MDM para el <strong>acceso condicional</strong>. En <strong>BYOD</strong>, el MDM aporta <strong>distribución de apps, solo apps aprobadas, inventario de apps y separación corporativo/personal</strong>, con <strong>borrado selectivo</strong>. Para las <strong>tabletas de registro</strong>: inventario → MDM (reutilizando el perfil) → <strong>quiosco</strong> + <strong>wifi de registro</strong> + app de firma → comprobar red y VLAN → pruebas → entrega.</p>
+<h2 id="17-actualidad-datos-fechados" class="tema-h2">17. Actualidad — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong></th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Broadcom</strong> compró VMware (2023) y vendió su división de usuario final, incluido <strong>Workspace ONE</strong>, al fondo KKR, que la relanzó como <strong>Omnissa</strong> (2024).</li>
+<li>Microsoft integra cada vez más <strong>Intune</strong> con <strong>Defender</strong> (MTD) y con el <strong>acceso condicional</strong> de Entra ID.</li>
+<li>Google y Apple siguen endureciendo los permisos y la privacidad, lo que limita lo que un MDM puede ver en los dispositivos personales.</li>
+</ul>
+
+  </div>
+</article>

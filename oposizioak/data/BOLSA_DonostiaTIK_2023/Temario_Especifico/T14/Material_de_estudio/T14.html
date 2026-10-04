@@ -1,0 +1,537 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T14</div>
+    <h1 class="tema-cabecera__titulo">Seguridad en redes de comunicaciones. Firewalls: firewalls de tipo stateful y stateless, NAT, antispoofing.</h1>
+    <div class="tema-cabecera__meta">Bloque 2 · Seguridad · Bolsa DonostiaTIK 2023 · Instalaciones y Comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-que-es-un-cortafuegos">1. Qué es un cortafuegos</a></li>
+<li><a href="#2-tipos-de-cortafuegos">2. Tipos de cortafuegos</a></li>
+<li><a href="#3-reglas-y-politica">3. Reglas y política</a></li>
+<li><a href="#4-zonas-dmz-y-arquitecturas">4. Zonas, DMZ y arquitecturas</a></li>
+<li><a href="#5-nat-en-el-cortafuegos">5. NAT en el cortafuegos</a></li>
+<li><a href="#6-antispoofing">6. Antispoofing</a></li>
+<li><a href="#7-otros-ataques-de-red-que-mitiga-el-cortafuegos">7. Otros ataques de red que mitiga el cortafuegos</a></li>
+<li><a href="#8-fabricantes-y-gestion">8. Fabricantes y gestión</a></li>
+<li><a href="#9-lo-que-cayo-en-el-examen-de-2023">9. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#10-anclas-de-memoria">10. Anclas de memoria</a></li>
+<li><a href="#11-no-confundir">11. No confundir</a></li>
+<li><a href="#12-posibles-trampas-de-examen">12. Posibles trampas de examen</a></li>
+<li><a href="#13-posibles-preguntas-tipo-test">13. Posibles preguntas tipo test</a></li>
+<li><a href="#14-posibles-preguntas-cortas-con-esquema-de-respuesta">14. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#15-supuesto-practico">15. Supuesto práctico</a></li>
+<li><a href="#16-matriz-de-memorizacion">16. Matriz de memorización</a></li>
+<li><a href="#17-resumen-final-si-manana-fuera-el-examen">17. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#18-actualidad-datos-fechados">18. Actualidad — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — fronteras del tema</strong><br>Este tema trata el <strong>cortafuegos</strong>: tipos (<strong>stateless, stateful</strong>, de aplicación, NGFW), <strong>reglas</strong>, <strong>zonas y DMZ</strong>, <strong>NAT</strong> desde el cortafuegos y <strong>antispoofing</strong>.<br><strong>T2</strong> → fundamentos de NAT y direccionamiento. <strong>T15</strong> → VPN (que suele terminar en el mismo cortafuegos). <strong>T17</strong> → IDS/IPS, filtrado web, antispam y sandbox (funciones de los NGFW). <strong>T4</strong> → ACL en routers y switches.</th>
+</tr>
+</table></div>
+<h2 id="1-que-es-un-cortafuegos" class="tema-h2">1. Qué es un cortafuegos</h2>
+<p>Un <strong>cortafuegos (<em>firewall</em>)</strong> es un sistema (equipo físico, virtual o software) que <strong>controla el tráfico entre redes o zonas de distinta confianza</strong>, <strong>permitiendo o bloqueando</strong> cada comunicación según una <strong>política de seguridad</strong> expresada en <strong>reglas</strong>.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Examen 2023, pregunta 33 (reserva)</strong><br>Un <strong>cortafuegos de red</strong> se ocupa de <strong>prevenir y proteger a nuestra red privada de intrusiones o ataques de otras redes, bloqueándoles el acceso</strong>. Elegir la mejor ruta es cosa del <strong>router</strong> (pregunta 34) y convertir nombres en IP, del <strong>DNS</strong>.</th>
+</tr>
+</table></div>
+<p>Funciones habituales de un cortafuegos actual: <strong>filtrado</strong> de tráfico, <strong>NAT</strong>, <strong>VPN</strong> (T15), <strong>routing entre VLAN</strong> (en el caso de 2023, «el routing se hace en el cortafuegos y el switch principal»), <strong>IPS</strong>, <strong>filtrado web</strong>, <strong>antivirus de red</strong>, <strong>control de aplicaciones</strong>, <strong>inspección TLS</strong> (T17) y <strong>registro</strong> del tráfico.</p>
+<h2 id="2-tipos-de-cortafuegos" class="tema-h2">2. Tipos de cortafuegos</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Capa OSI</th>
+<th>Cómo decide</th>
+<th>Ventajas</th>
+<th>Inconvenientes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Filtrado de paquetes sin estado (<em>stateless</em>)</strong></td>
+<td>3–4</td>
+<td>Mira <strong>cada paquete aislado</strong>: IP origen y destino, protocolo, puertos (<strong>ACL</strong>)</td>
+<td>Muy rápido, sencillo (ACL de routers y switches)</td>
+<td>No sabe si un paquete pertenece a una conexión: hay que <strong>abrir explícitamente el tráfico de vuelta</strong>; fácil de engañar</td>
+</tr>
+<tr>
+<td><strong>Inspección de estado (<em>stateful</em>)</strong></td>
+<td>3–4</td>
+<td>Mantiene una <strong>tabla de conexiones</strong>: permite automáticamente las <strong>respuestas</strong> de las conexiones autorizadas</td>
+<td>Más seguro y reglas más simples</td>
+<td>Más recursos; la tabla puede saturarse (ataques SYN flood)</td>
+</tr>
+<tr>
+<td><strong>Pasarela de aplicación (<em>proxy</em>)</strong></td>
+<td>7</td>
+<td>Hace de <strong>intermediario</strong>: termina la conexión y la rehace tras analizar el contenido</td>
+<td>Inspección profunda del protocolo</td>
+<td>Más lento; un proxy por protocolo</td>
+</tr>
+<tr>
+<td><strong>Cortafuegos de nueva generación (NGFW)</strong></td>
+<td>3–7</td>
+<td>Stateful + <strong>identificación de aplicaciones y usuarios</strong> + IPS + filtrado web + antimalware + sandbox + inspección TLS</td>
+<td>Política por aplicación y usuario («Teams sí, juegos no»)</td>
+<td>Coste y complejidad</td>
+</tr>
+<tr>
+<td><strong>WAF</strong> (<em>Web Application Firewall</em>)</td>
+<td>7 (HTTP)</td>
+<td>Protege <strong>aplicaciones web</strong> (inyección SQL, XSS)</td>
+<td>Específico para web</td>
+<td>Solo HTTP/HTTPS</td>
+</tr>
+<tr>
+<td><strong>Cortafuegos de host</strong></td>
+<td>Equipo</td>
+<td>En cada PC o servidor (Windows Defender Firewall, iptables/nftables)</td>
+<td>Protección también dentro de la LAN</td>
+<td>Gestión distribuida</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — <em>stateful</em> frente a <em>stateless</em></strong><br>El <strong>stateless</strong> evalúa <strong>cada paquete por separado</strong> según sus cabeceras. El <strong>stateful</strong> <strong>recuerda las conexiones</strong>: si una regla permite que un PC abra una conexión hacia fuera, la <strong>respuesta entra sola</strong> porque pertenece a una sesión conocida.<br>Con un <strong>stateless</strong>, para navegar hay que permitir la salida al puerto 443 <strong>y además</strong> la entrada de las respuestas desde el puerto 443 hacia los puertos altos del cliente, lo que abre mucho más.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar</strong><br><strong>Stateless = portero con lista: mira cada papel. Stateful = portero con memoria: sabe quién ha salido y le deja volver.</strong></th>
+</tr>
+</table></div>
+<h3 id="la-tabla-de-estados">La tabla de estados</h3>
+<p>El cortafuegos stateful anota cada conexión: IP y puerto de origen, IP y puerto de destino, protocolo y <strong>estado</strong> (en TCP: SYN enviado, establecida, cierre…). Para UDP e ICMP, sin estados reales, crea una <strong>pseudo-sesión</strong> con temporizador. Los paquetes que no pertenecen a ninguna sesión y no los permite una regla se descartan.</p>
+<h2 id="3-reglas-y-politica" class="tema-h2">3. Reglas y política</h2>
+<p>Una regla típica:</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Campo</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Zona / interfaz de origen y destino</td>
+<td>LAN → WAN</td>
+</tr>
+<tr>
+<td>IP o red de origen</td>
+<td>192.168.193.0/24 (usuarios)</td>
+</tr>
+<tr>
+<td>IP o red de destino</td>
+<td>cualquiera</td>
+</tr>
+<tr>
+<td>Servicio (protocolo y puerto)</td>
+<td>HTTPS (TCP 443)</td>
+</tr>
+<tr>
+<td>Acción</td>
+<td><strong>Permitir</strong> / <strong>denegar</strong> (<em>drop</em>: descartar en silencio) / <strong>rechazar</strong> (<em>reject</em>: con aviso)</td>
+</tr>
+<tr>
+<td>Opciones</td>
+<td>Registro (log), perfiles de seguridad (IPS, antivirus), horario, usuario</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Principios de la política:</strong></p>
+<ul class="tema-lista">
+<li><strong>Las reglas se evalúan en orden, de arriba abajo, y se aplica la primera que coincide (<em>first match</em>)</strong>: el <strong>orden</strong> es fundamental. Las reglas más <strong>específicas</strong> van <strong>antes</strong> que las generales.</li>
+<li><strong>Denegación por defecto (<em>default deny</em>)</strong>: al final hay una regla <strong>«denegar todo»</strong> (explícita o implícita): <strong>lo que no está expresamente permitido, está prohibido</strong>.</li>
+<li><strong>Mínimo privilegio</strong>: permitir solo los orígenes, destinos y servicios necesarios.</li>
+<li>Filtrar tanto el tráfico <strong>entrante</strong> como el <strong>saliente</strong> (<em>egress filtering</em>: limita lo que puede hacer un equipo infectado).</li>
+<li><strong>Documentar</strong> cada regla (motivo, solicitante, fecha) y <strong>revisar</strong> periódicamente las reglas obsoletas.</li>
+<li><strong>Registrar</strong> el tráfico denegado y el de las reglas críticas.</li>
+</ul>
+<h3 id="análisis-de-la-pregunta-corta-2-del-examen-de-2023">Análisis de la pregunta corta 2 del examen de 2023</h3>
+<p>Cortafuegos stateful en el perímetro de la red municipal:</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>#</th>
+<th>Acción</th>
+<th>Origen</th>
+<th>Destino</th>
+<th>Servicio</th>
+<th>Puerto destino</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Aceptar</td>
+<td>172.16.44.39</td>
+<td>8.8.8.8</td>
+<td>DNS</td>
+<td>53</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Aceptar</td>
+<td>cualquiera</td>
+<td>172.16.44.39</td>
+<td>DNS</td>
+<td>53</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Aceptar</td>
+<td>cualquiera</td>
+<td>172.16.44.23</td>
+<td>HTTP</td>
+<td>80</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Aceptar</td>
+<td>cualquiera</td>
+<td>172.16.44.23</td>
+<td>HTTPS</td>
+<td>443</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Denegar</td>
+<td>cualquiera</td>
+<td>cualquiera</td>
+<td>cualquiera</td>
+<td>cualquiera</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Respuesta modelo:</strong></p>
+<ol type="1">
+<li><strong>Regla 1</strong>: el equipo <strong>172.16.44.39</strong> puede hacer <strong>consultas DNS</strong> al <strong>servidor DNS público de Google (8.8.8.8)</strong>. Lo más probable es que .39 sea el <strong>servidor DNS</strong> de la organización que <strong>reenvía</strong> (<em>forwarder</em>) a 8.8.8.8 las consultas que no resuelve.</li>
+<li><strong>Regla 2</strong>: <strong>cualquiera</strong> puede consultar el <strong>DNS de 172.16.44.39</strong>: es un <strong>servidor DNS accesible</strong> (por ejemplo, <strong>autoritativo</strong> de los dominios municipales o el resolutor de la red interna, si «cualquiera» incluye a los equipos internos).</li>
+<li><strong>Reglas 3 y 4</strong>: <strong>cualquiera</strong> puede acceder al <strong>servidor web 172.16.44.23</strong> por <strong>HTTP (80) y HTTPS (443)</strong>: es un <strong>servidor web publicado</strong>, probablemente en una <strong>DMZ</strong> y con <strong>NAT</strong> desde una IP pública (172.16.x.x es privada).</li>
+<li><strong>Regla 5</strong>: <strong>deniega todo lo demás</strong> (denegación por defecto).</li>
+<li><strong>Orden y última regla</strong>: las reglas se evalúan <strong>secuencialmente</strong>; <strong>lo que no esté expresamente permitido, lo anula la última regla</strong>. Por ejemplo, ningún otro equipo interno puede consultar 8.8.8.8 ni navegar: solo pasa el tráfico de las reglas 1 a 4.</li>
+<li><strong>Stateful</strong>: al ser con estado, <strong>las respuestas</strong> de estas conexiones (la respuesta de 8.8.8.8, la de la web) <strong>se permiten automáticamente</strong>, sin reglas de vuelta.</li>
+</ol>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Criterios del tribunal</strong><br>Explicar <strong>cada regla por separado</strong> (0,75), <strong>saber qué es 8.8.8.8</strong> (0,5) y explicar que <strong>la secuencialidad es fundamental y la última regla deniega todo lo no permitido</strong> (0,75).</th>
+</tr>
+</table></div>
+<h2 id="4-zonas-dmz-y-arquitecturas" class="tema-h2">4. Zonas, DMZ y arquitecturas</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Zona</th>
+<th>Confianza</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LAN interna</strong></td>
+<td>Alta</td>
+<td>Usuarios, servidores internos</td>
+</tr>
+<tr>
+<td><strong>DMZ</strong> (zona desmilitarizada)</td>
+<td>Media</td>
+<td><strong>Servidores publicados en Internet</strong> (web, correo, DNS público, proxy inverso)</td>
+</tr>
+<tr>
+<td><strong>WAN / Internet</strong></td>
+<td>Ninguna</td>
+<td>Exterior</td>
+</tr>
+<tr>
+<td><strong>Invitados</strong></td>
+<td>Baja</td>
+<td>Wifi pública (Internet libre)</td>
+</tr>
+<tr>
+<td><strong>Zonas especiales</strong></td>
+<td>Según el caso</td>
+<td><strong>Cámaras, telegestión/OT (PLC), gestión</strong> de equipos</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>DMZ</strong>: subred <strong>intermedia</strong> donde se colocan los servidores que reciben conexiones desde Internet. Si uno es comprometido, el atacante <strong>no está dentro de la LAN</strong>: la política típica permite <strong>Internet → DMZ</strong> (solo los servicios publicados), <strong>LAN → DMZ</strong> (administración), y <strong>DMZ → LAN</strong> solo lo imprescindible (o nada).</p>
+<p>Arquitecturas:</p>
+<ul class="tema-lista">
+<li><strong>Cortafuegos de tres patas</strong>: un único cortafuegos con interfaces hacia Internet, DMZ y LAN (la más habitual).</li>
+<li><strong>DMZ entre dos cortafuegos</strong> (<em>screened subnet</em>): un cortafuegos exterior y otro interior, a ser posible de <strong>fabricantes distintos</strong> (defensa en profundidad).</li>
+<li><strong>Segmentación interna</strong>: el cortafuegos filtra también entre las VLAN internas (usuarios, cámaras, telegestión), como en el caso de 2023 («un cortafuegos gestiona la seguridad del tráfico entre VLAN»). Llevado al extremo: <strong>microsegmentación</strong> y modelo <strong>Zero Trust</strong> («nunca confíes, verifica siempre»).</li>
+</ul>
+<p><strong>Alta disponibilidad</strong>: dos cortafuegos en <strong>clúster activo-pasivo</strong> (o activo-activo) que sincronizan la tabla de sesiones, para que el fallo de uno no corte el servicio.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>El PLC de telegestión del caso de 2023 (pregunta 4)</strong><br>El tribunal esperaba identificar que el PLC está en una <strong>red securizada por el cortafuegos (una VLAN/zona tipo DMZ de telegestión)</strong> y ofrecer: <strong>VPN</strong> a nombre de la empresa mantenedora (T15) <strong>o</strong> <strong>traducción de puertos (NAT)</strong> en el cortafuegos, restringida a la <strong>IP de origen</strong> del mantenedor y al <strong>puerto</strong> concreto; <strong>en ambos casos, coordinación con DTIK-Sistemas</strong>, que gestiona el cortafuegos.</th>
+</tr>
+</table></div>
+<h2 id="5-nat-en-el-cortafuegos" class="tema-h2">5. NAT en el cortafuegos</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Dirección</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SNAT / masquerade / PAT</strong></td>
+<td>Cambia el <strong>origen</strong> al <strong>salir</strong></td>
+<td><strong>Salida a Internet</strong> de las redes internas con la IP pública del cortafuegos</td>
+</tr>
+<tr>
+<td><strong>DNAT / port forwarding</strong></td>
+<td>Cambia el <strong>destino</strong> al <strong>entrar</strong></td>
+<td><strong>Publicar un servicio interno</strong>: IP pública:443 → servidor web de la DMZ:443; o un puerto concreto hacia el PLC para el mantenedor</td>
+</tr>
+<tr>
+<td><strong>NAT estático 1:1</strong></td>
+<td>Una IP pública ↔︎ una privada</td>
+<td>Servidores que necesitan una IP pública propia</td>
+</tr>
+<tr>
+<td><strong>Hairpin NAT (<em>NAT loopback</em>)</strong></td>
+<td>Equipos internos que acceden a un servicio interno por su IP pública</td>
+<td>Que la URL pública funcione también desde dentro</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br><strong>La regla de NAT y la regla de filtrado son cosas distintas</strong>: publicar un servidor requiere el <strong>DNAT</strong> y además una <strong>regla que permita</strong> ese tráfico. Y <strong>NAT no sustituye al cortafuegos</strong>: oculta direcciones, pero no filtra.</th>
+</tr>
+</table></div>
+<h2 id="6-antispoofing" class="tema-h2">6. Antispoofing</h2>
+<p>El <em><strong>IP spoofing</strong></em> es <strong>falsificar la IP de origen</strong> de los paquetes: para hacerse pasar por un equipo de confianza, saltarse reglas basadas en IP o lanzar ataques de denegación de servicio con reflexión y amplificación (la respuesta va a la víctima cuya IP se ha falsificado).</p>
+<p><strong>Medidas antispoofing:</strong></p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Medida</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Filtrado de entrada (<em>ingress</em>)</strong></td>
+<td><strong>Descartar los paquetes que llegan de Internet con una IP de origen que no puede venir de ahí</strong>: direcciones <strong>privadas (RFC 1918)</strong>, loopback (127.0.0.0/8), multicast, reservadas (<em>bogons</em>) o <strong>las propias de la organización</strong></td>
+</tr>
+<tr>
+<td><strong>Filtrado de salida (<em>egress</em>)</strong></td>
+<td>Solo permitir que salgan paquetes con <strong>IP de origen de nuestras redes</strong> (evita que nuestros equipos participen en ataques; recomendación <strong>BCP 38</strong>)</td>
+</tr>
+<tr>
+<td><strong>uRPF</strong> (<em>Unicast Reverse Path Forwarding</em>)</td>
+<td>El router o cortafuegos comprueba que el paquete <strong>llega por la interfaz por la que se enrutaría la respuesta</strong> a su IP de origen; si no, lo descarta (modo <strong>estricto</strong> o <strong>laxo</strong>)</td>
+</tr>
+<tr>
+<td><strong>Asociación interfaz–red</strong></td>
+<td>En el cortafuegos, cada interfaz o zona solo acepta como origen las redes que tiene detrás (el «antispoofing» de Check Point o Fortinet)</td>
+</tr>
+<tr>
+<td><strong>En la LAN</strong></td>
+<td><strong>DHCP snooping, Dynamic ARP Inspection e IP Source Guard</strong> en los switches, contra la suplantación de IP y de MAC dentro de la red (T4)</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible</strong><br>Un paquete que entra <strong>desde Internet</strong> con IP de origen <strong>10.x, 172.16–31.x o 192.168.x</strong>, o con una IP <strong>de nuestra propia red</strong>, es <strong>falso por definición</strong>: el antispoofing lo descarta.</th>
+</tr>
+</table></div>
+<h2 id="7-otros-ataques-de-red-que-mitiga-el-cortafuegos" class="tema-h2">7. Otros ataques de red que mitiga el cortafuegos</h2>
+<ul class="tema-lista">
+<li><strong>Escaneo de puertos</strong> (reconocimiento): detección y bloqueo (IPS).</li>
+<li><strong>SYN flood</strong>: inundación de peticiones de conexión que agota la tabla de estados; defensa con <strong>SYN cookies</strong> y límites.</li>
+<li><strong>DoS/DDoS</strong>: el cortafuegos ayuda, pero los DDoS volumétricos se mitigan con el <strong>operador</strong> o servicios <strong>anti-DDoS</strong> en la nube.</li>
+<li><strong>Fragmentación maliciosa</strong> y paquetes malformados: reensamblado y normalización.</li>
+</ul>
+<h2 id="8-fabricantes-y-gestion" class="tema-h2">8. Fabricantes y gestión</h2>
+<p>Fabricantes habituales: <strong>Fortinet (FortiGate)</strong>, <strong>Palo Alto Networks</strong>, <strong>Check Point</strong>, <strong>Cisco (Secure Firewall/FTD)</strong>, <strong>Sophos</strong>, <strong>WatchGuard</strong>; de código abierto, <strong>pfSense</strong> y <strong>OPNsense</strong> (sobre FreeBSD) e <strong>iptables/nftables</strong> en Linux.</p>
+<p>Buenas prácticas de gestión: acceso de administración <strong>solo desde la red de gestión</strong> y con MFA; <strong>copia de la configuración</strong> antes de cada cambio; <strong>gestión de cambios</strong> (T20); <strong>firmware</strong> actualizado (los cortafuegos y las VPN son un objetivo prioritario de los atacantes); <strong>logs</strong> enviados a un <strong>SIEM</strong>; <strong>revisión</strong> periódica de reglas.</p>
+<h2 id="9-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">9. Lo que cayó en el examen de 2023</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Contenido</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test 33 (reserva)</td>
+<td>Función del cortafuegos</td>
+<td><strong>Prevenir y proteger la red privada de intrusiones de otras redes</strong></td>
+</tr>
+<tr>
+<td>Corta 2</td>
+<td>Explicar 5 reglas de un cortafuegos stateful</td>
+<td>Ver apartado 3</td>
+</tr>
+<tr>
+<td>Caso 4</td>
+<td>Acceso remoto al PLC</td>
+<td>Zona securizada (DMZ), <strong>VPN</strong> o <strong>NAT de puertos</strong>, coordinación con Sistemas</td>
+</tr>
+<tr>
+<td>Caso (enunciado)</td>
+<td>Cortafuegos entre VLAN y routing</td>
+<td>Segmentación interna</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="10-anclas-de-memoria" class="tema-h2">10. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>Stateless = paquete a paquete (ACL) · stateful = tabla de conexiones, la vuelta entra sola · NGFW = aplicación + usuario + IPS.</strong></li>
+<li><strong>Reglas: en orden, primera coincidencia, específicas arriba, «denegar todo» al final.</strong></li>
+<li><strong>DMZ = servidores publicados, entre Internet y la LAN.</strong></li>
+<li><strong>SNAT/PAT = salida · DNAT/port forwarding = publicar un servicio.</strong></li>
+<li><strong>Antispoofing = no aceptar de fuera IP privadas ni propias · uRPF · BCP 38 · DHCP snooping/DAI en la LAN.</strong></li>
+<li><strong>8.8.8.8 = DNS público de Google.</strong></li>
+</ul>
+<h2 id="11-no-confundir" class="tema-h2">11. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Esto</th>
+<th>No es esto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Stateless</strong></td>
+<td><strong>Stateful</strong></td>
+</tr>
+<tr>
+<td><strong>Drop</strong> (descarta en silencio)</td>
+<td><strong>Reject</strong> (descarta y avisa)</td>
+</tr>
+<tr>
+<td><strong>SNAT</strong> (origen, salida)</td>
+<td><strong>DNAT</strong> (destino, entrada)</td>
+</tr>
+<tr>
+<td><strong>DMZ</strong> (servidores publicados)</td>
+<td><strong>Red de invitados</strong></td>
+</tr>
+<tr>
+<td><strong>Cortafuegos</strong> (filtra)</td>
+<td><strong>Router</strong> (enruta) y <strong>NAT</strong> (traduce)</td>
+</tr>
+<tr>
+<td><strong>Ingress filtering</strong></td>
+<td><strong>Egress filtering</strong></td>
+</tr>
+<tr>
+<td><strong>WAF</strong> (aplicaciones web)</td>
+<td><strong>NGFW</strong> (perímetro de red)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="12-posibles-trampas-de-examen" class="tema-h2">12. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li>Pensar que el orden de las reglas no importa.</li>
+<li>Creer que un stateful necesita reglas para las respuestas.</li>
+<li>Decir que NAT es suficiente como protección.</li>
+<li>Olvidar la regla de filtrado al publicar un servicio con DNAT.</li>
+<li>Confundir 8.8.8.8 con una IP interna.</li>
+<li>Pensar que el antispoofing es una función del antivirus.</li>
+</ul>
+<h2 id="13-posibles-preguntas-tipo-test" class="tema-h2">13. Posibles preguntas tipo test</h2>
+<ol type="1">
+<li>¿Qué tipo de cortafuegos mantiene una tabla de conexiones? → <strong>Stateful</strong>.</li>
+<li>¿Dónde se ubican los servidores accesibles desde Internet? → <strong>En la DMZ</strong>.</li>
+<li>¿Qué técnica comprueba que un paquete llega por la interfaz correcta según su origen? → <strong>uRPF</strong>.</li>
+<li>¿Qué NAT se usa para publicar un servidor interno? → <strong>DNAT (port forwarding)</strong>.</li>
+<li>¿Qué ocurre con el tráfico no permitido expresamente? → <strong>Lo deniega la regla final (denegación por defecto)</strong>.</li>
+</ol>
+<h2 id="14-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">14. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. Diferencias entre cortafuegos stateful y stateless (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>Stateless: cada paquete por separado (IP, puertos, protocolo); ACL; rápido.</li>
+<li>Stateful: tabla de sesiones; respuestas automáticas; más seguro y reglas más simples.</li>
+<li>Ejemplo: navegar con cada tipo (reglas necesarias).</li>
+<li>Evolución: NGFW (aplicación, usuario, IPS).</li>
+</ul>
+<p><strong>2. Qué es el antispoofing y cómo se implementa (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>IP spoofing: falsificar el origen (suplantación, saltarse reglas, DDoS por reflexión).</li>
+<li>Ingress: descartar desde Internet las privadas, bogons y las propias.</li>
+<li>Egress (BCP 38) y uRPF.</li>
+<li>En la LAN: DHCP snooping, DAI, IP Source Guard.</li>
+</ul>
+<h2 id="15-supuesto-practico" class="tema-h2">15. Supuesto práctico</h2>
+<p><strong>Enunciado:</strong> la empresa que mantiene las cámaras de videovigilancia pide acceso desde su oficina para revisar las grabaciones del NVR, situado en la VLAN de cámaras (47).</p>
+<p><strong>Esquema de respuesta:</strong></p>
+<ol type="1">
+<li><strong>Preferente: VPN</strong> de acceso remoto <strong>nominativa</strong> para cada técnico, con MFA, cuya política solo permita llegar a la <strong>IP del NVR</strong> y a los <strong>puertos necesarios</strong> (T15).</li>
+<li><strong>Alternativa: DNAT</strong> de un puerto de la IP pública al puerto web del NVR, <strong>restringido a la IP pública de la empresa</strong> como origen, con una regla de filtrado específica y <strong>registro</strong>; nunca abrir el puerto a «cualquiera».</li>
+<li><strong>Política</strong>: la VLAN de cámaras <strong>no puede iniciar conexiones</strong> hacia la LAN de usuarios; el acceso del mantenedor se habilita <strong>solo cuando se necesita</strong> (ventana) y se revisa periódicamente.</li>
+<li><strong>Protección de datos</strong>: las grabaciones son <strong>datos personales</strong>: contrato de <strong>encargado de tratamiento</strong> y registro de accesos.</li>
+<li><strong>Coordinación</strong> con <strong>DTIK-Sistemas</strong> (VPN, reglas), el responsable de seguridad y el departamento responsable de las cámaras; documentar el cambio.</li>
+</ol>
+<h2 id="16-matriz-de-memorizacion" class="tema-h2">16. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Dato clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tipos</td>
+<td>Stateless (ACL) · stateful (sesiones) · proxy (capa 7) · NGFW · WAF · host</td>
+</tr>
+<tr>
+<td>Reglas</td>
+<td>Orden · primera coincidencia · específicas arriba · default deny · mínimo privilegio · entrada y salida</td>
+</tr>
+<tr>
+<td>Zonas</td>
+<td>LAN · DMZ · WAN · invitados · OT/cámaras · gestión</td>
+</tr>
+<tr>
+<td>NAT</td>
+<td>SNAT/PAT · DNAT/port forwarding · 1:1 · hairpin</td>
+</tr>
+<tr>
+<td>Antispoofing</td>
+<td>Ingress (RFC 1918, bogons, propias) · egress (BCP 38) · uRPF · DHCP snooping/DAI</td>
+</tr>
+<tr>
+<td>Ataques</td>
+<td>Escaneo · SYN flood (SYN cookies) · DDoS · spoofing</td>
+</tr>
+<tr>
+<td>Fabricantes</td>
+<td>Fortinet · Palo Alto · Check Point · Cisco · Sophos · pfSense/OPNsense</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="17-resumen-final-si-manana-fuera-el-examen" class="tema-h2">17. Resumen final: si mañana fuera el examen</h2>
+<p>El <strong>cortafuegos</strong> controla el tráfico entre zonas aplicando <strong>reglas en orden (primera coincidencia)</strong> con una <strong>denegación por defecto al final</strong>: lo no permitido expresamente, se deniega. El <strong>stateless</strong> evalúa <strong>cada paquete</strong> (como una ACL); el <strong>stateful</strong> mantiene una <strong>tabla de sesiones</strong> y deja pasar <strong>las respuestas</strong> automáticamente; el <strong>NGFW</strong> añade <strong>aplicación, usuario, IPS</strong> y más. Los servidores publicados van en la <strong>DMZ</strong>, y el cortafuegos también segmenta las <strong>VLAN internas</strong>. Con <strong>SNAT/PAT</strong> sale la red a Internet y con <strong>DNAT</strong> se publica un servicio (siempre con su regla de filtrado). El <strong>antispoofing</strong> descarta los paquetes de Internet con origen <strong>privado, reservado o propio</strong>, aplica <strong>uRPF</strong> y <strong>filtrado de salida</strong>, y en la LAN se apoya en <strong>DHCP snooping y DAI</strong>. <strong>8.8.8.8 es el DNS público de Google.</strong></p>
+<h2 id="18-actualidad-datos-fechados" class="tema-h2">18. Actualidad — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong></th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li>Los <strong>dispositivos perimetrales</strong> (cortafuegos y VPN de Fortinet, Ivanti, Cisco, Palo Alto, Check Point) han sido en 2024–2026 uno de los <strong>principales vectores de intrusión</strong> por vulnerabilidades críticas: hay que aplicar los parches con urgencia y no exponer la interfaz de administración a Internet.</li>
+<li>Crece la adopción de <strong>SASE/SSE</strong> (cortafuegos y seguridad como servicio en la nube) y de modelos <strong>Zero Trust</strong>.</li>
+<li>El CCN publica guías CCN-STIC de configuración y empleo seguro de productos de seguridad, incluidos los cortafuegos, y mantiene el catálogo de productos cualificados (CPSTIC).</li>
+</ul>
+
+  </div>
+</article>
