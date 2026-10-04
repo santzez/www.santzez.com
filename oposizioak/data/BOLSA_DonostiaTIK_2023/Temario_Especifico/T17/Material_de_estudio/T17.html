@@ -1,0 +1,526 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T17</div>
+    <h1 class="tema-cabecera__titulo">Seguridad en redes de comunicaciones. Soluciones avanzadas: IDS/IPS, filtrado web, antispam, control de aplicaciones, sandbox.</h1>
+    <div class="tema-cabecera__meta">Bloque 2 · Seguridad · Bolsa DonostiaTIK 2023 · Instalaciones y Comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-ids-e-ips">1. IDS e IPS</a></li>
+<li><a href="#2-filtrado-web">2. Filtrado web</a></li>
+<li><a href="#3-antispam-y-seguridad-del-correo">3. Antispam y seguridad del correo</a></li>
+<li><a href="#4-control-de-aplicaciones">4. Control de aplicaciones</a></li>
+<li><a href="#5-sandbox-de-red">5. Sandbox de red</a></li>
+<li><a href="#6-control-de-acceso-a-la-red-nac">6. Control de acceso a la red (NAC)</a></li>
+<li><a href="#7-siem-soc-y-otras-soluciones">7. SIEM, SOC y otras soluciones</a></li>
+<li><a href="#8-defensa-en-profundidad">8. Defensa en profundidad</a></li>
+<li><a href="#9-lo-que-cayo-en-el-examen-de-2023">9. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#10-anclas-de-memoria">10. Anclas de memoria</a></li>
+<li><a href="#11-no-confundir">11. No confundir</a></li>
+<li><a href="#12-posibles-trampas-de-examen">12. Posibles trampas de examen</a></li>
+<li><a href="#13-posibles-preguntas-tipo-test">13. Posibles preguntas tipo test</a></li>
+<li><a href="#14-posibles-preguntas-cortas-con-esquema-de-respuesta">14. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#15-supuesto-practico">15. Supuesto práctico</a></li>
+<li><a href="#16-matriz-de-memorizacion">16. Matriz de memorización</a></li>
+<li><a href="#17-resumen-final-si-manana-fuera-el-examen">17. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#18-actualidad-datos-fechados">18. Actualidad — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — fronteras del tema</strong><br>Este tema trata las <strong>soluciones avanzadas de seguridad de red</strong>: <strong>IDS/IPS</strong>, <strong>filtrado web</strong>, <strong>antispam</strong>, <strong>control de aplicaciones</strong>, <strong>sandbox de red</strong>, y otras relacionadas (<strong>NAC</strong>, <strong>SIEM</strong>, DLP).<br><strong>T14</strong> → cortafuegos (donde muchas de estas funciones se integran en un NGFW). <strong>T13</strong> → malware, EPP/EDR y sandbox en el puesto. <strong>T10</strong> → SPF, DKIM y DMARC.</th>
+</tr>
+</table></div>
+<h2 id="1-ids-e-ips" class="tema-h2">1. IDS e IPS</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th></th>
+<th><strong>IDS</strong> (<em>Intrusion Detection System</em>)</th>
+<th><strong>IPS</strong> (<em>Intrusion Prevention System</em>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Qué hace</td>
+<td><strong>Detecta</strong> indicios de ataque o compromiso y <strong>genera alertas</strong></td>
+<td><strong>Detecta y bloquea</strong> el ataque en tiempo real</td>
+</tr>
+<tr>
+<td>Posición</td>
+<td><strong>Pasivo</strong>: recibe una <strong>copia</strong> del tráfico (puerto <strong>SPAN</strong>/espejo o <strong>TAP</strong>)</td>
+<td><strong>En línea (<em>inline</em>)</strong>: el tráfico <strong>pasa a través</strong> de él</td>
+</tr>
+<tr>
+<td>Impacto si falla</td>
+<td>No afecta al tráfico</td>
+<td>Puede <strong>cortar</strong> el tráfico (<em>fail-open</em>/<em>fail-closed</em>)</td>
+</tr>
+<tr>
+<td>Riesgo de un falso positivo</td>
+<td>Una alerta de más</td>
+<td><strong>Bloquear tráfico legítimo</strong></td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 26</strong><br>Los sistemas cuya <strong>función principal es detectar indicios de ataque o compromiso</strong> hacia la infraestructura, los sistemas o las redes son los <strong>IDS</strong>. El <strong>IPS</strong> además <strong>previene</strong> (bloquea); los <strong>concentradores VPN</strong> crean túneles y los <strong>cortafuegos</strong> filtran según reglas.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar</strong><br><strong>IDS = alarma (detecta y avisa). IPS = alarma + guardia que cierra la puerta (detecta y bloquea).</strong></th>
+</tr>
+</table></div>
+<h3 id="tipos-según-dónde-se-instalan">Tipos según dónde se instalan</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Dónde</th>
+<th>Qué analiza</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>NIDS / NIPS</strong> (de red)</td>
+<td>En un punto de la red (perímetro, entre zonas, CPD)</td>
+<td>El <strong>tráfico de red</strong> de muchos equipos</td>
+</tr>
+<tr>
+<td><strong>HIDS / HIPS</strong> (de host)</td>
+<td>En un <strong>servidor o equipo</strong> concreto</td>
+<td>Logs, ficheros del sistema (integridad), procesos (hoy, función del <strong>EDR</strong>)</td>
+</tr>
+<tr>
+<td><strong>WIDS / WIPS</strong> (inalámbrico)</td>
+<td>Sensores o los propios AP</td>
+<td>El <strong>espectro wifi</strong>: <strong>rogue AP</strong>, evil twin, ataques de desautenticación (T5)</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="métodos-de-detección">Métodos de detección</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Método</th>
+<th>Cómo</th>
+<th>Ventaja</th>
+<th>Inconveniente</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Por firmas</strong> (patrones)</td>
+<td>Compara con <strong>patrones de ataques conocidos</strong></td>
+<td>Preciso con lo conocido; pocos falsos positivos</td>
+<td>No detecta ataques nuevos</td>
+</tr>
+<tr>
+<td><strong>Por anomalías</strong> (comportamiento)</td>
+<td>Aprende lo <strong>normal</strong> y alerta de <strong>desviaciones</strong></td>
+<td>Detecta ataques nuevos</td>
+<td><strong>Más falsos positivos</strong>; necesita aprendizaje</td>
+</tr>
+<tr>
+<td><strong>Por análisis de protocolo</strong></td>
+<td>Comprueba que el tráfico cumple el estándar del protocolo</td>
+<td>Detecta abusos de protocolo</td>
+<td>Limitado al protocolo</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Falso positivo</strong>: alerta ante algo legítimo. <strong>Falso negativo</strong>: un ataque real que <strong>no</strong> se detecta (el más peligroso). Ajustar (<em>tuning</em>) las firmas y los umbrales es una tarea continua.</p>
+<p>Herramientas: <strong>Snort</strong> y <strong>Suricata</strong> (IDS/IPS de código abierto por firmas), <strong>Zeek</strong> (análisis del tráfico y anomalías); en el sector público, las <strong>sondas del CCN-CERT (SAT)</strong> y la plataforma <strong>CARMEN</strong> para amenazas persistentes. Los <strong>NGFW</strong> (T14) integran IPS.</p>
+<h2 id="2-filtrado-web" class="tema-h2">2. Filtrado web</h2>
+<p>Controla <strong>a qué sitios web pueden acceder</strong> los usuarios, para proteger frente a malware y phishing y aplicar la política de uso.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Técnica</th>
+<th>Cómo funciona</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Categorías de URL</strong></td>
+<td>Bases de datos del fabricante que clasifican los sitios (malware, phishing, juegos, apuestas, redes sociales, adultos…); se <strong>permiten, bloquean o avisan</strong> por categoría</td>
+</tr>
+<tr>
+<td><strong>Listas blancas y negras</strong></td>
+<td>Dominios permitidos o bloqueados expresamente</td>
+</tr>
+<tr>
+<td><strong>Reputación</strong></td>
+<td>Bloquear dominios <strong>recién registrados</strong> o con mala reputación</td>
+</tr>
+<tr>
+<td><strong>Filtrado DNS</strong></td>
+<td>El resolutor DNS <strong>no resuelve</strong> los dominios maliciosos (protege también fuera de la oficina)</td>
+</tr>
+<tr>
+<td><strong>Proxy web</strong></td>
+<td>Los navegadores salen por un proxy (explícito o transparente) que filtra, registra y cachea</td>
+</tr>
+<tr>
+<td><strong>Inspección TLS (<em>SSL inspection</em>)</strong></td>
+<td>El dispositivo <strong>descifra el HTTPS</strong>, lo analiza y lo vuelve a cifrar (necesita instalar su <strong>certificado CA</strong> en los equipos; se excluyen categorías sensibles como banca o salud por privacidad)</td>
+</tr>
+<tr>
+<td>Búsqueda segura</td>
+<td>Fuerza el modo seguro de los buscadores</td>
+</tr>
+</tbody>
+</table></div>
+<p>Se aplica en el <strong>NGFW</strong>, en un <strong>proxy</strong> o en servicios en la nube (<strong>SWG</strong>, <em>Secure Web Gateway</em>), con políticas por <strong>usuario o grupo</strong> (integración con el directorio).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>En el caso de 2023</strong><br>La red de <strong>Internet libre</strong> (ciudadanía y player de TV) debería tener su <strong>propio perfil de filtrado</strong> (bloqueo de categorías ilegales o de malware) y <strong>aislamiento</strong> respecto a la red municipal.</th>
+</tr>
+</table></div>
+<h2 id="3-antispam-y-seguridad-del-correo" class="tema-h2">3. Antispam y seguridad del correo</h2>
+<p>El correo es el <strong>principal vector</strong> de malware y phishing. Una <strong>pasarela de seguridad de correo</strong> (<em>Secure Email Gateway</em>) o la protección integrada del servicio (Microsoft Defender for Office 365, Google) aplica varias capas:</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Técnica</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Reputación del remitente</strong> (listas RBL/DNSBL)</td>
+<td>Rechaza correos de servidores conocidos como fuentes de spam</td>
+</tr>
+<tr>
+<td><strong>SPF, DKIM y DMARC</strong></td>
+<td>Verifica que el remitente está autorizado y el mensaje no se ha alterado (T10)</td>
+</tr>
+<tr>
+<td><strong>Análisis de contenido</strong></td>
+<td>Filtros <strong>bayesianos</strong> y heurísticos, palabras clave, aprendizaje automático</td>
+</tr>
+<tr>
+<td><em><strong>Greylisting</strong></em></td>
+<td>Rechaza temporalmente el primer intento de un remitente desconocido (los servidores legítimos reintentan; muchos de spam no)</td>
+</tr>
+<tr>
+<td><strong>Antimalware</strong></td>
+<td>Analiza los adjuntos con antivirus</td>
+</tr>
+<tr>
+<td><strong>Sandbox de adjuntos</strong></td>
+<td><strong>Detona</strong> los adjuntos sospechosos antes de entregarlos (T13)</td>
+</tr>
+<tr>
+<td><strong>Reescritura de enlaces</strong> (<em>URL rewriting</em>)</td>
+<td>Comprueba cada enlace <strong>en el momento del clic</strong></td>
+</tr>
+<tr>
+<td><strong>Cuarentena</strong></td>
+<td>Retiene lo sospechoso para su revisión</td>
+</tr>
+<tr>
+<td><strong>Anti-suplantación</strong></td>
+<td>Detecta dominios parecidos (<em>typosquatting</em>) y suplantación de directivos (BEC)</td>
+</tr>
+<tr>
+<td><strong>Aviso de correo externo</strong></td>
+<td>Etiqueta los correos que vienen de fuera</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="4-control-de-aplicaciones" class="tema-h2">4. Control de aplicaciones</h2>
+<p>El <strong>control de aplicaciones</strong> identifica el <strong>tráfico por la aplicación que lo genera</strong>, no solo por el puerto (muchas aplicaciones usan el 443), y aplica políticas: <strong>permitir, bloquear o limitar el ancho de banda</strong>.</p>
+<ul class="tema-lista">
+<li>Ejemplos: permitir Teams y bloquear juegos en línea, P2P o anonimizadores (Tor); <strong>limitar</strong> el <em>streaming</em> de vídeo en horario de trabajo; permitir <strong>solo la lectura</strong> de una red social.</li>
+<li>Técnicas: <strong>inspección profunda de paquetes (DPI)</strong>, firmas de aplicación, análisis del TLS (nombre del servidor, SNI).</li>
+<li>Lo incorporan los <strong>NGFW</strong> (App-ID de Palo Alto, Application Control de Fortinet y Check Point).</li>
+<li>En la <strong>nube</strong>: los <strong>CASB</strong> (<em>Cloud Access Security Broker</em>) controlan el uso de aplicaciones en la nube y descubren el <em><strong>shadow IT</strong></em> (servicios que los usuarios usan sin autorización).</li>
+<li>En el <strong>puesto</strong>: el <strong>control de aplicaciones</strong> (listas blancas, AppLocker) decide <strong>qué programas pueden ejecutarse</strong> (T13).</li>
+</ul>
+<h2 id="5-sandbox-de-red" class="tema-h2">5. Sandbox de red</h2>
+<p>Además de la sandbox del puesto (T13), las soluciones de red <strong>envían a una sandbox</strong> (en el propio equipo o en la nube del fabricante) los <strong>ficheros desconocidos</strong> que atraviesan el <strong>cortafuegos</strong> o la <strong>pasarela de correo</strong>: los <strong>detonan en un entorno aislado</strong> y, si se comportan de forma maliciosa, los bloquean y <strong>actualizan las firmas</strong> de toda la red. Es la defensa frente al <strong>malware de día cero</strong> y los documentos con contenido activo.</p>
+<h2 id="6-control-de-acceso-a-la-red-nac" class="tema-h2">6. Control de acceso a la red (NAC)</h2>
+<p>Un <strong>NAC</strong> (<em>Network Access Control</em>) <strong>decide qué dispositivos y usuarios pueden conectarse a la red corporativa y con qué permisos</strong>, según su <strong>identidad</strong> y su <strong>cumplimiento de la política</strong> de seguridad.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Función</th>
+<th>Cómo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Autenticación</strong></td>
+<td><strong>802.1X</strong> con <strong>RADIUS</strong> (usuario o certificado de máquina) en puertos de switch y wifi; <strong>MAB</strong> (por MAC) para impresoras o cámaras que no soportan 802.1X</td>
+</tr>
+<tr>
+<td><strong>Evaluación de postura</strong></td>
+<td>Antivirus activo, parches, sistema soportado, cifrado</td>
+</tr>
+<tr>
+<td><strong>Autorización</strong></td>
+<td>Asignar <strong>VLAN</strong> o <strong>ACL</strong> según el resultado: red corporativa, <strong>red de cuarentena o remediación</strong>, <strong>invitados</strong></td>
+</tr>
+<tr>
+<td><strong>Visibilidad</strong></td>
+<td>Inventario de <strong>todo lo conectado</strong> (incluido IoT)</td>
+</tr>
+<tr>
+<td><strong>Invitados</strong></td>
+<td>Portal de alta y acceso temporal a Internet</td>
+</tr>
+</tbody>
+</table></div>
+<p>Productos: <strong>Cisco ISE</strong>, <strong>Aruba ClearPass</strong>, <strong>FortiNAC</strong>, PacketFence (libre).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 27</strong><br><strong>NAC</strong> es una <strong>solución que permite restringir el acceso a la red corporativa a dispositivos y usuarios no autorizados o que no cumplen las políticas de seguridad</strong>. <strong>No</strong> es NAT (convertir direcciones privadas en públicas) ni un protocolo de enrutamiento.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br><strong>NAC ≠ NAT.</strong> <strong>NAC</strong> = <em>Network Access <strong>Control</strong></em> (quién entra). <strong>NAT</strong> = <em>Network Address <strong>Translation</strong></em> (traducir direcciones). El examen las puso juntas a propósito.</th>
+</tr>
+</table></div>
+<h2 id="7-siem-soc-y-otras-soluciones" class="tema-h2">7. SIEM, SOC y otras soluciones</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Solución</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SIEM</strong> (<em>Security Information and Event Management</em>)</td>
+<td><strong>Centraliza y correlaciona los logs</strong> de cortafuegos, servidores, EDR, AD… para <strong>detectar incidentes</strong> y conservar evidencias (Splunk, Microsoft Sentinel, QRadar, Wazuh, <strong>GLORIA</strong> del CCN)</td>
+</tr>
+<tr>
+<td><strong>SOC</strong> (<em>Security Operations Center</em>)</td>
+<td>Equipo (propio o externo) que <strong>vigila 24×7</strong>, analiza las alertas y responde</td>
+</tr>
+<tr>
+<td><strong>SOAR</strong></td>
+<td>Automatiza la respuesta (<em>playbooks</em>)</td>
+</tr>
+<tr>
+<td><strong>DLP</strong> (<em>Data Loss Prevention</em>)</td>
+<td>Evita la <strong>fuga de información</strong> sensible (por correo, USB, nube)</td>
+</tr>
+<tr>
+<td><strong>Honeypot</strong></td>
+<td>Señuelo que atrae a los atacantes para detectarlos y estudiarlos</td>
+</tr>
+<tr>
+<td><strong>Anti-DDoS</strong></td>
+<td>Mitigación de ataques de denegación de servicio (normalmente del operador o en la nube)</td>
+</tr>
+<tr>
+<td><strong>UTM</strong> (<em>Unified Threat Management</em>)</td>
+<td>Equipo «todo en uno» (cortafuegos + IPS + antivirus + filtrado web + antispam + VPN) para organizaciones pequeñas; antecesor de los NGFW</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="8-defensa-en-profundidad" class="tema-h2">8. Defensa en profundidad</h2>
+<p>Ninguna solución basta por sí sola: se combinan <strong>capas</strong> (principio de <strong>líneas de defensa</strong> del ENS):</p>
+<ol type="1">
+<li><strong>Perímetro</strong>: NGFW, IPS, filtrado web, antispam, sandbox, anti-DDoS.</li>
+<li><strong>Red interna</strong>: segmentación en VLAN, NAC, IDS interno.</li>
+<li><strong>Puesto y servidor</strong>: EPP/EDR, control de aplicaciones, parches, mínimo privilegio.</li>
+<li><strong>Identidad</strong>: MFA, gestión de privilegios.</li>
+<li><strong>Datos</strong>: cifrado, DLP, copias.</li>
+<li><strong>Personas</strong>: formación y concienciación.</li>
+<li><strong>Detección y respuesta</strong>: SIEM, SOC, procedimientos de incidentes.</li>
+</ol>
+<h2 id="9-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">9. Lo que cayó en el examen de 2023</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Contenido</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test 26</td>
+<td>Sistemas que detectan indicios de ataque</td>
+<td><strong>IDS</strong></td>
+</tr>
+<tr>
+<td>Test 27</td>
+<td>Qué es NAC</td>
+<td><strong>Restringir el acceso a la red a dispositivos y usuarios no autorizados o que no cumplen la política</strong></td>
+</tr>
+<tr>
+<td>Test 19–20</td>
+<td>Rogue AP y RADIUS</td>
+<td>WIPS y autenticación 802.1X (T5)</td>
+</tr>
+<tr>
+<td>Test 24</td>
+<td>EDR</td>
+<td>T13</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="10-anclas-de-memoria" class="tema-h2">10. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>IDS detecta y avisa (pasivo, SPAN/TAP) · IPS detecta y bloquea (inline).</strong></li>
+<li><strong>NIDS (red) · HIDS (host) · WIDS (wifi).</strong></li>
+<li><strong>Firmas (lo conocido) · anomalías (lo nuevo, más falsos positivos).</strong></li>
+<li><strong>Falso negativo = el peor (ataque no detectado).</strong></li>
+<li><strong>Filtrado web: categorías, reputación, DNS, proxy, inspección TLS.</strong></li>
+<li><strong>Antispam: RBL, SPF/DKIM/DMARC, bayesiano, greylisting, sandbox, reescritura de enlaces.</strong></li>
+<li><strong>Control de aplicaciones: por aplicación, no por puerto (DPI, NGFW, CASB).</strong></li>
+<li><strong>NAC = 802.1X + RADIUS + postura + VLAN de cuarentena. NAC ≠ NAT.</strong></li>
+<li><strong>SIEM correlaciona logs · SOC vigila · DLP evita fugas.</strong></li>
+</ul>
+<h2 id="11-no-confundir" class="tema-h2">11. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Esto</th>
+<th>No es esto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IDS</strong> (detecta)</td>
+<td><strong>IPS</strong> (bloquea)</td>
+</tr>
+<tr>
+<td><strong>NAC</strong> (control de acceso)</td>
+<td><strong>NAT</strong> (traducción de direcciones)</td>
+</tr>
+<tr>
+<td><strong>Falso positivo</strong> (alerta sin ataque)</td>
+<td><strong>Falso negativo</strong> (ataque sin alerta)</td>
+</tr>
+<tr>
+<td><strong>SIEM</strong> (herramienta)</td>
+<td><strong>SOC</strong> (equipo de personas)</td>
+</tr>
+<tr>
+<td><strong>Proxy web</strong> (usuarios a Internet)</td>
+<td><strong>Proxy inverso</strong> (Internet a servidores)</td>
+</tr>
+<tr>
+<td><strong>Firma</strong></td>
+<td><strong>Anomalía</strong></td>
+</tr>
+<tr>
+<td><strong>UTM</strong> (todo en uno, pymes)</td>
+<td><strong>NGFW</strong> (cortafuegos de nueva generación)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="12-posibles-trampas-de-examen" class="tema-h2">12. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li>Decir que el IDS bloquea el tráfico.</li>
+<li>Confundir NAC con NAT.</li>
+<li>Pensar que la detección por anomalías no tiene falsos positivos.</li>
+<li>Creer que un filtrado web por puertos basta (casi todo va por el 443).</li>
+<li>Pensar que la inspección TLS no requiere instalar ningún certificado en los equipos.</li>
+<li>Confundir greylisting con una lista negra.</li>
+</ul>
+<h2 id="13-posibles-preguntas-tipo-test" class="tema-h2">13. Posibles preguntas tipo test</h2>
+<ol type="1">
+<li>¿Qué sistema detecta y bloquea los ataques en línea? → <strong>IPS</strong>.</li>
+<li>¿Cómo recibe el tráfico un IDS de red pasivo? → <strong>Por un puerto espejo (SPAN) o un TAP</strong>.</li>
+<li>¿Qué protocolo usa el NAC para autenticar en los puertos del switch? → <strong>802.1X (con RADIUS)</strong>.</li>
+<li>¿Qué técnica antispam rechaza temporalmente al remitente desconocido? → <strong>Greylisting</strong>.</li>
+<li>¿Qué solución centraliza y correlaciona los logs de seguridad? → <strong>SIEM</strong>.</li>
+</ol>
+<h2 id="14-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">14. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. Diferencias entre IDS e IPS (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>Función (detectar y alertar / detectar y bloquear).</li>
+<li>Posición (pasivo con SPAN/TAP / en línea).</li>
+<li>Tipos (NIDS/HIDS/WIDS) y métodos (firmas/anomalías).</li>
+<li>Riesgos (falsos positivos que bloquean; falsos negativos).</li>
+</ul>
+<p><strong>2. Qué es un NAC y cómo funciona (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>Definición: restringir el acceso a la red a quien no está autorizado o no cumple.</li>
+<li>802.1X + RADIUS (y MAB); evaluación de postura.</li>
+<li>Autorización por VLAN o ACL: corporativa, cuarentena, invitados.</li>
+<li>Visibilidad de los dispositivos; ejemplos de productos.</li>
+</ul>
+<h2 id="15-supuesto-practico" class="tema-h2">15. Supuesto práctico</h2>
+<p><strong>Enunciado:</strong> el Ayuntamiento quiere impedir que cualquiera conecte un portátil personal a una toma de red de una oficina y acceda a la red municipal.</p>
+<p><strong>Esquema de respuesta:</strong></p>
+<ol type="1">
+<li><strong>Solución</strong>: <strong>NAC con 802.1X</strong> en los puertos de acceso de los switches: solo los equipos <strong>corporativos</strong> (certificado de máquina o usuario del dominio) acceden a su VLAN.</li>
+<li><strong>Excepciones</strong>: impresoras, cámaras o teléfonos que no soportan 802.1X → <strong>MAB</strong> con inventario de MAC y perfiles específicos; teléfonos con 802.1X o LLDP.</li>
+<li><strong>No autorizados</strong>: VLAN de <strong>invitados</strong> (solo Internet) o puerto bloqueado; <strong>postura</strong>: equipos sin antivirus o parches a <strong>cuarentena</strong>.</li>
+<li><strong>Despliegue por fases</strong>: <strong>modo monitor</strong> (solo registrar) → ajustes → <strong>aplicación</strong>; sin cortar el servicio.</li>
+<li><strong>Coordinación</strong> con Sistemas (RADIUS, certificados, directorio), comunicaciones (switches) y los departamentos; formación y documentación. Complemento: puertos sin uso <strong>apagados</strong> y <strong>BPDU Guard</strong> (T4).</li>
+</ol>
+<h2 id="16-matriz-de-memorizacion" class="tema-h2">16. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Dato clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IDS / IPS</td>
+<td>Detecta / bloquea · pasivo (SPAN, TAP) / inline</td>
+</tr>
+<tr>
+<td>Tipos</td>
+<td>NIDS · HIDS · WIDS</td>
+</tr>
+<tr>
+<td>Detección</td>
+<td>Firmas · anomalías · protocolo · falsos positivos/negativos</td>
+</tr>
+<tr>
+<td>Herramientas</td>
+<td>Snort · Suricata · Zeek · sondas SAT y CARMEN (CCN)</td>
+</tr>
+<tr>
+<td>Filtrado web</td>
+<td>Categorías · reputación · DNS · proxy · inspección TLS · SWG</td>
+</tr>
+<tr>
+<td>Antispam</td>
+<td>RBL · SPF/DKIM/DMARC · bayesiano · greylisting · sandbox · URL rewriting · cuarentena</td>
+</tr>
+<tr>
+<td>Control de aplicaciones</td>
+<td>DPI · App-ID · CASB · shadow IT</td>
+</tr>
+<tr>
+<td>NAC</td>
+<td>802.1X · RADIUS · MAB · postura · VLAN de cuarentena · ISE, ClearPass</td>
+</tr>
+<tr>
+<td>Otros</td>
+<td>SIEM · SOC · SOAR · DLP · honeypot · UTM</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="17-resumen-final-si-manana-fuera-el-examen" class="tema-h2">17. Resumen final: si mañana fuera el examen</h2>
+<p>El <strong>IDS detecta</strong> indicios de ataque y <strong>avisa</strong> (pasivo, con SPAN o TAP); el <strong>IPS</strong> además <strong>bloquea</strong> (en línea). Pueden ser <strong>de red, de host o inalámbricos</strong>, y detectan <strong>por firmas</strong> (lo conocido) o <strong>por anomalías</strong> (lo nuevo, con más falsos positivos). El <strong>filtrado web</strong> usa <strong>categorías, reputación, DNS e inspección TLS</strong>; el <strong>antispam</strong> combina <strong>reputación, SPF/DKIM/DMARC, filtros de contenido, greylisting y sandbox de adjuntos</strong>; el <strong>control de aplicaciones</strong> filtra <strong>por aplicación y no por puerto</strong>; la <strong>sandbox</strong> detona lo desconocido. El <strong>NAC</strong> (<strong>802.1X + RADIUS + postura</strong>) <strong>restringe el acceso a la red</strong> a quien no está autorizado o no cumple (y <strong>no es NAT</strong>). Todo se integra en un <strong>SIEM</strong> vigilado por un <strong>SOC</strong>, como capas de una <strong>defensa en profundidad</strong>.</p>
+<h2 id="18-actualidad-datos-fechados" class="tema-h2">18. Actualidad — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong></th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li>Las funciones de este tema se están moviendo a la <strong>nube</strong> dentro de las arquitecturas <strong>SASE/SSE</strong> (SWG, CASB, ZTNA y FWaaS como servicio).</li>
+<li>La adopción de <strong>DNS cifrado (DoH)</strong> y de <strong>TLS 1.3 con ECH</strong> (<em>Encrypted Client Hello</em>) dificulta el filtrado web basado en DNS o en el nombre del servidor.</li>
+<li>El CCN-CERT ofrece a las entidades locales servicios de detección (<strong>SAT-INET</strong>, <strong>SOC</strong>) y la <strong>Red Nacional de SOC (RNS)</strong> para compartir información de amenazas.</li>
+</ul>
+
+  </div>
+</article>

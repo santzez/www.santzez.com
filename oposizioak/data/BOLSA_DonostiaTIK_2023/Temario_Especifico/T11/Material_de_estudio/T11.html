@@ -1,0 +1,524 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T11</div>
+    <h1 class="tema-cabecera__titulo">Centro de Proceso de Datos. Seguridad física. Seguridad lógica. Amenazas y vulnerabilidades. Grados de disponibilidad TIER. Subsistemas de la infraestructura física de un CPD: acondicionamiento y equipamiento.</h1>
+    <div class="tema-cabecera__meta">Bloque 2 · Seguridad · Bolsa DonostiaTIK 2023 · Instalaciones y Comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-que-es-un-cpd">1. Qué es un CPD</a></li>
+<li><a href="#2-amenazas-y-vulnerabilidades">2. Amenazas y vulnerabilidades</a></li>
+<li><a href="#3-seguridad-fisica">3. Seguridad física</a></li>
+<li><a href="#4-seguridad-logica">4. Seguridad lógica</a></li>
+<li><a href="#5-los-principios-de-la-seguridad-la-triada-cia-y-algo-mas">5. Los principios de la seguridad: la tríada CIA y algo más</a></li>
+<li><a href="#6-grados-de-disponibilidad-los-tier">6. Grados de disponibilidad: los TIER</a></li>
+<li><a href="#7-subsistemas-de-la-infraestructura-fisica">7. Subsistemas de la infraestructura física</a></li>
+<li><a href="#8-continuidad-mas-alla-del-cpd">8. Continuidad: más allá del CPD</a></li>
+<li><a href="#9-lo-que-cayo-en-el-examen-de-2023">9. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#10-anclas-de-memoria">10. Anclas de memoria</a></li>
+<li><a href="#11-no-confundir">11. No confundir</a></li>
+<li><a href="#12-posibles-trampas-de-examen">12. Posibles trampas de examen</a></li>
+<li><a href="#13-posibles-preguntas-tipo-test">13. Posibles preguntas tipo test</a></li>
+<li><a href="#14-posibles-preguntas-cortas-con-esquema-de-respuesta">14. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#15-supuesto-practico">15. Supuesto práctico</a></li>
+<li><a href="#16-matriz-de-memorizacion">16. Matriz de memorización</a></li>
+<li><a href="#17-resumen-final-si-manana-fuera-el-examen">17. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#18-actualidad-datos-fechados">18. Actualidad — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — fronteras del tema</strong><br>Este tema trata el <strong>CPD como instalación</strong>: ubicación, <strong>seguridad física y lógica</strong>, <strong>amenazas</strong>, niveles <strong>TIER</strong> y los <strong>subsistemas</strong> (eléctrico, climatización, incendios, cableado, control).<br><strong>T12</strong> → ENS, análisis de riesgos y auditoría (el marco de gestión). <strong>T13</strong> → malware. <strong>T3</strong> → cableado estructurado. <strong>T19</strong> → monitorización.</th>
+</tr>
+</table></div>
+<h2 id="1-que-es-un-cpd" class="tema-h2">1. Qué es un CPD</h2>
+<p>Un <strong>Centro de Proceso de Datos (CPD)</strong> (<em>data center</em>, sala de servidores) es el espacio que aloja los <strong>sistemas de información</strong> de una organización (servidores, almacenamiento, electrónica de red troncal, cortafuegos) con las <strong>condiciones de alimentación, climatización, seguridad y conectividad</strong> necesarias para que funcionen de forma <strong>continua</strong>.</p>
+<p>Tipos: <strong>CPD propio</strong> (<em>on-premise</em>), <strong>coubicación</strong> (<em>colocation</em>: los equipos propios en un CPD de un proveedor), <strong>CPD de respaldo</strong> (para continuidad) y <strong>nube</strong> (infraestructura de un tercero como servicio).</p>
+<h3 id="requisitos-de-ubicación">Requisitos de ubicación</h3>
+<ul class="tema-lista">
+<li><strong>Evitar riesgos</strong>: no en sótanos inundables ni bajo cubiertas con goteras, lejos de tuberías de agua, cocinas, almacenes de material inflamable, zonas de paso de público o fachadas expuestas.</li>
+<li><strong>Accesibilidad</strong> para introducir equipos (puertas y ascensores con dimensiones y carga suficientes) pero <strong>acceso restringido</strong>.</li>
+<li><strong>Estructura</strong>: el suelo debe soportar el peso de racks, SAI y baterías (kg/m²).</li>
+<li><strong>Acometidas</strong>: eléctrica y de comunicaciones (preferiblemente <strong>dos operadores por caminos distintos</strong>).</li>
+<li><strong>Espacio</strong> para crecimiento, zonas de operación y almacén.</li>
+</ul>
+<h2 id="2-amenazas-y-vulnerabilidades" class="tema-h2">2. Amenazas y vulnerabilidades</h2>
+<ul class="tema-lista">
+<li><strong>Amenaza</strong>: evento que puede causar daño (un incendio, un corte eléctrico, un atacante).</li>
+<li><strong>Vulnerabilidad</strong>: debilidad que la amenaza puede aprovechar (no tener SAI, un software sin parchear).</li>
+<li><strong>Riesgo</strong> = probabilidad de que la amenaza explote la vulnerabilidad × impacto (T12).</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Amenazas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Naturales y del entorno</strong></td>
+<td>Incendio, <strong>inundación</strong> (también por fugas de la climatización), terremoto, tormentas y rayos</td>
+</tr>
+<tr>
+<td><strong>Eléctricas</strong></td>
+<td><strong>Cortes</strong>, microcortes, <strong>sobretensiones</strong>, armónicos, fallo de tierra</td>
+</tr>
+<tr>
+<td><strong>Ambientales</strong></td>
+<td><strong>Temperatura</strong> y <strong>humedad</strong> fuera de rango, polvo, electricidad estática</td>
+</tr>
+<tr>
+<td><strong>Humanas no intencionadas</strong></td>
+<td>Errores de operación, desconexiones accidentales, derrames</td>
+</tr>
+<tr>
+<td><strong>Humanas intencionadas</strong></td>
+<td><strong>Robo</strong>, <strong>sabotaje</strong>, <strong>acceso no autorizado</strong>, vandalismo</td>
+</tr>
+<tr>
+<td><strong>Lógicas</strong></td>
+<td><strong>Malware</strong> y ransomware, intrusiones, accesos indebidos, fallos de software</td>
+</tr>
+<tr>
+<td><strong>Técnicas</strong></td>
+<td>Avería de hardware (discos, fuentes), fallo de un proveedor o de las comunicaciones</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="3-seguridad-fisica" class="tema-h2">3. Seguridad física</h2>
+<p>Protege las <strong>instalaciones y el equipamiento</strong> frente a amenazas físicas.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Medida</th>
+<th>Ejemplos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Control de acceso</strong></td>
+<td><strong>Tarjeta</strong>, PIN, <strong>biometría</strong> (huella, rostro), doble factor; <strong>esclusa</strong> (<em>mantrap</em>) en CPD críticos; <strong>lista de personal autorizado</strong>; <strong>registro de entradas y salidas</strong>; visitas siempre <strong>acompañadas</strong></td>
+</tr>
+<tr>
+<td><strong>Vigilancia</strong></td>
+<td><strong>CCTV</strong> con grabación, detectores de intrusión, alarmas de puerta abierta</td>
+</tr>
+<tr>
+<td><strong>Protección perimetral</strong></td>
+<td>Muros, puertas de seguridad, ausencia de ventanas, señalización discreta</td>
+</tr>
+<tr>
+<td><strong>Racks</strong></td>
+<td>Armarios con <strong>llave</strong> y control de apertura</td>
+</tr>
+<tr>
+<td><strong>Protección del entorno</strong></td>
+<td>Detección y <strong>extinción de incendios</strong>, <strong>detección de fugas de agua</strong>, control de temperatura y humedad</td>
+</tr>
+<tr>
+<td><strong>Suministro</strong></td>
+<td>SAI, grupo electrógeno, doble acometida</td>
+</tr>
+<tr>
+<td><strong>Protección del cableado</strong></td>
+<td>Canalizaciones protegidas y separadas de la red eléctrica</td>
+</tr>
+<tr>
+<td><strong>Gestión de soportes</strong></td>
+<td>Destrucción segura de discos (desmagnetizado, triturado)</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 22</strong><br>En los cuadros eléctricos, los <strong>interruptores diferenciales</strong> protegen a las <strong>personas</strong> frente a la <strong>electrocución</strong> por un contacto con un equipo con un problema de aislamiento (detectan <strong>fugas de corriente a tierra</strong>, típicamente de 30 mA).<br>Los <strong>magnetotérmicos</strong> son los que protegen la <strong>instalación</strong> frente a <strong>sobrecargas y cortocircuitos</strong>. Seleccionar la fase o repartir la carga son tareas de diseño, no de un diferencial.</th>
+</tr>
+</table></div>
+<h2 id="4-seguridad-logica" class="tema-h2">4. Seguridad lógica</h2>
+<p>Protege la <strong>información y los sistemas</strong> frente a accesos y usos indebidos.</p>
+<ul class="tema-lista">
+<li><strong>Identificación y autenticación</strong>: cuentas nominales, contraseñas robustas, <strong>MFA</strong>, gestión centralizada (Active Directory, LDAP, RADIUS).</li>
+<li><strong>Control de acceso</strong>: <strong>mínimo privilegio</strong> y <strong>segregación de funciones</strong>; cuentas privilegiadas controladas (PAM); revisión periódica de permisos.</li>
+<li><strong>Protección de las comunicaciones</strong>: cortafuegos, segmentación en VLAN, VPN, cifrado (T14, T15).</li>
+<li><strong>Protección frente a malware</strong>: antivirus/EDR, parches (T13).</li>
+<li><strong>Copias de seguridad</strong>: regla <strong>3-2-1</strong> (3 copias, en 2 soportes distintos, 1 fuera de la sede) y, frente al ransomware, una copia <strong>inmutable o desconectada</strong> (3-2-1-1-0); <strong>pruebas de restauración</strong>.</li>
+<li><strong>Registro y monitorización</strong>: logs centralizados, SIEM, alertas (T17, T19).</li>
+<li><strong>Cifrado</strong> de la información sensible en reposo y en tránsito.</li>
+<li><strong>Continuidad</strong>: replicación, CPD de respaldo, plan de recuperación ante desastres.</li>
+</ul>
+<h2 id="5-los-principios-de-la-seguridad-la-triada-cia-y-algo-mas" class="tema-h2">5. Los principios de la seguridad: la tríada CIA y algo más</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Dimensión</th>
+<th>Qué protege</th>
+<th>Ejemplo de medida</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Confidencialidad</strong></td>
+<td>Que solo accedan los autorizados</td>
+<td>Cifrado, control de acceso</td>
+</tr>
+<tr>
+<td><strong>Integridad</strong></td>
+<td>Que la información no se altere indebidamente</td>
+<td>Firmas, hashes, control de cambios</td>
+</tr>
+<tr>
+<td><strong>Disponibilidad</strong></td>
+<td>Que esté accesible cuando se necesita</td>
+<td><strong>Redundancia</strong>, SAI, copias, clústeres</td>
+</tr>
+<tr>
+<td><strong>Autenticidad</strong></td>
+<td>Que se sabe quién es quién</td>
+<td>Certificados, MFA</td>
+</tr>
+<tr>
+<td><strong>Trazabilidad</strong></td>
+<td>Que se puede saber quién hizo qué</td>
+<td>Logs, auditoría</td>
+</tr>
+</tbody>
+</table></div>
+<p>Estas son las <strong>cinco dimensiones del ENS</strong> (T12).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 23</strong><br>Un servidor con <strong>dos fuentes de alimentación redundantes</strong>, conectada <strong>cada una a un SAI distinto</strong>, aplica el principio de <strong>disponibilidad</strong>: si falla una fuente, un SAI o una línea, el servidor sigue funcionando. Los principios de seguridad <strong>también se aplican al hardware</strong>.</th>
+</tr>
+</table></div>
+<h2 id="6-grados-de-disponibilidad-los-tier" class="tema-h2">6. Grados de disponibilidad: los TIER</h2>
+<p>El <strong>Uptime Institute</strong> clasifica los CPD en <strong>cuatro niveles (Tier I a IV)</strong> según su <strong>redundancia</strong> y su <strong>tolerancia a fallos</strong>. La norma <strong>ANSI/TIA-942</strong> usa una clasificación equivalente (<em>Rated 1–4</em>) y en Europa existe la <strong>EN 50600</strong> (clases de disponibilidad 1 a 4).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Tier</th>
+<th>Nombre</th>
+<th>Redundancia</th>
+<th>Disponibilidad</th>
+<th>Parada anual máxima</th>
+<th>Características</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>I</strong></td>
+<td>Básico</td>
+<td><strong>N</strong> (sin redundancia)</td>
+<td><strong>99,671 %</strong></td>
+<td><strong>≈ 28,8 h</strong></td>
+<td>Una sola vía de alimentación y refrigeración; para mantener hay que <strong>parar</strong></td>
+</tr>
+<tr>
+<td><strong>II</strong></td>
+<td>Componentes redundantes</td>
+<td><strong>N+1</strong> en componentes</td>
+<td><strong>99,741 %</strong></td>
+<td><strong>≈ 22 h</strong></td>
+<td>SAI y climatización redundantes, pero <strong>una sola vía</strong> de distribución</td>
+</tr>
+<tr>
+<td><strong>III</strong></td>
+<td><strong>Mantenimiento concurrente</strong></td>
+<td><strong>N+1</strong> y <strong>varias vías</strong> (una activa)</td>
+<td><strong>99,982 %</strong></td>
+<td><strong>≈ 1,6 h</strong></td>
+<td>Se puede <strong>mantener cualquier componente sin parar</strong> los sistemas; equipos con doble fuente</td>
+</tr>
+<tr>
+<td><strong>IV</strong></td>
+<td><strong>Tolerante a fallos</strong></td>
+<td><strong>2N</strong> o 2(N+1), <strong>vías activas simultáneas</strong></td>
+<td><strong>99,995 %</strong></td>
+<td><strong>≈ 26 min</strong></td>
+<td>Un fallo cualquiera <strong>no afecta</strong> a los servicios; compartimentación</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar</strong><br><strong>I = básico (N) · II = redundante (N+1) · III = mantenible sin parar · IV = tolerante a fallos (2N).</strong><br>Disponibilidades: <strong>99,671 · 99,741 · 99,982 · 99,995</strong>. Paradas: <strong>28,8 h · 22 h · 1,6 h · 26 min</strong>.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>N</strong> = la capacidad justa necesaria. <strong>N+1</strong> = una unidad de reserva. <strong>2N</strong> = todo duplicado.</li>
+<li>La disponibilidad también se expresa en <strong>«nueves»</strong>: 99,9 % («tres nueves») ≈ 8,76 h de parada al año; 99,99 % ≈ 52,6 min; 99,999 % ≈ 5,3 min.</li>
+</ul>
+<h2 id="7-subsistemas-de-la-infraestructura-fisica" class="tema-h2">7. Subsistemas de la infraestructura física</h2>
+<h3 id="subsistema-eléctrico">Subsistema eléctrico</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Acometida</strong></td>
+<td>Entrada de la compañía eléctrica (en CPD críticos, <strong>doble acometida</strong> de subestaciones distintas)</td>
+</tr>
+<tr>
+<td><strong>Cuadro general (CGBT)</strong> y cuadros de distribución</td>
+<td>Reparto y <strong>protecciones</strong>: <strong>magnetotérmicos</strong> (sobrecarga y cortocircuito), <strong>diferenciales</strong> (fugas, protección de personas) y <strong>protectores de sobretensiones</strong></td>
+</tr>
+<tr>
+<td><strong>SAI / UPS</strong></td>
+<td>Mantiene la alimentación <strong>sin corte</strong> durante un tiempo (autonomía de baterías) y <strong>filtra</strong> la corriente</td>
+</tr>
+<tr>
+<td><strong>Grupo electrógeno</strong></td>
+<td>Generador diésel para <strong>cortes largos</strong>; tarda segundos en arrancar (el SAI cubre ese hueco)</td>
+</tr>
+<tr>
+<td><strong>ATS</strong> (conmutador de transferencia)</td>
+<td>Pasa automáticamente de la red al grupo</td>
+</tr>
+<tr>
+<td><strong>PDU</strong></td>
+<td>Regletas de los racks (medidas o gestionables por red)</td>
+</tr>
+<tr>
+<td><strong>Doble alimentación A/B</strong></td>
+<td>Dos circuitos independientes por rack para los equipos con <strong>doble fuente</strong></td>
+</tr>
+<tr>
+<td><strong>Toma de tierra</strong></td>
+<td>Seguridad de las personas y de los equipos</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Tipo de SAI</th>
+<th>Funcionamiento</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em><strong>Offline / standby</strong></em></td>
+<td>La carga va a la red; ante un corte conmuta a batería (pequeño tiempo de conmutación)</td>
+<td>Puestos de trabajo</td>
+</tr>
+<tr>
+<td><em><strong>Line-interactive</strong></em></td>
+<td>Regula la tensión (AVR) sin pasar a batería en las fluctuaciones</td>
+<td>Pequeños servidores, armarios de comunicaciones</td>
+</tr>
+<tr>
+<td><strong>Online de doble conversión</strong></td>
+<td>La carga <strong>siempre</strong> se alimenta desde el inversor (AC → DC → AC): <strong>cero conmutación</strong> y corriente limpia</td>
+<td><strong>CPD</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>Dimensionado: potencia en <strong>VA y W</strong> (W = VA × factor de potencia), <strong>autonomía</strong> necesaria hasta que arranque el grupo o se apague ordenadamente (con un software de apagado automático por la tarjeta de red del SAI).</p>
+<h3 id="climatización">Climatización</h3>
+<ul class="tema-lista">
+<li>Los equipos convierten casi toda la energía en <strong>calor</strong>. Rango recomendado por <strong>ASHRAE</strong>: <strong>18–27 °C</strong> en la entrada de aire de los equipos y humedad controlada (evitar condensación y electricidad estática).</li>
+<li><strong>Pasillos fríos y calientes</strong>: los racks se colocan <strong>enfrentados</strong> (frontal con frontal) para que todos tomen aire del pasillo frío y expulsen al caliente; mejor aún con <strong>confinamiento</strong> (cerrar el pasillo frío o el caliente).</li>
+<li>Equipos: <strong>CRAC</strong> (expansión directa, con compresor) y <strong>CRAH</strong> (agua enfriada); unidades <em><strong>in-row</strong></em> entre racks; <strong>free cooling</strong> (aprovechar el aire exterior frío para ahorrar energía).</li>
+<li><strong>Paneles ciegos</strong> en las U vacías de los racks para no mezclar aire caliente y frío.</li>
+<li><strong>PUE</strong> (<em>Power Usage Effectiveness</em>) = energía total del CPD / energía de los equipos TI. Ideal = 1; un CPD eficiente está por debajo de 1,4–1,5.</li>
+</ul>
+<h3 id="detección-y-extinción-de-incendios">Detección y extinción de incendios</h3>
+<ul class="tema-lista">
+<li><strong>Detección precoz</strong>: detectores ópticos de humo y, en CPD, <strong>aspiración (VESDA)</strong>, que detecta partículas antes de que haya humo visible.</li>
+<li><strong>Extinción por gas</strong> (no daña los equipos ni deja residuos): <strong>gases inertes</strong> (<strong>IG-541 / Inergen</strong>, IG-55, argón, nitrógeno: reducen el oxígeno) o <strong>agentes químicos</strong> como el <strong>FK-5-1-12 (Novec 1230)</strong> o el HFC-227ea (FM-200). La sala debe ser <strong>estanca</strong> y tener <strong>aviso y retardo</strong> para evacuar.</li>
+<li><strong>Agua nebulizada</strong> como alternativa; los rociadores de agua convencionales son el último recurso (dañan los equipos).</li>
+<li><strong>Extintores de CO₂</strong> para fuego eléctrico (no de agua ni de espuma).</li>
+<li>El <strong>halón</strong> está <strong>prohibido</strong> (destruye la capa de ozono).</li>
+</ul>
+<h3 id="otros-subsistemas">Otros subsistemas</h3>
+<ul class="tema-lista">
+<li><strong>Suelo técnico</strong> elevado (paso de cables y aire) y/o <strong>bandejas aéreas</strong>; separación entre cableado eléctrico y de datos.</li>
+<li><strong>Racks</strong> de 42U o más, con organización del cableado, paneles ciegos y llave.</li>
+<li><strong>Cableado estructurado</strong> propio del CPD (fibra OM4/OS2 y cobre Cat6A; MPO para alta densidad).</li>
+<li><strong>Monitorización ambiental y de la infraestructura (DCIM)</strong>: sensores de <strong>temperatura, humedad, fugas de agua, humo, puertas</strong>, estado de SAI, clima y PDU, con alarmas (SNMP, correo, SMS; T19).</li>
+<li><strong>Alumbrado de emergencia</strong> y señalización.</li>
+</ul>
+<h2 id="8-continuidad-mas-alla-del-cpd" class="tema-h2">8. Continuidad: más allá del CPD</h2>
+<ul class="tema-lista">
+<li><strong>CPD de respaldo</strong> en otro edificio o en la nube, con <strong>replicación</strong> de datos.</li>
+<li><strong>RPO</strong> (<em>Recovery Point Objective</em>): <strong>cuántos datos</strong> se pueden perder (tiempo desde la última copia). <strong>RTO</strong> (<em>Recovery Time Objective</em>): <strong>cuánto tiempo</strong> se puede tardar en recuperar el servicio.</li>
+<li><strong>Plan de continuidad de negocio (PCN)</strong> y <strong>plan de recuperación ante desastres (DRP)</strong>, con <strong>pruebas periódicas</strong>.</li>
+</ul>
+<h2 id="9-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">9. Lo que cayó en el examen de 2023</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Contenido</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test 22</td>
+<td>Interruptores diferenciales</td>
+<td><strong>Protegen a las personas de la electrocución</strong> por fallo de aislamiento</td>
+</tr>
+<tr>
+<td>Test 23</td>
+<td>Dos fuentes conectadas a SAI distintos</td>
+<td><strong>Disponibilidad</strong></td>
+</tr>
+<tr>
+<td>Caso (enunciado)</td>
+<td>Armario principal en el sótano</td>
+<td>Riesgo de inundación: detección de agua, armario elevado</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="10-anclas-de-memoria" class="tema-h2">10. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>Amenaza (lo que pasa) × vulnerabilidad (la debilidad) → riesgo.</strong></li>
+<li><strong>Diferencial = protege personas (fugas) · magnetotérmico = protege la instalación (sobrecarga, cortocircuito).</strong></li>
+<li><strong>Tier I N 99,671 % · II N+1 99,741 % · III mantenimiento concurrente 99,982 % · IV tolerante 2N 99,995 %.</strong></li>
+<li><strong>SAI online de doble conversión para CPD · grupo electrógeno para cortes largos.</strong></li>
+<li><strong>Pasillo frío / pasillo caliente · ASHRAE 18–27 °C · PUE ideal 1.</strong></li>
+<li><strong>Extinción por gas (inertes o Novec), detección VESDA, CO₂ en extintores; halón prohibido.</strong></li>
+<li><strong>3-2-1 (+1 inmutable) · RPO = datos perdidos · RTO = tiempo de parada.</strong></li>
+</ul>
+<h2 id="11-no-confundir" class="tema-h2">11. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Esto</th>
+<th>No es esto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Diferencial</strong> (personas, fugas)</td>
+<td><strong>Magnetotérmico</strong> (sobrecargas, cortocircuitos)</td>
+</tr>
+<tr>
+<td><strong>Seguridad física</strong> (instalaciones)</td>
+<td><strong>Seguridad lógica</strong> (información y accesos)</td>
+</tr>
+<tr>
+<td><strong>Tier III</strong> (mantenible sin parar)</td>
+<td><strong>Tier IV</strong> (tolera un fallo sin parar)</td>
+</tr>
+<tr>
+<td><strong>RPO</strong> (datos)</td>
+<td><strong>RTO</strong> (tiempo)</td>
+</tr>
+<tr>
+<td><strong>CRAC</strong> (expansión directa)</td>
+<td><strong>CRAH</strong> (agua enfriada)</td>
+</tr>
+<tr>
+<td><strong>SAI</strong> (sin corte, minutos)</td>
+<td><strong>Grupo electrógeno</strong> (cortes largos, arranca en segundos)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="12-posibles-trampas-de-examen" class="tema-h2">12. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li>Pensar que el diferencial protege de los cortocircuitos.</li>
+<li>Creer que la disponibilidad solo es cosa del software.</li>
+<li>Confundir el orden de los Tier o sus porcentajes.</li>
+<li>Apagar un incendio eléctrico con agua o espuma.</li>
+<li>Pensar que el SAI sustituye al grupo electrógeno en cortes largos.</li>
+<li>Colocar los racks todos mirando en la misma dirección.</li>
+</ul>
+<h2 id="13-posibles-preguntas-tipo-test" class="tema-h2">13. Posibles preguntas tipo test</h2>
+<ol type="1">
+<li>¿Qué disponibilidad corresponde a un Tier III? → <strong>99,982 %</strong>.</li>
+<li>¿Qué tipo de SAI no tiene tiempo de conmutación? → <strong>Online de doble conversión</strong>.</li>
+<li>¿Qué mide el PUE? → <strong>Eficiencia energética: energía total / energía TI</strong>.</li>
+<li>¿Qué sistema detecta humo antes de que sea visible? → <strong>Detección por aspiración (VESDA)</strong>.</li>
+<li>¿Qué indica el RTO? → <strong>El tiempo máximo para recuperar el servicio</strong>.</li>
+</ol>
+<h2 id="14-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">14. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. Explica los niveles TIER (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>Quién los define (Uptime Institute; TIA-942, EN 50600).</li>
+<li>Los cuatro niveles con redundancia (N, N+1, mantenimiento concurrente, 2N).</li>
+<li>Disponibilidad y parada anual de cada uno.</li>
+<li>Ejemplo de qué se puede mantener sin parar en Tier III.</li>
+</ul>
+<p><strong>2. Medidas de seguridad física de un CPD (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>Control de acceso (tarjeta, biometría, registro, acompañamiento), CCTV y alarmas.</li>
+<li>Protección frente a incendio, agua, temperatura y electricidad (SAI, grupo, protecciones).</li>
+<li>Ubicación adecuada y racks con llave.</li>
+<li>Monitorización ambiental y procedimientos.</li>
+</ul>
+<h2 id="15-supuesto-practico" class="tema-h2">15. Supuesto práctico</h2>
+<p><strong>Enunciado:</strong> el armario principal del edificio está en el sótano (como en el caso de 2023). Tras una tormenta, entra agua en la sala.</p>
+<p><strong>Esquema de respuesta:</strong></p>
+<ol type="1">
+<li><strong>Seguridad de las personas primero</strong>: no entrar si hay riesgo eléctrico; avisar a mantenimiento para <strong>cortar la alimentación</strong> del cuadro afectado.</li>
+<li><strong>Contención</strong>: apagado ordenado de los equipos si el SAI lo permite; evaluar daños.</li>
+<li><strong>Restablecimiento</strong>: secado, revisión eléctrica, sustitución de los equipos dañados (repuestos o RMA), comprobación de la conectividad del edificio.</li>
+<li><strong>Medidas preventivas</strong>: <strong>sensores de fuga de agua</strong> con alarma, armario <strong>elevado</strong> sobre el suelo, sellado de pasos de tubos, revisión de desagües, y valorar <strong>reubicar</strong> el armario principal en una planta superior.</li>
+<li><strong>Coordinación</strong> con mantenimiento de edificios, el departamento y la aseguradora; <strong>registro</strong> de la incidencia y análisis de causa (gestión de problemas, T20).</li>
+</ol>
+<h2 id="16-matriz-de-memorizacion" class="tema-h2">16. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Dato clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tier I / II / III / IV</td>
+<td>99,671 / 99,741 / 99,982 / 99,995 % · 28,8 h / 22 h / 1,6 h / 26 min</td>
+</tr>
+<tr>
+<td>Redundancia</td>
+<td>N · N+1 · N+1 con vías alternativas · 2N</td>
+</tr>
+<tr>
+<td>Normas</td>
+<td>Uptime Institute · ANSI/TIA-942 · EN 50600</td>
+</tr>
+<tr>
+<td>Protecciones eléctricas</td>
+<td>Diferencial (personas, 30 mA) · magnetotérmico (sobrecarga, cortocircuito) · sobretensiones</td>
+</tr>
+<tr>
+<td>SAI</td>
+<td>Offline · line-interactive · online doble conversión</td>
+</tr>
+<tr>
+<td>Clima</td>
+<td>ASHRAE 18–27 °C · pasillos frío/caliente · PUE</td>
+</tr>
+<tr>
+<td>Incendios</td>
+<td>VESDA · IG-541, Novec 1230 · CO₂ · halón prohibido</td>
+</tr>
+<tr>
+<td>Continuidad</td>
+<td>3-2-1 · RPO · RTO · DRP</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="17-resumen-final-si-manana-fuera-el-examen" class="tema-h2">17. Resumen final: si mañana fuera el examen</h2>
+<p>El <strong>CPD</strong> aloja los sistemas críticos y se protege con <strong>seguridad física</strong> (acceso controlado y registrado, CCTV, protección contra <strong>incendio, agua, temperatura y electricidad</strong>) y <strong>lógica</strong> (autenticación, mínimo privilegio, cortafuegos, antimalware, <strong>copias 3-2-1</strong>, monitorización). Sus <strong>amenazas</strong> explotan <strong>vulnerabilidades</strong>; el resultado es el <strong>riesgo</strong>. Los <strong>Tier</strong> del Uptime Institute van de <strong>I (básico, 99,671 %)</strong> a <strong>IV (tolerante a fallos, 2N, 99,995 %)</strong>; el <strong>III</strong> permite <strong>mantener sin parar</strong>. Subsistemas: <strong>eléctrico</strong> (acometidas, <strong>SAI online</strong>, <strong>grupo electrógeno</strong>, <strong>diferenciales para las personas y magnetotérmicos para la instalación</strong>, doble alimentación A/B), <strong>climatización</strong> (pasillos frío/caliente, PUE), <strong>incendios</strong> (VESDA y <strong>gas</strong>), suelo técnico, racks y <strong>monitorización</strong>. Dos fuentes a dos SAI = <strong>disponibilidad</strong>.</p>
+<h2 id="18-actualidad-datos-fechados" class="tema-h2">18. Actualidad — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong></th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li>La <strong>inteligencia artificial</strong> ha disparado la densidad de los racks (de 5–10 kW a 40–100 kW o más), lo que generaliza la <strong>refrigeración líquida</strong> (directa al chip o por inmersión).</li>
+<li>El fabricante 3M dejó de producir el agente <strong>Novec 1230</strong> a finales de 2025 (por los PFAS); otros fabricantes siguen ofreciendo FK-5-1-12 y crece el uso de <strong>gases inertes</strong>.</li>
+<li>La <strong>Directiva de Eficiencia Energética (UE) 2023/1791</strong> obliga a los CPD de más de 500 kW a informar de su consumo, PUE y uso de agua.</li>
+</ul>
+
+  </div>
+</article>

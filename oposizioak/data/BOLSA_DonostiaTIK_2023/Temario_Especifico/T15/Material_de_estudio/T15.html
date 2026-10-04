@@ -1,0 +1,462 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T15</div>
+    <h1 class="tema-cabecera__titulo">Seguridad en redes de comunicaciones. VPNs: VPNs LAN to LAN y VPNs Client to LAN, VPNs IPsec y VPNs SSL.</h1>
+    <div class="tema-cabecera__meta">Bloque 2 · Seguridad · Bolsa DonostiaTIK 2023 · Instalaciones y Comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-que-es-una-vpn">1. Qué es una VPN</a></li>
+<li><a href="#2-tipos-de-vpn-segun-que-conectan">2. Tipos de VPN según qué conectan</a></li>
+<li><a href="#3-ipsec">3. IPsec</a></li>
+<li><a href="#4-vpn-ssl-tls">4. VPN SSL/TLS</a></li>
+<li><a href="#5-otras-tecnologias-de-tunel">5. Otras tecnologías de túnel</a></li>
+<li><a href="#6-seguridad-y-buenas-practicas">6. Seguridad y buenas prácticas</a></li>
+<li><a href="#7-lo-que-cayo-en-el-examen-de-2023">7. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#8-anclas-de-memoria">8. Anclas de memoria</a></li>
+<li><a href="#9-no-confundir">9. No confundir</a></li>
+<li><a href="#10-posibles-trampas-de-examen">10. Posibles trampas de examen</a></li>
+<li><a href="#11-posibles-preguntas-tipo-test">11. Posibles preguntas tipo test</a></li>
+<li><a href="#12-posibles-preguntas-cortas-con-esquema-de-respuesta">12. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#13-supuesto-practico">13. Supuesto práctico</a></li>
+<li><a href="#14-matriz-de-memorizacion">14. Matriz de memorización</a></li>
+<li><a href="#15-resumen-final-si-manana-fuera-el-examen">15. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#16-actualidad-datos-fechados">16. Actualidad — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — fronteras del tema</strong><br>Este tema trata las <strong>redes privadas virtuales</strong>: tipos (<strong>LAN to LAN</strong> y <strong>Client to LAN</strong>), tecnologías (<strong>IPsec</strong>, <strong>SSL/TLS</strong>, WireGuard, otras), configuración y seguridad.<br><strong>T14</strong> → el cortafuegos donde suelen terminar las VPN. <strong>T6</strong> → APN privado y routers 4G. <strong>T10</strong> → acceso remoto (RDP, SSH). <strong>T12</strong> → requisitos del ENS para accesos remotos.</th>
+</tr>
+</table></div>
+<h2 id="1-que-es-una-vpn" class="tema-h2">1. Qué es una VPN</h2>
+<p>Una <strong>VPN</strong> (<em>Virtual Private Network</em>, red privada virtual) crea una <strong>conexión privada y segura sobre una red pública o no confiable (normalmente Internet)</strong>, como si los extremos estuvieran conectados a la misma red privada.</p>
+<p>Se basa en dos ideas:</p>
+<ul class="tema-lista">
+<li><strong>Túnel</strong>: los paquetes originales se <strong>encapsulan</strong> dentro de otros paquetes que viajan por Internet.</li>
+<li><strong>Seguridad</strong>: el contenido del túnel se <strong>cifra</strong> (<strong>confidencialidad</strong>), se comprueba que no se ha alterado (<strong>integridad</strong>) y se verifica quién está al otro lado (<strong>autenticación</strong>).</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — la pregunta corta 3 de 2023</strong><br>«Describe lo que es una red privada virtual, los tipos de VPN que conoces y los propósitos de su uso». La rúbrica valoraba <strong>la descripción</strong> (0,5), <strong>más de dos tipos</strong> (0,75) y <strong>ejemplos de uso de cada tipo</strong> (0,75). Quedarse en las siglas puntuaba la mitad.</th>
+</tr>
+</table></div>
+<h2 id="2-tipos-de-vpn-segun-que-conectan" class="tema-h2">2. Tipos de VPN según qué conectan</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Qué une</th>
+<th>Quién establece el túnel</th>
+<th>Usos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LAN to LAN</strong> (<em>site-to-site</em>, sede a sede)</td>
+<td><strong>Dos redes completas</strong> (sede central y sede remota)</td>
+<td>Los <strong>equipos de red</strong> (cortafuegos o routers) de cada sede; los usuarios no hacen nada</td>
+<td><strong>Unir sedes</strong> municipales pequeñas con la central; conectar con un <strong>proveedor</strong> o con la nube; la <strong>carpa</strong> del caso de 2023 con un router 4G</td>
+</tr>
+<tr>
+<td><strong>Client to LAN</strong> (<em>remote access</em>, acceso remoto)</td>
+<td><strong>Un equipo</strong> (portátil, móvil) con la red corporativa</td>
+<td>Un <strong>cliente VPN</strong> en el equipo del usuario contra el concentrador VPN (normalmente el cortafuegos)</td>
+<td><strong>Teletrabajo</strong>, técnicos de guardia, <strong>mantenedores externos</strong> (el PLC del caso de 2023)</td>
+</tr>
+<tr>
+<td><em>Client to client</em> / host a host</td>
+<td>Dos equipos concretos</td>
+<td>Los propios equipos</td>
+<td>Administración puntual entre servidores</td>
+</tr>
+</tbody>
+</table></div>
+<p>Otras VPN según quién las presta:</p>
+<ul class="tema-lista">
+<li><strong>VPN de operador (MPLS / VPN IP)</strong>: el operador crea redes privadas entre las sedes de un cliente dentro de su red (no necesariamente cifradas, pero aisladas de Internet).</li>
+<li><strong>SD-WAN</strong>: gestión centralizada de varios enlaces (fibra, 4G) entre sedes, con túneles cifrados y elección dinámica del mejor camino.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar</strong><br><strong>LAN to LAN = sede con sede (lo montan los cortafuegos, siempre activo). Client to LAN = persona con la red (lo arranca el usuario con su cliente).</strong></th>
+</tr>
+</table></div>
+<h2 id="3-ipsec" class="tema-h2">3. IPsec</h2>
+<p><strong>IPsec</strong> (<em>IP Security</em>) es un conjunto de protocolos del <strong>IETF</strong> que protege el tráfico <strong>en la capa de red (capa 3)</strong>: cifra y autentica los paquetes IP. Es el estándar para las VPN <strong>LAN to LAN</strong> entre fabricantes distintos y también se usa en acceso remoto (IKEv2).</p>
+<h3 id="componentes">Componentes</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Componente</th>
+<th>Función</th>
+<th>Protocolo/puerto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IKE</strong> (<em>Internet Key Exchange</em>), v1 y <strong>v2</strong></td>
+<td><strong>Negocia</strong> los algoritmos, <strong>autentica</strong> a los extremos y <strong>genera las claves</strong> (asociaciones de seguridad, <strong>SA</strong>)</td>
+<td><strong>UDP 500</strong></td>
+</tr>
+<tr>
+<td><strong>ESP</strong> (<em>Encapsulating Security Payload</em>)</td>
+<td><strong>Cifra</strong> y autentica los datos</td>
+<td><strong>Protocolo IP 50</strong></td>
+</tr>
+<tr>
+<td><strong>AH</strong> (<em>Authentication Header</em>)</td>
+<td><strong>Solo autentica e integra</strong> (no cifra); incompatible con NAT</td>
+<td>Protocolo IP 51</td>
+</tr>
+<tr>
+<td><strong>NAT-T</strong> (NAT Traversal)</td>
+<td>Encapsula ESP en UDP para atravesar routers con NAT</td>
+<td><strong>UDP 4500</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="modos">Modos</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Modo</th>
+<th>Qué protege</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Túnel</strong></td>
+<td><strong>Todo el paquete IP original</strong> se cifra y se encapsula en uno nuevo con las IP de los extremos del túnel</td>
+<td><strong>VPN LAN to LAN</strong> entre cortafuegos (el habitual)</td>
+</tr>
+<tr>
+<td><strong>Transporte</strong></td>
+<td>Solo los <strong>datos</strong> del paquete; se conserva la cabecera IP original</td>
+<td>Comunicación cifrada entre dos equipos</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="negociación-con-ike">Negociación con IKE</h3>
+<ul class="tema-lista">
+<li><strong>IKEv1</strong> en dos fases: <strong>fase 1</strong> (canal seguro entre los extremos; modo principal o agresivo) y <strong>fase 2</strong> (las SA de IPsec para los datos: «modo rápido»).</li>
+<li><strong>IKEv2</strong>: más simple, robusto y rápido; soporta <strong>MOBIKE</strong> (cambio de red sin cortar, útil en móviles) y <strong>EAP</strong>. <strong>Es el recomendado.</strong></li>
+<li><strong>Autenticación de los extremos</strong>: <strong>clave precompartida (PSK)</strong> o <strong>certificados digitales</strong> (más seguro y escalable).</li>
+<li><strong>Parámetros que deben coincidir en ambos extremos</strong> (la causa número uno de que un túnel no levante): algoritmo de <strong>cifrado</strong> (<strong>AES-256</strong>, AES-GCM), <strong>integridad</strong> (SHA-256 o superior), <strong>grupo Diffie-Hellman</strong> (14 o superiores; 19/20 de curva elíptica), <strong>tiempos de vida</strong> de las SA, <strong>redes locales y remotas</strong> (los «selectores de tráfico» o <em>proxy ID</em>) y <strong>PFS</strong> (<em>Perfect Forward Secrecy</em>: nuevas claves que no dependen de las anteriores).</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>Avería típica: el túnel IPsec no levanta</strong><br><strong>Fase 1 no sube</strong> → IP del otro extremo, <strong>PSK</strong> o certificado, algoritmos o grupo DH distintos, <strong>UDP 500/4500 bloqueado</strong>. <strong>Fase 1 sube y fase 2 no</strong> → <strong>redes locales/remotas</strong> que no coinciden (al revés en cada extremo), algoritmos de fase 2 o PFS. <strong>Túnel arriba sin tráfico</strong> → <strong>rutas</strong>, reglas del cortafuegos o <strong>NAT</strong> que se aplica al tráfico del túnel cuando no debería.</th>
+</tr>
+</table></div>
+<h2 id="4-vpn-ssl-tls" class="tema-h2">4. VPN SSL/TLS</h2>
+<p>Las <strong>VPN SSL</strong> (hoy en realidad <strong>TLS</strong>) usan el mismo protocolo que <strong>HTTPS</strong>, normalmente por el <strong>puerto TCP 443</strong> (o <strong>DTLS sobre UDP</strong> para mejor rendimiento). Atraviesan casi cualquier red (hoteles, wifi públicas, NAT) porque el 443 casi nunca está bloqueado. Son la opción habitual para el <strong>acceso remoto (Client to LAN)</strong>.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Modalidad</th>
+<th>Cómo funciona</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sin cliente (<em>clientless</em>) / portal web</strong></td>
+<td>El usuario entra con el <strong>navegador</strong> en un portal que publica aplicaciones web, escritorios remotos (RDP en HTML5) o carpetas</td>
+<td>Acceso puntual desde equipos no corporativos</td>
+</tr>
+<tr>
+<td><strong>Con cliente (túnel completo)</strong></td>
+<td>Una <strong>aplicación</strong> del fabricante crea un adaptador virtual y un túnel de red completo</td>
+<td>Teletrabajo con equipos corporativos</td>
+</tr>
+</tbody>
+</table></div>
+<p>Clientes habituales: <strong>FortiClient</strong> (Fortinet), <strong>GlobalProtect</strong> (Palo Alto), <strong>Cisco Secure Client</strong> (antes AnyConnect), Check Point, <strong>OpenVPN</strong>.</p>
+<h3 id="ipsec-frente-a-ssltls">IPsec frente a SSL/TLS</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th></th>
+<th><strong>IPsec</strong></th>
+<th><strong>SSL/TLS</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Capa</td>
+<td><strong>Red (3)</strong></td>
+<td><strong>Transporte/aplicación (4–7)</strong></td>
+</tr>
+<tr>
+<td>Uso típico</td>
+<td><strong>LAN to LAN</strong> (y acceso remoto con IKEv2)</td>
+<td><strong>Client to LAN</strong></td>
+</tr>
+<tr>
+<td>Puertos</td>
+<td>UDP 500/4500, protocolo ESP (50)</td>
+<td><strong>TCP 443</strong> (o DTLS por UDP)</td>
+</tr>
+<tr>
+<td>Paso por NAT y cortafuegos</td>
+<td>Necesita NAT-T; a veces bloqueado</td>
+<td><strong>Muy fácil</strong> (como navegar)</td>
+</tr>
+<tr>
+<td>Interoperabilidad</td>
+<td><strong>Estándar entre fabricantes</strong></td>
+<td>Clientes propietarios de cada fabricante (salvo OpenVPN)</td>
+</tr>
+<tr>
+<td>Granularidad</td>
+<td>Redes completas</td>
+<td>Puede limitar a <strong>aplicaciones concretas</strong></td>
+</tr>
+<tr>
+<td>Instalación</td>
+<td>Configuración en ambos extremos</td>
+<td>Portal web o cliente sencillo</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="5-otras-tecnologias-de-tunel" class="tema-h2">5. Otras tecnologías de túnel</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Tecnología</th>
+<th>Características</th>
+<th>Estado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PPTP</strong></td>
+<td>Microsoft, años 90</td>
+<td><strong>Inseguro: no usar</strong></td>
+</tr>
+<tr>
+<td><strong>L2TP/IPsec</strong></td>
+<td>L2TP (túnel) + IPsec (cifrado)</td>
+<td>Antiguo, aún soportado en los sistemas</td>
+</tr>
+<tr>
+<td><strong>OpenVPN</strong></td>
+<td>Código abierto, sobre TLS (UDP o TCP)</td>
+<td>Muy extendido</td>
+</tr>
+<tr>
+<td><strong>WireGuard</strong></td>
+<td>Moderno, <strong>muy ligero y rápido</strong>, criptografía actual (ChaCha20, Curve25519), UDP</td>
+<td>En auge (en Linux, routers y servicios VPN)</td>
+</tr>
+<tr>
+<td><strong>GRE</strong></td>
+<td>Túnel <strong>sin cifrado</strong> (encapsula cualquier protocolo, incluido multicast); se combina con IPsec</td>
+<td>Routing entre sedes</td>
+</tr>
+<tr>
+<td>DMVPN</td>
+<td>Cisco: túneles dinámicos entre sedes</td>
+<td>Redes con muchas sedes</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="6-seguridad-y-buenas-practicas" class="tema-h2">6. Seguridad y buenas prácticas</h2>
+<ul class="tema-lista">
+<li><strong>Autenticación fuerte</strong>: usuario nominativo + <strong>MFA</strong> (o certificado de máquina + usuario), integrada con el directorio (<strong>RADIUS/LDAP/SAML</strong>).</li>
+<li><strong>Mínimo privilegio</strong>: cada perfil de VPN solo llega a lo que necesita (el mantenedor del PLC, <strong>solo al PLC</strong>; el teletrabajador, a sus aplicaciones), con <strong>reglas del cortafuegos</strong> específicas.</li>
+<li><em><strong>Split tunneling</strong></em> frente a <strong>túnel completo</strong>: con <em>split tunneling</em> solo va por la VPN el tráfico corporativo y el resto sale directo a Internet (menos carga, menos control); con <strong>túnel completo</strong> todo pasa por la organización (más control y filtrado).</li>
+<li><strong>Comprobación de postura</strong> (<em>host checking</em>): solo se conecta un equipo con antivirus activo, parches y disco cifrado.</li>
+<li><strong>Registro</strong> de las conexiones (quién, cuándo, desde dónde, cuánto) y <strong>desconexión por inactividad</strong>.</li>
+<li><strong>Accesos de terceros</strong>: cuentas <strong>nominativas</strong> y <strong>temporales</strong>, activadas bajo petición, con contrato de confidencialidad (T12).</li>
+<li><strong>Mantener el concentrador VPN actualizado</strong>: las VPN de los cortafuegos han sido una vía de entrada frecuente por vulnerabilidades (T14).</li>
+<li><strong>ZTNA</strong> (<em>Zero Trust Network Access</em>): evolución que da acceso <strong>por aplicación</strong> y no a toda la red, verificando identidad, dispositivo y contexto en cada conexión.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>Para el caso práctico de 2023</strong><br><strong>Pregunta 4 (PLC)</strong>: <strong>VPN Client to LAN</strong> a nombre de la empresa mantenedora, con usuario nominativo y MFA, que <strong>solo permite llegar al PLC</strong> (VLAN de telegestión); coordinación con <strong>DTIK-Sistemas</strong> (perfil VPN y reglas) y registro de accesos. Alternativa: NAT de puerto restringido por IP de origen (T14).<br><strong>Pregunta 6 (carpa)</strong>: con un <strong>router 4G/5G</strong>, una <strong>VPN LAN to LAN</strong> desde el router hasta el cortafuegos municipal para el PC de la red municipal (o una VPN de cliente en ese PC); el PC de Internet libre sale directamente.</th>
+</tr>
+</table></div>
+<h2 id="7-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">7. Lo que cayó en el examen de 2023</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Contenido</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Corta 3</td>
+<td>Qué es una VPN, tipos y propósitos</td>
+<td>Descripción + LAN to LAN / Client to LAN / IPsec / SSL + ejemplos</td>
+</tr>
+<tr>
+<td>Caso 4</td>
+<td>Acceso remoto del mantenedor al PLC</td>
+<td>VPN nominativa limitada + coordinación con Sistemas</td>
+</tr>
+<tr>
+<td>Caso 6</td>
+<td>PC municipal en la carpa</td>
+<td>VPN desde el router 4G o el PC</td>
+</tr>
+<tr>
+<td>Test 28 (distractor)</td>
+<td>«Grupo de dispositivos en la misma red privada virtual (RPV)»</td>
+<td>No es smishing; RPV = VPN</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="8-anclas-de-memoria" class="tema-h2">8. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>VPN = túnel + cifrado + integridad + autenticación sobre una red pública.</strong></li>
+<li><strong>LAN to LAN = sedes (cortafuegos) · Client to LAN = usuarios (cliente VPN).</strong></li>
+<li><strong>IPsec = capa 3 · IKE UDP 500 · NAT-T UDP 4500 · ESP 50 (cifra) · AH 51 (no cifra).</strong></li>
+<li><strong>Modo túnel (todo el paquete, entre cortafuegos) · modo transporte (solo los datos).</strong></li>
+<li><strong>IKEv1 = fase 1 + fase 2 · IKEv2 recomendado.</strong> <strong>PSK o certificados.</strong></li>
+<li><strong>SSL/TLS VPN = TCP 443, portal web o cliente, ideal para acceso remoto.</strong></li>
+<li><strong>PPTP inseguro · WireGuard moderno.</strong></li>
+<li><strong>MFA + mínimo privilegio + registro + split tunneling o túnel completo.</strong></li>
+</ul>
+<h2 id="9-no-confundir" class="tema-h2">9. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Esto</th>
+<th>No es esto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LAN to LAN</strong></td>
+<td><strong>Client to LAN</strong></td>
+</tr>
+<tr>
+<td><strong>ESP</strong> (cifra)</td>
+<td><strong>AH</strong> (solo autentica)</td>
+</tr>
+<tr>
+<td><strong>Modo túnel</strong></td>
+<td><strong>Modo transporte</strong></td>
+</tr>
+<tr>
+<td><strong>IKE fase 1</strong> (canal de gestión)</td>
+<td><strong>IKE fase 2</strong> (SA de datos)</td>
+</tr>
+<tr>
+<td><strong>Split tunneling</strong></td>
+<td><strong>Túnel completo</strong></td>
+</tr>
+<tr>
+<td><strong>VPN</strong> (red completa)</td>
+<td><strong>ZTNA</strong> (acceso por aplicación)</td>
+</tr>
+<tr>
+<td><strong>GRE</strong> (túnel sin cifrar)</td>
+<td><strong>IPsec</strong> (cifrado)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="10-posibles-trampas-de-examen" class="tema-h2">10. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li>Decir que AH cifra los datos.</li>
+<li>Pensar que una VPN SSL necesita abrir puertos especiales (usa el 443).</li>
+<li>Creer que IPsec funciona siempre a través de NAT sin NAT-T.</li>
+<li>Usar PPTP en una instalación nueva.</li>
+<li>Creer que la VPN, por sí sola, limita a qué puede acceder el usuario (eso lo hacen las reglas y los perfiles).</li>
+<li>Confundir la VPN de operador MPLS con una VPN cifrada.</li>
+</ul>
+<h2 id="11-posibles-preguntas-tipo-test" class="tema-h2">11. Posibles preguntas tipo test</h2>
+<ol type="1">
+<li>¿Qué puerto usa IKE? → <strong>UDP 500</strong>.</li>
+<li>¿Qué protocolo IPsec cifra los datos? → <strong>ESP</strong>.</li>
+<li>¿Qué tipo de VPN une dos sedes? → <strong>LAN to LAN (site-to-site)</strong>.</li>
+<li>¿Qué puerto usan habitualmente las VPN SSL? → <strong>TCP 443</strong>.</li>
+<li>¿Qué técnica envía por la VPN solo el tráfico corporativo? → <strong>Split tunneling</strong>.</li>
+</ol>
+<h2 id="12-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">12. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. Qué es una VPN, tipos que conoces y propósitos de uso (2 puntos; examen de 2023).</strong></p>
+<ul class="tema-lista">
+<li><strong>Definición</strong>: túnel cifrado sobre Internet; confidencialidad, integridad y autenticación.</li>
+<li><strong>Tipos</strong>: LAN to LAN y Client to LAN; tecnologías IPsec y SSL/TLS (y WireGuard, MPLS de operador).</li>
+<li><strong>Propósitos con ejemplos</strong>: unir sedes (LAN to LAN), teletrabajo y guardias (Client to LAN), acceso de mantenedores externos a un equipo concreto (PLC), conexión de una sede temporal con un router 4G.</li>
+<li>Seguridad: MFA y mínimo privilegio.</li>
+</ul>
+<p><strong>2. Diferencias entre VPN IPsec y VPN SSL (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>Capa (red frente a transporte/aplicación) y puertos.</li>
+<li>Uso típico (sedes frente a usuarios remotos).</li>
+<li>Paso por NAT y cortafuegos.</li>
+<li>Interoperabilidad, clientes y granularidad del acceso.</li>
+</ul>
+<h2 id="13-supuesto-practico" class="tema-h2">13. Supuesto práctico</h2>
+<p><strong>Enunciado:</strong> la VPN LAN to LAN con una sede remota nueva no levanta. En el log del cortafuegos central aparece «no proposal chosen».</p>
+<p><strong>Esquema de respuesta:</strong></p>
+<ol type="1">
+<li><strong>Interpretación</strong>: «no proposal chosen» = los extremos <strong>no coinciden en los parámetros</strong> de la negociación (fase 1 o fase 2).</li>
+<li><strong>Revisión de la fase 1</strong>: versión de IKE (v1/v2), algoritmos de cifrado e integridad, <strong>grupo DH</strong>, tiempo de vida, PSK o certificado, identidades.</li>
+<li><strong>Revisión de la fase 2</strong>: <strong>redes locales y remotas</strong> (deben ser las mismas pero al revés en cada extremo), algoritmos, <strong>PFS</strong> y su grupo.</li>
+<li><strong>Red</strong>: UDP 500/4500 permitidos; NAT-T si hay un router con NAT delante de la sede.</li>
+<li><strong>Tras levantar</strong>: comprobar las <strong>rutas</strong>, las <strong>reglas</strong> que permiten el tráfico del túnel y que <strong>no se aplique NAT</strong> a ese tráfico; pruebas de conectividad.</li>
+<li><strong>Coordinación</strong> con quien gestiona el otro extremo (sede, proveedor u operador) y <strong>documentación</strong> de los parámetros acordados.</li>
+</ol>
+<h2 id="14-matriz-de-memorizacion" class="tema-h2">14. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Dato clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tipos</td>
+<td>LAN to LAN (sedes) · Client to LAN (usuarios) · MPLS de operador · SD-WAN</td>
+</tr>
+<tr>
+<td>IPsec</td>
+<td>Capa 3 · IKE UDP 500 · NAT-T UDP 4500 · ESP (50) · AH (51)</td>
+</tr>
+<tr>
+<td>Modos</td>
+<td>Túnel (paquete completo) · transporte (datos)</td>
+</tr>
+<tr>
+<td>IKE</td>
+<td>v1: fase 1 + fase 2 · v2 recomendado · PSK o certificados · DH · PFS</td>
+</tr>
+<tr>
+<td>SSL/TLS</td>
+<td>TCP 443 · DTLS · clientless (portal) o cliente (FortiClient, GlobalProtect, Cisco Secure Client)</td>
+</tr>
+<tr>
+<td>Otras</td>
+<td>PPTP ✗ · L2TP/IPsec · OpenVPN · WireGuard · GRE</td>
+</tr>
+<tr>
+<td>Seguridad</td>
+<td>MFA · mínimo privilegio · postura · registro · split tunneling · ZTNA</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="15-resumen-final-si-manana-fuera-el-examen" class="tema-h2">15. Resumen final: si mañana fuera el examen</h2>
+<p>Una <strong>VPN</strong> crea un <strong>túnel cifrado</strong> sobre Internet que garantiza <strong>confidencialidad, integridad y autenticación</strong>. Puede ser <strong>LAN to LAN</strong> (une <strong>sedes</strong>, la montan los <strong>cortafuegos</strong>) o <strong>Client to LAN</strong> (une a un <strong>usuario</strong> con la red mediante un <strong>cliente</strong>). <strong>IPsec</strong> trabaja en <strong>capa 3</strong>: <strong>IKE (UDP 500, NAT-T 4500)</strong> negocia las claves y autentica (PSK o certificados), <strong>ESP</strong> cifra y <strong>AH</strong> solo autentica; en <strong>modo túnel</strong> protege el paquete entero. Las <strong>VPN SSL/TLS</strong> usan el <strong>443</strong>, atraviesan cualquier red y son ideales para <strong>acceso remoto</strong> (portal web o cliente). Se aseguran con <strong>MFA, mínimo privilegio, comprobación de postura y registro</strong>. En el caso de 2023: <strong>VPN para el mantenedor del PLC</strong> y <strong>VPN desde el router 4G de la carpa</strong>.</p>
+<h2 id="16-actualidad-datos-fechados" class="tema-h2">16. Actualidad — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong></th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li>Varios fabricantes han <strong>retirado o recortado sus VPN SSL</strong> en favor de IPsec/IKEv2 o de <strong>ZTNA</strong> tras múltiples vulnerabilidades críticas en sus portales web (por ejemplo, Fortinet anunció en 2024–2025 la eliminación del modo túnel de su VPN SSL en las nuevas versiones de FortiOS).</li>
+<li><strong>ZTNA/SASE</strong> sustituye progresivamente a la VPN tradicional en el teletrabajo.</li>
+<li><strong>WireGuard</strong> se ha incorporado a muchos routers y cortafuegos, aunque en grandes organizaciones sigue dominando IPsec.</li>
+</ul>
+
+  </div>
+</article>

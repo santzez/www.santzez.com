@@ -1,0 +1,654 @@
+{
+  "id": "BOLSA_RED_T14",
+  "opeNombre": "Bolsa DonostiaTIK 2023 — Técnico/a de apoyo: Instalaciones y Comunicaciones",
+  "titulo": "T14 · Seguridad en redes de comunicaciones. Firewalls: firewalls de tipo stateful y stateless, NAT, antispoofing.",
+  "descripcion": "23 preguntas tipo test con explicación, elaboradas a partir de los apuntes del tema.",
+  "fuente": "Elaboración propia a partir de los apuntes del tema (octubre de 2026). Las marcadas como «examen 2023» reproducen preguntas del examen real del 23/09/2023 con la plantilla oficial.",
+  "preguntas": [
+    {
+      "id": "BOLSA_RED_T14_001",
+      "opciones": [
+        {
+          "texto": "Conectar dos redes y determinar la mejor ruta para la transmisión de datos entre ellas.",
+          "correcta": false
+        },
+        {
+          "texto": "Prevenir y proteger a nuestra red privada de intrusiones o ataques de otras redes, bloqueándoles el acceso.",
+          "correcta": true
+        },
+        {
+          "texto": "Convertir las solicitudes de nombres en direcciones IP.",
+          "correcta": false
+        },
+        {
+          "texto": "Transferir todo tipo de archivos entre equipos conectados a una red.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Un firewall de red (cortafuegos) se ocupa de:",
+      "razonamiento": "El cortafuegos aplica una política de seguridad que permite o bloquea el tráfico entre redes. Elegir la ruta es función del router y traducir nombres, del DNS.",
+      "origen": "T14 §1",
+      "dificultad": "Fácil",
+      "tipo": "Concepto",
+      "concepto": "Cortafuegos",
+      "examen2023": "Test 2023, pregunta 33 (reserva)",
+      "prioridad": "Alta"
+    },
+    {
+      "id": "BOLSA_RED_T14_002",
+      "opciones": [
+        {
+          "texto": "Mantiene una tabla de conexiones y permite automáticamente las respuestas de las sesiones autorizadas.",
+          "correcta": true
+        },
+        {
+          "texto": "Analiza cada paquete de forma aislada sin recordar las conexiones.",
+          "correcta": false
+        },
+        {
+          "texto": "Solo funciona en la capa de aplicación.",
+          "correcta": false
+        },
+        {
+          "texto": "No permite configurar reglas por puerto.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "La principal diferencia entre un cortafuegos stateful y uno stateless es que el stateful:",
+      "razonamiento": "El stateful recuerda las sesiones: si se permite una conexión de salida, la respuesta entra sola. El stateless (como una ACL) evalúa cada paquete por separado y obliga a abrir también el tráfico de vuelta.",
+      "origen": "T14 §2",
+      "dificultad": "Media",
+      "tipo": "Comparación",
+      "concepto": "Stateful vs stateless",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T14_003",
+      "opciones": [
+        {
+          "texto": "Permitir solo la salida hacia el puerto 443.",
+          "correcta": false
+        },
+        {
+          "texto": "Desactivar el filtrado de todo el tráfico entrante.",
+          "correcta": false
+        },
+        {
+          "texto": "Permitir la salida hacia el 443 y también la entrada de las respuestas desde el 443 hacia los puertos altos.",
+          "correcta": true
+        },
+        {
+          "texto": "Configurar NAT estático para cada usuario.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Con un cortafuegos stateless, para que los usuarios naveguen por HTTPS hay que:",
+      "razonamiento": "Al no recordar las sesiones, el stateless necesita una regla de vuelta, lo que abre más superficie. Con un stateful bastaría la regla de salida.",
+      "origen": "T14 §2",
+      "dificultad": "Difícil",
+      "tipo": "Aplicación",
+      "concepto": "Stateless",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T14_004",
+      "opciones": [
+        {
+          "texto": "Todas a la vez, y gana la más permisiva.",
+          "correcta": false
+        },
+        {
+          "texto": "En orden, de arriba abajo, aplicando la primera que coincide.",
+          "correcta": true
+        },
+        {
+          "texto": "De abajo arriba, empezando por la regla por defecto.",
+          "correcta": false
+        },
+        {
+          "texto": "En orden aleatorio para mejorar el rendimiento.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "En un cortafuegos, las reglas se aplican habitualmente:",
+      "razonamiento": "Se evalúan secuencialmente y se aplica la primera coincidencia; por eso las reglas específicas deben ir antes que las generales y la de «denegar todo» al final.",
+      "origen": "T14 §3",
+      "dificultad": "Fácil",
+      "tipo": "Concepto",
+      "concepto": "Orden de reglas",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T14_005",
+      "opciones": [
+        {
+          "texto": "Bloquea todo el tráfico, incluido el permitido por las reglas anteriores.",
+          "correcta": false
+        },
+        {
+          "texto": "Solo se bloquea el tráfico entrante.",
+          "correcta": false
+        },
+        {
+          "texto": "La regla no tiene efecto porque es la última.",
+          "correcta": false
+        },
+        {
+          "texto": "Se deniega todo lo que no haya sido expresamente permitido por las reglas anteriores.",
+          "correcta": true
+        }
+      ],
+      "pregunta": "Un cortafuegos tiene como última regla «Denegar: cualquiera → cualquiera → cualquier servicio». Esto significa que:",
+      "razonamiento": "Es la denegación por defecto: como las reglas se evalúan en orden, el tráfico que coincide antes con una regla de aceptar pasa; el resto lo anula la última. Era uno de los criterios de la pregunta corta 2 de 2023.",
+      "origen": "T14 §3",
+      "dificultad": "Media",
+      "tipo": "Concepto",
+      "concepto": "Denegación por defecto",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T14_006",
+      "opciones": [
+        {
+          "texto": "El servidor DNS público de Google.",
+          "correcta": true
+        },
+        {
+          "texto": "La puerta de enlace de la red municipal.",
+          "correcta": false
+        },
+        {
+          "texto": "Una dirección IP privada de la DMZ.",
+          "correcta": false
+        },
+        {
+          "texto": "La dirección de broadcast de Internet.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "En una regla de cortafuegos aparece como destino 8.8.8.8 con el servicio DNS (puerto 53). ¿Qué es 8.8.8.8?",
+      "razonamiento": "8.8.8.8 (y 8.8.4.4) son los resolutores DNS públicos de Google. En el ejercicio de 2023, el servidor interno 172.16.44.39 podía consultarlos (probablemente como reenviador).",
+      "origen": "T14 §3",
+      "dificultad": "Fácil",
+      "tipo": "Dato",
+      "concepto": "8.8.8.8",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T14_007",
+      "opciones": [
+        {
+          "texto": "El servidor 172.16.44.23 puede navegar por Internet.",
+          "correcta": false
+        },
+        {
+          "texto": "El servidor 172.16.44.23 actúa como DNS.",
+          "correcta": false
+        },
+        {
+          "texto": "Solo los equipos internos pueden acceder a la web.",
+          "correcta": false
+        },
+        {
+          "texto": "Cualquier equipo puede acceder al servidor web 172.16.44.23 por HTTPS.",
+          "correcta": true
+        }
+      ],
+      "pregunta": "Una regla «Aceptar: cualquiera → 172.16.44.23 → HTTPS 443» en un cortafuegos perimetral indica que:",
+      "razonamiento": "Es un servidor web publicado (probablemente en la DMZ y con NAT, ya que 172.16.x.x es privada). La regla no permite que el servidor inicie conexiones hacia fuera.",
+      "origen": "T14 §3",
+      "dificultad": "Media",
+      "tipo": "Aplicación",
+      "concepto": "Lectura de reglas",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T14_008",
+      "opciones": [
+        {
+          "texto": "La red de los usuarios internos de más confianza.",
+          "correcta": false
+        },
+        {
+          "texto": "Una zona intermedia donde se sitúan los servidores accesibles desde Internet.",
+          "correcta": true
+        },
+        {
+          "texto": "La red wifi de invitados.",
+          "correcta": false
+        },
+        {
+          "texto": "La red de gestión de los equipos de comunicaciones.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "La DMZ de una red es:",
+      "razonamiento": "La DMZ aloja los servicios publicados (web, correo, DNS público, proxy inverso): si uno se compromete, el atacante no está directamente en la LAN interna.",
+      "origen": "T14 §4",
+      "dificultad": "Fácil",
+      "tipo": "Definición",
+      "concepto": "DMZ",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T14_009",
+      "opciones": [
+        {
+          "texto": "Permitir todo el tráfico de la DMZ hacia la LAN.",
+          "correcta": false
+        },
+        {
+          "texto": "Dejar la DMZ sin cortafuegos para mejorar el rendimiento.",
+          "correcta": false
+        },
+        {
+          "texto": "Bloquear todo el tráfico de la LAN hacia la DMZ.",
+          "correcta": false
+        },
+        {
+          "texto": "Permitir Internet → DMZ solo para los servicios publicados y restringir al máximo DMZ → LAN.",
+          "correcta": true
+        }
+      ],
+      "pregunta": "En una arquitectura con DMZ, la política habitual es:",
+      "razonamiento": "La DMZ es menos confiable: desde ella no debe poder accederse libremente a la LAN. Desde Internet solo se permiten los servicios publicados y desde la LAN, la administración necesaria.",
+      "origen": "T14 §4",
+      "dificultad": "Media",
+      "tipo": "Aplicación",
+      "concepto": "Política DMZ",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T14_010",
+      "opciones": [
+        {
+          "texto": "No mantiene tabla de sesiones.",
+          "correcta": false
+        },
+        {
+          "texto": "Solo filtra por dirección IP.",
+          "correcta": false
+        },
+        {
+          "texto": "Solo puede instalarse en la nube.",
+          "correcta": false
+        },
+        {
+          "texto": "Identifica aplicaciones y usuarios e integra IPS, filtrado web y antimalware.",
+          "correcta": true
+        }
+      ],
+      "pregunta": "Un cortafuegos de nueva generación (NGFW) se diferencia de uno stateful tradicional en que:",
+      "razonamiento": "El NGFW añade inspección de capa 7: políticas por aplicación («Teams sí, juegos no») y por usuario, IPS, filtrado de URL, antivirus, sandbox e inspección TLS (T17).",
+      "origen": "T14 §2",
+      "dificultad": "Media",
+      "tipo": "Concepto",
+      "concepto": "NGFW",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T14_011",
+      "opciones": [
+        {
+          "texto": "SNAT (masquerade).",
+          "correcta": false
+        },
+        {
+          "texto": "DNAT (port forwarding).",
+          "correcta": true
+        },
+        {
+          "texto": "PAT de salida.",
+          "correcta": false
+        },
+        {
+          "texto": "NAT64.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "¿Qué tipo de NAT se usa para publicar un servidor interno en Internet?",
+      "razonamiento": "DNAT cambia la dirección de destino de las conexiones entrantes (IP pública:puerto → IP interna:puerto). SNAT/PAT cambia el origen para la salida a Internet; NAT64 traduce entre IPv6 e IPv4.",
+      "origen": "T14 §5",
+      "dificultad": "Media",
+      "tipo": "Concepto",
+      "concepto": "DNAT",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T14_012",
+      "opciones": [
+        {
+          "texto": "Configurar SNAT en el servidor.",
+          "correcta": false
+        },
+        {
+          "texto": "Cambiar la máscara de la red interna.",
+          "correcta": false
+        },
+        {
+          "texto": "Una regla de filtrado que permita ese tráfico entrante.",
+          "correcta": true
+        },
+        {
+          "texto": "Desactivar el antispoofing.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Tras configurar en el cortafuegos un DNAT para publicar un servidor, los usuarios externos siguen sin poder acceder. ¿Qué falta probablemente?",
+      "razonamiento": "La traducción y el permiso son cosas distintas: además del DNAT hace falta una regla que acepte el tráfico hacia el servicio publicado.",
+      "origen": "T14 §5",
+      "dificultad": "Media",
+      "tipo": "Diagnóstico",
+      "concepto": "NAT y reglas",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T14_013",
+      "opciones": [
+        {
+          "texto": "Interceptar el tráfico wifi de una red.",
+          "correcta": false
+        },
+        {
+          "texto": "Saturar un servidor con peticiones.",
+          "correcta": false
+        },
+        {
+          "texto": "Falsificar la dirección IP de origen de los paquetes.",
+          "correcta": true
+        },
+        {
+          "texto": "Adivinar contraseñas por fuerza bruta.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "El IP spoofing consiste en:",
+      "razonamiento": "Falsificando el origen, el atacante se hace pasar por un equipo de confianza, se salta reglas basadas en IP o provoca ataques de reflexión y amplificación contra la víctima suplantada.",
+      "origen": "T14 §6",
+      "dificultad": "Fácil",
+      "tipo": "Definición",
+      "concepto": "Spoofing",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T14_014",
+      "opciones": [
+        {
+          "texto": "Privada (RFC 1918), reservada o perteneciente a nuestra propia red.",
+          "correcta": true
+        },
+        {
+          "texto": "Pública de otro país.",
+          "correcta": false
+        },
+        {
+          "texto": "Del servidor DNS de Google.",
+          "correcta": false
+        },
+        {
+          "texto": "IPv6.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Una medida antispoofing en el cortafuegos perimetral es descartar los paquetes que llegan desde Internet con IP de origen:",
+      "razonamiento": "Ningún paquete legítimo puede llegar de Internet con una IP privada, reservada (bogon) o de nuestras propias redes: si llega así, es falso.",
+      "origen": "T14 §6",
+      "dificultad": "Media",
+      "tipo": "Aplicación",
+      "concepto": "Ingress filtering",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T14_015",
+      "opciones": [
+        {
+          "texto": "Reenviar los paquetes por el camino más corto.",
+          "correcta": false
+        },
+        {
+          "texto": "Comprobar que el paquete llega por la interfaz por la que se enrutaría la respuesta a su IP de origen.",
+          "correcta": true
+        },
+        {
+          "texto": "Traducir la IP de origen a una IP pública.",
+          "correcta": false
+        },
+        {
+          "texto": "Cifrar el tráfico unicast entre dos routers.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "La técnica uRPF (Unicast Reverse Path Forwarding) consiste en:",
+      "razonamiento": "Si la IP de origen no es alcanzable por la interfaz de entrada (modo estricto) o no está en la tabla de rutas (modo laxo), el paquete se descarta como posible spoofing.",
+      "origen": "T14 §6",
+      "dificultad": "Difícil",
+      "tipo": "Concepto",
+      "concepto": "uRPF",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T14_016",
+      "opciones": [
+        {
+          "texto": "Usar IPv6 en todas sus redes.",
+          "correcta": false
+        },
+        {
+          "texto": "Instalar un IDS en el perímetro.",
+          "correcta": false
+        },
+        {
+          "texto": "Filtrar el tráfico de salida para que solo salgan paquetes con IP de origen de sus propias redes.",
+          "correcta": true
+        },
+        {
+          "texto": "Publicar sus servidores en una DMZ.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "La recomendación BCP 38 aconseja a las organizaciones y operadores:",
+      "razonamiento": "El filtrado de salida (egress) impide que los equipos propios envíen paquetes con origen falsificado, lo que frena los ataques de reflexión y amplificación.",
+      "origen": "T14 §6",
+      "dificultad": "Difícil",
+      "tipo": "Dato",
+      "concepto": "BCP 38",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T14_017",
+      "opciones": [
+        {
+          "texto": "STP y LACP.",
+          "correcta": false
+        },
+        {
+          "texto": "VLAN nativa y trunk.",
+          "correcta": false
+        },
+        {
+          "texto": "DHCP snooping, Dynamic ARP Inspection e IP Source Guard.",
+          "correcta": true
+        },
+        {
+          "texto": "PoE y LLDP.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Dentro de la LAN, ¿qué funciones del switch ayudan a evitar la suplantación de IP y de MAC?",
+      "razonamiento": "DHCP snooping crea la tabla de asignaciones legítimas, DAI valida el ARP con ella e IP Source Guard impide usar una IP distinta de la asignada en cada puerto.",
+      "origen": "T14 §6",
+      "dificultad": "Media",
+      "tipo": "Aplicación",
+      "concepto": "Antispoofing en LAN",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T14_018",
+      "opciones": [
+        {
+          "texto": "Drop permite el tráfico y reject lo bloquea.",
+          "correcta": false
+        },
+        {
+          "texto": "Drop descarta el paquete en silencio y reject lo descarta enviando un aviso al origen.",
+          "correcta": true
+        },
+        {
+          "texto": "Reject solo se aplica al tráfico saliente.",
+          "correcta": false
+        },
+        {
+          "texto": "No hay diferencia.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "¿Qué diferencia hay entre las acciones «drop» y «reject» en un cortafuegos?",
+      "razonamiento": "Drop no responde (el origen espera hasta agotar el tiempo); reject devuelve un RST de TCP o un ICMP de inalcanzable. Hacia Internet suele preferirse drop para dar menos información.",
+      "origen": "T14 §3",
+      "dificultad": "Media",
+      "tipo": "Comparación",
+      "concepto": "Drop vs reject",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T14_019",
+      "opciones": [
+        {
+          "texto": "Robar las credenciales de los administradores.",
+          "correcta": false
+        },
+        {
+          "texto": "Agotar la tabla de conexiones con peticiones de conexión que nunca se completan.",
+          "correcta": true
+        },
+        {
+          "texto": "Falsificar las respuestas DNS.",
+          "correcta": false
+        },
+        {
+          "texto": "Cifrar los ficheros del servidor.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "El ataque SYN flood contra un cortafuegos o un servidor busca:",
+      "razonamiento": "El atacante envía muchos SYN sin completar el handshake, llenando la tabla de conexiones semiabiertas. Se mitiga con SYN cookies, límites y protección anti-DDoS.",
+      "origen": "T14 §7",
+      "dificultad": "Media",
+      "tipo": "Concepto",
+      "concepto": "SYN flood",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T14_020",
+      "opciones": [
+        {
+          "texto": "Una VPN nominativa para la empresa, limitada al PLC, coordinada con el equipo de Sistemas.",
+          "correcta": true
+        },
+        {
+          "texto": "Conectar el PLC directamente a Internet por un router 4G.",
+          "correcta": false
+        },
+        {
+          "texto": "Asignar al PLC una IP pública sin restricciones.",
+          "correcta": false
+        },
+        {
+          "texto": "Colocar el PLC en la VLAN de usuarios.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Una empresa externa necesita acceder al PLC de telegestión del edificio. ¿Cuál de estas opciones es la más adecuada?",
+      "razonamiento": "El tribunal de 2023 esperaba identificar que el PLC está en una red protegida por el cortafuegos y ofrecer VPN (o NAT de puerto restringido por origen), siempre coordinado con DTIK-Sistemas.",
+      "origen": "T14 §4",
+      "dificultad": "Media",
+      "tipo": "Supuesto",
+      "concepto": "Acceso del mantenedor",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T14_021",
+      "opciones": [
+        {
+          "texto": "Acelerar la navegación de los usuarios.",
+          "correcta": false
+        },
+        {
+          "texto": "Sustituir al antivirus de los equipos.",
+          "correcta": false
+        },
+        {
+          "texto": "Evitar que entren correos con malware.",
+          "correcta": false
+        },
+        {
+          "texto": "Limitar lo que puede hacer un equipo infectado y frenar la exfiltración de datos.",
+          "correcta": true
+        }
+      ],
+      "pregunta": "Filtrar en el cortafuegos el tráfico de SALIDA desde la red interna sirve para:",
+      "razonamiento": "El egress filtering impide que el malware contacte con sus servidores de mando, use puertos inusuales o saque datos. Es parte del mínimo privilegio.",
+      "origen": "T14 §3",
+      "dificultad": "Media",
+      "tipo": "Aplicación",
+      "concepto": "Egress filtering",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T14_022",
+      "opciones": [
+        {
+          "texto": "Que, si falla el cortafuegos activo, el pasivo asuma el servicio sin cortar las sesiones.",
+          "correcta": true
+        },
+        {
+          "texto": "Duplicar el ancho de banda de Internet.",
+          "correcta": false
+        },
+        {
+          "texto": "Tener dos políticas de seguridad distintas.",
+          "correcta": false
+        },
+        {
+          "texto": "Separar la DMZ de la LAN.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Un clúster de cortafuegos en modo activo-pasivo sirve para:",
+      "razonamiento": "Los dos equipos sincronizan la configuración y la tabla de sesiones; ante un fallo, el pasivo pasa a activo. Es alta disponibilidad.",
+      "origen": "T14 §4",
+      "dificultad": "Media",
+      "tipo": "Concepto",
+      "concepto": "Alta disponibilidad",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T14_023",
+      "opciones": [
+        {
+          "texto": "Un WAF (Web Application Firewall).",
+          "correcta": true
+        },
+        {
+          "texto": "Un IDS de red.",
+          "correcta": false
+        },
+        {
+          "texto": "Un cortafuegos stateless.",
+          "correcta": false
+        },
+        {
+          "texto": "Un cortafuegos de host.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "¿Qué tipo de cortafuegos está especializado en proteger aplicaciones web frente a inyección SQL o XSS?",
+      "razonamiento": "El WAF inspecciona las peticiones HTTP/HTTPS hacia las aplicaciones web. Suele colocarse delante de ellas, a menudo integrado en un proxy inverso.",
+      "origen": "T14 §2",
+      "dificultad": "Media",
+      "tipo": "Concepto",
+      "concepto": "WAF",
+      "prioridad": "Media"
+    }
+  ]
+}
