@@ -1,0 +1,958 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T1</div>
+    <h1 class="tema-cabecera__titulo">Redes de área local: estándares generales y redes Ethernet.</h1>
+    <div class="tema-cabecera__meta">Bloque 1 · Redes, comunicaciones, internet · Bolsa DonostiaTIK 2023 · Instalaciones y Comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-que-es-una-red-de-area-local">1. Qué es una red de área local</a></li>
+<li><a href="#2-topologias">2. Topologías</a></li>
+<li><a href="#3-quien-normaliza-las-lan">3. Quién normaliza las LAN</a></li>
+<li><a href="#4-donde-esta-ethernet-en-los-modelos-osi-y-tcp-ip">4. Dónde está Ethernet en los modelos OSI y TCP/IP</a></li>
+<li><a href="#5-ethernet-origen-y-principios">5. Ethernet: origen y principios</a></li>
+<li><a href="#6-la-direccion-mac">6. La dirección MAC</a></li>
+<li><a href="#7-la-trama-ethernet">7. La trama Ethernet</a></li>
+<li><a href="#8-acceso-al-medio-csma-cd-colisiones-y-duplex">8. Acceso al medio: CSMA/CD, colisiones y dúplex</a></li>
+<li><a href="#9-variantes-de-ethernet">9. Variantes de Ethernet</a></li>
+<li><a href="#10-equipos-de-interconexion-en-la-lan">10. Equipos de interconexión en la LAN</a></li>
+<li><a href="#11-rendimiento-ancho-de-banda-latencia-y-jitter">11. Rendimiento: ancho de banda, latencia y jitter</a></li>
+<li><a href="#12-la-lan-en-un-edificio-municipal">12. La LAN en un edificio municipal</a></li>
+<li><a href="#13-lo-que-cayo-en-el-examen-de-2023">13. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#14-anclas-de-memoria">14. Anclas de memoria</a></li>
+<li><a href="#15-no-confundir">15. No confundir</a></li>
+<li><a href="#16-posibles-trampas-de-examen">16. Posibles trampas de examen</a></li>
+<li><a href="#17-posibles-preguntas-tipo-test">17. Posibles preguntas tipo test</a></li>
+<li><a href="#18-posibles-preguntas-cortas-con-esquema-de-respuesta">18. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#19-supuesto-practico">19. Supuesto práctico</a></li>
+<li><a href="#20-matriz-de-memorizacion">20. Matriz de memorización</a></li>
+<li><a href="#21-resumen-final-si-manana-fuera-el-examen">21. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#22-actualidad-datos-fechados">22. Actualidad — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — fronteras del tema</strong><br>Este tema trata <strong>qué es una LAN</strong>, <strong>quién la normaliza</strong> (IEEE 802, ISO/IEC, TIA) y <strong>cómo funciona Ethernet</strong>: direcciones MAC, trama, acceso al medio, dúplex y variantes de velocidad.<br><strong>T2</strong> → TCP/IP, direccionamiento IP y subredes. <strong>T3</strong> → cables, conectores y fibra en detalle. <strong>T4</strong> → switches gestionables: VLAN, STP, LACP, PoE y routing. <strong>T5</strong> → wifi (802.11).<br>Esos contenidos solo se citan aquí <strong>para situarlos</strong>.</th>
+</tr>
+</table></div>
+<h2 id="1-que-es-una-red-de-area-local" class="tema-h2">1. Qué es una red de área local</h2>
+<p>Una <strong>red de área local (LAN, Local Area Network)</strong> interconecta equipos (PC, impresoras, teléfonos IP, servidores, puntos de acceso…) dentro de un <strong>área geográfica limitada</strong>: una planta, un edificio o un campus. Su objetivo es <strong>compartir recursos</strong> (ficheros, impresoras, aplicaciones, la salida a Internet) y <strong>comunicar</strong> a los equipos entre sí con alta velocidad y baja latencia.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — el criterio que clasifica las redes es la EXTENSIÓN</strong><br><strong>PAN</strong> (personal, unos metros: Bluetooth) · <strong>LAN</strong> (edificio o campus) · <strong>MAN</strong> (ciudad) · <strong>WAN</strong> (países, operadores).<br>«Ser de una sola organización» o «ser rápida» son características <strong>habituales</strong> de una LAN, <strong>no su definición</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Alcance típico</th>
+<th>Ejemplo municipal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PAN</strong></td>
+<td>Unos metros alrededor de una persona</td>
+<td>Auriculares Bluetooth del puesto</td>
+</tr>
+<tr>
+<td><strong>LAN</strong></td>
+<td>Planta, edificio, campus</td>
+<td>Red del edificio de Udalinfo</td>
+</tr>
+<tr>
+<td><strong>MAN</strong></td>
+<td>Una ciudad o área metropolitana</td>
+<td>Fibra que une las sedes municipales de Donostia</td>
+</tr>
+<tr>
+<td><strong>WAN</strong></td>
+<td>Regiones, países</td>
+<td>Enlaces de operadora entre ciudades, Internet</td>
+</tr>
+</tbody>
+</table></div>
+<p>Rasgos típicos de una LAN:</p>
+<ul class="tema-lista">
+<li><strong>Alta velocidad</strong> (1 Gbps al puesto es lo habitual; 10 Gbps o más entre armarios).</li>
+<li><strong>Baja latencia</strong> y <strong>tasa de errores muy baja</strong>.</li>
+<li><strong>Infraestructura propia</strong> (cableado estructurado, switches, puntos de acceso), gestionada por la organización.</li>
+<li>Tecnologías dominantes: <strong>Ethernet (IEEE 802.3)</strong> por cable y <strong>wifi (IEEE 802.11)</strong> sin cable.</li>
+</ul>
+<h3 id="ventajas-e-inconvenientes">Ventajas e inconvenientes</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Ventajas</th>
+<th>Inconvenientes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Recursos compartidos (impresoras, ficheros, Internet)</td>
+<td>Requiere inversión en cableado y electrónica</td>
+</tr>
+<tr>
+<td>Administración centralizada (usuarios, seguridad, copias)</td>
+<td>Un fallo de un equipo central (switch troncal) afecta a muchos usuarios</td>
+</tr>
+<tr>
+<td>Velocidad alta y latencia baja</td>
+<td>Necesita seguridad: un equipo comprometido puede atacar a los demás</td>
+</tr>
+<tr>
+<td>Escalable: se añaden puestos conectando más tomas</td>
+<td>Alcance limitado: para unir sedes hacen falta enlaces MAN/WAN</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="2-topologias" class="tema-h2">2. Topologías</h2>
+<p>La <strong>topología física</strong> es cómo están tendidos los cables; la <strong>topología lógica</strong> es cómo circula la información. Pueden no coincidir: un hub tiene topología física en <strong>estrella</strong> pero lógica en <strong>bus</strong> (todo lo que entra por un puerto sale por todos).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Topología</th>
+<th>Cómo es</th>
+<th>Ventaja</th>
+<th>Inconveniente</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Bus</strong></td>
+<td>Un cable común al que se conectan todos (Ethernet coaxial antigua)</td>
+<td>Barata</td>
+<td>Un corte en el cable cae toda la red; colisiones</td>
+</tr>
+<tr>
+<td><strong>Anillo</strong></td>
+<td>Cada equipo conectado al siguiente formando un círculo (Token Ring, FDDI)</td>
+<td>Acceso ordenado</td>
+<td>Un fallo rompe el anillo salvo doble anillo</td>
+</tr>
+<tr>
+<td><strong>Estrella</strong></td>
+<td>Todos los equipos a un nodo central (switch)</td>
+<td>Un fallo de puesto no afecta a los demás; fácil de ampliar</td>
+<td>El nodo central es punto único de fallo</td>
+</tr>
+<tr>
+<td><strong>Estrella extendida / jerárquica (árbol)</strong></td>
+<td>Estrellas enlazadas: switches de planta → switch troncal</td>
+<td>Es la de las LAN actuales con cableado estructurado</td>
+<td>Depende de los enlaces troncales</td>
+</tr>
+<tr>
+<td><strong>Malla</strong></td>
+<td>Varios caminos entre nodos (total o parcial)</td>
+<td>Redundancia</td>
+<td>Cara y compleja; en Ethernet exige STP o enlaces agregados</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible</strong><br>La LAN moderna es una <strong>estrella extendida (jerárquica)</strong>: puestos → <strong>switch de acceso</strong> en cada armario de planta → <strong>switch de distribución/núcleo</strong> en el armario principal. Los enlaces entre armarios (<strong>troncales o backbone</strong>) suelen ser de <strong>fibra</strong> y, si se duplican, se protegen con <strong>STP</strong> o se agregan con <strong>LACP</strong> (T4).</th>
+</tr>
+</table></div>
+<h2 id="3-quien-normaliza-las-lan" class="tema-h2">3. Quién normaliza las LAN</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Organismo</th>
+<th>Qué hace</th>
+<th>Normas que debes asociar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IEEE</strong> (Institute of Electrical and Electronics Engineers)</td>
+<td>Estándares de LAN y MAN: familia <strong>IEEE 802</strong></td>
+<td>802.3 Ethernet, 802.11 wifi, 802.1Q VLAN…</td>
+</tr>
+<tr>
+<td><strong>ISO / IEC</strong></td>
+<td>Normas internacionales; modelo <strong>OSI</strong> (ISO/IEC 7498)</td>
+<td><strong>ISO/IEC 11801</strong>: cableado estructurado genérico</td>
+</tr>
+<tr>
+<td><strong>TIA / EIA</strong> (EE. UU.)</td>
+<td>Cableado de telecomunicaciones en edificios</td>
+<td><strong>TIA-568</strong>: categorías y esquemas <strong>T568A/T568B</strong></td>
+</tr>
+<tr>
+<td><strong>CENELEC</strong> (Europa)</td>
+<td>Adaptación europea de normas de cableado</td>
+<td><strong>EN 50173</strong> (cableado), EN 50174 (instalación)</td>
+</tr>
+<tr>
+<td><strong>ITU-T</strong></td>
+<td>Telecomunicaciones (operadores)</td>
+<td>G.652 (fibra monomodo), G.984 (GPON), G.711 (voz)</td>
+</tr>
+<tr>
+<td><strong>IETF</strong></td>
+<td>Protocolos de Internet, publicados como <strong>RFC</strong></td>
+<td>IP, TCP, UDP, DHCP, DNS…</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="la-familia-ieee-802">La familia IEEE 802</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Norma</th>
+<th>Contenido</th>
+<th>Tema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>802.1</strong></td>
+<td>Arquitectura y puenteo: <strong>802.1D</strong> (bridging y STP), <strong>802.1Q</strong> (VLAN y etiquetado), <strong>802.1w</strong> (RSTP), <strong>802.1s</strong> (MSTP), <strong>802.1X</strong> (control de acceso por puerto), <strong>802.1AX</strong> (agregación de enlaces, antes 802.3ad)</td>
+<td>T4, T14</td>
+</tr>
+<tr>
+<td><strong>802.2</strong></td>
+<td><strong>LLC</strong> (Logical Link Control), subcapa superior del nivel de enlace</td>
+<td>T1</td>
+</tr>
+<tr>
+<td><strong>802.3</strong></td>
+<td><strong>Ethernet</strong>: MAC CSMA/CD, medios físicos y velocidades; <strong>802.3af/at/bt</strong> = PoE</td>
+<td>T1, T3, T4</td>
+</tr>
+<tr>
+<td><strong>802.11</strong></td>
+<td><strong>Wifi</strong> (WLAN): 802.11a/b/g/n/ac/ax/be</td>
+<td>T5</td>
+</tr>
+<tr>
+<td><strong>802.15</strong></td>
+<td>Redes personales (WPAN): <strong>802.15.1</strong> Bluetooth, <strong>802.15.4</strong> (base de Zigbee, Thread)</td>
+<td>T5, T8</td>
+</tr>
+<tr>
+<td><strong>802.16</strong></td>
+<td>WiMAX (acceso inalámbrico metropolitano, hoy residual)</td>
+<td>T6</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar</strong><br><strong>802.3 = Ethernet (cable) · 802.11 = wifi · 802.1Q = VLAN · 802.1X = autenticación de puerto · 802.15 = Bluetooth/Zigbee.</strong><br>«<strong>Tres</strong> de cable, <strong>once</strong> del aire.»</th>
+</tr>
+</table></div>
+<h2 id="4-donde-esta-ethernet-en-los-modelos-osi-y-tcp-ip" class="tema-h2">4. Dónde está Ethernet en los modelos OSI y TCP/IP</h2>
+<p>El <strong>modelo OSI</strong> (ISO) tiene <strong>7 capas</strong>; el <strong>modelo TCP/IP</strong> las agrupa en <strong>4</strong> (o 5, según el autor).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>OSI</th>
+<th>Capa</th>
+<th>Unidad de datos</th>
+<th>Ejemplos</th>
+<th>TCP/IP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7</td>
+<td>Aplicación</td>
+<td>Datos</td>
+<td>HTTP, DNS, SMTP</td>
+<td>Aplicación</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Presentación</td>
+<td>Datos</td>
+<td>TLS, codificación, compresión</td>
+<td>Aplicación</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Sesión</td>
+<td>Datos</td>
+<td>Establecimiento de sesiones</td>
+<td>Aplicación</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Transporte</td>
+<td>Segmento (TCP) / datagrama (UDP)</td>
+<td>TCP, UDP</td>
+<td>Transporte</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Red</td>
+<td>Paquete</td>
+<td>IP, ICMP</td>
+<td>Internet</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Enlace de datos</td>
+<td><strong>Trama</strong></td>
+<td><strong>Ethernet (MAC)</strong>, 802.11, PPP</td>
+<td>Acceso a la red</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Física</td>
+<td>Bits</td>
+<td><strong>Ethernet (medios: 1000BASE-T…)</strong>, RJ45, fibra</td>
+<td>Acceso a la red</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 1</strong><br><strong>Ethernet se encuadra en las capas FÍSICA y de ENLACE</strong> del modelo OSI: define el medio y la señal (capa 1) y la trama, las direcciones MAC y el acceso al medio (capa 2).<br>La capa de enlace en IEEE 802 se divide en dos subcapas: <strong>LLC</strong> (802.2, arriba) y <strong>MAC</strong> (802.3, abajo).</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br>«Ethernet trabaja en enlace y <strong>red</strong>» es falso: la capa de red es la de <strong>IP</strong>. Ethernet no sabe de direcciones IP.</th>
+</tr>
+</table></div>
+<h2 id="5-ethernet-origen-y-principios" class="tema-h2">5. Ethernet: origen y principios</h2>
+<ul class="tema-lista">
+<li><strong>1973</strong>: Robert Metcalfe la diseña en Xerox PARC, sobre cable coaxial a 2,94 Mbps.</li>
+<li><strong>1980</strong>: estándar <strong>DIX</strong> (Digital, Intel, Xerox) a 10 Mbps.</li>
+<li><strong>1983</strong>: el <strong>IEEE la normaliza como 802.3</strong>. Desde entonces la norma ha incorporado nuevos medios y velocidades (de 10 Mbps a 400 Gbps y más) <strong>manteniendo el mismo formato de trama</strong>, que es la clave de su éxito.</li>
+</ul>
+<p>Principios de funcionamiento:</p>
+<ol type="1">
+<li>Cada interfaz tiene una <strong>dirección MAC</strong> única.</li>
+<li>La información viaja en <strong>tramas</strong> con dirección de origen y de destino.</li>
+<li>En medio compartido se usaba <strong>CSMA/CD</strong> para resolver quién transmite; hoy, con switches y <strong>full-duplex</strong>, no hay colisiones.</li>
+<li>Ethernet es un servicio <strong>sin conexión y sin confirmación</strong>: detecta errores (FCS) pero <strong>no retransmite</strong>; de eso se encargan las capas superiores (TCP).</li>
+</ol>
+<h2 id="6-la-direccion-mac" class="tema-h2">6. La dirección MAC</h2>
+<p>La <strong>dirección MAC</strong> (Media Access Control) identifica una interfaz de red en la capa 2.</p>
+<ul class="tema-lista">
+<li><strong>48 bits</strong> (6 bytes), escritos en hexadecimal: <code>00:1A:2B:3C:4D:5E</code>, <code>00-1A-2B-3C-4D-5E</code> o <code>001A.2B3C.4D5E</code> (formato Cisco).</li>
+<li>Los <strong>24 primeros bits</strong> son el <strong>OUI</strong> (Organizationally Unique Identifier), asignado por el IEEE a cada fabricante. Los 24 restantes los numera el fabricante.</li>
+<li>Se graba de fábrica, aunque el sistema operativo puede cambiarla (aleatorización de MAC en wifi de móviles).</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Destino</th>
+<th>Cómo se reconoce</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Unicast</strong></td>
+<td>Una sola interfaz</td>
+<td>Bit menos significativo del primer byte = 0</td>
+</tr>
+<tr>
+<td><strong>Multicast</strong></td>
+<td>Un grupo de interfaces</td>
+<td>Bit menos significativo del primer byte = 1 (p. ej. <code>01:00:5E:…</code> para IPv4 multicast)</td>
+</tr>
+<tr>
+<td><strong>Broadcast</strong></td>
+<td>Todas las interfaces del segmento</td>
+<td><code>FF:FF:FF:FF:FF:FF</code></td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar</strong><br><strong>MAC = 48 bits = 6 bytes = 12 dígitos hexadecimales.</strong> <strong>OUI = mitad izquierda = fabricante.</strong> <strong>Broadcast = todo F.</strong><br>IPv4 = 32 bits · MAC = 48 bits · IPv6 = 128 bits.</th>
+</tr>
+</table></div>
+<p>La relación entre IP y MAC la resuelve <strong>ARP</strong> (IPv4) o <strong>NDP</strong> (IPv6): ver T2.</p>
+<h2 id="7-la-trama-ethernet" class="tema-h2">7. La trama Ethernet</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tamaño</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Preámbulo</td>
+<td>7 bytes</td>
+<td>Sincronización (10101010…)</td>
+</tr>
+<tr>
+<td>SFD (delimitador de inicio)</td>
+<td>1 byte</td>
+<td>Marca el comienzo de la trama (10101011)</td>
+</tr>
+<tr>
+<td><strong>MAC destino</strong></td>
+<td>6 bytes</td>
+<td>A quién va</td>
+</tr>
+<tr>
+<td><strong>MAC origen</strong></td>
+<td>6 bytes</td>
+<td>Quién la envía</td>
+</tr>
+<tr>
+<td><em>Etiqueta 802.1Q</em> (opcional)</td>
+<td>4 bytes</td>
+<td>VLAN ID (12 bits) y prioridad (3 bits, 802.1p)</td>
+</tr>
+<tr>
+<td><strong>EtherType / longitud</strong></td>
+<td>2 bytes</td>
+<td>Protocolo transportado (≥ 0x0600) o longitud (≤ 1500)</td>
+</tr>
+<tr>
+<td><strong>Datos (payload)</strong></td>
+<td><strong>46 – 1.500 bytes</strong></td>
+<td>Paquete de la capa superior; si es menor de 46 se rellena</td>
+</tr>
+<tr>
+<td><strong>FCS</strong></td>
+<td>4 bytes</td>
+<td>Comprobación de errores (CRC-32)</td>
+</tr>
+</tbody>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Trama mínima: 64 bytes</strong> (de MAC destino a FCS). <strong>Máxima: 1.518 bytes</strong>, o <strong>1.522</strong> con etiqueta 802.1Q.</li>
+<li><strong>MTU Ethernet = 1.500 bytes</strong> de datos. Las <strong>tramas jumbo</strong> (hasta unos 9.000 bytes) se usan en redes de almacenamiento o CPD y deben estar soportadas extremo a extremo.</li>
+<li>Entre tramas hay un <strong>hueco mínimo (IFG)</strong> de 12 bytes.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>EtherType</th>
+<th>Protocolo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>0x0800</strong></td>
+<td>IPv4</td>
+</tr>
+<tr>
+<td><strong>0x0806</strong></td>
+<td>ARP</td>
+</tr>
+<tr>
+<td><strong>0x86DD</strong></td>
+<td>IPv6</td>
+</tr>
+<tr>
+<td><strong>0x8100</strong></td>
+<td>Etiqueta VLAN 802.1Q</td>
+</tr>
+<tr>
+<td>0x8847</td>
+<td>MPLS</td>
+</tr>
+<tr>
+<td>0x88CC</td>
+<td>LLDP</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br>El <strong>preámbulo y el SFD no cuentan</strong> en los 64/1.518 bytes. La <strong>FCS detecta</strong> errores pero <strong>no los corrige</strong>: la trama errónea se descarta.</th>
+</tr>
+</table></div>
+<h2 id="8-acceso-al-medio-csma-cd-colisiones-y-duplex" class="tema-h2">8. Acceso al medio: CSMA/CD, colisiones y dúplex</h2>
+<h3 id="csmacd">CSMA/CD</h3>
+<p>En el Ethernet original todos compartían el medio (bus coaxial o hub). El método <strong>CSMA/CD</strong> (Carrier Sense Multiple Access with Collision Detection) funciona así:</p>
+<ol type="1">
+<li><strong>Escuchar</strong> el medio antes de transmitir (<em>carrier sense</em>).</li>
+<li>Si está libre, <strong>transmitir</strong>; varios pueden hacerlo a la vez (<em>multiple access</em>).</li>
+<li>Si dos transmiten a la vez hay <strong>colisión</strong>: se detecta (<em>collision detection</em>), se envía una <strong>señal de atasco (jam)</strong> y se espera un <strong>tiempo aleatorio</strong> (<em>backoff</em> exponencial binario) antes de reintentar.</li>
+</ol>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible</strong><br><strong>CSMA/CD solo se usa en half-duplex</strong> (medio compartido, hubs). Con <strong>switches y full-duplex</strong> no hay colisiones y CSMA/CD queda <strong>desactivado</strong>.<br>El wifi usa <strong>CSMA/CA</strong> (<em>Collision Avoidance</em>): en radio no se pueden detectar colisiones mientras se transmite, así que se <strong>evitan</strong> (esperas aleatorias, confirmaciones ACK, RTS/CTS).</th>
+</tr>
+</table></div>
+<h3 id="dominios-de-colisión-y-de-difusión">Dominios de colisión y de difusión</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Equipo</th>
+<th>Capa</th>
+<th>¿Separa dominios de colisión?</th>
+<th>¿Separa dominios de broadcast?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hub / repetidor</strong></td>
+<td>1</td>
+<td><strong>No</strong>: todos sus puertos son un único dominio</td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Switch / bridge</strong></td>
+<td>2</td>
+<td><strong>Sí</strong>: cada puerto es su propio dominio</td>
+<td><strong>No</strong> (salvo VLAN)</td>
+</tr>
+<tr>
+<td><strong>Router</strong></td>
+<td>3</td>
+<td>Sí</td>
+<td><strong>Sí</strong>: cada interfaz es un dominio de broadcast</td>
+</tr>
+</tbody>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Dominio de colisión</strong>: conjunto de equipos cuyas tramas pueden colisionar.</li>
+<li><strong>Dominio de difusión (broadcast)</strong>: conjunto de equipos que reciben un broadcast. Las <strong>VLAN</strong> dividen un switch en varios dominios de broadcast (T4).</li>
+</ul>
+<h3 id="half-duplex-full-duplex-y-autonegociación">Half-duplex, full-duplex y autonegociación</h3>
+<ul class="tema-lista">
+<li><strong>Half-duplex</strong>: transmite o recibe, no ambas cosas a la vez (como un walkie-talkie).</li>
+<li><strong>Full-duplex</strong>: transmite y recibe simultáneamente; duplica el caudal útil y elimina las colisiones. Exige enlace punto a punto (puerto de switch).</li>
+<li><strong>Autonegociación</strong> (802.3u en adelante): los dos extremos acuerdan velocidad y dúplex. <strong>En 1000BASE-T es obligatoria.</strong></li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>AVERÍA TÍPICA — <em>duplex mismatch</em></strong><br>Si un extremo se fija a mano (100 Mbps full) y el otro autonegocia, este último cae a <strong>half-duplex</strong>. Resultado: el enlace «funciona» pero va <strong>lentísimo</strong>, con colisiones tardías y errores CRC en el contador del puerto. <strong>Solución</strong>: autonegociación en ambos extremos, o ambos fijados igual.</th>
+</tr>
+</table></div>
+<h2 id="9-variantes-de-ethernet" class="tema-h2">9. Variantes de Ethernet</h2>
+<p>La nomenclatura del IEEE es <strong>velocidad + BASE (banda base) + medio</strong>: <code>100BASE-TX</code> = 100 Mbps, banda base, par trenzado; <code>1000BASE-SX</code> = 1 Gbps, fibra multimodo (<em>short wavelength</em>).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Norma</th>
+<th>Nombre</th>
+<th>Medio</th>
+<th>Distancia máxima</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>802.3i</td>
+<td><strong>10BASE-T</strong></td>
+<td>Par trenzado Cat3+</td>
+<td>100 m</td>
+</tr>
+<tr>
+<td>802.3u</td>
+<td><strong>100BASE-TX</strong> (Fast Ethernet)</td>
+<td>Par trenzado Cat5 (2 pares)</td>
+<td>100 m</td>
+</tr>
+<tr>
+<td>802.3u</td>
+<td>100BASE-FX</td>
+<td>Fibra multimodo</td>
+<td>2 km</td>
+</tr>
+<tr>
+<td>802.3ab</td>
+<td><strong>1000BASE-T</strong> (Gigabit)</td>
+<td>Par trenzado <strong>Cat5e/Cat6 (4 pares)</strong></td>
+<td>100 m</td>
+</tr>
+<tr>
+<td>802.3z</td>
+<td><strong>1000BASE-SX</strong></td>
+<td>Fibra <strong>multimodo</strong>, 850 nm</td>
+<td>≈ 550 m (OM2); más con OM3/OM4</td>
+</tr>
+<tr>
+<td>802.3z</td>
+<td><strong>1000BASE-LX</strong></td>
+<td>Fibra <strong>monomodo</strong> (o multimodo), 1310 nm</td>
+<td><strong>≈ 5–10 km</strong> en monomodo</td>
+</tr>
+<tr>
+<td>802.3an</td>
+<td><strong>10GBASE-T</strong></td>
+<td>Par trenzado <strong>Cat6A</strong> (Cat6 solo hasta ≈ 55 m)</td>
+<td>100 m</td>
+</tr>
+<tr>
+<td>802.3ae</td>
+<td><strong>10GBASE-SR</strong></td>
+<td>Multimodo 850 nm</td>
+<td><strong>300 m OM3 · 400 m OM4</strong></td>
+</tr>
+<tr>
+<td>802.3ae</td>
+<td><strong>10GBASE-LR</strong></td>
+<td><strong>Monomodo</strong> 1310 nm</td>
+<td><strong>10 km</strong></td>
+</tr>
+<tr>
+<td>802.3ae</td>
+<td>10GBASE-ER</td>
+<td>Monomodo 1550 nm</td>
+<td>40 km</td>
+</tr>
+<tr>
+<td>802.3bz</td>
+<td>2.5GBASE-T / 5GBASE-T</td>
+<td>Cat5e / Cat6</td>
+<td>100 m (útil para AP wifi 6)</td>
+</tr>
+<tr>
+<td>802.3by / ba / bs</td>
+<td>25G / 40G / 100G / 400G</td>
+<td>Fibra o cobre directo (DAC)</td>
+<td>Según variante (CPD)</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 3</strong><br>Para un enlace de <strong>10 Gbps con la máxima longitud</strong>, la respuesta es <strong>fibra monomodo (OS2)</strong>: 10 km con 10GBASE-LR, frente a 300–400 m de la multimodo OM3/OM4 y 100 m del cobre Cat6A/Cat7.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar</strong><br><strong>T = par trenzado (twisted) · S = short (multimodo, 850 nm) · L = long (monomodo, 1310 nm) · E = extended (1550 nm).</strong><br><strong>El cobre siempre se queda en 100 m.</strong></th>
+</tr>
+</table></div>
+<h2 id="10-equipos-de-interconexion-en-la-lan" class="tema-h2">10. Equipos de interconexión en la LAN</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Equipo</th>
+<th>Capa</th>
+<th>Qué hace</th>
+<th>Cómo decide</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repetidor</strong></td>
+<td>1</td>
+<td>Regenera la señal para ampliar distancia</td>
+<td>No decide: repite bits</td>
+</tr>
+<tr>
+<td><strong>Hub</strong> (concentrador)</td>
+<td>1</td>
+<td>Repetidor multipuerto: lo que entra por un puerto sale por todos</td>
+<td>No decide; un único dominio de colisión</td>
+</tr>
+<tr>
+<td><strong>Puente (bridge)</strong></td>
+<td>2</td>
+<td>Une dos segmentos y filtra el tráfico</td>
+<td><strong>Por dirección MAC</strong></td>
+</tr>
+<tr>
+<td><strong>Switch</strong> (conmutador)</td>
+<td>2</td>
+<td>Bridge multipuerto con conmutación por hardware; full-duplex por puerto</td>
+<td><strong>Por dirección MAC</strong> (tabla MAC/CAM)</td>
+</tr>
+<tr>
+<td><strong>Switch de capa 3</strong></td>
+<td>2 y 3</td>
+<td>Switch que además enruta entre VLAN</td>
+<td>MAC y dirección IP</td>
+</tr>
+<tr>
+<td><strong>Router</strong></td>
+<td>3</td>
+<td>Une redes distintas y elige la mejor ruta</td>
+<td><strong>Por dirección IP</strong> (tabla de rutas)</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 11</strong><br>Un <strong>puente (bridge)</strong> opera en <strong>capa 2</strong> y usa <strong>direcciones MAC</strong> para tomar decisiones. Un router opera en capa 3 con direcciones IP.</th>
+</tr>
+</table></div>
+<h3 id="cómo-aprende-y-reenvía-un-switch">Cómo aprende y reenvía un switch</h3>
+<ol type="1">
+<li><strong>Aprende</strong>: al recibir una trama, anota en su <strong>tabla MAC</strong> la MAC de <strong>origen</strong> y el puerto por donde ha llegado (con un temporizador de envejecimiento, típicamente 300 s).</li>
+<li><strong>Reenvía</strong>: busca la MAC de <strong>destino</strong> en la tabla:
+<ul class="tema-lista">
+<li>si la conoce, envía la trama <strong>solo por ese puerto</strong> (<em>forwarding</em>);</li>
+<li>si no la conoce, la envía por <strong>todos los puertos</strong> menos el de llegada (<em>flooding</em>);</li>
+<li>si el destino está en el mismo puerto de llegada, la descarta (<em>filtering</em>).</li>
+</ul></li>
+<li>Los <strong>broadcast</strong> (y por defecto los multicast) se inundan por todos los puertos de la VLAN.</li>
+</ol>
+<p>Modos de conmutación: <strong>store-and-forward</strong> (recibe la trama entera y comprueba la FCS antes de reenviar: el habitual), <strong>cut-through</strong> (reenvía en cuanto lee la MAC destino: menos latencia, propaga errores) y <em>fragment-free</em> (lee los primeros 64 bytes).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>TRAMPA DE EXAMEN — ¿para qué tiene IP un switch de nivel 2?</strong> (examen 2023, pregunta 12)<br>Para <strong>administrarlo de forma remota</strong> (SSH, web, SNMP) a través de una interfaz virtual de gestión (SVI, normalmente en una VLAN de gestión). <strong>No la necesita para conmutar tramas</strong>: eso lo hace por MAC.</th>
+</tr>
+</table></div>
+<h2 id="11-rendimiento-ancho-de-banda-latencia-y-jitter" class="tema-h2">11. Rendimiento: ancho de banda, latencia y jitter</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Qué es</th>
+<th>Unidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ancho de banda</strong></td>
+<td>Capacidad máxima nominal del enlace</td>
+<td>bps (Mbps, Gbps)</td>
+</tr>
+<tr>
+<td><strong>Caudal (<em>throughput</em>)</strong></td>
+<td>Lo que realmente se transfiere, descontando cabeceras, colisiones y esperas</td>
+<td>bps</td>
+</tr>
+<tr>
+<td><strong>Latencia (retardo)</strong></td>
+<td><strong>Tiempo que tarda un paquete en ir del origen al destino</strong></td>
+<td>ms</td>
+</tr>
+<tr>
+<td><strong>RTT</strong></td>
+<td>Ida y vuelta (lo que mide <code>ping</code>)</td>
+<td>ms</td>
+</tr>
+<tr>
+<td><strong>Jitter</strong></td>
+<td>Variación de la latencia entre paquetes; crítico en voz y vídeo</td>
+<td>ms</td>
+</tr>
+<tr>
+<td><strong>Pérdida de paquetes</strong></td>
+<td>Porcentaje de paquetes que no llegan</td>
+<td>%</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 14</strong><br><strong>Latencia = tiempo que tarda un paquete de datos en transferirse desde su origen a su destino.</strong> No es la velocidad (eso es el ancho de banda) ni la capacidad de almacenamiento.</th>
+</tr>
+</table></div>
+<p>Componentes de la latencia: <strong>propagación</strong> (distancia/velocidad de la señal), <strong>transmisión</strong> (tamaño/velocidad del enlace), <strong>procesamiento</strong> en cada equipo y <strong>colas</strong> cuando hay congestión.</p>
+<h2 id="12-la-lan-en-un-edificio-municipal" class="tema-h2">12. La LAN en un edificio municipal</h2>
+<p>Así encaja todo en un caso como el del examen de 2023:</p>
+<ol type="1">
+<li><strong>Puestos</strong> (PC, teléfono IP, impresoras, AP, cámaras) conectados con <strong>latiguillos</strong> a <strong>rosetas RJ45</strong>.</li>
+<li><strong>Cableado horizontal</strong> Cat6 hasta el <strong>patch panel</strong> del armario de planta (máximo 90 m de enlace permanente; T3).</li>
+<li><strong>Switch de acceso</strong> en el armario de planta (con <strong>PoE</strong> para teléfonos, AP y cámaras; T4).</li>
+<li><strong>Enlaces troncales de fibra</strong> (<em>uplinks</em>) del armario de planta al <strong>armario principal</strong>, donde está el <strong>switch de distribución</strong> que conecta con el resto de la red municipal y con Internet a través del cortafuegos (T14).</li>
+<li>La red se <strong>segmenta en VLAN</strong> por servicio (usuarios, telefonía, cámaras, telegestión, wifi de invitados), y el <strong>routing entre VLAN</strong> lo hacen el switch principal o el cortafuegos (T4, T14).</li>
+</ol>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>Para el caso práctico</strong><br>Cuando te pidan «diseñar la red», recorre siempre esta cadena <strong>de dentro afuera</strong>: puesto → toma → patch panel → switch de acceso → uplink de fibra → switch principal → cortafuegos. Así no te dejas ningún elemento (latiguillos, transceptores, PoE, VLAN).</th>
+</tr>
+</table></div>
+<h2 id="13-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">13. Lo que cayó en el examen de 2023</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Contenido</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test 1</td>
+<td>Capas OSI de Ethernet</td>
+<td><strong>Física y enlace</strong></td>
+</tr>
+<tr>
+<td>Test 11</td>
+<td>Qué caracteriza a un bridge</td>
+<td><strong>Capa 2 y direcciones MAC</strong></td>
+</tr>
+<tr>
+<td>Test 12</td>
+<td>Para qué tiene IP un switch de nivel 2</td>
+<td><strong>Para administrarlo de forma remota</strong></td>
+</tr>
+<tr>
+<td>Test 14</td>
+<td>Qué es la latencia</td>
+<td><strong>Tiempo de origen a destino de un paquete</strong></td>
+</tr>
+<tr>
+<td>Caso 2</td>
+<td>Switches, latiguillos y transceptores del armario</td>
+<td>Diseño de la LAN de planta (T1 + T3 + T4)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="14-anclas-de-memoria" class="tema-h2">14. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>LAN = extensión limitada</strong>, no «de una organización».</li>
+<li><strong>Ethernet = capas 1 y 2.</strong> <strong>IP = capa 3.</strong></li>
+<li><strong>MAC: 48 bits; OUI = 24 bits del fabricante; broadcast = FF:FF:FF:FF:FF:FF.</strong></li>
+<li><strong>Trama: 64 a 1.518 bytes; datos de 46 a 1.500 (MTU); +4 con 802.1Q.</strong></li>
+<li><strong>CSMA/CD = half-duplex con hubs; CSMA/CA = wifi.</strong></li>
+<li><strong>Hub = un dominio de colisión; switch = uno por puerto; router = separa broadcast.</strong></li>
+<li><strong>Cobre: 100 m. Multimodo 10G: 300 m (OM3) / 400 m (OM4). Monomodo 10G-LR: 10 km.</strong></li>
+</ul>
+<h2 id="15-no-confundir" class="tema-h2">15. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Esto</th>
+<th>No es esto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Topología física</strong> (cables)</td>
+<td><strong>Topología lógica</strong> (flujo de datos)</td>
+</tr>
+<tr>
+<td><strong>Dominio de colisión</strong> (lo separa el switch)</td>
+<td><strong>Dominio de broadcast</strong> (lo separan router y VLAN)</td>
+</tr>
+<tr>
+<td><strong>Ancho de banda</strong> (capacidad)</td>
+<td><strong>Caudal</strong> (lo que realmente pasa) y <strong>latencia</strong> (tiempo)</td>
+</tr>
+<tr>
+<td><strong>802.3</strong> (Ethernet)</td>
+<td><strong>802.11</strong> (wifi) y <strong>802.1Q</strong> (VLAN)</td>
+</tr>
+<tr>
+<td><strong>MAC</strong> (enlace, 48 bits, física)</td>
+<td><strong>IP</strong> (red, lógica, 32/128 bits)</td>
+</tr>
+<tr>
+<td><strong>CSMA/CD</strong> (detecta colisiones)</td>
+<td><strong>CSMA/CA</strong> (las evita, wifi)</td>
+</tr>
+<tr>
+<td><strong>Store-and-forward</strong> (comprueba FCS)</td>
+<td><strong>Cut-through</strong> (reenvía antes, propaga errores)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="16-posibles-trampas-de-examen" class="tema-h2">16. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li>Definir LAN por la propiedad o por la velocidad.</li>
+<li>Situar Ethernet en «enlace y red» o en «física y red».</li>
+<li>Decir que el switch separa dominios de broadcast (solo con VLAN).</li>
+<li>Contar el preámbulo en la trama de 64 bytes.</li>
+<li>Creer que la FCS corrige errores.</li>
+<li>Pensar que CSMA/CD actúa en un switch full-duplex.</li>
+<li>Asociar 1000BASE-LX a multimodo de corto alcance (es <em>long wavelength</em>, monomodo).</li>
+<li>Confundir latencia con ancho de banda.</li>
+</ul>
+<h2 id="17-posibles-preguntas-tipo-test" class="tema-h2">17. Posibles preguntas tipo test</h2>
+<ol type="1">
+<li>¿Cuántos bits tiene una dirección MAC? → <strong>48</strong>.</li>
+<li>¿Qué parte de la MAC identifica al fabricante? → <strong>El OUI (24 primeros bits)</strong>.</li>
+<li>¿Cuál es la MTU estándar de Ethernet? → <strong>1.500 bytes</strong>.</li>
+<li>¿Qué método de acceso usa Ethernet en half-duplex? → <strong>CSMA/CD</strong>.</li>
+<li>¿Qué equipo separa dominios de broadcast sin configurar VLAN? → <strong>El router</strong>.</li>
+<li>¿Qué EtherType indica una trama etiquetada con VLAN? → <strong>0x8100</strong>.</li>
+</ol>
+<h2 id="18-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">18. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. Diferencias entre hub, switch y router (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li><strong>Capa</strong>: 1 / 2 / 3.</li>
+<li><strong>Criterio de reenvío</strong>: ninguno (repite) / MAC (tabla MAC) / IP (tabla de rutas).</li>
+<li><strong>Dominios</strong>: un dominio de colisión / uno por puerto / separa broadcast.</li>
+<li><strong>Dúplex</strong>: half / full por puerto / full.</li>
+<li><strong>Uso actual</strong>: obsoleto / acceso y distribución de la LAN / unión de redes y salida a Internet.</li>
+</ul>
+<p><strong>2. Explica cómo aprende y reenvía tramas un switch (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>Aprende la <strong>MAC origen</strong> y el puerto en la tabla MAC (con envejecimiento).</li>
+<li>Busca la <strong>MAC destino</strong>: la reenvía por un puerto (<em>forwarding</em>), la inunda si es desconocida o broadcast (<em>flooding</em>) o la descarta si el destino está en el mismo puerto (<em>filtering</em>).</li>
+<li>Modo <strong>store-and-forward</strong> con comprobación de FCS.</li>
+<li>Las <strong>VLAN</strong> limitan la inundación a los puertos de la misma VLAN.</li>
+</ul>
+<h2 id="19-supuesto-practico" class="tema-h2">19. Supuesto práctico</h2>
+<p><strong>Enunciado:</strong> en una oficina, los usuarios se quejan de que la red va muy lenta en un solo puesto. El contador del puerto del switch muestra muchos errores CRC y colisiones tardías.</p>
+<p><strong>Esquema de respuesta:</strong></p>
+<ol type="1">
+<li><strong>Hipótesis principal</strong>: <em>duplex mismatch</em> (un extremo fijado en full y el otro autonegociando y cayendo a half) o cableado defectuoso.</li>
+<li><strong>Comprobaciones</strong>: ver en el switch la velocidad y el dúplex negociados (<code>show interfaces</code> / <code>display interface</code>), revisar la configuración de la tarjeta del PC y <strong>certificar o cambiar el latiguillo</strong>.</li>
+<li><strong>Solución</strong>: autonegociación en ambos extremos (obligatoria en 1000BASE-T) o fijar los dos igual; sustituir el latiguillo o la roseta si el cable falla.</li>
+<li><strong>Verificación</strong>: contadores de errores a cero tras limpiar estadísticas y prueba de caudal (<strong>iPerf</strong>).</li>
+<li><strong>Escalado y registro</strong>: si el fallo está en el cableado horizontal, <strong>orden de trabajo</strong> a la empresa de cableado y registro en la herramienta de incidencias (T19, T20).</li>
+</ol>
+<h2 id="20-matriz-de-memorizacion" class="tema-h2">20. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Dato clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ethernet</td>
+<td>IEEE 802.3 · capas OSI 1 y 2</td>
+</tr>
+<tr>
+<td>MAC</td>
+<td>48 bits · OUI 24 bits · broadcast FF…FF</td>
+</tr>
+<tr>
+<td>Trama</td>
+<td>64–1.518 B (1.522 con VLAN) · datos 46–1.500 · FCS CRC-32</td>
+</tr>
+<tr>
+<td>EtherType</td>
+<td>0x0800 IPv4 · 0x0806 ARP · 0x86DD IPv6 · 0x8100 VLAN</td>
+</tr>
+<tr>
+<td>Acceso al medio</td>
+<td>CSMA/CD (half) · desactivado en full-duplex</td>
+</tr>
+<tr>
+<td>1000BASE-T</td>
+<td>Cat5e/6 · 4 pares · 100 m · autonegociación obligatoria</td>
+</tr>
+<tr>
+<td>10GBASE-T</td>
+<td>Cat6A · 100 m</td>
+</tr>
+<tr>
+<td>10GBASE-SR / LR</td>
+<td>300 m OM3 · 400 m OM4 / 10 km OS2</td>
+</tr>
+<tr>
+<td>Switch</td>
+<td>Capa 2 · tabla MAC · un dominio de colisión por puerto</td>
+</tr>
+<tr>
+<td>Latencia</td>
+<td>Tiempo de origen a destino</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="21-resumen-final-si-manana-fuera-el-examen" class="tema-h2">21. Resumen final: si mañana fuera el examen</h2>
+<p>Una <strong>LAN</strong> se define por su <strong>extensión limitada</strong>. Hoy es una <strong>estrella jerárquica</strong> de switches con troncales de fibra. <strong>Ethernet (IEEE 802.3)</strong> ocupa las <strong>capas física y de enlace</strong>, identifica las interfaces con <strong>MAC de 48 bits</strong> y transporta los datos en <strong>tramas de 64 a 1.518 bytes</strong> (MTU 1.500). <strong>CSMA/CD</strong> era para el medio compartido: con switches y <strong>full-duplex</strong> no hay colisiones. El <strong>switch</strong> aprende MAC de origen y reenvía por MAC de destino; separa dominios de colisión, pero <strong>los de broadcast solo con VLAN o router</strong>. Para <strong>10 Gbps a larga distancia</strong>, <strong>fibra monomodo</strong>; el cobre se queda en <strong>100 m</strong>.</p>
+<h2 id="22-actualidad-datos-fechados" class="tema-h2">22. Actualidad — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong><br>Las velocidades más altas y los nombres comerciales cambian; lo estable para el examen es lo explicado arriba.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Multigigabit (2.5G/5GBASE-T, 802.3bz)</strong> se ha generalizado en los puertos de acceso para alimentar puntos de acceso <strong>wifi 6/6E/7</strong>, que superan 1 Gbps de caudal.</li>
+<li>En CPD los enlaces de servidor de <strong>25 Gbps</strong> y los troncales de <strong>100/400 Gbps</strong> son habituales; existen ya normas de <strong>800 Gbps</strong> (IEEE 802.3df).</li>
+<li><strong>Single Pair Ethernet</strong> (10BASE-T1L, 802.3cg) lleva Ethernet sobre un único par hasta 1 km para sensores e IoT industrial (T8, T18).</li>
+<li><strong>Wifi 7 (802.11be)</strong> está ratificado y en despliegue (T5).</li>
+</ul>
+
+  </div>
+</article>

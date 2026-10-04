@@ -1,0 +1,1011 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T3</div>
+    <h1 class="tema-cabecera__titulo">Tipos de cableado, tanto cobre como fibra óptica. Estándares IEEE 802.</h1>
+    <div class="tema-cabecera__meta">Bloque 1 · Redes, comunicaciones, internet · Bolsa DonostiaTIK 2023 · Instalaciones y Comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-medios-de-transmision">1. Medios de transmisión</a></li>
+<li><a href="#2-par-trenzado">2. Par trenzado</a></li>
+<li><a href="#3-cable-coaxial">3. Cable coaxial</a></li>
+<li><a href="#4-fibra-optica-principios">4. Fibra óptica: principios</a></li>
+<li><a href="#5-conectores-de-fibra">5. Conectores de fibra</a></li>
+<li><a href="#6-transceptores">6. Transceptores</a></li>
+<li><a href="#7-instalacion-pruebas-y-averias-en-fibra">7. Instalación, pruebas y averías en fibra</a></li>
+<li><a href="#8-ftth-y-gpon">8. FTTH y GPON</a></li>
+<li><a href="#9-cableado-estructurado">9. Cableado estructurado</a></li>
+<li><a href="#10-estandares-ieee-802-relacionados-con-el-cableado">10. Estándares IEEE 802 relacionados con el cableado</a></li>
+<li><a href="#11-opciones-para-un-enlace-a-200-m-caso-2023-pregunta-6">11. Opciones para un enlace a 200 m (caso 2023, pregunta 6)</a></li>
+<li><a href="#12-lo-que-cayo-en-el-examen-de-2023">12. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#13-anclas-de-memoria">13. Anclas de memoria</a></li>
+<li><a href="#14-no-confundir">14. No confundir</a></li>
+<li><a href="#15-posibles-trampas-de-examen">15. Posibles trampas de examen</a></li>
+<li><a href="#16-posibles-preguntas-tipo-test">16. Posibles preguntas tipo test</a></li>
+<li><a href="#17-posibles-preguntas-cortas-con-esquema-de-respuesta">17. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#18-supuesto-practico">18. Supuesto práctico</a></li>
+<li><a href="#19-matriz-de-memorizacion">19. Matriz de memorización</a></li>
+<li><a href="#20-resumen-final-si-manana-fuera-el-examen">20. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#21-actualidad-datos-fechados">21. Actualidad — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — fronteras del tema</strong><br>Este tema trata los <strong>medios físicos</strong>: par trenzado (categorías, apantallamiento, conectores, T568A/B), coaxial, <strong>fibra óptica</strong> (multimodo y monomodo, OM/OS, conectores, transceptores, pruebas), <strong>FTTH/GPON</strong> y el <strong>cableado estructurado</strong>.<br><strong>T1</strong> → Ethernet y sus variantes de velocidad (1000BASE-T, 10GBASE-SR…). <strong>T4</strong> → los switches y el <strong>PoE</strong> desde el punto de vista del equipo. <strong>T5</strong> → medios no guiados (radio). <strong>T11</strong> → cableado del CPD (suelo técnico, bandejas).</th>
+</tr>
+</table></div>
+<h2 id="1-medios-de-transmision" class="tema-h2">1. Medios de transmisión</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Medio</th>
+<th>Tipo</th>
+<th>Señal</th>
+<th>Usos actuales</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Par trenzado</strong></td>
+<td>Guiado (cobre)</td>
+<td>Eléctrica</td>
+<td>Cableado horizontal hasta el puesto, telefonía, PoE</td>
+</tr>
+<tr>
+<td><strong>Coaxial</strong></td>
+<td>Guiado (cobre)</td>
+<td>Eléctrica</td>
+<td>TV (RG-6), CCTV analógico (RG-59), acceso de cable (HFC)</td>
+</tr>
+<tr>
+<td><strong>Fibra óptica</strong></td>
+<td>Guiado (vidrio)</td>
+<td>Luz</td>
+<td>Troncales entre armarios, enlaces entre edificios, FTTH, CPD</td>
+</tr>
+<tr>
+<td><strong>Radio</strong> (wifi, radioenlaces, móvil)</td>
+<td>No guiado</td>
+<td>Ondas electromagnéticas</td>
+<td>Movilidad, enlaces punto a punto, IoT (T5, T6, T8)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Parámetros que limitan cualquier medio: <strong>atenuación</strong> (pérdida de señal con la distancia), <strong>interferencias electromagnéticas (EMI)</strong>, <strong>diafonía</strong> (<em>crosstalk</em>: un par induce señal en otro) y <strong>ancho de banda</strong> disponible.</p>
+<h2 id="2-par-trenzado" class="tema-h2">2. Par trenzado</h2>
+<p>Cuatro pares de hilos de cobre trenzados entre sí. El <strong>trenzado</strong> cancela las interferencias electromagnéticas y la diafonía: cuanto más apretado, mejor rendimiento.</p>
+<h3 id="apantallamiento-nomenclatura-isoiec">Apantallamiento: nomenclatura ISO/IEC</h3>
+<p>El formato es <strong>X/YTP</strong>: la letra antes de la barra es la <strong>pantalla general</strong> del cable y la de después, la <strong>pantalla de cada par</strong>. <strong>U</strong> = sin pantalla, <strong>F</strong> = lámina (<em>foil</em>), <strong>S</strong> = malla trenzada (<em>shield</em>).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Denominación</th>
+<th>Pantalla general</th>
+<th>Pantalla por par</th>
+<th>Comentario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>U/UTP</strong></td>
+<td>No</td>
+<td>No</td>
+<td>El clásico «UTP»: el más usado en oficinas</td>
+</tr>
+<tr>
+<td><strong>F/UTP</strong> (FTP)</td>
+<td>Lámina</td>
+<td>No</td>
+<td>Algo más inmune a EMI</td>
+</tr>
+<tr>
+<td><strong>U/FTP</strong></td>
+<td>No</td>
+<td>Lámina en cada par</td>
+<td>Habitual en Cat6A</td>
+</tr>
+<tr>
+<td><strong>S/FTP</strong> (SSTP)</td>
+<td>Malla</td>
+<td>Lámina en cada par</td>
+<td>Cat7/Cat7A/Cat8: máxima protección</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br>Un cable apantallado <strong>solo protege si la pantalla está bien conectada a tierra</strong> en toda la instalación (conectores, patch panel y armario apantallados). Una pantalla sin tierra puede actuar como antena y empeorar el ruido.</th>
+</tr>
+</table></div>
+<h3 id="categorías-y-clases">Categorías y clases</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Categoría (TIA)</th>
+<th>Clase (ISO/IEC 11801)</th>
+<th>Frecuencia</th>
+<th>Ethernet típica</th>
+<th>Distancia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cat3</td>
+<td>C</td>
+<td>16 MHz</td>
+<td>10BASE-T, telefonía</td>
+<td>100 m</td>
+</tr>
+<tr>
+<td><strong>Cat5e</strong></td>
+<td>D</td>
+<td>100 MHz</td>
+<td><strong>1000BASE-T</strong> (y 2.5GBASE-T)</td>
+<td>100 m</td>
+</tr>
+<tr>
+<td><strong>Cat6</strong></td>
+<td>E</td>
+<td>250 MHz</td>
+<td>1000BASE-T, 5GBASE-T, 10GBASE-T <strong>solo hasta ≈ 55 m</strong></td>
+<td>100 m</td>
+</tr>
+<tr>
+<td><strong>Cat6A</strong></td>
+<td><strong>EA</strong></td>
+<td><strong>500 MHz</strong></td>
+<td><strong>10GBASE-T a 100 m</strong></td>
+<td>100 m</td>
+</tr>
+<tr>
+<td>Cat7</td>
+<td>F</td>
+<td>600 MHz</td>
+<td>10GBASE-T (conector GG45/TERA, no RJ45 estándar)</td>
+<td>100 m</td>
+</tr>
+<tr>
+<td>Cat7A</td>
+<td>FA</td>
+<td>1.000 MHz</td>
+<td>10G (40G en distancias cortas)</td>
+<td>100 m</td>
+</tr>
+<tr>
+<td><strong>Cat8</strong> (8.1/8.2)</td>
+<td>I / II</td>
+<td>2.000 MHz</td>
+<td><strong>25GBASE-T / 40GBASE-T</strong></td>
+<td><strong>30 m</strong> (solo CPD)</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible</strong><br><strong>En cobre, el canal máximo es de 100 m</strong>, sea cual sea la categoría (Cat8: 30 m). Para 10 Gbps a 100 m hace falta <strong>Cat6A</strong>. Cat7 no es una categoría de la TIA y no usa RJ45 estándar.</th>
+</tr>
+</table></div>
+<h3 id="el-conector-rj45-y-los-esquemas-t568a--t568b">El conector RJ45 y los esquemas T568A / T568B</h3>
+<p>El <strong>RJ45</strong> (técnicamente <strong>8P8C</strong>: 8 posiciones, 8 contactos) termina el par trenzado de datos. El <strong>RJ11</strong> (6P2C o 6P4C) es el de la telefonía analógica clásica, más estrecho.</p>
+<p>Pines numerados de 1 a 8 con la pestaña hacia abajo y los contactos hacia ti:</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pin</th>
+<th><strong>T568A</strong></th>
+<th><strong>T568B</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Blanco-verde</td>
+<td><strong>Blanco-naranja</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Verde</td>
+<td><strong>Naranja</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Blanco-naranja</td>
+<td><strong>Blanco-verde</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Azul</td>
+<td>Azul</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Blanco-azul</td>
+<td>Blanco-azul</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Naranja</td>
+<td><strong>Verde</strong></td>
+</tr>
+<tr>
+<td>7</td>
+<td>Blanco-marrón</td>
+<td>Blanco-marrón</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Marrón</td>
+<td>Marrón</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 2</strong><br><strong>T568B: blanco-naranja, naranja, blanco-verde, azul, blanco-azul, verde, blanco-marrón, marrón.</strong><br>Entre A y B solo <strong>se intercambian los pares naranja y verde</strong> (pines 1-2 con 3-6). El azul (4-5) y el marrón (7-8) <strong>no cambian</strong>. En las opciones del examen, la trampa estaba en invertir el último par (marrón, blanco-marrón): fíjate siempre en que <strong>el blanco va primero</strong> en cada par.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar T568B</strong><br>«<strong>Blanco-naranja, naranja, blanco-verde, AZUL, blanco-azul, VERDE, blanco-marrón, marrón</strong>»: el <strong>verde abraza al par azul</strong> (pines 3 y 6), y el blanco siempre va delante de su color.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Cable directo</strong> (<em>straight-through</em>): el mismo esquema en los dos extremos (B-B o A-A). Es el normal: PC-switch, latiguillos de patch panel.</li>
+<li><strong>Cable cruzado</strong> (<em>crossover</em>): A en un extremo y B en el otro. Antes era necesario para unir dos equipos iguales (switch-switch, PC-PC).</li>
+<li><strong>Auto-MDI/MDIX</strong>: casi todos los puertos actuales detectan y corrigen el cruce solos; en Gigabit es parte del estándar. <strong>Hoy se usan siempre cables directos.</strong></li>
+<li>Lo importante en una instalación es <strong>usar el mismo esquema en todas las tomas y en el patch panel</strong> (en España y Europa es habitual el T568B en datos, aunque la norma ISO acepta ambos).</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Examen 2023, pregunta 35 (reserva)</strong><br>Los <strong>puntos de telefonía en una instalación nueva</strong> son normalmente <strong>RJ45 de 8 contactos</strong>: con cableado estructurado, la toma es la misma para voz y datos (y la telefonía actual es IP). El RJ11 se usa en el terminal analógico.</th>
+</tr>
+</table></div>
+<h2 id="3-cable-coaxial" class="tema-h2">3. Cable coaxial</h2>
+<p>Un conductor central, un aislante (dieléctrico), una malla exterior y una cubierta. Buena inmunidad a interferencias.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Impedancia</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RG-6</strong></td>
+<td>75 Ω</td>
+<td>TV terrestre y satélite, redes HFC de cable</td>
+</tr>
+<tr>
+<td><strong>RG-59</strong></td>
+<td>75 Ω</td>
+<td>CCTV analógico (cámaras con conector BNC)</td>
+</tr>
+<tr>
+<td>RG-58</td>
+<td>50 Ω</td>
+<td>Ethernet 10BASE2 (<em>thinnet</em>), antenas de radio</td>
+</tr>
+<tr>
+<td>RG-8</td>
+<td>50 Ω</td>
+<td>10BASE5 (<em>thicknet</em>), radio</td>
+</tr>
+</tbody>
+</table></div>
+<p>En redes de datos el coaxial está <strong>obsoleto</strong>; en un edificio municipal aparece en <strong>TV, CCTV antiguo y antenas</strong>.</p>
+<h2 id="4-fibra-optica-principios" class="tema-h2">4. Fibra óptica: principios</h2>
+<p>La fibra transmite <strong>luz</strong> por un <strong>núcleo</strong> de vidrio rodeado de un <strong>revestimiento</strong> (<em>cladding</em>) de índice de refracción menor; la luz avanza por <strong>reflexión total interna</strong>. Después vienen el recubrimiento primario (250 µm), el <em>buffer</em> (900 µm) y la cubierta.</p>
+<p><strong>Ventajas sobre el cobre:</strong> mucho más ancho de banda y distancia, <strong>inmune a interferencias electromagnéticas</strong>, sin problemas de tierra entre edificios (aislamiento galvánico), más ligera y difícil de interceptar. <strong>Inconvenientes:</strong> frágil (radio de curvatura), conectorización y fusión más delicadas, equipos (transceptores) más caros.</p>
+<h3 id="multimodo-y-monomodo">Multimodo y monomodo</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th></th>
+<th><strong>Multimodo (MMF)</strong></th>
+<th><strong>Monomodo (SMF)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Núcleo / revestimiento</td>
+<td><strong>50/125 µm</strong> (o 62,5/125 antigua)</td>
+<td><strong>9/125 µm</strong> (≈ 8–10 µm de núcleo)</td>
+</tr>
+<tr>
+<td>Fuente de luz</td>
+<td>LED o <strong>VCSEL</strong> (láser económico)</td>
+<td><strong>Láser</strong></td>
+</tr>
+<tr>
+<td>Longitudes de onda</td>
+<td><strong>850 nm</strong> y 1300 nm</td>
+<td><strong>1310 nm</strong> y <strong>1550 nm</strong></td>
+</tr>
+<tr>
+<td>Problema principal</td>
+<td><strong>Dispersión modal</strong> (muchos modos llegan desfasados)</td>
+<td>Muy baja dispersión</td>
+</tr>
+<tr>
+<td>Distancia</td>
+<td>Cientos de metros</td>
+<td><strong>Kilómetros a decenas de km</strong></td>
+</tr>
+<tr>
+<td>Coste</td>
+<td>Transceptores más baratos</td>
+<td>Transceptores más caros, fibra más barata</td>
+</tr>
+<tr>
+<td>Uso</td>
+<td><strong>Dentro del edificio y en el CPD</strong></td>
+<td><strong>Entre edificios, campus, MAN, operadores, FTTH</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="tipos-de-fibra-om-y-os">Tipos de fibra: OM y OS</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Núcleo</th>
+<th>Color de la cubierta (habitual)</th>
+<th>1 Gbps</th>
+<th><strong>10 Gbps</strong></th>
+<th>40/100 Gbps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OM1</td>
+<td>62,5 µm</td>
+<td>Naranja</td>
+<td>275 m</td>
+<td>33 m</td>
+<td>—</td>
+</tr>
+<tr>
+<td>OM2</td>
+<td>50 µm</td>
+<td>Naranja</td>
+<td>550 m</td>
+<td>82 m</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>OM3</strong></td>
+<td>50 µm (láser optimizada)</td>
+<td><strong>Aguamarina</strong></td>
+<td>≈ 1 km</td>
+<td><strong>300 m</strong></td>
+<td>100 m</td>
+</tr>
+<tr>
+<td><strong>OM4</strong></td>
+<td>50 µm (láser optimizada)</td>
+<td><strong>Aguamarina o violeta (<em>erika</em>)</strong></td>
+<td>≈ 1 km</td>
+<td><strong>400 m</strong></td>
+<td>150 m</td>
+</tr>
+<tr>
+<td>OM5</td>
+<td>50 µm (banda ancha, SWDM)</td>
+<td><strong>Verde lima</strong></td>
+<td>≈ 1 km</td>
+<td>400 m</td>
+<td>150 m (más con SWDM)</td>
+</tr>
+<tr>
+<td>OS1</td>
+<td>9 µm (interior, <em>tight buffer</em>)</td>
+<td><strong>Amarillo</strong></td>
+<td>10 km</td>
+<td>10 km</td>
+<td>10 km</td>
+</tr>
+<tr>
+<td><strong>OS2</strong></td>
+<td>9 µm (baja pérdida de agua, exterior)</td>
+<td><strong>Amarillo</strong></td>
+<td><strong>&gt; 10 km</strong></td>
+<td><strong>10–40 km</strong> (según óptica)</td>
+<td>10–40 km</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible</strong><br>Las cuatro fibras <strong>OM4</strong> del caso de 2023 (armario de planta → armario principal) sobran para <strong>1 o 10 Gbps</strong> dentro de un edificio. Para unir edificios o la <strong>carpa a 200 m</strong> del examen, lo correcto sería <strong>monomodo OS2</strong> de exterior o, como mínimo, OM3/OM4 si la distancia lo permite (200 m &lt; 300 m).</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar los colores</strong><br><strong>Amarillo = monomodo</strong> (OS). <strong>Aguamarina = multimodo láser</strong> (OM3/OM4). <strong>Naranja = multimodo antigua</strong> (OM1/OM2). <strong>Violeta = OM4</strong> (en algunos fabricantes). <strong>Verde lima = OM5</strong>.</th>
+</tr>
+</table></div>
+<h3 id="atenuación-y-presupuesto-óptico">Atenuación y presupuesto óptico</h3>
+<ul class="tema-lista">
+<li>La atenuación se mide en <strong>dB</strong>: multimodo ≈ <strong>3 dB/km a 850 nm</strong>; monomodo ≈ <strong>0,35 dB/km a 1310 nm</strong> y <strong>0,2 dB/km a 1550 nm</strong>.</li>
+<li>Cada <strong>conector</strong> suma ≈ 0,3–0,75 dB y cada <strong>empalme por fusión</strong>, ≈ 0,1 dB.</li>
+<li><strong>Presupuesto óptico</strong> = potencia del emisor − sensibilidad del receptor. Si las pérdidas del enlace lo superan, <strong>no hay link</strong>.</li>
+<li>Con monomodo de muy corta distancia y ópticas de largo alcance (ER/ZR) se puede <strong>saturar</strong> el receptor: hace falta un <strong>atenuador</strong>.</li>
+</ul>
+<h2 id="5-conectores-de-fibra" class="tema-h2">5. Conectores de fibra</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Conector</th>
+<th>Acoplamiento</th>
+<th>Tamaño</th>
+<th>Uso típico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SC</strong> (<em>Subscriber Connector</em>)</td>
+<td><em>Push-pull</em> (empuja y tira)</td>
+<td>Cuadrado, 2,5 mm</td>
+<td><strong>Patch panels</strong> de edificio, <strong>GPON/FTTH</strong>, equipos antiguos</td>
+</tr>
+<tr>
+<td><strong>LC</strong> (<em>Lucent Connector</em>)</td>
+<td>Pestaña (<em>latch</em>), como el RJ45</td>
+<td><strong>Pequeño (1,25 mm)</strong>, normalmente dúplex</td>
+<td><strong>Transceptores SFP/SFP+</strong> de switch, CPD</td>
+</tr>
+<tr>
+<td>ST (<em>Straight Tip</em>)</td>
+<td>Bayoneta</td>
+<td>Redondo</td>
+<td>Instalaciones antiguas multimodo</td>
+</tr>
+<tr>
+<td>FC</td>
+<td>Rosca</td>
+<td>Redondo</td>
+<td>Instrumentación, telecomunicaciones antiguas</td>
+</tr>
+<tr>
+<td><strong>MTP/MPO</strong></td>
+<td><em>Push-pull</em>, multifibra</td>
+<td>12/24 fibras en un conector</td>
+<td>CPD, 40/100 Gbps (QSFP SR4)</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="pulido-de-la-férula">Pulido de la férula</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pulido</th>
+<th>Color del conector</th>
+<th>Pérdida de retorno</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PC / <strong>UPC</strong> (<em>Ultra Physical Contact</em>)</td>
+<td><strong>Azul</strong> (monomodo) · beige o aguamarina (multimodo)</td>
+<td>Buena</td>
+<td>Datos en general</td>
+</tr>
+<tr>
+<td><strong>APC</strong> (<em>Angled</em>, 8°)</td>
+<td><strong>Verde</strong></td>
+<td>Excelente (refleja muy poco)</td>
+<td><strong>FTTH/GPON</strong>, CATV, señales de vídeo RF</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>TRAMPA DE EXAMEN (y avería real)</strong><br><strong>No se puede conectar APC (verde) con UPC (azul)</strong>: el ángulo de 8° provoca grandes pérdidas y puede dañar las férulas. Tampoco se mezclan <strong>multimodo y monomodo</strong> en el mismo enlace.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>Para el caso práctico de 2023</strong><br>El patch panel de fibra del armario tenía <strong>puertos SC</strong> y los switches llevarán <strong>transceptores SFP/SFP+ con conector LC</strong>: los <strong>latiguillos de fibra</strong> serán <strong>SC-LC dúplex, OM4 (multimodo 50/125)</strong>, uno por cada enlace (dos fibras, Tx y Rx), más alguno de reserva.</th>
+</tr>
+</table></div>
+<h2 id="6-transceptores" class="tema-h2">6. Transceptores</h2>
+<p>Los switches modernos llevan <strong>puertos modulares</strong> donde se inserta el transceptor óptico (o de cobre) según el medio y la distancia.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Formato</th>
+<th>Velocidad</th>
+<th>Ejemplos de módulo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SFP</strong> (<em>mini-GBIC</em>)</td>
+<td><strong>1 Gbps</strong></td>
+<td>1000BASE-SX (MM, 850 nm), <strong>1000BASE-LX</strong> (SM, 1310 nm, 10 km), 1000BASE-T (RJ45)</td>
+</tr>
+<tr>
+<td><strong>SFP+</strong></td>
+<td><strong>10 Gbps</strong></td>
+<td><strong>10GBASE-SR</strong> (MM, 300/400 m), <strong>10GBASE-LR</strong> (SM, 10 km), DAC (cable de cobre directo)</td>
+</tr>
+<tr>
+<td>SFP28</td>
+<td>25 Gbps</td>
+<td>25GBASE-SR/LR</td>
+</tr>
+<tr>
+<td>QSFP+ / QSFP28</td>
+<td>40 / 100 Gbps</td>
+<td>40GBASE-SR4 (MPO), 100GBASE-LR4</td>
+</tr>
+</tbody>
+</table></div>
+<ul class="tema-lista">
+<li>El transceptor debe ser <strong>del mismo tipo en ambos extremos</strong> (SR con SR, LR con LR) y adecuado a la <strong>fibra</strong> instalada (SR → multimodo, LR → monomodo).</li>
+<li><strong>BiDi</strong>: transmite y recibe por <strong>una sola fibra</strong> usando dos longitudes de onda distintas (los extremos son pareja: uno 1310/1550 y el otro 1550/1310).</li>
+<li>Compatibilidad: muchos fabricantes (Cisco, HPE Aruba) <strong>solo aceptan sus módulos o módulos «codificados»</strong> para su marca; un SFP no admitido puede dejar el puerto desactivado.</li>
+<li>Un puerto SFP+ suele admitir también SFP de 1 Gbps (pero <strong>no al revés</strong>).</li>
+<li><strong>DOM/DDM</strong> (<em>Digital Optical Monitoring</em>): el switch puede leer la <strong>potencia óptica</strong> recibida y emitida, la temperatura y el voltaje del transceptor. Muy útil para diagnosticar.</li>
+</ul>
+<h2 id="7-instalacion-pruebas-y-averias-en-fibra" class="tema-h2">7. Instalación, pruebas y averías en fibra</h2>
+<p><strong>Empalmes</strong>: por <strong>fusión</strong> (la fibra se funde con un arco eléctrico; pérdida mínima; requiere <strong>fusionadora</strong>) o <strong>mecánico</strong> (alineación en un elemento con gel; más pérdida). Los conectores se instalan fusionando un <em><strong>pigtail</strong></em> (latiguillo con conector en un extremo) a cada fibra, alojado en una <strong>caja o bandeja de empalmes</strong>.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Herramienta</th>
+<th>Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>VFL</strong> (localizador visual, láser rojo)</td>
+<td>Ver la continuidad e identificar roturas o curvas excesivas en tramos cortos (la luz «se escapa»)</td>
+</tr>
+<tr>
+<td><strong>Medidor de potencia + fuente de luz</strong> (<em>power meter</em>)</td>
+<td>Medir la <strong>pérdida total del enlace</strong> (dB)</td>
+</tr>
+<tr>
+<td><strong>OTDR</strong> (reflectómetro óptico)</td>
+<td>Ver la fibra a lo largo: <strong>dónde</strong> están conectores, empalmes, curvas y roturas, y su pérdida</td>
+</tr>
+<tr>
+<td><strong>Microscopio / sonda de inspección</strong></td>
+<td>Comprobar que la férula está limpia y sin daños</td>
+</tr>
+<tr>
+<td>Kit de limpieza (<em>click cleaner</em>, toallitas sin pelusa, alcohol isopropílico)</td>
+<td>Limpiar férulas y conectores</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — un enlace de fibra no hace <em>link</em> (caso 2023, pregunta 8)</strong><br>Revisa en este orden, en <strong>los dos armarios</strong>:</p>
+<ol type="1">
+· <strong>Configuración</strong>: puerto habilitado (<em>no shutdown</em>), velocidad y dúplex fijados igual si el transceptor lo exige, puerto en el <strong>modo y VLAN</strong> correctos (trunk).<br>
+· <strong>Transceptor</strong>: reconocido por el switch (<code>show interfaces transceiver</code>), <strong>mismo tipo en ambos extremos</strong> (SR-SR, LR-LR), compatible con la fibra (MM/SM) y con el switch. Prueba a intercambiarlo.<br>
+· <strong>Polaridad Tx/Rx</strong>: el Tx de un extremo debe llegar al Rx del otro. <strong>Invertir el latiguillo dúplex</strong> en uno de los extremos es la solución más frecuente.<br>
+· <strong>Limpieza</strong> de conectores y férulas (la suciedad es la primera causa de pérdida).<br>
+· <strong>Latiguillo</strong>: tipo correcto (OM4 50/125, conectores SC-LC, sin mezclar APC/UPC), sin curvas excesivas; sustituir por otro.<br>
+· <strong>Fibra troncal</strong>: probar con otra fibra de las cuatro; medir con <strong>VFL</strong>, <strong>power meter</strong> u <strong>OTDR</strong>. Si la troncal está dañada, <strong>orden de trabajo a la empresa de cableado</strong>.<br>
+· Leer la <strong>potencia óptica (DOM)</strong> para saber si la luz llega y con cuánto nivel.<br>
+</ol></th>
+</tr>
+</table></div>
+<h2 id="8-ftth-y-gpon" class="tema-h2">8. FTTH y GPON</h2>
+<p><strong>FTTH</strong> (<em>Fiber To The Home</em>) lleva la fibra hasta la casa o el local. La tecnología más extendida es <strong>GPON</strong> (<em>Gigabit-capable Passive Optical Network</em>, <strong>ITU-T G.984</strong>):</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Dónde está</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>OLT</strong> (<em>Optical Line Termination</em>)</td>
+<td><strong>Central del operador</strong></td>
+<td>Cabecera: gestiona y da servicio a muchos abonados</td>
+</tr>
+<tr>
+<td><strong>Divisores (<em>splitters</em>) ópticos pasivos</strong></td>
+<td>Calle, arquetas, edificios</td>
+<td>Reparten la luz de una fibra entre varios abonados (1:32, 1:64), <strong>sin alimentación eléctrica</strong></td>
+</tr>
+<tr>
+<td><strong>ONT</strong> (<em>Optical Network Termination</em>)</td>
+<td><strong>En casa o en el local del abonado</strong></td>
+<td>Termina la fibra y entrega Ethernet (a menudo integrada en el router)</td>
+</tr>
+</tbody>
+</table></div>
+<ul class="tema-lista">
+<li>Velocidades GPON: <strong>2,488 Gbps de bajada y 1,244 Gbps de subida</strong>, compartidas entre los abonados del divisor. <strong>XGS-PON</strong> (ITU-T G.9807): 10 Gbps simétricos.</li>
+<li>Usa <strong>una sola fibra monomodo</strong> con distintas longitudes de onda para cada sentido (1490 nm bajada, 1310 nm subida) y conectores <strong>SC/APC (verdes)</strong>.</li>
+<li><strong>ONU</strong> (<em>Optical Network Unit</em>) es un término equivalente usado cuando el terminal da servicio a varios usuarios.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 4</strong><br>El elemento terminador de la red de fibra <strong>en la dependencia del abonado</strong> es la <strong>ONT</strong>. La <strong>OLT</strong> está en la <strong>central del operador</strong>. «Red óptica <strong>pasiva</strong>» significa que <strong>entre la OLT y la ONT no hay electrónica alimentada</strong>: solo fibra y divisores.</th>
+</tr>
+</table></div>
+<h2 id="9-cableado-estructurado" class="tema-h2">9. Cableado estructurado</h2>
+<p>Un <strong>sistema de cableado estructurado</strong> es una infraestructura <strong>genérica, normalizada y modular</strong> que sirve para voz, datos, vídeo y control con el mismo cableado, independientemente de los equipos que se conecten. Normas: <strong>ISO/IEC 11801</strong>, <strong>EN 50173</strong> (Europa) y <strong>TIA-568</strong> (EE. UU.); instalación (<strong>EN 50174</strong>), etiquetado y administración (<strong>TIA-606</strong>) y tierras (<strong>TIA-607</strong>).</p>
+<h3 id="subsistemas">Subsistemas</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Subsistema</th>
+<th>Qué une</th>
+<th>Medio habitual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Campus</strong> (entre edificios)</td>
+<td>Edificios entre sí</td>
+<td><strong>Fibra monomodo</strong> de exterior</td>
+</tr>
+<tr>
+<td><strong>Vertical / troncal (<em>backbone</em>)</strong></td>
+<td>Armario principal (distribuidor de edificio) ↔︎ armarios de planta</td>
+<td><strong>Fibra multimodo OM3/OM4</strong> (o monomodo) y cobre multipar para telefonía analógica</td>
+</tr>
+<tr>
+<td><strong>Horizontal</strong></td>
+<td>Armario de planta ↔︎ <strong>tomas</strong> de los puestos</td>
+<td><strong>Par trenzado</strong> Cat6/Cat6A</td>
+</tr>
+<tr>
+<td><strong>Área de trabajo</strong></td>
+<td>Toma ↔︎ equipo</td>
+<td>Latiguillo</td>
+</tr>
+</tbody>
+</table></div>
+<p>Además: <strong>sala de equipos</strong> (armario principal o CPD), <strong>acometida</strong> (entrada de los servicios del operador) y <strong>armarios de planta</strong> (<em>telecommunications room</em>).</p>
+<h3 id="las-distancias-del-cableado-horizontal">Las distancias del cableado horizontal</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Tramo</th>
+<th>Distancia máxima</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Enlace permanente</strong> (<em>permanent link</em>): del patch panel a la roseta</td>
+<td><strong>90 m</strong></td>
+</tr>
+<tr>
+<td>Latiguillos (patch panel → switch + roseta → equipo)</td>
+<td><strong>10 m</strong> en total</td>
+</tr>
+<tr>
+<td><strong>Canal</strong> (<em>channel</em>): de extremo a extremo</td>
+<td><strong>100 m</strong></td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar</strong><br><strong>90 + 10 = 100.</strong> El enlace fijo (90 m) se <strong>certifica</strong>; el canal completo no puede pasar de 100 m.</th>
+</tr>
+</table></div>
+<h3 id="armario-de-comunicaciones-rack">Armario de comunicaciones (rack)</h3>
+<ul class="tema-lista">
+<li>Ancho normalizado de <strong>19 pulgadas</strong>; altura en <strong>unidades (U)</strong>: <strong>1 U = 1,75" = 44,45 mm</strong>. Un armario de <strong>42U</strong> mide unos 2 m útiles. Medidas de planta habituales: 600×600, <strong>800×800</strong> (más espacio lateral para el cableado), 600×1000 (servidores).</li>
+<li>Contenido típico, de arriba abajo: <strong>bandeja de fibra / patch panel de fibra</strong>, <strong>patch panels de cobre</strong> (24 o 48 puertos, 1U o 2U), <strong>organizadores (pasahilos)</strong>, <strong>switches</strong>, regletas de alimentación (PDU), <strong>SAI</strong> y ventilación.</li>
+<li>Buenas prácticas: patch panel y switch <strong>intercalados</strong> con organizadores; <strong>latiguillos cortos</strong> (0,5–1 m) y de <strong>colores por servicio</strong> (p. ej., datos azul, voz amarillo, PoE rojo…); <strong>etiquetado</strong> de cada toma, puerto de patch panel y latiguillo; <strong>conexión a tierra</strong> del armario; documentación actualizada.</li>
+</ul>
+<h3 id="certificación">Certificación</h3>
+<p>Al terminar la obra, cada enlace de cobre se <strong>certifica</strong> con un certificador (Fluke DSX o similar) contra la categoría contratada. Pruebas principales: <strong>mapa de cableado (<em>wiremap</em>)</strong> (pares cruzados, abiertos, cortocircuitos, pares divididos), <strong>longitud</strong>, <strong>pérdida de inserción</strong>, <strong>NEXT/FEXT</strong> (diafonía) y <strong>pérdida de retorno</strong>. La fibra se certifica con <strong>power meter</strong> (pérdida) y <strong>OTDR</strong>.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>Para el caso práctico — reuniones de obra</strong><br>En el acompañamiento a la obra (caso 2023, pregunta 1) con la <strong>empresa de cableado</strong> se tratan: replanteo de <strong>tomas</strong> y recorridos, <strong>ubicación y equipamiento del armario</strong>, categoría y marca del cable, <strong>etiquetado</strong> según el criterio municipal, plazos, <strong>certificación</strong> (informes de Fluke de todos los enlaces) y <strong>recepción</strong> de la instalación con la documentación <em>as built</em>.</th>
+</tr>
+</table></div>
+<h2 id="10-estandares-ieee-802-relacionados-con-el-cableado" class="tema-h2">10. Estándares IEEE 802 relacionados con el cableado</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Norma</th>
+<th>Qué aporta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>802.3</td>
+<td>Ethernet: todas las variantes de medio (BASE-T, BASE-SX, BASE-LR…)</td>
+</tr>
+<tr>
+<td>802.3ab / an / bz</td>
+<td>1000BASE-T / 10GBASE-T / 2.5G y 5GBASE-T</td>
+</tr>
+<tr>
+<td>802.3z / ae</td>
+<td>Gigabit y 10 Gigabit sobre fibra</td>
+</tr>
+<tr>
+<td><strong>802.3af / at / bt</strong></td>
+<td><strong>PoE / PoE+ / PoE++</strong>: alimentación por el cable de datos (detalle en T4)</td>
+</tr>
+<tr>
+<td>802.3cg</td>
+<td>Single Pair Ethernet (10BASE-T1L): un par, hasta 1 km, para sensores</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>PoE en una línea</strong> (detalle en T4)<br><strong>802.3af = 15,4 W</strong> en el puerto · <strong>802.3at (PoE+) = 30 W</strong> · <strong>802.3bt = 60 W (tipo 3) y 90–100 W (tipo 4)</strong>. Una <strong>cámara IP PoE+</strong> consume del orden de <strong>hasta 25–30 W</strong> (examen 2023, pregunta 21: <strong>30 W</strong>).</th>
+</tr>
+</table></div>
+<h2 id="11-opciones-para-un-enlace-a-200-m-caso-2023-pregunta-6" class="tema-h2">11. Opciones para un enlace a 200 m (caso 2023, pregunta 6)</h2>
+<p>Para conectar una <strong>carpa a unos 200 m</strong> del edificio con un PC en Internet libre y otro en la red municipal:</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Opción</th>
+<th>Equipamiento</th>
+<th>Ventajas</th>
+<th>Inconvenientes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Fibra</strong> (exterior, canalizada o tendido provisional)</td>
+<td>Fibra OS2 o OM3/OM4 con conectores; <strong>switch o media converter</strong> con SFP en cada extremo</td>
+<td>Máximo caudal, VLAN extendidas (municipal e Internet libre por el mismo enlace)</td>
+<td>Tendido y protección del cable, tiempo de instalación</td>
+</tr>
+<tr>
+<td><strong>Radioenlace punto a punto</strong> (5 GHz/60 GHz)</td>
+<td>Dos antenas con visión directa, alimentación PoE, switch en la carpa</td>
+<td>Rápido de montar, sin obra</td>
+<td>Requiere <strong>línea de visión</strong>, alineación y seguridad (cifrado)</td>
+</tr>
+<tr>
+<td><strong>Router 4G/5G</strong></td>
+<td>Router con SIM; <strong>VPN</strong> al cortafuegos municipal para el PC corporativo</td>
+<td>Independiente de la infraestructura</td>
+<td>Depende de la cobertura y de la tarifa; caudal variable</td>
+</tr>
+<tr>
+<td><strong>Wifi del edificio</strong> ampliado</td>
+<td>AP exterior en fachada (SSID corporativo + SSID de Internet libre)</td>
+<td>Usa lo existente</td>
+<td>200 m es mucho para wifi convencional</td>
+</tr>
+<tr>
+<td>Cobre</td>
+<td>—</td>
+<td>—</td>
+<td><strong>Imposible: &gt; 100 m</strong> (salvo extensores, no recomendables)</td>
+</tr>
+</tbody>
+</table></div>
+<p>En todas las opciones hay que prever <strong>dos redes separadas</strong> (VLAN de Internet libre y VLAN municipal, o PC municipal por VPN), la <strong>coordinación</strong> con comunicaciones, sistemas (VPN, reglas), el departamento organizador, mantenimiento eléctrico y la empresa instaladora, y <strong>pruebas previas</strong> al día de la inauguración.</p>
+<h2 id="12-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">12. Lo que cayó en el examen de 2023</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Contenido</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test 2</td>
+<td>Colores de T568B</td>
+<td><strong>Blanco-naranja, naranja, blanco-verde, azul, blanco-azul, verde, blanco-marrón, marrón</strong></td>
+</tr>
+<tr>
+<td>Test 3</td>
+<td>10 Gbps a máxima distancia</td>
+<td><strong>Fibra monomodo OS2</strong></td>
+</tr>
+<tr>
+<td>Test 4</td>
+<td>Terminador de fibra en el abonado (GPON)</td>
+<td><strong>ONT</strong></td>
+</tr>
+<tr>
+<td>Test 21</td>
+<td>Consumo de una cámara PoE+</td>
+<td><strong>30 W</strong></td>
+</tr>
+<tr>
+<td>Test 35 (reserva)</td>
+<td>Toma de telefonía en instalación nueva</td>
+<td><strong>RJ45 de 8 contactos</strong></td>
+</tr>
+<tr>
+<td>Caso 2</td>
+<td>Latiguillos y transceptores de fibra y UTP</td>
+<td>SC-LC OM4 + SFP/SFP+; latiguillos UTP cortos en el armario</td>
+</tr>
+<tr>
+<td>Caso 6</td>
+<td>Carpa a 200 m</td>
+<td>Fibra, radioenlace o 4G/5G (no cobre)</td>
+</tr>
+<tr>
+<td>Caso 8</td>
+<td>Fibra sin link</td>
+<td>Polaridad, transceptores, limpieza, latiguillo, troncal</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="13-anclas-de-memoria" class="tema-h2">13. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>Cobre: 100 m (90 + 10).</strong> <strong>Cat6A = 10G a 100 m.</strong> <strong>Cat8 = 30 m.</strong></li>
+<li><strong>T568B empieza por blanco-naranja; T568A, por blanco-verde.</strong> Solo cambian naranja y verde.</li>
+<li><strong>Multimodo 50/125 · monomodo 9/125.</strong> <strong>850 nm MM · 1310/1550 nm SM.</strong></li>
+<li><strong>OM3 300 m · OM4 400 m a 10G · OS2 10 km (LR).</strong></li>
+<li><strong>Amarillo = monomodo · aguamarina = OM3/OM4 · verde = APC.</strong></li>
+<li><strong>SC en patch panel, LC en SFP.</strong> <strong>SFP 1G · SFP+ 10G.</strong></li>
+<li><strong>GPON: OLT en la central, splitter pasivo, ONT en el abonado.</strong></li>
+<li><strong>1U = 44,45 mm · 42U ≈ 2 m.</strong></li>
+</ul>
+<h2 id="14-no-confundir" class="tema-h2">14. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Esto</th>
+<th>No es esto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>U/FTP</strong> (pantalla en cada par)</td>
+<td><strong>F/UTP</strong> (pantalla general)</td>
+</tr>
+<tr>
+<td><strong>Categoría</strong> (componente, TIA)</td>
+<td><strong>Clase</strong> (enlace instalado, ISO)</td>
+</tr>
+<tr>
+<td><strong>Enlace permanente</strong> (90 m, se certifica)</td>
+<td><strong>Canal</strong> (100 m con latiguillos)</td>
+</tr>
+<tr>
+<td><strong>OLT</strong> (central)</td>
+<td><strong>ONT</strong> (abonado)</td>
+</tr>
+<tr>
+<td><strong>UPC</strong> (azul)</td>
+<td><strong>APC</strong> (verde, 8°)</td>
+</tr>
+<tr>
+<td><strong>SFP</strong> (1G)</td>
+<td><strong>SFP+</strong> (10G)</td>
+</tr>
+<tr>
+<td><strong>OTDR</strong> (dónde está la pérdida)</td>
+<td><strong>Power meter</strong> (cuánta pérdida total)</td>
+</tr>
+<tr>
+<td><strong>Media converter</strong> (cobre ↔︎ fibra)</td>
+<td><strong>Transceptor</strong> (módulo del switch)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="15-posibles-trampas-de-examen" class="tema-h2">15. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li>Invertir el último par de T568B (marrón, blanco-marrón).</li>
+<li>Creer que Cat7 usa RJ45 o que es categoría TIA.</li>
+<li>Pensar que con fibra multimodo se llega más lejos que con monomodo.</li>
+<li>Asociar la ONT a la central del operador.</li>
+<li>Mezclar APC y UPC, o SR con LR.</li>
+<li>Pensar que un cable apantallado sin tierra protege más.</li>
+<li>Olvidar que Cat6 solo garantiza 10G hasta unos 55 m.</li>
+</ul>
+<h2 id="16-posibles-preguntas-tipo-test" class="tema-h2">16. Posibles preguntas tipo test</h2>
+<ol type="1">
+<li>¿Qué longitud máxima tiene el enlace permanente horizontal? → <strong>90 m</strong>.</li>
+<li>¿Qué color identifica la fibra monomodo? → <strong>Amarillo</strong>.</li>
+<li>¿Qué conector se usa en los transceptores SFP? → <strong>LC dúplex</strong>.</li>
+<li>¿Qué norma define GPON? → <strong>ITU-T G.984</strong>.</li>
+<li>¿Qué instrumento localiza la distancia a una rotura de fibra? → <strong>OTDR</strong>.</li>
+</ol>
+<h2 id="17-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">17. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. Diferencias entre fibra multimodo y monomodo (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>Núcleo (50/62,5 µm frente a 9 µm) y número de modos.</li>
+<li>Fuente (LED/VCSEL frente a láser) y longitudes de onda (850 frente a 1310/1550 nm).</li>
+<li>Distancia (cientos de metros frente a kilómetros) por la dispersión modal.</li>
+<li>Coste y uso (intra-edificio y CPD frente a campus, MAN y FTTH); colores (aguamarina/naranja frente a amarillo).</li>
+</ul>
+<p><strong>2. Subsistemas del cableado estructurado (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>Campus, vertical (troncal), horizontal y área de trabajo, con su medio típico.</li>
+<li>Distancias: 90 m de enlace permanente + 10 m de latiguillos = 100 m.</li>
+<li>Normas: ISO/IEC 11801, EN 50173, TIA-568.</li>
+<li>Certificación y etiquetado.</li>
+</ul>
+<h2 id="18-supuesto-practico" class="tema-h2">18. Supuesto práctico</h2>
+<p><strong>Enunciado:</strong> tras la reforma, una roseta de un puesto de usuario no da servicio. El PC conectado no tiene luz de enlace; con otro latiguillo tampoco.</p>
+<p><strong>Esquema de respuesta:</strong></p>
+<ol type="1">
+<li><strong>Identificar la toma</strong> por su etiqueta (p. ej., 1D-24) y localizar su puerto en el <strong>patch panel</strong> del armario de planta.</li>
+<li>Comprobar si el puerto del patch panel tiene <strong>latiguillo al switch</strong> y si el puerto del switch está activo (luz, <code>show interface status</code>).</li>
+<li>Probar la <strong>toma con un tester</strong> de continuidad o con un PC portátil conectado directamente en el patch panel.</li>
+<li>Si el <strong>enlace permanente</strong> falla (<em>wiremap</em> con pares abiertos o cruzados), revisar el <strong>informe de certificación</strong> de la obra.</li>
+<li><strong>Orden de trabajo a la empresa de cableado</strong> (está en garantía tras la obra) para reterminar o sustituir el tramo, y <strong>nueva certificación</strong> del enlace.</li>
+<li>Mientras tanto, <strong>solución provisional</strong>: reubicar al usuario en otra toma libre y actualizar la documentación.</li>
+</ol>
+<h2 id="19-matriz-de-memorizacion" class="tema-h2">19. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Dato clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cat5e / Cat6 / Cat6A</td>
+<td>100 / 250 / 500 MHz · 1G / 1G (10G a 55 m) / 10G a 100 m</td>
+</tr>
+<tr>
+<td>T568B</td>
+<td>BN, N, BV, A, BA, V, BM, M</td>
+</tr>
+<tr>
+<td>Canal horizontal</td>
+<td>90 m permanente + 10 m latiguillos = 100 m</td>
+</tr>
+<tr>
+<td>MMF / SMF</td>
+<td>50/125 µm, 850 nm / 9/125 µm, 1310–1550 nm</td>
+</tr>
+<tr>
+<td>OM3 / OM4 a 10G</td>
+<td>300 m / 400 m (10GBASE-SR)</td>
+</tr>
+<tr>
+<td>OS2 a 10G</td>
+<td>10 km (LR) · 40 km (ER)</td>
+</tr>
+<tr>
+<td>Conectores</td>
+<td>SC (<em>push-pull</em>, patch panel, GPON) · LC (SFP) · MPO (multifibra)</td>
+</tr>
+<tr>
+<td>Pulido</td>
+<td>UPC azul · APC verde 8°</td>
+</tr>
+<tr>
+<td>GPON</td>
+<td>G.984 · OLT – splitter – ONT · 2,5/1,25 Gbps</td>
+</tr>
+<tr>
+<td>Rack</td>
+<td>19" · 1U = 44,45 mm</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="20-resumen-final-si-manana-fuera-el-examen" class="tema-h2">20. Resumen final: si mañana fuera el examen</h2>
+<p>El <strong>par trenzado</strong> se clasifica por <strong>categoría</strong> (Cat6A para 10G a 100 m) y <strong>apantallamiento</strong> (U/UTP, F/UTP, U/FTP, S/FTP); se termina en <strong>RJ45</strong> con <strong>T568B</strong> (blanco-naranja, naranja, blanco-verde, azul, blanco-azul, verde, blanco-marrón, marrón), y el canal no pasa de <strong>100 m (90 + 10)</strong>. La <strong>fibra multimodo</strong> (50/125, OM3/OM4, aguamarina) sirve dentro del edificio (<strong>300–400 m a 10G</strong>); la <strong>monomodo</strong> (9/125, OS2, amarilla) llega a <strong>kilómetros</strong>. Los patch panels usan <strong>SC</strong> y los <strong>SFP/SFP+</strong>, <strong>LC</strong>. Si una fibra no hace link: <strong>configuración, transceptor, polaridad, limpieza, latiguillo, troncal</strong>. En <strong>GPON</strong>, la <strong>OLT</strong> está en la central y la <strong>ONT</strong> en el abonado, con <strong>divisores pasivos</strong> en medio.</p>
+<h2 id="21-actualidad-datos-fechados" class="tema-h2">21. Actualidad — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong></th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li>La categoría recomendada en obra nueva es <strong>Cat6A</strong>, por los AP wifi 6/7 (multigigabit) y el <strong>PoE de alta potencia</strong> (802.3bt), que calienta los mazos de cable.</li>
+<li>En los CPD dominan la fibra <strong>OM4/OM5</strong> con conectores <strong>MPO</strong> y los enlaces <strong>monomodo</strong> para 100/400 Gbps; <strong>Cat8</strong> apenas se usa fuera del CPD.</li>
+<li>Los operadores despliegan <strong>XGS-PON (10 Gbps)</strong> sobre la misma red GPON; ya existen pruebas y despliegues iniciales de <strong>50G-PON</strong> (ITU-T G.9804).</li>
+</ul>
+
+  </div>
+</article>
