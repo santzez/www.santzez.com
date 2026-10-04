@@ -1,0 +1,762 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T5</div>
+    <h1 class="tema-cabecera__titulo">Redes inalámbricas: redes wifi y enlaces punto a punto de radiofrecuencia.</h1>
+    <div class="tema-cabecera__meta">Bloque 1 · Redes, comunicaciones, internet · Bolsa DonostiaTIK 2023 · Instalaciones y Comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-conceptos-basicos-de-radio">1. Conceptos básicos de radio</a></li>
+<li><a href="#2-estandares-ieee-802-11">2. Estándares IEEE 802.11</a></li>
+<li><a href="#3-bandas-y-canales">3. Bandas y canales</a></li>
+<li><a href="#4-arquitectura-y-componentes">4. Arquitectura y componentes</a></li>
+<li><a href="#5-seguridad-wifi">5. Seguridad wifi</a></li>
+<li><a href="#6-diseno-y-despliegue-de-una-red-wifi">6. Diseño y despliegue de una red wifi</a></li>
+<li><a href="#7-radioenlaces-punto-a-punto-y-punto-multipunto">7. Radioenlaces punto a punto y punto-multipunto</a></li>
+<li><a href="#8-wifi-4g-5g-y-lora-comparacion-pregunta-corta-1-de-2023">8. Wifi, 4G/5G y LoRa: comparación (pregunta corta 1 de 2023)</a></li>
+<li><a href="#9-lo-que-cayo-en-el-examen-de-2023">9. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#10-anclas-de-memoria">10. Anclas de memoria</a></li>
+<li><a href="#11-no-confundir">11. No confundir</a></li>
+<li><a href="#12-posibles-trampas-de-examen">12. Posibles trampas de examen</a></li>
+<li><a href="#13-posibles-preguntas-tipo-test">13. Posibles preguntas tipo test</a></li>
+<li><a href="#14-posibles-preguntas-cortas-con-esquema-de-respuesta">14. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#15-supuesto-practico">15. Supuesto práctico</a></li>
+<li><a href="#16-matriz-de-memorizacion">16. Matriz de memorización</a></li>
+<li><a href="#17-resumen-final-si-manana-fuera-el-examen">17. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#18-actualidad-datos-fechados">18. Actualidad — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — fronteras del tema</strong><br>Este tema trata las <strong>WLAN (IEEE 802.11, wifi)</strong>: estándares, bandas, arquitectura, seguridad y despliegue, y los <strong>radioenlaces punto a punto y punto-multipunto</strong>.<br><strong>T6</strong> → telefonía móvil (2G a 5G). <strong>T8</strong> → IoT: LoRa, NB-IoT, Zigbee. <strong>T16</strong> → securización de móviles (MDM). <strong>T17</strong> → NAC y WIPS en detalle.</th>
+</tr>
+</table></div>
+<h2 id="1-conceptos-basicos-de-radio" class="tema-h2">1. Conceptos básicos de radio</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Qué es</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Frecuencia</strong></td>
+<td>Oscilaciones por segundo (Hz). A <strong>más frecuencia</strong>, <strong>más capacidad</strong> pero <strong>menos alcance</strong> y peor paso a través de paredes</td>
+</tr>
+<tr>
+<td><strong>Banda</strong></td>
+<td>Rango de frecuencias (2,4 GHz, 5 GHz, 6 GHz…)</td>
+</tr>
+<tr>
+<td><strong>Canal</strong></td>
+<td>Porción de la banda usada por una red; su <strong>ancho</strong> (20, 40, 80, 160, 320 MHz) determina la velocidad</td>
+</tr>
+<tr>
+<td><strong>Potencia</strong></td>
+<td>En <strong>dBm</strong> (0 dBm = 1 mW; 20 dBm = 100 mW; 30 dBm = 1 W)</td>
+</tr>
+<tr>
+<td><strong>Ganancia de antena</strong></td>
+<td>En <strong>dBi</strong>: cuánto concentra la energía en una dirección</td>
+</tr>
+<tr>
+<td><strong>PIRE / EIRP</strong></td>
+<td>Potencia radiada efectiva = potencia del transmisor + ganancia de antena − pérdidas. <strong>Es lo que limita la normativa</strong></td>
+</tr>
+<tr>
+<td><strong>RSSI</strong></td>
+<td>Nivel de señal recibida (dBm negativos: −50 excelente, <strong>−67 dBm objetivo para voz y vídeo</strong>, −80 pobre)</td>
+</tr>
+<tr>
+<td><strong>SNR</strong></td>
+<td>Relación señal/ruido (dB): <strong>cuanto mayor, mejor</strong> (≥ 25 dB para buen rendimiento)</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar los dB</strong><br><strong>+3 dB = el doble de potencia · −3 dB = la mitad · +10 dB = diez veces más.</strong></th>
+</tr>
+</table></div>
+<p>En España, el uso de las bandas lo regula el <strong>CNAF</strong> (Cuadro Nacional de Atribución de Frecuencias). Las bandas de wifi y los radioenlaces más comunes son de <strong>uso común (sin licencia)</strong>, con límites de PIRE; otras bandas de radioenlace (p. ej., 18, 23, 38 o 80 GHz) requieren <strong>licencia</strong>.</p>
+<h2 id="2-estandares-ieee-802-11" class="tema-h2">2. Estándares IEEE 802.11</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Estándar</th>
+<th>Nombre comercial</th>
+<th>Año</th>
+<th>Bandas</th>
+<th>Velocidad máxima teórica</th>
+<th>Novedades</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>802.11b</td>
+<td>—</td>
+<td>1999</td>
+<td>2,4 GHz</td>
+<td>11 Mbps</td>
+<td>DSSS</td>
+</tr>
+<tr>
+<td>802.11a</td>
+<td>—</td>
+<td>1999</td>
+<td>5 GHz</td>
+<td>54 Mbps</td>
+<td>OFDM</td>
+</tr>
+<tr>
+<td>802.11g</td>
+<td>—</td>
+<td>2003</td>
+<td>2,4 GHz</td>
+<td>54 Mbps</td>
+<td>OFDM en 2,4</td>
+</tr>
+<tr>
+<td><strong>802.11n</strong></td>
+<td><strong>Wi-Fi 4</strong></td>
+<td>2009</td>
+<td>2,4 y 5 GHz</td>
+<td>600 Mbps</td>
+<td><strong>MIMO</strong>, canales de 40 MHz</td>
+</tr>
+<tr>
+<td><strong>802.11ac</strong></td>
+<td><strong>Wi-Fi 5</strong></td>
+<td>2013</td>
+<td><strong>Solo 5 GHz</strong></td>
+<td>≈ 3,5–6,9 Gbps</td>
+<td><strong>MU-MIMO de bajada</strong>, canales de 80/160 MHz, 256-QAM</td>
+</tr>
+<tr>
+<td><strong>802.11ax</strong></td>
+<td><strong>Wi-Fi 6</strong></td>
+<td>2019</td>
+<td>2,4 y 5 GHz</td>
+<td>9,6 Gbps</td>
+<td><strong>OFDMA</strong>, MU-MIMO de subida y bajada, <strong>TWT</strong> (ahorro de batería), BSS <em>coloring</em>, 1024-QAM, <strong>WPA3</strong></td>
+</tr>
+<tr>
+<td>802.11ax</td>
+<td><strong>Wi-Fi 6E</strong></td>
+<td>2020</td>
+<td><strong>+ 6 GHz</strong></td>
+<td>9,6 Gbps</td>
+<td>Nueva banda de 6 GHz, sin interferencias de equipos antiguos</td>
+</tr>
+<tr>
+<td><strong>802.11be</strong></td>
+<td><strong>Wi-Fi 7</strong></td>
+<td>2024</td>
+<td>2,4, 5 y 6 GHz</td>
+<td>≈ 46 Gbps</td>
+<td>Canales de <strong>320 MHz</strong>, 4096-QAM, <strong>MLO</strong> (varias bandas a la vez)</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 18</strong><br>Lo <strong>cierto</strong> al comparar Wi-Fi 6 con Wi-Fi 5: <strong>Wi-Fi 6 mejora la conexión de múltiples dispositivos que necesitan datos simultáneamente</strong> (OFDMA, MU-MIMO bidireccional, BSS <em>coloring</em>). Es una mejora de <strong>eficiencia en entornos densos</strong>, más que de velocidad pico.<br>Trampas: Wi-Fi 5 <strong>no</strong> es más rápido que el 6; Wi-Fi 6 <strong>no</strong> trabaja solo en 2,4 GHz (usa 2,4 y 5); <strong>802.11ac es Wi-Fi 5 y 802.11ax es Wi-Fi 6</strong> (no al revés).</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar</strong><br><strong>n = 4 · ac = 5 · ax = 6 · be = 7.</strong> El <strong>ac</strong> es el único que trabaja <strong>solo en 5 GHz</strong>.</th>
+</tr>
+</table></div>
+<h3 id="técnicas-clave">Técnicas clave</h3>
+<ul class="tema-lista">
+<li><strong>MIMO</strong> (<em>Multiple Input Multiple Output</em>): varias antenas transmiten varios <strong>flujos espaciales</strong> a la vez (2×2, 4×4).</li>
+<li><strong>MU-MIMO</strong>: el AP atiende a <strong>varios clientes a la vez</strong> con flujos distintos.</li>
+<li><strong>OFDMA</strong> (Wi-Fi 6): divide el canal en <strong>subportadoras (RU)</strong> asignadas a varios clientes en la misma transmisión. Es la clave en <strong>entornos densos</strong> (salas, oficinas de atención).</li>
+<li><strong>Beamforming</strong>: concentra la señal hacia el cliente.</li>
+<li><strong>TWT</strong> (<em>Target Wake Time</em>): los dispositivos IoT «duermen» hasta su turno: ahorro de batería.</li>
+</ul>
+<h2 id="3-bandas-y-canales" class="tema-h2">3. Bandas y canales</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Banda</th>
+<th>Canales</th>
+<th>Ventajas</th>
+<th>Inconvenientes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>2,4 GHz</strong></td>
+<td>13 canales en Europa, de 20 MHz, <strong>solapados</strong>; solo <strong>3 no solapados: 1, 6 y 11</strong> (o 1, 5, 9, 13)</td>
+<td><strong>Más alcance</strong> y mejor penetración</td>
+<td><strong>Saturada</strong> (bluetooth, microondas, redes vecinas), poca capacidad</td>
+</tr>
+<tr>
+<td><strong>5 GHz</strong></td>
+<td>Unos 19–24 canales de 20 MHz no solapados; algunos con <strong>DFS</strong> (deben cambiar de canal si detectan un radar)</td>
+<td><strong>Más capacidad</strong>, menos interferencias</td>
+<td>Menos alcance; DFS puede provocar cortes</td>
+</tr>
+<tr>
+<td><strong>6 GHz</strong> (Wi-Fi 6E/7)</td>
+<td>En Europa, <strong>480 MHz</strong> (5.945–6.425 MHz): 24 canales de 20 MHz</td>
+<td>Banda <strong>limpia</strong>, canales anchos</td>
+<td>Menor alcance; solo clientes 6E/7; <strong>WPA3 obligatorio</strong></td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>Diseño de canales</strong><br>En 2,4 GHz usa <strong>solo 1, 6 y 11</strong> y canales de <strong>20 MHz</strong>; en 5 GHz, canales de <strong>20 o 40 MHz</strong> en oficinas con muchos AP (los de 80/160 MHz solo donde hay pocos AP). Así se reduce la <strong>interferencia cocanal</strong> entre AP vecinos.</th>
+</tr>
+</table></div>
+<h2 id="4-arquitectura-y-componentes" class="tema-h2">4. Arquitectura y componentes</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Qué es</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AP</strong> (punto de acceso)</td>
+<td>Une los clientes inalámbricos con la red cableada</td>
+</tr>
+<tr>
+<td><strong>SSID</strong></td>
+<td><strong>Nombre de la red</strong> (hasta 32 caracteres). Un AP puede emitir <strong>varios SSID</strong>, cada uno asociado a una <strong>VLAN</strong> (el AP se conecta en <strong>trunk</strong>)</td>
+</tr>
+<tr>
+<td><strong>BSS / BSSID</strong></td>
+<td>Un AP y sus clientes / identificador del BSS (la <strong>MAC de la radio</strong> del AP)</td>
+</tr>
+<tr>
+<td><strong>ESS</strong></td>
+<td>Varios AP con el mismo SSID: el usuario se mueve sin cambiar de red</td>
+</tr>
+<tr>
+<td><strong>Roaming</strong></td>
+<td>El cliente pasa de un AP a otro. Lo aceleran <strong>802.11r</strong> (<em>fast BSS transition</em>), <strong>802.11k</strong> (lista de vecinos) y <strong>802.11v</strong> (sugerencias del AP)</td>
+</tr>
+<tr>
+<td><strong>Modo infraestructura</strong></td>
+<td>Clientes a través de un AP (el normal)</td>
+</tr>
+<tr>
+<td><strong>Modo ad hoc (IBSS)</strong></td>
+<td>Equipos entre sí, sin AP</td>
+</tr>
+<tr>
+<td><strong>Malla (<em>mesh</em>)</strong></td>
+<td>AP que se enlazan entre sí por radio cuando no hay cable hasta todos</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="modelos-de-gestión">Modelos de gestión</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Modelo</th>
+<th>Cómo funciona</th>
+<th>Ejemplos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AP autónomos</strong></td>
+<td>Cada AP se configura por separado</td>
+<td>Redes muy pequeñas</td>
+</tr>
+<tr>
+<td><strong>Controladora (WLC)</strong></td>
+<td>Una controladora física o virtual gestiona todos los AP (<em>lightweight</em>): configuración, canales y potencia automáticos (RRM), roaming, seguridad</td>
+<td>Cisco Catalyst 9800, Aruba Mobility Controller</td>
+</tr>
+<tr>
+<td><strong>Gestión en la nube</strong></td>
+<td>Los AP se gestionan desde una plataforma web del fabricante</td>
+<td><strong>Aruba Central</strong>, Cisco Meraki, Juniper Mist, Ubiquiti UniFi</td>
+</tr>
+<tr>
+<td><strong>Controladora integrada</strong></td>
+<td>Un AP hace de controlador del resto</td>
+<td>Aruba Instant</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>En el caso de 2023</strong><br>Había <strong>tres usos distintos</strong>: 2 AP para las <strong>tabletas de registro</strong> (VLAN 16, SSID corporativo seguro), 6 AP de <strong>cobertura</strong> (corporativo + <strong>Internet libre</strong> para la ciudadanía, VLAN 122) y 2 AP en la <strong>bajocubierta</strong> para los MiniPC de las salas. Los AP se conectan a <strong>puertos PoE</strong> en <strong>trunk</strong> con las VLAN de cada SSID.</th>
+</tr>
+</table></div>
+<h2 id="5-seguridad-wifi" class="tema-h2">5. Seguridad wifi</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Protocolo</th>
+<th>Cifrado</th>
+<th>Estado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Red abierta</td>
+<td>Ninguno (OWE en redes «abiertas mejoradas»)</td>
+<td>Solo para invitados con portal cautivo</td>
+</tr>
+<tr>
+<td><strong>WEP</strong></td>
+<td>RC4</td>
+<td><strong>Roto, prohibido</strong></td>
+</tr>
+<tr>
+<td><strong>WPA</strong></td>
+<td>TKIP</td>
+<td>Obsoleto</td>
+</tr>
+<tr>
+<td><strong>WPA2</strong></td>
+<td><strong>AES-CCMP</strong></td>
+<td>Válido; vulnerable a ataques de diccionario si la clave PSK es débil</td>
+</tr>
+<tr>
+<td><strong>WPA3</strong></td>
+<td>AES (GCMP-256 en Enterprise 192 bits); <strong>SAE</strong> en el modo personal</td>
+<td><strong>Recomendado</strong>; obligatorio en 6 GHz</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Modos de autenticación:</strong></p>
+<ul class="tema-lista">
+<li><strong>Personal (PSK / SAE)</strong>: una <strong>clave compartida</strong> por todos. Sencillo, pero si la clave se filtra hay que cambiarla en todos los equipos. <strong>WPA3-SAE</strong> resiste los ataques de diccionario fuera de línea.</li>
+<li><strong>Enterprise (802.1X/EAP)</strong>: cada usuario o equipo se autentica <strong>individualmente</strong> contra un <strong>servidor RADIUS</strong> (con usuario y contraseña o, mejor, <strong>certificado</strong>: <strong>EAP-TLS</strong>; otros métodos: PEAP-MSCHAPv2, EAP-TTLS). Permite asignar <strong>VLAN por usuario</strong>, revocar accesos individuales y registrar quién se conecta. <strong>Es lo recomendado en redes corporativas.</strong></li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 20</strong><br>En una infraestructura wifi, el <strong>servidor RADIUS</strong> se ocupa de la <strong>autenticación de las conexiones</strong> (AAA: autenticación, autorización y registro). No asigna IP (DHCP), no monitoriza la red ni almacena información.</th>
+</tr>
+</table></div>
+<h3 id="amenazas-y-protección">Amenazas y protección</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Amenaza</th>
+<th>Qué es</th>
+<th>Defensa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Rogue AP</strong></td>
+<td><strong>AP instalado sin autorización</strong> en la red (por un empleado bienintencionado o un atacante)</td>
+<td><strong>WIPS</strong> (<em>Wireless Intrusion Prevention System</em>): detección y contención; 802.1X en los puertos del switch</td>
+</tr>
+<tr>
+<td><strong>Evil twin</strong></td>
+<td>AP falso que <strong>imita el SSID</strong> legítimo para capturar credenciales</td>
+<td>802.1X con validación del certificado del servidor; WIPS</td>
+</tr>
+<tr>
+<td>Desautenticación</td>
+<td>Tramas de gestión falsas que desconectan a los clientes</td>
+<td><strong>802.11w (PMF)</strong>, obligatorio en WPA3</td>
+</tr>
+<tr>
+<td>Escucha</td>
+<td>Captura del tráfico</td>
+<td>WPA2/WPA3; VPN o TLS en redes abiertas</td>
+</tr>
+<tr>
+<td>Ataque de diccionario a PSK</td>
+<td>Prueba de claves capturando el <em>handshake</em></td>
+<td>Claves largas, <strong>WPA3-SAE</strong>, Enterprise</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 19</strong><br>Un <strong>punto de acceso instalado sin la autorización explícita del administrador</strong>, por un empleado o por un atacante, es un <strong>Rogue AP</strong>.</th>
+</tr>
+</table></div>
+<p>Otras buenas prácticas: <strong>separar la red de invitados</strong> (VLAN propia, <strong>aislamiento de clientes</strong>, solo salida a Internet, <strong>portal cautivo</strong> con aceptación de condiciones), <strong>ocultar el SSID no es seguridad</strong>, <strong>filtrado por MAC no es seguridad</strong> (la MAC se falsifica fácilmente), limitar la potencia para no «regalar» cobertura a la calle y actualizar el firmware de los AP.</p>
+<h2 id="6-diseno-y-despliegue-de-una-red-wifi" class="tema-h2">6. Diseño y despliegue de una red wifi</h2>
+<ol type="1">
+<li><strong>Requisitos</strong>: número y tipo de dispositivos, aplicaciones (voz, vídeo, tabletas de firma), zonas, densidad, roaming.</li>
+<li><strong>Estudio de cobertura (<em>site survey</em>)</strong>: <strong>predictivo</strong> (sobre plano, con software como Ekahau o Hamina) y/o <strong>in situ</strong> (mediciones reales). Resultado: <strong>mapas de calor</strong> de RSSI, SNR e interferencias.</li>
+<li><strong>Diseño por capacidad</strong>, no solo por cobertura: más AP de menor potencia en zonas densas.</li>
+<li><strong>Ubicación de los AP</strong>: en el <strong>techo</strong>, alejados de obstáculos metálicos, con <strong>solape del 15–20 %</strong> entre celdas para el roaming; plan de canales y potencias.</li>
+<li><strong>Cableado y PoE</strong>: una toma por AP, PoE suficiente (802.3at o bt).</li>
+<li><strong>Configuración</strong>: SSID y VLAN, seguridad (WPA3/802.1X), RADIUS, portal cautivo, QoS para voz (WMM).</li>
+<li><strong>Validación</strong> tras la instalación (<em>post-survey</em>) y monitorización (clientes, interferencias, rogue AP).</li>
+</ol>
+<p>Interferencias típicas: <strong>microondas</strong> (2,4 GHz), bluetooth, cámaras inalámbricas, otras redes, <strong>paredes de hormigón, metal, cristal con lámina, agua</strong> (atenúan mucho).</p>
+<h2 id="7-radioenlaces-punto-a-punto-y-punto-multipunto" class="tema-h2">7. Radioenlaces punto a punto y punto-multipunto</h2>
+<p>Un <strong>radioenlace</strong> une <strong>dos ubicaciones fijas</strong> por radio con <strong>antenas directivas</strong>. Sustituye a la fibra cuando el tendido es caro, lento o imposible (cruzar una calle, un edificio cercano, una instalación temporal).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Topología</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Punto a punto (PtP)</strong></td>
+<td>Un enlace entre dos antenas</td>
+<td>Unir dos edificios, llevar red a una caseta o a una <strong>carpa</strong></td>
+</tr>
+<tr>
+<td><strong>Punto-multipunto (PtMP)</strong></td>
+<td>Una estación base (antena sectorial) con varios remotos</td>
+<td>Dar servicio a varias sedes o cámaras dispersas</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="bandas-habituales">Bandas habituales</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Banda</th>
+<th>Licencia</th>
+<th>Alcance y caudal</th>
+<th>Comentario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>5 GHz</strong></td>
+<td>Uso común</td>
+<td>Varios km; cientos de Mbps</td>
+<td>La más habitual; posible interferencia con wifi</td>
+</tr>
+<tr>
+<td><strong>17/24 GHz</strong></td>
+<td>Uso común</td>
+<td>Pocos km; hasta 1–2 Gbps</td>
+<td>Menos saturada</td>
+</tr>
+<tr>
+<td><strong>60 GHz</strong> (802.11ad/ay)</td>
+<td>Uso común</td>
+<td><strong>Corto alcance</strong> (cientos de m a 1–2 km); <strong>multigigabit</strong></td>
+<td>Absorción por el oxígeno y la lluvia; ideal para enlaces cortos y rápidos</td>
+</tr>
+<tr>
+<td>70/80 GHz (banda E)</td>
+<td>Licencia simplificada</td>
+<td>Varios km; hasta 10 Gbps</td>
+<td>Muy sensible a la lluvia</td>
+</tr>
+<tr>
+<td>6–38 GHz con licencia</td>
+<td><strong>Licencia</strong></td>
+<td>Decenas de km</td>
+<td>Operadores; protegida contra interferencias</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="requisitos-de-un-radioenlace">Requisitos de un radioenlace</h3>
+<ul class="tema-lista">
+<li><strong>Línea de visión directa (LOS)</strong> entre las antenas <strong>y despejar la zona de Fresnel</strong>: el elipsoide alrededor de la línea recta debe estar libre al menos en un <strong>60 %</strong>. Árboles, grúas o edificios en medio degradan o cortan el enlace.</li>
+<li><strong>Alineación</strong> precisa de las antenas (con el indicador de señal del equipo o una aplicación).</li>
+<li><strong>Cálculo del balance de enlace</strong> (<em>link budget</em>): potencia + ganancias − pérdidas en el espacio libre − pérdidas de cables ≥ sensibilidad + <strong>margen de desvanecimiento</strong> (<em>fade margin</em>).</li>
+<li><strong>Polarización</strong> (vertical/horizontal) igual en ambos extremos.</li>
+<li><strong>Seguridad</strong>: cifrado (AES) y gestión segura; el enlace transporta <strong>VLAN</strong> como si fuera un cable (en modo puente).</li>
+<li><strong>Instalación</strong>: mástil o soporte, <strong>toma de tierra y protección contra rayos</strong>, alimentación <strong>PoE</strong>, permisos del edificio.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Antena</th>
+<th>Patrón</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Omnidireccional</strong></td>
+<td>360° en horizontal</td>
+<td>AP de interior, cobertura de zona</td>
+</tr>
+<tr>
+<td><strong>Sectorial</strong></td>
+<td>60–120°</td>
+<td>Estación base de PtMP</td>
+</tr>
+<tr>
+<td><strong>Panel / parche</strong></td>
+<td>Directiva moderada</td>
+<td>AP de exterior hacia una zona, PtP corto</td>
+</tr>
+<tr>
+<td><strong>Parabólica</strong></td>
+<td><strong>Muy directiva</strong>, mucha ganancia</td>
+<td><strong>PtP de largo alcance</strong></td>
+</tr>
+<tr>
+<td>Yagi</td>
+<td>Directiva</td>
+<td>Enlaces sencillos, recepción de señal móvil</td>
+</tr>
+</tbody>
+</table></div>
+<p>Fabricantes habituales: <strong>Ubiquiti</strong> (airMAX, airFiber), <strong>MikroTik</strong>, <strong>Cambium Networks</strong>, Siklu (60/80 GHz), Ericsson MINI-LINK y Nokia Wavence (operadores).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>Radioenlace para la carpa del caso de 2023</strong> (pregunta 6)</p>
+<ol type="1">
+· <strong>Replanteo</strong>: comprobar visión directa desde la <strong>fachada o cubierta</strong> del edificio hasta la carpa (200 m) y un punto de anclaje en ambos lados.<br>
+· <strong>Equipos</strong>: pareja PtP en <strong>5 GHz o 60 GHz</strong> (sobra caudal a 200 m), <strong>alimentación PoE</strong> y un <strong>switch</strong> pequeño en la carpa.<br>
+· <strong>Red</strong>: el enlace en modo puente transporta en <strong>trunk</strong> la <strong>VLAN municipal</strong> y la <strong>VLAN de Internet libre</strong>; en la carpa, un puerto en cada VLAN para cada PC.<br>
+· <strong>Coordinación</strong>: mantenimiento del edificio (acceso a la cubierta y anclajes), electricistas (alimentación de la carpa), comunicaciones (VLAN y puertos), sistemas (políticas del PC municipal), organización del evento (fechas, ubicación).<br>
+· <strong>Pruebas</strong> el día anterior y plan B (router 4G/5G con VPN).<br>
+</ol></th>
+</tr>
+</table></div>
+<h2 id="8-wifi-4g-5g-y-lora-comparacion-pregunta-corta-1-de-2023" class="tema-h2">8. Wifi, 4G/5G y LoRa: comparación (pregunta corta 1 de 2023)</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th></th>
+<th><strong>Wifi (802.11)</strong></th>
+<th><strong>4G/5G (móvil)</strong></th>
+<th><strong>LoRa / LoRaWAN</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Espectro</td>
+<td><strong>Uso común</strong> (sin licencia)</td>
+<td><strong>Licenciado</strong> (operador)</td>
+<td><strong>Uso común</strong> (868 MHz en Europa)</td>
+</tr>
+<tr>
+<td>¿Quién lo despliega?</td>
+<td><strong>La propia organización</strong></td>
+<td><strong>Un operador</strong> (o red privada 5G)</td>
+<td>La propia organización o un operador de red LoRaWAN</td>
+</tr>
+<tr>
+<td>Alcance</td>
+<td>Decenas de metros</td>
+<td>Kilómetros (celdas)</td>
+<td><strong>Kilómetros</strong> (2–5 km urbano, &gt; 10 km rural)</td>
+</tr>
+<tr>
+<td>Caudal</td>
+<td>Cientos de Mbps a Gbps</td>
+<td>Decenas de Mbps a Gbps</td>
+<td><strong>Muy bajo</strong> (0,3–50 kbps)</td>
+</tr>
+<tr>
+<td>Consumo</td>
+<td>Medio-alto</td>
+<td>Medio</td>
+<td><strong>Muy bajo</strong> (años con pila)</td>
+</tr>
+<tr>
+<td>Usos</td>
+<td><strong>LAN inalámbrica</strong> de oficinas, invitados</td>
+<td><strong>Movilidad</strong>, conexión de respaldo, IoT con caudal (cámaras)</td>
+<td><strong>Sensores IoT</strong>: contadores, aparcamiento, contenedores, calidad del aire (T8)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="9-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">9. Lo que cayó en el examen de 2023</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Contenido</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test 18</td>
+<td>Wi-Fi 6 frente a Wi-Fi 5</td>
+<td><strong>Wi-Fi 6 mejora la conexión de múltiples dispositivos simultáneos</strong></td>
+</tr>
+<tr>
+<td>Test 19</td>
+<td>AP sin autorización</td>
+<td><strong>Rogue AP</strong></td>
+</tr>
+<tr>
+<td>Test 20</td>
+<td>Función de RADIUS</td>
+<td><strong>Autenticación de conexiones</strong></td>
+</tr>
+<tr>
+<td>Corta 1</td>
+<td>Wifi, 4G/5G y LoRa</td>
+<td>Características, usos, libre u operador</td>
+</tr>
+<tr>
+<td>Caso 5</td>
+<td>Tabletas por wifi con MDM</td>
+<td>SSID de registro, 802.1X/certificado (T16)</td>
+</tr>
+<tr>
+<td>Caso 6</td>
+<td>Carpa a 200 m</td>
+<td>Radioenlace PtP como opción</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="10-anclas-de-memoria" class="tema-h2">10. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>n = Wi-Fi 4 · ac = 5 (solo 5 GHz) · ax = 6 (OFDMA) · 6E = 6 GHz · be = 7 (320 MHz, MLO).</strong></li>
+<li><strong>2,4 GHz: canales 1, 6 y 11.</strong> <strong>5 GHz: más capacidad, DFS.</strong> <strong>6 GHz: WPA3 obligatorio.</strong></li>
+<li><strong>SSID = nombre · BSSID = MAC del AP · ESS = varios AP, mismo SSID.</strong></li>
+<li><strong>WPA2 = AES-CCMP · WPA3 = SAE + PMF.</strong> <strong>Enterprise = 802.1X + RADIUS (EAP-TLS).</strong></li>
+<li><strong>Rogue AP = no autorizado · evil twin = imita el SSID.</strong></li>
+<li><strong>Radioenlace: visión directa + zona de Fresnel 60 % libre.</strong> <strong>Parabólica = PtP largo · sectorial = PtMP.</strong></li>
+<li><strong>−67 dBm</strong> para voz; <strong>+3 dB = doble</strong>.</li>
+</ul>
+<h2 id="11-no-confundir" class="tema-h2">11. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Esto</th>
+<th>No es esto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SSID</strong> (nombre de red)</td>
+<td><strong>BSSID</strong> (MAC de la radio del AP)</td>
+</tr>
+<tr>
+<td><strong>Rogue AP</strong> (no autorizado)</td>
+<td><strong>Evil twin</strong> (copia el SSID para engañar)</td>
+</tr>
+<tr>
+<td><strong>WPA3-Personal (SAE)</strong></td>
+<td><strong>WPA3-Enterprise (802.1X)</strong></td>
+</tr>
+<tr>
+<td><strong>RADIUS</strong> (autentica)</td>
+<td><strong>DHCP</strong> (da IP) y <strong>NAC</strong> (decide si el equipo cumple la política)</td>
+</tr>
+<tr>
+<td><strong>MU-MIMO</strong> (varios flujos espaciales)</td>
+<td><strong>OFDMA</strong> (reparte el canal en subportadoras)</td>
+</tr>
+<tr>
+<td><strong>PIRE</strong> (lo que se radia)</td>
+<td><strong>Potencia del transmisor</strong> (sin la ganancia de antena)</td>
+</tr>
+<tr>
+<td><strong>CSMA/CA</strong> (wifi)</td>
+<td><strong>CSMA/CD</strong> (Ethernet half-duplex)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="12-posibles-trampas-de-examen" class="tema-h2">12. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li>Decir que 802.11ac es Wi-Fi 6 o que ax es Wi-Fi 5.</li>
+<li>Creer que ocultar el SSID o filtrar por MAC protege la red.</li>
+<li>Pensar que en 2,4 GHz hay 13 canales independientes.</li>
+<li>Confundir la función de RADIUS con la de DHCP.</li>
+<li>Olvidar la zona de Fresnel («hay visión directa, pero un árbol roza la línea»).</li>
+<li>Pensar que a más frecuencia, más alcance.</li>
+</ul>
+<h2 id="13-posibles-preguntas-tipo-test" class="tema-h2">13. Posibles preguntas tipo test</h2>
+<ol type="1">
+<li>¿Qué estándar trabaja solo en 5 GHz? → <strong>802.11ac (Wi-Fi 5)</strong>.</li>
+<li>¿Qué canales de 2,4 GHz no se solapan? → <strong>1, 6 y 11</strong>.</li>
+<li>¿Qué método de autenticación sustituye a PSK en WPA3-Personal? → <strong>SAE</strong>.</li>
+<li>¿Qué técnica de Wi-Fi 6 reparte el canal entre varios clientes? → <strong>OFDMA</strong>.</li>
+<li>¿Qué tipo de antena se usa en un PtP de 5 km? → <strong>Parabólica</strong>.</li>
+</ol>
+<h2 id="14-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">14. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. Describe las características y usos de wifi, 4G/5G y LoRa (2 puntos; examen 2023).</strong></p>
+<ul class="tema-lista">
+<li><strong>Fundamentos</strong> de cada una (802.11 en 2,4/5/6 GHz; red celular del operador; LPWAN de largo alcance y bajo consumo en 868 MHz).</li>
+<li><strong>Usos diferenciados</strong>: LAN inalámbrica / movilidad y respaldo / sensores IoT.</li>
+<li><strong>Libre o con operador</strong>: wifi y LoRa en banda de uso común (LoRa puede ir también por operador LoRaWAN); 4G/5G con operador (salvo 5G privado).</li>
+<li>Ejemplos municipales de cada una.</li>
+</ul>
+<p><strong>2. Medidas para asegurar una red wifi corporativa (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>WPA3 (o WPA2-AES) y <strong>802.1X con RADIUS</strong> y certificados.</li>
+<li>SSID separados por uso, cada uno en su VLAN; invitados aislados con portal cautivo.</li>
+<li><strong>WIPS</strong> para rogue AP y evil twin; PMF (802.11w).</li>
+<li>Firmware al día, gestión centralizada, potencia ajustada y monitorización.</li>
+</ul>
+<h2 id="15-supuesto-practico" class="tema-h2">15. Supuesto práctico</h2>
+<p><strong>Enunciado:</strong> en la sala de reuniones de la bajocubierta, los MiniPC se desconectan del wifi durante las videollamadas.</p>
+<p><strong>Esquema de respuesta:</strong></p>
+<ol type="1">
+<li><strong>Recogida de información</strong>: a qué horas, cuántos usuarios, qué AP, qué banda.</li>
+<li><strong>Medición</strong>: RSSI y SNR en la sala (objetivo −67 dBm y SNR ≥ 25 dB), canal y <strong>ocupación del canal</strong>; buscar interferencias (otras redes, equipos) y comprobar el <strong>roaming</strong> (si el MiniPC salta entre AP).</li>
+<li><strong>Causas probables</strong>: cobertura insuficiente bajo la cubierta (estructura metálica), <strong>canal DFS</strong> que cambia por radar, cliente «pegajoso» a un AP lejano, controlador de tarjeta wifi antiguo o ahorro de energía del adaptador.</li>
+<li><strong>Acciones</strong>: ajustar canal y potencia (evitar DFS en esa sala), habilitar 802.11k/v/r, actualizar los controladores del MiniPC y desactivar su ahorro de energía; si hace falta, <strong>cablear el MiniPC</strong> (lo más fiable para videollamadas) o añadir un AP.</li>
+<li><strong>Verificación y registro</strong>: prueba de videollamada, monitorización desde la plataforma de gestión y cierre de la incidencia.</li>
+</ol>
+<h2 id="16-matriz-de-memorizacion" class="tema-h2">16. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Dato clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wi-Fi 4/5/6/7</td>
+<td>802.11n / ac / ax / be</td>
+</tr>
+<tr>
+<td>Bandas</td>
+<td>2,4 (1-6-11) · 5 (DFS) · 6 GHz (6E/7, WPA3)</td>
+</tr>
+<tr>
+<td>Wi-Fi 6</td>
+<td>OFDMA, MU-MIMO subida y bajada, TWT, BSS <em>coloring</em></td>
+</tr>
+<tr>
+<td>Seguridad</td>
+<td>WEP ✗ · WPA2 AES · WPA3 SAE + PMF · Enterprise 802.1X + RADIUS</td>
+</tr>
+<tr>
+<td>Amenazas</td>
+<td>Rogue AP · evil twin · desautenticación</td>
+</tr>
+<tr>
+<td>Objetivo de señal</td>
+<td>−67 dBm, SNR ≥ 25 dB</td>
+</tr>
+<tr>
+<td>Radioenlace</td>
+<td>LOS + Fresnel 60 % · 5/60/80 GHz · parabólica (PtP), sectorial (PtMP)</td>
+</tr>
+<tr>
+<td>dB</td>
+<td>+3 doble · +10 ×10 · 30 dBm = 1 W</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="17-resumen-final-si-manana-fuera-el-examen" class="tema-h2">17. Resumen final: si mañana fuera el examen</h2>
+<p>El wifi es <strong>IEEE 802.11</strong>: <strong>n (Wi-Fi 4)</strong>, <strong>ac (Wi-Fi 5, solo 5 GHz)</strong>, <strong>ax (Wi-Fi 6: OFDMA, mejor con muchos dispositivos a la vez)</strong>, <strong>6E (6 GHz)</strong> y <strong>be (Wi-Fi 7)</strong>. En <strong>2,4 GHz</strong> solo hay <strong>tres canales sin solape (1, 6, 11)</strong>. Cada <strong>SSID</strong> va a una <strong>VLAN</strong> y los AP se gestionan con <strong>controladora o nube</strong>. Seguridad: <strong>WPA3</strong> o WPA2-AES, mejor <strong>Enterprise (802.1X con RADIUS)</strong>; el <strong>RADIUS autentica</strong>; un AP no autorizado es un <strong>Rogue AP</strong> y se detecta con <strong>WIPS</strong>. Los <strong>radioenlaces</strong> unen ubicaciones fijas con antenas directivas y necesitan <strong>visión directa y la zona de Fresnel despejada</strong>.</p>
+<h2 id="18-actualidad-datos-fechados" class="tema-h2">18. Actualidad — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong></th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Wi-Fi 7 (802.11be)</strong> fue publicado por el IEEE en 2024–2025 y la Wi-Fi Alliance certifica equipos desde enero de 2024; en Europa solo está habilitada la parte baja de la banda de 6 GHz (5.945–6.425 MHz), lo que limita los canales de 320 MHz.</li>
+<li>Ya se trabaja en <strong>Wi-Fi 8 (802.11bn, <em>Ultra High Reliability</em>)</strong>, centrado en la fiabilidad más que en la velocidad.</li>
+<li><strong>WPA3</strong> es obligatorio para la certificación Wi-Fi 6E/7 y en la banda de 6 GHz.</li>
+</ul>
+
+  </div>
+</article>

@@ -1,0 +1,667 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T9</div>
+    <h1 class="tema-cabecera__titulo">Sistemas de telefonía: telefonía analógica, ToIP, Asterisk.</h1>
+    <div class="tema-cabecera__meta">Bloque 1 · Redes, comunicaciones, internet · Bolsa DonostiaTIK 2023 · Instalaciones y Comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-la-telefonia-analogica">1. La telefonía analógica</a></li>
+<li><a href="#2-centralitas-pbx">2. Centralitas (PBX)</a></li>
+<li><a href="#3-telefonia-ip-toip-voip">3. Telefonía IP (ToIP / VoIP)</a></li>
+<li><a href="#4-asterisk">4. Asterisk</a></li>
+<li><a href="#5-funciones-del-telefono-y-de-la-centralita-caso-2023-pregun">5. Funciones del teléfono y de la centralita (caso 2023, pregunta 3)</a></li>
+<li><a href="#6-despliegue-de-telefonia-ip-en-una-oficina">6. Despliegue de telefonía IP en una oficina</a></li>
+<li><a href="#7-lo-que-cayo-en-el-examen-de-2023">7. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#8-anclas-de-memoria">8. Anclas de memoria</a></li>
+<li><a href="#9-no-confundir">9. No confundir</a></li>
+<li><a href="#10-posibles-trampas-de-examen">10. Posibles trampas de examen</a></li>
+<li><a href="#11-posibles-preguntas-tipo-test">11. Posibles preguntas tipo test</a></li>
+<li><a href="#12-posibles-preguntas-cortas-con-esquema-de-respuesta">12. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#13-supuesto-practico">13. Supuesto práctico</a></li>
+<li><a href="#14-matriz-de-memorizacion">14. Matriz de memorización</a></li>
+<li><a href="#15-resumen-final-si-manana-fuera-el-examen">15. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#16-actualidad-datos-fechados">16. Actualidad — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — fronteras del tema</strong><br>Este tema trata la <strong>telefonía fija</strong>: red analógica y RDSI, <strong>centralitas (PBX)</strong>, <strong>telefonía IP</strong> (SIP, RTP, códecs, QoS), <strong>Asterisk</strong> y las <strong>funciones de los teléfonos y la centralita</strong>.<br><strong>T6</strong> → telefonía móvil. <strong>T4</strong> → VLAN de voz y PoE en el switch. <strong>T2</strong> → UDP y puertos. <strong>T19</strong> → diagnóstico de la calidad de la voz.</th>
+</tr>
+</table></div>
+<h2 id="1-la-telefonia-analogica" class="tema-h2">1. La telefonía analógica</h2>
+<p>La <strong>red telefónica conmutada (RTC / PSTN)</strong> clásica es una red de <strong>conmutación de circuitos</strong>: durante la llamada se reserva un circuito de extremo a extremo.</p>
+<ul class="tema-lista">
+<li><strong>Bucle de abonado</strong>: el <strong>par de cobre</strong> que une la casa o la oficina con la central del operador. Transporta la <strong>voz analógica</strong> (banda de <strong>300–3.400 Hz</strong>), la <strong>alimentación</strong> del teléfono (≈ 48 V en reposo) y la <strong>señal de llamada</strong> (corriente alterna de ≈ 75 V).</li>
+<li><strong>Marcación</strong>: por <strong>pulsos</strong> (antigua) o por <strong>tonos DTMF</strong> (cada tecla genera dos frecuencias). DTMF también sirve para moverse por los menús (IVR).</li>
+<li><strong>POTS</strong> (<em>Plain Old Telephone Service</em>): el servicio telefónico básico.</li>
+<li>El <strong>fax</strong> y los módems antiguos usan la línea analógica (en IP, el fax necesita <strong>T.38</strong>).</li>
+</ul>
+<h3 id="digitalización-rdsi-y-e1">Digitalización: RDSI y E1</h3>
+<ul class="tema-lista">
+<li>La voz se digitaliza con <strong>PCM a 64 kbps</strong> (8.000 muestras por segundo × 8 bits): es el códec <strong>G.711</strong>.</li>
+<li><strong>RDSI (ISDN)</strong>: telefonía digital extremo a extremo.
+<ul class="tema-lista">
+<li><strong>Acceso básico (BRI)</strong>: <strong>2B + D</strong> → 2 canales de voz de 64 kbps + 1 canal de señalización de 16 kbps.</li>
+<li><strong>Acceso primario (PRI)</strong> en Europa: <strong>30B + D</strong> sobre una línea <strong>E1 (2 Mbps)</strong> → <strong>30 llamadas simultáneas</strong>. Era la conexión típica de una centralita grande con el operador.</li>
+</ul></li>
+<li>Hoy los operadores están <strong>migrando todo a IP</strong>: la RDSI y muchas líneas analógicas se sustituyen por <strong>troncales SIP</strong>.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar</strong><br><strong>G.711 = 64 kbps = un canal de voz digital clásico. BRI = 2B + D. PRI (E1) = 30B + D = 30 llamadas.</strong></th>
+</tr>
+</table></div>
+<h2 id="2-centralitas-pbx" class="tema-h2">2. Centralitas (PBX)</h2>
+<p>Una <strong>centralita</strong> (<strong>PBX</strong>, <em>Private Branch Exchange</em>) conmuta las llamadas <strong>internas</strong> de una organización (entre <strong>extensiones</strong>) y gestiona las <strong>externas</strong> a través de las <strong>líneas o troncales</strong> del operador.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Generación</th>
+<th>Tecnología</th>
+<th>Ejemplos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Analógica</td>
+<td>Conmutación analógica</td>
+<td>Centralitas antiguas</td>
+</tr>
+<tr>
+<td>Digital (TDM)</td>
+<td>Conmutación digital, teléfonos digitales propietarios</td>
+<td>Alcatel OmniPCX, Siemens Hicom, Ericsson MD110</td>
+</tr>
+<tr>
+<td><strong>IP-PBX</strong></td>
+<td>Software sobre IP; teléfonos IP y softphones</td>
+<td><strong>Asterisk</strong>, Cisco CUCM, <strong>Mitel MX-ONE</strong>, Avaya Aura, Alcatel OmniPCX Enterprise</td>
+</tr>
+<tr>
+<td><strong>Centralita en la nube</strong> (<em>hosted</em>, UCaaS)</td>
+<td>La centralita la gestiona un proveedor</td>
+<td><strong>Microsoft Teams Phone</strong>, Zoom Phone, Webex Calling, centralitas virtuales de los operadores</td>
+</tr>
+</tbody>
+</table></div>
+<p>Interfaces de la centralita con el mundo analógico:</p>
+<ul class="tema-lista">
+<li><strong>FXS</strong> (<em>Foreign eXchange Subscriber</em>): el puerto que <strong>da línea</strong> a un <strong>teléfono analógico</strong> o un fax (genera tono y alimentación). Lo tiene la centralita o un ATA.</li>
+<li><strong>FXO</strong> (<em>Foreign eXchange Office</em>): el puerto que <strong>se conecta a una línea del operador</strong> (como si fuera un teléfono).</li>
+<li><strong>ATA</strong> (<em>Analog Telephone Adapter</em>) o <strong>pasarela FXS</strong>: conecta teléfonos analógicos y faxes a una red IP.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br><strong>FXS = Subscriber = da línea al teléfono. FXO = Office = recibe la línea del operador.</strong> Un teléfono se conecta a un FXS; una línea del operador, a un FXO.</th>
+</tr>
+</table></div>
+<h2 id="3-telefonia-ip-toip-voip" class="tema-h2">3. Telefonía IP (ToIP / VoIP)</h2>
+<p><strong>VoIP</strong> es transportar voz por redes IP; <strong>ToIP</strong> (telefonía IP) es el <strong>servicio telefónico completo</strong> (centralita, extensiones, numeración) sobre IP. Ventajas: <strong>una única red</strong> para voz y datos, <strong>movilidad</strong> (la extensión va con el usuario: teléfono IP, softphone, móvil), <strong>integración</strong> con aplicaciones (CRM, Teams, correo), <strong>ahorro</strong> en llamadas y mantenimiento, y funciones avanzadas (presencia, videollamada, <em>call center</em>).</p>
+<h3 id="protocolos">Protocolos</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Protocolo</th>
+<th>Función</th>
+<th>Transporte</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SIP</strong> (<em>Session Initiation Protocol</em>, RFC 3261)</td>
+<td><strong>Señalización</strong>: establecer, modificar y terminar llamadas (INVITE, 180 Ringing, 200 OK, ACK, BYE, REGISTER)</td>
+<td><strong>UDP/TCP 5060</strong>, <strong>TLS 5061</strong></td>
+</tr>
+<tr>
+<td><strong>SDP</strong></td>
+<td>Describe la sesión dentro de SIP (códecs, IP y puertos del audio)</td>
+<td>Dentro de SIP</td>
+</tr>
+<tr>
+<td><strong>RTP</strong> (<em>Real-time Transport Protocol</em>)</td>
+<td><strong>Transporta el audio</strong> (y el vídeo)</td>
+<td><strong>UDP</strong> (puertos dinámicos, típicamente 10000–20000)</td>
+</tr>
+<tr>
+<td><strong>SRTP</strong></td>
+<td>RTP <strong>cifrado</strong></td>
+<td>UDP</td>
+</tr>
+<tr>
+<td>RTCP</td>
+<td>Estadísticas de calidad de RTP</td>
+<td>UDP</td>
+</tr>
+<tr>
+<td>H.323</td>
+<td>Familia de la ITU para videoconferencia y VoIP (anterior a SIP)</td>
+<td>TCP/UDP</td>
+</tr>
+<tr>
+<td>IAX2</td>
+<td>Protocolo propio de Asterisk (señalización + audio por un único puerto UDP 4569)</td>
+<td>UDP</td>
+</tr>
+<tr>
+<td>SCCP (<em>Skinny</em>)</td>
+<td>Protocolo propietario de teléfonos Cisco</td>
+<td>TCP</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar</strong><br><strong>SIP = el que llama y cuelga (señalización, 5060). RTP = la voz (UDP). SRTP + SIP-TLS = llamada cifrada.</strong></th>
+</tr>
+</table></div>
+<p><strong>Elementos SIP</strong>: <em><strong>user agent</strong></em> (el teléfono o softphone), <strong>registrador</strong> (donde se registran las extensiones), <strong>proxy SIP</strong>, <strong>SBC</strong> (<em>Session Border Controller</em>: el «cortafuegos» de la voz entre la centralita y el troncal SIP del operador o Internet; resuelve NAT y protege frente a fraude).</p>
+<p><strong>Troncal SIP</strong>: conexión IP con el operador que sustituye a las líneas RDSI o analógicas; se contratan <strong>canales</strong> (llamadas simultáneas) y <strong>numeración (DDI)</strong>.</p>
+<h3 id="códecs">Códecs</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Códec</th>
+<th>Norma</th>
+<th>Ancho de banda (solo voz)</th>
+<th>Calidad</th>
+<th>Comentario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>G.711</strong> (µ-law / <strong>A-law</strong> en Europa)</td>
+<td>ITU-T</td>
+<td><strong>64 kbps</strong></td>
+<td>Calidad telefónica sin compresión</td>
+<td>El más usado en la LAN</td>
+</tr>
+<tr>
+<td><strong>G.726</strong></td>
+<td>ITU-T</td>
+<td>16–40 kbps (32 típico)</td>
+<td>Buena</td>
+<td>ADPCM; usado en DECT</td>
+</tr>
+<tr>
+<td><strong>G.729</strong></td>
+<td>ITU-T</td>
+<td><strong>8 kbps</strong></td>
+<td>Aceptable</td>
+<td>Comprimido: para enlaces lentos; licenciado en su origen</td>
+</tr>
+<tr>
+<td><strong>G.722</strong></td>
+<td>ITU-T</td>
+<td>64 kbps</td>
+<td><strong>Banda ancha (HD voice)</strong>, 50–7.000 Hz</td>
+<td>Voz en alta definición</td>
+</tr>
+<tr>
+<td><strong>Opus</strong></td>
+<td>IETF</td>
+<td>6–510 kbps (adaptativo)</td>
+<td>Excelente</td>
+<td>WebRTC, Teams, WhatsApp</td>
+</tr>
+<tr>
+<td>iLBC, GSM</td>
+<td>—</td>
+<td>13–15 kbps</td>
+<td>Media</td>
+<td>Resistentes a pérdidas</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 13</strong><br>Los códecs <strong>G.711, G.726 o G.729</strong> están relacionados con <strong>la transmisión de voz en telefonía IP</strong>. No con imágenes JPG ni con <em>streaming</em> de vídeo.</th>
+</tr>
+</table></div>
+<p>Con cabeceras IP/UDP/RTP y Ethernet, una llamada G.711 ocupa en realidad <strong>≈ 87 kbps</strong> por sentido y una G.729, <strong>≈ 31 kbps</strong>.</p>
+<h3 id="calidad-de-servicio-qos-para-la-voz">Calidad de servicio (QoS) para la voz</h3>
+<p>La voz tolera muy mal los problemas de red:</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>Objetivo (recomendación ITU-T G.114 y práctica habitual)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Latencia</strong> (boca a oído, en un sentido)</td>
+<td><strong>&lt; 150 ms</strong></td>
+</tr>
+<tr>
+<td><strong>Jitter</strong> (variación del retardo)</td>
+<td><strong>&lt; 30 ms</strong></td>
+</tr>
+<tr>
+<td><strong>Pérdida de paquetes</strong></td>
+<td><strong>&lt; 1 %</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>Medidas: <strong>VLAN de voz</strong> separada (T4), <strong>marcado DSCP EF (46)</strong> del audio y <strong>CS3/AF31</strong> de la señalización, <strong>colas prioritarias</strong> en switches, routers y cortafuegos, <em><strong>jitter buffer</strong></em> en los teléfonos y <strong>dimensionar</strong> los enlaces. La calidad percibida se mide con el <strong>MOS</strong> (<em>Mean Opinion Score</em>, de 1 a 5; ≥ 4 es buena).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>AVERÍAS TÍPICAS DE VoIP</strong><br><strong>Audio en un solo sentido</strong> → casi siempre <strong>NAT o cortafuegos</strong> (RTP bloqueado o con IP mal traducida; revisar el SBC y desactivar el <strong>SIP ALG</strong> del router). <strong>Voz entrecortada o robótica</strong> → <strong>jitter o pérdida</strong> de paquetes (QoS, congestión, wifi). <strong>Eco</strong> → retardo alto o acoplamiento del terminal. <strong>El teléfono no registra</strong> → VLAN de voz, DHCP (opciones 66/150), credenciales SIP o red hasta la centralita.</th>
+</tr>
+</table></div>
+<h3 id="terminales">Terminales</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Teléfono IP (<em>hardphone</em>)</strong></td>
+<td>Teléfono físico con puerto de red (y un <strong>segundo puerto para el PC</strong>), <strong>PoE</strong>, VLAN de voz por LLDP-MED</td>
+</tr>
+<tr>
+<td><strong>Softphone</strong></td>
+<td><strong>Aplicación</strong> en el PC o el móvil (Teams, Webex, Zoiper, softphone de la centralita) con auriculares. En el caso de 2023, los 30 puestos de usuario usaban softphone</td>
+</tr>
+<tr>
+<td><strong>Teléfono DECT</strong></td>
+<td>Inalámbrico: base conectada a la centralita (o base IP) y terminales que se mueven por el edificio</td>
+</tr>
+<tr>
+<td>Teléfono analógico</td>
+<td>Conectado a un FXS o un ATA</td>
+</tr>
+<tr>
+<td>Terminal de videoconferencia</td>
+<td>Salas de reuniones (en el caso: MiniPC con cámara, micrófono y altavoces)</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="dect">DECT</h3>
+<p><strong>DECT</strong> (<em>Digital Enhanced Cordless Telecommunications</em>) es el <strong>estándar europeo de teléfonos inalámbricos</strong> de interior: banda de <strong>1.880–1.900 MHz</strong> en Europa, alcance de <strong>≈ 50 m en interior y 300 m en exterior</strong> por base, varias bases con <strong>roaming</strong> y <strong>traspaso</strong> para cubrir un edificio, y códec <strong>G.726</strong>. Se usa en recepciones, almacenes, hospitales o residencias. Sucesor: <strong>DECT-2020 NR</strong>, para IoT.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Examen 2023, pregunta 31 (reserva)</strong><br><strong>DECT</strong> corresponde a <strong>un sistema de teléfonos inalámbricos</strong>. <strong>No es telefonía móvil</strong> (eso es GSM/LTE) ni una red de microondas militar.</th>
+</tr>
+</table></div>
+<h2 id="4-asterisk" class="tema-h2">4. Asterisk</h2>
+<p><strong>Asterisk</strong> es una <strong>centralita IP de código abierto</strong> (licencia GPL), creada en 1999 por Mark Spencer y mantenida por <strong>Digium</strong>, hoy parte de <strong>Sangoma</strong>. Corre sobre <strong>Linux</strong> y convierte un servidor en una centralita completa.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Característica</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Protocolos</td>
+<td><strong>SIP</strong> (canal <strong>PJSIP</strong>; el antiguo chan_sip ya se ha retirado), <strong>IAX2</strong>, H.323; RDSI y analógico con tarjetas (Digium/Sangoma) o pasarelas</td>
+</tr>
+<tr>
+<td>Funciones</td>
+<td>Extensiones, <strong>IVR</strong>, <strong>buzón de voz</strong> (<em>voicemail</em>), <strong>colas</strong> (ACD), grupos de llamada, <strong>conferencias</strong>, grabación, música en espera, aparcamiento de llamadas, desvíos, informes (CDR)</td>
+</tr>
+<tr>
+<td>Configuración</td>
+<td>Ficheros de texto en <code>/etc/asterisk/</code>: <strong><code>pjsip.conf</code></strong> (extensiones y troncales SIP), <strong><code>extensions.conf</code></strong> (<strong>plan de marcación</strong>, <em>dialplan</em>), <code>voicemail.conf</code>, <code>queues.conf</code></td>
+</tr>
+<tr>
+<td>Consola</td>
+<td><code>asterisk -rvvv</code> → comandos como <code>pjsip show endpoints</code>, <code>core show channels</code>, <code>dialplan reload</code></td>
+</tr>
+<tr>
+<td>Interfaces gráficas</td>
+<td><strong>FreePBX</strong> (la más usada, de Sangoma), Issabel, VitalPBX</td>
+</tr>
+<tr>
+<td>Integraciones</td>
+<td><strong>AMI</strong> y <strong>ARI</strong> (interfaces de programación), AGI (scripts), CRM</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="el-plan-de-marcación-dialplan">El plan de marcación (<em>dialplan</em>)</h3>
+<p>El <code>extensions.conf</code> se organiza en <strong>contextos</strong> (grupos de reglas; controlan <strong>qué puede marcar cada extensión</strong>) y <strong>extensiones</strong> con <strong>prioridades</strong> y <strong>aplicaciones</strong>:</p>
+<pre><code>[internas]
+exten =&gt; _2XXX,1,Dial(PJSIP/${EXTEN},20)   ; llama a la extensión 2000-2999 durante 20 s
+ same =&gt; n,VoiceMail(${EXTEN}@default,u)   ; si no contesta, buzón de voz
+ same =&gt; n,Hangup()
+
+[salientes]
+exten =&gt; _9XXXXXXXXX,1,Dial(PJSIP/${EXTEN:1}@troncal-operador)  ; 9 + número: sale por el troncal</code></pre>
+<p>Patrones: <strong>X</strong> = cualquier dígito 0–9, <strong>Z</strong> = 1–9, <strong>N</strong> = 2–9, <strong>.</strong> = uno o más caracteres.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>Seguridad en Asterisk y en cualquier centralita IP</strong><br>El gran riesgo es el <strong>fraude telefónico (<em>toll fraud</em>)</strong>: atacantes que adivinan contraseñas SIP y hacen llamadas internacionales de tarificación especial a costa de la organización. Medidas: <strong>contraseñas SIP robustas</strong>, <strong>no exponer el 5060 a Internet</strong> (o hacerlo tras un <strong>SBC</strong>), <strong>fail2ban</strong>, <strong>contextos</strong> que restrinjan las llamadas internacionales, <strong>límites de gasto</strong> con el operador, SIP-TLS + SRTP y actualizaciones.</th>
+</tr>
+</table></div>
+<h2 id="5-funciones-del-telefono-y-de-la-centralita-caso-2023-pregun" class="tema-h2">5. Funciones del teléfono y de la centralita (caso 2023, pregunta 3)</h2>
+<p><strong>Funciones del propio teléfono:</strong></p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Función</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Agenda o memoria de contactos privada</strong></td>
+<td>Números guardados en el terminal</td>
+</tr>
+<tr>
+<td><strong>Silencio (<em>mute</em>)</strong></td>
+<td>Corta el micrófono</td>
+</tr>
+<tr>
+<td><strong>Timbre y volumen</strong></td>
+<td>Cambiar melodía y volumen del timbre, del auricular y del altavoz</td>
+</tr>
+<tr>
+<td><strong>Desvío manual</strong></td>
+<td>El usuario desvía sus llamadas a otro número (también lo gestiona la centralita)</td>
+</tr>
+<tr>
+<td>Manos libres y auriculares</td>
+<td>Hablar sin el auricular; cascos inalámbricos</td>
+</tr>
+<tr>
+<td>Rellamada y registro de llamadas</td>
+<td>Últimos números, perdidas, recibidas</td>
+</tr>
+<tr>
+<td>No molestar</td>
+<td>Rechaza o desvía todas las llamadas</td>
+</tr>
+<tr>
+<td>Teclas programables</td>
+<td>Accesos directos a extensiones o funciones, con piloto de estado (ocupado/libre)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Funciones de la centralita (en relación con el resto de teléfonos y los de referencia del departamento):</strong></p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Función</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Grupo de captura</strong> (<em>pickup</em>)</td>
+<td>Cualquier miembro del grupo <strong>descuelga desde su teléfono una llamada que suena en otro</strong> del mismo grupo (marcando un código, p. ej. <code>*8</code>)</td>
+</tr>
+<tr>
+<td><strong>Grupo de salto</strong> (<em>hunt group</em>)</td>
+<td>Una llamada a un número del grupo <strong>salta a las extensiones</strong> siguiendo un orden (lineal, circular, a todas a la vez, a la más libre) hasta que alguien contesta. Ideal para los <strong>teléfonos de referencia del departamento</strong></td>
+</tr>
+<tr>
+<td><strong>Desvíos programados</strong></td>
+<td><strong>Incondicional</strong> (siempre), <strong>si ocupado</strong>, <strong>si no contesta</strong> (tras X segundos), <strong>por horario</strong> (fuera de horario, a otra extensión o a una locución)</td>
+</tr>
+<tr>
+<td><strong>Buzón de voz</strong></td>
+<td>Mensajes grabados, con aviso por correo electrónico</td>
+</tr>
+<tr>
+<td><strong>Jefe-secretaria</strong> (filtro)</td>
+<td>Las llamadas al jefe pasan primero por la secretaria, que las filtra o las pasa; la secretaria ve el estado del jefe</td>
+</tr>
+<tr>
+<td><strong>Identificación de llamada</strong></td>
+<td><strong>CLIP</strong> (ver quién llama), <strong>CLIR</strong> (ocultar el número propio), presentación del <strong>número de cabecera</strong> del departamento en las salientes</td>
+</tr>
+<tr>
+<td><strong>Memorias corporativas</strong></td>
+<td><strong>Agenda común</strong> de la organización y <strong>marcación abreviada</strong> a números frecuentes</td>
+</tr>
+<tr>
+<td><strong>Locuciones</strong></td>
+<td>Mensajes de bienvenida, fuera de horario, festivos</td>
+</tr>
+<tr>
+<td><strong>IVR</strong></td>
+<td>Menú de voz («pulse 1 para…») que encamina la llamada</td>
+</tr>
+<tr>
+<td><strong>Servicios de <em>call center</em></strong></td>
+<td><strong>Colas</strong> con <strong>distribución automática (ACD)</strong>, agentes que entran y salen, estadísticas, grabación, supervisión</td>
+</tr>
+<tr>
+<td>Transferencia</td>
+<td>Pasar la llamada a otra extensión: <strong>ciega</strong> (sin avisar) o <strong>atendida/consultada</strong> (hablando antes)</td>
+</tr>
+<tr>
+<td>Conferencia</td>
+<td>Tres o más interlocutores</td>
+</tr>
+<tr>
+<td>Aparcamiento (<em>call park</em>) y retención</td>
+<td>Dejar la llamada en espera para recogerla desde otro teléfono; <strong>música en espera</strong></td>
+</tr>
+<tr>
+<td>Extensión móvil</td>
+<td>La extensión suena también en el móvil corporativo (<em>twinning</em>)</td>
+</tr>
+<tr>
+<td>Restricciones por categoría</td>
+<td>Qué extensiones pueden llamar a móviles, internacionales…</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Criterio del tribunal en 2023</strong><br>Para puntuar había que dar al menos <strong>1 opción del teléfono y 3 de la centralita</strong>; con <strong>8 de centralita</strong>, la puntuación máxima. La rúbrica premiaba distinguir <strong>hardphone y softphone</strong>. Memoriza al menos estas ocho: <strong>grupos de captura, grupos de salto, desvíos programados, buzón de voz, jefe-secretaria, identificación, memorias corporativas y locuciones</strong> (y <em>call center</em> como novena).</th>
+</tr>
+</table></div>
+<h2 id="6-despliegue-de-telefonia-ip-en-una-oficina" class="tema-h2">6. Despliegue de telefonía IP en una oficina</h2>
+<ol type="1">
+<li><strong>Red</strong>: VLAN de voz (DHCP con opciones de aprovisionamiento), <strong>PoE</strong> en los puertos de los teléfonos, QoS de extremo a extremo.</li>
+<li><strong>Centralita</strong>: alta de las <strong>extensiones</strong>, <strong>numeración directa (DDI)</strong>, grupos de salto y captura, desvíos, buzones, locuciones, permisos de llamada.</li>
+<li><strong>Aprovisionamiento</strong> de los teléfonos: automático por DHCP (opción 66/150) y plantillas, o manual.</li>
+<li><strong>Puestos</strong>: teléfono IP con el <strong>PC conectado a través del teléfono</strong> (atención ciudadana en el caso de 2023) o <strong>softphone</strong> con auriculares.</li>
+<li><strong>Pruebas</strong>: llamadas internas, externas, entrantes a los números de referencia, desvíos, buzón; calidad (MOS, jitter).</li>
+<li><strong>Formación</strong> de los usuarios en las funciones (pregunta 3 del caso) y documentación.</li>
+</ol>
+<h2 id="7-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">7. Lo que cayó en el examen de 2023</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Contenido</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test 13</td>
+<td>G.711, G.726, G.729</td>
+<td><strong>Voz en telefonía IP</strong></td>
+</tr>
+<tr>
+<td>Test 31 (reserva)</td>
+<td>DECT</td>
+<td><strong>Sistema de teléfonos inalámbricos</strong></td>
+</tr>
+<tr>
+<td>Test 35 (reserva)</td>
+<td>Toma de telefonía nueva</td>
+<td><strong>RJ45 de 8 contactos</strong> (T3)</td>
+</tr>
+<tr>
+<td>Caso 3</td>
+<td>Funciones del teléfono y la centralita</td>
+<td>Ver apartado 5</td>
+</tr>
+<tr>
+<td>Caso (enunciado)</td>
+<td>Teléfono IP con el PC conectado detrás; VLAN de telefonía por DHCP</td>
+<td>VLAN de voz y PoE (T4)</td>
+</tr>
+<tr>
+<td>Caso 10</td>
+<td>Puerto averiado con teléfono y PC</td>
+<td>Reconfigurar VLAN de datos + voz y PoE (T4)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="8-anclas-de-memoria" class="tema-h2">8. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>Voz analógica: 300–3.400 Hz. G.711 = 64 kbps. BRI = 2B + D. PRI = 30B + D (E1, 2 Mbps).</strong></li>
+<li><strong>FXS = da línea al teléfono · FXO = recibe la línea del operador.</strong></li>
+<li><strong>SIP 5060 (TLS 5061) = señalización · RTP/UDP = audio · SRTP = audio cifrado.</strong></li>
+<li><strong>G.711 64k · G.729 8k · G.722 HD · Opus adaptativo.</strong></li>
+<li><strong>Latencia &lt; 150 ms · jitter &lt; 30 ms · pérdidas &lt; 1 % · DSCP EF 46.</strong></li>
+<li><strong>Asterisk = IP-PBX libre (Sangoma) · pjsip.conf + extensions.conf · FreePBX.</strong></li>
+<li><strong>DECT = teléfonos inalámbricos (1,9 GHz).</strong></li>
+<li><strong>Grupo de captura = cojo la llamada de otro · grupo de salto = la llamada va saltando.</strong></li>
+</ul>
+<h2 id="9-no-confundir" class="tema-h2">9. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Esto</th>
+<th>No es esto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Grupo de captura</strong> (<em>pickup</em>)</td>
+<td><strong>Grupo de salto</strong> (<em>hunt</em>)</td>
+</tr>
+<tr>
+<td><strong>SIP</strong> (señalización)</td>
+<td><strong>RTP</strong> (voz)</td>
+</tr>
+<tr>
+<td><strong>FXS</strong></td>
+<td><strong>FXO</strong></td>
+</tr>
+<tr>
+<td><strong>Softphone</strong> (aplicación)</td>
+<td><strong>Hardphone</strong> (teléfono físico)</td>
+</tr>
+<tr>
+<td><strong>DECT</strong> (inalámbrico de oficina)</td>
+<td><strong>GSM/LTE</strong> (red móvil)</td>
+</tr>
+<tr>
+<td><strong>CLIP</strong> (mostrar número)</td>
+<td><strong>CLIR</strong> (ocultarlo)</td>
+</tr>
+<tr>
+<td><strong>Transferencia ciega</strong></td>
+<td><strong>Transferencia atendida</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="10-posibles-trampas-de-examen" class="tema-h2">10. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li>Asociar los códecs G.7xx a imágenes o vídeo.</li>
+<li>Creer que la voz IP va por TCP.</li>
+<li>Confundir FXS y FXO.</li>
+<li>Pensar que DECT es telefonía móvil.</li>
+<li>Confundir el grupo de salto con el de captura.</li>
+<li>Creer que el audio en un solo sentido es un problema del códec (suele ser NAT o cortafuegos).</li>
+</ul>
+<h2 id="11-posibles-preguntas-tipo-test" class="tema-h2">11. Posibles preguntas tipo test</h2>
+<ol type="1">
+<li>¿Qué puerto usa SIP por defecto? → <strong>5060</strong>.</li>
+<li>¿Qué protocolo transporta el audio de una llamada IP? → <strong>RTP sobre UDP</strong>.</li>
+<li>¿Cuánto ancho de banda usa G.729 sin cabeceras? → <strong>8 kbps</strong>.</li>
+<li>¿Cuántos canales de voz tiene un acceso primario RDSI europeo? → <strong>30</strong>.</li>
+<li>¿Qué fichero de Asterisk contiene el plan de marcación? → <strong>extensions.conf</strong>.</li>
+<li>¿Qué marcado DSCP se usa para el audio? → <strong>EF (46)</strong>.</li>
+</ol>
+<h2 id="12-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">12. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. Funciones de un teléfono corporativo conectado a una centralita (2 puntos; caso de 2023).</strong></p>
+<ul class="tema-lista">
+<li>Del teléfono: agenda, <em>mute</em>, timbre y volumen, desvío manual, manos libres.</li>
+<li>De la centralita (mínimo 8): captura, salto, desvíos programados, buzón, jefe-secretaria, identificación, memorias corporativas, locuciones, IVR, <em>call center</em>.</li>
+<li>Hardphone frente a softphone.</li>
+</ul>
+<p><strong>2. Ventajas de la telefonía IP y requisitos de la red (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>Red única, movilidad, integración, ahorro, funciones avanzadas.</li>
+<li>Protocolos: SIP, RTP, códecs.</li>
+<li>Red: VLAN de voz, PoE, QoS (DSCP EF), latencia &lt; 150 ms, jitter y pérdidas bajos.</li>
+<li>Seguridad: SBC, cifrado, fraude.</li>
+</ul>
+<h2 id="13-supuesto-practico" class="tema-h2">13. Supuesto práctico</h2>
+<p><strong>Enunciado:</strong> tras instalar los teléfonos IP de la oficina de atención, en las llamadas externas el ciudadano oye al funcionario, pero el funcionario no oye al ciudadano.</p>
+<p><strong>Esquema de respuesta:</strong></p>
+<ol type="1">
+<li><strong>Diagnóstico</strong>: <strong>audio en un solo sentido</strong> = la señalización SIP funciona, pero el <strong>RTP de entrada no llega</strong>. Causas típicas: <strong>NAT</strong> (la IP privada del teléfono viaja en el SDP), <strong>cortafuegos</strong> que bloquea los puertos RTP, <strong>SIP ALG</strong> del router que reescribe mal, rutas asimétricas.</li>
+<li><strong>Comprobaciones</strong>: ¿pasa con llamadas internas? (si no, es externo); captura del tráfico con <strong>Wireshark</strong> (SIP y RTP); revisar la configuración del <strong>SBC</strong> o del troncal, las reglas del cortafuegos para el rango RTP y si el SIP ALG está activo.</li>
+<li><strong>Solución</strong>: desactivar el SIP ALG, abrir o permitir el rango RTP hacia la centralita/SBC, configurar correctamente la IP externa en la centralita (NAT) o en el SBC.</li>
+<li><strong>Coordinación</strong> con Sistemas (cortafuegos) y el operador del troncal SIP; pruebas de llamadas entrantes y salientes.</li>
+<li><strong>Registro</strong> y documentación del cambio.</li>
+</ol>
+<h2 id="14-matriz-de-memorizacion" class="tema-h2">14. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Dato clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Analógica</td>
+<td>300–3.400 Hz · DTMF · ≈ 48 V</td>
+</tr>
+<tr>
+<td>RDSI</td>
+<td>BRI 2B+D · PRI 30B+D (E1 2 Mbps)</td>
+</tr>
+<tr>
+<td>SIP</td>
+<td>5060 UDP/TCP · 5061 TLS · INVITE/200 OK/ACK/BYE/REGISTER</td>
+</tr>
+<tr>
+<td>RTP</td>
+<td>UDP · 10000–20000 en Asterisk · SRTP cifrado</td>
+</tr>
+<tr>
+<td>Códecs</td>
+<td>G.711 64k · G.726 32k · G.729 8k · G.722 HD · Opus</td>
+</tr>
+<tr>
+<td>QoS</td>
+<td>&lt; 150 ms · &lt; 30 ms jitter · &lt; 1 % · EF 46 · MOS ≥ 4</td>
+</tr>
+<tr>
+<td>Asterisk</td>
+<td>GPL · Sangoma · pjsip.conf · extensions.conf · FreePBX</td>
+</tr>
+<tr>
+<td>DECT</td>
+<td>1.880–1.900 MHz · teléfonos inalámbricos · G.726</td>
+</tr>
+<tr>
+<td>Centralita</td>
+<td>Captura · salto · desvíos · buzón · jefe-secretaria · CLIP · memorias · locuciones · IVR · ACD</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="15-resumen-final-si-manana-fuera-el-examen" class="tema-h2">15. Resumen final: si mañana fuera el examen</h2>
+<p>La telefonía analógica usa el <strong>bucle de cobre</strong> con voz de <strong>300–3.400 Hz</strong>; digitalizada con <strong>G.711 (64 kbps)</strong>, la RDSI ofrece <strong>2B+D</strong> o <strong>30B+D (E1)</strong>. La <strong>centralita (PBX)</strong> conmuta extensiones y troncales; hoy es una <strong>IP-PBX</strong> (<strong>Asterisk</strong>, libre, configurada en <code>pjsip.conf</code> y <code>extensions.conf</code>, con <strong>FreePBX</strong>) o está en la nube (Teams). La telefonía IP usa <strong>SIP (5060) para la señalización</strong> y <strong>RTP sobre UDP para el audio</strong>, con códecs <strong>G.711, G.726, G.729, G.722 u Opus</strong>, y exige <strong>QoS</strong> (VLAN de voz, <strong>DSCP EF</strong>, <strong>&lt; 150 ms</strong>, poco jitter y pérdidas). <strong>DECT</strong> es la telefonía <strong>inalámbrica</strong> de interior. Funciones clave de la centralita: <strong>grupos de captura y de salto, desvíos, buzón, jefe-secretaria, identificación, memorias, locuciones, IVR y call center</strong>.</p>
+<h2 id="16-actualidad-datos-fechados" class="tema-h2">16. Actualidad — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong></th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li>Los operadores españoles están <strong>apagando la red de cobre</strong> (Telefónica se fijó 2025 como fecha para cerrar sus centrales de cobre): las líneas analógicas y RDSI se sustituyen por <strong>fibra, troncales SIP o soluciones móviles</strong>, lo que afecta a alarmas, ascensores y faxes que usaban líneas analógicas.</li>
+<li>La telefonía corporativa se desplaza hacia la <strong>nube (UCaaS)</strong> integrada con la colaboración (Teams Phone, Webex, Zoom).</li>
+<li><strong>Asterisk</strong> publica versiones LTS periódicas (la 22 en 2024); <strong>chan_sip</strong> fue eliminado y <strong>PJSIP</strong> es el único canal SIP.</li>
+</ul>
+
+  </div>
+</article>
