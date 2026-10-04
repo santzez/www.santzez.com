@@ -2,7 +2,7 @@
   "id": "BOLSA_RED_T1",
   "opeNombre": "Bolsa DonostiaTIK 2023 — Técnico/a de apoyo: Instalaciones y Comunicaciones",
   "titulo": "T1 · Redes de área local: estándares generales y redes Ethernet.",
-  "descripcion": "30 preguntas tipo test con explicación, elaboradas a partir de los apuntes del tema.",
+  "descripcion": "37 preguntas tipo test con explicación, elaboradas a partir de los apuntes del tema.",
   "fuente": "Elaboración propia a partir de los apuntes del tema (octubre de 2026). Las marcadas como «examen 2023» reproducen preguntas del examen real del 23/09/2023 con la plantilla oficial.",
   "preguntas": [
     {
@@ -26,7 +26,7 @@
         }
       ],
       "pregunta": "En cuáles de las siguientes capas del modelo OSI se encuadra el estándar Ethernet:",
-      "razonamiento": "Ethernet (IEEE 802.3) define el medio y la señal (capa 1, física) y la trama, las direcciones MAC y el acceso al medio (capa 2, enlace). La capa de red es la de IP: Ethernet no maneja direcciones IP.",
+      "razonamiento": "IEEE 802.3 especifica la capa física (medio, señal, velocidades) y la subcapa MAC de la capa de enlace (trama, direcciones MAC y acceso al medio). La capa de red es la de IP: Ethernet no maneja direcciones IP.",
       "origen": "T1 §4",
       "dificultad": "Fácil",
       "tipo": "Concepto",
@@ -56,7 +56,7 @@
       ],
       "pregunta": "Un puente (bridge) se caracteriza por:",
       "razonamiento": "El bridge (y el switch, que es un bridge multipuerto) trabaja en la capa de enlace y filtra o reenvía según la dirección MAC de destino. El router es el que trabaja en capa 3 con direcciones IP.",
-      "origen": "T1 §10",
+      "origen": "T1 §11",
       "dificultad": "Fácil",
       "tipo": "Concepto",
       "concepto": "Bridge",
@@ -85,7 +85,7 @@
       ],
       "pregunta": "¿Para qué necesita una dirección IP un switch de nivel 2?",
       "razonamiento": "Un switch de capa 2 conmuta tramas por dirección MAC y no necesita IP para ello. La IP (en una interfaz virtual de gestión) sirve para administrarlo por SSH, web o SNMP. Actuar de puerta de enlace es función de un router o de un switch de capa 3.",
-      "origen": "T1 §10",
+      "origen": "T1 §12",
       "dificultad": "Media",
       "tipo": "Aplicación",
       "concepto": "Gestión del switch",
@@ -114,7 +114,7 @@
       ],
       "pregunta": "En términos de redes, ¿qué significa la latencia?",
       "razonamiento": "La latencia es un tiempo (ms): lo que tarda un paquete de origen a destino. La velocidad máxima es el ancho de banda; el caudal real es el throughput; la variación de la latencia es el jitter.",
-      "origen": "T1 §11",
+      "origen": "T1 §13",
       "dificultad": "Fácil",
       "tipo": "Definición",
       "concepto": "Latencia",
@@ -181,24 +181,24 @@
       "id": "BOLSA_RED_T1_007",
       "opciones": [
         {
-          "texto": "Al segmento de red donde está conectado el equipo.",
+          "texto": "Al número de serie de la tarjeta de red, grabado en fábrica por el propio IEEE.",
           "correcta": false
         },
         {
-          "texto": "A la VLAN a la que pertenece la interfaz.",
+          "texto": "A la VLAN a la que pertenece la interfaz dentro del switch de acceso.",
           "correcta": false
         },
         {
-          "texto": "Al fabricante de la interfaz, por asignación del IEEE.",
+          "texto": "Al segmento de red o a la planta del edificio donde está conectado el equipo.",
+          "correcta": false
+        },
+        {
+          "texto": "A la organización, normalmente el fabricante, a la que el IEEE asignó el bloque.",
           "correcta": true
-        },
-        {
-          "texto": "Al número de serie de la tarjeta de red, grabado por el IEEE.",
-          "correcta": false
         }
       ],
-      "pregunta": "En una dirección MAC, los 24 primeros bits (OUI) identifican:",
-      "razonamiento": "El OUI (Organizationally Unique Identifier) lo asigna el IEEE a cada fabricante; los 24 bits restantes los numera el propio fabricante. La MAC no contiene información de VLAN ni de ubicación.",
+      "pregunta": "En una dirección MAC administrada universalmente, los 24 primeros bits (OUI) identifican:",
+      "razonamiento": "El OUI (Organizationally Unique Identifier) lo asigna el IEEE a una organización; los 24 bits restantes los numera ella. Es la asociación clásica de examen (48 bits, OUI de 24), aunque las MAC locales (aleatorias, virtuales) no llevan OUI. La MAC no contiene información de VLAN ni de ubicación.",
       "origen": "T1 §6",
       "dificultad": "Fácil",
       "tipo": "Concepto",
@@ -241,16 +241,16 @@
           "correcta": false
         },
         {
-          "texto": "Entre 46 y 9.000 bytes.",
-          "correcta": false
+          "texto": "Entre 46 y 1.500 bytes.",
+          "correcta": true
         },
         {
           "texto": "Entre 0 y 1.500 bytes.",
           "correcta": false
         },
         {
-          "texto": "Entre 46 y 1.500 bytes.",
-          "correcta": true
+          "texto": "Entre 46 y 9.000 bytes.",
+          "correcta": false
         }
       ],
       "pregunta": "¿Cuál es el tamaño del campo de datos de una trama Ethernet estándar sin etiqueta VLAN?",
@@ -293,11 +293,11 @@
       "id": "BOLSA_RED_T1_011",
       "opciones": [
         {
-          "texto": "Detectar errores en la trama mediante un CRC de 32 bits.",
-          "correcta": true
+          "texto": "Corregir los bits erróneos que llegan al receptor.",
+          "correcta": false
         },
         {
-          "texto": "Corregir los bits erróneos que llegan al receptor.",
+          "texto": "Sincronizar el reloj del receptor antes de los datos.",
           "correcta": false
         },
         {
@@ -305,8 +305,8 @@
           "correcta": false
         },
         {
-          "texto": "Sincronizar el reloj del receptor antes de los datos.",
-          "correcta": false
+          "texto": "Detectar errores en la trama mediante un CRC de 32 bits.",
+          "correcta": true
         }
       ],
       "pregunta": "El campo FCS de la trama Ethernet sirve para:",
@@ -381,12 +381,12 @@
           "correcta": false
         },
         {
-          "texto": "Paso de testigo (token passing).",
-          "correcta": false
-        },
-        {
           "texto": "CSMA/CA, que intenta evitar las colisiones.",
           "correcta": true
+        },
+        {
+          "texto": "Paso de testigo (token passing).",
+          "correcta": false
         },
         {
           "texto": "Acceso por división de tiempo (TDMA) fijo.",
@@ -413,12 +413,12 @@
           "correcta": false
         },
         {
-          "texto": "Un router une en un solo dominio de broadcast todas sus interfaces.",
-          "correcta": false
-        },
-        {
           "texto": "Un switch crea un dominio de colisión por cada puerto.",
           "correcta": true
+        },
+        {
+          "texto": "Un router une en un solo dominio de broadcast todas sus interfaces.",
+          "correcta": false
         }
       ],
       "pregunta": "Respecto a los dominios de colisión y de difusión, es correcto que:",
@@ -437,21 +437,21 @@
           "correcta": false
         },
         {
-          "texto": "Un desajuste de dúplex entre el PC y el puerto del switch.",
-          "correcta": true
+          "texto": "Un servidor DHCP sin direcciones libres en el ámbito de la VLAN.",
+          "correcta": false
         },
         {
           "texto": "Una dirección IP duplicada en la VLAN de usuarios.",
           "correcta": false
         },
         {
-          "texto": "Un servidor DHCP sin direcciones libres en el ámbito de la VLAN.",
-          "correcta": false
+          "texto": "Un desajuste de dúplex entre el PC y el puerto del switch.",
+          "correcta": true
         }
       ],
       "pregunta": "Un PC conectado a un switch funciona, pero muy lento, y el puerto acumula errores CRC y colisiones tardías. La causa más probable es:",
-      "razonamiento": "El duplex mismatch (un extremo en full fijado y el otro autonegociando y cayendo a half) produce exactamente esos síntomas: el enlace funciona, pero con colisiones tardías y errores CRC. Un bucle saturaría toda la red; una IP duplicada o el DHCP agotado impedirían la conectividad, no la ralentizarían.",
-      "origen": "T1 §8",
+      "razonamiento": "En el desajuste de dúplex típico, un extremo está fijado a mano y el otro autonegocia y, por detección paralela, queda en half: el lado half cuenta colisiones tardías y el lado full, errores CRC y runts. El enlace funciona, pero muy lento. Se corrige comprobando velocidad y dúplex en ambos extremos. Un bucle saturaría toda la red; una IP duplicada o el DHCP agotado impedirían la conectividad, no la ralentizarían.",
+      "origen": "T1 §9",
       "dificultad": "Difícil",
       "tipo": "Supuesto",
       "concepto": "Duplex mismatch",
@@ -478,8 +478,8 @@
         }
       ],
       "pregunta": "En 1000BASE-T, la autonegociación de velocidad y dúplex:",
-      "razonamiento": "El estándar 802.3ab hace obligatoria la autonegociación en 1000BASE-T (entre otras cosas, para decidir qué extremo da el reloj maestro). Fijar valores a mano en un solo extremo provoca desajustes.",
-      "origen": "T1 §8",
+      "razonamiento": "El estándar 802.3ab hace obligatoria la autonegociación en 1000BASE-T (entre otras cosas, para decidir qué extremo da el reloj maestro). Fijar valores a mano en un solo extremo provoca desajustes de dúplex.",
+      "origen": "T1 §9",
       "dificultad": "Media",
       "tipo": "Dato",
       "concepto": "Autonegociación",
@@ -489,10 +489,6 @@
       "id": "BOLSA_RED_T1_018",
       "opciones": [
         {
-          "texto": "Que el medio es par trenzado (twisted pair).",
-          "correcta": true
-        },
-        {
           "texto": "Que la transmisión es de tipo trama (frame).",
           "correcta": false
         },
@@ -501,13 +497,17 @@
           "correcta": false
         },
         {
+          "texto": "Que el medio es par trenzado (twisted pair).",
+          "correcta": true
+        },
+        {
           "texto": "Que el cable es de tipo troncal (trunk).",
           "correcta": false
         }
       ],
       "pregunta": "¿Qué significa la «T» en la denominación 1000BASE-T?",
       "razonamiento": "La nomenclatura del IEEE es velocidad + BASE (banda base) + medio. T = twisted pair; S = fibra multimodo de onda corta; L = onda larga (monomodo); E = extended (1550 nm).",
-      "origen": "T1 §9",
+      "origen": "T1 §10",
       "dificultad": "Fácil",
       "tipo": "Dato",
       "concepto": "Nomenclatura",
@@ -535,7 +535,7 @@
       ],
       "pregunta": "1000BASE-T utiliza:",
       "razonamiento": "Gigabit sobre cobre transmite por los cuatro pares a la vez en ambos sentidos. Fast Ethernet (100BASE-TX) usa dos pares. La fibra multimodo a 850 nm es 1000BASE-SX; un solo par hasta 1 km es Single Pair Ethernet (10BASE-T1L).",
-      "origen": "T1 §9",
+      "origen": "T1 §10",
       "dificultad": "Media",
       "tipo": "Dato",
       "concepto": "1000BASE-T",
@@ -563,7 +563,7 @@
       ],
       "pregunta": "Si queremos diseñar un enlace de 10 Gbps, ¿qué medio de transmisión permite la máxima longitud?",
       "razonamiento": "10GBASE-LR sobre monomodo llega a 10 km (y más con ER/ZR). La multimodo se queda en unos 300 m (OM3) o 400 m (OM4) con 10GBASE-SR, y el cobre en 100 m.",
-      "origen": "T1 §9",
+      "origen": "T1 §10",
       "dificultad": "Media",
       "tipo": "Comparación",
       "concepto": "Distancias 10G",
@@ -574,25 +574,25 @@
       "id": "BOLSA_RED_T1_021",
       "opciones": [
         {
-          "texto": "Categoría 5e.",
-          "correcta": false
+          "texto": "Categoría 6A.",
+          "correcta": true
         },
         {
           "texto": "Categoría 6.",
           "correcta": false
         },
         {
-          "texto": "Categoría 3.",
+          "texto": "Categoría 5e.",
           "correcta": false
         },
         {
-          "texto": "Categoría 6A.",
-          "correcta": true
+          "texto": "Categoría 3.",
+          "correcta": false
         }
       ],
       "pregunta": "¿Qué categoría mínima de cable necesita 10GBASE-T para alcanzar 100 metros?",
       "razonamiento": "10GBASE-T llega a 100 m con Cat6A (500 MHz). Con Cat6 solo se garantizan unos 55 m, y Cat5e no está soportada para 10 Gbps.",
-      "origen": "T1 §9",
+      "origen": "T1 §10",
       "dificultad": "Media",
       "tipo": "Dato",
       "concepto": "10GBASE-T",
@@ -602,15 +602,15 @@
       "id": "BOLSA_RED_T1_022",
       "opciones": [
         {
+          "texto": "La descarta y envía un mensaje ICMP de error al equipo de origen.",
+          "correcta": false
+        },
+        {
           "texto": "La reenvía por todos los puertos de la VLAN salvo el de llegada.",
           "correcta": true
         },
         {
           "texto": "La devuelve por el puerto de llegada.",
-          "correcta": false
-        },
-        {
-          "texto": "La descarta y envía un mensaje ICMP de error al equipo de origen.",
           "correcta": false
         },
         {
@@ -620,7 +620,7 @@
       ],
       "pregunta": "¿Qué hace un switch cuando recibe una trama unicast cuya MAC de destino no está en su tabla?",
       "razonamiento": "Ante un destino desconocido el switch inunda (flooding) la trama por todos los puertos de la VLAN menos el de entrada. Cuando el destino responda, aprenderá su MAC y las siguientes tramas irán solo por su puerto.",
-      "origen": "T1 §10",
+      "origen": "T1 §12",
       "dificultad": "Media",
       "tipo": "Concepto",
       "concepto": "Flooding",
@@ -630,8 +630,8 @@
       "id": "BOLSA_RED_T1_023",
       "opciones": [
         {
-          "texto": "La MAC del router de la VLAN.",
-          "correcta": false
+          "texto": "La MAC de origen, asociada al puerto por el que llega.",
+          "correcta": true
         },
         {
           "texto": "La MAC de destino, asociada al puerto por el que debe salir.",
@@ -642,13 +642,13 @@
           "correcta": false
         },
         {
-          "texto": "La MAC de origen, asociada al puerto por el que llega.",
-          "correcta": true
+          "texto": "La MAC del router de la VLAN.",
+          "correcta": false
         }
       ],
       "pregunta": "¿Qué dirección anota un switch en su tabla MAC al recibir una trama?",
       "razonamiento": "El switch aprende de la MAC de origen (y el puerto de llegada) y decide el reenvío consultando la MAC de destino. Las entradas caducan tras un tiempo sin tráfico (típicamente 300 s).",
-      "origen": "T1 §10",
+      "origen": "T1 §12",
       "dificultad": "Media",
       "tipo": "Concepto",
       "concepto": "Aprendizaje MAC",
@@ -658,12 +658,12 @@
       "id": "BOLSA_RED_T1_024",
       "opciones": [
         {
-          "texto": "Reenvía la trama en cuanto lee la MAC de destino.",
-          "correcta": false
-        },
-        {
           "texto": "Recibe la trama completa y comprueba la FCS antes de reenviarla.",
           "correcta": true
+        },
+        {
+          "texto": "Reenvía la trama en cuanto lee la MAC de destino.",
+          "correcta": false
         },
         {
           "texto": "Lee solo los primeros 64 bytes para descartar fragmentos.",
@@ -676,7 +676,7 @@
       ],
       "pregunta": "En el modo de conmutación store-and-forward, el switch:",
       "razonamiento": "Store-and-forward almacena la trama entera y descarta las erróneas, a costa de algo más de latencia. Cut-through reenvía al leer la MAC destino y propaga errores; fragment-free lee 64 bytes.",
-      "origen": "T1 §10",
+      "origen": "T1 §12",
       "dificultad": "Media",
       "tipo": "Comparación",
       "concepto": "Modos de conmutación",
@@ -714,16 +714,16 @@
       "id": "BOLSA_RED_T1_026",
       "opciones": [
         {
-          "texto": "Estrella extendida (jerárquica): switches de planta unidos a un switch principal.",
-          "correcta": true
+          "texto": "Bus, con un cable troncal coaxial compartido por todos los equipos de la planta.",
+          "correcta": false
         },
         {
           "texto": "Anillo doble, para tener redundancia en todos los puestos frente a cortes del cable.",
           "correcta": false
         },
         {
-          "texto": "Bus, con un cable troncal coaxial compartido por todos los equipos de la planta.",
-          "correcta": false
+          "texto": "Estrella extendida (jerárquica): switches de planta unidos a un switch principal.",
+          "correcta": true
         },
         {
           "texto": "Malla completa entre todos los puestos de trabajo.",
@@ -746,16 +746,16 @@
           "correcta": false
         },
         {
-          "texto": "IEEE 802.1Q",
-          "correcta": true
-        },
-        {
           "texto": "IEEE 802.11",
           "correcta": false
         },
         {
           "texto": "IEEE 802.1X",
           "correcta": false
+        },
+        {
+          "texto": "IEEE 802.1Q",
+          "correcta": true
         }
       ],
       "pregunta": "¿Qué norma del IEEE define el etiquetado de VLAN en las tramas Ethernet?",
@@ -770,16 +770,16 @@
       "id": "BOLSA_RED_T1_028",
       "opciones": [
         {
-          "texto": "ITU-T G.984.",
-          "correcta": false
-        },
-        {
           "texto": "IEEE 802.3.",
           "correcta": false
         },
         {
           "texto": "ISO/IEC 11801.",
           "correcta": true
+        },
+        {
+          "texto": "ITU-T G.984.",
+          "correcta": false
         },
         {
           "texto": "RFC 791.",
@@ -802,15 +802,15 @@
           "correcta": false
         },
         {
-          "texto": "Subcapas IP y ARP.",
-          "correcta": false
-        },
-        {
           "texto": "Subcapas LLC y MAC.",
           "correcta": true
         },
         {
           "texto": "Subcapas PHY y PMD.",
+          "correcta": false
+        },
+        {
+          "texto": "Subcapas IP y ARP.",
           "correcta": false
         }
       ],
@@ -826,15 +826,15 @@
       "id": "BOLSA_RED_T1_030",
       "opciones": [
         {
-          "texto": "Tracert.",
-          "correcta": false
-        },
-        {
           "texto": "iPerf.",
           "correcta": true
         },
         {
           "texto": "Nslookup.",
+          "correcta": false
+        },
+        {
+          "texto": "Tracert.",
           "correcta": false
         },
         {
@@ -844,10 +844,206 @@
       ],
       "pregunta": "La herramienta que permite medir el caudal real (throughput) entre dos equipos de la red es:",
       "razonamiento": "iPerf genera tráfico entre un cliente y un servidor y mide el caudal, el jitter y las pérdidas. Tracert muestra la ruta; nslookup consulta el DNS; arp muestra la tabla IP–MAC.",
-      "origen": "T1 §11",
+      "origen": "T1 §13",
       "dificultad": "Media",
       "tipo": "Herramienta",
       "concepto": "iPerf",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T1_031",
+      "opciones": [
+        {
+          "texto": "Transmitir a 2 Gb/s en un sentido cuando el otro está libre.",
+          "correcta": false
+        },
+        {
+          "texto": "Transmitir a 1 Gb/s y recibir a 1 Gb/s al mismo tiempo.",
+          "correcta": true
+        },
+        {
+          "texto": "Repartir 1 Gb/s entre los dos sentidos según la carga.",
+          "correcta": false
+        },
+        {
+          "texto": "Transmitir y recibir a 1 Gb/s, pero por turnos alternos.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Un enlace Ethernet de 1 Gb/s que trabaja en full-duplex permite:",
+      "razonamiento": "Full-duplex significa transmitir y recibir simultáneamente, cada sentido a la velocidad nominal. No «duplica la velocidad»: ningún sentido supera 1 Gb/s. Los turnos alternos son el half-duplex.",
+      "origen": "T1 §9",
+      "dificultad": "Media",
+      "tipo": "Trampa",
+      "concepto": "Full-duplex",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T1_032",
+      "opciones": [
+        {
+          "texto": "Que es una dirección de grupo (multicast) y no de una sola interfaz.",
+          "correcta": false
+        },
+        {
+          "texto": "Que el IEEE ha asignado el OUI 02:5A:3C a su fabricante.",
+          "correcta": false
+        },
+        {
+          "texto": "Que es una dirección administrada localmente, no la grabada de fábrica.",
+          "correcta": true
+        },
+        {
+          "texto": "Que es la dirección de broadcast de la VLAN de usuarios.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Un portátil aparece en la red con la MAC 02:5A:3C:11:22:33. ¿Qué indica su primer byte (02)?",
+      "razonamiento": "0x02 = 00000010: el bit I/G (el menos significativo) vale 0, así que es unicast; el bit U/L vale 1, así que es local. Es lo típico de las MAC aleatorias (privadas) y de muchas virtuales. El broadcast es FF:FF:FF:FF:FF:FF.",
+      "origen": "T1 §6",
+      "dificultad": "Difícil",
+      "tipo": "Aplicación",
+      "concepto": "MAC local",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T1_033",
+      "opciones": [
+        {
+          "texto": "100 Mb/s full-duplex, igual que la tarjeta del PC.",
+          "correcta": false
+        },
+        {
+          "texto": "10 Mb/s half-duplex, como modo de seguridad.",
+          "correcta": false
+        },
+        {
+          "texto": "1000 Mb/s full-duplex, la velocidad máxima del puerto.",
+          "correcta": false
+        },
+        {
+          "texto": "100 Mb/s half-duplex, por detección paralela.",
+          "correcta": true
+        }
+      ],
+      "pregunta": "El puerto de un switch está en autonegociación y la tarjeta del PC está fijada a mano en 100 Mb/s full-duplex. Lo esperable es que el puerto quede en:",
+      "razonamiento": "Con detección paralela el puerto deduce la velocidad a partir de la señal, pero no puede conocer el dúplex y asume half-duplex. Resultado: desajuste de dúplex. Lo correcto es autonegociar en ambos extremos o fijar los dos igual.",
+      "origen": "T1 §9",
+      "dificultad": "Difícil",
+      "tipo": "Supuesto",
+      "concepto": "Detección paralela",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T1_034",
+      "opciones": [
+        {
+          "texto": "Fallos de autenticación 802.1X en el puerto.",
+          "correcta": false
+        },
+        {
+          "texto": "Tramas gigantes (giants) por exceso de tamaño.",
+          "correcta": false
+        },
+        {
+          "texto": "Colisiones tardías (late collisions).",
+          "correcta": true
+        },
+        {
+          "texto": "Caídas intermitentes del enlace (link flaps).",
+          "correcta": false
+        }
+      ],
+      "pregunta": "En un desajuste de dúplex, el extremo que ha quedado en half-duplex registra sobre todo:",
+      "razonamiento": "El extremo en half-duplex recibe mientras transmite y lo interpreta como colisión, a menudo tardía. El extremo en full-duplex ve, en cambio, errores CRC y runts. El enlace no cae: va lento.",
+      "origen": "T1 §9",
+      "dificultad": "Difícil",
+      "tipo": "Aplicación",
+      "concepto": "Contadores del puerto",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T1_035",
+      "opciones": [
+        {
+          "texto": "Cualquier variante de Ethernet sobre cobre está limitada a 100 metros.",
+          "correcta": false
+        },
+        {
+          "texto": "10GBASE-T alcanza 100 m con cualquier cable de categoría 5e o superior.",
+          "correcta": false
+        },
+        {
+          "texto": "El par trenzado BASE-T se diseña con 100 m, pero 10BASE-T1L llega a 1.000 m.",
+          "correcta": true
+        },
+        {
+          "texto": "El cobre llega siempre más lejos que la multimodo a la misma velocidad.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Sobre la distancia máxima del cobre en Ethernet, es correcto que:",
+      "razonamiento": "100 m es la regla práctica del canal de par trenzado BASE-T, no un límite absoluto del cobre: Single Pair Ethernet (10BASE-T1L) alcanza 1.000 m a 10 Mb/s. 10GBASE-T necesita Cat6A para 100 m (Cat6, unos 55 m).",
+      "origen": "T1 §10",
+      "dificultad": "Difícil",
+      "tipo": "Trampa",
+      "concepto": "Distancias en cobre",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T1_036",
+      "opciones": [
+        {
+          "texto": "Empieza a reenviar al leer la MAC de destino, aunque la trama traiga errores.",
+          "correcta": true
+        },
+        {
+          "texto": "Comprueba la FCS de cada trama antes de reenviarla por el puerto de salida.",
+          "correcta": false
+        },
+        {
+          "texto": "Espera a recibir 1.518 bytes antes de decidir el puerto de salida.",
+          "correcta": false
+        },
+        {
+          "texto": "Inunda todas las tramas por todos los puertos para reducir la latencia.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Un switch que conmuta en modo cut-through:",
+      "razonamiento": "Cut-through gana latencia porque no espera a la trama completa, pero por eso no puede comprobar la FCS y propaga tramas erróneas. Comprobar la FCS antes de reenviar es store-and-forward.",
+      "origen": "T1 §12",
+      "dificultad": "Media",
+      "tipo": "Comparación",
+      "concepto": "Cut-through",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T1_037",
+      "opciones": [
+        {
+          "texto": "La latencia.",
+          "correcta": false
+        },
+        {
+          "texto": "El ancho de banda.",
+          "correcta": false
+        },
+        {
+          "texto": "El caudal.",
+          "correcta": false
+        },
+        {
+          "texto": "El jitter.",
+          "correcta": true
+        }
+      ],
+      "pregunta": "En una llamada de voz IP, el parámetro que mide la variación del retardo entre paquetes es:",
+      "razonamiento": "El jitter es la variación de la latencia; si es alto, la voz se entrecorta. La latencia es el retardo en sí, el ancho de banda la capacidad y el caudal lo que realmente se transfiere.",
+      "origen": "T1 §13",
+      "dificultad": "Fácil",
+      "tipo": "Definición",
+      "concepto": "Jitter",
       "prioridad": "Media"
     }
   ]
