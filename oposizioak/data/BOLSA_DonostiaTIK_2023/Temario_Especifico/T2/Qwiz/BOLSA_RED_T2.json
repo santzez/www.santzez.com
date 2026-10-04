@@ -1,0 +1,824 @@
+{
+  "id": "BOLSA_RED_T2",
+  "opeNombre": "Bolsa DonostiaTIK 2023 — Técnico/a de apoyo: Instalaciones y Comunicaciones",
+  "titulo": "T2 · Protocolos de comunicación TCP/IP. Direccionamiento IPv4 e IPv6. Conceptos generales.",
+  "descripcion": "29 preguntas tipo test con explicación, elaboradas a partir de los apuntes del tema.",
+  "fuente": "Elaboración propia a partir de los apuntes del tema (octubre de 2026). Las marcadas como «examen 2023» reproducen preguntas del examen real del 23/09/2023 con la plantilla oficial.",
+  "preguntas": [
+    {
+      "id": "BOLSA_RED_T2_001",
+      "opciones": [
+        {
+          "texto": "213.114.93.63",
+          "correcta": true
+        },
+        {
+          "texto": "213.114.93.127",
+          "correcta": false
+        },
+        {
+          "texto": "213.114.93.31",
+          "correcta": false
+        },
+        {
+          "texto": "213.114.93.255",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Dada la dirección de red 213.114.93.0 con máscara 255.255.255.192, indique cuál es su dirección de broadcast:",
+      "razonamiento": "Máscara .192 = /26: el salto es 256 − 192 = 64. La subred que empieza en .0 termina en .63, que es su broadcast (hosts .1 a .62). .127 sería el broadcast de la siguiente /26, .31 el de una /27 y .255 el de una /24.",
+      "origen": "T2 §6",
+      "dificultad": "Media",
+      "tipo": "Cálculo",
+      "concepto": "Broadcast",
+      "examen2023": "Test 2023, pregunta 5",
+      "prioridad": "Alta"
+    },
+    {
+      "id": "BOLSA_RED_T2_002",
+      "opciones": [
+        {
+          "texto": "ARP",
+          "correcta": true
+        },
+        {
+          "texto": "NTP",
+          "correcta": false
+        },
+        {
+          "texto": "ICMP",
+          "correcta": false
+        },
+        {
+          "texto": "DHCP",
+          "correcta": false
+        }
+      ],
+      "pregunta": "¿Qué protocolo de red permite obtener la dirección de capa 2 (MAC) a partir de la dirección de capa 3 (IP)?",
+      "razonamiento": "ARP pregunta en broadcast «¿quién tiene esta IP?» y el dueño responde con su MAC. NTP sincroniza la hora, ICMP transporta mensajes de control (ping) y DHCP asigna la configuración IP.",
+      "origen": "T2 §3",
+      "dificultad": "Fácil",
+      "tipo": "Concepto",
+      "concepto": "ARP",
+      "examen2023": "Test 2023, pregunta 7",
+      "prioridad": "Alta"
+    },
+    {
+      "id": "BOLSA_RED_T2_003",
+      "opciones": [
+        {
+          "texto": "25",
+          "correcta": false
+        },
+        {
+          "texto": "22",
+          "correcta": true
+        },
+        {
+          "texto": "110",
+          "correcta": false
+        },
+        {
+          "texto": "80",
+          "correcta": false
+        }
+      ],
+      "pregunta": "En caso de necesitar configurar remotamente un switch mediante SSH, ¿qué puerto se usa habitualmente?",
+      "razonamiento": "SSH usa el puerto TCP 22. El 25 es SMTP, el 110 POP3 y el 80 HTTP (gestión web sin cifrar, desaconsejada).",
+      "origen": "T2 §4",
+      "dificultad": "Fácil",
+      "tipo": "Dato",
+      "concepto": "Puertos",
+      "examen2023": "Test 2023, pregunta 8",
+      "prioridad": "Alta"
+    },
+    {
+      "id": "BOLSA_RED_T2_004",
+      "opciones": [
+        {
+          "texto": "16",
+          "correcta": false
+        },
+        {
+          "texto": "30",
+          "correcta": false
+        },
+        {
+          "texto": "14",
+          "correcta": true
+        },
+        {
+          "texto": "6",
+          "correcta": false
+        }
+      ],
+      "pregunta": "¿Cuántos hosts utilizables tiene una subred con máscara 255.255.255.240?",
+      "razonamiento": "255.255.255.240 = /28: quedan 4 bits de host, 2⁴ = 16 direcciones, menos la de red y la de broadcast = 14 hosts. 30 son los de una /27 y 6 los de una /29.",
+      "origen": "T2 §5",
+      "dificultad": "Media",
+      "tipo": "Cálculo",
+      "concepto": "Hosts por subred",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_005",
+      "opciones": [
+        {
+          "texto": "10.42.96.255",
+          "correcta": false
+        },
+        {
+          "texto": "10.42.127.255",
+          "correcta": false
+        },
+        {
+          "texto": "10.42.255.255",
+          "correcta": false
+        },
+        {
+          "texto": "10.42.111.255",
+          "correcta": true
+        }
+      ],
+      "pregunta": "La subred de telefonía 10.42.96.0 con máscara 255.255.240.0 tiene como dirección de broadcast:",
+      "razonamiento": "/20: el octeto interesante es el tercero y el salto, 256 − 240 = 16. La subred va de 10.42.96.0 a 10.42.111.255 (la siguiente empieza en 10.42.112.0).",
+      "origen": "T2 §6",
+      "dificultad": "Difícil",
+      "tipo": "Cálculo",
+      "concepto": "Subredes del caso 2023",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_006",
+      "opciones": [
+        {
+          "texto": "10.0.0.0/8",
+          "correcta": false
+        },
+        {
+          "texto": "172.32.0.0/16",
+          "correcta": true
+        },
+        {
+          "texto": "172.16.0.0/12",
+          "correcta": false
+        },
+        {
+          "texto": "192.168.0.0/16",
+          "correcta": false
+        }
+      ],
+      "pregunta": "¿Cuál de estos rangos NO es de direcciones IPv4 privadas (RFC 1918)?",
+      "razonamiento": "El bloque privado de clase B es 172.16.0.0/12, que llega hasta 172.31.255.255. 172.32.x.x ya es espacio público.",
+      "origen": "T2 §5",
+      "dificultad": "Media",
+      "tipo": "Trampa",
+      "concepto": "Direcciones privadas",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_007",
+      "opciones": [
+        {
+          "texto": "Está conectado a la VLAN de telefonía.",
+          "correcta": false
+        },
+        {
+          "texto": "Ha recibido una IP pública del operador.",
+          "correcta": false
+        },
+        {
+          "texto": "No ha obtenido respuesta de ningún servidor DHCP.",
+          "correcta": true
+        },
+        {
+          "texto": "Tiene configurada una IP estática duplicada.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Un PC configurado por DHCP muestra la dirección 169.254.12.40. Esto indica que:",
+      "razonamiento": "169.254.0.0/16 es APIPA (link-local): el sistema se la autoasigna cuando el DHCP no responde. Es una pista típica de fallo de cable, de VLAN mal configurada en el puerto o de servidor DHCP caído.",
+      "origen": "T2 §5",
+      "dificultad": "Fácil",
+      "tipo": "Diagnóstico",
+      "concepto": "APIPA",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_008",
+      "opciones": [
+        {
+          "texto": "ACK, SYN, SYN-ACK.",
+          "correcta": false
+        },
+        {
+          "texto": "SYN, SYN-ACK, ACK.",
+          "correcta": true
+        },
+        {
+          "texto": "SYN, ACK, FIN.",
+          "correcta": false
+        },
+        {
+          "texto": "REQUEST, OFFER, ACK.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "El establecimiento de una conexión TCP sigue la secuencia:",
+      "razonamiento": "Three-way handshake: el cliente envía SYN, el servidor responde SYN-ACK y el cliente confirma con ACK. Discover-Offer-Request-Ack es el proceso de DHCP.",
+      "origen": "T2 §4",
+      "dificultad": "Fácil",
+      "tipo": "Proceso",
+      "concepto": "Three-way handshake",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_009",
+      "opciones": [
+        {
+          "texto": "TCP, porque garantiza que no se pierda ningún paquete.",
+          "correcta": false
+        },
+        {
+          "texto": "UDP, porque prima la baja latencia sobre la retransmisión.",
+          "correcta": true
+        },
+        {
+          "texto": "ICMP, porque no necesita puertos.",
+          "correcta": false
+        },
+        {
+          "texto": "SCTP, porque es obligatorio en telefonía.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "¿Qué protocolo de transporte utiliza normalmente la voz sobre IP (RTP)?",
+      "razonamiento": "En voz un paquete retransmitido llegaría tarde y no sirve: interesa más la latencia baja que la fiabilidad. Por eso RTP va sobre UDP. La señalización SIP puede ir por UDP o TCP.",
+      "origen": "T2 §4",
+      "dificultad": "Media",
+      "tipo": "Aplicación",
+      "concepto": "UDP",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_010",
+      "opciones": [
+        {
+          "texto": "Los mensajes ARP que envía cada router del camino.",
+          "correcta": false
+        },
+        {
+          "texto": "Los mensajes ICMP «Time Exceeded» que generan los routers al agotarse el TTL.",
+          "correcta": true
+        },
+        {
+          "texto": "La tabla de rutas que le devuelve el servidor DNS.",
+          "correcta": false
+        },
+        {
+          "texto": "Las respuestas DHCP de cada segmento atravesado.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "El comando traceroute (tracert) descubre la ruta hacia un destino gracias a:",
+      "razonamiento": "Tracert envía paquetes con TTL 1, 2, 3…; cada router que decrementa el TTL a 0 descarta el paquete y responde con ICMP Time Exceeded, revelando su dirección.",
+      "origen": "T2 §3",
+      "dificultad": "Media",
+      "tipo": "Herramienta",
+      "concepto": "Traceroute",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_011",
+      "opciones": [
+        {
+          "texto": "Utiliza el puerto UDP 7 para los mensajes de eco.",
+          "correcta": false
+        },
+        {
+          "texto": "Va directamente sobre IP y no utiliza puertos.",
+          "correcta": true
+        },
+        {
+          "texto": "Es un protocolo de la capa de transporte, como TCP.",
+          "correcta": false
+        },
+        {
+          "texto": "Solo existe en IPv4; IPv6 no lo utiliza.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Sobre el protocolo ICMP es correcto afirmar que:",
+      "razonamiento": "ICMP es el protocolo IP número 1 y no usa puertos. IPv6 tiene su propia versión, ICMPv6, que además sustenta NDP.",
+      "origen": "T2 §3",
+      "dificultad": "Media",
+      "tipo": "Trampa",
+      "concepto": "ICMP",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_012",
+      "opciones": [
+        {
+          "texto": "La puerta de enlace no está configurada.",
+          "correcta": false
+        },
+        {
+          "texto": "El cable de red está dañado.",
+          "correcta": false
+        },
+        {
+          "texto": "Falla la resolución DNS.",
+          "correcta": true
+        },
+        {
+          "texto": "El equipo tiene una dirección APIPA.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Un equipo puede hacer ping a 8.8.8.8, pero no a www.donostia.eus. ¿Qué es lo más probable?",
+      "razonamiento": "Si llega a una IP externa, la red, la puerta de enlace y el routing funcionan. Lo que falla es traducir el nombre a IP: DNS mal configurado o inaccesible.",
+      "origen": "T2 §10",
+      "dificultad": "Media",
+      "tipo": "Diagnóstico",
+      "concepto": "DNS",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_013",
+      "opciones": [
+        {
+          "texto": "NAT estático 1:1.",
+          "correcta": false
+        },
+        {
+          "texto": "NAT dinámico con un pool de direcciones.",
+          "correcta": false
+        },
+        {
+          "texto": "PAT (NAT con sobrecarga o masquerade).",
+          "correcta": true
+        },
+        {
+          "texto": "Port forwarding.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "¿Qué tipo de NAT permite que todos los equipos de una LAN salgan a Internet con una única IP pública?",
+      "razonamiento": "PAT traduce muchas IP privadas a una sola pública distinguiendo cada conexión por el puerto de origen. El NAT estático publica un servidor; el port forwarding redirige un puerto entrante a un equipo interno.",
+      "origen": "T2 §8",
+      "dificultad": "Media",
+      "tipo": "Concepto",
+      "concepto": "PAT",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_014",
+      "opciones": [
+        {
+          "texto": "PAT de salida en el router.",
+          "correcta": false
+        },
+        {
+          "texto": "Una reserva DHCP para el equipo.",
+          "correcta": false
+        },
+        {
+          "texto": "Port forwarding (traducción de puerto) en el cortafuegos.",
+          "correcta": true
+        },
+        {
+          "texto": "Una ruta estática hacia la red privada.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Una empresa externa necesita acceder desde Internet a un equipo interno solo por un puerto concreto. Sin VPN, la técnica sería:",
+      "razonamiento": "El port forwarding (DNAT) asocia un puerto de la IP pública a la IP y el puerto internos. Es la alternativa a la VPN que aparecía en el caso de 2023 (acceso del mantenedor del PLC), siempre coordinada con Sistemas y restringida por origen.",
+      "origen": "T2 §8",
+      "dificultad": "Media",
+      "tipo": "Aplicación",
+      "concepto": "Port forwarding",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_015",
+      "opciones": [
+        {
+          "texto": "128",
+          "correcta": true
+        },
+        {
+          "texto": "48",
+          "correcta": false
+        },
+        {
+          "texto": "64",
+          "correcta": false
+        },
+        {
+          "texto": "32",
+          "correcta": false
+        }
+      ],
+      "pregunta": "¿Cuántos bits tiene una dirección IPv6?",
+      "razonamiento": "IPv6 usa 128 bits. 32 son IPv4, 48 una MAC y 64 el identificador de interfaz típico de una red IPv6 /64.",
+      "origen": "T2 §9",
+      "dificultad": "Fácil",
+      "tipo": "Dato",
+      "concepto": "IPv6",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_016",
+      "opciones": [
+        {
+          "texto": "2001:db8:::1",
+          "correcta": false
+        },
+        {
+          "texto": "2001:db8:0:0:1",
+          "correcta": false
+        },
+        {
+          "texto": "2001::db8::1",
+          "correcta": false
+        },
+        {
+          "texto": "2001:db8::1",
+          "correcta": true
+        }
+      ],
+      "pregunta": "¿Cuál es una forma abreviada correcta de 2001:0db8:0000:0000:0000:0000:0000:0001?",
+      "razonamiento": "Se quitan los ceros a la izquierda de cada grupo y una única secuencia de grupos a cero se sustituye por «::». No se puede usar «::» dos veces ni omitir grupos sin «::».",
+      "origen": "T2 §9",
+      "dificultad": "Media",
+      "tipo": "Notación",
+      "concepto": "Abreviatura IPv6",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_017",
+      "opciones": [
+        {
+          "texto": "NDP (Neighbor Discovery Protocol), sobre ICMPv6.",
+          "correcta": true
+        },
+        {
+          "texto": "DHCPv6.",
+          "correcta": false
+        },
+        {
+          "texto": "SLAAC.",
+          "correcta": false
+        },
+        {
+          "texto": "El broadcast de la subred.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "En IPv6, la función de ARP la realiza:",
+      "razonamiento": "NDP resuelve las MAC de los vecinos y descubre los routers mediante mensajes ICMPv6. SLAAC es la autoconfiguración de direcciones. IPv6 no tiene broadcast.",
+      "origen": "T2 §9",
+      "dificultad": "Media",
+      "tipo": "Concepto",
+      "concepto": "NDP",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_018",
+      "opciones": [
+        {
+          "texto": "FE80::/10",
+          "correcta": true
+        },
+        {
+          "texto": "FF00::/8",
+          "correcta": false
+        },
+        {
+          "texto": "FC00::/7",
+          "correcta": false
+        },
+        {
+          "texto": "2001::/16",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Las direcciones IPv6 link-local empiezan por:",
+      "razonamiento": "FE80::/10 = link-local (todas las interfaces IPv6 tienen una). FF00::/8 es multicast, FC00::/7 las únicas locales (ULA, equivalente a privadas) y las globales empiezan por 2 o 3 (2000::/3).",
+      "origen": "T2 §9",
+      "dificultad": "Media",
+      "tipo": "Dato",
+      "concepto": "Tipos IPv6",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_019",
+      "opciones": [
+        {
+          "texto": "Mantiene el broadcast para descubrir equipos de la subred.",
+          "correcta": false
+        },
+        {
+          "texto": "Necesita NAT para salir a Internet, igual que IPv4.",
+          "correcta": false
+        },
+        {
+          "texto": "Su cabecera es variable e incluye checksum, como la de IPv4.",
+          "correcta": false
+        },
+        {
+          "texto": "No tiene broadcast: utiliza multicast en su lugar.",
+          "correcta": true
+        }
+      ],
+      "pregunta": "¿Cuál de estas afirmaciones sobre IPv6 es correcta?",
+      "razonamiento": "IPv6 elimina el broadcast (usa multicast, por ejemplo FF02::1), no necesita NAT porque sobran direcciones y tiene una cabecera fija de 40 bytes sin checksum.",
+      "origen": "T2 §9",
+      "dificultad": "Media",
+      "tipo": "Comparación",
+      "concepto": "IPv4 vs IPv6",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_020",
+      "opciones": [
+        {
+          "texto": "NAT64.",
+          "correcta": false
+        },
+        {
+          "texto": "Teredo.",
+          "correcta": false
+        },
+        {
+          "texto": "Doble pila (dual stack).",
+          "correcta": true
+        },
+        {
+          "texto": "6to4.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "El mecanismo de transición en el que un equipo tiene a la vez direcciones IPv4 e IPv6 se llama:",
+      "razonamiento": "Con doble pila el equipo habla ambos protocolos y usa el que soporte el destino. Teredo y 6to4 son túneles; NAT64 traduce entre ambos protocolos.",
+      "origen": "T2 §9",
+      "dificultad": "Fácil",
+      "tipo": "Concepto",
+      "concepto": "Transición",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_021",
+      "opciones": [
+        {
+          "texto": "Genere su propia dirección a partir del prefijo anunciado por el router.",
+          "correcta": true
+        },
+        {
+          "texto": "Obtenga su dirección de un servidor DHCPv6 con estado.",
+          "correcta": false
+        },
+        {
+          "texto": "Traduzca su dirección IPv6 a IPv4 para navegar.",
+          "correcta": false
+        },
+        {
+          "texto": "Resuelva la MAC de su puerta de enlace por ARP.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "SLAAC permite que un equipo IPv6:",
+      "razonamiento": "Con SLAAC el router anuncia el prefijo (Router Advertisement) y el equipo completa el identificador de interfaz (EUI-64 o aleatorio). No hace falta servidor.",
+      "origen": "T2 §9",
+      "dificultad": "Media",
+      "tipo": "Concepto",
+      "concepto": "SLAAC",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_022",
+      "opciones": [
+        {
+          "texto": "SYN, SYN-ACK, ACK, FIN.",
+          "correcta": false
+        },
+        {
+          "texto": "Request, Offer, Discover, Ack.",
+          "correcta": false
+        },
+        {
+          "texto": "Hello, Offer, Accept, Bind.",
+          "correcta": false
+        },
+        {
+          "texto": "Discover, Offer, Request, Ack.",
+          "correcta": true
+        }
+      ],
+      "pregunta": "Las cuatro fases del proceso DHCP son:",
+      "razonamiento": "DORA: el cliente busca en broadcast (Discover), los servidores ofrecen (Offer), el cliente pide una oferta (Request) y el servidor confirma (Ack).",
+      "origen": "T2 §7",
+      "dificultad": "Fácil",
+      "tipo": "Proceso",
+      "concepto": "DHCP",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_023",
+      "opciones": [
+        {
+          "texto": "Configurar un DHCP relay (ip helper-address) en la interfaz de capa 3 de esa VLAN.",
+          "correcta": true
+        },
+        {
+          "texto": "Instalar un servidor DHCP en cada switch de acceso.",
+          "correcta": false
+        },
+        {
+          "texto": "Asignar IP estáticas a todos los equipos de la VLAN.",
+          "correcta": false
+        },
+        {
+          "texto": "Habilitar el broadcast entre todas las VLAN del switch.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Para que los equipos de una VLAN obtengan IP de un servidor DHCP situado en otra subred hay que:",
+      "razonamiento": "El DHCP Discover es un broadcast y no atraviesa routers. El relay de la interfaz de capa 3 (switch principal o cortafuegos) lo reenvía en unicast al servidor central.",
+      "origen": "T2 §7",
+      "dificultad": "Media",
+      "tipo": "Aplicación",
+      "concepto": "DHCP relay",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_024",
+      "opciones": [
+        {
+          "texto": "TCP 80.",
+          "correcta": false
+        },
+        {
+          "texto": "TCP 443.",
+          "correcta": true
+        },
+        {
+          "texto": "UDP 443.",
+          "correcta": false
+        },
+        {
+          "texto": "TCP 8080.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "¿Qué puerto y protocolo utiliza HTTPS por defecto?",
+      "razonamiento": "HTTPS = HTTP sobre TLS en TCP 443 (HTTP/3 usa QUIC sobre UDP 443, pero el puerto por defecto clásico es TCP 443). El 80 es HTTP sin cifrar y el 8080 un puerto alternativo habitual de proxys.",
+      "origen": "T2 §4",
+      "dificultad": "Fácil",
+      "tipo": "Dato",
+      "concepto": "Puertos",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_025",
+      "opciones": [
+        {
+          "texto": "SNMP.",
+          "correcta": true
+        },
+        {
+          "texto": "SMTP.",
+          "correcta": false
+        },
+        {
+          "texto": "HTTPS.",
+          "correcta": false
+        },
+        {
+          "texto": "SSH.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "¿Cuál de estos servicios usa UDP como transporte principal?",
+      "razonamiento": "SNMP usa UDP 161 (consultas) y 162 (traps). SSH (22), SMTP (25) y HTTPS (443) usan TCP.",
+      "origen": "T2 §4",
+      "dificultad": "Media",
+      "tipo": "Dato",
+      "concepto": "UDP",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_026",
+      "opciones": [
+        {
+          "texto": "Medir el tiempo de respuesta del destino en milisegundos.",
+          "correcta": false
+        },
+        {
+          "texto": "Indicar la prioridad del paquete para la calidad de servicio.",
+          "correcta": false
+        },
+        {
+          "texto": "Señalar el protocolo de transporte transportado.",
+          "correcta": false
+        },
+        {
+          "texto": "Evitar que un paquete circule indefinidamente si hay un bucle de enrutamiento.",
+          "correcta": true
+        }
+      ],
+      "pregunta": "La función del campo TTL en la cabecera IPv4 es:",
+      "razonamiento": "Cada router resta 1 al TTL; si llega a 0 descarta el paquete y avisa con ICMP Time Exceeded. La prioridad la marca el campo DSCP y el protocolo, el campo Protocolo.",
+      "origen": "T2 §2",
+      "dificultad": "Media",
+      "tipo": "Concepto",
+      "concepto": "TTL",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_027",
+      "opciones": [
+        {
+          "texto": "192.168.0.0/16",
+          "correcta": false
+        },
+        {
+          "texto": "192.168.0.0/23",
+          "correcta": true
+        },
+        {
+          "texto": "192.168.0.0/22",
+          "correcta": false
+        },
+        {
+          "texto": "192.168.1.0/23",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Las redes 192.168.0.0/24 y 192.168.1.0/24 pueden resumirse en una sola ruta como:",
+      "razonamiento": "Dos /24 contiguas que empiezan en un múltiplo de 2 en el tercer octeto forman un /23 (255.255.254.0). /22 abarcaría cuatro /24 y 192.168.1.0/23 no es una dirección de red válida.",
+      "origen": "T2 §6",
+      "dificultad": "Difícil",
+      "tipo": "Cálculo",
+      "concepto": "Sumarización",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_028",
+      "opciones": [
+        {
+          "texto": "CIDR inverso.",
+          "correcta": false
+        },
+        {
+          "texto": "NAT dinámico.",
+          "correcta": false
+        },
+        {
+          "texto": "Superredes.",
+          "correcta": false
+        },
+        {
+          "texto": "VLSM.",
+          "correcta": true
+        }
+      ],
+      "pregunta": "La técnica de usar máscaras de distinta longitud según el tamaño de cada subred se llama:",
+      "razonamiento": "VLSM (Variable Length Subnet Mask): por ejemplo, /30 para enlaces entre routers, /28 para dispositivos y /24 para usuarios. La sumarización (superred) agrupa redes contiguas.",
+      "origen": "T2 §6",
+      "dificultad": "Media",
+      "tipo": "Concepto",
+      "concepto": "VLSM",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_029",
+      "opciones": [
+        {
+          "texto": "Comunicarse solo con los equipos de su misma subred.",
+          "correcta": true
+        },
+        {
+          "texto": "Navegar por Internet, pero no resolver nombres.",
+          "correcta": false
+        },
+        {
+          "texto": "Comunicarse con todas las VLAN del edificio, pero no con Internet.",
+          "correcta": false
+        },
+        {
+          "texto": "No comunicarse con ningún equipo, ni siquiera de su subred.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Si un equipo tiene bien configuradas su IP y su máscara, pero no la puerta de enlace, podrá:",
+      "razonamiento": "Sin puerta de enlace el equipo no sabe a quién entregar los paquetes para otras redes: solo alcanza su propia subred (resuelve los vecinos por ARP).",
+      "origen": "T2 §7",
+      "dificultad": "Media",
+      "tipo": "Diagnóstico",
+      "concepto": "Puerta de enlace",
+      "prioridad": "Media"
+    }
+  ]
+}

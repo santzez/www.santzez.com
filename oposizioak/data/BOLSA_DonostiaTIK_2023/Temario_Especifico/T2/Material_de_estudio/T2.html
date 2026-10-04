@@ -1,0 +1,978 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T2</div>
+    <h1 class="tema-cabecera__titulo">Protocolos de comunicación TCP/IP. Direccionamiento IPv4 e IPv6. Conceptos generales.</h1>
+    <div class="tema-cabecera__meta">Bloque 1 · Redes, comunicaciones, internet · Bolsa DonostiaTIK 2023 · Instalaciones y Comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-el-modelo-tcp-ip">1. El modelo TCP/IP</a></li>
+<li><a href="#2-el-protocolo-ip">2. El protocolo IP</a></li>
+<li><a href="#3-icmp-y-arp">3. ICMP y ARP</a></li>
+<li><a href="#4-tcp-y-udp">4. TCP y UDP</a></li>
+<li><a href="#5-direccionamiento-ipv4">5. Direccionamiento IPv4</a></li>
+<li><a href="#6-calculo-de-subredes-paso-a-paso">6. Cálculo de subredes paso a paso</a></li>
+<li><a href="#7-asignacion-de-direcciones-estatica-y-dhcp">7. Asignación de direcciones: estática y DHCP</a></li>
+<li><a href="#8-nat">8. NAT</a></li>
+<li><a href="#9-ipv6">9. IPv6</a></li>
+<li><a href="#10-comandos-de-diagnostico-ip">10. Comandos de diagnóstico IP</a></li>
+<li><a href="#11-lo-que-cayo-en-el-examen-de-2023">11. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#12-anclas-de-memoria">12. Anclas de memoria</a></li>
+<li><a href="#13-no-confundir">13. No confundir</a></li>
+<li><a href="#14-posibles-trampas-de-examen">14. Posibles trampas de examen</a></li>
+<li><a href="#15-posibles-preguntas-tipo-test">15. Posibles preguntas tipo test</a></li>
+<li><a href="#16-posibles-preguntas-cortas-con-esquema-de-respuesta">16. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#17-supuesto-practico">17. Supuesto práctico</a></li>
+<li><a href="#18-matriz-de-memorizacion">18. Matriz de memorización</a></li>
+<li><a href="#19-resumen-final-si-manana-fuera-el-examen">19. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#20-actualidad-datos-fechados">20. Actualidad — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — fronteras del tema</strong><br>Este tema trata la <strong>pila TCP/IP</strong> (IP, ICMP, ARP, TCP, UDP), el <strong>direccionamiento IPv4</strong> (clases, privadas, máscaras, subredes, NAT) y el <strong>direccionamiento IPv6</strong>.<br><strong>T1</strong> → Ethernet y direcciones MAC. <strong>T4</strong> → routing y configuración de interfaces en routers y switches. <strong>T10</strong> → servicios de aplicación (DNS, DHCP en detalle, correo, web). <strong>T14</strong> → NAT desde el punto de vista del cortafuegos.</th>
+</tr>
+</table></div>
+<h2 id="1-el-modelo-tcp-ip" class="tema-h2">1. El modelo TCP/IP</h2>
+<p><strong>TCP/IP</strong> es la familia de protocolos de Internet, desarrollada para ARPANET en los años 70 y normalizada por el <strong>IETF</strong> mediante documentos <strong>RFC</strong>. Se organiza en <strong>4 capas</strong> (algunos autores separan la física y hablan de 5):</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Capa TCP/IP</th>
+<th>Equivale en OSI</th>
+<th>Protocolos</th>
+<th>Unidad de datos</th>
+<th>Dirección</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Aplicación</strong></td>
+<td>5, 6 y 7</td>
+<td>HTTP/S, DNS, DHCP, SMTP, IMAP, SSH, FTP, SNMP, SIP</td>
+<td>Datos / mensaje</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Transporte</strong></td>
+<td>4</td>
+<td><strong>TCP</strong>, <strong>UDP</strong></td>
+<td>Segmento / datagrama</td>
+<td><strong>Puerto</strong> (16 bits)</td>
+</tr>
+<tr>
+<td><strong>Internet (red)</strong></td>
+<td>3</td>
+<td><strong>IP</strong> (v4, v6), <strong>ICMP</strong>, IGMP</td>
+<td><strong>Paquete</strong></td>
+<td><strong>IP</strong> (32 / 128 bits)</td>
+</tr>
+<tr>
+<td><strong>Acceso a la red (enlace)</strong></td>
+<td>1 y 2</td>
+<td>Ethernet, wifi, PPP; <strong>ARP</strong> en la frontera</td>
+<td>Trama</td>
+<td><strong>MAC</strong> (48 bits)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Encapsulación</strong>: cada capa añade su cabecera a los datos de la capa superior. Un correo viaja como datos SMTP → dentro de un segmento TCP → dentro de un paquete IP → dentro de una trama Ethernet. En el destino se desencapsula en orden inverso.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar</strong><br><strong>Puerto → aplicación · IP → equipo en Internet · MAC → interfaz en la red local.</strong><br>Para que un paquete llegue hacen falta las tres: la MAC para el salto local, la IP para el destino final y el puerto para el programa concreto.</th>
+</tr>
+</table></div>
+<h2 id="2-el-protocolo-ip" class="tema-h2">2. El protocolo IP</h2>
+<p><strong>IP (Internet Protocol)</strong> encamina paquetes entre redes. Sus características:</p>
+<ul class="tema-lista">
+<li><strong>Sin conexión</strong>: cada paquete viaja de forma independiente.</li>
+<li><strong>No fiable (<em>best effort</em>)</strong>: no garantiza la entrega, el orden ni la ausencia de duplicados; de eso se encarga TCP.</li>
+<li><strong>Direccionamiento lógico</strong> jerárquico (red + host) que permite el <strong>enrutamiento</strong>.</li>
+<li><strong>Fragmentación</strong> (IPv4) cuando el paquete supera la MTU de un enlace.</li>
+</ul>
+<p>Campos importantes de la cabecera IPv4 (20 bytes mínimo): versión, longitud, <strong>TTL</strong> (<em>Time To Live</em>: cada router lo decrementa en 1; al llegar a 0 descarta el paquete y avisa con ICMP, lo que evita bucles infinitos), <strong>protocolo</strong> (6 = TCP, 17 = UDP, 1 = ICMP), <strong>IP origen</strong> e <strong>IP destino</strong>, y una suma de comprobación de la cabecera.</p>
+<h2 id="3-icmp-y-arp" class="tema-h2">3. ICMP y ARP</h2>
+<h3 id="icmp">ICMP</h3>
+<p><strong>ICMP (Internet Control Message Protocol)</strong> transporta <strong>mensajes de control y error</strong> de IP. Lo usan:</p>
+<ul class="tema-lista">
+<li><strong><code>ping</code></strong>: envía <em>Echo Request</em> (tipo 8) y espera <em>Echo Reply</em> (tipo 0). Comprueba alcanzabilidad y mide el RTT.</li>
+<li><strong><code>tracert</code> / <code>traceroute</code></strong>: envía paquetes con TTL creciente (1, 2, 3…); cada router que lo descarta responde con <em>Time Exceeded</em> (tipo 11), y así se descubre la ruta.</li>
+<li>Mensajes de error: <em>Destination Unreachable</em> (tipo 3: red, host o puerto inalcanzable), <em>Redirect</em>, etc.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br><strong>ICMP no usa puertos</strong> (no es TCP ni UDP; va directamente sobre IP, protocolo 1). Que un <code>ping</code> no responda <strong>no prueba</strong> que el equipo esté apagado: muchos cortafuegos bloquean ICMP.</th>
+</tr>
+</table></div>
+<h3 id="arp">ARP</h3>
+<p><strong>ARP (Address Resolution Protocol)</strong> obtiene la <strong>dirección MAC (capa 2) a partir de la dirección IP (capa 3)</strong> en la red local:</p>
+<ol type="1">
+<li>El equipo A quiere enviar a 192.168.1.20 y no conoce su MAC.</li>
+<li>Envía un <strong>ARP Request en broadcast</strong> (<code>FF:FF:FF:FF:FF:FF</code>): «¿quién tiene 192.168.1.20?».</li>
+<li>El dueño de esa IP responde con un <strong>ARP Reply en unicast</strong> con su MAC.</li>
+<li>A guarda la correspondencia en su <strong>caché ARP</strong> (<code>arp -a</code> en Windows) durante un tiempo.</li>
+</ol>
+<p>Si el destino está <strong>en otra red</strong>, el equipo resuelve con ARP la MAC de su <strong>puerta de enlace</strong>, no la del destino final.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 7</strong><br>El protocolo que <strong>obtiene la MAC a partir de la IP</strong> es <strong>ARP</strong>. NTP sincroniza la hora, ICMP transporta mensajes de control y DHCP asigna la configuración IP.<br>En <strong>IPv6 no hay ARP</strong>: lo sustituye <strong>NDP</strong> (<em>Neighbor Discovery Protocol</em>, sobre ICMPv6).</th>
+</tr>
+</table></div>
+<p>Variantes y riesgos: el <strong>ARP gratuito</strong> (un equipo anuncia su propia IP, útil para detectar IP duplicadas) y el <strong>ARP spoofing / poisoning</strong> (un atacante responde con su MAC para interceptar tráfico). Este último se mitiga en el switch con <em><strong>Dynamic ARP Inspection</strong></em> (T4, T17).</p>
+<h2 id="4-tcp-y-udp" class="tema-h2">4. TCP y UDP</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Característica</th>
+<th><strong>TCP</strong></th>
+<th><strong>UDP</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conexión</td>
+<td><strong>Orientado a conexión</strong> (<em>three-way handshake</em>)</td>
+<td><strong>Sin conexión</strong></td>
+</tr>
+<tr>
+<td>Fiabilidad</td>
+<td>Confirmaciones (ACK), retransmisión, orden, control de flujo y de congestión</td>
+<td>Ninguna: si se pierde, se pierde</td>
+</tr>
+<tr>
+<td>Cabecera</td>
+<td>20 bytes mínimo</td>
+<td><strong>8 bytes</strong></td>
+</tr>
+<tr>
+<td>Velocidad / latencia</td>
+<td>Mayor sobrecarga</td>
+<td>Mínima sobrecarga y latencia</td>
+</tr>
+<tr>
+<td>Usos</td>
+<td>Web (HTTP/S), correo (SMTP, IMAP), SSH, FTP, transferencia de ficheros</td>
+<td><strong>DNS</strong> (consultas), <strong>DHCP</strong>, <strong>VoIP (RTP)</strong>, vídeo en directo, <strong>SNMP</strong>, <strong>NTP</strong>, <strong>syslog</strong>, TFTP</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Establecimiento de una conexión TCP (<em>three-way handshake</em>):</strong> <strong>SYN</strong> → <strong>SYN-ACK</strong> → <strong>ACK</strong>. El cierre se hace con FIN/ACK en ambos sentidos. Un <strong>RST</strong> corta la conexión de golpe (p. ej., puerto cerrado).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar</strong><br><strong>TCP = correo certificado</strong> (con acuse de recibo y reenvío). <strong>UDP = buzoneo</strong> (rápido, sin garantías).<br>La <strong>voz</strong> va por <strong>UDP</strong>: un paquete retransmitido llegaría tarde y no sirve.</th>
+</tr>
+</table></div>
+<h3 id="puertos">Puertos</h3>
+<p>Un <strong>puerto</strong> (16 bits: 0 a 65.535) identifica la aplicación. Una conexión queda definida por el <strong>socket</strong>: IP origen + puerto origen + IP destino + puerto destino + protocolo.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Rango</th>
+<th>Nombre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>0 – 1023</strong></td>
+<td>Puertos bien conocidos (<em>well-known</em>), asignados por la IANA</td>
+</tr>
+<tr>
+<td>1024 – 49151</td>
+<td>Registrados</td>
+</tr>
+<tr>
+<td>49152 – 65535</td>
+<td>Dinámicos o efímeros (los usa el cliente como origen)</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Puerto</th>
+<th>Servicio</th>
+<th>Puerto</th>
+<th>Servicio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>20/21 TCP</td>
+<td>FTP (datos/control)</td>
+<td>110 TCP</td>
+<td>POP3</td>
+</tr>
+<tr>
+<td><strong>22 TCP</strong></td>
+<td><strong>SSH, SFTP, SCP</strong></td>
+<td>123 UDP</td>
+<td>NTP</td>
+</tr>
+<tr>
+<td>23 TCP</td>
+<td>Telnet (inseguro)</td>
+<td>143 TCP</td>
+<td>IMAP</td>
+</tr>
+<tr>
+<td><strong>25 TCP</strong></td>
+<td><strong>SMTP</strong></td>
+<td>161/162 UDP</td>
+<td>SNMP / traps</td>
+</tr>
+<tr>
+<td><strong>53 UDP/TCP</strong></td>
+<td><strong>DNS</strong></td>
+<td><strong>443 TCP</strong></td>
+<td><strong>HTTPS</strong></td>
+</tr>
+<tr>
+<td>67/68 UDP</td>
+<td>DHCP (servidor/cliente)</td>
+<td>445 TCP</td>
+<td>SMB (compartición Windows)</td>
+</tr>
+<tr>
+<td>69 UDP</td>
+<td>TFTP</td>
+<td>514 UDP</td>
+<td>Syslog</td>
+</tr>
+<tr>
+<td><strong>80 TCP</strong></td>
+<td><strong>HTTP</strong></td>
+<td>3389 TCP</td>
+<td>RDP (escritorio remoto)</td>
+</tr>
+<tr>
+<td>5060/5061</td>
+<td>SIP (VoIP) / SIP-TLS</td>
+<td>993 / 995</td>
+<td>IMAPS / POP3S</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Examen 2023, pregunta 8</strong>: para <strong>configurar un switch de forma remota con SSH</strong> se usa el <strong>puerto 22</strong>.</th>
+</tr>
+</table></div>
+<h2 id="5-direccionamiento-ipv4" class="tema-h2">5. Direccionamiento IPv4</h2>
+<p>Una dirección IPv4 tiene <strong>32 bits</strong>, escritos en <strong>notación decimal con puntos</strong>: cuatro octetos de 0 a 255 (<code>192.168.193.25</code>). Se divide en <strong>parte de red</strong> y <strong>parte de host</strong>, y la frontera la marca la <strong>máscara</strong>.</p>
+<h3 id="clases-direccionamiento-classful-histórico">Clases (direccionamiento <em>classful</em>, histórico)</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Clase</th>
+<th>Primer octeto</th>
+<th>Bits iniciales</th>
+<th>Máscara por defecto</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A</strong></td>
+<td>1 – 126</td>
+<td>0</td>
+<td>/8 (255.0.0.0)</td>
+<td>Redes muy grandes</td>
+</tr>
+<tr>
+<td><strong>B</strong></td>
+<td>128 – 191</td>
+<td>10</td>
+<td>/16 (255.255.0.0)</td>
+<td>Redes medianas</td>
+</tr>
+<tr>
+<td><strong>C</strong></td>
+<td>192 – 223</td>
+<td>110</td>
+<td>/24 (255.255.255.0)</td>
+<td>Redes pequeñas</td>
+</tr>
+<tr>
+<td>D</td>
+<td>224 – 239</td>
+<td>1110</td>
+<td>—</td>
+<td><strong>Multicast</strong></td>
+</tr>
+<tr>
+<td>E</td>
+<td>240 – 255</td>
+<td>1111</td>
+<td>—</td>
+<td>Experimental</td>
+</tr>
+</tbody>
+</table></div>
+<p>El 127 está reservado para <strong>loopback</strong> (<code>127.0.0.1</code> = el propio equipo). Hoy se usa <strong>CIDR</strong> (<em>Classless Inter-Domain Routing</em>): la máscara puede ser cualquiera (/26, /20…), y las clases solo sirven como referencia.</p>
+<h3 id="direcciones-privadas-y-especiales">Direcciones privadas y especiales</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Rango</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>10.0.0.0/8</strong></td>
+<td>Privada (RFC 1918)</td>
+</tr>
+<tr>
+<td><strong>172.16.0.0/12</strong> (172.16.0.0 – 172.31.255.255)</td>
+<td>Privada (RFC 1918)</td>
+</tr>
+<tr>
+<td><strong>192.168.0.0/16</strong></td>
+<td>Privada (RFC 1918)</td>
+</tr>
+<tr>
+<td>127.0.0.0/8</td>
+<td>Loopback</td>
+</tr>
+<tr>
+<td><strong>169.254.0.0/16</strong></td>
+<td><strong>APIPA / link-local</strong>: la toma el equipo cuando <strong>no recibe respuesta del DHCP</strong></td>
+</tr>
+<tr>
+<td>100.64.0.0/10</td>
+<td>CGNAT de operadores (RFC 6598)</td>
+</tr>
+<tr>
+<td>0.0.0.0</td>
+<td>«Esta red» / ruta por defecto (<code>0.0.0.0/0</code>)</td>
+</tr>
+<tr>
+<td>255.255.255.255</td>
+<td>Broadcast limitado</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible</strong><br>Las direcciones <strong>privadas no se enrutan en Internet</strong>: para salir hace falta <strong>NAT</strong> (apartado 8). Las redes del caso de 2023 (192.168.193.0, 10.42.96.0, 172.16.47.0) son todas privadas.<br>Un PC con <strong>169.254.x.x</strong> indica <strong>fallo de DHCP</strong> (cable, VLAN mal configurada en el puerto o servidor caído): es una pista clásica de avería.</th>
+</tr>
+</table></div>
+<h3 id="máscara-red-broadcast-y-hosts">Máscara, red, broadcast y hosts</h3>
+<ul class="tema-lista">
+<li><strong>Dirección de red</strong>: todos los bits de host a 0 (identifica la subred; no se asigna a equipos).</li>
+<li><strong>Dirección de broadcast</strong>: todos los bits de host a 1 (llega a todos los equipos de la subred).</li>
+<li><strong>Hosts útiles = 2ⁿ − 2</strong>, siendo <em>n</em> el número de bits de host.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Prefijo</th>
+<th>Máscara</th>
+<th>Bits de host</th>
+<th>Direcciones</th>
+<th>Hosts útiles</th>
+<th>Salto (bloque)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/30</td>
+<td>255.255.255.252</td>
+<td>2</td>
+<td>4</td>
+<td>2</td>
+<td>4</td>
+</tr>
+<tr>
+<td>/29</td>
+<td>255.255.255.248</td>
+<td>3</td>
+<td>8</td>
+<td>6</td>
+<td>8</td>
+</tr>
+<tr>
+<td><strong>/28</strong></td>
+<td><strong>255.255.255.240</strong></td>
+<td>4</td>
+<td>16</td>
+<td><strong>14</strong></td>
+<td>16</td>
+</tr>
+<tr>
+<td>/27</td>
+<td>255.255.255.224</td>
+<td>5</td>
+<td>32</td>
+<td>30</td>
+<td>32</td>
+</tr>
+<tr>
+<td><strong>/26</strong></td>
+<td><strong>255.255.255.192</strong></td>
+<td>6</td>
+<td>64</td>
+<td><strong>62</strong></td>
+<td>64</td>
+</tr>
+<tr>
+<td>/25</td>
+<td>255.255.255.128</td>
+<td>7</td>
+<td>128</td>
+<td>126</td>
+<td>128</td>
+</tr>
+<tr>
+<td><strong>/24</strong></td>
+<td><strong>255.255.255.0</strong></td>
+<td>8</td>
+<td>256</td>
+<td><strong>254</strong></td>
+<td>256</td>
+</tr>
+<tr>
+<td><strong>/23</strong></td>
+<td><strong>255.255.254.0</strong></td>
+<td>9</td>
+<td>512</td>
+<td><strong>510</strong></td>
+<td>2 en el 3.er octeto</td>
+</tr>
+<tr>
+<td>/22</td>
+<td>255.255.252.0</td>
+<td>10</td>
+<td>1.024</td>
+<td>1.022</td>
+<td>4 en el 3.er octeto</td>
+</tr>
+<tr>
+<td><strong>/20</strong></td>
+<td><strong>255.255.240.0</strong></td>
+<td>12</td>
+<td>4.096</td>
+<td><strong>4.094</strong></td>
+<td>16 en el 3.er octeto</td>
+</tr>
+<tr>
+<td>/16</td>
+<td>255.255.0.0</td>
+<td>16</td>
+<td>65.536</td>
+<td>65.534</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar los valores de máscara</strong><br><strong>128 · 192 · 224 · 240 · 248 · 252 · 254 · 255</strong> (1, 2, 3… bits a 1 en el octeto).<br><strong>Salto = 256 − valor de la máscara</strong> en el octeto «interesante». Con 255.255.255.192 el salto es 256 − 192 = <strong>64</strong>.</th>
+</tr>
+</table></div>
+<h2 id="6-calculo-de-subredes-paso-a-paso" class="tema-h2">6. Cálculo de subredes paso a paso</h2>
+<p><strong>Método del salto (bloque):</strong></p>
+<ol type="1">
+<li>Localiza el <strong>octeto interesante</strong> (el primero de la máscara que no es 255).</li>
+<li><strong>Salto</strong> = 256 − valor de la máscara en ese octeto.</li>
+<li>Las subredes empiezan en <strong>múltiplos del salto</strong> (0, 64, 128, 192…).</li>
+<li><strong>Red</strong> = el múltiplo del salto igual o inferior a la IP. <strong>Broadcast</strong> = siguiente red − 1. <strong>Hosts</strong> = lo que hay entre ambas.</li>
+</ol>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Examen 2023, pregunta 5</strong><br>Red <strong>213.114.93.0</strong> con máscara <strong>255.255.255.192 (/26)</strong>: salto = 256 − 192 = <strong>64</strong>. La primera subred va de .0 a .63, así que el <strong>broadcast es 213.114.93.63</strong>. Hosts útiles: .1 a .62 (62 hosts).<br>Trampas de las otras opciones: <strong>.127</strong> sería el broadcast de la segunda subred /26 (o de una /25); <strong>.31</strong> el de una /27; <strong>.255</strong> el de una /24.</th>
+</tr>
+</table></div>
+<h3 id="ejemplos-con-las-subredes-del-caso-de-2023">Ejemplos con las subredes del caso de 2023</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Subred del enunciado</th>
+<th>Máscara</th>
+<th>Red</th>
+<th>Rango de hosts</th>
+<th>Broadcast</th>
+<th>Hosts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Usuarios 192.168.193.0</td>
+<td>/24</td>
+<td>192.168.193.0</td>
+<td>.1 – .254</td>
+<td>192.168.193.255</td>
+<td>254</td>
+</tr>
+<tr>
+<td><strong>Telefonía 10.42.96.0</strong></td>
+<td><strong>255.255.240.0 (/20)</strong></td>
+<td>10.42.96.0</td>
+<td>10.42.96.1 – <strong>10.42.111.254</strong></td>
+<td><strong>10.42.111.255</strong></td>
+<td>4.094</td>
+</tr>
+<tr>
+<td><strong>Registro 192.168.16.16</strong></td>
+<td><strong>255.255.255.240 (/28)</strong></td>
+<td>192.168.16.16</td>
+<td>.17 – .30</td>
+<td><strong>192.168.16.31</strong></td>
+<td>14</td>
+</tr>
+<tr>
+<td>Internet libre 192.168.122.0</td>
+<td>/23</td>
+<td>192.168.122.0</td>
+<td>192.168.122.1 – 192.168.123.254</td>
+<td>192.168.123.255</td>
+<td>510</td>
+</tr>
+<tr>
+<td>Cámaras 172.16.47.0</td>
+<td>/24</td>
+<td>172.16.47.0</td>
+<td>.1 – .254</td>
+<td>172.16.47.255</td>
+<td>254</td>
+</tr>
+</tbody>
+</table></div>
+<p>Cómo se calcula la de telefonía: máscara 255.255.<strong>240</strong>.0 → octeto interesante el <strong>tercero</strong>, salto 256 − 240 = <strong>16</strong>. Las subredes empiezan en 96 (múltiplo de 16) y la siguiente en 112, así que el broadcast es <strong>10.42.111.255</strong>.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>Para el caso práctico</strong><br>Fíjate en el <strong>tamaño</strong> de cada subred: la de <strong>registro (/28) solo admite 14 equipos</strong> (2 AP + tabletas + la puerta de enlace). Si te piden añadir dispositivos, comprueba que caben. La de <strong>Internet libre (/23)</strong> es grande porque los invitados por wifi son muchos y su IP es dinámica (DHCP).</th>
+</tr>
+</table></div>
+<h3 id="vlsm-y-superredes">VLSM y superredes</h3>
+<ul class="tema-lista">
+<li><strong>VLSM</strong> (<em>Variable Length Subnet Mask</em>): usar máscaras distintas según el tamaño de cada subred (/30 para enlaces punto a punto entre routers, /24 para usuarios, /28 para dispositivos). Ahorra direcciones.</li>
+<li><strong>Sumarización (superred)</strong>: agrupar varias redes contiguas en una sola ruta. Por ejemplo, 192.168.0.0/24 + 192.168.1.0/24 = <strong>192.168.0.0/23</strong>. Reduce las tablas de rutas.</li>
+</ul>
+<h2 id="7-asignacion-de-direcciones-estatica-y-dhcp" class="tema-h2">7. Asignación de direcciones: estática y DHCP</h2>
+<ul class="tema-lista">
+<li><strong>Estática</strong>: se configura a mano (IP, máscara, puerta de enlace, DNS). Se usa en <strong>servidores, impresoras, cámaras, PLC, electrónica de red</strong>: equipos que deben tener siempre la misma IP. En el caso de 2023, todo salvo telefonía, wifi e Internet libre.</li>
+<li><strong>Dinámica con DHCP</strong> (<em>Dynamic Host Configuration Protocol</em>, UDP 67/68): un servidor entrega la configuración por un tiempo (<em>concesión</em> o <em>lease</em>). Proceso <strong>DORA</strong>: <strong>D</strong>iscover (broadcast) → <strong>O</strong>ffer → <strong>R</strong>equest → <strong>A</strong>ck.</li>
+<li><strong>Reserva DHCP</strong>: el servidor entrega siempre la misma IP a una MAC concreta (lo mejor de ambos mundos).</li>
+<li><strong>DHCP Relay (<code>ip helper-address</code>)</strong>: como el <em>Discover</em> es un broadcast y no atraviesa routers, el router o switch de capa 3 de cada VLAN lo reenvía al servidor DHCP central.</li>
+<li><strong>Opciones DHCP</strong>: además de IP, máscara, puerta de enlace (opción 3) y DNS (opción 6), el DHCP puede dar a los <strong>teléfonos IP</strong> la dirección de su servidor de aprovisionamiento (opciones <strong>66/150</strong>) o su VLAN de voz.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br>Sin puerta de enlace configurada un equipo <strong>solo</strong> se comunica con su propia subred. Sin DNS, se comunica por IP pero <strong>no resuelve nombres</strong>: <code>ping 8.8.8.8</code> funciona y <code>ping google.com</code>, no.</th>
+</tr>
+</table></div>
+<h2 id="8-nat" class="tema-h2">8. NAT</h2>
+<p><strong>NAT</strong> (<em>Network Address Translation</em>) traduce direcciones IP al pasar por el router o el cortafuegos. Nació para paliar el <strong>agotamiento de IPv4</strong>: muchas direcciones privadas comparten pocas públicas.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Qué hace</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>NAT estático (1:1)</strong></td>
+<td>Una IP privada ↔︎ una IP pública fija</td>
+<td>Publicar un servidor interno</td>
+</tr>
+<tr>
+<td><strong>NAT dinámico</strong></td>
+<td>IP privadas ↔︎ un conjunto (<em>pool</em>) de públicas</td>
+<td>Poco usado hoy</td>
+</tr>
+<tr>
+<td><strong>PAT / NAT overload</strong> (<em>masquerade</em>)</td>
+<td><strong>Muchas privadas → una pública</strong>, distinguidas por <strong>puerto</strong></td>
+<td><strong>Salida a Internet</strong> de una LAN; el router de casa</td>
+</tr>
+<tr>
+<td><strong>Port forwarding (DNAT de puerto)</strong></td>
+<td>Un puerto de la IP pública → IP y puerto internos</td>
+<td>Acceso desde fuera a un servicio concreto (en el caso de 2023, una opción para el <strong>mantenedor del PLC</strong>, coordinada con Sistemas)</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br><strong>NAT no es una medida de seguridad</strong> por sí misma (oculta la red, pero no filtra). La seguridad la dan las <strong>reglas del cortafuegos</strong> (T14). Y NAT <strong>no tiene nada que ver con NAC</strong> (control de acceso a la red; T17).</th>
+</tr>
+</table></div>
+<h2 id="9-ipv6" class="tema-h2">9. IPv6</h2>
+<h3 id="por-qué-y-cómo">Por qué y cómo</h3>
+<p>IPv6 resuelve el <strong>agotamiento de IPv4</strong> (la IANA asignó sus últimos bloques en 2011). Sus direcciones tienen <strong>128 bits</strong> (≈ 3,4 × 10³⁸ direcciones).</p>
+<ul class="tema-lista">
+<li>Se escriben en <strong>8 grupos de 4 dígitos hexadecimales</strong> separados por dos puntos: <code>2001:0db8:0000:0000:0000:ff00:0042:8329</code>.</li>
+<li><strong>Simplificación</strong>: se pueden <strong>quitar los ceros a la izquierda</strong> de cada grupo, y <strong>una sola vez</strong> se puede sustituir una secuencia de grupos a cero por <code>::</code> → <code>2001:db8::ff00:42:8329</code>.</li>
+<li>Prefijo con notación CIDR: una red de usuarios típica es un <strong>/64</strong> (64 bits de red + 64 de identificador de interfaz).</li>
+</ul>
+<h3 id="tipos-de-direcciones-ipv6">Tipos de direcciones IPv6</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Prefijo</th>
+<th>Equivale en IPv4 a</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Unicast global</strong> (GUA)</td>
+<td><strong>2000::/3</strong> (empiezan por 2 o 3)</td>
+<td>Dirección pública</td>
+</tr>
+<tr>
+<td><strong>Link-local</strong></td>
+<td><strong>FE80::/10</strong></td>
+<td>169.254.x.x (pero en IPv6 <strong>siempre existe</strong> en cada interfaz)</td>
+</tr>
+<tr>
+<td><strong>Unique local</strong> (ULA)</td>
+<td><strong>FC00::/7</strong> (en la práctica FD00::/8)</td>
+<td>Privadas RFC 1918</td>
+</tr>
+<tr>
+<td><strong>Multicast</strong></td>
+<td><strong>FF00::/8</strong></td>
+<td>224.0.0.0/4</td>
+</tr>
+<tr>
+<td><strong>Loopback</strong></td>
+<td><strong>::1</strong></td>
+<td>127.0.0.1</td>
+</tr>
+<tr>
+<td>No especificada</td>
+<td><strong>::</strong></td>
+<td>0.0.0.0</td>
+</tr>
+<tr>
+<td>Documentación</td>
+<td>2001:db8::/32</td>
+<td>Ejemplos en manuales</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible</strong><br><strong>En IPv6 no existe el broadcast</strong>: se usa <strong>multicast</strong> (por ejemplo, FF02::1 = todos los nodos del enlace).<br>Tampoco hay ARP: la resolución de vecinos y el descubrimiento de routers los hace <strong>NDP</strong> (ICMPv6).</th>
+</tr>
+</table></div>
+<h3 id="autoconfiguración">Autoconfiguración</h3>
+<ul class="tema-lista">
+<li><strong>SLAAC</strong> (<em>Stateless Address Autoconfiguration</em>): el router anuncia el prefijo (<em>Router Advertisement</em>) y el equipo genera él mismo su identificador de interfaz (por <strong>EUI-64</strong>, derivado de la MAC, o <strong>aleatorio</strong> por privacidad). No necesita servidor.</li>
+<li><strong>DHCPv6</strong>: con estado (asigna direcciones, como el DHCP de IPv4) o sin estado (solo da DNS y otras opciones).</li>
+</ul>
+<h3 id="diferencias-clave-ipv4--ipv6">Diferencias clave IPv4 / IPv6</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th></th>
+<th>IPv4</th>
+<th>IPv6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Longitud</td>
+<td>32 bits</td>
+<td><strong>128 bits</strong></td>
+</tr>
+<tr>
+<td>Notación</td>
+<td>Decimal con puntos</td>
+<td>Hexadecimal con dos puntos</td>
+</tr>
+<tr>
+<td>Cabecera</td>
+<td>Variable (20–60 B), con <em>checksum</em></td>
+<td><strong>Fija de 40 B</strong>, sin <em>checksum</em>, con cabeceras de extensión</td>
+</tr>
+<tr>
+<td>Broadcast</td>
+<td>Sí</td>
+<td><strong>No</strong> (multicast)</td>
+</tr>
+<tr>
+<td>Resolución de MAC</td>
+<td>ARP</td>
+<td><strong>NDP</strong></td>
+</tr>
+<tr>
+<td>Autoconfiguración</td>
+<td>DHCP</td>
+<td><strong>SLAAC</strong> y/o DHCPv6</td>
+</tr>
+<tr>
+<td>Fragmentación</td>
+<td>Routers y origen</td>
+<td><strong>Solo el origen</strong> (descubrimiento de MTU de ruta)</td>
+</tr>
+<tr>
+<td>NAT</td>
+<td>Imprescindible en la práctica</td>
+<td>Innecesario (sobran direcciones)</td>
+</tr>
+<tr>
+<td>IPsec</td>
+<td>Opcional</td>
+<td>Soportado de forma nativa (su uso sigue siendo opcional)</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="transición-ipv4--ipv6">Transición IPv4 → IPv6</h3>
+<ul class="tema-lista">
+<li><strong>Doble pila (<em>dual stack</em>)</strong>: el equipo tiene a la vez IPv4 e IPv6. Es el mecanismo preferido.</li>
+<li><strong>Túneles</strong>: IPv6 encapsulado dentro de IPv4 (6in4, 6to4, Teredo…).</li>
+<li><strong>Traducción</strong>: <strong>NAT64 + DNS64</strong>, para que equipos solo IPv6 alcancen servicios solo IPv4.</li>
+</ul>
+<h2 id="10-comandos-de-diagnostico-ip" class="tema-h2">10. Comandos de diagnóstico IP</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Comando (Windows / Linux)</th>
+<th>Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ipconfig /all</code> · <code>ip addr</code></td>
+<td>Ver IP, máscara, puerta de enlace, DNS y MAC</td>
+</tr>
+<tr>
+<td><code>ipconfig /release</code> y <code>/renew</code></td>
+<td>Liberar y pedir de nuevo la IP por DHCP</td>
+</tr>
+<tr>
+<td><code>ping</code></td>
+<td>Alcanzabilidad y RTT (ICMP)</td>
+</tr>
+<tr>
+<td><code>tracert</code> · <code>traceroute</code></td>
+<td>Ruta salto a salto</td>
+</tr>
+<tr>
+<td><code>pathping</code> (Windows) · <code>mtr</code> (Linux)</td>
+<td>Ruta más pérdidas por salto</td>
+</tr>
+<tr>
+<td><code>arp -a</code> · <code>ip neigh</code></td>
+<td>Caché ARP / vecinos</td>
+</tr>
+<tr>
+<td><code>nslookup</code> · <code>dig</code></td>
+<td>Consultas DNS</td>
+</tr>
+<tr>
+<td><code>netstat -an</code> · <code>ss -tuln</code></td>
+<td>Conexiones y puertos abiertos</td>
+</tr>
+<tr>
+<td><code>route print</code> · <code>ip route</code></td>
+<td>Tabla de rutas del equipo</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>Diagnóstico de conectividad de abajo arriba</strong></p>
+<ol type="1">
+· <code>ipconfig</code>: ¿tiene IP válida? (169.254 = fallo de DHCP). 2. <code>ping 127.0.0.1</code> (pila TCP/IP). 3. <code>ping</code> a la <strong>puerta de enlace</strong> (red local). 4. <code>ping</code> a una IP externa (routing y salida). 5. <code>ping</code> a un nombre (DNS). El primer paso que falla te dice en qué capa está el problema.<br>
+</ol></th>
+</tr>
+</table></div>
+<h2 id="11-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">11. Lo que cayó en el examen de 2023</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Contenido</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test 5</td>
+<td>Broadcast de 213.114.93.0/26</td>
+<td><strong>213.114.93.63</strong></td>
+</tr>
+<tr>
+<td>Test 7</td>
+<td>Obtener la MAC a partir de la IP</td>
+<td><strong>ARP</strong></td>
+</tr>
+<tr>
+<td>Test 8</td>
+<td>Puerto de SSH</td>
+<td><strong>22</strong></td>
+</tr>
+<tr>
+<td>Caso (enunciado)</td>
+<td>Seis subredes con máscaras /24, /20, /28, /23</td>
+<td>Saber interpretarlas (tamaño, rango, DHCP o estática)</td>
+</tr>
+<tr>
+<td>Caso 4</td>
+<td>Acceso remoto al PLC</td>
+<td>VPN o <strong>NAT de puertos</strong> en el cortafuegos</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="12-anclas-de-memoria" class="tema-h2">12. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>IPv4 = 32 bits · IPv6 = 128 bits · MAC = 48 bits · puerto = 16 bits.</strong></li>
+<li><strong>Privadas: 10/8 · 172.16/12 · 192.168/16.</strong> <strong>169.254 = sin DHCP.</strong></li>
+<li><strong>Hosts = 2ⁿ − 2 · salto = 256 − máscara.</strong></li>
+<li><strong>ARP: IP → MAC (broadcast); en IPv6, NDP.</strong></li>
+<li><strong>TCP: SYN, SYN-ACK, ACK. UDP: DNS, DHCP, VoIP, SNMP, NTP.</strong></li>
+<li><strong>22 SSH · 53 DNS · 80 HTTP · 443 HTTPS · 25 SMTP · 3389 RDP.</strong></li>
+<li><strong>IPv6: sin broadcast, sin ARP, sin NAT; FE80 link-local; :: una sola vez.</strong></li>
+</ul>
+<h2 id="13-no-confundir" class="tema-h2">13. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Esto</th>
+<th>No es esto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ARP</strong> (IP → MAC)</td>
+<td><strong>RARP</strong>, obsoleto (MAC → IP) y <strong>DNS</strong> (nombre → IP)</td>
+</tr>
+<tr>
+<td><strong>ICMP</strong> (control, sin puertos)</td>
+<td><strong>TCP/UDP</strong> (transporte, con puertos)</td>
+</tr>
+<tr>
+<td><strong>NAT</strong> (traduce direcciones)</td>
+<td><strong>NAC</strong> (controla quién entra en la red)</td>
+</tr>
+<tr>
+<td><strong>Dirección de red</strong> (bits de host a 0)</td>
+<td><strong>Puerta de enlace</strong> (un host, normalmente la .1)</td>
+</tr>
+<tr>
+<td><strong>/23</strong> (510 hosts, ocupa dos «/24»)</td>
+<td><strong>/32</strong> (un único host)</td>
+</tr>
+<tr>
+<td><strong>Link-local IPv6</strong> (FE80, siempre presente)</td>
+<td><strong>APIPA IPv4</strong> (169.254, solo si falla el DHCP)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="14-posibles-trampas-de-examen" class="tema-h2">14. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li>Contar la red y el broadcast como hosts (los hosts útiles son 2ⁿ − 2).</li>
+<li>Elegir .127 o .255 como broadcast de un /26 que empieza en .0.</li>
+<li>Decir que ICMP usa el puerto 7 o el 0 (no usa puertos).</li>
+<li>Pensar que DNS solo usa UDP (las transferencias de zona y respuestas grandes usan TCP 53).</li>
+<li>Comprimir con <code>::</code> dos veces en la misma dirección IPv6.</li>
+<li>Creer que IPv6 elimina por completo la necesidad de DHCP o que IPv6 tiene broadcast.</li>
+<li>Confundir 172.16.0.0/12 (hasta 172.31.255.255) con 172.16.0.0/16.</li>
+</ul>
+<h2 id="15-posibles-preguntas-tipo-test" class="tema-h2">15. Posibles preguntas tipo test</h2>
+<ol type="1">
+<li>¿Cuántos hosts útiles tiene una subred /28? → <strong>14</strong>.</li>
+<li>¿Qué rango es privado? → <strong>172.20.5.0</strong> sí (dentro de 172.16/12); <strong>172.32.0.0</strong>, no.</li>
+<li>¿Qué protocolo usa el <em>three-way handshake</em>? → <strong>TCP</strong>.</li>
+<li>¿Cuál es la dirección de loopback en IPv6? → <strong>::1</strong>.</li>
+<li>¿Qué tipo de NAT permite que toda la LAN salga con una sola IP pública? → <strong>PAT (NAT overload)</strong>.</li>
+</ol>
+<h2 id="16-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">16. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. Diferencias entre TCP y UDP, con ejemplos de uso (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>Conexión (sí/no), fiabilidad (ACK y retransmisión / ninguna), orden, control de flujo.</li>
+<li>Cabecera de 20 B frente a 8 B; latencia.</li>
+<li>Ejemplos TCP: HTTPS, SMTP, SSH. Ejemplos UDP: DNS, DHCP, VoIP-RTP, SNMP.</li>
+<li>Criterio: fiabilidad (TCP) frente a tiempo real (UDP).</li>
+</ul>
+<p><strong>2. Explica las principales diferencias entre IPv4 e IPv6 (2 puntos).</strong></p>
+<ul class="tema-lista">
+<li>32 frente a 128 bits y notación.</li>
+<li>Sin broadcast (multicast), NDP en lugar de ARP, SLAAC.</li>
+<li>Cabecera fija de 40 B y fragmentación solo en origen.</li>
+<li>Sin necesidad de NAT; transición por doble pila, túneles y NAT64.</li>
+</ul>
+<h2 id="17-supuesto-practico" class="tema-h2">17. Supuesto práctico</h2>
+<p><strong>Enunciado:</strong> un PC recién instalado en la planta primera tiene la IP <strong>169.254.33.10</strong> y no navega. Los demás puestos de la planta funcionan.</p>
+<p><strong>Esquema de respuesta:</strong></p>
+<ol type="1">
+<li><strong>Interpretación</strong>: 169.254.x.x = <strong>APIPA</strong>: el equipo <strong>no ha recibido respuesta del DHCP</strong>.</li>
+<li><strong>Nivel físico</strong>: luz de enlace en la tarjeta y en el puerto; latiguillo y roseta; seguir la toma en el <strong>patch panel</strong> hasta el puerto del switch.</li>
+<li><strong>Nivel de enlace</strong>: comprobar en el switch que el puerto está <strong>activo</strong> y en la <strong>VLAN correcta</strong> (usuarios, 23); si está en una VLAN sin DHCP o el puerto está desactivado (<em>shutdown</em>, <em>err-disabled</em>), el DHCP no llega.</li>
+<li><strong>Nivel de red</strong>: <code>ipconfig /release</code> y <code>/renew</code>; comprobar que el <strong>DHCP relay</strong> de la VLAN está configurado en el switch principal o el cortafuegos y que el ámbito <strong>tiene direcciones libres</strong>.</li>
+<li><strong>Escalado</strong>: si el puerto o el relay requieren cambios, <strong>coordinación con el grupo de comunicaciones o sistemas</strong> y registro de la incidencia.</li>
+</ol>
+<h2 id="18-matriz-de-memorizacion" class="tema-h2">18. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Dato clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Capas TCP/IP</td>
+<td>Aplicación · Transporte · Internet · Acceso a la red</td>
+</tr>
+<tr>
+<td>ARP</td>
+<td>IP → MAC · Request broadcast, Reply unicast</td>
+</tr>
+<tr>
+<td>ICMP</td>
+<td>Protocolo IP 1 · ping (8/0) · traceroute (TTL, tipo 11)</td>
+</tr>
+<tr>
+<td>TCP / UDP</td>
+<td>Protocolo 6 / 17 · cabecera 20 / 8 B</td>
+</tr>
+<tr>
+<td>Privadas</td>
+<td>10/8 · 172.16/12 · 192.168/16</td>
+</tr>
+<tr>
+<td>/26</td>
+<td>255.255.255.192 · salto 64 · 62 hosts</td>
+</tr>
+<tr>
+<td>/28</td>
+<td>255.255.255.240 · salto 16 · 14 hosts</td>
+</tr>
+<tr>
+<td>/20</td>
+<td>255.255.240.0 · 4.094 hosts</td>
+</tr>
+<tr>
+<td>DHCP</td>
+<td>DORA · UDP 67/68 · relay con <code>ip helper-address</code></td>
+</tr>
+<tr>
+<td>IPv6</td>
+<td>128 bits · FE80::/10 · 2000::/3 · FF00::/8 · ::1</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="19-resumen-final-si-manana-fuera-el-examen" class="tema-h2">19. Resumen final: si mañana fuera el examen</h2>
+<p>TCP/IP tiene <strong>cuatro capas</strong>: aplicación, transporte (TCP fiable y con conexión; UDP rápido y sin conexión), Internet (<strong>IP</strong>, con <strong>ICMP</strong> para control) y acceso a la red; <strong>ARP</strong> traduce IP a MAC. Una IPv4 tiene <strong>32 bits</strong>: con la <strong>máscara</strong> se calculan red, <strong>broadcast</strong> (bits de host a 1) y <strong>hosts (2ⁿ − 2)</strong>, usando el <strong>salto = 256 − máscara</strong>. Las <strong>privadas</strong> (10/8, 172.16/12, 192.168/16) salen a Internet con <strong>NAT/PAT</strong>. <strong>IPv6</strong> usa <strong>128 bits</strong> en hexadecimal; no tiene broadcast ni ARP (usa <strong>NDP</strong>) y se autoconfigura con <strong>SLAAC</strong>. Para diagnosticar, ve <strong>de abajo arriba</strong>: IP válida → puerta de enlace → IP externa → nombre.</p>
+<h2 id="20-actualidad-datos-fechados" class="tema-h2">20. Actualidad — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong></th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li>Las mediciones de Google sitúan el acceso a sus servicios por <strong>IPv6</strong> en torno al <strong>45–50 %</strong> a nivel mundial; en España la adopción es menor y depende mucho del operador. La cifra varía según la fuente y el momento: <strong>no la memorices como dato fijo</strong>.</li>
+<li>Las administraciones están desplegando la <strong>doble pila</strong> de forma progresiva; en redes corporativas internas, IPv4 privado con NAT sigue siendo lo habitual.</li>
+<li><strong>DNS sobre HTTPS (DoH)</strong> y <strong>DNS sobre TLS (DoT)</strong> cifran las consultas DNS; afectan a cómo se filtran los dominios en el cortafuegos (T14, T17).</li>
+</ul>
+
+  </div>
+</article>
