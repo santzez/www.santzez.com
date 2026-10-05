@@ -2,7 +2,7 @@
   "id": "BOLSA_RED_T4",
   "opeNombre": "Bolsa DonostiaTIK 2023 — Técnico/a de apoyo: Instalaciones y Comunicaciones",
   "titulo": "T4 · Dispositivos de interconexión de redes: switches y routers. Funcionalidades de nivel 2 (VLANs, spanning tree, etc.) y de nivel 3 (configuración de interfaces, routing, etc.). Soluciones de Cisco y Aruba.",
-  "descripcion": "35 preguntas tipo test con explicación, elaboradas a partir de los apuntes del tema.",
+  "descripcion": "41 preguntas tipo test con explicación, elaboradas a partir de los apuntes del tema.",
   "fuente": "Elaboración propia a partir de los apuntes del tema (octubre de 2026). Las marcadas como «examen 2023» reproducen preguntas del examen real del 23/09/2023 con la plantilla oficial.",
   "preguntas": [
     {
@@ -26,7 +26,7 @@
         }
       ],
       "pregunta": "El protocolo LACP (Link Aggregation Control Protocol) permite:",
-      "razonamiento": "LACP (802.3ad/802.1AX) agrega varios puertos físicos en un enlace lógico: suma capacidad y, si cae un enlace, el tráfico sigue por los demás. Las otras opciones son incompletas (no mencionan la redundancia) o describen otra cosa (monitorización).",
+      "razonamiento": "LACP (802.1AX, antes 802.3ad) agrega varios puertos físicos en un enlace lógico: suma capacidad y, si cae un enlace, el tráfico sigue por los demás. Las otras opciones son incompletas (no mencionan la redundancia) o describen otra cosa (monitorización).",
       "origen": "T4 §4",
       "dificultad": "Media",
       "tipo": "Concepto",
@@ -158,16 +158,16 @@
           "correcta": false
         },
         {
-          "texto": "Transporta únicamente la VLAN nativa etiquetada.",
-          "correcta": false
+          "texto": "Pertenece a una sola VLAN y envía las tramas sin etiqueta.",
+          "correcta": true
         },
         {
           "texto": "Solo puede conectarse a otro switch o a un router.",
           "correcta": false
         },
         {
-          "texto": "Pertenece a una sola VLAN y envía las tramas sin etiqueta.",
-          "correcta": true
+          "texto": "Transporta únicamente la VLAN nativa etiquetada.",
+          "correcta": false
         }
       ],
       "pregunta": "Un puerto de acceso de un switch:",
@@ -186,12 +186,12 @@
           "correcta": false
         },
         {
-          "texto": "En acceso a la VLAN de voz únicamente.",
-          "correcta": false
-        },
-        {
           "texto": "En acceso a la VLAN de datos, con la VLAN de voz etiquetada y PoE habilitado.",
           "correcta": true
+        },
+        {
+          "texto": "En acceso a la VLAN de voz únicamente.",
+          "correcta": false
         },
         {
           "texto": "En acceso a la VLAN de datos sin PoE, alimentando el teléfono con su fuente.",
@@ -214,12 +214,12 @@
           "correcta": false
         },
         {
-          "texto": "La VLAN con mayor número de puertos asignados.",
-          "correcta": false
-        },
-        {
           "texto": "La VLAN cuyas tramas viajan sin etiqueta por el trunk.",
           "correcta": true
+        },
+        {
+          "texto": "La VLAN con mayor número de puertos asignados.",
+          "correcta": false
         },
         {
           "texto": "La VLAN que tiene prioridad en la calidad de servicio.",
@@ -227,7 +227,7 @@
         }
       ],
       "pregunta": "La VLAN nativa de un enlace trunk 802.1Q es:",
-      "razonamiento": "La nativa es la única que va sin etiqueta por el trunk; debe coincidir en ambos extremos. Por defecto es la 1, y por seguridad se recomienda cambiarla a una VLAN sin uso.",
+      "razonamiento": "La nativa es la VLAN que va sin etiqueta por el trunk; debe coincidir en ambos extremos. En plataformas como Cisco es por defecto la 1 (depende del fabricante); como buena práctica se cambia a una VLAN sin uso.",
       "origen": "T4 §2",
       "dificultad": "Media",
       "tipo": "Concepto",
@@ -242,20 +242,20 @@
           "correcta": false
         },
         {
+          "texto": "802.1Q",
+          "correcta": true
+        },
+        {
           "texto": "802.1w",
           "correcta": false
         },
         {
           "texto": "802.3ad",
           "correcta": false
-        },
-        {
-          "texto": "802.1Q",
-          "correcta": true
         }
       ],
       "pregunta": "¿Qué norma del IEEE define el etiquetado de tramas para VLAN?",
-      "razonamiento": "802.1Q define las VLAN y la etiqueta de 4 bytes. 802.1D es STP, 802.1w es RSTP y 802.3ad es la agregación de enlaces (LACP).",
+      "razonamiento": "802.1Q define las VLAN y la etiqueta de 4 bytes. 802.1D es STP, 802.1w es RSTP y 802.3ad (hoy 802.1AX) es la agregación de enlaces (LACP).",
       "origen": "T4 §2",
       "dificultad": "Fácil",
       "tipo": "Dato",
@@ -294,6 +294,10 @@
       "id": "BOLSA_RED_T4_011",
       "opciones": [
         {
+          "texto": "Mayor número de puertos activos y más enlaces troncales.",
+          "correcta": false
+        },
+        {
           "texto": "Menor Bridge ID (prioridad más baja y, a igualdad, MAC más baja).",
           "correcta": true
         },
@@ -302,16 +306,12 @@
           "correcta": false
         },
         {
-          "texto": "Mayor número de puertos activos y más enlaces troncales.",
-          "correcta": false
-        },
-        {
           "texto": "Enlaces de mayor velocidad hacia el resto.",
           "correcta": false
         }
       ],
       "pregunta": "En Spanning Tree, el puente raíz (root bridge) es el switch con:",
-      "razonamiento": "Se elige el menor Bridge ID: primero la prioridad (32768 por defecto, en múltiplos de 4096) y, si empatan, la MAC más baja. Conviene forzar como raíz al switch principal bajando su prioridad.",
+      "razonamiento": "Se elige el menor Bridge ID. Modelo didáctico: primero la prioridad (32768 por defecto, en múltiplos de 4096) y, si empatan, la MAC más baja. Conviene forzar como raíz al switch principal bajando su prioridad.",
       "origen": "T4 §3",
       "dificultad": "Media",
       "tipo": "Concepto",
@@ -322,11 +322,11 @@
       "id": "BOLSA_RED_T4_012",
       "opciones": [
         {
-          "texto": "IEEE 802.1w",
-          "correcta": true
+          "texto": "IEEE 802.1D",
+          "correcta": false
         },
         {
-          "texto": "IEEE 802.1D",
+          "texto": "IEEE 802.1X",
           "correcta": false
         },
         {
@@ -334,8 +334,8 @@
           "correcta": false
         },
         {
-          "texto": "IEEE 802.1X",
-          "correcta": false
+          "texto": "IEEE 802.1w",
+          "correcta": true
         }
       ],
       "pregunta": "¿Qué versión de Spanning Tree se conoce como Rapid Spanning Tree?",
@@ -354,12 +354,12 @@
           "correcta": false
         },
         {
-          "texto": "Pasa al estado de escucha durante 15 segundos.",
-          "correcta": false
-        },
-        {
           "texto": "Se desactiva (err-disabled) para evitar un posible bucle.",
           "correcta": true
+        },
+        {
+          "texto": "Pasa al estado de escucha durante 15 segundos.",
+          "correcta": false
         },
         {
           "texto": "Ignora la BPDU y sigue en forwarding porque tiene PortFast.",
@@ -395,7 +395,7 @@
         }
       ],
       "pregunta": "Con STP clásico (802.1D), ¿cuánto tarda aproximadamente un puerto en pasar de bloqueo a reenvío?",
-      "razonamiento": "Listening (15 s) + learning (15 s), más hasta 20 s de max age si hay que detectar la caída: 30–50 s. RSTP lo reduce a 1–2 s.",
+      "razonamiento": "Listening (15 s) + learning (15 s), más hasta 20 s de max age si hay que detectar la caída: 30–50 s con los temporizadores por defecto. RSTP converge mucho más rápido (segundos o menos).",
       "origen": "T4 §3",
       "dificultad": "Media",
       "tipo": "Dato",
@@ -434,12 +434,12 @@
       "id": "BOLSA_RED_T4_016",
       "opciones": [
         {
-          "texto": "15,4 W",
-          "correcta": true
-        },
-        {
           "texto": "30 W",
           "correcta": false
+        },
+        {
+          "texto": "15,4 W",
+          "correcta": true
         },
         {
           "texto": "60 W",
@@ -494,16 +494,16 @@
           "correcta": false
         },
         {
-          "texto": "Instalar inyectores PoE de la potencia adecuada entre el switch y el AP.",
-          "correcta": true
-        },
-        {
           "texto": "Configurar una VLAN de voz en sus puertos.",
           "correcta": false
         },
         {
           "texto": "Bajar la velocidad del puerto a 100 Mbps.",
           "correcta": false
+        },
+        {
+          "texto": "Instalar inyectores PoE de la potencia adecuada entre el switch y el AP.",
+          "correcta": true
         }
       ],
       "pregunta": "Si el PoE de un switch falla, ¿cuál es una solución válida para alimentar los AP wifi?",
@@ -518,19 +518,19 @@
       "id": "BOLSA_RED_T4_019",
       "opciones": [
         {
-          "texto": "Port security.",
-          "correcta": false
-        },
-        {
           "texto": "DHCP snooping.",
           "correcta": true
+        },
+        {
+          "texto": "BPDU Guard.",
+          "correcta": false
         },
         {
           "texto": "Storm control.",
           "correcta": false
         },
         {
-          "texto": "BPDU Guard.",
+          "texto": "Port security.",
           "correcta": false
         }
       ],
@@ -546,16 +546,16 @@
       "id": "BOLSA_RED_T4_020",
       "opciones": [
         {
-          "texto": "LLDP (IEEE 802.1AB)",
-          "correcta": true
-        },
-        {
           "texto": "CDP (Cisco Discovery Protocol)",
           "correcta": false
         },
         {
           "texto": "STP (IEEE 802.1D)",
           "correcta": false
+        },
+        {
+          "texto": "LLDP (IEEE 802.1AB)",
+          "correcta": true
         },
         {
           "texto": "VRRP (RFC 5798)",
@@ -606,16 +606,16 @@
           "correcta": false
         },
         {
-          "texto": "1",
-          "correcta": true
+          "texto": "120",
+          "correcta": false
         },
         {
           "texto": "110",
           "correcta": false
         },
         {
-          "texto": "120",
-          "correcta": false
+          "texto": "1",
+          "correcta": true
         }
       ],
       "pregunta": "En un router Cisco, ¿qué distancia administrativa tiene por defecto una ruta estática?",
@@ -630,16 +630,16 @@
       "id": "BOLSA_RED_T4_023",
       "opciones": [
         {
+          "texto": "De estado de enlace que calcula las rutas con el algoritmo de Dijkstra.",
+          "correcta": true
+        },
+        {
           "texto": "De vector distancia cuya métrica es el número de saltos hasta el destino.",
           "correcta": false
         },
         {
           "texto": "Exterior utilizado entre operadores de Internet.",
           "correcta": false
-        },
-        {
-          "texto": "De estado de enlace que calcula las rutas con el algoritmo de Dijkstra.",
-          "correcta": true
         },
         {
           "texto": "Propietario de Cisco cuya métrica combina ancho de banda y retardo.",
@@ -662,15 +662,15 @@
           "correcta": false
         },
         {
+          "texto": "RIPv2.",
+          "correcta": false
+        },
+        {
           "texto": "BGP.",
           "correcta": true
         },
         {
           "texto": "EIGRP.",
-          "correcta": false
-        },
-        {
-          "texto": "RIPv2.",
           "correcta": false
         }
       ],
@@ -686,7 +686,7 @@
       "id": "BOLSA_RED_T4_025",
       "opciones": [
         {
-          "texto": "La misma dirección IP en todas las VLAN.",
+          "texto": "Una VLAN nativa común a todos los puertos y un único dominio de broadcast.",
           "correcta": false
         },
         {
@@ -694,12 +694,12 @@
           "correcta": false
         },
         {
-          "texto": "Una interfaz virtual (SVI) con IP en cada VLAN y se habilita el routing.",
-          "correcta": true
+          "texto": "La misma dirección IP en todas las VLAN.",
+          "correcta": false
         },
         {
-          "texto": "Una VLAN nativa común a todos los puertos y un único dominio de broadcast.",
-          "correcta": false
+          "texto": "Una interfaz virtual (SVI) con IP en cada VLAN y se habilita el routing.",
+          "correcta": true
         }
       ],
       "pregunta": "Para enrutar entre VLAN en un switch de capa 3 se configura:",
@@ -714,20 +714,20 @@
       "id": "BOLSA_RED_T4_026",
       "opciones": [
         {
-          "texto": "VRRP.",
-          "correcta": true
+          "texto": "HSRP.",
+          "correcta": false
         },
         {
           "texto": "OSPF.",
           "correcta": false
         },
         {
-          "texto": "HSRP.",
+          "texto": "LACP.",
           "correcta": false
         },
         {
-          "texto": "LACP.",
-          "correcta": false
+          "texto": "VRRP.",
+          "correcta": true
         }
       ],
       "pregunta": "¿Qué protocolo estándar permite que dos routers compartan una IP virtual de puerta de enlace para que los equipos no pierdan la conexión si uno falla?",
@@ -774,12 +774,12 @@
           "correcta": false
         },
         {
-          "texto": "Gestionarlos como un único switch y repartir los uplinks agregados entre ambos miembros.",
-          "correcta": true
-        },
-        {
           "texto": "Eliminar la necesidad de configurar VLAN, trunks y spanning tree en los switches de la planta.",
           "correcta": false
+        },
+        {
+          "texto": "Gestionarlos como un único switch y repartir los uplinks agregados entre ambos miembros.",
+          "correcta": true
         },
         {
           "texto": "Convertirlos automáticamente en switches de capa 3 con routing entre VLAN.",
@@ -802,12 +802,12 @@
           "correcta": false
         },
         {
-          "texto": "vlan 23 untagged 5",
-          "correcta": false
-        },
-        {
           "texto": "vlan access 23",
           "correcta": true
+        },
+        {
+          "texto": "vlan 23 untagged 5",
+          "correcta": false
         },
         {
           "texto": "access-vlan 23 tagged",
@@ -826,12 +826,12 @@
       "id": "BOLSA_RED_T4_030",
       "opciones": [
         {
-          "texto": "Que el trunk no levante hasta que se igualen las velocidades.",
-          "correcta": false
-        },
-        {
           "texto": "Que el tráfico sin etiqueta acabe en VLAN distintas en cada lado.",
           "correcta": true
+        },
+        {
+          "texto": "Que el trunk no levante hasta que se igualen las velocidades.",
+          "correcta": false
         },
         {
           "texto": "Que el switch cifre la VLAN nativa para separarla de las demás.",
@@ -858,16 +858,16 @@
           "correcta": false
         },
         {
-          "texto": "Un enlace de fibra de 10 Gb/s hacia el núcleo.",
-          "correcta": false
-        },
-        {
           "texto": "Un puerto de acceso con una VLAN de voz adicional.",
           "correcta": false
         },
         {
           "texto": "Un grupo de puertos agregados en un solo enlace lógico.",
           "correcta": true
+        },
+        {
+          "texto": "Un enlace de fibra de 10 Gb/s hacia el núcleo.",
+          "correcta": false
         }
       ],
       "pregunta": "En la terminología del antiguo ArubaOS-Switch (ProCurve), un «trunk» es:",
@@ -882,20 +882,20 @@
       "id": "BOLSA_RED_T4_032",
       "opciones": [
         {
-          "texto": "LLDP, que no reconoció el modelo del equipo conectado.",
+          "texto": "DHCP snooping, que bloqueó el servidor DHCP corporativo.",
           "correcta": false
         },
         {
-          "texto": "DHCP snooping, que bloqueó el servidor DHCP corporativo.",
-          "correcta": false
+          "texto": "BPDU Guard, que apagó el puerto al recibir una BPDU.",
+          "correcta": true
         },
         {
           "texto": "LACP, que no pudo negociar la agregación con el portátil.",
           "correcta": false
         },
         {
-          "texto": "BPDU Guard, que apagó el puerto al recibir una BPDU.",
-          "correcta": true
+          "texto": "LLDP, que no reconoció el modelo del equipo conectado.",
+          "correcta": false
         }
       ],
       "pregunta": "Un puerto de usuario aparece en estado err-disabled tras conectar un empleado un pequeño switch en su mesa. La causa más probable es:",
@@ -946,12 +946,12 @@
           "correcta": false
         },
         {
-          "texto": "150 W",
-          "correcta": false
-        },
-        {
           "texto": "90 W",
           "correcta": true
+        },
+        {
+          "texto": "150 W",
+          "correcta": false
         }
       ],
       "pregunta": "¿Qué potencia máxima entrega en el puerto un switch PoE IEEE 802.3bt de tipo 4?",
@@ -970,16 +970,16 @@
           "correcta": false
         },
         {
-          "texto": "LLDP-MED, la extensión de LLDP para dispositivos finales.",
-          "correcta": true
+          "texto": "LACP, que negocia la VLAN de voz junto con el grupo.",
+          "correcta": false
         },
         {
           "texto": "STP, que anuncia las VLAN de voz dentro de sus BPDU.",
           "correcta": false
         },
         {
-          "texto": "LACP, que negocia la VLAN de voz junto con el grupo.",
-          "correcta": false
+          "texto": "LLDP-MED, la extensión de LLDP para dispositivos finales.",
+          "correcta": true
         }
       ],
       "pregunta": "Para que un teléfono IP conozca automáticamente su VLAN de voz en una red con switches de varios fabricantes se usa:",
@@ -988,6 +988,174 @@
       "dificultad": "Media",
       "tipo": "Aplicación",
       "concepto": "LLDP-MED",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T4_036",
+      "opciones": [
+        {
+          "texto": "Sí: sin IP no puede aprender las direcciones MAC de los equipos.",
+          "correcta": false
+        },
+        {
+          "texto": "Sí: la necesita para que Spanning Tree elija el puente raíz.",
+          "correcta": false
+        },
+        {
+          "texto": "No: conmuta por MAC; la IP solo sirve para gestionarlo en remoto.",
+          "correcta": true
+        },
+        {
+          "texto": "No: los switches de capa 2 nunca pueden tener una dirección IP.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "¿Necesita un switch de capa 2 una dirección IP para conmutar tramas?",
+      "razonamiento": "El switch de capa 2 conmuta por MAC. Una IP de gestión permite administrarlo por SSH, HTTPS o SNMP. En un switch de capa 3 hay además interfaces IP (SVI) para enrutar.",
+      "origen": "T4 §1",
+      "dificultad": "Media",
+      "tipo": "Trampa",
+      "concepto": "IP del switch",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T4_037",
+      "opciones": [
+        {
+          "texto": "Reenvía de inmediato, pero el puerto sigue participando en STP.",
+          "correcta": true
+        },
+        {
+          "texto": "Desactiva Spanning Tree en el puerto para que arranque antes.",
+          "correcta": false
+        },
+        {
+          "texto": "Debe activarse en los enlaces entre switches para acelerarlos.",
+          "correcta": false
+        },
+        {
+          "texto": "Solo existe en los switches Aruba con AOS-CX actuales.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Sobre PortFast (edge port), es correcto que:",
+      "razonamiento": "PortFast no desactiva STP: si llega una BPDU, el puerto deja de ser edge (y con BPDU Guard se deshabilita). Solo en puertos de equipos finales.",
+      "origen": "T4 §3",
+      "dificultad": "Media",
+      "tipo": "Trampa",
+      "concepto": "PortFast no desactiva STP",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T4_038",
+      "opciones": [
+        {
+          "texto": "Reparte como máximo 370 W entre todos los puertos.",
+          "correcta": true
+        },
+        {
+          "texto": "Solo puede alimentar como máximo doce equipos.",
+          "correcta": false
+        },
+        {
+          "texto": "Puede dar 30 W simultáneamente en los 48 puertos.",
+          "correcta": false
+        },
+        {
+          "texto": "Solo puede alimentar teléfonos IP, no AP.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Un switch de 48 puertos PoE+ tiene un presupuesto PoE de 370 W. ¿Qué afirmación es correcta?",
+      "razonamiento": "48 × 30 W serían 1.440 W. Lo que manda es el presupuesto del switch (y sus fuentes): hay que sumar lo que reserva cada equipo y dejar margen.",
+      "origen": "T4 §5",
+      "dificultad": "Media",
+      "tipo": "Trampa",
+      "concepto": "Presupuesto PoE",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T4_039",
+      "opciones": [
+        {
+          "texto": "No forman el LAG, porque ninguno inicia la negociación.",
+          "correcta": true
+        },
+        {
+          "texto": "Forman el LAG con el doble de velocidad para cada flujo.",
+          "correcta": false
+        },
+        {
+          "texto": "Forman un LAG estático sin protocolo de control.",
+          "correcta": false
+        },
+        {
+          "texto": "Desactivan Spanning Tree en esos dos puertos.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Si los dos extremos de un enlace están configurados con LACP en modo passive:",
+      "razonamiento": "Active + active o active + passive forman el LAG; passive + passive no, porque passive solo responde.",
+      "origen": "T4 §4",
+      "dificultad": "Media",
+      "tipo": "Concepto",
+      "concepto": "LACP active/passive",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T4_040",
+      "opciones": [
+        {
+          "texto": "Une hasta diez switches de acceso en un solo equipo lógico.",
+          "correcta": false
+        },
+        {
+          "texto": "Es el nombre que da Aruba a la agregación de enlaces LACP.",
+          "correcta": false
+        },
+        {
+          "texto": "Son dos switches con planos de control independientes coordinados.",
+          "correcta": true
+        },
+        {
+          "texto": "Solo funciona con switches Cisco de la gama Catalyst.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Aruba VSX se diferencia de un apilamiento (stack o VSF) en que:",
+      "razonamiento": "En un stack o VSF varios switches forman un sistema lógico con un plano de control. En VSX, dos switches (típicos del núcleo) mantienen su control independiente y se coordinan para dar redundancia.",
+      "origen": "T4 §1",
+      "dificultad": "Difícil",
+      "tipo": "Diferenciación",
+      "concepto": "VSF vs VSX",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T4_041",
+      "opciones": [
+        {
+          "texto": "Elegir entre rutas de un mismo protocolo según su coste.",
+          "correcta": false
+        },
+        {
+          "texto": "Elegir la ruta con el prefijo más largo de la tabla.",
+          "correcta": false
+        },
+        {
+          "texto": "Elegir entre fuentes distintas que dan el mismo prefijo.",
+          "correcta": true
+        },
+        {
+          "texto": "Medir la distancia física entre dos routers en metros.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "La distancia administrativa (en Cisco) sirve para:",
+      "razonamiento": "Primero se aplica el prefijo más largo. Si dos fuentes distintas (estática, OSPF…) ofrecen el mismo prefijo, gana la de menor DA. La métrica decide dentro de un mismo protocolo. Los valores de DA son de Cisco, no estándar.",
+      "origen": "T4 §8",
+      "dificultad": "Media",
+      "tipo": "Diferenciación",
+      "concepto": "DA vs métrica",
       "prioridad": "Media"
     }
   ]
