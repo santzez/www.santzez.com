@@ -6,70 +6,94 @@
   </header>
 
   <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#mapa-del-tema">Mapa del tema</a></li>
 <li><a href="#1-iot-y-m2m">1. IoT y M2M</a></li>
 <li><a href="#2-requisitos-de-la-conectividad-iot">2. Requisitos de la conectividad IoT</a></li>
-<li><a href="#3-tecnologias-de-conectividad">3. Tecnologías de conectividad</a></li>
-<li><a href="#4-protocolos-de-aplicacion-iot">4. Protocolos de aplicación IoT</a></li>
-<li><a href="#5-plataformas-gestion-y-seguridad-del-iot">5. Plataformas, gestión y seguridad del IoT</a></li>
-<li><a href="#6-lo-que-cayo-en-el-examen-de-2023">6. Lo que cayó en el examen de 2023</a></li>
-<li><a href="#7-anclas-de-memoria">7. Anclas de memoria</a></li>
-<li><a href="#8-no-confundir">8. No confundir</a></li>
-<li><a href="#9-posibles-trampas-de-examen">9. Posibles trampas de examen</a></li>
-<li><a href="#10-posibles-preguntas-tipo-test">10. Posibles preguntas tipo test</a></li>
-<li><a href="#11-posibles-preguntas-cortas-con-esquema-de-respuesta">11. Posibles preguntas cortas (con esquema de respuesta)</a></li>
-<li><a href="#12-supuesto-practico">12. Supuesto práctico</a></li>
+<li><a href="#3-lpwan-sin-licencia-lorawan-y-sigfox">3. LPWAN sin licencia: LoRaWAN y Sigfox</a></li>
+<li><a href="#4-iot-celular-nb-iot-lte-m-y-5g">4. IoT celular: NB-IoT, LTE-M y 5G</a></li>
+<li><a href="#5-corto-alcance-y-cable">5. Corto alcance y cable</a></li>
+<li><a href="#6-protocolos-de-aplicacion-mqtt-y-coap">6. Protocolos de aplicación: MQTT y CoAP</a></li>
+<li><a href="#7-plataformas-gestion-y-seguridad-del-iot">7. Plataformas, gestión y seguridad del IoT</a></li>
+<li><a href="#8-situaciones-profesionales">8. Situaciones profesionales</a></li>
+<li><a href="#9-lo-que-cayo-en-el-examen-de-2023">9. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#10-anclas-de-memoria">10. Anclas de memoria</a></li>
+<li><a href="#11-no-confundir">11. No confundir</a></li>
+<li><a href="#12-posibles-trampas-de-examen">12. Posibles trampas de examen</a></li>
 <li><a href="#13-matriz-de-memorizacion">13. Matriz de memorización</a></li>
-<li><a href="#14-resumen-final-si-manana-fuera-el-examen">14. Resumen final: si mañana fuera el examen</a></li>
-<li><a href="#15-actualidad-datos-fechados">15. Actualidad — datos fechados</a></li>
+<li><a href="#14-preguntas-tipo-test">14. Preguntas tipo test</a></li>
+<li><a href="#15-posibles-preguntas-cortas-con-esquema-de-respuesta">15. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#16-casos-practicos">16. Casos prácticos</a></li>
+<li><a href="#17-repaso-visual-t8">17. Repaso visual · T8</a></li>
+<li><a href="#18-resumen-final-si-manana-fuera-el-examen">18. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#19-actualidad-datos-fechados">19. Actualidad — datos fechados</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th>⚠️ <strong>No confundir — fronteras del tema</strong><br>Este tema trata el <strong>Internet de las cosas (IoT)</strong> y la comunicación <strong>máquina a máquina (M2M)</strong>: tecnologías de conectividad (<strong>LPWAN</strong>: LoRaWAN, Sigfox, NB-IoT, LTE-M; corto alcance: Zigbee, BLE), <strong>IoT sobre 4G/5G</strong> y los <strong>protocolos de aplicación</strong> (MQTT, CoAP).<br><strong>T6</strong> → generaciones móviles en general. <strong>T5</strong> → wifi. <strong>T18</strong> → SCADA y PLC (el IoT industrial clásico). <strong>T16/T17</strong> → seguridad de dispositivos.</th>
-</tr>
-</table></div>
-<h2 id="1-iot-y-m2m" class="tema-h2">1. IoT y M2M</h2>
-<ul class="tema-lista">
-<li><strong>M2M</strong> (<em>Machine to Machine</em>): comunicación <strong>directa entre máquinas</strong> sin intervención humana, normalmente punto a punto o hacia un servidor (un contador que envía su lectura, una alarma que avisa a la central). Es el concepto más antiguo, ligado a las <strong>SIM de datos</strong> de 2G/3G.</li>
-<li><strong>IoT</strong> (<em>Internet of Things</em>): <strong>objetos conectados a Internet</strong> (o a una red IP) que recogen datos con <strong>sensores</strong>, actúan con <strong>actuadores</strong> y se integran en <strong>plataformas</strong> en la nube para analizar y presentar la información. El IoT engloba al M2M.</li>
-<li><strong>IIoT</strong> (IoT industrial): sensores y máquinas en fábricas e infraestructuras (T18).</li>
-</ul>
-<h3 id="arquitectura-en-capas">Arquitectura en capas</h3>
+<h2 id="mapa-del-tema" class="tema-h2">Mapa del tema</h2>
+<p>T8 trata el <strong>Internet de las cosas (IoT)</strong> y la comunicación <strong>máquina a máquina (M2M)</strong>: sus requisitos, las tecnologías de conectividad (<strong>LPWAN</strong>: LoRaWAN, Sigfox, NB-IoT, LTE-M; corto alcance: BLE, Zigbee), el <strong>IoT sobre 4G/5G</strong>, los <strong>protocolos de aplicación</strong> (MQTT, CoAP) y su <strong>integración segura</strong> en la red municipal.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
-<th>Capa</th>
-<th>Elementos</th>
-<th>Ejemplo municipal</th>
+<th>Si la pregunta trata de…</th>
+<th>Está en</th>
+<th>Desde T8 solo…</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Percepción / dispositivo</strong></td>
-<td>Sensores, actuadores, microcontroladores</td>
-<td>Sensor de ocupación de una plaza de aparcamiento, contador de agua, sensor de ruido</td>
+<td>Generaciones móviles, mMTC, slicing</td>
+<td><strong>T6</strong></td>
+<td>se usan NB-IoT, LTE-M y RedCap</td>
 </tr>
 <tr>
-<td><strong>Red / conectividad</strong></td>
-<td>LPWAN, celular, wifi, Zigbee… y <strong>pasarelas (<em>gateways</em>)</strong></td>
-<td>Antena LoRaWAN en la azotea de un edificio municipal</td>
+<td>Wifi</td>
+<td><strong>T5</strong></td>
+<td>se compara con las LPWAN</td>
 </tr>
 <tr>
-<td><strong>Plataforma / middleware</strong></td>
-<td>Servidor de red, <em>broker</em> MQTT, bases de datos, gestión de dispositivos</td>
-<td>Plataforma de ciudad inteligente (<em>smart city</em>)</td>
+<td>Single Pair Ethernet (cable)</td>
+<td><strong>T1, T3</strong></td>
+<td>se cita como opción cableada para sensores</td>
 </tr>
 <tr>
-<td><strong>Aplicación</strong></td>
-<td>Paneles, alertas, análisis, integración con otros sistemas</td>
-<td>Mapa de aparcamientos libres, aviso de contenedor lleno</td>
+<td>VLAN y cortafuegos</td>
+<td><strong>T4, T14</strong></td>
+<td>se exige segmentar el IoT</td>
+</tr>
+<tr>
+<td>SCADA, PLC, OPC UA</td>
+<td><strong>T18</strong></td>
+<td>se cita el IoT industrial</td>
+</tr>
+<tr>
+<td>Seguridad de dispositivos, malware</td>
+<td><strong>T13, T16, T17</strong></td>
+<td>se citan Mirai y las medidas básicas</td>
 </tr>
 </tbody>
 </table></div>
-<p><strong>Ejemplos de IoT en un ayuntamiento</strong>: aparcamiento inteligente, contenedores con sensor de llenado, <strong>lectura remota de contadores</strong> de agua, <strong>alumbrado</strong> público telegestionado, calidad del aire y ruido, riego de parques, control de aforos, <strong>telegestión de la climatización de los edificios</strong> (el PLC del caso de 2023, T18), cámaras y sensores de tráfico.</p>
+<p>Cada apartado sigue tres niveles: <strong>concepto</strong>, <strong>explicación</strong> y <strong>aplicación práctica</strong>.</p>
+<h2 id="1-iot-y-m2m" class="tema-h2">1. IoT y M2M</h2>
+<p><strong>Concepto.</strong> <strong>M2M</strong> es la comunicación <strong>directa entre máquinas</strong> sin intervención humana. <strong>IoT</strong> es más amplio: <strong>objetos conectados</strong> que recogen datos con sensores, actúan con actuadores y se integran en <strong>plataformas</strong>.</p>
+<p><strong>Explicación.</strong></p>
+<ul class="tema-lista">
+<li><strong>M2M</strong>: normalmente punto a punto o hacia un servidor (un contador que envía su lectura, una alarma que avisa a la central). Es el concepto más antiguo, ligado a las <strong>SIM de datos</strong> 2G/3G.</li>
+<li><strong>IoT</strong>: objetos en red con plataformas de análisis y presentación. <strong>Engloba al M2M</strong>.</li>
+<li><strong>IIoT</strong> (IoT industrial): máquinas e infraestructuras (T18).</li>
+</ul>
+<figure class="tema-figura">
+<figcaption>Figura 1 · Arquitectura del IoT en capas</figcaption>
+<svg viewBox="0 0 700 234" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cuatro capas del IoT de abajo arriba, con un ejemplo municipal: dispositivo (sensores, actuadores, microcontrolador; sensor de plaza, contador de agua), red y conectividad (LPWAN, celular, wifi y pasarelas; gateway LoRaWAN en una azotea), plataforma (servidor de red, broker MQTT, base de datos; plataforma de ciudad) y aplicación (paneles, alertas, análisis; mapa de aparcamientos libres). M2M es máquina a máquina; IoT, objetos en red integrados en plataformas." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0801capasa-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0801capasv-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0801capasm-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0801capasg-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><text x="260" y="14" text-anchor="middle" font-size="11" font-weight="700" fill="#5a5652" dominant-baseline="middle">capa</text><text x="560" y="14" text-anchor="middle" font-size="11" font-weight="700" fill="#5a5652" dominant-baseline="middle">ejemplo municipal</text><rect x="110" y="24" width="300" height="38" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="260.0" y="35.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">Aplicación</text><text x="260.0" y="50.25" text-anchor="middle" font-size="10.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">paneles, alertas, análisis</text><text x="430" y="43" text-anchor="start" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle">mapa de aparcamientos libres</text><rect x="110" y="70" width="300" height="38" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="260.0" y="81.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Plataforma</text><text x="260.0" y="96.25" text-anchor="middle" font-size="10.0" font-weight="500" fill="#23272e" dominant-baseline="middle">servidor de red, broker MQTT, BD</text><text x="430" y="89" text-anchor="start" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle">plataforma de ciudad (FIWARE…)</text><rect x="110" y="116" width="300" height="38" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="260.0" y="127.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Red / conectividad</text><text x="260.0" y="142.25" text-anchor="middle" font-size="10.0" font-weight="500" fill="#23272e" dominant-baseline="middle">LPWAN, celular, wifi + pasarelas</text><text x="430" y="135" text-anchor="start" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle">gateway LoRaWAN en una azotea</text><rect x="110" y="162" width="300" height="38" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="260.0" y="173.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Dispositivo</text><text x="260.0" y="188.25" text-anchor="middle" font-size="10.0" font-weight="500" fill="#23272e" dominant-baseline="middle">sensores, actuadores, microcontrolador</text><text x="430" y="181" text-anchor="start" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle">sensor de plaza, contador de agua</text><path d="M70,200 L70,30" fill="none" stroke="#5a5652" stroke-width="1.6" marker-end="url(#T0801capasg-1)"/><text x="60" y="120" text-anchor="end" font-size="10.5" font-weight="600" fill="#5a5652" dominant-baseline="middle">datos</text><text x="350" y="222" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">M2M = máquina a máquina, punto a punto · IoT = objetos en red integrados en plataformas</text></svg>
+</figure>
+<p><strong>Aplicación práctica — IoT en un ayuntamiento</strong>: aparcamiento inteligente, contenedores con sensor de llenado, <strong>lectura remota de contadores</strong>, <strong>alumbrado telegestionado</strong>, calidad del aire y ruido, riego, aforos y <strong>telegestión de la climatización de los edificios</strong> (el PLC del caso de 2023, T18).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — M2M vs IoT</strong><br><strong>M2M</strong>: máquina a máquina, punto a punto. <strong>IoT</strong>: objetos en red integrados en plataformas; incluye el M2M.</th>
+</tr>
+</table></div>
 <h2 id="2-requisitos-de-la-conectividad-iot" class="tema-h2">2. Requisitos de la conectividad IoT</h2>
-<p>Un sensor IoT suele necesitar lo contrario que un usuario de oficina:</p>
+<p><strong>Concepto.</strong> Un sensor IoT necesita casi lo contrario que un usuario de oficina: <strong>poco caudal</strong>, <strong>mucho alcance</strong> y <strong>muy poco consumo</strong>.</p>
+<p><strong>Explicación.</strong></p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -91,12 +115,12 @@
 <td>Llegar a sótanos y arquetas (contadores)</td>
 </tr>
 <tr>
-<td><strong>Bajo coste</strong> del módulo y de la conectividad</td>
+<td><strong>Bajo coste</strong></td>
 <td>Desplegar miles de unidades</td>
 </tr>
 <tr>
 <td><strong>Poco caudal</strong></td>
-<td>Mensajes de unos pocos bytes, unas cuantas veces al día</td>
+<td>Unos pocos bytes, unas cuantas veces al día</td>
 </tr>
 <tr>
 <td><strong>Escalabilidad</strong></td>
@@ -105,8 +129,14 @@
 </tbody>
 </table></div>
 <p>Por eso existen las <strong>LPWAN</strong> (<em>Low Power Wide Area Networks</em>): <strong>bajo consumo, largo alcance y poco caudal</strong>.</p>
-<h2 id="3-tecnologias-de-conectividad" class="tema-h2">3. Tecnologías de conectividad</h2>
-<h3 id="lpwan-sin-licencia">LPWAN sin licencia</h3>
+<figure class="tema-figura">
+<figcaption>Figura 2 · Tecnologías IoT por alcance y caudal</figcaption>
+<svg viewBox="0 0 700 236" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gráfico de alcance frente a caudal: wifi con mucho caudal y poco alcance; BLE y Zigbee (malla) con poco alcance y poco caudal; 4G/5G con mucho alcance y caudal; dentro de un recuadro LPWAN (bajo consumo, largo alcance, poco caudal) están LTE-M, NB-IoT (con operador) y LoRaWAN y Sigfox (sin licencia, 868 MHz)." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0802mapaa-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0802mapav-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0802mapam-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0802mapag-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><line x1="70" y1="210" x2="690" y2="210" stroke="#5a5652" stroke-width="1.4"/><line x1="70" y1="210" x2="70" y2="18" stroke="#5a5652" stroke-width="1.4"/><text x="690" y="228" text-anchor="end" font-size="11" font-weight="600" fill="#5a5652" dominant-baseline="middle">alcance →</text><text x="76" y="14" text-anchor="start" font-size="11" font-weight="600" fill="#5a5652" dominant-baseline="middle">↑ caudal</text><line x1="110" y1="206" x2="110" y2="214" stroke="#5a5652" stroke-width="1.2"/><text x="110" y="226" text-anchor="middle" font-size="10" font-weight="600" fill="#5a5652" dominant-baseline="middle">10 m</text><line x1="250" y1="206" x2="250" y2="214" stroke="#5a5652" stroke-width="1.2"/><text x="250" y="226" text-anchor="middle" font-size="10" font-weight="600" fill="#5a5652" dominant-baseline="middle">100 m</text><line x1="400" y1="206" x2="400" y2="214" stroke="#5a5652" stroke-width="1.2"/><text x="400" y="226" text-anchor="middle" font-size="10" font-weight="600" fill="#5a5652" dominant-baseline="middle">1 km</text><line x1="560" y1="206" x2="560" y2="214" stroke="#5a5652" stroke-width="1.2"/><text x="560" y="226" text-anchor="middle" font-size="10" font-weight="600" fill="#5a5652" dominant-baseline="middle">10 km</text><rect x="65" y="26" width="110" height="28" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="120.0" y="40.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Wifi</text><rect x="85" y="110" width="110" height="28" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="140.0" y="124.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">BLE</text><rect x="195" y="140" width="110" height="28" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="250.0" y="154.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Zigbee (malla)</text><rect x="385" y="36" width="110" height="28" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="440.0" y="50.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">4G / 5G</text><rect x="385" y="90" width="110" height="28" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="440.0" y="104.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">LTE-M</text><rect x="465" y="122" width="110" height="28" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="520.0" y="136.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">NB-IoT</text><rect x="375" y="162" width="110" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="430.0" y="176.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">LoRaWAN</text><rect x="525" y="172" width="110" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="580.0" y="186.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Sigfox</text><rect x="360" y="90" width="320" height="112" rx="10" fill="none" stroke="#003da5" stroke-width="1.6" stroke-dasharray="6 4"/><text x="675" y="84" text-anchor="end" font-size="10.5" font-weight="700" fill="#003da5" dominant-baseline="middle">LPWAN: bajo consumo + largo alcance + poco caudal</text><text x="240" y="76" text-anchor="middle" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">azul = con operador (licenciado) · ámbar = sin licencia (868 MHz)</text></svg>
+</figure>
+<p><strong>Aplicación práctica.</strong> Antes de elegir tecnología, pregunta: <strong>cuántos bytes, cada cuánto, dónde está el sensor, si se mueve y si tiene alimentación</strong>.</p>
+<h2 id="3-lpwan-sin-licencia-lorawan-y-sigfox" class="tema-h2">3. LPWAN sin licencia: LoRaWAN y Sigfox</h2>
+<p><strong>Concepto.</strong> <strong>LoRaWAN</strong> y <strong>Sigfox</strong> usan bandas de <strong>uso común</strong> (868 MHz en Europa) para llevar mensajes pequeños a kilómetros de distancia con muy poco consumo.</p>
+<p><strong>Explicación.</strong></p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -118,57 +148,69 @@
 <tbody>
 <tr>
 <td>Banda</td>
-<td><strong>868 MHz</strong> en Europa (uso común)</td>
+<td><strong>868 MHz</strong> en Europa</td>
 <td>868 MHz</td>
 </tr>
 <tr>
 <td>Modulación</td>
-<td><strong>CSS</strong> (<em>Chirp Spread Spectrum</em>), patentada por Semtech</td>
-<td>Banda ultraestrecha (UNB)</td>
+<td><strong>CSS</strong> (<em>Chirp Spread Spectrum</em>)</td>
+<td>Banda ultraestrecha</td>
 </tr>
 <tr>
 <td>Alcance</td>
-<td><strong>2–5 km en ciudad, más de 10–15 km en zona rural</strong></td>
+<td><strong>2–5 km en ciudad, más de 10 km en rural</strong></td>
 <td>Similar</td>
 </tr>
 <tr>
 <td>Caudal</td>
-<td><strong>0,3 a 50 kbps</strong></td>
-<td>100 bps; ≈ 140 mensajes de 12 bytes al día</td>
+<td><strong>0,3 a unos 11 kb/s</strong> con modulación LoRa; <strong>hasta 50 kb/s</strong> con la opción FSK</td>
+<td>≈ 100 b/s; unos 140 mensajes de 12 bytes al día</td>
 </tr>
 <tr>
 <td>Topología</td>
-<td><strong>Estrella de estrellas</strong>: dispositivos → <em>gateways</em> → servidor de red</td>
+<td><strong>Estrella de estrellas</strong></td>
 <td>Estrella, red del operador</td>
 </tr>
 <tr>
 <td>Despliegue</td>
-<td><strong>Red propia</strong> (la organización instala sus <em>gateways</em>) o de un operador LoRaWAN</td>
-<td>Solo red del operador Sigfox</td>
-</tr>
-<tr>
-<td>Clases de dispositivo</td>
-<td><strong>A</strong> (máximo ahorro: solo escucha tras transmitir), <strong>B</strong> (ventanas programadas), <strong>C</strong> (escucha continua)</td>
-<td>—</td>
+<td><strong>Red propia</strong> o de un operador LoRaWAN</td>
+<td>Solo red del operador</td>
 </tr>
 <tr>
 <td>Seguridad</td>
-<td>Cifrado AES-128 de extremo a extremo (dos claves: de red y de aplicación)</td>
-<td>Autenticación y cifrado opcional</td>
+<td><strong>AES-128</strong> con clave de red y clave de aplicación</td>
+<td>Autenticación, cifrado opcional</td>
 </tr>
 </tbody>
 </table></div>
 <ul class="tema-lista">
-<li><strong>LoRa</strong> es la <strong>capa física</strong> (la modulación) y <strong>LoRaWAN</strong> el <strong>protocolo de red</strong> (capa MAC) definido por la <strong>LoRa Alliance</strong>.</li>
-<li>Un <strong>gateway LoRaWAN</strong> recibe los mensajes de todos los sensores a su alcance y los reenvía por IP (Ethernet, 4G) al <strong>servidor de red</strong>; los dispositivos <strong>no se asocian</strong> a un gateway concreto.</li>
-<li><strong>No necesita visión directa</strong>: la modulación CSS es muy robusta y funciona con señales por debajo del nivel de ruido.</li>
+<li><strong>LoRa</strong> es la <strong>capa física</strong> (la modulación); <strong>LoRaWAN</strong>, el <strong>protocolo de red</strong> de la <strong>LoRa Alliance</strong>.</li>
+<li>Un <strong>gateway</strong> recibe a todos los sensores a su alcance y los reenvía por IP al <strong>servidor de red</strong>, que elimina los duplicados. Los sensores <strong>no se asocian</strong> a un gateway concreto.</li>
+<li><strong>No necesita visión directa</strong>: la modulación CSS funciona incluso por debajo del nivel de ruido.</li>
 </ul>
+<figure class="tema-figura">
+<figcaption>Figura 3 · Red LoRaWAN</figcaption>
+<svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cuatro sensores envían por radio LoRa a 868 MHz y cada mensaje lo reciben los dos gateways de las azoteas que estén cerca; los gateways lo reenvían por IP (Ethernet o 4G) al servidor de red, que deduplica, y este a la aplicación o plataforma. Estrella de estrellas; cifrado AES-128 con clave de red y de aplicación." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0803lorawana-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0803lorawanv-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0803lorawanm-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0803lorawang-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="16" width="60" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="40.0" y="30.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">sensor</text><line x1="70" y1="30" x2="200" y2="60" stroke="#b26a00" stroke-width="1.2" stroke-dasharray="5 3"/><line x1="70" y1="30" x2="200" y2="170" stroke="#b26a00" stroke-width="1.2" stroke-dasharray="5 3"/><rect x="10" y="76" width="60" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="40.0" y="90.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">sensor</text><line x1="70" y1="90" x2="200" y2="60" stroke="#b26a00" stroke-width="1.2" stroke-dasharray="5 3"/><line x1="70" y1="90" x2="200" y2="170" stroke="#b26a00" stroke-width="1.2" stroke-dasharray="5 3"/><rect x="10" y="136" width="60" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="40.0" y="150.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">sensor</text><line x1="70" y1="150" x2="200" y2="60" stroke="#b26a00" stroke-width="1.2" stroke-dasharray="5 3"/><line x1="70" y1="150" x2="200" y2="170" stroke="#b26a00" stroke-width="1.2" stroke-dasharray="5 3"/><rect x="10" y="196" width="60" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="40.0" y="210.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">sensor</text><line x1="70" y1="210" x2="200" y2="60" stroke="#b26a00" stroke-width="1.2" stroke-dasharray="5 3"/><line x1="70" y1="210" x2="200" y2="170" stroke="#b26a00" stroke-width="1.2" stroke-dasharray="5 3"/><rect x="200" y="40" width="100" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="250.0" y="53.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">gateway</text><text x="250.0" y="66.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">azotea</text><line x1="300" y1="60" x2="420" y2="115" stroke="#003da5" stroke-width="2"/><rect x="200" y="150" width="100" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="250.0" y="163.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">gateway</text><text x="250.0" y="176.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">azotea</text><line x1="300" y1="170" x2="420" y2="115" stroke="#003da5" stroke-width="2"/><rect x="420" y="92" width="120" height="46" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="480.0" y="108.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">Servidor de red</text><text x="480.0" y="122.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">deduplica</text><line x1="540" y1="115" x2="570" y2="115" stroke="#2e7d3c" stroke-width="2"/><rect x="570" y="92" width="120" height="46" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="630.0" y="108.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">Aplicación</text><text x="630.0" y="122.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">plataforma</text><text x="160" y="248" text-anchor="middle" font-size="10.5" font-weight="600" fill="#b26a00" dominant-baseline="middle">radio LoRa 868 MHz (CSS)</text><text x="335" y="248" text-anchor="middle" font-size="10.5" font-weight="600" fill="#003da5" dominant-baseline="middle">IP: Ethernet o 4G</text><text x="560" y="30" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Estrella de estrellas: los sensores</text><text x="560" y="46" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">no se asocian a un gateway;</text><text x="560" y="62" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">lo oye cualquiera que esté cerca</text><text x="560" y="170" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">AES-128: clave de red</text><text x="560" y="186" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">y clave de aplicación</text></svg>
+</figure>
+<p><strong>Clases de dispositivo LoRaWAN:</strong></p>
+<figure class="tema-figura">
+<figcaption>Figura 4 · Clases A, B y C de LoRaWAN</figcaption>
+<svg viewBox="0 0 700 198" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tres líneas de tiempo. Clase A: el dispositivo envía y luego abre dos ventanas cortas de recepción (RX1 y RX2); máximo ahorro, la habitual. Clase B: además abre ventanas programadas sincronizadas con balizas. Clase C: escucha casi continuamente; necesita alimentación." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0804clasesa-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0804clasesv-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0804clasesm-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0804clasesg-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><text x="10" y="28" text-anchor="start" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">Clase A</text><text x="10" y="44" text-anchor="start" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">máximo ahorro (la habitual)</text><line x1="140.0" y1="50" x2="680.0" y2="50" stroke="#5a5652" stroke-width="1"/><rect x="140.0" y="24" width="54.0" height="24" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="167.0" y="36.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">envía</text><rect x="226.4" y="24" width="32.400000000000006" height="24" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="242.60000000000002" y="36.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">RX1</text><rect x="291.20000000000005" y="24" width="32.39999999999998" height="24" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="307.40000000000003" y="36.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">RX2</text><text x="10" y="82" text-anchor="start" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">Clase B</text><text x="10" y="98" text-anchor="start" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">ventanas programadas</text><line x1="140.0" y1="104" x2="680.0" y2="104" stroke="#5a5652" stroke-width="1"/><rect x="140.0" y="78" width="54.0" height="24" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="167.0" y="90.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">envía</text><rect x="226.4" y="78" width="32.400000000000006" height="24" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="242.60000000000002" y="90.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">RX1</text><rect x="291.20000000000005" y="78" width="32.39999999999998" height="24" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="307.40000000000003" y="90.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">RX2</text><rect x="410.0" y="78" width="21.600000000000023" height="24" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><rect x="518.0" y="78" width="21.600000000000023" height="24" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><rect x="626.0" y="78" width="21.600000000000023" height="24" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="10" y="136" text-anchor="start" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">Clase C</text><text x="10" y="152" text-anchor="start" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">escucha casi continua</text><line x1="140.0" y1="158" x2="680.0" y2="158" stroke="#5a5652" stroke-width="1"/><rect x="140.0" y="132" width="54.0" height="24" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="167.0" y="144.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">envía</text><rect x="194.0" y="132" width="486.0" height="24" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="437.0" y="144.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">recepción continua</text><text x="528.8" y="76" text-anchor="middle" font-size="10" font-weight="600" fill="#003da5" dominant-baseline="middle">balizas</text><text x="350" y="186" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">A: solo escucha justo después de transmitir → años de batería · C: siempre escuchando → necesita alimentación</text></svg>
+</figure>
+<p><strong>Aplicación práctica.</strong> Con 2–4 gateways en azoteas municipales se cubre un barrio: <strong>red propia, sin cuota por sensor</strong>, a cambio de mantener gateways y servidor de red.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>📌 <strong>Imprescindible — examen 2023, pregunta 16 (señale la FALSA)</strong><br>Es <strong>FALSO</strong> que LoRaWAN «utilice modulación DSSS» y que «precise de visión directa entre dispositivos y antenas»: usa <strong>CSS (chirp)</strong> y funciona <strong>sin visión directa</strong>.<br>Son ciertas las demás: velocidades de hasta <strong>50 kbps</strong>, <strong>topología en estrella</strong> y <strong>largas distancias (del orden de 10 km)</strong>.</th>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 16 (señale la FALSA)</strong><br>Es <strong>FALSO</strong> que LoRaWAN «utilice modulación DSSS» o «precise de visión directa»: usa <strong>CSS</strong> y funciona <strong>sin visión directa</strong>. Eran ciertas: velocidades de <strong>hasta 50 kb/s</strong>, <strong>topología en estrella</strong> y <strong>largas distancias</strong> (del orden de 10 km).</th>
 </tr>
 </table></div>
-<h3 id="iot-celular-licenciado-con-operador">IoT celular (licenciado, con operador)</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — LoRa vs LoRaWAN · CSS vs DSSS</strong><br><strong>LoRa</strong> = modulación (capa física). <strong>LoRaWAN</strong> = protocolo de red. <strong>CSS</strong> (chirp) = LoRa. <strong>DSSS</strong> = espectro ensanchado por secuencia directa (802.11b).</th>
+</tr>
+</table></div>
+<h2 id="4-iot-celular-nb-iot-lte-m-y-5g" class="tema-h2">4. IoT celular: NB-IoT, LTE-M y 5G</h2>
+<p><strong>Concepto.</strong> Los operadores ofrecen IoT sobre su red <strong>4G/5G</strong> con versiones de bajo consumo: <strong>NB-IoT</strong> y <strong>LTE-M</strong>, que forman parte de la solución <strong>mMTC</strong> del 5G (T6).</p>
+<p><strong>Explicación.</strong></p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -193,14 +235,14 @@
 </tr>
 <tr>
 <td>Caudal</td>
-<td>Decenas de kbps</td>
-<td>Hasta ≈ 1 Mbps</td>
-<td>Mbps a Gbps</td>
+<td>Decenas de kb/s</td>
+<td>Hasta ≈ 1 Mb/s</td>
+<td>Mb/s a Gb/s</td>
 </tr>
 <tr>
 <td>Movilidad</td>
 <td>Prácticamente fija</td>
-<td><strong>Sí</strong> (handover)</td>
+<td><strong>Sí</strong></td>
 <td>Sí</td>
 </tr>
 <tr>
@@ -210,34 +252,42 @@
 <td>Sí</td>
 </tr>
 <tr>
-<td>Cobertura en interiores</td>
-<td><strong>Excelente</strong> (contadores en sótanos)</td>
+<td>Interiores</td>
+<td><strong>Excelente</strong></td>
 <td>Muy buena</td>
 <td>Normal</td>
 </tr>
 <tr>
 <td>Usos</td>
-<td>Contadores, aparcamiento, sensores fijos</td>
-<td>Seguimiento de flotas, alarmas, wearables</td>
+<td>Contadores, aparcamiento</td>
+<td>Flotas, alarmas, <em>wearables</em></td>
 <td>Cámaras, vídeo, routers</td>
 </tr>
 </tbody>
 </table></div>
 <ul class="tema-lista">
-<li>Ambas usan <strong>ahorro de energía</strong>: <strong>PSM</strong> (<em>Power Saving Mode</em>, el módulo «se duerme» durante horas) y <strong>eDRX</strong> (escucha la red con menos frecuencia).</li>
-<li>Funcionan sobre la red <strong>4G</strong> del operador y forman parte del <strong>5G</strong> como su solución de <strong>mMTC</strong> (comunicaciones masivas, T6). El 5G añade <strong>RedCap</strong> (<em>Reduced Capability</em>, Release 17): módulos 5G más sencillos para IoT de gama media (cámaras, wearables).</li>
+<li>Ahorro de energía: <strong>PSM</strong> (el módulo se «duerme» horas) y <strong>eDRX</strong> (escucha la red con menos frecuencia).</li>
+<li><strong>5G RedCap</strong> (Release 17): módulos 5G simplificados para IoT de gama media (cámaras, <em>wearables</em>).</li>
 </ul>
+<p><strong>Aplicación práctica.</strong> <strong>NB-IoT</strong> para contadores de agua en sótanos; <strong>LTE-M</strong> para dispositivos que se mueven (vehículos) o necesitan voz (alarmas de ascensor); <strong>4G/5G</strong> para cámaras.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>💡 <strong>¿LoRaWAN o NB-IoT?</strong><br><strong>LoRaWAN</strong>: red <strong>propia</strong> (sin cuotas por dispositivo), ideal para muchos sensores en una zona concreta. <strong>NB-IoT/LTE-M</strong>: <strong>sin infraestructura propia</strong>, cobertura del operador en todo el territorio, pago por SIM. Ambas son LPWAN; la elección depende de la cobertura, el coste total y quién gestiona la red.</th>
+<th>💡 <strong>Para el caso práctico — ¿LoRaWAN o NB-IoT?</strong><br><strong>LoRaWAN</strong>: red <strong>propia</strong>, sin cuota por dispositivo, ideal para muchos sensores en una zona. <strong>NB-IoT/LTE-M</strong>: <strong>sin infraestructura propia</strong>, cobertura del operador, <strong>pago por SIM</strong>. La elección depende de cobertura, coste total y quién gestiona la red.</th>
 </tr>
 </table></div>
-<h3 id="corto-alcance">Corto alcance</h3>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — NB-IoT vs LTE-M</strong><br><strong>NB-IoT</strong>: fijo, poquísimo caudal, máxima penetración. <strong>LTE-M</strong>: movilidad, más caudal y voz.</th>
+</tr>
+</table></div>
+<h2 id="5-corto-alcance-y-cable" class="tema-h2">5. Corto alcance y cable</h2>
+<p><strong>Concepto.</strong> Para sensores dentro de un edificio o cerca de una pasarela se usan tecnologías de <strong>corto alcance</strong> o, cuando se puede, <strong>cable</strong>.</p>
+<p><strong>Explicación.</strong></p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
 <th>Tecnología</th>
-<th>Norma</th>
+<th>Base</th>
 <th>Alcance</th>
 <th>Uso</th>
 </tr>
@@ -245,43 +295,51 @@
 <tbody>
 <tr>
 <td><strong>Bluetooth Low Energy (BLE)</strong></td>
-<td>Bluetooth SIG (802.15.1 en su origen)</td>
+<td>Bluetooth SIG</td>
 <td>10–100 m</td>
-<td>Wearables, balizas (<em>beacons</em>), sensores cercanos</td>
+<td><em>Wearables</em>, balizas, sensores cercanos</td>
 </tr>
 <tr>
 <td><strong>Zigbee</strong></td>
-<td>Sobre <strong>IEEE 802.15.4</strong></td>
-<td>10–100 m, <strong>red mallada</strong></td>
+<td><strong>IEEE 802.15.4</strong></td>
+<td>10–100 m, <strong>malla</strong></td>
 <td>Domótica, iluminación, sensores de edificio</td>
 </tr>
 <tr>
 <td><strong>Thread / Matter</strong></td>
-<td>802.15.4 (Thread) + estándar de aplicación (Matter)</td>
+<td>802.15.4 + estándar de aplicación</td>
 <td>Malla IPv6</td>
-<td>Hogar conectado interoperable</td>
-</tr>
-<tr>
-<td><strong>Z-Wave</strong></td>
-<td>Propietario (Sub-GHz)</td>
-<td>Malla</td>
-<td>Domótica</td>
+<td>Hogar y edificio conectados</td>
 </tr>
 <tr>
 <td><strong>RFID / NFC</strong></td>
 <td>ISO 14443 y otras</td>
-<td>cm a metros</td>
-<td>Identificación, inventario, control de acceso</td>
+<td>cm a m</td>
+<td>Identificación, inventario, acceso</td>
 </tr>
 <tr>
-<td><strong>Wifi (HaLow, 802.11ah)</strong></td>
-<td>802.11 en Sub-GHz</td>
+<td><strong>Wi-Fi HaLow (802.11ah)</strong></td>
+<td>802.11 por debajo de 1 GHz</td>
 <td>Hasta 1 km</td>
 <td>IoT con IP y más caudal</td>
 </tr>
+<tr>
+<td><strong>Single Pair Ethernet</strong> (10BASE-T1L)</td>
+<td>IEEE 802.3cg</td>
+<td>Hasta 1.000 m por un par</td>
+<td>Sensores cableados con alimentación (T1, T3)</td>
+</tr>
 </tbody>
 </table></div>
-<h2 id="4-protocolos-de-aplicacion-iot" class="tema-h2">4. Protocolos de aplicación IoT</h2>
+<p><strong>Aplicación práctica.</strong> En un edificio municipal, los sensores de climatización e iluminación suelen ir por <strong>Zigbee/Thread</strong> o por el bus del fabricante hacia una pasarela, que se conecta a una <strong>VLAN de telegestión</strong>.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — Zigbee vs Bluetooth</strong><br><strong>Zigbee</strong> se basa en <strong>802.15.4</strong> y forma mallas. <strong>Bluetooth</strong> nació de <strong>802.15.1</strong> y se usa sobre todo punto a punto.</th>
+</tr>
+</table></div>
+<h2 id="6-protocolos-de-aplicacion-mqtt-y-coap" class="tema-h2">6. Protocolos de aplicación: MQTT y CoAP</h2>
+<p><strong>Concepto.</strong> Los dispositivos IoT envían sus datos con protocolos <strong>ligeros</strong>; el más usado es <strong>MQTT</strong>, de <strong>publicación/suscripción</strong> con un <em><strong>broker</strong></em>.</p>
+<p><strong>Explicación.</strong></p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -294,24 +352,24 @@
 <tbody>
 <tr>
 <td><strong>MQTT</strong></td>
-<td><strong>Publicación/suscripción</strong> con un <em><strong>broker</strong></em> central</td>
+<td><strong>Publicación/suscripción</strong> con <strong>broker</strong></td>
 <td><strong>TCP</strong> (1883; <strong>8883</strong> con TLS)</td>
-<td><strong>Ligero</strong>, ideal para M2M e IoT; <strong>temas</strong> (<em>topics</em>); <strong>QoS 0, 1 y 2</strong>; mensaje de última voluntad (<em>Last Will</em>)</td>
+<td>Ligero; <strong>temas</strong>; <strong>QoS 0, 1 y 2</strong>; mensaje de última voluntad</td>
 </tr>
 <tr>
 <td><strong>CoAP</strong></td>
-<td>Petición/respuesta tipo REST (GET, PUT…)</td>
+<td>Petición/respuesta tipo REST</td>
 <td><strong>UDP</strong> (5683; 5684 con DTLS)</td>
-<td>Para dispositivos muy limitados</td>
+<td>Dispositivos muy limitados</td>
 </tr>
 <tr>
 <td>HTTP/REST</td>
 <td>Petición/respuesta</td>
 <td>TCP</td>
-<td>Pesado, pero universal</td>
+<td>Pesado pero universal</td>
 </tr>
 <tr>
-<td><strong>AMQP</strong></td>
+<td>AMQP</td>
 <td>Colas de mensajes</td>
 <td>TCP</td>
 <td>Integración empresarial</td>
@@ -326,41 +384,102 @@
 <td><strong>OPC UA</strong></td>
 <td>Cliente/servidor y pub/sub</td>
 <td>TCP</td>
-<td>Estándar del <strong>IoT industrial</strong> (T18)</td>
+<td><strong>IoT industrial</strong> (T18)</td>
 </tr>
 </tbody>
 </table></div>
-<h3 id="mqtt-en-detalle">MQTT en detalle</h3>
+<figure class="tema-figura">
+<figcaption>Figura 5 · MQTT: publicación y suscripción</figcaption>
+<svg viewBox="0 0 700 236" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dos sensores publican en el tema donostia/ed3/p1/temperatura del broker MQTT (TCP 1883, TLS 8883), que entrega los mensajes a tres suscriptores: panel de control, alertas e histórico. Publicador y suscriptor no se conocen; el broker los desacopla. Niveles de calidad: QoS 0 como mucho una vez, QoS 1 al menos una vez, QoS 2 exactamente una vez." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0805mqtta-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0805mqttv-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0805mqttm-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0805mqttg-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="30" width="170" height="40" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="95.0" y="43.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Sensor planta 1</text><text x="95.0" y="57.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">publica</text><rect x="10" y="110" width="170" height="40" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="95.0" y="123.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Sensor planta 2</text><text x="95.0" y="137.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">publica</text><rect x="265" y="60" width="170" height="60" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="82.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">Broker MQTT</text><text x="350.0" y="97.5" text-anchor="middle" font-size="10.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">TCP 1883 · TLS 8883</text><rect x="520" y="20" width="170" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="605.0" y="33.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">Panel de control</text><text x="605.0" y="47.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">suscrito</text><rect x="520" y="80" width="170" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="605.0" y="93.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">Alertas</text><text x="605.0" y="107.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">suscrito</text><rect x="520" y="140" width="170" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="605.0" y="153.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">Histórico</text><text x="605.0" y="167.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">suscrito</text><path d="M180,50 L262,78" fill="none" stroke="#b26a00" stroke-width="2" marker-end="url(#T0805mqttm-5)"/><path d="M180,130 L262,104" fill="none" stroke="#b26a00" stroke-width="2" marker-end="url(#T0805mqttm-5)"/><path d="M435,80 L517,40" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0805mqttv-5)"/><path d="M435,90 L517,100" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0805mqttv-5)"/><path d="M435,100 L517,160" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0805mqttv-5)"/><text x="222" y="18" text-anchor="start" font-size="10" font-weight="600" fill="#b26a00" dominant-baseline="middle">tema: donostia/ed3/p1/temperatura</text><text x="350" y="206" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">Publicador y suscriptor no se conocen: el broker desacopla · comodines + y # en los temas</text><text x="350" y="224" text-anchor="middle" font-size="11" font-weight="500" fill="#5a5652" dominant-baseline="middle">QoS 0 = como mucho una vez · QoS 1 = al menos una vez · QoS 2 = exactamente una vez</text></svg>
+</figure>
 <ul class="tema-lista">
-<li>Los dispositivos <strong>publican</strong> mensajes en un <strong>tema</strong> (p. ej., <code>donostia/edificio3/planta1/temperatura</code>) en el <strong>broker</strong> (Mosquitto, HiveMQ, EMQX…).</li>
-<li>Las aplicaciones se <strong>suscriben</strong> a los temas que les interesan (con comodines <code>+</code> y <code>#</code>) y reciben los mensajes.</li>
-<li>Publicador y suscriptor <strong>no se conocen</strong> ni tienen que estar conectados a la vez: el broker <strong>desacopla</strong>.</li>
-<li><strong>QoS 0</strong> = como mucho una vez (sin confirmación) · <strong>QoS 1</strong> = al menos una vez · <strong>QoS 2</strong> = exactamente una vez.</li>
-<li>Seguridad: <strong>TLS</strong> (puerto 8883), usuario y contraseña o certificados, y control de acceso por tema en el broker.</li>
+<li>Los dispositivos <strong>publican</strong> en un <strong>tema</strong> (p. ej., <code>donostia/edificio3/planta1/temperatura</code>).</li>
+<li>Las aplicaciones se <strong>suscriben</strong> a los temas (con comodines <code>+</code> y <code>#</code>).</li>
+<li>Publicador y suscriptor <strong>no se conocen</strong> ni tienen que estar conectados a la vez.</li>
+<li>Seguridad: <strong>TLS</strong> (8883), usuario y contraseña o certificados, y permisos por tema en el broker.</li>
 </ul>
+<p><strong>Aplicación práctica.</strong> La plataforma municipal recibe los datos de los sensores por <strong>MQTT con TLS</strong> y el broker se sitúa en una VLAN o DMZ propia con acceso controlado.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>📌 <strong>Imprescindible — examen 2023, pregunta 17</strong><br>Un protocolo usado en la comunicación <strong>M2M en el IoT</strong> es <strong>MQTT</strong> (<em>Message Queuing Telemetry Transport</em>). Los demás eran distractores de otras épocas: <strong>ATP</strong> (AppleTalk), <strong>ACSE</strong> (OSI) y <strong>RSVP</strong> (reserva de recursos en redes IP).</th>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 17</strong><br>Un protocolo usado en la comunicación <strong>M2M en el IoT</strong> es <strong>MQTT</strong>. Los distractores eran protocolos de otras épocas: ATP (AppleTalk), ACSE (OSI) y RSVP (reserva de recursos en IP).</th>
 </tr>
 </table></div>
-<h2 id="5-plataformas-gestion-y-seguridad-del-iot" class="tema-h2">5. Plataformas, gestión y seguridad del IoT</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — MQTT vs CoAP</strong><br><strong>MQTT</strong>: publicación/suscripción, broker, <strong>TCP</strong>. <strong>CoAP</strong>: petición/respuesta REST, <strong>UDP</strong>.</th>
+</tr>
+</table></div>
+<h2 id="7-plataformas-gestion-y-seguridad-del-iot" class="tema-h2">7. Plataformas, gestión y seguridad del IoT</h2>
+<p><strong>Concepto.</strong> Un despliegue IoT necesita una <strong>plataforma</strong> para los datos, <strong>gestión del ciclo de vida</strong> de miles de dispositivos y <strong>seguridad</strong> desde el primer día.</p>
+<p><strong>Explicación.</strong></p>
 <ul class="tema-lista">
-<li><strong>Plataformas IoT</strong>: reciben, almacenan y procesan los datos y gestionan los dispositivos (AWS IoT, Azure IoT, ThingsBoard, plataformas de <em>smart city</em> como <strong>FIWARE</strong>, estándar europeo de código abierto). Los servidores de red LoRaWAN más conocidos son The Things Stack o ChirpStack.</li>
-<li><strong>Gestión del ciclo de vida</strong>: alta (aprovisionamiento con claves únicas), monitorización (batería, cobertura), <strong>actualización del firmware a distancia (FOTA)</strong> y baja segura.</li>
-<li><strong>Edge computing</strong>: procesar los datos cerca del dispositivo (en la pasarela) para reducir latencia y tráfico.</li>
+<li><strong>Plataformas</strong>: reciben, almacenan y procesan los datos (AWS IoT, Azure IoT, ThingsBoard; en ciudad inteligente, <strong>FIWARE</strong>, estándar europeo de código abierto). Servidores LoRaWAN: The Things Stack, ChirpStack.</li>
+<li><strong>Ciclo de vida</strong>: alta con <strong>claves únicas</strong>, monitorización (batería, cobertura), <strong>actualización remota del firmware (FOTA)</strong> y baja segura.</li>
+<li><strong>Edge computing</strong>: procesar cerca del dispositivo para reducir latencia y tráfico.</li>
 </ul>
-<h3 id="seguridad-del-iot">Seguridad del IoT</h3>
-<p>El IoT es un objetivo frecuente: dispositivos baratos, <strong>contraseñas por defecto</strong>, firmware sin actualizar y miles de unidades expuestas. La botnet <strong>Mirai</strong> (2016) infectó cámaras y routers con credenciales de fábrica y lanzó ataques DDoS masivos.</p>
+<p><strong>Seguridad.</strong> El IoT es un objetivo frecuente: dispositivos baratos, <strong>contraseñas por defecto</strong>, firmware sin actualizar. La botnet <strong>Mirai</strong> (2016) infectó cámaras y routers con credenciales de fábrica y lanzó ataques DDoS masivos.</p>
+<figure class="tema-figura">
+<figcaption>Figura 6 · Integración segura del IoT</figcaption>
+<svg viewBox="0 0 700 256" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tres VLAN (usuarios, cámaras con credenciales cambiadas y telegestión o IoT con firmware al día) conectadas a un cortafuegos de mínimo privilegio; el cortafuegos deja pasar a la plataforma IoT por MQTT con TLS y al mantenedor externo solo por VPN. Usuarios e IoT no se ven entre sí. Mirai (2016) convirtió miles de cámaras con contraseña de fábrica en una botnet." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0806seguridada-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0806seguridadv-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0806seguridadm-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0806seguridadg-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="20" width="180" height="48" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="100.0" y="44.0" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">VLAN usuarios</text><rect x="10" y="90" width="180" height="48" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="100.0" y="107.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">VLAN cámaras</text><text x="100.0" y="121.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">credenciales cambiadas</text><rect x="10" y="160" width="180" height="48" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="100.0" y="177.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">VLAN telegestión / IoT</text><text x="100.0" y="191.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">firmware al día</text><rect x="270" y="70" width="160" height="90" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="350.0" y="100.0" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">Cortafuegos</text><text x="350.0" y="115.0" text-anchor="middle" font-size="10.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">mínimo privilegio</text><text x="350.0" y="130.0" text-anchor="middle" font-size="10.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">(T14)</text><line x1="190" y1="44" x2="270" y2="115" stroke="#5a5652" stroke-width="1.6"/><line x1="190" y1="114" x2="270" y2="115" stroke="#5a5652" stroke-width="1.6"/><line x1="190" y1="184" x2="270" y2="115" stroke="#5a5652" stroke-width="1.6"/><rect x="510" y="20" width="180" height="48" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="600.0" y="37.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">Plataforma IoT</text><text x="600.0" y="51.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">MQTT con TLS</text><rect x="510" y="160" width="180" height="48" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="600.0" y="177.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Mantenedor externo</text><text x="600.0" y="191.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">solo por VPN (T15)</text><line x1="430" y1="100" x2="510" y2="44" stroke="#2e7d3c" stroke-width="2"/><line x1="430" y1="130" x2="510" y2="184" stroke="#b26a00" stroke-width="2" stroke-dasharray="5 3"/><text x="350" y="226" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">Usuarios e IoT no se ven entre sí · solo los flujos necesarios · inventario de todos los dispositivos</text><text x="350" y="244" text-anchor="middle" font-size="10.5" font-weight="500" fill="#b26a00" dominant-baseline="middle">Mirai (2016): miles de cámaras con contraseña de fábrica convertidas en una botnet</text></svg>
+</figure>
 <p>Medidas:</p>
 <ul class="tema-lista">
 <li><strong>Cambiar las credenciales por defecto</strong> y deshabilitar servicios innecesarios (Telnet).</li>
-<li><strong>Segmentar</strong>: los dispositivos IoT en <strong>VLAN propias</strong> (como las de <strong>cámaras</strong> y <strong>telegestión</strong> del caso de 2023), sin acceso a la red de usuarios y con <strong>reglas de cortafuegos</strong> estrictas (T14).</li>
-<li><strong>Cifrado</strong> de las comunicaciones (TLS, DTLS, AES en LoRaWAN).</li>
-<li><strong>Actualizaciones</strong> de firmware y <strong>inventario</strong> de todos los dispositivos.</li>
-<li><strong>Accesos remotos de mantenedores</strong> solo por <strong>VPN</strong> o accesos controlados (pregunta 4 del caso de 2023).</li>
-<li>Marco legal: el <strong>Reglamento europeo de ciberresiliencia (CRA)</strong> obligará a los fabricantes a garantizar la seguridad de los productos con elementos digitales.</li>
+<li><strong>Segmentar</strong>: el IoT en <strong>VLAN propias</strong> (cámaras y telegestión del caso de 2023), sin acceso a la red de usuarios y con <strong>reglas de cortafuegos</strong> estrictas (T14).</li>
+<li><strong>Cifrar</strong> (TLS, DTLS, AES en LoRaWAN) y <strong>actualizar</strong> el firmware.</li>
+<li><strong>Inventario</strong> de todos los dispositivos.</li>
+<li><strong>Mantenedores</strong> externos solo por <strong>VPN</strong> o accesos controlados (pregunta 4 del caso de 2023).</li>
+<li>Marco legal: el <strong>Reglamento europeo de ciberresiliencia (CRA)</strong> obliga a los fabricantes a garantizar la seguridad de los productos con elementos digitales.</li>
 </ul>
-<h2 id="6-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">6. Lo que cayó en el examen de 2023</h2>
+<p><strong>Aplicación práctica.</strong> Ningún dispositivo IoT se conecta a la VLAN de usuarios: cada familia de dispositivos va a su VLAN y el cortafuegos solo permite los flujos necesarios.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br>«El IoT no necesita segmentación porque solo envía datos» es falso: los dispositivos IoT son puertas de entrada habituales (Mirai).</th>
+</tr>
+</table></div>
+<h2 id="8-situaciones-profesionales" class="tema-h2">8. Situaciones profesionales</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Situación</th>
+<th>Lectura en clave de T8</th>
+<th>Primera comprobación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sensores que dejan de enviar</strong></td>
+<td>Batería, cobertura o gateway caído</td>
+<td>Estado de los gateways; nivel de señal (RSSI/SNR) en el servidor de red; batería</td>
+</tr>
+<tr>
+<td><strong>Contador en sótano sin cobertura NB-IoT</strong></td>
+<td>Penetración insuficiente</td>
+<td>Cobertura del operador; antena externa; alternativa LoRaWAN</td>
+</tr>
+<tr>
+<td><strong>Cámara IoT con contraseña de fábrica</strong></td>
+<td>Riesgo de botnet</td>
+<td>Cambiar credenciales; revisar la VLAN; inventario</td>
+</tr>
+<tr>
+<td><strong>El panel no muestra datos</strong> pero los sensores emiten</td>
+<td>Broker, tema o certificado</td>
+<td>Suscripción al tema; certificados TLS; reglas del cortafuegos</td>
+</tr>
+<tr>
+<td><strong>Mantenedor pide acceso remoto a un PLC</strong></td>
+<td>Acceso externo a IoT/OT</td>
+<td>Solo por VPN y con autorización de Sistemas (T15, T18)</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>Para el caso práctico</strong><br>Para cualquier proyecto IoT, responde con: <strong>requisitos (bytes, frecuencia, ubicación, batería) → tecnología (LoRaWAN, NB-IoT, LTE-M…) → plataforma (MQTT con TLS) → seguridad (VLAN, credenciales, firmware) → piloto</strong>.</th>
+</tr>
+</table></div>
+<h2 id="9-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">9. Lo que cayó en el examen de 2023</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -383,7 +502,7 @@
 <tr>
 <td>Corta 1</td>
 <td>LoRa frente a wifi y 4G/5G</td>
-<td>LPWAN, largo alcance, bajo consumo, banda libre o red de operador</td>
+<td>LPWAN, largo alcance, bajo consumo, libre o de operador</td>
 </tr>
 <tr>
 <td>Caso (enunciado)</td>
@@ -392,17 +511,17 @@
 </tr>
 </tbody>
 </table></div>
-<h2 id="7-anclas-de-memoria" class="tema-h2">7. Anclas de memoria</h2>
+<h2 id="10-anclas-de-memoria" class="tema-h2">10. Anclas de memoria</h2>
 <ul class="tema-lista">
 <li><strong>M2M = máquina a máquina · IoT = objetos en red + plataforma.</strong></li>
 <li><strong>LPWAN = bajo consumo + largo alcance + poco caudal.</strong></li>
-<li><strong>LoRa = CSS, 868 MHz, hasta 50 kbps, estrella, sin visión directa; LoRaWAN = protocolo de red.</strong></li>
-<li><strong>NB-IoT = fijo e interiores · LTE-M = movilidad y voz.</strong></li>
-<li><strong>Zigbee = 802.15.4, malla · BLE = corto alcance, wearables.</strong></li>
+<li><strong>LoRa = CSS, 868 MHz, kilómetros, sin visión directa; LoRaWAN = protocolo de red en estrella de estrellas.</strong></li>
+<li><strong>NB-IoT = fijo e interiores · LTE-M = movilidad y voz · RedCap = 5G para IoT medio.</strong></li>
+<li><strong>Zigbee = 802.15.4, malla · BLE = corto alcance.</strong></li>
 <li><strong>MQTT = publicar/suscribir + broker, TCP 1883/8883, QoS 0-1-2 · CoAP = REST sobre UDP.</strong></li>
-<li><strong>IoT seguro = sin contraseñas por defecto + VLAN propia + cifrado + actualizaciones.</strong></li>
+<li><strong>IoT seguro = sin contraseñas de fábrica + VLAN propia + cifrado + actualizaciones + inventario.</strong></li>
 </ul>
-<h2 id="8-no-confundir" class="tema-h2">8. No confundir</h2>
+<h2 id="11-no-confundir" class="tema-h2">11. No confundir</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -416,12 +535,12 @@
 <td><strong>LoRaWAN</strong> (protocolo de red)</td>
 </tr>
 <tr>
-<td><strong>CSS</strong> (chirp, LoRa)</td>
-<td><strong>DSSS</strong> (espectro ensanchado de secuencia directa: 802.11b)</td>
+<td><strong>CSS</strong> (LoRa)</td>
+<td><strong>DSSS</strong> (802.11b)</td>
 </tr>
 <tr>
-<td><strong>NB-IoT</strong></td>
-<td><strong>LTE-M</strong></td>
+<td><strong>NB-IoT</strong> (fijo)</td>
+<td><strong>LTE-M</strong> (movilidad, voz)</td>
 </tr>
 <tr>
 <td><strong>MQTT</strong> (pub/sub, TCP)</td>
@@ -435,50 +554,21 @@
 <td><strong>M2M</strong></td>
 <td><strong>IoT</strong> (más amplio)</td>
 </tr>
+<tr>
+<td><strong>Gateway LoRaWAN</strong> (reenvía por IP)</td>
+<td><strong>Servidor de red</strong> (deduplica y gestiona)</td>
+</tr>
 </tbody>
 </table></div>
-<h2 id="9-posibles-trampas-de-examen" class="tema-h2">9. Posibles trampas de examen</h2>
+<h2 id="12-posibles-trampas-de-examen" class="tema-h2">12. Posibles trampas de examen</h2>
 <ul class="tema-lista">
 <li>Decir que LoRa necesita visión directa o que usa DSSS.</li>
 <li>Pensar que NB-IoT funciona sin operador.</li>
-<li>Creer que MQTT funciona sobre UDP (va sobre TCP; MQTT-SN sí puede ir sobre UDP).</li>
+<li>Creer que MQTT funciona sobre UDP (MQTT-SN sí puede).</li>
 <li>Confundir el broker MQTT con un servidor web.</li>
-<li>Pensar que el IoT no necesita segmentación porque «solo manda datos».</li>
+<li>Pensar que el IoT no necesita segmentación.</li>
+<li>Creer que un sensor LoRaWAN se asocia a un único gateway.</li>
 </ul>
-<h2 id="10-posibles-preguntas-tipo-test" class="tema-h2">10. Posibles preguntas tipo test</h2>
-<ol type="1">
-<li>¿En qué banda trabaja LoRa en Europa? → <strong>868 MHz</strong>.</li>
-<li>¿Qué tecnología LPWAN celular admite movilidad y voz? → <strong>LTE-M</strong>.</li>
-<li>¿Qué modelo de comunicación usa MQTT? → <strong>Publicación/suscripción con broker</strong>.</li>
-<li>¿Qué norma IEEE es la base de Zigbee? → <strong>802.15.4</strong>.</li>
-<li>¿Qué nivel de QoS de MQTT garantiza la entrega exactamente una vez? → <strong>QoS 2</strong>.</li>
-</ol>
-<h2 id="11-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">11. Posibles preguntas cortas (con esquema de respuesta)</h2>
-<p><strong>1. Qué es una red LPWAN y compara LoRaWAN y NB-IoT (2 puntos).</strong></p>
-<ul class="tema-lista">
-<li>Definición: bajo consumo, largo alcance, poco caudal; para sensores.</li>
-<li>LoRaWAN: 868 MHz sin licencia, CSS, red propia o de operador, gateways, estrella, AES.</li>
-<li>NB-IoT: espectro licenciado del operador (4G/5G), excelente penetración, pago por SIM.</li>
-<li>Ejemplos de uso en un ayuntamiento.</li>
-</ul>
-<p><strong>2. Medidas para integrar de forma segura dispositivos IoT en la red municipal (2 puntos).</strong></p>
-<ul class="tema-lista">
-<li>Inventario y credenciales únicas (sin las de fábrica).</li>
-<li>VLAN propias y reglas de cortafuegos de mínimo privilegio.</li>
-<li>Cifrado y actualizaciones de firmware.</li>
-<li>Accesos remotos de los mantenedores solo por VPN, coordinados con Sistemas; monitorización.</li>
-</ul>
-<h2 id="12-supuesto-practico" class="tema-h2">12. Supuesto práctico</h2>
-<p><strong>Enunciado:</strong> el Ayuntamiento quiere instalar 300 sensores de llenado en los contenedores de un barrio y pide una propuesta de conectividad.</p>
-<p><strong>Esquema de respuesta:</strong></p>
-<ol type="1">
-<li><strong>Requisitos</strong>: pocos bytes varias veces al día, <strong>batería de varios años</strong>, sensores en la calle (algunos en zonas con mala cobertura), coste por unidad.</li>
-<li><strong>Opción A — LoRaWAN propio</strong>: 2–4 <strong>gateways</strong> en azoteas de edificios municipales (con alimentación PoE y conexión a la red municipal o 4G), servidor de red LoRaWAN y plataforma. Sin cuotas por sensor.</li>
-<li><strong>Opción B — NB-IoT</strong>: SIM de un operador en cada sensor, sin infraestructura propia, coste mensual por SIM; comprobar la cobertura.</li>
-<li><strong>Integración</strong>: los datos llegan a la plataforma por <strong>MQTT</strong> con TLS; el servidor se sitúa en una VLAN/DMZ propia, con acceso controlado.</li>
-<li><strong>Seguridad y gestión</strong>: claves únicas por sensor, inventario, monitorización de baterías, actualizaciones (FOTA).</li>
-<li><strong>Coordinación</strong>: servicio de medio ambiente o limpieza (necesidades), mantenimiento de edificios (azoteas), comunicaciones y sistemas (red, cortafuegos), proveedor (instalación); <strong>piloto</strong> en una zona antes del despliegue completo.</li>
-</ol>
 <h2 id="13-matriz-de-memorizacion" class="tema-h2">13. Matriz de memorización</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
@@ -490,11 +580,11 @@
 <tbody>
 <tr>
 <td>LoRaWAN</td>
-<td>868 MHz · CSS · 0,3–50 kbps · 2–15 km · estrella · clases A/B/C · AES-128</td>
+<td>868 MHz · CSS · hasta 50 kb/s (FSK) · 2–15 km · estrella · clases A/B/C · AES-128</td>
 </tr>
 <tr>
 <td>Sigfox</td>
-<td>UNB · 12 bytes · red del operador</td>
+<td>Banda ultraestrecha · 12 bytes · red del operador</td>
 </tr>
 <tr>
 <td>NB-IoT</td>
@@ -522,18 +612,107 @@
 </tr>
 </tbody>
 </table></div>
-<h2 id="14-resumen-final-si-manana-fuera-el-examen" class="tema-h2">14. Resumen final: si mañana fuera el examen</h2>
-<p>El <strong>M2M</strong> comunica máquinas entre sí; el <strong>IoT</strong> conecta objetos a redes y plataformas. Los sensores necesitan <strong>bajo consumo, largo alcance y poco caudal</strong>: las <strong>LPWAN</strong>. <strong>LoRaWAN</strong> trabaja en <strong>868 MHz</strong> sin licencia, con modulación <strong>CSS</strong> (no DSSS), <strong>topología en estrella</strong>, <strong>hasta 50 kbps</strong> y <strong>kilómetros de alcance sin visión directa</strong>; <strong>NB-IoT</strong> y <strong>LTE-M</strong> son el IoT de los operadores 4G/5G (<strong>mMTC</strong>). En corto alcance, <strong>BLE</strong> y <strong>Zigbee</strong> (802.15.4, malla). El protocolo IoT más usado es <strong>MQTT</strong> (<strong>publicación/suscripción</strong> con <strong>broker</strong>, TCP 1883/8883). La seguridad pasa por <strong>eliminar las contraseñas por defecto, segmentar en VLAN, cifrar y actualizar</strong>.</p>
-<h2 id="15-actualidad-datos-fechados" class="tema-h2">15. Actualidad — datos fechados</h2>
+<h2 id="14-preguntas-tipo-test" class="tema-h2">14. Preguntas tipo test</h2>
+<p><strong>1.</strong> Es FALSO sobre LoRaWAN:<br />
+a) Topología en estrella · b) Usa modulación DSSS y precisa visión directa · c) Largas distancias · d) Hasta 50 kb/s</p>
+<p><strong>2.</strong> Un protocolo M2M del IoT es:<br />
+a) ATP · b) MQTT · c) ACSE · d) RSVP</p>
+<p><strong>3.</strong> Las LPWAN se caracterizan por:<br />
+a) Mucho caudal y poco alcance · b) Bajo consumo, largo alcance y poco caudal · c) Fibra óptica · d) Solo interiores</p>
+<p><strong>4.</strong> LoRa trabaja en Europa en:<br />
+a) 2,4 GHz · b) 868 MHz · c) 5 GHz · d) 3,5 GHz</p>
+<p><strong>5.</strong> La diferencia entre LoRa y LoRaWAN es que:<br />
+a) Son lo mismo · b) LoRa es la modulación y LoRaWAN el protocolo de red · c) LoRaWAN es la modulación · d) LoRa es de operador</p>
+<p><strong>6.</strong> En LoRaWAN, el gateway:<br />
+a) Almacena los datos · b) Reenvía por IP lo que recibe de los sensores cercanos · c) Asigna IP a los sensores · d) Es el broker MQTT</p>
+<p><strong>7.</strong> La clase A de LoRaWAN:<br />
+a) Escucha siempre · b) Solo escucha justo después de transmitir · c) Escucha con balizas · d) No transmite</p>
+<p><strong>8.</strong> Para contadores de agua en sótanos con red del operador conviene:<br />
+a) LTE-M · b) NB-IoT · c) Wifi · d) Bluetooth</p>
+<p><strong>9.</strong> Frente a NB-IoT, LTE-M:<br />
+a) Admite movilidad y voz · b) Tiene menos caudal · c) No necesita operador · d) Usa 868 MHz</p>
+<p><strong>10.</strong> El modo PSM permite:<br />
+a) Más caudal · b) Que el módulo duerma largos periodos y ahorre batería · c) Cambiar de operador · d) Cifrar</p>
+<p><strong>11.</strong> Zigbee se basa en:<br />
+a) 802.11 · b) 802.15.4 · c) 802.3 · d) 802.1Q</p>
+<p><strong>12.</strong> En MQTT, el elemento central es:<br />
+a) El gateway · b) El broker · c) El servidor DNS · d) El suscriptor</p>
+<p><strong>13.</strong> MQTT con TLS usa:<br />
+a) UDP 5683 · b) TCP 8883 · c) TCP 80 · d) UDP 161</p>
+<p><strong>14.</strong> El QoS de MQTT que garantiza la entrega exactamente una vez es:<br />
+a) 0 · b) 1 · c) 2 · d) 3</p>
+<p><strong>15.</strong> CoAP es:<br />
+a) Pub/sub sobre TCP · b) Petición/respuesta tipo REST sobre UDP · c) Un protocolo de routing · d) Una red LPWAN</p>
+<p><strong>16.</strong> La botnet Mirai infectó dispositivos IoT sobre todo por:<br />
+a) Fallos de cifrado de LoRaWAN · b) Contraseñas por defecto · c) Ataques físicos · d) Fallos de MQTT</p>
+<p><strong>17.</strong> La medida de red más importante para integrar IoT en la red municipal es:<br />
+a) Conectarlo a la VLAN de usuarios · b) Segmentarlo en VLAN propias con reglas de cortafuegos · c) Darle IP pública · d) Desactivar el cortafuegos</p>
+<p><strong>18.</strong> La actualización remota del firmware de dispositivos IoT se llama:<br />
+a) PSM · b) FOTA · c) eDRX · d) SLAAC</p>
+<p><strong>Soluciones:</strong> 1 b · 2 b · 3 b · 4 b · 5 b · 6 b · 7 b · 8 b · 9 a · 10 b · 11 b · 12 b · 13 b · 14 c · 15 b · 16 b · 17 b · 18 b</p>
+<h2 id="15-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">15. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. Qué es una LPWAN y compara LoRaWAN y NB-IoT.</strong><br />
+Bajo consumo, largo alcance, poco caudal · LoRaWAN: 868 MHz sin licencia, CSS, red propia, gateways, AES · NB-IoT: espectro del operador, penetración, pago por SIM · usos municipales.</p>
+<p><strong>2. Medidas para integrar de forma segura dispositivos IoT en la red municipal.</strong><br />
+Inventario y credenciales únicas · VLAN propias y cortafuegos de mínimo privilegio · cifrado y actualizaciones · mantenedores solo por VPN · monitorización.</p>
+<p><strong>3. Cómo funciona MQTT.</strong><br />
+Publicación/suscripción · broker · temas y comodines · QoS 0/1/2 · TCP 1883/8883 · seguridad con TLS y permisos por tema.</p>
+<p><strong>4. Diferencias entre M2M e IoT, con ejemplos municipales.</strong><br />
+Definiciones · M2M punto a punto con SIM de datos · IoT con plataforma · arquitectura en capas · ejemplos.</p>
+<p><strong>5. Tecnologías de conectividad IoT de corto alcance.</strong><br />
+BLE, Zigbee (malla), Thread/Matter, RFID/NFC, Wi-Fi HaLow, Single Pair Ethernet · usos en edificios.</p>
+<p><strong>6. Qué aporta el 5G al IoT.</strong><br />
+mMTC · NB-IoT y LTE-M como parte del 5G · RedCap · URLLC para control crítico · slicing (T6).</p>
+<h2 id="16-casos-practicos" class="tema-h2">16. Casos prácticos</h2>
+<p><strong>Mini caso 1 — Sensores que se callan.</strong> Un tercio de los sensores de aparcamiento de un barrio deja de enviar datos.<br />
+<em>Esquema:</em> si coinciden en una zona, gateway caído (alimentación, red) · si están repartidos, baterías o interferencias · revisar el servidor de red (último mensaje, RSSI/SNR) · restablecer y añadir monitorización de gateways.</p>
+<p><strong>Mini caso 2 — Cámara expuesta.</strong> Un análisis detecta una cámara IP accesible desde Internet con usuario y contraseña de fábrica.<br />
+<em>Esquema:</em> retirar la exposición (regla o NAT del cortafuegos) · cambiar credenciales y actualizar firmware · moverla a la VLAN de cámaras · revisar el inventario y el resto de cámaras · registrar la incidencia de seguridad.</p>
+<p><strong>Mini caso 3 — Panel sin datos.</strong> Los sensores de un edificio envían, pero el panel de climatización no muestra nada.<br />
+<em>Esquema:</em> el broker recibe los mensajes · el panel está suscrito al tema correcto · certificados TLS vigentes · reglas del cortafuegos entre la VLAN de la plataforma y la del panel.</p>
+<p><strong>Supuesto desarrollado — Sensores de llenado de contenedores (supuesto).</strong> El Ayuntamiento quiere instalar 300 sensores de llenado en los contenedores de un barrio y pide una propuesta.</p>
+<p><em>a) Requisitos.</em><br />
+Pocos bytes varias veces al día · batería de varios años · sensores en la calle con zonas de mala cobertura · coste por unidad.</p>
+<p><em>b) Opciones de conectividad.</em><br />
+<strong>LoRaWAN propio</strong>: 2–4 gateways en azoteas municipales (PoE y conexión a la red municipal o 4G), servidor de red y plataforma; sin cuota por sensor · <strong>NB-IoT</strong>: SIM de un operador por sensor, sin infraestructura propia, cuota mensual; comprobar cobertura · comparar coste total a cinco años.</p>
+<p><em>c) Integración.</em><br />
+Datos a la plataforma por <strong>MQTT con TLS</strong> · servidor en una VLAN o DMZ propia · claves únicas por sensor · monitorización de baterías y FOTA.</p>
+<p><em>d) Gestión del proyecto.</em><br />
+Coordinación con medio ambiente, mantenimiento de edificios (azoteas), comunicaciones y sistemas (red, cortafuegos) y el proveedor · <strong>piloto</strong> en una zona antes del despliegue completo · inventario y procedimiento de baja.</p>
+<h2 id="17-repaso-visual-t8" class="tema-h2">17. Repaso visual · T8</h2>
+<figure class="tema-figura">
+<figcaption>Repaso 1 · Arquitectura IoT</figcaption>
+<svg viewBox="0 0 700 234" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Capas del IoT: dispositivo, red, plataforma y aplicación." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0801capasa-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0801capasv-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0801capasm-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0801capasg-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><text x="260" y="14" text-anchor="middle" font-size="11" font-weight="700" fill="#5a5652" dominant-baseline="middle">capa</text><text x="560" y="14" text-anchor="middle" font-size="11" font-weight="700" fill="#5a5652" dominant-baseline="middle">ejemplo municipal</text><rect x="110" y="24" width="300" height="38" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="260.0" y="35.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">Aplicación</text><text x="260.0" y="50.25" text-anchor="middle" font-size="10.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">paneles, alertas, análisis</text><text x="430" y="43" text-anchor="start" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle">mapa de aparcamientos libres</text><rect x="110" y="70" width="300" height="38" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="260.0" y="81.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Plataforma</text><text x="260.0" y="96.25" text-anchor="middle" font-size="10.0" font-weight="500" fill="#23272e" dominant-baseline="middle">servidor de red, broker MQTT, BD</text><text x="430" y="89" text-anchor="start" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle">plataforma de ciudad (FIWARE…)</text><rect x="110" y="116" width="300" height="38" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="260.0" y="127.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Red / conectividad</text><text x="260.0" y="142.25" text-anchor="middle" font-size="10.0" font-weight="500" fill="#23272e" dominant-baseline="middle">LPWAN, celular, wifi + pasarelas</text><text x="430" y="135" text-anchor="start" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle">gateway LoRaWAN en una azotea</text><rect x="110" y="162" width="300" height="38" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="260.0" y="173.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Dispositivo</text><text x="260.0" y="188.25" text-anchor="middle" font-size="10.0" font-weight="500" fill="#23272e" dominant-baseline="middle">sensores, actuadores, microcontrolador</text><text x="430" y="181" text-anchor="start" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle">sensor de plaza, contador de agua</text><path d="M70,200 L70,30" fill="none" stroke="#5a5652" stroke-width="1.6" marker-end="url(#T0801capasg-7)"/><text x="60" y="120" text-anchor="end" font-size="10.5" font-weight="600" fill="#5a5652" dominant-baseline="middle">datos</text><text x="350" y="222" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">M2M = máquina a máquina, punto a punto · IoT = objetos en red integrados en plataformas</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 2 · LPWAN</figcaption>
+<svg viewBox="0 0 700 236" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tecnologías IoT por alcance y caudal, con el grupo LPWAN." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0802mapaa-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0802mapav-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0802mapam-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0802mapag-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><line x1="70" y1="210" x2="690" y2="210" stroke="#5a5652" stroke-width="1.4"/><line x1="70" y1="210" x2="70" y2="18" stroke="#5a5652" stroke-width="1.4"/><text x="690" y="228" text-anchor="end" font-size="11" font-weight="600" fill="#5a5652" dominant-baseline="middle">alcance →</text><text x="76" y="14" text-anchor="start" font-size="11" font-weight="600" fill="#5a5652" dominant-baseline="middle">↑ caudal</text><line x1="110" y1="206" x2="110" y2="214" stroke="#5a5652" stroke-width="1.2"/><text x="110" y="226" text-anchor="middle" font-size="10" font-weight="600" fill="#5a5652" dominant-baseline="middle">10 m</text><line x1="250" y1="206" x2="250" y2="214" stroke="#5a5652" stroke-width="1.2"/><text x="250" y="226" text-anchor="middle" font-size="10" font-weight="600" fill="#5a5652" dominant-baseline="middle">100 m</text><line x1="400" y1="206" x2="400" y2="214" stroke="#5a5652" stroke-width="1.2"/><text x="400" y="226" text-anchor="middle" font-size="10" font-weight="600" fill="#5a5652" dominant-baseline="middle">1 km</text><line x1="560" y1="206" x2="560" y2="214" stroke="#5a5652" stroke-width="1.2"/><text x="560" y="226" text-anchor="middle" font-size="10" font-weight="600" fill="#5a5652" dominant-baseline="middle">10 km</text><rect x="65" y="26" width="110" height="28" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="120.0" y="40.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Wifi</text><rect x="85" y="110" width="110" height="28" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="140.0" y="124.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">BLE</text><rect x="195" y="140" width="110" height="28" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="250.0" y="154.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Zigbee (malla)</text><rect x="385" y="36" width="110" height="28" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="440.0" y="50.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">4G / 5G</text><rect x="385" y="90" width="110" height="28" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="440.0" y="104.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">LTE-M</text><rect x="465" y="122" width="110" height="28" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="520.0" y="136.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">NB-IoT</text><rect x="375" y="162" width="110" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="430.0" y="176.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">LoRaWAN</text><rect x="525" y="172" width="110" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="580.0" y="186.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Sigfox</text><rect x="360" y="90" width="320" height="112" rx="10" fill="none" stroke="#003da5" stroke-width="1.6" stroke-dasharray="6 4"/><text x="675" y="84" text-anchor="end" font-size="10.5" font-weight="700" fill="#003da5" dominant-baseline="middle">LPWAN: bajo consumo + largo alcance + poco caudal</text><text x="240" y="76" text-anchor="middle" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">azul = con operador (licenciado) · ámbar = sin licencia (868 MHz)</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 3 · LoRaWAN</figcaption>
+<svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Red LoRaWAN en estrella de estrellas con gateways y servidor de red." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0803lorawana-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0803lorawanv-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0803lorawanm-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0803lorawang-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="16" width="60" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="40.0" y="30.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">sensor</text><line x1="70" y1="30" x2="200" y2="60" stroke="#b26a00" stroke-width="1.2" stroke-dasharray="5 3"/><line x1="70" y1="30" x2="200" y2="170" stroke="#b26a00" stroke-width="1.2" stroke-dasharray="5 3"/><rect x="10" y="76" width="60" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="40.0" y="90.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">sensor</text><line x1="70" y1="90" x2="200" y2="60" stroke="#b26a00" stroke-width="1.2" stroke-dasharray="5 3"/><line x1="70" y1="90" x2="200" y2="170" stroke="#b26a00" stroke-width="1.2" stroke-dasharray="5 3"/><rect x="10" y="136" width="60" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="40.0" y="150.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">sensor</text><line x1="70" y1="150" x2="200" y2="60" stroke="#b26a00" stroke-width="1.2" stroke-dasharray="5 3"/><line x1="70" y1="150" x2="200" y2="170" stroke="#b26a00" stroke-width="1.2" stroke-dasharray="5 3"/><rect x="10" y="196" width="60" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="40.0" y="210.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">sensor</text><line x1="70" y1="210" x2="200" y2="60" stroke="#b26a00" stroke-width="1.2" stroke-dasharray="5 3"/><line x1="70" y1="210" x2="200" y2="170" stroke="#b26a00" stroke-width="1.2" stroke-dasharray="5 3"/><rect x="200" y="40" width="100" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="250.0" y="53.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">gateway</text><text x="250.0" y="66.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">azotea</text><line x1="300" y1="60" x2="420" y2="115" stroke="#003da5" stroke-width="2"/><rect x="200" y="150" width="100" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="250.0" y="163.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">gateway</text><text x="250.0" y="176.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">azotea</text><line x1="300" y1="170" x2="420" y2="115" stroke="#003da5" stroke-width="2"/><rect x="420" y="92" width="120" height="46" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="480.0" y="108.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">Servidor de red</text><text x="480.0" y="122.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">deduplica</text><line x1="540" y1="115" x2="570" y2="115" stroke="#2e7d3c" stroke-width="2"/><rect x="570" y="92" width="120" height="46" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="630.0" y="108.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">Aplicación</text><text x="630.0" y="122.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">plataforma</text><text x="160" y="248" text-anchor="middle" font-size="10.5" font-weight="600" fill="#b26a00" dominant-baseline="middle">radio LoRa 868 MHz (CSS)</text><text x="335" y="248" text-anchor="middle" font-size="10.5" font-weight="600" fill="#003da5" dominant-baseline="middle">IP: Ethernet o 4G</text><text x="560" y="30" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Estrella de estrellas: los sensores</text><text x="560" y="46" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">no se asocian a un gateway;</text><text x="560" y="62" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">lo oye cualquiera que esté cerca</text><text x="560" y="170" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">AES-128: clave de red</text><text x="560" y="186" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">y clave de aplicación</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 4 · MQTT</figcaption>
+<svg viewBox="0 0 700 236" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MQTT con publicadores, broker y suscriptores." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0805mqtta-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0805mqttv-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0805mqttm-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0805mqttg-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="30" width="170" height="40" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="95.0" y="43.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Sensor planta 1</text><text x="95.0" y="57.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">publica</text><rect x="10" y="110" width="170" height="40" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="95.0" y="123.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Sensor planta 2</text><text x="95.0" y="137.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">publica</text><rect x="265" y="60" width="170" height="60" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="82.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">Broker MQTT</text><text x="350.0" y="97.5" text-anchor="middle" font-size="10.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">TCP 1883 · TLS 8883</text><rect x="520" y="20" width="170" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="605.0" y="33.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">Panel de control</text><text x="605.0" y="47.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">suscrito</text><rect x="520" y="80" width="170" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="605.0" y="93.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">Alertas</text><text x="605.0" y="107.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">suscrito</text><rect x="520" y="140" width="170" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="605.0" y="153.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">Histórico</text><text x="605.0" y="167.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">suscrito</text><path d="M180,50 L262,78" fill="none" stroke="#b26a00" stroke-width="2" marker-end="url(#T0805mqttm-10)"/><path d="M180,130 L262,104" fill="none" stroke="#b26a00" stroke-width="2" marker-end="url(#T0805mqttm-10)"/><path d="M435,80 L517,40" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0805mqttv-10)"/><path d="M435,90 L517,100" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0805mqttv-10)"/><path d="M435,100 L517,160" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0805mqttv-10)"/><text x="222" y="18" text-anchor="start" font-size="10" font-weight="600" fill="#b26a00" dominant-baseline="middle">tema: donostia/ed3/p1/temperatura</text><text x="350" y="206" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">Publicador y suscriptor no se conocen: el broker desacopla · comodines + y # en los temas</text><text x="350" y="224" text-anchor="middle" font-size="11" font-weight="500" fill="#5a5652" dominant-baseline="middle">QoS 0 = como mucho una vez · QoS 1 = al menos una vez · QoS 2 = exactamente una vez</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 5 · IoT seguro</figcaption>
+<svg viewBox="0 0 700 256" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="IoT en VLAN propias tras el cortafuegos; mantenedor solo por VPN." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0806seguridada-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0806seguridadv-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0806seguridadm-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0806seguridadg-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="20" width="180" height="48" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="100.0" y="44.0" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">VLAN usuarios</text><rect x="10" y="90" width="180" height="48" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="100.0" y="107.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">VLAN cámaras</text><text x="100.0" y="121.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">credenciales cambiadas</text><rect x="10" y="160" width="180" height="48" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="100.0" y="177.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">VLAN telegestión / IoT</text><text x="100.0" y="191.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">firmware al día</text><rect x="270" y="70" width="160" height="90" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="350.0" y="100.0" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">Cortafuegos</text><text x="350.0" y="115.0" text-anchor="middle" font-size="10.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">mínimo privilegio</text><text x="350.0" y="130.0" text-anchor="middle" font-size="10.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">(T14)</text><line x1="190" y1="44" x2="270" y2="115" stroke="#5a5652" stroke-width="1.6"/><line x1="190" y1="114" x2="270" y2="115" stroke="#5a5652" stroke-width="1.6"/><line x1="190" y1="184" x2="270" y2="115" stroke="#5a5652" stroke-width="1.6"/><rect x="510" y="20" width="180" height="48" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="600.0" y="37.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">Plataforma IoT</text><text x="600.0" y="51.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">MQTT con TLS</text><rect x="510" y="160" width="180" height="48" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="600.0" y="177.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Mantenedor externo</text><text x="600.0" y="191.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">solo por VPN (T15)</text><line x1="430" y1="100" x2="510" y2="44" stroke="#2e7d3c" stroke-width="2"/><line x1="430" y1="130" x2="510" y2="184" stroke="#b26a00" stroke-width="2" stroke-dasharray="5 3"/><text x="350" y="226" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">Usuarios e IoT no se ven entre sí · solo los flujos necesarios · inventario de todos los dispositivos</text><text x="350" y="244" text-anchor="middle" font-size="10.5" font-weight="500" fill="#b26a00" dominant-baseline="middle">Mirai (2016): miles de cámaras con contraseña de fábrica convertidas en una botnet</text></svg>
+</figure>
+<h2 id="18-resumen-final-si-manana-fuera-el-examen" class="tema-h2">18. Resumen final: si mañana fuera el examen</h2>
+<p>El <strong>M2M</strong> comunica máquinas entre sí; el <strong>IoT</strong> conecta objetos a redes y plataformas. Los sensores necesitan <strong>bajo consumo, largo alcance y poco caudal</strong>: las <strong>LPWAN</strong>. <strong>LoRaWAN</strong> trabaja en <strong>868 MHz</strong> sin licencia, con modulación <strong>CSS</strong> (no DSSS), en <strong>estrella de estrellas</strong>, con <strong>kilómetros de alcance sin visión directa</strong>; <strong>NB-IoT</strong> (fijo, interiores) y <strong>LTE-M</strong> (movilidad, voz) son el IoT de los operadores 4G/5G (<strong>mMTC</strong>). En corto alcance, <strong>BLE</strong> y <strong>Zigbee</strong> (802.15.4, malla). El protocolo IoT más usado es <strong>MQTT</strong> (<strong>publicación/suscripción</strong> con <strong>broker</strong>, TCP 1883/8883, QoS 0-1-2). La seguridad pasa por <strong>eliminar las contraseñas por defecto, segmentar en VLAN, cifrar, actualizar y mantener un inventario</strong>.</p>
+<h2 id="19-actualidad-datos-fechados" class="tema-h2">19. Actualidad — datos fechados</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong></th>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong><br>Lo estable para el examen es lo explicado arriba; estos datos cambian.</th>
 </tr>
 </table></div>
 <ul class="tema-lista">
-<li><strong>Sigfox</strong> quebró en 2022 y fue comprada por UnaBiz, que mantiene la red con una cobertura más reducida en algunos países.</li>
+<li><strong>Sigfox</strong> quebró en 2022 y fue comprada por UnaBiz, que mantiene la red con cobertura más reducida en algunos países.</li>
 <li>El <strong>Reglamento de Ciberresiliencia (CRA, Reglamento UE 2024/2847)</strong> entró en vigor en diciembre de 2024; la obligación de notificar vulnerabilidades explotadas se aplica desde septiembre de 2026 y el resto de requisitos, desde diciembre de 2027.</li>
-<li>El <strong>5G RedCap</strong> empieza a sustituir a los módulos 4G Cat-1/Cat-4 en dispositivos IoT de gama media.</li>
+<li>El <strong>5G RedCap</strong> empieza a sustituir a los módulos 4G de gama media en dispositivos IoT.</li>
+<li><strong>Matter</strong> se extiende como estándar de interoperabilidad en edificios y hogar conectados.</li>
 </ul>
 
   </div>
