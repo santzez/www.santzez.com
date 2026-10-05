@@ -6,6 +6,7 @@
   </header>
 
   <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#mapa-del-tema">Mapa del tema</a></li>
 <li><a href="#1-switches-tipos-y-prestaciones">1. Switches: tipos y prestaciones</a></li>
 <li><a href="#2-vlan">2. VLAN</a></li>
 <li><a href="#3-spanning-tree-stp">3. Spanning Tree (STP)</a></li>
@@ -14,33 +15,80 @@
 <li><a href="#6-seguridad-en-el-switch">6. Seguridad en el switch</a></li>
 <li><a href="#7-descubrimiento-de-vecinos-lldp-y-cdp">7. Descubrimiento de vecinos: LLDP y CDP</a></li>
 <li><a href="#8-routers-y-routing">8. Routers y routing</a></li>
-<li><a href="#9-gestion-de-switches-y-routers">9. Gestión de switches y routers</a></li>
-<li><a href="#10-diseno-del-armario-de-planta-del-caso-de-2023">10. Diseño del armario de planta del caso de 2023</a></li>
-<li><a href="#11-cambiar-de-puerto-un-puesto-con-telefono-y-pc-caso-2023-p">11. Cambiar de puerto un puesto con teléfono y PC (caso 2023, pregunta 10)</a></li>
+<li><a href="#9-gestion-cisco-y-aruba">9. Gestión: Cisco y Aruba</a></li>
+<li><a href="#10-situaciones-profesionales">10. Situaciones profesionales</a></li>
+<li><a href="#11-el-armario-de-planta-del-caso-de-2023">11. El armario de planta del caso de 2023</a></li>
 <li><a href="#12-lo-que-cayo-en-el-examen-de-2023">12. Lo que cayó en el examen de 2023</a></li>
 <li><a href="#13-anclas-de-memoria">13. Anclas de memoria</a></li>
 <li><a href="#14-no-confundir">14. No confundir</a></li>
 <li><a href="#15-posibles-trampas-de-examen">15. Posibles trampas de examen</a></li>
-<li><a href="#16-posibles-preguntas-tipo-test">16. Posibles preguntas tipo test</a></li>
-<li><a href="#17-posibles-preguntas-cortas-con-esquema-de-respuesta">17. Posibles preguntas cortas (con esquema de respuesta)</a></li>
-<li><a href="#18-supuesto-practico">18. Supuesto práctico</a></li>
-<li><a href="#19-matriz-de-memorizacion">19. Matriz de memorización</a></li>
-<li><a href="#20-resumen-final-si-manana-fuera-el-examen">20. Resumen final: si mañana fuera el examen</a></li>
-<li><a href="#21-actualidad-datos-fechados">21. Actualidad — datos fechados</a></li>
+<li><a href="#16-matriz-de-memorizacion">16. Matriz de memorización</a></li>
+<li><a href="#17-preguntas-tipo-test">17. Preguntas tipo test</a></li>
+<li><a href="#18-posibles-preguntas-cortas-con-esquema-de-respuesta">18. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#19-casos-practicos">19. Casos prácticos</a></li>
+<li><a href="#20-repaso-visual-t4">20. Repaso visual · T4</a></li>
+<li><a href="#21-resumen-final-si-manana-fuera-el-examen">21. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#22-actualidad-datos-fechados">22. Actualidad — datos fechados</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
+<h2 id="mapa-del-tema" class="tema-h2">Mapa del tema</h2>
+<p>T4 trata los <strong>equipos</strong>: switches gestionables (VLAN, trunk, STP, agregación de enlaces, PoE, seguridad de puerto), routers (tabla de rutas, routing estático y dinámico, routing entre VLAN, redundancia), su <strong>gestión</strong> y la comparación <strong>Cisco / Aruba</strong>.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>⚠️ <strong>No confundir — fronteras del tema</strong><br>Este tema trata los <strong>equipos</strong>: switches (VLAN, trunk, STP, agregación de enlaces, PoE, seguridad de puerto) y routers (interfaces, routing estático y dinámico, redundancia), su <strong>gestión</strong> y la comparación <strong>Cisco / Aruba</strong>.<br><strong>T1</strong> → cómo conmuta un switch (tabla MAC, dominios). <strong>T2</strong> → direccionamiento IP y subredes. <strong>T3</strong> → cables y transceptores. <strong>T14</strong> → el cortafuegos (filtrado y NAT). <strong>T19</strong> → monitorización (SNMP en detalle).</th>
+<th>📌 <strong>Imprescindible — el tema más preguntado en 2023</strong><br><strong>7 preguntas del test</strong> (LACP, PortFast, bridge, IP del switch, trunk, PoE+, router) y <strong>4 del caso práctico</strong> (elegir switches, player sin conexión, PoE caído, cambiar de puerto un puesto con teléfono).</th>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
+<thead>
 <tr>
-<th>📌 <strong>El tema más preguntado en 2023</strong><br><strong>7 preguntas del test</strong> (LACP, portfast, bridge, IP del switch, trunk, PoE+, router) y <strong>4 del caso práctico</strong> (elegir switches, player sin conexión, PoE caído, cambiar de puerto un puesto con teléfono). Dominarlo es la mejor inversión de estudio.</th>
+<th>Si la pregunta trata de…</th>
+<th>Está en</th>
+<th>Desde T4 solo…</th>
 </tr>
+</thead>
+<tbody>
+<tr>
+<td>Cómo conmuta un switch: tabla MAC, inundación, dominios</td>
+<td><strong>T1</strong></td>
+<td>se da por sabido</td>
+</tr>
+<tr>
+<td>Direccionamiento IP, subredes, DHCP, NAT</td>
+<td><strong>T2</strong></td>
+<td>se usan las subredes de cada VLAN</td>
+</tr>
+<tr>
+<td>Cables, fibra, transceptores, distancias</td>
+<td><strong>T3</strong></td>
+<td>se eligen los uplinks</td>
+</tr>
+<tr>
+<td>Wifi: SSID, controladora, AP</td>
+<td><strong>T5</strong></td>
+<td>el AP se conecta a un trunk</td>
+</tr>
+<tr>
+<td>Cortafuegos, reglas, NAT</td>
+<td><strong>T14</strong></td>
+<td>es la puerta de enlace de las VLAN sensibles</td>
+</tr>
+<tr>
+<td>NAC, IDS/IPS</td>
+<td><strong>T17</strong></td>
+<td>se cita 802.1X</td>
+</tr>
+<tr>
+<td>Monitorización (SNMP, syslog)</td>
+<td><strong>T19</strong></td>
+<td>se citan como buenas prácticas de gestión</td>
+</tr>
+</tbody>
 </table></div>
+<p>Cada apartado sigue tres niveles: <strong>concepto</strong>, <strong>explicación</strong> y <strong>aplicación práctica</strong>.</p>
 <h2 id="1-switches-tipos-y-prestaciones" class="tema-h2">1. Switches: tipos y prestaciones</h2>
+<p><strong>Concepto.</strong> Un switch gestionable conmuta tramas por MAC (T1) y además permite <strong>configurar</strong> VLAN, redundancia, PoE y seguridad.</p>
+<p><strong>Explicación.</strong></p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -51,82 +99,74 @@
 <tbody>
 <tr>
 <td><strong>Gestión</strong></td>
-<td><strong>No gestionable</strong> (<em>plug and play</em>, sin configuración) · <strong>Gestionable</strong> (VLAN, STP, SNMP, ACL…) · <em>Smart/web-managed</em> (gestión web básica)</td>
+<td>No gestionable (sin configuración) · <em>smart</em> (gestión web básica) · <strong>gestionable</strong> (VLAN, STP, SNMP, ACL…)</td>
 </tr>
 <tr>
 <td><strong>Capa</strong></td>
-<td><strong>Capa 2</strong> (conmuta por MAC) · <strong>Capa 3</strong> (además enruta entre VLAN)</td>
+<td><strong>Capa 2</strong> (conmuta por MAC) · <strong>capa 3</strong> (además enruta entre VLAN)</td>
 </tr>
 <tr>
-<td><strong>Función en la red</strong></td>
-<td><strong>Acceso</strong> (puestos, PoE) · <strong>Distribución/agregación</strong> (une armarios de planta) · <strong>Núcleo (<em>core</em>)</strong> (troncal de alta velocidad)</td>
+<td><strong>Función</strong></td>
+<td><strong>Acceso</strong> (puestos, PoE) · <strong>distribución</strong> (une armarios) · <strong>núcleo</strong> (troncal de alta velocidad)</td>
 </tr>
 <tr>
 <td><strong>Formato</strong></td>
-<td>Fijo de 24/48 puertos (1U) · <strong>Apilable (<em>stack</em>)</strong> · Chasis modular</td>
+<td>Fijo de 24/48 puertos · <strong>apilable</strong> · chasis modular</td>
 </tr>
 <tr>
-<td><strong>Puertos de <em>uplink</em></strong></td>
+<td><strong>Uplinks</strong></td>
 <td>SFP (1G), <strong>SFP+ (10G)</strong>, SFP28 (25G), QSFP (40/100G)</td>
 </tr>
 <tr>
 <td><strong>PoE</strong></td>
-<td>Sin PoE · PoE/PoE+ · PoE++ (802.3bt), con un <strong>presupuesto PoE</strong> total en vatios</td>
+<td>Sin PoE · PoE/PoE+ · PoE++ (802.3bt), con un <strong>presupuesto</strong> total en vatios</td>
 </tr>
 </tbody>
 </table></div>
-<p>Datos de la hoja técnica que hay que saber leer: <strong>número y tipo de puertos</strong>, <strong>capacidad de conmutación</strong> (Gbps, <em>backplane</em>), <strong>tasa de reenvío</strong> (Mpps), <strong>tamaño de la tabla MAC</strong>, <strong>número de VLAN</strong>, <strong>presupuesto PoE (W)</strong>, <strong>fuentes redundantes</strong> y <strong>apilamiento</strong>.</p>
-<h3 id="apilamiento-stacking">Apilamiento (<em>stacking</em>)</h3>
-<p>Varios switches físicos unidos por cables o puertos especiales se comportan como <strong>un único switch lógico</strong>: una sola IP de gestión y una sola configuración, y permiten <strong>agregar enlaces de <em>uplink</em> repartidos entre miembros</strong> (si cae un switch, el <em>uplink</em> del otro sigue funcionando). Cisco lo llama <strong>StackWise</strong>; Aruba, <strong>VSF</strong> (<em>Virtual Switching Framework</em>) o <strong>VSX</strong> en el núcleo.</p>
+<p>En la hoja técnica hay que saber leer: número y tipo de puertos, <strong>capacidad de conmutación</strong> (Gb/s), <strong>tasa de reenvío</strong> (Mpps), tamaño de la <strong>tabla MAC</strong>, número de <strong>VLAN</strong>, <strong>presupuesto PoE</strong>, <strong>fuentes redundantes</strong> y <strong>apilamiento</strong>.</p>
+<p><strong>Apilamiento (<em>stacking</em>).</strong> Varios switches unidos por cables o puertos especiales funcionan como <strong>un único switch lógico</strong>: una IP de gestión, una configuración y la posibilidad de <strong>agregar uplinks repartidos entre miembros</strong>. Cisco lo llama <strong>StackWise</strong>; Aruba, <strong>VSF</strong> (acceso) y <strong>VSX</strong> (núcleo, dos equipos con plano de control independiente).</p>
+<p><strong>Aplicación práctica.</strong> Para un armario de planta: switches de acceso <strong>apilables</strong>, con <strong>PoE+</strong> suficiente y <strong>uplinks SFP+</strong>. Para el armario principal: switch de <strong>capa 3</strong> con fuentes redundantes.</p>
 <h2 id="2-vlan" class="tema-h2">2. VLAN</h2>
-<p>Una <strong>VLAN</strong> (<em>Virtual LAN</em>, <strong>IEEE 802.1Q</strong>) divide un switch físico en <strong>varias redes lógicas independientes</strong>: cada VLAN es un <strong>dominio de broadcast</strong> distinto y una <strong>subred IP</strong> distinta. Para pasar de una VLAN a otra hace falta un <strong>router</strong> o un <strong>switch de capa 3</strong>.</p>
-<p><strong>Para qué sirven</strong>: <strong>seguridad</strong> (cámaras, telegestión o invitados aislados de los usuarios), <strong>rendimiento</strong> (menos broadcast), <strong>organización</strong> por servicio y no por ubicación física, y <strong>calidad de servicio</strong> (voz separada).</p>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th>📌 <strong>Imprescindible — la directiva del caso de 2023</strong><br>«En cada subred solo puede haber dispositivos de un servicio» y «las VLAN se extienden a nivel 2 entre todos los switches»: <strong>una VLAN por servicio</strong> (usuarios 23, telefonía 2, registro 16, Internet libre 122, cámaras 47, telegestión 94), <strong>llevadas por <em>trunks</em></strong> hasta el switch principal, donde (junto con el cortafuegos) se hace el <strong>routing entre VLAN</strong>.</th>
-</tr>
-</table></div>
-<h3 id="puertos-de-acceso-y-troncales">Puertos de acceso y troncales</h3>
+<p><strong>Concepto.</strong> Una <strong>VLAN</strong> (<strong>IEEE 802.1Q</strong>) divide un switch físico en <strong>varias redes lógicas</strong>: cada VLAN es un <strong>dominio de broadcast</strong> distinto y una <strong>subred IP</strong> distinta. Para pasar de una VLAN a otra hace falta un <strong>router</strong> o un <strong>switch de capa 3</strong>.</p>
+<p><strong>Explicación.</strong> Sirven para <strong>seguridad</strong> (cámaras, telegestión o invitados aislados), <strong>rendimiento</strong> (menos broadcast), <strong>organización</strong> por servicio y <strong>calidad de servicio</strong> (voz separada). El identificador de VLAN tiene <strong>12 bits</strong> (1–4094) y viaja en una <strong>etiqueta de 4 bytes</strong> (T1).</p>
+<figure class="tema-figura">
+<figcaption>Figura 1 · Puertos de acceso y trunk</figcaption>
+<svg viewBox="0 0 700 224" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dos switches unidos por un trunk 802.1Q que lleva varias VLAN etiquetadas más la nativa sin etiqueta. En cada switch, un equipo de la VLAN 23 y otro de la VLAN 47 conectados a puertos de acceso, una VLAN sin etiqueta. Cada VLAN es un dominio de broadcast y una subred; para pasar de la 23 a la 47 hace falta un router o un switch de capa 3." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0401vlana-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0401vlanv-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0401vlanm-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0401vlang-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="40" y="70" width="220" height="44" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="150.0" y="92.0" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">Switch A (planta)</text><rect x="440" y="70" width="220" height="44" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="550.0" y="92.0" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">Switch B (principal)</text><rect x="20" y="160" width="125" height="34" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="82.5" y="177.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">PC · VLAN 23</text><line x1="82" y1="160" x2="82" y2="114" stroke="#003da5" stroke-width="2"/><rect x="150" y="160" width="125" height="34" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="212.5" y="177.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Cámara · VLAN 47</text><line x1="212" y1="160" x2="212" y2="114" stroke="#b26a00" stroke-width="2" stroke-dasharray="5 3"/><rect x="420" y="160" width="125" height="34" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="482.5" y="177.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Servidor · VLAN 23</text><line x1="482" y1="160" x2="482" y2="114" stroke="#003da5" stroke-width="2"/><rect x="560" y="160" width="125" height="34" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="622.5" y="177.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Grabador · VLAN 47</text><line x1="622" y1="160" x2="622" y2="114" stroke="#b26a00" stroke-width="2" stroke-dasharray="5 3"/><line x1="260" y1="86" x2="440" y2="86" stroke="#003da5" stroke-width="5"/><line x1="260" y1="98" x2="440" y2="98" stroke="#b26a00" stroke-width="3" stroke-dasharray="5 3"/><text x="350" y="64" text-anchor="middle" font-size="12.5" font-weight="700" fill="#003da5" dominant-baseline="middle">TRUNK (802.1Q)</text><text x="350" y="116" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">varias VLAN etiquetadas</text><text x="350" y="130" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">+ la nativa sin etiqueta</text><text x="148" y="212" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">puertos de ACCESO: una VLAN, sin etiqueta</text><text x="350" y="18" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">Cada VLAN = un dominio de broadcast = una subred</text><text x="350" y="36" text-anchor="middle" font-size="11" font-weight="500" fill="#5a5652" dominant-baseline="middle">de la VLAN 23 a la 47 solo se pasa a través de un router o switch de capa 3</text><text x="560" y="212" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">mismas VLAN en ambos switches</text></svg>
+</figure>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
 <th>Tipo de puerto</th>
 <th>Qué transporta</th>
-<th>Etiqueta 802.1Q</th>
+<th>Etiqueta</th>
 <th>Uso</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Acceso (<em>access</em>, <em>untagged</em>)</strong></td>
-<td><strong>Una sola VLAN</strong></td>
+<td><strong>Acceso</strong> (<em>untagged</em>)</td>
+<td><strong>Una VLAN</strong></td>
 <td><strong>Sin etiqueta</strong></td>
-<td>Puesto, impresora, cámara, AP sencillo</td>
+<td>Puesto, impresora, cámara</td>
 </tr>
 <tr>
-<td><strong>Troncal (<em>trunk</em>, <em>tagged</em>)</strong></td>
+<td><strong>Troncal / trunk</strong> (<em>tagged</em>)</td>
 <td><strong>Varias VLAN</strong></td>
 <td><strong>Etiquetadas</strong> (salvo la nativa)</td>
-<td>Enlaces <strong>switch–switch</strong>, switch–router/cortafuegos, AP con varios SSID, servidores de virtualización</td>
+<td>Switch–switch, switch–cortafuegos, AP con varios SSID, servidores de virtualización</td>
 </tr>
 </tbody>
 </table></div>
 <ul class="tema-lista">
-<li><strong>VLAN nativa</strong>: la única que viaja <strong>sin etiqueta</strong> por el trunk (por defecto la 1). Debe <strong>coincidir en ambos extremos</strong>; por seguridad se recomienda <strong>no usar la VLAN 1</strong> para datos y cambiar la nativa a una VLAN sin uso.</li>
-<li><strong>VLAN de voz</strong>: un puerto de acceso puede llevar además una <strong>VLAN de voz etiquetada</strong>. Así, en la <strong>misma toma</strong> se conectan el <strong>teléfono IP</strong> (VLAN de voz, etiquetada) y el <strong>PC conectado al teléfono</strong> (VLAN de datos, sin etiqueta). El teléfono aprende la VLAN de voz por <strong>LLDP-MED</strong> (o CDP en Cisco) o por DHCP.</li>
-<li><strong>Tipos de pertenencia</strong>: por <strong>puerto</strong> (estática, la habitual), dinámica por MAC o por <strong>autenticación 802.1X</strong> (el servidor RADIUS asigna la VLAN según el usuario o dispositivo).</li>
+<li><strong>VLAN nativa</strong>: la única que viaja <strong>sin etiqueta</strong> por el trunk (por defecto la 1). Debe <strong>coincidir en ambos extremos</strong>. Por seguridad, la nativa se cambia a una VLAN sin uso y la VLAN 1 no se usa para datos.</li>
+<li><strong>VLAN de voz</strong>: un puerto de acceso puede llevar además una <strong>VLAN de voz etiquetada</strong>. En la misma toma van el <strong>teléfono IP</strong> (voz, etiquetada) y el <strong>PC</strong> conectado detrás del teléfono (datos, sin etiqueta). El teléfono aprende la VLAN de voz por <strong>LLDP-MED</strong> (o CDP en Cisco) o por DHCP.</li>
+<li><strong>Pertenencia</strong>: por <strong>puerto</strong> (lo habitual) o dinámica por <strong>802.1X</strong> (el servidor RADIUS asigna la VLAN, T17).</li>
 </ul>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th>📌 <strong>Imprescindible — examen 2023, pregunta 15</strong><br>Un <strong>trunk</strong> es <strong>un enlace que agrega (transporta) tráfico de varias VLAN</strong>. No es un puerto de alta velocidad, ni un adaptador de fibra, ni una versión de firmware.</th>
-</tr>
-</table></div>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th>🧠 <strong>Para memorizar</strong><br><strong>Acceso = una VLAN sin etiqueta. Trunk = muchas VLAN etiquetadas (+ la nativa sin etiqueta).</strong><br>En Aruba se dice al revés de forma más intuitiva: puerto <strong>untagged</strong> en una VLAN = acceso; <strong>tagged</strong> en varias = trunk.</th>
-</tr>
-</table></div>
-<h3 id="configuración-de-ejemplo">Configuración de ejemplo</h3>
+<figure class="tema-figura">
+<figcaption>Figura 2 · Puesto con teléfono IP y PC en una sola toma</figcaption>
+<svg viewBox="0 0 700 172" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Un puerto del switch configurado como acceso más VLAN de voz y con PoE: hacia el teléfono IP viajan la VLAN 2 de voz etiquetada y la VLAN 23 de datos sin etiqueta; el teléfono usa la VLAN 2 y deja pasar la VLAN 23 hacia el PC conectado a su segundo puerto." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0402telefonoa-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0402telefonov-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0402telefonom-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0402telefonog-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="50" width="170" height="60" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="95.0" y="72.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">Puerto del switch</text><text x="95.0" y="87.5" text-anchor="middle" font-size="10.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">acceso + voz · PoE</text><line x1="180" y1="72" x2="290" y2="72" stroke="#b26a00" stroke-width="3" stroke-dasharray="5 3"/><line x1="180" y1="88" x2="290" y2="88" stroke="#003da5" stroke-width="3"/><text x="235" y="60" text-anchor="middle" font-size="9.5" font-weight="600" fill="#b26a00" dominant-baseline="middle">voz: VLAN 2 etiquetada</text><text x="235" y="102" text-anchor="middle" font-size="10" font-weight="600" fill="#003da5" dominant-baseline="middle">VLAN 23 sin etiqueta</text><rect x="290" y="50" width="160" height="60" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="370.0" y="72.5" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">Teléfono IP</text><text x="370.0" y="87.5" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">usa la VLAN 2 · PoE</text><line x1="450" y1="88" x2="540" y2="88" stroke="#003da5" stroke-width="3"/><text x="495" y="102" text-anchor="middle" font-size="10" font-weight="600" fill="#003da5" dominant-baseline="middle">VLAN 23</text><rect x="540" y="50" width="150" height="60" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="615.0" y="72.5" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">PC</text><text x="615.0" y="87.5" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">por el puerto del teléfono</text><text x="350" y="142" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">Una sola toma: el teléfono aprende la VLAN de voz por LLDP-MED (o CDP, o DHCP)</text><text x="350" y="160" text-anchor="middle" font-size="11" font-weight="500" fill="#5a5652" dominant-baseline="middle">y deja pasar al PC por la VLAN de datos. El switch alimenta el teléfono por PoE.</text></svg>
+</figure>
+<p><strong>Configuración de ejemplo:</strong></p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -147,9 +187,9 @@
 <td><code>interface 1/1/5</code> · <code>no routing</code> · <code>vlan access 23</code></td>
 </tr>
 <tr>
-<td>VLAN de voz en el puerto</td>
+<td>VLAN de voz</td>
 <td><code>switchport voice vlan 2</code></td>
-<td><code>vlan trunk allowed 2</code> (etiquetada) + <code>vlan trunk native 23</code>, o perfil de voz por LLDP-MED</td>
+<td>VLAN 2 etiquetada en el puerto (o perfil de voz por LLDP-MED)</td>
 </tr>
 <tr>
 <td>Trunk</td>
@@ -163,58 +203,36 @@
 </tr>
 </tbody>
 </table></div>
+<p>En el antiguo <strong>ArubaOS-Switch</strong> (ProCurve) se configura desde la VLAN: <code>vlan 23 untagged 5</code> y <code>vlan 2 tagged 5</code>.</p>
+<p><strong>Aplicación práctica — la directiva del caso de 2023.</strong> «En cada subred solo dispositivos de un servicio» y «las VLAN se extienden a nivel 2 entre todos los switches»: <strong>una VLAN por servicio</strong> (usuarios 23, telefonía 2, registro 16, Internet libre 122, cámaras 47, telegestión 94), llevadas por <strong>trunks</strong> hasta el switch principal.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>Aruba tiene dos familias de sistema: <strong>AOS-CX</strong> (series CX actuales) y <strong>ArubaOS-Switch</strong> (antiguo ProCurve), donde se configura desde la VLAN: <code>vlan 23 untagged 5</code> y <code>vlan 2 tagged 5</code>.</th>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 15</strong><br>Un <strong>trunk</strong> es <strong>un enlace que agrega (transporta) tráfico de varias VLAN</strong>. No es un puerto de alta velocidad ni un adaptador de fibra.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — trunk 802.1Q vs trunk de ProCurve</strong><br>En Cisco y en la terminología general, <strong>trunk</strong> = enlace con varias VLAN etiquetadas. En el antiguo <strong>ProCurve</strong> (ArubaOS-Switch), <em>trunk</em> significaba <strong>agregación de puertos</strong> (LACP). En AOS-CX la agregación se llama <strong>LAG</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — VLAN nativa vs VLAN por defecto</strong><br><strong>Nativa</strong>: la que va sin etiqueta por un trunk (configurable). <strong>Por defecto</strong>: la VLAN 1, a la que pertenecen todos los puertos de fábrica.</th>
 </tr>
 </table></div>
 <h2 id="3-spanning-tree-stp" class="tema-h2">3. Spanning Tree (STP)</h2>
-<p>Los <strong>enlaces redundantes</strong> entre switches crean <strong>bucles de capa 2</strong>. Como las tramas Ethernet <strong>no tienen TTL</strong>, un bucle provoca <strong>tormentas de broadcast</strong>, inestabilidad de las tablas MAC y tramas duplicadas: <strong>la red se cae en segundos</strong>.</p>
-<p><strong>STP (IEEE 802.1D)</strong> evita los bucles <strong>bloqueando lógicamente</strong> los enlaces redundantes y dejando un árbol sin ciclos; si un enlace activo cae, desbloquea el de reserva.</p>
-<h3 id="cómo-funciona">Cómo funciona</h3>
+<p><strong>Concepto.</strong> Los enlaces redundantes entre switches crean <strong>bucles de capa 2</strong>. Como las tramas Ethernet <strong>no tienen TTL</strong>, un bucle provoca <strong>tormentas de broadcast</strong> e inestabilidad de las tablas MAC: la red cae en segundos. <strong>STP</strong> evita los bucles <strong>bloqueando lógicamente</strong> los enlaces sobrantes.</p>
+<p><strong>Explicación.</strong></p>
+<figure class="tema-figura">
+<figcaption>Figura 3 · Spanning Tree en un triángulo de switches</figcaption>
+<svg viewBox="0 0 700 262" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tres switches en triángulo. El switch 1, con prioridad 4096, es la raíz; los switches 2 y 3 llegan a él por sus puertos raíz. El enlace directo entre los switches 2 y 3 es redundante y uno de sus puertos queda bloqueado; se desbloquea si cae otro enlace. La raíz es el switch con menor Bridge ID (prioridad más MAC)." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0403stpa-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0403stpv-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0403stpm-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0403stpg-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="260" y="10" width="180" height="46" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="350.0" y="25.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">Switch 1 · RAÍZ</text><text x="350.0" y="40.5" text-anchor="middle" font-size="10.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">prioridad 4096</text><rect x="40" y="160" width="180" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="130.0" y="175.5" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">Switch 2</text><text x="130.0" y="190.5" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">prioridad 32768</text><rect x="480" y="160" width="180" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="570.0" y="175.5" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">Switch 3</text><text x="570.0" y="190.5" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">prioridad 32768</text><line x1="300" y1="56" x2="150" y2="160" stroke="#2e7d3c" stroke-width="3"/><line x1="400" y1="56" x2="550" y2="160" stroke="#2e7d3c" stroke-width="3"/><line x1="220" y1="183" x2="480" y2="183" stroke="#b26a00" stroke-width="3" stroke-dasharray="5 3"/><line x1="440" y1="174" x2="458" y2="192" stroke="#b26a00" stroke-width="3"/><line x1="458" y1="174" x2="440" y2="192" stroke="#b26a00" stroke-width="3"/><text x="350" y="172" text-anchor="middle" font-size="11" font-weight="700" fill="#b26a00" dominant-baseline="middle">enlace redundante: un puerto BLOQUEADO</text><text x="350" y="198" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">se desbloquea si cae otro enlace</text><text x="196" y="98" text-anchor="end" font-size="10.5" font-weight="600" fill="#2e7d3c" dominant-baseline="middle">puerto raíz</text><text x="504" y="98" text-anchor="start" font-size="10.5" font-weight="600" fill="#2e7d3c" dominant-baseline="middle">puerto raíz</text><text x="350" y="232" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">Raíz = menor Bridge ID (prioridad + MAC) · se fuerza en el switch principal bajando su prioridad</text><text x="350" y="250" text-anchor="middle" font-size="11" font-weight="500" fill="#5a5652" dominant-baseline="middle">Sin STP, el triángulo sería un bucle: tormenta de broadcast en segundos (las tramas no tienen TTL)</text></svg>
+</figure>
 <ol type="1">
-<li>Se elige el <strong>puente raíz (<em>root bridge</em>)</strong>: el de <strong>menor Bridge ID</strong> = <strong>prioridad</strong> (por defecto 32768, múltiplos de 4096) + <strong>MAC</strong>. Conviene <strong>forzar</strong> que sea el switch principal bajando su prioridad.</li>
-<li>Cada switch elige su <strong>puerto raíz</strong> (el de menor coste hacia la raíz). El <strong>coste</strong> depende de la velocidad (1 Gbps = 4 y 10 Gbps = 2 en el coste clásico; 20.000 y 2.000 en el coste largo).</li>
-<li>En cada segmento se elige un <strong>puerto designado</strong>; el resto queda <strong>bloqueado</strong> (<em>alternate/blocking</em>).</li>
-<li>Los switches intercambian <strong>BPDU</strong> (<em>Bridge Protocol Data Units</em>) cada 2 s.</li>
+<li>Se elige el <strong>puente raíz</strong>: el de <strong>menor Bridge ID</strong> = <strong>prioridad</strong> (32768 por defecto, en múltiplos de 4096) + <strong>MAC</strong>. Conviene <strong>forzar</strong> que sea el switch principal bajando su prioridad.</li>
+<li>Cada switch elige su <strong>puerto raíz</strong>: el de menor <strong>coste</strong> hacia la raíz (el coste depende de la velocidad).</li>
+<li>En cada segmento hay un <strong>puerto designado</strong>; el resto queda <strong>bloqueado</strong> (<em>alternate</em>).</li>
+<li>Los switches intercambian <strong>BPDU</strong> (cada 2 s).</li>
 </ol>
-<div class="tabla-wrap"><table class="tabla-tema">
-<thead>
-<tr>
-<th>Estado (STP clásico)</th>
-<th>Qué hace</th>
-<th>Duración</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Blocking</strong></td>
-<td>No reenvía; solo escucha BPDU</td>
-<td>—</td>
-</tr>
-<tr>
-<td><strong>Listening</strong></td>
-<td>Participa en la elección; no aprende MAC</td>
-<td>15 s (<em>forward delay</em>)</td>
-</tr>
-<tr>
-<td><strong>Learning</strong></td>
-<td>Aprende MAC; aún no reenvía</td>
-<td>15 s</td>
-</tr>
-<tr>
-<td><strong>Forwarding</strong></td>
-<td>Reenvía tramas</td>
-<td>—</td>
-</tr>
-<tr>
-<td>Disabled</td>
-<td>Puerto apagado</td>
-<td>—</td>
-</tr>
-</tbody>
-</table></div>
-<p>Con STP clásico un puerto tarda <strong>30–50 s</strong> en pasar a <em>forwarding</em>.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -227,66 +245,83 @@
 <tr>
 <td>STP</td>
 <td>802.1D</td>
-<td>Convergencia lenta (30–50 s)</td>
+<td>Lento: <strong>30–50 s</strong> hasta <em>forwarding</em> (<em>listening</em> 15 s + <em>learning</em> 15 s, más hasta 20 s de <em>max age</em>)</td>
 </tr>
 <tr>
 <td><strong>RSTP</strong></td>
 <td><strong>802.1w</strong></td>
-<td><strong>Convergencia rápida</strong> (≈ 1–2 s); estados <em>discarding/learning/forwarding</em>; <strong>es el recomendado</strong></td>
+<td><strong>Rápido</strong> (≈ 1–2 s); el recomendado</td>
 </tr>
 <tr>
 <td><strong>MSTP</strong></td>
 <td><strong>802.1s</strong></td>
-<td>Agrupa VLAN en <strong>instancias</strong>, cada una con su árbol (reparto de carga); estándar multifabricante</td>
+<td>Agrupa VLAN en <strong>instancias</strong>, cada una con su árbol; estándar multifabricante</td>
 </tr>
 <tr>
 <td>PVST+ / Rapid PVST+</td>
 <td>Cisco</td>
-<td>Un árbol por VLAN (propietario de Cisco)</td>
+<td>Un árbol por VLAN (propietario)</td>
 </tr>
 </tbody>
 </table></div>
+<figure class="tema-figura">
+<figcaption>Figura 4 · Cuánto tarda un puerto en reenviar</figcaption>
+<svg viewBox="0 0 700 202" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Línea de tiempo de 0 a 50 segundos: con STP clásico un puerto pasa por blocking (hasta 20 s), listening (15 s) y learning (15 s) antes de forwarding, de 30 a 50 s; con RSTP llega a forwarding en 1 o 2 s; con PortFast o admin-edge pasa a forwarding de inmediato. Nota: PortFast solo en puertos de equipos finales y siempre con BPDU Guard." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0404tiemposa-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0404tiemposv-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0404tiemposm-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0404tiemposg-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><line x1="170" y1="150" x2="570" y2="150" stroke="#5a5652" stroke-width="1.2"/><line x1="170" y1="146" x2="170" y2="154" stroke="#5a5652" stroke-width="1.2"/><text x="170" y="166" text-anchor="middle" font-size="10" font-weight="600" fill="#5a5652" dominant-baseline="middle">0 s</text><line x1="250" y1="146" x2="250" y2="154" stroke="#5a5652" stroke-width="1.2"/><text x="250" y="166" text-anchor="middle" font-size="10" font-weight="600" fill="#5a5652" dominant-baseline="middle">10 s</text><line x1="330" y1="146" x2="330" y2="154" stroke="#5a5652" stroke-width="1.2"/><text x="330" y="166" text-anchor="middle" font-size="10" font-weight="600" fill="#5a5652" dominant-baseline="middle">20 s</text><line x1="410" y1="146" x2="410" y2="154" stroke="#5a5652" stroke-width="1.2"/><text x="410" y="166" text-anchor="middle" font-size="10" font-weight="600" fill="#5a5652" dominant-baseline="middle">30 s</text><line x1="490" y1="146" x2="490" y2="154" stroke="#5a5652" stroke-width="1.2"/><text x="490" y="166" text-anchor="middle" font-size="10" font-weight="600" fill="#5a5652" dominant-baseline="middle">40 s</text><line x1="570" y1="146" x2="570" y2="154" stroke="#5a5652" stroke-width="1.2"/><text x="570" y="166" text-anchor="middle" font-size="10" font-weight="600" fill="#5a5652" dominant-baseline="middle">50 s</text><text x="10" y="28" text-anchor="start" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">STP clásico (802.1D)</text><text x="10" y="44" text-anchor="start" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">30–50 s hasta forwarding</text><rect x="170" y="14" width="160" height="28" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="250.0" y="28.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">blocking (≤ 20 s)</text><rect x="330" y="14" width="120" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="390.0" y="28.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">listening</text><rect x="450" y="14" width="120" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="510.0" y="28.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">learning</text><rect x="570" y="14" width="110" height="28" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="625.0" y="28.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">forwarding</text><text x="688" y="28" text-anchor="start" font-size="10.5" font-weight="600" fill="#2e7d3c" dominant-baseline="middle"></text><text x="10" y="70" text-anchor="start" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">RSTP (802.1w)</text><rect x="170" y="56" width="16" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><rect x="186" y="56" width="110" height="28" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="241.0" y="70.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">forwarding</text><text x="304" y="70" text-anchor="start" font-size="10.5" font-weight="600" fill="#2e7d3c" dominant-baseline="middle">forwarding en 1–2 s</text><text x="10" y="112" text-anchor="start" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">PortFast / admin-edge</text><rect x="170" y="98" width="110" height="28" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="225.0" y="112.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">forwarding</text><text x="288" y="112" text-anchor="start" font-size="10.5" font-weight="600" fill="#2e7d3c" dominant-baseline="middle">forwarding inmediato</text><text x="350" y="190" text-anchor="middle" font-size="11" font-weight="700" fill="#b26a00" dominant-baseline="middle">PortFast solo en puertos de equipos finales y siempre con BPDU Guard; nunca entre switches</text></svg>
+</figure>
+<p><strong>Protecciones en los puertos de acceso:</strong></p>
+<ul class="tema-lista">
+<li><strong>PortFast</strong> (Cisco) / <em><strong>admin-edge</strong></em> (Aruba): un puerto donde solo hay un equipo final pasa <strong>directamente a <em>forwarding</em></strong>. Evita que un PC se quede sin IP por DHCP al arrancar o que falle el arranque por red.</li>
+<li><strong>BPDU Guard</strong>: si un puerto con PortFast recibe una BPDU (alguien ha conectado un switch), se <strong>desactiva</strong> (<em>err-disabled</em>).</li>
+<li><strong>Root Guard</strong>: impide que un switch de acceso se convierta en raíz.</li>
+<li><strong>Loop protection</strong> (Aruba) / <em>loop guard</em>: detecta bucles aunque el equipo conectado no hable STP.</li>
+</ul>
+<p><strong>Aplicación práctica.</strong> Cisco usa por defecto <strong>Rapid PVST+</strong> y Aruba <strong>MSTP</strong>: en una red mixta se configura <strong>MSTP</strong> en todos (o se cuida la interoperabilidad). La raíz, siempre en el switch principal.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>⚠️ <strong>Mezcla Cisco–Aruba</strong><br>Cisco usa por defecto <strong>PVST+/Rapid PVST+</strong> (propietario) y Aruba <strong>MSTP</strong>: para que convivan se configura <strong>MSTP</strong> (o se cuida la interoperabilidad con la instancia común, CST).</th>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 10</strong><br><code>spanning-tree portfast</code> hace que el puerto <strong>pase inmediatamente a <em>forwarding</em></strong>, <strong>minimizando el tiempo de convergencia STP</strong> en puertos de equipos finales. <strong>Nunca en puertos hacia otros switches.</strong></th>
 </tr>
 </table></div>
-<h3 id="portfast-bpdu-guard-y-root-guard">PortFast, BPDU Guard y Root Guard</h3>
-<ul class="tema-lista">
-<li><strong>PortFast</strong> (Cisco) / <em><strong>admin-edge</strong></em> (Aruba): un puerto <strong>de acceso</strong> donde solo hay un equipo final pasa <strong>directamente a <em>forwarding</em></strong> sin esperar los 30 s. Evita que un PC no obtenga IP por DHCP al arrancar o que el arranque PXE falle.</li>
-<li><strong>BPDU Guard</strong>: si un puerto con PortFast recibe una BPDU (alguien ha conectado un switch), se <strong>desactiva</strong> (<em>err-disabled</em>). Protege contra bucles y switches no autorizados.</li>
-<li><strong>Root Guard</strong>: impide que un switch de acceso se convierta en raíz.</li>
-<li><strong>Loop protection</strong> (Aruba) / <strong>loop guard</strong>: detecta bucles aunque el otro equipo no hable STP (un switch doméstico).</li>
-</ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>📌 <strong>Imprescindible — examen 2023, pregunta 10</strong><br>El efecto principal de <code>spanning-tree portfast</code> es que el puerto <strong>pasa inmediatamente a <em>forwarding</em></strong>, <strong>minimizando el tiempo de convergencia STP</strong> en puertos de equipos finales. <strong>Nunca en puertos hacia otros switches.</strong></th>
+<th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br>El puente raíz es el de <strong>menor</strong> Bridge ID, no el de mayor prioridad numérica.</th>
 </tr>
 </table></div>
 <h2 id="4-agregacion-de-enlaces-lacp" class="tema-h2">4. Agregación de enlaces (LACP)</h2>
-<p>La <strong>agregación de enlaces</strong> une <strong>varios puertos físicos en un único enlace lógico</strong>:</p>
+<p><strong>Concepto.</strong> La <strong>agregación de enlaces</strong> une <strong>varios puertos físicos en un único enlace lógico</strong>: más capacidad y <strong>redundancia</strong>.</p>
+<p><strong>Explicación.</strong></p>
+<figure class="tema-figura">
+<figcaption>Figura 5 · Agregación de enlaces con LACP</figcaption>
+<svg viewBox="0 0 700 194" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Una pila de planta y el switch principal unidos por dos enlaces de 10 Gb/s agrupados en un único enlace lógico (port-channel o LAG) negociado con LACP: 20 Gb/s de capacidad total. Si cae una fibra, el tráfico sigue por la otra sin que STP reconverja. El reparto es por flujo: una sola descarga usa un único enlace de 10 Gb/s." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0405lacpa-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0405lacpv-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0405lacpm-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0405lacpg-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="50" width="160" height="70" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="90.0" y="77.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">Pila de planta</text><text x="90.0" y="92.5" text-anchor="middle" font-size="10.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">2 × SFP+ 10G</text><rect x="530" y="50" width="160" height="70" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="610.0" y="77.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">Switch principal</text><text x="610.0" y="92.5" text-anchor="middle" font-size="10.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">2 × SFP+ 10G</text><rect x="200" y="54" width="300" height="62" rx="31" fill="none" stroke="#2e7d3c" stroke-width="2" stroke-dasharray="6 4"/><line x1="170" y1="72" x2="530" y2="72" stroke="#003da5" stroke-width="4"/><line x1="170" y1="98" x2="530" y2="98" stroke="#003da5" stroke-width="4"/><text x="350" y="40" text-anchor="middle" font-size="12" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">un enlace LÓGICO (port-channel / LAG) negociado con LACP</text><text x="350" y="86" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">20 Gb/s de capacidad total</text><text x="350" y="146" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">Redundancia: si cae una fibra, el tráfico sigue por la otra sin que STP reconverja</text><text x="350" y="164" text-anchor="middle" font-size="11" font-weight="500" fill="#b26a00" dominant-baseline="middle">Reparto por flujo (hash de MAC/IP/puerto): una sola descarga usa un único enlace de 10 Gb/s</text><text x="350" y="182" text-anchor="middle" font-size="11" font-weight="500" fill="#5a5652" dominant-baseline="middle">Requisitos: misma velocidad, dúplex y VLAN en todos los puertos · al menos un extremo en «active»</text></svg>
+</figure>
 <ul class="tema-lista">
-<li><strong>Más ancho de banda</strong>: 2 × 10 Gbps = 20 Gbps de capacidad total (un mismo flujo usa un solo enlace físico: el reparto es por <em>hash</em> de MAC/IP/puerto).</li>
-<li><strong>Redundancia</strong>: si cae un enlace, el tráfico sigue por los demás <strong>sin que STP tenga que reconverger</strong> (STP ve un único enlace lógico).</li>
+<li><strong>Capacidad</strong>: 2 × 10 Gb/s = 20 Gb/s en total. El reparto es <strong>por flujo</strong> (<em>hash</em> de MAC/IP/puerto): una única descarga usa <strong>un solo</strong> enlace físico.</li>
+<li><strong>Redundancia</strong>: si cae un enlace, el tráfico sigue por los demás y <strong>STP no reconverge</strong> (ve un único enlace lógico).</li>
+<li><strong>LACP</strong> (<em>Link Aggregation Control Protocol</em>, <strong>IEEE 802.3ad</strong>, hoy <strong>802.1AX</strong>) negocia el grupo y detecta errores de cableado. Modos <strong>active</strong> y <strong>passive</strong>: al menos un extremo en <em>active</em>. También existe la agregación <strong>estática</strong> (sin protocolo, más arriesgada) y <strong>PAgP</strong>, propietario de Cisco.</li>
+<li>Requisitos: <strong>misma velocidad, dúplex y configuración de VLAN</strong> en todos los puertos del grupo.</li>
+<li>Nombres: <strong>EtherChannel / port-channel</strong> (Cisco), <strong>LAG</strong> (Aruba AOS-CX), <em>bonding/teaming</em> (servidores).</li>
 </ul>
-<p>Nombres: <em><strong>EtherChannel</strong></em> / <em><strong>Port-channel</strong></em> (Cisco), <em><strong>LAG / trunk</strong></em> (Aruba; ojo, en el antiguo ProCurve <em>trunk</em> significa agregación, no 802.1Q), <em>bonding/teaming</em> (servidores).</p>
-<p><strong>LACP</strong> (<em>Link Aggregation Control Protocol</em>, <strong>IEEE 802.3ad</strong>, hoy <strong>802.1AX</strong>) negocia automáticamente el grupo y detecta errores de cableado. Modos: <strong>active</strong> (inicia la negociación) y <strong>passive</strong> (responde); al menos un extremo debe estar en <em>active</em>. También existe la agregación <strong>estática</strong> (sin protocolo, más arriesgada) y el <strong>PAgP</strong> propietario de Cisco.</p>
-<p>Requisitos: <strong>misma velocidad, dúplex y configuración de VLAN</strong> en todos los puertos del grupo; hasta 8 enlaces activos.</p>
+<p><strong>Aplicación práctica.</strong> Dos uplinks desde una pila de planta, uno por miembro, agregados con LACP: si cae un switch de la pila o una fibra, la planta sigue conectada.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>📌 <strong>Imprescindible — examen 2023, pregunta 9</strong><br><strong>LACP permite unir varias conexiones de red para obtener mayor ancho de banda y redundancia entre canales.</strong> Las demás opciones eran incompletas: «gestionar enlaces de forma unificada» o «agrupar tráfico en un interfaz de mayor ancho de banda» no mencionan la redundancia.</th>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 9</strong><br><strong>LACP permite unir varias conexiones de red para obtener mayor ancho de banda y redundancia.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br>2 × 1 Gb/s agregados <strong>no</strong> hacen que una sola descarga vaya a 2 Gb/s.</th>
 </tr>
 </table></div>
 <h2 id="5-poe-alimentacion-por-el-cable-de-datos" class="tema-h2">5. PoE: alimentación por el cable de datos</h2>
-<p><strong>PoE</strong> (<em>Power over Ethernet</em>) suministra <strong>alimentación eléctrica por el mismo cable de par trenzado</strong> que los datos. Evita enchufes junto a <strong>AP del techo, cámaras, teléfonos IP o lectores</strong>, y permite reiniciarlos en remoto <strong>apagando y encendiendo el PoE del puerto</strong>.</p>
+<p><strong>Concepto.</strong> <strong>PoE</strong> suministra <strong>alimentación eléctrica por el mismo par trenzado</strong> que los datos. Evita enchufes junto a AP, cámaras y teléfonos, y permite <strong>reiniciarlos en remoto</strong> cortando y devolviendo el PoE del puerto.</p>
+<p><strong>Explicación.</strong></p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
 <th>Norma</th>
 <th>Nombre</th>
 <th><strong>Potencia en el puerto (PSE)</strong></th>
-<th>Potencia en el equipo (PD)</th>
-<th>Pares usados</th>
+<th>En el equipo (PD)</th>
+<th>Pares</th>
 </tr>
 </thead>
 <tbody>
@@ -295,76 +330,82 @@
 <td>PoE (tipo 1)</td>
 <td><strong>15,4 W</strong></td>
 <td>12,95 W</td>
-<td>2 pares</td>
+<td>2</td>
 </tr>
 <tr>
 <td><strong>802.3at</strong></td>
 <td><strong>PoE+</strong> (tipo 2)</td>
 <td><strong>30 W</strong></td>
 <td>25,5 W</td>
-<td>2 pares</td>
+<td>2</td>
 </tr>
 <tr>
 <td><strong>802.3bt</strong></td>
 <td>PoE++ tipo 3</td>
 <td><strong>60 W</strong></td>
 <td>51 W</td>
-<td>4 pares</td>
+<td>2 o 4</td>
 </tr>
 <tr>
 <td><strong>802.3bt</strong></td>
 <td>PoE++ tipo 4</td>
-<td><strong>90–100 W</strong></td>
-<td>71–73 W</td>
-<td>4 pares</td>
+<td><strong>90 W</strong></td>
+<td>71,3 W</td>
+<td>4</td>
 </tr>
 </tbody>
 </table></div>
 <ul class="tema-lista">
-<li><strong>PSE</strong> (<em>Power Sourcing Equipment</em>): quien da energía (switch o <strong>inyector</strong>). <strong>PD</strong> (<em>Powered Device</em>): quien la recibe.</li>
-<li>El switch <strong>detecta</strong> si el equipo es PoE antes de dar tensión (firma de 25 kΩ) y <strong>clasifica</strong> su consumo: no daña equipos que no son PoE.</li>
-<li><strong>Presupuesto PoE (<em>power budget</em>)</strong>: potencia total que el switch puede repartir (p. ej., 370 W o 740 W). <strong>No se puede dar el máximo a todos los puertos a la vez</strong>: hay que sumar los consumos reales.</li>
-<li><strong>Consumos orientativos</strong>: teléfono IP 3–7 W (13 W con pantalla a color o módulos), <strong>cámara IP 5–13 W</strong> (<strong>hasta 25 W</strong> con calefactor o PTZ), <strong>AP wifi 6 de 15 a 30 W</strong> (wifi 6E/7 pueden necesitar 802.3bt), cliente ligero o pantalla con 802.3bt hasta 60–90 W.</li>
+<li><strong>PSE</strong> = quien da energía (switch o <strong>inyector</strong>); <strong>PD</strong> = quien la recibe.</li>
+<li>El switch <strong>detecta</strong> si el equipo es PoE antes de dar tensión y <strong>clasifica</strong> su consumo: no daña equipos que no son PoE.</li>
+<li><strong>Presupuesto PoE</strong>: potencia total que el switch puede repartir (370 W, 740 W…). No se puede dar el máximo a todos los puertos a la vez: hay que <strong>sumar los consumos reales</strong>.</li>
+<li>Consumos orientativos: teléfono IP 3–7 W (más con pantalla grande), <strong>cámara IP 5–13 W</strong> (hasta 25 W con calefactor o PTZ), <strong>AP wifi 6 de 15 a 30 W</strong> (wifi 6E/7 pueden pedir 802.3bt).</li>
 </ul>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th>📌 <strong>Imprescindible — examen 2023, pregunta 21</strong><br>Una <strong>cámara IP que negocia 802.3at (PoE+)</strong> tiene un consumo estimado del orden de <strong>30 W</strong> (el máximo de la clase en el puerto). 15 W sería 802.3af; 40 W no corresponde a ninguna clase estándar.</th>
-</tr>
-</table></div>
-<h3 id="si-falla-el-poe-del-switch-caso-2023-pregunta-9">Si falla el PoE del switch (caso 2023, pregunta 9)</h3>
+<figure class="tema-figura">
+<figcaption>Figura 6 · El presupuesto PoE</figcaption>
+<svg viewBox="0 0 700 196" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Barra del presupuesto PoE de un switch de 48 puertos PoE+ con 370 W: 6 teléfonos (unos 42 W), 10 AP (unos 250 W) y 4 cámaras (unos 60 W) suman unos 352 W, por debajo del presupuesto pero con poco margen. Debajo, 48 puertos por 30 W serían 1.440 W: imposible dar el máximo a todos a la vez." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0406poea-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0406poev-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0406poem-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0406poeg-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><text x="10" y="18" text-anchor="start" font-size="12.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Switch de 48 puertos PoE+ con presupuesto de 370 W</text><rect x="10" y="34" width="38.5945945945946" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><rect x="48.5945945945946" y="34" width="229.72972972972974" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><rect x="278.3243243243243" y="34" width="55.13513513513514" height="40" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="29.2972972972973" y="92" text-anchor="middle" font-size="10" font-weight="600" fill="#003da5" dominant-baseline="middle">6 tel.</text><text x="163.45945945945948" y="54" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">10 AP · 250 W</text><text x="305.89189189189193" y="92" text-anchor="middle" font-size="10" font-weight="600" fill="#b26a00" dominant-baseline="middle">4 cám.</text><line x1="350.0" y1="26" x2="350.0" y2="84" stroke="#2e7d3c" stroke-width="2.6"/><text x="356.0" y="100" text-anchor="start" font-size="11" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">presupuesto 370 W</text><text x="337.4594594594595" y="120" text-anchor="start" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">consumo ≈ 352 W: cabe, con poco margen</text><rect x="10" y="140" width="680" height="20" rx="4" fill="#f0efed" stroke="#5a5652" stroke-width="1.6" stroke-dasharray="5 3"/><text x="350" y="150" text-anchor="middle" font-size="10.5" font-weight="600" fill="#5a5652" dominant-baseline="middle">48 puertos × 30 W = 1.440 W: imposible dar el máximo a todos a la vez</text><text x="350" y="184" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">PoE 802.3af 15,4 W · PoE+ 802.3at 30 W · PoE++ 802.3bt 60 W (tipo 3) / 90 W (tipo 4) en el puerto</text></svg>
+</figure>
+<p><strong>Aplicación práctica — si falla el PoE del switch (caso 2023, pregunta 9):</strong></p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
 <th>Equipo</th>
-<th>Alternativas</th>
+<th>Alternativa</th>
 <th>Consideraciones</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>Teléfonos IP</strong></td>
-<td><strong>Fuente de alimentación</strong> propia del teléfono (si el modelo la admite) o <strong>inyector PoE</strong></td>
-<td>Pocos vatios: cualquier inyector 802.3af sirve</td>
+<td>Fuente de alimentación propia o <strong>inyector PoE</strong></td>
+<td>Pocos vatios: sirve un inyector 802.3af</td>
 </tr>
 <tr>
 <td><strong>Cámaras IP</strong></td>
-<td><strong>Inyector PoE+</strong> junto al switch, o fuente de 12 V CC en la cámara (si hay enchufe en el techo, que normalmente no hay)</td>
-<td>802.3at (30 W), especialmente las exteriores con calefactor o PTZ</td>
+<td><strong>Inyector PoE+</strong> junto al switch</td>
+<td>30 W para las exteriores con calefactor o PTZ</td>
 </tr>
 <tr>
 <td><strong>AP wifi</strong></td>
 <td><strong>Inyector PoE+ o 802.3bt</strong> según el modelo</td>
-<td>Si reciben menos potencia de la necesaria, arrancan con <strong>funciones reducidas</strong> (menos radios o <em>streams</em>)</td>
+<td>Con menos potencia arrancan con funciones reducidas</td>
 </tr>
 <tr>
 <td>Todos</td>
-<td><strong>Switch PoE de sustitución</strong> o <strong>reparto</strong> en otro switch PoE con presupuesto libre</td>
-<td><strong>Sumar consumos</strong> y comparar con el presupuesto del switch; revisar si la avería es de <strong>una fuente</strong> del switch (las fuentes redundantes aportan potencia PoE)</td>
+<td><strong>Switch PoE de sustitución</strong> o reparto en otro switch con presupuesto libre</td>
+<td>Sumar consumos; revisar si falla <strong>una fuente</strong> (las fuentes aportan potencia PoE)</td>
 </tr>
 </tbody>
 </table></div>
-<p>Además: <strong>priorizar</strong> puertos (<em>PoE priority</em>: cámaras de seguridad y AP primero), <strong>revisar el log</strong> del switch (sobrecarga, <em>overcurrent</em>, presupuesto agotado), y <strong>abrir incidencia con el fabricante</strong> o el mantenedor si es una avería de hardware.</p>
+<p>Además: <strong>prioridad PoE</strong> por puerto (cámaras y AP primero), revisar el <strong>log</strong> (sobrecarga, presupuesto agotado) e <strong>incidencia con el fabricante</strong> si es avería de hardware.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 21</strong><br>Una <strong>cámara IP que negocia 802.3at (PoE+)</strong> tiene un consumo de referencia del orden de <strong>30 W</strong> (el máximo de su clase en el puerto). 15 W sería 802.3af.</th>
+</tr>
+</table></div>
 <h2 id="6-seguridad-en-el-switch" class="tema-h2">6. Seguridad en el switch</h2>
+<p><strong>Concepto.</strong> El switch de acceso es la primera línea de defensa: controla <strong>quién se conecta</strong> y <strong>qué puede hacer</strong> en cada puerto.</p>
+<p><strong>Explicación.</strong></p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -375,62 +416,59 @@
 <tbody>
 <tr>
 <td><strong>Port security</strong></td>
-<td>Limita el número de MAC por puerto o fija las MAC permitidas; ante una infracción, bloquea o apaga el puerto</td>
+<td>Limita las MAC por puerto; ante una infracción bloquea o apaga el puerto</td>
 </tr>
 <tr>
-<td><strong>802.1X</strong> (+ RADIUS)</td>
+<td><strong>802.1X</strong> + RADIUS</td>
 <td>El equipo se <strong>autentica</strong> antes de tener acceso; puede recibir VLAN dinámica. Base del <strong>NAC</strong> (T17)</td>
 </tr>
 <tr>
 <td><strong>DHCP snooping</strong></td>
-<td>Solo los puertos de confianza (hacia el servidor DHCP real) pueden responder DHCP: bloquea <strong>servidores DHCP falsos</strong></td>
+<td>Solo los puertos de confianza pueden responder DHCP: bloquea <strong>servidores DHCP falsos</strong></td>
 </tr>
 <tr>
-<td><strong>Dynamic ARP Inspection (DAI)</strong></td>
-<td>Valida las respuestas ARP con la tabla de DHCP snooping: frena el <strong>ARP spoofing</strong></td>
+<td><strong>Dynamic ARP Inspection</strong></td>
+<td>Valida el ARP con la tabla de DHCP snooping: frena el <strong>ARP spoofing</strong> (T2)</td>
 </tr>
 <tr>
-<td><strong>IP Source Guard</strong></td>
-<td>Impide que un puerto use una IP distinta de la asignada</td>
-</tr>
-<tr>
-<td><em><strong>Storm control</strong></em></td>
-<td>Limita el broadcast/multicast por puerto para contener tormentas</td>
+<td><strong>Storm control</strong></td>
+<td>Limita el broadcast y el multicast por puerto</td>
 </tr>
 <tr>
 <td><strong>BPDU Guard / loop protection</strong></td>
-<td>Ver STP</td>
+<td>Ver apartado 3</td>
 </tr>
 <tr>
 <td>Puertos sin uso</td>
-<td><strong>Apagados</strong> (<em>shutdown</em>) y en una <strong>VLAN «aparcamiento»</strong> sin servicio</td>
+<td><strong>Apagados</strong> y en una <strong>VLAN de aparcamiento</strong> sin servicio</td>
 </tr>
 <tr>
 <td>Gestión segura</td>
-<td><strong>SSH</strong> (no Telnet), <strong>HTTPS</strong>, <strong>SNMPv3</strong>, cuentas nominales con <strong>RADIUS/TACACS+</strong>, VLAN de gestión separada, ACL de gestión</td>
+<td><strong>SSH</strong> (no Telnet), <strong>HTTPS</strong>, <strong>SNMPv3</strong>, cuentas nominales con <strong>RADIUS/TACACS+</strong>, VLAN de gestión separada</td>
 </tr>
 </tbody>
 </table></div>
+<p><strong>Aplicación práctica.</strong> Plantilla de puerto de usuario: acceso en su VLAN, VLAN de voz si hay teléfono, <strong>PortFast + BPDU Guard</strong>, <em>storm control</em> y 802.1X o port security según la política municipal.</p>
 <h2 id="7-descubrimiento-de-vecinos-lldp-y-cdp" class="tema-h2">7. Descubrimiento de vecinos: LLDP y CDP</h2>
+<p><strong>Concepto.</strong> Protocolos con los que cada equipo anuncia a su vecino directo quién es y por qué puerto está conectado.</p>
+<p><strong>Explicación.</strong></p>
 <ul class="tema-lista">
-<li><strong>LLDP</strong> (<em>Link Layer Discovery Protocol</em>, <strong>IEEE 802.1AB</strong>): estándar multifabricante. Cada equipo anuncia a su vecino directo su nombre, puerto, modelo, IP de gestión y capacidades. <strong>LLDP-MED</strong> añade datos para teléfonos IP (VLAN de voz, potencia PoE, ubicación).</li>
-<li><strong>CDP</strong> (<em>Cisco Discovery Protocol</em>): equivalente propietario de Cisco.</li>
-<li>Uso práctico: <strong>saber a qué puerto del switch está conectado un equipo</strong> sin seguir el cable: <code>show lldp neighbors</code> (Cisco y Aruba) o <code>show cdp neighbors</code>.</li>
+<li><strong>LLDP</strong> (<strong>IEEE 802.1AB</strong>): estándar multifabricante. Anuncia nombre, puerto, modelo, IP de gestión y capacidades. <strong>LLDP-MED</strong> añade datos para teléfonos (VLAN de voz, potencia PoE, ubicación).</li>
+<li><strong>CDP</strong>: equivalente propietario de Cisco.</li>
 </ul>
+<p><strong>Aplicación práctica.</strong> Saber a qué puerto está conectado un equipo sin seguir el cable: <code>show lldp neighbors</code> (Cisco), <code>show lldp neighbor-info</code> (Aruba AOS-CX), <code>show cdp neighbors</code>.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>💡 <strong>Para el caso práctico — player sin conectividad en el techo</strong> (caso 2023, pregunta 7)<br>Sin poder seguir el cable: buscar la <strong>MAC del player</strong> en las tablas MAC de los switches (<code>show mac address-table address …</code>), ver su vecino <strong>LLDP</strong>, o mirar la <strong>IP en el DHCP y la caché ARP</strong>. Así se localiza el puerto; después, se comprueba su estado, <strong>VLAN (Internet libre, 122)</strong>, PoE si lo usa y errores. In situ: luz del enlace, ping desde un portátil en la misma VLAN y prueba con otro latiguillo.</th>
+<th>⚠️ <strong>No confundir — LLDP vs CDP</strong><br><strong>LLDP</strong> es estándar (802.1AB). <strong>CDP</strong> es de Cisco. En una red con Aruba y Cisco, se usa LLDP.</th>
 </tr>
 </table></div>
 <h2 id="8-routers-y-routing" class="tema-h2">8. Routers y routing</h2>
-<p>Un <strong>router</strong> une <strong>redes distintas</strong> y decide por qué interfaz enviar cada paquete según la <strong>IP de destino</strong> y su <strong>tabla de rutas</strong>. Además de enrutar, los routers actuales hacen NAT, VPN, filtrado (ACL), QoS y DHCP.</p>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th>📌 <strong>Examen 2023, pregunta 34 (reserva)</strong><br>Un <strong>router</strong> se ocupa de <strong>conectar dos redes y determinar la mejor ruta</strong> para la transmisión de datos entre ellas. Prevenir intrusiones es cosa del <strong>cortafuegos</strong> (pregunta 33); convertir nombres en IP, del <strong>DNS</strong>.</th>
-</tr>
-</table></div>
-<h3 id="la-tabla-de-rutas">La tabla de rutas</h3>
-<p>Cada entrada indica <strong>red de destino / máscara → siguiente salto o interfaz</strong>, con una <strong>métrica</strong>. El router elige la ruta con el <strong>prefijo más largo (más específico)</strong> que coincida con el destino. Si nada coincide, usa la <strong>ruta por defecto (0.0.0.0/0)</strong>; si no hay ruta por defecto, descarta el paquete.</p>
+<p><strong>Concepto.</strong> Un <strong>router</strong> une <strong>redes distintas</strong> y decide por qué interfaz sale cada paquete según la <strong>IP de destino</strong> y su <strong>tabla de rutas</strong>. Los routers actuales también hacen NAT, VPN, ACL, QoS y DHCP.</p>
+<p><strong>Explicación — la tabla de rutas.</strong> Cada entrada: <strong>red de destino / máscara → siguiente salto o interfaz</strong>, con una <strong>métrica</strong>. Se elige la ruta con el <strong>prefijo más largo</strong> que coincida; si ninguna coincide, la <strong>ruta por defecto (0.0.0.0/0)</strong>; si no la hay, se descarta el paquete.</p>
+<figure class="tema-figura">
+<figcaption>Figura 7 · El prefijo más largo gana</figcaption>
+<svg viewBox="0 0 700 232" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Para un paquete con destino 10.1.5.20, la tabla tiene cuatro rutas: 0.0.0.0/0 hacia el operador (coincide con 0 bits), 10.0.0.0/8 (coincide con 8 bits), 10.1.0.0/16 (coincide con 16 bits y gana) y 10.2.0.0/16 (no coincide). Gana la ruta más específica; entre fuentes distintas para el mismo prefijo decide la distancia administrativa." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0408prefijoa-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0408prefijov-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0408prefijom-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0408prefijog-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><text x="10" y="20" text-anchor="start" font-size="13" font-weight="700" fill="#23272e" dominant-baseline="middle">Destino del paquete: 10.1.5.20</text><rect x="10" y="36" width="170" height="30" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="95.0" y="51.0" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">0.0.0.0/0</text><text x="196" y="51" text-anchor="start" font-size="11.5" font-weight="500" fill="#23272e" dominant-baseline="middle">ruta por defecto → operador</text><text x="450" y="51" text-anchor="start" font-size="11.5" font-weight="500" fill="#23272e" dominant-baseline="middle">coincide (0 bits)</text><rect x="10" y="74" width="170" height="30" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="95.0" y="89.0" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">10.0.0.0/8</text><text x="196" y="89" text-anchor="start" font-size="11.5" font-weight="500" fill="#23272e" dominant-baseline="middle">→ 192.168.1.1</text><text x="450" y="89" text-anchor="start" font-size="11.5" font-weight="500" fill="#23272e" dominant-baseline="middle">coincide (8 bits)</text><rect x="10" y="112" width="170" height="30" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="95.0" y="127.0" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">10.1.0.0/16</text><text x="196" y="127" text-anchor="start" font-size="11.5" font-weight="500" fill="#23272e" dominant-baseline="middle">→ 192.168.1.2</text><text x="450" y="127" text-anchor="start" font-size="11.5" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">coincide (16 bits): GANA</text><rect x="10" y="150" width="170" height="30" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="95.0" y="165.0" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">10.2.0.0/16</text><text x="196" y="165" text-anchor="start" font-size="11.5" font-weight="500" fill="#23272e" dominant-baseline="middle">→ 192.168.1.3</text><text x="450" y="165" text-anchor="start" font-size="11.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">no coincide</text><text x="350" y="202" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">Gana la ruta MÁS ESPECÍFICA (prefijo más largo). Entre fuentes distintas para el mismo prefijo,</text><text x="350" y="220" text-anchor="middle" font-size="11" font-weight="500" fill="#5a5652" dominant-baseline="middle">decide la distancia administrativa (conectada 0 · estática 1 · OSPF 110 · RIP 120).</text></svg>
+</figure>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -442,7 +480,7 @@
 <tbody>
 <tr>
 <td><strong>Conectada</strong></td>
-<td>Automáticamente al configurar una interfaz con IP</td>
+<td>Al configurar una interfaz con IP</td>
 <td>0</td>
 </tr>
 <tr>
@@ -451,24 +489,23 @@
 <td>1</td>
 </tr>
 <tr>
-<td><strong>eBGP</strong></td>
-<td>Protocolo entre sistemas autónomos</td>
+<td>eBGP</td>
+<td>Entre sistemas autónomos</td>
 <td>20</td>
 </tr>
 <tr>
 <td><strong>OSPF</strong></td>
-<td>Protocolo de estado de enlace</td>
+<td>Estado de enlace</td>
 <td>110</td>
 </tr>
 <tr>
 <td><strong>RIP</strong></td>
-<td>Protocolo de vector distancia</td>
+<td>Vector distancia</td>
 <td>120</td>
 </tr>
 </tbody>
 </table></div>
-<p>La <strong>distancia administrativa</strong> decide entre rutas al mismo destino aprendidas por <strong>fuentes distintas</strong> (gana la menor); la <strong>métrica</strong> decide dentro de un mismo protocolo.</p>
-<h3 id="protocolos-de-enrutamiento-dinámico">Protocolos de enrutamiento dinámico</h3>
+<p>La <strong>distancia administrativa</strong> decide entre rutas al mismo destino aprendidas por <strong>fuentes distintas</strong> (gana la menor); la <strong>métrica</strong> decide <strong>dentro</strong> de un mismo protocolo.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -487,32 +524,26 @@
 </tr>
 <tr>
 <td><strong>OSPF</strong></td>
-<td><strong>Estado de enlace</strong> (algoritmo de <strong>Dijkstra</strong>, SPF)</td>
-<td><strong>Coste</strong> (según el ancho de banda)</td>
-<td><strong>Estándar en redes corporativas</strong>; áreas, convergencia rápida</td>
+<td><strong>Estado de enlace</strong> (algoritmo de <strong>Dijkstra</strong>)</td>
+<td><strong>Coste</strong> (según ancho de banda)</td>
+<td><strong>Estándar en redes corporativas</strong></td>
 </tr>
 <tr>
 <td>EIGRP</td>
 <td>Vector distancia avanzado</td>
 <td>Ancho de banda y retardo</td>
-<td>Cisco (publicado como RFC informativo)</td>
+<td>Cisco</td>
 </tr>
 <tr>
 <td><strong>BGP</strong></td>
-<td>Vector de rutas (<em>path vector</em>)</td>
+<td>Vector de rutas</td>
 <td>Atributos (AS-path…)</td>
-<td><strong>Internet</strong>, entre operadores y sistemas autónomos (eBGP)</td>
-</tr>
-<tr>
-<td>IS-IS</td>
-<td>Estado de enlace</td>
-<td>Coste</td>
-<td>Operadores</td>
+<td><strong>Internet</strong>, entre sistemas autónomos</td>
 </tr>
 </tbody>
 </table></div>
-<p>Protocolos <strong>IGP</strong> (dentro de una organización: RIP, OSPF, EIGRP, IS-IS) frente a <strong>EGP</strong> (entre organizaciones: BGP).</p>
-<h3 id="routing-entre-vlan">Routing entre VLAN</h3>
+<p><strong>IGP</strong> (dentro de una organización: RIP, OSPF, EIGRP, IS-IS) frente a <strong>EGP</strong> (entre organizaciones: BGP).</p>
+<p><strong>Routing entre VLAN:</strong></p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -524,29 +555,40 @@
 <tbody>
 <tr>
 <td><strong>Switch de capa 3 con SVI</strong></td>
-<td>Una <strong>interfaz virtual (SVI)</strong> por VLAN con la IP de puerta de enlace (<code>interface vlan 23</code> · <code>ip address 192.168.193.1 255.255.255.0</code>) y <code>ip routing</code></td>
-<td><strong>Lo habitual</strong> en el switch principal: rápido, por hardware</td>
+<td>Una <strong>interfaz virtual</strong> por VLAN con la IP de puerta de enlace (<code>interface vlan 23</code> · <code>ip address 192.168.193.1 255.255.255.0</code>) y <code>ip routing</code></td>
+<td><strong>Lo habitual</strong> en el switch principal</td>
 </tr>
 <tr>
-<td><em><strong>Router-on-a-stick</strong></em></td>
-<td>Un único enlace trunk al router con <strong>subinterfaces</strong> (<code>interface gi0/0.23</code> · <code>encapsulation dot1Q 23</code>)</td>
+<td><em>Router-on-a-stick</em></td>
+<td>Un trunk al router con <strong>subinterfaces</strong> (<code>interface gi0/0.23</code> · <code>encapsulation dot1Q 23</code>)</td>
 <td>Redes pequeñas</td>
 </tr>
 <tr>
 <td><strong>Cortafuegos</strong></td>
 <td>Interfaces o subinterfaces por VLAN en el firewall</td>
-<td>Cuando hay que <strong>filtrar el tráfico entre VLAN</strong> (cámaras, telegestión, invitados)</td>
+<td>Cuando hay que <strong>filtrar</strong> el tráfico entre VLAN</td>
 </tr>
 </tbody>
 </table></div>
+<figure class="tema-figura">
+<figcaption>Figura 8 · Dónde se enruta cada VLAN</figcaption>
+<svg viewBox="0 0 700 264" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="El switch principal de capa 3 hace de puerta de enlace, con SVI, de las VLAN internas de confianza (usuarios 23 y voz 2); el cortafuegos, unido al switch por un enlace de tránsito, es la puerta de enlace de las VLAN sensibles (cámaras 47 y telegestión 94), donde se enruta y se filtra." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0407intervlana-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0407intervlanv-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0407intervlanm-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0407intervlang-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="220" y="10" width="260" height="44" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="350.0" y="24.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">Cortafuegos (T14)</text><text x="350.0" y="39.25" text-anchor="middle" font-size="10.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">puerta de enlace de las VLAN sensibles</text><rect x="220" y="100" width="260" height="50" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="350.0" y="117.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">Switch principal de capa 3</text><text x="350.0" y="132.25" text-anchor="middle" font-size="10.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">SVI: interface vlan 23 → 192.168.193.1</text><line x1="350" y1="54" x2="350" y2="100" stroke="#2e7d3c" stroke-width="3"/><text x="358" y="80" text-anchor="start" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">enlace de tránsito</text><rect x="40" y="196" width="110" height="32" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="95.0" y="212.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Usuarios · 23</text><line x1="95" y1="196" x2="290" y2="150" stroke="#003da5" stroke-width="2"/><rect x="170" y="196" width="110" height="32" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="225.0" y="212.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Voz · 2</text><line x1="225" y1="196" x2="290" y2="150" stroke="#003da5" stroke-width="2"/><rect x="410" y="196" width="135" height="32" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="477.5" y="212.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Cámaras · 47</text><rect x="550" y="196" width="140" height="32" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="620.0" y="212.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Telegestión · 94</text><path d="M477,196 V176 H620 M620,196 V32 H482" fill="none" stroke="#b26a00" stroke-width="2" stroke-dasharray="5 3"/><text x="160" y="252" text-anchor="middle" font-size="11" font-weight="600" fill="#003da5" dominant-baseline="middle">VLAN internas de confianza: routing rápido en el switch</text><text x="540" y="252" text-anchor="middle" font-size="11" font-weight="600" fill="#b26a00" dominant-baseline="middle">VLAN sensibles: routing y filtrado en el cortafuegos</text></svg>
+</figure>
+<p><strong>Redundancia de la puerta de enlace.</strong> <strong>VRRP</strong> (estándar) y <strong>HSRP</strong> (Cisco) hacen que dos routers o switches de capa 3 compartan una <strong>IP virtual</strong>: si el activo cae, el otro asume la IP en segundos.</p>
+<p><strong>Aplicación práctica.</strong> En el caso de 2023 «el routing se hace en el cortafuegos y el switch principal»: el switch enruta las VLAN internas de confianza y las sensibles (telegestión, cámaras, Internet libre) tienen su puerta de enlace en el <strong>cortafuegos</strong>, que aplica las reglas (T14).</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>💡 <strong>En el caso de 2023</strong><br>«El routing se hace en el <strong>cortafuegos y el switch principal</strong>»: lo normal es que el switch principal enrute entre las VLAN internas de confianza y que las VLAN sensibles (telegestión, cámaras, Internet libre) tengan su puerta de enlace en el <strong>cortafuegos</strong>, que aplica las reglas (T14).</th>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 34 (reserva)</strong><br>Un <strong>router</strong> se ocupa de <strong>conectar redes y determinar la mejor ruta</strong>. Prevenir intrusiones es cosa del cortafuegos; convertir nombres en IP, del DNS.</th>
 </tr>
 </table></div>
-<h3 id="redundancia-de-la-puerta-de-enlace">Redundancia de la puerta de enlace</h3>
-<p><strong>VRRP</strong> (estándar, RFC 5798) y <strong>HSRP</strong> (Cisco) hacen que <strong>dos routers o switches de capa 3 compartan una IP virtual</strong> de puerta de enlace: si el activo cae, el otro asume la IP en segundos, sin cambiar nada en los equipos.</p>
-<h2 id="9-gestion-de-switches-y-routers" class="tema-h2">9. Gestión de switches y routers</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — distancia administrativa vs métrica · SVI vs subinterfaz · VRRP vs HSRP</strong><br><strong>DA</strong>: entre fuentes distintas. <strong>Métrica</strong>: dentro de un protocolo. <strong>SVI</strong>: interfaz virtual de VLAN en un switch de capa 3. <strong>Subinterfaz</strong>: división lógica de una interfaz física de router. <strong>VRRP</strong>: estándar. <strong>HSRP</strong>: Cisco.</th>
+</tr>
+</table></div>
+<h2 id="9-gestion-cisco-y-aruba" class="tema-h2">9. Gestión: Cisco y Aruba</h2>
+<p><strong>Concepto.</strong> Los equipos se gestionan por consola, SSH, web o plataformas de gestión, siempre con <strong>copias de seguridad</strong> y <strong>registro de cambios</strong>.</p>
+<p><strong>Explicación.</strong></p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -557,7 +599,7 @@
 <tbody>
 <tr>
 <td><strong>Consola</strong></td>
-<td>Cable serie (RJ45 <em>rollover</em> o USB) al puerto de consola: configuración inicial y recuperación</td>
+<td>Cable serie o USB: configuración inicial y recuperación</td>
 </tr>
 <tr>
 <td><strong>SSH</strong> (TCP 22)</td>
@@ -565,24 +607,22 @@
 </tr>
 <tr>
 <td>Telnet (TCP 23)</td>
-<td><strong>Inseguro</strong> (texto en claro): desactivar</td>
+<td><strong>Inseguro</strong>: desactivar</td>
 </tr>
 <tr>
 <td><strong>HTTPS</strong></td>
 <td>Interfaz web</td>
 </tr>
 <tr>
-<td><strong>SNMP</strong> (UDP 161/162)</td>
-<td>Monitorización; <strong>SNMPv3</strong> con autenticación y cifrado (T19)</td>
+<td><strong>SNMPv3</strong></td>
+<td>Monitorización con autenticación y cifrado (T19)</td>
 </tr>
 <tr>
-<td>Plataformas de gestión</td>
-<td><strong>Cisco</strong> Catalyst Center (antes DNA Center) o <strong>Meraki</strong> (nube) · <strong>Aruba Central</strong> (nube)</td>
+<td>Plataformas</td>
+<td>Cisco <strong>Catalyst Center</strong> o <strong>Meraki</strong> (nube) · <strong>Aruba Central</strong> (nube)</td>
 </tr>
 </tbody>
 </table></div>
-<p>Buenas prácticas: <strong>copia de seguridad</strong> de la configuración tras cada cambio (<code>copy running-config startup-config</code>, <code>write memory</code>; exportación a TFTP/SCP), <strong>NTP</strong> para que los logs tengan la hora correcta, <strong>syslog</strong> centralizado, firmware actualizado según las recomendaciones de seguridad del fabricante y <strong>documentar</strong> cada cambio (gestión de cambios, T20).</p>
-<h3 id="cisco-y-aruba-correspondencias-útiles">Cisco y Aruba: correspondencias útiles</h3>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -592,11 +632,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>Modo configuración</td>
-<td><code>configure terminal</code></td>
-<td><code>configure terminal</code></td>
-</tr>
 <tr>
 <td>Ver interfaces</td>
 <td><code>show interfaces status</code></td>
@@ -609,7 +644,7 @@
 </tr>
 <tr>
 <td>Ver vecinos</td>
-<td><code>show cdp neighbors</code> · <code>show lldp neighbors</code></td>
+<td><code>show lldp neighbors</code> · <code>show cdp neighbors</code></td>
 <td><code>show lldp neighbor-info</code></td>
 </tr>
 <tr>
@@ -633,12 +668,7 @@
 <td><code>show interface transceiver</code></td>
 </tr>
 <tr>
-<td>Activar un puerto</td>
-<td><code>no shutdown</code></td>
-<td><code>no shutdown</code></td>
-</tr>
-<tr>
-<td>Guardar configuración</td>
+<td>Guardar</td>
 <td><code>copy running-config startup-config</code> / <code>write memory</code></td>
 <td><code>write memory</code></td>
 </tr>
@@ -649,9 +679,67 @@
 </tr>
 </tbody>
 </table></div>
-<p>Gamas de referencia: <strong>Cisco Catalyst</strong> 9200/9300 (acceso) y 9500 (núcleo), <strong>Meraki MS</strong> (gestión en la nube), routers ISR/Catalyst 8000; <strong>Aruba CX</strong> 6100/6200/6300 (acceso) y 8xxx (núcleo, VSX), gestión con <strong>Aruba Central</strong> (HPE Aruba Networking).</p>
-<h2 id="10-diseno-del-armario-de-planta-del-caso-de-2023" class="tema-h2">10. Diseño del armario de planta del caso de 2023</h2>
-<p><strong>Contar tomas</strong> (cada toma = un puerto de switch):</p>
+<p>Gamas de referencia: <strong>Cisco Catalyst</strong> 9200/9300 (acceso) y 9500 (núcleo), <strong>Meraki MS</strong>; <strong>Aruba CX</strong> 6100/6200/6300 (acceso) y 8xxx (núcleo, VSX).</p>
+<p><strong>Aplicación práctica.</strong> Tras cada cambio: <strong>guardar la configuración</strong>, copia de seguridad externa, <strong>NTP</strong> para que los registros tengan la hora correcta, <strong>syslog</strong> centralizado y <strong>documentar</strong> el cambio (T20).</p>
+<h2 id="10-situaciones-profesionales" class="tema-h2">10. Situaciones profesionales</h2>
+<p><strong>Concepto.</strong> Las incidencias típicas de switch se resuelven combinando la tabla MAC, LLDP, el estado del puerto, su VLAN y su PoE. La metodología general está en T19.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Situación</th>
+<th>Lectura en clave de T4</th>
+<th>Primera comprobación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Toda la planta cae</strong>, luces parpadeando, CPU al 100 %</td>
+<td><strong>Bucle de capa 2</strong></td>
+<td>Localizar el puerto con tráfico anómalo y apagarlo; revisar BPDU Guard y <em>storm control</em></td>
+</tr>
+<tr>
+<td><strong>Puerto en <em>err-disabled</em></strong></td>
+<td>BPDU Guard o port security saltaron</td>
+<td>Ver el motivo en el log; retirar el equipo no autorizado; reactivar el puerto</td>
+</tr>
+<tr>
+<td><strong>Equipo sin IP solo en un puerto</strong></td>
+<td>VLAN equivocada o puerto apagado</td>
+<td><code>show interfaces status</code>; VLAN del puerto</td>
+</tr>
+<tr>
+<td><strong>Las VLAN no pasan entre dos switches</strong></td>
+<td>Trunk mal configurado: VLAN no permitida o <strong>nativa distinta</strong></td>
+<td><code>show interfaces trunk</code>; mismas VLAN y nativa en ambos extremos</td>
+</tr>
+<tr>
+<td><strong>Teléfono sin alimentación</strong></td>
+<td>PoE desactivado o presupuesto agotado</td>
+<td><code>show power inline</code>; log de PoE</td>
+</tr>
+<tr>
+<td><strong>Localizar un equipo sin seguir el cable</strong></td>
+<td>MAC, LLDP o ARP</td>
+<td><code>show mac address-table address …</code>; vecino LLDP; IP en el DHCP</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Player sin conectividad en el techo (caso 2023, pregunta 7).</strong> Buscar la <strong>MAC del player</strong> en las tablas MAC de los switches, ver su vecino <strong>LLDP</strong> o su IP en el DHCP y la caché ARP. Localizado el puerto: estado, <strong>VLAN (Internet libre, 122)</strong>, PoE si lo usa y errores. In situ: luz del enlace, prueba con otro latiguillo y ping desde un portátil en la misma VLAN.</p>
+<p><strong>Cambiar de puerto un puesto con teléfono y PC (caso 2023, pregunta 10):</strong></p>
+<ol type="1">
+<li><strong>Cableado</strong>: pasar el latiguillo del panel del puerto averiado a un puerto libre; etiquetar el averiado como fuera de servicio.</li>
+<li><strong>Configuración del puerto nuevo</strong>: activarlo y sacarlo de la VLAN de aparcamiento; <strong>acceso</strong> en la VLAN de datos y <strong>VLAN de voz</strong> (2); <strong>PoE</strong> habilitado; <strong>PortFast + BPDU Guard</strong> y la misma seguridad que el resto (copiar la plantilla); QoS si se usa.</li>
+<li><strong>Verificar</strong>: el teléfono arranca, registra y recibe IP de voz; el PC recibe IP de datos; llamada y navegación de prueba.</li>
+<li><strong>Documentar</strong>, <strong>guardar la configuración</strong> y abrir <strong>incidencia o RMA</strong> del puerto averiado.</li>
+</ol>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>Para el caso práctico</strong><br>En cualquier incidencia de puerto, repasa siempre las cuatro claves: <strong>estado</strong> (activo, <em>err-disabled</em>), <strong>VLAN</strong> (acceso, voz, trunk), <strong>PoE</strong> (si lo necesita) y <strong>errores</strong> (T1).</th>
+</tr>
+</table></div>
+<h2 id="11-el-armario-de-planta-del-caso-de-2023" class="tema-h2">11. El armario de planta del caso de 2023</h2>
+<p><strong>Concepto.</strong> Elegir switches es contar puertos y PoE, prever crecimiento y diseñar uplinks redundantes.</p>
+<p><strong>Explicación — recuento de tomas:</strong></p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -663,7 +751,7 @@
 </thead>
 <tbody>
 <tr>
-<td>Puestos de atención ciudadana</td>
+<td>Puestos de atención</td>
 <td>4 puestos × 4 tomas</td>
 <td><strong>16</strong></td>
 <td>4 (teléfonos)</td>
@@ -672,30 +760,18 @@
 <td>Puestos de usuario</td>
 <td>30 + 2 con teléfono de referencia</td>
 <td><strong>32</strong></td>
-<td>2 (teléfonos)</td>
+<td>2</td>
 </tr>
 <tr>
-<td>Impresoras compartidas de atención</td>
-<td>1 cada 2 puestos</td>
-<td><strong>2</strong></td>
+<td>Impresoras</td>
+<td>2 de atención + 2 multifunción</td>
+<td><strong>4</strong></td>
 <td>—</td>
 </tr>
 <tr>
-<td>Impresoras multifunción</td>
+<td>Player de TV y PLC</td>
 <td></td>
 <td><strong>2</strong></td>
-<td>—</td>
-</tr>
-<tr>
-<td>Player de TV</td>
-<td></td>
-<td><strong>1</strong></td>
-<td>—</td>
-</tr>
-<tr>
-<td>PLC de telegestión</td>
-<td></td>
-<td><strong>1</strong></td>
 <td>—</td>
 </tr>
 <tr>
@@ -713,40 +789,24 @@
 <tr>
 <td><strong>Total</strong></td>
 <td></td>
-<td><strong>68 tomas</strong></td>
-<td><strong>20 puertos PoE</strong></td>
+<td><strong>68</strong></td>
+<td><strong>20</strong></td>
 </tr>
 </tbody>
 </table></div>
+<figure class="tema-figura">
+<figcaption>Figura 9 · Propuesta para el armario de planta</figcaption>
+<svg viewBox="0 0 700 244" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Armario de planta con dos switches de 48 puertos 1G PoE+ y 4 SFP+ apilados como un switch lógico (96 puertos para 68 tomas, 20 con PoE, unos 400 W de PoE con fuentes redundantes). Desde cada miembro de la pila sale un uplink de 10G sobre OM4 con latiguillos SC-LC hacia el switch principal de capa 3, agregados con LACP (2 × 10G) y en trunk con las VLAN permitidas." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0409armarioa-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0409armariov-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0409armariom-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0409armariog-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="300" height="200" rx="6" fill="#ffffff" stroke="#5a5652" stroke-width="1.4"/><text x="160" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="#5a5652" dominant-baseline="middle">Armario de planta</text><rect x="30" y="40" width="260" height="34" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="160.0" y="57.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">Switch 1 · 48 × 1G PoE+ · 4 SFP+</text><rect x="30" y="90" width="260" height="34" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="160.0" y="107.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">Switch 2 · 48 × 1G PoE+ · 4 SFP+</text><path d="M24,57 H16 V107 H24" fill="none" stroke="#2e7d3c" stroke-width="3"/><text x="160" y="140" text-anchor="middle" font-size="10.5" font-weight="600" fill="#2e7d3c" dominant-baseline="middle">pila: un switch lógico</text><text x="160" y="160" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">96 puertos para 68 tomas · 20 con PoE</text><text x="160" y="178" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">PoE ≈ 400 W → fuentes redundantes</text><text x="160" y="196" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">latiguillos cortos de colores</text><rect x="470" y="50" width="220" height="110" rx="6" fill="#ffffff" stroke="#5a5652" stroke-width="1.4"/><text x="580" y="66" text-anchor="middle" font-size="12" font-weight="700" fill="#5a5652" dominant-baseline="middle">Armario principal</text><rect x="490" y="80" width="180" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="580.0" y="93.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">Switch principal</text><text x="580.0" y="107.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">capa 3</text><line x1="290" y1="57" x2="490" y2="92" stroke="#003da5" stroke-width="3.4"/><line x1="290" y1="107" x2="490" y2="108" stroke="#003da5" stroke-width="3.4"/><ellipse cx="390" cy="91" rx="24" ry="26" fill="none" stroke="#2e7d3c" stroke-width="2" stroke-dasharray="5 3"/><text x="390" y="136" text-anchor="middle" font-size="11" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">LACP 2 × 10G</text><text x="390" y="152" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">10GBASE-SR · OM4</text><text x="390" y="168" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">SC-LC dúplex</text><text x="580" y="180" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">uplinks en trunk con</text><text x="580" y="196" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">las VLAN permitidas</text><text x="350" y="232" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">Un uplink desde cada miembro de la pila: si cae un switch o una fibra, la planta sigue conectada</text></svg>
+</figure>
 <p><strong>Propuesta razonada:</strong></p>
 <ul class="tema-lista">
-<li><strong>2 switches de acceso de 48 puertos 1 Gbps PoE+ con 4 puertos SFP+ de 10 Gbps, apilados</strong> (un switch lógico): 96 puertos para 68 tomas, con un margen del ≈ 40 % para crecimiento. Alternativa: 1 switch de 48 PoE+ y 1 de 24 PoE+.</li>
-<li><strong>Presupuesto PoE</strong>: 6 teléfonos × 7 W ≈ 42 W + 10 AP × 25 W = 250 W + 4 cámaras × 15–25 W ≈ 100 W → <strong>≈ 400 W</strong>: switches con <strong>≥ 370–740 W</strong> de PoE, mejor con <strong>fuentes redundantes</strong>.</li>
-<li><strong>Conexión con el armario principal</strong>: con las 4 fibras OM4 se montan <strong>2 enlaces de 10 Gbps</strong> (uno desde cada miembro de la pila) agregados con <strong>LACP</strong> hacia el switch principal: <strong>redundancia y 20 Gbps</strong>. Si el principal también está apilado o tiene VSX/MLAG, cada enlace puede ir a un miembro distinto.</li>
-<li><strong>Transceptores</strong>: <strong>4 SFP+ 10GBASE-SR</strong> (2 en la pila de planta y 2 en el switch principal) + <strong>1–2 de repuesto</strong>.</li>
-<li><strong>Latiguillos de fibra</strong>: <strong>4 SC-LC dúplex OM4</strong> (2 en cada armario) + repuesto.</li>
-<li><strong>Latiguillos UTP en el armario</strong>: <strong>≈ 70 latiguillos de 0,5–1 m</strong> (patch panel → switch), de colores por servicio; <strong>latiguillos de puesto</strong>: ≈ 70 de 2–3 m, más <strong>4 cortos para PC-teléfono</strong> en atención y dos para los teléfonos de referencia.</li>
-<li><strong>Configuración</strong>: VLAN por servicio; puertos de acceso con <strong>PortFast/admin-edge</strong> y <strong>BPDU Guard</strong>; VLAN de voz en los puertos de teléfonos; AP en <strong>trunk</strong> (varios SSID: registro e Internet libre); uplinks en <strong>trunk</strong> con las VLAN permitidas; <strong>RSTP/MSTP</strong> con la raíz en el switch principal; gestión por <strong>SSH</strong> en VLAN de gestión.</li>
+<li><strong>2 switches de acceso de 48 puertos 1G PoE+ con 4 SFP+, apilados</strong>: 96 puertos para 68 tomas, con margen de crecimiento.</li>
+<li><strong>PoE</strong>: 6 teléfonos × 7 W + 10 AP × 25 W + 4 cámaras × 15–25 W ≈ <strong>400 W</strong> → switches con presupuesto suficiente y <strong>fuentes redundantes</strong>.</li>
+<li><strong>Uplinks</strong>: con las 4 fibras OM4, <strong>2 enlaces de 10 Gb/s</strong> (uno desde cada miembro) agregados con <strong>LACP</strong>: redundancia y 20 Gb/s.</li>
+<li><strong>Material</strong>: 4 SFP+ 10GBASE-SR (+ repuesto), 4 latiguillos SC-LC dúplex OM4, unos 70 latiguillos de cobre cortos para el armario y otros tantos de puesto.</li>
+<li><strong>Configuración</strong>: VLAN por servicio; acceso con <strong>PortFast + BPDU Guard</strong>; VLAN de voz en los teléfonos; AP en <strong>trunk</strong> (varios SSID); uplinks en <strong>trunk</strong> con las VLAN permitidas; <strong>RSTP/MSTP</strong> con la raíz en el principal; gestión por <strong>SSH</strong> en la VLAN de gestión.</li>
 </ul>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th>💡 <strong>Lo que valoraba el tribunal</strong><br>Comprensión del supuesto, <strong>cuántos y cómo conectarías los switches</strong>, <strong>claridad del esquema</strong>, número razonable de latiguillos (no hace falta exactitud) y una idea extra (apilamiento, redundancia, margen de crecimiento, PoE con fuentes redundantes).</th>
-</tr>
-</table></div>
-<h2 id="11-cambiar-de-puerto-un-puesto-con-telefono-y-pc-caso-2023-p" class="tema-h2">11. Cambiar de puerto un puesto con teléfono y PC (caso 2023, pregunta 10)</h2>
-<ol type="1">
-<li><strong>Cableado</strong>: en el armario, <strong>desconectar el latiguillo</strong> del patch panel correspondiente a la toma del puesto del <strong>puerto averiado</strong> y conectarlo al <strong>puerto libre</strong>. <strong>Etiquetar</strong> el puerto averiado como fuera de servicio.</li>
-<li><strong>Configuración del puerto nuevo</strong>:
-<ul class="tema-lista">
-<li><code>no shutdown</code> si estaba apagado y sacarlo de la VLAN de aparcamiento.</li>
-<li><strong>Modo acceso</strong> en la <strong>VLAN de datos</strong> (usuarios/atención) y <strong>VLAN de voz</strong> de telefonía (2) etiquetada.</li>
-<li><strong>PoE habilitado</strong> (el teléfono lo necesita).</li>
-<li><strong>PortFast/admin-edge</strong>, <strong>BPDU Guard</strong>, port security o 802.1X <strong>igual que el resto</strong> de puestos (copiar la configuración del puerto averiado o aplicar la plantilla).</li>
-<li><strong>QoS</strong> (confianza en el marcado DSCP/CoS del teléfono) si se usa.</li>
-</ul></li>
-<li><strong>Verificar</strong>: el teléfono arranca, registra en la centralita y recibe IP de la VLAN de voz; el PC recibe IP de la VLAN de datos; navegación y llamada de prueba.</li>
-<li><strong>Documentar</strong> el cambio (tabla de puertos), <strong>guardar la configuración</strong> y <strong>abrir incidencia o RMA</strong> del puerto o del switch averiado (tras un apagón puede haber daños en la fuente o en el puerto).</li>
-</ol>
+<p><strong>Aplicación práctica — lo que valoraba el tribunal:</strong> comprensión del supuesto, <strong>cuántos switches y cómo se conectan</strong>, claridad del esquema, número razonable de latiguillos y alguna idea extra (apilamiento, redundancia, margen, fuentes redundantes).</p>
 <h2 id="12-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">12. Lo que cayó en el examen de 2023</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
@@ -770,12 +830,12 @@
 <tr>
 <td>Test 11</td>
 <td>Bridge</td>
-<td>Capa 2, direcciones MAC</td>
+<td>Capa 2, MAC (T1)</td>
 </tr>
 <tr>
 <td>Test 12</td>
 <td>IP de un switch de capa 2</td>
-<td>Para administrarlo en remoto</td>
+<td>Para administrarlo en remoto (T1)</td>
 </tr>
 <tr>
 <td>Test 15</td>
@@ -795,20 +855,21 @@
 <tr>
 <td>Caso 2, 7, 9, 10</td>
 <td>Switches, player, PoE, puerto averiado</td>
-<td>Ver apartados 7, 5, 10 y 11</td>
+<td>Apartados 11, 10 y 5</td>
 </tr>
 </tbody>
 </table></div>
 <h2 id="13-anclas-de-memoria" class="tema-h2">13. Anclas de memoria</h2>
 <ul class="tema-lista">
-<li><strong>VLAN = 802.1Q = dominio de broadcast = subred.</strong></li>
-<li><strong>Acceso: una VLAN sin etiqueta · trunk: varias etiquetadas + nativa.</strong></li>
-<li><strong>STP 802.1D (lento) · RSTP 802.1w (rápido) · MSTP 802.1s (instancias).</strong> Raíz = <strong>menor prioridad + MAC</strong>.</li>
-<li><strong>PortFast = directo a forwarding en puertos de equipo final + BPDU Guard.</strong></li>
-<li><strong>LACP = 802.3ad/802.1AX = ancho de banda + redundancia.</strong></li>
-<li><strong>PoE 15,4 W · PoE+ 30 W · PoE++ 60/90 W.</strong></li>
-<li><strong>Ruta más específica gana · DA: conectada 0, estática 1, OSPF 110, RIP 120.</strong></li>
+<li><strong>VLAN = 802.1Q = dominio de broadcast = subred · ID de 12 bits.</strong></li>
+<li><strong>Acceso: una VLAN sin etiqueta (+ voz) · trunk: varias etiquetadas + nativa.</strong></li>
+<li><strong>STP 802.1D (30–50 s) · RSTP 802.1w (1–2 s) · MSTP 802.1s · raíz = menor Bridge ID.</strong></li>
+<li><strong>PortFast = forwarding inmediato en puertos de equipo final + BPDU Guard.</strong></li>
+<li><strong>LACP = 802.3ad/802.1AX = capacidad + redundancia; reparto por flujo.</strong></li>
+<li><strong>PoE 15,4 W · PoE+ 30 W · PoE++ 60/90 W · sumar consumos contra el presupuesto.</strong></li>
+<li><strong>Prefijo más largo gana · DA: conectada 0, estática 1, OSPF 110, RIP 120.</strong></li>
 <li><strong>OSPF = estado de enlace (Dijkstra) · RIP = saltos · BGP = Internet.</strong></li>
+<li><strong>LLDP 802.1AB (estándar) · CDP (Cisco) · VRRP (estándar) · HSRP (Cisco).</strong></li>
 </ul>
 <h2 id="14-no-confundir" class="tema-h2">14. No confundir</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -820,12 +881,20 @@
 </thead>
 <tbody>
 <tr>
-<td><strong><em>Trunk</em> 802.1Q</strong> (varias VLAN)</td>
-<td><strong><em>Trunk</em> en ProCurve</strong> (agregación de puertos)</td>
+<td><strong>Trunk 802.1Q</strong> (varias VLAN)</td>
+<td><strong>Trunk de ProCurve</strong> (agregación)</td>
 </tr>
 <tr>
 <td><strong>VLAN nativa</strong> (sin etiqueta en el trunk)</td>
-<td><strong>VLAN por defecto</strong> (VLAN 1 de fábrica)</td>
+<td><strong>VLAN por defecto</strong> (la 1 de fábrica)</td>
+</tr>
+<tr>
+<td><strong>STP</strong> (bloquea enlaces redundantes)</td>
+<td><strong>LACP</strong> (los usa todos como uno)</td>
+</tr>
+<tr>
+<td><strong>PortFast</strong> (forwarding inmediato)</td>
+<td><strong>BPDU Guard</strong> (apaga el puerto si llega una BPDU)</td>
 </tr>
 <tr>
 <td><strong>Distancia administrativa</strong> (entre fuentes)</td>
@@ -840,60 +909,27 @@
 <td><strong>HSRP</strong> (Cisco)</td>
 </tr>
 <tr>
-<td><strong>LLDP</strong> (802.1AB, estándar)</td>
+<td><strong>LLDP</strong> (estándar)</td>
 <td><strong>CDP</strong> (Cisco)</td>
 </tr>
 <tr>
-<td><strong>LACP</strong> (negociado)</td>
-<td><strong>Agregación estática</strong> (sin protocolo)</td>
+<td><strong>Router</strong> (encamina)</td>
+<td><strong>Cortafuegos</strong> (filtra, T14)</td>
 </tr>
 </tbody>
 </table></div>
 <h2 id="15-posibles-trampas-de-examen" class="tema-h2">15. Posibles trampas de examen</h2>
 <ul class="tema-lista">
 <li>Activar PortFast en puertos entre switches.</li>
-<li>Pensar que un trunk es «un puerto de 10 Gbps».</li>
-<li>Creer que la agregación de 2 × 1 Gbps hace que una sola descarga vaya a 2 Gbps.</li>
-<li>Decir que el puente raíz es el de <strong>mayor</strong> prioridad (es el de menor Bridge ID).</li>
-<li>Pensar que el switch da 30 W en todos los puertos a la vez (presupuesto PoE).</li>
-<li>Confundir el router con el cortafuegos.</li>
-<li>Usar Telnet para la gestión remota.</li>
+<li>Pensar que un trunk es «un puerto de 10 Gb/s».</li>
+<li>Creer que la agregación hace que una sola descarga vaya más rápido.</li>
+<li>Decir que la raíz es el switch de <strong>mayor</strong> prioridad.</li>
+<li>Pensar que un switch PoE da 30 W en todos los puertos a la vez.</li>
+<li>Confundir router con cortafuegos.</li>
+<li>Usar Telnet para la gestión.</li>
+<li>Dejar distinta la VLAN nativa en los dos extremos de un trunk.</li>
 </ul>
-<h2 id="16-posibles-preguntas-tipo-test" class="tema-h2">16. Posibles preguntas tipo test</h2>
-<ol type="1">
-<li>¿Qué norma define RSTP? → <strong>IEEE 802.1w</strong>.</li>
-<li>¿Qué protocolo negocia la agregación de enlaces? → <strong>LACP</strong>.</li>
-<li>¿Qué distancia administrativa tiene una ruta estática en Cisco? → <strong>1</strong>.</li>
-<li>¿Qué algoritmo usa OSPF? → <strong>Dijkstra (SPF)</strong>.</li>
-<li>¿Qué potencia entrega un puerto 802.3af? → <strong>15,4 W</strong>.</li>
-<li>¿Qué protocolo estándar comparte una IP virtual de puerta de enlace entre dos routers? → <strong>VRRP</strong>.</li>
-</ol>
-<h2 id="17-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">17. Posibles preguntas cortas (con esquema de respuesta)</h2>
-<p><strong>1. Qué es una VLAN, para qué sirve y cómo se configura un puesto con teléfono IP y PC (2 puntos).</strong></p>
-<ul class="tema-lista">
-<li>Definición (802.1Q, dominio de broadcast, subred) y ventajas (seguridad, rendimiento, organización, QoS).</li>
-<li>Puertos de acceso y troncales; VLAN nativa.</li>
-<li>Puesto con teléfono: VLAN de datos sin etiqueta + VLAN de voz etiquetada; LLDP-MED; PoE.</li>
-<li>Routing entre VLAN en el switch de capa 3 o el cortafuegos.</li>
-</ul>
-<p><strong>2. Explica el problema de los bucles de capa 2 y cómo se resuelve (2 puntos).</strong></p>
-<ul class="tema-lista">
-<li>Enlaces redundantes → tormentas de broadcast, tablas MAC inestables (Ethernet sin TTL).</li>
-<li>STP/RSTP/MSTP: raíz, puertos raíz/designados/bloqueados, BPDU, tiempos.</li>
-<li>PortFast + BPDU Guard en los puertos de acceso; raíz forzada en el núcleo.</li>
-<li>Alternativa: LACP (enlaces agregados en lugar de bloqueados) y apilamiento.</li>
-</ul>
-<h2 id="18-supuesto-practico" class="tema-h2">18. Supuesto práctico</h2>
-<p><strong>Enunciado:</strong> a primera hora, toda la planta pierde la red. Las luces de los puertos del switch parpadean sin parar y la CPU del switch está al 100 %. Un usuario dice que ha conectado un pequeño switch en su mesa para el portátil.</p>
-<p><strong>Esquema de respuesta:</strong></p>
-<ol type="1">
-<li><strong>Diagnóstico</strong>: síntomas de <strong>bucle de capa 2</strong> (tormenta de broadcast): probablemente el switch de mesa tiene dos cables conectados a dos tomas, o un latiguillo de una toma a otra.</li>
-<li><strong>Contención inmediata</strong>: localizar el puerto con tráfico anómalo (contadores de broadcast, <code>show interfaces</code>, logs de MAC <em>flapping</em>) y <strong>apagarlo</strong>; retirar el switch de mesa.</li>
-<li><strong>Verificación</strong>: la red se recupera; comprobar los servicios (DHCP, telefonía).</li>
-<li><strong>Corrección</strong>: revisar por qué no lo frenó STP: activar <strong>BPDU Guard</strong> y <strong>loop protection</strong> en todos los puertos de acceso, <em><strong>storm control</strong></em>, y confirmar RSTP con la raíz en el switch principal.</li>
-<li><strong>Prevención y comunicación</strong>: recordar al usuario y al departamento la norma de no conectar equipos no autorizados (o <strong>802.1X</strong>); registrar la incidencia y la causa raíz (gestión de problemas, T20).</li>
-</ol>
-<h2 id="19-matriz-de-memorizacion" class="tema-h2">19. Matriz de memorización</h2>
+<h2 id="16-matriz-de-memorizacion" class="tema-h2">16. Matriz de memorización</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -904,23 +940,23 @@
 <tbody>
 <tr>
 <td>VLAN</td>
-<td>802.1Q · 12 bits de VLAN ID (1–4094) · etiqueta de 4 bytes</td>
+<td>802.1Q · ID de 12 bits (1–4094) · etiqueta de 4 bytes</td>
 </tr>
 <tr>
 <td>Trunk</td>
-<td>Varias VLAN etiquetadas · nativa sin etiqueta (igual en ambos extremos)</td>
+<td>Varias VLAN etiquetadas · nativa igual en ambos extremos</td>
 </tr>
 <tr>
 <td>STP / RSTP / MSTP</td>
-<td>802.1D / 802.1w / 802.1s · raíz = menor Bridge ID (prioridad 32768 por defecto)</td>
+<td>802.1D / 802.1w / 802.1s · prioridad 32768 por defecto</td>
 </tr>
 <tr>
 <td>Tiempos STP</td>
-<td>Listening 15 s + learning 15 s · BPDU cada 2 s</td>
+<td>15 s + 15 s (+ 20 s) · BPDU cada 2 s</td>
 </tr>
 <tr>
 <td>LACP</td>
-<td>802.3ad / 802.1AX · active/passive · hasta 8 enlaces</td>
+<td>802.3ad / 802.1AX · active/passive</td>
 </tr>
 <tr>
 <td>PoE</td>
@@ -928,11 +964,7 @@
 </tr>
 <tr>
 <td>Distancia administrativa</td>
-<td>Conectada 0 · estática 1 · eBGP 20 · OSPF 110 · RIP 120</td>
-</tr>
-<tr>
-<td>OSPF / RIP / BGP</td>
-<td>Dijkstra-coste / saltos (máx. 15) / Internet</td>
+<td>0 conectada · 1 estática · 20 eBGP · 110 OSPF · 120 RIP</td>
 </tr>
 <tr>
 <td>LLDP</td>
@@ -944,18 +976,106 @@
 </tr>
 </tbody>
 </table></div>
-<h2 id="20-resumen-final-si-manana-fuera-el-examen" class="tema-h2">20. Resumen final: si mañana fuera el examen</h2>
-<p>El <strong>switch</strong> segmenta con <strong>VLAN 802.1Q</strong> (una por servicio): <strong>puertos de acceso</strong> con una VLAN sin etiqueta (más la <strong>VLAN de voz</strong> para el teléfono) y <strong>trunks</strong> con varias etiquetadas entre switches. Los enlaces redundantes se protegen con <strong>STP/RSTP/MSTP</strong> (raíz = menor Bridge ID) o se convierten en <strong>LACP</strong> (ancho de banda + redundancia). En los puertos de usuario, <strong>PortFast + BPDU Guard</strong>. <strong>PoE</strong>: 15,4 / <strong>30</strong> / 60–90 W, sin superar el <strong>presupuesto</strong> del switch. El <strong>router</strong> (o el switch de capa 3 con <strong>SVI</strong>) une redes por IP: gana la <strong>ruta más específica</strong>; estática (DA 1), <strong>OSPF</strong> en la empresa, <strong>BGP</strong> en Internet; <strong>VRRP/HSRP</strong> para redundancia. Se gestionan por <strong>SSH/SNMPv3</strong> con copia de la configuración. Cisco y Aruba hacen lo mismo con comandos parecidos (Aruba: MSTP por defecto, VSF/VSX, Central).</p>
-<h2 id="21-actualidad-datos-fechados" class="tema-h2">21. Actualidad — datos fechados</h2>
+<h2 id="17-preguntas-tipo-test" class="tema-h2">17. Preguntas tipo test</h2>
+<p><strong>1.</strong> LACP permite:<br />
+a) Gestionar enlaces de forma unificada · b) Unir varias conexiones para más ancho de banda y redundancia · c) Etiquetar VLAN · d) Evitar bucles bloqueando puertos</p>
+<p><strong>2.</strong> El efecto principal de <code>spanning-tree portfast</code> es:<br />
+a) Bloquear el puerto · b) Pasar el puerto a forwarding de inmediato · c) Activar LACP · d) Cambiar la raíz</p>
+<p><strong>3.</strong> Un trunk es:<br />
+a) Un puerto de 10 Gb/s · b) Un enlace que transporta varias VLAN · c) Un adaptador de fibra · d) Una versión de firmware</p>
+<p><strong>4.</strong> La VLAN nativa de un trunk 802.1Q:<br />
+a) Va etiquetada · b) Va sin etiqueta y debe coincidir en ambos extremos · c) Es siempre la de voz · d) No existe en Aruba</p>
+<p><strong>5.</strong> Un puerto de acceso con teléfono y PC lleva:<br />
+a) Dos VLAN sin etiqueta · b) Datos sin etiqueta y voz etiquetada · c) Solo la VLAN de voz · d) Un trunk con todas las VLAN</p>
+<p><strong>6.</strong> El puente raíz de STP es el switch con:<br />
+a) Mayor prioridad · b) Menor Bridge ID · c) Más puertos · d) La IP más baja</p>
+<p><strong>7.</strong> Rapid Spanning Tree es:<br />
+a) 802.1D · b) 802.1w · c) 802.1s · d) 802.1Q</p>
+<p><strong>8.</strong> Un puerto con BPDU Guard que recibe una BPDU:<br />
+a) Se convierte en raíz · b) Pasa a err-disabled · c) Ignora la BPDU · d) Activa LACP</p>
+<p><strong>9.</strong> Con STP clásico, un puerto tarda en reenviar:<br />
+a) 1–2 s · b) 30–50 s · c) 5 min · d) Nada</p>
+<p><strong>10.</strong> Al agregar dos enlaces de 1 Gb/s, una única descarga:<br />
+a) Va a 2 Gb/s · b) Usa un solo enlace de 1 Gb/s · c) Se reparte trama a trama · d) No funciona</p>
+<p><strong>11.</strong> Un puerto 802.3af entrega:<br />
+a) 15,4 W · b) 30 W · c) 60 W · d) 90 W</p>
+<p><strong>12.</strong> Una cámara que negocia PoE+ (802.3at) tiene un consumo de referencia de:<br />
+a) 15 W · b) 30 W · c) 40 W · d) 90 W</p>
+<p><strong>13.</strong> La función que bloquea servidores DHCP falsos es:<br />
+a) Port security · b) DHCP snooping · c) Storm control · d) LLDP</p>
+<p><strong>14.</strong> El protocolo estándar para conocer el equipo vecino de cada puerto es:<br />
+a) CDP · b) LLDP · c) STP · d) VRRP</p>
+<p><strong>15.</strong> Con rutas a 10.0.0.0/8 y 10.1.0.0/16, el paquete a 10.1.5.20 va por:<br />
+a) La /8 · b) La /16 · c) La ruta por defecto · d) Se descarta</p>
+<p><strong>16.</strong> La distancia administrativa de una ruta estática en Cisco es:<br />
+a) 0 · b) 1 · c) 110 · d) 120</p>
+<p><strong>17.</strong> OSPF es un protocolo de:<br />
+a) Vector distancia por saltos · b) Estado de enlace (Dijkstra) · c) Vector de rutas entre AS · d) Descubrimiento de vecinos</p>
+<p><strong>18.</strong> Para enrutar entre VLAN en un switch de capa 3 se configura:<br />
+a) Una SVI por VLAN · b) Un trunk por VLAN · c) PortFast · d) LACP</p>
+<p><strong>Soluciones:</strong> 1 b · 2 b · 3 b · 4 b · 5 b · 6 b · 7 b · 8 b · 9 b · 10 b · 11 a · 12 b · 13 b · 14 b · 15 b · 16 b · 17 b · 18 a</p>
+<h2 id="18-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">18. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. Qué es una VLAN y cómo se configura un puesto con teléfono y PC.</strong><br />
+802.1Q, dominio de broadcast, subred · ventajas · acceso y trunk, nativa · puesto: datos sin etiqueta + voz etiquetada, LLDP-MED, PoE · routing entre VLAN en el switch de capa 3 o el cortafuegos.</p>
+<p><strong>2. El problema de los bucles de capa 2 y cómo se resuelve.</strong><br />
+Enlaces redundantes → tormenta de broadcast (sin TTL) · STP/RSTP/MSTP: raíz, puertos raíz, designados, bloqueados, BPDU · PortFast + BPDU Guard · raíz forzada · alternativa: LACP y apilamiento.</p>
+<p><strong>3. LACP: qué es, ventajas y requisitos.</strong><br />
+Enlace lógico · capacidad y redundancia · reparto por flujo · 802.3ad/802.1AX, active/passive · misma velocidad, dúplex y VLAN · nombres en Cisco y Aruba.</p>
+<p><strong>4. PoE: normas, presupuesto y qué hacer si falla.</strong><br />
+af/at/bt con potencias · PSE y PD, detección y clasificación · presupuesto: sumar consumos · alternativas: inyectores, fuente propia, otro switch, prioridad PoE · revisar fuentes y log.</p>
+<p><strong>5. Cómo decide un router y cómo se enruta entre VLAN.</strong><br />
+Tabla de rutas · prefijo más largo · ruta por defecto · DA y métrica · estáticas, OSPF, BGP · SVI, router-on-a-stick, cortafuegos · VRRP/HSRP.</p>
+<p><strong>6. Buenas prácticas de seguridad y gestión de switches.</strong><br />
+Puertos sin uso apagados y en VLAN de aparcamiento · BPDU Guard, DHCP snooping, DAI, storm control, 802.1X · SSH, SNMPv3, RADIUS/TACACS+, VLAN de gestión · copias de configuración, NTP, syslog, gestión de cambios.</p>
+<h2 id="19-casos-practicos" class="tema-h2">19. Casos prácticos</h2>
+<p><strong>Mini caso 1 — Bucle en una planta.</strong> A primera hora cae toda la planta; las luces parpadean sin parar y un usuario ha conectado un switch de mesa.<br />
+<em>Esquema:</em> bucle de capa 2 · localizar el puerto (contadores de broadcast, MAC <em>flapping</em>) y apagarlo · retirar el switch · verificar servicios · BPDU Guard, loop protection y storm control en todos los puertos de acceso · RSTP con la raíz en el principal · registrar causa raíz (T20).</p>
+<p><strong>Mini caso 2 — VLAN que no llega a otro armario.</strong> Las cámaras de la planta 2 no se ven desde el grabador del CPD; el resto funciona.<br />
+<em>Esquema:</em> trunk entre armarios · VLAN 47 en la lista de permitidas en ambos extremos · nativa igual · la VLAN existe en el switch intermedio · <code>show interfaces trunk</code> · corregir y documentar.</p>
+<p><strong>Mini caso 3 — AP que arrancan a medias.</strong> Tras instalar AP nuevos, algunos funcionan con menos radios.<br />
+<em>Esquema:</em> potencia PoE insuficiente (necesitan 802.3bt o presupuesto agotado) · <code>show power inline</code> · prioridad PoE · inyectores 802.3bt o switch con más presupuesto.</p>
+<p><strong>Supuesto desarrollado — Red de un centro municipal (supuesto).</strong> Un centro de dos plantas tendrá 70 tomas, 8 AP, 6 cámaras y 20 teléfonos. Habrá un armario por planta y el principal en planta baja, con fibra OM4 entre ellos. Las cámaras deben estar aisladas y la red de invitados solo debe salir a Internet.</p>
+<p><em>a) Switches.</em><br />
+Por planta, una pila de switches de acceso 1G PoE+ con uplinks SFP+ · switch principal de capa 3 con fuentes redundantes · presupuesto PoE sumando teléfonos, AP y cámaras con margen.</p>
+<p><em>b) VLAN y puertos.</em><br />
+Usuarios, voz, cámaras, invitados y gestión · puertos de usuario en acceso + voz · AP en trunk con usuarios e invitados · cámaras en acceso en su VLAN · uplinks en trunk solo con las VLAN necesarias y nativa sin uso.</p>
+<p><em>c) Redundancia y routing.</em><br />
+Dos uplinks por planta con LACP · RSTP/MSTP con la raíz en el principal · usuarios y voz enrutados en el switch principal con SVI · cámaras e invitados con puerta de enlace en el cortafuegos, que solo deja salir a Internet a los invitados (T14).</p>
+<p><em>d) Seguridad y gestión.</em><br />
+PortFast + BPDU Guard, DHCP snooping y storm control · puertos libres apagados · SSH y SNMPv3 en la VLAN de gestión · copia de configuraciones y documentación de puertos · cambios registrados (T20).</p>
+<h2 id="20-repaso-visual-t4" class="tema-h2">20. Repaso visual · T4</h2>
+<figure class="tema-figura">
+<figcaption>Repaso 1 · Acceso y trunk</figcaption>
+<svg viewBox="0 0 700 224" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Puertos de acceso con una VLAN sin etiqueta y trunk con varias VLAN etiquetadas entre dos switches." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0401vlana-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0401vlanv-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0401vlanm-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0401vlang-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="40" y="70" width="220" height="44" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="150.0" y="92.0" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">Switch A (planta)</text><rect x="440" y="70" width="220" height="44" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="550.0" y="92.0" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">Switch B (principal)</text><rect x="20" y="160" width="125" height="34" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="82.5" y="177.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">PC · VLAN 23</text><line x1="82" y1="160" x2="82" y2="114" stroke="#003da5" stroke-width="2"/><rect x="150" y="160" width="125" height="34" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="212.5" y="177.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Cámara · VLAN 47</text><line x1="212" y1="160" x2="212" y2="114" stroke="#b26a00" stroke-width="2" stroke-dasharray="5 3"/><rect x="420" y="160" width="125" height="34" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="482.5" y="177.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Servidor · VLAN 23</text><line x1="482" y1="160" x2="482" y2="114" stroke="#003da5" stroke-width="2"/><rect x="560" y="160" width="125" height="34" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="622.5" y="177.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Grabador · VLAN 47</text><line x1="622" y1="160" x2="622" y2="114" stroke="#b26a00" stroke-width="2" stroke-dasharray="5 3"/><line x1="260" y1="86" x2="440" y2="86" stroke="#003da5" stroke-width="5"/><line x1="260" y1="98" x2="440" y2="98" stroke="#b26a00" stroke-width="3" stroke-dasharray="5 3"/><text x="350" y="64" text-anchor="middle" font-size="12.5" font-weight="700" fill="#003da5" dominant-baseline="middle">TRUNK (802.1Q)</text><text x="350" y="116" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">varias VLAN etiquetadas</text><text x="350" y="130" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">+ la nativa sin etiqueta</text><text x="148" y="212" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">puertos de ACCESO: una VLAN, sin etiqueta</text><text x="350" y="18" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">Cada VLAN = un dominio de broadcast = una subred</text><text x="350" y="36" text-anchor="middle" font-size="11" font-weight="500" fill="#5a5652" dominant-baseline="middle">de la VLAN 23 a la 47 solo se pasa a través de un router o switch de capa 3</text><text x="560" y="212" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">mismas VLAN en ambos switches</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 2 · Spanning Tree</figcaption>
+<svg viewBox="0 0 700 262" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triángulo de switches con la raíz arriba y un puerto bloqueado en el enlace redundante." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0403stpa-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0403stpv-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0403stpm-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0403stpg-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="260" y="10" width="180" height="46" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="350.0" y="25.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">Switch 1 · RAÍZ</text><text x="350.0" y="40.5" text-anchor="middle" font-size="10.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">prioridad 4096</text><rect x="40" y="160" width="180" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="130.0" y="175.5" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">Switch 2</text><text x="130.0" y="190.5" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">prioridad 32768</text><rect x="480" y="160" width="180" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="570.0" y="175.5" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">Switch 3</text><text x="570.0" y="190.5" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">prioridad 32768</text><line x1="300" y1="56" x2="150" y2="160" stroke="#2e7d3c" stroke-width="3"/><line x1="400" y1="56" x2="550" y2="160" stroke="#2e7d3c" stroke-width="3"/><line x1="220" y1="183" x2="480" y2="183" stroke="#b26a00" stroke-width="3" stroke-dasharray="5 3"/><line x1="440" y1="174" x2="458" y2="192" stroke="#b26a00" stroke-width="3"/><line x1="458" y1="174" x2="440" y2="192" stroke="#b26a00" stroke-width="3"/><text x="350" y="172" text-anchor="middle" font-size="11" font-weight="700" fill="#b26a00" dominant-baseline="middle">enlace redundante: un puerto BLOQUEADO</text><text x="350" y="198" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">se desbloquea si cae otro enlace</text><text x="196" y="98" text-anchor="end" font-size="10.5" font-weight="600" fill="#2e7d3c" dominant-baseline="middle">puerto raíz</text><text x="504" y="98" text-anchor="start" font-size="10.5" font-weight="600" fill="#2e7d3c" dominant-baseline="middle">puerto raíz</text><text x="350" y="232" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">Raíz = menor Bridge ID (prioridad + MAC) · se fuerza en el switch principal bajando su prioridad</text><text x="350" y="250" text-anchor="middle" font-size="11" font-weight="500" fill="#5a5652" dominant-baseline="middle">Sin STP, el triángulo sería un bucle: tormenta de broadcast en segundos (las tramas no tienen TTL)</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 3 · LACP</figcaption>
+<svg viewBox="0 0 700 194" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dos enlaces de 10G agrupados en un enlace lógico con LACP." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0405lacpa-12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0405lacpv-12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0405lacpm-12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0405lacpg-12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="50" width="160" height="70" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="90.0" y="77.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">Pila de planta</text><text x="90.0" y="92.5" text-anchor="middle" font-size="10.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">2 × SFP+ 10G</text><rect x="530" y="50" width="160" height="70" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="610.0" y="77.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">Switch principal</text><text x="610.0" y="92.5" text-anchor="middle" font-size="10.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">2 × SFP+ 10G</text><rect x="200" y="54" width="300" height="62" rx="31" fill="none" stroke="#2e7d3c" stroke-width="2" stroke-dasharray="6 4"/><line x1="170" y1="72" x2="530" y2="72" stroke="#003da5" stroke-width="4"/><line x1="170" y1="98" x2="530" y2="98" stroke="#003da5" stroke-width="4"/><text x="350" y="40" text-anchor="middle" font-size="12" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">un enlace LÓGICO (port-channel / LAG) negociado con LACP</text><text x="350" y="86" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">20 Gb/s de capacidad total</text><text x="350" y="146" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">Redundancia: si cae una fibra, el tráfico sigue por la otra sin que STP reconverja</text><text x="350" y="164" text-anchor="middle" font-size="11" font-weight="500" fill="#b26a00" dominant-baseline="middle">Reparto por flujo (hash de MAC/IP/puerto): una sola descarga usa un único enlace de 10 Gb/s</text><text x="350" y="182" text-anchor="middle" font-size="11" font-weight="500" fill="#5a5652" dominant-baseline="middle">Requisitos: misma velocidad, dúplex y VLAN en todos los puertos · al menos un extremo en «active»</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 4 · Presupuesto PoE</figcaption>
+<svg viewBox="0 0 700 196" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Presupuesto PoE de 370 W con teléfonos, AP y cámaras." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0406poea-13" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0406poev-13" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0406poem-13" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0406poeg-13" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><text x="10" y="18" text-anchor="start" font-size="12.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Switch de 48 puertos PoE+ con presupuesto de 370 W</text><rect x="10" y="34" width="38.5945945945946" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><rect x="48.5945945945946" y="34" width="229.72972972972974" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><rect x="278.3243243243243" y="34" width="55.13513513513514" height="40" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="29.2972972972973" y="92" text-anchor="middle" font-size="10" font-weight="600" fill="#003da5" dominant-baseline="middle">6 tel.</text><text x="163.45945945945948" y="54" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">10 AP · 250 W</text><text x="305.89189189189193" y="92" text-anchor="middle" font-size="10" font-weight="600" fill="#b26a00" dominant-baseline="middle">4 cám.</text><line x1="350.0" y1="26" x2="350.0" y2="84" stroke="#2e7d3c" stroke-width="2.6"/><text x="356.0" y="100" text-anchor="start" font-size="11" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">presupuesto 370 W</text><text x="337.4594594594595" y="120" text-anchor="start" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">consumo ≈ 352 W: cabe, con poco margen</text><rect x="10" y="140" width="680" height="20" rx="4" fill="#f0efed" stroke="#5a5652" stroke-width="1.6" stroke-dasharray="5 3"/><text x="350" y="150" text-anchor="middle" font-size="10.5" font-weight="600" fill="#5a5652" dominant-baseline="middle">48 puertos × 30 W = 1.440 W: imposible dar el máximo a todos a la vez</text><text x="350" y="184" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">PoE 802.3af 15,4 W · PoE+ 802.3at 30 W · PoE++ 802.3bt 60 W (tipo 3) / 90 W (tipo 4) en el puerto</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 5 · Prefijo más largo</figcaption>
+<svg viewBox="0 0 700 232" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gana la ruta con el prefijo más largo: 10.1.0.0/16 frente a 10.0.0.0/8 y la ruta por defecto." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0408prefijoa-14" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0408prefijov-14" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0408prefijom-14" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0408prefijog-14" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><text x="10" y="20" text-anchor="start" font-size="13" font-weight="700" fill="#23272e" dominant-baseline="middle">Destino del paquete: 10.1.5.20</text><rect x="10" y="36" width="170" height="30" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="95.0" y="51.0" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">0.0.0.0/0</text><text x="196" y="51" text-anchor="start" font-size="11.5" font-weight="500" fill="#23272e" dominant-baseline="middle">ruta por defecto → operador</text><text x="450" y="51" text-anchor="start" font-size="11.5" font-weight="500" fill="#23272e" dominant-baseline="middle">coincide (0 bits)</text><rect x="10" y="74" width="170" height="30" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="95.0" y="89.0" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">10.0.0.0/8</text><text x="196" y="89" text-anchor="start" font-size="11.5" font-weight="500" fill="#23272e" dominant-baseline="middle">→ 192.168.1.1</text><text x="450" y="89" text-anchor="start" font-size="11.5" font-weight="500" fill="#23272e" dominant-baseline="middle">coincide (8 bits)</text><rect x="10" y="112" width="170" height="30" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="95.0" y="127.0" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">10.1.0.0/16</text><text x="196" y="127" text-anchor="start" font-size="11.5" font-weight="500" fill="#23272e" dominant-baseline="middle">→ 192.168.1.2</text><text x="450" y="127" text-anchor="start" font-size="11.5" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">coincide (16 bits): GANA</text><rect x="10" y="150" width="170" height="30" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="95.0" y="165.0" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">10.2.0.0/16</text><text x="196" y="165" text-anchor="start" font-size="11.5" font-weight="500" fill="#23272e" dominant-baseline="middle">→ 192.168.1.3</text><text x="450" y="165" text-anchor="start" font-size="11.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">no coincide</text><text x="350" y="202" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">Gana la ruta MÁS ESPECÍFICA (prefijo más largo). Entre fuentes distintas para el mismo prefijo,</text><text x="350" y="220" text-anchor="middle" font-size="11" font-weight="500" fill="#5a5652" dominant-baseline="middle">decide la distancia administrativa (conectada 0 · estática 1 · OSPF 110 · RIP 120).</text></svg>
+</figure>
+<h2 id="21-resumen-final-si-manana-fuera-el-examen" class="tema-h2">21. Resumen final: si mañana fuera el examen</h2>
+<p>El <strong>switch</strong> segmenta con <strong>VLAN 802.1Q</strong> (una por servicio): <strong>acceso</strong> con una VLAN sin etiqueta (más la <strong>voz</strong> etiquetada para el teléfono) y <strong>trunks</strong> con varias etiquetadas y la <strong>nativa</strong> igual en ambos extremos. Los enlaces redundantes se protegen con <strong>STP/RSTP/MSTP</strong> (raíz = <strong>menor</strong> Bridge ID) o se convierten en <strong>LACP</strong> (capacidad + redundancia, reparto por flujo). En los puertos de usuario, <strong>PortFast + BPDU Guard</strong>. <strong>PoE</strong>: 15,4 / <strong>30</strong> / 60 / 90 W en el puerto, sin superar el <strong>presupuesto</strong>. El <strong>router</strong> (o el switch de capa 3 con <strong>SVI</strong>) une redes por IP: gana la <strong>ruta más específica</strong>; <strong>estática</strong> (DA 1), <strong>OSPF</strong> en la empresa, <strong>BGP</strong> en Internet; <strong>VRRP/HSRP</strong> para redundancia. Las VLAN sensibles se enrutan en el <strong>cortafuegos</strong>. Se gestionan por <strong>SSH/SNMPv3</strong> con copia de la configuración. Cisco y Aruba hacen lo mismo con comandos parecidos (Aruba: MSTP por defecto, VSF/VSX, Central).</p>
+<h2 id="22-actualidad-datos-fechados" class="tema-h2">22. Actualidad — datos fechados</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong></th>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong><br>Lo estable para el examen es lo explicado arriba; estos datos cambian.</th>
 </tr>
 </table></div>
 <ul class="tema-lista">
-<li><strong>HPE completó la compra de Juniper</strong> (julio de 2025): la oferta de redes de HPE (Aruba + Juniper/Mist) se está integrando; las marcas comerciales pueden cambiar.</li>
-<li>Cisco ha unificado su gestión en la nube bajo la plataforma <strong>Meraki/Cisco Networking Cloud</strong>; Catalyst Center (antes DNA Center) sigue para gestión local.</li>
-<li>Los switches de acceso nuevos suelen traer puertos <strong>multigigabit (2,5/5 Gbps)</strong> y <strong>802.3bt</strong> para AP wifi 7, y uplinks de <strong>25 Gbps</strong>.</li>
+<li><strong>HPE completó la compra de Juniper</strong> en 2025: la oferta de redes de HPE (Aruba y Juniper/Mist) se está integrando y los nombres comerciales pueden cambiar.</li>
+<li>Cisco mantiene <strong>Catalyst Center</strong> para la gestión local y potencia la gestión en la nube de <strong>Meraki</strong>; las denominaciones de producto cambian con frecuencia.</li>
+<li>Los switches de acceso nuevos traen puertos <strong>multigigabit (2,5/5 Gb/s)</strong>, <strong>802.3bt</strong> para AP wifi 7 y uplinks de <strong>25 Gb/s</strong>.</li>
 </ul>
 
   </div>
