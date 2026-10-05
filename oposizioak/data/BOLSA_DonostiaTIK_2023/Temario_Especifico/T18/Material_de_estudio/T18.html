@@ -6,35 +6,84 @@
   </header>
 
   <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#mapa-del-tema">Mapa del tema</a></li>
 <li><a href="#1-que-es-un-sistema-scada">1. Qué es un sistema SCADA</a></li>
 <li><a href="#2-componentes">2. Componentes</a></li>
-<li><a href="#3-el-plc">3. El PLC</a></li>
+<li><a href="#3-el-plc-y-su-relacion-con-el-scada">3. El PLC y su relación con el SCADA</a></li>
 <li><a href="#4-arquitectura-por-niveles">4. Arquitectura por niveles</a></li>
 <li><a href="#5-protocolos-industriales">5. Protocolos industriales</a></li>
 <li><a href="#6-it-frente-a-ot">6. IT frente a OT</a></li>
 <li><a href="#7-ciberseguridad-industrial">7. Ciberseguridad industrial</a></li>
-<li><a href="#8-lo-que-cayo-en-el-examen-de-2023">8. Lo que cayó en el examen de 2023</a></li>
-<li><a href="#9-anclas-de-memoria">9. Anclas de memoria</a></li>
-<li><a href="#10-no-confundir">10. No confundir</a></li>
-<li><a href="#11-posibles-trampas-de-examen">11. Posibles trampas de examen</a></li>
-<li><a href="#12-posibles-preguntas-tipo-test">12. Posibles preguntas tipo test</a></li>
-<li><a href="#13-posibles-preguntas-cortas-con-esquema-de-respuesta">13. Posibles preguntas cortas (con esquema de respuesta)</a></li>
-<li><a href="#14-supuesto-practico">14. Supuesto práctico</a></li>
-<li><a href="#15-matriz-de-memorizacion">15. Matriz de memorización</a></li>
-<li><a href="#16-resumen-final-si-manana-fuera-el-examen">16. Resumen final: si mañana fuera el examen</a></li>
-<li><a href="#17-actualidad-datos-fechados">17. Actualidad — datos fechados</a></li>
+<li><a href="#8-situaciones-profesionales-y-buenas-practicas">8. Situaciones profesionales y buenas prácticas</a></li>
+<li><a href="#9-lo-que-cayo-en-el-examen-de-2023">9. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#10-anclas-de-memoria">10. Anclas de memoria</a></li>
+<li><a href="#11-no-confundir">11. No confundir</a></li>
+<li><a href="#12-posibles-trampas-de-examen">12. Posibles trampas de examen</a></li>
+<li><a href="#13-matriz-de-memorizacion">13. Matriz de memorización</a></li>
+<li><a href="#14-preguntas-tipo-test">14. Preguntas tipo test</a></li>
+<li><a href="#15-posibles-preguntas-cortas-con-esquema-de-respuesta">15. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#16-casos-practicos">16. Casos prácticos</a></li>
+<li><a href="#17-repaso-visual-t18">17. Repaso visual · T18</a></li>
+<li><a href="#18-resumen-final-si-manana-fuera-el-examen">18. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#19-actualidad-datos-fechados">19. Actualidad — datos fechados</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
+<h2 id="mapa-del-tema" class="tema-h2">Mapa del tema</h2>
+<p>T18 trata los <strong>sistemas de control industrial</strong>: <strong>SCADA</strong>, <strong>PLC</strong>, RTU, HMI, sus <strong>protocolos</strong> (Modbus, Profinet, DNP3, OPC UA, BACnet), las diferencias <strong>IT/OT</strong> y la <strong>ciberseguridad industrial</strong>.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>⚠️ <strong>No confundir — fronteras del tema</strong><br>Este tema trata los <strong>sistemas de control industrial</strong>: <strong>SCADA</strong>, <strong>PLC</strong>, RTU, HMI, sus <strong>protocolos</strong> (Modbus, Profinet, DNP3, OPC UA, BACnet), las diferencias <strong>IT/OT</strong> y la <strong>ciberseguridad industrial</strong>.<br><strong>T8</strong> → IoT y M2M (sensores conectados en general). <strong>T14/T15</strong> → cortafuegos y VPN para proteger y dar acceso a estos sistemas. <strong>T19</strong> → monitorización de comunicaciones.</th>
+<th>📌 <strong>Imprescindible — salió en la corta y en el caso de 2023</strong><br><strong>Corta 4</strong>: SCADA frente a PLC, con ejemplos y qué aporta el SCADA. <strong>Caso 4</strong>: acceso remoto del mantenedor al <strong>PLC de telegestión</strong> (VLAN 94).</th>
 </tr>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Si la pregunta trata de…</th>
+<th>Está en</th>
+<th>Desde T18 solo…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sensores IoT, LoRaWAN, MQTT</td>
+<td><strong>T8</strong></td>
+<td>se cita MQTT en el IoT industrial</td>
+</tr>
+<tr>
+<td>VLAN y segmentación</td>
+<td><strong>T4</strong></td>
+<td>se aplica a la red OT</td>
+</tr>
+<tr>
+<td>Cortafuegos, DMZ, VPN</td>
+<td><strong>T14, T15</strong></td>
+<td>se usan para el acceso del mantenedor</td>
+</tr>
+<tr>
+<td>Monitorización de comunicaciones</td>
+<td><strong>T19</strong></td>
+<td>se cita la alerta por pérdida de comunicación</td>
+</tr>
+<tr>
+<td>NIS2, ENS</td>
+<td><strong>T12</strong></td>
+<td>se citan como marco</td>
+</tr>
+</tbody>
+</table></div>
+<p>Cada apartado sigue tres niveles: <strong>concepto</strong>, <strong>explicación</strong> y <strong>aplicación práctica</strong>.</p>
 <h2 id="1-que-es-un-sistema-scada" class="tema-h2">1. Qué es un sistema SCADA</h2>
-<p><strong>SCADA</strong> (<em>Supervisory Control And Data Acquisition</em>, <strong>supervisión, control y adquisición de datos</strong>) es un sistema de <strong>software y hardware</strong> que permite <strong>supervisar y controlar a distancia procesos e instalaciones</strong> —a menudo <strong>distribuidos geográficamente</strong>—, recogiendo datos de campo en tiempo real, mostrándolos a los operadores, generando <strong>alarmas</strong> y enviando <strong>órdenes</strong>.</p>
-<p>Ejemplos en un ayuntamiento y su entorno: <strong>abastecimiento y depuración de agua</strong> (bombeos, depósitos, depuradoras), <strong>alumbrado público</strong>, <strong>semáforos y tráfico</strong>, <strong>climatización y gestión técnica de los edificios</strong> (el <strong>PLC de telegestión</strong> del caso de 2023), túneles, aparcamientos, redes eléctricas y de gas, transporte.</p>
+<p><strong>Concepto.</strong> <strong>SCADA</strong> (<em>Supervisory Control And Data Acquisition</em>, <strong>supervisión, control y adquisición de datos</strong>) es un sistema de <strong>software y hardware</strong> que permite <strong>supervisar y controlar a distancia procesos e instalaciones</strong>, a menudo <strong>distribuidos geográficamente</strong>.</p>
+<p><strong>Explicación.</strong> Recoge datos de campo en tiempo real, los muestra a los operadores, genera <strong>alarmas</strong> y envía <strong>órdenes</strong>. No sustituye al control local: lo <strong>supervisa</strong>.</p>
+<p><strong>Aplicación práctica.</strong> En un ayuntamiento y su entorno: <strong>abastecimiento y depuración de agua</strong> (bombeos, depósitos), <strong>alumbrado público</strong>, <strong>semáforos y tráfico</strong>, <strong>climatización y gestión técnica de edificios</strong> (el <strong>PLC de telegestión</strong> del caso de 2023), túneles y aparcamientos.</p>
 <h2 id="2-componentes" class="tema-h2">2. Componentes</h2>
+<p><strong>Concepto.</strong> Un SCADA une el <strong>campo</strong> (sensores, actuadores, PLC, RTU) con el <strong>centro de mando</strong> (servidor, HMI, historian) a través de una <strong>red de comunicaciones</strong>.</p>
+<p><strong>Explicación.</strong></p>
+<figure class="tema-figura">
+<figcaption>Figura 1 · Componentes de un sistema SCADA</figcaption>
+<svg viewBox="0 0 700 256" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A la izquierda, el campo: sensores (nivel, caudal, temperatura), actuadores (bombas, válvulas, relés) y, debajo, el PLC, que controla, y la RTU, remota. En el centro, las comunicaciones: Ethernet, fibra, radio, 4G/5G. A la derecha, el centro de mando: servidor SCADA o MTU, que interroga, gestiona alarmas y da órdenes; HMI con sinópticos; historian con series temporales; y estación de ingeniería. Los PLC recogen y controlan; el SCADA es el centro de mando." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1801componentesa-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1801componentesv-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1801componentesm-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1801componentesg-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="200" height="210" rx="10" fill="#f0efed" stroke="#5a5652" stroke-width="1.2"/><text x="110" y="30" text-anchor="middle" font-size="11.5" font-weight="700" fill="#5a5652" dominant-baseline="middle">CAMPO</text><rect x="25" y="44" width="170" height="44" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="110.0" y="59.5" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Sensores</text><text x="110.0" y="72.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">nivel, caudal, temperatura</text><rect x="25" y="98" width="170" height="44" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="110.0" y="113.5" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Actuadores</text><text x="110.0" y="126.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">bombas, válvulas, relés</text><rect x="25" y="160" width="80" height="48" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="65.0" y="177.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">PLC</text><text x="65.0" y="190.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">controla</text><rect x="115" y="160" width="80" height="48" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="155.0" y="177.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">RTU</text><text x="155.0" y="190.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">remota</text><line x1="110" y1="142" x2="110" y2="160" stroke="#5a5652" stroke-width="1.4"/><rect x="240" y="85" width="150" height="60" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="315.0" y="102.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Comunicaciones</text><text x="315.0" y="115.0" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">Ethernet, fibra,</text><text x="315.0" y="128.0" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">radio, 4G/5G</text><path d="M200,115 L236,115" fill="none" stroke="#5a5652" stroke-width="1.6" marker-end="url(#T1801componentesg-1)"/><path d="M390,115 L426,115" fill="none" stroke="#5a5652" stroke-width="1.6" marker-end="url(#T1801componentesg-1)"/><rect x="430" y="10" width="260" height="210" rx="10" fill="#e6edf7" stroke="#003da5" stroke-width="1.2"/><text x="560" y="30" text-anchor="middle" font-size="11.5" font-weight="700" fill="#003da5" dominant-baseline="middle">CENTRO DE MANDO</text><rect x="445" y="44" width="230" height="50" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="560.0" y="62.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">Servidor SCADA (MTU)</text><text x="560.0" y="75.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">interroga, alarmas, órdenes</text><rect x="445" y="108" width="110" height="50" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="500.0" y="126.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">HMI</text><text x="500.0" y="139.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">sinópticos</text><rect x="565" y="108" width="110" height="50" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="620.0" y="126.5" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Historian</text><text x="620.0" y="139.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">series temporales</text><rect x="445" y="168" width="230" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="560.0" y="188.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Estación de ingeniería</text><text x="350" y="244" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Los PLC recogen y controlan; el SCADA es el centro de mando (corta 4 de 2023)</text></svg>
+</figure>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -44,36 +93,36 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Sensores y actuadores</strong> (nivel de campo)</td>
-<td>Miden (temperatura, presión, nivel, caudal, presencia) y actúan (bombas, válvulas, motores, relés)</td>
+<td><strong>Sensores y actuadores</strong> (campo)</td>
+<td>Miden (temperatura, presión, nivel, caudal) y actúan (bombas, válvulas, motores, relés)</td>
 </tr>
 <tr>
 <td><strong>PLC</strong> (autómata programable)</td>
-<td><strong>Controla localmente</strong> el proceso: lee las entradas, ejecuta su programa y actúa sobre las salidas</td>
+<td><strong>Controla localmente</strong> el proceso: lee entradas, ejecuta su programa y actúa sobre las salidas</td>
 </tr>
 <tr>
 <td><strong>RTU</strong> (<em>Remote Terminal Unit</em>)</td>
-<td>Unidad remota que <strong>recoge datos</strong> de campo y los <strong>comunica</strong> al centro de control; pensada para ubicaciones remotas y comunicaciones de largo alcance (radio, móvil)</td>
+<td><strong>Recoge datos</strong> de campo y los <strong>comunica</strong> al centro; pensada para ubicaciones remotas y largo alcance (radio, móvil)</td>
 </tr>
 <tr>
 <td><strong>Red de comunicaciones</strong></td>
-<td>Une campo y centro: Ethernet industrial, fibra, radio, 4G/5G, buses de campo</td>
+<td>Ethernet industrial, fibra, radio, 4G/5G, buses de campo</td>
 </tr>
 <tr>
 <td><strong>Servidor SCADA / MTU</strong> (<em>Master Terminal Unit</em>)</td>
-<td><strong>Centro de mando</strong>: interroga a PLC y RTU, procesa los datos, gestiona alarmas y envía órdenes</td>
+<td><strong>Centro de mando</strong>: interroga a PLC y RTU, procesa, gestiona <strong>alarmas</strong> y envía órdenes</td>
 </tr>
 <tr>
 <td><strong>HMI</strong> (<em>Human-Machine Interface</em>)</td>
-<td><strong>Interfaz con el operador</strong>: pantallas con <strong>sinópticos</strong> del proceso, alarmas, tendencias y mandos</td>
+<td><strong>Interfaz con el operador</strong>: <strong>sinópticos</strong>, alarmas, tendencias y mandos</td>
 </tr>
 <tr>
 <td><em><strong>Historian</strong></em></td>
-<td>Base de datos de <strong>series temporales</strong> para el histórico, informes y análisis</td>
+<td>Base de datos de <strong>series temporales</strong> para histórico, informes y análisis</td>
 </tr>
 <tr>
 <td>Estación de ingeniería</td>
-<td>Para programar los PLC y configurar el SCADA</td>
+<td>Programar los PLC y configurar el SCADA</td>
 </tr>
 </tbody>
 </table></div>
@@ -82,16 +131,30 @@
 <th>📌 <strong>Imprescindible — la idea clave de la corta 4 de 2023</strong><br>«<strong>Los PLC son microordenadores diseñados para recopilar datos industriales procedentes de entradas como sensores y comunicarlos a un centro de mando, mientras que un sistema SCADA actúa como ese centro de mando.</strong>»</th>
 </tr>
 </table></div>
-<h2 id="3-el-plc" class="tema-h2">3. El PLC</h2>
-<p>Un <strong>PLC</strong> (<em>Programmable Logic Controller</em>, <strong>autómata programable</strong>) es un <strong>ordenador industrial robusto</strong> (resistente a temperatura, vibraciones, ruido eléctrico) que controla máquinas o procesos <strong>en tiempo real</strong>.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — HMI vs historian · RTU vs PLC</strong><br><strong>HMI</strong> = la <strong>pantalla</strong> del operador (lo que pasa ahora). <strong>Historian</strong> = la <strong>base de datos</strong> de lo que pasó. <strong>RTU</strong> = adquiere y <strong>comunica</strong> desde lejos. <strong>PLC</strong> = <strong>controla</strong> el proceso.</th>
+</tr>
+</table></div>
+<h2 id="3-el-plc-y-su-relacion-con-el-scada" class="tema-h2">3. El PLC y su relación con el SCADA</h2>
+<p><strong>Concepto.</strong> Un <strong>PLC</strong> (<em>Programmable Logic Controller</em>, <strong>autómata programable</strong>) es un <strong>ordenador industrial robusto</strong> (temperatura, vibraciones, ruido eléctrico) que controla máquinas o procesos <strong>en tiempo real</strong>.</p>
+<p><strong>Explicación.</strong></p>
+<figure class="tema-figura">
+<figcaption>Figura 2 · Ciclo de scan, E/S y lenguajes del PLC</figcaption>
+<svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A la izquierda, el ciclo de scan del PLC, en milisegundos: 1 leer entradas, 2 ejecutar programa, 3 escribir salidas, 4 diagnóstico y comunicaciones, y vuelta a empezar. A la derecha, las E/S del PLC: digitales (on/off, pulsador, relé) y analógicas (4–20 mA, 0–10 V, nivel); y los lenguajes de la IEC 61131-3: LD (contactos, ladder), FBD (bloques de funciones), ST (texto estructurado), SFC (Grafcet) e IL (en desuso)." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1803scana-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1803scanv-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1803scanm-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1803scang-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><circle cx="170" cy="130" r="100" fill="none" stroke="#5a5652" stroke-width="1.6" stroke-dasharray="5 4"/><text x="170" y="126" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">ciclo de scan</text><text x="170" y="142" text-anchor="middle" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">milisegundos</text><rect x="122.0" y="10.0" width="96" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="170.0" y="23.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">1 Leer</text><text x="170.0" y="36.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">entradas</text><rect x="222.0" y="110.0" width="96" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="270.0" y="123.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">2 Ejecutar</text><text x="270.0" y="136.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">programa</text><rect x="122.0" y="210.0" width="96" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="170.0" y="223.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">3 Escribir</text><text x="170.0" y="236.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">salidas</text><rect x="22.0" y="110.0" width="96" height="40" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="70.0" y="123.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">4 Diagnóstico</text><text x="70.0" y="136.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#23272e" dominant-baseline="middle">y comunicaciones</text><text x="400" y="30" text-anchor="start" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">E/S del PLC</text><text x="400" y="52" text-anchor="start" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">• digitales: on/off (pulsador, relé)</text><text x="400" y="72" text-anchor="start" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">• analógicas: 4–20 mA, 0–10 V (nivel)</text><text x="400" y="110" text-anchor="start" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Lenguajes IEC 61131-3</text><text x="400" y="132" text-anchor="start" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">• LD (contactos, ladder)</text><text x="400" y="152" text-anchor="start" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">• FBD (bloques de funciones)</text><text x="400" y="172" text-anchor="start" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">• ST (texto estructurado)</text><text x="400" y="192" text-anchor="start" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">• SFC (Grafcet) · IL (en desuso)</text></svg>
+</figure>
 <ul class="tema-lista">
-<li><strong>Partes</strong>: fuente de alimentación, <strong>CPU</strong>, memoria, <strong>módulos de entradas y salidas</strong> (<strong>digitales</strong>: on/off; <strong>analógicas</strong>: 4–20 mA, 0–10 V), <strong>módulos de comunicaciones</strong>.</li>
-<li><strong>Ciclo de <em>scan</em></strong>: 1) lee todas las <strong>entradas</strong>, 2) ejecuta el <strong>programa</strong>, 3) actualiza las <strong>salidas</strong>, 4) diagnósticos y comunicaciones; y vuelta a empezar, en milisegundos.</li>
-<li><strong>Lenguajes</strong> de la norma <strong>IEC 61131-3</strong>: <strong>diagrama de contactos (LD, <em>ladder</em>)</strong>, diagrama de bloques de funciones (<strong>FBD</strong>), texto estructurado (<strong>ST</strong>), lista de instrucciones (IL, en desuso) y gráfico secuencial (<strong>SFC</strong>, Grafcet).</li>
-<li><strong>Fabricantes</strong>: <strong>Siemens</strong> (SIMATIC S7-1200/1500), <strong>Schneider Electric</strong> (Modicon), <strong>Rockwell Automation</strong> (Allen-Bradley), Omron, Mitsubishi, ABB, Beckhoff; para edificios, controladores específicos (Siemens Desigo, Schneider EcoStruxure, Honeywell, Johnson Controls).</li>
-<li>Ejemplos de uso: control de una bomba según el nivel del depósito, secuencia de un semáforo, encendido del alumbrado según el horario o la luz, <strong>control de la climatización</strong> (enfriadoras, calderas, fancoils) de un edificio.</li>
+<li><strong>Partes</strong>: fuente de alimentación, <strong>CPU</strong>, memoria, <strong>módulos de E/S</strong> (<strong>digitales</strong>: on/off; <strong>analógicas</strong>: 4–20 mA, 0–10 V), <strong>módulos de comunicaciones</strong>.</li>
+<li><strong>Ciclo de <em>scan</em></strong>: leer <strong>entradas</strong> → ejecutar <strong>programa</strong> → actualizar <strong>salidas</strong> → diagnósticos y comunicaciones, en milisegundos.</li>
+<li><strong>Lenguajes</strong> de la norma <strong>IEC 61131-3</strong>: <strong>LD</strong> (<em>ladder</em>, contactos), <strong>FBD</strong>, <strong>ST</strong>, IL (en desuso) y <strong>SFC</strong> (Grafcet).</li>
+<li><strong>Fabricantes</strong>: <strong>Siemens</strong> (SIMATIC S7-1200/1500), <strong>Schneider Electric</strong> (Modicon), <strong>Rockwell</strong> (Allen-Bradley), Omron, Mitsubishi, ABB, Beckhoff; en edificios, controladores específicos (Siemens Desigo, Schneider EcoStruxure, Honeywell, Johnson Controls).</li>
+<li><strong>Ejemplos de uso</strong>: bomba según el nivel del depósito, secuencia de un semáforo, alumbrado según horario o luz, <strong>climatización</strong> (enfriadoras, calderas, fancoils).</li>
 </ul>
 <h3 id="scada-frente-a-plc">SCADA frente a PLC</h3>
+<figure class="tema-figura">
+<figcaption>Figura 3 · PLC frente a SCADA</figcaption>
+<svg viewBox="0 0 700 244" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dos paneles. PLC, autómata: hardware industrial robusto, control local en tiempo real, una máquina o instalación; Siemens S7, Allen-Bradley, Modicon; bomba, semáforo, climatización; si cae, se para esa parte. SCADA, supervisión: software con servidores y HMI, supervisa muchos PLC y RTU, instalaciones dispersas; WinCC, AVEVA, Ignition; agua, alumbrado, tráfico; si cae, el proceso sigue sin supervisión. Aporta el SCADA: visión global, HMI, alarmas centralizadas, histórico, informes y mando remoto." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1802plcscadaa-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1802plcscadav-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1802plcscadam-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1802plcscadag-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="330" height="200" rx="10" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.2"/><rect x="360" y="10" width="330" height="200" rx="10" fill="#e6edf7" stroke="#003da5" stroke-width="1.2"/><text x="175" y="34" text-anchor="middle" font-size="13" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">PLC · autómata</text><text x="525" y="34" text-anchor="middle" font-size="13" font-weight="700" fill="#003da5" dominant-baseline="middle">SCADA · supervisión</text><text x="175" y="62" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">HARDWARE industrial robusto</text><text x="525" y="62" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">SOFTWARE + servidores + HMI</text><text x="175" y="84" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">control LOCAL en tiempo real</text><text x="525" y="84" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">SUPERVISA muchos PLC y RTU</text><text x="175" y="106" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">una máquina o instalación</text><text x="525" y="106" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">instalaciones dispersas</text><text x="175" y="128" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">Siemens S7, Allen-Bradley, Modicon</text><text x="525" y="128" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">WinCC, AVEVA, Ignition</text><text x="175" y="150" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">bomba, semáforo, climatización</text><text x="525" y="150" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">agua, alumbrado, tráfico</text><text x="175" y="190" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b26a00" dominant-baseline="middle">si cae: se para esa parte</text><text x="525" y="190" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">si cae: el proceso SIGUE (sin supervisión)</text><text x="350" y="232" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Aporta el SCADA: visión global · HMI · alarmas centralizadas · histórico · informes · mando remoto</text></svg>
+</figure>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -114,29 +177,44 @@
 <tr>
 <td>Función</td>
 <td><strong>Ejecuta</strong> la lógica de control en tiempo real</td>
-<td><strong>Supervisa, visualiza, registra, alerta y da órdenes</strong> sobre muchos PLC/RTU</td>
+<td><strong>Supervisa, visualiza, registra, alerta y ordena</strong> sobre muchos PLC/RTU</td>
 </tr>
 <tr>
 <td>Alcance</td>
-<td>Una máquina o una instalación</td>
+<td>Una máquina o instalación</td>
 <td>Toda la planta o <strong>instalaciones dispersas</strong></td>
 </tr>
 <tr>
 <td>Si se cae</td>
-<td>El proceso se para (en esa parte)</td>
-<td><strong>El proceso sigue</strong> (los PLC siguen controlando), pero se pierde la supervisión</td>
+<td>Se para esa parte del proceso</td>
+<td><strong>El proceso sigue</strong> (los PLC controlan), pero se pierde la supervisión</td>
 </tr>
 <tr>
 <td>Ejemplos</td>
 <td>Siemens S7, Allen-Bradley, Modicon</td>
-<td><strong>Siemens WinCC</strong>, <strong>AVEVA</strong> (Wonderware), <strong>Ignition</strong> (Inductive Automation), GE iFIX, Schneider EcoStruxure, Codesys</td>
+<td><strong>Siemens WinCC</strong>, <strong>AVEVA</strong> (Wonderware), <strong>Ignition</strong>, GE iFIX, Schneider EcoStruxure</td>
 </tr>
 </tbody>
 </table></div>
-<p><strong>Qué aporta el SCADA que no tiene el PLC</strong>: <strong>visión global</strong> de muchas instalaciones, <strong>HMI</strong> gráfica para los operadores, <strong>gestión centralizada de alarmas</strong> (con avisos por SMS o correo), <strong>histórico</strong> y tendencias, <strong>informes</strong>, <strong>control remoto</strong> centralizado, integración con otros sistemas (ERP, GIS, mantenimiento) y <strong>gestión de usuarios</strong> y registro de las acciones.</p>
-<p><strong>DCS</strong> (<em>Distributed Control System</em>): sistema de control distribuido, típico de <strong>una gran planta</strong> continua (química, refinería), con controladores y supervisión integrados de un mismo fabricante; el SCADA es más típico de instalaciones <strong>geográficamente dispersas</strong>.</p>
+<p><strong>Qué aporta el SCADA que no tiene el PLC</strong>: <strong>visión global</strong> de muchas instalaciones, <strong>HMI</strong> gráfica, <strong>gestión centralizada de alarmas</strong> (avisos por SMS o correo), <strong>histórico</strong> y tendencias, <strong>informes</strong>, <strong>mando remoto</strong> centralizado, integración con otros sistemas (ERP, GIS, mantenimiento) y <strong>gestión de usuarios</strong> con registro de acciones.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br><strong>El control en tiempo real lo ejecuta el PLC, no el SCADA.</strong> Por eso, si cae el SCADA, <strong>el proceso sigue</strong>: lo que se pierde es la <strong>supervisión</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — SCADA vs DCS</strong><br><strong>DCS</strong> (<em>Distributed Control System</em>): control distribuido de <strong>una gran planta continua</strong> (química, refinería), integrado de un mismo fabricante. <strong>SCADA</strong>: típico de instalaciones <strong>geográficamente dispersas</strong> (agua, alumbrado).</th>
+</tr>
+</table></div>
+<p><strong>Aplicación práctica.</strong> En la corta de 2023 había que dar <strong>descripción + 2 ejemplos</strong> de cada uno y <strong>qué aporta el SCADA</strong>: con la tabla anterior y la frase de la corta se cubren todos los criterios.</p>
 <h2 id="4-arquitectura-por-niveles" class="tema-h2">4. Arquitectura por niveles</h2>
-<p>La <strong>pirámide de automatización</strong> (y el <strong>modelo Purdue / ISA-95</strong>) ordena los sistemas por niveles:</p>
+<p><strong>Concepto.</strong> La <strong>pirámide de automatización</strong> (modelo <strong>Purdue / ISA-95</strong>) ordena los sistemas por niveles, de los sensores a la red corporativa.</p>
+<p><strong>Explicación.</strong></p>
+<figure class="tema-figura">
+<figcaption>Figura 4 · Niveles del modelo Purdue</figcaption>
+<svg viewBox="0 0 700 278" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pirámide de niveles, de arriba abajo: 4, empresa (IT), ERP y red municipal de usuarios; 3,5, DMZ industrial, sin tráfico directo entre IT y OT; 3, operaciones, MES, historian y mantenimiento; 2, supervisión, SCADA y HMI; 1, control, PLC y RTU; 0, campo, sensores y actuadores. Los niveles 0 a 3 son OT. Modelo Purdue / ISA-95; IEC 62443, zonas y conductos; caso 2023, VLAN de telegestión 94." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1804nivelesa-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1804nivelesv-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1804nivelesm-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1804nivelesg-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="140" y="10" width="420" height="34" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="27.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">4 · Empresa (IT) — ERP, red municipal de usuarios</text><rect x="120" y="50" width="460" height="34" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="350.0" y="67.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">3,5 · DMZ industrial — ningún tráfico directo IT ↔ OT</text><rect x="100" y="90" width="500" height="34" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="107.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">3 · Operaciones — MES, historian, mantenimiento</text><rect x="80" y="130" width="540" height="34" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="147.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">2 · Supervisión — SCADA, HMI</text><rect x="60" y="170" width="580" height="34" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="350.0" y="187.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">1 · Control — PLC, RTU</text><rect x="40" y="210" width="620" height="34" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="350.0" y="227.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">0 · Campo — sensores y actuadores</text><text x="12" y="32" text-anchor="start" font-size="13" font-weight="700" fill="#003da5" dominant-baseline="middle">IT</text><text x="12" y="152" text-anchor="start" font-size="13" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">OT</text><text x="350" y="266" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Modelo Purdue / ISA-95 · IEC 62443: zonas y conductos · caso 2023: VLAN de telegestión 94</text></svg>
+</figure>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -147,7 +225,7 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>0 — Proceso / campo</strong></td>
+<td><strong>0 — Campo</strong></td>
 <td>Sensores y actuadores</td>
 <td>Sonda de temperatura, válvula</td>
 </tr>
@@ -167,27 +245,38 @@
 <td>Gestión del mantenimiento</td>
 </tr>
 <tr>
-<td><strong>4 — Empresa</strong></td>
+<td><strong>3,5 — DMZ industrial</strong></td>
+<td>Servidores intermedios</td>
+<td>Réplica del historian, servidor de salto</td>
+</tr>
+<tr>
+<td><strong>4 (y 5) — Empresa</strong></td>
 <td>ERP, red corporativa (<strong>IT</strong>)</td>
 <td>Red municipal de usuarios</td>
 </tr>
 </tbody>
 </table></div>
-<p>Entre la red corporativa (niveles 4–5) y la red industrial (0–3) se recomienda una <strong>DMZ industrial</strong> (nivel 3,5): <strong>ningún tráfico directo</strong> entre IT y OT.</p>
+<p><strong>Aplicación práctica.</strong> Entre la red corporativa y la industrial va una <strong>DMZ industrial</strong>: <strong>ningún tráfico directo</strong> entre IT y OT. Si la red de usuarios necesita datos del SCADA, los consulta en una <strong>réplica</strong> en la DMZ, no en el SCADA.</p>
 <h2 id="5-protocolos-industriales" class="tema-h2">5. Protocolos industriales</h2>
+<p><strong>Concepto.</strong> Los protocolos industriales comunican PLC, RTU y SCADA; la mayoría de los clásicos <strong>nacieron sin seguridad</strong>.</p>
+<p><strong>Explicación.</strong></p>
+<figure class="tema-figura">
+<figcaption>Figura 5 · Protocolos industriales y su seguridad</figcaption>
+<svg viewBox="0 0 700 266" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tabla de protocolos con su puerto, uso y seguridad nativa: Modbus TCP, 502, el más extendido, sin seguridad; EtherNet/IP, 44818, Rockwell, sin seguridad; DNP3, 20000, telecontrol de agua y eléctrico, sin seguridad; IEC 60870-5-104, 2404, telecontrol eléctrico, sin seguridad; BACnet, UDP 47808, edificios, sin seguridad; OPC UA, 4840, interoperabilidad, autentica y cifra. Modbus, Profibus o BACnet nacieron sin seguridad: quien llega a la red puede leer y escribir en el PLC." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1805protocolosa-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1805protocolosv-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1805protocolosm-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1805protocolosg-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><text x="120" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Protocolo</text><text x="270" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Puerto</text><text x="430" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Uso</text><text x="610" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Seguridad</text><rect x="30" y="34" width="180" height="28" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="120.0" y="48.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Modbus TCP</text><text x="270" y="52" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">502</text><text x="430" y="52" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">el más extendido</text><rect x="540" y="34" width="140" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="610.0" y="48.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">sin seguridad</text><rect x="30" y="68" width="180" height="28" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="120.0" y="82.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">EtherNet/IP</text><text x="270" y="86" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">44818</text><text x="430" y="86" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">Rockwell</text><rect x="540" y="68" width="140" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="610.0" y="82.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">sin seguridad</text><rect x="30" y="102" width="180" height="28" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="120.0" y="116.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">DNP3</text><text x="270" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">20000</text><text x="430" y="120" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">telecontrol agua/eléctrico</text><rect x="540" y="102" width="140" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="610.0" y="116.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">sin seguridad</text><rect x="30" y="136" width="180" height="28" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="120.0" y="150.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">IEC 60870-5-104</text><text x="270" y="154" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">2404</text><text x="430" y="154" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">telecontrol eléctrico</text><rect x="540" y="136" width="140" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="610.0" y="150.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">sin seguridad</text><rect x="30" y="170" width="180" height="28" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="120.0" y="184.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">BACnet</text><text x="270" y="188" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">UDP 47808</text><text x="430" y="188" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">edificios</text><rect x="540" y="170" width="140" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="610.0" y="184.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">sin seguridad</text><rect x="30" y="204" width="180" height="28" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="120.0" y="218.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">OPC UA</text><text x="270" y="222" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">4840</text><text x="430" y="222" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">interoperabilidad</text><rect x="540" y="204" width="140" height="28" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="610.0" y="218.0" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff" dominant-baseline="middle">autentica y cifra</text><text x="350" y="254" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b26a00" dominant-baseline="middle">Modbus, Profibus o BACnet nacieron sin seguridad: quien llega a la red puede leer y ESCRIBIR en el PLC</text></svg>
+</figure>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
 <th>Protocolo</th>
 <th>Características</th>
-<th>Puerto TCP</th>
+<th>Puerto</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>Modbus</strong> (RTU por serie; <strong>Modbus TCP</strong>)</td>
 <td>El más extendido y sencillo; maestro-esclavo; <strong>sin autenticación ni cifrado</strong></td>
-<td><strong>502</strong></td>
+<td><strong>TCP 502</strong></td>
 </tr>
 <tr>
 <td><strong>Profibus / Profinet</strong></td>
@@ -197,17 +286,17 @@
 <tr>
 <td><strong>EtherNet/IP</strong></td>
 <td>Rockwell (CIP sobre Ethernet)</td>
-<td>44818</td>
+<td>TCP 44818</td>
 </tr>
 <tr>
 <td><strong>DNP3</strong></td>
-<td>Sector eléctrico y agua (EE. UU.); para telecontrol</td>
-<td>20000</td>
+<td>Telecontrol en el sector eléctrico y del agua (origen EE. UU.)</td>
+<td>TCP 20000</td>
 </tr>
 <tr>
 <td><strong>IEC 60870-5-104</strong></td>
 <td>Telecontrol eléctrico (Europa)</td>
-<td>2404</td>
+<td>TCP 2404</td>
 </tr>
 <tr>
 <td><strong>IEC 61850</strong></td>
@@ -216,8 +305,8 @@
 </tr>
 <tr>
 <td><strong>OPC UA</strong></td>
-<td><strong>Estándar moderno</strong> de interoperabilidad entre fabricantes, <strong>con seguridad</strong> (autenticación, cifrado)</td>
-<td>4840</td>
+<td><strong>Estándar moderno</strong> de interoperabilidad, <strong>con seguridad</strong> (autenticación, cifrado)</td>
+<td>TCP 4840</td>
 </tr>
 <tr>
 <td><strong>BACnet</strong></td>
@@ -232,17 +321,23 @@
 <tr>
 <td><strong>MQTT</strong></td>
 <td>IoT industrial (T8)</td>
-<td>1883/8883</td>
+<td>1883 / 8883 (TLS)</td>
 </tr>
 </tbody>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>⚠️ <strong>El gran problema de los protocolos industriales clásicos</strong><br><strong>Modbus, Profibus o BACnet nacieron sin seguridad</strong>: no autentican ni cifran. Cualquiera que llegue a la red puede <strong>leer y escribir</strong> en un PLC. Por eso la <strong>segmentación</strong> y el <strong>control de los accesos</strong> son vitales.</th>
+<th>🧠 <strong>Para memorizar</strong><br><strong>Modbus 502 · BACnet 47808 (edificios) · OPC UA 4840 (el seguro).</strong> Los clásicos <strong>no autentican ni cifran</strong>: cualquiera que llegue a la red puede <strong>leer y escribir</strong> en el PLC.</th>
 </tr>
 </table></div>
+<p><strong>Aplicación práctica.</strong> Por eso la protección real está en la <strong>red</strong>: segmentar, abrir en el cortafuegos <strong>solo</strong> el puerto del protocolo <strong>entre</strong> el SCADA y sus PLC, y vigilar ese tráfico.</p>
 <h2 id="6-it-frente-a-ot" class="tema-h2">6. IT frente a OT</h2>
-<p><strong>OT</strong> (<em>Operational Technology</em>) es la tecnología que <strong>controla procesos físicos</strong>; <strong>IT</strong> es la de la información.</p>
+<p><strong>Concepto.</strong> <strong>OT</strong> (<em>Operational Technology</em>) es la tecnología que <strong>controla procesos físicos</strong>; <strong>IT</strong> es la de la información. Sus prioridades son <strong>distintas</strong>.</p>
+<p><strong>Explicación.</strong></p>
+<figure class="tema-figura">
+<figcaption>Figura 6 · IT frente a OT</figcaption>
+<svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dos paneles. IT, información: prioridades 1 confidencialidad, 2 integridad, 3 disponibilidad; vida de 3 a 5 años y parches frecuentes; un incidente supone datos robados. OT, procesos físicos: prioridades 1 disponibilidad y seguridad física, 2 integridad, 3 confidencialidad; vida de 15 a 25 años y parches difíciles; un incidente supone daño físico o un servicio cortado." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1806itota-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1806itotv-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1806itotm-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1806itotg-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="330" height="200" rx="10" fill="#e6edf7" stroke="#003da5" stroke-width="1.2"/><rect x="360" y="10" width="330" height="200" rx="10" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.2"/><text x="175" y="34" text-anchor="middle" font-size="13" font-weight="700" fill="#003da5" dominant-baseline="middle">IT · información</text><text x="525" y="34" text-anchor="middle" font-size="13" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">OT · procesos físicos</text><rect x="40" y="50" width="270" height="28" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="175.0" y="64.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">1 Confidencialidad</text><rect x="390" y="50" width="270" height="28" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="525.0" y="64.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">1 Disponibilidad y seguridad física</text><rect x="40" y="84" width="270" height="28" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="175.0" y="98.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">2 Integridad</text><rect x="390" y="84" width="270" height="28" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="525.0" y="98.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">2 Integridad</text><rect x="40" y="118" width="270" height="28" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="175.0" y="132.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">3 Disponibilidad</text><rect x="390" y="118" width="270" height="28" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="525.0" y="132.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">3 Confidencialidad</text><text x="175" y="168" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">vida 3–5 años · parches frecuentes</text><text x="525" y="168" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">vida 15–25 años · parches difíciles</text><text x="175" y="190" text-anchor="middle" font-size="10.5" font-weight="600" fill="#5a5652" dominant-baseline="middle">incidente: datos robados</text><text x="525" y="190" text-anchor="middle" font-size="10.5" font-weight="600" fill="#b26a00" dominant-baseline="middle">incidente: daño físico, servicio cortado</text></svg>
+</figure>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -255,7 +350,7 @@
 <tr>
 <td>Prioridad</td>
 <td><strong>Confidencialidad</strong> → integridad → disponibilidad</td>
-<td><strong>Disponibilidad y seguridad física</strong> (de las personas) → integridad → confidencialidad</td>
+<td><strong>Disponibilidad y seguridad física</strong> → integridad → confidencialidad</td>
 </tr>
 <tr>
 <td>Ciclo de vida</td>
@@ -265,7 +360,7 @@
 <tr>
 <td>Parches</td>
 <td>Frecuentes</td>
-<td><strong>Difíciles</strong>: no se puede parar, el fabricante debe certificar, sistemas obsoletos</td>
+<td><strong>Difíciles</strong>: no se puede parar, el fabricante debe certificar</td>
 </tr>
 <tr>
 <td>Tiempo real</td>
@@ -273,37 +368,100 @@
 <td><strong>Crítico</strong></td>
 </tr>
 <tr>
-<td>Consecuencia de un incidente</td>
+<td>Incidente</td>
 <td>Pérdida o robo de datos</td>
 <td><strong>Daño físico</strong>, medioambiental, riesgo para las personas, corte de servicios esenciales</td>
 </tr>
 <tr>
-<td>Antivirus / escaneos</td>
+<td>Antivirus y escaneos</td>
 <td>Habituales</td>
 <td>Con cuidado: pueden <strong>afectar al proceso</strong></td>
 </tr>
 </tbody>
 </table></div>
-<h2 id="7-ciberseguridad-industrial" class="tema-h2">7. Ciberseguridad industrial</h2>
-<p>Incidentes de referencia: <strong>Stuxnet</strong> (2010, saboteó las centrifugadoras iraníes reprogramando PLC Siemens), los <strong>apagones de Ucrania</strong> (2015 y 2016), Triton (2017, sistemas de seguridad de una planta petroquímica), ataques a <strong>plantas de agua</strong> por accesos remotos mal protegidos (Oldsmar, EE. UU., 2021) y campañas contra <strong>PLC expuestos en Internet</strong> con contraseñas por defecto.</p>
-<p><strong>Medidas</strong> (norma <strong>IEC 62443</strong> y guías del CCN-CERT y el INCIBE):</p>
-<ol type="1">
-<li><strong>Inventario</strong> de todos los activos OT y de sus comunicaciones.</li>
-<li><strong>Segmentación</strong> en <strong>zonas y conductos</strong> (IEC 62443): red OT <strong>separada</strong> de la IT, <strong>DMZ industrial</strong>, cortafuegos con reglas de <strong>mínimo privilegio</strong> (en el caso de 2023, la <strong>VLAN de telegestión 94</strong>, protegida por el cortafuegos).</li>
-<li><strong>Nunca exponer un PLC o un HMI directamente a Internet.</strong></li>
-<li><strong>Accesos remotos de los mantenedores</strong>: por <strong>VPN</strong> nominativa con <strong>MFA</strong>, a través de un <strong>servidor de salto (<em>jump host</em>)</strong> o una plataforma de acceso privilegiado, <strong>activados bajo petición</strong> y <strong>registrados</strong> (y, si es posible, grabados).</li>
-<li><strong>Cambiar las credenciales por defecto</strong>, deshabilitar servicios innecesarios.</li>
-<li><strong>Copias</strong> de los programas de los PLC y de la configuración del SCADA.</li>
-<li><strong>Monitorización</strong> del tráfico OT con <strong>IDS industriales</strong> que entienden los protocolos (Nozomi Networks, Claroty, Dragos).</li>
-<li><strong>Gestión de parches</strong> planificada con el fabricante y ventanas de mantenimiento.</li>
-<li><strong>Concienciación</strong> del personal de mantenimiento y de los proveedores.</li>
-</ol>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>💡 <strong>El PLC de telegestión del caso de 2023 (pregunta 4)</strong><br>El PLC que gestiona el frío y el calor del edificio es un <strong>activo OT</strong> mantenido por un <strong>tercero</strong>. Respuesta esperada: identificar que está en una <strong>red protegida por el cortafuegos</strong> (VLAN/DMZ de telegestión), ofrecer una <strong>VPN</strong> a nombre de la empresa mantenedora (o NAT de puerto restringido), con acceso <strong>solo al PLC</strong>, y <strong>coordinarse con DTIK-Sistemas</strong>.</th>
+<th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br>Aplicar a OT las prioridades de IT. En OT <strong>lo primero es que el proceso siga funcionando con seguridad para las personas</strong>; un escaneo agresivo o un reinicio para parchear puede ser peor que la vulnerabilidad.</th>
 </tr>
 </table></div>
-<h2 id="8-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">8. Lo que cayó en el examen de 2023</h2>
+<p><strong>Aplicación práctica.</strong> Nunca se lanza un <strong>escaneo de vulnerabilidades</strong> ni se reinicia un equipo OT sin <strong>coordinarlo</strong> con el responsable del proceso y el mantenedor, en una <strong>ventana de mantenimiento</strong>.</p>
+<h2 id="7-ciberseguridad-industrial" class="tema-h2">7. Ciberseguridad industrial</h2>
+<p><strong>Concepto.</strong> Proteger OT es <strong>aislar y controlar el acceso</strong>, porque los equipos y protocolos no se defienden solos. La norma de referencia es la <strong>IEC 62443</strong>.</p>
+<p><strong>Explicación.</strong> Incidentes de referencia: <strong>Stuxnet</strong> (2010, saboteó centrifugadoras iraníes reprogramando PLC Siemens), los <strong>apagones de Ucrania</strong> (2015 y 2016), <strong>Triton</strong> (2017, sistemas de seguridad de una petroquímica), accesos remotos mal protegidos a <strong>plantas de agua</strong> (Oldsmar, 2021) y <strong>PLC expuestos en Internet</strong> con contraseñas por defecto.</p>
+<p>Medidas (IEC 62443 y guías del CCN-CERT y el INCIBE):</p>
+<ol type="1">
+<li><strong>Inventario</strong> de activos OT y de sus comunicaciones.</li>
+<li><strong>Segmentación</strong> en <strong>zonas y conductos</strong>: red OT <strong>separada</strong>, <strong>DMZ industrial</strong>, cortafuegos con <strong>mínimo privilegio</strong> (caso 2023: <strong>VLAN de telegestión 94</strong>).</li>
+<li><strong>Nunca exponer un PLC o un HMI directamente a Internet.</strong></li>
+<li><strong>Accesos remotos de los mantenedores</strong> por <strong>VPN</strong> nominativa con <strong>MFA</strong>, a través de un <strong>servidor de salto (<em>jump host</em>)</strong>, <strong>activados bajo petición</strong> y <strong>registrados</strong>.</li>
+<li><strong>Cambiar las credenciales por defecto</strong>; deshabilitar servicios innecesarios.</li>
+<li><strong>Copias</strong> de los programas de los PLC y de la configuración del SCADA.</li>
+<li><strong>Monitorización</strong> con <strong>IDS industriales</strong> que entienden los protocolos (Nozomi Networks, Claroty, Dragos).</li>
+<li><strong>Parches</strong> planificados con el fabricante y ventanas de mantenimiento.</li>
+<li><strong>Concienciación</strong> del personal de mantenimiento y de los proveedores.</li>
+</ol>
+<figure class="tema-figura">
+<figcaption>Figura 7 · Acceso remoto seguro del mantenedor</figcaption>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="El mantenedor, empresa externa, entra por una VPN nominativa con MFA, pasa por el cortafuegos, que solo permite llegar al PLC, y por un servidor de salto registrado, hasta el PLC de la VLAN 94 de telegestión. Bajo petición, por tiempo limitado y coordinado con DTIK-Sistemas. Abajo, una flecha tachada: nunca exponer el PLC o el HMI directamente a Internet." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1807accesoa-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1807accesov-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1807accesom-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1807accesog-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="70" width="120" height="56" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="70.0" y="91.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Mantenedor</text><text x="70.0" y="104.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">empresa externa</text><rect x="170" y="70" width="120" height="56" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="230.0" y="91.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">VPN nominativa</text><text x="230.0" y="104.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">+ MFA</text><rect x="330" y="70" width="110" height="56" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="385.0" y="91.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">Cortafuegos</text><text x="385.0" y="104.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">solo el PLC</text><rect x="480" y="70" width="90" height="56" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="525.0" y="91.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Jump host</text><text x="525.0" y="104.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">registrado</text><rect x="600" y="60" width="90" height="76" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="645.0" y="84.5" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">PLC</text><text x="645.0" y="98.0" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">VLAN 94</text><text x="645.0" y="111.5" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">telegestión</text><path d="M130,98 L166,98" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T1807accesov-7)"/><path d="M290,98 L326,98" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T1807accesov-7)"/><path d="M440,98 L476,98" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T1807accesov-7)"/><path d="M570,98 L596,98" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T1807accesov-7)"/><text x="350" y="40" text-anchor="middle" font-size="11" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">Bajo petición · por tiempo limitado · coordinado con DTIK-Sistemas</text><path d="M70,170 L620,170" fill="none" stroke="#b26a00" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#T1807accesom-7)"/><line x1="341" y1="161" x2="359" y2="179" stroke="#b26a00" stroke-width="3"/><line x1="359" y1="161" x2="341" y2="179" stroke="#b26a00" stroke-width="3"/><text x="350" y="196" text-anchor="middle" font-size="11" font-weight="700" fill="#b26a00" dominant-baseline="middle">NUNCA exponer el PLC o el HMI directamente a Internet</text></svg>
+</figure>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>Para el caso práctico — caso 2023, pregunta 4</strong><br>El PLC que gestiona el frío y el calor del edificio es un <strong>activo OT</strong> mantenido por un <strong>tercero</strong>. Respuesta esperada: está en una <strong>red protegida por el cortafuegos</strong> (VLAN de telegestión), se da una <strong>VPN</strong> a nombre de la empresa mantenedora (o un NAT de puerto restringido), con acceso <strong>solo al PLC</strong>, y se <strong>coordina con DTIK-Sistemas</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — IEC 61131-3 vs IEC 62443</strong><br><strong>IEC 61131-3</strong> = <strong>lenguajes</strong> de programación de los PLC. <strong>IEC 62443</strong> = <strong>ciberseguridad</strong> de los sistemas de control industrial.</th>
+</tr>
+</table></div>
+<h2 id="8-situaciones-profesionales-y-buenas-practicas" class="tema-h2">8. Situaciones profesionales y buenas prácticas</h2>
+<p><strong>Aplicación práctica — valores «congelados» en el SCADA:</strong></p>
+<figure class="tema-figura">
+<figcaption>Figura 8 · Diagnóstico de valores congelados en el SCADA</figcaption>
+<svg viewBox="0 0 700 116" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Secuencia de diagnóstico: comprobar si el proceso funciona (sí, los PLC siguen); la red (ping al PLC, puerto, VLAN); el cortafuegos (reglas y cambios); el SCADA (servicio, licencia, logs); el PLC (en RUN, sin fallos); y escalar al mantenedor. Valores congelados significa que se perdió la comunicación, no el control; después, alerta en la monitorización (T19)." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1808congeladoa-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1808congeladov-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1808congeladom-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1808congeladog-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="20" width="105" height="60" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="62.5" y="43.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">¿Proceso OK?</text><text x="62.5" y="56.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#23272e" dominant-baseline="middle">sí: PLC siguen</text><path d="M115,50 L123,50" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1808congeladog-8)"/><rect x="125" y="20" width="105" height="60" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="177.5" y="43.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Red</text><text x="177.5" y="56.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#23272e" dominant-baseline="middle">ping, puerto, VLAN</text><path d="M230,50 L238,50" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1808congeladog-8)"/><rect x="240" y="20" width="105" height="60" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="292.5" y="43.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Cortafuegos</text><text x="292.5" y="56.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#23272e" dominant-baseline="middle">reglas y cambios</text><path d="M345,50 L353,50" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1808congeladog-8)"/><rect x="355" y="20" width="105" height="60" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="407.5" y="43.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">SCADA</text><text x="407.5" y="56.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#23272e" dominant-baseline="middle">servicio, licencia, logs</text><path d="M460,50 L468,50" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1808congeladog-8)"/><rect x="470" y="20" width="105" height="60" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="522.5" y="43.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">PLC</text><text x="522.5" y="56.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">en RUN, sin fallos</text><path d="M575,50 L583,50" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1808congeladog-8)"/><rect x="585" y="20" width="105" height="60" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="637.5" y="43.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Escalar</text><text x="637.5" y="56.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#23272e" dominant-baseline="middle">al mantenedor</text><text x="350" y="104" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Valores «congelados» = se perdió la COMUNICACIÓN, no el control · después, alerta en la monitorización (T19)</text></svg>
+</figure>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Situación</th>
+<th>Lectura en clave de T18</th>
+<th>Primera actuación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SCADA con valores congelados</strong></td>
+<td>Comunicación perdida; el PLC sigue</td>
+<td>Ping al PLC, puerto, regla del cortafuegos, servicio del SCADA</td>
+</tr>
+<tr>
+<td><strong>Mantenedor pide acceso «desde casa»</strong></td>
+<td>Acceso remoto a OT</td>
+<td>VPN nominativa + MFA, solo al PLC, bajo petición y registrado</td>
+</tr>
+<tr>
+<td><strong>PLC encontrado con IP pública</strong></td>
+<td>Exposición crítica</td>
+<td>Retirarlo de Internet de inmediato; revisar accesos; avisar a Sistemas</td>
+</tr>
+<tr>
+<td><strong>Escaneo de red previsto</strong></td>
+<td>Riesgo para el proceso</td>
+<td>Excluir la red OT o coordinar una ventana con el responsable</td>
+</tr>
+<tr>
+<td><strong>Cambio en el cortafuegos</strong></td>
+<td>Posible corte de telegestión</td>
+<td>Comprobar las reglas OT antes y después del cambio</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>Para el caso práctico</strong><br>En cualquier pregunta OT: <strong>segmentar</strong> (VLAN/DMZ) → <strong>acceso mínimo</strong> (solo el puerto y el equipo necesarios) → <strong>acceso remoto controlado</strong> (VPN, MFA, bajo petición) → <strong>coordinación</strong> con Sistemas y el mantenedor → <strong>monitorización</strong>.</th>
+</tr>
+</table></div>
+<h2 id="9-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">9. Lo que cayó en el examen de 2023</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -316,12 +474,12 @@
 <tr>
 <td>Corta 4</td>
 <td>SCADA frente a PLC: descripción, ejemplos y qué aporta SCADA</td>
-<td>Ver apartados 2 y 3</td>
+<td>Apartados 2 y 3</td>
 </tr>
 <tr>
 <td>Caso 4</td>
 <td>Acceso remoto al PLC de telegestión</td>
-<td>VPN o NAT, red protegida, coordinación con Sistemas</td>
+<td>VPN o NAT restringido, red protegida, coordinación con Sistemas</td>
 </tr>
 <tr>
 <td>Caso (enunciado)</td>
@@ -335,18 +493,19 @@
 <th>📌 <strong>Criterios del tribunal (corta 4)</strong><br><strong>Descripción de SCADA</strong> (0,5) + <strong>2 ejemplos de SCADA</strong> (0,25) + <strong>descripción de PLC con ejemplos</strong> (0,5) + <strong>2 ejemplos de PLC</strong> (0,25) + <strong>qué aporta SCADA más que PLC</strong> (0,5). Quedarse en las siglas valía la mitad.</th>
 </tr>
 </table></div>
-<h2 id="9-anclas-de-memoria" class="tema-h2">9. Anclas de memoria</h2>
+<h2 id="10-anclas-de-memoria" class="tema-h2">10. Anclas de memoria</h2>
 <ul class="tema-lista">
 <li><strong>SCADA = supervisión, control y adquisición de datos = el centro de mando (software).</strong></li>
 <li><strong>PLC = autómata = microordenador industrial que controla en tiempo real (hardware).</strong></li>
-<li><strong>Ciclo del PLC: leer entradas → ejecutar programa → escribir salidas.</strong> <strong>IEC 61131-3: LD, FBD, ST, IL, SFC.</strong></li>
+<li><strong>Si cae el SCADA, el proceso sigue; si cae el PLC, se para esa parte.</strong></li>
+<li><strong>Ciclo del PLC: leer entradas → ejecutar programa → escribir salidas. IEC 61131-3: LD, FBD, ST, IL, SFC.</strong></li>
 <li><strong>Componentes: sensores/actuadores · PLC/RTU · comunicaciones · servidor SCADA · HMI · historian.</strong></li>
 <li><strong>Modbus TCP 502 (sin seguridad) · OPC UA 4840 (con seguridad) · BACnet edificios · DNP3 / IEC 104 telecontrol.</strong></li>
 <li><strong>OT prioriza disponibilidad y seguridad física; IT, confidencialidad.</strong></li>
-<li><strong>IEC 62443: zonas y conductos · DMZ industrial · nunca PLC en Internet · VPN + jump host para mantenedores.</strong></li>
+<li><strong>IEC 62443: zonas y conductos · DMZ industrial · nunca PLC en Internet · VPN + MFA + jump host.</strong></li>
 <li><strong>Stuxnet 2010 (PLC Siemens).</strong></li>
 </ul>
-<h2 id="10-no-confundir" class="tema-h2">10. No confundir</h2>
+<h2 id="11-no-confundir" class="tema-h2">11. No confundir</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -379,49 +538,22 @@
 <td><strong>Modbus</strong> (sin seguridad)</td>
 <td><strong>OPC UA</strong> (con seguridad)</td>
 </tr>
+<tr>
+<td><strong>IEC 61131-3</strong> (lenguajes PLC)</td>
+<td><strong>IEC 62443</strong> (ciberseguridad industrial)</td>
+</tr>
 </tbody>
 </table></div>
-<h2 id="11-posibles-trampas-de-examen" class="tema-h2">11. Posibles trampas de examen</h2>
+<h2 id="12-posibles-trampas-de-examen" class="tema-h2">12. Posibles trampas de examen</h2>
 <ul class="tema-lista">
 <li>Decir que el SCADA ejecuta el control en tiempo real (lo hace el PLC).</li>
 <li>Pensar que si cae el SCADA se para el proceso.</li>
 <li>Creer que Modbus cifra la comunicación.</li>
 <li>Aplicar a OT las prioridades de IT (confidencialidad primero).</li>
 <li>Proponer exponer el PLC a Internet para que acceda el mantenedor.</li>
+<li>Confundir IEC 61131-3 con IEC 62443.</li>
 </ul>
-<h2 id="12-posibles-preguntas-tipo-test" class="tema-h2">12. Posibles preguntas tipo test</h2>
-<ol type="1">
-<li>¿Qué significan las siglas SCADA? → <strong>Supervisory Control And Data Acquisition</strong>.</li>
-<li>¿Qué norma define los lenguajes de programación de los PLC? → <strong>IEC 61131-3</strong>.</li>
-<li>¿Qué puerto usa Modbus TCP? → <strong>502</strong>.</li>
-<li>¿Qué norma trata la ciberseguridad de los sistemas de control industrial? → <strong>IEC 62443</strong>.</li>
-<li>¿Qué protocolo se usa en la automatización de edificios? → <strong>BACnet</strong> (y KNX).</li>
-</ol>
-<h2 id="13-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">13. Posibles preguntas cortas (con esquema de respuesta)</h2>
-<p><strong>1. SCADA frente a PLC (2 puntos; examen de 2023).</strong></p>
-<ul class="tema-lista">
-<li><strong>SCADA</strong>: sistema de supervisión y adquisición de datos; centro de mando con servidor, HMI, alarmas e histórico. <strong>Ejemplos</strong>: control del abastecimiento de agua, del alumbrado o del tráfico; productos WinCC, AVEVA, Ignition.</li>
-<li><strong>PLC</strong>: autómata programable que lee sensores, ejecuta su programa y actúa. <strong>Ejemplos</strong>: control de una bomba, de la climatización de un edificio o de un semáforo; Siemens S7, Allen-Bradley, Modicon.</li>
-<li><strong>Qué aporta SCADA</strong>: visión global de muchas instalaciones, HMI, alarmas centralizadas, histórico, informes y control remoto; los PLC recogen y comunican, el SCADA supervisa.</li>
-</ul>
-<p><strong>2. Medidas de seguridad para un sistema de control industrial (2 puntos).</strong></p>
-<ul class="tema-lista">
-<li>Inventario y segmentación (zonas y conductos, DMZ industrial).</li>
-<li>Accesos remotos por VPN, MFA y jump host, bajo petición y registrados.</li>
-<li>Credenciales, copias de los programas, parches planificados.</li>
-<li>Monitorización con IDS industrial; IEC 62443.</li>
-</ul>
-<h2 id="14-supuesto-practico" class="tema-h2">14. Supuesto práctico</h2>
-<p><strong>Enunciado:</strong> el responsable de mantenimiento informa de que el SCADA de climatización de un edificio muestra los valores «congelados» desde hace dos horas, aunque la climatización funciona.</p>
-<p><strong>Esquema de respuesta:</strong></p>
-<ol type="1">
-<li><strong>Interpretación</strong>: el proceso funciona (los <strong>PLC siguen controlando</strong>); lo que se ha perdido es la <strong>comunicación</strong> entre el SCADA y el PLC o la adquisición de datos.</li>
-<li><strong>Comprobaciones de red</strong>: conectividad entre el servidor SCADA y el PLC (<strong>ping</strong> a la IP del PLC en la VLAN de telegestión), estado del <strong>puerto del switch</strong>, <strong>reglas del cortafuegos</strong> entre las zonas (puerto del protocolo: Modbus 502, BACnet 47808…), cambios recientes.</li>
-<li><strong>Comprobaciones del sistema</strong>: servicio de comunicaciones del SCADA, licencias, logs de alarmas; estado del PLC (en <em>run</em>, sin fallos).</li>
-<li><strong>Escalado</strong>: si la red está bien, al <strong>mantenedor</strong> del SCADA o del PLC (con acceso controlado si debe conectarse en remoto).</li>
-<li><strong>Registro</strong> y, una vez resuelto, revisar la <strong>monitorización</strong> para detectar antes la pérdida de comunicaciones (T19).</li>
-</ol>
-<h2 id="15-matriz-de-memorizacion" class="tema-h2">15. Matriz de memorización</h2>
+<h2 id="13-matriz-de-memorizacion" class="tema-h2">13. Matriz de memorización</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -436,37 +568,129 @@
 </tr>
 <tr>
 <td>PLC</td>
-<td>Autómata · E/S digitales y analógicas · ciclo de scan · IEC 61131-3</td>
+<td>Autómata · E/S digitales y analógicas (4–20 mA) · ciclo de scan · IEC 61131-3</td>
 </tr>
 <tr>
 <td>RTU</td>
 <td>Unidad remota de adquisición y comunicación</td>
 </tr>
 <tr>
+<td>DCS</td>
+<td>Gran planta continua, un fabricante</td>
+</tr>
+<tr>
 <td>Niveles</td>
-<td>0 campo · 1 control · 2 supervisión · 3 operaciones · 4 empresa</td>
+<td>0 campo · 1 control · 2 supervisión · 3 operaciones · 3,5 DMZ · 4 empresa</td>
 </tr>
 <tr>
 <td>Protocolos</td>
-<td>Modbus 502 · Profinet · EtherNet/IP 44818 · DNP3 20000 · IEC 104 2404 · OPC UA 4840 · BACnet 47808 · KNX</td>
+<td>Modbus 502 · EtherNet/IP 44818 · DNP3 20000 · IEC 104 2404 · OPC UA 4840 · BACnet 47808 · KNX</td>
 </tr>
 <tr>
 <td>IT vs OT</td>
-<td>OT: disponibilidad y seguridad física; ciclos de 20 años; parches difíciles</td>
+<td>OT: disponibilidad y seguridad física; vida de 15–25 años; parches difíciles</td>
 </tr>
 <tr>
 <td>Seguridad</td>
-<td>IEC 62443 · zonas y conductos · DMZ industrial · VPN + jump host · IDS industrial</td>
+<td>IEC 62443 · zonas y conductos · DMZ industrial · VPN + MFA + jump host · IDS industrial</td>
 </tr>
 <tr>
 <td>Incidentes</td>
-<td>Stuxnet 2010 · Ucrania 2015 · Triton 2017</td>
+<td>Stuxnet 2010 · Ucrania 2015 · Triton 2017 · Oldsmar 2021</td>
 </tr>
 </tbody>
 </table></div>
-<h2 id="16-resumen-final-si-manana-fuera-el-examen" class="tema-h2">16. Resumen final: si mañana fuera el examen</h2>
+<h2 id="14-preguntas-tipo-test" class="tema-h2">14. Preguntas tipo test</h2>
+<p><strong>1.</strong> SCADA significa:<br />
+a) Secure Control And Data Access · b) Supervisory Control And Data Acquisition · c) System Control Automatic Data Analysis · d) Supervisory Communication And Device Access</p>
+<p><strong>2.</strong> El control en tiempo real del proceso lo ejecuta:<br />
+a) El SCADA · b) La HMI · c) El historian · d) El PLC</p>
+<p><strong>3.</strong> Si cae el servidor SCADA:<br />
+a) El proceso sigue, pero sin supervisión · b) Todo el proceso se para · c) Los PLC se borran · d) Se apagan los sensores</p>
+<p><strong>4.</strong> La interfaz gráfica del operador es la:<br />
+a) RTU · b) MTU · c) HMI · d) DMZ</p>
+<p><strong>5.</strong> La base de datos de series temporales de un SCADA es el:<br />
+a) Historian · b) PLC · c) Sinóptico · d) Jump host</p>
+<p><strong>6.</strong> Los lenguajes de programación de los PLC los define la norma:<br />
+a) IEC 62443 · b) ISO 27001 · c) IEC 61131-3 · d) IEEE 802.3</p>
+<p><strong>7.</strong> El orden del ciclo de scan de un PLC es:<br />
+a) Escribir salidas, leer entradas, ejecutar · b) Leer entradas, ejecutar programa, escribir salidas · c) Ejecutar, leer, escribir · d) Comunicar, leer, apagar</p>
+<p><strong>8.</strong> Una señal analógica típica de un PLC es:<br />
+a) 1 Gb/s · b) 230 V alterna · c) 48 V PoE · d) 4–20 mA</p>
+<p><strong>9.</strong> Modbus TCP usa el puerto:<br />
+a) 502 · b) 443 · c) 4840 · d) 47808</p>
+<p><strong>10.</strong> El protocolo industrial moderno con autenticación y cifrado es:<br />
+a) Modbus · b) Profibus · c) OPC UA · d) BACnet</p>
+<p><strong>11.</strong> El protocolo típico de automatización de edificios es:<br />
+a) DNP3 · b) EtherNet/IP · c) IEC 61850 · d) BACnet</p>
+<p><strong>12.</strong> En OT, la prioridad principal es:<br />
+a) La confidencialidad · b) La disponibilidad y la seguridad física · c) El ahorro de licencias · d) La velocidad de navegación</p>
+<p><strong>13.</strong> La norma de ciberseguridad de los sistemas de control industrial es la:<br />
+a) IEC 62443 · b) IEC 61131-3 · c) IEEE 802.11 · d) ISO 9001</p>
+<p><strong>14.</strong> En el modelo Purdue, el SCADA y la HMI están en el nivel:<br />
+a) 0 · b) 4 · c) 2 · d) 1</p>
+<p><strong>15.</strong> Entre la red corporativa y la red industrial se recomienda:<br />
+a) Una conexión directa · b) Una red wifi abierta · c) Un hub · d) Una DMZ industrial</p>
+<p><strong>16.</strong> El acceso remoto del mantenedor a un PLC debe hacerse:<br />
+a) Por VPN nominativa con MFA, bajo petición y solo al PLC · b) Publicando el PLC en Internet · c) Con la contraseña por defecto · d) Por escritorio remoto abierto</p>
+<p><strong>17.</strong> Stuxnet atacó:<br />
+a) Servidores de correo · b) PLC Siemens de centrifugadoras · c) Teléfonos móviles · d) Cajeros automáticos</p>
+<p><strong>18.</strong> Un sistema de control integrado para una gran planta química continua es un:<br />
+a) SCADA · b) HMI · c) DCS · d) RTU</p>
+<p><strong>Soluciones:</strong> 1 b · 2 d · 3 a · 4 c · 5 a · 6 c · 7 b · 8 d · 9 a · 10 c · 11 d · 12 b · 13 a · 14 c · 15 d · 16 a · 17 b · 18 c</p>
+<h2 id="15-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">15. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. SCADA frente a PLC (examen de 2023).</strong><br />
+SCADA: supervisión y adquisición de datos; centro de mando con servidor, HMI, alarmas e histórico · ejemplos: agua, alumbrado, tráfico; WinCC, AVEVA, Ignition · PLC: autómata que lee sensores, ejecuta y actúa · ejemplos: bomba, climatización, semáforo; S7, Allen-Bradley, Modicon · qué aporta el SCADA: visión global, HMI, alarmas, histórico, informes, mando remoto.</p>
+<p><strong>2. Componentes de un sistema SCADA.</strong><br />
+Sensores y actuadores · PLC y RTU · comunicaciones · servidor/MTU · HMI · historian · estación de ingeniería.</p>
+<p><strong>3. Diferencias entre IT y OT.</strong><br />
+Prioridades (CIA invertida) · ciclo de vida · parches · tiempo real · consecuencias · cuidado con escaneos.</p>
+<p><strong>4. Medidas de seguridad para un sistema de control industrial.</strong><br />
+Inventario · segmentación (zonas y conductos, DMZ) · nunca en Internet · acceso remoto VPN + MFA + jump host · credenciales · copias · IDS industrial · parches planificados · IEC 62443.</p>
+<p><strong>5. Protocolos industriales.</strong><br />
+Modbus 502 · Profinet · EtherNet/IP · DNP3 e IEC 104 · OPC UA con seguridad · BACnet y KNX en edificios · la mayoría sin seguridad.</p>
+<p><strong>6. El PLC: partes y funcionamiento.</strong><br />
+CPU, memoria, E/S digitales y analógicas, comunicaciones · ciclo de scan · IEC 61131-3 · fabricantes y ejemplos.</p>
+<h2 id="16-casos-practicos" class="tema-h2">16. Casos prácticos</h2>
+<p><strong>Mini caso 1 — PLC con IP pública.</strong> Un escaneo externo revela que el HMI de un bombeo responde desde Internet.<br />
+<em>Esquema:</em> retirar la exposición de inmediato (regla del cortafuegos o NAT) · revisar registros de acceso y credenciales · cambiar contraseñas por defecto · acceso remoto por VPN · avisar a Sistemas y valorar incidente.</p>
+<p><strong>Mini caso 2 — Mantenedor que pide acceso permanente.</strong> La empresa de climatización quiere una conexión siempre abierta al PLC.<br />
+<em>Esquema:</em> VPN nominativa con MFA · solo al PLC y al puerto necesario · activación bajo petición y por tiempo limitado · registro · acuerdo firmado y coordinación con DTIK-Sistemas.</p>
+<p><strong>Mini caso 3 — Escaneo de vulnerabilidades.</strong> Seguridad quiere escanear toda la red, incluida la VLAN de telegestión.<br />
+<em>Esquema:</em> advertir del riesgo para el proceso · excluir la red OT o escaneo pasivo · ventana de mantenimiento con el responsable · el mantenedor presente.</p>
+<p><strong>Supuesto desarrollado — Valores congelados en el SCADA de climatización.</strong> El responsable de mantenimiento informa de que el SCADA de un edificio muestra los valores «congelados» desde hace dos horas, aunque la climatización funciona.</p>
+<p><em>a) Interpretación.</em><br />
+El proceso funciona (los <strong>PLC siguen controlando</strong>); se ha perdido la <strong>comunicación</strong> entre el SCADA y el PLC.</p>
+<p><em>b) Comprobaciones de red.</em><br />
+<strong>Ping</strong> al PLC en la VLAN de telegestión · estado del <strong>puerto del switch</strong> · <strong>reglas del cortafuegos</strong> entre zonas (Modbus 502, BACnet 47808…) · <strong>cambios recientes</strong>.</p>
+<p><em>c) Comprobaciones del sistema.</em><br />
+Servicio de comunicaciones del SCADA, licencias, logs de alarmas · estado del PLC (en <em>run</em>, sin fallos).</p>
+<p><em>d) Escalado y cierre.</em><br />
+Si la red está bien, al <strong>mantenedor</strong> (con acceso controlado) · registrar la incidencia · añadir en la <strong>monitorización</strong> una alerta por pérdida de comunicación (T19).</p>
+<h2 id="17-repaso-visual-t18" class="tema-h2">17. Repaso visual · T18</h2>
+<figure class="tema-figura">
+<figcaption>Repaso 1 · Componentes</figcaption>
+<svg viewBox="0 0 700 256" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Campo, comunicaciones y centro de mando de un SCADA." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1801componentesa-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1801componentesv-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1801componentesm-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1801componentesg-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="200" height="210" rx="10" fill="#f0efed" stroke="#5a5652" stroke-width="1.2"/><text x="110" y="30" text-anchor="middle" font-size="11.5" font-weight="700" fill="#5a5652" dominant-baseline="middle">CAMPO</text><rect x="25" y="44" width="170" height="44" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="110.0" y="59.5" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Sensores</text><text x="110.0" y="72.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">nivel, caudal, temperatura</text><rect x="25" y="98" width="170" height="44" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="110.0" y="113.5" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Actuadores</text><text x="110.0" y="126.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">bombas, válvulas, relés</text><rect x="25" y="160" width="80" height="48" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="65.0" y="177.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">PLC</text><text x="65.0" y="190.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">controla</text><rect x="115" y="160" width="80" height="48" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="155.0" y="177.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">RTU</text><text x="155.0" y="190.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">remota</text><line x1="110" y1="142" x2="110" y2="160" stroke="#5a5652" stroke-width="1.4"/><rect x="240" y="85" width="150" height="60" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="315.0" y="102.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Comunicaciones</text><text x="315.0" y="115.0" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">Ethernet, fibra,</text><text x="315.0" y="128.0" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">radio, 4G/5G</text><path d="M200,115 L236,115" fill="none" stroke="#5a5652" stroke-width="1.6" marker-end="url(#T1801componentesg-9)"/><path d="M390,115 L426,115" fill="none" stroke="#5a5652" stroke-width="1.6" marker-end="url(#T1801componentesg-9)"/><rect x="430" y="10" width="260" height="210" rx="10" fill="#e6edf7" stroke="#003da5" stroke-width="1.2"/><text x="560" y="30" text-anchor="middle" font-size="11.5" font-weight="700" fill="#003da5" dominant-baseline="middle">CENTRO DE MANDO</text><rect x="445" y="44" width="230" height="50" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="560.0" y="62.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">Servidor SCADA (MTU)</text><text x="560.0" y="75.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">interroga, alarmas, órdenes</text><rect x="445" y="108" width="110" height="50" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="500.0" y="126.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">HMI</text><text x="500.0" y="139.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">sinópticos</text><rect x="565" y="108" width="110" height="50" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="620.0" y="126.5" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Historian</text><text x="620.0" y="139.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">series temporales</text><rect x="445" y="168" width="230" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="560.0" y="188.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Estación de ingeniería</text><text x="350" y="244" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Los PLC recogen y controlan; el SCADA es el centro de mando (corta 4 de 2023)</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 2 · PLC frente a SCADA</figcaption>
+<svg viewBox="0 0 700 244" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PLC frente a SCADA y qué aporta el SCADA." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1802plcscadaa-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1802plcscadav-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1802plcscadam-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1802plcscadag-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="330" height="200" rx="10" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.2"/><rect x="360" y="10" width="330" height="200" rx="10" fill="#e6edf7" stroke="#003da5" stroke-width="1.2"/><text x="175" y="34" text-anchor="middle" font-size="13" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">PLC · autómata</text><text x="525" y="34" text-anchor="middle" font-size="13" font-weight="700" fill="#003da5" dominant-baseline="middle">SCADA · supervisión</text><text x="175" y="62" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">HARDWARE industrial robusto</text><text x="525" y="62" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">SOFTWARE + servidores + HMI</text><text x="175" y="84" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">control LOCAL en tiempo real</text><text x="525" y="84" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">SUPERVISA muchos PLC y RTU</text><text x="175" y="106" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">una máquina o instalación</text><text x="525" y="106" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">instalaciones dispersas</text><text x="175" y="128" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">Siemens S7, Allen-Bradley, Modicon</text><text x="525" y="128" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">WinCC, AVEVA, Ignition</text><text x="175" y="150" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">bomba, semáforo, climatización</text><text x="525" y="150" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">agua, alumbrado, tráfico</text><text x="175" y="190" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b26a00" dominant-baseline="middle">si cae: se para esa parte</text><text x="525" y="190" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">si cae: el proceso SIGUE (sin supervisión)</text><text x="350" y="232" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Aporta el SCADA: visión global · HMI · alarmas centralizadas · histórico · informes · mando remoto</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 3 · Niveles</figcaption>
+<svg viewBox="0 0 700 278" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pirámide de niveles de Purdue con la DMZ industrial." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1804nivelesa-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1804nivelesv-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1804nivelesm-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1804nivelesg-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="140" y="10" width="420" height="34" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="27.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">4 · Empresa (IT) — ERP, red municipal de usuarios</text><rect x="120" y="50" width="460" height="34" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="350.0" y="67.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">3,5 · DMZ industrial — ningún tráfico directo IT ↔ OT</text><rect x="100" y="90" width="500" height="34" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="107.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">3 · Operaciones — MES, historian, mantenimiento</text><rect x="80" y="130" width="540" height="34" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="147.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">2 · Supervisión — SCADA, HMI</text><rect x="60" y="170" width="580" height="34" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="350.0" y="187.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">1 · Control — PLC, RTU</text><rect x="40" y="210" width="620" height="34" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="350.0" y="227.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">0 · Campo — sensores y actuadores</text><text x="12" y="32" text-anchor="start" font-size="13" font-weight="700" fill="#003da5" dominant-baseline="middle">IT</text><text x="12" y="152" text-anchor="start" font-size="13" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">OT</text><text x="350" y="266" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Modelo Purdue / ISA-95 · IEC 62443: zonas y conductos · caso 2023: VLAN de telegestión 94</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 4 · Protocolos</figcaption>
+<svg viewBox="0 0 700 266" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Protocolos industriales, puertos y seguridad." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1805protocolosa-12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1805protocolosv-12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1805protocolosm-12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1805protocolosg-12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><text x="120" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Protocolo</text><text x="270" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Puerto</text><text x="430" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Uso</text><text x="610" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Seguridad</text><rect x="30" y="34" width="180" height="28" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="120.0" y="48.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Modbus TCP</text><text x="270" y="52" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">502</text><text x="430" y="52" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">el más extendido</text><rect x="540" y="34" width="140" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="610.0" y="48.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">sin seguridad</text><rect x="30" y="68" width="180" height="28" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="120.0" y="82.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">EtherNet/IP</text><text x="270" y="86" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">44818</text><text x="430" y="86" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">Rockwell</text><rect x="540" y="68" width="140" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="610.0" y="82.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">sin seguridad</text><rect x="30" y="102" width="180" height="28" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="120.0" y="116.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">DNP3</text><text x="270" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">20000</text><text x="430" y="120" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">telecontrol agua/eléctrico</text><rect x="540" y="102" width="140" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="610.0" y="116.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">sin seguridad</text><rect x="30" y="136" width="180" height="28" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="120.0" y="150.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">IEC 60870-5-104</text><text x="270" y="154" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">2404</text><text x="430" y="154" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">telecontrol eléctrico</text><rect x="540" y="136" width="140" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="610.0" y="150.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">sin seguridad</text><rect x="30" y="170" width="180" height="28" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="120.0" y="184.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">BACnet</text><text x="270" y="188" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">UDP 47808</text><text x="430" y="188" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">edificios</text><rect x="540" y="170" width="140" height="28" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="610.0" y="184.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">sin seguridad</text><rect x="30" y="204" width="180" height="28" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="120.0" y="218.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">OPC UA</text><text x="270" y="222" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">4840</text><text x="430" y="222" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">interoperabilidad</text><rect x="540" y="204" width="140" height="28" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="610.0" y="218.0" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff" dominant-baseline="middle">autentica y cifra</text><text x="350" y="254" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b26a00" dominant-baseline="middle">Modbus, Profibus o BACnet nacieron sin seguridad: quien llega a la red puede leer y ESCRIBIR en el PLC</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 5 · Acceso remoto</figcaption>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Acceso remoto del mantenedor por VPN, cortafuegos y jump host." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1807accesoa-13" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1807accesov-13" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1807accesom-13" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1807accesog-13" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="70" width="120" height="56" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="70.0" y="91.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Mantenedor</text><text x="70.0" y="104.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">empresa externa</text><rect x="170" y="70" width="120" height="56" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="230.0" y="91.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">VPN nominativa</text><text x="230.0" y="104.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">+ MFA</text><rect x="330" y="70" width="110" height="56" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="385.0" y="91.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">Cortafuegos</text><text x="385.0" y="104.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">solo el PLC</text><rect x="480" y="70" width="90" height="56" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="525.0" y="91.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Jump host</text><text x="525.0" y="104.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">registrado</text><rect x="600" y="60" width="90" height="76" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="645.0" y="84.5" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">PLC</text><text x="645.0" y="98.0" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">VLAN 94</text><text x="645.0" y="111.5" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">telegestión</text><path d="M130,98 L166,98" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T1807accesov-13)"/><path d="M290,98 L326,98" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T1807accesov-13)"/><path d="M440,98 L476,98" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T1807accesov-13)"/><path d="M570,98 L596,98" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T1807accesov-13)"/><text x="350" y="40" text-anchor="middle" font-size="11" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">Bajo petición · por tiempo limitado · coordinado con DTIK-Sistemas</text><path d="M70,170 L620,170" fill="none" stroke="#b26a00" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#T1807accesom-13)"/><line x1="341" y1="161" x2="359" y2="179" stroke="#b26a00" stroke-width="3"/><line x1="359" y1="161" x2="341" y2="179" stroke="#b26a00" stroke-width="3"/><text x="350" y="196" text-anchor="middle" font-size="11" font-weight="700" fill="#b26a00" dominant-baseline="middle">NUNCA exponer el PLC o el HMI directamente a Internet</text></svg>
+</figure>
+<h2 id="18-resumen-final-si-manana-fuera-el-examen" class="tema-h2">18. Resumen final: si mañana fuera el examen</h2>
 <p>Un <strong>SCADA</strong> (<strong>supervisión, control y adquisición de datos</strong>) es el <strong>centro de mando</strong> que supervisa procesos —a menudo <strong>dispersos</strong>— con un <strong>servidor</strong>, <strong>HMI</strong>, <strong>alarmas</strong> e <strong>histórico</strong>, comunicándose con los <strong>PLC y RTU</strong> de campo. El <strong>PLC</strong> es un <strong>microordenador industrial</strong> que <strong>lee sensores, ejecuta su programa y actúa</strong> en tiempo real (lenguajes <strong>IEC 61131-3</strong>); si cae el SCADA, <strong>el proceso sigue</strong>. Los protocolos clásicos (<strong>Modbus TCP 502</strong>, Profinet, <strong>BACnet</strong> en edificios) <strong>no tienen seguridad</strong>; <strong>OPC UA</strong> sí. En <strong>OT</strong> prima la <strong>disponibilidad y la seguridad física</strong>, los sistemas duran décadas y no se parchean fácilmente: hay que <strong>segmentar</strong> (<strong>IEC 62443</strong>, DMZ industrial), <strong>no exponer nunca un PLC a Internet</strong> y dar a los mantenedores acceso solo por <strong>VPN con MFA</strong>, <strong>coordinado con Sistemas</strong>.</p>
-<h2 id="17-actualidad-datos-fechados" class="tema-h2">17. Actualidad — datos fechados</h2>
+<h2 id="19-actualidad-datos-fechados" class="tema-h2">19. Actualidad — datos fechados</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong></th>
