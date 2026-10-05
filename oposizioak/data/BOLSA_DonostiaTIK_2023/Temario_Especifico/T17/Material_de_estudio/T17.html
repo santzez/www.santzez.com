@@ -6,6 +6,7 @@
   </header>
 
   <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#mapa-del-tema">Mapa del tema</a></li>
 <li><a href="#1-ids-e-ips">1. IDS e IPS</a></li>
 <li><a href="#2-filtrado-web">2. Filtrado web</a></li>
 <li><a href="#3-antispam-y-seguridad-del-correo">3. Antispam y seguridad del correo</a></li>
@@ -14,38 +15,85 @@
 <li><a href="#6-control-de-acceso-a-la-red-nac">6. Control de acceso a la red (NAC)</a></li>
 <li><a href="#7-siem-soc-y-otras-soluciones">7. SIEM, SOC y otras soluciones</a></li>
 <li><a href="#8-defensa-en-profundidad">8. Defensa en profundidad</a></li>
-<li><a href="#9-lo-que-cayo-en-el-examen-de-2023">9. Lo que cayó en el examen de 2023</a></li>
-<li><a href="#10-anclas-de-memoria">10. Anclas de memoria</a></li>
-<li><a href="#11-no-confundir">11. No confundir</a></li>
-<li><a href="#12-posibles-trampas-de-examen">12. Posibles trampas de examen</a></li>
-<li><a href="#13-posibles-preguntas-tipo-test">13. Posibles preguntas tipo test</a></li>
-<li><a href="#14-posibles-preguntas-cortas-con-esquema-de-respuesta">14. Posibles preguntas cortas (con esquema de respuesta)</a></li>
-<li><a href="#15-supuesto-practico">15. Supuesto práctico</a></li>
-<li><a href="#16-matriz-de-memorizacion">16. Matriz de memorización</a></li>
-<li><a href="#17-resumen-final-si-manana-fuera-el-examen">17. Resumen final: si mañana fuera el examen</a></li>
-<li><a href="#18-actualidad-datos-fechados">18. Actualidad — datos fechados</a></li>
+<li><a href="#9-situaciones-profesionales-y-buenas-practicas">9. Situaciones profesionales y buenas prácticas</a></li>
+<li><a href="#10-lo-que-cayo-en-el-examen-de-2023">10. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#11-anclas-de-memoria">11. Anclas de memoria</a></li>
+<li><a href="#12-no-confundir">12. No confundir</a></li>
+<li><a href="#13-posibles-trampas-de-examen">13. Posibles trampas de examen</a></li>
+<li><a href="#14-matriz-de-memorizacion">14. Matriz de memorización</a></li>
+<li><a href="#15-preguntas-tipo-test">15. Preguntas tipo test</a></li>
+<li><a href="#16-posibles-preguntas-cortas-con-esquema-de-respuesta">16. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#17-casos-practicos">17. Casos prácticos</a></li>
+<li><a href="#18-repaso-visual-t17">18. Repaso visual · T17</a></li>
+<li><a href="#19-resumen-final-si-manana-fuera-el-examen">19. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#20-actualidad-datos-fechados">20. Actualidad — datos fechados</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
+<h2 id="mapa-del-tema" class="tema-h2">Mapa del tema</h2>
+<p>T17 trata las <strong>soluciones avanzadas de seguridad de red</strong> que acompañan al cortafuegos: <strong>IDS/IPS</strong>, <strong>filtrado web</strong>, <strong>antispam</strong>, <strong>control de aplicaciones</strong>, <strong>sandbox de red</strong>, <strong>NAC</strong> y la capa de <strong>detección y respuesta</strong> (SIEM, SOC).</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>⚠️ <strong>No confundir — fronteras del tema</strong><br>Este tema trata las <strong>soluciones avanzadas de seguridad de red</strong>: <strong>IDS/IPS</strong>, <strong>filtrado web</strong>, <strong>antispam</strong>, <strong>control de aplicaciones</strong>, <strong>sandbox de red</strong>, y otras relacionadas (<strong>NAC</strong>, <strong>SIEM</strong>, DLP).<br><strong>T14</strong> → cortafuegos (donde muchas de estas funciones se integran en un NGFW). <strong>T13</strong> → malware, EPP/EDR y sandbox en el puesto. <strong>T10</strong> → SPF, DKIM y DMARC.</th>
+<th>📌 <strong>Imprescindible — dos preguntas de test en 2023</strong><br><strong>Pregunta 26</strong>: el sistema que <strong>detecta</strong> indicios de ataque es el <strong>IDS</strong>. <strong>Pregunta 27</strong>: el <strong>NAC</strong> restringe el acceso a la red a quien no está autorizado o no cumple la política (<strong>no es NAT</strong>).</th>
 </tr>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Si la pregunta trata de…</th>
+<th>Está en</th>
+<th>Desde T17 solo…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reglas, zonas, DMZ, NGFW</td>
+<td><strong>T14</strong></td>
+<td>se cita que el NGFW integra IPS, filtrado y control de apps</td>
+</tr>
+<tr>
+<td>Malware, EPP/EDR, sandbox del puesto</td>
+<td><strong>T13</strong></td>
+<td>se cita la sandbox de red como complemento</td>
+</tr>
+<tr>
+<td>SPF, DKIM, DMARC</td>
+<td><strong>T10</strong></td>
+<td>se usan como capa del antispam</td>
+</tr>
+<tr>
+<td>802.1X, RADIUS, rogue AP</td>
+<td><strong>T5</strong></td>
+<td>se usan como base del NAC y del WIDS</td>
+</tr>
+<tr>
+<td>ENS, gestión de incidentes</td>
+<td><strong>T12, T20</strong></td>
+<td>se cita la defensa en profundidad</td>
+</tr>
+</tbody>
+</table></div>
+<p>Cada apartado sigue tres niveles: <strong>concepto</strong>, <strong>explicación</strong> y <strong>aplicación práctica</strong>.</p>
 <h2 id="1-ids-e-ips" class="tema-h2">1. IDS e IPS</h2>
+<p><strong>Concepto.</strong> Un <strong>IDS</strong> (<em>Intrusion Detection System</em>) <strong>detecta</strong> indicios de ataque o compromiso y <strong>genera alertas</strong>; un <strong>IPS</strong> (<em>Intrusion Prevention System</em>) <strong>detecta y bloquea</strong> en tiempo real.</p>
+<p><strong>Explicación.</strong></p>
+<figure class="tema-figura">
+<figcaption>Figura 1 · IDS frente a IPS</figcaption>
+<svg viewBox="0 0 700 244" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dos paneles. IDS, detecta y avisa: Internet, switch y red en línea; el IDS cuelga del switch y recibe una copia del tráfico por SPAN o TAP; es pasivo, si falla el tráfico sigue, y un falso positivo es una alerta de más. IPS, detecta y bloquea: está en línea entre Internet y la red, el tráfico pasa a través de él y el ataque se bloquea; si falla puede cortar el tráfico (fail-open o fail-closed) y un falso positivo bloquea tráfico legítimo. Examen 2023: el sistema cuya función principal es detectar indicios de ataque es el IDS." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1701idsipsa-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1701idsipsv-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1701idsipsm-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1701idsipsg-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="330" height="200" rx="8" fill="#ffffff" stroke="#c9c6c2" stroke-width="1"/><rect x="360" y="10" width="330" height="200" rx="8" fill="#ffffff" stroke="#c9c6c2" stroke-width="1"/><text x="175" y="30" text-anchor="middle" font-size="12.5" font-weight="700" fill="#003da5" dominant-baseline="middle">IDS · detecta y AVISA</text><text x="525" y="30" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">IPS · detecta y BLOQUEA</text><rect x="20" y="60" width="70" height="36" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="55.0" y="78.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Internet</text><rect x="130" y="60" width="80" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="170.0" y="78.0" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff" dominant-baseline="middle">Switch</text><rect x="250" y="60" width="80" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="290.0" y="78.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Red</text><line x1="90" y1="78" x2="130" y2="78" stroke="#5a5652" stroke-width="2"/><line x1="210" y1="78" x2="250" y2="78" stroke="#5a5652" stroke-width="2"/><rect x="130" y="130" width="80" height="36" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="170.0" y="148.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">IDS</text><path d="M170,96 L170,126" fill="none" stroke="#5a5652" stroke-width="1.6" stroke-dasharray="5 3" marker-end="url(#T1701idsipsg-1)"/><text x="222" y="114" text-anchor="start" font-size="9.5" font-weight="600" fill="#5a5652" dominant-baseline="middle">copia (SPAN/TAP)</text><text x="175" y="186" text-anchor="middle" font-size="10" font-weight="500" fill="#23272e" dominant-baseline="middle">pasivo: si falla, el tráfico sigue</text><text x="175" y="200" text-anchor="middle" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">falso positivo = una alerta de más</text><rect x="370" y="60" width="70" height="36" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="405.0" y="78.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Internet</text><rect x="480" y="60" width="80" height="36" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="520.0" y="78.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">IPS</text><rect x="600" y="60" width="80" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="640.0" y="78.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Red</text><line x1="440" y1="78" x2="480" y2="78" stroke="#5a5652" stroke-width="2"/><line x1="560" y1="78" x2="600" y2="78" stroke="#5a5652" stroke-width="2"/><text x="520" y="118" text-anchor="middle" font-size="10" font-weight="600" fill="#2e7d3c" dominant-baseline="middle">EN LÍNEA: el tráfico pasa a través</text><path d="M370,150 L500,150" fill="none" stroke="#b26a00" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#T1701idsipsm-1)"/><line x1="502" y1="142" x2="518" y2="158" stroke="#b26a00" stroke-width="3"/><line x1="518" y1="142" x2="502" y2="158" stroke="#b26a00" stroke-width="3"/><text x="600" y="150" text-anchor="middle" font-size="10" font-weight="700" fill="#b26a00" dominant-baseline="middle">ataque bloqueado</text><text x="525" y="186" text-anchor="middle" font-size="10" font-weight="500" fill="#23272e" dominant-baseline="middle">si falla, puede cortar (fail-open/closed)</text><text x="525" y="200" text-anchor="middle" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">falso positivo = tráfico legítimo bloqueado</text><text x="350" y="232" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Examen 2023: el sistema cuya función principal es DETECTAR indicios de ataque es el IDS</text></svg>
+</figure>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
 <th></th>
-<th><strong>IDS</strong> (<em>Intrusion Detection System</em>)</th>
-<th><strong>IPS</strong> (<em>Intrusion Prevention System</em>)</th>
+<th><strong>IDS</strong></th>
+<th><strong>IPS</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Qué hace</td>
-<td><strong>Detecta</strong> indicios de ataque o compromiso y <strong>genera alertas</strong></td>
-<td><strong>Detecta y bloquea</strong> el ataque en tiempo real</td>
+<td><strong>Detecta</strong> y <strong>alerta</strong></td>
+<td><strong>Detecta y bloquea</strong></td>
 </tr>
 <tr>
 <td>Posición</td>
@@ -53,12 +101,12 @@
 <td><strong>En línea (<em>inline</em>)</strong>: el tráfico <strong>pasa a través</strong> de él</td>
 </tr>
 <tr>
-<td>Impacto si falla</td>
+<td>Si falla</td>
 <td>No afecta al tráfico</td>
 <td>Puede <strong>cortar</strong> el tráfico (<em>fail-open</em>/<em>fail-closed</em>)</td>
 </tr>
 <tr>
-<td>Riesgo de un falso positivo</td>
+<td>Un falso positivo supone</td>
 <td>Una alerta de más</td>
 <td><strong>Bloquear tráfico legítimo</strong></td>
 </tr>
@@ -74,7 +122,12 @@
 <th>🧠 <strong>Para memorizar</strong><br><strong>IDS = alarma (detecta y avisa). IPS = alarma + guardia que cierra la puerta (detecta y bloquea).</strong></th>
 </tr>
 </table></div>
+<p><strong>Aplicación práctica.</strong> Un IPS nuevo se pone primero <strong>en modo detección</strong> (solo alertar) unas semanas, se <strong>ajustan</strong> las firmas que dan falsos positivos y después se activa el <strong>bloqueo</strong>: así no se corta un servicio legítimo.</p>
 <h3 id="tipos-según-dónde-se-instalan">Tipos según dónde se instalan</h3>
+<figure class="tema-figura">
+<figcaption>Figura 2 · Tipos de IDS</figcaption>
+<svg viewBox="0 0 700 256" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="En el centro, NIDS/NIPS analiza el tráfico de red en el perímetro, entre zonas o en el CPD. HIDS/HIPS se instala en un servidor o equipo y analiza logs, integridad de ficheros y procesos; hoy es función del EDR. WIDS/WIPS vigila el espectro wifi: rogue AP, evil twin y desautenticación. Herramientas: Snort, Suricata, Zeek. En el sector público, sondas del CCN-CERT (SAT); los NGFW integran IPS." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1702tiposa-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1702tiposv-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1702tiposm-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1702tiposg-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="260" y="20" width="180" height="50" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="350.0" y="38.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">NIDS / NIPS</text><text x="350.0" y="52.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">tráfico de red</text><rect x="20" y="130" width="200" height="50" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="120.0" y="148.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">HIDS / HIPS</text><text x="120.0" y="162.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">en un servidor o equipo</text><rect x="480" y="130" width="200" height="50" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="580.0" y="148.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">WIDS / WIPS</text><text x="580.0" y="162.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">espectro wifi</text><text x="350" y="92" text-anchor="middle" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">perímetro, entre zonas, CPD</text><text x="120" y="200" text-anchor="middle" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">logs, integridad de ficheros,</text><text x="120" y="214" text-anchor="middle" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">procesos (hoy, el EDR)</text><text x="580" y="200" text-anchor="middle" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">rogue AP, evil twin,</text><text x="580" y="214" text-anchor="middle" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">desautenticación (T5)</text><rect x="270" y="130" width="160" height="50" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="350.0" y="148.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Herramientas</text><text x="350.0" y="161.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">Snort, Suricata, Zeek</text><text x="350" y="244" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Sector público: sondas del CCN-CERT (SAT) · los NGFW integran IPS (T14)</text></svg>
+</figure>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -86,22 +139,27 @@
 <tbody>
 <tr>
 <td><strong>NIDS / NIPS</strong> (de red)</td>
-<td>En un punto de la red (perímetro, entre zonas, CPD)</td>
+<td>Un punto de la red (perímetro, entre zonas, CPD)</td>
 <td>El <strong>tráfico de red</strong> de muchos equipos</td>
 </tr>
 <tr>
 <td><strong>HIDS / HIPS</strong> (de host)</td>
-<td>En un <strong>servidor o equipo</strong> concreto</td>
-<td>Logs, ficheros del sistema (integridad), procesos (hoy, función del <strong>EDR</strong>)</td>
+<td>Un <strong>servidor o equipo</strong> concreto</td>
+<td>Logs, integridad de ficheros, procesos (hoy, función del <strong>EDR</strong>)</td>
 </tr>
 <tr>
 <td><strong>WIDS / WIPS</strong> (inalámbrico)</td>
 <td>Sensores o los propios AP</td>
-<td>El <strong>espectro wifi</strong>: <strong>rogue AP</strong>, evil twin, ataques de desautenticación (T5)</td>
+<td>El <strong>espectro wifi</strong>: <strong>rogue AP</strong>, evil twin, desautenticación (T5)</td>
 </tr>
 </tbody>
 </table></div>
-<h3 id="métodos-de-detección">Métodos de detección</h3>
+<p>Herramientas: <strong>Snort</strong> y <strong>Suricata</strong> (IDS/IPS de código abierto por firmas), <strong>Zeek</strong> (análisis del tráfico y comportamiento); en el sector público, las <strong>sondas del CCN-CERT (SAT)</strong> y <strong>CARMEN</strong> para amenazas persistentes. Los <strong>NGFW</strong> (T14) integran IPS.</p>
+<h3 id="métodos-de-detección-y-errores">Métodos de detección y errores</h3>
+<figure class="tema-figura">
+<figcaption>Figura 3 · Métodos de detección, falsos positivos y falsos negativos</figcaption>
+<svg viewBox="0 0 700 212" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A la izquierda, los métodos: por firmas (ataques conocidos, pocos falsos positivos), por anomalías (desviaciones de lo normal, detecta lo nuevo, más ruido) y por análisis de protocolo. A la derecha, matriz: con ataque real y alerta, verdadero positivo; sin ataque y con alerta, falso positivo; con ataque y sin alerta, falso negativo; sin ataque ni alerta, verdadero negativo. El falso negativo es el más peligroso; ajustar firmas y umbrales es continuo." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1703erroresa-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1703erroresv-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1703erroresm-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1703erroresg-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="210" height="60" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="115.0" y="26.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Por FIRMAS</text><text x="115.0" y="40.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">ataques conocidos</text><text x="115.0" y="54.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">pocos falsos positivos</text><rect x="10" y="84" width="210" height="60" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="115.0" y="100.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Por ANOMALÍAS</text><text x="115.0" y="114.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">desviaciones de lo normal</text><text x="115.0" y="128.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">detecta lo nuevo, más ruido</text><rect x="10" y="158" width="210" height="44" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="115.0" y="180.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Por análisis de protocolo</text><text x="470" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">¿Hay ataque real?</text><text x="400" y="38" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">SÍ</text><text x="580" y="38" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">NO</text><text x="262" y="84" text-anchor="start" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">alerta</text><text x="262" y="150" text-anchor="start" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">sin alerta</text><rect x="330" y="52" width="150" height="60" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="405.0" y="75.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">Verdadero positivo</text><text x="405.0" y="88.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">detectado</text><rect x="500" y="52" width="150" height="60" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="575.0" y="75.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Falso positivo</text><text x="575.0" y="88.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">alerta de más</text><rect x="330" y="120" width="150" height="60" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="405.0" y="143.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">FALSO NEGATIVO</text><text x="405.0" y="156.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">ataque sin detectar</text><rect x="500" y="120" width="150" height="60" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="575.0" y="143.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Verdadero negativo</text><text x="575.0" y="156.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">todo normal</text><text x="490" y="198" text-anchor="middle" font-size="10.5" font-weight="600" fill="#b26a00" dominant-baseline="middle">El falso negativo es el más peligroso · ajustar firmas y umbrales es continuo</text></svg>
+</figure>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -116,7 +174,7 @@
 <td><strong>Por firmas</strong> (patrones)</td>
 <td>Compara con <strong>patrones de ataques conocidos</strong></td>
 <td>Preciso con lo conocido; pocos falsos positivos</td>
-<td>No detecta ataques nuevos</td>
+<td>No detecta lo nuevo</td>
 </tr>
 <tr>
 <td><strong>Por anomalías</strong> (comportamiento)</td>
@@ -126,16 +184,24 @@
 </tr>
 <tr>
 <td><strong>Por análisis de protocolo</strong></td>
-<td>Comprueba que el tráfico cumple el estándar del protocolo</td>
+<td>Comprueba que el tráfico cumple el estándar</td>
 <td>Detecta abusos de protocolo</td>
 <td>Limitado al protocolo</td>
 </tr>
 </tbody>
 </table></div>
-<p><strong>Falso positivo</strong>: alerta ante algo legítimo. <strong>Falso negativo</strong>: un ataque real que <strong>no</strong> se detecta (el más peligroso). Ajustar (<em>tuning</em>) las firmas y los umbrales es una tarea continua.</p>
-<p>Herramientas: <strong>Snort</strong> y <strong>Suricata</strong> (IDS/IPS de código abierto por firmas), <strong>Zeek</strong> (análisis del tráfico y anomalías); en el sector público, las <strong>sondas del CCN-CERT (SAT)</strong> y la plataforma <strong>CARMEN</strong> para amenazas persistentes. Los <strong>NGFW</strong> (T14) integran IPS.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — falso positivo vs falso negativo</strong><br><strong>Falso positivo</strong>: <strong>alerta sin ataque</strong> (molesto; en un IPS, bloquea lo legítimo). <strong>Falso negativo</strong>: <strong>ataque sin alerta</strong> (el <strong>más peligroso</strong>: nadie se entera).</th>
+</tr>
+</table></div>
 <h2 id="2-filtrado-web" class="tema-h2">2. Filtrado web</h2>
-<p>Controla <strong>a qué sitios web pueden acceder</strong> los usuarios, para proteger frente a malware y phishing y aplicar la política de uso.</p>
+<p><strong>Concepto.</strong> El <strong>filtrado web</strong> controla <strong>a qué sitios pueden acceder</strong> los usuarios, para protegerlos del malware y el phishing y aplicar la política de uso.</p>
+<p><strong>Explicación.</strong></p>
+<figure class="tema-figura">
+<figcaption>Figura 4 · Capas del filtrado web</figcaption>
+<svg viewBox="0 0 700 244" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="El usuario sale a la web por dos caminos complementarios: el filtrado DNS, que no resuelve los dominios maliciosos, y un NGFW, proxy o SWG que aplica categorías, reputación, listas y búsqueda segura. Después, la inspección TLS descifra y analiza el HTTPS antes de llegar a la web; requiere instalar su CA en los equipos y se excluyen banca y salud. La política se aplica por usuario o grupo; como casi todo va por el 443, filtrar por puerto no basta." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1704weba-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1704webv-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1704webm-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1704webg-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="80" width="100" height="50" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="60.0" y="105.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Usuario</text><rect x="160" y="20" width="170" height="50" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="245.0" y="38.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Filtrado DNS</text><text x="245.0" y="51.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">no resuelve lo malicioso</text><rect x="160" y="110" width="170" height="60" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="245.0" y="127.0" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff" dominant-baseline="middle">NGFW / proxy / SWG</text><text x="245.0" y="140.0" text-anchor="middle" font-size="8.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">categorías, reputación</text><text x="245.0" y="153.0" text-anchor="middle" font-size="8.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">listas, búsqueda segura</text><rect x="380" y="110" width="150" height="60" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="455.0" y="133.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Inspección TLS</text><text x="455.0" y="146.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">descifra y analiza</text><rect x="580" y="80" width="110" height="50" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="635.0" y="105.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Web</text><path d="M110,96 L156,50" fill="none" stroke="#5a5652" stroke-width="1.6" marker-end="url(#T1704webg-4)"/><path d="M110,112 L156,138" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T1704webv-4)"/><path d="M330,140 L376,140" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T1704webv-4)"/><path d="M530,130 L576,108" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T1704webv-4)"/><text x="455" y="192" text-anchor="middle" font-size="10" font-weight="600" fill="#b26a00" dominant-baseline="middle">requiere instalar su CA en los equipos;</text><text x="455" y="206" text-anchor="middle" font-size="10" font-weight="600" fill="#b26a00" dominant-baseline="middle">se excluyen banca y salud</text><text x="10" y="232" text-anchor="start" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Política por usuario o grupo · casi todo va por el 443: filtrar por puerto no basta</text></svg>
+</figure>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -146,7 +212,7 @@
 <tbody>
 <tr>
 <td><strong>Categorías de URL</strong></td>
-<td>Bases de datos del fabricante que clasifican los sitios (malware, phishing, juegos, apuestas, redes sociales, adultos…); se <strong>permiten, bloquean o avisan</strong> por categoría</td>
+<td>Bases del fabricante que clasifican los sitios (malware, phishing, juegos, apuestas, adultos…); se <strong>permiten, bloquean o avisan</strong> por categoría</td>
 </tr>
 <tr>
 <td><strong>Listas blancas y negras</strong></td>
@@ -158,15 +224,15 @@
 </tr>
 <tr>
 <td><strong>Filtrado DNS</strong></td>
-<td>El resolutor DNS <strong>no resuelve</strong> los dominios maliciosos (protege también fuera de la oficina)</td>
+<td>El resolutor <strong>no resuelve</strong> los dominios maliciosos (protege también fuera de la oficina)</td>
 </tr>
 <tr>
 <td><strong>Proxy web</strong></td>
 <td>Los navegadores salen por un proxy (explícito o transparente) que filtra, registra y cachea</td>
 </tr>
 <tr>
-<td><strong>Inspección TLS (<em>SSL inspection</em>)</strong></td>
-<td>El dispositivo <strong>descifra el HTTPS</strong>, lo analiza y lo vuelve a cifrar (necesita instalar su <strong>certificado CA</strong> en los equipos; se excluyen categorías sensibles como banca o salud por privacidad)</td>
+<td><strong>Inspección TLS</strong></td>
+<td><strong>Descifra el HTTPS</strong>, lo analiza y lo vuelve a cifrar; exige instalar su <strong>certificado de CA</strong> en los equipos; se excluyen categorías sensibles (banca, salud) por privacidad</td>
 </tr>
 <tr>
 <td>Búsqueda segura</td>
@@ -174,14 +240,25 @@
 </tr>
 </tbody>
 </table></div>
-<p>Se aplica en el <strong>NGFW</strong>, en un <strong>proxy</strong> o en servicios en la nube (<strong>SWG</strong>, <em>Secure Web Gateway</em>), con políticas por <strong>usuario o grupo</strong> (integración con el directorio).</p>
+<p>Se aplica en el <strong>NGFW</strong>, en un <strong>proxy</strong> o en la nube (<strong>SWG</strong>, <em>Secure Web Gateway</em>), con políticas por <strong>usuario o grupo</strong> (integración con el directorio).</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>💡 <strong>En el caso de 2023</strong><br>La red de <strong>Internet libre</strong> (ciudadanía y player de TV) debería tener su <strong>propio perfil de filtrado</strong> (bloqueo de categorías ilegales o de malware) y <strong>aislamiento</strong> respecto a la red municipal.</th>
+<th>⚠️ <strong>No confundir — proxy web vs proxy inverso</strong><br>El <strong>proxy web</strong> (directo) protege a los <strong>usuarios</strong> que salen a Internet. El <strong>proxy inverso</strong> protege a los <strong>servidores</strong> publicados hacia Internet (T14, DMZ, WAF).</th>
 </tr>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>Para el caso práctico — caso 2023</strong><br>La red de <strong>Internet libre</strong> (ciudadanía y player de TV) debería tener su <strong>propio perfil de filtrado</strong> (bloqueo de categorías ilegales o de malware) y <strong>aislamiento</strong> respecto a la red municipal.</th>
+</tr>
+</table></div>
+<p><strong>Aplicación práctica.</strong> Si una web legítima aparece bloqueada, se comprueba <strong>la categoría</strong> asignada por el fabricante; si es errónea, se pide la <strong>recategorización</strong> o se añade a la lista blanca con el visto bueno del responsable de seguridad.</p>
 <h2 id="3-antispam-y-seguridad-del-correo" class="tema-h2">3. Antispam y seguridad del correo</h2>
-<p>El correo es el <strong>principal vector</strong> de malware y phishing. Una <strong>pasarela de seguridad de correo</strong> (<em>Secure Email Gateway</em>) o la protección integrada del servicio (Microsoft Defender for Office 365, Google) aplica varias capas:</p>
+<p><strong>Concepto.</strong> El correo es el <strong>principal vector</strong> de malware y phishing; una <strong>pasarela de seguridad de correo</strong> (<em>Secure Email Gateway</em>) o la protección integrada del servicio aplica <strong>varias capas</strong> antes de entregarlo.</p>
+<p><strong>Explicación.</strong></p>
+<figure class="tema-figura">
+<figcaption>Figura 5 · Capas del antispam</figcaption>
+<svg viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cadena de capas por las que pasa el correo entrante: reputación (RBL/DNSBL), SPF, DKIM y DMARC (T10), contenido (filtros bayesianos y aprendizaje automático), antimalware de adjuntos, sandbox que detona adjuntos y reescritura de enlaces. Al final, el correo va al buzón o a cuarentena. Greylisting: rechaza temporalmente al remitente desconocido; los servidores legítimos reintentan. Además, anti-suplantación y aviso de correo externo." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1705antispama-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1705antispamv-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1705antispamm-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1705antispamg-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="50" width="70" height="50" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="45.0" y="68.5" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Correo</text><text x="45.0" y="81.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">entrante</text><rect x="94" y="50" width="80" height="50" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="134.0" y="69.0" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff" dominant-baseline="middle">Reputación</text><text x="134.0" y="81.0" text-anchor="middle" font-size="7.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">RBL/DNSBL</text><path d="M82,75 L92,75" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1705antispamg-5)"/><rect x="182" y="50" width="80" height="50" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="222.0" y="69.0" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff" dominant-baseline="middle">SPF · DKIM</text><text x="222.0" y="81.0" text-anchor="middle" font-size="7.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">DMARC (T10)</text><path d="M170,75 L180,75" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1705antispamg-5)"/><rect x="270" y="50" width="80" height="50" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="310.0" y="69.0" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff" dominant-baseline="middle">Contenido</text><text x="310.0" y="81.0" text-anchor="middle" font-size="7.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">bayesiano, ML</text><path d="M258,75 L268,75" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1705antispamg-5)"/><rect x="358" y="50" width="80" height="50" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="398.0" y="69.0" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff" dominant-baseline="middle">Antimalware</text><text x="398.0" y="81.0" text-anchor="middle" font-size="7.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">adjuntos</text><path d="M346,75 L356,75" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1705antispamg-5)"/><rect x="446" y="50" width="80" height="50" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="486.0" y="69.0" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff" dominant-baseline="middle">Sandbox</text><text x="486.0" y="81.0" text-anchor="middle" font-size="7.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">detona adjuntos</text><path d="M434,75 L444,75" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1705antispamg-5)"/><rect x="534" y="50" width="80" height="50" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="574.0" y="69.0" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff" dominant-baseline="middle">Enlaces</text><text x="574.0" y="81.0" text-anchor="middle" font-size="7.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">reescritos</text><path d="M522,75 L532,75" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1705antispamg-5)"/><rect x="640" y="20" width="52" height="40" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="666.0" y="40.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Buzón</text><rect x="640" y="90" width="52" height="40" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="666.0" y="110.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Cuar.</text><path d="M614,66 L636,46" fill="none" stroke="#2e7d3c" stroke-width="1.2" marker-end="url(#T1705antispamv-5)"/><path d="M614,84 L636,104" fill="none" stroke="#b26a00" stroke-width="1.2" marker-end="url(#T1705antispamm-5)"/><text x="350" y="140" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Greylisting: rechaza temporalmente al remitente desconocido; los servidores legítimos reintentan</text><text x="350" y="158" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">Además: anti-suplantación (typosquatting, BEC) y aviso de correo externo</text></svg>
+</figure>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -191,7 +268,7 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Reputación del remitente</strong> (listas RBL/DNSBL)</td>
+<td><strong>Reputación del remitente</strong> (RBL/DNSBL)</td>
 <td>Rechaza correos de servidores conocidos como fuentes de spam</td>
 </tr>
 <tr>
@@ -200,22 +277,22 @@
 </tr>
 <tr>
 <td><strong>Análisis de contenido</strong></td>
-<td>Filtros <strong>bayesianos</strong> y heurísticos, palabras clave, aprendizaje automático</td>
+<td>Filtros <strong>bayesianos</strong> y heurísticos, aprendizaje automático</td>
 </tr>
 <tr>
 <td><em><strong>Greylisting</strong></em></td>
-<td>Rechaza temporalmente el primer intento de un remitente desconocido (los servidores legítimos reintentan; muchos de spam no)</td>
+<td>Rechaza <strong>temporalmente</strong> el primer intento de un remitente desconocido (los servidores legítimos reintentan; muchos de spam no)</td>
 </tr>
 <tr>
 <td><strong>Antimalware</strong></td>
-<td>Analiza los adjuntos con antivirus</td>
+<td>Analiza los adjuntos</td>
 </tr>
 <tr>
 <td><strong>Sandbox de adjuntos</strong></td>
-<td><strong>Detona</strong> los adjuntos sospechosos antes de entregarlos (T13)</td>
+<td><strong>Detona</strong> los adjuntos sospechosos antes de entregarlos</td>
 </tr>
 <tr>
-<td><strong>Reescritura de enlaces</strong> (<em>URL rewriting</em>)</td>
+<td><strong>Reescritura de enlaces</strong></td>
 <td>Comprueba cada enlace <strong>en el momento del clic</strong></td>
 </tr>
 <tr>
@@ -224,7 +301,7 @@
 </tr>
 <tr>
 <td><strong>Anti-suplantación</strong></td>
-<td>Detecta dominios parecidos (<em>typosquatting</em>) y suplantación de directivos (BEC)</td>
+<td>Dominios parecidos (<em>typosquatting</em>) y suplantación de directivos (<strong>BEC</strong>)</td>
 </tr>
 <tr>
 <td><strong>Aviso de correo externo</strong></td>
@@ -232,19 +309,42 @@
 </tr>
 </tbody>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br>El <strong>greylisting no es una lista negra</strong>: no bloquea para siempre, <strong>retrasa</strong> el primer intento. Por eso el primer correo de un remitente nuevo puede tardar unos minutos.</th>
+</tr>
+</table></div>
+<p><strong>Aplicación práctica.</strong> Si un proveedor dice que sus correos «no llegan», se busca en la <strong>cuarentena</strong> y en el <strong>registro de mensajes</strong> de la pasarela; si falla su SPF o DMARC, es el proveedor quien debe corregir su DNS, no se abre una excepción general.</p>
 <h2 id="4-control-de-aplicaciones" class="tema-h2">4. Control de aplicaciones</h2>
-<p>El <strong>control de aplicaciones</strong> identifica el <strong>tráfico por la aplicación que lo genera</strong>, no solo por el puerto (muchas aplicaciones usan el 443), y aplica políticas: <strong>permitir, bloquear o limitar el ancho de banda</strong>.</p>
+<p><strong>Concepto.</strong> El <strong>control de aplicaciones</strong> identifica el tráfico <strong>por la aplicación que lo genera</strong>, no solo por el puerto, y aplica políticas: <strong>permitir, bloquear o limitar</strong>.</p>
+<p><strong>Explicación.</strong></p>
+<figure class="tema-figura">
+<figcaption>Figura 6 · Control de aplicaciones</figcaption>
+<svg viewBox="0 0 700 192" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Los usuarios salen por un NGFW con control de aplicaciones (DPI); todo va por el puerto 443, pero el NGFW distingue: Teams se permite, el streaming se limita y P2P, Tor y juegos se bloquean. Identifica la aplicación, no solo el puerto; en la nube, el CASB descubre el shadow IT." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1706appsa-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1706appsv-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1706appsm-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1706appsg-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="70" width="120" height="50" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="70.0" y="95.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Usuarios</text><rect x="200" y="50" width="160" height="90" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="280.0" y="81.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">NGFW</text><text x="280.0" y="95.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">control de</text><text x="280.0" y="109.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">aplicaciones (DPI)</text><text x="280" y="30" text-anchor="middle" font-size="10.5" font-weight="700" fill="#5a5652" dominant-baseline="middle">todo por el 443</text><line x1="130" y1="95" x2="200" y2="95" stroke="#5a5652" stroke-width="3"/><rect x="450" y="12" width="130" height="36" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="515.0" y="30.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Teams</text><rect x="590" y="12" width="100" height="36" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="640.0" y="30.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">permitir</text><line x1="360" y1="95" x2="450" y2="30" stroke="#5a5652" stroke-width="1.4"/><rect x="450" y="62" width="130" height="36" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="515.0" y="80.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Streaming</text><rect x="590" y="62" width="100" height="36" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="640.0" y="80.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">limitar</text><line x1="360" y1="95" x2="450" y2="80" stroke="#5a5652" stroke-width="1.4"/><rect x="450" y="112" width="130" height="36" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="515.0" y="130.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">P2P · Tor · juegos</text><rect x="590" y="112" width="100" height="36" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="640.0" y="130.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">bloquear</text><line x1="360" y1="95" x2="450" y2="130" stroke="#5a5652" stroke-width="1.4"/><text x="350" y="180" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Identifica la APLICACIÓN, no solo el puerto · en la nube, CASB descubre el shadow IT</text></svg>
+</figure>
 <ul class="tema-lista">
-<li>Ejemplos: permitir Teams y bloquear juegos en línea, P2P o anonimizadores (Tor); <strong>limitar</strong> el <em>streaming</em> de vídeo en horario de trabajo; permitir <strong>solo la lectura</strong> de una red social.</li>
-<li>Técnicas: <strong>inspección profunda de paquetes (DPI)</strong>, firmas de aplicación, análisis del TLS (nombre del servidor, SNI).</li>
-<li>Lo incorporan los <strong>NGFW</strong> (App-ID de Palo Alto, Application Control de Fortinet y Check Point).</li>
-<li>En la <strong>nube</strong>: los <strong>CASB</strong> (<em>Cloud Access Security Broker</em>) controlan el uso de aplicaciones en la nube y descubren el <em><strong>shadow IT</strong></em> (servicios que los usuarios usan sin autorización).</li>
-<li>En el <strong>puesto</strong>: el <strong>control de aplicaciones</strong> (listas blancas, AppLocker) decide <strong>qué programas pueden ejecutarse</strong> (T13).</li>
+<li><strong>Técnicas</strong>: <strong>inspección profunda de paquetes (DPI)</strong>, firmas de aplicación, análisis del TLS (nombre del servidor, <strong>SNI</strong>).</li>
+<li><strong>Dónde</strong>: los <strong>NGFW</strong> (App-ID de Palo Alto, Application Control de Fortinet y Check Point).</li>
+<li><strong>En la nube</strong>: los <strong>CASB</strong> (<em>Cloud Access Security Broker</em>) controlan el uso de servicios en la nube y descubren el <em><strong>shadow IT</strong></em> (servicios usados sin autorización).</li>
+<li><strong>En el puesto</strong>: el control de aplicaciones (listas blancas, AppLocker) decide <strong>qué programas pueden ejecutarse</strong> (T13).</li>
 </ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — control de aplicaciones de red vs del puesto</strong><br>En <strong>red</strong> (NGFW) decide <strong>qué tráfico de aplicación pasa</strong>. En el <strong>puesto</strong> (AppLocker, EDR) decide <strong>qué programa se ejecuta</strong>. Mismo nombre, sitio distinto.</th>
+</tr>
+</table></div>
+<p><strong>Aplicación práctica.</strong> Para limitar el <em>streaming</em> en horario laboral sin prohibirlo, se crea una regla por <strong>aplicación</strong> con <strong>límite de ancho de banda</strong> (QoS, T9) y franja horaria, en lugar de bloquear el puerto 443.</p>
 <h2 id="5-sandbox-de-red" class="tema-h2">5. Sandbox de red</h2>
-<p>Además de la sandbox del puesto (T13), las soluciones de red <strong>envían a una sandbox</strong> (en el propio equipo o en la nube del fabricante) los <strong>ficheros desconocidos</strong> que atraviesan el <strong>cortafuegos</strong> o la <strong>pasarela de correo</strong>: los <strong>detonan en un entorno aislado</strong> y, si se comportan de forma maliciosa, los bloquean y <strong>actualizan las firmas</strong> de toda la red. Es la defensa frente al <strong>malware de día cero</strong> y los documentos con contenido activo.</p>
+<p><strong>Concepto.</strong> La <strong>sandbox de red</strong> <strong>detona en un entorno aislado</strong> los ficheros desconocidos que atraviesan el cortafuegos o la pasarela de correo.</p>
+<p><strong>Explicación.</strong> El fichero se envía a la sandbox (en el propio equipo o en la nube del fabricante); si se comporta de forma maliciosa, se <strong>bloquea</strong> y se <strong>actualizan las firmas</strong> de toda la red. Es la defensa frente al <strong>malware de día cero</strong> y los documentos con contenido activo. Complementa a la sandbox del puesto (T13).</p>
+<p><strong>Aplicación práctica.</strong> Retiene el fichero unos segundos o minutos: hay que avisar a los usuarios de que un adjunto nuevo puede <strong>tardar</strong> en llegar.</p>
 <h2 id="6-control-de-acceso-a-la-red-nac" class="tema-h2">6. Control de acceso a la red (NAC)</h2>
-<p>Un <strong>NAC</strong> (<em>Network Access Control</em>) <strong>decide qué dispositivos y usuarios pueden conectarse a la red corporativa y con qué permisos</strong>, según su <strong>identidad</strong> y su <strong>cumplimiento de la política</strong> de seguridad.</p>
+<p><strong>Concepto.</strong> Un <strong>NAC</strong> (<em>Network Access Control</em>) <strong>decide qué dispositivos y usuarios pueden conectarse a la red corporativa y con qué permisos</strong>, según su <strong>identidad</strong> y su <strong>cumplimiento</strong> de la política.</p>
+<p><strong>Explicación.</strong></p>
+<figure class="tema-figura">
+<figcaption>Figura 7 · Flujo del NAC</figcaption>
+<svg viewBox="0 0 700 248" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Un equipo se conecta a un switch o AP, que lo autentica por 802.1X o MAB contra el NAC con RADIUS, que comprueba la identidad y la postura. Según el resultado lo envía a la VLAN corporativa (autorizado y cumple), a cuarentena (no cumple, remediación) o a invitados (no autorizado, solo Internet). MAB, por MAC, para impresoras y cámaras que no soportan 802.1X. Examen 2023: NAC restringe el acceso a la red a quien no está autorizado o no cumple; NAC no es NAT." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1707naca-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1707nacv-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1707nacm-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1707nacg-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="80" width="120" height="56" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="70.0" y="101.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Equipo</text><text x="70.0" y="115.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">se conecta</text><rect x="170" y="80" width="130" height="56" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="235.0" y="101.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Switch / AP</text><text x="235.0" y="114.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">802.1X o MAB</text><rect x="340" y="60" width="140" height="96" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="410.0" y="94.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">NAC + RADIUS</text><text x="410.0" y="108.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">identidad</text><text x="410.0" y="122.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">+ postura</text><path d="M130,108 L166,108" fill="none" stroke="#5a5652" stroke-width="2" marker-end="url(#T1707nacg-7)"/><path d="M300,108 L336,108" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T1707nacv-7)"/><rect x="530" y="20" width="160" height="50" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="610.0" y="38.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">VLAN corporativa</text><text x="610.0" y="51.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">autorizado y cumple</text><path d="M480,108 L526,45" fill="none" stroke="#5a5652" stroke-width="1.4" marker-end="url(#T1707nacg-7)"/><rect x="530" y="90" width="160" height="50" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="610.0" y="108.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Cuarentena</text><text x="610.0" y="121.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">no cumple: remediación</text><path d="M480,108 L526,115" fill="none" stroke="#5a5652" stroke-width="1.4" marker-end="url(#T1707nacg-7)"/><rect x="530" y="160" width="160" height="50" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="610.0" y="178.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Invitados</text><text x="610.0" y="191.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">no autorizado: solo Internet</text><path d="M480,108 L526,185" fill="none" stroke="#5a5652" stroke-width="1.4" marker-end="url(#T1707nacg-7)"/><text x="240" y="196" text-anchor="middle" font-size="10" font-weight="600" fill="#5a5652" dominant-baseline="middle">MAB (por MAC) para impresoras y cámaras</text><text x="240" y="210" text-anchor="middle" font-size="10" font-weight="600" fill="#5a5652" dominant-baseline="middle">que no soportan 802.1X</text><text x="350" y="236" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b26a00" dominant-baseline="middle">Examen 2023: NAC restringe el acceso a la red a quien no está autorizado o no cumple · NAC ≠ NAT</text></svg>
+</figure>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -255,7 +355,7 @@
 <tbody>
 <tr>
 <td><strong>Autenticación</strong></td>
-<td><strong>802.1X</strong> con <strong>RADIUS</strong> (usuario o certificado de máquina) en puertos de switch y wifi; <strong>MAB</strong> (por MAC) para impresoras o cámaras que no soportan 802.1X</td>
+<td><strong>802.1X</strong> con <strong>RADIUS</strong> (usuario o certificado de máquina); <strong>MAB</strong> (por MAC) para impresoras o cámaras sin 802.1X</td>
 </tr>
 <tr>
 <td><strong>Evaluación de postura</strong></td>
@@ -263,7 +363,7 @@
 </tr>
 <tr>
 <td><strong>Autorización</strong></td>
-<td>Asignar <strong>VLAN</strong> o <strong>ACL</strong> según el resultado: red corporativa, <strong>red de cuarentena o remediación</strong>, <strong>invitados</strong></td>
+<td>Asignar <strong>VLAN</strong> o <strong>ACL</strong>: corporativa, <strong>cuarentena/remediación</strong>, <strong>invitados</strong></td>
 </tr>
 <tr>
 <td><strong>Visibilidad</strong></td>
@@ -278,7 +378,7 @@
 <p>Productos: <strong>Cisco ISE</strong>, <strong>Aruba ClearPass</strong>, <strong>FortiNAC</strong>, PacketFence (libre).</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>📌 <strong>Imprescindible — examen 2023, pregunta 27</strong><br><strong>NAC</strong> es una <strong>solución que permite restringir el acceso a la red corporativa a dispositivos y usuarios no autorizados o que no cumplen las políticas de seguridad</strong>. <strong>No</strong> es NAT (convertir direcciones privadas en públicas) ni un protocolo de enrutamiento.</th>
+<th>📌 <strong>Imprescindible — examen 2023, pregunta 27</strong><br><strong>NAC</strong> es una <strong>solución que permite restringir el acceso a la red corporativa a dispositivos y usuarios no autorizados o que no cumplen las políticas de seguridad</strong>. <strong>No</strong> es NAT ni un protocolo de enrutamiento.</th>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -286,7 +386,19 @@
 <th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br><strong>NAC ≠ NAT.</strong> <strong>NAC</strong> = <em>Network Access <strong>Control</strong></em> (quién entra). <strong>NAT</strong> = <em>Network Address <strong>Translation</strong></em> (traducir direcciones). El examen las puso juntas a propósito.</th>
 </tr>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — MAB vs 802.1X</strong><br><strong>802.1X</strong> autentica con <strong>credenciales o certificado</strong> (fuerte). <strong>MAB</strong> solo comprueba la <strong>MAC</strong> (falsificable): es una <strong>excepción</strong> para equipos que no soportan 802.1X, con perfiles restringidos.</th>
+</tr>
+</table></div>
+<p><strong>Aplicación práctica.</strong> El despliegue se hace por fases: <strong>modo monitor</strong> (solo registrar) → ajustes → <strong>aplicación</strong>, para no dejar sin red a nadie el primer día.</p>
 <h2 id="7-siem-soc-y-otras-soluciones" class="tema-h2">7. SIEM, SOC y otras soluciones</h2>
+<p><strong>Concepto.</strong> La <strong>detección y respuesta</strong> une las piezas: el <strong>SIEM</strong> reúne los eventos, el <strong>SOC</strong> los vigila y responde.</p>
+<p><strong>Explicación.</strong></p>
+<figure class="tema-figura">
+<figcaption>Figura 8 · SIEM, SOC y SOAR</figcaption>
+<svg viewBox="0 0 700 198" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cortafuegos, servidores, EDR, directorio y correo envían sus logs al SIEM, que centraliza y correlaciona; el SOC, personas 24x7, analiza las alertas; el SOAR automatiza la respuesta. SIEM es la herramienta y SOC el equipo; DLP evita fugas y un honeypot es un señuelo. En el sector público, GLORIA (SIEM del CCN) y la Red Nacional de SOC." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1708siema-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1708siemv-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1708siemm-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1708siemg-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="120" height="30" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="70.0" y="25.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Cortafuegos</text><path d="M130,25 L206,100" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1708siemg-8)"/><rect x="10" y="48" width="120" height="30" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="70.0" y="63.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Servidores</text><path d="M130,63 L206,100" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1708siemg-8)"/><rect x="10" y="86" width="120" height="30" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="70.0" y="101.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">EDR</text><path d="M130,101 L206,100" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1708siemg-8)"/><rect x="10" y="124" width="120" height="30" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="70.0" y="139.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Directorio</text><path d="M130,139 L206,100" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1708siemg-8)"/><rect x="10" y="162" width="120" height="30" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="70.0" y="177.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Correo</text><path d="M130,177 L206,100" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1708siemg-8)"/><rect x="210" y="70" width="150" height="60" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="285.0" y="93.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">SIEM</text><text x="285.0" y="107.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">centraliza y correlaciona</text><rect x="410" y="70" width="130" height="60" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="475.0" y="93.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">SOC</text><text x="475.0" y="107.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">personas 24×7</text><rect x="580" y="70" width="110" height="60" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="635.0" y="93.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">SOAR</text><text x="635.0" y="106.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">respuesta automática</text><path d="M360,100 L406,100" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T1708siema-8)"/><path d="M540,100 L576,100" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T1708siemv-8)"/><text x="450" y="168" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">SIEM = herramienta · SOC = equipo · DLP evita fugas · honeypot = señuelo</text><text x="450" y="186" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">Sector público: GLORIA (SIEM del CCN) y la Red Nacional de SOC</text></svg>
+</figure>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -296,20 +408,20 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>SIEM</strong> (<em>Security Information and Event Management</em>)</td>
-<td><strong>Centraliza y correlaciona los logs</strong> de cortafuegos, servidores, EDR, AD… para <strong>detectar incidentes</strong> y conservar evidencias (Splunk, Microsoft Sentinel, QRadar, Wazuh, <strong>GLORIA</strong> del CCN)</td>
+<td><strong>SIEM</strong></td>
+<td><strong>Centraliza y correlaciona los logs</strong> para <strong>detectar incidentes</strong> y conservar evidencias (Splunk, Microsoft Sentinel, QRadar, Wazuh, <strong>GLORIA</strong> del CCN)</td>
 </tr>
 <tr>
-<td><strong>SOC</strong> (<em>Security Operations Center</em>)</td>
-<td>Equipo (propio o externo) que <strong>vigila 24×7</strong>, analiza las alertas y responde</td>
+<td><strong>SOC</strong></td>
+<td>Equipo (propio o externo) que <strong>vigila 24×7</strong>, analiza alertas y responde</td>
 </tr>
 <tr>
 <td><strong>SOAR</strong></td>
 <td>Automatiza la respuesta (<em>playbooks</em>)</td>
 </tr>
 <tr>
-<td><strong>DLP</strong> (<em>Data Loss Prevention</em>)</td>
-<td>Evita la <strong>fuga de información</strong> sensible (por correo, USB, nube)</td>
+<td><strong>DLP</strong></td>
+<td>Evita la <strong>fuga de información</strong> sensible (correo, USB, nube)</td>
 </tr>
 <tr>
 <td><strong>Honeypot</strong></td>
@@ -317,26 +429,109 @@
 </tr>
 <tr>
 <td><strong>Anti-DDoS</strong></td>
-<td>Mitigación de ataques de denegación de servicio (normalmente del operador o en la nube)</td>
+<td>Mitiga la denegación de servicio (normalmente el operador o la nube)</td>
 </tr>
 <tr>
-<td><strong>UTM</strong> (<em>Unified Threat Management</em>)</td>
-<td>Equipo «todo en uno» (cortafuegos + IPS + antivirus + filtrado web + antispam + VPN) para organizaciones pequeñas; antecesor de los NGFW</td>
+<td><strong>UTM</strong></td>
+<td>Equipo «todo en uno» (cortafuegos + IPS + antivirus + filtrado + antispam + VPN) para organizaciones pequeñas; antecesor del NGFW</td>
 </tr>
 </tbody>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — SIEM vs SOC</strong><br><strong>SIEM = herramienta</strong> (software que correlaciona). <strong>SOC = equipo de personas</strong> que la usa. Un SIEM sin nadie que mire las alertas no protege.</th>
+</tr>
+</table></div>
+<p><strong>Aplicación práctica.</strong> Para que el SIEM sirva, los equipos deben tener la <strong>hora sincronizada (NTP)</strong> y enviar sus logs (<strong>syslog</strong>): sin eso no se pueden correlacionar los eventos.</p>
 <h2 id="8-defensa-en-profundidad" class="tema-h2">8. Defensa en profundidad</h2>
-<p>Ninguna solución basta por sí sola: se combinan <strong>capas</strong> (principio de <strong>líneas de defensa</strong> del ENS):</p>
-<ol type="1">
-<li><strong>Perímetro</strong>: NGFW, IPS, filtrado web, antispam, sandbox, anti-DDoS.</li>
-<li><strong>Red interna</strong>: segmentación en VLAN, NAC, IDS interno.</li>
-<li><strong>Puesto y servidor</strong>: EPP/EDR, control de aplicaciones, parches, mínimo privilegio.</li>
-<li><strong>Identidad</strong>: MFA, gestión de privilegios.</li>
-<li><strong>Datos</strong>: cifrado, DLP, copias.</li>
-<li><strong>Personas</strong>: formación y concienciación.</li>
-<li><strong>Detección y respuesta</strong>: SIEM, SOC, procedimientos de incidentes.</li>
-</ol>
-<h2 id="9-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">9. Lo que cayó en el examen de 2023</h2>
+<p><strong>Concepto.</strong> Ninguna solución basta sola: se combinan <strong>capas</strong> independientes (principio de <strong>líneas de defensa</strong> del ENS).</p>
+<p><strong>Explicación.</strong></p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Capa</th>
+<th>Soluciones</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Perímetro</strong></td>
+<td>NGFW, IPS, filtrado web, antispam, sandbox, anti-DDoS</td>
+</tr>
+<tr>
+<td><strong>Red interna</strong></td>
+<td>Segmentación en VLAN, NAC, IDS interno</td>
+</tr>
+<tr>
+<td><strong>Puesto y servidor</strong></td>
+<td>EPP/EDR, control de aplicaciones, parches, mínimo privilegio</td>
+</tr>
+<tr>
+<td><strong>Identidad</strong></td>
+<td>MFA, gestión de privilegios</td>
+</tr>
+<tr>
+<td><strong>Datos</strong></td>
+<td>Cifrado, DLP, copias</td>
+</tr>
+<tr>
+<td><strong>Personas</strong></td>
+<td>Formación y concienciación</td>
+</tr>
+<tr>
+<td><strong>Detección y respuesta</strong></td>
+<td>SIEM, SOC, procedimientos de incidentes</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🧠 <strong>Para memorizar</strong><br><strong>Si una capa falla, la siguiente frena el ataque.</strong> Un phishing que pasa el antispam choca con la reescritura de enlaces, después con el filtrado web, después con el EDR y acaba en el SIEM.</th>
+</tr>
+</table></div>
+<h2 id="9-situaciones-profesionales-y-buenas-practicas" class="tema-h2">9. Situaciones profesionales y buenas prácticas</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Situación</th>
+<th>Lectura en clave de T17</th>
+<th>Primera actuación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Web legítima bloqueada</strong></td>
+<td>Categoría errónea o reputación</td>
+<td>Ver la categoría; recategorizar o excepción autorizada</td>
+</tr>
+<tr>
+<td><strong>Correo de un proveedor que no llega</strong></td>
+<td>Cuarentena, SPF/DMARC o greylisting</td>
+<td>Buscar en el registro y la cuarentena de la pasarela</td>
+</tr>
+<tr>
+<td><strong>Aplicación de negocio cortada tras activar el IPS</strong></td>
+<td>Falso positivo en línea</td>
+<td>Identificar la firma; excepción acotada; documentar</td>
+</tr>
+<tr>
+<td><strong>Portátil personal en una toma de red</strong></td>
+<td>Sin NAC</td>
+<td>Puerto apagado o NAC con 802.1X; VLAN de invitados</td>
+</tr>
+<tr>
+<td><strong>Alerta del SIEM a las 3 de la mañana</strong></td>
+<td>Posible incidente</td>
+<td>Triaje por el SOC; contener; escalar según el procedimiento (T20)</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>💡 <strong>Para el caso práctico</strong><br>Ante «mejorar la seguridad de la red», responde <strong>por capas</strong>: perímetro (NGFW con IPS, filtrado, antispam, sandbox) → red interna (VLAN, NAC) → puesto (EDR) → detección (SIEM/SOC) → personas; y despliega siempre en <strong>modo monitor primero</strong>.</th>
+</tr>
+</table></div>
+<h2 id="10-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">10. Lo que cayó en el examen de 2023</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -359,7 +554,7 @@
 <tr>
 <td>Test 19–20</td>
 <td>Rogue AP y RADIUS</td>
-<td>WIPS y autenticación 802.1X (T5)</td>
+<td>WIPS y 802.1X (T5)</td>
 </tr>
 <tr>
 <td>Test 24</td>
@@ -368,19 +563,19 @@
 </tr>
 </tbody>
 </table></div>
-<h2 id="10-anclas-de-memoria" class="tema-h2">10. Anclas de memoria</h2>
+<h2 id="11-anclas-de-memoria" class="tema-h2">11. Anclas de memoria</h2>
 <ul class="tema-lista">
 <li><strong>IDS detecta y avisa (pasivo, SPAN/TAP) · IPS detecta y bloquea (inline).</strong></li>
 <li><strong>NIDS (red) · HIDS (host) · WIDS (wifi).</strong></li>
 <li><strong>Firmas (lo conocido) · anomalías (lo nuevo, más falsos positivos).</strong></li>
 <li><strong>Falso negativo = el peor (ataque no detectado).</strong></li>
-<li><strong>Filtrado web: categorías, reputación, DNS, proxy, inspección TLS.</strong></li>
+<li><strong>Filtrado web: categorías, reputación, DNS, proxy, inspección TLS (con CA instalada).</strong></li>
 <li><strong>Antispam: RBL, SPF/DKIM/DMARC, bayesiano, greylisting, sandbox, reescritura de enlaces.</strong></li>
 <li><strong>Control de aplicaciones: por aplicación, no por puerto (DPI, NGFW, CASB).</strong></li>
 <li><strong>NAC = 802.1X + RADIUS + postura + VLAN de cuarentena. NAC ≠ NAT.</strong></li>
-<li><strong>SIEM correlaciona logs · SOC vigila · DLP evita fugas.</strong></li>
+<li><strong>SIEM correlaciona logs · SOC vigila · SOAR automatiza · DLP evita fugas.</strong></li>
 </ul>
-<h2 id="11-no-confundir" class="tema-h2">11. No confundir</h2>
+<h2 id="12-no-confundir" class="tema-h2">12. No confundir</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -410,8 +605,12 @@
 <td><strong>Proxy inverso</strong> (Internet a servidores)</td>
 </tr>
 <tr>
-<td><strong>Firma</strong></td>
-<td><strong>Anomalía</strong></td>
+<td><strong>Greylisting</strong> (retrasa)</td>
+<td><strong>Lista negra</strong> (bloquea)</td>
+</tr>
+<tr>
+<td><strong>802.1X</strong> (credencial o certificado)</td>
+<td><strong>MAB</strong> (solo la MAC)</td>
 </tr>
 <tr>
 <td><strong>UTM</strong> (todo en uno, pymes)</td>
@@ -419,7 +618,7 @@
 </tr>
 </tbody>
 </table></div>
-<h2 id="12-posibles-trampas-de-examen" class="tema-h2">12. Posibles trampas de examen</h2>
+<h2 id="13-posibles-trampas-de-examen" class="tema-h2">13. Posibles trampas de examen</h2>
 <ul class="tema-lista">
 <li>Decir que el IDS bloquea el tráfico.</li>
 <li>Confundir NAC con NAT.</li>
@@ -427,41 +626,9 @@
 <li>Creer que un filtrado web por puertos basta (casi todo va por el 443).</li>
 <li>Pensar que la inspección TLS no requiere instalar ningún certificado en los equipos.</li>
 <li>Confundir greylisting con una lista negra.</li>
+<li>Creer que el falso positivo es más grave que el falso negativo.</li>
 </ul>
-<h2 id="13-posibles-preguntas-tipo-test" class="tema-h2">13. Posibles preguntas tipo test</h2>
-<ol type="1">
-<li>¿Qué sistema detecta y bloquea los ataques en línea? → <strong>IPS</strong>.</li>
-<li>¿Cómo recibe el tráfico un IDS de red pasivo? → <strong>Por un puerto espejo (SPAN) o un TAP</strong>.</li>
-<li>¿Qué protocolo usa el NAC para autenticar en los puertos del switch? → <strong>802.1X (con RADIUS)</strong>.</li>
-<li>¿Qué técnica antispam rechaza temporalmente al remitente desconocido? → <strong>Greylisting</strong>.</li>
-<li>¿Qué solución centraliza y correlaciona los logs de seguridad? → <strong>SIEM</strong>.</li>
-</ol>
-<h2 id="14-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">14. Posibles preguntas cortas (con esquema de respuesta)</h2>
-<p><strong>1. Diferencias entre IDS e IPS (2 puntos).</strong></p>
-<ul class="tema-lista">
-<li>Función (detectar y alertar / detectar y bloquear).</li>
-<li>Posición (pasivo con SPAN/TAP / en línea).</li>
-<li>Tipos (NIDS/HIDS/WIDS) y métodos (firmas/anomalías).</li>
-<li>Riesgos (falsos positivos que bloquean; falsos negativos).</li>
-</ul>
-<p><strong>2. Qué es un NAC y cómo funciona (2 puntos).</strong></p>
-<ul class="tema-lista">
-<li>Definición: restringir el acceso a la red a quien no está autorizado o no cumple.</li>
-<li>802.1X + RADIUS (y MAB); evaluación de postura.</li>
-<li>Autorización por VLAN o ACL: corporativa, cuarentena, invitados.</li>
-<li>Visibilidad de los dispositivos; ejemplos de productos.</li>
-</ul>
-<h2 id="15-supuesto-practico" class="tema-h2">15. Supuesto práctico</h2>
-<p><strong>Enunciado:</strong> el Ayuntamiento quiere impedir que cualquiera conecte un portátil personal a una toma de red de una oficina y acceda a la red municipal.</p>
-<p><strong>Esquema de respuesta:</strong></p>
-<ol type="1">
-<li><strong>Solución</strong>: <strong>NAC con 802.1X</strong> en los puertos de acceso de los switches: solo los equipos <strong>corporativos</strong> (certificado de máquina o usuario del dominio) acceden a su VLAN.</li>
-<li><strong>Excepciones</strong>: impresoras, cámaras o teléfonos que no soportan 802.1X → <strong>MAB</strong> con inventario de MAC y perfiles específicos; teléfonos con 802.1X o LLDP.</li>
-<li><strong>No autorizados</strong>: VLAN de <strong>invitados</strong> (solo Internet) o puerto bloqueado; <strong>postura</strong>: equipos sin antivirus o parches a <strong>cuarentena</strong>.</li>
-<li><strong>Despliegue por fases</strong>: <strong>modo monitor</strong> (solo registrar) → ajustes → <strong>aplicación</strong>; sin cortar el servicio.</li>
-<li><strong>Coordinación</strong> con Sistemas (RADIUS, certificados, directorio), comunicaciones (switches) y los departamentos; formación y documentación. Complemento: puertos sin uso <strong>apagados</strong> y <strong>BPDU Guard</strong> (T4).</li>
-</ol>
-<h2 id="16-matriz-de-memorizacion" class="tema-h2">16. Matriz de memorización</h2>
+<h2 id="14-matriz-de-memorizacion" class="tema-h2">14. Matriz de memorización</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -484,7 +651,7 @@
 </tr>
 <tr>
 <td>Herramientas</td>
-<td>Snort · Suricata · Zeek · sondas SAT y CARMEN (CCN)</td>
+<td>Snort · Suricata · Zeek · SAT y CARMEN (CCN)</td>
 </tr>
 <tr>
 <td>Filtrado web</td>
@@ -496,21 +663,113 @@
 </tr>
 <tr>
 <td>Control de aplicaciones</td>
-<td>DPI · App-ID · CASB · shadow IT</td>
+<td>DPI · App-ID · SNI · CASB · shadow IT</td>
+</tr>
+<tr>
+<td>Sandbox de red</td>
+<td>Detona lo desconocido · día cero · actualiza firmas</td>
 </tr>
 <tr>
 <td>NAC</td>
 <td>802.1X · RADIUS · MAB · postura · VLAN de cuarentena · ISE, ClearPass</td>
 </tr>
 <tr>
-<td>Otros</td>
-<td>SIEM · SOC · SOAR · DLP · honeypot · UTM</td>
+<td>Detección y respuesta</td>
+<td>SIEM · SOC · SOAR · DLP · honeypot · UTM · GLORIA</td>
 </tr>
 </tbody>
 </table></div>
-<h2 id="17-resumen-final-si-manana-fuera-el-examen" class="tema-h2">17. Resumen final: si mañana fuera el examen</h2>
-<p>El <strong>IDS detecta</strong> indicios de ataque y <strong>avisa</strong> (pasivo, con SPAN o TAP); el <strong>IPS</strong> además <strong>bloquea</strong> (en línea). Pueden ser <strong>de red, de host o inalámbricos</strong>, y detectan <strong>por firmas</strong> (lo conocido) o <strong>por anomalías</strong> (lo nuevo, con más falsos positivos). El <strong>filtrado web</strong> usa <strong>categorías, reputación, DNS e inspección TLS</strong>; el <strong>antispam</strong> combina <strong>reputación, SPF/DKIM/DMARC, filtros de contenido, greylisting y sandbox de adjuntos</strong>; el <strong>control de aplicaciones</strong> filtra <strong>por aplicación y no por puerto</strong>; la <strong>sandbox</strong> detona lo desconocido. El <strong>NAC</strong> (<strong>802.1X + RADIUS + postura</strong>) <strong>restringe el acceso a la red</strong> a quien no está autorizado o no cumple (y <strong>no es NAT</strong>). Todo se integra en un <strong>SIEM</strong> vigilado por un <strong>SOC</strong>, como capas de una <strong>defensa en profundidad</strong>.</p>
-<h2 id="18-actualidad-datos-fechados" class="tema-h2">18. Actualidad — datos fechados</h2>
+<h2 id="15-preguntas-tipo-test" class="tema-h2">15. Preguntas tipo test</h2>
+<p><strong>1.</strong> Los sistemas cuya función principal es detectar indicios de ataque o compromiso son:<br />
+a) Los concentradores VPN · b) Los IDS · c) Los IPS · d) Los cortafuegos</p>
+<p><strong>2.</strong> Un IPS se diferencia de un IDS en que:<br />
+a) Solo registra · b) Está en línea y bloquea · c) Recibe una copia del tráfico · d) Solo analiza wifi</p>
+<p><strong>3.</strong> Un NIDS pasivo recibe el tráfico mediante:<br />
+a) Un puerto SPAN o un TAP · b) Una VPN · c) El DNS · d) Un proxy inverso</p>
+<p><strong>4.</strong> NAC es:<br />
+a) Traducción de direcciones · b) Restringir el acceso a la red a quien no está autorizado o no cumple · c) Un protocolo de enrutamiento · d) Un tipo de VPN</p>
+<p><strong>5.</strong> El error más peligroso de un IDS es:<br />
+a) El verdadero positivo · b) El falso positivo · c) El falso negativo · d) El verdadero negativo</p>
+<p><strong>6.</strong> La detección por anomalías:<br />
+a) Solo detecta ataques conocidos · b) Detecta lo nuevo, con más falsos positivos · c) No necesita aprendizaje · d) No genera alertas</p>
+<p><strong>7.</strong> Un IDS que vigila el espectro inalámbrico es un:<br />
+a) HIDS · b) WIDS · c) NIDS · d) SIEM</p>
+<p><strong>8.</strong> La inspección TLS exige:<br />
+a) Instalar el certificado de CA del equipo en los clientes · b) Desactivar HTTPS · c) Usar el puerto 80 · d) Nada en los clientes</p>
+<p><strong>9.</strong> El greylisting:<br />
+a) Bloquea para siempre al remitente · b) Rechaza temporalmente el primer intento de un remitente desconocido · c) Cifra el correo · d) Firma los mensajes</p>
+<p><strong>10.</strong> El control de aplicaciones de un NGFW identifica el tráfico por:<br />
+a) Solo el puerto · b) La aplicación que lo genera · c) La MAC · d) La VLAN</p>
+<p><strong>11.</strong> El servicio que descubre el shadow IT en la nube es el:<br />
+a) CASB · b) RADIUS · c) WIDS · d) Honeypot</p>
+<p><strong>12.</strong> La sandbox de red sirve sobre todo frente a:<br />
+a) Los cortes de luz · b) El malware de día cero · c) Las colisiones · d) El spam por reputación</p>
+<p><strong>13.</strong> Para autenticar una impresora que no soporta 802.1X, el NAC usa:<br />
+a) MAB · b) WPA3 · c) NAT · d) SNMP</p>
+<p><strong>14.</strong> Un equipo que no cumple la postura de seguridad va a:<br />
+a) La VLAN corporativa · b) La VLAN de cuarentena o remediación · c) La DMZ · d) Internet sin filtrar</p>
+<p><strong>15.</strong> La herramienta que centraliza y correlaciona los logs de seguridad es el:<br />
+a) SOC · b) SIEM · c) DLP · d) UTM</p>
+<p><strong>16.</strong> Evitar la fuga de información sensible por correo o USB es función del:<br />
+a) DLP · b) IDS · c) NAC · d) Proxy inverso</p>
+<p><strong>17.</strong> El filtrado DNS consiste en:<br />
+a) Cifrar las consultas · b) No resolver los dominios maliciosos · c) Traducir direcciones · d) Asignar IP</p>
+<p><strong>18.</strong> Un IPS nuevo debería activarse primero en:<br />
+a) Modo bloqueo total · b) Modo detección para ajustar falsos positivos · c) Modo apagado · d) Modo NAT</p>
+<p><strong>Soluciones:</strong> 1 b · 2 b · 3 a · 4 b · 5 c · 6 b · 7 b · 8 a · 9 b · 10 b · 11 a · 12 b · 13 a · 14 b · 15 b · 16 a · 17 b · 18 b</p>
+<h2 id="16-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">16. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. Diferencias entre IDS e IPS.</strong><br />
+Función (detectar y alertar / detectar y bloquear) · posición (pasivo con SPAN/TAP / en línea) · tipos (NIDS, HIDS, WIDS) · métodos (firmas, anomalías) · riesgos (falsos positivos que bloquean, falsos negativos).</p>
+<p><strong>2. Qué es un NAC y cómo funciona.</strong><br />
+Restringir el acceso a quien no está autorizado o no cumple · 802.1X + RADIUS y MAB · postura · VLAN o ACL: corporativa, cuarentena, invitados · visibilidad · productos.</p>
+<p><strong>3. Técnicas antispam.</strong><br />
+Reputación (RBL) · SPF/DKIM/DMARC · contenido bayesiano · greylisting · antimalware y sandbox · reescritura de enlaces · cuarentena · anti-suplantación.</p>
+<p><strong>4. Filtrado web.</strong><br />
+Categorías, listas, reputación · DNS · proxy y SWG · inspección TLS con CA y exclusiones · política por usuario o grupo.</p>
+<p><strong>5. SIEM y SOC.</strong><br />
+SIEM: centraliza y correlaciona logs, alertas, evidencias · SOC: equipo 24×7 · SOAR · requisitos (NTP, syslog) · GLORIA y Red Nacional de SOC.</p>
+<p><strong>6. Defensa en profundidad.</strong><br />
+Capas: perímetro, red interna, puesto, identidad, datos, personas, detección y respuesta · ejemplo de un phishing que atraviesa capas.</p>
+<h2 id="17-casos-practicos" class="tema-h2">17. Casos prácticos</h2>
+<p><strong>Mini caso 1 — Aplicación cortada por el IPS.</strong> Tras activar el bloqueo en el IPS, una aplicación de gestión deja de funcionar.<br />
+<em>Esquema:</em> revisar los registros del IPS y localizar la firma · confirmar falso positivo con el proveedor · excepción acotada (origen, destino, firma) · documentar y revisar · en adelante, modo detección antes de bloquear.</p>
+<p><strong>Mini caso 2 — Correo de proveedor en cuarentena.</strong> Las facturas de un proveedor van siempre a cuarentena.<br />
+<em>Esquema:</em> ver el motivo en la pasarela (SPF/DMARC, reputación, contenido) · si falla su autenticación, que corrija su DNS · liberar los mensajes revisados · evitar una lista blanca general.</p>
+<p><strong>Mini caso 3 — Wifi pública en la biblioteca.</strong> Se quiere ofrecer Internet a la ciudadanía sin riesgo para la red municipal.<br />
+<em>Esquema:</em> SSID y VLAN separados · aislamiento de clientes · perfil de filtrado web propio (malware, ilegal) · límite de ancho de banda · sin acceso a la red interna (cortafuegos).</p>
+<p><strong>Supuesto desarrollado — Impedir que un portátil personal acceda a la red municipal.</strong> El Ayuntamiento quiere que nadie pueda enchufar un equipo ajeno a una toma de red de una oficina y llegar a la red municipal.</p>
+<p><em>a) Solución.</em><br />
+<strong>NAC con 802.1X</strong> en los puertos de acceso: solo los equipos <strong>corporativos</strong> (certificado de máquina o usuario del dominio) acceden a su VLAN.</p>
+<p><em>b) Excepciones.</em><br />
+Impresoras, cámaras o teléfonos sin 802.1X → <strong>MAB</strong> con inventario de MAC y perfiles restringidos.</p>
+<p><em>c) No autorizados y no conformes.</em><br />
+VLAN de <strong>invitados</strong> (solo Internet) o puerto bloqueado; equipos sin antivirus o parches → <strong>cuarentena</strong>.</p>
+<p><em>d) Despliegue y coordinación.</em><br />
+<strong>Modo monitor</strong> → ajustes → <strong>aplicación</strong>, sin cortar el servicio · coordinación con Sistemas (RADIUS, certificados, directorio) y comunicaciones (switches) · documentación y formación · complemento: puertos sin uso <strong>apagados</strong> y <strong>BPDU Guard</strong> (T4).</p>
+<h2 id="18-repaso-visual-t17" class="tema-h2">18. Repaso visual · T17</h2>
+<figure class="tema-figura">
+<figcaption>Repaso 1 · IDS e IPS</figcaption>
+<svg viewBox="0 0 700 244" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="IDS pasivo con copia del tráfico frente a IPS en línea que bloquea." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1701idsipsa-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1701idsipsv-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1701idsipsm-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1701idsipsg-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="330" height="200" rx="8" fill="#ffffff" stroke="#c9c6c2" stroke-width="1"/><rect x="360" y="10" width="330" height="200" rx="8" fill="#ffffff" stroke="#c9c6c2" stroke-width="1"/><text x="175" y="30" text-anchor="middle" font-size="12.5" font-weight="700" fill="#003da5" dominant-baseline="middle">IDS · detecta y AVISA</text><text x="525" y="30" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">IPS · detecta y BLOQUEA</text><rect x="20" y="60" width="70" height="36" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="55.0" y="78.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Internet</text><rect x="130" y="60" width="80" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="170.0" y="78.0" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff" dominant-baseline="middle">Switch</text><rect x="250" y="60" width="80" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="290.0" y="78.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Red</text><line x1="90" y1="78" x2="130" y2="78" stroke="#5a5652" stroke-width="2"/><line x1="210" y1="78" x2="250" y2="78" stroke="#5a5652" stroke-width="2"/><rect x="130" y="130" width="80" height="36" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="170.0" y="148.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">IDS</text><path d="M170,96 L170,126" fill="none" stroke="#5a5652" stroke-width="1.6" stroke-dasharray="5 3" marker-end="url(#T1701idsipsg-9)"/><text x="222" y="114" text-anchor="start" font-size="9.5" font-weight="600" fill="#5a5652" dominant-baseline="middle">copia (SPAN/TAP)</text><text x="175" y="186" text-anchor="middle" font-size="10" font-weight="500" fill="#23272e" dominant-baseline="middle">pasivo: si falla, el tráfico sigue</text><text x="175" y="200" text-anchor="middle" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">falso positivo = una alerta de más</text><rect x="370" y="60" width="70" height="36" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="405.0" y="78.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Internet</text><rect x="480" y="60" width="80" height="36" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="520.0" y="78.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">IPS</text><rect x="600" y="60" width="80" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="640.0" y="78.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Red</text><line x1="440" y1="78" x2="480" y2="78" stroke="#5a5652" stroke-width="2"/><line x1="560" y1="78" x2="600" y2="78" stroke="#5a5652" stroke-width="2"/><text x="520" y="118" text-anchor="middle" font-size="10" font-weight="600" fill="#2e7d3c" dominant-baseline="middle">EN LÍNEA: el tráfico pasa a través</text><path d="M370,150 L500,150" fill="none" stroke="#b26a00" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#T1701idsipsm-9)"/><line x1="502" y1="142" x2="518" y2="158" stroke="#b26a00" stroke-width="3"/><line x1="518" y1="142" x2="502" y2="158" stroke="#b26a00" stroke-width="3"/><text x="600" y="150" text-anchor="middle" font-size="10" font-weight="700" fill="#b26a00" dominant-baseline="middle">ataque bloqueado</text><text x="525" y="186" text-anchor="middle" font-size="10" font-weight="500" fill="#23272e" dominant-baseline="middle">si falla, puede cortar (fail-open/closed)</text><text x="525" y="200" text-anchor="middle" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">falso positivo = tráfico legítimo bloqueado</text><text x="350" y="232" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Examen 2023: el sistema cuya función principal es DETECTAR indicios de ataque es el IDS</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 2 · Errores de detección</figcaption>
+<svg viewBox="0 0 700 212" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Matriz de verdaderos y falsos positivos y negativos." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1703erroresa-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1703erroresv-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1703erroresm-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1703erroresg-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="210" height="60" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="115.0" y="26.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Por FIRMAS</text><text x="115.0" y="40.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">ataques conocidos</text><text x="115.0" y="54.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">pocos falsos positivos</text><rect x="10" y="84" width="210" height="60" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="115.0" y="100.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Por ANOMALÍAS</text><text x="115.0" y="114.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">desviaciones de lo normal</text><text x="115.0" y="128.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">detecta lo nuevo, más ruido</text><rect x="10" y="158" width="210" height="44" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="115.0" y="180.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Por análisis de protocolo</text><text x="470" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">¿Hay ataque real?</text><text x="400" y="38" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">SÍ</text><text x="580" y="38" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">NO</text><text x="262" y="84" text-anchor="start" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">alerta</text><text x="262" y="150" text-anchor="start" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">sin alerta</text><rect x="330" y="52" width="150" height="60" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="405.0" y="75.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">Verdadero positivo</text><text x="405.0" y="88.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">detectado</text><rect x="500" y="52" width="150" height="60" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="575.0" y="75.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Falso positivo</text><text x="575.0" y="88.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">alerta de más</text><rect x="330" y="120" width="150" height="60" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="405.0" y="143.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">FALSO NEGATIVO</text><text x="405.0" y="156.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">ataque sin detectar</text><rect x="500" y="120" width="150" height="60" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="575.0" y="143.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Verdadero negativo</text><text x="575.0" y="156.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">todo normal</text><text x="490" y="198" text-anchor="middle" font-size="10.5" font-weight="600" fill="#b26a00" dominant-baseline="middle">El falso negativo es el más peligroso · ajustar firmas y umbrales es continuo</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 3 · Antispam</figcaption>
+<svg viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Capas del antispam hasta el buzón o la cuarentena." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1705antispama-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1705antispamv-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1705antispamm-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1705antispamg-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="50" width="70" height="50" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="45.0" y="68.5" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Correo</text><text x="45.0" y="81.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">entrante</text><rect x="94" y="50" width="80" height="50" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="134.0" y="69.0" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff" dominant-baseline="middle">Reputación</text><text x="134.0" y="81.0" text-anchor="middle" font-size="7.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">RBL/DNSBL</text><path d="M82,75 L92,75" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1705antispamg-11)"/><rect x="182" y="50" width="80" height="50" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="222.0" y="69.0" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff" dominant-baseline="middle">SPF · DKIM</text><text x="222.0" y="81.0" text-anchor="middle" font-size="7.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">DMARC (T10)</text><path d="M170,75 L180,75" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1705antispamg-11)"/><rect x="270" y="50" width="80" height="50" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="310.0" y="69.0" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff" dominant-baseline="middle">Contenido</text><text x="310.0" y="81.0" text-anchor="middle" font-size="7.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">bayesiano, ML</text><path d="M258,75 L268,75" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1705antispamg-11)"/><rect x="358" y="50" width="80" height="50" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="398.0" y="69.0" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff" dominant-baseline="middle">Antimalware</text><text x="398.0" y="81.0" text-anchor="middle" font-size="7.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">adjuntos</text><path d="M346,75 L356,75" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1705antispamg-11)"/><rect x="446" y="50" width="80" height="50" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="486.0" y="69.0" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff" dominant-baseline="middle">Sandbox</text><text x="486.0" y="81.0" text-anchor="middle" font-size="7.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">detona adjuntos</text><path d="M434,75 L444,75" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1705antispamg-11)"/><rect x="534" y="50" width="80" height="50" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="574.0" y="69.0" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff" dominant-baseline="middle">Enlaces</text><text x="574.0" y="81.0" text-anchor="middle" font-size="7.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">reescritos</text><path d="M522,75 L532,75" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1705antispamg-11)"/><rect x="640" y="20" width="52" height="40" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="666.0" y="40.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Buzón</text><rect x="640" y="90" width="52" height="40" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="666.0" y="110.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Cuar.</text><path d="M614,66 L636,46" fill="none" stroke="#2e7d3c" stroke-width="1.2" marker-end="url(#T1705antispamv-11)"/><path d="M614,84 L636,104" fill="none" stroke="#b26a00" stroke-width="1.2" marker-end="url(#T1705antispamm-11)"/><text x="350" y="140" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Greylisting: rechaza temporalmente al remitente desconocido; los servidores legítimos reintentan</text><text x="350" y="158" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">Además: anti-suplantación (typosquatting, BEC) y aviso de correo externo</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 4 · NAC</figcaption>
+<svg viewBox="0 0 700 248" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flujo del NAC hacia VLAN corporativa, cuarentena o invitados." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1707naca-12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1707nacv-12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1707nacm-12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1707nacg-12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="80" width="120" height="56" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="70.0" y="101.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Equipo</text><text x="70.0" y="115.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">se conecta</text><rect x="170" y="80" width="130" height="56" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="235.0" y="101.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Switch / AP</text><text x="235.0" y="114.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">802.1X o MAB</text><rect x="340" y="60" width="140" height="96" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="410.0" y="94.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">NAC + RADIUS</text><text x="410.0" y="108.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">identidad</text><text x="410.0" y="122.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">+ postura</text><path d="M130,108 L166,108" fill="none" stroke="#5a5652" stroke-width="2" marker-end="url(#T1707nacg-12)"/><path d="M300,108 L336,108" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T1707nacv-12)"/><rect x="530" y="20" width="160" height="50" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="610.0" y="38.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">VLAN corporativa</text><text x="610.0" y="51.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">autorizado y cumple</text><path d="M480,108 L526,45" fill="none" stroke="#5a5652" stroke-width="1.4" marker-end="url(#T1707nacg-12)"/><rect x="530" y="90" width="160" height="50" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="610.0" y="108.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Cuarentena</text><text x="610.0" y="121.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">no cumple: remediación</text><path d="M480,108 L526,115" fill="none" stroke="#5a5652" stroke-width="1.4" marker-end="url(#T1707nacg-12)"/><rect x="530" y="160" width="160" height="50" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="610.0" y="178.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Invitados</text><text x="610.0" y="191.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">no autorizado: solo Internet</text><path d="M480,108 L526,185" fill="none" stroke="#5a5652" stroke-width="1.4" marker-end="url(#T1707nacg-12)"/><text x="240" y="196" text-anchor="middle" font-size="10" font-weight="600" fill="#5a5652" dominant-baseline="middle">MAB (por MAC) para impresoras y cámaras</text><text x="240" y="210" text-anchor="middle" font-size="10" font-weight="600" fill="#5a5652" dominant-baseline="middle">que no soportan 802.1X</text><text x="350" y="236" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b26a00" dominant-baseline="middle">Examen 2023: NAC restringe el acceso a la red a quien no está autorizado o no cumple · NAC ≠ NAT</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 5 · SIEM y SOC</figcaption>
+<svg viewBox="0 0 700 198" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fuentes de logs hacia el SIEM, el SOC y el SOAR." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1708siema-13" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1708siemv-13" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1708siemm-13" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1708siemg-13" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="120" height="30" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="70.0" y="25.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Cortafuegos</text><path d="M130,25 L206,100" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1708siemg-13)"/><rect x="10" y="48" width="120" height="30" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="70.0" y="63.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Servidores</text><path d="M130,63 L206,100" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1708siemg-13)"/><rect x="10" y="86" width="120" height="30" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="70.0" y="101.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">EDR</text><path d="M130,101 L206,100" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1708siemg-13)"/><rect x="10" y="124" width="120" height="30" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="70.0" y="139.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Directorio</text><path d="M130,139 L206,100" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1708siemg-13)"/><rect x="10" y="162" width="120" height="30" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="70.0" y="177.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Correo</text><path d="M130,177 L206,100" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1708siemg-13)"/><rect x="210" y="70" width="150" height="60" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="285.0" y="93.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">SIEM</text><text x="285.0" y="107.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">centraliza y correlaciona</text><rect x="410" y="70" width="130" height="60" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="475.0" y="93.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">SOC</text><text x="475.0" y="107.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">personas 24×7</text><rect x="580" y="70" width="110" height="60" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="635.0" y="93.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">SOAR</text><text x="635.0" y="106.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">respuesta automática</text><path d="M360,100 L406,100" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T1708siema-13)"/><path d="M540,100 L576,100" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T1708siemv-13)"/><text x="450" y="168" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">SIEM = herramienta · SOC = equipo · DLP evita fugas · honeypot = señuelo</text><text x="450" y="186" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">Sector público: GLORIA (SIEM del CCN) y la Red Nacional de SOC</text></svg>
+</figure>
+<h2 id="19-resumen-final-si-manana-fuera-el-examen" class="tema-h2">19. Resumen final: si mañana fuera el examen</h2>
+<p>El <strong>IDS detecta</strong> indicios de ataque y <strong>avisa</strong> (pasivo, con SPAN o TAP); el <strong>IPS</strong> además <strong>bloquea</strong> (en línea). Pueden ser <strong>de red, de host o inalámbricos</strong>, y detectan <strong>por firmas</strong> (lo conocido) o <strong>por anomalías</strong> (lo nuevo, con más falsos positivos); el <strong>falso negativo</strong> es el peor error. El <strong>filtrado web</strong> usa <strong>categorías, reputación, DNS e inspección TLS</strong>; el <strong>antispam</strong> combina <strong>reputación, SPF/DKIM/DMARC, filtros de contenido, greylisting y sandbox de adjuntos</strong>; el <strong>control de aplicaciones</strong> filtra <strong>por aplicación y no por puerto</strong>; la <strong>sandbox</strong> detona lo desconocido. El <strong>NAC</strong> (<strong>802.1X + RADIUS + postura</strong>) <strong>restringe el acceso a la red</strong> a quien no está autorizado o no cumple (y <strong>no es NAT</strong>). Todo se integra en un <strong>SIEM</strong> vigilado por un <strong>SOC</strong>, como capas de una <strong>defensa en profundidad</strong>.</p>
+<h2 id="20-actualidad-datos-fechados" class="tema-h2">20. Actualidad — datos fechados</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong></th>
