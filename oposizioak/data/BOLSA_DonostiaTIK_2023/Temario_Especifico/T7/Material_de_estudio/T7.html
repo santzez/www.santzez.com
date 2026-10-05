@@ -8,11 +8,11 @@
   <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
 <li><a href="#mapa-del-tema">Mapa del tema</a></li>
 <li><a href="#1-sistemas-operativos-moviles">1. Sistemas operativos móviles</a></li>
-<li><a href="#2-seguridad-del-sistema-movil">2. Seguridad del sistema móvil</a></li>
+<li><a href="#2-seguridad-y-permisos-del-sistema">2. Seguridad y permisos del sistema</a></li>
 <li><a href="#3-configuracion-de-las-comunicaciones">3. Configuración de las comunicaciones</a></li>
 <li><a href="#4-sincronizacion-del-correo-electronico">4. Sincronización del correo electrónico</a></li>
-<li><a href="#5-gestion-empresarial-y-puesta-en-marcha">5. Gestión empresarial y puesta en marcha</a></li>
-<li><a href="#6-situaciones-profesionales">6. Situaciones profesionales</a></li>
+<li><a href="#5-perfiles-corporativos-y-puesta-en-marcha">5. Perfiles corporativos y puesta en marcha</a></li>
+<li><a href="#6-situaciones-profesionales-y-diagnostico">6. Situaciones profesionales y diagnóstico</a></li>
 <li><a href="#7-lo-que-cayo-en-el-examen-de-2023">7. Lo que cayó en el examen de 2023</a></li>
 <li><a href="#8-anclas-de-memoria">8. Anclas de memoria</a></li>
 <li><a href="#9-no-confundir">9. No confundir</a></li>
@@ -28,10 +28,10 @@
 
   <div class="tema-cuerpo">
 <h2 id="mapa-del-tema" class="tema-h2">Mapa del tema</h2>
-<p>T7 trata <strong>Android e iOS/iPadOS</strong> (arquitectura, seguridad, gestión empresarial), <strong>cómo se configuran las comunicaciones</strong> de un móvil (wifi, datos, APN, VPN, bluetooth, NFC) y la <strong>sincronización del correo</strong> (ActiveSync, IMAP, POP3, SMTP).</p>
+<p>T7 es el tema del <strong>terminal móvil</strong>: <strong>Android e iOS/iPadOS</strong>, cómo se <strong>configuran y diagnostican sus comunicaciones</strong> (datos, wifi, certificados, bluetooth, NFC, USB, tethering, VPN) y la <strong>sincronización del correo</strong> (IMAP, POP3, SMTP, Exchange, autenticación moderna). Pregunta guía: <strong>¿cómo funciona, se configura y se diagnostica un móvil corporativo en sus comunicaciones y su correo?</strong></p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>📌 <strong>Imprescindible — en 2023</strong><br>No apareció en el test, pero sí en el <strong>caso práctico</strong>: <strong>tabletas Android de registro</strong> conectadas por wifi y gestionadas con MDM (pregunta 5). Lo esencial es saber <strong>preparar y configurar</strong> un dispositivo.</th>
+<th>📌 <strong>Imprescindible — en 2023</strong><br>No apareció en el test, pero sí en el <strong>caso práctico</strong>: <strong>tabletas Android de registro</strong> conectadas por wifi y gestionadas con MDM (pregunta 5). Lo esencial es saber <strong>preparar, configurar y diagnosticar</strong> un dispositivo.</th>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -44,9 +44,9 @@
 </thead>
 <tbody>
 <tr>
-<td>Red móvil del operador, SIM, APN privado</td>
-<td><strong>T6</strong></td>
-<td>se configura el APN en el terminal</td>
+<td>IP, DHCP, DNS</td>
+<td><strong>T2</strong></td>
+<td>se comprueba que el terminal recibe IP</td>
 </tr>
 <tr>
 <td>Wifi Enterprise, 802.1X, RADIUS</td>
@@ -54,30 +54,50 @@
 <td>se instala el perfil y los certificados</td>
 </tr>
 <tr>
-<td>Correo en el servidor (SMTP, DNS MX)</td>
+<td>Red móvil, SIM, IMEI, generaciones</td>
+<td><strong>T6</strong></td>
+<td>se configura la SIM, los datos y el APN</td>
+</tr>
+<tr>
+<td>M2M e IoT</td>
+<td><strong>T8</strong></td>
+<td>no se trata</td>
+</tr>
+<tr>
+<td>Servidores de correo, DNS MX</td>
 <td><strong>T10</strong></td>
 <td>se configura el cliente</td>
 </tr>
 <tr>
-<td>Malware móvil, phishing por SMS</td>
-<td><strong>T13</strong></td>
-<td>se citan los riesgos</td>
+<td>NAT del tethering</td>
+<td><strong>T14</strong></td>
+<td>se cita</td>
 </tr>
 <tr>
-<td>VPN</td>
+<td>VPN en profundidad</td>
 <td><strong>T15</strong></td>
 <td>se configura el cliente</td>
 </tr>
 <tr>
-<td><strong>MDM y MTD</strong> (gestión de la flota)</td>
+<td><strong>MDM y MTD</strong> (inscripción, cumplimiento, borrado)</td>
 <td><strong>T16</strong></td>
-<td>es la continuación natural de este tema</td>
+<td>se citan los modos de gestión</td>
+</tr>
+<tr>
+<td>NAC, seguridad avanzada</td>
+<td><strong>T17</strong></td>
+<td>no se trata</td>
+</tr>
+<tr>
+<td>Metodología general de averías</td>
+<td><strong>T19</strong></td>
+<td>flujos propios del terminal</td>
 </tr>
 </tbody>
 </table></div>
 <p>Cada apartado sigue tres niveles: <strong>concepto</strong>, <strong>explicación</strong> y <strong>aplicación práctica</strong>.</p>
 <h2 id="1-sistemas-operativos-moviles" class="tema-h2">1. Sistemas operativos móviles</h2>
-<p><strong>Concepto.</strong> Dos sistemas dominan el mercado: <strong>Android</strong> (Google, base de código abierto, muchos fabricantes) e <strong>iOS/iPadOS</strong> (Apple, cerrado, un solo fabricante).</p>
+<p><strong>Concepto.</strong> Hoy dominan <strong>Android</strong> (Google y muchos fabricantes) e <strong>iOS/iPadOS</strong> (Apple). Windows Phone, BlackBerry OS o Symbian son solo historia.</p>
 <p><strong>Explicación.</strong></p>
 <figure class="tema-figura">
 <figcaption>Figura 1 · Arquitectura de Android e iOS</figcaption>
@@ -93,9 +113,9 @@
 </thead>
 <tbody>
 <tr>
-<td>Responsable</td>
-<td><strong>Google</strong> (proyecto abierto <strong>AOSP</strong>)</td>
-<td><strong>Apple</strong></td>
+<td>Ecosistema</td>
+<td><strong>Google</strong> (proyecto abierto <strong>AOSP</strong> + servicios propietarios <strong>GMS</strong>) y muchos fabricantes que lo personalizan (Samsung, Xiaomi, Motorola, Pixel…)</td>
+<td><strong>Apple</strong>: hardware y software integrados</td>
 </tr>
 <tr>
 <td>Núcleo</td>
@@ -103,24 +123,29 @@
 <td><strong>XNU</strong> (Darwin, tipo Unix)</td>
 </tr>
 <tr>
-<td>Licencia</td>
-<td>AOSP abierto + servicios propietarios de Google (<strong>GMS</strong>: Play Store, Gmail, Maps)</td>
-<td>Cerrado</td>
-</tr>
-<tr>
-<td>Fabricantes</td>
-<td>Muchos (Samsung, Xiaomi, Motorola, Google Pixel…)</td>
-<td>Solo Apple</td>
-</tr>
-<tr>
-<td>Tienda</td>
-<td><strong>Google Play</strong> (y otras tiendas, instalación de APK)</td>
-<td><strong>App Store</strong> (en la UE también tiendas alternativas, por la Ley de Mercados Digitales)</td>
+<td>Distribución de apps</td>
+<td><strong>APK / App Bundle</strong> desde <strong>Google Play</strong>, otras tiendas o el MDM</td>
+<td><strong>IPA</strong> desde la <strong>App Store</strong> (en la UE, también tiendas alternativas) o el MDM</td>
 </tr>
 <tr>
 <td>Actualizaciones</td>
 <td>Dependen del <strong>fabricante</strong> y del modelo: <strong>fragmentación</strong></td>
-<td>Centralizadas por Apple</td>
+<td>Centralizadas por Apple, muchos años</td>
+</tr>
+<tr>
+<td>Permisos y aislamiento</td>
+<td><em>Sandbox</em> por app y permisos en tiempo de ejecución</td>
+<td><em>Sandbox</em> por app y permisos</td>
+</tr>
+<tr>
+<td>Cuenta del sistema</td>
+<td><strong>Cuenta de Google</strong></td>
+<td><strong>Cuenta de Apple</strong></td>
+</tr>
+<tr>
+<td>Copias</td>
+<td>Copia en la nube de Google (y del fabricante)</td>
+<td>iCloud o copia local</td>
 </tr>
 <tr>
 <td>Gestión empresarial</td>
@@ -129,15 +154,22 @@
 </tr>
 </tbody>
 </table></div>
-<p>Otros sistemas: <strong>HarmonyOS</strong> (Huawei) y otros ya desaparecidos (Windows Phone, BlackBerry OS, Symbian).</p>
-<p><strong>Aplicación práctica.</strong> Al comprar terminales corporativos Android hay que mirar <strong>cuántos años de actualizaciones</strong> garantiza el fabricante: un móvil sin parches de seguridad es un riesgo.</p>
+<p>«Android abierto, iOS cerrado» es una <strong>simplificación</strong>: AOSP es abierto, pero los servicios de Google (Play Store, Gmail, Maps) son propietarios; y ambos aíslan las apps de forma parecida.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>⚠️ <strong>No confundir — AOSP vs GMS</strong><br><strong>AOSP</strong>: la base abierta de Android. <strong>GMS</strong>: los servicios propietarios de Google (Play Store, Gmail…). «Android es cerrado» es falso; sus servicios de Google sí son propietarios.</th>
+<th>🔀 <strong>No confundir — sistema operativo vs firmware vs app</strong><br><strong>Sistema operativo</strong>: la plataforma que gestiona el hardware, las apps y los servicios (Android, iOS). <strong>Firmware</strong>: software de bajo nivel ligado al hardware (por ejemplo, el <em>baseband</em> del módem). <strong>App</strong>: una aplicación que se ejecuta sobre el sistema.</th>
 </tr>
 </table></div>
-<h2 id="2-seguridad-del-sistema-movil" class="tema-h2">2. Seguridad del sistema móvil</h2>
-<p><strong>Concepto.</strong> Los sistemas móviles protegen los datos <strong>aislando las aplicaciones</strong> y <strong>cifrando</strong> el almacenamiento.</p>
+<p><strong>Actualizaciones.</strong> Hay tres niveles: <strong>sistema operativo</strong>, <strong>aplicaciones</strong> y <strong>firmware/baseband</strong>. Importan por <strong>seguridad</strong> (parches mensuales en Android), correcciones, compatibilidad y funciones. Los números de versión cambian cada año: no se memorizan.</p>
+<p><strong>Cuentas y servicios.</strong> Un mismo móvil puede tener a la vez la <strong>cuenta del fabricante</strong> (Google o Apple), la <strong>cuenta corporativa</strong> (Microsoft 365 u otra), otras cuentas de correo, servicios en la nube y un <strong>perfil empresarial</strong>.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — cuenta de Google/Apple vs cuenta corporativa</strong><br>La <strong>cuenta del sistema</strong> (Google, Apple) sirve para la tienda, las copias y la localización del aparato. La <strong>cuenta corporativa</strong> da acceso al correo, el calendario y los datos de la organización. Son independientes.</th>
+</tr>
+</table></div>
+<p><strong>Aplicación práctica.</strong> Al comprar terminales corporativos Android hay que mirar <strong>cuántos años de actualizaciones</strong> garantiza el fabricante: un móvil sin parches de seguridad es un riesgo.</p>
+<h2 id="2-seguridad-y-permisos-del-sistema" class="tema-h2">2. Seguridad y permisos del sistema</h2>
+<p><strong>Concepto.</strong> Los sistemas móviles protegen los datos <strong>aislando las aplicaciones</strong>, pidiendo <strong>permisos</strong> y <strong>cifrando</strong> el almacenamiento.</p>
 <p><strong>Explicación.</strong></p>
 <figure class="tema-figura">
 <figcaption>Figura 2 · Sandbox y permisos</figcaption>
@@ -145,143 +177,260 @@
 </figure>
 <ul class="tema-lista">
 <li><em><strong>Sandbox</strong></em>: cada aplicación se ejecuta <strong>aislada</strong>, sin acceso a los datos de otras.</li>
-<li><strong>Permisos</strong> que el usuario concede (cámara, ubicación, contactos…).</li>
-<li><strong>Cifrado del almacenamiento</strong>, activado por defecto en los sistemas actuales.</li>
-<li><strong>Arranque verificado</strong> y <strong>chip de seguridad</strong> (Secure Enclave en Apple, Titan en Pixel, Knox Vault en Samsung).</li>
-<li><strong>Bloqueo</strong> con PIN o biometría.</li>
-<li><strong>Parches de seguridad</strong> periódicos (mensuales en Android).</li>
+<li><strong>Permisos</strong> que concede el usuario o la organización: <strong>cámara, micrófono, contactos, ubicación, bluetooth, notificaciones, datos en segundo plano</strong>.</li>
+<li><strong>Cifrado del almacenamiento</strong> por defecto, <strong>arranque verificado</strong>, <strong>chip de seguridad</strong> y <strong>bloqueo</strong> con PIN o biometría.</li>
 </ul>
-<p><strong>Aplicación práctica.</strong> <strong>Root</strong> (Android) y <em><strong>jailbreak</strong></em> (iOS) <strong>anulan</strong> gran parte de estas protecciones: un MDM los detecta y bloquea el acceso a los datos corporativos (T16). Otros riesgos: apps de origen desconocido, phishing por SMS y wifi públicas.</p>
+<p><strong>Aplicación práctica.</strong> Muchas veces una app «no funciona» porque <strong>le falta un permiso</strong> (la de videollamadas sin micrófono, la de firma sin cámara, el correo sin permiso de segundo plano). <strong>Root</strong> (Android) y <em><strong>jailbreak</strong></em> (iOS) anulan gran parte de las protecciones: un MDM los detecta y bloquea el acceso corporativo (T16).</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>⚠️ <strong>No confundir — root vs jailbreak</strong><br><strong>Root</strong>: obtener privilegios de administrador en <strong>Android</strong>. <strong>Jailbreak</strong>: saltarse las restricciones de <strong>iOS</strong>. Los dos son incompatibles con un dispositivo corporativo.</th>
+<th>⚠️ <strong>No confundir — root vs jailbreak</strong><br><strong>Root</strong>: privilegios de administrador en <strong>Android</strong>. <strong>Jailbreak</strong>: saltarse las restricciones de <strong>iOS</strong>. Los dos son incompatibles con un dispositivo corporativo.</th>
 </tr>
 </table></div>
 <h2 id="3-configuracion-de-las-comunicaciones" class="tema-h2">3. Configuración de las comunicaciones</h2>
-<p><strong>Concepto.</strong> Un móvil combina varias comunicaciones (wifi, datos móviles, VPN, bluetooth, NFC) que hay que configurar con criterios de seguridad.</p>
+<p><strong>Concepto.</strong> Un móvil combina varias comunicaciones —<strong>celular, wifi, bluetooth, NFC, USB, VPN y tethering</strong>— que hay que saber <strong>qué son, para qué sirven, cómo se configuran y cómo fallan</strong>.</p>
 <p><strong>Explicación.</strong></p>
 <figure class="tema-figura">
 <figcaption>Figura 3 · Comunicaciones de un móvil</figcaption>
 <svg viewBox="0 0 700 258" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="El dispositivo corporativo en el centro con sus comunicaciones alrededor: wifi (SSID, WPA3 o Enterprise), datos y APN (SIM o eSIM, APN privado), VPN (IKEv2 o SSL con aplicación, siempre activa), bluetooth y NFC (emparejar con PIN, pagos y DNIe), zona wifi o tethering (comparte los datos; suele prohibirse) y ubicación (permisos por app). En una flota corporativa todo llega por perfil desde el MDM." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0704comunicacionesa-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0704comunicacionesv-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0704comunicacionesm-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0704comunicacionesg-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="290" y="86" width="120" height="60" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="108.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">Dispositivo</text><text x="350.0" y="123.5" text-anchor="middle" font-size="10.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">corporativo</text><rect x="20" y="12" width="200" height="44" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="120.0" y="27.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Wifi</text><text x="120.0" y="41.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">SSID · WPA3 / Enterprise</text><line x1="220" y1="34" x2="290" y2="116" stroke="#5a5652" stroke-width="1.2" stroke-dasharray="5 3"/><rect x="480" y="12" width="200" height="44" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="580.0" y="27.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Datos / APN</text><text x="580.0" y="41.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">SIM o eSIM · APN privado</text><line x1="480" y1="34" x2="410" y2="116" stroke="#5a5652" stroke-width="1.2" stroke-dasharray="5 3"/><rect x="20" y="96" width="200" height="44" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="120.0" y="111.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">VPN</text><text x="120.0" y="125.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">IKEv2 · SSL (app) · siempre activa</text><line x1="220" y1="118" x2="290" y2="116" stroke="#5a5652" stroke-width="1.2" stroke-dasharray="5 3"/><rect x="480" y="96" width="200" height="44" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="580.0" y="111.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Bluetooth · NFC</text><text x="580.0" y="125.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">emparejar con PIN · pagos, DNIe</text><line x1="480" y1="118" x2="410" y2="116" stroke="#5a5652" stroke-width="1.2" stroke-dasharray="5 3"/><rect x="20" y="180" width="200" height="44" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="120.0" y="195.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Zona wifi (tethering)</text><text x="120.0" y="209.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">comparte datos: suele prohibirse</text><line x1="220" y1="202" x2="290" y2="116" stroke="#5a5652" stroke-width="1.2" stroke-dasharray="5 3"/><rect x="480" y="180" width="200" height="44" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="580.0" y="195.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Ubicación</text><text x="580.0" y="209.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">permisos por app</text><line x1="480" y1="202" x2="410" y2="116" stroke="#5a5652" stroke-width="1.2" stroke-dasharray="5 3"/><text x="350" y="246" text-anchor="middle" font-size="11" font-weight="600" fill="#2e7d3c" dominant-baseline="middle">En una flota corporativa, todo esto llega por perfil desde el MDM (T16), no se configura a mano</text></svg>
 </figure>
+<h3 id="datos-móviles-sim-y-apn">Datos móviles, SIM y APN</h3>
+<figure class="tema-figura">
+<figcaption>Figura 4 · De la SIM al servicio</figcaption>
+<svg viewBox="0 0 700 142" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="De la SIM al servicio: SIM o eSIM (activa, PIN, perfil), registro en la red del operador, datos móviles (activados, línea correcta), APN (el del operador o privado), IP asignada (normalmente con CGNAT) y servicio (DNS, aplicación). Si falla un eslabón, no hay datos. Tener cobertura no garantiza datos: el APN, la provisión de la línea o el roaming de datos pueden fallar. Dual SIM: comprobar qué línea se usa para datos y cuál para voz." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0708datosa-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0708datosv-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0708datosm-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0708datosg-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="30" width="105" height="56" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="62.5" y="51.6" text-anchor="middle" font-size="9.8" font-weight="700" fill="#23272e" dominant-baseline="middle">SIM / eSIM</text><text x="62.5" y="64.4" text-anchor="middle" font-size="8.3" font-weight="500" fill="#23272e" dominant-baseline="middle">activa, PIN, perfil</text><path d="M115,58 L123,58" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0708datosg-4)"/><rect x="125" y="30" width="105" height="56" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="177.5" y="51.6" text-anchor="middle" font-size="9.8" font-weight="700" fill="#23272e" dominant-baseline="middle">Registro</text><text x="177.5" y="64.4" text-anchor="middle" font-size="8.3" font-weight="500" fill="#23272e" dominant-baseline="middle">en la red del operador</text><path d="M230,58 L238,58" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0708datosg-4)"/><rect x="240" y="30" width="105" height="56" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="292.5" y="51.6" text-anchor="middle" font-size="9.8" font-weight="700" fill="#23272e" dominant-baseline="middle">Datos móviles</text><text x="292.5" y="64.4" text-anchor="middle" font-size="8.3" font-weight="500" fill="#23272e" dominant-baseline="middle">activados, línea correcta</text><path d="M345,58 L353,58" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0708datosg-4)"/><rect x="355" y="30" width="105" height="56" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="407.5" y="51.6" text-anchor="middle" font-size="9.8" font-weight="700" fill="#23272e" dominant-baseline="middle">APN</text><text x="407.5" y="64.4" text-anchor="middle" font-size="8.3" font-weight="500" fill="#23272e" dominant-baseline="middle">el del operador o privado</text><path d="M460,58 L468,58" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0708datosg-4)"/><rect x="470" y="30" width="105" height="56" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="522.5" y="51.6" text-anchor="middle" font-size="9.8" font-weight="700" fill="#23272e" dominant-baseline="middle">IP</text><text x="522.5" y="64.4" text-anchor="middle" font-size="8.3" font-weight="500" fill="#23272e" dominant-baseline="middle">asignada (CGNAT)</text><path d="M575,58 L583,58" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0708datosg-4)"/><rect x="585" y="30" width="105" height="56" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="637.5" y="51.6" text-anchor="middle" font-size="9.8" font-weight="700" fill="#ffffff" dominant-baseline="middle">Servicio</text><text x="637.5" y="64.4" text-anchor="middle" font-size="8.3" font-weight="500" fill="#ffffff" dominant-baseline="middle">DNS, aplicación</text><text x="350" y="16" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">De la SIM al servicio: si falla un eslabón, no hay datos</text><text x="350" y="112" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b26a00" dominant-baseline="middle">Tener cobertura NO garantiza datos: el APN, la provisión de la línea o el roaming de datos pueden fallar</text><text x="350" y="130" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">Dual SIM: comprobar qué línea se usa para datos y cuál para voz</text></svg>
+</figure>
+<ul class="tema-lista">
+<li><strong>SIM / eSIM</strong>: activa, con su <strong>PIN</strong>; en eSIM, el <strong>perfil</strong> descargado y activo. La teoría de SIM e IMEI está en T6.</li>
+<li><strong>Dual SIM</strong>: dos líneas (dos SIM físicas, SIM + eSIM o varios perfiles eSIM). Se elige la <strong>línea de voz</strong>, la <strong>de datos</strong> y, a veces, la línea por contacto. Si los datos salen por la línea personal, el usuario lo nota en la factura (ampliación: en <strong>DSDS</strong> solo una línea está activa a la vez; en <strong>DSDA</strong>, las dos).</li>
+<li><strong>APN</strong> (<em>Access Point Name</em>): los parámetros con los que el terminal accede a la <strong>red de datos del operador</strong> (nombre, tipo, autenticación, a veces MCC/MNC o proxy). Puede ser el del operador o un <strong>APN privado</strong> corporativo. No se memorizan configuraciones de operadores.</li>
+<li><strong>Roaming de datos</strong>: un <strong>ajuste del terminal</strong> que permite usar datos cuando está registrado en una red de otro operador. No es el handover (T6) ni el roaming wifi (T5).</li>
+<li><strong>Modo de red</strong> (5G/4G/automático) y selección de operador.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br><strong>Tener cobertura no garantiza tener datos</strong>: si los datos están desactivados, la línea de datos es otra, el roaming de datos está apagado o el <strong>APN</strong> es incorrecto, no habrá Internet aunque haya rayas.</th>
+</tr>
+</table></div>
+<h3 id="wifi-en-el-terminal">Wifi en el terminal</h3>
+<ul class="tema-lista">
+<li>Activar, elegir el <strong>SSID</strong>, la seguridad y la contraseña o el método <strong>Enterprise</strong>; redes guardadas y prioridades.</li>
+<li><strong>IP por DHCP</strong> o <strong>estática</strong>, <strong>proxy</strong> y, si el sistema lo permite, <strong>DNS</strong>.</li>
+<li><strong>MAC aleatoria</strong> por red (privacidad, T1): puede romper reservas DHCP o filtros por MAC.</li>
+<li><strong>Personal</strong> (PSK en WPA2, SAE en WPA3) frente a <strong>Enterprise</strong> (802.1X/EAP con <strong>identidad</strong>, <strong>contraseña o certificado</strong>, <strong>certificado de la CA</strong> y <strong>método EAP</strong>; NAC en T17).</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br><strong>«Conectado al wifi» no significa «conectado a Internet»</strong>: falta comprobar IP, puerta de enlace, DNS y el servicio.</th>
+</tr>
+</table></div>
+<h3 id="certificados-en-el-móvil">Certificados en el móvil</h3>
+<p>Un <strong>certificado</strong> da <strong>identidad</strong> (del dispositivo o el usuario) y <strong>confianza</strong> (la CA que permite validar al servidor). Se usa en <strong>wifi Enterprise</strong>, <strong>VPN</strong>, <strong>autenticación</strong> y algunos servicios de correo. Problemas típicos: <strong>caducado</strong>, <strong>no confiable</strong>, <strong>CA ausente</strong>, <strong>certificado equivocado</strong> y <strong>fecha u hora del móvil incorrectas</strong>.</p>
+<figure class="tema-figura">
+<figcaption>Figura 5 · Wifi Enterprise en una tableta</figcaption>
+<svg viewBox="0 0 700 206" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="El MDM envía un perfil a la tableta con el certificado del dispositivo, el certificado de la CA y el perfil wifi (SSID y EAP-TLS). La tableta se conecta al AP del SSID de registro; el RADIUS valida su certificado, la tableta valida el del servidor y se asigna la VLAN 16. Sin el certificado de la CA no se puede validar al RADIUS (riesgo de evil twin)." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0705wifienta-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0705wifientv-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0705wifientm-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0705wifientg-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="60" width="130" height="54" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="75.0" y="79.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">MDM</text><text x="75.0" y="94.5" text-anchor="middle" font-size="10.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">envía el perfil</text><rect x="210" y="40" width="190" height="94" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="305" y="56" text-anchor="middle" font-size="12.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Tableta</text><text x="305" y="78" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">• certificado del dispositivo</text><text x="305" y="96" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">• certificado de la CA</text><text x="305" y="114" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">• perfil wifi: SSID + EAP-TLS</text><path d="M140,87 L206,87" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0705wifientv-5)"/><rect x="460" y="20" width="110" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="515.0" y="33.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">AP</text><text x="515.0" y="47.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">SSID REGISTRO</text><rect x="460" y="112" width="110" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="515.0" y="132.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">RADIUS</text><path d="M400,70 L456,46" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0705wifienta-5)"/><line x1="515" y1="60" x2="515" y2="112" stroke="#5a5652" stroke-width="2"/><text x="585" y="76" text-anchor="start" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">presenta su certificado</text><text x="585" y="92" text-anchor="start" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">y valida el del servidor</text><text x="585" y="130" text-anchor="start" font-size="10.5" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">→ VLAN 16</text><text x="350" y="176" text-anchor="middle" font-size="11" font-weight="600" fill="#b26a00" dominant-baseline="middle">Sin el certificado de la CA, la tableta no puede validar al RADIUS (riesgo de evil twin, T5).</text><text x="350" y="194" text-anchor="middle" font-size="11" font-weight="500" fill="#5a5652" dominant-baseline="middle">Instalarlo a mano en decenas de tabletas es inviable: se despliega por perfil desde el MDM.</text></svg>
+</figure>
+<p><strong>Aplicación práctica — wifi Enterprise en una tableta.</strong> Para un SSID con <strong>EAP-TLS</strong> hay que instalar el <strong>certificado del dispositivo</strong> y el <strong>certificado de la CA</strong> que firma el del servidor RADIUS. Hacerlo a mano en decenas de tabletas es inviable: se <strong>despliega por perfil desde el MDM</strong> (T16).</p>
+<h3 id="bluetooth-nfc-y-usb">Bluetooth, NFC y USB</h3>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
 <th>Comunicación</th>
-<th>Datos que hay que conocer</th>
+<th>Qué es</th>
+<th>Claves prácticas</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Wifi</strong></td>
-<td><strong>SSID</strong> y seguridad: <strong>WPA2/WPA3-Personal</strong> (clave) o <strong>Enterprise</strong> (método <strong>EAP</strong>, identidad, <strong>certificado de la CA</strong>); proxy; <strong>MAC aleatoria</strong> (privacidad, T1)</td>
-</tr>
-<tr>
-<td><strong>Datos móviles</strong></td>
-<td>SIM o eSIM, itinerancia, red preferida (5G/4G)</td>
-</tr>
-<tr>
-<td><strong>APN</strong></td>
-<td>El del operador o un <strong>APN privado</strong> corporativo (T6)</td>
-</tr>
-<tr>
-<td><strong>VPN</strong></td>
-<td>Servidor, tipo (<strong>IKEv2/IPsec</strong>, <strong>SSL/TLS</strong> con la app del fabricante del cortafuegos, WireGuard), credenciales o certificado; <strong>siempre activa</strong> o <strong>por aplicación</strong> (T15)</td>
-</tr>
-<tr>
 <td><strong>Bluetooth</strong></td>
-<td>Emparejamiento con PIN; desactivado si no se usa</td>
+<td>Radio de <strong>corto alcance</strong> (metros)</td>
+<td><strong>Emparejamiento</strong> (<em>pairing</em>) con PIN o confirmación; dispositivo <strong>visible</strong> solo al emparejar; <strong>perfiles</strong>: <strong>A2DP</strong> (audio), <strong>HFP</strong> (manos libres), <strong>HID</strong> (teclado y ratón)</td>
 </tr>
 <tr>
 <td><strong>NFC</strong></td>
-<td>Pagos, lectura del DNIe y tarjetas</td>
+<td>Radio de <strong>muy corto alcance</strong> (centímetros)</td>
+<td>Pagos, lectura del DNIe y tarjetas, etiquetas, a veces aprovisionamiento</td>
 </tr>
 <tr>
-<td><strong>Zona wifi (<em>tethering</em>)</strong></td>
-<td>Comparte los datos móviles; las políticas corporativas suelen prohibirlo</td>
+<td><strong>USB</strong></td>
+<td>Conexión física</td>
+<td>Carga, datos, tethering por USB, periféricos, depuración (desactivada en corporativos)</td>
 </tr>
 </tbody>
 </table></div>
-<p><strong>Aplicación práctica — wifi Enterprise en una tableta.</strong> Para un SSID con <strong>EAP-TLS</strong> hay que instalar el <strong>certificado del dispositivo</strong> y el <strong>certificado de la CA</strong> que firma el del servidor RADIUS. Hacerlo a mano en decenas de tabletas es inviable: se <strong>despliega por perfil desde el MDM</strong>.</p>
-<figure class="tema-figura">
-<figcaption>Figura 4 · Wifi Enterprise en una tableta</figcaption>
-<svg viewBox="0 0 700 206" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="El MDM envía un perfil a la tableta con el certificado del dispositivo, el certificado de la CA y el perfil wifi (SSID y EAP-TLS). La tableta se conecta al AP del SSID de registro; el RADIUS valida su certificado, la tableta valida el del servidor y se asigna la VLAN 16. Sin el certificado de la CA no se puede validar al RADIUS (riesgo de evil twin)." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0705wifienta-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0705wifientv-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0705wifientm-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0705wifientg-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="60" width="130" height="54" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="75.0" y="79.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">MDM</text><text x="75.0" y="94.5" text-anchor="middle" font-size="10.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">envía el perfil</text><rect x="210" y="40" width="190" height="94" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="305" y="56" text-anchor="middle" font-size="12.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Tableta</text><text x="305" y="78" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">• certificado del dispositivo</text><text x="305" y="96" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">• certificado de la CA</text><text x="305" y="114" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">• perfil wifi: SSID + EAP-TLS</text><path d="M140,87 L206,87" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0705wifientv-4)"/><rect x="460" y="20" width="110" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="515.0" y="33.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">AP</text><text x="515.0" y="47.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">SSID REGISTRO</text><rect x="460" y="112" width="110" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="515.0" y="132.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">RADIUS</text><path d="M400,70 L456,46" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0705wifienta-4)"/><line x1="515" y1="60" x2="515" y2="112" stroke="#5a5652" stroke-width="2"/><text x="585" y="76" text-anchor="start" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">presenta su certificado</text><text x="585" y="92" text-anchor="start" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">y valida el del servidor</text><text x="585" y="130" text-anchor="start" font-size="10.5" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">→ VLAN 16</text><text x="350" y="176" text-anchor="middle" font-size="11" font-weight="600" fill="#b26a00" dominant-baseline="middle">Sin el certificado de la CA, la tableta no puede validar al RADIUS (riesgo de evil twin, T5).</text><text x="350" y="194" text-anchor="middle" font-size="11" font-weight="500" fill="#5a5652" dominant-baseline="middle">Instalarlo a mano en decenas de tabletas es inviable: se despliega por perfil desde el MDM.</text></svg>
-</figure>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>⚠️ <strong>No confundir — APN vs SSID vs punto de acceso</strong><br><strong>APN</strong>: nombre del acceso a datos del <strong>operador móvil</strong>. <strong>SSID</strong>: nombre de la <strong>red wifi</strong>. <strong>Punto de acceso (AP)</strong>: el equipo que emite el wifi. <strong>Zona wifi del móvil</strong>: el móvil haciendo de AP.</th>
+<th>🔀 <strong>No confundir — NFC vs bluetooth · USB-C vs capacidades</strong><br><strong>NFC</strong>: centímetros, acercar y listo. <strong>Bluetooth</strong>: metros, con emparejamiento. Y un conector <strong>USB-C</strong> no dice por sí solo qué <strong>velocidad o funciones</strong> tiene el puerto.</th>
+</tr>
+</table></div>
+<p><strong>Diagnóstico de bluetooth:</strong> bluetooth activo → dispositivo visible → emparejamiento → <strong>perfil compatible</strong> → permisos → servicio.</p>
+<h3 id="tethering-y-vpn">Tethering y VPN</h3>
+<figure class="tema-figura">
+<figcaption>Figura 6 · Tethering y VPN</figcaption>
+<svg viewBox="0 0 700 218" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tethering: la red móvil del operador llega al smartphone, que hace de router con NAT y DHCP y comparte la conexión por wifi, USB o bluetooth con un portátil; las políticas corporativas suelen restringirlo. Debajo, la VPN en tres pasos: 1, conectividad (wifi o datos OK); 2, túnel VPN (servidor, certificado, MFA); 3, red corporativa. La VPN va por encima de la conexión: si no hay wifi ni datos, la VPN no lo arregla." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0712tethera-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0712tetherv-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0712tetherm-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0712tetherg-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="40" width="130" height="50" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="75.0" y="58.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Red móvil</text><text x="75.0" y="71.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">operador</text><rect x="200" y="30" width="170" height="70" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="285.0" y="51.5" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">Smartphone</text><text x="285.0" y="65.0" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">hace de router:</text><text x="285.0" y="78.5" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">NAT + DHCP</text><rect x="450" y="40" width="130" height="50" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="515.0" y="65.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Portátil</text><path d="M140,65 L196,65" fill="none" stroke="#5a5652" stroke-width="2" marker-end="url(#T0712tetherg-6)"/><path d="M370,65 L446,65" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0712tethera-6)"/><text x="408" y="54" text-anchor="middle" font-size="10" font-weight="600" fill="#003da5" dominant-baseline="middle">wifi · USB · BT</text><text x="350" y="126" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Tethering: el móvil comparte sus datos (las políticas corporativas suelen restringirlo)</text><rect x="60" y="146" width="160" height="40" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="140.0" y="159.5" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">1 · Conectividad</text><text x="140.0" y="172.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">wifi o datos OK</text><rect x="270" y="146" width="160" height="40" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="350.0" y="159.5" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">2 · Túnel VPN</text><text x="350.0" y="172.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">servidor, certificado, MFA</text><rect x="480" y="146" width="160" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="560.0" y="166.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">3 · Red corporativa</text><path d="M220,166 L266,166" fill="none" stroke="#2e7d3c" stroke-width="1.6" marker-end="url(#T0712tetherv-6)"/><path d="M430,166 L476,166" fill="none" stroke="#2e7d3c" stroke-width="1.6" marker-end="url(#T0712tetherv-6)"/><text x="350" y="206" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b26a00" dominant-baseline="middle">La VPN va POR ENCIMA de la conexión: si no hay wifi ni datos, la VPN no lo arregla</text></svg>
+</figure>
+<ul class="tema-lista">
+<li><strong>Tethering / zona wifi</strong>: el móvil <strong>comparte sus datos</strong> por wifi, USB o bluetooth y <strong>actúa como router</strong> (con <strong>NAT</strong> y <strong>DHCP</strong> propios, T14). Las políticas corporativas suelen restringirlo.</li>
+<li><strong>VPN en el móvil</strong>: cliente VPN, servidor, credenciales o certificado y, a menudo, MFA; <strong>siempre activa</strong> o <strong>por aplicación</strong>. Los tipos (IPsec, SSL) se ven en T15.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br><strong>La VPN necesita conectividad previa</strong>: va por encima del wifi o de los datos. Si no hay conexión, la VPN no la crea.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — APN vs SSID vs AP vs zona wifi</strong><br><strong>APN</strong>: acceso a datos del <strong>operador móvil</strong>. <strong>SSID</strong>: nombre de la <strong>red wifi</strong>. <strong>AP</strong>: el equipo que emite el wifi. <strong>Zona wifi del móvil</strong>: el propio móvil haciendo de AP.</th>
 </tr>
 </table></div>
 <h2 id="4-sincronizacion-del-correo-electronico" class="tema-h2">4. Sincronización del correo electrónico</h2>
-<p><strong>Concepto.</strong> El correo se sincroniza con protocolos que <strong>dejan los mensajes en el servidor</strong> (IMAP, ActiveSync) o que <strong>los descargan</strong> (POP3); el envío siempre es por <strong>SMTP</strong>.</p>
+<p><strong>Concepto.</strong> El enunciado lo cita expresamente: aquí interesa <strong>configurar, sincronizar y diagnosticar</strong> el correo en el móvil (el funcionamiento de los servidores de correo es de T10). <strong>SMTP envía</strong>, <strong>IMAP sincroniza</strong> el buzón del servidor y <strong>POP3 descarga</strong>.</p>
 <p><strong>Explicación.</strong></p>
 <figure class="tema-figura">
-<figcaption>Figura 5 · IMAP, POP3 y ActiveSync</figcaption>
-<svg viewBox="0 0 700 232" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tres paneles con un servidor, un móvil y un PC. IMAP: el correo vive en el servidor y móvil y PC sincronizan carpetas y estados. POP3: el correo se descarga al móvil y el PC ya no lo ve. ActiveSync u Outlook: correo, calendario y contactos con notificaciones push, políticas y borrado remoto. Pie: SMTP solo envía (587 con STARTTLS); IMAPS 993; POP3S 995; ActiveSync va sobre HTTPS." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0703correoa-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0703correov-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0703correom-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0703correog-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="216" height="190" rx="8" fill="#ffffff" stroke="#c9c6c2" stroke-width="1"/><text x="118" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">IMAP</text><rect x="68" y="42" width="100" height="34" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="118.0" y="59.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Servidor</text><rect x="24" y="122" width="80" height="32" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="64.0" y="138.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Móvil</text><rect x="132" y="122" width="80" height="32" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="172.0" y="138.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">PC</text><path d="M100,76 L66,120" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0703correov-5)"/><path d="M66,120 L100,78" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0703correov-5)"/><path d="M136,76 L170,120" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0703correov-5)"/><path d="M170,120 L136,78" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0703correov-5)"/><text x="118" y="172" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">el correo vive en el servidor</text><text x="118" y="188" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">carpetas y estados sincronizados</text><rect x="242" y="10" width="216" height="190" rx="8" fill="#ffffff" stroke="#c9c6c2" stroke-width="1"/><text x="350" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#b26a00" dominant-baseline="middle">POP3</text><rect x="300" y="42" width="100" height="34" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="350.0" y="59.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Servidor</text><rect x="256" y="122" width="80" height="32" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="296.0" y="138.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Móvil</text><rect x="364" y="122" width="80" height="32" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="404.0" y="138.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">PC</text><path d="M332,76 L298,120" fill="none" stroke="#b26a00" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#T0703correom-5)"/><line x1="392" y1="80" x2="404" y2="116" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="3 3"/><text x="418" y="100" text-anchor="middle" font-size="14" font-weight="700" fill="#b26a00" dominant-baseline="middle">✗</text><text x="350" y="172" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">descarga al dispositivo</text><text x="350" y="188" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">el otro equipo no lo ve</text><rect x="474" y="10" width="216" height="190" rx="8" fill="#ffffff" stroke="#c9c6c2" stroke-width="1"/><text x="582" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#003da5" dominant-baseline="middle">ActiveSync / Outlook</text><rect x="532" y="42" width="100" height="34" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="582.0" y="59.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Servidor</text><rect x="488" y="122" width="80" height="32" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="528.0" y="138.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Móvil</text><rect x="596" y="122" width="80" height="32" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="636.0" y="138.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">PC</text><path d="M564,76 L530,120" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0703correoa-5)"/><path d="M530,120 L564,78" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0703correoa-5)"/><path d="M600,76 L634,120" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0703correoa-5)"/><path d="M634,120 L600,78" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0703correoa-5)"/><text x="582" y="172" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">correo + calendario + contactos</text><text x="582" y="188" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">push · políticas · borrado remoto</text><text x="350" y="220" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">SMTP solo ENVÍA (587 con STARTTLS) · IMAPS 993 · POP3S 995 · ActiveSync va sobre HTTPS</text></svg>
+<figcaption>Figura 7 · IMAP, POP3 y ActiveSync</figcaption>
+<svg viewBox="0 0 700 232" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tres paneles con un servidor, un móvil y un PC. IMAP: el correo vive en el servidor y móvil y PC sincronizan carpetas y estados. POP3: el correo se descarga al móvil y otro equipo puede no verlo. ActiveSync u Outlook: correo, calendario y contactos con notificaciones push, políticas y borrado remoto. Pie: SMTP solo envía (587 con STARTTLS); IMAPS 993; POP3S 995; ActiveSync va sobre HTTPS." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0703correoa-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0703correov-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0703correom-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0703correog-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="216" height="190" rx="8" fill="#ffffff" stroke="#c9c6c2" stroke-width="1"/><text x="118" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">IMAP</text><rect x="68" y="42" width="100" height="34" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="118.0" y="59.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Servidor</text><rect x="24" y="122" width="80" height="32" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="64.0" y="138.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Móvil</text><rect x="132" y="122" width="80" height="32" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="172.0" y="138.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">PC</text><path d="M100,76 L66,120" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0703correov-7)"/><path d="M66,120 L100,78" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0703correov-7)"/><path d="M136,76 L170,120" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0703correov-7)"/><path d="M170,120 L136,78" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0703correov-7)"/><text x="118" y="172" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">el correo vive en el servidor</text><text x="118" y="188" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">carpetas y estados sincronizados</text><rect x="242" y="10" width="216" height="190" rx="8" fill="#ffffff" stroke="#c9c6c2" stroke-width="1"/><text x="350" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#b26a00" dominant-baseline="middle">POP3</text><rect x="300" y="42" width="100" height="34" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="350.0" y="59.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Servidor</text><rect x="256" y="122" width="80" height="32" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="296.0" y="138.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Móvil</text><rect x="364" y="122" width="80" height="32" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="404.0" y="138.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">PC</text><path d="M332,76 L298,120" fill="none" stroke="#b26a00" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#T0703correom-7)"/><line x1="392" y1="80" x2="404" y2="116" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="3 3"/><text x="418" y="100" text-anchor="middle" font-size="14" font-weight="700" fill="#b26a00" dominant-baseline="middle">✗</text><text x="350" y="172" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">descarga al dispositivo</text><text x="350" y="188" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">otro equipo puede no verlo</text><rect x="474" y="10" width="216" height="190" rx="8" fill="#ffffff" stroke="#c9c6c2" stroke-width="1"/><text x="582" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#003da5" dominant-baseline="middle">ActiveSync / Outlook</text><rect x="532" y="42" width="100" height="34" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="582.0" y="59.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Servidor</text><rect x="488" y="122" width="80" height="32" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="528.0" y="138.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Móvil</text><rect x="596" y="122" width="80" height="32" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="636.0" y="138.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">PC</text><path d="M564,76 L530,120" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0703correoa-7)"/><path d="M530,120 L564,78" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0703correoa-7)"/><path d="M600,76 L634,120" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0703correoa-7)"/><path d="M634,120 L600,78" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0703correoa-7)"/><text x="582" y="172" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">correo + calendario + contactos</text><text x="582" y="188" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">push · políticas · borrado remoto</text><text x="350" y="220" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">SMTP solo ENVÍA (587 con STARTTLS) · IMAPS 993 · POP3S 995 · ActiveSync va sobre HTTPS</text></svg>
 </figure>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
 <th>Protocolo</th>
-<th>Qué hace</th>
-<th>Puertos</th>
+<th>Modelo de funcionamiento</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Exchange ActiveSync</strong></td>
-<td><strong>Correo, calendario, contactos, tareas</strong>; notificaciones <em>push</em>; <strong>políticas</strong> (PIN, cifrado) y <strong>borrado remoto</strong></td>
-<td>HTTPS (443)</td>
-</tr>
-<tr>
-<td><strong>Microsoft 365 / Outlook móvil</strong></td>
-<td>Lo anterior con <strong>autenticación moderna</strong> (OAuth 2.0, MFA) y acceso condicional</td>
-<td>HTTPS (443)</td>
+<td><strong>SMTP</strong></td>
+<td><strong>Enviar</strong> correo</td>
 </tr>
 <tr>
 <td><strong>IMAP</strong></td>
-<td><strong>El correo queda en el servidor</strong>; se sincronizan carpetas y estados</td>
-<td>143 (STARTTLS) · <strong>993</strong> (IMAPS)</td>
+<td><strong>Acceder al buzón en el servidor y sincronizar</strong> carpetas y estados (leído, borrado) entre todos los clientes</td>
 </tr>
 <tr>
 <td><strong>POP3</strong></td>
-<td><strong>Descarga</strong> el correo al dispositivo (puede borrarlo del servidor)</td>
-<td>110 · <strong>995</strong> (POP3S)</td>
+<td><strong>Descargar / recuperar</strong> los mensajes al dispositivo; puede <strong>conservar o no</strong> una copia en el servidor según la configuración, pero <strong>no sincroniza estados</strong> entre dispositivos</td>
 </tr>
 <tr>
-<td><strong>SMTP</strong></td>
-<td><strong>Envío</strong> de correo, con autenticación</td>
-<td><strong>587</strong> (STARTTLS) · 465 (SMTPS) · 25 (entre servidores)</td>
+<td><strong>Exchange ActiveSync</strong></td>
+<td>Protocolo de Microsoft para sincronizar <strong>correo, calendario, contactos y tareas</strong> con <em>push</em>, <strong>políticas</strong> y <strong>borrado remoto</strong></td>
 </tr>
 <tr>
 <td><strong>CalDAV / CardDAV</strong></td>
-<td>Calendario / contactos, estándares abiertos</td>
-<td>HTTPS</td>
+<td>Estándares abiertos para <strong>calendario</strong> y <strong>contactos</strong></td>
 </tr>
 </tbody>
 </table></div>
-<p><strong>Aplicación práctica.</strong> La cuenta corporativa se configura con <strong>dirección y contraseña con autenticación moderna y MFA</strong>; si no se autodetecta, con el servidor y el dominio; y se aceptan las <strong>políticas de seguridad</strong> que pida el servidor. En una flota gestionada, la cuenta llega <strong>preconfigurada por el MDM</strong> y separada del correo personal.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>🧠 <strong>Para memorizar</strong><br><strong>IMAP = el correo vive en el servidor · POP3 = se baja al dispositivo · SMTP = solo envía · ActiveSync = correo + calendario + contactos + políticas + borrado remoto.</strong></th>
+<th>🧠 <strong>Para memorizar</strong><br><strong>SMTP = ENVIAR · IMAP = SINCRONIZAR · POP3 = DESCARGAR.</strong></th>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br><strong>POP3 no sincroniza</strong>: si se lee el correo en el móvil por POP3, puede no aparecer luego en el PC. La solución es <strong>IMAP o ActiveSync</strong>.</th>
+<th>⚠️ <strong>TRAMPA DE EXAMEN</strong><br>«POP3 siempre borra el correo del servidor» es <strong>falso</strong>: puede dejar copia. Lo que lo distingue es que <strong>descarga y no sincroniza</strong>: lo leído o borrado en el móvil no se refleja en el PC.</th>
 </tr>
 </table></div>
-<div class="tabla-wrap"><table class="tabla-tema">
-<tr>
-<th>⚠️ <strong>No confundir — IMAP vs POP3 · ActiveSync vs CalDAV/CardDAV</strong><br><strong>IMAP</strong> sincroniza; <strong>POP3</strong> descarga. <strong>ActiveSync</strong> es de Microsoft e incluye políticas; <strong>CalDAV/CardDAV</strong> son estándares abiertos solo para calendario y contactos.</th>
-</tr>
-</table></div>
-<h2 id="5-gestion-empresarial-y-puesta-en-marcha" class="tema-h2">5. Gestión empresarial y puesta en marcha</h2>
-<p><strong>Concepto.</strong> Los dispositivos corporativos se <strong>inscriben</strong> en un sistema de gestión (MDM) y se configuran según su <strong>modo de uso</strong>.</p>
-<p><strong>Explicación — modos de gestión:</strong></p>
+<p><strong>Protocolo, puerto y cifrado:</strong></p>
 <figure class="tema-figura">
-<figcaption>Figura 6 · Modos de gestión</figcaption>
-<svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tres móviles. Totalmente gestionado: corporativo de uso laboral, la organización controla todo el dispositivo. Perfil de trabajo: BYOD o uso mixto, con una parte personal y un contenedor de trabajo; la organización solo controla el contenedor. Dedicado o quiosco: una o pocas apps, como la tableta de firma del registro. Android Enterprise (zero-touch, Knox) y Apple Business Manager con ADE y modo supervisado." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0706modosa-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0706modosv-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0706modosm-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0706modosg-6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="80" y="10" width="90" height="150" rx="14" fill="#ffffff" stroke="#5a5652" stroke-width="2"/><rect x="88" y="26" width="74" height="118" rx="4" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="125" y="182" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">Totalmente gestionado</text><text x="125" y="198" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">corporativo de uso laboral</text><text x="125" y="214" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">la organización controla todo</text><rect x="308" y="10" width="90" height="150" rx="14" fill="#ffffff" stroke="#5a5652" stroke-width="2"/><rect x="316" y="26" width="74" height="56" rx="4" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><rect x="316" y="88" width="74" height="56" rx="4" fill="#e6edf7" stroke="#003da5" stroke-width="1.6" stroke-dasharray="5 3"/><text x="353" y="54" text-anchor="middle" font-size="9.5" font-weight="600" fill="#5a5652" dominant-baseline="middle">personal</text><text x="353" y="116" text-anchor="middle" font-size="9.5" font-weight="700" fill="#003da5" dominant-baseline="middle">trabajo</text><text x="353" y="182" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">Perfil de trabajo</text><text x="353" y="198" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">BYOD o uso mixto</text><text x="353" y="214" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">solo el contenedor corporativo</text><rect x="536" y="10" width="90" height="150" rx="14" fill="#ffffff" stroke="#5a5652" stroke-width="2"/><rect x="544" y="26" width="74" height="118" rx="4" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="581" y="85" text-anchor="middle" font-size="11" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">1 app</text><text x="581" y="182" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">Dedicado / quiosco</text><text x="581" y="198" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">una o pocas apps</text><text x="581" y="214" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">tableta de firma del registro</text><text x="350" y="238" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">Android Enterprise (también zero-touch, Knox) · Apple: Business Manager + ADE + modo supervisado</text></svg>
+<figcaption>Figura 8 · Protocolo, puerto y cifrado</figcaption>
+<svg viewBox="0 0 700 212" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tabla de protocolos de correo: SMTP para enviar, puertos 587 (submission con STARTTLS), 465 (TLS implícito) y 25 (entre servidores); IMAP para sincronizar el buzón, 143 (STARTTLS) y 993 (IMAPS, TLS implícito); POP3 para descargar, 110 (STARTTLS) y 995 (POP3S, TLS implícito); Exchange o Microsoft 365 para correo, calendario y contactos, HTTPS 443 con ActiveSync u otras API. Protocolo no es puerto ni cifrado; TLS protege el transporte, no cifra el mensaje de extremo a extremo." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0713puertosa-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0713puertosv-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0713puertosm-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0713puertosg-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><text x="80" y="16" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Protocolo</text><text x="240" y="16" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Para qué</text><text x="520" y="16" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Puertos y cifrado</text><rect x="10" y="26" width="140" height="32" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="80.0" y="42.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">SMTP</text><text x="240" y="46" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">ENVIAR</text><text x="520" y="46" text-anchor="middle" font-size="10" font-weight="500" fill="#23272e" dominant-baseline="middle">587 (submission, STARTTLS) · 465 (TLS implícito) · 25 (entre servidores)</text><rect x="10" y="66" width="140" height="32" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="80.0" y="82.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">IMAP</text><text x="240" y="86" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">SINCRONIZAR el buzón</text><text x="520" y="86" text-anchor="middle" font-size="10" font-weight="500" fill="#23272e" dominant-baseline="middle">143 (STARTTLS) · 993 (IMAPS, TLS implícito)</text><rect x="10" y="106" width="140" height="32" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="80.0" y="122.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">POP3</text><text x="240" y="126" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">DESCARGAR / recuperar</text><text x="520" y="126" text-anchor="middle" font-size="10" font-weight="500" fill="#23272e" dominant-baseline="middle">110 (STARTTLS) · 995 (POP3S, TLS implícito)</text><rect x="10" y="146" width="140" height="32" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="80.0" y="162.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Exchange / M365</text><text x="240" y="166" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">correo + calendario + contactos</text><text x="520" y="166" text-anchor="middle" font-size="10" font-weight="500" fill="#23272e" dominant-baseline="middle">HTTPS 443 (ActiveSync u otras API)</text><text x="350" y="200" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b26a00" dominant-baseline="middle">Protocolo ≠ puerto ≠ cifrado · TLS protege el TRANSPORTE, no cifra el mensaje de extremo a extremo</text></svg>
+</figure>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Protocolo</th>
+<th>Puertos</th>
+<th>Comentario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SMTP</strong></td>
+<td><strong>587</strong> (envío desde el cliente, <em>submission</em>, con STARTTLS) · <strong>465</strong> (TLS implícito) · <strong>25</strong> (entre servidores)</td>
+<td>El móvil envía por 587 o 465, autenticado</td>
+</tr>
+<tr>
+<td><strong>IMAP</strong></td>
+<td>143 (STARTTLS) · <strong>993</strong> (IMAPS)</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>POP3</strong></td>
+<td>110 (STARTTLS) · <strong>995</strong> (POP3S)</td>
+<td></td>
+</tr>
+<tr>
+<td>Exchange / Microsoft 365</td>
+<td>HTTPS <strong>443</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>STARTTLS</strong> convierte en cifrada una conexión que empezó en claro; <strong>TLS implícito</strong> cifra desde el principio. Por eso no basta con decir «tal puerto es seguro»: hay que distinguir <strong>protocolo, puerto y cifrado</strong>.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>No confundir — TLS vs cifrado de extremo a extremo</strong><br>TLS protege la <strong>conexión</strong> entre el móvil y el servidor. <strong>No</strong> significa que el mensaje vaya cifrado durante todo su recorrido ni que quede cifrado en los buzones.</th>
+</tr>
+</table></div>
+<p><strong>Sincronizar no es descargar.</strong> El usuario espera que lo <strong>leído</strong> en el móvil aparezca leído en el PC, que los <strong>borrados</strong> y las <strong>carpetas</strong> coincidan y que el <strong>calendario</strong> y los <strong>contactos</strong> estén al día: eso es sincronización.</p>
+<figure class="tema-figura">
+<figcaption>Figura 9 · Push, fetch, sincronización y copia</figcaption>
+<svg viewBox="0 0 700 242" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arriba, push y fetch: en push el servidor avisa y el correo llega al momento; en fetch el móvil pregunta periódicamente, por ejemplo cada 15 minutos. Abajo, sincronización frente a copia de seguridad: la sincronización mantiene todo coherente y un borrado también se sincroniza; la copia de seguridad es una copia aparte, recuperable aunque se borre el original. Sincronización no es copia y notificación no es sincronización." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0710pusha-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0710pushv-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0710pushm-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0710pushg-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="330" height="120" rx="8" fill="#ffffff" stroke="#c9c6c2" stroke-width="1"/><rect x="360" y="10" width="330" height="120" rx="8" fill="#ffffff" stroke="#c9c6c2" stroke-width="1"/><text x="175" y="30" text-anchor="middle" font-size="12" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">PUSH · el servidor avisa</text><text x="525" y="30" text-anchor="middle" font-size="12" font-weight="700" fill="#003da5" dominant-baseline="middle">FETCH · el cliente pregunta</text><rect x="30" y="50" width="100" height="40" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="80.0" y="70.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Servidor</text><rect x="220" y="50" width="100" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="270.0" y="70.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Móvil</text><path d="M130,70 L216,70" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0710pushv-9)"/><text x="175" y="112" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">llega al momento</text><rect x="380" y="50" width="100" height="40" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="430.0" y="70.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Servidor</text><rect x="570" y="50" width="100" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="620.0" y="70.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Móvil</text><path d="M570,62 L484,62" fill="none" stroke="#003da5" stroke-width="1.6" marker-end="url(#T0710pusha-9)"/><path d="M480,78 L566,78" fill="none" stroke="#2e7d3c" stroke-width="1.6" marker-end="url(#T0710pushv-9)"/><text x="525" y="112" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">¿hay algo? cada 15 min…</text><rect x="10" y="150" width="330" height="60" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="175.0" y="166.5" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">SINCRONIZACIÓN</text><text x="175.0" y="180.0" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">mantiene todo coherente:</text><text x="175.0" y="193.5" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">un borrado también se sincroniza</text><rect x="360" y="150" width="330" height="60" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="525.0" y="166.5" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">COPIA DE SEGURIDAD</text><text x="525.0" y="180.0" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">copia aparte, recuperable</text><text x="525.0" y="193.5" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">aunque se borre el original</text><text x="350" y="230" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Sincronización ≠ copia · notificación ≠ sincronización</text></svg>
+</figure>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Modo</th>
+<th>Cómo funciona</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Push</strong></td>
+<td>El servidor avisa o entrega en cuanto hay cambios</td>
+</tr>
+<tr>
+<td><strong>Fetch</strong></td>
+<td>El cliente pregunta cada cierto tiempo</td>
+</tr>
+<tr>
+<td><strong>Manual</strong></td>
+<td>El usuario actualiza</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🔀 <strong>No confundir — sincronización vs copia · notificación vs sincronización</strong><br><strong>Sincronización</strong>: mantiene coherentes los datos; <strong>un borrado se propaga</strong>. <strong>Copia de seguridad</strong>: copia aparte y recuperable. Y que <strong>no suene la notificación</strong> no significa que el correo no se haya sincronizado (y al revés).</th>
+</tr>
+</table></div>
+<p><strong>Exchange y Microsoft 365.</strong> Una cuenta corporativa sincroniza <strong>correo, calendario, contactos y tareas</strong>. <strong>Exchange</strong> es la <strong>plataforma</strong> de correo; <strong>Exchange ActiveSync</strong> es <strong>un protocolo</strong> de sincronización móvil, muy extendido, aunque no el único: los clientes actuales (Outlook móvil) usan también otras API. <strong>Autodiscover</strong> localiza automáticamente la configuración: con la <strong>dirección y las credenciales</strong> basta; si falla, hay que diagnosticar.</p>
+<p><strong>Autenticación moderna y MFA.</strong> En lugar de guardar la contraseña en cada app, la <strong>autenticación moderna</strong> (OAuth 2.0) entrega <strong>tokens</strong> de acceso; la <strong>MFA</strong> añade un segundo factor (app autenticadora, token, llave). La autenticación básica está retirada en Microsoft 365.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🔀 <strong>No confundir — MFA vs MDM</strong><br><strong>MFA</strong> = <strong>autenticación</strong> con varios factores. <strong>MDM</strong> = <strong>gestión del dispositivo</strong> (T16).</th>
+</tr>
+</table></div>
+<figure class="tema-figura">
+<figcaption>Figura 10 · Cuenta, servicios, buzón y app</figcaption>
+<svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Una cuenta corporativa, que es identidad más configuración, da acceso a tres servicios: correo (buzón), calendario (reuniones) y contactos (agenda); cada servicio se activa y sincroniza por separado, así que se diagnostica por servicio. Debajo, tres conceptos: cuenta (quién eres y cómo conectas), buzón (los datos, en el servidor) y app (el cliente que los muestra). Quitar la cuenta del móvil no borra el buzón del servidor." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0709cuentaa-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0709cuentav-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0709cuentam-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0709cuentag-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="260" y="10" width="180" height="44" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="25.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">Cuenta corporativa</text><text x="350.0" y="38.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">identidad + configuración</text><rect x="150" y="84" width="120" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="210.0" y="97.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Correo</text><text x="210.0" y="110.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">buzón</text><line x1="350" y1="54" x2="210" y2="84" stroke="#5a5652" stroke-width="1.3"/><rect x="290" y="84" width="120" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="97.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Calendario</text><text x="350.0" y="110.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">reuniones</text><line x1="350" y1="54" x2="350" y2="84" stroke="#5a5652" stroke-width="1.3"/><rect x="430" y="84" width="120" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="490.0" y="97.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Contactos</text><text x="490.0" y="110.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">agenda</text><line x1="350" y1="54" x2="490" y2="84" stroke="#5a5652" stroke-width="1.3"/><text x="350" y="146" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Cada servicio se activa y sincroniza por separado: diagnosticar POR SERVICIO</text><rect x="10" y="166" width="220" height="50" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="120.0" y="184.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">CUENTA</text><text x="120.0" y="197.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">quién eres y cómo conectas</text><rect x="240" y="166" width="220" height="50" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="350.0" y="184.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">BUZÓN</text><text x="350.0" y="197.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">los datos, en el servidor</text><rect x="470" y="166" width="220" height="50" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="580.0" y="184.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">APP</text><text x="580.0" y="197.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">el cliente que los muestra</text><text x="350" y="238" text-anchor="middle" font-size="11" font-weight="700" fill="#b26a00" dominant-baseline="middle">Quitar la cuenta del móvil no borra el buzón del servidor</text></svg>
+</figure>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>🔀 <strong>No confundir — cuenta vs buzón vs app</strong><br><strong>Cuenta</strong>: identidad y configuración. <strong>Buzón</strong>: los datos, en el servidor. <strong>App</strong>: el cliente que los muestra. <strong>Eliminar la cuenta del móvil no borra el buzón</strong> (aunque un borrado hecho con la cuenta activa sí se sincroniza).</th>
+</tr>
+</table></div>
+<p><strong>Detalles que causan muchas incidencias:</strong></p>
+<ul class="tema-lista">
+<li><strong>Fecha y hora automáticas</strong>: con la hora mal, fallan certificados, TLS y tokens.</li>
+<li><strong>Segundo plano</strong>: el ahorro de batería, la restricción de datos o los permisos retrasan el <em>push</em> y las notificaciones.</li>
+<li><strong>Por servicio</strong>: puede funcionar el correo y no el calendario (servicio desactivado en la cuenta o restringido).</li>
+</ul>
+<p><strong>Aplicación práctica.</strong> La cuenta corporativa se configura con <strong>dirección y autenticación moderna con MFA</strong> (Autodiscover hace el resto); en una flota gestionada, llega <strong>preconfigurada por el MDM</strong> y separada del correo personal.</p>
+<h2 id="5-perfiles-corporativos-y-puesta-en-marcha" class="tema-h2">5. Perfiles corporativos y puesta en marcha</h2>
+<p><strong>Concepto.</strong> Un terminal corporativo puede tener <strong>configuraciones gestionadas o restringidas</strong> porque está inscrito en un sistema de gestión. Aquí solo se explica por qué; la <strong>inscripción, el cumplimiento, el borrado y el MTD</strong> son de <strong>T16</strong>.</p>
+<p><strong>Explicación.</strong></p>
+<figure class="tema-figura">
+<figcaption>Figura 11 · Modos de gestión</figcaption>
+<svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tres móviles. Totalmente gestionado: corporativo de uso laboral, la organización controla todo el dispositivo. Perfil de trabajo: BYOD o uso mixto, con una parte personal y un contenedor de trabajo; la organización solo controla el contenedor. Dedicado o quiosco: una o pocas apps, como la tableta de firma del registro. Android Enterprise (zero-touch, Knox) y Apple Business Manager con ADE y modo supervisado." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0706modosa-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0706modosv-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0706modosm-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0706modosg-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="80" y="10" width="90" height="150" rx="14" fill="#ffffff" stroke="#5a5652" stroke-width="2"/><rect x="88" y="26" width="74" height="118" rx="4" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="125" y="182" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">Totalmente gestionado</text><text x="125" y="198" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">corporativo de uso laboral</text><text x="125" y="214" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">la organización controla todo</text><rect x="308" y="10" width="90" height="150" rx="14" fill="#ffffff" stroke="#5a5652" stroke-width="2"/><rect x="316" y="26" width="74" height="56" rx="4" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><rect x="316" y="88" width="74" height="56" rx="4" fill="#e6edf7" stroke="#003da5" stroke-width="1.6" stroke-dasharray="5 3"/><text x="353" y="54" text-anchor="middle" font-size="9.5" font-weight="600" fill="#5a5652" dominant-baseline="middle">personal</text><text x="353" y="116" text-anchor="middle" font-size="9.5" font-weight="700" fill="#003da5" dominant-baseline="middle">trabajo</text><text x="353" y="182" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">Perfil de trabajo</text><text x="353" y="198" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">BYOD o uso mixto</text><text x="353" y="214" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">solo el contenedor corporativo</text><rect x="536" y="10" width="90" height="150" rx="14" fill="#ffffff" stroke="#5a5652" stroke-width="2"/><rect x="544" y="26" width="74" height="118" rx="4" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="581" y="85" text-anchor="middle" font-size="11" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">1 app</text><text x="581" y="182" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">Dedicado / quiosco</text><text x="581" y="198" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">una o pocas apps</text><text x="581" y="214" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">tableta de firma del registro</text><text x="350" y="238" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">Android Enterprise (también zero-touch, Knox) · Apple: Business Manager + ADE + modo supervisado</text></svg>
 </figure>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
@@ -299,38 +448,44 @@
 </tr>
 <tr>
 <td><strong>Perfil de trabajo</strong></td>
-<td>Dispositivo personal (BYOD) o mixto: separa datos personales y corporativos</td>
-<td>Android Enterprise; iOS con inscripción de usuario</td>
+<td>Dispositivo personal o mixto: <strong>separa datos personales y corporativos</strong></td>
+<td>Android Enterprise <em>Work Profile</em>; iOS con inscripción de usuario</td>
 </tr>
 <tr>
 <td><strong>Dedicado / quiosco</strong></td>
-<td>Una o pocas apps (firma, información, inventario)</td>
-<td>Android Enterprise; iOS con modo de app única</td>
+<td>Una o pocas apps (firma, información)</td>
+<td>Android Enterprise; iOS con app única</td>
 </tr>
 </tbody>
 </table></div>
-<p><strong>Inscripción automática</strong>: Android <strong>zero-touch</strong> (o Knox Mobile Enrollment en Samsung) y Apple <strong>ADE</strong> a través de <strong>Apple Business Manager</strong>: el dispositivo se configura solo al encenderlo por primera vez.</p>
-<p><strong>Aplicación práctica — puesta en marcha de un dispositivo:</strong></p>
+<p><strong>Inscripción automática</strong>: Android <strong>zero-touch</strong> (o Knox Mobile Enrollment en Samsung) y Apple <strong>ADE</strong> vía <strong>Apple Business Manager</strong>.</p>
 <figure class="tema-figura">
-<figcaption>Figura 7 · Puesta en marcha de un dispositivo corporativo</figcaption>
-<svg viewBox="0 0 700 182" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Siete pasos: 1, inventario (IMEI, número de serie, usuario y línea); 2, inscripción (zero-touch, código QR o ADE); 3, modo (totalmente gestionado, perfil de trabajo o dedicado); 4, comunicaciones (wifi, VPN, APN, correo); 5, apps de la tienda gestionada; 6, políticas (PIN, cifrado, actualizaciones); 7, entrega con pruebas y normas firmadas. Con MDM, los pasos 2 a 6 son automáticos." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0707puestaa-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0707puestav-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0707puestam-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0707puestag-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="12" width="160" height="60" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="90.0" y="35.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">1 Inventario</text><text x="90.0" y="49.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">IMEI, serie, usuario, línea</text><path d="M170,42 L180,42" fill="none" stroke="#5a5652" stroke-width="1.4" marker-end="url(#T0707puestag-7)"/><rect x="182" y="12" width="160" height="60" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="262.0" y="35.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">2 Inscripción</text><text x="262.0" y="49.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">zero-touch, QR, ADE</text><path d="M342,42 L352,42" fill="none" stroke="#5a5652" stroke-width="1.4" marker-end="url(#T0707puestag-7)"/><rect x="354" y="12" width="160" height="60" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="434.0" y="35.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">3 Modo</text><text x="434.0" y="49.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">gestionado, perfil, dedicado</text><path d="M514,42 L524,42" fill="none" stroke="#5a5652" stroke-width="1.4" marker-end="url(#T0707puestag-7)"/><rect x="526" y="12" width="160" height="60" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="606.0" y="35.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">4 Comunicaciones</text><text x="606.0" y="49.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">wifi, VPN, APN, correo</text><rect x="10" y="108" width="160" height="60" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="90.0" y="131.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">5 Apps</text><text x="90.0" y="145.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">tienda gestionada</text><path d="M170,138 L180,138" fill="none" stroke="#5a5652" stroke-width="1.4" marker-end="url(#T0707puestag-7)"/><rect x="182" y="108" width="160" height="60" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="262.0" y="131.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">6 Políticas</text><text x="262.0" y="145.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">PIN, cifrado, actualizaciones</text><path d="M342,138 L352,138" fill="none" stroke="#5a5652" stroke-width="1.4" marker-end="url(#T0707puestag-7)"/><rect x="354" y="108" width="160" height="60" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="434.0" y="131.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">7 Entrega</text><text x="434.0" y="145.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">pruebas y normas firmadas</text><path d="M600,72 L600,90 L90,90 L90,106" fill="none" stroke="#5a5652" stroke-width="1.4" marker-end="url(#T0707puestag-7)"/><text x="600" y="140" text-anchor="middle" font-size="11" font-weight="600" fill="#2e7d3c" dominant-baseline="middle">Con MDM, los pasos 2 a 6</text><text x="600" y="156" text-anchor="middle" font-size="11" font-weight="600" fill="#2e7d3c" dominant-baseline="middle">son automáticos</text></svg>
+<figcaption>Figura 12 · Puesta en marcha de un dispositivo corporativo</figcaption>
+<svg viewBox="0 0 700 182" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Siete pasos: 1, inventario (IMEI, número de serie, usuario y línea); 2, inscripción (zero-touch, código QR o ADE); 3, modo (totalmente gestionado, perfil de trabajo o dedicado); 4, comunicaciones (wifi, VPN, APN, correo); 5, apps de la tienda gestionada; 6, políticas (PIN, cifrado, actualizaciones); 7, entrega con pruebas y normas firmadas. Con MDM, los pasos 2 a 6 son automáticos." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0707puestaa-12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0707puestav-12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0707puestam-12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0707puestag-12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="12" width="160" height="60" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="90.0" y="35.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">1 Inventario</text><text x="90.0" y="49.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">IMEI, serie, usuario, línea</text><path d="M170,42 L180,42" fill="none" stroke="#5a5652" stroke-width="1.4" marker-end="url(#T0707puestag-12)"/><rect x="182" y="12" width="160" height="60" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="262.0" y="35.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">2 Inscripción</text><text x="262.0" y="49.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">zero-touch, QR, ADE</text><path d="M342,42 L352,42" fill="none" stroke="#5a5652" stroke-width="1.4" marker-end="url(#T0707puestag-12)"/><rect x="354" y="12" width="160" height="60" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="434.0" y="35.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">3 Modo</text><text x="434.0" y="49.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">gestionado, perfil, dedicado</text><path d="M514,42 L524,42" fill="none" stroke="#5a5652" stroke-width="1.4" marker-end="url(#T0707puestag-12)"/><rect x="526" y="12" width="160" height="60" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="606.0" y="35.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">4 Comunicaciones</text><text x="606.0" y="49.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">wifi, VPN, APN, correo</text><rect x="10" y="108" width="160" height="60" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="90.0" y="131.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">5 Apps</text><text x="90.0" y="145.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">tienda gestionada</text><path d="M170,138 L180,138" fill="none" stroke="#5a5652" stroke-width="1.4" marker-end="url(#T0707puestag-12)"/><rect x="182" y="108" width="160" height="60" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="262.0" y="131.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">6 Políticas</text><text x="262.0" y="145.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">PIN, cifrado, actualizaciones</text><path d="M342,138 L352,138" fill="none" stroke="#5a5652" stroke-width="1.4" marker-end="url(#T0707puestag-12)"/><rect x="354" y="108" width="160" height="60" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="434.0" y="131.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">7 Entrega</text><text x="434.0" y="145.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">pruebas y normas firmadas</text><path d="M600,72 L600,90 L90,90 L90,106" fill="none" stroke="#5a5652" stroke-width="1.4" marker-end="url(#T0707puestag-12)"/><text x="600" y="140" text-anchor="middle" font-size="11" font-weight="600" fill="#2e7d3c" dominant-baseline="middle">Con MDM, los pasos 2 a 6</text><text x="600" y="156" text-anchor="middle" font-size="11" font-weight="600" fill="#2e7d3c" dominant-baseline="middle">son automáticos</text></svg>
 </figure>
-<ol type="1">
-<li><strong>Inventario</strong>: IMEI, número de serie, usuario y línea.</li>
-<li><strong>Inscripción</strong> en el MDM.</li>
-<li><strong>Modo</strong> según el uso.</li>
-<li><strong>Comunicaciones por perfil</strong>: wifi con certificado, VPN, APN, correo.</li>
-<li><strong>Aplicaciones</strong> desde la tienda gestionada.</li>
-<li><strong>Políticas</strong>: PIN, cifrado, restricciones, actualizaciones.</li>
-<li><strong>Pruebas y entrega</strong> con las normas de uso firmadas.</li>
-</ol>
-<p><strong>Caso de 2023 (pregunta 5).</strong> Las <strong>tabletas Android de registro</strong>: Android Enterprise en <strong>modo dedicado</strong>, wifi del SSID de registro con <strong>certificado</strong>, app de firma fijada y gestión con MDM (detalle en T16).</p>
+<p><strong>Caso de 2023 (pregunta 5).</strong> Las <strong>tabletas Android de registro</strong>: modo <strong>dedicado</strong>, wifi del SSID de registro con <strong>certificado</strong>, app de firma fijada y gestión con MDM (detalle en T16).</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th>⚠️ <strong>No confundir — perfil de trabajo vs dispositivo dedicado</strong><br><strong>Perfil de trabajo</strong>: dos espacios (personal y corporativo) en el mismo dispositivo. <strong>Dedicado</strong>: un dispositivo de una sola función, sin uso personal.</th>
 </tr>
 </table></div>
-<h2 id="6-situaciones-profesionales" class="tema-h2">6. Situaciones profesionales</h2>
+<h2 id="6-situaciones-profesionales-y-diagnostico" class="tema-h2">6. Situaciones profesionales y diagnóstico</h2>
+<p><strong>Concepto.</strong> El diagnóstico del terminal sigue un orden sencillo (la metodología completa está en T19): <strong>qué falla → alcance → conectividad → configuración → autenticación → servicio → probar otra red o app → escalar con datos</strong>.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>⚠️ <strong>TRAMPA DE CAMPO — no empezar reseteando</strong><br>«Restablecer ajustes de red», «borrar la cuenta» o «restaurar el terminal» son acciones de <strong>alto impacto</strong>: primero <strong>observar, recoger datos, aislar</strong> y hacer <strong>cambios reversibles</strong>.</th>
+</tr>
+</table></div>
+<p><strong>Flujos rápidos:</strong></p>
+<ul class="tema-lista">
+<li><strong>Sin datos móviles</strong>: cobertura → SIM activa → registro → datos activados → línea de datos → roaming → APN → IP → operador (T6).</li>
+<li><strong>Wifi</strong>: SSID visible → asociación → autenticación → certificado → IP → puerta de enlace → DNS → servicio (T5, T2, T4, T17).</li>
+<li><strong>Correo</strong>: el flujo de la Figura 13.</li>
+</ul>
+<figure class="tema-figura">
+<figcaption>Figura 13 · Correo que no sincroniza</figcaption>
+<svg viewBox="0 0 700 202" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Correo que no sincroniza, de menor a mayor impacto: ¿hay conectividad? (wifi o datos, otra web); ¿solo falla el correo o también otras apps?; cuenta (servidor, usuario); credenciales (token, cambio de clave); MFA (aprobación pendiente); fecha y hora (certificados y TLS); sincronización (activada, batería, datos); ¿otros usuarios? (incidencia del servicio). Si envía y no recibe, mirar IMAP o Exchange; si recibe y no envía, SMTP (puerto, TLS, autenticación). No empezar borrando la cuenta ni restableciendo el terminal." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0711diagcorreoa-13" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0711diagcorreov-13" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0711diagcorreom-13" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0711diagcorreog-13" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="28" width="160" height="48" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="90.0" y="45.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">¿Conectividad?</text><text x="90.0" y="58.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">wifi o datos, otra web</text><path d="M170,52 L180,52" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T0711diagcorreog-13)"/><rect x="182" y="28" width="160" height="48" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="262.0" y="45.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">¿Solo el correo?</text><text x="262.0" y="58.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">o también otras apps</text><path d="M342,52 L352,52" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T0711diagcorreog-13)"/><rect x="354" y="28" width="160" height="48" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="434.0" y="45.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Cuenta</text><text x="434.0" y="58.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">servidor, usuario</text><path d="M514,52 L524,52" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T0711diagcorreog-13)"/><rect x="526" y="28" width="160" height="48" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="606.0" y="45.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Credenciales</text><text x="606.0" y="58.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">token, cambio de clave</text><rect x="10" y="104" width="160" height="48" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="90.0" y="121.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">MFA</text><text x="90.0" y="134.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">aprobación pendiente</text><path d="M170,128 L180,128" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T0711diagcorreog-13)"/><rect x="182" y="104" width="160" height="48" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="262.0" y="121.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Fecha y hora</text><text x="262.0" y="134.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">certificados y TLS</text><path d="M342,128 L352,128" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T0711diagcorreog-13)"/><rect x="354" y="104" width="160" height="48" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="434.0" y="121.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Sincronización</text><text x="434.0" y="134.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">activada, batería, datos</text><path d="M514,128 L524,128" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T0711diagcorreog-13)"/><rect x="526" y="104" width="160" height="48" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="606.0" y="121.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">¿Otros usuarios?</text><text x="606.0" y="134.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">incidencia del servicio</text><path d="M606,76 L606,90 L90,90 L90,104" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T0711diagcorreog-13)"/><text x="350" y="16" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Correo que no sincroniza: de menor a mayor impacto</text><text x="350" y="172" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Envía y no recibe → IMAP/Exchange · recibe y no envía → SMTP (puerto, TLS, autenticación)</text><text x="350" y="190" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b26a00" dominant-baseline="middle">No empezar borrando la cuenta ni restableciendo el terminal: primero observar y aislar</text></svg>
+</figure>
 <div class="tabla-wrap"><table class="tabla-tema">
 <thead>
 <tr>
@@ -343,38 +498,63 @@
 <tr>
 <td><strong>El correo leído en el móvil no aparece en el PC</strong></td>
 <td>Cuenta configurada por <strong>POP3</strong></td>
-<td>Reconfigurar con ActiveSync/Outlook o IMAP</td>
+<td>Reconfigurar con Exchange/Outlook o IMAP</td>
 </tr>
 <tr>
-<td><strong>No ve el calendario en el móvil</strong></td>
-<td>Cuenta solo de correo (IMAP)</td>
-<td>Configurar ActiveSync/Outlook</td>
+<td><strong>Correo sí, calendario no</strong></td>
+<td>Servicio de calendario desactivado o cuenta solo IMAP</td>
+<td>Servicios activos en la cuenta; Exchange/Outlook</td>
 </tr>
 <tr>
-<td><strong>La tableta no se conecta al wifi corporativo</strong></td>
-<td>Falta el certificado de la CA o del dispositivo, o ha caducado</td>
+<td><strong>Envía pero no recibe</strong></td>
+<td>Fallo de IMAP/Exchange</td>
+<td>Servidor, autenticación, sincronización</td>
+</tr>
+<tr>
+<td><strong>Recibe pero no envía</strong></td>
+<td>Fallo de SMTP</td>
+<td>Servidor y puerto (587/465), TLS, autenticación</td>
+</tr>
+<tr>
+<td><strong>Tras cambiar la contraseña, deja de sincronizar</strong></td>
+<td>Token o credenciales caducados</td>
+<td>Volver a autenticar en la app; MFA; bloqueo de cuenta</td>
+</tr>
+<tr>
+<td><strong>Tableta sin wifi corporativo</strong></td>
+<td>Certificado caducado o CA ausente</td>
 <td>Perfil del MDM; fecha del certificado; log del RADIUS</td>
 </tr>
 <tr>
-<td><strong>No llega a las aplicaciones internas fuera de la oficina</strong></td>
-<td>VPN no configurada o desconectada</td>
-<td>Perfil VPN; estado del túnel</td>
+<td><strong>VPN que no conecta</strong></td>
+<td>Sin conectividad, certificado o MFA</td>
+<td>Probar Internet primero; certificado; servidor</td>
 </tr>
 <tr>
-<td><strong>El MDM marca el móvil como no conforme</strong></td>
-<td>Root/jailbreak, sistema sin actualizar o sin PIN</td>
-<td>Revisar el motivo en la consola (T16)</td>
+<td><strong>Bluetooth que no empareja</strong></td>
+<td>Visibilidad, perfil o permiso</td>
+<td>Modo de emparejamiento; perfil compatible; permisos</td>
 </tr>
 <tr>
-<td><strong>El usuario no recibe correo en tiempo real</strong></td>
-<td>Ahorro de energía o sincronización manual</td>
-<td>Ajustes de batería y de la cuenta</td>
+<td><strong>Datos por la línea equivocada</strong></td>
+<td>Dual SIM mal configurado</td>
+<td>Línea de datos predeterminada</td>
+</tr>
+<tr>
+<td><strong>«No me llegan los correos»</strong></td>
+<td>Solo fallan las notificaciones</td>
+<td>Correo sincronizado en la app; permisos y batería</td>
+</tr>
+<tr>
+<td><strong>MDM marca el móvil como no conforme</strong></td>
+<td>Root, sin actualizar o sin PIN</td>
+<td>Motivo en la consola (T16)</td>
 </tr>
 </tbody>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>💡 <strong>Para el caso práctico</strong><br>Para cualquier dispositivo, responde con la cadena: <strong>inscripción en el MDM → modo → perfiles (wifi con certificado, VPN, correo) → apps → políticas → pruebas</strong>. Nada a mano si hay MDM.</th>
+<th>💡 <strong>Para el caso práctico</strong><br>Para un dispositivo nuevo: <strong>inscripción → modo → perfiles (wifi con certificado, VPN, correo) → apps → políticas → pruebas</strong>. Para una incidencia: <strong>síntoma → hipótesis → comprobaciones → aislamiento → solución → escalado</strong>, sin empezar reseteando.</th>
 </tr>
 </table></div>
 <h2 id="7-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">7. Lo que cayó en el examen de 2023</h2>
@@ -390,7 +570,7 @@
 <tr>
 <td>Caso 5</td>
 <td>Aprovisionar <strong>tabletas Android de registro</strong> por wifi con MDM</td>
-<td>Android Enterprise en <strong>modo dedicado</strong>, wifi con certificado, app de firma (T16)</td>
+<td>Modo <strong>dedicado</strong>, wifi con certificado, app de firma (T16)</td>
 </tr>
 <tr>
 <td>Test 25</td>
@@ -401,12 +581,18 @@
 </table></div>
 <h2 id="8-anclas-de-memoria" class="tema-h2">8. Anclas de memoria</h2>
 <ul class="tema-lista">
-<li><strong>Android = núcleo Linux, AOSP + GMS, fragmentación · iOS = Apple, XNU, cerrado.</strong></li>
-<li><strong>Sandbox + permisos + cifrado + arranque verificado · root/jailbreak = adiós a la seguridad.</strong></li>
-<li><strong>Android Enterprise: totalmente gestionado, perfil de trabajo, dedicado · Apple: ABM + ADE + supervisado.</strong></li>
-<li><strong>Wifi Enterprise en el móvil = certificado del dispositivo + certificado de la CA, por MDM.</strong></li>
-<li><strong>IMAP sincroniza · POP3 descarga · SMTP envía · ActiveSync = todo + políticas + borrado remoto.</strong></li>
-<li><strong>IMAPS 993 · POP3S 995 · SMTP de envío 587.</strong></li>
+<li><strong>Android = Linux, AOSP + GMS, fragmentación · iOS = Apple, ecosistema integrado.</strong></li>
+<li><strong>Sistema operativo ≠ firmware ≠ app · cuenta del sistema ≠ cuenta corporativa.</strong></li>
+<li><strong>Sandbox + permisos + cifrado · root/jailbreak = adiós a la seguridad.</strong></li>
+<li><strong>SIM → registro → datos → APN → IP → servicio · cobertura ≠ datos.</strong></li>
+<li><strong>Wifi conectado ≠ Internet · Enterprise = certificado del dispositivo + de la CA.</strong></li>
+<li><strong>NFC centímetros · bluetooth metros con emparejamiento (A2DP, HFP, HID).</strong></li>
+<li><strong>Tethering: el móvil hace de router · la VPN necesita conectividad previa.</strong></li>
+<li><strong>SMTP envía (587/465) · IMAP sincroniza (993) · POP3 descarga (995).</strong></li>
+<li><strong>Push: el servidor avisa · fetch: el cliente pregunta.</strong></li>
+<li><strong>Exchange = plataforma · ActiveSync = protocolo · Autodiscover = configuración automática.</strong></li>
+<li><strong>Cuenta ≠ buzón ≠ app · sincronización ≠ copia · notificación ≠ sincronización.</strong></li>
+<li><strong>OAuth = tokens · MFA = varios factores (≠ MDM) · fecha y hora automáticas.</strong></li>
 </ul>
 <h2 id="9-no-confundir" class="tema-h2">9. No confundir</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -418,42 +604,100 @@
 </thead>
 <tbody>
 <tr>
+<td><strong>Android</strong></td>
+<td><strong>iOS</strong> («abierto/cerrado» es una simplificación)</td>
+</tr>
+<tr>
+<td><strong>Sistema operativo</strong></td>
+<td><strong>Firmware</strong> y <strong>app</strong></td>
+</tr>
+<tr>
 <td><strong>AOSP</strong> (abierto)</td>
-<td><strong>GMS</strong> (servicios propietarios de Google)</td>
+<td><strong>GMS</strong> (servicios de Google)</td>
 </tr>
 <tr>
-<td><strong>Root</strong> (Android)</td>
-<td><strong>Jailbreak</strong> (iOS)</td>
+<td><strong>SIM</strong></td>
+<td><strong>eSIM</strong> (perfil descargable)</td>
 </tr>
 <tr>
-<td><strong>IMAP</strong> (sincroniza)</td>
-<td><strong>POP3</strong> (descarga)</td>
+<td><strong>SIM</strong> (abonado)</td>
+<td><strong>IMEI</strong> (terminal)</td>
 </tr>
 <tr>
-<td><strong>ActiveSync</strong> (Microsoft, políticas)</td>
-<td><strong>CalDAV/CardDAV</strong> (estándares abiertos)</td>
+<td><strong>Datos móviles</strong></td>
+<td><strong>Wifi</strong></td>
 </tr>
 <tr>
-<td><strong>Perfil de trabajo</strong> (BYOD)</td>
-<td><strong>Dispositivo dedicado</strong> (quiosco)</td>
+<td><strong>Roaming de datos</strong> (ajuste)</td>
+<td><strong>Handover</strong> (T6)</td>
 </tr>
 <tr>
-<td><strong>APN</strong> (operador móvil)</td>
-<td><strong>SSID</strong> (red wifi)</td>
+<td><strong>NFC</strong> (centímetros)</td>
+<td><strong>Bluetooth</strong> (metros)</td>
 </tr>
 <tr>
-<td><strong>Certificado del dispositivo</strong> (identifica a la tableta)</td>
-<td><strong>Certificado de la CA</strong> (permite validar al servidor)</td>
+<td><strong>Zona wifi del móvil</strong></td>
+<td><strong>Wifi cliente</strong></td>
+</tr>
+<tr>
+<td><strong>VPN</strong> (túnel sobre una conexión)</td>
+<td><strong>Conexión a Internet</strong></td>
+</tr>
+<tr>
+<td><strong>Cuenta</strong> · <strong>buzón</strong> · <strong>app</strong></td>
+<td>identidad · datos en el servidor · cliente</td>
+</tr>
+<tr>
+<td><strong>SMTP</strong> (envía)</td>
+<td><strong>IMAP</strong> (sincroniza) y <strong>POP3</strong> (descarga)</td>
+</tr>
+<tr>
+<td><strong>Exchange</strong> (plataforma)</td>
+<td><strong>Exchange ActiveSync</strong> (protocolo)</td>
+</tr>
+<tr>
+<td><strong>Push</strong></td>
+<td><strong>Fetch</strong></td>
+</tr>
+<tr>
+<td><strong>Sincronización</strong></td>
+<td><strong>Copia de seguridad</strong></td>
+</tr>
+<tr>
+<td><strong>Autenticación</strong></td>
+<td><strong>Cifrado</strong></td>
+</tr>
+<tr>
+<td><strong>TLS</strong> (transporte)</td>
+<td><strong>Cifrado de extremo a extremo</strong></td>
+</tr>
+<tr>
+<td><strong>MFA</strong> (autenticación)</td>
+<td><strong>MDM</strong> (gestión)</td>
+</tr>
+<tr>
+<td><strong>Notificación</strong></td>
+<td><strong>Sincronización</strong></td>
+</tr>
+<tr>
+<td><strong>Perfil de trabajo</strong></td>
+<td><strong>Dispositivo dedicado</strong></td>
 </tr>
 </tbody>
 </table></div>
 <h2 id="10-posibles-trampas-de-examen" class="tema-h2">10. Posibles trampas de examen</h2>
 <ul class="tema-lista">
-<li>Pensar que Android es un sistema cerrado de Google.</li>
-<li>Creer que POP3 mantiene sincronizados varios dispositivos.</li>
-<li>Confundir el APN con el SSID.</li>
+<li>«POP3 siempre elimina el correo del servidor» → <strong>falso</strong>.</li>
+<li>«SMTP se usa para enviar correo» → <strong>verdadero</strong>.</li>
+<li>«IMAP facilita la sincronización entre varios dispositivos» → <strong>verdadero</strong>.</li>
+<li>«Una VPN da conexión a Internet por sí sola» → <strong>falso</strong>.</li>
+<li>«Estar conectado al wifi garantiza acceso a Internet» → <strong>falso</strong>.</li>
+<li>«Eliminar una cuenta del móvil elimina el buzón del servidor» → <strong>falso</strong>.</li>
+<li>«Sincronización y copia de seguridad son equivalentes» → <strong>falso</strong>.</li>
+<li>«Exchange y Exchange ActiveSync son lo mismo» → <strong>falso</strong>.</li>
+<li>«Una fecha u hora incorrectas pueden provocar errores TLS» → <strong>verdadero</strong>.</li>
+<li>Confundir el APN con el SSID, o la MFA con el MDM.</li>
 <li>Olvidar el certificado de la CA al configurar wifi Enterprise.</li>
-<li>Pensar que SMTP sirve para recibir el correo en el móvil.</li>
 <li>Creer que un móvil con root es aceptable si tiene antivirus.</li>
 </ul>
 <h2 id="11-matriz-de-memorizacion" class="tema-h2">11. Matriz de memorización</h2>
@@ -467,27 +711,35 @@
 <tbody>
 <tr>
 <td>Android</td>
-<td>Linux · ART · AOSP + GMS · Android Enterprise · Knox</td>
+<td>Linux · ART · AOSP + GMS · APK/AAB · Android Enterprise · Knox</td>
 </tr>
 <tr>
 <td>iOS</td>
-<td>XNU · App Store · Apple Business Manager · ADE · supervisado</td>
+<td>XNU · App Store · cuenta de Apple · Apple Business Manager · ADE · supervisado</td>
 </tr>
 <tr>
-<td>Seguridad</td>
-<td>Sandbox · permisos · cifrado · arranque verificado · sin root/jailbreak</td>
+<td>Datos</td>
+<td>SIM/eSIM · dual SIM · APN · roaming de datos · modo de red</td>
+</tr>
+<tr>
+<td>Wifi</td>
+<td>SSID · PSK/SAE · Enterprise (EAP, certificado, CA) · DHCP/estática · MAC aleatoria</td>
+</tr>
+<tr>
+<td>Otras</td>
+<td>Bluetooth (A2DP, HFP, HID) · NFC · USB · tethering (NAT, DHCP) · VPN</td>
 </tr>
 <tr>
 <td>Correo</td>
-<td>IMAP 143/993 · POP3 110/995 · SMTP 587/465/25 · EAS sobre HTTPS</td>
+<td>SMTP 587/465/25 · IMAP 143/993 · POP3 110/995 · Exchange HTTPS 443 · CalDAV/CardDAV</td>
 </tr>
 <tr>
-<td>Comunicaciones</td>
-<td>Wifi (PSK o Enterprise + CA) · APN · VPN (IKEv2, SSL) · BT · NFC</td>
+<td>Sincronización</td>
+<td>Push · fetch · manual · Autodiscover · OAuth + MFA</td>
 </tr>
 <tr>
 <td>Modos</td>
-<td>Totalmente gestionado · perfil de trabajo · dedicado</td>
+<td>Totalmente gestionado · perfil de trabajo · dedicado (T16)</td>
 </tr>
 </tbody>
 </table></div>
@@ -498,97 +750,144 @@ a) XNU · b) Windows NT · c) Linux · d) BSD</p>
 a) GMS · b) ART · c) AOSP · d) Knox</p>
 <p><strong>3.</strong> La fragmentación de Android consiste en:<br />
 a) Que las apps se dividen en trozos · b) Que conviven muchas versiones porque las actualizaciones dependen del fabricante · c) Que el almacenamiento se fragmenta · d) Que hay muchas tiendas</p>
-<p><strong>4.</strong> El mecanismo que impide que una app lea los datos de otra es:<br />
+<p><strong>4.</strong> El software de bajo nivel ligado al hardware del módem es:<br />
+a) Una app · b) El sistema operativo · c) El firmware o baseband · d) El APN</p>
+<p><strong>5.</strong> El mecanismo que impide que una app lea los datos de otra es:<br />
 a) El sandbox · b) El APN · c) El MDM · d) El tethering</p>
-<p><strong>5.</strong> El riesgo de hacer root o jailbreak a un móvil corporativo es:<br />
-a) Gastar más batería · b) Ninguno · c) Perder la cobertura · d) Anular protecciones del sistema</p>
-<p><strong>6.</strong> El protocolo que sincroniza correo, calendario y contactos con políticas y borrado remoto es:<br />
-a) POP3 · b) SMTP · c) Exchange ActiveSync · d) FTP</p>
-<p><strong>7.</strong> Un usuario lee el correo en el móvil y luego no lo encuentra en el PC. Probablemente usa:<br />
-a) IMAP · b) CalDAV · c) ActiveSync · d) POP3</p>
-<p><strong>8.</strong> IMAP sobre TLS usa el puerto:<br />
-a) 110 · b) 443 · c) 25 · d) 993</p>
-<p><strong>9.</strong> El cliente de correo envía los mensajes por:<br />
-a) IMAP · b) SMTP · c) POP3 · d) CardDAV</p>
-<p><strong>10.</strong> Para un SSID con EAP-TLS, la tableta necesita:<br />
+<p><strong>6.</strong> Un móvil tiene cobertura pero no navega por datos. NO es una causa probable:<br />
+a) Datos móviles desactivados · b) APN incorrecto · c) Roaming de datos desactivado en el extranjero · d) El color de la carcasa</p>
+<p><strong>7.</strong> El APN de un móvil es:<br />
+a) El nombre de la red wifi · b) La dirección del MDM · c) El PIN de la SIM · d) El acceso a datos del operador</p>
+<p><strong>8.</strong> «Conectado al wifi» garantiza:<br />
+a) Acceso a Internet · b) DNS funcionando · c) Solo la asociación radio con el AP · d) VPN activa</p>
+<p><strong>9.</strong> Para un SSID con EAP-TLS, la tableta necesita:<br />
 a) Solo la clave del wifi · b) Su certificado y el de la CA · c) Una MAC fija · d) Un APN privado</p>
-<p><strong>11.</strong> El APN de un móvil es:<br />
-a) El nombre de la red wifi · b) La dirección del MDM · c) El PIN de la SIM · d) El punto de acceso a datos del operador</p>
+<p><strong>10.</strong> El perfil bluetooth para teclados y ratones es:<br />
+a) A2DP · b) HFP · c) HID · d) NFC</p>
+<p><strong>11.</strong> NFC se caracteriza por:<br />
+a) Alcance de centímetros · b) Alcance de kilómetros · c) Ser una red móvil · d) Necesitar APN</p>
 <p><strong>12.</strong> Compartir los datos móviles con otros equipos se llama:<br />
 a) Tethering (zona wifi) · b) Roaming · c) Handover · d) Sandbox</p>
-<p><strong>13.</strong> La MAC aleatoria de un móvil sirve para:<br />
-a) Acelerar la conexión · b) Evitar el rastreo entre redes wifi · c) Cifrar el tráfico · d) Ahorrar batería</p>
-<p><strong>14.</strong> El programa de Apple para inscribir automáticamente sus dispositivos en el MDM es:<br />
-a) ADE (Apple Business Manager) · b) iCloud · c) TestFlight · d) Find My</p>
-<p><strong>15.</strong> Para una tableta que solo debe ejecutar la app de firma se usa el modo:<br />
+<p><strong>13.</strong> Si un móvil no tiene ni wifi ni datos, la VPN:<br />
+a) Da Internet · b) No puede conectar: necesita conectividad previa · c) Activa los datos · d) Cambia el APN</p>
+<p><strong>14.</strong> El cliente de correo envía los mensajes por:<br />
+a) IMAP · b) SMTP · c) POP3 · d) CardDAV</p>
+<p><strong>15.</strong> Sobre POP3, es correcto que:<br />
+a) Siempre borra el correo del servidor · b) Sincroniza estados entre dispositivos · c) Descarga los mensajes y puede conservar copia en el servidor · d) Es para enviar</p>
+<p><strong>16.</strong> IMAP sobre TLS implícito usa el puerto:<br />
+a) 110 · b) 443 · c) 25 · d) 993</p>
+<p><strong>17.</strong> El puerto de envío autenticado desde un cliente (submission) es:<br />
+a) 587 · b) 993 · c) 110 · d) 143</p>
+<p><strong>18.</strong> En el modo push:<br />
+a) El cliente pregunta cada 15 minutos · b) El servidor avisa en cuanto hay cambios · c) Solo se actualiza a mano · d) No hay notificaciones</p>
+<p><strong>19.</strong> Exchange ActiveSync es:<br />
+a) La plataforma de correo de Microsoft · b) Un protocolo de sincronización móvil · c) Un antivirus · d) Un tipo de SIM</p>
+<p><strong>20.</strong> Un usuario elimina la cuenta corporativa de su móvil. Su buzón:<br />
+a) Se borra del servidor · b) Sigue en el servidor · c) Se mueve al móvil · d) Pasa a POP3</p>
+<p><strong>21.</strong> La sincronización del correo:<br />
+a) Es una copia de seguridad · b) Propaga también los borrados · c) Impide perder datos · d) Solo afecta a las notificaciones</p>
+<p><strong>22.</strong> Tras cambiar la contraseña corporativa, el móvil deja de sincronizar. Lo primero es:<br />
+a) Restaurar el terminal · b) Volver a autenticarse en la app (token o credenciales) · c) Cambiar de operador · d) Comprar otro móvil</p>
+<p><strong>23.</strong> Una fecha u hora incorrectas en el móvil pueden provocar:<br />
+a) Errores de certificados y TLS · b) Más batería · c) Mejor cobertura · d) Nada</p>
+<p><strong>24.</strong> La MFA es:<br />
+a) Gestión del dispositivo · b) Autenticación con varios factores · c) Un protocolo de correo · d) Un modo de red</p>
+<p><strong>25.</strong> Para una tableta que solo debe ejecutar la app de firma se usa el modo:<br />
 a) Perfil de trabajo · b) Dedicado (quiosco) · c) Sin gestión · d) Root</p>
-<p><strong>16.</strong> El perfil de trabajo de Android Enterprise está pensado para:<br />
-a) Separar datos personales y corporativos en el mismo dispositivo · b) Bloquear todas las apps · c) Dispositivos de una sola app · d) Servidores</p>
-<p><strong>17.</strong> Los estándares abiertos para calendario y contactos son:<br />
-a) CalDAV y CardDAV · b) IMAP y POP3 · c) SMTP y SNMP · d) LDAP y DNS</p>
-<p><strong>18.</strong> NFC permite, entre otras cosas:<br />
-a) Navegar por 5G · b) Conectarse a una VPN · c) Pagar con el móvil y leer el DNIe · d) Hacer de punto de acceso</p>
-<p><strong>Soluciones:</strong> 1 c · 2 c · 3 b · 4 a · 5 d · 6 c · 7 d · 8 d · 9 b · 10 b · 11 d · 12 a · 13 b · 14 a · 15 b · 16 a · 17 a · 18 c</p>
+<p><strong>Soluciones:</strong> 1 c · 2 c · 3 b · 4 c · 5 a · 6 d · 7 d · 8 c · 9 b · 10 c · 11 a · 12 a · 13 b · 14 b · 15 c · 16 d · 17 a · 18 b · 19 b · 20 b · 21 b · 22 b · 23 a · 24 b · 25 b</p>
 <h2 id="13-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">13. Posibles preguntas cortas (con esquema de respuesta)</h2>
-<p><strong>1. Diferencias entre IMAP, POP3 y ActiveSync para el correo en el móvil.</strong><br />
-IMAP: el correo en el servidor y estados sincronizados · POP3: descarga local, no apto para varios dispositivos · ActiveSync: correo, calendario y contactos, push, políticas y borrado remoto · puertos seguros y SMTP para el envío.</p>
-<p><strong>2. Medidas de seguridad de un móvil corporativo.</strong><br />
-PIN o biometría, cifrado, actualizaciones · apps de la tienda gestionada · sin root ni jailbreak · separación de datos · VPN y wifi seguras · MDM con bloqueo y borrado remoto.</p>
-<p><strong>3. Android frente a iOS en la empresa.</strong><br />
-Arquitectura y licencia · fragmentación y años de actualizaciones · tiendas · Android Enterprise frente a Apple Business Manager, ADE y supervisión.</p>
-<p><strong>4. Cómo se configura una tableta para el wifi corporativo con EAP-TLS.</strong><br />
-Perfil del MDM con SSID y EAP-TLS · certificado del dispositivo · certificado de la CA · validación mutua con el RADIUS · VLAN asignada · renovación de certificados.</p>
-<p><strong>5. Pasos para poner en marcha un dispositivo corporativo.</strong><br />
-Inventario · inscripción automática · modo · comunicaciones por perfil · apps · políticas · pruebas y entrega.</p>
-<p><strong>6. Comunicaciones de un móvil y cómo se configuran con seguridad.</strong><br />
-Wifi, datos y APN, VPN, bluetooth, NFC, zona wifi · criterios de seguridad de cada una · despliegue por MDM.</p>
+<p>Estructura modelo: <strong>definición → funcionamiento → configuración → aplicación</strong>.</p>
+<p><strong>1. Android e iOS en la administración básica.</strong><br />
+Ecosistema y distribución · actualizaciones y fragmentación · permisos y sandbox · cuentas · gestión empresarial (Android Enterprise, ABM/ADE).</p>
+<p><strong>2. Qué es un APN y por qué puede fallar la conexión de datos.</strong><br />
+Acceso a la red de datos del operador · parámetros · APN privado · cobertura ≠ datos · cadena SIM → registro → datos → APN → IP.</p>
+<p><strong>3. Tethering.</strong><br />
+Compartir datos por wifi, USB o bluetooth · el móvil hace de router (NAT, DHCP) · restricciones corporativas · consumo de datos.</p>
+<p><strong>4. SMTP, POP3 e IMAP.</strong><br />
+Enviar, descargar, sincronizar · puertos 587/465/25, 110/995, 143/993 · STARTTLS y TLS implícito · por qué POP3 no sirve para varios dispositivos.</p>
+<p><strong>5. Push y fetch.</strong><br />
+Quién inicia · efecto en la inmediatez y la batería · restricciones de segundo plano · notificación ≠ sincronización.</p>
+<p><strong>6. Exchange ActiveSync y Autodiscover.</strong><br />
+Protocolo frente a plataforma · correo, calendario, contactos, políticas · autenticación moderna y MFA · Autodiscover.</p>
+<p><strong>7. Sincronización y copia de seguridad.</strong><br />
+Coherencia frente a copia recuperable · los borrados se propagan · cuenta, buzón y app.</p>
+<p><strong>8. Cómo diagnosticar un móvil que no sincroniza el correo.</strong><br />
+Conectividad · alcance · cuenta y credenciales · MFA · fecha y hora · sincronización y batería · otros usuarios · aislar envío y recepción · no empezar reseteando.</p>
 <h2 id="14-casos-practicos" class="tema-h2">14. Casos prácticos</h2>
-<p><strong>Mini caso 1 — Correo que desaparece.</strong> Un usuario con móvil nuevo no ve en el PC el correo que ha leído en el móvil, ni las reuniones del calendario.<br />
-<em>Esquema:</em> cuenta configurada por POP3 (o solo IMAP) · eliminarla y configurar ActiveSync/Outlook · comprobar si los mensajes siguen en el servidor · desplegar la configuración desde el MDM · registrar la incidencia.</p>
-<p><strong>Mini caso 2 — Tableta sin wifi.</strong> Una tableta de registro deja de conectarse al SSID de registro un lunes por la mañana.<br />
-<em>Esquema:</em> certificado caducado o perfil retirado · consola del MDM y log del RADIUS · renovar el certificado por el MDM · revisar la caducidad del resto de la flota.</p>
-<p><strong>Mini caso 3 — Móvil no conforme.</strong> El MDM bloquea el acceso al correo de un móvil y lo marca como «no conforme».<br />
-<em>Esquema:</em> ver el motivo (sin PIN, sistema desactualizado, root) · corregir con el usuario · si hay root, restaurar el dispositivo · comprobar el acceso tras la corrección.</p>
-<p><strong>Supuesto desarrollado — Tabletas para el registro municipal (supuesto).</strong> El registro va a usar 10 tabletas Android para que la ciudadanía firme sus solicitudes. Deben conectarse solo al wifi del registro, ejecutar solo la app de firma y poder bloquearse si se pierden.</p>
+<p>Para cada caso: <strong>síntoma → hipótesis → comprobaciones → aislamiento → solución → escalado</strong>.</p>
+<p><strong>Mini caso 1 — Móvil sin datos.</strong> Un técnico no tiene datos en un móvil corporativo nuevo, aunque tiene rayas.<br />
+<em>Esquema:</em> datos activados · línea de datos (dual SIM) · roaming si está fuera · APN · reiniciar la conexión · comprobar con otra SIM · incidencia con el operador si persiste (T6).</p>
+<p><strong>Mini caso 2 — Wifi sin servicios.</strong> Una tableta aparece conectada al wifi pero no abre la aplicación de citas.<br />
+<em>Esquema:</em> IP recibida (¿169.254?) · puerta de enlace y DNS · VLAN del SSID (T4) · portal o proxy · el servicio en otro equipo.</p>
+<p><strong>Mini caso 3 — Cambio de contraseña.</strong> Tras cambiar su contraseña, a una usuaria le deja de llegar el correo al móvil.<br />
+<em>Esquema:</em> volver a autenticarse en la app · aprobar la MFA · comprobar bloqueo de la cuenta · conectividad · no borrar la cuenta como primer paso.</p>
+<p><strong>Mini caso 4 — Correo sí, calendario no.</strong> Un concejal recibe el correo en el móvil pero no ve las reuniones.<br />
+<em>Esquema:</em> servicio de calendario activado en la cuenta · cuenta por IMAP (sin calendario) → Exchange/Outlook · permisos de la app de calendario.</p>
+<p><strong>Mini caso 5 — Recibe pero no envía.</strong> Un usuario recibe correo pero sus envíos se quedan en la bandeja de salida.<br />
+<em>Esquema:</em> SMTP · servidor y puerto (587 o 465) · TLS · autenticación del envío · restricciones de la red (puerto bloqueado).</p>
+<p><strong>Mini caso 6 — Wifi Enterprise caído tras caducar un certificado.</strong> Varias tabletas dejan de conectarse el mismo día.<br />
+<em>Esquema:</em> certificado del dispositivo o de la CA caducado · log del RADIUS · renovar por el MDM (T16) · revisar fecha y hora · calendario de caducidades.</p>
+<p><strong>Mini caso 7 — VPN que no conecta.</strong> Un técnico en la calle no consigue conectar la VPN.<br />
+<em>Esquema:</em> primero, ¿hay Internet? (datos o wifi) · certificado y credenciales · MFA · servidor accesible · cliente actualizado (T15).</p>
+<p><strong>Mini caso 8 — «No me llegan los correos».</strong> Un usuario se queja de que no le avisan de los correos.<br />
+<em>Esquema:</em> abrir la app: ¿están sincronizados? · si lo están, son <strong>notificaciones</strong>: permisos, modo no molestar, ahorro de batería · si no, flujo de sincronización.</p>
+<p><strong>Supuesto desarrollado 1 — Tabletas para el registro municipal (supuesto).</strong> El registro va a usar 10 tabletas Android para que la ciudadanía firme sus solicitudes. Deben conectarse solo al wifi del registro, ejecutar solo la app de firma y poder bloquearse si se pierden.</p>
 <p><em>a) Compra y alta.</em><br />
 Modelos compatibles con Android Enterprise y con años de actualizaciones garantizados · alta en <strong>zero-touch</strong> · inventario de IMEI, número de serie y ubicación.</p>
 <p><em>b) Modo y aplicaciones.</em><br />
-<strong>Modo dedicado (quiosco)</strong> con la app de firma fijada · sin acceso a ajustes, cámara ni tienda pública · actualizaciones de la app desde la tienda gestionada.</p>
+<strong>Modo dedicado</strong> con la app de firma fijada · sin ajustes, cámara ni tienda pública · actualizaciones desde la tienda gestionada.</p>
 <p><em>c) Comunicaciones.</em><br />
-Perfil wifi del SSID de registro con <strong>EAP-TLS</strong>: certificado de cada tableta y certificado de la CA, desplegados por el MDM · sin datos móviles ni bluetooth · VLAN 16 (T4, T5).</p>
-<p><em>d) Seguridad y operación.</em><br />
-PIN de administración, cifrado y parches · localización, bloqueo y borrado remoto (T16) · control de la caducidad de los certificados · procedimiento ante pérdida o avería registrado en la herramienta de incidencias (T20).</p>
+Perfil wifi del SSID de registro con <strong>EAP-TLS</strong> (certificado de cada tableta y de la CA) por el MDM · sin datos móviles ni bluetooth · <strong>fecha y hora automáticas</strong> · VLAN 16 (T4, T5).</p>
+<p><em>d) Operación.</em><br />
+Control de caducidad de los certificados · procedimiento ante pérdida (bloqueo y borrado, T16) · incidencias registradas (T20).</p>
+<p><strong>Supuesto desarrollado 2 — Correo que no sincroniza en un móvil corporativo (supuesto).</strong> Una técnica de servicios sociales dice que «el correo del móvil no funciona desde ayer».</p>
+<p><em>a) Identificar.</em><br />
+¿Qué falla exactamente: recibir, enviar, calendario, notificaciones? · ¿desde cuándo y qué cambió (contraseña, actualización, viaje)?</p>
+<p><em>b) Aislar.</em><br />
+¿Navega por otras webs? (conectividad) · ¿solo ella o más usuarios? · envía y no recibe → IMAP/Exchange; recibe y no envía → SMTP.</p>
+<p><em>c) Comprobar de menor a mayor impacto.</em><br />
+Reautenticar en la app y aprobar la MFA · fecha y hora automáticas · sincronización activada y sin restricción de batería o datos · estado de la cuenta (bloqueo) · estado del servicio.</p>
+<p><em>d) Resolver y escalar.</em><br />
+Si es la cuenta o el servicio, escalar a Sistemas con los datos recogidos · solo si todo lo anterior falla, quitar y volver a añadir la cuenta (el buzón sigue en el servidor) · registrar la incidencia (T20).</p>
 <h2 id="15-repaso-visual-t7" class="tema-h2">15. Repaso visual · T7</h2>
 <figure class="tema-figura">
-<figcaption>Repaso 1 · Android e iOS</figcaption>
-<svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pilas de Android (Linux, HAL, ART, framework, apps) e iOS (XNU, Core OS, servicios, Cocoa Touch, apps)." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0701pilasa-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0701pilasv-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0701pilasm-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0701pilasg-8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><text x="175" y="16" text-anchor="middle" font-size="12.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Android (Google · AOSP + GMS)</text><text x="525" y="16" text-anchor="middle" font-size="12.5" font-weight="700" fill="#23272e" dominant-baseline="middle">iOS / iPadOS (Apple)</text><rect x="30" y="28" width="290" height="30" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="175.0" y="43.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Aplicaciones (APK/AAB)</text><rect x="380" y="28" width="290" height="30" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="525.0" y="43.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Aplicaciones (IPA)</text><rect x="30" y="62" width="290" height="30" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="175.0" y="77.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Framework de Android</text><rect x="380" y="62" width="290" height="30" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="525.0" y="77.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Cocoa Touch / frameworks</text><rect x="30" y="96" width="290" height="30" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="175.0" y="111.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">ART + bibliotecas nativas</text><rect x="380" y="96" width="290" height="30" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="525.0" y="111.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Servicios del sistema</text><rect x="30" y="130" width="290" height="30" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="175.0" y="145.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">HAL (abstracción del hardware)</text><rect x="380" y="130" width="290" height="30" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="525.0" y="145.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Core OS</text><rect x="30" y="164" width="290" height="30" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="175.0" y="179.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">Núcleo Linux</text><rect x="380" y="164" width="290" height="30" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="525.0" y="179.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">Núcleo XNU (Darwin)</text><text x="175" y="212" text-anchor="middle" font-size="10.5" font-weight="600" fill="#b26a00" dominant-baseline="middle">muchos fabricantes · actualizaciones según fabricante</text><text x="175" y="228" text-anchor="middle" font-size="10.5" font-weight="600" fill="#b26a00" dominant-baseline="middle">→ fragmentación</text><text x="525" y="212" text-anchor="middle" font-size="10.5" font-weight="600" fill="#2e7d3c" dominant-baseline="middle">un solo fabricante · actualizaciones centralizadas</text><text x="525" y="228" text-anchor="middle" font-size="10.5" font-weight="600" fill="#2e7d3c" dominant-baseline="middle">durante muchos años</text></svg>
+<figcaption>Repaso 1 · Comunicaciones</figcaption>
+<svg viewBox="0 0 700 258" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Comunicaciones de un móvil alrededor del dispositivo." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0704comunicacionesa-14" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0704comunicacionesv-14" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0704comunicacionesm-14" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0704comunicacionesg-14" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="290" y="86" width="120" height="60" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="108.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">Dispositivo</text><text x="350.0" y="123.5" text-anchor="middle" font-size="10.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">corporativo</text><rect x="20" y="12" width="200" height="44" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="120.0" y="27.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Wifi</text><text x="120.0" y="41.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">SSID · WPA3 / Enterprise</text><line x1="220" y1="34" x2="290" y2="116" stroke="#5a5652" stroke-width="1.2" stroke-dasharray="5 3"/><rect x="480" y="12" width="200" height="44" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="580.0" y="27.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Datos / APN</text><text x="580.0" y="41.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">SIM o eSIM · APN privado</text><line x1="480" y1="34" x2="410" y2="116" stroke="#5a5652" stroke-width="1.2" stroke-dasharray="5 3"/><rect x="20" y="96" width="200" height="44" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="120.0" y="111.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">VPN</text><text x="120.0" y="125.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">IKEv2 · SSL (app) · siempre activa</text><line x1="220" y1="118" x2="290" y2="116" stroke="#5a5652" stroke-width="1.2" stroke-dasharray="5 3"/><rect x="480" y="96" width="200" height="44" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="580.0" y="111.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Bluetooth · NFC</text><text x="580.0" y="125.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">emparejar con PIN · pagos, DNIe</text><line x1="480" y1="118" x2="410" y2="116" stroke="#5a5652" stroke-width="1.2" stroke-dasharray="5 3"/><rect x="20" y="180" width="200" height="44" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="120.0" y="195.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Zona wifi (tethering)</text><text x="120.0" y="209.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">comparte datos: suele prohibirse</text><line x1="220" y1="202" x2="290" y2="116" stroke="#5a5652" stroke-width="1.2" stroke-dasharray="5 3"/><rect x="480" y="180" width="200" height="44" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="580.0" y="195.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Ubicación</text><text x="580.0" y="209.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">permisos por app</text><line x1="480" y1="202" x2="410" y2="116" stroke="#5a5652" stroke-width="1.2" stroke-dasharray="5 3"/><text x="350" y="246" text-anchor="middle" font-size="11" font-weight="600" fill="#2e7d3c" dominant-baseline="middle">En una flota corporativa, todo esto llega por perfil desde el MDM (T16), no se configura a mano</text></svg>
 </figure>
 <figure class="tema-figura">
-<figcaption>Repaso 2 · Sandbox</figcaption>
-<svg viewBox="0 0 700 214" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Apps aisladas en su sandbox y permisos para acceder a recursos." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0702sandboxa-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0702sandboxv-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0702sandboxm-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0702sandboxg-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="680" height="150" rx="10" fill="#f0efed" stroke="#5a5652" stroke-width="1.2"/><text x="350" y="28" text-anchor="middle" font-size="11.5" font-weight="700" fill="#5a5652" dominant-baseline="middle">Sistema operativo móvil</text><rect x="30" y="40" width="200" height="70" rx="8" fill="#ffffff" stroke="#003da5" stroke-width="2"/><text x="130" y="58" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">App correo</text><text x="130" y="78" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">sus datos, aislados</text><text x="130" y="96" text-anchor="middle" font-size="10" font-weight="700" fill="#003da5" dominant-baseline="middle">sandbox</text><rect x="250" y="40" width="200" height="70" rx="8" fill="#ffffff" stroke="#003da5" stroke-width="2"/><text x="350" y="58" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">App firma</text><text x="350" y="78" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">sus datos, aislados</text><text x="350" y="96" text-anchor="middle" font-size="10" font-weight="700" fill="#003da5" dominant-baseline="middle">sandbox</text><rect x="470" y="40" width="200" height="70" rx="8" fill="#ffffff" stroke="#5a5652" stroke-width="2"/><text x="570" y="58" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">App juegos</text><text x="570" y="78" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">sus datos, aislados</text><text x="570" y="96" text-anchor="middle" font-size="10" font-weight="700" fill="#5a5652" dominant-baseline="middle">sandbox</text><line x1="230" y1="75" x2="250" y2="75" stroke="#b26a00" stroke-width="3"/><line x1="236" y1="68" x2="244" y2="82" stroke="#b26a00" stroke-width="3"/><text x="240" y="128" text-anchor="middle" font-size="10.5" font-weight="600" fill="#b26a00" dominant-baseline="middle">una app no lee los datos de otra</text><text x="560" y="128" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">cámara, ubicación, contactos…</text><text x="560" y="144" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">solo con PERMISO concedido</text><text x="350" y="184" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">Más: cifrado del almacenamiento · arranque verificado · chip de seguridad · bloqueo con PIN o biometría</text><text x="350" y="202" text-anchor="middle" font-size="11" font-weight="600" fill="#b26a00" dominant-baseline="middle">Root (Android) o jailbreak (iOS) desactivan estas protecciones: prohibidos en dispositivos corporativos</text></svg>
+<figcaption>Repaso 2 · Datos móviles</figcaption>
+<svg viewBox="0 0 700 142" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="De la SIM al servicio: registro, datos, APN, IP." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0708datosa-15" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0708datosv-15" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0708datosm-15" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0708datosg-15" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="30" width="105" height="56" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="62.5" y="51.6" text-anchor="middle" font-size="9.8" font-weight="700" fill="#23272e" dominant-baseline="middle">SIM / eSIM</text><text x="62.5" y="64.4" text-anchor="middle" font-size="8.3" font-weight="500" fill="#23272e" dominant-baseline="middle">activa, PIN, perfil</text><path d="M115,58 L123,58" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0708datosg-15)"/><rect x="125" y="30" width="105" height="56" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="177.5" y="51.6" text-anchor="middle" font-size="9.8" font-weight="700" fill="#23272e" dominant-baseline="middle">Registro</text><text x="177.5" y="64.4" text-anchor="middle" font-size="8.3" font-weight="500" fill="#23272e" dominant-baseline="middle">en la red del operador</text><path d="M230,58 L238,58" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0708datosg-15)"/><rect x="240" y="30" width="105" height="56" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="292.5" y="51.6" text-anchor="middle" font-size="9.8" font-weight="700" fill="#23272e" dominant-baseline="middle">Datos móviles</text><text x="292.5" y="64.4" text-anchor="middle" font-size="8.3" font-weight="500" fill="#23272e" dominant-baseline="middle">activados, línea correcta</text><path d="M345,58 L353,58" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0708datosg-15)"/><rect x="355" y="30" width="105" height="56" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="407.5" y="51.6" text-anchor="middle" font-size="9.8" font-weight="700" fill="#23272e" dominant-baseline="middle">APN</text><text x="407.5" y="64.4" text-anchor="middle" font-size="8.3" font-weight="500" fill="#23272e" dominant-baseline="middle">el del operador o privado</text><path d="M460,58 L468,58" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0708datosg-15)"/><rect x="470" y="30" width="105" height="56" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="522.5" y="51.6" text-anchor="middle" font-size="9.8" font-weight="700" fill="#23272e" dominant-baseline="middle">IP</text><text x="522.5" y="64.4" text-anchor="middle" font-size="8.3" font-weight="500" fill="#23272e" dominant-baseline="middle">asignada (CGNAT)</text><path d="M575,58 L583,58" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0708datosg-15)"/><rect x="585" y="30" width="105" height="56" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="637.5" y="51.6" text-anchor="middle" font-size="9.8" font-weight="700" fill="#ffffff" dominant-baseline="middle">Servicio</text><text x="637.5" y="64.4" text-anchor="middle" font-size="8.3" font-weight="500" fill="#ffffff" dominant-baseline="middle">DNS, aplicación</text><text x="350" y="16" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">De la SIM al servicio: si falla un eslabón, no hay datos</text><text x="350" y="112" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b26a00" dominant-baseline="middle">Tener cobertura NO garantiza datos: el APN, la provisión de la línea o el roaming de datos pueden fallar</text><text x="350" y="130" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">Dual SIM: comprobar qué línea se usa para datos y cuál para voz</text></svg>
 </figure>
 <figure class="tema-figura">
-<figcaption>Repaso 3 · Correo en el móvil</figcaption>
-<svg viewBox="0 0 700 232" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="IMAP sincroniza, POP3 descarga y ActiveSync sincroniza todo con políticas." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0703correoa-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0703correov-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0703correom-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0703correog-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="216" height="190" rx="8" fill="#ffffff" stroke="#c9c6c2" stroke-width="1"/><text x="118" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">IMAP</text><rect x="68" y="42" width="100" height="34" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="118.0" y="59.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Servidor</text><rect x="24" y="122" width="80" height="32" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="64.0" y="138.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Móvil</text><rect x="132" y="122" width="80" height="32" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="172.0" y="138.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">PC</text><path d="M100,76 L66,120" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0703correov-10)"/><path d="M66,120 L100,78" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0703correov-10)"/><path d="M136,76 L170,120" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0703correov-10)"/><path d="M170,120 L136,78" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0703correov-10)"/><text x="118" y="172" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">el correo vive en el servidor</text><text x="118" y="188" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">carpetas y estados sincronizados</text><rect x="242" y="10" width="216" height="190" rx="8" fill="#ffffff" stroke="#c9c6c2" stroke-width="1"/><text x="350" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#b26a00" dominant-baseline="middle">POP3</text><rect x="300" y="42" width="100" height="34" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="350.0" y="59.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Servidor</text><rect x="256" y="122" width="80" height="32" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="296.0" y="138.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Móvil</text><rect x="364" y="122" width="80" height="32" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="404.0" y="138.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">PC</text><path d="M332,76 L298,120" fill="none" stroke="#b26a00" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#T0703correom-10)"/><line x1="392" y1="80" x2="404" y2="116" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="3 3"/><text x="418" y="100" text-anchor="middle" font-size="14" font-weight="700" fill="#b26a00" dominant-baseline="middle">✗</text><text x="350" y="172" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">descarga al dispositivo</text><text x="350" y="188" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">el otro equipo no lo ve</text><rect x="474" y="10" width="216" height="190" rx="8" fill="#ffffff" stroke="#c9c6c2" stroke-width="1"/><text x="582" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#003da5" dominant-baseline="middle">ActiveSync / Outlook</text><rect x="532" y="42" width="100" height="34" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="582.0" y="59.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Servidor</text><rect x="488" y="122" width="80" height="32" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="528.0" y="138.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Móvil</text><rect x="596" y="122" width="80" height="32" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="636.0" y="138.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">PC</text><path d="M564,76 L530,120" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0703correoa-10)"/><path d="M530,120 L564,78" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0703correoa-10)"/><path d="M600,76 L634,120" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0703correoa-10)"/><path d="M634,120 L600,78" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0703correoa-10)"/><text x="582" y="172" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">correo + calendario + contactos</text><text x="582" y="188" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">push · políticas · borrado remoto</text><text x="350" y="220" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">SMTP solo ENVÍA (587 con STARTTLS) · IMAPS 993 · POP3S 995 · ActiveSync va sobre HTTPS</text></svg>
+<figcaption>Repaso 3 · Wifi corporativo</figcaption>
+<svg viewBox="0 0 700 206" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wifi Enterprise con certificados en una tableta." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0705wifienta-16" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0705wifientv-16" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0705wifientm-16" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0705wifientg-16" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="60" width="130" height="54" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="75.0" y="79.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">MDM</text><text x="75.0" y="94.5" text-anchor="middle" font-size="10.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">envía el perfil</text><rect x="210" y="40" width="190" height="94" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="305" y="56" text-anchor="middle" font-size="12.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Tableta</text><text x="305" y="78" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">• certificado del dispositivo</text><text x="305" y="96" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">• certificado de la CA</text><text x="305" y="114" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">• perfil wifi: SSID + EAP-TLS</text><path d="M140,87 L206,87" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0705wifientv-16)"/><rect x="460" y="20" width="110" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="515.0" y="33.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">AP</text><text x="515.0" y="47.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">SSID REGISTRO</text><rect x="460" y="112" width="110" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="515.0" y="132.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">RADIUS</text><path d="M400,70 L456,46" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0705wifienta-16)"/><line x1="515" y1="60" x2="515" y2="112" stroke="#5a5652" stroke-width="2"/><text x="585" y="76" text-anchor="start" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">presenta su certificado</text><text x="585" y="92" text-anchor="start" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">y valida el del servidor</text><text x="585" y="130" text-anchor="start" font-size="10.5" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">→ VLAN 16</text><text x="350" y="176" text-anchor="middle" font-size="11" font-weight="600" fill="#b26a00" dominant-baseline="middle">Sin el certificado de la CA, la tableta no puede validar al RADIUS (riesgo de evil twin, T5).</text><text x="350" y="194" text-anchor="middle" font-size="11" font-weight="500" fill="#5a5652" dominant-baseline="middle">Instalarlo a mano en decenas de tabletas es inviable: se despliega por perfil desde el MDM.</text></svg>
 </figure>
 <figure class="tema-figura">
-<figcaption>Repaso 4 · Wifi Enterprise</figcaption>
-<svg viewBox="0 0 700 206" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Perfil wifi con certificados enviado por el MDM a la tableta y validado por el RADIUS." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0705wifienta-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0705wifientv-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0705wifientm-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0705wifientg-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="60" width="130" height="54" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="75.0" y="79.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">MDM</text><text x="75.0" y="94.5" text-anchor="middle" font-size="10.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">envía el perfil</text><rect x="210" y="40" width="190" height="94" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="305" y="56" text-anchor="middle" font-size="12.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Tableta</text><text x="305" y="78" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">• certificado del dispositivo</text><text x="305" y="96" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">• certificado de la CA</text><text x="305" y="114" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">• perfil wifi: SSID + EAP-TLS</text><path d="M140,87 L206,87" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0705wifientv-11)"/><rect x="460" y="20" width="110" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="515.0" y="33.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">AP</text><text x="515.0" y="47.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">SSID REGISTRO</text><rect x="460" y="112" width="110" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="515.0" y="132.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">RADIUS</text><path d="M400,70 L456,46" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0705wifienta-11)"/><line x1="515" y1="60" x2="515" y2="112" stroke="#5a5652" stroke-width="2"/><text x="585" y="76" text-anchor="start" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">presenta su certificado</text><text x="585" y="92" text-anchor="start" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">y valida el del servidor</text><text x="585" y="130" text-anchor="start" font-size="10.5" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">→ VLAN 16</text><text x="350" y="176" text-anchor="middle" font-size="11" font-weight="600" fill="#b26a00" dominant-baseline="middle">Sin el certificado de la CA, la tableta no puede validar al RADIUS (riesgo de evil twin, T5).</text><text x="350" y="194" text-anchor="middle" font-size="11" font-weight="500" fill="#5a5652" dominant-baseline="middle">Instalarlo a mano en decenas de tabletas es inviable: se despliega por perfil desde el MDM.</text></svg>
+<figcaption>Repaso 4 · Protocolos de correo</figcaption>
+<svg viewBox="0 0 700 212" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SMTP, IMAP, POP3 y Exchange con sus puertos." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0713puertosa-17" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0713puertosv-17" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0713puertosm-17" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0713puertosg-17" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><text x="80" y="16" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Protocolo</text><text x="240" y="16" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Para qué</text><text x="520" y="16" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Puertos y cifrado</text><rect x="10" y="26" width="140" height="32" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="80.0" y="42.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">SMTP</text><text x="240" y="46" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">ENVIAR</text><text x="520" y="46" text-anchor="middle" font-size="10" font-weight="500" fill="#23272e" dominant-baseline="middle">587 (submission, STARTTLS) · 465 (TLS implícito) · 25 (entre servidores)</text><rect x="10" y="66" width="140" height="32" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="80.0" y="82.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">IMAP</text><text x="240" y="86" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">SINCRONIZAR el buzón</text><text x="520" y="86" text-anchor="middle" font-size="10" font-weight="500" fill="#23272e" dominant-baseline="middle">143 (STARTTLS) · 993 (IMAPS, TLS implícito)</text><rect x="10" y="106" width="140" height="32" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="80.0" y="122.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">POP3</text><text x="240" y="126" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">DESCARGAR / recuperar</text><text x="520" y="126" text-anchor="middle" font-size="10" font-weight="500" fill="#23272e" dominant-baseline="middle">110 (STARTTLS) · 995 (POP3S, TLS implícito)</text><rect x="10" y="146" width="140" height="32" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="80.0" y="162.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Exchange / M365</text><text x="240" y="166" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">correo + calendario + contactos</text><text x="520" y="166" text-anchor="middle" font-size="10" font-weight="500" fill="#23272e" dominant-baseline="middle">HTTPS 443 (ActiveSync u otras API)</text><text x="350" y="200" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b26a00" dominant-baseline="middle">Protocolo ≠ puerto ≠ cifrado · TLS protege el TRANSPORTE, no cifra el mensaje de extremo a extremo</text></svg>
 </figure>
 <figure class="tema-figura">
-<figcaption>Repaso 5 · Modos de gestión</figcaption>
-<svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Totalmente gestionado, perfil de trabajo y dedicado." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0706modosa-12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0706modosv-12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0706modosm-12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0706modosg-12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="80" y="10" width="90" height="150" rx="14" fill="#ffffff" stroke="#5a5652" stroke-width="2"/><rect x="88" y="26" width="74" height="118" rx="4" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="125" y="182" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">Totalmente gestionado</text><text x="125" y="198" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">corporativo de uso laboral</text><text x="125" y="214" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">la organización controla todo</text><rect x="308" y="10" width="90" height="150" rx="14" fill="#ffffff" stroke="#5a5652" stroke-width="2"/><rect x="316" y="26" width="74" height="56" rx="4" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><rect x="316" y="88" width="74" height="56" rx="4" fill="#e6edf7" stroke="#003da5" stroke-width="1.6" stroke-dasharray="5 3"/><text x="353" y="54" text-anchor="middle" font-size="9.5" font-weight="600" fill="#5a5652" dominant-baseline="middle">personal</text><text x="353" y="116" text-anchor="middle" font-size="9.5" font-weight="700" fill="#003da5" dominant-baseline="middle">trabajo</text><text x="353" y="182" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">Perfil de trabajo</text><text x="353" y="198" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">BYOD o uso mixto</text><text x="353" y="214" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">solo el contenedor corporativo</text><rect x="536" y="10" width="90" height="150" rx="14" fill="#ffffff" stroke="#5a5652" stroke-width="2"/><rect x="544" y="26" width="74" height="118" rx="4" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="581" y="85" text-anchor="middle" font-size="11" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">1 app</text><text x="581" y="182" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">Dedicado / quiosco</text><text x="581" y="198" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">una o pocas apps</text><text x="581" y="214" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">tableta de firma del registro</text><text x="350" y="238" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">Android Enterprise (también zero-touch, Knox) · Apple: Business Manager + ADE + modo supervisado</text></svg>
+<figcaption>Repaso 5 · Cuenta y servicios</figcaption>
+<svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cuenta corporativa con correo, calendario y contactos; cuenta, buzón y app." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0709cuentaa-18" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0709cuentav-18" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0709cuentam-18" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0709cuentag-18" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="260" y="10" width="180" height="44" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="25.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">Cuenta corporativa</text><text x="350.0" y="38.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">identidad + configuración</text><rect x="150" y="84" width="120" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="210.0" y="97.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Correo</text><text x="210.0" y="110.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">buzón</text><line x1="350" y1="54" x2="210" y2="84" stroke="#5a5652" stroke-width="1.3"/><rect x="290" y="84" width="120" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="97.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Calendario</text><text x="350.0" y="110.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">reuniones</text><line x1="350" y1="54" x2="350" y2="84" stroke="#5a5652" stroke-width="1.3"/><rect x="430" y="84" width="120" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="490.0" y="97.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Contactos</text><text x="490.0" y="110.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">agenda</text><line x1="350" y1="54" x2="490" y2="84" stroke="#5a5652" stroke-width="1.3"/><text x="350" y="146" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Cada servicio se activa y sincroniza por separado: diagnosticar POR SERVICIO</text><rect x="10" y="166" width="220" height="50" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="120.0" y="184.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">CUENTA</text><text x="120.0" y="197.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">quién eres y cómo conectas</text><rect x="240" y="166" width="220" height="50" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="350.0" y="184.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">BUZÓN</text><text x="350.0" y="197.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">los datos, en el servidor</text><rect x="470" y="166" width="220" height="50" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="580.0" y="184.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">APP</text><text x="580.0" y="197.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">el cliente que los muestra</text><text x="350" y="238" text-anchor="middle" font-size="11" font-weight="700" fill="#b26a00" dominant-baseline="middle">Quitar la cuenta del móvil no borra el buzón del servidor</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 6 · Sincronización</figcaption>
+<svg viewBox="0 0 700 242" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Push y fetch; sincronización frente a copia." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0710pusha-19" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0710pushv-19" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0710pushm-19" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0710pushg-19" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="330" height="120" rx="8" fill="#ffffff" stroke="#c9c6c2" stroke-width="1"/><rect x="360" y="10" width="330" height="120" rx="8" fill="#ffffff" stroke="#c9c6c2" stroke-width="1"/><text x="175" y="30" text-anchor="middle" font-size="12" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">PUSH · el servidor avisa</text><text x="525" y="30" text-anchor="middle" font-size="12" font-weight="700" fill="#003da5" dominant-baseline="middle">FETCH · el cliente pregunta</text><rect x="30" y="50" width="100" height="40" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="80.0" y="70.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Servidor</text><rect x="220" y="50" width="100" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="270.0" y="70.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Móvil</text><path d="M130,70 L216,70" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T0710pushv-19)"/><text x="175" y="112" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">llega al momento</text><rect x="380" y="50" width="100" height="40" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="430.0" y="70.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Servidor</text><rect x="570" y="50" width="100" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="620.0" y="70.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Móvil</text><path d="M570,62 L484,62" fill="none" stroke="#003da5" stroke-width="1.6" marker-end="url(#T0710pusha-19)"/><path d="M480,78 L566,78" fill="none" stroke="#2e7d3c" stroke-width="1.6" marker-end="url(#T0710pushv-19)"/><text x="525" y="112" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">¿hay algo? cada 15 min…</text><rect x="10" y="150" width="330" height="60" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="175.0" y="166.5" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">SINCRONIZACIÓN</text><text x="175.0" y="180.0" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">mantiene todo coherente:</text><text x="175.0" y="193.5" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">un borrado también se sincroniza</text><rect x="360" y="150" width="330" height="60" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="525.0" y="166.5" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">COPIA DE SEGURIDAD</text><text x="525.0" y="180.0" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">copia aparte, recuperable</text><text x="525.0" y="193.5" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">aunque se borre el original</text><text x="350" y="230" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Sincronización ≠ copia · notificación ≠ sincronización</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 7 · Diagnóstico del correo</figcaption>
+<svg viewBox="0 0 700 202" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flujo de diagnóstico del correo que no sincroniza." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0711diagcorreoa-20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0711diagcorreov-20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0711diagcorreom-20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0711diagcorreog-20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="28" width="160" height="48" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="90.0" y="45.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">¿Conectividad?</text><text x="90.0" y="58.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">wifi o datos, otra web</text><path d="M170,52 L180,52" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T0711diagcorreog-20)"/><rect x="182" y="28" width="160" height="48" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="262.0" y="45.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">¿Solo el correo?</text><text x="262.0" y="58.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">o también otras apps</text><path d="M342,52 L352,52" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T0711diagcorreog-20)"/><rect x="354" y="28" width="160" height="48" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="434.0" y="45.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Cuenta</text><text x="434.0" y="58.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">servidor, usuario</text><path d="M514,52 L524,52" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T0711diagcorreog-20)"/><rect x="526" y="28" width="160" height="48" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="606.0" y="45.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Credenciales</text><text x="606.0" y="58.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">token, cambio de clave</text><rect x="10" y="104" width="160" height="48" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="90.0" y="121.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">MFA</text><text x="90.0" y="134.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">aprobación pendiente</text><path d="M170,128 L180,128" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T0711diagcorreog-20)"/><rect x="182" y="104" width="160" height="48" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="262.0" y="121.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Fecha y hora</text><text x="262.0" y="134.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">certificados y TLS</text><path d="M342,128 L352,128" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T0711diagcorreog-20)"/><rect x="354" y="104" width="160" height="48" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="434.0" y="121.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Sincronización</text><text x="434.0" y="134.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">activada, batería, datos</text><path d="M514,128 L524,128" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T0711diagcorreog-20)"/><rect x="526" y="104" width="160" height="48" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="606.0" y="121.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">¿Otros usuarios?</text><text x="606.0" y="134.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">incidencia del servicio</text><path d="M606,76 L606,90 L90,90 L90,104" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T0711diagcorreog-20)"/><text x="350" y="16" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Correo que no sincroniza: de menor a mayor impacto</text><text x="350" y="172" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Envía y no recibe → IMAP/Exchange · recibe y no envía → SMTP (puerto, TLS, autenticación)</text><text x="350" y="190" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b26a00" dominant-baseline="middle">No empezar borrando la cuenta ni restableciendo el terminal: primero observar y aislar</text></svg>
 </figure>
 <h2 id="16-resumen-final-si-manana-fuera-el-examen" class="tema-h2">16. Resumen final: si mañana fuera el examen</h2>
-<p><strong>Android</strong> (Google, núcleo Linux, AOSP + GMS, fragmentado) e <strong>iOS</strong> (Apple, cerrado) protegen las apps con <em><strong>sandbox</strong></em>, <strong>permisos</strong>, <strong>cifrado</strong> y <strong>arranque verificado</strong>, protecciones que se pierden con <strong>root o jailbreak</strong>. En la empresa se gestionan con <strong>Android Enterprise</strong> (totalmente gestionado, <strong>perfil de trabajo</strong> o <strong>dedicado</strong>) y <strong>Apple Business Manager/ADE</strong> (supervisado), con inscripción automática. En el móvil se configuran <strong>wifi</strong> (en Enterprise, con <strong>certificado del dispositivo y de la CA</strong>), <strong>APN</strong>, <strong>VPN</strong>, bluetooth y NFC, mejor por <strong>perfil desde el MDM</strong>. El correo corporativo se sincroniza con <strong>ActiveSync/Outlook</strong> (correo, calendario, contactos, políticas y borrado remoto) o <strong>IMAP</strong>; <strong>POP3 descarga y no sincroniza</strong>; <strong>SMTP solo envía</strong>.</p>
+<p><strong>Android</strong> (Linux, AOSP + GMS, fragmentado) e <strong>iOS</strong> (ecosistema Apple) aíslan las apps con <em><strong>sandbox</strong></em> y <strong>permisos</strong>, protecciones que se pierden con <strong>root o jailbreak</strong>; sistema operativo, firmware y app son cosas distintas. En el terminal se configuran los <strong>datos</strong> (SIM/eSIM, dual SIM, <strong>APN</strong>, roaming de datos: <strong>cobertura no es datos</strong>), el <strong>wifi</strong> (<strong>conectado no es Internet</strong>; Enterprise con <strong>certificado del dispositivo y de la CA</strong>), <strong>bluetooth</strong> (emparejamiento y perfiles), <strong>NFC</strong> (centímetros), <strong>USB</strong>, el <strong>tethering</strong> (el móvil hace de router) y la <strong>VPN</strong> (<strong>necesita conectividad previa</strong>). El correo: <strong>SMTP envía</strong> (587/465), <strong>IMAP sincroniza</strong> (993), <strong>POP3 descarga</strong> (995, puede dejar copia); <strong>push</strong> frente a <strong>fetch</strong>; <strong>Exchange</strong> es la plataforma y <strong>ActiveSync</strong> un protocolo; <strong>Autodiscover</strong>, <strong>OAuth</strong> y <strong>MFA</strong>. <strong>Cuenta ≠ buzón ≠ app</strong>, <strong>sincronización ≠ copia</strong>, <strong>notificación ≠ sincronización</strong>, y la <strong>fecha y hora</strong> importan. Ante una incidencia: <strong>identificar, aislar y comprobar de menor a mayor impacto</strong>, sin empezar reseteando.</p>
 <h2 id="17-actualidad-datos-fechados" class="tema-h2">17. Actualidad — datos fechados</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong><br>Lo estable para el examen es lo explicado arriba; estos datos cambian.</th>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong><br>Lo estable para el examen es lo explicado arriba; estos datos cambian y <strong>no hay que memorizarlos</strong>.</th>
 </tr>
 </table></div>
 <ul class="tema-lista">
-<li>Android publica una versión principal al año (Android 16 en 2025) y Apple numera desde 2025 sus sistemas por año (iOS/iPadOS 26 en 2025). Consulta la versión vigente antes del examen: no suele preguntarse el número.</li>
+<li>Android publica una versión principal al año (Android 16 en 2025) y Apple numera desde 2025 sus sistemas por año (iOS/iPadOS 26 en 2025). No suele preguntarse el número.</li>
 <li>En la UE, la <strong>Ley de Mercados Digitales</strong> obliga a Apple a permitir tiendas de aplicaciones alternativas en el iPhone.</li>
 <li>Google anunció en 2025 la <strong>verificación obligatoria de los desarrolladores</strong> también para las apps instaladas fuera de Google Play, con implantación progresiva a partir de 2026.</li>
 <li>Microsoft retiró la <strong>autenticación básica</strong> en Exchange Online: los clientes móviles deben usar <strong>autenticación moderna</strong> (OAuth 2.0).</li>
