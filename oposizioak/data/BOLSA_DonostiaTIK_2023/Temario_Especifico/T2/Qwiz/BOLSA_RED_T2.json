@@ -2,7 +2,7 @@
   "id": "BOLSA_RED_T2",
   "opeNombre": "Bolsa DonostiaTIK 2023 — Técnico/a de apoyo: Instalaciones y Comunicaciones",
   "titulo": "T2 · Protocolos de comunicación TCP/IP. Direccionamiento IPv4 e IPv6. Conceptos generales.",
-  "descripcion": "35 preguntas tipo test con explicación, elaboradas a partir de los apuntes del tema.",
+  "descripcion": "41 preguntas tipo test con explicación, elaboradas a partir de los apuntes del tema.",
   "fuente": "Elaboración propia a partir de los apuntes del tema (octubre de 2026). Las marcadas como «examen 2023» reproducen preguntas del examen real del 23/09/2023 con la plantilla oficial.",
   "preguntas": [
     {
@@ -100,16 +100,16 @@
           "correcta": false
         },
         {
-          "texto": "14",
-          "correcta": true
-        },
-        {
           "texto": "30",
           "correcta": false
         },
         {
           "texto": "6",
           "correcta": false
+        },
+        {
+          "texto": "14",
+          "correcta": true
         }
       ],
       "pregunta": "¿Cuántos hosts utilizables tiene una subred con máscara 255.255.255.240?",
@@ -128,16 +128,16 @@
           "correcta": false
         },
         {
-          "texto": "10.42.111.255",
-          "correcta": true
+          "texto": "10.42.127.255",
+          "correcta": false
         },
         {
           "texto": "10.42.255.255",
           "correcta": false
         },
         {
-          "texto": "10.42.127.255",
-          "correcta": false
+          "texto": "10.42.111.255",
+          "correcta": true
         }
       ],
       "pregunta": "La subred de telefonía 10.42.96.0 con máscara 255.255.240.0 tiene como dirección de broadcast:",
@@ -152,15 +152,15 @@
       "id": "BOLSA_RED_T2_006",
       "opciones": [
         {
+          "texto": "10.0.0.0/8",
+          "correcta": false
+        },
+        {
           "texto": "172.32.0.0/16",
           "correcta": true
         },
         {
           "texto": "172.16.0.0/12",
-          "correcta": false
-        },
-        {
-          "texto": "10.0.0.0/8",
           "correcta": false
         },
         {
@@ -180,7 +180,7 @@
       "id": "BOLSA_RED_T2_007",
       "opciones": [
         {
-          "texto": "Tiene configurada una IP estática duplicada en la misma red.",
+          "texto": "Está conectado a la VLAN de telefonía.",
           "correcta": false
         },
         {
@@ -188,16 +188,16 @@
           "correcta": false
         },
         {
-          "texto": "Está conectado a la VLAN de telefonía.",
-          "correcta": false
-        },
-        {
           "texto": "No ha obtenido respuesta de ningún servidor DHCP.",
           "correcta": true
+        },
+        {
+          "texto": "Tiene configurada una IP estática duplicada en la misma red.",
+          "correcta": false
         }
       ],
       "pregunta": "Un PC configurado por DHCP muestra la dirección 169.254.12.40. Esto indica que:",
-      "razonamiento": "169.254.0.0/16 es APIPA (link-local): el sistema se la autoasigna cuando el DHCP no responde. Es una pista típica de fallo de cable, de VLAN mal configurada en el puerto o de servidor DHCP caído.",
+      "razonamiento": "169.254.0.0/16 es link-local (APIPA en Windows): el sistema se la asigna cuando esperaba DHCP y no obtuvo configuración. Es una pista muy fuerte, no una prueba: la causa puede estar en el cable, la VLAN del puerto, el relay, el servidor o el ámbito sin direcciones libres.",
       "origen": "T2 §6",
       "dificultad": "Fácil",
       "tipo": "Diagnóstico",
@@ -208,16 +208,16 @@
       "id": "BOLSA_RED_T2_008",
       "opciones": [
         {
-          "texto": "ACK, SYN, SYN-ACK.",
-          "correcta": false
+          "texto": "SYN, SYN-ACK, ACK.",
+          "correcta": true
         },
         {
           "texto": "SYN, ACK, FIN.",
           "correcta": false
         },
         {
-          "texto": "SYN, SYN-ACK, ACK.",
-          "correcta": true
+          "texto": "ACK, SYN, SYN-ACK.",
+          "correcta": false
         },
         {
           "texto": "REQUEST, OFFER, ACK.",
@@ -236,11 +236,11 @@
       "id": "BOLSA_RED_T2_009",
       "opciones": [
         {
-          "texto": "TCP, porque garantiza que no se pierda ningún paquete de voz.",
-          "correcta": false
+          "texto": "UDP, porque prima la baja latencia sobre la retransmisión.",
+          "correcta": true
         },
         {
-          "texto": "SCTP, porque es obligatorio en telefonía.",
+          "texto": "TCP, porque garantiza que no se pierda ningún paquete de voz.",
           "correcta": false
         },
         {
@@ -248,8 +248,8 @@
           "correcta": false
         },
         {
-          "texto": "UDP, porque prima la baja latencia sobre la retransmisión.",
-          "correcta": true
+          "texto": "SCTP, porque es obligatorio en telefonía.",
+          "correcta": false
         }
       ],
       "pregunta": "¿Qué protocolo de transporte utiliza normalmente la voz sobre IP (RTP)?",
@@ -268,12 +268,12 @@
           "correcta": false
         },
         {
-          "texto": "Los mensajes ICMP «Time Exceeded» que generan los routers al agotarse el TTL.",
-          "correcta": true
-        },
-        {
           "texto": "La tabla de rutas completa que le devuelve el servidor DNS configurado en el equipo.",
           "correcta": false
+        },
+        {
+          "texto": "Los mensajes ICMP «Time Exceeded» que generan los routers al agotarse el TTL.",
+          "correcta": true
         },
         {
           "texto": "Las respuestas DHCP de cada segmento atravesado.",
@@ -292,16 +292,16 @@
       "id": "BOLSA_RED_T2_011",
       "opciones": [
         {
+          "texto": "Va directamente sobre IP y no utiliza puertos.",
+          "correcta": true
+        },
+        {
           "texto": "Utiliza el puerto UDP 7 para los mensajes de eco.",
           "correcta": false
         },
         {
           "texto": "Es un protocolo de la capa de transporte, como TCP.",
           "correcta": false
-        },
-        {
-          "texto": "Va directamente sobre IP y no utiliza puertos.",
-          "correcta": true
         },
         {
           "texto": "Solo existe en IPv4; IPv6 no lo utiliza.",
@@ -380,16 +380,16 @@
           "correcta": false
         },
         {
-          "texto": "Port forwarding (traducción de puerto) en el cortafuegos.",
-          "correcta": true
-        },
-        {
           "texto": "Una reserva DHCP para el equipo.",
           "correcta": false
         },
         {
           "texto": "Una ruta estática hacia la red privada configurada en el operador.",
           "correcta": false
+        },
+        {
+          "texto": "Port forwarding (traducción de puerto) en el cortafuegos.",
+          "correcta": true
         }
       ],
       "pregunta": "Una empresa externa necesita acceder desde Internet a un equipo interno solo por un puerto concreto. Sin VPN, la técnica sería:",
@@ -408,15 +408,15 @@
           "correcta": false
         },
         {
+          "texto": "48",
+          "correcta": false
+        },
+        {
           "texto": "128",
           "correcta": true
         },
         {
           "texto": "64",
-          "correcta": false
-        },
-        {
-          "texto": "48",
           "correcta": false
         }
       ],
@@ -432,16 +432,16 @@
       "id": "BOLSA_RED_T2_016",
       "opciones": [
         {
-          "texto": "2001::db8::1",
-          "correcta": false
+          "texto": "2001:db8::1",
+          "correcta": true
         },
         {
           "texto": "2001:db8:0:0:1",
           "correcta": false
         },
         {
-          "texto": "2001:db8::1",
-          "correcta": true
+          "texto": "2001::db8::1",
+          "correcta": false
         },
         {
           "texto": "2001:db8:::1",
@@ -460,12 +460,12 @@
       "id": "BOLSA_RED_T2_017",
       "opciones": [
         {
-          "texto": "NDP (Neighbor Discovery Protocol), sobre ICMPv6.",
-          "correcta": true
-        },
-        {
           "texto": "DHCPv6, que entrega la MAC junto con la dirección IPv6.",
           "correcta": false
+        },
+        {
+          "texto": "NDP (Neighbor Discovery Protocol), sobre ICMPv6.",
+          "correcta": true
         },
         {
           "texto": "SLAAC.",
@@ -488,8 +488,8 @@
       "id": "BOLSA_RED_T2_018",
       "opciones": [
         {
-          "texto": "FE80::/10",
-          "correcta": true
+          "texto": "2001::/16",
+          "correcta": false
         },
         {
           "texto": "FF00::/8",
@@ -500,8 +500,8 @@
           "correcta": false
         },
         {
-          "texto": "2001::/16",
-          "correcta": false
+          "texto": "FE80::/10",
+          "correcta": true
         }
       ],
       "pregunta": "Las direcciones IPv6 link-local empiezan por:",
@@ -520,12 +520,12 @@
           "correcta": false
         },
         {
-          "texto": "Necesita NAT para salir a Internet, igual que IPv4.",
-          "correcta": false
-        },
-        {
           "texto": "No tiene broadcast: utiliza multicast en su lugar.",
           "correcta": true
+        },
+        {
+          "texto": "Necesita NAT para salir a Internet, igual que IPv4.",
+          "correcta": false
         },
         {
           "texto": "Su cabecera es variable e incluye checksum, como la de IPv4.",
@@ -533,7 +533,7 @@
         }
       ],
       "pregunta": "¿Cuál de estas afirmaciones sobre IPv6 es correcta?",
-      "razonamiento": "IPv6 elimina el broadcast (usa multicast, por ejemplo FF02::1), no necesita NAT porque sobran direcciones y tiene una cabecera fija de 40 bytes sin checksum.",
+      "razonamiento": "IPv6 elimina el broadcast (usa multicast, por ejemplo FF02::1), normalmente no necesita NAT porque sobran direcciones (aunque existen traducciones como NAT64) y tiene una cabecera fija de 40 bytes sin checksum.",
       "origen": "T2 §10",
       "dificultad": "Media",
       "tipo": "Comparación",
@@ -548,16 +548,16 @@
           "correcta": false
         },
         {
-          "texto": "Doble pila (dual stack).",
-          "correcta": true
-        },
-        {
           "texto": "Teredo (túnel sobre UDP).",
           "correcta": false
         },
         {
           "texto": "6to4.",
           "correcta": false
+        },
+        {
+          "texto": "Doble pila (dual stack).",
+          "correcta": true
         }
       ],
       "pregunta": "El mecanismo de transición en el que un equipo tiene a la vez direcciones IPv4 e IPv6 se llama:",
@@ -572,12 +572,12 @@
       "id": "BOLSA_RED_T2_021",
       "opciones": [
         {
-          "texto": "Obtenga su dirección de un servidor DHCPv6 con estado configurado en la VLAN.",
-          "correcta": false
-        },
-        {
           "texto": "Genere su propia dirección a partir del prefijo anunciado por el router.",
           "correcta": true
+        },
+        {
+          "texto": "Obtenga su dirección de un servidor DHCPv6 con estado configurado en la VLAN.",
+          "correcta": false
         },
         {
           "texto": "Traduzca su dirección IPv6 a una IPv4 pública para poder navegar por Internet.",
@@ -589,7 +589,7 @@
         }
       ],
       "pregunta": "SLAAC permite que un equipo IPv6:",
-      "razonamiento": "Con SLAAC el router anuncia el prefijo (Router Advertisement) y el equipo completa el identificador de interfaz (EUI-64 o aleatorio). No hace falta servidor.",
+      "razonamiento": "Con SLAAC el router anuncia el prefijo (Router Advertisement) y el equipo completa el identificador de interfaz: hoy suele ser estable o temporal por privacidad; el derivado de la MAC (EUI-64) es el método histórico. No hace falta servidor.",
       "origen": "T2 §10",
       "dificultad": "Media",
       "tipo": "Concepto",
@@ -660,12 +660,12 @@
           "correcta": false
         },
         {
-          "texto": "UDP 443.",
-          "correcta": false
-        },
-        {
           "texto": "TCP 443.",
           "correcta": true
+        },
+        {
+          "texto": "UDP 443.",
+          "correcta": false
         },
         {
           "texto": "TCP 8080.",
@@ -712,16 +712,16 @@
       "id": "BOLSA_RED_T2_026",
       "opciones": [
         {
-          "texto": "Señalar el protocolo de transporte transportado.",
-          "correcta": false
-        },
-        {
           "texto": "Indicar la prioridad del paquete para la calidad de servicio en la red.",
           "correcta": false
         },
         {
           "texto": "Evitar que un paquete circule indefinidamente si hay un bucle de enrutamiento.",
           "correcta": true
+        },
+        {
+          "texto": "Señalar el protocolo de transporte transportado.",
+          "correcta": false
         },
         {
           "texto": "Medir el tiempo de respuesta del destino en milisegundos, como hace el comando ping.",
@@ -772,16 +772,16 @@
           "correcta": false
         },
         {
+          "texto": "VLSM.",
+          "correcta": true
+        },
+        {
           "texto": "NAT dinámico.",
           "correcta": false
         },
         {
           "texto": "Superredes.",
           "correcta": false
-        },
-        {
-          "texto": "VLSM.",
-          "correcta": true
         }
       ],
       "pregunta": "La técnica de usar máscaras de distinta longitud según el tamaño de cada subred se llama:",
@@ -796,7 +796,7 @@
       "id": "BOLSA_RED_T2_029",
       "opciones": [
         {
-          "texto": "No comunicarse con ningún equipo, ni siquiera de su subred.",
+          "texto": "Comunicarse con todas las VLAN del edificio, pero no con Internet.",
           "correcta": false
         },
         {
@@ -804,12 +804,12 @@
           "correcta": false
         },
         {
-          "texto": "Comunicarse con todas las VLAN del edificio, pero no con Internet.",
-          "correcta": false
-        },
-        {
           "texto": "Comunicarse solo con los equipos de su misma subred.",
           "correcta": true
+        },
+        {
+          "texto": "No comunicarse con ningún equipo, ni siquiera de su subred.",
+          "correcta": false
         }
       ],
       "pregunta": "Si un equipo tiene bien configuradas su IP y su máscara, pero no la puerta de enlace, podrá:",
@@ -824,16 +824,16 @@
       "id": "BOLSA_RED_T2_030",
       "opciones": [
         {
-          "texto": "De su puerta de enlace predeterminada.",
-          "correcta": true
-        },
-        {
           "texto": "Del equipo de destino 10.5.5.5, directamente.",
           "correcta": false
         },
         {
           "texto": "Del servidor DNS configurado en el equipo.",
           "correcta": false
+        },
+        {
+          "texto": "De su puerta de enlace predeterminada.",
+          "correcta": true
         },
         {
           "texto": "Del servidor DHCP que le asignó la dirección.",
@@ -860,12 +860,12 @@
           "correcta": false
         },
         {
-          "texto": "La trama Ethernet, que contiene el paquete IP.",
-          "correcta": true
-        },
-        {
           "texto": "Los datos de aplicación, que contienen el segmento.",
           "correcta": false
+        },
+        {
+          "texto": "La trama Ethernet, que contiene el paquete IP.",
+          "correcta": true
         }
       ],
       "pregunta": "En la encapsulación TCP/IP, ¿qué unidad de datos contiene a las demás?",
@@ -880,16 +880,16 @@
       "id": "BOLSA_RED_T2_032",
       "opciones": [
         {
-          "texto": "192.168.16.30",
-          "correcta": true
-        },
-        {
           "texto": "192.168.16.16",
           "correcta": false
         },
         {
           "texto": "192.168.16.31",
           "correcta": false
+        },
+        {
+          "texto": "192.168.16.30",
+          "correcta": true
         },
         {
           "texto": "192.168.16.33",
@@ -908,11 +908,11 @@
       "id": "BOLSA_RED_T2_033",
       "opciones": [
         {
-          "texto": "La dirección de broadcast FFFF:FFFF::FFFF.",
-          "correcta": false
+          "texto": "La dirección multicast FF02::1.",
+          "correcta": true
         },
         {
-          "texto": "La dirección de loopback ::1.",
+          "texto": "La dirección de broadcast FFFF:FFFF::FFFF.",
           "correcta": false
         },
         {
@@ -920,8 +920,8 @@
           "correcta": false
         },
         {
-          "texto": "La dirección multicast FF02::1.",
-          "correcta": true
+          "texto": "La dirección de loopback ::1.",
+          "correcta": false
         }
       ],
       "pregunta": "En IPv6, el envío a todos los equipos del enlace local se hace con:",
@@ -986,6 +986,174 @@
       "dificultad": "Difícil",
       "tipo": "Supuesto",
       "concepto": "IP duplicada",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_036",
+      "opciones": [
+        {
+          "texto": "Mediante la opción 3 de DHCPv6, igual que en DHCPv4.",
+          "correcta": false
+        },
+        {
+          "texto": "Mediante el Router Advertisement que envía el router (NDP).",
+          "correcta": true
+        },
+        {
+          "texto": "Mediante una consulta ARP en broadcast a toda la red.",
+          "correcta": false
+        },
+        {
+          "texto": "Mediante una consulta DNS al servidor corporativo.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "En IPv6, ¿cómo aprende normalmente un equipo su puerta de enlace predeterminada?",
+      "razonamiento": "La puerta de enlace IPv6 la anuncia el router en el RA. DHCPv6 puede dar la dirección o el DNS, pero no la puerta de enlace: no hay que trasladar el modelo DHCPv4 a IPv6.",
+      "origen": "T2 §10",
+      "dificultad": "Difícil",
+      "tipo": "Trampa",
+      "concepto": "Puerta de enlace IPv6",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_037",
+      "opciones": [
+        {
+          "texto": "La ruta por defecto hacia la puerta de enlace.",
+          "correcta": true
+        },
+        {
+          "texto": "La dirección de loopback del propio equipo.",
+          "correcta": false
+        },
+        {
+          "texto": "El broadcast limitado de la red local.",
+          "correcta": false
+        },
+        {
+          "texto": "La red que toma un equipo sin DHCP.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "En una tabla de rutas, ¿qué representa el destino 0.0.0.0 con máscara 0.0.0.0?",
+      "razonamiento": "0.0.0.0/0 abarca todas las redes y es la ruta por defecto hacia la puerta de enlace. No hay que confundirla con 0.0.0.0 como dirección no especificada (un equipo sin IP).",
+      "origen": "T2 §11",
+      "dificultad": "Media",
+      "tipo": "Concepto",
+      "concepto": "Ruta por defecto",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_038",
+      "opciones": [
+        {
+          "texto": "Que el cable y el puerto del switch funcionan correctamente.",
+          "correcta": false
+        },
+        {
+          "texto": "Que la pila TCP/IP del propio equipo funciona.",
+          "correcta": true
+        },
+        {
+          "texto": "Que el equipo tiene salida a Internet a través del router.",
+          "correcta": false
+        },
+        {
+          "texto": "Que el servidor DHCP le ha entregado una configuración.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Un técnico hace ping 127.0.0.1 y responde. ¿Qué queda comprobado?",
+      "razonamiento": "El loopback no sale del equipo: solo prueba la pila TCP/IP local. No verifica cable, switch, red ni DHCP.",
+      "origen": "T2 §11",
+      "dificultad": "Fácil",
+      "tipo": "Diagnóstico",
+      "concepto": "Loopback",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_039",
+      "opciones": [
+        {
+          "texto": "Es de clase A, así que su máscara real es /8.",
+          "correcta": false
+        },
+        {
+          "texto": "Es de clase A, así que admite 16 millones de hosts.",
+          "correcta": false
+        },
+        {
+          "texto": "Su prefijo es /20: manda la máscara indicada, no la clase.",
+          "correcta": true
+        },
+        {
+          "texto": "Las clases impiden usar en ella máscaras distintas de /8.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Una red 10.42.96.0 tiene máscara 255.255.240.0. ¿Qué afirmación es correcta?",
+      "razonamiento": "Las clases son históricas. Con CIDR el prefijo se indica siempre y es el que se usa para calcular: aquí /20, con 4.094 hosts (red de telefonía del caso de 2023).",
+      "origen": "T2 §6",
+      "dificultad": "Media",
+      "tipo": "Trampa",
+      "concepto": "CIDR vs clases",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_040",
+      "opciones": [
+        {
+          "texto": "Es el broadcast de la red y no puede asignarse a ningún equipo.",
+          "correcta": false
+        },
+        {
+          "texto": "Es la dirección de red de la segunda mitad del bloque /23.",
+          "correcta": false
+        },
+        {
+          "texto": "Es un host válido, porque el broadcast es 192.168.123.255.",
+          "correcta": true
+        },
+        {
+          "texto": "Pertenece a otra subred y no forma parte del rango.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "En la red 192.168.122.0/23, la dirección 192.168.122.255:",
+      "razonamiento": "Una /23 abarca de 192.168.122.0 a 192.168.123.255. Las direcciones .122.255 y .123.0 están en medio del rango y son hosts válidos.",
+      "origen": "T2 §7",
+      "dificultad": "Difícil",
+      "tipo": "Cálculo",
+      "concepto": "/23",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T2_041",
+      "opciones": [
+        {
+          "texto": "IPv6 no admite ningún tipo de traducción de direcciones.",
+          "correcta": false
+        },
+        {
+          "texto": "IPv6 contempla IPsec, pero su uso no es obligatorio.",
+          "correcta": true
+        },
+        {
+          "texto": "IPv6 cifra automáticamente todas las comunicaciones.",
+          "correcta": false
+        },
+        {
+          "texto": "IPsec es obligatorio para cualquier tráfico IPv6.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Sobre IPv6 y la seguridad, es correcto que:",
+      "razonamiento": "«IPsec obligatorio en IPv6» y «IPv6 sin NAT» son simplificaciones: IPsec es opcional y existen traducciones como NAT64. IPsec se estudia en T15.",
+      "origen": "T2 §10",
+      "dificultad": "Difícil",
+      "tipo": "Trampa",
+      "concepto": "IPsec en IPv6",
       "prioridad": "Media"
     }
   ]
