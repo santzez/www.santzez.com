@@ -2,12 +2,16 @@
   "id": "BOLSA_RED_T18",
   "opeNombre": "Bolsa DonostiaTIK 2023 — Técnico/a de apoyo: Instalaciones y Comunicaciones",
   "titulo": "T18 · Fundamentos de sistemas SCADA.",
-  "descripcion": "27 preguntas tipo test con explicación, elaboradas a partir de los apuntes del tema.",
+  "descripcion": "35 preguntas tipo test con explicación, elaboradas a partir de los apuntes del tema.",
   "fuente": "Elaboración propia a partir de los apuntes del tema (octubre de 2026). Las marcadas como «examen 2023» reproducen preguntas del examen real del 23/09/2023 con la plantilla oficial.",
   "preguntas": [
     {
       "id": "BOLSA_RED_T18_001",
       "opciones": [
+        {
+          "texto": "System for Central Administration of Digital Assets.",
+          "correcta": false
+        },
         {
           "texto": "Secure Communication And Data Access (comunicación segura y acceso a datos).",
           "correcta": false
@@ -15,10 +19,6 @@
         {
           "texto": "Supervisory Control And Data Acquisition (supervisión, control y adquisición de datos).",
           "correcta": true
-        },
-        {
-          "texto": "System for Central Administration of Digital Assets.",
-          "correcta": false
         },
         {
           "texto": "Standard Control Architecture for Distributed Automation (arquitectura de control estándar).",
@@ -65,11 +65,11 @@
       "id": "BOLSA_RED_T18_003",
       "opciones": [
         {
-          "texto": "El SCADA ejecuta la lógica de control y los PLC solo muestran datos.",
-          "correcta": false
+          "texto": "Los PLC recogen datos y controlan el proceso; el SCADA es el centro de mando que los supervisa.",
+          "correcta": true
         },
         {
-          "texto": "Los PLC sustituyen al SCADA en instalaciones grandes.",
+          "texto": "El SCADA ejecuta la lógica de control y los PLC solo muestran datos.",
           "correcta": false
         },
         {
@@ -77,13 +77,13 @@
           "correcta": false
         },
         {
-          "texto": "Los PLC recogen datos y controlan el proceso; el SCADA es el centro de mando que los supervisa.",
-          "correcta": true
+          "texto": "Los PLC sustituyen al SCADA en instalaciones grandes.",
+          "correcta": false
         }
       ],
       "pregunta": "¿Qué relación hay entre los PLC y el sistema SCADA?",
-      "razonamiento": "Es la idea que pedía el tribunal en 2023: los PLC son microordenadores que recopilan datos de entradas como sensores y los comunican a un centro de mando, que es el SCADA.",
-      "origen": "T18 §3",
+      "razonamiento": "Es la idea que pedía el tribunal en 2023 (los PLC recopilan datos y los comunican a un centro de mando, que es el SCADA), completada: la función principal del PLC es el control local; el SCADA supervisa, coordina y hace control supervisor.",
+      "origen": "T18 §4",
       "dificultad": "Media",
       "tipo": "Comparación",
       "concepto": "SCADA vs PLC",
@@ -93,11 +93,11 @@
       "id": "BOLSA_RED_T18_004",
       "opciones": [
         {
-          "texto": "Sigue funcionando, porque los PLC mantienen el control, pero se pierde la supervisión.",
-          "correcta": true
+          "texto": "Se para inmediatamente, porque el SCADA es quien ejecuta la lógica de control.",
+          "correcta": false
         },
         {
-          "texto": "Se para inmediatamente, porque el SCADA es quien ejecuta la lógica de control.",
+          "texto": "Se reinician todos los PLC de la instalación y vuelven a cargar su programa.",
           "correcta": false
         },
         {
@@ -105,13 +105,13 @@
           "correcta": false
         },
         {
-          "texto": "Se reinician todos los PLC.",
-          "correcta": false
+          "texto": "El control local suele seguir en los PLC, pero se pierden supervisión, alarmas e histórico.",
+          "correcta": true
         }
       ],
-      "pregunta": "Si el servidor SCADA de una instalación se cae, ¿qué ocurre normalmente con el proceso controlado?",
-      "razonamiento": "El control en tiempo real lo ejecutan los PLC; el SCADA supervisa. Sin SCADA no se ven datos, alarmas ni histórico, pero el proceso continúa.",
-      "origen": "T18 §3",
+      "pregunta": "Si el servidor SCADA de una instalación bien diseñada se cae, ¿qué ocurre normalmente con el proceso?",
+      "razonamiento": "Caída del SCADA no es parada necesaria del control local, pero tampoco «no pasa nada»: se pierden supervisión, alarmas centralizadas, histórico, órdenes remotas y coordinación.",
+      "origen": "T18 §4",
       "dificultad": "Media",
       "tipo": "Concepto",
       "concepto": "Dependencias",
@@ -139,7 +139,7 @@
       ],
       "pregunta": "¿Qué aporta un sistema SCADA que no ofrece un PLC por sí solo?",
       "razonamiento": "El SCADA integra muchos PLC/RTU en un centro de mando con sinópticos, gestión de alarmas, histórico, informes y control remoto.",
-      "origen": "T18 §3",
+      "origen": "T18 §4",
       "dificultad": "Media",
       "tipo": "Concepto",
       "concepto": "Aporte del SCADA",
@@ -153,12 +153,12 @@
           "correcta": false
         },
         {
-          "texto": "El protocolo de comunicación entre el servidor SCADA y los PLC.",
-          "correcta": false
-        },
-        {
           "texto": "La interfaz gráfica con la que el operador supervisa y controla el proceso.",
           "correcta": true
+        },
+        {
+          "texto": "El protocolo de comunicación entre el servidor SCADA y los PLC.",
+          "correcta": false
         },
         {
           "texto": "La base de datos histórica.",
@@ -177,11 +177,11 @@
       "id": "BOLSA_RED_T18_007",
       "opciones": [
         {
-          "texto": "IEC 61131-3.",
-          "correcta": true
+          "texto": "IEC 62443.",
+          "correcta": false
         },
         {
-          "texto": "IEC 62443.",
+          "texto": "IEEE 802.3.",
           "correcta": false
         },
         {
@@ -189,12 +189,12 @@
           "correcta": false
         },
         {
-          "texto": "IEEE 802.3.",
-          "correcta": false
+          "texto": "IEC 61131-3.",
+          "correcta": true
         }
       ],
       "pregunta": "La norma que define los lenguajes de programación de los PLC (ladder, bloques de funciones, texto estructurado…) es:",
-      "razonamiento": "IEC 61131-3 define LD (ladder), FBD, ST, IL y SFC. IEC 62443 trata la ciberseguridad industrial.",
+      "razonamiento": "IEC 61131-3 define LD (ladder), FBD, ST y SFC; IL es histórico y se retiró en las revisiones recientes. IEC 62443 trata la ciberseguridad industrial.",
       "origen": "T18 §3",
       "dificultad": "Media",
       "tipo": "Dato",
@@ -237,16 +237,16 @@
           "correcta": false
         },
         {
+          "texto": "Programar los PLC desde la oficina técnica a través de la red corporativa municipal.",
+          "correcta": false
+        },
+        {
           "texto": "Ser el servidor principal del SCADA en el centro de control.",
           "correcta": false
         },
         {
           "texto": "Recoger datos de campo en ubicaciones remotas y comunicarlos al centro de control.",
           "correcta": true
-        },
-        {
-          "texto": "Programar los PLC desde la oficina técnica a través de la red corporativa municipal.",
-          "correcta": false
         }
       ],
       "pregunta": "Una RTU (Remote Terminal Unit) se caracteriza por:",
@@ -279,7 +279,7 @@
       ],
       "pregunta": "¿Cuál es la principal debilidad de seguridad del protocolo Modbus TCP?",
       "razonamiento": "Modbus nació para redes industriales aisladas: cualquiera que alcance el puerto 502 puede leer y escribir en el dispositivo. De ahí la importancia de la segmentación.",
-      "origen": "T18 §5",
+      "origen": "T18 §6",
       "dificultad": "Media",
       "tipo": "Concepto",
       "concepto": "Modbus",
@@ -307,7 +307,7 @@
       ],
       "pregunta": "¿Qué puerto TCP utiliza Modbus TCP?",
       "razonamiento": "Modbus TCP = 502. El 4840 es OPC UA, el 161 SNMP y el 22 SSH.",
-      "origen": "T18 §5",
+      "origen": "T18 §6",
       "dificultad": "Media",
       "tipo": "Dato",
       "concepto": "Puertos industriales",
@@ -321,21 +321,21 @@
           "correcta": false
         },
         {
-          "texto": "OPC UA.",
-          "correcta": true
-        },
-        {
           "texto": "Profibus.",
           "correcta": false
+        },
+        {
+          "texto": "OPC UA.",
+          "correcta": true
         },
         {
           "texto": "KNX.",
           "correcta": false
         }
       ],
-      "pregunta": "El estándar moderno de interoperabilidad industrial que incorpora autenticación y cifrado es:",
-      "razonamiento": "OPC UA (puerto 4840) es independiente del fabricante e incluye seguridad. Modbus y Profibus no la tienen y KNX es de domótica.",
-      "origen": "T18 §5",
+      "pregunta": "El estándar moderno de interoperabilidad industrial que dispone de mecanismos de autenticación y cifrado es:",
+      "razonamiento": "OPC UA (puerto 4840 habitual) es independiente del fabricante y dispone de mecanismos de seguridad, que hay que configurar: no es seguro por definición. Modbus y Profibus clásicos no los integran y KNX es de domótica.",
+      "origen": "T18 §6",
       "dificultad": "Media",
       "tipo": "Dato",
       "concepto": "OPC UA",
@@ -349,21 +349,21 @@
           "correcta": false
         },
         {
+          "texto": "BACnet.",
+          "correcta": true
+        },
+        {
           "texto": "IEC 61850.",
           "correcta": false
         },
         {
           "texto": "EtherNet/IP.",
           "correcta": false
-        },
-        {
-          "texto": "BACnet.",
-          "correcta": true
         }
       ],
       "pregunta": "¿Qué protocolo se utiliza habitualmente en la automatización y gestión técnica de edificios (climatización, iluminación)?",
       "razonamiento": "BACnet (UDP 47808) es el estándar de automatización de edificios, junto con KNX y Modbus. DNP3 e IEC 61850 son del sector eléctrico y EtherNet/IP, industrial.",
-      "origen": "T18 §5",
+      "origen": "T18 §6",
       "dificultad": "Media",
       "tipo": "Aplicación",
       "concepto": "BACnet",
@@ -377,21 +377,21 @@
           "correcta": false
         },
         {
-          "texto": "El cifrado de todos los datos que circulan por la red industrial.",
-          "correcta": false
+          "texto": "La disponibilidad del proceso y la seguridad física de las personas.",
+          "correcta": true
         },
         {
           "texto": "La trazabilidad de los usuarios.",
           "correcta": false
         },
         {
-          "texto": "La disponibilidad del proceso y la seguridad física de las personas.",
-          "correcta": true
+          "texto": "El cifrado de todos los datos que circulan por la red industrial.",
+          "correcta": false
         }
       ],
       "pregunta": "En los entornos OT (tecnología operacional), la prioridad de seguridad suele ser:",
-      "razonamiento": "Un corte en OT puede dejar sin agua, luz o climatización o causar daños físicos. En IT, en cambio, la confidencialidad suele estar en primer lugar.",
-      "origen": "T18 §6",
+      "razonamiento": "Un corte en OT puede dejar sin agua, luz o climatización o causar daños físicos. Es un peso habitual, no una regla universal («CIA invertida»): depende del sistema y del riesgo, y la confidencialidad también importa.",
+      "origen": "T18 §7",
       "dificultad": "Media",
       "tipo": "Comparación",
       "concepto": "IT vs OT",
@@ -401,12 +401,12 @@
       "id": "BOLSA_RED_T18_015",
       "opciones": [
         {
-          "texto": "Porque los fabricantes de automatización nunca publican parches de seguridad para sus PLC.",
-          "correcta": false
+          "texto": "Porque las paradas son escasas, el fabricante debe validarlos y hay sistemas antiguos.",
+          "correcta": true
         },
         {
-          "texto": "Porque no se puede parar el proceso, los parches deben certificarse y hay sistemas antiguos.",
-          "correcta": true
+          "texto": "Porque los fabricantes de automatización nunca publican parches de seguridad para sus PLC.",
+          "correcta": false
         },
         {
           "texto": "Porque los PLC no tienen sistema operativo.",
@@ -417,9 +417,9 @@
           "correcta": false
         }
       ],
-      "pregunta": "¿Por qué es difícil aplicar parches en los sistemas de control industrial?",
-      "razonamiento": "En OT los equipos duran décadas, el fabricante debe validar cada cambio y las ventanas de parada son escasas. Por eso se refuerzan la segmentación y la monitorización.",
-      "origen": "T18 §6",
+      "pregunta": "¿Por qué hay que planificar especialmente los parches en los sistemas de control industrial?",
+      "razonamiento": "En OT sí se parchea, pero con proceso: compatibilidad, prueba, coordinación, ventana, copia y vuelta atrás, verificación. Mientras tanto se refuerzan la segmentación y la monitorización.",
+      "origen": "T18 §7",
       "dificultad": "Media",
       "tipo": "Concepto",
       "concepto": "Parches en OT",
@@ -433,21 +433,21 @@
           "correcta": false
         },
         {
-          "texto": "IEC 62443.",
-          "correcta": true
-        },
-        {
           "texto": "IEC 61131-3.",
           "correcta": false
         },
         {
           "texto": "ITU-T G.984.",
           "correcta": false
+        },
+        {
+          "texto": "IEC 62443.",
+          "correcta": true
         }
       ],
       "pregunta": "La norma internacional de referencia en ciberseguridad de sistemas de automatización y control industrial es:",
       "razonamiento": "IEC 62443 define, entre otros, el modelo de zonas y conductos y los niveles de seguridad para OT.",
-      "origen": "T18 §7",
+      "origen": "T18 §8",
       "dificultad": "Media",
       "tipo": "Dato",
       "concepto": "IEC 62443",
@@ -457,15 +457,15 @@
       "id": "BOLSA_RED_T18_017",
       "opciones": [
         {
-          "texto": "Una VPN nominativa con MFA, limitada solo al PLC.",
-          "correcta": false
-        },
-        {
           "texto": "Publicar el PLC directamente en Internet con su contraseña por defecto.",
           "correcta": true
         },
         {
           "texto": "Un servidor de salto (jump host) con acceso registrado.",
+          "correcta": false
+        },
+        {
+          "texto": "Una VPN nominativa con MFA, limitada solo al PLC.",
           "correcta": false
         },
         {
@@ -475,7 +475,7 @@
       ],
       "pregunta": "Una empresa mantenedora pide acceso a un PLC de la red municipal. ¿Qué opción NO es aceptable?",
       "razonamiento": "Exponer un PLC o un HMI a Internet es uno de los errores más graves en OT; muchos incidentes reales se han producido así. Las otras tres son buenas prácticas.",
-      "origen": "T18 §7",
+      "origen": "T18 §8",
       "dificultad": "Fácil",
       "tipo": "Supuesto",
       "concepto": "Acceso remoto OT",
@@ -485,12 +485,12 @@
       "id": "BOLSA_RED_T18_018",
       "opciones": [
         {
-          "texto": "Ser el primer ransomware de la historia en atacar hospitales.",
-          "correcta": false
-        },
-        {
           "texto": "Sabotear centrifugadoras reprogramando PLC industriales.",
           "correcta": true
+        },
+        {
+          "texto": "Ser el primer ransomware de la historia en atacar hospitales.",
+          "correcta": false
         },
         {
           "texto": "Robar credenciales bancarias por SMS.",
@@ -503,7 +503,7 @@
       ],
       "pregunta": "El gusano Stuxnet (2010) es conocido por:",
       "razonamiento": "Stuxnet atacó PLC Siemens de una instalación nuclear iraní, alterando el proceso físico mientras mostraba valores normales al operador. La botnet de cámaras IoT es Mirai.",
-      "origen": "T18 §7",
+      "origen": "T18 §8",
       "dificultad": "Media",
       "tipo": "Dato",
       "concepto": "Stuxnet",
@@ -517,21 +517,21 @@
           "correcta": false
         },
         {
-          "texto": "2 (supervisión).",
-          "correcta": false
-        },
-        {
           "texto": "1 (control).",
           "correcta": true
+        },
+        {
+          "texto": "2 (supervisión).",
+          "correcta": false
         },
         {
           "texto": "4 (empresa).",
           "correcta": false
         }
       ],
-      "pregunta": "En el modelo de niveles de automatización (Purdue/ISA-95), los PLC se sitúan en el nivel:",
+      "pregunta": "En el modelo de niveles de automatización (modelo Purdue), los PLC se sitúan en el nivel:",
       "razonamiento": "Nivel 0: sensores y actuadores; nivel 1: PLC y RTU; nivel 2: SCADA y HMI; nivel 3: operaciones; nivel 4: red corporativa (ERP).",
-      "origen": "T18 §4",
+      "origen": "T18 §5",
       "dificultad": "Media",
       "tipo": "Concepto",
       "concepto": "Modelo Purdue",
@@ -541,6 +541,10 @@
       "id": "BOLSA_RED_T18_020",
       "opciones": [
         {
+          "texto": "Una DMZ industrial, con flujos estrictamente controlados.",
+          "correcta": true
+        },
+        {
           "texto": "Conectarlas directamente para facilitar la gestión.",
           "correcta": false
         },
@@ -549,17 +553,13 @@
           "correcta": false
         },
         {
-          "texto": "Una DMZ industrial, sin tráfico directo entre ambas.",
-          "correcta": true
-        },
-        {
           "texto": "Eliminar el cortafuegos para no añadir latencia.",
           "correcta": false
         }
       ],
       "pregunta": "Entre la red corporativa (IT) y la red industrial (OT) se recomienda:",
-      "razonamiento": "La DMZ industrial (nivel 3,5) aloja los servicios de intercambio (historian réplica, servidores de salto, actualizaciones) y evita conexiones directas entre IT y OT.",
-      "origen": "T18 §4",
+      "razonamiento": "La DMZ industrial (nivel 3,5, una convención de seguridad) aloja los servicios de intercambio (réplica del historian, servidores de salto, actualizaciones) y reduce y controla los flujos entre IT y OT.",
+      "origen": "T18 §5",
       "dificultad": "Media",
       "tipo": "Aplicación",
       "concepto": "DMZ industrial",
@@ -569,7 +569,7 @@
       "id": "BOLSA_RED_T18_021",
       "opciones": [
         {
-          "texto": "No existe ninguna diferencia.",
+          "texto": "No existe ninguna diferencia entre ambos: son dos nombres del mismo sistema.",
           "correcta": false
         },
         {
@@ -581,13 +581,13 @@
           "correcta": false
         },
         {
-          "texto": "Suele controlar de forma integrada una gran planta continua; el SCADA, instalaciones dispersas.",
+          "texto": "Es control distribuido muy integrado, típico de plantas de proceso continuo.",
           "correcta": true
         }
       ],
       "pregunta": "Un sistema de control distribuido (DCS) se diferencia de un SCADA en que:",
-      "razonamiento": "El DCS integra control y supervisión de un mismo fabricante en una planta (química, refinería). El SCADA supervisa instalaciones distribuidas geográficamente (agua, energía).",
-      "origen": "T18 §3",
+      "razonamiento": "El DCS integra control y supervisión en procesos continuos de planta (química, refinería). El SCADA se asocia a la supervisión de sistemas distribuidos geográficamente (agua, energía). Las fronteras se solapan y el fabricante no es el criterio.",
+      "origen": "T18 §4",
       "dificultad": "Difícil",
       "tipo": "Comparación",
       "concepto": "DCS",
@@ -597,11 +597,11 @@
       "id": "BOLSA_RED_T18_022",
       "opciones": [
         {
-          "texto": "Los PLC hayan dejado de controlar y el proceso esté parado por completo.",
-          "correcta": false
+          "texto": "Un fallo de supervisión o comunicación, mirando calidad y hora de los datos.",
+          "correcta": true
         },
         {
-          "texto": "Los sensores de temperatura se hayan desconectado todos al mismo tiempo.",
+          "texto": "Los PLC hayan dejado de controlar y el proceso esté parado por completo.",
           "correcta": false
         },
         {
@@ -609,13 +609,13 @@
           "correcta": false
         },
         {
-          "texto": "Se haya perdido la comunicación entre el SCADA y el PLC, que sigue controlando.",
-          "correcta": true
+          "texto": "Los sensores de temperatura se hayan desconectado todos al mismo tiempo.",
+          "correcta": false
         }
       ],
-      "pregunta": "El SCADA de climatización muestra valores «congelados», pero el edificio sigue climatizado. Lo más probable es que:",
-      "razonamiento": "El control en tiempo real lo hace el PLC; si el proceso funciona, lo que falla es la adquisición de datos. Se comprueba red, puerto, cortafuegos y servicio del SCADA.",
-      "origen": "T18 §8",
+      "pregunta": "El SCADA de climatización muestra valores «congelados», pero el edificio sigue climatizado. ¿Qué hipótesis hay que comprobar primero?",
+      "razonamiento": "Si el proceso funciona, el control local está bien y lo sospechoso es la supervisión. «Congelado» es una hipótesis: se confirma con la calidad y la marca de tiempo, el alcance (un tag, un PLC, todos) y después red, cortafuegos, protocolo y servicio del SCADA.",
+      "origen": "T18 §9",
       "dificultad": "Media",
       "tipo": "Aplicación",
       "concepto": "Valores congelados",
@@ -625,16 +625,16 @@
       "id": "BOLSA_RED_T18_023",
       "opciones": [
         {
-          "texto": "RTU",
-          "correcta": false
-        },
-        {
           "texto": "HMI",
           "correcta": false
         },
         {
           "texto": "Historian",
           "correcta": true
+        },
+        {
+          "texto": "RTU",
+          "correcta": false
         },
         {
           "texto": "PLC",
@@ -653,16 +653,16 @@
       "id": "BOLSA_RED_T18_024",
       "opciones": [
         {
+          "texto": "4–20 mA",
+          "correcta": true
+        },
+        {
           "texto": "230 V en corriente alterna",
           "correcta": false
         },
         {
           "texto": "1 Gb/s por Ethernet",
           "correcta": false
-        },
-        {
-          "texto": "4–20 mA",
-          "correcta": true
         },
         {
           "texto": "48 V por PoE",
@@ -681,12 +681,12 @@
       "id": "BOLSA_RED_T18_025",
       "opciones": [
         {
-          "texto": "Los lenguajes de programación de los autómatas programables.",
-          "correcta": true
-        },
-        {
           "texto": "La ciberseguridad de los sistemas de control industrial.",
           "correcta": false
+        },
+        {
+          "texto": "Los lenguajes de programación de los autómatas programables.",
+          "correcta": true
         },
         {
           "texto": "Los niveles de disponibilidad de los centros de proceso de datos.",
@@ -698,8 +698,8 @@
         }
       ],
       "pregunta": "La norma IEC 61131-3 trata de:",
-      "razonamiento": "IEC 61131-3: LD, FBD, ST, IL y SFC. La ciberseguridad industrial es la IEC 62443.",
-      "origen": "T18 §7",
+      "razonamiento": "IEC 61131-3: LD, FBD, ST y SFC (IL, retirado). La ciberseguridad industrial es la familia IEC 62443.",
+      "origen": "T18 §8",
       "dificultad": "Media",
       "tipo": "Diferenciación",
       "concepto": "IEC 61131-3 vs 62443",
@@ -709,10 +709,6 @@
       "id": "BOLSA_RED_T18_026",
       "opciones": [
         {
-          "texto": "Coordinarlo con el responsable del proceso y el mantenedor, en una ventana.",
-          "correcta": true
-        },
-        {
           "texto": "Lanzar el escaneo más agresivo posible para encontrarlo todo cuanto antes.",
           "correcta": false
         },
@@ -721,13 +717,17 @@
           "correcta": false
         },
         {
+          "texto": "Coordinarlo con el responsable del proceso y el mantenedor, en una ventana.",
+          "correcta": true
+        },
+        {
           "texto": "Nada especial: un escaneo de red nunca afecta a los equipos industriales.",
           "correcta": false
         }
       ],
       "pregunta": "Antes de escanear vulnerabilidades en la VLAN de telegestión hay que:",
-      "razonamiento": "En OT prima la disponibilidad: un escaneo puede bloquear un PLC antiguo. Se coordina, se planifica o se usa monitorización pasiva.",
-      "origen": "T18 §6",
+      "razonamiento": "Un escaneo activo puede afectar a un PLC antiguo. No está prohibido, pero se autoriza, se prueba y se coordina en una ventana; para el descubrimiento habitual se prefiere la monitorización pasiva.",
+      "origen": "T18 §7",
       "dificultad": "Media",
       "tipo": "Aplicación",
       "concepto": "Escaneos en OT",
@@ -737,11 +737,11 @@
       "id": "BOLSA_RED_T18_027",
       "opciones": [
         {
-          "texto": "Retirar la exposición de inmediato y revisar accesos y credenciales.",
-          "correcta": true
+          "texto": "Cambiar el color de los sinópticos para que el atacante no los entienda.",
+          "correcta": false
         },
         {
-          "texto": "Cambiar el color de los sinópticos para que el atacante no los entienda.",
+          "texto": "Publicar también el PLC para poder supervisarlo desde fuera.",
           "correcta": false
         },
         {
@@ -749,16 +749,240 @@
           "correcta": false
         },
         {
-          "texto": "Publicar también el PLC para poder supervisarlo desde fuera.",
-          "correcta": false
+          "texto": "Retirar la exposición de inmediato y revisar accesos y credenciales.",
+          "correcta": true
         }
       ],
       "pregunta": "Se descubre que el HMI de un bombeo es accesible desde Internet. La primera medida es:",
-      "razonamiento": "Nunca se expone un PLC o un HMI a Internet. Se corta la exposición, se revisan registros y contraseñas por defecto y se da acceso remoto solo por VPN.",
-      "origen": "T18 §8",
+      "razonamiento": "Un PLC o un HMI no se expone directamente a Internet. Se corta la exposición, se revisan registros y contraseñas por defecto y se da acceso remoto por VPN con MFA, nominativo y a través de un jump host.",
+      "origen": "T18 §9",
       "dificultad": "Fácil",
       "tipo": "Aplicación",
       "concepto": "PLC expuesto",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T18_028",
+      "opciones": [
+        {
+          "texto": "Solo transmite datos al centro y nunca puede ejecutar ninguna lógica de control.",
+          "correcta": false
+        },
+        {
+          "texto": "Es la base de datos de series temporales que guarda el histórico.",
+          "correcta": false
+        },
+        {
+          "texto": "Es la pantalla con sinópticos que usa el operador del centro de control.",
+          "correcta": false
+        },
+        {
+          "texto": "Está orientada a sitios remotos y telemetría, y también puede ejecutar lógica.",
+          "correcta": true
+        }
+      ],
+      "pregunta": "Sobre una RTU es correcto afirmar que:",
+      "razonamiento": "PLC y RTU se diferencian por su enfoque (control local frente a sitio remoto y telecomunicaciones), no por una frontera absoluta: hoy sus capacidades se solapan.",
+      "origen": "T18 §2",
+      "dificultad": "Media",
+      "tipo": "Trampa",
+      "concepto": "PLC vs RTU",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T18_029",
+      "opciones": [
+        {
+          "texto": "Ethernet normal usando el protocolo IP, sin nada específico de la industria.",
+          "correcta": false
+        },
+        {
+          "texto": "Un tipo de cable de par trenzado para entornos industriales con vibraciones.",
+          "correcta": false
+        },
+        {
+          "texto": "Un protocolo industrial basado en CIP que funciona sobre redes Ethernet y TCP/UDP.",
+          "correcta": true
+        },
+        {
+          "texto": "Una variante de PROFIBUS para buses de campo sobre RS-485.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "EtherNet/IP es:",
+      "razonamiento": "EtherNet/IP (Rockwell, ODVA) transporta CIP; usa habitualmente TCP/UDP 44818 y UDP 2222 para la E/S. No es «Ethernet usando IP».",
+      "origen": "T18 §6",
+      "dificultad": "Media",
+      "tipo": "Trampa",
+      "concepto": "EtherNet/IP",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T18_030",
+      "opciones": [
+        {
+          "texto": "La 101 define lenguajes de PLC y la 104, la ciberseguridad industrial.",
+          "correcta": false
+        },
+        {
+          "texto": "La 101 es para edificios y la 104 para subestaciones eléctricas de alta tensión.",
+          "correcta": false
+        },
+        {
+          "texto": "La 101 es telecontrol por enlace serie y la 104 es telecontrol sobre TCP/IP.",
+          "correcta": true
+        },
+        {
+          "texto": "No hay diferencia: son dos números de la misma edición de la norma.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "La diferencia entre IEC 60870-5-101 e IEC 60870-5-104 es que:",
+      "razonamiento": "IEC 60870-5-104 lleva el telecontrol de la 101 (serie) sobre TCP/IP, con el puerto TCP 2404 habitual.",
+      "origen": "T18 §6",
+      "dificultad": "Difícil",
+      "tipo": "Diferenciación",
+      "concepto": "IEC 101 vs 104",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T18_031",
+      "opciones": [
+        {
+          "texto": "Un grupo de activos que comparten los mismos requisitos de seguridad.",
+          "correcta": false
+        },
+        {
+          "texto": "La comunicación controlada entre dos zonas de seguridad.",
+          "correcta": true
+        },
+        {
+          "texto": "El cable de fibra óptica que une las salas técnicas de la planta.",
+          "correcta": false
+        },
+        {
+          "texto": "El servidor de salto por el que entra el personal mantenedor.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "En la IEC 62443, ¿qué es un conducto?",
+      "razonamiento": "Zona = qué agrupamos (activos con requisitos comunes); conducto = cómo se comunican las zonas, con solo los flujos necesarios.",
+      "origen": "T18 §8",
+      "dificultad": "Media",
+      "tipo": "Definición",
+      "concepto": "Zonas y conductos",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T18_032",
+      "opciones": [
+        {
+          "texto": "Las zonas de seguridad no utilizan VLAN ni ningún tipo de red.",
+          "correcta": false
+        },
+        {
+          "texto": "Son exactamente lo mismo: crear la VLAN ya crea la zona segura.",
+          "correcta": false
+        },
+        {
+          "texto": "La VLAN ayuda a implementar una zona, pero sola no la hace segura.",
+          "correcta": true
+        },
+        {
+          "texto": "Una VLAN impide por sí sola cualquier acceso no autorizado a los PLC.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Sobre una VLAN y una zona de seguridad OT es correcto afirmar que:",
+      "razonamiento": "La VLAN es segmentación lógica (T4). La zona es un concepto de seguridad basado en activos y riesgo, que necesita además cortafuegos, reglas, control de acceso y vigilancia.",
+      "origen": "T18 §8",
+      "dificultad": "Media",
+      "tipo": "Trampa",
+      "concepto": "VLAN vs zona",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T18_033",
+      "opciones": [
+        {
+          "texto": "Que es el dato actual del proceso y que todo funciona con normalidad.",
+          "correcta": false
+        },
+        {
+          "texto": "Que el sensor está perfectamente y el proceso se ha parado de forma segura.",
+          "correcta": false
+        },
+        {
+          "texto": "Que es el último valor conocido y el dato ha dejado de actualizarse.",
+          "correcta": true
+        },
+        {
+          "texto": "Que el historian ha borrado los datos de las dos últimas horas.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Un tag del SCADA muestra el mismo valor, con calidad BAD y una marca de tiempo de hace dos horas. ¿Qué indica?",
+      "razonamiento": "Valor + calidad + marca de tiempo distinguen el dato actual del último valor conocido. Con calidad BAD y hora antigua, falla la adquisición; después se busca la capa según el alcance.",
+      "origen": "T18 §9",
+      "dificultad": "Media",
+      "tipo": "Aplicación",
+      "concepto": "Calidad del dato",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T18_034",
+      "opciones": [
+        {
+          "texto": "En ningún sitio: si responde al ping, la comunicación Modbus es correcta.",
+          "correcta": false
+        },
+        {
+          "texto": "Solo en el cable de red, porque el ping no comprueba la capa física.",
+          "correcta": false
+        },
+        {
+          "texto": "En el puerto 502, el cortafuegos, el protocolo o el driver del SCADA.",
+          "correcta": true
+        },
+        {
+          "texto": "En la alimentación eléctrica del PLC, que ha entrado en modo de ahorro.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "El ping al PLC responde, pero el SCADA no recibe datos Modbus TCP. ¿Dónde puede estar el fallo?",
+      "razonamiento": "Ping funciona no es protocolo funcionando, y puerto abierto no es Modbus correcto: hay que comprobar la aplicación, los registros y el driver.",
+      "origen": "T18 §9",
+      "dificultad": "Media",
+      "tipo": "Trampa",
+      "concepto": "Ping vs protocolo",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T18_035",
+      "opciones": [
+        {
+          "texto": "Ya está adecuadamente protegido, porque la VPN cifra todo el canal.",
+          "correcta": false
+        },
+        {
+          "texto": "Necesita además MFA, autorización, mínimo privilegio, registro y tiempo limitado.",
+          "correcta": true
+        },
+        {
+          "texto": "Puede usar una cuenta compartida, porque el túnel es privado.",
+          "correcta": false
+        },
+        {
+          "texto": "No necesita registro de accesos, porque la VPN ya autentica al usuario.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Un PLC accesible por VPN para el mantenedor:",
+      "razonamiento": "La VPN protege el canal, pero no decide quién entra, a qué PLC, cuánto tiempo ni qué puede hacer. VPN no es autorización.",
+      "origen": "T18 §8",
+      "dificultad": "Media",
+      "tipo": "Trampa",
+      "concepto": "VPN vs autorización",
       "prioridad": "Media"
     }
   ]
