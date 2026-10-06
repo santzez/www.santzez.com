@@ -2,7 +2,7 @@
   "id": "BOLSA_RED_T19",
   "opeNombre": "Bolsa DonostiaTIK 2023 — Técnico/a de apoyo: Instalaciones y Comunicaciones",
   "titulo": "T19 · Monitorización de comunicaciones. Detección y resolución de averías. Soporte técnico informático. Mantenimiento y localización de averías.",
-  "descripcion": "27 preguntas tipo test con explicación, elaboradas a partir de los apuntes del tema.",
+  "descripcion": "35 preguntas tipo test con explicación, elaboradas a partir de los apuntes del tema.",
   "fuente": "Elaboración propia a partir de los apuntes del tema (octubre de 2026). Las marcadas como «examen 2023» reproducen preguntas del examen real del 23/09/2023 con la plantilla oficial.",
   "preguntas": [
     {
@@ -27,7 +27,7 @@
       ],
       "pregunta": "Señale cuál NO es una herramienta que ayude al diagnóstico y solución de averías en comunicaciones en red:",
       "razonamiento": "sudo es un comando de Linux para ejecutar órdenes con privilegios de otro usuario. iPerf mide el caudal, Wireshark captura y analiza paquetes y tracert muestra la ruta.",
-      "origen": "T19 §3",
+      "origen": "T19 §6",
       "dificultad": "Fácil",
       "tipo": "Trampa",
       "concepto": "Herramientas",
@@ -56,7 +56,7 @@
       ],
       "pregunta": "Respecto a SNMP (Simple Network Management Protocol), ¿cuál de las siguientes respuestas es CORRECTA?",
       "razonamiento": "Los traps los envía el agente por iniciativa propia (UDP 162). La última versión es SNMPv3, lo soportan switches, routers, AP, SAI e impresoras, y es un protocolo de aplicación.",
-      "origen": "T19 §1",
+      "origen": "T19 §2",
       "dificultad": "Media",
       "tipo": "Concepto",
       "concepto": "SNMP",
@@ -71,21 +71,21 @@
           "correcta": false
         },
         {
-          "texto": "NMS.",
-          "correcta": false
-        },
-        {
           "texto": "MIB.",
           "correcta": true
+        },
+        {
+          "texto": "NMS.",
+          "correcta": false
         },
         {
           "texto": "CMDB.",
           "correcta": false
         }
       ],
-      "pregunta": "En SNMP, la base de datos de variables que ofrece cada agente se denomina:",
-      "razonamiento": "La MIB (Management Information Base) organiza las variables, y cada una se identifica con un OID. El NMS es el sistema gestor y la CMDB, la base de datos de configuración de ITIL.",
-      "origen": "T19 §1",
+      "pregunta": "En SNMP, la definición de los objetos gestionables, cuyos valores mantiene el agente, se denomina:",
+      "razonamiento": "La MIB (Management Information Base) define y organiza los objetos gestionables, cada uno identificado con un OID; el agente mantiene sus valores. El NMS es el sistema gestor y la CMDB, la base de datos de configuración de ITIL.",
+      "origen": "T19 §2",
       "dificultad": "Media",
       "tipo": "Dato",
       "concepto": "MIB",
@@ -99,21 +99,21 @@
           "correcta": false
         },
         {
-          "texto": "UDP 514.",
-          "correcta": false
-        },
-        {
           "texto": "TCP 22.",
           "correcta": false
         },
         {
           "texto": "UDP 162.",
           "correcta": true
+        },
+        {
+          "texto": "UDP 514.",
+          "correcta": false
         }
       ],
       "pregunta": "¿Qué puerto utiliza el gestor SNMP para recibir los traps de los agentes?",
       "razonamiento": "Las consultas al agente van al UDP 161 y los traps al gestor, al UDP 162. El 514 es syslog.",
-      "origen": "T19 §1",
+      "origen": "T19 §2",
       "dificultad": "Media",
       "tipo": "Dato",
       "concepto": "Puertos SNMP",
@@ -139,9 +139,9 @@
           "correcta": false
         }
       ],
-      "pregunta": "¿Qué versión de SNMP incorpora autenticación de usuarios y cifrado?",
-      "razonamiento": "SNMPv1 y v2c usan community strings en texto claro. SNMPv3 añade usuarios con autenticación (SHA) y cifrado (AES) y es la versión recomendada.",
-      "origen": "T19 §1",
+      "pregunta": "¿Qué versión de SNMP puede proporcionar autenticación por usuario y cifrado?",
+      "razonamiento": "SNMPv1 y v2c usan community strings sin cifrar. SNMPv3 añade un modelo por usuario con tres niveles; cifra solo en authPriv (SHA y AES son algoritmos habituales). Es la versión recomendada.",
+      "origen": "T19 §2",
       "dificultad": "Fácil",
       "tipo": "Dato",
       "concepto": "SNMPv3",
@@ -169,7 +169,7 @@
       ],
       "pregunta": "La diferencia entre un TRAP y un INFORM en SNMP es que:",
       "razonamiento": "Ambos son notificaciones del agente al gestor; el INFORM espera acuse de recibo y se reenvía si no llega.",
-      "origen": "T19 §1",
+      "origen": "T19 §2",
       "dificultad": "Difícil",
       "tipo": "Comparación",
       "concepto": "Trap vs inform",
@@ -197,7 +197,7 @@
       ],
       "pregunta": "¿Qué tecnología permite saber qué equipos hablan con cuáles, cuánto tráfico intercambian y con qué protocolos?",
       "razonamiento": "NetFlow exporta resúmenes de los flujos de tráfico (origen, destino, puertos, volumen). Syslog envía mensajes de log y SNMP lee contadores.",
-      "origen": "T19 §1",
+      "origen": "T19 §3",
       "dificultad": "Media",
       "tipo": "Concepto",
       "concepto": "NetFlow",
@@ -207,12 +207,12 @@
       "id": "BOLSA_RED_T19_008",
       "opciones": [
         {
-          "texto": "Syslog en el puerto UDP 514.",
-          "correcta": true
-        },
-        {
           "texto": "SNMP en el puerto UDP 161.",
           "correcta": false
+        },
+        {
+          "texto": "Syslog en el puerto UDP 514.",
+          "correcta": true
         },
         {
           "texto": "NTP en el puerto UDP 123.",
@@ -225,7 +225,7 @@
       ],
       "pregunta": "El servicio que centraliza los mensajes de log de los equipos de red usa normalmente:",
       "razonamiento": "Syslog (UDP 514, o TCP/TLS) recoge en un servidor central los mensajes de los equipos: caídas de enlace, errores, inicios de sesión.",
-      "origen": "T19 §1",
+      "origen": "T19 §3",
       "dificultad": "Fácil",
       "tipo": "Dato",
       "concepto": "Syslog",
@@ -235,11 +235,11 @@
       "id": "BOLSA_RED_T19_009",
       "opciones": [
         {
-          "texto": "Zabbix.",
-          "correcta": true
+          "texto": "Wireshark.",
+          "correcta": false
         },
         {
-          "texto": "Wireshark.",
+          "texto": "Nmap.",
           "correcta": false
         },
         {
@@ -247,13 +247,13 @@
           "correcta": false
         },
         {
-          "texto": "Nmap.",
-          "correcta": false
+          "texto": "Zabbix.",
+          "correcta": true
         }
       ],
       "pregunta": "¿Cuál de estas es una herramienta de monitorización de red de código abierto?",
       "razonamiento": "Zabbix (como Nagios o LibreNMS) monitoriza disponibilidad y rendimiento con SNMP y agentes, con alertas y gráficas. Wireshark analiza paquetes, iPerf mide el caudal y Nmap descubre puertos.",
-      "origen": "T19 §1",
+      "origen": "T19 §3",
       "dificultad": "Fácil",
       "tipo": "Dato",
       "concepto": "Herramientas de monitorización",
@@ -263,8 +263,8 @@
       "id": "BOLSA_RED_T19_010",
       "opciones": [
         {
-          "texto": "Escalar la incidencia directamente al fabricante del equipo de red.",
-          "correcta": false
+          "texto": "Empezar por la capa física (cables, luces) y subir por las capas del modelo OSI.",
+          "correcta": true
         },
         {
           "texto": "Empezar por la aplicación del usuario y bajar hasta el cable, la roseta y el puerto.",
@@ -275,13 +275,13 @@
           "correcta": false
         },
         {
-          "texto": "Empezar por la capa física (cables, luces) y subir por las capas del modelo OSI.",
-          "correcta": true
+          "texto": "Escalar la incidencia directamente al fabricante del equipo de red.",
+          "correcta": false
         }
       ],
       "pregunta": "En el diagnóstico de una avería de red, el enfoque «de abajo arriba» (bottom-up) consiste en:",
-      "razonamiento": "En comunicaciones es el más habitual: muchas averías son físicas (latiguillo, roseta, puerto). Top-down empieza por la aplicación; divide y vencerás, por una capa intermedia.",
-      "origen": "T19 §2",
+      "razonamiento": "Es muy útil cuando el síntoma apunta a conectividad: muchas averías son físicas (latiguillo, roseta, puerto). Top-down empieza por la aplicación; divide y vencerás, por una capa intermedia. Ningún enfoque es universal.",
+      "origen": "T19 §5",
       "dificultad": "Fácil",
       "tipo": "Concepto",
       "concepto": "Bottom-up",
@@ -291,12 +291,12 @@
       "id": "BOLSA_RED_T19_011",
       "opciones": [
         {
-          "texto": "Cambiar el equipo del usuario por uno de repuesto.",
-          "correcta": false
-        },
-        {
           "texto": "Identificar el problema: qué falla, a quién afecta, desde cuándo y qué ha cambiado.",
           "correcta": true
+        },
+        {
+          "texto": "Cambiar el equipo del usuario por uno de repuesto.",
+          "correcta": false
         },
         {
           "texto": "Reiniciar el switch de la planta para descartar fallos de la electrónica de red.",
@@ -309,7 +309,7 @@
       ],
       "pregunta": "¿Cuál es el primer paso de la metodología de resolución de una avería?",
       "razonamiento": "Sin entender bien el problema se pierde tiempo. Después vienen la información, la hipótesis, las pruebas, la solución, la verificación y la documentación.",
-      "origen": "T19 §2",
+      "origen": "T19 §5",
       "dificultad": "Fácil",
       "tipo": "Proceso",
       "concepto": "Metodología",
@@ -337,7 +337,7 @@
       ],
       "pregunta": "Para localizar físicamente un cable sin seguirlo a lo largo de su recorrido se utiliza:",
       "razonamiento": "El generador inyecta un tono en un extremo y la sonda lo detecta en el patch panel o el techo. El OTDR y el power meter son de fibra y el multímetro mide magnitudes eléctricas.",
-      "origen": "T19 §3",
+      "origen": "T19 §6",
       "dificultad": "Media",
       "tipo": "Herramienta",
       "concepto": "Toner",
@@ -351,21 +351,21 @@
           "correcta": false
         },
         {
-          "texto": "Desconectando uno a uno los latiguillos del armario hasta que se pierda el ping.",
-          "correcta": false
-        },
-        {
           "texto": "Cambiando la VLAN de todos los puertos.",
           "correcta": false
         },
         {
-          "texto": "Buscando su MAC o su IP en la tabla MAC, la caché ARP y el DHCP (o por LLDP).",
+          "texto": "Buscando su MAC o su IP en la tabla MAC, la caché ARP y el DHCP.",
           "correcta": true
+        },
+        {
+          "texto": "Desconectando uno a uno los latiguillos del armario hasta que se pierda el ping.",
+          "correcta": false
         }
       ],
       "pregunta": "Un player de cartelería en el techo no tiene conectividad y no se puede localizar su cable. ¿Cómo se encuentra su puerto en el switch a través de la red?",
-      "razonamiento": "La tabla MAC del switch indica en qué puerto se ha visto esa MAC; ARP y DHCP relacionan la IP con la MAC. Era una de las opciones «a través de la red» del caso de 2023.",
-      "origen": "T19 §4",
+      "razonamiento": "La tabla MAC del switch indica en qué puerto se ha visto esa MAC; ARP y DHCP relacionan la IP con la MAC. LLDP solo ayuda si el player lo anuncia, y muchos equipos finales no lo hacen. Era una de las opciones «a través de la red» del caso de 2023.",
+      "origen": "T19 §7",
       "dificultad": "Media",
       "tipo": "Supuesto",
       "concepto": "Player sin conexión",
@@ -393,7 +393,7 @@
       ],
       "pregunta": "Un analizador de red portátil conectado a una toma permite saber:",
       "razonamiento": "Equipos como el LinkSprinter leen LLDP/CDP, detectan el PoE, piden IP por DHCP y prueban la conectividad: muy útil para averías in situ.",
-      "origen": "T19 §3",
+      "origen": "T19 §6",
       "dificultad": "Media",
       "tipo": "Herramienta",
       "concepto": "Analizador portátil",
@@ -407,12 +407,12 @@
           "correcta": false
         },
         {
-          "texto": "En la VLAN del puerto o en el servicio DHCP.",
-          "correcta": true
-        },
-        {
           "texto": "En el servidor DNS.",
           "correcta": false
+        },
+        {
+          "texto": "En la VLAN del puerto o en el servicio DHCP.",
+          "correcta": true
         },
         {
           "texto": "En la aplicación del usuario o en su navegador.",
@@ -420,8 +420,8 @@
         }
       ],
       "pregunta": "Un equipo tiene enlace en la tarjeta de red, pero obtiene la IP 169.254.10.5. ¿Dónde está probablemente el problema?",
-      "razonamiento": "Con enlace pero sin respuesta del DHCP, lo típico es que el puerto esté en una VLAN equivocada, que falle el relay o que el ámbito esté agotado (APIPA).",
-      "origen": "T19 §4",
+      "razonamiento": "Una 169.254.x.x (APIPA) en un equipo con DHCP es un fuerte indicio de que no obtuvo configuración: VLAN equivocada, relay, ámbito agotado, servidor o cortafuegos. No significa por sí sola que el servidor DHCP esté averiado.",
+      "origen": "T19 §7",
       "dificultad": "Media",
       "tipo": "Diagnóstico",
       "concepto": "APIPA",
@@ -431,12 +431,12 @@
       "id": "BOLSA_RED_T19_016",
       "opciones": [
         {
-          "texto": "El switch de acceso de la planta, su alimentación y su enlace de subida (uplink).",
-          "correcta": true
-        },
-        {
           "texto": "El navegador y la configuración de proxy de cada usuario.",
           "correcta": false
+        },
+        {
+          "texto": "El switch de acceso de la planta, su alimentación y su enlace de subida (uplink).",
+          "correcta": true
         },
         {
           "texto": "Las contraseñas y las cuentas de los usuarios afectados en el directorio activo.",
@@ -449,7 +449,7 @@
       ],
       "pregunta": "Toda una planta se queda sin red a la vez. ¿Qué comprobarías primero?",
       "razonamiento": "Si fallan todos los equipos de una zona, la causa suele ser común: el switch de planta, su SAI o alimentación, el uplink hacia el principal o un bucle de capa 2.",
-      "origen": "T19 §4",
+      "origen": "T19 §7",
       "dificultad": "Fácil",
       "tipo": "Diagnóstico",
       "concepto": "Fallo de planta",
@@ -463,12 +463,12 @@
           "correcta": false
         },
         {
-          "texto": "Cerrar la incidencia por falta de información y pedir al usuario que la reabra.",
-          "correcta": false
-        },
-        {
           "texto": "Pasar la incidencia a un grupo más especializado (N2, N3, fabricante).",
           "correcta": true
+        },
+        {
+          "texto": "Cerrar la incidencia por falta de información y pedir al usuario que la reabra.",
+          "correcta": false
         },
         {
           "texto": "Reasignar la incidencia al mismo técnico para que la revise de nuevo.",
@@ -477,7 +477,7 @@
       ],
       "pregunta": "En el soporte técnico, el escalado funcional consiste en:",
       "razonamiento": "El escalado funcional busca más conocimiento técnico; el jerárquico implica a los responsables cuando la incidencia es grave o se incumple el SLA.",
-      "origen": "T19 §5",
+      "origen": "T19 §8",
       "dificultad": "Media",
       "tipo": "Concepto",
       "concepto": "Escalado",
@@ -503,9 +503,9 @@
           "correcta": false
         }
       ],
-      "pregunta": "En la organización del soporte, el primer nivel (N1 o CAU) se encarga de:",
-      "razonamiento": "El N1 es el punto único de contacto: registra, resuelve con procedimientos y escala al N2 (especialistas, como el puesto de instalaciones y comunicaciones) o al N3 (expertos y fabricantes).",
-      "origen": "T19 §5",
+      "pregunta": "En el modelo habitual de niveles de soporte, el primer nivel (a menudo el CAU) se encarga de:",
+      "razonamiento": "El N1 suele ser el punto único de contacto: registra, resuelve con procedimientos y escala al N2 (especialistas, como el puesto de instalaciones y comunicaciones) o al N3 (expertos y fabricantes). Es un modelo habitual que cada organización adapta.",
+      "origen": "T19 §8",
       "dificultad": "Fácil",
       "tipo": "Concepto",
       "concepto": "Niveles de soporte",
@@ -519,12 +519,12 @@
           "correcta": false
         },
         {
-          "texto": "Preventivo.",
-          "correcta": true
-        },
-        {
           "texto": "Evolutivo.",
           "correcta": false
+        },
+        {
+          "texto": "Preventivo.",
+          "correcta": true
         },
         {
           "texto": "Adaptativo.",
@@ -533,7 +533,7 @@
       ],
       "pregunta": "Las revisiones periódicas planificadas de los SAI, la limpieza de los armarios y la actualización del firmware son mantenimiento:",
       "razonamiento": "El preventivo se planifica para evitar averías. El correctivo repara tras el fallo y el evolutivo mejora o amplía la instalación.",
-      "origen": "T19 §6",
+      "origen": "T19 §9",
       "dificultad": "Fácil",
       "tipo": "Concepto",
       "concepto": "Preventivo",
@@ -561,7 +561,7 @@
       ],
       "pregunta": "Sustituir las baterías de un SAI porque las mediciones muestran que su autonomía está bajando es mantenimiento:",
       "razonamiento": "El predictivo actúa según el estado medido del componente, antes de que falle. El preventivo sigue un calendario fijo y el correctivo, una avería ya ocurrida.",
-      "origen": "T19 §6",
+      "origen": "T19 §9",
       "dificultad": "Media",
       "tipo": "Concepto",
       "concepto": "Predictivo",
@@ -575,21 +575,21 @@
           "correcta": false
         },
         {
-          "texto": "Para mostrar la ruta hasta un destino con el porcentaje de pérdidas en cada salto.",
-          "correcta": true
+          "texto": "Para medir la temperatura del procesador y de la tarjeta de red durante una prueba.",
+          "correcta": false
         },
         {
           "texto": "Para asignar una IP fija al equipo.",
           "correcta": false
         },
         {
-          "texto": "Para medir la temperatura del procesador y de la tarjeta de red durante una prueba.",
-          "correcta": false
+          "texto": "Para mostrar la ruta hasta un destino con el porcentaje de pérdidas en cada salto.",
+          "correcta": true
         }
       ],
       "pregunta": "¿Para qué sirve el comando pathping (Windows) o mtr (Linux)?",
-      "razonamiento": "Combina traceroute y ping: identifica en qué salto se producen las pérdidas o el retardo.",
-      "origen": "T19 §3",
+      "razonamiento": "Combina traceroute y ping con medidas repetidas. Ojo: una pérdida en un salto intermedio puede ser solo que ese router limita sus respuestas ICMP; es real si continúa en los saltos siguientes y el destino.",
+      "origen": "T19 §6",
       "dificultad": "Media",
       "tipo": "Herramienta",
       "concepto": "Pathping",
@@ -599,6 +599,10 @@
       "id": "BOLSA_RED_T19_022",
       "opciones": [
         {
+          "texto": "Limpiar los conectores y probar con otro latiguillo y transceptor.",
+          "correcta": true
+        },
+        {
           "texto": "Cambiar el switch principal del edificio por uno nuevo de mayor capacidad.",
           "correcta": false
         },
@@ -607,17 +611,13 @@
           "correcta": false
         },
         {
-          "texto": "Limpiar los conectores y probar con otro latiguillo y transceptor.",
-          "correcta": true
-        },
-        {
           "texto": "Aumentar el presupuesto PoE del switch de planta.",
           "correcta": false
         }
       ],
       "pregunta": "Un enlace de fibra acumula errores CRC y la potencia óptica recibida es baja. ¿Qué es lo primero que conviene hacer?",
       "razonamiento": "La suciedad en las férulas es la primera causa de pérdida. Si no mejora, se cambia el latiguillo y el transceptor, se prueba otra fibra y, si la troncal está dañada, se emite una orden de trabajo.",
-      "origen": "T19 §4",
+      "origen": "T19 §7",
       "dificultad": "Media",
       "tipo": "Supuesto",
       "concepto": "Fibra con errores",
@@ -627,11 +627,11 @@
       "id": "BOLSA_RED_T19_023",
       "opciones": [
         {
-          "texto": "Borrar el registro de la incidencia para no ocupar espacio en la herramienta.",
-          "correcta": false
+          "texto": "Verificar que el servicio está restaurado y documentar la causa y la solución.",
+          "correcta": true
         },
         {
-          "texto": "Escalarla al tercer nivel para que la revise el fabricante.",
+          "texto": "Borrar el registro de la incidencia para no ocupar espacio en la herramienta.",
           "correcta": false
         },
         {
@@ -639,13 +639,13 @@
           "correcta": false
         },
         {
-          "texto": "Verificar con el usuario que funciona y documentar la causa y la solución.",
-          "correcta": true
+          "texto": "Escalarla al tercer nivel para que la revise el fabricante.",
+          "correcta": false
         }
       ],
       "pregunta": "Al cerrar una incidencia de comunicaciones, ¿qué es imprescindible?",
-      "razonamiento": "Sin verificación la incidencia puede reabrirse; sin documentación no se aprende ni se detectan problemas repetidos (gestión de problemas, T20).",
-      "origen": "T19 §2",
+      "razonamiento": "Sin verificación la incidencia puede reabrirse; sin documentación no se aprende ni se detectan problemas repetidos (gestión de problemas, T20). La confirmación del usuario depende del procedimiento de cierre.",
+      "origen": "T19 §5",
       "dificultad": "Fácil",
       "tipo": "Proceso",
       "concepto": "Cierre de incidencias",
@@ -659,21 +659,21 @@
           "correcta": false
         },
         {
-          "texto": "Reabrirla como problema cuando se repite varias veces en el mismo mes.",
-          "correcta": false
+          "texto": "Informar a los responsables por gravedad o por riesgo de incumplir el SLA.",
+          "correcta": true
         },
         {
           "texto": "Cerrarla automáticamente cuando el usuario no responde en un plazo dado.",
           "correcta": false
         },
         {
-          "texto": "Informar a los responsables por gravedad o por riesgo de incumplir el SLA.",
-          "correcta": true
+          "texto": "Reabrirla como problema cuando se repite varias veces en el mismo mes.",
+          "correcta": false
         }
       ],
       "pregunta": "El escalado jerárquico de una incidencia consiste en:",
       "razonamiento": "Funcional = a quien sabe más (conocimiento). Jerárquico = a quien manda (autoridad, gravedad, SLA). Pueden convivir.",
-      "origen": "T19 §5",
+      "origen": "T19 §8",
       "dificultad": "Media",
       "tipo": "Diferenciación",
       "concepto": "Escalado jerárquico",
@@ -687,21 +687,21 @@
           "correcta": false
         },
         {
+          "texto": "Evolutivo",
+          "correcta": false
+        },
+        {
           "texto": "Correctivo",
           "correcta": false
         },
         {
           "texto": "Preventivo",
           "correcta": true
-        },
-        {
-          "texto": "Evolutivo",
-          "correcta": false
         }
       ],
       "pregunta": "Revisar las baterías del SAI cada seis meses, se necesite o no, es mantenimiento:",
       "razonamiento": "Preventivo = por calendario. Predictivo = según el estado medido (por ejemplo, cuando la autonomía medida baja).",
-      "origen": "T19 §6",
+      "origen": "T19 §9",
       "dificultad": "Fácil",
       "tipo": "Clasificación",
       "concepto": "Preventivo vs predictivo",
@@ -711,7 +711,7 @@
       "id": "BOLSA_RED_T19_026",
       "opciones": [
         {
-          "texto": "El núcleo de la red y los enrutadores de la sede principal.",
+          "texto": "El servidor de correo y el directorio activo del Ayuntamiento.",
           "correcta": false
         },
         {
@@ -719,17 +719,17 @@
           "correcta": false
         },
         {
-          "texto": "Su puesto: latiguillo, roseta, puerto del switch y VLAN.",
-          "correcta": true
+          "texto": "El núcleo de la red y los enrutadores de la sede principal.",
+          "correcta": false
         },
         {
-          "texto": "El servidor de correo y el directorio activo del Ayuntamiento.",
-          "correcta": false
+          "texto": "Su puesto: latiguillo, roseta, puerto del switch y VLAN.",
+          "correcta": true
         }
       ],
       "pregunta": "Si una sola persona se queda sin red, la hipótesis inicial debe centrarse en:",
       "razonamiento": "El alcance orienta la hipótesis: un usuario → su puesto; una planta → switch y uplink; todos → núcleo, cortafuegos o Internet.",
-      "origen": "T19 §2",
+      "origen": "T19 §5",
       "dificultad": "Media",
       "tipo": "Aplicación",
       "concepto": "Alcance",
@@ -756,11 +756,235 @@
         }
       ],
       "pregunta": "La herramienta que mide el caudal real disponible entre dos puntos de la red es:",
-      "razonamiento": "iPerf genera tráfico entre cliente y servidor y mide caudal, jitter y pérdidas. sudo no es de diagnóstico (examen 2023).",
-      "origen": "T19 §3",
+      "razonamiento": "iPerf genera tráfico entre dos extremos controlados: en TCP mide el caudal y en UDP la pérdida y el jitter. sudo no es de diagnóstico (examen 2023).",
+      "origen": "T19 §6",
       "dificultad": "Fácil",
       "tipo": "Herramientas",
       "concepto": "iPerf",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T19_028",
+      "opciones": [
+        {
+          "texto": "noAuthNoPriv, que es el nivel por defecto de la versión 3.",
+          "correcta": false
+        },
+        {
+          "texto": "authNoPriv, porque autenticar ya implica cifrar el contenido.",
+          "correcta": false
+        },
+        {
+          "texto": "Cualquiera, porque SNMPv3 siempre cifra todos los mensajes.",
+          "correcta": false
+        },
+        {
+          "texto": "authPriv, que añade privacidad (cifrado) a la autenticación.",
+          "correcta": true
+        }
+      ],
+      "pregunta": "Para que SNMPv3 cifre la información, el nivel de seguridad configurado debe ser:",
+      "razonamiento": "SNMPv3 no implica siempre cifrado: noAuthNoPriv no autentica ni cifra, authNoPriv autentica sin cifrar y authPriv autentica y cifra.",
+      "origen": "T19 §2",
+      "dificultad": "Difícil",
+      "tipo": "Trampa",
+      "concepto": "SNMPv3 authPriv",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T19_029",
+      "opciones": [
+        {
+          "texto": "La latencia de un solo sentido, del origen al destino.",
+          "correcta": false
+        },
+        {
+          "texto": "El caudal máximo disponible en el enlace entre los dos equipos.",
+          "correcta": false
+        },
+        {
+          "texto": "El RTT (tiempo de ida y vuelta) y la pérdida durante la prueba.",
+          "correcta": true
+        },
+        {
+          "texto": "El jitter que sufrirá una llamada de voz por ese camino.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "El comando ping proporciona principalmente:",
+      "razonamiento": "Ping mide el RTT. La latencia de un sentido (definición del examen de 2023: de origen a destino) exige relojes sincronizados en los dos extremos.",
+      "origen": "T19 §4",
+      "dificultad": "Media",
+      "tipo": "Diferenciación",
+      "concepto": "Latencia vs RTT",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T19_030",
+      "opciones": [
+        {
+          "texto": "Que el servidor DNS no resuelve el nombre de ese router intermedio.",
+          "correcta": false
+        },
+        {
+          "texto": "Que el tráfico se corta en ese router y no llega más allá del salto.",
+          "correcta": false
+        },
+        {
+          "texto": "Que el destino está caído y no puede responder a ninguna petición.",
+          "correcta": false
+        },
+        {
+          "texto": "Que ese router no responde o limita ICMP, pero sigue reenviando el tráfico.",
+          "correcta": true
+        }
+      ],
+      "pregunta": "Un traceroute muestra «* * *» en un salto intermedio, pero los saltos siguientes y el destino responden. ¿Qué significa?",
+      "razonamiento": "Un asterisco no demuestra un corte: si los saltos posteriores responden, el tráfico pasa. El router simplemente no contesta o limita sus respuestas ICMP.",
+      "origen": "T19 §6",
+      "dificultad": "Media",
+      "tipo": "Trampa",
+      "concepto": "Traceroute",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T19_031",
+      "opciones": [
+        {
+          "texto": "El DNS, el puerto 443, el certificado TLS, el proxy y el propio servicio.",
+          "correcta": true
+        },
+        {
+          "texto": "El cable de red del servidor, porque el ping no comprueba la capa física.",
+          "correcta": false
+        },
+        {
+          "texto": "Nada más: si responde al ping, el servicio web funciona y el fallo es del usuario.",
+          "correcta": false
+        },
+        {
+          "texto": "La batería del SAI del servidor, porque el ping no la detecta.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "El servidor web responde al ping, pero la página no carga. ¿Qué conviene comprobar?",
+      "razonamiento": "Host arriba no es servicio arriba. Ping solo prueba ICMP; hay que subir por capas: puerto TCP (Test-NetConnection), TLS, HTTP (curl) y logs del servicio.",
+      "origen": "T19 §6",
+      "dificultad": "Media",
+      "tipo": "Aplicación",
+      "concepto": "Ping vs servicio",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T19_032",
+      "opciones": [
+        {
+          "texto": "Que el switch esté caído y los usuarios trabajen sin red sin darse cuenta.",
+          "correcta": false
+        },
+        {
+          "texto": "Que el SAI del armario se haya quedado sin batería esta mañana.",
+          "correcta": false
+        },
+        {
+          "texto": "Un bucle de capa 2 que ha saturado todos los puertos del switch.",
+          "correcta": false
+        },
+        {
+          "texto": "Un fallo de monitorización: agente, ACL, credenciales, rutas o el propio NMS.",
+          "correcta": true
+        }
+      ],
+      "pregunta": "El NMS deja de recibir métricas SNMP de un switch, pero los usuarios conectados a él trabajan con normalidad. Lo más probable es:",
+      "razonamiento": "Fallo de monitorización no es fallo de red. Se revisan el agente SNMP, las ACL, las credenciales y el nivel de SNMPv3, las rutas, el cortafuegos, la CPU del switch y el NMS.",
+      "origen": "T19 §2",
+      "dificultad": "Media",
+      "tipo": "Aplicación",
+      "concepto": "Fallo de monitorización",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T19_033",
+      "opciones": [
+        {
+          "texto": "Abrir 60 tickets, uno por equipo, y repartirlos entre los técnicos.",
+          "correcta": false
+        },
+        {
+          "texto": "Reiniciar uno por uno los 60 equipos hasta que desaparezcan las alertas.",
+          "correcta": false
+        },
+        {
+          "texto": "Buscar la dependencia común: equipo padre, uplink, alimentación o el NMS.",
+          "correcta": true
+        },
+        {
+          "texto": "Desactivar las alertas de esos equipos hasta que pase el problema.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "La plataforma de monitorización genera 60 alertas a la vez de equipos de la misma zona. Lo primero es:",
+      "razonamiento": "No son 60 averías: una alerta de causa vale más que muchas de consecuencia. Después se configuran dependencias para que la próxima vez salte una sola.",
+      "origen": "T19 §1",
+      "dificultad": "Media",
+      "tipo": "Aplicación",
+      "concepto": "Dependencias",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T19_034",
+      "opciones": [
+        {
+          "texto": "NetFlow captura todos los paquetes completos y Wireshark solo los resume.",
+          "correcta": false
+        },
+        {
+          "texto": "NetFlow exporta registros resumidos de flujos y la captura muestra los paquetes.",
+          "correcta": true
+        },
+        {
+          "texto": "Son lo mismo: dos nombres para la captura completa del tráfico de red.",
+          "correcta": false
+        },
+        {
+          "texto": "NetFlow solo funciona en wifi y Wireshark solo en redes cableadas.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "La diferencia entre NetFlow y una captura de paquetes con Wireshark es que:",
+      "razonamiento": "Flujo = resumen (quién habla con quién, cuánto, cuándo); captura = detalle, pero solo de lo que pasa por ese punto.",
+      "origen": "T19 §3",
+      "dificultad": "Media",
+      "tipo": "Diferenciación",
+      "concepto": "Flujo vs captura",
+      "prioridad": "Media"
+    },
+    {
+      "id": "BOLSA_RED_T19_035",
+      "opciones": [
+        {
+          "texto": "Una solución definitiva, porque el usuario ya tiene red de nuevo.",
+          "correcta": false
+        },
+        {
+          "texto": "Un mantenimiento evolutivo, porque mejora la instalación del usuario.",
+          "correcta": false
+        },
+        {
+          "texto": "Una solución temporal (workaround): restaura, pero no corrige la causa.",
+          "correcta": true
+        },
+        {
+          "texto": "Un escalado jerárquico, porque lo decide el técnico de comunicaciones.",
+          "correcta": false
+        }
+      ],
+      "pregunta": "Mover a un usuario a otro puerto del switch porque el suyo ha fallado es:",
+      "razonamiento": "El workaround restaura el servicio; la solución corrige la causa (reparar el puerto o la configuración). Si se repite, gestión de problemas (T20).",
+      "origen": "T19 §9",
+      "dificultad": "Fácil",
+      "tipo": "Diferenciación",
+      "concepto": "Workaround",
       "prioridad": "Media"
     }
   ]
