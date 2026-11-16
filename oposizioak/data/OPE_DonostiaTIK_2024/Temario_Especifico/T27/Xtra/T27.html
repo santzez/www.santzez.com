@@ -1,0 +1,529 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T27</div>
+    <h1 class="tema-cabecera__titulo">Modelo de referencia OSI de ISO. El modelo TCP/IP: arquitectura de capas, protocolos, direccionamiento y encaminamiento</h1>
+    <div class="tema-cabecera__meta">Xtra · Bloque IV · Redes y comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-anclas-de-memoria">1. Anclas de memoria</a></li>
+<li><a href="#2-no-confundir">2. No confundir</a></li>
+<li><a href="#3-trampas-de-examen">3. Posibles trampas de examen</a></li>
+<li><a href="#4-preguntas-tipo-test">4. Posibles preguntas tipo test</a></li>
+<li><a href="#5-preguntas-cortas">5. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#6-supuestos-practicos">6. Supuestos prácticos</a></li>
+<li><a href="#7-matriz-de-memorizacion">7. Matriz de memorización</a></li>
+<li><a href="#8-resumen-final">8. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#9-actualidad-ipv6">9. Actualidad IPv6 — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h2 id="1-anclas-de-memoria" class="tema-h2">1. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>OSI → 7 CAPAS · TCP/IP → 4 CAPAS.</strong></li>
+<li><strong>7 Aplicación · 6 Presentación · 5 Sesión · 4 Transporte · 3 Red · 2 Enlace · 1 Física.</strong></li>
+<li><strong>TRANSPORTE → TCP/UDP · RED → IP · ENLACE → MAC · FÍSICA → BITS.</strong></li>
+<li><strong>PDU</strong>: <strong>segmento → transporte · paquete → red · trama → enlace · bits → física</strong>.</li>
+<li><strong>OSI → EXPLICA · TCP/IP → IMPLEMENTA.</strong></li>
+<li><strong>7+6+5 → APLICACIÓN · 2+1 → ACCESO A LA RED.</strong> La capa <strong>RED</strong> de OSI se llama <strong>INTERNET</strong> en TCP/IP.</li>
+<li><strong>TCP → orientado a conexión y FIABLE · UDP → SIN CONEXIÓN y menor sobrecarga.</strong></li>
+<li><strong>IPv4 → 32 BITS · IPv6 → 128 BITS.</strong></li>
+<li><strong>IPv4 → ARP · IPv6 → NDP.</strong></li>
+<li><strong>RFC 1918</strong>: <strong>10.0.0.0/8 · 172.16.0.0/12 · 192.168.0.0/16</strong>.</li>
+<li><strong>MAYOR PREFIJO → RED MÁS PEQUEÑA.</strong></li>
+<li><strong>MAC → DÓNDE EN LA LAN · IP → QUÉ HOST/RED · PUERTO → QUÉ SERVICIO.</strong></li>
+<li><strong>ROUTING → IP + CAPA 3 · SWITCHING → MAC + CAPA 2.</strong></li>
+<li><strong>RIP → vector distancia · OSPF → estado de enlace · BGP → entre sistemas autónomos.</strong></li>
+<li><strong>PING RESPONDE ≠ SERVICIO FUNCIONA.</strong></li>
+</ul>
+
+<h2 id="2-no-confundir" class="tema-h2">2. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto A</strong></th>
+<th><strong>Concepto B</strong></th>
+<th><strong>Diferencia clave</strong></th>
+</tr>
+<tr>
+<td><strong>OSI</strong>: 7 capas, modelo de referencia</td>
+<td><strong>TCP/IP</strong>: 4 capas, familia de protocolos</td>
+<td>OSI explica; TCP/IP implementa</td>
+</tr>
+<tr>
+<td><strong>OSI</strong>: modelo conceptual</td>
+<td><strong>Protocolos reales</strong></td>
+<td>OSI no es una pila que deba implementarse literalmente</td>
+</tr>
+<tr>
+<td><strong>Capa</strong>: nivel funcional</td>
+<td><strong>Protocolo</strong>: regla concreta de comunicación</td>
+<td>Una capa puede albergar varios protocolos</td>
+</tr>
+<tr>
+<td><strong>Capa 2</strong>: enlace, MAC, trama</td>
+<td><strong>Capa 3</strong>: red, IP, paquete</td>
+<td>Local frente a entre redes</td>
+</tr>
+<tr>
+<td><strong>MAC</strong>: interfaz en la LAN</td>
+<td><strong>IP</strong>: host o red</td>
+<td>La MAC no sirve para encaminar entre redes</td>
+</tr>
+<tr>
+<td><strong>IP</strong>: identifica el host</td>
+<td><strong>Puerto</strong>: identifica el servicio</td>
+<td>Una IP puede ofrecer muchos servicios</td>
+</tr>
+<tr>
+<td><strong>TCP</strong>: orientado a conexión y fiable</td>
+<td><strong>UDP</strong>: sin conexión y menor sobrecarga</td>
+<td>UDP no aporta orden ni retransmisión por sí mismo</td>
+</tr>
+<tr>
+<td><strong>IPv4</strong>: 32 bits, decimal punteada</td>
+<td><strong>IPv6</strong>: 128 bits, hexadecimal</td>
+<td>Espacio de direccionamiento</td>
+</tr>
+<tr>
+<td><strong>ARP</strong>: resolución IPv4 → MAC</td>
+<td><strong>NDP</strong>: función equivalente en IPv6</td>
+<td>IPv6 no utiliza ARP</td>
+</tr>
+<tr>
+<td><strong>NAT</strong>: traduce direcciones</td>
+<td><strong>Cortafuegos</strong>: filtra tráfico</td>
+<td>NAT no es un mecanismo de seguridad</td>
+</tr>
+<tr>
+<td><strong>Switching</strong>: capa 2, MAC, trama</td>
+<td><strong>Routing</strong>: capa 3, IP, paquete</td>
+<td>Puerto de salida frente a ruta</td>
+</tr>
+<tr>
+<td><strong>Gateway</strong>: puerta de salida</td>
+<td><strong>Destino final</strong></td>
+<td>El gateway es un salto intermedio</td>
+</tr>
+<tr>
+<td><strong>CIDR</strong>: notación de red /n</td>
+<td><strong>Dirección IP</strong>: identifica una interfaz</td>
+<td>Red frente a host</td>
+</tr>
+<tr>
+<td><strong>Segmento</strong> (transporte)</td>
+<td><strong>Paquete</strong> (red) · <strong>Trama</strong> (enlace)</td>
+<td>PDU distinta en cada capa</td>
+</tr>
+<tr>
+<td><strong>DNS</strong>: resuelve nombres a direcciones</td>
+<td><strong>IP</strong>: la dirección resultante</td>
+<td>Un fallo de DNS no es un fallo de conectividad IP</td>
+</tr>
+<tr>
+<td><strong>Telnet</strong> (23): sin cifrado</td>
+<td><strong>SSH</strong> (22): acceso remoto seguro</td>
+<td>Seguridad del canal</td>
+</tr>
+</table></div>
+
+<h2 id="3-trampas-de-examen" class="tema-h2">3. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li><strong>«TCP garantiza la entrega sin pérdidas»</strong> — incorrecto: proporciona un servicio <strong>fiable</strong> con retransmisión, ordenación y control de flujo y congestión, no una garantía absoluta en cualquier circunstancia.</li>
+<li><strong>«UDP es más rápido»</strong> — simplificación: tiene <strong>menor sobrecarga</strong>, lo que puede favorecer aplicaciones sensibles a la latencia o que gestionen la fiabilidad por otros mecanismos.</li>
+<li><strong>«UDP garantiza el orden de entrega»</strong> — falso: <strong>no</strong> proporciona orden, ni retransmisión, ni entrega garantizada.</li>
+<li><strong>«IPv6 utiliza ARP»</strong> — falso: utiliza <strong>NDP</strong>. <strong>ARP es de IPv4.</strong></li>
+<li><strong>«NAT es un cortafuegos»</strong> — falso: <strong>NAT traduce direcciones</strong>; <strong>no es un mecanismo de seguridad por sí mismo</strong>.</li>
+<li><strong>«Si el ping responde, la web funciona»</strong> — falso: el ping comprueba <strong>conectividad y respuesta ICMP</strong>, no el funcionamiento de una aplicación.</li>
+<li><strong>«Si el ping no responde, el servidor está caído»</strong> — falso: ICMP puede estar <strong>filtrado</strong> y los servicios seguir operativos.</li>
+<li><strong>«La IP identifica el servicio»</strong> — falso: eso lo hace el <strong>PUERTO</strong>. La IP identifica el <strong>host o la interfaz</strong>.</li>
+<li><strong>«La MAC sirve para encaminar entre redes»</strong> — falso: la MAC opera en la <strong>red local</strong>; el encaminamiento usa <strong>IP</strong>.</li>
+<li><strong>«Switching y routing son lo mismo»</strong> — falso: <strong>capa 2 / MAC / trama / LAN</strong> frente a <strong>capa 3 / IP / paquete / entre redes</strong>.</li>
+<li><strong>«El gateway es el destino final»</strong> — falso: es la <strong>puerta de salida</strong> hacia otras redes.</li>
+<li><strong>«El next hop es el destino»</strong> — falso: es el <strong>siguiente router</strong> del trayecto.</li>
+<li><strong>«OSI es una pila de protocolos»</strong> — falso: es un <strong>modelo de referencia conceptual</strong>.</li>
+<li><strong>«OSI es teórico y TCP/IP es real»</strong> — formulación imprecisa: ambos son modelos; <strong>OSI explica y TCP/IP implementa</strong>.</li>
+<li><strong>«TLS es la capa 6»</strong> — no debe memorizarse rígidamente: su encaje en el modelo es <strong>conceptual y discutido</strong>.</li>
+<li><strong>«La capa 1 de OSI es la de Aplicación»</strong> — falso: la <strong>1 es la Física</strong> y la <strong>7 la de Aplicación</strong>.</li>
+<li><strong>«En TCP/IP la capa 3 se llama Red»</strong> — impreciso: en <strong>OSI</strong> se llama <strong>Red</strong>; en <strong>TCP/IP</strong>, <strong>Internet</strong>.</li>
+<li><strong>«172.16.0.0/16 es un rango privado»</strong> — el rango de la RFC 1918 es <strong>172.16.0.0/12</strong>.</li>
+<li><strong>«Un /24 es una red mayor que un /16»</strong> — falso: <strong>mayor prefijo, red más pequeña</strong>.</li>
+<li><strong>«Con IPv6 desaparece NAT»</strong> — impreciso: IPv6 evita que NAT sea una <strong>necesidad derivada del agotamiento</strong> de IPv4; puede utilizarse en determinados escenarios.</li>
+<li><strong>Colar contenido ajeno</strong>: LAN/MAN/WAN, cableado y equipos (T28), arquitectura de Internet (T31), correo (T17), navegadores (T20) y SSH (T13) no se desarrollan aquí.</li>
+</ul>
+
+<h2 id="4-preguntas-tipo-test" class="tema-h2">4. Posibles preguntas tipo test</h2>
+<ul class="tema-lista">
+<li>¿Qué significan las siglas <strong>OSI</strong> y qué organización lo desarrolló?</li>
+<li>¿Cuántas capas tiene <strong>OSI</strong> y cuántas <strong>TCP/IP</strong>?</li>
+<li>Enumerar las <strong>siete capas</strong> en el orden correcto.</li>
+<li>¿Cuál es la <strong>capa 1</strong> de OSI? ¿Y la <strong>capa 7</strong>?</li>
+<li><strong>Capa → función</strong>: servicios de red · formato de datos · gestión de sesiones · extremo a extremo · direccionamiento y encaminamiento · tramas · bits.</li>
+<li><strong>Función → capa</strong>: «direccionamiento y encaminamiento» / «tramas y comunicación local».</li>
+<li><strong>Capa → palabra clave</strong>: TCP/UDP · IP · MAC · señal.</li>
+<li>¿Qué es la <strong>encapsulación</strong> y qué ocurre en el destino?</li>
+<li><strong>PDU → capa</strong>: segmento · paquete · trama · bits.</li>
+<li>¿Qué PDU corresponde a la capa de <strong>enlace</strong>?</li>
+<li>Enumerar las <strong>cuatro capas</strong> del modelo TCP/IP.</li>
+<li><strong>Correspondencia</strong>: ¿a qué capas OSI equivale la capa de <strong>Aplicación</strong> de TCP/IP? ¿Y la de <strong>Acceso a la red</strong>?</li>
+<li>¿Cómo se llama en TCP/IP la capa equivalente a la capa <strong>Red</strong> de OSI?</li>
+<li><strong>Protocolo → capa</strong>: HTTP · TCP · IP · Ethernet · DNS · ICMP · Wi-Fi · SSH.</li>
+<li><strong>Definición</strong> correcta de TCP: identificar la que habla de «garantía absoluta» como incorrecta.</li>
+<li>¿Qué <strong>no</strong> proporciona UDP por sí mismo?</li>
+<li>¿Cuál es la secuencia del <strong>three-way handshake</strong>?</li>
+<li>¿Para qué sirve <strong>ICMP</strong> y qué comando lo utiliza?</li>
+<li>¿Garantiza el <strong>ping</strong> que una aplicación funcione?</li>
+<li>¿Qué protocolo resuelve una <strong>IPv4 a MAC</strong>? ¿Y su equivalente en <strong>IPv6</strong>?</li>
+<li><strong>Puerto → servicio</strong>: 21 · 22 · 23 · 25 · 53 · 80 · 110 · 143 · 443 · 3389.</li>
+<li><strong>Servicio → puerto</strong>: HTTPS · DNS · IMAP · RDP · SMTP.</li>
+<li>Diferencia entre <strong>Telnet</strong> y <strong>SSH</strong> y sus puertos.</li>
+<li>¿Cuántos <strong>bits</strong> tiene una dirección IPv4? ¿Y una IPv6?</li>
+<li>Identificar los <strong>rangos privados</strong> de la RFC 1918.</li>
+<li>¿Es <strong>172.16.0.0/12</strong> o <strong>172.16.0.0/16</strong> el rango privado correcto?</li>
+<li>¿Qué es <strong>NAT</strong>? ¿Constituye un mecanismo de seguridad?</li>
+<li>En <strong>192.168.1.0/24</strong>, ¿cuántos bits corresponden a la parte de red?</li>
+<li>¿Qué red es mayor, un <strong>/16</strong> o un <strong>/24</strong>?</li>
+<li>¿Qué es la <strong>puerta de enlace predeterminada</strong>?</li>
+<li><strong>Supuesto</strong>: PC 192.168.1.20/24 con gateway 192.168.1.1. ¿Adónde envía el tráfico dirigido a 10.0.0.5?</li>
+<li>¿Qué es <strong>dual stack</strong>?</li>
+<li>Diferencias entre <strong>MAC</strong>, <strong>IP</strong> y <strong>puerto</strong>.</li>
+<li>¿A qué capa pertenece el <strong>encaminamiento</strong> en OSI y en TCP/IP?</li>
+<li>¿Qué es el <strong>next hop</strong>? ¿Es el destino final?</li>
+<li>Diferencia entre routing <strong>estático</strong> y <strong>dinámico</strong>.</li>
+<li><strong>Protocolo → tipo</strong>: RIP · OSPF · BGP.</li>
+<li>Diferencias entre <strong>switching</strong> y <strong>routing</strong>: capa, dirección, ámbito, unidad y equipo.</li>
+</ul>
+
+<h2 id="5-preguntas-cortas" class="tema-h2">5. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<h4 class="tema-h4">1. Explique el modelo OSI</h4>
+<ul class="tema-lista">
+<li>Qué es: Open Systems Interconnection, modelo de referencia desarrollado por ISO para describir las funciones de comunicación mediante capas.</li>
+<li>Objetivos: interoperabilidad, modularidad y diagnóstico.</li>
+<li>Cierre: es un modelo de referencia, no una pila de protocolos que deba implementarse literalmente.</li>
+</ul>
+<h4 class="tema-h4">2. Enumere y explique las siete capas</h4>
+<ul class="tema-lista">
+<li>7 Aplicación (servicios), 6 Presentación (formato), 5 Sesión (sesión).</li>
+<li>4 Transporte (extremo a extremo, TCP/UDP), 3 Red (direccionamiento y encaminamiento, IP).</li>
+<li>2 Enlace (tramas y comunicación local, MAC), 1 Física (bits y señal).</li>
+<li>Cierre: la numeración va de abajo (Física) hacia arriba (Aplicación).</li>
+</ul>
+<h4 class="tema-h4">3. Explique la encapsulación y la desencapsulación</h4>
+<ul class="tema-lista">
+<li>Encapsulación: cada capa añade la información de control necesaria a los datos recibidos de la superior.</li>
+<li>Secuencia: datos → segmento → paquete → trama → bits.</li>
+<li>Desencapsulación: en destino, cada capa retira su información y entrega a la capa superior.</li>
+<li>Cierre: los nombres de las PDU pueden variar según el contexto y el protocolo.</li>
+</ul>
+<h4 class="tema-h4">4. Relacione OSI y TCP/IP</h4>
+<ul class="tema-lista">
+<li>TCP/IP tiene cuatro capas: acceso a la red, Internet, transporte y aplicación.</li>
+<li>Correspondencia: Aplicación de TCP/IP equivale a 7+6+5; Transporte a 4; Internet a 3; Acceso a la red a 2+1.</li>
+<li>Cierre: OSI explica y TCP/IP implementa; ambos son modelos.</li>
+</ul>
+<h4 class="tema-h4">5. Diferencie TCP y UDP</h4>
+<ul class="tema-lista">
+<li>TCP: orientado a conexión y fiable, con entrega ordenada y mecanismos de retransmisión, control de flujo y control de congestión.</li>
+<li>UDP: sin conexión y con menor sobrecarga; no proporciona por sí mismo entrega garantizada, orden ni retransmisión.</li>
+<li>Cierre: la menor sobrecarga de UDP puede favorecer aplicaciones sensibles a la latencia o que gestionen la fiabilidad por otros mecanismos.</li>
+</ul>
+<h4 class="tema-h4">6. Explique IP, ICMP y ARP</h4>
+<ul class="tema-lista">
+<li>IP: direccionamiento lógico y encaminamiento en la capa Internet o Red.</li>
+<li>ICMP: mensajes de control y diagnóstico; lo utiliza el comando ping.</li>
+<li>ARP: resolución de una dirección IPv4 a MAC dentro de la red local; en IPv6 la función equivalente la realiza NDP.</li>
+<li>Cierre: el ping comprueba conectividad y respuesta ICMP, no el funcionamiento de una aplicación.</li>
+</ul>
+<h4 class="tema-h4">7. Diferencie IPv4 e IPv6</h4>
+<ul class="tema-lista">
+<li>IPv4: 32 bits, notación decimal punteada, resolución a MAC mediante ARP.</li>
+<li>IPv6: 128 bits, notación hexadecimal, resolución mediante NDP, mayor espacio de direccionamiento.</li>
+<li>IPv6 se diseñó para solucionar el agotamiento de IPv4.</li>
+<li>Cierre: dual stack como coexistencia de ambas pilas en un mismo entorno o equipo.</li>
+</ul>
+<h4 class="tema-h4">8. Explique CIDR</h4>
+<ul class="tema-lista">
+<li>Notación de prefijo /n que indica cuántos bits corresponden a la parte de red.</li>
+<li>Ejemplo: 192.168.1.0/24, con 24 bits de red y el resto de host según el esquema.</li>
+<li>Cierre: mayor prefijo, red más pequeña.</li>
+</ul>
+<h4 class="tema-h4">9. Explique la puerta de enlace predeterminada</h4>
+<ul class="tema-lista">
+<li>Router utilizado por el equipo para enviar el tráfico destinado a otras redes.</li>
+<li>Ejemplo: PC 192.168.1.20/24 con gateway 192.168.1.1; lo local se entrega directamente y lo externo se envía al gateway.</li>
+<li>Cierre: no es el destino final; sin gateway solo hay comunicación en la red local.</li>
+</ul>
+<h4 class="tema-h4">10. Diferencie routing estático y dinámico</h4>
+<ul class="tema-lista">
+<li>Estático: rutas configuradas manualmente; simplicidad y control en redes pequeñas, pero mantenimiento manual y poca adaptación.</li>
+<li>Dinámico: rutas aprendidas y actualizadas mediante protocolos de routing.</li>
+<li>Ejemplos: RIP (vector distancia), OSPF (estado de enlace), BGP (entre sistemas autónomos).</li>
+<li>Cierre: el encaminamiento funciona salto a salto mediante el next hop.</li>
+</ul>
+<h4 class="tema-h4">11. Diferencie routing y switching</h4>
+<ul class="tema-lista">
+<li>Switching: capa 2, direcciones MAC, tramas, ámbito de la LAN, equipo típico el switch; decide a qué puerto reenviar.</li>
+<li>Routing: capa 3, direcciones IP, paquetes, comunicación entre redes, equipo típico el router; decide por qué ruta reenviar.</li>
+<li>Cierre: son funciones complementarias en el trayecto de un paquete.</li>
+</ul>
+<h4 class="tema-h4">12. Explique la relación entre MAC, IP y puerto</h4>
+<ul class="tema-lista">
+<li>MAC: identificación de la interfaz a nivel de enlace, ámbito de la red local (capa 2).</li>
+<li>IP: direccionamiento lógico del host o de la interfaz, permite el encaminamiento entre redes (capa 3).</li>
+<li>Puerto: identificación del servicio o proceso dentro del host (capa 4).</li>
+<li>Cierre: MAC dónde en la LAN, IP qué host o red, puerto qué servicio.</li>
+</ul>
+
+<h2 id="6-supuestos-practicos" class="tema-h2">6. Supuestos prácticos</h2>
+<h4 class="tema-h4">Caso 1 — IP correcta pero sin puerta de enlace</h4>
+<p><strong>Escenario</strong>: un equipo tiene <strong>192.168.1.20/24</strong>, ve a sus compañeros de red y accede a la impresora, pero <strong>no navega ni alcanza ningún servicio externo</strong>. Al revisar la configuración, <strong>no tiene puerta de enlace</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué explica el comportamiento?</strong> Sin <strong>gateway</strong>, el equipo <strong>no sabe a quién entregar</strong> el tráfico destinado a <strong>otras redes</strong>. Solo funciona lo que está <strong>dentro de 192.168.1.0/24</strong>.</li>
+<li><strong>b) ¿Es un problema de capa 2 o de capa 3?</strong> De <strong>capa 3</strong>: la conectividad local (capa 2) funciona; falla el <strong>encaminamiento</strong> hacia el exterior.</li>
+<li><strong>c) ¿Qué se comprueba?</strong> Que la <strong>puerta de enlace</strong> esté configurada y sea correcta (típicamente <strong>192.168.1.1</strong>), y si la dirección se obtiene <strong>manualmente o por asignación automática</strong>.</li>
+<li><strong>d) Regla que conviene retener.</strong> <strong>SIN GATEWAY → SOLO RED LOCAL.</strong></li>
+</ul>
+<h4 class="tema-h4">Caso 2 — El ping funciona pero la web no carga</h4>
+<p><strong>Escenario</strong>: se hace <strong>ping a la dirección IP</strong> del servidor y <strong>responde correctamente</strong>, pero al abrir la aplicación web <strong>no carga</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué demuestra el ping?</strong> Que hay <strong>conectividad</strong> hasta ese host y que <strong>responde a ICMP</strong>. Es una prueba de <strong>capa 3</strong>.</li>
+<li><strong>b) ¿Qué NO demuestra?</strong> Que el <strong>servicio</strong> funcione: <strong>ping responde ≠ servicio funciona</strong>.</li>
+<li><strong>c) ¿Qué se investiga a continuación?</strong> <strong>DNS</strong> (¿resuelve el nombre?), <strong>HTTP/HTTPS</strong> (¿escucha el puerto 80 o 443?) y la <strong>propia aplicación</strong>.</li>
+<li><strong>d) ¿Cómo se acota?</strong> Probar por <strong>nombre y por IP</strong>: si por IP funciona y por nombre no, el problema apunta a <strong>DNS</strong>, no a conectividad. (El diagnóstico en el navegador corresponde al <strong>Tema 20</strong>.)</li>
+</ul>
+<h4 class="tema-h4">Caso 3 — Dos equipos de la misma LAN</h4>
+<p><strong>Escenario</strong>: dos equipos de la <strong>misma red</strong> intercambian ficheros a través del switch de planta.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué función interviene?</strong> <strong>Switching</strong>, en la <strong>capa 2</strong>.</li>
+<li><strong>b) ¿Qué dirección se usa para la entrega?</strong> La <strong>MAC</strong>, y la unidad transmitida es la <strong>trama</strong>.</li>
+<li><strong>c) ¿Interviene el router?</strong> <strong>No</strong>: al estar en la <strong>misma red</strong>, no hace falta encaminamiento.</li>
+<li><strong>d) ¿Cómo obtiene el equipo la MAC del otro?</strong> Mediante <strong>ARP</strong>, si la red es IPv4 — o mediante <strong>NDP</strong> si es IPv6.</li>
+</ul>
+<h4 class="tema-h4">Caso 4 — Comunicación con otra red</h4>
+<p><strong>Escenario</strong>: un equipo de <strong>192.168.1.0/24</strong> debe acceder a un servidor situado en <strong>10.20.0.10</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué determina el equipo primero?</strong> Comparando su <strong>máscara /24</strong>, concluye que el destino <strong>no está en su red</strong>.</li>
+<li><strong>b) ¿Qué hace entonces?</strong> Envía el paquete a su <strong>puerta de enlace</strong>, que actuará como <strong>router</strong>.</li>
+<li><strong>c) ¿Qué función y qué capa intervienen?</strong> <strong>Routing</strong>, en la <strong>capa 3</strong>, usando direcciones <strong>IP</strong> y transmitiendo <strong>paquetes</strong>.</li>
+<li><strong>d) ¿Conoce el equipo el camino completo?</strong> <strong>No</strong>: solo el <strong>siguiente salto</strong>. Cada router decide su propio <strong>next hop</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 5 — Se conoce la IP pero no el servicio</h4>
+<p><strong>Escenario</strong>: se sabe que un servidor tiene la dirección <strong>10.20.0.10</strong>, pero se desconoce si el problema afecta al <strong>servicio web</strong> o al de <strong>acceso remoto</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Basta la IP para identificar el servicio?</strong> <strong>No.</strong> La <strong>IP identifica el host</strong>; el <strong>servicio lo identifica el PUERTO</strong>.</li>
+<li><strong>b) ¿Qué puertos corresponden?</strong> <strong>80 (HTTP)</strong> y <strong>443 (HTTPS)</strong> para web; <strong>22 (SSH)</strong> o <strong>3389 (RDP)</strong> para acceso remoto según el sistema.</li>
+<li><strong>c) ¿Puede un host ofrecer varios servicios?</strong> <strong>Sí</strong>: con una sola IP, cada servicio escucha en un <strong>puerto distinto</strong>.</li>
+<li><strong>d) ¿En qué capa opera el puerto?</strong> En la de <strong>transporte</strong> (capa 4), junto a TCP y UDP.</li>
+</ul>
+<h4 class="tema-h4">Caso 6 — Salida a Internet desde direccionamiento privado</h4>
+<p><strong>Escenario</strong>: los equipos de la oficina usan direcciones <strong>192.168.x.x</strong> y, sin embargo, todos acceden a Internet a través de <strong>una única dirección pública</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué mecanismo lo permite?</strong> <strong>NAT</strong>: <strong>traducción de direcciones de red</strong>.</li>
+<li><strong>b) ¿Por qué son privadas esas direcciones?</strong> Porque <strong>192.168.0.0/16</strong> es uno de los <strong>rangos privados de la RFC 1918</strong>, junto con <strong>10.0.0.0/8</strong> y <strong>172.16.0.0/12</strong>.</li>
+<li><strong>c) ¿Protege NAT la red?</strong> <strong>No es un mecanismo de seguridad por sí mismo</strong> ni un cortafuegos: solo <strong>traduce direcciones</strong>. El filtrado corresponde al cortafuegos (<strong>Tema 29</strong>).</li>
+<li><strong>d) ¿Sería necesario con IPv6?</strong> IPv6 proporciona <strong>espacio suficiente</strong> para que NAT <strong>no sea una necesidad derivada del agotamiento</strong> de IPv4, aunque pueda utilizarse en determinados escenarios.</li>
+</ul>
+<h4 class="tema-h4">Caso 7 — Resolver la MAC en IPv4</h4>
+<p><strong>Escenario</strong>: un equipo IPv4 va a enviar datos a otro de <strong>su misma red</strong> y conoce su <strong>dirección IP</strong>, pero necesita entregar la trama.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué le falta?</strong> La <strong>dirección MAC</strong> del destinatario: la entrega en la LAN se hace a nivel de <strong>capa 2</strong>.</li>
+<li><strong>b) ¿Qué protocolo lo resuelve?</strong> <strong>ARP</strong>, que traduce <strong>IPv4 → MAC</strong> dentro de la red local.</li>
+<li><strong>c) ¿Sirve fuera de la red local?</strong> <strong>No</strong>: su ámbito es <strong>la LAN</strong>. Para destinos externos, el equipo resuelve la MAC <strong>del gateway</strong>, no la del destino final.</li>
+<li><strong>d) ¿Y si la red fuese IPv6?</strong> <strong>No se usaría ARP</strong>, sino <strong>NDP</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 8 — Resolución de vecino en IPv6</h4>
+<p><strong>Escenario</strong>: en un segmento con <strong>IPv6</strong> se pregunta qué protocolo cumple la función que ARP desempeña en IPv4.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Cuál es la respuesta?</strong> <strong>NDP (Neighbor Discovery Protocol)</strong>.</li>
+<li><strong>b) ¿Utiliza IPv6 ARP?</strong> <strong>No.</strong> Es una de las asociaciones más preguntadas: <strong>IPv4 → ARP · IPv6 → NDP</strong>.</li>
+<li><strong>c) ¿Qué otras diferencias hay entre ambos protocolos de red?</strong> <strong>32 frente a 128 bits</strong> y <strong>decimal punteada frente a hexadecimal</strong>.</li>
+<li><strong>d) ¿Pueden convivir?</strong> Sí: es lo que se denomina <strong>dual stack</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 9 — Identificar el tipo de routing</h4>
+<p><strong>Escenario</strong>: en la documentación de red aparecen los protocolos <strong>RIP</strong>, <strong>OSPF</strong> y <strong>BGP</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿A qué categoría pertenecen los tres?</strong> Son protocolos de <strong>routing dinámico</strong>: las rutas se <strong>aprenden y actualizan</strong> automáticamente.</li>
+<li><strong>b) ¿Qué tipo o ámbito corresponde a cada uno?</strong> <strong>RIP → vector distancia · OSPF → estado de enlace · BGP → routing entre sistemas autónomos</strong>.</li>
+<li><strong>c) ¿En qué se diferencian del estático?</strong> El <strong>estático</strong> se configura <strong>manualmente</strong>: aporta simplicidad y control en redes pequeñas, pero exige <strong>mantenimiento manual</strong> y <strong>se adapta mal</strong> a los cambios.</li>
+<li><strong>d) ¿En qué capa operan?</strong> En la <strong>capa 3</strong> de OSI, capa <strong>Internet</strong> de TCP/IP.</li>
+</ul>
+<h4 class="tema-h4">Caso 10 — Recorrido de una aplicación por la pila</h4>
+<p><strong>Escenario</strong>: se pide explicar qué le ocurre a los datos de una aplicación desde que se generan hasta que salen por el cable.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Cómo se llama el proceso?</strong> <strong>Encapsulación</strong>: cada capa <strong>añade la información de control necesaria</strong>.</li>
+<li><strong>b) ¿Cuál es la secuencia?</strong> <strong>Datos → segmento (TCP) → paquete o datagrama IP → trama (Ethernet) → bits</strong>.</li>
+<li><strong>c) ¿Qué ocurre en el destino?</strong> La <strong>desencapsulación</strong>: cada capa retira su información y entrega el contenido a la capa superior, hasta llegar a la aplicación.</li>
+<li><strong>d) ¿Cambian los datos originales?</strong> <strong>No</strong>: se van <strong>envolviendo</strong> y <strong>desenvolviendo</strong>. Los nombres de las PDU pueden variar según el contexto y el protocolo.</li>
+</ul>
+
+<h2 id="7-matriz-de-memorizacion" class="tema-h2">7. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Lo que debo recordar</strong></th>
+</tr>
+<tr>
+<td><strong>OSI</strong></td>
+<td>Modelo de referencia de ISO, 7 capas; describe funciones, no es una pila de protocolos</td>
+</tr>
+<tr>
+<td><strong>TCP/IP</strong></td>
+<td>Modelo y familia de protocolos, 4 capas; base de Internet</td>
+</tr>
+<tr>
+<td><strong>Aplicación (7)</strong></td>
+<td>Servicios de red para las aplicaciones</td>
+</tr>
+<tr>
+<td><strong>Presentación (6)</strong></td>
+<td>Representación y formato de los datos</td>
+</tr>
+<tr>
+<td><strong>Sesión (5)</strong></td>
+<td>Gestión de las sesiones de comunicación</td>
+</tr>
+<tr>
+<td><strong>Transporte (4)</strong></td>
+<td>Comunicación extremo a extremo; TCP y UDP; puertos</td>
+</tr>
+<tr>
+<td><strong>Red (3)</strong></td>
+<td>Direccionamiento y encaminamiento; IP; en TCP/IP se llama Internet</td>
+</tr>
+<tr>
+<td><strong>Enlace (2)</strong></td>
+<td>Tramas y comunicación local; MAC</td>
+</tr>
+<tr>
+<td><strong>Física (1)</strong></td>
+<td>Bits y señal por el medio</td>
+</tr>
+<tr>
+<td><strong>PDU</strong></td>
+<td>Protocol Data Unit: segmento, paquete, trama, bits</td>
+</tr>
+<tr>
+<td><strong>Encapsulación</strong></td>
+<td>Cada capa añade su información de control; en destino, desencapsulación</td>
+</tr>
+<tr>
+<td><strong>TCP</strong></td>
+<td>Orientado a conexión y fiable, con entrega ordenada, retransmisión y control de flujo y congestión</td>
+</tr>
+<tr>
+<td><strong>UDP</strong></td>
+<td>Sin conexión y con menor sobrecarga; no aporta entrega garantizada, orden ni retransmisión</td>
+</tr>
+<tr>
+<td><strong>IP</strong></td>
+<td>Direccionamiento lógico y encaminamiento (capa 3 / Internet)</td>
+</tr>
+<tr>
+<td><strong>ICMP</strong></td>
+<td>Mensajes de control y diagnóstico; lo utiliza ping</td>
+</tr>
+<tr>
+<td><strong>ARP</strong></td>
+<td>Resolución IPv4 → MAC en la red local</td>
+</tr>
+<tr>
+<td><strong>NDP</strong></td>
+<td>Función equivalente en IPv6; IPv6 no usa ARP</td>
+</tr>
+<tr>
+<td><strong>MAC</strong></td>
+<td>Identificación de la interfaz a nivel de enlace, ámbito de la LAN</td>
+</tr>
+<tr>
+<td><strong>Puerto</strong></td>
+<td>Identifica el servicio o proceso dentro del host</td>
+</tr>
+<tr>
+<td><strong>IPv4</strong></td>
+<td>32 bits, decimal punteada (192.168.1.1)</td>
+</tr>
+<tr>
+<td><strong>IPv6</strong></td>
+<td>128 bits, hexadecimal, mayor espacio de direccionamiento</td>
+</tr>
+<tr>
+<td><strong>RFC 1918</strong></td>
+<td>10.0.0.0/8 · 172.16.0.0/12 · 192.168.0.0/16</td>
+</tr>
+<tr>
+<td><strong>CIDR</strong></td>
+<td>Notación /n; mayor prefijo, red más pequeña</td>
+</tr>
+<tr>
+<td><strong>NAT</strong></td>
+<td>Traducción de direcciones; no es un mecanismo de seguridad</td>
+</tr>
+<tr>
+<td><strong>Gateway</strong></td>
+<td>Router para enviar tráfico a otras redes; no es el destino final</td>
+</tr>
+<tr>
+<td><strong>Dual stack</strong></td>
+<td>Coexistencia de IPv4 e IPv6 en el mismo entorno o equipo</td>
+</tr>
+<tr>
+<td><strong>Routing</strong></td>
+<td>Selección de rutas entre redes; capa 3 / Internet</td>
+</tr>
+<tr>
+<td><strong>Next hop</strong></td>
+<td>Siguiente router al que se entrega el paquete; no es el destino final</td>
+</tr>
+<tr>
+<td><strong>Switching</strong></td>
+<td>Capa 2, MAC, trama, dentro de la LAN; decide el puerto de salida</td>
+</tr>
+<tr>
+<td><strong>RIP</strong></td>
+<td>Routing dinámico por vector distancia</td>
+</tr>
+<tr>
+<td><strong>OSPF</strong></td>
+<td>Routing dinámico por estado de enlace</td>
+</tr>
+<tr>
+<td><strong>BGP</strong></td>
+<td>Routing entre sistemas autónomos</td>
+</tr>
+</table></div>
+
+<h2 id="8-resumen-final" class="tema-h2">8. Resumen final: si mañana fuera el examen</h2>
+<ul class="tema-lista">
+<li><strong>OSI</strong> = <strong>Open Systems Interconnection</strong>, modelo de referencia de <strong>ISO</strong>, <strong>7 capas</strong>: interoperabilidad, modularidad y diagnóstico. <strong>No es una pila de protocolos.</strong></li>
+<li><strong>7 Aplicación (servicios) · 6 Presentación (formato) · 5 Sesión · 4 Transporte (TCP/UDP) · 3 Red (IP) · 2 Enlace (MAC) · 1 Física (bits).</strong></li>
+<li><strong>Encapsulación</strong>: <strong>datos → segmento → paquete → trama → bits</strong>; en destino, <strong>desencapsulación</strong>. Los nombres de <strong>PDU</strong> pueden variar según contexto y protocolo.</li>
+<li><strong>TCP/IP</strong> = <strong>4 capas</strong>: <strong>acceso a la red · Internet · transporte · aplicación</strong>. Correspondencia: <strong>7+6+5 → Aplicación · 4 → Transporte · 3 → Internet · 2+1 → Acceso a la red</strong>.</li>
+<li><strong>OSI EXPLICA · TCP/IP IMPLEMENTA.</strong> Evita la simplificación «teórico frente a real».</li>
+<li><strong>Protocolos</strong>: <strong>aplicación</strong> (HTTP/HTTPS, SMTP, POP3, IMAP, FTP, DNS, SSH) · <strong>transporte</strong> (TCP, UDP) · <strong>Internet</strong> (IP, ICMP, ARP en IPv4) · <strong>acceso a la red</strong> (Ethernet, Wi-Fi).</li>
+<li><strong>TCP</strong>: <strong>orientado a conexión y FIABLE</strong>, con entrega ordenada, retransmisión y control de flujo y congestión. <strong>No «garantía sin pérdidas».</strong> <strong>UDP</strong>: <strong>sin conexión</strong> y <strong>menor sobrecarga</strong>; no aporta entrega garantizada, orden ni retransmisión. <strong>No «más rápido» a secas.</strong></li>
+<li><strong>ICMP</strong> = control y diagnóstico; lo usa <strong>ping</strong>. <strong>PING RESPONDE ≠ SERVICIO FUNCIONA.</strong></li>
+<li><strong>ARP → IPv4 (IP → MAC en la LAN) · NDP → IPv6.</strong> IPv6 <strong>no usa ARP</strong>.</li>
+<li><strong>Puertos</strong>: <strong>21 FTP · 22 SSH · 23 Telnet · 25 SMTP · 53 DNS · 80 HTTP · 110 POP3 · 143 IMAP · 443 HTTPS · 3389 RDP</strong>. <strong>Telnet sin cifrado, SSH seguro.</strong></li>
+<li><strong>IPv4 → 32 bits</strong>, decimal punteada. <strong>RFC 1918</strong>: <strong>10.0.0.0/8 · 172.16.0.0/12 · 192.168.0.0/16</strong>.</li>
+<li><strong>NAT</strong> = traducción de direcciones; permite compartir una IP pública. <strong>NO es un mecanismo de seguridad ni un cortafuegos.</strong></li>
+<li><strong>CIDR</strong> = prefijo <strong>/n</strong>; en <strong>192.168.1.0/24</strong>, 24 bits de red. <strong>MAYOR PREFIJO → RED MÁS PEQUEÑA.</strong></li>
+<li><strong>Gateway</strong> = router para el tráfico dirigido a <strong>otras redes</strong>; <strong>no es el destino final</strong>. <strong>Sin gateway → solo red local.</strong></li>
+<li><strong>IPv6 → 128 bits</strong>, hexadecimal; evita que NAT sea una <strong>necesidad derivada del agotamiento</strong> de IPv4. <strong>Dual stack</strong> = coexistencia de ambas.</li>
+<li><strong>MAC → DÓNDE EN LA LAN (capa 2) · IP → QUÉ HOST/RED (capa 3) · PUERTO → QUÉ SERVICIO (capa 4).</strong></li>
+<li><strong>Routing</strong> = selección de rutas entre redes (capa 3 / Internet); tabla con destino, <strong>next hop</strong>, interfaz y otros parámetros. <strong>Estático</strong> (manual) frente a <strong>dinámico</strong>: <strong>RIP vector distancia · OSPF estado de enlace · BGP entre sistemas autónomos</strong>.</li>
+<li><strong>SWITCHING → capa 2, MAC, trama, LAN, switch, elige PUERTO.</strong> <strong>ROUTING → capa 3, IP, paquete, entre redes, router, elige RUTA.</strong></li>
+</ul>
+
+<h2 id="9-actualidad-ipv6" class="tema-h2">9. Actualidad IPv6 — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Información sujeta a cambio · Fecha de actualización de estos apuntes: agosto de 2026</strong><br>El <strong>núcleo permanente</strong> de examen es: <strong>IPv4 → 32 bits · IPv6 → 128 bits · dual stack</strong>.<br>Cualquier <strong>porcentaje de adopción</strong> es un <strong>dato temporal</strong> que debe citarse siempre con <strong>fuente y fecha</strong>, y <strong>nunca</strong> como contenido nuclear.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Adopción de IPv6</strong>: su despliegue ha ido <strong>creciendo de forma sostenida</strong> durante los últimos años, con <strong>diferencias notables entre países, operadores y tipos de acceso</strong>. Los porcentajes concretos —mundiales o por país— <strong>varían continuamente</strong> y proceden de <strong>mediciones de terceros</strong>; si se manejan, debe indicarse <strong>quién mide y en qué fecha</strong>. <strong>No deben afirmarse en un examen</strong> como dato cerrado.</li>
+<li><strong>Coexistencia</strong>: la situación consolidada es la <strong>convivencia de ambas versiones</strong> mediante <strong>dual stack</strong>, no la sustitución completa de IPv4. Ese es el dato conceptualmente estable.</li>
+<li><strong>Agotamiento de IPv4</strong>: el agotamiento del espacio de direcciones IPv4 es el <strong>motivo de diseño</strong> de IPv6 y explica el uso extendido de <strong>NAT</strong> y de los <strong>rangos privados</strong> de la RFC 1918. Esto <strong>sí</strong> es contenido estable.</li>
+<li><strong>Protocolos y puertos</strong>: las asignaciones de <strong>puertos bien conocidos</strong> recogidas en el apartado 11 de Apuntes son <strong>estables</strong> y plenamente preguntables. Otros servicios pueden utilizar puertos distintos por configuración, pero eso <strong>no altera</strong> la asignación estándar.</li>
+</ul>
+  </div>
+</article>

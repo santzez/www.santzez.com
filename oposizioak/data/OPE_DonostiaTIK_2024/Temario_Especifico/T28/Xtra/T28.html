@@ -1,0 +1,523 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T28</div>
+    <h1 class="tema-cabecera__titulo">Redes LAN, MAN y WAN. Tipología. Métodos de acceso y protocolos. Medios de transmisión y equipos de interconexión. Cableado estructurado. Administración de redes locales y equipamiento</h1>
+    <div class="tema-cabecera__meta">Xtra · Bloque IV · Redes y comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-anclas-de-memoria">1. Anclas de memoria</a></li>
+<li><a href="#2-no-confundir">2. No confundir</a></li>
+<li><a href="#3-trampas-de-examen">3. Posibles trampas de examen</a></li>
+<li><a href="#4-preguntas-tipo-test">4. Posibles preguntas tipo test</a></li>
+<li><a href="#5-preguntas-cortas">5. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#6-supuestos-practicos">6. Supuestos prácticos</a></li>
+<li><a href="#7-matriz-de-memorizacion">7. Matriz de memorización</a></li>
+<li><a href="#8-resumen-final">8. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#9-actualidad">9. Actualidad de redes y cableado — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h2 id="1-anclas-de-memoria" class="tema-h2">1. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>LAN → LOCAL · MAN → METROPOLITANA · WAN → AMPLIA.</strong> El criterio es la <strong>EXTENSIÓN</strong>.</li>
+<li><strong>WLAN → LAN inalámbrica · SAN → almacenamiento (no es categoría geográfica).</strong></li>
+<li><strong>ESTRELLA → DOMINANTE EN LAN</strong>; bus y anillo, históricas; malla, redundancia; árbol, edificios y campus.</li>
+<li><strong>CSMA/CD → ETHERNET COMPARTIDA</strong> (half-duplex, medio compartido) · <strong>CSMA/CA → WI-FI</strong>.</li>
+<li><strong>HUB → TODOS (capa 1) · SWITCH → MAC (capa 2) · ROUTER → IP (capa 3).</strong></li>
+<li><strong>REPETIDOR → REGENERA SEÑAL · BRIDGE → INTERCONECTA SEGMENTOS · AP → CLIENTES WI-FI.</strong></li>
+<li><strong>GATEWAY → PUNTO DE SALIDA O INTERCONEXIÓN</strong> (traducción solo según contexto).</li>
+<li><strong>MONOMODO → LEJOS · MULTIMODO → CERCA.</strong></li>
+<li><strong>HORIZONTAL → COBRE · BACKBONE → FIBRA.</strong></li>
+<li><strong>ISO/IEC 11801 → CABLEADO ESTRUCTURADO</strong> (EN 50173 en Europa, TIA-568 en EE. UU.).</li>
+<li><strong>90 → PERMANENT LINK · 100 → CHANNEL.</strong></li>
+<li><strong>VLAN → SEGMENTACIÓN LÓGICA DE CAPA 2</strong>; el tráfico entre VLAN requiere normalmente <strong>routing de capa 3</strong>.</li>
+<li><strong>SNMP → PROTOCOLO · MONITORIZACIÓN → PLATAFORMA.</strong></li>
+<li><strong>INVENTARIO → QUÉ TENGO · MONITORIZACIÓN → CÓMO ESTÁ.</strong></li>
+</ul>
+
+<h2 id="2-no-confundir" class="tema-h2">2. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto A</strong></th>
+<th><strong>Concepto B</strong></th>
+<th><strong>Diferencia clave</strong></th>
+</tr>
+<tr>
+<td><strong>LAN</strong>: extensión limitada</td>
+<td><strong>MAN</strong>: metropolitana · <strong>WAN</strong>: gran extensión</td>
+<td>El criterio es la <strong>extensión</strong>, no la propiedad ni la velocidad</td>
+</tr>
+<tr>
+<td><strong>WLAN</strong>: LAN inalámbrica</td>
+<td><strong>LAN</strong>: puede ser cableada o inalámbrica</td>
+<td>La W se refiere al <strong>medio</strong>, no al ámbito</td>
+</tr>
+<tr>
+<td><strong>SAN</strong>: red de almacenamiento</td>
+<td><strong>WAN</strong>: red de gran extensión</td>
+<td>Finalidad frente a extensión; SAN no es categoría geográfica</td>
+</tr>
+<tr>
+<td><strong>Topología</strong>: forma de interconexión</td>
+<td><strong>Arquitectura</strong>: diseño global de la red</td>
+<td>Cómo se conectan frente a cómo se organiza el conjunto</td>
+</tr>
+<tr>
+<td><strong>CSMA/CD</strong>: detecta la colisión</td>
+<td><strong>CSMA/CA</strong>: trata de evitarla</td>
+<td>Ethernet compartida frente a Wi-Fi</td>
+</tr>
+<tr>
+<td><strong>Hub</strong>: capa 1, repite a todos</td>
+<td><strong>Switch</strong>: capa 2, reenvía por MAC</td>
+<td>Dominio de colisión compartido frente a uno por puerto</td>
+</tr>
+<tr>
+<td><strong>Switch</strong>: capa 2, MAC, dentro de la LAN</td>
+<td><strong>Router</strong>: capa 3, IP, entre redes</td>
+<td>Elige puerto frente a elige ruta</td>
+</tr>
+<tr>
+<td><strong>Bridge</strong>: interconecta segmentos</td>
+<td><strong>Switch</strong>: conmuta por MAC con múltiples puertos</td>
+<td>Ambos de capa 2; el switch es la evolución con muchos puertos</td>
+</tr>
+<tr>
+<td><strong>Router</strong>: equipo de capa 3</td>
+<td><strong>Gateway</strong>: punto de salida o interconexión</td>
+<td>En redes IP el default gateway suele ser un router</td>
+</tr>
+<tr>
+<td><strong>MAC</strong>: capa 2, red local</td>
+<td><strong>IP</strong>: capa 3, entre redes</td>
+<td>La MAC no encamina entre redes (Tema 27)</td>
+</tr>
+<tr>
+<td><strong>VLAN</strong>: segmentación de capa 2</td>
+<td><strong>Subred IP</strong>: segmentación de capa 3</td>
+<td>Suelen asociarse, pero no son el mismo concepto</td>
+</tr>
+<tr>
+<td><strong>Permanent link</strong>: hasta 90 m</td>
+<td><strong>Channel</strong>: hasta 100 m</td>
+<td>El channel incluye latiguillos y conexiones</td>
+</tr>
+<tr>
+<td><strong>Monomodo</strong>: largas distancias</td>
+<td><strong>Multimodo</strong>: distancias más cortas</td>
+<td>Mono lejos, multi cerca</td>
+</tr>
+<tr>
+<td><strong>Cobre</strong>: horizontal, hasta el puesto</td>
+<td><strong>Fibra</strong>: backbone, distancia e inmunidad EM</td>
+<td>Cada medio en su subsistema</td>
+</tr>
+<tr>
+<td><strong>SNMP</strong>: protocolo</td>
+<td><strong>Monitorización</strong>: plataforma y proceso</td>
+<td>El idioma frente a quien conversa y registra</td>
+</tr>
+<tr>
+<td><strong>Inventario</strong>: qué tengo</td>
+<td><strong>Monitorización</strong>: cómo está</td>
+<td>Registro estático frente a supervisión continua</td>
+</tr>
+</table></div>
+
+<h2 id="3-trampas-de-examen" class="tema-h2">3. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li><strong>«Una LAN se define por pertenecer a una sola organización»</strong> — falso: se define por su <strong>extensión limitada</strong>.</li>
+<li><strong>«Una LAN se define por su alta velocidad»</strong> — falso: es una característica habitual, no un criterio definitorio.</li>
+<li><strong>«SAN es una red de gran extensión»</strong> — falso: es una <strong>red de almacenamiento</strong>, definida por su finalidad.</li>
+<li><strong>«WLAN es un ámbito distinto de LAN»</strong> — falso: es una <strong>LAN inalámbrica</strong>.</li>
+<li><strong>«CSMA/CD es el mecanismo habitual de la Ethernet actual»</strong> — falso: las <strong>Ethernet conmutadas full-duplex no lo necesitan</strong> para esos enlaces; IEEE 802.3 lo mantiene asociado a <strong>medio compartido y half-duplex</strong>.</li>
+<li><strong>«CSMA/CD y CSMA/CA son lo mismo»</strong> — falso: <strong>detección</strong> frente a <strong>evitación</strong>; <strong>Ethernet compartida</strong> frente a <strong>Wi-Fi</strong>.</li>
+<li><strong>«El hub trabaja con direcciones MAC»</strong> — falso: es de <strong>capa 1</strong> y <strong>repite a todos</strong> sin interpretar direcciones.</li>
+<li><strong>«Hub y switch son equivalentes»</strong> — falso: capa 1 frente a capa 2; dominio de colisión compartido frente a uno por puerto.</li>
+<li><strong>«El switch elimina las colisiones»</strong> — formulación absoluta incorrecta: <strong>segmenta los dominios de colisión</strong> y en <strong>full-duplex no se dan</strong> las del medio compartido.</li>
+<li><strong>«El switch encamina entre redes»</strong> — falso: eso lo hace el <strong>router</strong> (capa 3).</li>
+<li><strong>«Gateway es únicamente un traductor de protocolos»</strong> — falso: es un <strong>punto de salida o interconexión</strong>; la traducción es <strong>uno</strong> de sus posibles cometidos.</li>
+<li><strong>«El default gateway traduce protocolos»</strong> — falso en el caso habitual: es <strong>normalmente un router</strong> para alcanzar otras redes.</li>
+<li><strong>«En una estrella el elemento central es siempre un punto único de fallo»</strong> — impreciso: lo es <strong>en una estrella simple</strong>; con <strong>redundancia</strong> se mitiga.</li>
+<li><strong>«El multimodo alcanza mayores distancias»</strong> — falso: <strong>monomodo lejos, multimodo cerca</strong>.</li>
+<li><strong>«El cableado horizontal admite 100 m de tirada fija»</strong> — falso: <strong>90 m el permanent link</strong>; <strong>100 m el channel</strong> con latiguillos y conexiones.</li>
+<li><strong>«90 m es el channel»</strong> — falso: <strong>90 es permanent link</strong>.</li>
+<li><strong>«Una categoría superior de cable garantiza por sí sola el rendimiento»</strong> — impreciso: depende del <strong>conjunto instalado</strong> y de las <strong>especificaciones de la norma aplicable</strong>.</li>
+<li><strong>«VLAN equivale a firewall»</strong> — falso: mejora el aislamiento, pero la <strong>seguridad entre VLAN depende del routing, las ACL, el cortafuegos y la configuración</strong>.</li>
+<li><strong>«Una VLAN es una subred IP»</strong> — impreciso: son conceptos de <strong>capas distintas</strong>, aunque suelan asociarse.</li>
+<li><strong>«El tráfico entre VLAN no necesita routing»</strong> — falso: <strong>normalmente requiere routing de capa 3</strong>.</li>
+<li><strong>«SNMP es una herramienta de monitorización»</strong> — falso: es un <strong>protocolo</strong>; la <strong>plataforma</strong> es otra cosa.</li>
+<li><strong>«Tener inventario es tener monitorización»</strong> — falso: <strong>qué tengo</strong> frente a <strong>cómo está</strong>.</li>
+<li><strong>Colar contenido ajeno</strong>: OSI/TCP-IP y routing (T27), cortafuegos y VPN (T29), Wi-Fi (T30) y SAN/NAS (T7) no se desarrollan aquí.</li>
+</ul>
+
+<h2 id="4-preguntas-tipo-test" class="tema-h2">4. Posibles preguntas tipo test</h2>
+<ul class="tema-lista">
+<li>¿Cuál es el <strong>criterio</strong> que distingue LAN, MAN y WAN?</li>
+<li>¿Se define una LAN por pertenecer a una <strong>sola organización</strong>?</li>
+<li><strong>Sigla → significado</strong>: LAN · MAN · WAN · PAN · WLAN · SAN.</li>
+<li>¿Es <strong>SAN</strong> una categoría geográfica de red?</li>
+<li><strong>Topología → característica</strong>: bus · estrella · anillo · malla · árbol.</li>
+<li>¿Qué topología es <strong>dominante</strong> en las LAN actuales?</li>
+<li>¿Qué topología ofrece <strong>mayor tolerancia a fallos</strong> y a qué coste?</li>
+<li>En una <strong>estrella simple</strong>, ¿qué representa el elemento central?</li>
+<li>¿Qué es <strong>CSMA/CD</strong> y en qué tipo de operación se emplea?</li>
+<li>Enumerar los <strong>pasos</strong> conceptuales de CSMA/CD.</li>
+<li>¿Necesitan CSMA/CD los enlaces <strong>full-duplex</strong> de una Ethernet conmutada?</li>
+<li>¿Qué método de acceso utiliza <strong>Wi-Fi</strong> y por qué?</li>
+<li>¿Qué tecnologías utilizaban <strong>paso de testigo</strong>?</li>
+<li><strong>Medio → característica</strong>: par trenzado · fibra · radio · infrarrojos.</li>
+<li>Diferencia entre <strong>UTP</strong> y <strong>STP</strong>.</li>
+<li>Diferencia entre fibra <strong>monomodo</strong> y <strong>multimodo</strong>.</li>
+<li>¿Qué medio ofrece <strong>inmunidad electromagnética</strong>?</li>
+<li><strong>Equipo → capa</strong>: repetidor · hub · bridge · switch · router.</li>
+<li><strong>Equipo → función</strong>: regenerar señal · repetir a todos · conmutar por MAC · encaminar por IP.</li>
+<li>¿Qué ocurre con los <strong>dominios de colisión</strong> en un hub y en un switch?</li>
+<li>¿Es correcto afirmar que el switch <strong>elimina las colisiones</strong>?</li>
+<li>¿Qué es un <strong>AP</strong> y qué función cumple?</li>
+<li><strong>Definición</strong> de gateway: ¿se limita a traducir protocolos?</li>
+<li><strong>Definición</strong> de cableado estructurado y <strong>norma internacional</strong> de referencia.</li>
+<li>Enumerar los <strong>subsistemas</strong> del cableado estructurado.</li>
+<li>¿Qué medio se emplea habitualmente en el <strong>horizontal</strong>? ¿Y en el <strong>backbone</strong>?</li>
+<li>¿Qué longitud corresponde al <strong>permanent link</strong>? ¿Y al <strong>channel</strong>?</li>
+<li><strong>Supuesto</strong>: una tirada permanente mide 92 m. ¿Cumple?</li>
+<li><strong>Definición</strong> de VLAN. ¿En qué capa segmenta?</li>
+<li>¿Sustituye una VLAN a un <strong>cortafuegos</strong>?</li>
+<li>¿Requiere routing el tráfico <strong>entre VLAN</strong>?</li>
+<li>¿Qué es <strong>SNMP</strong> y qué permite hacer?</li>
+<li>¿Es SNMP una <strong>herramienta</strong> de monitorización?</li>
+<li>Diferencia entre <strong>inventario</strong> y <strong>monitorización</strong>.</li>
+<li>¿Qué elementos deben mantenerse <strong>documentados</strong> en una LAN?</li>
+</ul>
+
+<h2 id="5-preguntas-cortas" class="tema-h2">5. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<h4 class="tema-h4">1. Diferencie LAN, MAN y WAN</h4>
+<ul class="tema-lista">
+<li>LAN: red de extensión limitada (edificio, planta, campus o recinto).</li>
+<li>MAN: red de ámbito metropolitano. WAN: red de gran extensión que interconecta redes o sedes distantes.</li>
+<li>Cierre: el criterio es la extensión geográfica, no la titularidad ni la velocidad; PAN, WLAN y SAN responden a otros criterios.</li>
+</ul>
+<h4 class="tema-h4">2. Explique las topologías de red</h4>
+<ul class="tema-lista">
+<li>Bus (medio común, histórica), estrella (elemento central, dominante en LAN), anillo (circuito cerrado, histórica).</li>
+<li>Malla (alta redundancia, mayor coste y complejidad), árbol o jerárquica (estrellas encadenadas, habitual en edificios).</li>
+<li>Cierre: en una estrella simple el elemento central constituye un punto único de fallo, mitigable con redundancia.</li>
+</ul>
+<h4 class="tema-h4">3. Diferencie CSMA/CD y CSMA/CA</h4>
+<ul class="tema-lista">
+<li>CSMA/CD: mecanismo histórico de Ethernet sobre medio compartido y half-duplex; escucha, transmite, detecta colisión, detiene, espera un tiempo aleatorio y reintenta.</li>
+<li>CSMA/CA: método de acceso de IEEE 802.11 / Wi-Fi, orientado a evitar la colisión antes de transmitir porque en el medio inalámbrico no es sencillo detectarla.</li>
+<li>Cierre: las Ethernet conmutadas con enlaces full-duplex no necesitan CSMA/CD para esos enlaces.</li>
+</ul>
+<h4 class="tema-h4">4. Compare cobre y fibra</h4>
+<ul class="tema-lista">
+<li>Par trenzado de cobre: económico, sencillo de instalar, habitual en el cableado horizontal hasta el puesto; UTP y STP.</li>
+<li>Fibra: grandes distancias, gran ancho de banda e inmunidad electromagnética; habitual en backbone y enlaces entre edificios.</li>
+<li>Cierre: cada medio en su subsistema — horizontal en cobre, vertical en fibra.</li>
+</ul>
+<h4 class="tema-h4">5. Diferencie fibra monomodo y multimodo</h4>
+<ul class="tema-lista">
+<li>Monomodo: largas distancias, enlaces entre sedes y tramos largos.</li>
+<li>Multimodo: distancias más cortas, interior de edificios y campus.</li>
+<li>Cierre: monomodo lejos, multimodo cerca.</li>
+</ul>
+<h4 class="tema-h4">6. Diferencie hub, switch y router</h4>
+<ul class="tema-lista">
+<li>Hub: capa 1, repite la señal a todos los puertos; todos comparten el mismo dominio de colisión.</li>
+<li>Switch: capa 2, aprende direcciones MAC y reenvía la trama al puerto correspondiente; cada puerto es normalmente un dominio de colisión independiente y en full-duplex no hay colisiones del medio compartido.</li>
+<li>Router: capa 3, interconecta redes IP diferentes y realiza el encaminamiento.</li>
+<li>Cierre: capa 1 señal, capa 2 MAC, capa 3 IP.</li>
+</ul>
+<h4 class="tema-h4">7. Explique qué es un gateway</h4>
+<ul class="tema-lista">
+<li>Elemento que actúa como punto de salida o interconexión entre redes o sistemas.</li>
+<li>En una red IP, el default gateway es normalmente un router utilizado para alcanzar otras redes.</li>
+<li>Cierre: en otros contextos puede realizar traducción o interoperabilidad entre protocolos, pero no se define únicamente por ello.</li>
+</ul>
+<h4 class="tema-h4">8. Explique el cableado estructurado</h4>
+<ul class="tema-lista">
+<li>Definición: sistema normalizado, jerárquico y flexible diseñado para soportar múltiples servicios de comunicaciones.</li>
+<li>Normas: ISO/IEC 11801 (internacional), EN 50173 (europea) y TIA-568 (estadounidense).</li>
+<li>Subsistemas: área de trabajo, cableado horizontal, repartidor de planta, backbone y repartidor principal.</li>
+<li>Cierre: se diseña con independencia del servicio y sobrevive a varios ciclos de renovación del equipamiento.</li>
+</ul>
+<h4 class="tema-h4">9. Diferencie permanent link y channel</h4>
+<ul class="tema-lista">
+<li>Permanent link: tirada fija instalada, hasta 90 metros.</li>
+<li>Channel: enlace completo, hasta 100 metros incluyendo latiguillos y conexiones.</li>
+<li>Cierre: los 10 metros de diferencia corresponden a los latiguillos de ambos extremos; ISO y TIA distinguen explícitamente ambas longitudes.</li>
+</ul>
+<h4 class="tema-h4">10. Explique las VLAN</h4>
+<ul class="tema-lista">
+<li>Definición: segmentación lógica de una infraestructura de switching en distintos dominios de broadcast de capa 2.</li>
+<li>Ventajas: aislamiento lógico, reducción del dominio de broadcast, organización y control.</li>
+<li>Límite: puede mejorar el aislamiento, pero la seguridad entre VLAN depende del routing, las ACL, el cortafuegos y la configuración.</li>
+<li>Cierre: el tráfico entre VLAN normalmente requiere routing de capa 3; VLAN no equivale a subred IP.</li>
+</ul>
+<h4 class="tema-h4">11. Explique SNMP</h4>
+<ul class="tema-lista">
+<li>Protocolo utilizado para supervisar y gestionar equipos de red.</li>
+<li>Permite consultar el estado, obtener métricas y recibir alertas o traps.</li>
+<li>Cierre: es un protocolo, no una plataforma de monitorización; la plataforma lo utiliza para obtener datos y además los almacena, representa y genera avisos.</li>
+</ul>
+<h4 class="tema-h4">12. Explique la administración básica de una LAN</h4>
+<ul class="tema-lista">
+<li>Documentación e inventario actualizados: equipos, direcciones IP, VLAN, puertos, planos, cableado, conexiones y dependencias; etiquetado físico.</li>
+<li>Segmentación mediante VLAN y supervisión mediante SNMP y plataforma de monitorización.</li>
+<li>Control de cambios: los cambios de configuración deben documentarse, autorizarse y controlarse (op.exp.5 del ENS).</li>
+<li>Cierre: redundancia de enlaces, equipos y alimentación cuando proceda, para evitar puntos únicos de fallo.</li>
+</ul>
+
+<h2 id="6-supuestos-practicos" class="tema-h2">6. Supuestos prácticos</h2>
+<h4 class="tema-h4">Caso 1 — Edificio de cuatro plantas</h4>
+<p><strong>Escenario</strong>: una dependencia municipal de <strong>cuatro plantas</strong> tiene <strong>un switch por planta</strong>, todos ellos conectados a un equipo situado en la sala técnica.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué topología describe la instalación?</strong> Una <strong>estrella extendida o jerárquica (árbol)</strong>: cada planta es una <strong>estrella</strong> y los switches se conectan a un <strong>nivel superior</strong>.</li>
+<li><strong>b) ¿Qué subsistemas de cableado intervienen?</strong> <strong>Horizontal</strong> (del repartidor de planta a cada puesto), <strong>repartidor de planta</strong>, <strong>backbone o vertical</strong> (entre plantas) y <strong>repartidor principal</strong>.</li>
+<li><strong>c) ¿Qué medio corresponde a cada tramo?</strong> <strong>Cobre</strong> (par trenzado) en el horizontal; <strong>fibra</strong> habitualmente en el backbone.</li>
+<li><strong>d) ¿Qué riesgo hay que considerar?</strong> El <strong>punto único de fallo</strong> del equipo central; se mitiga con <strong>redundancia</strong> de enlaces y equipos.</li>
+</ul>
+<h4 class="tema-h4">Caso 2 — Dos edificios separados por cientos de metros</h4>
+<p><strong>Escenario</strong>: hay que interconectar dos dependencias situadas a <strong>varios centenares de metros</strong> de distancia.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué medio procede?</strong> <strong>Fibra óptica</strong>: cubre <strong>grandes distancias</strong>, ofrece <strong>gran ancho de banda</strong> e <strong>inmunidad electromagnética</strong>.</li>
+<li><strong>b) ¿Monomodo o multimodo?</strong> Según <strong>distancia y entorno</strong>: el <strong>monomodo</strong> es el indicado para tramos largos; el <strong>multimodo</strong>, para distancias más cortas dentro de edificios o campus.</li>
+<li><strong>c) ¿Por qué no cobre?</strong> Porque el par trenzado está pensado para el <strong>tramo horizontal</strong>, con longitudes muy inferiores: <strong>90 m de permanent link</strong> y <strong>100 m de channel</strong>.</li>
+<li><strong>d) ¿A qué subsistema pertenece ese enlace?</strong> Al <strong>backbone o cableado vertical</strong>, entre repartidores.</li>
+</ul>
+<h4 class="tema-h4">Caso 3 — Un PC sin conectividad y los demás bien</h4>
+<p><strong>Escenario</strong>: un puesto <strong>no tiene conectividad</strong>, mientras que el resto de equipos conectados <strong>al mismo switch funcionan correctamente</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué descarta el hecho de que los demás funcionen?</strong> Un fallo general del <strong>switch</strong> o del <strong>enlace de planta</strong>: el problema está <strong>acotado a ese puesto</strong>.</li>
+<li><strong>b) ¿Qué se comprueba?</strong> El <strong>cable y el latiguillo</strong>, el <strong>puerto</strong> del switch, la <strong>VLAN</strong> asignada a ese puerto y la <strong>tarjeta de red y su configuración</strong>.</li>
+<li><strong>c) ¿Por qué la VLAN?</strong> Porque un puerto asignado a una <strong>VLAN distinta</strong> deja al equipo en <strong>otro dominio de broadcast</strong>: tendrá enlace físico pero no alcanzará los recursos esperados.</li>
+<li><strong>d) ¿Qué facilita el diagnóstico?</strong> Una <strong>documentación y un etiquetado</strong> correctos, que permitan identificar de inmediato <strong>qué puerto</strong> corresponde a ese puesto.</li>
+</ul>
+<h4 class="tema-h4">Caso 4 — Todos los equipos reciben el tráfico de todos</h4>
+<p><strong>Escenario</strong>: en un segmento antiguo se observa que <strong>todos los equipos reciben el tráfico dirigido a cualquiera</strong> de ellos.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué comportamiento es ese?</strong> El propio de un <strong>hub</strong> o de un <strong>medio compartido</strong>: <strong>repite a todos</strong> los puertos.</li>
+<li><strong>b) ¿En qué capa opera?</strong> En la <strong>capa 1</strong>: <strong>no interpreta direcciones MAC</strong>, solo regenera y repite señal.</li>
+<li><strong>c) ¿Qué implica en cuanto a colisiones?</strong> Que <strong>todos comparten el mismo dominio de colisión</strong>, y por tanto opera el mecanismo <strong>CSMA/CD</strong> propio del medio compartido y half-duplex.</li>
+<li><strong>d) ¿Qué corrige la situación?</strong> Sustituirlo por un <strong>switch</strong>, que <strong>reenvía al puerto correspondiente</strong> según la MAC y en el que <strong>cada puerto es normalmente un dominio de colisión independiente</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 5 — Dos departamentos sobre la misma infraestructura</h4>
+<p><strong>Escenario</strong>: dos departamentos deben <strong>compartir la infraestructura física</strong> de red pero <strong>mantenerse segmentados</strong> entre sí.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué solución corresponde?</strong> <strong>VLAN</strong>: <strong>segmentación lógica</strong> de la infraestructura de switching en distintos <strong>dominios de broadcast de capa 2</strong>.</li>
+<li><strong>b) ¿Qué se consigue?</strong> <strong>Aislamiento lógico</strong>, <strong>reducción del dominio de broadcast</strong>, <strong>organización</strong> y <strong>control</strong>, sin duplicar el cableado.</li>
+<li><strong>c) ¿Basta la VLAN para garantizar la seguridad entre ambos?</strong> <strong>No.</strong> <strong>VLAN no es un cortafuegos</strong>: la seguridad entre VLAN depende del <strong>routing, las ACL, el cortafuegos y la configuración</strong>.</li>
+<li><strong>d) ¿Y si necesitan comunicarse puntualmente?</strong> El tráfico <strong>entre VLAN requiere normalmente routing de capa 3</strong>, y es en ese punto donde puede aplicarse el filtrado (<strong>Tema 29</strong>).</li>
+</ul>
+<h4 class="tema-h4">Caso 6 — Monitorizar switches y recibir alertas</h4>
+<p><strong>Escenario</strong>: se quiere conocer en todo momento el <strong>estado de los switches</strong> y <strong>recibir un aviso</strong> cuando un enlace caiga.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué protocolo interviene?</strong> <strong>SNMP</strong>, que permite <strong>consultar el estado, obtener métricas y recibir alertas o traps</strong>.</li>
+<li><strong>b) ¿Basta con SNMP?</strong> <strong>No.</strong> SNMP es el <strong>protocolo</strong>; hace falta además una <strong>plataforma de monitorización</strong> que <strong>recoja, almacene, represente y avise</strong>.</li>
+<li><strong>c) ¿Qué se monitoriza?</strong> <strong>Disponibilidad, rendimiento y estado</strong> de <strong>switches, routers, puntos de acceso y enlaces</strong>.</li>
+<li><strong>d) ¿Qué requisito previo hay?</strong> Un <strong>inventario</strong> actualizado: <strong>no puede monitorizarse lo que no está inventariado</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 7 — Sustitución de un switch sin documentación</h4>
+<p><strong>Escenario</strong>: hay que <strong>sustituir un switch</strong> de planta y <strong>nadie sabe qué cable corresponde a cada puesto</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Cuál es el problema de fondo?</strong> <strong>Documentación y etiquetado deficientes</strong>: no existe correspondencia registrada entre <strong>puertos, tomas y puestos</strong>.</li>
+<li><strong>b) ¿Qué consecuencias tiene?</strong> <strong>Mayor tiempo de intervención</strong>, riesgo de <strong>error en la reconexión</strong> y posible <strong>asignación incorrecta de VLAN</strong> a los puestos.</li>
+<li><strong>c) ¿Qué debería estar documentado?</strong> <strong>Inventario de equipos, direcciones IP, VLAN, puertos, planos, cableado, conexiones y dependencias</strong>.</li>
+<li><strong>d) ¿Qué actuación procede?</strong> <strong>Identificar y etiquetar</strong> durante la propia intervención, <strong>actualizar la documentación</strong> y tramitar el cambio conforme al <strong>control de cambios</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 8 — Una tirada de 92 metros</h4>
+<p><strong>Escenario</strong>: al certificar la instalación se comprueba que una <strong>tirada permanente de cobre mide 92 metros</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Cumple?</strong> <strong>No.</strong> <strong>Supera el límite de 90 m del permanent link.</strong></li>
+<li><strong>b) ¿Y el channel?</strong> El <strong>channel completo</strong> admite <strong>hasta 100 m incluyendo latiguillos y conexiones</strong>; pero la <strong>tirada fija</strong> ya excede por sí sola su propio límite.</li>
+<li><strong>c) ¿Por qué existen dos cifras?</strong> Porque los <strong>10 metros de diferencia</strong> están reservados a los <strong>latiguillos de ambos extremos</strong> —armario y puesto—. <strong>ISO y TIA distinguen explícitamente ambas longitudes.</strong></li>
+<li><strong>d) ¿Qué procede?</strong> <strong>Rediseñar el trazado</strong> o <strong>reubicar el repartidor</strong>, no «forzar» la tirada: el enlace <strong>no certificaría</strong>.</li>
+</ul>
+<h4 class="tema-h4">Caso 9 — Gran distancia con interferencias electromagnéticas</h4>
+<p><strong>Escenario</strong>: hay que llevar un enlace a través de una zona con <strong>maquinaria y tendidos eléctricos</strong>, salvando además una distancia considerable.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué medio se elige?</strong> <strong>Fibra óptica</strong>.</li>
+<li><strong>b) ¿Por qué?</strong> Por su <strong>inmunidad electromagnética</strong>, además de por su capacidad para cubrir <strong>grandes distancias</strong> con <strong>gran ancho de banda</strong>.</li>
+<li><strong>c) ¿Serviría STP?</strong> El apantallamiento <strong>mitiga</strong> las interferencias, pero <strong>no resuelve la limitación de distancia</strong> del cobre ni ofrece la inmunidad de la fibra.</li>
+<li><strong>d) ¿Qué tipo de fibra?</strong> Según <strong>distancia y entorno</strong>: <strong>monomodo</strong> para tramos largos; <strong>multimodo</strong> si el recorrido es corto.</li>
+</ul>
+<h4 class="tema-h4">Caso 10 — Máxima disponibilidad entre dos puntos críticos</h4>
+<p><strong>Escenario</strong>: se exige la <strong>máxima disponibilidad</strong> del enlace entre la sala técnica principal y una dependencia que presta servicio al público.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué principio se aplica?</strong> La <strong>redundancia</strong>, para eliminar <strong>puntos únicos de fallo</strong>.</li>
+<li><strong>b) ¿En qué se concreta?</strong> <strong>Doble enlace</strong>, <strong>equipos redundantes</strong>, <strong>alimentación redundante</strong> cuando proceda y <strong>caminos alternativos</strong>.</li>
+<li><strong>c) ¿Qué topología favorece esa redundancia?</strong> La <strong>malla</strong>, que aporta <strong>caminos alternativos</strong> a costa de <strong>más enlaces y mayor complejidad</strong>.</li>
+<li><strong>d) ¿Qué más debe acompañarlo?</strong> <strong>Monitorización</strong> que detecte la pérdida de un camino y <strong>documentación</strong> que refleje la topología redundante. Los protocolos concretos que gestionan los caminos alternativos no son objeto de este tema.</li>
+</ul>
+
+<h2 id="7-matriz-de-memorizacion" class="tema-h2">7. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Lo que debo recordar</strong></th>
+</tr>
+<tr>
+<td><strong>LAN</strong></td>
+<td>Red de extensión limitada: edificio, planta, campus o recinto</td>
+</tr>
+<tr>
+<td><strong>MAN</strong></td>
+<td>Red de ámbito metropolitano</td>
+</tr>
+<tr>
+<td><strong>WAN</strong></td>
+<td>Red de gran extensión que interconecta redes o sedes distantes</td>
+</tr>
+<tr>
+<td><strong>WLAN / PAN / SAN</strong></td>
+<td>LAN inalámbrica · red personal · red de almacenamiento (no es categoría geográfica)</td>
+</tr>
+<tr>
+<td><strong>Bus</strong></td>
+<td>Medio común compartido; topología histórica</td>
+</tr>
+<tr>
+<td><strong>Estrella</strong></td>
+<td>Equipos conectados a un elemento central; dominante en LAN; punto único de fallo en su forma simple</td>
+</tr>
+<tr>
+<td><strong>Anillo</strong></td>
+<td>Circuito cerrado; histórica (Token Ring, FDDI)</td>
+</tr>
+<tr>
+<td><strong>Malla</strong></td>
+<td>Alta redundancia y tolerancia a fallos; más enlaces y complejidad</td>
+</tr>
+<tr>
+<td><strong>Árbol / jerárquica</strong></td>
+<td>Estrellas encadenadas por niveles; habitual en edificios y campus</td>
+</tr>
+<tr>
+<td><strong>CSMA/CD</strong></td>
+<td>Mecanismo histórico de Ethernet en medio compartido y half-duplex; escuchar, transmitir, detectar, detener, esperar, reintentar</td>
+</tr>
+<tr>
+<td><strong>CSMA/CA</strong></td>
+<td>Método de acceso de IEEE 802.11 / Wi-Fi; evita la colisión antes de transmitir</td>
+</tr>
+<tr>
+<td><strong>Token passing</strong></td>
+<td>Permiso de transmisión mediante testigo; Token Ring y FDDI, históricos</td>
+</tr>
+<tr>
+<td><strong>UTP / STP</strong></td>
+<td>Par trenzado sin apantallar / apantallado; categorías según la norma aplicable</td>
+</tr>
+<tr>
+<td><strong>Fibra monomodo</strong></td>
+<td>Largas distancias</td>
+</tr>
+<tr>
+<td><strong>Fibra multimodo</strong></td>
+<td>Distancias más cortas: edificios y campus</td>
+</tr>
+<tr>
+<td><strong>Repetidor</strong></td>
+<td>Capa 1: regenera la señal</td>
+</tr>
+<tr>
+<td><strong>Hub</strong></td>
+<td>Capa 1: repite a todos; un único dominio de colisión compartido</td>
+</tr>
+<tr>
+<td><strong>Bridge</strong></td>
+<td>Capa 2: interconecta segmentos</td>
+</tr>
+<tr>
+<td><strong>Switch</strong></td>
+<td>Capa 2: aprende MAC y reenvía al puerto; un dominio de colisión por puerto; en full-duplex no hay colisiones del medio compartido</td>
+</tr>
+<tr>
+<td><strong>Router</strong></td>
+<td>Capa 3: interconecta redes IP y encamina</td>
+</tr>
+<tr>
+<td><strong>AP</strong></td>
+<td>Conecta clientes Wi-Fi a la infraestructura de red</td>
+</tr>
+<tr>
+<td><strong>Gateway</strong></td>
+<td>Punto de salida o interconexión; en IP, normalmente un router; traducción según contexto</td>
+</tr>
+<tr>
+<td><strong>Cableado estructurado</strong></td>
+<td>Sistema normalizado, jerárquico y flexible para múltiples servicios</td>
+</tr>
+<tr>
+<td><strong>ISO/IEC 11801</strong></td>
+<td>Norma internacional de cableado estructurado (EN 50173 en Europa, TIA-568 en EE. UU.)</td>
+</tr>
+<tr>
+<td><strong>Subsistemas</strong></td>
+<td>Área de trabajo, horizontal, repartidor de planta, backbone y repartidor principal</td>
+</tr>
+<tr>
+<td><strong>Permanent link</strong></td>
+<td>Tirada fija: hasta <strong>90 m</strong></td>
+</tr>
+<tr>
+<td><strong>Channel</strong></td>
+<td>Enlace completo con latiguillos y conexiones: hasta <strong>100 m</strong></td>
+</tr>
+<tr>
+<td><strong>VLAN</strong></td>
+<td>Segmentación lógica en dominios de broadcast de capa 2; no es un cortafuegos; el tráfico entre VLAN requiere routing</td>
+</tr>
+<tr>
+<td><strong>SNMP</strong></td>
+<td>Protocolo de supervisión y gestión: estado, métricas, traps</td>
+</tr>
+<tr>
+<td><strong>Monitorización</strong></td>
+<td>Supervisión continua de disponibilidad, rendimiento y estado; la plataforma no es el protocolo</td>
+</tr>
+<tr>
+<td><strong>Control de cambios</strong></td>
+<td>Documentar, autorizar y controlar las modificaciones (op.exp.5 del ENS)</td>
+</tr>
+<tr>
+<td><strong>Redundancia</strong></td>
+<td>Doble enlace, equipos y alimentación redundantes, caminos alternativos</td>
+</tr>
+</table></div>
+
+<h2 id="8-resumen-final" class="tema-h2">8. Resumen final: si mañana fuera el examen</h2>
+<ul class="tema-lista">
+<li><strong>LAN → extensión limitada · MAN → metropolitana · WAN → gran extensión.</strong> El criterio es la <strong>EXTENSIÓN</strong>, <strong>no</strong> la titularidad ni la velocidad. <strong>WLAN es una LAN</strong>; <strong>SAN no es categoría geográfica</strong>.</li>
+<li><strong>Topologías</strong>: bus e anillo <strong>históricas</strong>; <strong>estrella dominante en LAN</strong>; <strong>malla</strong> = redundancia con más coste; <strong>árbol</strong> = estrellas encadenadas, habitual en edificios. En <strong>estrella simple</strong>, el central es <strong>punto único de fallo</strong>.</li>
+<li><strong>CSMA/CD</strong> = mecanismo <strong>histórico</strong> de Ethernet sobre <strong>medio compartido y half-duplex</strong>: escuchar, transmitir, detectar, detener, esperar aleatoriamente, reintentar. <strong>Las Ethernet conmutadas full-duplex no lo necesitan.</strong></li>
+<li><strong>CSMA/CA</strong> = <strong>Wi-Fi (IEEE 802.11)</strong>: <strong>evita</strong> la colisión antes de transmitir porque en el aire <strong>no es sencillo detectarla</strong>.</li>
+<li><strong>Medios</strong>: <strong>par trenzado</strong> (cobre, horizontal) · <strong>fibra</strong> (distancia, ancho de banda, <strong>inmunidad EM</strong>) · <strong>radio</strong> · <strong>infrarrojos</strong> (residual). <strong>UTP sin apantallar / STP apantallado.</strong></li>
+<li><strong>MONOMODO → LEJOS · MULTIMODO → CERCA.</strong></li>
+<li><strong>EQUIPOS</strong>: <strong>repetidor (1) regenera · hub (1) repite a todos · bridge (2) interconecta segmentos · switch (2) conmuta por MAC · router (3) encamina por IP · AP conecta clientes Wi-Fi · gateway = salida o interconexión</strong>.</li>
+<li><strong>Switch</strong>: aprende MAC, reenvía al puerto, <strong>un dominio de colisión por puerto</strong> y <strong>en full-duplex no hay colisiones del medio compartido</strong>. <strong>No digas «elimina las colisiones».</strong></li>
+<li><strong>Gateway</strong>: <strong>punto de salida o interconexión</strong>; en IP, el <strong>default gateway es normalmente un router</strong>. <strong>No es solo un traductor de protocolos.</strong></li>
+<li><strong>Cableado estructurado</strong> = <strong>normalizado, jerárquico y flexible</strong> para <strong>múltiples servicios</strong>. Normas: <strong>ISO/IEC 11801</strong> · EN 50173 · TIA-568.</li>
+<li><strong>Subsistemas</strong>: <strong>área de trabajo → horizontal → repartidor de planta → backbone → repartidor principal</strong>. <strong>Horizontal en cobre; backbone en fibra.</strong></li>
+<li><strong>90 → PERMANENT LINK · 100 → CHANNEL</strong> (con latiguillos y conexiones). ISO y TIA <strong>distinguen explícitamente</strong> ambas longitudes.</li>
+<li><strong>Administración</strong>: <strong>documentación · inventario · VLAN · SNMP · monitorización · control de cambios · etiquetado · redundancia</strong>.</li>
+<li><strong>VLAN</strong> = <strong>segmentación lógica en dominios de broadcast de capa 2</strong>. <strong>NO es un cortafuegos</strong>: la seguridad entre VLAN depende del <strong>routing, ACL, cortafuegos y configuración</strong>. El tráfico <strong>entre VLAN requiere normalmente routing de capa 3</strong>. <strong>VLAN ≠ subred IP.</strong></li>
+<li><strong>SNMP = PROTOCOLO</strong> (estado, métricas, traps). <strong>La plataforma de monitorización es otra cosa.</strong> <strong>Inventario = qué tengo · monitorización = cómo está.</strong></li>
+</ul>
+
+<h2 id="9-actualidad" class="tema-h2">9. Actualidad de redes y cableado — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Información sujeta a cambio · Fecha de actualización de estos apuntes: agosto de 2026</strong><br><strong>No forman parte del núcleo</strong>: cifras de mercado, modelos concretos de switches, versiones de SNMP y denominaciones comerciales cambiantes de categorías de cable.<br>La norma <strong>ISO/IEC 11801</strong> se mantiene como <strong>referencia estable</strong> del cableado estructurado.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Normativa de cableado</strong>: <strong>ISO/IEC 11801</strong> es la referencia internacional y ha conocido <strong>sucesivas ediciones y partes</strong> según el tipo de instalación. Para la OPE lo relevante es la <strong>asociación norma-materia</strong> y la distinción <strong>permanent link (90 m) / channel (100 m)</strong>, que se mantiene estable.</li>
+<li><strong>Categorías de cable</strong>: las denominaciones comerciales y las categorías <strong>evolucionan</strong>. Lo estable es el <strong>criterio</strong>: las categorías superiores proporcionan <strong>prestaciones y frecuencias superiores según las especificaciones de la norma aplicable</strong>, y el rendimiento real depende del <strong>conjunto instalado</strong>.</li>
+<li><strong>Ethernet y velocidades</strong>: la familia <strong>IEEE 802.3</strong> ha incorporado sucesivas velocidades. Lo conceptualmente estable es que <strong>CSMA/CD queda asociado a la operación de medio compartido y half-duplex</strong>, mientras que la <strong>conmutación full-duplex</strong> es el modo habitual de la LAN actual.</li>
+<li><strong>SNMP</strong>: existen <strong>distintas versiones</strong> con diferencias funcionales y de seguridad. <strong>No son materia de examen</strong> en este tema: lo preguntable es <strong>qué es SNMP</strong> —un protocolo de supervisión y gestión— y su <strong>diferencia con la plataforma de monitorización</strong>.</li>
+<li><strong>Herramientas de monitorización</strong>: las plataformas concretas pueden citarse como <strong>ejemplos</strong>, pero <strong>no constituyen contenido nuclear</strong> ni deben memorizarse nombres ni versiones.</li>
+</ul>
+  </div>
+</article>

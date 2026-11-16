@@ -242,8 +242,12 @@
         if (textos) return textos;
         const pares = await Promise.all(temas.map(async t => {
           try {
-            const r = await fetch(`data/${rutaOpe}/${t.id}/Material_de_estudio/${t.id}.html`);
-            const doc = new DOMParser().parseFromString(r.ok ? await r.text() : '', 'text/html');
+            const leer = async (pestana) => {
+              const r = await fetch(`data/${rutaOpe}/${t.id}/${pestana}/${t.id}.html`);
+              return r.ok ? r.text() : '';
+            };
+            const html = (await Promise.all(['Material_de_estudio', 'Xtra'].map(leer))).join(' ');
+            const doc = new DOMParser().parseFromString(html, 'text/html');
             return [t.id, doc.body.textContent.replace(/\s+/g, ' ')];
           } catch { return [t.id, '']; }
         }));
@@ -286,7 +290,7 @@
               <span class="bloque-tema__id">${t.id}</span>
               <span class="buscador-temas__texto">
                 <span class="buscador-temas__titulo">${esc(t.titulo || t.id)}</span>
-                <span class="buscador-temas__meta">${esc(t.bloque)}${n ? ` · ${n} coincidencia${n === 1 ? '' : 's'} en los apuntes` : ''}${enTitulo ? ' · en el título' : ''}</span>
+                <span class="buscador-temas__meta">${esc(t.bloque)}${n ? ` · ${n} coincidencia${n === 1 ? '' : 's'} en el tema` : ''}${enTitulo ? ' · en el título' : ''}</span>
                 ${frag ? `<span class="buscador-temas__frag">…${esc(frag)}…</span>` : ''}
               </span>
             </a>`).join('')
@@ -324,12 +328,14 @@
         //  · Claude   → chispa/estrella de 4 puntas
         const ICONO_APUNTES = `<svg class="tabs__icono" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v16H6.5A2.5 2.5 0 0 1 4 16.5V5.5Z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H12v16h5.5A2.5 2.5 0 0 0 20 16.5V5.5Z"/></svg>`;
         const ICONO_QWIZ = `<svg class="tabs__icono" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>`;
+        const ICONO_XTRA = `<svg class="tabs__icono" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>`;
         const ICONO_CLAUDE = `<svg class="tabs__icono" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.6 5.8a2 2 0 0 0 1.6 1.6L21 12l-5.8 1.6a2 2 0 0 0-1.6 1.6L12 21l-1.6-5.8a2 2 0 0 0-1.6-1.6L3 12l5.8-1.6a2 2 0 0 0 1.6-1.6L12 3Z"/></svg>`;
         const ICONO_EXAMEN = `<svg class="tabs__icono" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/><path d="M9 2h6"/></svg>`;
         const ICONO_PDF = `<svg class="tabs__icono" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>`;
         const iconoDe = (h) => {
           if (!h) return '';
           if (h.id === 'Qwiz') return ICONO_QWIZ;
+          if (h.id === 'Xtra') return ICONO_XTRA;
           if (h.id === 'Examen') return ICONO_EXAMEN;
           if (h.id === 'PDF') return ICONO_PDF;
           // Apuntes: hoy usa id "Material_de_estudio" con nombre "Apuntes"
@@ -429,6 +435,11 @@
                               data-goto="Material_de_estudio" title="Ir a Apuntes" aria-label="Ir a Apuntes">
                         ${ICONO_APUNTES}
                       </button>
+                      ${info.hijos.some(h => h.id === 'Xtra') ? `
+                      <button type="button" class="tema-contexto__icono"
+                              data-goto="Xtra" title="Ir a Xtra" aria-label="Ir a Xtra">
+                        ${ICONO_XTRA}
+                      </button>` : ''}
                       <button type="button" class="tema-contexto__icono"
                               data-goto="Qwiz" title="Ir a Qwiz" aria-label="Ir a Qwiz">
                         ${ICONO_QWIZ}
@@ -619,6 +630,37 @@
           }
         }));
 
+        // Enlaces a una sección (#8-no-confundir): se abre la pestaña que la
+        // contiene. Los enlaces antiguos, de antes de separar Xtra, llevan el
+        // número viejo; si no existe el id exacto se busca por el nombre.
+        const buscarAncla = (id) => {
+          if (!id) return null;
+          const exacto = Array.from(tabsWrap.querySelectorAll('[id]')).find(e => e.id === id);
+          if (exacto) return exacto;
+          const nombre = id.replace(/^\d+-/, '');
+          if (nombre === id) return null;
+          return Array.from(tabsWrap.querySelectorAll('h2[id]'))
+            .find(e => e.id.replace(/^\d+-/, '') === nombre) || null;
+        };
+        const irAAncla = (el) => {
+          const panel = el.closest('.tabs__panel');
+          if (panel && panel.hidden) cambiarTab(panel.dataset.panel);
+          history.replaceState(null, '', location.pathname + location.search + '#' + el.id);
+          requestAnimationFrame(() => el.scrollIntoView({ block: 'start' }));
+        };
+        tabsWrap.addEventListener('click', (e) => {
+          const a = e.target.closest('a[href^="#"]');
+          if (!a) return;
+          const el = buscarAncla(decodeURIComponent(a.getAttribute('href').slice(1)));
+          if (!el) return;
+          e.preventDefault();
+          irAAncla(el);
+        });
+        if (hashObjetivo && !info.hijos.some(h => h.id.toLowerCase() === hashObjetivo.toLowerCase())) {
+          const el = buscarAncla(hashObjetivo);
+          if (el) irAAncla(el);
+        }
+
         // Con los paneles ya cargados: contexto de Ask_Claude = pestaña activa
         // (si es de contenido) y la tira de pestañas centrada en la activa.
         {
@@ -644,7 +686,13 @@
               contenedor: panelClaude.querySelector('#chat-ia'),
               cliente: AuthSession.cliente(),
               idTema: () => (panelContexto || panelApuntes).__idTema,
-              contextoHtml: () => (panelContexto || panelApuntes).__contextoHtml,
+              // Todo el tema (Apuntes + Xtra), empezando por la pestaña que se mira
+              contextoHtml: () => {
+                const activo = panelContexto || panelApuntes;
+                const otros = Array.from(tabsWrap.querySelectorAll('.tabs__panel'))
+                  .filter(p => p.__contextoHtml && p !== activo);
+                return [activo, ...otros].map(p => p.__contextoHtml).join('\n');
+              },
             });
           };
           // Exponemos la función al closure de cambiarTab/entrarEnSplit

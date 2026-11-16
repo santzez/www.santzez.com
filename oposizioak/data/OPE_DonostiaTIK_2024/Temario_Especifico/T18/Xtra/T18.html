@@ -1,0 +1,361 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T18</div>
+    <h1 class="tema-cabecera__titulo">El cliente de correo IBM Notes o HCL Notes: configuración y funcionalidades. Acceso al correo mediante interfaz web y dispositivo móvil</h1>
+    <div class="tema-cabecera__meta">Xtra · Bloque II · Tecnología básica</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-datos-y-anclas-de-memoria">1. Datos y anclas de memoria</a></li>
+<li><a href="#2-no-confundir">2. No confundir</a></li>
+<li><a href="#3-posibles-trampas-de-examen">3. Posibles trampas de examen</a></li>
+<li><a href="#4-posibles-preguntas-tipo-test">4. Posibles preguntas tipo test</a></li>
+<li><a href="#5-posibles-preguntas-cortas">5. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#6-supuestos-practicos-cau">6. Supuestos prácticos CAU</a></li>
+<li><a href="#7-matriz-de-memorizacion">7. Matriz de memorización</a></li>
+<li><a href="#8-resumen-final">8. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#9-actualidad-del-producto">9. Actualidad HCL Notes/Domino — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h2 id="1-datos-y-anclas-de-memoria" class="tema-h2">1. Datos y anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>NOTES → CLIENTE · DOMINO → SERVIDOR/PLATAFORMA</strong>.</li>
+<li><strong>NSF → BASE DE DATOS</strong> (Notes Storage Facility) · <strong>mail.nsf → BUZÓN</strong>. Una base NSF no tiene por qué ser el correo.</li>
+<li><strong>NRPC → NOTES ↔ DOMINO</strong> (protocolo nativo); Domino admite además SMTP/IMAP/POP3 para interoperar.</li>
+<li><strong>REPLICACIÓN → RÉPLICAS SINCRONIZADAS</strong> (servidor↔servidor y servidor↔local) · <strong>RÉPLICA LOCAL → OFFLINE</strong>.</li>
+<li><strong>REPLICACIÓN ≠ BACKUP</strong>.</li>
+<li><strong>ID → IDENTIDAD</strong> (identidad + credenciales criptográficas; no es «solo un certificado») · <strong>Notes.ini → CONFIGURACIÓN</strong>.</li>
+<li><strong>Contraseña de Notes ≠ contraseña de dominio</strong>: protege el ID local.</li>
+<li><strong>ID Vault → RECUPERACIÓN DEL ID</strong> (según el procedimiento corporativo).</li>
+<li><strong>Directory</strong> = usuarios, grupos, recursos y configuración del entorno Domino — <strong>no es Active Directory</strong>.</li>
+<li><strong>iNotes → WEB</strong> (antes DWA) · <strong>Traveler → MÓVIL/SINCRONIZACIÓN</strong> · <strong>Verse → CLIENTE MODERNO</strong>.</li>
+<li>Evolución: <strong>Lotus → IBM → HCL (2019)</strong>.</li>
+</ul>
+<figure class="tema-figura">
+<figcaption>Accesos web y móvil</figcaption>
+<svg viewBox="0 0 700 139" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at18ep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at18ea" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at18ev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at18en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at18er" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at18eg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">iNotes</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at18ea)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Acceso WEB (antes DWA)</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">Traveler</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at18ea)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">MÓVIL y sincronización</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">Verse</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#003da5" stroke-width="2" marker-end="url(#at18ep)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Cliente MODERNO</text></svg>
+<p class="tema-figura__nota">Evolución de la plataforma: Lotus → IBM → HCL (2019).</p></figure>
+
+<figure class="tema-figura">
+<figcaption>Identidad en Notes</figcaption>
+<svg viewBox="0 0 700 184" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at18dp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at18da" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at18dv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at18dn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at18dr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at18dg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">ID de usuario</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#003da5" stroke-width="2" marker-end="url(#at18dp)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Identidad + credenciales criptográficas</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">Contraseña de Notes</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#b26a00" stroke-width="2" marker-end="url(#at18dn)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Protege el ID local (≠ la de dominio)</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">Notes.ini</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at18dg)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Configuración del cliente</text><rect x="8" y="139" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">ID Vault</text><line x1="264" y1="157.0" x2="356" y2="157.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at18da)"/><rect x="362" y="139" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Recuperación del ID</text></svg>
+</figure>
+
+<figure class="tema-figura">
+<figcaption>Notes y Domino</figcaption>
+<svg viewBox="0 0 700 136" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at18ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at18aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at18av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at18an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at18ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at18ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">NOTES</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">DOMINO</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">CLIENTE</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Puesto del usuario</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">SERVIDOR / PLATAFORMA</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Servicios y bases</text></svg>
+<p class="tema-figura__nota">NSF = base de datos (Notes Storage Facility); mail.nsf es el buzón, pero no toda NSF es correo.</p></figure>
+
+
+<h2 id="2-no-confundir" class="tema-h2">2. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto A</strong></th>
+<th><strong>Concepto B</strong></th>
+<th><strong>Diferencia clave</strong></th>
+</tr>
+<tr>
+<td><strong>Notes</strong>: cliente de la persona usuaria</td>
+<td><strong>Domino</strong>: plataforma/servidor que aloja bases y aplicaciones</td>
+<td>Domino no es solo «servidor de correo»</td>
+</tr>
+<tr>
+<td><strong>NSF</strong>: formato de base de datos nativo</td>
+<td><strong>mail.nsf</strong>: la base NSF del buzón</td>
+<td>El buzón es una NSF más entre muchas</td>
+</tr>
+<tr>
+<td><strong>NRPC</strong>: protocolo nativo Notes-Domino</td>
+<td><strong>SMTP</strong> (y IMAP/POP3): protocolos estándar</td>
+<td>Vía nativa vs. interoperabilidad (Tema 17)</td>
+</tr>
+<tr>
+<td><strong>ID file</strong>: identidad y credenciales</td>
+<td><strong>Notes.ini</strong>: parámetros de configuración</td>
+<td>Quién es el usuario vs. cómo está configurado el cliente</td>
+</tr>
+<tr>
+<td><strong>ID file</strong>: identidad y credenciales criptográficas</td>
+<td><strong>Certificado</strong> en sentido estricto</td>
+<td>El ID cumple funciones más amplias que un simple certificado</td>
+</tr>
+<tr>
+<td><strong>Contraseña del ID</strong>: protege el archivo ID local</td>
+<td><strong>Contraseña de dominio Windows</strong></td>
+<td>Son independientes; restablecer una no afecta a la otra</td>
+</tr>
+<tr>
+<td><strong>Directory de Domino</strong></td>
+<td><strong>Active Directory</strong> (Tema 12)</td>
+<td>Funciones de directorio parecidas, productos y modelos distintos</td>
+</tr>
+<tr>
+<td><strong>Replicación</strong>: sincroniza réplicas</td>
+<td><strong>Copia de seguridad</strong>: conserva un estado recuperable</td>
+<td>Lo replicado se propaga, incluidos los borrados</td>
+</tr>
+<tr>
+<td><strong>mail.nsf</strong>: buzón</td>
+<td><strong>Aplicación NSF</strong>: expedientes, formularios, flujos</td>
+<td>No todo NSF es correo</td>
+</tr>
+<tr>
+<td><strong>iNotes</strong>: interfaz web</td>
+<td><strong>Cliente Notes</strong>: aplicación de escritorio</td>
+<td>Navegador sin instalación vs. cliente instalado y configurado</td>
+</tr>
+<tr>
+<td><strong>Traveler</strong>: sincronización con dispositivos móviles</td>
+<td><strong>iNotes</strong>: acceso web por navegador</td>
+<td>Sincronizar en el dispositivo vs. consultar en el navegador</td>
+</tr>
+<tr>
+<td><strong>Verse</strong>: cliente/interfaz moderna</td>
+<td><strong>Traveler</strong>: servicio de sincronización</td>
+<td>Interfaz de usuario vs. mecanismo de sincronización</td>
+</tr>
+</table></div>
+
+<h2 id="3-posibles-trampas-de-examen" class="tema-h2">3. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li><strong>«Notes y Domino son dos nombres del mismo producto»</strong> — falso: cliente y plataforma/servidor.</li>
+<li><strong>«Domino es un servidor de correo»</strong> — reduccionista: es una plataforma que aloja bases y aplicaciones, y además presta correo.</li>
+<li><strong>«Todo NSF es el buzón del usuario»</strong> — falso: mail.nsf es una NSF concreta; hay muchas otras (aplicaciones, directorios).</li>
+<li><strong>«Absolutamente todo en Notes/Domino se almacena en NSF»</strong> — formulación excesiva: correo, aplicaciones y otros datos se almacenan <strong>habitualmente</strong> en NSF.</li>
+<li><strong>«Una réplica es una copia de seguridad»</strong> — falso: la replicación sincroniza; el backup conserva un estado recuperable.</li>
+<li><strong>«NRPC es el nombre que da Notes a SMTP»</strong> — falso: NRPC es el protocolo nativo Notes-Domino; SMTP es estándar.</li>
+<li><strong>«El ID file es un certificado personal»</strong> — impreciso: contiene identidad y credenciales criptográficas, con funciones más amplias.</li>
+<li><strong>«Restableciendo la contraseña de dominio se soluciona el olvido de la contraseña de Notes»</strong> — falso: la del ID es independiente; se recurre a ID Vault o a la reexpedición del ID.</li>
+<li><strong>«Notes.ini guarda la identidad del usuario»</strong> — falso: guarda configuración; la identidad está en el ID file.</li>
+<li><strong>«El Directory de Domino es Active Directory»</strong> — falso: cumple algunas funciones de directorio, pero no lo es.</li>
+<li><strong>«iNotes es el cliente de escritorio»</strong> — falso: es la interfaz web (antes DWA).</li>
+<li><strong>«Traveler e iNotes son lo mismo»</strong> — falso: sincronización con el dispositivo vs. acceso por navegador.</li>
+<li><strong>«Verse es el servicio que sincroniza los móviles»</strong> — falso: eso es Traveler; Verse es un cliente/interfaz moderna.</li>
+<li><strong>«Con réplica local todo funciona igual sin conexión»</strong> — matiz: no todas las aplicaciones y configuraciones se comportan igual offline.</li>
+</ul>
+
+<h2 id="4-posibles-preguntas-tipo-test" class="tema-h2">4. Posibles preguntas tipo test</h2>
+<ul class="tema-lista">
+<li>¿Cuál es el <strong>cliente</strong> y cuál la <strong>plataforma/servidor</strong> del ecosistema?</li>
+<li>¿Qué significa <strong>NSF</strong> y qué almacena?</li>
+<li>¿Qué contiene el archivo <strong>mail.nsf</strong>? ¿Toda NSF es un buzón?</li>
+<li>¿Qué es <strong>NRPC</strong> y entre qué elementos actúa?</li>
+<li>¿Qué protocolos estándar admite además Domino y para qué?</li>
+<li>¿Qué es la <strong>replicación</strong> y entre qué elementos puede producirse?</li>
+<li>¿Qué permite una <strong>réplica local</strong>?</li>
+<li>¿Es la replicación una copia de seguridad?</li>
+<li>¿Qué contiene el <strong>ID file</strong> y para qué se utiliza?</li>
+<li>¿Qué protege la <strong>contraseña de Notes</strong>? ¿Coincide con la de dominio?</li>
+<li>¿Para qué sirve el <strong>ID Vault</strong>?</li>
+<li>¿Qué guarda <strong>Notes.ini</strong>?</li>
+<li>Concepto → función: <strong>ID file</strong>, <strong>Notes.ini</strong>, <strong>ID Vault</strong>.</li>
+<li>¿Qué contiene el <strong>Directory / Address Book</strong> de Domino? ¿Es Active Directory?</li>
+<li>¿Qué es <strong>iNotes</strong> y cómo se denominaba antes?</li>
+<li>¿Qué componente <strong>sincroniza correo, calendario y contactos con móviles</strong>?</li>
+<li>¿Qué es <strong>HCL Verse</strong>?</li>
+<li>Concepto → acceso: equipo sin cliente Notes · sincronización en el móvil · interfaz moderna.</li>
+<li>¿Puede Domino alojar algo distinto del correo? Pon un ejemplo.</li>
+<li>Ordena la evolución del producto: <strong>Lotus → IBM → HCL</strong>.</li>
+</ul>
+
+<h2 id="5-posibles-preguntas-cortas" class="tema-h2">5. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<h4 class="tema-h4">1. Diferencie Notes y Domino</h4>
+<ul class="tema-lista">
+<li>Notes: cliente utilizado por la persona usuaria.</li>
+<li>Domino: plataforma/servidor que presta servicios y aloja bases de datos y aplicaciones.</li>
+<li>Cierre: Domino no es solo correo; de ahí la permanencia de la plataforma en muchas organizaciones.</li>
+</ul>
+<h4 class="tema-h4">2. Explique qué es una base NSF</h4>
+<ul class="tema-lista">
+<li>Definición: Notes Storage Facility, formato de base de datos nativo del ecosistema.</li>
+<li>Qué se almacena habitualmente en NSF: correo, aplicaciones y otros datos.</li>
+<li>Cierre: una NSF no tiene por qué ser el buzón.</li>
+</ul>
+<h4 class="tema-h4">3. Explique mail.nsf</h4>
+<ul class="tema-lista">
+<li>Definición: base NSF que contiene el buzón de correo del usuario.</li>
+<li>Relación con la configuración del cliente (servidor de correo + base de correo).</li>
+<li>Cierre: distinguirla de otras NSF (aplicaciones, directorio).</li>
+</ul>
+<h4 class="tema-h4">4. Explique NRPC</h4>
+<ul class="tema-lista">
+<li>Definición: protocolo nativo/propietario de comunicación entre cliente Notes y Domino.</li>
+<li>Complemento: Domino admite SMTP/IMAP/POP3 para interoperabilidad.</li>
+<li>Cierre: no confundir la vía nativa con los estándares del Tema 17.</li>
+</ul>
+<h4 class="tema-h4">5. Explique la replicación y las réplicas locales</h4>
+<ul class="tema-lista">
+<li>Definición: mecanismo que mantiene sincronizadas réplicas de una base NSF.</li>
+<li>Casos: servidor ↔ servidor y servidor ↔ réplica local.</li>
+<li>Réplica local: trabajo sin conexión y sincronización posterior, con el matiz de que no todo se comporta igual offline.</li>
+<li>Cierre: replicación ≠ backup.</li>
+</ul>
+<h4 class="tema-h4">6. Explique el ID file</h4>
+<ul class="tema-lista">
+<li>Definición: archivo con la información de identidad y credenciales criptográficas del usuario.</li>
+<li>Usos: autenticación frente a Domino y operaciones de firma y cifrado.</li>
+<li>Protección por contraseña propia (distinta de la de dominio) y recuperación mediante ID Vault.</li>
+</ul>
+<h4 class="tema-h4">7. Diferencie ID file y Notes.ini</h4>
+<ul class="tema-lista">
+<li>ID file: identidad y credenciales.</li>
+<li>Notes.ini: parámetros de configuración del cliente (ubicación de datos, servidor de correo, otros).</li>
+<li>Cierre: consecuencia práctica en el diagnóstico de incidencias.</li>
+</ul>
+<h4 class="tema-h4">8. Explique iNotes</h4>
+<ul class="tema-lista">
+<li>Definición: interfaz web de acceso al correo, calendario y contactos de Domino.</li>
+<li>Denominación anterior (Domino Web Access) y acceso desde navegador compatible.</li>
+<li>Cierre: útil cuando no hay cliente Notes instalado.</li>
+</ul>
+<h4 class="tema-h4">9. Explique las alternativas de acceso móvil</h4>
+<ul class="tema-lista">
+<li>HCL Traveler: sincronización de correo, calendario y contactos con el dispositivo.</li>
+<li>iNotes desde el navegador móvil: sin instalar aplicación.</li>
+<li>HCL Verse: cliente/interfaz moderna.</li>
+<li>Cierre: la gestión del dispositivo (MDM) corresponde al Tema 30.</li>
+</ul>
+
+<h2 id="6-supuestos-practicos-cau" class="tema-h2">6. Supuestos prácticos CAU</h2>
+<h4 class="tema-h4">Supuesto 1 — «He olvidado la contraseña de Notes»</h4>
+<p><strong>Escenario</strong>: un usuario no puede abrir Notes porque no recuerda su contraseña. Pide que «se la reseteen como la del ordenador».</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Por qué no sirve restablecer la del dominio?</strong> Porque la contraseña de Notes <strong>protege su archivo ID local</strong> y es <strong>independiente de la contraseña de dominio Windows</strong>.</li>
+<li><strong>b) ¿Qué procede?</strong> Seguir el <strong>procedimiento corporativo</strong> de recuperación: <strong>ID Vault</strong> o <strong>reexpedición del ID</strong>, según esté implantado en la organización.</li>
+<li><strong>c) ¿Es igual en todas las organizaciones?</strong> No: depende de cómo esté configurada la gestión de identidades de Domino.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 2 — Notes no conecta con Domino</h4>
+<p><strong>Escenario</strong>: tras cambiar el equipo a un usuario, el cliente Notes no consigue conectar con el servidor.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué comprobar?</strong> La <strong>configuración del cliente</strong> (parámetros de <strong>Notes.ini</strong>: servidor de correo, ubicación de datos), el <strong>servidor Domino</strong> indicado, la <strong>conectividad</strong> de red y la <strong>identidad</strong> (ID correcto y accesible).</li>
+<li><strong>b) ¿Qué distingue este caso del anterior?</strong> Aquí puede fallar la configuración o la red; en el anterior, la credencial del ID. <strong>Notes.ini = configuración · ID = identidad</strong>.</li>
+<li><strong>c) ¿Qué protocolo interviene en la conexión nativa?</strong> <strong>NRPC</strong>, entre el cliente Notes y Domino.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 3 — Trabajar sin conexión</h4>
+<p><strong>Escenario</strong>: una persona debe desplazarse a una sede sin acceso a la red corporativa y necesita seguir consultando y redactando correo.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué comprobar antes del desplazamiento?</strong> Que tenga configurada y <strong>sincronizada su réplica local</strong> del correo (y de las aplicaciones que necesite).</li>
+<li><strong>b) ¿Qué ocurre al volver?</strong> La <strong>replicación</strong> sincroniza los cambios en ambos sentidos con el servidor.</li>
+<li><strong>c) ¿Qué advertir al usuario?</strong> Que <strong>no todas las aplicaciones ni configuraciones funcionan offline exactamente igual</strong> que en línea.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 4 — Una NSF que no es el buzón</h4>
+<p><strong>Escenario</strong>: un usuario informa de un problema al abrir «una base de datos de Notes» que no es su correo.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿De qué puede tratarse?</strong> De una <strong>aplicación Notes</strong> alojada en una base NSF: gestión de expedientes, formularios, flujos de aprobación u otra aplicación interna.</li>
+<li><strong>b) ¿Qué concepto se evalúa?</strong> Que <strong>una base NSF no tiene por qué ser el buzón</strong>: Domino aloja aplicaciones además del correo.</li>
+<li><strong>c) ¿Qué implica para el diagnóstico?</strong> Que el acceso, los permisos y las réplicas de esa base pueden ser distintos de los del mail.nsf.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 5 — Consultar el correo desde un equipo ajeno</h4>
+<p><strong>Escenario</strong>: una persona necesita revisar su correo desde un equipo prestado donde no está instalado ni configurado Notes.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué opción encaja?</strong> <strong>iNotes</strong>: interfaz web de acceso al correo, calendario y contactos desde un <strong>navegador compatible</strong>, sin cliente de escritorio.</li>
+<li><strong>b) ¿Cómo se denominaba antes?</strong> <strong>Domino Web Access (DWA)</strong>.</li>
+<li><strong>c) ¿Qué evita esta vía?</strong> Instalar el cliente y registrar el ID en un equipo que no es el suyo.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 6 — Correo y agenda en el móvil</h4>
+<p><strong>Escenario</strong>: se solicita que el correo, el calendario y los contactos estén disponibles y actualizados en el teléfono corporativo.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué componente lo proporciona?</strong> <strong>HCL Traveler</strong>, que sincroniza correo, calendario y contactos entre Domino y el dispositivo.</li>
+<li><strong>b) ¿Alternativa sin instalar aplicación?</strong> Acceder a <strong>iNotes desde el navegador</strong> del móvil.</li>
+<li><strong>c) ¿Y la gestión del propio terminal?</strong> Corresponde a la movilidad y el MDM (Tema 30), no a este tema.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 7 — Interfaz moderna de correo</h4>
+<p><strong>Escenario</strong>: la organización valora ofrecer una experiencia de correo más actual sobre su plataforma Domino.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué producto entra en juego?</strong> <strong>HCL Verse</strong>, cliente/interfaz moderna de correo y colaboración.</li>
+<li><strong>b) ¿Sustituye a Traveler?</strong> No: son cosas distintas — <strong>Verse es interfaz de usuario</strong>; <strong>Traveler es sincronización</strong> con dispositivos.</li>
+<li><strong>c) ¿Y a iNotes?</strong> Verse es una alternativa más moderna de acceso; iNotes sigue siendo la interfaz web clásica de Domino.</li>
+</ul>
+
+<h2 id="7-matriz-de-memorizacion" class="tema-h2">7. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Lo que debo recordar</strong></th>
+</tr>
+<tr>
+<td>Notes</td>
+<td>Cliente/aplicación que utiliza la persona usuaria</td>
+</tr>
+<tr>
+<td>Domino</td>
+<td>Plataforma/servidor que presta servicios y aloja bases de datos y aplicaciones</td>
+</tr>
+<tr>
+<td>NSF</td>
+<td>Notes Storage Facility: formato de base de datos nativo del ecosistema</td>
+</tr>
+<tr>
+<td>mail.nsf</td>
+<td>Base NSF que contiene el buzón de correo del usuario</td>
+</tr>
+<tr>
+<td>NRPC</td>
+<td>Protocolo nativo de comunicación Notes ↔ Domino (Domino admite además SMTP/IMAP/POP3)</td>
+</tr>
+<tr>
+<td>Replicación</td>
+<td>Sincroniza réplicas de una base NSF (servidor↔servidor, servidor↔local); no es un backup</td>
+</tr>
+<tr>
+<td>Réplica local</td>
+<td>Permite trabajar sin conexión y sincronizar al recuperar conectividad</td>
+</tr>
+<tr>
+<td>ID file</td>
+<td>Identidad y credenciales criptográficas: autenticación, firma y cifrado</td>
+</tr>
+<tr>
+<td>ID Vault</td>
+<td>Gestión y recuperación centralizada de archivos ID</td>
+</tr>
+<tr>
+<td>Notes.ini</td>
+<td>Configuración del cliente: ubicación de datos, servidor de correo, otros parámetros</td>
+</tr>
+<tr>
+<td>Directory</td>
+<td>Usuarios, grupos, recursos y configuración del entorno Domino; no es Active Directory</td>
+</tr>
+<tr>
+<td>iNotes</td>
+<td>Interfaz web de acceso al correo/calendario/contactos (antes Domino Web Access)</td>
+</tr>
+<tr>
+<td>Traveler</td>
+<td>Sincronización de correo, calendario y contactos con dispositivos móviles</td>
+</tr>
+<tr>
+<td>Verse</td>
+<td>Cliente/interfaz moderna de correo y colaboración</td>
+</tr>
+</table></div>
+
+<h2 id="8-resumen-final" class="tema-h2">8. Resumen final: si mañana fuera el examen</h2>
+<ul class="tema-lista">
+<li><strong>Notes = cliente · Domino = plataforma/servidor</strong> que aloja bases y aplicaciones (no solo correo). Evolución: <strong>Lotus → IBM → HCL (2019)</strong>.</li>
+<li><strong>NSF</strong> = formato de base de datos nativo; correo, aplicaciones y otros datos se almacenan habitualmente en NSF. <strong>mail.nsf</strong> = buzón, pero <strong>una NSF no tiene por qué ser el correo</strong>.</li>
+<li><strong>NRPC</strong> = protocolo nativo Notes ↔ Domino; Domino admite además <strong>SMTP/IMAP/POP3</strong> para interoperar (Tema 17).</li>
+<li><strong>Replicación</strong> = sincronización de réplicas de una NSF (servidor↔servidor y servidor↔local). La <strong>réplica local</strong> permite trabajar <strong>sin conexión</strong> y sincronizar después — con el matiz de que no todo funciona igual offline. <strong>Replicación ≠ backup</strong>.</li>
+<li><strong>ID file</strong> = identidad + credenciales criptográficas (autenticación, firma, cifrado): <strong>no es simplemente un certificado</strong>. Su <strong>contraseña protege el ID local</strong> y <strong>no es la del dominio</strong>. <strong>ID Vault</strong> = recuperación centralizada. <strong>Notes.ini</strong> = configuración.</li>
+<li><strong>Directory / Address Book</strong> = usuarios, grupos, recursos y configuración del entorno Domino; <strong>no es Active Directory</strong>.</li>
+<li><strong>Configuración del cliente</strong>: instalar → registrar el ID → identificar el servidor Domino → configurar la base de correo → comprobar acceso → verificar replicación.</li>
+<li><strong>Funcionalidades</strong>: correo, calendario, tareas, contactos, aplicaciones NSF, réplica local, firma y cifrado con el ID.</li>
+<li><strong>Accesos</strong>: <strong>iNotes</strong> (web, antes DWA, navegador compatible) · <strong>Traveler</strong> (sincronización con móviles) · <strong>Verse</strong> (cliente/interfaz moderna). No confundirlos entre sí.</li>
+</ul>
+
+<h2 id="9-actualidad-del-producto" class="tema-h2">9. Actualidad HCL Notes/Domino — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Información sujeta a cambio · Fecha de actualización de estos apuntes: agosto de 2026</strong><br>Versiones, nomenclatura comercial y plazos de soporte evolucionan; el núcleo conceptual del tema no depende de estos datos.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Propiedad</strong>: el producto pertenece a <strong>HCL</strong> desde <strong>2019</strong>, tras su adquisición a IBM. En muchas organizaciones se sigue hablando indistintamente de «IBM Notes» y «HCL Notes».</li>
+<li><strong>Nomenclatura</strong>: HCL ha adoptado una <strong>denominación por año</strong> para las versiones recientes de Notes/Domino, además de la numeración de build tradicional.</li>
+<li><strong>Ciclo de soporte</strong>: HCL ha publicado compromisos de soporte para versiones actuales y anteriores; conviene consultar el ciclo vigente antes de planificar migraciones.</li>
+<li><strong>Contexto de uso</strong>: la plataforma mantiene una implantación significativa en grandes organizaciones y administraciones, en buena medida por las <strong>aplicaciones a medida</strong> desarrolladas sobre bases NSF, cuya migración resulta costosa.</li>
+</ul>
+  </div>
+</article>

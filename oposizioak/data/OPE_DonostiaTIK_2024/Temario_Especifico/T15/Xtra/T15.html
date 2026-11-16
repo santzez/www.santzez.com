@@ -1,0 +1,380 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T15</div>
+    <h1 class="tema-cabecera__titulo">Entorno Windows - Supervisión de visor de eventos. Gestión de compartidos y permisos de red</h1>
+    <div class="tema-cabecera__meta">Xtra · Bloque II · Tecnología básica</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-datos-y-anclas-de-memoria">1. Datos y anclas de memoria</a></li>
+<li><a href="#2-no-confundir">2. No confundir</a></li>
+<li><a href="#3-posibles-trampas-de-examen">3. Posibles trampas de examen</a></li>
+<li><a href="#4-posibles-preguntas-tipo-test">4. Posibles preguntas tipo test</a></li>
+<li><a href="#5-posibles-preguntas-cortas">5. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#6-supuestos-practicos-cau">6. Supuestos prácticos CAU</a></li>
+<li><a href="#7-matriz-de-memorizacion">7. Matriz de memorización</a></li>
+<li><a href="#8-resumen-final">8. Resumen final: si mañana fuera el examen</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h2 id="1-datos-y-anclas-de-memoria" class="tema-h2">1. Datos y anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>EVENTVWR → EVENTOS</strong>; los registros se guardan en <strong>.evtx</strong>; cada evento tiene <strong>Event ID</strong>, origen, fecha/hora y descripción.</li>
+<li><strong>APLICACIÓN → PROGRAMAS · SEGURIDAD → AUDITORÍA · SISTEMA → SO/DRIVERS/SERVICIOS</strong> (+ Instalación y Eventos reenviados).</li>
+<li>Niveles: <strong>Information · Warning · Error · Critical</strong>. Auditoría: <strong>Success Audit · Failure Audit</strong> — <strong>no son niveles de gravedad</strong>.</li>
+<li>El registro de Seguridad depende de que la <strong>auditoría esté habilitada</strong>.</li>
+<li><strong>WEF</strong> = reenvío a un equipo recolector, sobre <strong>WinRM</strong>; después, posible SIEM.</li>
+<li><strong>UNC → \\servidor\recurso · SMB → COMPARTIR</strong> (CIFS = denominación histórica).</li>
+<li><strong>$ = recurso administrativo oculto</strong> (C$, ADMIN$): oculto, no inaccesible.</li>
+<li>Share: <strong>Read · Change · Full Control</strong>. NTFS básicos: <strong>Full Control · Modify · Read &amp; Execute · List Folder Contents · Read · Write</strong>.</li>
+<li><strong>SHARE → SOLO RED · NTFS → LOCAL + RED</strong>.</li>
+<li><strong>ACL → LISTA · ACE → ENTRADA</strong>; la herencia puede modificarse o deshabilitarse.</li>
+<li><strong>LOCAL → NTFS · RED → SHARE + NTFS · EFECTIVO → MÁS RESTRICTIVO</strong>.</li>
+<li>Una <strong>denegación explícita suele prevalecer</strong> sobre los permisos de permitir aplicables.</li>
+</ul>
+<figure class="tema-figura">
+<figcaption>Permisos de recurso compartido vs. NTFS</figcaption>
+<svg viewBox="0 0 700 136" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at15dp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at15da" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at15dv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at15dn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at15dr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at15dg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">SHARE</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">NTFS</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Solo por RED</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="103.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Read · Change</text><text x="176.0" y="118.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">· Full Control</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">LOCAL y por RED</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="96.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Full Control · Modify</text><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Read &amp;amp; Execute · Read</text><text x="524.0" y="126.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Write · List Folder</text></svg>
+</figure>
+
+<figure class="tema-figura">
+<figcaption>Niveles vs. auditoría</figcaption>
+<svg viewBox="0 0 700 216" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at15bp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at15ba" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at15bv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at15bn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at15br" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at15bg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">NIVELES</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">AUDITORÍA</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Information</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Warning</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Error</text><rect x="8.0" y="174" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="191.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Critical</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Success Audit</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Failure Audit</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">—</text><rect x="356.0" y="174" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="524.0" y="191.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">—</text></svg>
+<p class="tema-figura__nota">La auditoría no es un nivel de gravedad: es el resultado de un intento de acceso.</p></figure>
+
+
+<h2 id="2-no-confundir" class="tema-h2">2. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto A</strong></th>
+<th><strong>Concepto B</strong></th>
+<th><strong>Diferencia clave</strong></th>
+</tr>
+<tr>
+<td><strong>Registro de Windows</strong>: configuración del sistema (T11)</td>
+<td><strong>Visor de eventos</strong>: sucesos ocurridos</td>
+<td>Cómo está configurado vs. qué ha pasado</td>
+</tr>
+<tr>
+<td><strong>Aplicación</strong>: eventos de programas</td>
+<td><strong>Seguridad</strong>: auditoría · <strong>Sistema</strong>: SO, servicios, controladores</td>
+<td>Cada registro tiene su origen característico</td>
+</tr>
+<tr>
+<td><strong>Nivel de evento</strong>: Information/Warning/Error/Critical</td>
+<td><strong>Resultado de auditoría</strong>: Success/Failure Audit</td>
+<td>Gravedad vs. éxito o fallo de la acción auditada</td>
+</tr>
+<tr>
+<td><strong>WEF</strong>: reenvío y centralización de eventos</td>
+<td><strong>SIEM</strong>: correlación y análisis avanzados</td>
+<td>WEF recoge; el SIEM analiza y correlaciona</td>
+</tr>
+<tr>
+<td><strong>SMB</strong>: protocolo de compartición actual</td>
+<td><strong>CIFS</strong>: denominación histórica del ecosistema SMB</td>
+<td>Hoy se habla de SMB</td>
+</tr>
+<tr>
+<td><strong>Ruta UNC</strong>: \\servidor\recurso</td>
+<td><strong>Ruta local</strong>: por ejemplo C:\carpeta</td>
+<td>La UNC implica acceso por red</td>
+</tr>
+<tr>
+<td><strong>Recurso administrativo</strong> (C$, ADMIN$)</td>
+<td><strong>Recurso compartido normal</strong></td>
+<td>El $ lo oculta en la exploración, no lo hace inaccesible</td>
+</tr>
+<tr>
+<td><strong>Permisos Share</strong>: capa de acceso por red</td>
+<td><strong>Permisos NTFS</strong>: control fino, local y por red</td>
+<td>Share solo actúa en red; NTFS siempre</td>
+</tr>
+<tr>
+<td><strong>ACL</strong>: la lista completa</td>
+<td><strong>ACE</strong>: cada entrada de la lista</td>
+<td>La ACL se compone de ACE</td>
+</tr>
+<tr>
+<td><strong>Acceso local</strong>: solo NTFS</td>
+<td><strong>Acceso por red</strong>: Share + NTFS</td>
+<td>Determina qué capas hay que evaluar</td>
+</tr>
+<tr>
+<td><strong>Allow (permitir)</strong></td>
+<td><strong>Deny (denegar)</strong></td>
+<td>Una denegación explícita suele prevalecer sobre los permitir aplicables</td>
+</tr>
+<tr>
+<td><strong>Pertenecer al grupo</strong> (T14)</td>
+<td><strong>Tener permiso efectivo</strong> sobre el recurso</td>
+<td>Ser miembro no basta si el permiso resultante no lo concede</td>
+</tr>
+</table></div>
+
+<h2 id="3-posibles-trampas-de-examen" class="tema-h2">3. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li><strong>«Success Audit y Failure Audit son niveles de gravedad»</strong> — falso: son <strong>resultados de auditoría</strong>, no niveles como Information/Warning/Error/Critical.</li>
+<li><strong>«El registro de Seguridad recoge automáticamente todos los accesos»</strong> — falso: depende de que la <strong>política de auditoría</strong> correspondiente esté habilitada.</li>
+<li><strong>«Los permisos Share se aplican también en el acceso local»</strong> — falso: <strong>solo en el acceso por red</strong>.</li>
+<li><strong>«Los permisos NTFS solo se aplican por red»</strong> — falso: se aplican <strong>local y por red</strong>.</li>
+<li><strong>«Por red basta con mirar los permisos NTFS»</strong> — falso: hay que evaluar <strong>Share + NTFS</strong> y quedarse con el <strong>más restrictivo</strong>.</li>
+<li><strong>«Share Full Control garantiza el acceso completo»</strong> — falso: si el NTFS es Read, el efectivo por red es Read.</li>
+<li><strong>«C$ y ADMIN$ son recursos secretos e inaccesibles»</strong> — falso: son <strong>administrativos ocultos</strong>; se accede con credenciales y permisos adecuados.</li>
+<li><strong>«CIFS es un protocolo distinto y actual»</strong> — impreciso: es la denominación histórica asociada a una implementación antigua del ecosistema SMB; hoy se habla de <strong>SMB</strong>.</li>
+<li><strong>«ACL y ACE son sinónimos»</strong> — falso: la ACL es la lista; la ACE, cada entrada.</li>
+<li><strong>«Un Deny de cualquier grupo elimina siempre el acceso en cualquier circunstancia»</strong> — formulación demasiado absoluta: <strong>una denegación explícita suele prevalecer</strong> sobre los permitir aplicables al mismo acceso.</li>
+<li><strong>«La herencia de permisos no se puede modificar»</strong> — falso: puede modificarse o deshabilitarse según la configuración.</li>
+<li><strong>«Critical implica pérdida de datos»</strong> — falso: indica gravedad potencial, no un desenlace concreto.</li>
+<li><strong>Colar contenido ajeno</strong>: M.2, discos o arquitectura de red no son objeto de este tema.</li>
+</ul>
+
+<h2 id="4-posibles-preguntas-tipo-test" class="tema-h2">4. Posibles preguntas tipo test</h2>
+<ul class="tema-lista">
+<li>¿Qué consola abre el Visor de eventos y en qué formato se guardan los registros?</li>
+<li>Emparejar registro y contenido: <strong>Aplicación · Seguridad · Sistema · Instalación · Eventos reenviados</strong>.</li>
+<li>¿Qué datos identifican un evento? (Event ID, origen, fecha/hora, descripción).</li>
+<li>¿Cuáles son los <strong>niveles de evento</strong>? ¿Y los <strong>resultados de auditoría</strong>?</li>
+<li>¿De qué depende que el registro de Seguridad recoja un acceso?</li>
+<li>¿Qué es una <strong>vista personalizada</strong>? ¿Y adjuntar una tarea a un evento?</li>
+<li>¿Qué es <strong>WEF</strong> y sobre qué infraestructura se apoya?</li>
+<li>Interpretar una <strong>ruta UNC</strong> y reconocer un <strong>recurso administrativo</strong> (C$, ADMIN$).</li>
+<li>¿Qué significa el sufijo <strong>$</strong> en un recurso compartido?</li>
+<li>Enumerar los <strong>tres permisos Share</strong> y decir cuándo se aplican.</li>
+<li>Enumerar los <strong>permisos NTFS básicos</strong> y decir cuándo se aplican.</li>
+<li>Diferencia entre <strong>ACL</strong> y <strong>ACE</strong>.</li>
+<li>¿Puede deshabilitarse la <strong>herencia</strong> de permisos?</li>
+<li><strong>Cálculo</strong>: Share = Full Control, NTFS = Read, acceso por red → ¿efectivo?</li>
+<li><strong>Cálculo</strong>: Share = Read, NTFS = Modify, acceso <strong>local</strong> → ¿efectivo?</li>
+<li><strong>Cálculo</strong>: Share = Change, NTFS = Read, acceso por red → ¿efectivo?</li>
+<li>¿Qué capas se evalúan en un acceso <strong>local</strong>? ¿Y en uno <strong>por red</strong>?</li>
+<li>¿Qué prevalece cuando concurren una denegación explícita y permisos de permitir aplicables?</li>
+</ul>
+
+<h2 id="5-posibles-preguntas-cortas" class="tema-h2">5. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<h4 class="tema-h4">1. Explique la función del Visor de eventos</h4>
+<ul class="tema-lista">
+<li>Definición: consola MMC (eventvwr.msc) para consultar eventos de Windows y aplicaciones; archivos .evtx.</li>
+<li>Datos de un evento: Event ID, origen, fecha/hora, descripción.</li>
+<li>Utilidad para el CAU: diagnóstico de incidencias y trazabilidad.</li>
+</ul>
+<h4 class="tema-h4">2. Diferencie los registros Aplicación, Seguridad y Sistema</h4>
+<ul class="tema-lista">
+<li>Aplicación: eventos de programas. Seguridad: seguridad y auditoría. Sistema: componentes del SO, servicios, controladores, arranque/apagado.</li>
+<li>Mención de Instalación y Eventos reenviados.</li>
+<li>Cierre: el de Seguridad depende de la auditoría configurada.</li>
+</ul>
+<h4 class="tema-h4">3. Explique el reenvío de eventos</h4>
+<ul class="tema-lista">
+<li>WEF: centralizar eventos de varios equipos en un equipo recolector.</li>
+<li>Infraestructura: WinRM; el registro de destino es «Eventos reenviados».</li>
+<li>Ventaja y continuidad: supervisión sin conectarse equipo a equipo; posible integración posterior con un SIEM.</li>
+</ul>
+<h4 class="tema-h4">4. Explique qué es una ruta UNC y un recurso compartido</h4>
+<ul class="tema-lista">
+<li>Carpeta compartida: recurso accesible desde otros equipos; protocolo SMB (CIFS como denominación histórica).</li>
+<li>UNC: \\servidor\recurso.</li>
+<li>Herramientas (Explorador, fsmgmt.msc, PowerShell) y recursos administrativos con $.</li>
+</ul>
+<h4 class="tema-h4">5. Diferencie los permisos Share y NTFS</h4>
+<ul class="tema-lista">
+<li>Share: Read/Change/Full Control; solo en acceso por red.</li>
+<li>NTFS: básicos y avanzados, granularidad por archivo/carpeta; local y por red.</li>
+<li>Cierre: NTFS = control fino; Share = capa de acceso por red.</li>
+</ul>
+<h4 class="tema-h4">6. Explique ACL y ACE</h4>
+<ul class="tema-lista">
+<li>ACL: lista de control de acceso del objeto.</li>
+<li>ACE: cada entrada, que define permisos para una cuenta o grupo.</li>
+<li>Cierre: relación lista-entrada y su papel en el cálculo del acceso.</li>
+</ul>
+<h4 class="tema-h4">7. Explique la herencia de permisos</h4>
+<ul class="tema-lista">
+<li>Definición: los permisos de una carpeta pueden heredarse a los objetos inferiores.</li>
+<li>La herencia puede modificarse o deshabilitarse según la configuración.</li>
+<li>Utilidad y riesgo: coherencia del árbol frente a excepciones que hay que documentar.</li>
+</ul>
+<h4 class="tema-h4">8. Explique cómo se determina el permiso efectivo por red</h4>
+<ul class="tema-lista">
+<li>Local → solo NTFS. Red → Share + NTFS.</li>
+<li>Regla: el efectivo por red es el <strong>más restrictivo</strong> de ambas capas.</li>
+<li>Añadir el efecto de una denegación explícita, que suele prevalecer sobre los permitir aplicables.</li>
+<li>Ejemplo numérico breve (Share Full + NTFS Read → Read).</li>
+</ul>
+
+<h2 id="6-supuestos-practicos-cau" class="tema-h2">6. Supuestos prácticos CAU</h2>
+<h4 class="tema-h4">Supuesto 1 — Lectura por red pese al NTFS</h4>
+<p><strong>Escenario</strong>: sobre la carpeta \\servidor\contabilidad, el grupo tiene <strong>Share = Read</strong> y <strong>NTFS = Modify</strong>. La usuaria accede <strong>por red</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Permiso efectivo?</strong> <strong>Read</strong>: en el acceso por red se evalúan ambas capas y prevalece la más restrictiva (el Share).</li>
+<li><strong>b) ¿Qué podrá hacer?</strong> Abrir los documentos, pero no guardar cambios.</li>
+<li><strong>c) ¿Cómo se corrige?</strong> Ampliando el permiso Share al nivel adecuado y dejando el control fino en NTFS para los grupos correctos.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 2 — La misma carpeta, acceso local</h4>
+<p><strong>Escenario</strong>: los mismos permisos (<strong>Share = Read</strong>, <strong>NTFS = Modify</strong>), pero el usuario trabaja <strong>sentado en el propio servidor</strong>, abriendo la carpeta por su ruta local.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Permiso efectivo?</strong> <strong>Modify</strong>.</li>
+<li><strong>b) ¿Por qué cambia?</strong> Porque el permiso <strong>Share no interviene en el acceso local</strong>: solo se aplican los permisos NTFS.</li>
+<li><strong>c) ¿Qué enseña el caso?</strong> Que la primera pregunta del diagnóstico debe ser siempre <strong>«¿accede por red o localmente?»</strong>.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 3 — Share generoso, NTFS restrictivo</h4>
+<p><strong>Escenario</strong>: <strong>Share = Full Control</strong> y <strong>NTFS = Read</strong> para el grupo, acceso por red.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Permiso efectivo?</strong> <strong>Read</strong>: manda la capa más restrictiva, en este caso NTFS.</li>
+<li><strong>b) ¿Es un error de configuración?</strong> No necesariamente: responde a la práctica de mantener el Share amplio y gobernar el detalle con NTFS.</li>
+<li><strong>c) ¿Dónde se corrige el acceso?</strong> En los permisos <strong>NTFS</strong>, asignados a los grupos adecuados.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 4 — «No consigo saber por qué no entra»</h4>
+<p><strong>Escenario</strong>: un usuario pertenece al grupo correcto, el recurso existe y aun así no puede modificar archivos.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué comprobar, por orden?</strong> Tipo de acceso (red/local) → recurso UNC utilizado → permisos Share → permisos NTFS → grupos del usuario → <strong>denegaciones explícitas</strong> → permiso efectivo.</li>
+<li><strong>b) ¿Qué explica el caso más a menudo?</strong> Una capa restrictiva (Share o NTFS) o una <strong>denegación explícita</strong>, que suele prevalecer sobre los permitir aplicables.</li>
+<li><strong>c) ¿Basta con pertenecer al grupo?</strong> No: la pertenencia (Tema 14) es condición necesaria, pero el acceso depende del permiso efectivo.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 5 — Investigar un problema de inicio de sesión</h4>
+<p><strong>Escenario</strong>: una persona informa de que no consigue iniciar sesión y hay que averiguar qué ocurre.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Dónde mirar?</strong> En el registro de <strong>Seguridad</strong> del Visor de eventos, buscando los eventos de inicio de sesión y sus <strong>resultados de auditoría</strong> (Success/Failure Audit).</li>
+<li><strong>b) ¿Y si no aparece nada?</strong> Comprobar si la <strong>política de auditoría</strong> correspondiente está habilitada: sin ella, esos sucesos pueden no registrarse.</li>
+<li><strong>c) ¿Qué otro registro puede ayudar?</strong> El de <strong>Sistema</strong>, para descartar problemas de servicios o del propio equipo.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 6 — Centralizar la supervisión</h4>
+<p><strong>Escenario</strong>: la organización quiere revisar los eventos de muchos equipos sin conectarse a cada uno.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué mecanismo?</strong> <strong>WEF (Windows Event Forwarding)</strong> con un <strong>equipo recolector</strong>; los eventos llegan al registro <strong>Eventos reenviados</strong>.</li>
+<li><strong>b) ¿Sobre qué se apoya?</strong> Sobre <strong>WinRM</strong>.</li>
+<li><strong>c) ¿Y después?</strong> La agregación puede alimentar un <strong>SIEM</strong> para correlación y análisis — ampliación fuera del alcance del tema.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 7 — Acceso administrativo remoto</h4>
+<p><strong>Escenario</strong>: un técnico necesita acceder al disco de un equipo remoto y observa que \\equipo no muestra ningún recurso.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Por qué no aparece nada?</strong> Los recursos administrativos terminan en <strong>$</strong> (C$, ADMIN$) y <strong>no se muestran</strong> en la exploración normal de la red.</li>
+<li><strong>b) ¿Significa que no puede acceder?</strong> No: oculto no es inaccesible; el acceso depende de disponer de <strong>credenciales y permisos adecuados</strong>.</li>
+<li><strong>c) ¿Qué ruta utilizaría?</strong> La UNC directa al recurso administrativo correspondiente.</li>
+</ul>
+
+<h2 id="7-matriz-de-memorizacion" class="tema-h2">7. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Lo que debo recordar</strong></th>
+</tr>
+<tr>
+<td>Visor de eventos</td>
+<td>Consulta de eventos registrados por Windows y aplicaciones</td>
+</tr>
+<tr>
+<td>eventvwr.msc</td>
+<td>Consola MMC que lo abre</td>
+</tr>
+<tr>
+<td>.evtx</td>
+<td>Formato de los archivos de registro</td>
+</tr>
+<tr>
+<td>Event ID</td>
+<td>Identificador del tipo de suceso</td>
+</tr>
+<tr>
+<td>Aplicación</td>
+<td>Eventos de aplicaciones</td>
+</tr>
+<tr>
+<td>Seguridad</td>
+<td>Seguridad y auditoría; depende de la política de auditoría habilitada</td>
+</tr>
+<tr>
+<td>Sistema</td>
+<td>Componentes del SO: servicios, controladores, arranque/apagado</td>
+</tr>
+<tr>
+<td>Information</td>
+<td>Evento informativo o normal</td>
+</tr>
+<tr>
+<td>Warning</td>
+<td>Situación que puede requerir atención</td>
+</tr>
+<tr>
+<td>Error</td>
+<td>Problema que afecta a una operación o componente</td>
+</tr>
+<tr>
+<td>Critical</td>
+<td>Problema grave que puede afectar significativamente al sistema</td>
+</tr>
+<tr>
+<td>Success Audit</td>
+<td>Resultado de auditoría: la acción auditada tuvo éxito (no es un nivel)</td>
+</tr>
+<tr>
+<td>Failure Audit</td>
+<td>Resultado de auditoría: la acción auditada falló (no es un nivel)</td>
+</tr>
+<tr>
+<td>WEF</td>
+<td>Reenvío de eventos a un equipo recolector</td>
+</tr>
+<tr>
+<td>WinRM</td>
+<td>Infraestructura de gestión/reenvío en ese escenario</td>
+</tr>
+<tr>
+<td>UNC</td>
+<td>\\servidor\recurso: acceso por red</td>
+</tr>
+<tr>
+<td>SMB</td>
+<td>Protocolo de compartición en Windows (CIFS: denominación histórica)</td>
+</tr>
+<tr>
+<td>C$ / ADMIN$</td>
+<td>Recursos administrativos ocultos; el $ los oculta, no los bloquea</td>
+</tr>
+<tr>
+<td>Share Read</td>
+<td>Lectura, solo en acceso por red</td>
+</tr>
+<tr>
+<td>Share Change</td>
+<td>Lectura, escritura, modificación y eliminación (por red)</td>
+</tr>
+<tr>
+<td>Share Full Control</td>
+<td>Lo anterior + gestión de los permisos del recurso compartido</td>
+</tr>
+<tr>
+<td>NTFS</td>
+<td>Control fino por archivo/carpeta; se aplica local y por red</td>
+</tr>
+<tr>
+<td>ACL</td>
+<td>Lista de control de acceso del objeto</td>
+</tr>
+<tr>
+<td>ACE</td>
+<td>Cada entrada de la ACL, para una cuenta o grupo</td>
+</tr>
+<tr>
+<td>Herencia</td>
+<td>Los permisos pueden heredarse hacia abajo; puede modificarse o deshabilitarse</td>
+</tr>
+<tr>
+<td>Permiso efectivo</td>
+<td>Local = NTFS · Red = Share + NTFS, el más restrictivo</td>
+</tr>
+</table></div>
+
+<h2 id="8-resumen-final" class="tema-h2">8. Resumen final: si mañana fuera el examen</h2>
+<ul class="tema-lista">
+<li><strong>Visor de eventos (eventvwr.msc)</strong>: eventos de Windows y aplicaciones en archivos <strong>.evtx</strong>, con <strong>Event ID</strong>, origen, fecha/hora y descripción. Registros: <strong>Aplicación · Seguridad · Sistema</strong> (+ Instalación y Eventos reenviados).</li>
+<li><strong>Niveles</strong>: Information · Warning · Error · Critical. <strong>Resultados de auditoría</strong>: Success/Failure Audit — <strong>no son niveles de gravedad</strong>. El registro de <strong>Seguridad depende de la auditoría habilitada</strong>.</li>
+<li><strong>Supervisión</strong>: vistas personalizadas (filtros guardados), tareas adjuntas a eventos, y <strong>WEF sobre WinRM</strong> para centralizar en un equipo recolector (después, posible SIEM).</li>
+<li><strong>Compartidos</strong>: <strong>UNC \\servidor\recurso</strong> sobre <strong>SMB</strong> (CIFS = histórico); herramientas: Explorador, <strong>fsmgmt.msc</strong>, PowerShell. <strong>$ = recurso administrativo oculto</strong> (C$, ADMIN$): oculto, no inaccesible.</li>
+<li><strong>Permisos Share</strong>: <strong>Read · Change · Full Control</strong> — <strong>solo en acceso por red</strong>. <strong>Permisos NTFS</strong>: Full Control, Modify, Read &amp; Execute, List Folder Contents, Read, Write — <strong>local y por red</strong>, con granularidad por archivo/carpeta.</li>
+<li><strong>ACL = lista · ACE = entrada</strong>; la <strong>herencia</strong> puede modificarse o deshabilitarse; una <strong>denegación explícita suele prevalecer</strong> sobre los permitir aplicables.</li>
+<li><strong>LA regla</strong>: <strong>LOCAL → NTFS · RED → SHARE + NTFS · EFECTIVO → EL MÁS RESTRICTIVO</strong>. Buena práctica: Share suficientemente amplio y <strong>NTFS como control fino</strong> asignado a los grupos adecuados.</li>
+<li><strong>Diagnóstico CAU</strong>: red o local → UNC → Share → NTFS → grupos → denegaciones → permiso efectivo.</li>
+</ul>
+  </div>
+</article>

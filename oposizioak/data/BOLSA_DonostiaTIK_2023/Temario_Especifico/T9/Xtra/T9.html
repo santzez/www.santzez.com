@@ -1,0 +1,484 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T9</div>
+    <h1 class="tema-cabecera__titulo">Sistemas de telefonía: telefonía analógica, ToIP, Asterisk.</h1>
+    <div class="tema-cabecera__meta">Xtra · Bloque 1 · Redes, comunicaciones, internet · Bolsa DonostiaTIK 2023 · Instalaciones y Comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-lo-que-cayo-en-el-examen-de-2023">1. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#2-anclas-de-memoria">2. Anclas de memoria</a></li>
+<li><a href="#3-no-confundir">3. No confundir</a></li>
+<li><a href="#4-posibles-trampas-de-examen">4. Posibles trampas de examen</a></li>
+<li><a href="#5-matriz-de-memorizacion">5. Matriz de memorización</a></li>
+<li><a href="#6-preguntas-tipo-test">6. Preguntas tipo test</a></li>
+<li><a href="#7-posibles-preguntas-cortas-con-esquema-de-respuesta">7. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#8-casos-practicos">8. Casos prácticos</a></li>
+<li><a href="#9-repaso-visual-t9">9. Repaso visual · T9</a></li>
+<li><a href="#10-resumen-final-si-manana-fuera-el-examen">10. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#11-actualidad-datos-fechados">11. Actualidad — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h2 id="1-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">1. Lo que cayó en el examen de 2023</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Contenido</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test 13</td>
+<td>G.711, G.726, G.729</td>
+<td><strong>Voz en telefonía IP</strong></td>
+</tr>
+<tr>
+<td>Test 31 (reserva)</td>
+<td>DECT</td>
+<td><strong>Sistema de teléfonos inalámbricos</strong></td>
+</tr>
+<tr>
+<td>Test 35 (reserva)</td>
+<td>Toma de telefonía nueva</td>
+<td><strong>RJ45 de 8 contactos</strong> (T3)</td>
+</tr>
+<tr>
+<td>Caso 3</td>
+<td>Funciones del teléfono y la centralita</td>
+<td>Apartado 7 de Apuntes</td>
+</tr>
+<tr>
+<td>Caso (enunciado)</td>
+<td>Teléfono IP con el PC detrás; VLAN de telefonía por DHCP</td>
+<td>VLAN de voz y PoE (T4)</td>
+</tr>
+<tr>
+<td>Caso 10</td>
+<td>Puerto averiado con teléfono y PC</td>
+<td>Reconfigurar datos + voz y PoE (T4)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="2-anclas-de-memoria" class="tema-h2">2. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>Teléfono → PBX → IP → SIP → SDP → RTP → códec → Asterisk → troncal → operador.</strong></li>
+<li><strong>Circuitos = camino reservado · paquetes = IP.</strong> DTMF = dos tonos por tecla (IVR).</li>
+<li><strong>FXS DA línea · FXO RECIBE línea · ATA = analógico a IP · gateway = red a red.</strong></li>
+<li><strong>SIP señaliza · SDP describe · RTP transporta · códec codifica.</strong></li>
+<li><strong>REGISTER registra · INVITE llama · ACK confirma · BYE cuelga.</strong> 180 suena, 200 acepta, 486 ocupado.</li>
+<li><strong>5060 / 5061 (TLS): habituales, no únicos · RTP: rango UDP configurable.</strong></li>
+<li><strong>G.711 = 64 kb/s de audio, ≈ 87 kb/s reales · G.729 ≈ 8 kb/s, ≈ 31 kb/s.</strong></li>
+<li><strong>Latencia ≈ 150 ms · jitter ≈ 30 ms · pérdidas &lt; 1 % · EF 46 · MOS ≥ 4 · QoS prioriza, no crea.</strong></li>
+<li><strong>Asterisk: PJSIP (endpoint, auth, aor, transport) + extensions.conf (contexto, extensión, prioridad, aplicación).</strong></li>
+<li><strong>TLS protege SIP · SRTP protege RTP.</strong></li>
+<li><strong>¿Una o todas? · SIP funciona ≠ RTP funciona · audio en un sentido = NAT/cortafuegos.</strong></li>
+<li><strong>Captura = cojo la de otro · salto = la llamada va saltando.</strong></li>
+</ul>
+<h2 id="3-no-confundir" class="tema-h2">3. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Esto</th>
+<th>No es esto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Telefonía analógica</strong> (circuitos)</td>
+<td><strong>VoIP</strong> (paquetes)</td>
+</tr>
+<tr>
+<td><strong>FXS</strong> (da línea)</td>
+<td><strong>FXO</strong> (recibe la línea)</td>
+</tr>
+<tr>
+<td><strong>ATA</strong> (un teléfono a IP)</td>
+<td><strong>Gateway de voz</strong> (una red a otra)</td>
+</tr>
+<tr>
+<td><strong>VoIP</strong> (transporte)</td>
+<td><strong>ToIP</strong> (servicio telefónico); se solapan</td>
+</tr>
+<tr>
+<td><strong>Extensión</strong></td>
+<td><strong>Número público</strong> (DDI) / <strong>troncal</strong></td>
+</tr>
+<tr>
+<td><strong>SIP</strong> (señalización)</td>
+<td><strong>RTP</strong> (voz)</td>
+</tr>
+<tr>
+<td><strong>SIP</strong></td>
+<td><strong>SDP</strong> (describe los medios)</td>
+</tr>
+<tr>
+<td><strong>RTP</strong></td>
+<td><strong>RTCP</strong> (estadísticas)</td>
+</tr>
+<tr>
+<td><strong>Códec</strong> (G.711)</td>
+<td><strong>Protocolo</strong> (SIP, RTP)</td>
+</tr>
+<tr>
+<td><strong>Bitrate del códec</strong></td>
+<td><strong>Ancho de banda real con cabeceras</strong></td>
+</tr>
+<tr>
+<td><strong>Latencia</strong></td>
+<td><strong>Jitter</strong> / <strong>pérdida</strong></td>
+</tr>
+<tr>
+<td><strong>PBX</strong></td>
+<td><strong>IP-PBX</strong></td>
+</tr>
+<tr>
+<td><strong>REGISTER</strong></td>
+<td><strong>INVITE</strong></td>
+</tr>
+<tr>
+<td><strong>VLAN de voz</strong> (separa)</td>
+<td><strong>QoS</strong> (prioriza)</td>
+</tr>
+<tr>
+<td><strong>TLS</strong> (señalización)</td>
+<td><strong>SRTP</strong> (audio)</td>
+</tr>
+<tr>
+<td><strong>PJSIP</strong> (actual)</td>
+<td><strong>chan_sip</strong> (legacy)</td>
+</tr>
+<tr>
+<td><strong>Grupo</strong> (<em>ring group</em>)</td>
+<td><strong>Cola</strong> (<em>queue</em>)</td>
+</tr>
+<tr>
+<td><strong>Grupo de captura</strong></td>
+<td><strong>Grupo de salto</strong></td>
+</tr>
+<tr>
+<td><strong>Softphone</strong></td>
+<td><strong>Hardphone</strong></td>
+</tr>
+<tr>
+<td><strong>DECT</strong></td>
+<td><strong>GSM/LTE</strong></td>
+</tr>
+<tr>
+<td><strong>CLIP</strong></td>
+<td><strong>CLIR</strong></td>
+</tr>
+<tr>
+<td><strong>Transferencia ciega</strong></td>
+<td><strong>Transferencia atendida</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="4-posibles-trampas-de-examen" class="tema-h2">4. Posibles trampas de examen</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Afirmación</th>
+<th>V/F</th>
+<th>Por qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SIP transporta normalmente el audio de la llamada</td>
+<td><strong>F</strong></td>
+<td>Lo transporta RTP</td>
+</tr>
+<tr>
+<td>RTP transporta medios en tiempo real</td>
+<td><strong>V</strong></td>
+<td>Sobre UDP</td>
+</tr>
+<tr>
+<td>G.711 consume exactamente 64 kb/s sobre Ethernet</td>
+<td><strong>F</strong></td>
+<td>Con cabeceras, unos 87 kb/s</td>
+</tr>
+<tr>
+<td>FXS proporciona la línea a un teléfono analógico</td>
+<td><strong>V</strong></td>
+<td>FXO la recibe</td>
+</tr>
+<tr>
+<td>Una extensión registrada garantiza que habrá audio</td>
+<td><strong>F</strong></td>
+<td>SIP y RTP van por caminos distintos</td>
+</tr>
+<tr>
+<td>La QoS aumenta el ancho de banda</td>
+<td><strong>F</strong></td>
+<td>Solo prioriza</td>
+</tr>
+<tr>
+<td>El audio unidireccional puede indicar un problema de NAT o cortafuegos</td>
+<td><strong>V</strong></td>
+<td>RTP de un sentido bloqueado</td>
+</tr>
+<tr>
+<td>5060 es el único puerto posible para SIP</td>
+<td><strong>F</strong></td>
+<td>Es el habitual; 5061 con TLS, y configurable</td>
+</tr>
+<tr>
+<td>Asterisk solo funciona con teléfonos IP</td>
+<td><strong>F</strong></td>
+<td>También analógicos y RDSI con tarjetas o gateways</td>
+</tr>
+<tr>
+<td>chan_sip es la configuración principal en Asterisk moderno</td>
+<td><strong>F</strong></td>
+<td>Es PJSIP</td>
+</tr>
+<tr>
+<td>La VLAN de voz es obligatoria para que funcione la VoIP</td>
+<td><strong>F</strong></td>
+<td>Es una práctica de diseño</td>
+</tr>
+<tr>
+<td>SIP ALG debe estar siempre activado</td>
+<td><strong>F</strong></td>
+<td>Depende; a menudo da problemas</td>
+</tr>
+<tr>
+<td>DECT es telefonía móvil</td>
+<td><strong>F</strong></td>
+<td>Teléfonos inalámbricos de interior</td>
+</tr>
+<tr>
+<td>Los códecs G.7xx son de vídeo</td>
+<td><strong>F</strong></td>
+<td>Son de voz</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="5-matriz-de-memorizacion" class="tema-h2">5. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Dato clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Analógica</td>
+<td>300–3.400 Hz · DTMF · ≈ 48 V · circuitos</td>
+</tr>
+<tr>
+<td>RDSI (legacy)</td>
+<td>BRI 2B+D · PRI 30B+D (E1, 2 Mb/s)</td>
+</tr>
+<tr>
+<td>Interfaces</td>
+<td>FXS da línea · FXO recibe · ATA · gateway de voz</td>
+</tr>
+<tr>
+<td>SIP</td>
+<td>5060 / 5061 TLS habituales · REGISTER, INVITE, ACK, BYE, CANCEL, OPTIONS · 100/180/200/401/404/486</td>
+</tr>
+<tr>
+<td>SDP</td>
+<td>Códec, IP y puertos del audio</td>
+</tr>
+<tr>
+<td>RTP</td>
+<td>UDP · rango configurable · SRTP cifrado · RTCP estadísticas</td>
+</tr>
+<tr>
+<td>Códecs</td>
+<td>G.711 64k (≈ 87k) · G.722 HD · G.726 32k · G.729 8k (≈ 31k) · Opus</td>
+</tr>
+<tr>
+<td>Calidad</td>
+<td>≈ 150 ms · ≈ 30 ms · &lt; 1 % · EF 46 · MOS ≥ 4 · jitter buffer</td>
+</tr>
+<tr>
+<td>Asterisk</td>
+<td>GPL · Sangoma · PJSIP (endpoint, auth, aor, transport) · extensions.conf · FreePBX</td>
+</tr>
+<tr>
+<td>CLI</td>
+<td>pjsip show endpoints/contacts/registrations · core show channels · pjsip set logger on · rtp set debug on</td>
+</tr>
+<tr>
+<td>Seguridad</td>
+<td>TLS + SRTP · SBC · fail2ban · contextos · límites de gasto</td>
+</tr>
+<tr>
+<td>DECT</td>
+<td>1.880–1.900 MHz · inalámbrico de interior · G.726</td>
+</tr>
+<tr>
+<td>Centralita</td>
+<td>Captura · salto · desvíos · buzón · jefe-secretaria · CLIP/CLIR · memorias · locuciones · IVR · colas</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="6-preguntas-tipo-test" class="tema-h2">6. Preguntas tipo test</h2>
+<p><strong>1.</strong> Los códecs G.711, G.726 o G.729 están relacionados con:<br />
+a) Imágenes JPG · b) Compresión de ficheros · c) Streaming de vídeo · d) La transmisión de voz en telefonía IP</p>
+<p><strong>2.</strong> DECT corresponde a:<br />
+a) Telefonía móvil 4G · b) Un sistema de teléfonos inalámbricos · c) Una red de microondas · d) Un códec</p>
+<p><strong>3.</strong> La telefonía tradicional se basa en:<br />
+a) Conmutación de circuitos · b) Conmutación de paquetes · c) Conmutación de etiquetas · d) Difusión</p>
+<p><strong>4.</strong> El puerto que da línea a un teléfono analógico es:<br />
+a) FXO · b) BRI · c) E1 · d) FXS</p>
+<p><strong>5.</strong> Un ATA sirve para:<br />
+a) Unir dos centralitas IP · b) Conectar un teléfono analógico a la telefonía IP · c) Cifrar la voz · d) Medir el jitter</p>
+<p><strong>6.</strong> Un PRI europeo sobre E1 ofrece:<br />
+a) 2 canales · b) 24 canales · c) 30 canales de voz + 1 de señalización · d) 64 canales</p>
+<p><strong>7.</strong> SIP se encarga de:<br />
+a) Establecer, modificar y terminar las llamadas · b) Transportar la voz · c) Comprimir el audio · d) Asignar IP</p>
+<p><strong>8.</strong> El códec, la IP y el puerto del audio se describen con:<br />
+a) RTCP · b) SDP · c) DTMF · d) DHCP</p>
+<p><strong>9.</strong> El audio de una llamada IP viaja normalmente por:<br />
+a) SIP sobre TCP · b) HTTP · c) RTP sobre UDP · d) ICMP</p>
+<p><strong>10.</strong> El mensaje SIP con el que un teléfono comunica su ubicación al registrador es:<br />
+a) REGISTER · b) INVITE · c) BYE · d) OPTIONS</p>
+<p><strong>11.</strong> La respuesta SIP «180» indica:<br />
+a) Ocupado · b) No encontrado · c) Llamada aceptada · d) Que el destino está sonando</p>
+<p><strong>12.</strong> Sobre los puertos de SIP es correcto que:<br />
+a) SIP solo puede usar UDP 5060 · b) 5060 y 5061 (TLS) son los habituales, pero son configurables · c) SIP usa el 443 · d) SIP no usa puertos</p>
+<p><strong>13.</strong> G.711 usa, sin cabeceras:<br />
+a) 64 kb/s · b) 8 kb/s · c) 32 kb/s · d) 128 kb/s</p>
+<p><strong>14.</strong> Una llamada G.711 por Ethernet ocupa realmente, por sentido:<br />
+a) Exactamente 64 kb/s · b) 8 kb/s · c) Unos 87 kb/s · d) 2 Mb/s</p>
+<p><strong>15.</strong> La variación del retardo entre paquetes de voz se llama:<br />
+a) Latencia · b) Eco · c) MOS · d) Jitter</p>
+<p><strong>16.</strong> Sobre la QoS es correcto que:<br />
+a) Prioriza el tráfico, pero no crea ancho de banda · b) Duplica el ancho de banda · c) Sustituye a la VLAN de voz · d) Solo funciona con G.729</p>
+<p><strong>17.</strong> En Asterisk, el canal SIP actual es:<br />
+a) chan_sip · b) PJSIP · c) IAX2 · d) H.323</p>
+<p><strong>18.</strong> En Asterisk, el plan de marcación está en:<br />
+a) pjsip.conf · b) voicemail.conf · c) queues.conf · d) extensions.conf</p>
+<p><strong>19.</strong> En PJSIP, el objeto que guarda dónde está registrado un terminal es:<br />
+a) auth · b) transport · c) aor · d) endpoint</p>
+<p><strong>20.</strong> El patrón _2XXX de Asterisk coincide con:<br />
+a) Las extensiones de 2000 a 2999 · b) Cualquier número · c) Solo la 2000 · d) Números de 2 cifras</p>
+<p><strong>21.</strong> El comando de Asterisk que muestra los terminales registrados y desde dónde es:<br />
+a) sip show peers · b) pjsip show contacts · c) dialplan reload · d) core restart now</p>
+<p><strong>22.</strong> La función para descolgar una llamada que suena en otro teléfono del grupo es:<br />
+a) Grupo de salto · b) IVR · c) Grupo de captura · d) Desvío</p>
+<p><strong>23.</strong> Para cifrar el audio de una llamada se usa:<br />
+a) SIP sobre TLS · b) SRTP · c) DTMF · d) SDP</p>
+<p><strong>24.</strong> En una llamada externa, el funcionario no oye al ciudadano pero el ciudadano sí le oye. La causa más probable es:<br />
+a) El códec · b) El PoE · c) El DNS · d) NAT o cortafuegos que bloquean el RTP de vuelta</p>
+<p><strong>25.</strong> Un teléfono IP no enciende. Lo primero que se comprueba es:<br />
+a) La alimentación: PoE, cable y puerto del switch · b) El dialplan · c) La troncal SIP · d) El códec</p>
+<p><strong>26.</strong> Las extensiones se llaman entre sí, pero nadie puede llamar al exterior. Lo más probable es un fallo en:<br />
+a) La VLAN de voz · b) La troncal o la ruta saliente · c) El PoE de los teléfonos · d) El jitter buffer</p>
+<p><strong>Soluciones:</strong> 1 d · 2 b · 3 a · 4 d · 5 b · 6 c · 7 a · 8 b · 9 c · 10 a · 11 d · 12 b · 13 a · 14 c · 15 d · 16 a · 17 b · 18 d · 19 c · 20 a · 21 b · 22 c · 23 b · 24 d · 25 a · 26 b</p>
+<h2 id="7-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">7. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. Funciones de un teléfono corporativo conectado a una centralita (caso de 2023).</strong><br />
+Del teléfono: agenda, mute, timbre y volumen, desvío manual · de la centralita (mínimo 8): captura, salto, desvíos, buzón, jefe-secretaria, identificación, memorias, locuciones, IVR, colas · hardphone frente a softphone.</p>
+<p><strong>2. Diferencie FXS y FXO.</strong><br />
+FXS da línea (tono, alimentación, timbre) · FXO recibe la línea · ejemplos: teléfono a FXS, línea del operador a FXO · ATA con FXS.</p>
+<p><strong>3. Qué es una PBX y qué es una troncal.</strong><br />
+Centralita: extensiones y llamadas internas · troncal: camino al operador (RDSI, SIP), canales y DDI · rutas entrantes y salientes.</p>
+<p><strong>4. Diferencie VoIP y ToIP.</strong><br />
+Transporte de voz por IP frente a servicio telefónico completo · se solapan · arquitectura ToIP.</p>
+<p><strong>5. Explique SIP, SDP y RTP.</strong><br />
+Señalización (mensajes, respuestas, registro) · descripción de medios · transporte de la voz por UDP · caminos distintos · TLS y SRTP.</p>
+<p><strong>6. Qué es un códec. Compare G.711 con un códec comprimido.</strong><br />
+Codificación PCM · 64 kb/s frente a ≈ 8 kb/s · calidad, complejidad, ancho de banda real con cabeceras · uso en LAN o en enlaces lentos.</p>
+<p><strong>7. Parámetros de calidad de la voz y cómo se garantizan.</strong><br />
+Latencia, jitter, pérdidas (referencias) · jitter buffer · VLAN de voz, QoS (EF) · MOS · la QoS no crea ancho de banda.</p>
+<p><strong>8. Qué es Asterisk y cómo se configura.</strong><br />
+Plataforma abierta · PJSIP (endpoint, auth, aor, transport) · extensions.conf · FreePBX · CLI · PJSIP frente a chan_sip.</p>
+<p><strong>9. Explique el concepto de dialplan.</strong><br />
+Contextos, extensiones, prioridades, aplicaciones · ejemplo línea a línea · patrones · valor de seguridad de los contextos.</p>
+<p><strong>10. Cómo diagnosticaría una llamada con audio unidireccional.</strong><br />
+SIP funciona, RTP de un sentido no · ¿internas o externas? · IP anunciada en el SDP, NAT, rango RTP, SIP ALG, SBC · captura con Wireshark · escalado con evidencias.</p>
+<h2 id="8-casos-practicos" class="tema-h2">8. Casos prácticos</h2>
+<p>Cada mini caso sigue el esquema <strong>síntoma → capa → hipótesis → comprobaciones → solución → escalado</strong>.</p>
+<p><strong>Mini caso 1 — Teléfono apagado.</strong> Un teléfono IP recién instalado no enciende.<br />
+<em>Esquema:</em> capa física · PoE del puerto, cable, presupuesto PoE del switch · probar otro puerto o fuente externa · si el switch no da PoE, revisar su configuración (T4).</p>
+<p><strong>Mini caso 2 — Tiene IP pero no registra.</strong> El teléfono muestra una IP correcta pero «sin registro».<br />
+<em>Esquema:</em> ¿la IP es de la VLAN de voz? · gateway y <strong>DNS</strong> si el servidor va por nombre · PBX alcanzable · usuario y contraseña · <code>pjsip show endpoint</code> y <code>pjsip show contacts</code> · cortafuegos entre VLAN.</p>
+<p><strong>Mini caso 3 — Registra pero no puede llamar.</strong> Una extensión registrada recibe un error al marcar cualquier número.<br />
+<em>Esquema:</em> señalización básica OK · <strong>contexto</strong> del endpoint · el número coincide con algún patrón del dialplan · respuesta SIP (404, 403) con <code>pjsip set logger on</code> · corregir y recargar el dialplan.</p>
+<p><strong>Mini caso 4 — Llamada establecida sin audio.</strong> Las llamadas a un proveedor externo se establecen pero no se oye nada.<br />
+<em>Esquema:</em> SIP OK, RTP no · IP anunciada en el SDP (¿privada?) · rango RTP en el cortafuegos · SBC o IP externa de la centralita · captura con Wireshark.</p>
+<p><strong>Mini caso 5 — Audio en un solo sentido.</strong> Tras instalar los teléfonos IP de la oficina de atención, el ciudadano oye al funcionario pero el funcionario no oye al ciudadano.<br />
+<em>Esquema:</em> RTP de vuelta no llega · ¿pasa en internas? · SBC o IP externa, rango RTP, SIP ALG · coordinación con Sistemas y el operador · pruebas y registro.</p>
+<p><strong>Mini caso 6 — Audio entrecortado.</strong> En una sede remota la voz suena robótica a ciertas horas.<br />
+<em>Esquema:</em> calidad · medir pérdidas y jitter (RTCP, MOS) · coincide con copias o descargas · QoS en el enlace WAN · ancho de banda real de las llamadas · no cambiar el códec sin medir.</p>
+<p><strong>Mini caso 7 — Entrantes sí, salientes no.</strong> Se reciben llamadas del exterior, pero no se puede llamar fuera.<br />
+<em>Esquema:</em> troncal viva en sentido entrante · <strong>ruta saliente</strong> y patrón (¿0 + número?) · permisos del contexto · autenticación de la troncal (401/407) · operador con evidencias.</p>
+<p><strong>Mini caso 8 — Todos los teléfonos caídos.</strong> A primera hora no funciona ningún teléfono del edificio.<br />
+<em>Esquema:</em> todas → elemento común · centralita encendida y alcanzable · switch y PoE (¿corte eléctrico sin SAI?) · DHCP de la VLAN de voz · DNS · escalar con datos.</p>
+<p><strong>Mini caso 9 — Cambio de cortafuegos.</strong> Tras sustituir el cortafuegos, las llamadas externas no tienen audio.<br />
+<em>Esquema:</em> qué cambió · reglas del rango RTP · tratamiento de SIP (ALG) · NAT de la centralita · comparar con la configuración anterior · documentar el cambio (T20).</p>
+<p><strong>Mini caso 10 — Teléfono analógico antiguo.</strong> Hay que mantener el teléfono de un ascensor tras migrar a la centralita IP.<br />
+<em>Esquema:</em> <strong>ATA con FXS</strong> · extensión SIP en la centralita · alimentación con SAI · prueba periódica · alternativa: línea móvil o gateway.</p>
+<p><strong>Supuesto desarrollado 1 — Telefonía de una oficina de atención (supuesto).</strong> Una oficina de atención municipal con 4 puestos de ventanilla, 20 puestos de trabajo y un número de referencia pasa de una centralita antigua a la IP-PBX municipal.</p>
+<p><em>a) Red.</em><br />
+VLAN de voz con DHCP · puertos PoE con SAI · QoS con DSCP EF de extremo a extremo · enlace con la sede central dimensionado (por ejemplo, 10 llamadas G.711 ≈ 0,9 Mb/s por sentido más margen).</p>
+<p><em>b) Terminales.</em><br />
+Ventanilla: teléfono IP con el PC detrás · puestos de trabajo: softphone con auriculares · fax o analógicos residuales por ATA.</p>
+<p><em>c) Centralita.</em><br />
+Extensiones y DDI · número de referencia en <strong>grupo de salto</strong> por las 4 ventanillas · <strong>grupo de captura</strong> por departamento · desvíos por horario y locución fuera de horario · buzones con aviso por correo · restricciones de llamadas por contexto.</p>
+<p><em>d) Puesta en marcha.</em><br />
+Pruebas de internas, externas, entrantes al número de referencia, desvíos, buzón y 112 · medición de calidad (MOS, jitter) · formación de los usuarios en las funciones · documentación y registro del cambio (T20).</p>
+<p><strong>Supuesto desarrollado 2 — Dos averías a la vez (supuesto).</strong> Un edificio municipal tiene <strong>40 teléfonos IP</strong>, VLAN de voz, switches PoE, <strong>Asterisk</strong> y una <strong>troncal SIP</strong> con el operador. Los usuarios se llaman entre extensiones, pero <strong>no pueden hacer llamadas externas</strong>. Además, <strong>dos terminales tienen audio en un solo sentido</strong>.</p>
+<p><em>a) Separar las averías.</em><br />
+Son dos problemas distintos: uno afecta a <strong>todos</strong> (salida al exterior) y otro a <strong>dos</strong> terminales (audio).</p>
+<p><em>b) Qué ya funciona.</em><br />
+Alimentación, red, VLAN, IP y registro de las extensiones · la centralita encamina las internas · el dialplan interno.</p>
+<p><em>c) Llamadas externas.</em><br />
+<code>pjsip show registrations</code> (¿troncal registrada?) · ruta saliente y patrón · contexto de las extensiones · <code>pjsip set logger on</code>: respuesta del operador (401/407, 403, 503) · cambios recientes (contraseña, IP, cortafuegos).</p>
+<p><em>d) Audio en un sentido.</em><br />
+¿Qué tienen en común los dos terminales (ubicación, switch, VLAN, red wifi, NAT)? · <code>rtp set debug on</code> y Wireshark · IP anunciada en el SDP · rango RTP y SIP ALG en el camino.</p>
+<p><em>e) Cierre.</em><br />
+Corregir y probar cada avería por separado · documentar causa y solución · <strong>escalar al operador solo con evidencias</strong> (hora, número, respuesta SIP, traza) · registrar la incidencia (T20).</p>
+<h2 id="9-repaso-visual-t9" class="tema-h2">9. Repaso visual · T9</h2>
+<figure class="tema-figura">
+<figcaption>Repaso 1 · FXS y FXO</figcaption>
+<svg viewBox="0 0 700 198" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FXS da línea al teléfono; FXO recibe la línea del operador." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0902fxsa-17" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0902fxsv-17" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0902fxsm-17" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0902fxsg-17" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="250" y="50" width="200" height="90" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="87.5" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">Centralita</text><text x="350.0" y="102.5" text-anchor="middle" font-size="10.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">o pasarela</text><rect x="10" y="60" width="150" height="70" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="85.0" y="87.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Línea analógica</text><text x="85.0" y="102.25" text-anchor="middle" font-size="10.0" font-weight="500" fill="#23272e" dominant-baseline="middle">del operador</text><rect x="540" y="60" width="150" height="70" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="615.0" y="87.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Teléfono</text><text x="615.0" y="102.25" text-anchor="middle" font-size="10.0" font-weight="500" fill="#23272e" dominant-baseline="middle">analógico o fax</text><line x1="160" y1="95" x2="250" y2="95" stroke="#b26a00" stroke-width="3"/><line x1="450" y1="95" x2="540" y2="95" stroke="#b26a00" stroke-width="3"/><rect x="222" y="80" width="56" height="30" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="250.0" y="95.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">FXO</text><rect x="422" y="80" width="56" height="30" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="450.0" y="95.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">FXS</text><text x="160" y="168" text-anchor="middle" font-size="11" font-weight="700" fill="#b26a00" dominant-baseline="middle">FXO (Office): se conecta a la LÍNEA</text><text x="160" y="184" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">del operador, como si fuera un teléfono</text><text x="540" y="168" text-anchor="middle" font-size="11" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">FXS (Subscriber): DA LÍNEA al teléfono</text><text x="540" y="184" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">tono, alimentación y timbre</text><text x="350" y="24" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">Un ATA es una pequeña pasarela con puertos FXS para conectar teléfonos analógicos y faxes a la red IP</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 2 · Centralita</figcaption>
+<svg viewBox="0 0 700 226" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Extensiones, PBX, troncal y operador." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0909pbxa-18" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0909pbxv-18" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0909pbxm-18" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0909pbxg-18" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="20" width="110" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="65.0" y="38.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Ext. 101</text><line x1="120" y1="38" x2="220" y2="95" stroke="#003da5" stroke-width="1.6"/><rect x="10" y="70" width="110" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="65.0" y="88.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Ext. 102</text><line x1="120" y1="88" x2="220" y2="95" stroke="#003da5" stroke-width="1.6"/><rect x="10" y="120" width="110" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="65.0" y="138.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Ext. 103</text><line x1="120" y1="138" x2="220" y2="95" stroke="#003da5" stroke-width="1.6"/><rect x="220" y="60" width="150" height="70" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="295.0" y="81.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">PBX</text><text x="295.0" y="95.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">llamadas internas</text><text x="295.0" y="109.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">y rutas</text><rect x="430" y="70" width="110" height="50" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6" stroke-dasharray="5 3"/><text x="485.0" y="88.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Troncal</text><text x="485.0" y="101.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">SIP / RDSI</text><rect x="590" y="70" width="100" height="50" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="640.0" y="88.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Operador</text><text x="640.0" y="101.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">red pública</text><line x1="370" y1="95" x2="430" y2="95" stroke="#003da5" stroke-width="2"/><line x1="540" y1="95" x2="590" y2="95" stroke="#003da5" stroke-width="2"/><text x="160" y="186" text-anchor="middle" font-size="11" font-weight="700" fill="#003da5" dominant-baseline="middle">EXTENSIÓN = identificador interno</text><text x="160" y="202" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">(101 llama a 102 sin salir)</text><text x="520" y="150" text-anchor="middle" font-size="11" font-weight="700" fill="#5a5652" dominant-baseline="middle">NÚMERO PÚBLICO (DDI) 943 xx xx xx</text><text x="520" y="166" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">se asocia a una extensión o a un grupo</text><text x="520" y="196" text-anchor="middle" font-size="10.5" font-weight="600" fill="#2e7d3c" dominant-baseline="middle">Ruta entrante: número → extensión/grupo</text><text x="520" y="212" text-anchor="middle" font-size="10.5" font-weight="600" fill="#2e7d3c" dominant-baseline="middle">Ruta saliente: 0 + número → troncal</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 3 · SIP, SDP, RTP y códec</figcaption>
+<svg viewBox="0 0 700 224" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SIP señaliza, SDP describe, RTP transporta y el códec codifica; SIP y RTP siguen caminos distintos." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0911triadaa-19" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0911triadav-19" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0911triadam-19" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0911triadag-19" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="14" width="160" height="54" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="90.0" y="27.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">SIP</text><text x="90.0" y="41.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">SEÑALIZA</text><text x="90.0" y="55.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">monta y cuelga</text><rect x="185" y="14" width="160" height="54" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="265.0" y="27.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">SDP</text><text x="265.0" y="41.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">DESCRIBE</text><text x="265.0" y="55.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">códec, IP, puertos</text><rect x="360" y="14" width="160" height="54" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="440.0" y="27.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">RTP</text><text x="440.0" y="41.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">TRANSPORTA</text><text x="440.0" y="55.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">la voz por UDP</text><rect x="535" y="14" width="155" height="54" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="612.5" y="27.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">CÓDEC</text><text x="612.5" y="41.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">CODIFICA</text><text x="612.5" y="55.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">G.711, G.729, Opus</text><rect x="10" y="108" width="120" height="40" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="70.0" y="128.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Teléfono A</text><rect x="290" y="96" width="120" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="116.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">PBX</text><rect x="570" y="108" width="120" height="40" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="630.0" y="128.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Teléfono B</text><path d="M130,116 L286,112" fill="none" stroke="#003da5" stroke-width="1.8" marker-end="url(#T0911triadaa-19)"/><path d="M410,112 L566,116" fill="none" stroke="#003da5" stroke-width="1.8" marker-end="url(#T0911triadaa-19)"/><text x="210" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="#003da5" dominant-baseline="middle">SIP</text><text x="490" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="#003da5" dominant-baseline="middle">SIP</text><path d="M130,140 L566,140" fill="none" stroke="#2e7d3c" stroke-width="2.6" marker-end="url(#T0911triadav-19)"/><path d="M570,152 L134,152" fill="none" stroke="#2e7d3c" stroke-width="2.6" marker-end="url(#T0911triadav-19)"/><text x="350" y="168" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">RTP: otro camino y otros puertos (a menudo directo)</text><text x="350" y="192" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">Voz → códec → RTP/UDP/IP → códec → voz</text><text x="350" y="212" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b26a00" dominant-baseline="middle">Registrado o con llamada establecida (SIP) no garantiza que haya audio (RTP)</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 4 · Llamada SIP</figcaption>
+<svg viewBox="0 0 700 288" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Llamada SIP: INVITE, 180, 200 OK, ACK; audio por RTP; BYE." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0903sipa-20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0903sipv-20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0903sipm-20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0903sipg-20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="15.0" y="8" width="150" height="40" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="90.0" y="20.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Teléfono A</text><text x="90.0" y="35.25" text-anchor="middle" font-size="10.0" font-weight="500" fill="#23272e" dominant-baseline="middle">ext. 2001</text><line x1="90" y1="48" x2="90" y2="258" stroke="#5a5652" stroke-width="1.2" stroke-dasharray="5 3"/><rect x="265.0" y="8" width="170" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="20.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">Centralita IP</text><text x="350.0" y="35.25" text-anchor="middle" font-size="10.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">registrador / proxy</text><line x1="350" y1="48" x2="350" y2="258" stroke="#5a5652" stroke-width="1.2" stroke-dasharray="5 3"/><rect x="535.0" y="8" width="150" height="40" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="610.0" y="20.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Teléfono B</text><text x="610.0" y="35.25" text-anchor="middle" font-size="10.0" font-weight="500" fill="#23272e" dominant-baseline="middle">ext. 2002</text><line x1="610" y1="48" x2="610" y2="258" stroke="#5a5652" stroke-width="1.2" stroke-dasharray="5 3"/><path d="M90,72 L346,72" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0903sipa-20)"/><text x="220.0" y="64" text-anchor="middle" font-size="10.5" font-weight="600" fill="#003da5" dominant-baseline="middle">INVITE (SDP: códecs, IP y puerto)</text><path d="M350,72 L606,72" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0903sipa-20)"/><text x="480.0" y="64" text-anchor="middle" font-size="10.5" font-weight="600" fill="#003da5" dominant-baseline="middle">INVITE</text><path d="M610,100 L354,100" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0903sipa-20)"/><text x="480.0" y="92" text-anchor="middle" font-size="10.5" font-weight="600" fill="#003da5" dominant-baseline="middle">180 Ringing</text><path d="M350,100 L94,100" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0903sipa-20)"/><text x="220.0" y="92" text-anchor="middle" font-size="10.5" font-weight="600" fill="#003da5" dominant-baseline="middle">180 Ringing</text><path d="M610,128 L354,128" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0903sipa-20)"/><text x="480.0" y="120" text-anchor="middle" font-size="10.5" font-weight="600" fill="#003da5" dominant-baseline="middle">200 OK</text><path d="M350,128 L94,128" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0903sipa-20)"/><text x="220.0" y="120" text-anchor="middle" font-size="10.5" font-weight="600" fill="#003da5" dominant-baseline="middle">200 OK</text><path d="M90,156 L606,156" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0903sipa-20)"/><text x="350.0" y="148" text-anchor="middle" font-size="10.5" font-weight="600" fill="#003da5" dominant-baseline="middle">ACK</text><path d="M90,186 L606,186" fill="none" stroke="#2e7d3c" stroke-width="3" marker-end="url(#T0903sipv-20)"/><path d="M610,198 L94,198" fill="none" stroke="#2e7d3c" stroke-width="3" marker-end="url(#T0903sipv-20)"/><text x="350" y="178" text-anchor="middle" font-size="11" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">AUDIO: RTP sobre UDP (puertos dinámicos), a menudo directo entre teléfonos</text><path d="M90,234 L606,234" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0903sipa-20)"/><text x="350.0" y="226" text-anchor="middle" font-size="10.5" font-weight="600" fill="#003da5" dominant-baseline="middle">BYE  →  200 OK</text><text x="350" y="276" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">Señalización SIP: habitualmente UDP/TCP 5060 (TLS 5061) · Audio: RTP/UDP (SRTP si va cifrado)</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 5 · Asterisk</figcaption>
+<svg viewBox="0 0 700 244" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Asterisk: PJSIP (endpoint, auth, aor, transport), dialplan y servicios." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0912asteriska-21" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0912asteriskv-21" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0912asteriskm-21" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0912asteriskg-21" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><text x="95" y="14" text-anchor="middle" font-size="10.5" font-weight="700" fill="#5a5652" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">pjsip.conf</text><rect x="10" y="26" width="170" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="95.0" y="37.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">endpoint</text><text x="95.0" y="50.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">cómo se comporta</text><rect x="10" y="70" width="170" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="95.0" y="81.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">auth</text><text x="95.0" y="94.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">usuario y clave</text><rect x="10" y="114" width="170" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="95.0" y="125.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">aor</text><text x="95.0" y="138.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">dónde está (contactos)</text><rect x="10" y="158" width="170" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="95.0" y="169.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">transport</text><text x="95.0" y="182.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">UDP, TCP o TLS</text><rect x="240" y="40" width="210" height="130" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="345.0" y="84.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">ASTERISK</text><text x="345.0" y="98.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">canal PJSIP</text><text x="345.0" y="112.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">dialplan (extensions.conf)</text><text x="345.0" y="126.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">contextos → aplicaciones</text><path d="M180,105 L236,105" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T0912asteriska-21)"/><rect x="510" y="26" width="180" height="36" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="600.0" y="44.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Extensiones</text><rect x="510" y="70" width="180" height="36" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6" stroke-dasharray="5 3"/><text x="600.0" y="81.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Troncal SIP</text><text x="600.0" y="94.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">operador</text><rect x="510" y="114" width="180" height="36" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="600.0" y="132.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Buzón, IVR, colas</text><rect x="510" y="158" width="180" height="36" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="600.0" y="176.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Grabación, CDR</text><line x1="450" y1="105" x2="510" y2="44" stroke="#003da5" stroke-width="1.4"/><line x1="450" y1="105" x2="510" y2="88" stroke="#003da5" stroke-width="1.4"/><line x1="450" y1="105" x2="510" y2="132" stroke="#003da5" stroke-width="1.4"/><line x1="450" y1="105" x2="510" y2="176" stroke="#003da5" stroke-width="1.4"/><text x="345" y="214" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Gestión: archivos en /etc/asterisk, o interfaces como FreePBX que los generan · CLI: asterisk -rvvv</text><text x="345" y="232" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b26a00" dominant-baseline="middle">PJSIP es el canal SIP actual; chan_sip (sip.conf, sip show peers) es legacy y ya no existe</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 6 · Cadena de dependencias</figcaption>
+<svg viewBox="0 0 700 198" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cadena de dependencias de la telefonía IP." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0915cadenaa-22" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0915cadenav-22" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0915cadenam-22" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0915cadenag-22" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="20" width="128" height="46" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="74.0" y="36.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Alimentación</text><text x="74.0" y="49.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">PoE, SAI</text><path d="M138,43 L146,43" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T0915cadenag-22)"/><rect x="148" y="20" width="128" height="46" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="212.0" y="36.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Enlace</text><text x="212.0" y="49.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">cable, puerto</text><path d="M276,43 L284,43" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T0915cadenag-22)"/><rect x="286" y="20" width="128" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="36.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">VLAN</text><text x="350.0" y="49.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">voz</text><path d="M414,43 L422,43" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T0915cadenag-22)"/><rect x="424" y="20" width="128" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="488.0" y="36.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">IP</text><text x="488.0" y="49.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">DHCP</text><path d="M552,43 L560,43" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T0915cadenag-22)"/><rect x="562" y="20" width="128" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="626.0" y="36.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Gateway / DNS</text><text x="626.0" y="49.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">nombre del servidor</text><rect x="10" y="90" width="128" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="74.0" y="106.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">PBX</text><text x="74.0" y="119.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">alcanzable</text><path d="M138,113 L146,113" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T0915cadenag-22)"/><rect x="148" y="90" width="128" height="46" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="212.0" y="106.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Registro</text><text x="212.0" y="119.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">SIP</text><path d="M276,113 L284,113" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T0915cadenag-22)"/><rect x="286" y="90" width="128" height="46" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="350.0" y="106.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Ruta</text><text x="350.0" y="119.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">dialplan, troncal</text><path d="M414,113 L422,113" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T0915cadenag-22)"/><rect x="424" y="90" width="128" height="46" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="488.0" y="106.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">RTP</text><text x="488.0" y="119.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">audio, NAT</text><path d="M552,113 L560,113" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T0915cadenag-22)"/><rect x="562" y="90" width="128" height="46" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="626.0" y="106.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Operador</text><text x="626.0" y="119.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">red pública</text><path d="M626,66 L626,78 L74,78 L74,86" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T0915cadenag-22)"/><text x="350" y="168" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Cada eslabón depende del anterior: se diagnostica de arriba abajo, sin saltar a SIP si el teléfono no enciende</text><text x="350" y="186" text-anchor="middle" font-size="10.5" font-weight="600" fill="#b26a00" dominant-baseline="middle">Un teléfono IP depende de la red y de la electricidad: sin SAI, un corte deja sin telefonía</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 7 · Diagnóstico</figcaption>
+<svg viewBox="0 0 700 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Árbol de diagnóstico: una o todas, y por síntoma." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0916diaga-23" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0916diagv-23" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0916diagm-23" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0916diagg-23" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="250" y="10" width="200" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="30.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">¿UNA extensión o TODAS?</text><rect x="10" y="70" width="300" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="160.0" y="90.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">UNA: terminal, puerto, usuario, configuración</text><rect x="390" y="70" width="300" height="40" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="540.0" y="90.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">TODAS: PBX, red, troncal u operador</text><path d="M300,50 L200,66" fill="none" stroke="#5a5652" stroke-width="1.4" marker-end="url(#T0916diagg-23)"/><path d="M400,50 L520,66" fill="none" stroke="#5a5652" stroke-width="1.4" marker-end="url(#T0916diagg-23)"/><rect x="10" y="128" width="220" height="24" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="120.0" y="140.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">No enciende</text><path d="M230,140 L246,140" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0916diagg-23)"/><text x="254" y="140" text-anchor="start" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">alimentación, PoE, cable, puerto</text><rect x="10" y="158" width="220" height="24" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="120.0" y="170.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Enciende, no registra</text><path d="M230,170 L246,170" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0916diagg-23)"/><text x="254" y="170" text-anchor="start" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">VLAN, IP, DNS, PBX, usuario/clave, PJSIP, cortafuegos</text><rect x="10" y="188" width="220" height="24" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="120.0" y="200.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Registra, no llama</text><path d="M230,200 L246,200" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0916diagg-23)"/><text x="254" y="200" text-anchor="start" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">dialplan, contexto, ruta, troncal, códec, respuesta SIP</text><rect x="10" y="218" width="220" height="24" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="120.0" y="230.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Llama, sin audio o en un sentido</text><path d="M230,230 L246,230" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0916diagg-23)"/><text x="254" y="230" text-anchor="start" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">RTP: NAT, cortafuegos, IP anunciada en SDP, puertos</text><rect x="10" y="248" width="220" height="24" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="120.0" y="260.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Audio cortado o robótico</text><path d="M230,260 L246,260" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0916diagg-23)"/><text x="254" y="260" text-anchor="start" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">pérdidas, jitter, congestión, wifi, QoS (medir antes)</text><rect x="10" y="278" width="220" height="24" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="120.0" y="290.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Se corta a los X segundos</text><path d="M230,290 L246,290" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0916diagg-23)"/><text x="254" y="290" text-anchor="start" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">ACK perdido, NAT, temporizadores: verificar con trazas</text><text x="350" y="318" text-anchor="middle" font-size="10" font-weight="600" fill="#5a5652" dominant-baseline="middle">Herramientas: pjsip show endpoints/contacts · core show channels · pjsip set logger on · rtp set debug on · Wireshark</text></svg>
+</figure>
+<h2 id="10-resumen-final-si-manana-fuera-el-examen" class="tema-h2">10. Resumen final: si mañana fuera el examen</h2>
+<p>La telefonía tradicional usa <strong>conmutación de circuitos</strong> y el <strong>bucle de abonado</strong> con voz de <strong>300–3.400 Hz</strong>; el <strong>DTMF</strong> (dos tonos por tecla) sigue sirviendo para los IVR. Digitalizada con <strong>PCM</strong>, la voz da <strong>64 kb/s (G.711)</strong>; la RDSI (legacy) ofrece <strong>2B+D</strong> o <strong>30B+D (E1)</strong>. La <strong>centralita</strong> une <strong>extensiones</strong> y <strong>troncales</strong>; <strong>FXS da línea</strong> al teléfono, <strong>FXO recibe</strong> la del operador, el <strong>ATA</strong> lleva un analógico a IP y el <strong>gateway</strong> une redes telefónicas. En telefonía IP, <strong>SIP señaliza</strong> (REGISTER, INVITE, ACK, BYE; puertos <strong>habituales</strong> 5060/5061), <strong>SDP describe</strong>, <strong>RTP transporta la voz por UDP</strong> y el <strong>códec</strong> la codifica (G.711, G.722, G.726, G.729, Opus; con cabeceras, más ancho de banda). La calidad se juzga por <strong>latencia (≈ 150 ms), jitter y pérdidas</strong>; la <strong>QoS</strong> prioriza, no crea ancho de banda. <strong>Asterisk</strong> es la plataforma abierta: <strong>PJSIP</strong> (endpoint, auth, aor, transport; chan_sip es legacy) y el <strong>dialplan</strong> (contextos, extensiones, prioridades, aplicaciones). <strong>TLS</strong> protege la señalización y <strong>SRTP</strong> el audio. Para diagnosticar: <strong>¿una o todas?</strong>, luego la <strong>cadena</strong> de alimentación a operador; <strong>SIP funciona ≠ RTP funciona</strong>, y el <strong>audio en un solo sentido</strong> es casi siempre <strong>NAT o cortafuegos</strong>. <strong>DECT</strong> es la telefonía <strong>inalámbrica</strong> de interior. Funciones clave de la centralita: <strong>captura, salto, desvíos, buzón, jefe-secretaria, identificación, memorias, locuciones, IVR y colas</strong>.</p>
+<h2 id="11-actualidad-datos-fechados" class="tema-h2">11. Actualidad — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong><br>Lo estable para el examen es lo explicado arriba; estos datos cambian.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Legacy</strong>: telefonía analógica sobre cobre, <strong>RDSI</strong> y <strong>chan_sip</strong>. Telefónica dio por terminado en 2025 el cierre de sus centrales de cobre; las líneas analógicas y RDSI pasan a <strong>fibra, troncales SIP o soluciones móviles</strong>, lo que afecta a alarmas, ascensores y faxes.</li>
+<li><strong>Actual</strong>: <strong>PJSIP</strong>, <strong>troncales SIP</strong>, <strong>TLS + SRTP</strong>, softphones y <strong>comunicaciones unificadas</strong>. La telefonía corporativa se desplaza hacia la <strong>nube (UCaaS)</strong> integrada con la colaboración (Teams Phone, Webex, Zoom).</li>
+<li>En <strong>Asterisk</strong>, <strong>chan_sip</strong> se eliminó en la versión 21 (2023) y <strong>PJSIP</strong> es el único canal SIP; Sangoma publica versiones con soporte extendido (LTS), como Asterisk 22.</li>
+</ul>
+  </div>
+</article>
