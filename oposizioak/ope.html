@@ -735,6 +735,23 @@
           cont.dataset.contextoHtml = 'listo';
           cont.__contextoHtml = htmlFragmento;
           cont.__idTema = rutaOpe.split('/').slice(-2)[0]; // T{n}
+          // Botón «PDF»: imprime solo esta pestaña; en el diálogo de impresión
+          // se elige «Guardar como PDF». El título de la página da el nombre
+          // propuesto al archivo (p. ej. «T1 · Xtra · Gestión de la atención…»).
+          const pie = document.createElement('div');
+          pie.className = 'tema-pdf';
+          pie.innerHTML = `<button type="button" class="tema-pdf__boton" title="Guardar esta pestaña como PDF">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>PDF</button>`;
+          pie.querySelector('button').addEventListener('click', () => {
+            const tituloAnt = document.title;
+            const titulo = (cont.querySelector('.tema-cabecera__titulo')?.textContent || '').trim();
+            const corto = titulo.length > 70 ? titulo.slice(0, 70).replace(/\s+\S*$/, '') + '…' : titulo;
+            document.title = [cont.__idTema, info.nombre, corto].filter(Boolean).join(' · ');
+            const restaurar = () => { document.title = tituloAnt; window.removeEventListener('afterprint', restaurar); };
+            window.addEventListener('afterprint', restaurar);
+            window.print();
+          });
+          cont.appendChild(pie);
         } catch (e) {
           cont.innerHTML = `<div class="tarjeta">Error cargando el contenido: ${e.message}</div>`;
         }

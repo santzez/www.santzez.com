@@ -2263,6 +2263,10 @@ button.tabs__tab:focus-visible {
   html, body { background: #fff !important; color: #000; }
   .cabecera, .pie, .migas, .no-print, .tema-acciones,
   .cabecera__usuario, .panel-ajustes { display: none !important; }
+  /* Barra del tema con los iconos, pestañas, chat, navegación y botón PDF */
+  .tema-contexto, .tema-contexto-sentinel, .tabs__cabecera,
+  .tabs__panel--claude, .tema-nav, .tema-pdf { display: none !important; }
+  .tabs__paneles.modo-split { display: block !important; }
   main { padding: 0 !important; }
   .contenedor { max-width: none; padding: 0; }
   .tema-articulo {
@@ -3062,3 +3066,25 @@ html.modo-oscuro .tema-figura figcaption, html.modo-oscuro .tema-figura__nota { 
 .tema-lista--ley .tema-lista__sub { padding-left: 1.4rem; }
 .por-tema td a { color: inherit; text-decoration: none; }
 .por-tema td a:hover strong { text-decoration: underline; }
+
+/* Botón discreto «PDF» al final de los apuntes */
+.tema-pdf {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1.5rem 0 0.5rem;
+}
+.tema-pdf__boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.75rem;
+  font: 600 0.78rem/1 var(--fuente-corporativa);
+  letter-spacing: 0.04em;
+  color: var(--color-texto-suave);
+  background: transparent;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-grande);
+  cursor: pointer;
+}
+.tema-pdf__boton:hover { color: var(--color-primario); border-color: var(--color-primario); }
+.tema-pdf__boton svg { width: 14px; height: 14px; }
