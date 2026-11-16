@@ -1,0 +1,501 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T15</div>
+    <h1 class="tema-cabecera__titulo">Seguridad en redes de comunicaciones. VPNs: VPNs LAN to LAN y VPNs Client to LAN, VPNs IPsec y VPNs SSL.</h1>
+    <div class="tema-cabecera__meta">Xtra · Bloque 2 · Seguridad · Bolsa DonostiaTIK 2023 · Instalaciones y Comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-lo-que-cayo-en-el-examen-de-2023">1. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#2-anclas-de-memoria">2. Anclas de memoria</a></li>
+<li><a href="#3-no-confundir">3. No confundir</a></li>
+<li><a href="#4-posibles-trampas-de-examen">4. Posibles trampas de examen</a></li>
+<li><a href="#5-matriz-de-memorizacion">5. Matriz de memorización</a></li>
+<li><a href="#6-preguntas-tipo-test">6. Preguntas tipo test</a></li>
+<li><a href="#7-posibles-preguntas-cortas-con-esquema-de-respuesta">7. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#8-casos-practicos">8. Casos prácticos</a></li>
+<li><a href="#9-repaso-visual-t15">9. Repaso visual · T15</a></li>
+<li><a href="#10-resumen-final-si-manana-fuera-el-examen">10. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#11-actualidad-datos-fechados">11. Actualidad — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h2 id="1-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">1. Lo que cayó en el examen de 2023</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Contenido</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Corta 3</td>
+<td>Qué es una VPN, tipos y propósitos</td>
+<td>Descripción + LAN to LAN / Client to LAN / IPsec / TLS + ejemplos</td>
+</tr>
+<tr>
+<td>Caso 4</td>
+<td>Acceso remoto del mantenedor al PLC</td>
+<td>VPN nominativa limitada + coordinación con Sistemas</td>
+</tr>
+<tr>
+<td>Caso 6</td>
+<td>PC municipal en la carpa</td>
+<td>VPN desde el router 4G o desde el PC</td>
+</tr>
+<tr>
+<td>Test 28 (distractor)</td>
+<td>«Grupo de dispositivos en la misma red privada virtual (RPV)»</td>
+<td>No es smishing; RPV = VPN</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="2-anclas-de-memoria" class="tema-h2">2. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>VPN = conectividad lógica protegida (túnel + autenticación + integridad + cifrado, según tecnología).</strong></li>
+<li><strong>LAN to LAN = red ↔︎ red (pasarelas) · Client to LAN = usuario ↔︎ red (cliente + concentrador).</strong></li>
+<li><strong>IPsec = suite en capa IP · IKE negocia (UDP 500) · NAT-T UDP 4500 · ESP cifra (protocolo IP 50) · AH no cifra (protocolo IP 51) · 50 y 51 no son puertos.</strong></li>
+<li><strong>Transporte = cabecera original · túnel = nueva cabecera IP.</strong></li>
+<li><strong>SA unidireccional (con su SPI) · IKEv1: fase 1 y 2 · IKEv2: IKE SA y CHILD SA.</strong></li>
+<li><strong>PSK o certificado · PSK ≠ contraseña · AES para los datos · DH + PFS.</strong></li>
+<li><strong>Selectores simétricos · policy-based o route-based (VTI) · exención de NAT · MTU/MSS.</strong></li>
+<li><strong>«VPN SSL» = TLS por 443 · con cliente o portal web · ≠ HTTPS.</strong></li>
+<li><strong>Túnel completo o split (ninguno es «el seguro») · split DNS.</strong></li>
+<li><strong>Autenticar ≠ autorizar · túnel arriba ≠ servicio · túnel ≠ cifrado (GRE, MPLS).</strong></li>
+</ul>
+<h2 id="3-no-confundir" class="tema-h2">3. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Esto</th>
+<th>No es esto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>VPN</strong></td>
+<td><strong>NAT</strong> / <strong>cortafuegos</strong> / <strong>proxy</strong></td>
+</tr>
+<tr>
+<td><strong>Túnel</strong></td>
+<td><strong>Cifrado</strong></td>
+</tr>
+<tr>
+<td><strong>LAN to LAN</strong></td>
+<td><strong>Client to LAN</strong></td>
+</tr>
+<tr>
+<td><strong>IPsec</strong></td>
+<td><strong>VPN</strong> (una de sus tecnologías)</td>
+</tr>
+<tr>
+<td><strong>ESP</strong> (cifra)</td>
+<td><strong>AH</strong> (solo autentica)</td>
+</tr>
+<tr>
+<td><strong>Protocolo IP 50 / 51</strong></td>
+<td><strong>Puerto TCP/UDP 50 / 51</strong></td>
+</tr>
+<tr>
+<td><strong>Modo transporte</strong></td>
+<td><strong>Modo túnel</strong></td>
+</tr>
+<tr>
+<td><strong>IKE</strong> (negocia)</td>
+<td><strong>ESP</strong> (protege los datos)</td>
+</tr>
+<tr>
+<td><strong>IKEv1</strong> (fases)</td>
+<td><strong>IKEv2</strong> (IKE SA, CHILD SA)</td>
+</tr>
+<tr>
+<td><strong>PSK</strong></td>
+<td><strong>Contraseña del usuario</strong></td>
+</tr>
+<tr>
+<td><strong>Autenticación</strong></td>
+<td><strong>Autorización</strong></td>
+</tr>
+<tr>
+<td><strong>Cifrado</strong></td>
+<td><strong>Integridad</strong></td>
+</tr>
+<tr>
+<td><strong>Certificado</strong></td>
+<td><strong>Clave privada</strong></td>
+</tr>
+<tr>
+<td><strong>Túnel completo</strong></td>
+<td><strong>Split tunnel</strong></td>
+</tr>
+<tr>
+<td><strong>Split tunnel</strong></td>
+<td><strong>Split DNS</strong></td>
+</tr>
+<tr>
+<td><strong>Route-based</strong></td>
+<td><strong>Policy-based</strong></td>
+</tr>
+<tr>
+<td><strong>NAT-T</strong></td>
+<td><strong>NAT</strong></td>
+</tr>
+<tr>
+<td><strong>SSL</strong></td>
+<td><strong>TLS</strong></td>
+</tr>
+<tr>
+<td><strong>VPN TLS</strong></td>
+<td><strong>HTTPS</strong></td>
+</tr>
+<tr>
+<td><strong>GRE / MPLS</strong></td>
+<td><strong>VPN cifrada</strong></td>
+</tr>
+<tr>
+<td><strong>Túnel arriba</strong></td>
+<td><strong>Servicio operativo</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="4-posibles-trampas-de-examen" class="tema-h2">4. Posibles trampas de examen</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Afirmación</th>
+<th>V/F</th>
+<th>Por qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VPN significa necesariamente IPsec</td>
+<td><strong>F</strong></td>
+<td>También TLS, WireGuard…</td>
+</tr>
+<tr>
+<td>Una VPN site-to-site conecta redes mediante pasarelas</td>
+<td><strong>V</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Una VPN Client to LAN conecta un usuario o equipo con una red</td>
+<td><strong>V</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>AH cifra el contenido del paquete</td>
+<td><strong>F</strong></td>
+<td>Solo autentica</td>
+</tr>
+<tr>
+<td>ESP puede proporcionar confidencialidad</td>
+<td><strong>V</strong></td>
+<td>Cifra</td>
+</tr>
+<tr>
+<td>ESP usa el puerto TCP 50</td>
+<td><strong>F</strong></td>
+<td>Protocolo IP 50</td>
+</tr>
+<tr>
+<td>IKE usa habitualmente UDP 500</td>
+<td><strong>V</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>NAT-T usa habitualmente UDP 4500</td>
+<td><strong>V</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>El modo túnel añade una nueva cabecera IP</td>
+<td><strong>V</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>IKEv2 usa las mismas fases 1 y 2 que IKEv1</td>
+<td><strong>F</strong></td>
+<td>IKE SA y CHILD SA</td>
+</tr>
+<tr>
+<td>Una SA de IPsec es unidireccional</td>
+<td><strong>V</strong></td>
+<td>Hacen falta dos</td>
+</tr>
+<tr>
+<td>Una VPN establecida da acceso total a la LAN</td>
+<td><strong>F</strong></td>
+<td>Hace falta autorización</td>
+</tr>
+<tr>
+<td>El split tunneling es siempre inseguro</td>
+<td><strong>F</strong></td>
+<td>Depende de los controles</td>
+</tr>
+<tr>
+<td>SSL es el protocolo moderno que sustituye a TLS</td>
+<td><strong>F</strong></td>
+<td>Es al revés</td>
+</tr>
+<tr>
+<td>Una VPN SSL moderna usa realmente TLS</td>
+<td><strong>V</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>IPsec solo se usa entre sedes</td>
+<td><strong>F</strong></td>
+<td>También acceso remoto</td>
+</tr>
+<tr>
+<td>Una VPN TLS solo funciona desde el navegador</td>
+<td><strong>F</strong></td>
+<td>También con cliente</td>
+</tr>
+<tr>
+<td>GRE cifra el tráfico</td>
+<td><strong>F</strong></td>
+<td>Solo encapsula</td>
+</tr>
+<tr>
+<td>Una MPLS de operador está siempre cifrada</td>
+<td><strong>F</strong></td>
+<td>Aísla, no cifra necesariamente</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="5-matriz-de-memorizacion" class="tema-h2">5. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Dato clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tipos</td>
+<td>LAN to LAN (pasarelas) · Client to LAN (cliente + concentrador) · host a host · MPLS · SD-WAN</td>
+</tr>
+<tr>
+<td>IPsec</td>
+<td>Suite capa 3 · IKE UDP 500 · NAT-T UDP 4500 · ESP protocolo 50 · AH protocolo 51</td>
+</tr>
+<tr>
+<td>Modos</td>
+<td>Transporte (cabecera original) · túnel (nueva cabecera)</td>
+</tr>
+<tr>
+<td>IKE</td>
+<td>v1: fase 1 (Main/Aggressive) + fase 2 (Quick) · v2: IKE SA + CHILD SA · MOBIKE</td>
+</tr>
+<tr>
+<td>SA</td>
+<td>Unidireccional · SPI · tiempo de vida · rekey · DPD</td>
+</tr>
+<tr>
+<td>Autenticación</td>
+<td>PSK · certificados (CA, vigencia) · usuario + MFA</td>
+</tr>
+<tr>
+<td>Cripto</td>
+<td>AES · SHA-2 · DH · PFS · evitar DES, 3DES, MD5, SHA-1</td>
+</tr>
+<tr>
+<td>Tráfico</td>
+<td>Selectores simétricos · policy-based / route-based (VTI) · exención de NAT · MTU/MSS</td>
+</tr>
+<tr>
+<td>TLS</td>
+<td>TCP 443 / DTLS · con cliente o portal · SSL obsoleto</td>
+</tr>
+<tr>
+<td>Otras</td>
+<td>PPTP ✗ · L2TP (sin cifrar) · OpenVPN · WireGuard · GRE (sin cifrar)</td>
+</tr>
+<tr>
+<td>Seguridad</td>
+<td>MFA · mínimo privilegio · postura · registro · split/completo · split DNS · ZTNA</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="6-preguntas-tipo-test" class="tema-h2">6. Preguntas tipo test</h2>
+<p><strong>1.</strong> Una VPN crea:<br />
+a) Una línea física dedicada · b) Conectividad lógica protegida sobre una red no confiable · c) Una VLAN · d) Un cortafuegos</p>
+<p><strong>2.</strong> Sobre VPN e IPsec es correcto que:<br />
+a) Son sinónimos · b) IPsec es una de las tecnologías para crear VPN · c) Toda VPN usa IPsec · d) IPsec no sirve para VPN</p>
+<p><strong>3.</strong> La VPN que une dos sedes es:<br />
+a) LAN to LAN · b) Client to LAN · c) Host a host · d) Sin cliente</p>
+<p><strong>4.</strong> En una VPN LAN to LAN, el túnel lo montan:<br />
+a) Los usuarios · b) El servidor DHCP · c) El DNS · d) Las pasarelas (cortafuegos o routers) de cada sede</p>
+<p><strong>5.</strong> Una VPN establecida con un usuario autenticado:<br />
+a) Da acceso a toda la LAN · b) Necesita además políticas de autorización · c) No necesita cortafuegos · d) Cifra el disco del equipo</p>
+<p><strong>6.</strong> IPsec trabaja en la capa:<br />
+a) De red (IP) · b) De enlace · c) De aplicación · d) Física</p>
+<p><strong>7.</strong> Sobre IPsec es correcto que:<br />
+a) Es un único protocolo · b) Es una suite con IKE, ESP, AH y SA · c) Solo cifra · d) Solo funciona en IPv6</p>
+<p><strong>8.</strong> IKE usa el puerto:<br />
+a) TCP 443 · b) TCP 22 · c) UDP 53 · d) UDP 500</p>
+<p><strong>9.</strong> El componente de IPsec que cifra los datos es:<br />
+a) AH · b) ESP · c) GRE · d) IKE</p>
+<p><strong>10.</strong> AH:<br />
+a) Cifra los datos · b) Es un cliente VPN · c) Usa TCP 443 · d) Autentica e integra, pero no cifra</p>
+<p><strong>11.</strong> ESP se identifica en IP con:<br />
+a) El puerto TCP 50 · b) El puerto UDP 50 · c) El protocolo IP 50 · d) El puerto 4500</p>
+<p><strong>12.</strong> NAT-T encapsula ESP en:<br />
+a) TCP 443 · b) UDP 4500 · c) ICMP · d) GRE</p>
+<p><strong>13.</strong> En modo túnel:<br />
+a) Se mantiene solo la cabecera original · b) Se encapsula el paquete original entero con una nueva cabecera IP · c) No se cifra nada · d) Solo se cifra el puerto</p>
+<p><strong>14.</strong> Sobre las SA de IPsec es correcto que:<br />
+a) Son bidireccionales · b) Son unidireccionales y se identifican con un SPI · c) No caducan · d) Las crea el DNS</p>
+<p><strong>15.</strong> En IKEv2, la SA que protege el tráfico de datos se llama:<br />
+a) CHILD SA · b) Fase 1 · c) Main Mode · d) Quick Mode</p>
+<p><strong>16.</strong> La terminología «fase 1 / fase 2» es propia de:<br />
+a) TLS · b) IKEv1 · c) WireGuard · d) GRE</p>
+<p><strong>17.</strong> Una PSK es:<br />
+a) La contraseña del usuario · b) Un certificado · c) Una clave secreta compartida entre las pasarelas · d) Un algoritmo de cifrado</p>
+<p><strong>18.</strong> «No proposal chosen» indica que:<br />
+a) El túnel funciona · b) Falta el DNS · c) Hay un bucle · d) Los extremos no coinciden en los parámetros negociados</p>
+<p><strong>19.</strong> Los selectores de tráfico de una VPN entre sedes deben ser:<br />
+a) Idénticos en ambos extremos · b) Iguales pero al revés en cada extremo · c) Vacíos · d) Solo de la sede central</p>
+<p><strong>20.</strong> En una VPN route-based, el tráfico que entra en el túnel lo decide:<br />
+a) Una política de selectores · b) El routing hacia una interfaz de túnel (VTI) · c) El DNS · d) El usuario</p>
+<p><strong>21.</strong> Las VPN «SSL» actuales usan:<br />
+a) TLS, normalmente por TCP 443 · b) SSL v2 · c) UDP 500 · d) Telnet</p>
+<p><strong>22.</strong> Sobre una VPN basada en TLS es correcto que:<br />
+a) Solo funciona desde el navegador · b) Puede usar un cliente o un portal web · c) Es lo mismo que HTTPS · d) No atraviesa NAT</p>
+<p><strong>23.</strong> GRE:<br />
+a) Cifra con AES · b) Es una VPN TLS · c) Encapsula sin cifrar · d) Usa el puerto 443</p>
+<p><strong>24.</strong> El split tunneling:<br />
+a) Manda todo por la VPN · b) Es siempre inseguro · c) Manda por la VPN solo el tráfico corporativo · d) Cifra dos veces</p>
+<p><strong>25.</strong> Para un mantenedor externo lo adecuado es:<br />
+a) VPN nominativa con MFA limitada a lo necesario y con caducidad · b) Una cuenta compartida sin MFA · c) Abrir RDP a Internet · d) Darle la clave del wifi</p>
+<p><strong>26.</strong> Un túnel IPsec está arriba, pero no hay tráfico entre las sedes. Se revisa primero:<br />
+a) Cambiar los algoritmos de cifrado · b) Los selectores, rutas, exención de NAT, reglas y retorno · c) La PSK · d) La versión de IKE</p>
+<p><strong>27.</strong> Un túnel funciona para varias redes, pero no llega a una VLAN nueva de la sede B. Lo más probable es:<br />
+a) Un fallo de cifrado · b) Que la red nueva falte en los selectores, rutas o políticas · c) Un certificado caducado · d) Que AH no cifre</p>
+<p><strong>28.</strong> Un usuario conecta la VPN, accede a los servidores por IP, pero no por nombre. Hay que revisar:<br />
+a) El DNS que entrega la VPN · b) La PSK · c) El modo túnel · d) El NAT-T</p>
+<p><strong>29.</strong> Una VPN que funcionaba deja de autenticar de un día para otro. Una causa habitual es:<br />
+a) El split tunneling · b) Un certificado caducado o una hora incorrecta · c) El modo transporte · d) La MTU</p>
+<p><strong>30.</strong> Un técnico del CAU recibe una incidencia de VPN de un teletrabajador. Lo primero NO debe ser:<br />
+a) Comprobar si tiene Internet sin VPN · b) Revisar los logs de autenticación · c) Borrar el perfil y reinstalar el cliente · d) Ver si recibe IP y DNS</p>
+<p><strong>Soluciones:</strong> 1 b · 2 b · 3 a · 4 d · 5 b · 6 a · 7 b · 8 d · 9 b · 10 d · 11 c · 12 b · 13 b · 14 b · 15 a · 16 b · 17 c · 18 d · 19 b · 20 b · 21 a · 22 b · 23 c · 24 c · 25 a · 26 b · 27 b · 28 a · 29 b · 30 c</p>
+<h2 id="7-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">7. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. Qué es una VPN, tipos que conoces y propósitos de uso (examen de 2023).</strong><br />
+Definición (túnel, confidencialidad, integridad, autenticación) · LAN to LAN y Client to LAN; IPsec y TLS (WireGuard, MPLS) · ejemplos: unir sedes, teletrabajo, mantenedor del PLC, carpa con router 4G · MFA y mínimo privilegio.</p>
+<p><strong>2. Diferencie LAN to LAN y Client to LAN.</strong><br />
+Qué une · quién monta el túnel · componentes · usos · autorización.</p>
+<p><strong>3. Explique IPsec.</strong><br />
+Suite en capa IP · IKE, ESP, AH, SA · puertos y protocolos · modos · autenticación.</p>
+<p><strong>4. Diferencie AH y ESP.</strong><br />
+Funciones · cifrado · protocolos 50 y 51 (no puertos) · NAT · uso actual.</p>
+<p><strong>5. Diferencie modo transporte y modo túnel.</strong><br />
+Cabecera original frente a nueva · usos típicos · modo túnel ≠ VPN.</p>
+<p><strong>6. ¿Qué función cumple IKE? ¿Qué es una SA?</strong><br />
+Negociar, autenticar, generar claves · IKEv1 frente a IKEv2 · SA unidireccional, SPI · IKE SA y CHILD SA.</p>
+<p><strong>7. Explique NAT-T.</strong><br />
+Problema de IPsec con NAT · ESP en UDP 4500 · AH y NAT · reglas en el cortafuegos.</p>
+<p><strong>8. Diferencie túnel completo y split tunneling.</strong><br />
+Definiciones · control y filtrado frente a carga · split DNS · criterio de elección.</p>
+<p><strong>9. Diferencie VPN IPsec y VPN basada en TLS.</strong><br />
+Capa y puertos · uso frecuente sin exclusividad · con y sin cliente · SSL frente a TLS.</p>
+<p><strong>10. Explique por qué «VPN arriba» no garantiza la conectividad.</strong><br />
+Túnel frente a tráfico · selectores, rutas, NAT, cortafuegos, retorno, DNS, servicio.</p>
+<p><strong>11. Describa un diagnóstico de una VPN LAN to LAN.</strong><br />
+IP entre pares · IKE · autenticación · propuestas · SA · selectores · contadores · cortafuegos · retorno · DNS · aplicación · logs.</p>
+<p><strong>12. Buenas prácticas de seguridad en las VPN.</strong><br />
+MFA · mínimo privilegio · postura · registro · terceros nominativos y temporales · algoritmos vigentes · retirar lo obsoleto · ZTNA.</p>
+<h2 id="8-casos-practicos" class="tema-h2">8. Casos prácticos</h2>
+<p>Cada mini caso sigue el esquema <strong>síntoma → capa → hipótesis → comprobaciones → solución → escalado</strong>.</p>
+<p><strong>Mini caso 1 — LAN to LAN que no levanta.</strong> El túnel con una sede nueva no se establece.<br />
+<em>Esquema:</em> conectividad entre pares (IP pública, ruta) · UDP 500/4500 · versión de IKE · PSK o certificado · identidades · propuestas · logs. No empezar por las aplicaciones internas.</p>
+<p><strong>Mini caso 2 — IKE falla en la autenticación.</strong> Los pares se alcanzan, pero el log muestra un fallo de autenticación.<br />
+<em>Esquema:</em> PSK distinta o identidad incorrecta · revisar la configuración en ambos extremos · nunca enviar la PSK por un canal inseguro.</p>
+<p><strong>Mini caso 3 — Túnel arriba sin tráfico.</strong> El túnel aparece arriba, pero no hay ping entre sedes.<br />
+<em>Esquema:</em> selectores · rutas · exención de NAT · reglas · ICMP filtrado · retorno · contadores TX/RX.</p>
+<p><strong>Mini caso 4 — Una subred no funciona.</strong> Todas las redes de la sede B se alcanzan menos una.<br />
+<em>Esquema:</em> comparar la red que funciona con la que falla · selector ausente · ruta · política · NAT.</p>
+<p><strong>Mini caso 5 — Redes solapadas.</strong> Las dos sedes usan 192.168.1.0/24.<br />
+<em>Esquema:</em> routing ambiguo · lo ideal, renumerar una sede · alternativa: NAT dentro de la VPN con su complejidad.</p>
+<p><strong>Mini caso 6 — Cambio de operador.</strong> Una sede cambia de operador y la VPN cae.<br />
+<em>Esquema:</em> nueva IP pública del par · FQDN si se usa · routing, cortafuegos y NAT · identidad o certificado.</p>
+<p><strong>Mini caso 7 — Certificado caducado.</strong> La VPN deja de autenticar de un día para otro.<br />
+<em>Esquema:</em> vigencia del certificado · hora de los equipos · cadena de confianza · revocación · renovar y programar alertas de caducidad.</p>
+<p><strong>Mini caso 8 — VPN de cliente sin DNS.</strong> El usuario accede por IP, pero no por nombre.<br />
+<em>Esquema:</em> DNS corporativo no asignado · sufijo · split DNS · ruta hacia el DNS · cortafuegos (T10).</p>
+<p><strong>Mini caso 9 — Túnel completo lento.</strong> Con la VPN conectada, la navegación va muy lenta.<br />
+<em>Esquema:</em> todo el tráfico pasa por la sede · ancho de banda y latencia · MTU/MSS · valorar split tunneling según la política.</p>
+<p><strong>Mini caso 10 — Proveedor con permisos excesivos.</strong> Un proveedor que solo mantiene un servidor llega por VPN a toda la red.<br />
+<em>Esquema:</em> problema de <strong>autorización</strong>, no de cifrado · perfil propio con solo ese servidor y puerto · MFA, horario, registro y caducidad.</p>
+<p><strong>Supuesto desarrollado 1 — Conectar un edificio municipal con el CPD (supuesto).</strong> DonostiaTIK debe unir de forma permanente la red de un edificio municipal (<strong>10.20.0.0/16</strong>) con el CPD (<strong>10.10.0.0/16</strong>) a través de Internet; ambos extremos tienen cortafuegos con VPN.</p>
+<p><em>a) Tipo y tecnología.</em><br />
+<strong>LAN to LAN</strong> (red ↔︎ red, siempre activa, sin que los usuarios hagan nada) con <strong>IPsec en modo túnel</strong>.</p>
+<p><em>b) Negociación y autenticación.</em><br />
+<strong>IKEv2</strong> con <strong>certificados</strong> (o PSK robusta y única si son pocos extremos) · AES y SHA-2 · grupo DH moderno · PFS · tiempos de vida acordados.</p>
+<p><em>c) Tráfico y red.</em><br />
+<strong>Selectores</strong> 10.10.0.0/16 ↔︎ 10.20.0.0/16 (al revés en cada extremo) o <strong>route-based</strong> con VTI · rutas · <strong>exención de NAT</strong> · reglas en el cortafuegos (UDP 500, 4500, ESP) y entre redes, por mínimo privilegio.</p>
+<p><em>d) Pruebas y operación.</em><br />
+Comprobar el túnel, los contadores y servicios concretos · logs y alertas (túnel caído, certificados) · documentar sin guardar secretos en claro · diagnóstico por capas si falla.</p>
+<p><strong>Supuesto desarrollado 2 — Técnico externo durante tres meses (supuesto).</strong> Un técnico de un proveedor necesita acceder durante <strong>tres meses</strong> a <strong>dos servidores</strong> concretos.</p>
+<p><em>a) Diseño.</em><br />
+<strong>Client to LAN</strong> con cuenta <strong>nominativa</strong>, <strong>MFA</strong>, perfil que solo llega a <strong>esos dos servidores y sus puertos</strong>, <strong>horario</strong> si procede, <strong>registro</strong> y <strong>caducidad</strong> a los tres meses.</p>
+<p><em>b) Túnel completo o split.</em><br />
+Lo habitual para un tercero es que <strong>solo</strong> el tráfico hacia esos servidores entre en la VPN; su navegación no pasa por la red municipal. Se decide según la política.</p>
+<p><em>c) Idea clave.</em><br />
+<strong>VPN no implica acceso total</strong>: autenticar no es autorizar. Contrato y encargo de tratamiento si hay datos personales (T12).</p>
+<p><strong>Supuesto desarrollado 3 — VLAN nueva no alcanzable (supuesto).</strong> Una VPN LAN to LAN aparece <strong>arriba</strong>, pero desde la sede A no se alcanza la <strong>VLAN nueva</strong> creada en la sede B; las demás redes funcionan.</p>
+<p><em>a) Razonamiento.</em><br />
+El túnel funciona (otras redes pasan): <strong>no tocar la criptografía</strong>.</p>
+<p><em>b) Comprobaciones.</em><br />
+<strong>Nueva subred</strong> → ¿está en los <strong>selectores</strong> o en las <strong>rutas</strong>? → ¿la <strong>política</strong> del cortafuegos la permite? → ¿<strong>exención de NAT</strong>? → ¿<strong>ruta de retorno</strong> en la sede B hacia la red de A?</p>
+<p><em>c) Cierre.</em><br />
+Añadir la red donde falte, en <strong>ambos extremos</strong> · probar · documentar el cambio (T20).</p>
+<h2 id="9-repaso-visual-t15" class="tema-h2">9. Repaso visual · T15</h2>
+<figure class="tema-figura">
+<figcaption>Repaso 1 · Tipos de VPN</figcaption>
+<svg viewBox="0 0 700 242" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LAN to LAN entre cortafuegos y Client to LAN desde un portátil." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1502tiposa-17" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1502tiposv-17" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1502tiposm-17" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1502tiposg-17" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="330" height="200" rx="8" fill="#ffffff" stroke="#c9c6c2" stroke-width="1"/><rect x="360" y="10" width="330" height="200" rx="8" fill="#ffffff" stroke="#c9c6c2" stroke-width="1"/><text x="175" y="30" text-anchor="middle" font-size="12.5" font-weight="700" fill="#003da5" dominant-baseline="middle">LAN to LAN (site-to-site)</text><text x="525" y="30" text-anchor="middle" font-size="12.5" font-weight="700" fill="#003da5" dominant-baseline="middle">Client to LAN (acceso remoto)</text><rect x="20" y="50" width="90" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="65.0" y="63.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">Cortafuegos</text><text x="65.0" y="76.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">sede central</text><rect x="240" y="50" width="90" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="285.0" y="63.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">Cortafuegos</text><text x="285.0" y="76.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">sede remota</text><line x1="110" y1="70" x2="240" y2="70" stroke="#2e7d3c" stroke-width="4"/><text x="175" y="62" text-anchor="middle" font-size="9.5" font-weight="600" fill="#2e7d3c" dominant-baseline="middle">túnel permanente</text><rect x="20" y="100" width="90" height="30" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="65.0" y="115.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">LAN central</text><rect x="240" y="100" width="90" height="30" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="285.0" y="115.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">LAN remota</text><text x="175" y="156" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">une REDES completas</text><text x="175" y="174" text-anchor="middle" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">lo montan los equipos de red;</text><text x="175" y="190" text-anchor="middle" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">los usuarios no hacen nada</text><rect x="370" y="50" width="100" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="420.0" y="63.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Portátil</text><text x="420.0" y="76.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#23272e" dominant-baseline="middle">cliente VPN</text><rect x="590" y="50" width="90" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="635.0" y="63.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">Concentrador</text><text x="635.0" y="76.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">cortafuegos</text><line x1="470" y1="70" x2="590" y2="70" stroke="#2e7d3c" stroke-width="4"/><text x="530" y="62" text-anchor="middle" font-size="9.5" font-weight="600" fill="#2e7d3c" dominant-baseline="middle">túnel bajo demanda</text><rect x="590" y="100" width="90" height="30" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="635.0" y="115.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Red corporativa</text><text x="525" y="156" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">une un EQUIPO con la red</text><text x="525" y="174" text-anchor="middle" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">teletrabajo, guardias,</text><text x="525" y="190" text-anchor="middle" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">mantenedores externos</text><text x="350" y="230" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">Otras: VPN de operador (MPLS, aislada pero no necesariamente cifrada) · SD-WAN entre sedes</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 2 · IPsec</figcaption>
+<svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="IPsec como suite: IKE, ESP, AH y SA, con puertos y protocolos." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1509suitea-18" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1509suitev-18" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1509suitem-18" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1509suiteg-18" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="260" y="8" width="180" height="32" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="24.0" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">IPsec (suite)</text><rect x="20" y="66" width="150" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="95.0" y="79.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">IKE</text><text x="95.0" y="92.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">negocia y autentica</text><line x1="350" y1="40" x2="95" y2="66" stroke="#5a5652" stroke-width="1.1"/><rect x="190" y="66" width="150" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="265.0" y="79.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">ESP</text><text x="265.0" y="92.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">protege y cifra</text><line x1="350" y1="40" x2="265" y2="66" stroke="#5a5652" stroke-width="1.1"/><rect x="360" y="66" width="150" height="40" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="435.0" y="79.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">AH</text><text x="435.0" y="92.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">autentica, no cifra</text><line x1="350" y1="40" x2="435" y2="66" stroke="#5a5652" stroke-width="1.1"/><rect x="530" y="66" width="150" height="40" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="605.0" y="79.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">SA</text><text x="605.0" y="92.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">parámetros acordados</text><line x1="350" y1="40" x2="605" y2="66" stroke="#5a5652" stroke-width="1.1"/><rect x="150" y="126" width="90" height="22" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="195.0" y="137.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">IKE</text><text x="260" y="137" text-anchor="start" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">UDP 500</text><text x="420" y="137" text-anchor="start" font-size="10" font-weight="700" fill="#5a5652" dominant-baseline="middle">puerto</text><rect x="150" y="152" width="90" height="22" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="195.0" y="163.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">NAT-T</text><text x="260" y="163" text-anchor="start" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">UDP 4500</text><text x="420" y="163" text-anchor="start" font-size="10" font-weight="700" fill="#5a5652" dominant-baseline="middle">puerto</text><rect x="150" y="178" width="90" height="22" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="195.0" y="189.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">ESP</text><text x="260" y="189" text-anchor="start" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">protocolo IP 50</text><text x="420" y="189" text-anchor="start" font-size="10" font-weight="700" fill="#b26a00" dominant-baseline="middle">NO es un puerto</text><rect x="150" y="204" width="90" height="22" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="195.0" y="215.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">AH</text><text x="260" y="215" text-anchor="start" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">protocolo IP 51</text><text x="420" y="215" text-anchor="start" font-size="10" font-weight="700" fill="#b26a00" dominant-baseline="middle">NO es un puerto</text><text x="350" y="238" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">AH protege campos de la cabecera que el NAT cambia: por eso con NAT se usa ESP + NAT-T</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 3 · Modos</figcaption>
+<svg viewBox="0 0 700 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Modo túnel y modo transporte." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1504modosa-19" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1504modosv-19" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1504modosm-19" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1504modosg-19" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><text x="10" y="16" text-anchor="start" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Paquete original</text><rect x="160" y="4" width="110" height="26" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="215.0" y="17.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">IP original</text><rect x="270" y="4" width="200" height="26" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="370.0" y="17.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">datos</text><text x="10" y="66" text-anchor="start" font-size="12" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">Modo TÚNEL</text><text x="10" y="82" text-anchor="start" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">entre cortafuegos</text><rect x="160" y="56" width="100" height="30" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="210.0" y="71.0" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff" dominant-baseline="middle">IP nueva</text><rect x="260" y="56" width="50" height="30" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="285.0" y="71.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">ESP</text><rect x="310" y="56" width="310" height="30" rx="4" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="465" y="71" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">IP original + datos: TODO cifrado</text><text x="10" y="126" text-anchor="start" font-size="12" font-weight="700" fill="#003da5" dominant-baseline="middle">Modo TRANSPORTE</text><text x="10" y="142" text-anchor="start" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">entre dos equipos</text><rect x="160" y="116" width="110" height="30" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="215.0" y="131.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">IP original</text><rect x="270" y="116" width="50" height="30" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="295.0" y="131.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">ESP</text><rect x="320" y="116" width="200" height="30" rx="4" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="420" y="131" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">solo los datos, cifrados</text><text x="350" y="178" text-anchor="middle" font-size="11" font-weight="600" fill="#23272e" dominant-baseline="middle">El habitual en las VPN entre sedes es el modo túnel</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 4 · Negociación</figcaption>
+<svg viewBox="0 0 700 216" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SA unidireccional, IKEv1 e IKEv2." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1510saa-20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1510sav-20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1510sam-20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1510sag-20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="40" width="120" height="50" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="70.0" y="65.0" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">Par A</text><rect x="570" y="40" width="120" height="50" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="630.0" y="65.0" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" dominant-baseline="middle">Par B</text><path d="M130,52 L566,52" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T1510sav-20)"/><text x="350" y="44" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">SA 1: A → B (con su SPI)</text><path d="M570,78 L134,78" fill="none" stroke="#2e7d3c" stroke-width="2" marker-end="url(#T1510sav-20)"/><text x="350" y="92" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">SA 2: B → A (con su SPI)</text><text x="350" y="16" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Una SA de IPsec es UNIDIRECCIONAL: para hablar en los dos sentidos hacen falta dos</text><rect x="10" y="116" width="330" height="70" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="175.0" y="138.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">IKEv1</text><text x="175.0" y="151.0" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">fase 1 (Main o Aggressive Mode): canal seguro</text><text x="175.0" y="164.0" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">fase 2 (Quick Mode): SA de IPsec</text><rect x="360" y="116" width="330" height="70" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="525.0" y="138.0" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff" dominant-baseline="middle">IKEv2 (recomendado)</text><text x="525.0" y="151.0" text-anchor="middle" font-size="8.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">IKE_SA_INIT + IKE_AUTH → IKE SA</text><text x="525.0" y="164.0" text-anchor="middle" font-size="8.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">CHILD SA: protege el tráfico</text><text x="350" y="204" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b26a00" dominant-baseline="middle">IKE negocia; ESP protege los datos · IKE no cifra el tráfico del usuario</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 5 · Full y split</figcaption>
+<svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Túnel completo frente a split tunneling." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1507splita-21" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1507splitv-21" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1507splitm-21" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1507splitg-21" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="330" height="180" rx="8" fill="#ffffff" stroke="#c9c6c2" stroke-width="1"/><rect x="360" y="10" width="330" height="180" rx="8" fill="#ffffff" stroke="#c9c6c2" stroke-width="1"/><text x="175" y="30" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">Túnel completo</text><text x="525" y="30" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b26a00" dominant-baseline="middle">Split tunneling</text><rect x="25" y="80" width="80" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="65.0" y="100.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Portátil</text><rect x="235" y="50" width="90" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="280.0" y="68.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">Red corporativa</text><rect x="235" y="120" width="90" height="36" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="280.0" y="138.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Internet</text><rect x="375" y="80" width="80" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="415.0" y="100.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Portátil</text><rect x="585" y="50" width="90" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="630.0" y="68.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">Red corporativa</text><rect x="585" y="120" width="90" height="36" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="630.0" y="138.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Internet</text><line x1="95" y1="92" x2="235" y2="68" stroke="#2e7d3c" stroke-width="3"/><path d="M270,86 V120" fill="none" stroke="#2e7d3c" stroke-width="2"/><text x="175" y="172" text-anchor="middle" font-size="10" font-weight="600" fill="#23272e" dominant-baseline="middle">todo pasa por la organización:</text><text x="175" y="186" text-anchor="middle" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">más control y filtrado</text><line x1="445" y1="92" x2="585" y2="68" stroke="#2e7d3c" stroke-width="3"/><line x1="445" y1="108" x2="585" y2="138" stroke="#b26a00" stroke-width="2" stroke-dasharray="5 3"/><text x="525" y="172" text-anchor="middle" font-size="10" font-weight="600" fill="#23272e" dominant-baseline="middle">solo lo corporativo por la VPN:</text><text x="525" y="186" text-anchor="middle" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">menos carga, menos control</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 6 · ¿Túnel o tráfico?</figcaption>
+<svg viewBox="0 0 700 238" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Túnel caído frente a túnel arriba sin tráfico." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1513updowna-22" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1513updownv-22" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1513updownm-22" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1513updowng-22" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="330" height="196" rx="8" fill="#ffffff" stroke="#c9c6c2" stroke-width="1"/><rect x="360" y="10" width="330" height="196" rx="8" fill="#ffffff" stroke="#c9c6c2" stroke-width="1"/><text x="175" y="30" text-anchor="middle" font-size="12" font-weight="700" fill="#b26a00" dominant-baseline="middle">TÚNEL CAÍDO</text><text x="525" y="30" text-anchor="middle" font-size="12" font-weight="700" fill="#003da5" dominant-baseline="middle">TÚNEL ARRIBA, SIN TRÁFICO</text><text x="175" y="54" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">¿Los pares se alcanzan por IP?</text><text x="525" y="54" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">¿Selectores y rutas?</text><text x="175" y="78" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">¿Llegan UDP 500 / 4500?</text><text x="525" y="78" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">¿Exención de NAT?</text><text x="175" y="102" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">¿NAT-T si hay NAT?</text><text x="525" y="102" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">¿Reglas del cortafuegos?</text><text x="175" y="126" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">¿Versión de IKE?</text><text x="525" y="126" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">¿Ruta de retorno?</text><text x="175" y="150" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">¿PSK o certificado (vigente)?</text><text x="525" y="150" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">¿DNS?</text><text x="175" y="174" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">¿Identidades y propuestas?</text><text x="525" y="174" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">¿Servicio escuchando?</text><text x="175" y="196" text-anchor="middle" font-size="10" font-weight="700" fill="#5a5652" dominant-baseline="middle">conectividad · negociación · autenticación</text><text x="525" y="196" text-anchor="middle" font-size="10" font-weight="700" fill="#5a5652" dominant-baseline="middle">routing · NAT · cortafuegos · servicio</text><text x="350" y="226" text-anchor="middle" font-size="11" font-weight="700" fill="#b26a00" dominant-baseline="middle">¿Falla el túnel o falla el tráfico dentro del túnel? · túnel arriba ≠ servicio accesible</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 7 · Diagnóstico</figcaption>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagnóstico de una VPN LAN to LAN." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1514diags2sa-23" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1514diags2sv-23" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1514diags2sm-23" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1514diags2sg-23" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="12" width="160" height="44" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="90.0" y="27.5" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff" dominant-baseline="middle">1 · IP entre pares</text><text x="90.0" y="40.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">WAN, ruta, IP pública</text><path d="M170,34 L180,34" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T1514diags2sg-23)"/><rect x="182" y="12" width="160" height="44" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="262.0" y="27.5" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff" dominant-baseline="middle">2 · ¿Llega IKE?</text><text x="262.0" y="40.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">UDP 500 / 4500</text><path d="M342,34 L352,34" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T1514diags2sg-23)"/><rect x="354" y="12" width="160" height="44" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="434.0" y="27.5" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff" dominant-baseline="middle">3 · ¿Autentican?</text><text x="434.0" y="40.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">PSK, certificado, identidad</text><path d="M514,34 L524,34" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T1514diags2sg-23)"/><rect x="526" y="12" width="160" height="44" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="606.0" y="27.5" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff" dominant-baseline="middle">4 · ¿Negocian?</text><text x="606.0" y="40.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">propuestas compatibles</text><rect x="10" y="72" width="160" height="44" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="90.0" y="87.5" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff" dominant-baseline="middle">5 · ¿Hay SA?</text><text x="90.0" y="100.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">IKE SA y CHILD SA</text><path d="M170,94 L180,94" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T1514diags2sg-23)"/><rect x="182" y="72" width="160" height="44" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="262.0" y="87.5" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">6 · ¿Coincide el tráfico?</text><text x="262.0" y="100.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">selectores o rutas</text><path d="M342,94 L352,94" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T1514diags2sg-23)"/><rect x="354" y="72" width="160" height="44" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="434.0" y="87.5" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">7 · ¿Entra en el túnel?</text><text x="434.0" y="100.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">contadores TX</text><path d="M514,94 L524,94" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T1514diags2sg-23)"/><rect x="526" y="72" width="160" height="44" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="606.0" y="87.5" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">8 · ¿Sale al otro lado?</text><text x="606.0" y="100.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">contadores RX</text><rect x="10" y="132" width="160" height="44" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="90.0" y="147.5" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">9 · ¿Lo permite el FW?</text><text x="90.0" y="160.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">reglas, exención NAT</text><path d="M170,154 L180,154" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T1514diags2sg-23)"/><rect x="182" y="132" width="160" height="44" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="262.0" y="147.5" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">10 · ¿Hay retorno?</text><text x="262.0" y="160.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">ruta de vuelta</text><path d="M342,154 L352,154" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T1514diags2sg-23)"/><rect x="354" y="132" width="160" height="44" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="434.0" y="147.5" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">11 · ¿Funciona el DNS?</text><text x="434.0" y="160.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">nombres</text><path d="M514,154 L524,154" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T1514diags2sg-23)"/><rect x="526" y="132" width="160" height="44" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="606.0" y="147.5" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">12 · ¿Funciona la aplicación?</text><text x="606.0" y="160.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">servicio</text><path d="M606,56 L606,62 L90,62 L90,72" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T1514diags2sg-23)"/><path d="M606,116 L606,122 L90,122 L90,132" fill="none" stroke="#5a5652" stroke-width="1.3" marker-end="url(#T1514diags2sg-23)"/><text x="350" y="198" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">TX sube y RX no: el otro extremo no contesta · TX = 0: el tráfico no entra en el túnel (pistas, no veredictos)</text></svg>
+</figure>
+<h2 id="10-resumen-final-si-manana-fuera-el-examen" class="tema-h2">10. Resumen final: si mañana fuera el examen</h2>
+<p>Una <strong>VPN</strong> crea <strong>conectividad lógica protegida</strong> sobre una red no confiable (túnel con autenticación, integridad y cifrado, según la tecnología); <strong>no es</strong> NAT, ni cortafuegos, ni da acceso total por sí sola. Puede ser <strong>LAN to LAN</strong> (red ↔︎ red, la montan las <strong>pasarelas</strong>) o <strong>Client to LAN</strong> (usuario ↔︎ red, con <strong>cliente</strong> y <strong>concentrador</strong>, IP de un pool, rutas y DNS). <strong>IPsec</strong> es una <strong>suite</strong> de capa IP: <strong>IKE (UDP 500)</strong> negocia y autentica (<strong>PSK</strong> o <strong>certificados</strong>), <strong>ESP (protocolo IP 50)</strong> cifra, <strong>AH (protocolo IP 51)</strong> solo autentica y choca con NAT, y <strong>NAT-T (UDP 4500)</strong> atraviesa NAT; <strong>50 y 51 no son puertos</strong>. El <strong>modo túnel</strong> añade una cabecera nueva y el <strong>transporte</strong> mantiene la original. Las <strong>SA</strong> son <strong>unidireccionales</strong>; <strong>IKEv1</strong> habla de <strong>fases 1 y 2</strong> e <strong>IKEv2</strong> de <strong>IKE SA y CHILD SA</strong>. Los <strong>selectores</strong> deben ser simétricos (o <strong>route-based</strong> con VTI), con <strong>exención de NAT</strong>. Las «<strong>VPN SSL</strong>» usan realmente <strong>TLS</strong> por <strong>443</strong>, con cliente o portal. <strong>Túnel completo</strong> o <strong>split</strong> se eligen por riesgo. Se aseguran con <strong>MFA, mínimo privilegio, postura y registro</strong>, y los terceros con cuentas <strong>nominativas y temporales</strong>. Para diagnosticar: <strong>¿falla el túnel o el tráfico dentro del túnel?</strong> — <strong>túnel arriba ≠ servicio</strong>.</p>
+<h2 id="11-actualidad-datos-fechados" class="tema-h2">11. Actualidad — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong><br>Lo estable para el examen es lo explicado arriba; estos datos cambian.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Núcleo estable</strong>: VPN, site-to-site, acceso remoto, IPsec, ESP, IKE, SA, NAT-T, TLS. <strong>Legado</strong>: AH en la práctica, IKEv1, PPTP, L2TP/IPsec, SSL como protocolo. <strong>Ampliación</strong>: IKEv2, WireGuard, Always-On, per-app, ZTNA, comprobación de postura.</li>
+<li>Varios fabricantes han <strong>recortado sus VPN «SSL»</strong> en favor de IPsec/IKEv2 o de <strong>ZTNA</strong> tras vulnerabilidades críticas en sus portales web (Fortinet, por ejemplo, retiró el modo túnel de su VPN SSL en las versiones recientes de FortiOS).</li>
+<li><strong>ZTNA/SASE</strong> sustituye progresivamente a la VPN tradicional en el teletrabajo, sin ser un sustituto universal.</li>
+<li><strong>WireGuard</strong> está ya en muchos routers y cortafuegos, aunque en grandes organizaciones domina IPsec.</li>
+</ul>
+  </div>
+</article>

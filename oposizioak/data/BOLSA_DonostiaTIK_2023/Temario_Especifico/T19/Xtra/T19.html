@@ -1,0 +1,639 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T19</div>
+    <h1 class="tema-cabecera__titulo">Monitorización de comunicaciones. Detección y resolución de averías. Soporte técnico informático. Mantenimiento y localización de averías.</h1>
+    <div class="tema-cabecera__meta">Xtra · Bloque 3 · Organización e integración · Bolsa DonostiaTIK 2023 · Instalaciones y Comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-lo-que-cayo-en-el-examen-de-2023">1. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#2-anclas-de-memoria">2. Anclas de memoria</a></li>
+<li><a href="#3-no-confundir">3. No confundir</a></li>
+<li><a href="#4-posibles-trampas-de-examen">4. Posibles trampas de examen</a></li>
+<li><a href="#5-matriz-de-memorizacion">5. Matriz de memorización</a></li>
+<li><a href="#6-preguntas-tipo-test">6. Preguntas tipo test</a></li>
+<li><a href="#7-posibles-preguntas-cortas-con-esquema-de-respuesta">7. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#8-casos-practicos">8. Casos prácticos</a></li>
+<li><a href="#9-repaso-visual-t19">9. Repaso visual · T19</a></li>
+<li><a href="#10-resumen-final-si-manana-fuera-el-examen">10. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#11-actualidad-datos-fechados">11. Actualidad — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h2 id="1-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">1. Lo que cayó en el examen de 2023</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Contenido</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test 6</td>
+<td>Qué NO es herramienta de diagnóstico</td>
+<td><strong>sudo</strong></td>
+</tr>
+<tr>
+<td>Test 14</td>
+<td>Latencia</td>
+<td><strong>Tiempo de origen a destino</strong></td>
+</tr>
+<tr>
+<td>Test 29</td>
+<td>SNMP</td>
+<td><strong>Los traps son notificaciones asíncronas de los agentes a los gestores</strong></td>
+</tr>
+<tr>
+<td>Caso 7</td>
+<td>Player sin conectividad</td>
+<td>In situ (tonos, portátil, analizador) y por la red (DHCP, ARP, tabla MAC)</td>
+</tr>
+<tr>
+<td>Caso 8</td>
+<td>Fibra sin link</td>
+<td>T3</td>
+</tr>
+<tr>
+<td>Caso 9</td>
+<td>PoE caído</td>
+<td>T4</td>
+</tr>
+<tr>
+<td>Caso 10</td>
+<td>Puerto averiado</td>
+<td>T4</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="2-anclas-de-memoria" class="tema-h2">2. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>Monitorizar → medir + detectar + alertar · detectar antes que el usuario es objetivo, no garantía.</strong></li>
+<li><strong>UP ≠ sano · host arriba ≠ servicio arriba · síntoma ≠ causa · hipótesis ≠ diagnóstico.</strong></li>
+<li><strong>Métrica ≠ log ≠ evento ≠ alerta ≠ incidente · alerta de causa &gt; alertas de consecuencia.</strong></li>
+<li><strong>SNMP: gestor + agente + MIB + OID · polling (161) + trap/inform (162) · trap = asíncrono del agente al gestor · capa de aplicación.</strong></li>
+<li><strong>SNMPv3 cifra solo con authPriv.</strong></li>
+<li><strong>Syslog → logs (UDP 514 clásico, TLS 6514) · NetFlow/IPFIX → flujos · PCAP → paquetes.</strong></li>
+<li><strong>Latencia = origen → destino · ping → RTT · jitter = variación.</strong></li>
+<li><strong>El alcance reduce las hipótesis · cambiar una cosa cada vez.</strong></li>
+<li><strong>Una herramienta es una prueba: qué compruebo y qué haré según el resultado · sudo NO.</strong></li>
+<li><strong>Ping KO ≠ caído · <code>* * *</code> ≠ corte · 169.254 = indicio de DHCP no obtenido.</strong></li>
+<li><strong>Toner → qué cable · tester → continuidad · certificador → categoría.</strong></li>
+<li><strong>Funcional → quien sabe o puede · jerárquico → quien decide · escalar con evidencias.</strong></li>
+<li><strong>Preventivo → plan · predictivo → estado · workaround ≠ solución.</strong></li>
+</ul>
+<h2 id="3-no-confundir" class="tema-h2">3. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Esto</th>
+<th>No es esto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Monitorización</strong> (cómo está)</td>
+<td><strong>Inventario</strong> (qué hay) / <strong>observabilidad</strong> (ampliación)</td>
+</tr>
+<tr>
+<td><strong>Métrica</strong></td>
+<td><strong>Log</strong></td>
+</tr>
+<tr>
+<td><strong>Evento</strong></td>
+<td><strong>Alerta</strong> / <strong>incidente</strong></td>
+</tr>
+<tr>
+<td><strong>Síntoma</strong></td>
+<td><strong>Causa</strong></td>
+</tr>
+<tr>
+<td><strong>Hipótesis</strong></td>
+<td><strong>Diagnóstico</strong></td>
+</tr>
+<tr>
+<td><strong>Disponibilidad</strong></td>
+<td><strong>Rendimiento</strong></td>
+</tr>
+<tr>
+<td><strong>Capacidad (ancho de banda)</strong></td>
+<td><em><strong>Throughput</strong></em></td>
+</tr>
+<tr>
+<td><strong>Latencia</strong> (ida)</td>
+<td><strong>RTT</strong> (ida y vuelta)</td>
+</tr>
+<tr>
+<td><strong>Latencia</strong></td>
+<td><strong>Jitter</strong> / <strong>pérdida</strong></td>
+</tr>
+<tr>
+<td><strong>Error</strong> (CRC)</td>
+<td><strong>Descarte</strong> (<em>discard</em>)</td>
+</tr>
+<tr>
+<td><strong>Polling</strong></td>
+<td><strong>Trap</strong></td>
+</tr>
+<tr>
+<td><strong>TRAP</strong> (sin confirmación)</td>
+<td><strong>INFORM</strong> (con confirmación)</td>
+</tr>
+<tr>
+<td><strong>SNMP 161</strong> (consultas al agente)</td>
+<td><strong>SNMP 162</strong> (traps al gestor)</td>
+</tr>
+<tr>
+<td><strong>SNMPv2c</strong> (comunidad)</td>
+<td><strong>SNMPv3</strong> (usuario)</td>
+</tr>
+<tr>
+<td><strong>SNMPv3</strong></td>
+<td><strong>authPriv</strong> (el nivel que cifra)</td>
+</tr>
+<tr>
+<td><strong>MIB</strong> (definición)</td>
+<td><strong>OID</strong> (identificador)</td>
+</tr>
+<tr>
+<td><strong>NetFlow</strong> (flujos)</td>
+<td><strong>Captura</strong> (paquetes) / <strong>sFlow</strong> (muestreo)</td>
+</tr>
+<tr>
+<td><strong>Syslog</strong></td>
+<td><strong>SNMP</strong></td>
+</tr>
+<tr>
+<td><strong>Log</strong></td>
+<td><strong>Captura</strong></td>
+</tr>
+<tr>
+<td><strong>ping</strong></td>
+<td><strong>iPerf</strong> / <strong>prueba de puerto TCP</strong> / <strong>traceroute</strong></td>
+</tr>
+<tr>
+<td><strong>Tester</strong> (continuidad)</td>
+<td><strong>Certificador</strong> (categoría) / <strong>toner</strong> (identificar)</td>
+</tr>
+<tr>
+<td><strong>VFL</strong></td>
+<td><strong>OTDR</strong></td>
+</tr>
+<tr>
+<td><strong>Tabla MAC</strong> (switch)</td>
+<td><strong>Tabla ARP</strong> (IP ↔︎ MAC)</td>
+</tr>
+<tr>
+<td><strong>APIPA 169.254</strong></td>
+<td><strong>IPv6 fe80::</strong> (normal)</td>
+</tr>
+<tr>
+<td><strong>Escalado funcional</strong></td>
+<td><strong>Escalado jerárquico</strong></td>
+</tr>
+<tr>
+<td><em><strong>Workaround</strong></em></td>
+<td><strong>Solución</strong></td>
+</tr>
+<tr>
+<td><strong>Correctivo</strong></td>
+<td><strong>Preventivo</strong></td>
+</tr>
+<tr>
+<td><strong>Preventivo</strong> (plan)</td>
+<td><strong>Predictivo</strong> (estado)</td>
+</tr>
+<tr>
+<td><strong>Inventario</strong></td>
+<td><strong>CMDB</strong></td>
+</tr>
+<tr>
+<td><strong>Grafana</strong> (visualización)</td>
+<td><strong>NMS completo</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="4-posibles-trampas-de-examen" class="tema-h2">4. Posibles trampas de examen</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Afirmación</th>
+<th>V/F</th>
+<th>Por qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SNMP pertenece a la capa de aplicación</td>
+<td><strong>V</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Los traps SNMP son notificaciones asíncronas del agente al gestor</td>
+<td><strong>V</strong></td>
+<td>Examen 2023</td>
+</tr>
+<tr>
+<td>La última versión de SNMP es la v2</td>
+<td><strong>F</strong></td>
+<td>Es la v3</td>
+</tr>
+<tr>
+<td>SNMPv3 implica siempre cifrado</td>
+<td><strong>F</strong></td>
+<td>Solo authPriv</td>
+</tr>
+<tr>
+<td>SNMPv3 puede proporcionar autenticación y privacidad</td>
+<td><strong>V</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>UDP 161 se asocia a las consultas al agente</td>
+<td><strong>V</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>UDP 162 se asocia a traps e informs</td>
+<td><strong>V</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Syslog usa exclusivamente UDP 514</td>
+<td><strong>F</strong></td>
+<td>También TCP y TLS 6514</td>
+</tr>
+<tr>
+<td>NetFlow equivale a una captura completa de paquetes</td>
+<td><strong>F</strong></td>
+<td>Son registros de flujo</td>
+</tr>
+<tr>
+<td>Ping mide directamente la latencia de un sentido</td>
+<td><strong>F</strong></td>
+<td>Da el RTT</td>
+</tr>
+<tr>
+<td>Ping proporciona el RTT</td>
+<td><strong>V</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Un ping correcto demuestra que el servicio web funciona</td>
+<td><strong>F</strong></td>
+<td>Host arriba ≠ servicio</td>
+</tr>
+<tr>
+<td>Un ping fallido demuestra que el equipo está apagado</td>
+<td><strong>F</strong></td>
+<td>ICMP filtrado</td>
+</tr>
+<tr>
+<td>Un asterisco en traceroute demuestra que el tráfico se corta en ese router</td>
+<td><strong>F</strong></td>
+<td>Puede no responder ICMP</td>
+</tr>
+<tr>
+<td>Una IPv4 169.254.x.x en un PC con DHCP indica que no obtuvo configuración DHCP</td>
+<td><strong>V</strong></td>
+<td>Indicio fuerte</td>
+</tr>
+<tr>
+<td>Una IPv6 link-local indica un fallo de DHCP</td>
+<td><strong>F</strong></td>
+<td>Es normal</td>
+</tr>
+<tr>
+<td>Un tester certifica Cat 6A</td>
+<td><strong>F</strong></td>
+<td>Eso es el certificador</td>
+</tr>
+<tr>
+<td>iPerf mide el rendimiento entre dos extremos</td>
+<td><strong>V</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Wireshark analiza paquetes</td>
+<td><strong>V</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>sudo es una herramienta de diagnóstico de red</td>
+<td><strong>F</strong></td>
+<td>Examen 2023</td>
+</tr>
+<tr>
+<td>Un fallo de monitorización implica un fallo de red</td>
+<td><strong>F</strong></td>
+<td>Puede fallar el agente o el NMS</td>
+</tr>
+<tr>
+<td>El escalado funcional y el jerárquico son lo mismo</td>
+<td><strong>F</strong></td>
+<td>Saber frente a decidir</td>
+</tr>
+<tr>
+<td>El predictivo se basa en el estado o la tendencia del activo</td>
+<td><strong>V</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Los niveles N0–N3 son un estándar obligatorio</td>
+<td><strong>F</strong></td>
+<td>Modelo habitual</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="5-matriz-de-memorizacion" class="tema-h2">5. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Dato clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Monitorización</td>
+<td>Disponibilidad · rendimiento · calidad · recursos · infraestructura · wifi · servicios · entorno</td>
+</tr>
+<tr>
+<td>Alertas</td>
+<td>Umbral con duración · línea base · fatiga · dependencias · métrica ≠ log ≠ evento ≠ alerta</td>
+</tr>
+<tr>
+<td>SNMP</td>
+<td>Gestor · agente · MIB · OID · GET/GETNEXT/GETBULK/SET · TRAP/INFORM · UDP 161/162 · v3 authPriv</td>
+</tr>
+<tr>
+<td>Otras fuentes</td>
+<td>Syslog (514, TLS 6514, severidad 0–7) · NetFlow/IPFIX · sFlow · PCAP · telemetría · API · sondas</td>
+</tr>
+<tr>
+<td>Métricas</td>
+<td>Latencia · RTT · jitter · pérdida · capacidad · throughput · utilización · CRC · descartes · DOM</td>
+</tr>
+<tr>
+<td>Método</td>
+<td>Identificar · alcance · información · cambios · hipótesis · priorizar · probar · causa · aplicar · verificar · monitorizar · documentar</td>
+</tr>
+<tr>
+<td>Enfoques</td>
+<td>Bottom-up · top-down · divide y vencerás · seguir el camino · comparación · sustitución</td>
+</tr>
+<tr>
+<td>Herramientas</td>
+<td>ping · traceroute · pathping · ipconfig · nslookup · arp · Test-NetConnection · iPerf · Wireshark · show · tester · certificador · toner · analizador · VFL/OTDR</td>
+</tr>
+<tr>
+<td>Soporte</td>
+<td>N0–N3 (modelo) · funcional/jerárquico · traspaso con evidencias · ticket · prioridad · cierre</td>
+</tr>
+<tr>
+<td>Mantenimiento</td>
+<td>Correctivo · preventivo · predictivo · evolutivo · inventario · CMDB · repuestos · MTTR · MTBF · workaround</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="6-preguntas-tipo-test" class="tema-h2">6. Preguntas tipo test</h2>
+<p><strong>1.</strong> NO es una herramienta de diagnóstico de averías de comunicaciones:<br />
+a) iPerf · b) Wireshark · c) sudo · d) tracert</p>
+<p><strong>2.</strong> La latencia es:<br />
+a) La variación del retardo · b) El tiempo que tarda un paquete de origen a destino · c) El caudal máximo · d) El porcentaje de pérdidas</p>
+<p><strong>3.</strong> Sobre SNMP, es correcto que:<br />
+a) Su última versión es la v2 · b) Es de la capa de red · c) Los traps son notificaciones asíncronas de los agentes a los gestores · d) Los switches no lo soportan</p>
+<p><strong>4.</strong> Los traps SNMP llegan al gestor habitualmente por el puerto:<br />
+a) UDP 161 · b) UDP 162 · c) TCP 443 · d) UDP 514</p>
+<p><strong>5.</strong> Para que SNMPv3 cifre la información, el nivel de seguridad debe ser:<br />
+a) noAuthNoPriv · b) authNoPriv · c) authPriv · d) Cualquiera: v3 siempre cifra</p>
+<p><strong>6.</strong> La MIB de SNMP:<br />
+a) Define los objetos gestionables, identificados por OID · b) Es el puerto de los traps · c) Es la CMDB · d) Es el servidor DHCP</p>
+<p><strong>7.</strong> Una notificación SNMP con confirmación es un:<br />
+a) GET · b) SET · c) TRAP · d) INFORM</p>
+<p><strong>8.</strong> El protocolo que informa de quién habla con quién y cuánto es:<br />
+a) Syslog · b) NetFlow · c) SNMP SET · d) ARP</p>
+<p><strong>9.</strong> Para identificar un cable sin seguirlo se usa:<br />
+a) Un generador de tonos y sonda · b) Un OTDR · c) iPerf · d) Un multímetro</p>
+<p><strong>10.</strong> Un PC con DHCP tiene la IP 169.254.x.x. Indica que:<br />
+a) Tiene IP pública · b) El DNS falla · c) No obtuvo configuración DHCP (enlace, VLAN, relay o servidor) · d) El cortafuegos bloquea el 443</p>
+<p><strong>11.</strong> En una avería con síntomas de cable conviene empezar:<br />
+a) Por la aplicación · b) Por la capa física (bottom-up) · c) Por reinstalar el sistema · d) Por el proveedor</p>
+<p><strong>12.</strong> La herramienta que mide el rendimiento entre dos extremos controlados es:<br />
+a) nslookup · b) arp · c) iPerf · d) sudo</p>
+<p><strong>13.</strong> Para encontrar el puerto del switch de un equipo sin tocar el cable se consulta:<br />
+a) La tabla MAC del switch · b) El DNS público · c) El correo · d) La MIB del SAI</p>
+<p><strong>14.</strong> Pasar una incidencia a un grupo con el conocimiento necesario es un escalado:<br />
+a) Jerárquico · b) Funcional · c) Predictivo · d) Preventivo</p>
+<p><strong>15.</strong> Sustituir un disco por sus alertas SMART antes de que falle es mantenimiento:<br />
+a) Correctivo · b) Evolutivo · c) Predictivo · d) Preventivo</p>
+<p><strong>16.</strong> Limpiar los armarios cada seis meses es mantenimiento:<br />
+a) Predictivo · b) Correctivo · c) Adaptativo · d) Preventivo</p>
+<p><strong>17.</strong> El transporte clásico de syslog es:<br />
+a) UDP 514 · b) UDP 161 · c) UDP 53 · d) UDP 123</p>
+<p><strong>18.</strong> <code>ping</code> proporciona:<br />
+a) La latencia de un solo sentido · b) El caudal máximo · c) El jitter de la voz · d) El RTT (ida y vuelta)</p>
+<p><strong>19.</strong> Un traceroute muestra <code>* * *</code> en un salto intermedio, pero llega al destino. Significa que:<br />
+a) Ese router no responde o limita ICMP, pero reenvía el tráfico · b) El tráfico se corta en ese router · c) El destino está caído · d) El DNS falla</p>
+<p><strong>20.</strong> El ping al servidor web responde, pero la web no carga. Lo correcto es:<br />
+a) Cerrar la incidencia · b) Comprobar DNS, el puerto 443, TLS y el servicio · c) Cambiar el cable del servidor · d) Reiniciar el switch de núcleo</p>
+<p><strong>21.</strong> El NMS deja de recibir métricas de un switch que sigue reenviando tráfico. Lo más probable es:<br />
+a) Que la red esté caída · b) Que haya un bucle de capa 2 · c) Un fallo de monitorización: agente, ACL, credenciales o NMS · d) Que el SAI esté descargado</p>
+<p><strong>22.</strong> El NMS genera 60 alertas a la vez. Lo primero es:<br />
+a) Abrir 60 tickets · b) Reiniciar los 60 equipos · c) Desactivar las alertas · d) Buscar la dependencia común (equipo padre, uplink, alimentación)</p>
+<p><strong>23.</strong> Sobre errores CRC y descartes es correcto que:<br />
+a) Los descartes suelen deberse a congestión y los CRC apuntan a capa física · b) Son lo mismo · c) Los CRC indican siempre fibra sucia · d) Los descartes son siempre averías</p>
+<p><strong>24.</strong> Mover a un usuario a otro puerto porque el suyo falla es:<br />
+a) Una solución definitiva · b) Un workaround · c) Mantenimiento evolutivo · d) Un escalado jerárquico</p>
+<p><strong>25.</strong> Grafana es fundamentalmente:<br />
+a) Un agente SNMP · b) Un certificador de cable · c) Una herramienta de visualización sobre fuentes de datos · d) Un servidor syslog</p>
+<p><strong>26.</strong> En una captura no aparece un paquete esperado. Puede deberse a:<br />
+a) Que el paquete existe siempre · b) Que Wireshark lo borra · c) Que el switch no tiene MIB · d) Que no pasó por ese punto de captura</p>
+<p><strong>27.</strong> La severidad de syslog más grave es:<br />
+a) 0 (Emergency) · b) 7 (Debug) · c) 4 (Warning) · d) 6 (Informational)</p>
+<p><strong>28.</strong> Un enlace al 70 % de utilización:<br />
+a) Está averiado · b) No es necesariamente un problema · c) Debe ampliarse ya · d) Pierde siempre paquetes</p>
+<p><strong>29.</strong> <code>Test-NetConnection servidor -Port 443</code> funciona. Significa que:<br />
+a) La aplicación web funciona · b) El DNS está bien · c) El puerto TCP es accesible, no que la aplicación funcione · d) El certificado es válido</p>
+<p><strong>30.</strong> Antes de reiniciar un equipo que falla conviene:<br />
+a) No hacer nada más · b) Cambiar la VLAN · c) Avisar al fabricante · d) Recoger información y evidencias si es viable</p>
+<p><strong>31.</strong> La diferencia entre tester y certificador es que:<br />
+a) El certificador comprueba si el enlace cumple la categoría · b) Son lo mismo · c) El tester mide fibra · d) El certificador identifica cables</p>
+<p><strong>32.</strong> Sobre polling y trap es correcto que:<br />
+a) El trap sustituye al polling · b) Se complementan: el polling detecta el estado aunque se pierda un trap · c) El polling es del agente · d) El trap usa el 161</p>
+<p><strong>33.</strong> Una dirección IPv6 fe80:: en un equipo:<br />
+a) Indica fallo de DHCP · b) Indica IP duplicada · c) Es normal (link-local) · d) Indica un bucle</p>
+<p><strong>34.</strong> Sobre los niveles de soporte N0–N3 es correcto que:<br />
+a) Son un estándar obligatorio · b) N1 siempre es el fabricante · c) N3 es el autoservicio · d) Son un modelo habitual que cada organización adapta</p>
+<p><strong>Soluciones:</strong> 1 c · 2 b · 3 c · 4 b · 5 c · 6 a · 7 d · 8 b · 9 a · 10 c · 11 b · 12 c · 13 a · 14 b · 15 c · 16 d · 17 a · 18 d · 19 a · 20 b · 21 c · 22 d · 23 a · 24 b · 25 c · 26 d · 27 a · 28 b · 29 c · 30 d · 31 a · 32 b · 33 c · 34 d</p>
+<h2 id="7-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">7. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p>Respuesta modelo: <strong>definición → método → herramienta → resultado → siguiente paso</strong>.</p>
+<p><strong>1. Funcionamiento de SNMP.</strong><br />
+Gestor, agente, MIB y OID · GET/GETNEXT/GETBULK/SET (UDP 161) y TRAP/INFORM (UDP 162) · v1/v2c con comunidades · v3 con niveles, cifra con authPriv · uso en Zabbix o PRTG.</p>
+<p><strong>2. Polling, trap e inform.</strong><br />
+El gestor pregunta frente al agente que avisa · asíncrono · con o sin confirmación · se complementan.</p>
+<p><strong>3. SNMP, syslog y NetFlow.</strong><br />
+Estado y contadores · mensajes de eventos (514, TLS 6514, severidad) · flujos (quién con quién) · ≠ captura de paquetes · NTP.</p>
+<p><strong>4. Latencia, RTT, jitter y pérdida.</strong><br />
+Definiciones · ping da RTT · efectos en la voz · throughput frente a capacidad · cómo medir cada una.</p>
+<p><strong>5. Metodología para resolver una avería de comunicaciones.</strong><br />
+Identificar, alcance, información, cambios · hipótesis priorizadas · pruebas (una cosa cada vez) · causa con evidencia · solución, verificación, monitorización · documentación o escalado.</p>
+<p><strong>6. Enfoques bottom-up, top-down y divide y vencerás.</strong><br />
+Cómo es cada uno · cuándo usarlo · ninguno universal · ejemplo con la puerta de enlace.</p>
+<p><strong>7. Herramientas físicas.</strong><br />
+Tester, certificador, toner, comprobador de PoE, analizador portátil, VFL, medidor de potencia, OTDR · qué pregunta responde cada una.</p>
+<p><strong>8. Herramientas lógicas.</strong><br />
+ping, traceroute, nslookup, arp, Test-NetConnection, iPerf, Wireshark, show · qué comprueba cada una y su trampa de interpretación.</p>
+<p><strong>9. ¿Cómo localizaría el puerto del switch de un equipo?</strong><br />
+IP → ARP/DHCP → MAC → tabla MAC → switch → puerto → LLDP o plano · límites (capa 2, aleatorización de MAC).</p>
+<p><strong>10. Niveles de soporte y escalado.</strong><br />
+N0 a N3 como modelo · escalado funcional y jerárquico · traspaso con evidencias · ticket, prioridad, cierre.</p>
+<p><strong>11. Tipos de mantenimiento.</strong><br />
+Correctivo, preventivo, predictivo, evolutivo con ejemplos · inventario, repuestos, documentación, copias, externos · MTTR y MTBF.</p>
+<p><strong>12. ¿Cómo diagnosticaría una planta completa sin red?</strong><br />
+Elemento común · monitorización · switch, alimentación, SAI, uplink, fibra, LACP, STP, logs · repuesto · externo · comunicación.</p>
+<h2 id="8-casos-practicos" class="tema-h2">8. Casos prácticos</h2>
+<p>Cada mini caso sigue el esquema <strong>síntoma → alcance → cambios → hipótesis → pruebas → evidencias → causa → solución → verificación → documentación o escalado</strong>.</p>
+<p><strong>Mini caso 1 — Usuario sin red.</strong> Un usuario dice que «no tiene Internet».<br />
+<em>Esquema:</em> alcance y cambios · luces y latiguillo · <code>ipconfig</code> (¿169.254?) · VLAN y estado del puerto · puerta de enlace, DNS, servicio · solución, verificación y registro.</p>
+<p><strong>Mini caso 2 — Toda una planta caída.</strong> Ninguna toma de la segunda planta tiene red.<br />
+<em>Esquema:</em> elemento común · monitorización · alimentación y SAI del armario · uplink de fibra · logs y posible bucle · switch de reserva · orden de trabajo si es cableado · aviso a los usuarios.</p>
+<p><strong>Mini caso 3 — Edificio caído.</strong> Un edificio remoto no tiene conexión.<br />
+<em>Esquema:</em> validar el alcance · CPE encendido, lado LAN, interfaz WAN, rutas, VPN · otros edificios · monitorización · hora exacta · escalar al operador con evidencias.</p>
+<p><strong>Mini caso 4 — Lentitud horaria.</strong> Los usuarios dicen que de 11 a 13 h Internet va lento.<br />
+<em>Esquema:</em> históricos · utilización · flujos (¿quién consume?) · RTT y pérdida · DNS · wifi · aplicación · medidas (QoS, ampliar, limitar) · seguimiento.</p>
+<p><strong>Mini caso 5 — DNS.</strong> Un usuario no navega, pero el ping a una IP externa funciona.<br />
+<em>Esquema:</em> hipótesis DNS · servidor configurado · <code>nslookup</code> · alcance del puerto 53 · respuesta · logs.</p>
+<p><strong>Mini caso 6 — APIPA.</strong> Un PC corporativo tiene 169.254.x.x.<br />
+<em>Esquema:</em> no «DHCP roto» sin más · enlace · VLAN · relay · ámbito · servidor · cortafuegos · captura del DORA.</p>
+<p><strong>Mini caso 7 — CRC en fibra.</strong> Crecen los CRC en un uplink de fibra.<br />
+<em>Esquema:</em> confirmar contador y tendencia · extremo · DOM · logs · limpiar · latiguillo · transceptor · otra fibra · medidor u OTDR · verificar.</p>
+<p><strong>Mini caso 8 — AP que se reinicia.</strong> Un AP desaparece cada pocos minutos.<br />
+<em>Esquema:</em> logs · PoE (presupuesto, clase) · cable · tiempo encendido · contadores · temperatura · firmware.</p>
+<p><strong>Mini caso 9 — Web con ping OK.</strong> El servidor responde al ping, pero la web no carga.<br />
+<em>Esquema:</em> ping OK ≠ web OK · DNS · TCP 443 · TLS · HTTP · proxy inverso · cortafuegos · servicio · logs.</p>
+<p><strong>Mini caso 10 — Pérdida de monitorización SNMP.</strong> El NMS no obtiene métricas de un switch que funciona.<br />
+<em>Esquema:</em> fallo de monitorización ≠ de red · agente · ACL · credenciales y nivel SNMPv3 · rutas y cortafuegos · CPU · NMS.</p>
+<p><strong>Supuesto desarrollado 1 — Planta sin red.</strong> Todos los usuarios de una planta pierden la red a la vez.</p>
+<p><em>a) Razonamiento.</em><br />
+No revisar 40 PC: buscar el <strong>elemento común</strong>.</p>
+<p><em>b) Comprobaciones.</em><br />
+Monitorización · <strong>switch de acceso</strong> (luces, alimentación, <strong>SAI</strong>) · <strong>uplink</strong> (fibra, transceptor, LACP) · STP y posible bucle · logs.</p>
+<p><em>c) Restauración.</em><br />
+Switch o SFP de <strong>repuesto</strong> con la <strong>copia de configuración</strong> · si es cableado, <strong>orden de trabajo</strong> al externo.</p>
+<p><em>d) Cierre.</em><br />
+Verificar · comunicar a los usuarios · documentar · si se repite, problema (T20).</p>
+<p><strong>Supuesto desarrollado 2 — Saturación del enlace WAN.</strong> Durante dos semanas, la monitorización muestra una utilización muy alta del enlace WAN de un edificio entre las 10 y las 12 h, y los usuarios notan lentitud.</p>
+<p><em>a) Medir.</em><br />
+Confirmar el <strong>histórico</strong> · distinguir utilización y <em>throughput</em> · <strong>RTT y pérdida</strong> en esa franja.</p>
+<p><em>b) Identificar.</em><br />
+<strong>Flujos</strong> (NetFlow/IPFIX): qué tráfico, de quién · ¿es legítimo? (copias, actualizaciones, vídeo).</p>
+<p><em>c) Actuar.</em><br />
+Programar copias o actualizaciones fuera de hora · <strong>QoS</strong> si procede · valorar la <strong>capacidad</strong> con el operador.</p>
+<p><em>d) Cerrar.</em><br />
+Recomendación documentada · seguimiento en la monitorización.</p>
+<p><strong>Supuesto desarrollado 3 — 60 equipos sin monitorizar a la vez.</strong> El NMS alerta de la pérdida de monitorización de 60 dispositivos simultáneamente.</p>
+<p><em>a) Razonamiento.</em><br />
+No son 60 averías: buscar la <strong>dependencia</strong>.</p>
+<p><em>b) Recorrer.</em><br />
+<strong>Topología</strong> → equipo padre → uplink → alimentación → núcleo → <strong>el propio NMS</strong> (¿se ha caído o perdido la ruta?).</p>
+<p><em>c) Actuar y mejorar.</em><br />
+Restaurar la causa · configurar <strong>dependencias</strong> en el NMS para que la próxima vez salte una sola alerta de causa.</p>
+<p><strong>Supuesto desarrollado 4 — Errores crecientes en el enlace de planta (predictivo).</strong> La monitorización avisa de que el enlace de fibra entre el switch de la planta primera y el principal tiene errores CRC crecientes, aunque todavía no ha caído.</p>
+<p><em>a) Confirmar.</em><br />
+Contadores (<code>show interfaces</code>) y su <strong>tendencia</strong> · <strong>potencia óptica</strong> del transceptor (<strong>DOM</strong>) · logs (<em>flapping</em>).</p>
+<p><em>b) Hipótesis y pruebas.</em><br />
+Conector sucio, latiguillo dañado, transceptor degradado, curva excesiva o troncal dañada. Una cosa cada vez:</p>
+<ol type="1">
+<li><strong>Limpiar</strong> los conectores.</li>
+<li><strong>Cambiar el latiguillo</strong>.</li>
+<li><strong>Cambiar el transceptor</strong> por uno de repuesto.</li>
+<li>Mover a <strong>otra fibra</strong>.</li>
+</ol>
+<p>Con LACP, el tráfico sigue por el otro enlace mientras se actúa.</p>
+<p><em>c) Verificación.</em><br />
+Contadores a cero tras limpiar estadísticas · potencia óptica en rango · prueba de caudal con iPerf.</p>
+<p><em>d) Escalado y documentación.</em><br />
+Si la troncal está dañada, <strong>orden de trabajo</strong> a la empresa de cableado (medición con OTDR) y seguimiento · documentar · si se repite, <strong>problema</strong> (T20) · revisar el <strong>stock</strong> de transceptores y latiguillos.</p>
+<p>Es <strong>mantenimiento predictivo</strong>: actuar <strong>antes</strong> de la caída.</p>
+<h2 id="9-repaso-visual-t19" class="tema-h2">9. Repaso visual · T19</h2>
+<figure class="tema-figura">
+<figcaption>Repaso 1 · Método</figcaption>
+<svg viewBox="0 0 700 412" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Del aviso a la causa: método completo." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1909maestroa-17" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1909maestrov-17" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1909maestrom-17" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1909maestrog-17" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="60" y="8" width="100" height="28" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="110.0" y="22.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Métricas</text><path d="M110,36 L230,50" fill="none" stroke="#5a5652" stroke-width="1.1" marker-end="url(#T1909maestrog-17)"/><rect x="180" y="8" width="100" height="28" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="230.0" y="22.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Logs</text><path d="M230,36 L230,50" fill="none" stroke="#5a5652" stroke-width="1.1" marker-end="url(#T1909maestrog-17)"/><rect x="300" y="8" width="100" height="28" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="350.0" y="22.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Flujos</text><path d="M350,36 L230,50" fill="none" stroke="#5a5652" stroke-width="1.1" marker-end="url(#T1909maestrog-17)"/><rect x="90" y="54" width="280" height="32" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="230.0" y="70.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Alerta / aviso del usuario</text><path d="M230,86 L230,94" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1909maestrog-17)"/><rect x="90" y="96" width="280" height="32" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="230.0" y="112.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Síntoma</text><path d="M230,128 L230,136" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1909maestrog-17)"/><rect x="90" y="138" width="280" height="32" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="230.0" y="154.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Alcance · desde cuándo · cambios</text><path d="M230,170 L230,178" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1909maestrog-17)"/><rect x="90" y="180" width="280" height="32" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="230.0" y="196.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Hipótesis</text><path d="M230,212 L230,220" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1909maestrog-17)"/><rect x="90" y="222" width="280" height="32" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="230.0" y="238.0" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff" dominant-baseline="middle">Prueba por capas: físico · red · servicio</text><path d="M230,254 L230,262" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1909maestrog-17)"/><rect x="90" y="264" width="280" height="32" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="230.0" y="280.0" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff" dominant-baseline="middle">Causa (con evidencia)</text><path d="M230,296 L230,304" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1909maestrog-17)"/><rect x="90" y="306" width="280" height="32" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="230.0" y="322.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Solución → verificación</text><path d="M230,338 L230,346" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1909maestrog-17)"/><rect x="90" y="348" width="280" height="32" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="230.0" y="364.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Monitorizar · documentar · escalar si procede</text><path d="M370,238 L400,238 L400,196 L374,196" fill="none" stroke="#b26a00" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#T1909maestrom-17)"/><text x="470" y="220" text-anchor="middle" font-size="10" font-weight="600" fill="#b26a00" dominant-baseline="middle">no confirmada:</text><text x="470" y="234" text-anchor="middle" font-size="10" font-weight="600" fill="#b26a00" dominant-baseline="middle">otra hipótesis</text><rect x="430" y="54" width="260" height="100" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="560.0" y="84.5" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff" dominant-baseline="middle">Una herramienta no es</text><text x="560.0" y="97.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">una respuesta: es una PRUEBA</text><text x="560.0" y="110.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">¿qué compruebo? ¿qué haré</text><text x="560.0" y="123.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">según el resultado?</text><rect x="430" y="290" width="260" height="56" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="560.0" y="311.5" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">No cambiar cosas al azar:</text><text x="560.0" y="324.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">medir → razonar → aislar → probar</text><text x="350" y="400" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">T19: ¿qué falla, dónde y por qué? · T20: ¿cómo se gestiona?</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 2 · Monitorización</figcaption>
+<svg viewBox="0 0 700 216" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fuentes, plataforma de monitorización, alerta y ticket." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1901monitora-18" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1901monitorv-18" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1901monitorm-18" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1901monitorg-18" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="150" height="42" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="85.0" y="24.5" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Switches y routers</text><text x="85.0" y="37.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">SNMP · syslog</text><path d="M160,31 L216,105" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1901monitorg-18)"/><rect x="10" y="60" width="150" height="42" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="85.0" y="74.5" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">AP y controladora</text><text x="85.0" y="87.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">API · SNMP</text><path d="M160,81 L216,105" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1901monitorg-18)"/><rect x="10" y="110" width="150" height="42" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="85.0" y="124.5" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Enlaces</text><text x="85.0" y="137.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">NetFlow · ping</text><path d="M160,131 L216,105" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1901monitorg-18)"/><rect x="10" y="160" width="150" height="42" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="85.0" y="174.5" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">SAI y CPD</text><text x="85.0" y="187.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">SNMP · sensores</text><path d="M160,181 L216,105" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1901monitorg-18)"/><rect x="220" y="70" width="150" height="70" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="295.0" y="91.5" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">Plataforma</text><text x="295.0" y="105.0" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">Zabbix, PRTG,</text><text x="295.0" y="118.5" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">LibreNMS</text><rect x="420" y="20" width="120" height="50" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="480.0" y="38.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Paneles</text><text x="480.0" y="51.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">e históricos</text><rect x="420" y="90" width="120" height="50" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="480.0" y="108.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Alerta</text><text x="480.0" y="121.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">umbral superado</text><rect x="580" y="90" width="110" height="50" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="635.0" y="108.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">Ticket</text><text x="635.0" y="121.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">y actuación</text><path d="M370,95 L416,50" fill="none" stroke="#003da5" stroke-width="1.6" marker-end="url(#T1901monitora-18)"/><path d="M370,115 L416,115" fill="none" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3" marker-end="url(#T1901monitorm-18)"/><path d="M540,115 L576,115" fill="none" stroke="#2e7d3c" stroke-width="1.6" marker-end="url(#T1901monitorv-18)"/><text x="560" y="170" text-anchor="middle" font-size="11" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">Objetivo: detectar antes que el usuario</text><text x="560" y="188" text-anchor="middle" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">alertar solo de lo que exige actuar,</text><text x="560" y="202" text-anchor="middle" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">con dependencias entre equipos</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 3 · SNMP</figcaption>
+<svg viewBox="0 0 700 244" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gestor y agente SNMP con operaciones, puertos y versiones." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1902snmpa-19" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1902snmpv-19" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1902snmpm-19" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1902snmpg-19" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="60" width="170" height="90" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="95.0" y="91.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">GESTOR (NMS)</text><text x="95.0" y="105.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">consulta y recibe</text><text x="95.0" y="119.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">avisos</text><rect x="520" y="60" width="170" height="90" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="605.0" y="91.5" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">AGENTE</text><text x="605.0" y="105.0" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">switch, router, SAI,</text><text x="605.0" y="118.5" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">impresora · MIB + OID</text><path d="M180,80 L516,80" fill="none" stroke="#003da5" stroke-width="2" marker-end="url(#T1902snmpa-19)"/><text x="350" y="72" text-anchor="middle" font-size="11" font-weight="700" fill="#003da5" dominant-baseline="middle">GET · GETNEXT · GETBULK · SET  →  UDP 161</text><path d="M520,130 L184,130" fill="none" stroke="#b26a00" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#T1902snmpm-19)"/><text x="350" y="122" text-anchor="middle" font-size="11" font-weight="700" fill="#b26a00" dominant-baseline="middle">←  TRAP (sin confirmación) · INFORM (con)  UDP 162</text><text x="350" y="172" text-anchor="middle" font-size="10" font-weight="600" fill="#23272e" dominant-baseline="middle">el trap es una notificación ASÍNCRONA del agente al gestor (examen 2023)</text><rect x="10" y="186" width="330" height="46" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="175.0" y="202.5" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">v1 / v2c: community string sin cifrar</text><text x="175.0" y="215.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#23272e" dominant-baseline="middle">(public/private, habituales: cambiarlas)</text><rect x="360" y="186" width="330" height="46" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="525.0" y="202.5" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff" dominant-baseline="middle">v3 (la última y recomendada): por usuario</text><text x="525.0" y="215.5" text-anchor="middle" font-size="8.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">cifrado solo en el nivel authPriv</text><text x="350" y="30" text-anchor="middle" font-size="12.5" font-weight="700" fill="#23272e" dominant-baseline="middle">SNMP · protocolo de la capa de APLICACIÓN</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 4 · Métricas</figcaption>
+<svg viewBox="0 0 700 188" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Latencia, RTT, jitter, pérdida y caudal." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1913metricasa-20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1913metricasv-20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1913metricasm-20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1913metricasg-20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="20" width="80" height="34" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="50.0" y="37.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">A</text><rect x="330" y="20" width="80" height="34" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="370.0" y="37.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">B</text><path d="M90,30 L326,30" fill="none" stroke="#003da5" stroke-width="1.8" marker-end="url(#T1913metricasa-20)"/><text x="208" y="22" text-anchor="middle" font-size="9.5" font-weight="600" fill="#003da5" dominant-baseline="middle">latencia (un sentido)</text><path d="M326,46 L94,46" fill="none" stroke="#2e7d3c" stroke-width="1.6" marker-end="url(#T1913metricasv-20)"/><text x="208" y="64" text-anchor="middle" font-size="9.5" font-weight="600" fill="#2e7d3c" dominant-baseline="middle">RTT = ida y vuelta (lo que da ping)</text><rect x="440" y="34" width="26" height="20" rx="3" fill="#e6edf7" stroke="#003da5" stroke-width="1"/><rect x="480" y="33" width="26" height="21" rx="3" fill="#e6edf7" stroke="#003da5" stroke-width="1"/><rect x="520" y="19" width="26" height="35" rx="3" fill="#e6edf7" stroke="#003da5" stroke-width="1"/><rect x="560" y="34" width="26" height="20" rx="3" fill="#e6edf7" stroke="#003da5" stroke-width="1"/><rect x="600" y="6" width="26" height="48" rx="3" fill="#e6edf7" stroke="#003da5" stroke-width="1"/><rect x="640" y="32" width="26" height="22" rx="3" fill="#e6edf7" stroke="#003da5" stroke-width="1"/><text x="560" y="72" text-anchor="middle" font-size="9.5" font-weight="600" fill="#23272e" dominant-baseline="middle">jitter = variación del retardo</text><rect x="10" y="92" width="160" height="44" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="90.0" y="107.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Pérdida</text><text x="90.0" y="120.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#23272e" dominant-baseline="middle">congestión, errores, wifi</text><rect x="182" y="92" width="160" height="44" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="262.0" y="107.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Capacidad</text><text x="262.0" y="120.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#23272e" dominant-baseline="middle">nominal del enlace</text><rect x="354" y="92" width="160" height="44" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="434.0" y="107.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Throughput</text><text x="434.0" y="120.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#23272e" dominant-baseline="middle">tasa efectiva obtenida</text><rect x="526" y="92" width="160" height="44" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="606.0" y="107.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Utilización</text><text x="606.0" y="120.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#23272e" dominant-baseline="middle">70 % ≠ problema</text><text x="350" y="158" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Examen 2023: latencia = tiempo de origen a destino · ping mide RTT, no la latencia de un sentido</text><text x="350" y="176" text-anchor="middle" font-size="10" font-weight="500" fill="#5a5652" dominant-baseline="middle">La voz sufre por latencia + jitter + pérdida + congestión (T9)</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 5 · Capas</figcaption>
+<svg viewBox="0 0 700 272" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagnóstico por capas con herramientas." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1904capasa-21" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1904capasv-21" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1904capasm-21" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1904capasg-21" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><text x="205" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Capa · qué se comprueba</text><text x="525" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Herramientas</text><rect x="60" y="194" width="290" height="36" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="205.0" y="212.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Física · luces, cable, roseta, PoE</text><text x="525" y="216" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">tester, toner, latiguillo</text><rect x="60" y="152" width="290" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="205.0" y="170.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Enlace · puerto, VLAN, dúplex, MAC</text><text x="525" y="174" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">show interfaces, show mac</text><rect x="60" y="110" width="290" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="205.0" y="128.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Red · IP, máscara, puerta de enlace</text><text x="525" y="132" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">ipconfig, ping, tracert</text><rect x="60" y="68" width="290" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="205.0" y="86.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Transporte · puertos, cortafuegos</text><text x="525" y="90" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">Test-NetConnection, nc, ss</text><rect x="60" y="26" width="290" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="205.0" y="44.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Aplicación · DNS, servicio</text><text x="525" y="48" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">nslookup, curl, navegador</text><path d="M30,228 L30,36" fill="none" stroke="#2e7d3c" stroke-width="2.5" marker-end="url(#T1904capasv-21)"/><text x="30" y="248" text-anchor="middle" font-size="10" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">bottom-up</text><text x="350" y="260" text-anchor="middle" font-size="10.5" font-weight="600" fill="#5a5652" dominant-baseline="middle">Divide y vencerás: empezar por la puerta de enlace y subir o bajar · ningún enfoque es universal</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 6 · Herramientas</figcaption>
+<svg viewBox="0 0 700 234" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Qué pregunta responde cada herramienta." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1914herrama-22" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1914herramv-22" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1914herramm-22" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1914herramg-22" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="150" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="85.0" y="30.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">ping</text><text x="170" y="26" text-anchor="start" font-size="10" font-weight="600" fill="#23272e" dominant-baseline="middle">¿llega? RTT</text><text x="170" y="42" text-anchor="start" font-size="9.5" font-weight="600" fill="#b26a00" dominant-baseline="middle">KO ≠ caído (ICMP filtrado)</text><rect x="10" y="60" width="150" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="85.0" y="80.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">traceroute</text><text x="170" y="76" text-anchor="start" font-size="10" font-weight="600" fill="#23272e" dominant-baseline="middle">¿por dónde va?</text><text x="170" y="92" text-anchor="start" font-size="9.5" font-weight="600" fill="#b26a00" dominant-baseline="middle">* * * ≠ corte</text><rect x="10" y="110" width="150" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="85.0" y="130.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Test-NetConnection / nc</text><text x="170" y="126" text-anchor="start" font-size="10" font-weight="600" fill="#23272e" dominant-baseline="middle">¿abre el puerto TCP?</text><text x="170" y="142" text-anchor="start" font-size="9.5" font-weight="600" fill="#b26a00" dominant-baseline="middle">conecta ≠ aplicación OK</text><rect x="10" y="160" width="150" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="85.0" y="180.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">nslookup / dig</text><text x="170" y="176" text-anchor="start" font-size="10" font-weight="600" fill="#23272e" dominant-baseline="middle">¿resuelve el nombre?</text><text x="170" y="192" text-anchor="start" font-size="9.5" font-weight="600" fill="#b26a00" dominant-baseline="middle">probar por IP no siempre vale</text><rect x="355" y="10" width="150" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="430.0" y="30.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">iPerf</text><text x="515" y="26" text-anchor="start" font-size="10" font-weight="600" fill="#23272e" dominant-baseline="middle">¿cuánto caudal entre dos extremos?</text><text x="515" y="42" text-anchor="start" font-size="9.5" font-weight="600" fill="#b26a00" dominant-baseline="middle">TCP caudal · UDP pérdida y jitter</text><rect x="355" y="60" width="150" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="430.0" y="80.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Wireshark</text><text x="515" y="76" text-anchor="start" font-size="10" font-weight="600" fill="#23272e" dominant-baseline="middle">¿qué paquetes pasan aquí?</text><text x="515" y="92" text-anchor="start" font-size="9.5" font-weight="600" fill="#b26a00" dominant-baseline="middle">solo ese punto de captura</text><rect x="355" y="110" width="150" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="430.0" y="130.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">tester</text><text x="515" y="126" text-anchor="start" font-size="10" font-weight="600" fill="#23272e" dominant-baseline="middle">¿continuidad y pares?</text><text x="515" y="142" text-anchor="start" font-size="9.5" font-weight="600" fill="#b26a00" dominant-baseline="middle">≠ certificador (categoría)</text><rect x="355" y="160" width="150" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="430.0" y="180.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">toner</text><text x="515" y="176" text-anchor="start" font-size="10" font-weight="600" fill="#23272e" dominant-baseline="middle">¿qué cable es?</text><text x="515" y="192" text-anchor="start" font-size="9.5" font-weight="600" fill="#b26a00" dominant-baseline="middle">no mide calidad</text><text x="350" y="222" text-anchor="middle" font-size="11" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">Una herramienta es una prueba: di qué compruebas con ella y qué harás según el resultado</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 7 · Alcance y localización</figcaption>
+<svg viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Localizar un equipo y leer el alcance." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T1915localizara-23" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T1915localizarv-23" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T1915localizarm-23" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T1915localizarg-23" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="14" width="78" height="34" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="49.0" y="31.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">IP</text><path d="M88,31 L94,31" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1915localizarg-23)"/><rect x="96" y="14" width="78" height="34" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="135.0" y="31.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">ARP / ND</text><path d="M174,31 L180,31" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1915localizarg-23)"/><rect x="182" y="14" width="78" height="34" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="221.0" y="31.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">MAC</text><path d="M260,31 L266,31" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1915localizarg-23)"/><rect x="268" y="14" width="78" height="34" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="307.0" y="31.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Tabla MAC</text><path d="M346,31 L352,31" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1915localizarg-23)"/><rect x="354" y="14" width="78" height="34" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="393.0" y="31.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Switch</text><path d="M432,31 L438,31" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1915localizarg-23)"/><rect x="440" y="14" width="78" height="34" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="479.0" y="31.0" text-anchor="middle" font-size="10" font-weight="700" fill="#23272e" dominant-baseline="middle">Puerto</text><path d="M518,31 L524,31" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1915localizarg-23)"/><rect x="526" y="14" width="78" height="34" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="565.0" y="31.0" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff" dominant-baseline="middle">LLDP / plano</text><path d="M604,31 L610,31" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T1915localizarg-23)"/><rect x="612" y="14" width="78" height="34" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="651.0" y="31.0" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff" dominant-baseline="middle">Ubicación</text><text x="350" y="68" text-anchor="middle" font-size="10" font-weight="600" fill="#5a5652" dominant-baseline="middle">ARP solo ve vecinos de capa 2: para redes remotas, el router, el DHCP, la controladora o el NMS</text><rect x="10" y="86" width="216" height="50" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="118.0" y="104.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">UNO</text><text x="118.0" y="117.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#23272e" dominant-baseline="middle">cerca del usuario: puesto, latiguillo, toma, puerto</text><rect x="242" y="86" width="216" height="50" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="350.0" y="104.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">UNA PLANTA</text><text x="350.0" y="117.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#23272e" dominant-baseline="middle">switch de acceso, uplink, alimentación</text><rect x="474" y="86" width="216" height="50" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="582.0" y="104.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">TODOS</text><text x="582.0" y="117.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#ffffff" dominant-baseline="middle">núcleo, cortafuegos, servicio, proveedor</text><text x="350" y="158" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">El alcance es la primera pista sobre la causa (heurística, no ley) · busca el elemento común</text></svg>
+</figure>
+<h2 id="10-resumen-final-si-manana-fuera-el-examen" class="tema-h2">10. Resumen final: si mañana fuera el examen</h2>
+<p><strong>Monitorización</strong></p>
+<ul class="tema-lista">
+<li><strong>Monitorizar</strong> es observar disponibilidad, rendimiento, calidad, recursos y servicios para <strong>detectar</strong> (idealmente antes que el usuario) y <strong>actuar</strong>.</li>
+<li><strong>UP ≠ sano.</strong> Se alerta con umbrales razonables, línea base y <strong>dependencias</strong>.</li>
+<li><strong>SNMP</strong> (capa de <strong>aplicación</strong>):
+<ul class="tema-lista">
+<li>Elementos: gestor, agente, <strong>MIB</strong>, OID.</li>
+<li><strong>GET/SET</strong> por <strong>UDP 161</strong>; <strong>traps asíncronos del agente al gestor</strong> por <strong>UDP 162</strong>; INFORM con confirmación.</li>
+<li><strong>v3</strong>, que cifra solo con <strong>authPriv</strong>.</li>
+</ul></li>
+<li>Se completa con <strong>syslog</strong> (514 clásico), <strong>NetFlow/IPFIX</strong> (flujos, no paquetes) y capturas.</li>
+<li>La <strong>latencia</strong> es el tiempo de origen a destino; <strong>ping da el RTT</strong>.</li>
+</ul>
+<p><strong>Averías</strong></p>
+<ul class="tema-lista">
+<li>Se resuelven con <strong>método</strong>: síntoma → <strong>alcance</strong> → cambios → <strong>hipótesis</strong> → <strong>prueba</strong> (una cosa cada vez, por capas) → <strong>causa con evidencia</strong> → solución → <strong>verificación</strong> → documentación o escalado.</li>
+<li><strong>Una herramienta es una prueba</strong>:
+<ul class="tema-lista">
+<li><strong>Ping KO ≠ caído</strong>; <strong><code>* * *</code> ≠ corte</strong>.</li>
+<li><strong>169.254</strong> es un indicio de DHCP no obtenido.</li>
+<li><strong>Toner</strong> identifica el cable, <strong>tester</strong> comprueba la continuidad y <strong>certificador</strong>, la categoría.</li>
+<li><strong>sudo no es</strong> de diagnóstico.</li>
+</ul></li>
+</ul>
+<p><strong>Soporte y mantenimiento</strong></p>
+<ul class="tema-lista">
+<li>El soporte se organiza en <strong>niveles</strong> (modelo habitual) con <strong>escalado funcional</strong> (quien sabe) y <strong>jerárquico</strong> (quien decide), y <strong>se escala con evidencias</strong>.</li>
+<li>El mantenimiento es <strong>correctivo, preventivo (plan), predictivo (estado) o evolutivo</strong>, con inventario, repuestos, copias de configuración y <strong>órdenes de trabajo</strong> a los externos.</li>
+<li><strong>Workaround ≠ solución</strong>; si se repite, gestión de problemas (T20).</li>
+</ul>
+<h2 id="11-actualidad-datos-fechados" class="tema-h2">11. Actualidad — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong><br>Lo estable para el examen es lo explicado arriba; estos datos cambian.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Núcleo estable</strong>: SNMP, syslog, flujos, ping, traceroute, Wireshark, método de diagnóstico, herramientas físicas, soporte y mantenimiento.</li>
+<li><strong>Contexto actual</strong>:
+<ul class="tema-lista">
+<li><strong>Telemetría en <em>streaming</em></strong> y <strong>API</strong>.</li>
+<li><strong>AIOps</strong> (análisis con IA de la telemetría para detectar anomalías y sugerir causas probables).</li>
+<li><strong>Observabilidad</strong> (métricas, logs y trazas).</li>
+<li>Automatización.</li>
+</ul></li>
+<li>Son una <strong>evolución y un complemento</strong>: SNMP sigue muy presente y la IA no identifica sola y siempre la causa raíz.</li>
+<li>SNMPv1/v2c siguen muy extendidos, pero las guías de seguridad recomiendan <strong>SNMPv3 con authPriv</strong>.</li>
+</ul>
+  </div>
+</article>

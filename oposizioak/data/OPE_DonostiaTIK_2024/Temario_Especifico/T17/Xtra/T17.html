@@ -1,0 +1,350 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T17</div>
+    <h1 class="tema-cabecera__titulo">Correo electrónico. Arquitectura y componentes. Clientes de correo</h1>
+    <div class="tema-cabecera__meta">Xtra · Bloque II · Tecnología básica</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-datos-y-anclas-de-memoria">1. Datos y anclas de memoria</a></li>
+<li><a href="#2-no-confundir">2. No confundir</a></li>
+<li><a href="#3-posibles-trampas-de-examen">3. Posibles trampas de examen</a></li>
+<li><a href="#4-posibles-preguntas-tipo-test">4. Posibles preguntas tipo test</a></li>
+<li><a href="#5-posibles-preguntas-cortas">5. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#6-supuestos-practicos-cau">6. Supuestos prácticos CAU</a></li>
+<li><a href="#7-matriz-de-memorizacion">7. Matriz de memorización</a></li>
+<li><a href="#8-resumen-final">8. Resumen final: si mañana fuera el examen</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h2 id="1-datos-y-anclas-de-memoria" class="tema-h2">1. Datos y anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>MUA → USA · MSA → SUBMISSION · MTA → TRANSPORTA · MDA → ENTREGA</strong>.</li>
+<li><strong>MX → ¿DÓNDE RECIBE?</strong> — registro DNS con prioridad, no el servidor en sí.</li>
+<li><strong>SMTP → ENVÍA/TRANSPORTA · IMAP → SERVIDOR + SINCRONIZA · POP3 → DESCARGA</strong>.</li>
+<li>Puertos: <strong>25 → RELAY · 587 → SUBMISSION (STARTTLS/TLS) · 465 → SUBMISSION + TLS IMPLÍCITO</strong>.</li>
+<li><strong>110/995 → POP3 · 143/993 → IMAP</strong> (los «9x» son las variantes con TLS implícito).</li>
+<li>Cabeceras: <strong>From · To · Cc (visibles) · Cco/Bcc (ocultos) · Subject · Date · Message-ID · Received (traza del recorrido)</strong>.</li>
+<li><strong>MIME</strong> = estándar para contenido no limitado a texto simple; <strong>Base64</strong> = codificación que puede usarse dentro de MIME.</li>
+<li><strong>SPF → AUTORIZA · DKIM → FIRMA (+ integridad) · DMARC → POLÍTICA + ALINEACIÓN + INFORMES</strong>.</li>
+<li>DNS: SPF (política) · DKIM (clave pública; la firma va en el mensaje) · DMARC (política, bajo <strong>_dmarc</strong>).</li>
+<li>Clientes: <strong>escritorio · webmail · móvil</strong>; un cliente usa <strong>SMTP para enviar</strong> e <strong>IMAP/POP3 para recibir</strong>.</li>
+</ul>
+<figure class="tema-figura">
+<figcaption>Puertos de salida</figcaption>
+<svg viewBox="0 0 700 139" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at17dp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at17da" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at17dv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at17dn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at17dr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at17dg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">25</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at17dg)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">RELAY entre servidores</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">587</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#003da5" stroke-width="2" marker-end="url(#at17dp)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">SUBMISSION (STARTTLS/TLS)</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">465</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at17da)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">SUBMISSION + TLS implícito</text></svg>
+</figure>
+
+<figure class="tema-figura">
+<figcaption>MX: dónde recibe un dominio</figcaption>
+<svg viewBox="0 0 700 94" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at17bp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at17ba" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at17bv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at17bn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at17br" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at17bg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">MX</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#003da5" stroke-width="2" marker-end="url(#at17bp)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Registro DNS con prioridad</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">NO es</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at17bg)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">El servidor de correo en sí</text></svg>
+</figure>
+
+
+<h2 id="2-no-confundir" class="tema-h2">2. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto A</strong></th>
+<th><strong>Concepto B</strong></th>
+<th><strong>Diferencia clave</strong></th>
+</tr>
+<tr>
+<td><strong>MUA</strong>: lo usa la persona</td>
+<td><strong>MSA</strong>: recibe el envío del cliente</td>
+<td>Cliente vs. punto de entrada al sistema de correo</td>
+</tr>
+<tr>
+<td><strong>MTA</strong>: transporta entre servidores</td>
+<td><strong>MDA</strong>: entrega en el buzón</td>
+<td>Transporte vs. entrega final</td>
+</tr>
+<tr>
+<td><strong>SMTP</strong>: submission y transferencia</td>
+<td><strong>POP3/IMAP</strong>: acceso al correo entregado</td>
+<td>Enviar/transportar vs. consultar el buzón</td>
+</tr>
+<tr>
+<td><strong>25</strong>: relay entre servidores</td>
+<td><strong>587</strong>: submission del cliente · <strong>465</strong>: submission con TLS implícito</td>
+<td>587 y 465 no son lo mismo: difieren en cómo se establece el cifrado</td>
+</tr>
+<tr>
+<td><strong>110</strong>: POP3 sin TLS</td>
+<td><strong>995</strong>: POP3 con TLS implícito</td>
+<td>Mismo protocolo, distinto tratamiento del cifrado</td>
+</tr>
+<tr>
+<td><strong>143</strong>: IMAP</td>
+<td><strong>993</strong>: IMAP con TLS implícito</td>
+<td>Mismo protocolo, distinto tratamiento del cifrado</td>
+</tr>
+<tr>
+<td><strong>MX</strong>: registro DNS que localiza el servidor de correo</td>
+<td><strong>DNS en general</strong>: sistema de nombres (Temas 27-28)</td>
+<td>El MX es un tipo de registro concreto, no el servidor ni todo el DNS</td>
+</tr>
+<tr>
+<td><strong>Cc</strong>: destinatarios visibles</td>
+<td><strong>Cco/Bcc</strong>: destinatarios ocultos</td>
+<td>Visibilidad entre destinatarios</td>
+</tr>
+<tr>
+<td><strong>MIME</strong>: estándar de representación del contenido</td>
+<td><strong>Base64</strong>: codificación utilizable dentro de MIME</td>
+<td>Estándar vs. una de sus codificaciones</td>
+</tr>
+<tr>
+<td><strong>SPF</strong>: autoriza orígenes</td>
+<td><strong>DKIM</strong>: firma e integridad · <strong>DMARC</strong>: política, alineación e informes</td>
+<td>Tres capas distintas y complementarias</td>
+</tr>
+<tr>
+<td><strong>Webmail</strong>: navegador, sin instalación</td>
+<td><strong>Cliente de escritorio</strong>: aplicación instalada y configurada</td>
+<td>Acceso web vs. programa local</td>
+</tr>
+<tr>
+<td><strong>MAPI</strong>: mecanismo propio del entorno Exchange</td>
+<td><strong>SMTP/IMAP</strong>: protocolos estándar</td>
+<td>MAPI no es otro nombre de los estándares</td>
+</tr>
+</table></div>
+
+<h2 id="3-posibles-trampas-de-examen" class="tema-h2">3. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li><strong>«SMTP se usa para consultar el buzón»</strong> — falso: para eso están POP3 e IMAP; SMTP hace submission y transferencia.</li>
+<li><strong>«POP3 borra siempre los mensajes del servidor»</strong> — falso: en la configuración clásica puede descargarlos y eliminarlos, pero <strong>puede configurarse para conservar copia</strong>.</li>
+<li><strong>«POP3 solo puede usarse en un dispositivo»</strong> — impreciso: lo limitado es su <strong>capacidad de sincronización</strong>, no una prohibición formal.</li>
+<li><strong>«IMAP descarga y vacía el buzón»</strong> — falso: mantiene los mensajes en el servidor y sincroniza carpetas y estados.</li>
+<li><strong>«El puerto 25 es el recomendado para que los clientes envíen correo»</strong> — falso: el 25 es el de <strong>relay entre servidores</strong>; la submission del cliente usa 587 (o 465).</li>
+<li><strong>«587 y 465 son exactamente lo mismo»</strong> — falso: ambos son submission, pero difieren en el establecimiento del cifrado (STARTTLS/TLS vs. TLS implícito).</li>
+<li><strong>«MUA y MTA son sinónimos»</strong> — falso: cliente del usuario vs. servidor de transporte.</li>
+<li><strong>«MTA y MDA son lo mismo»</strong> — falso: transportar entre servidores vs. entregar en el buzón.</li>
+<li><strong>«El MX es el servidor de correo»</strong> — falso: es el <strong>registro DNS</strong> que indica qué servidores reciben el correo del dominio.</li>
+<li><strong>«MIME es Base64»</strong> — falso: Base64 es una codificación que puede usarse dentro de MIME.</li>
+<li><strong>«SPF verifica que el From visible es auténtico»</strong> — falso: SPF autoriza orígenes de envío; su comprobación se relaciona con la identidad/dominio del envío y el origen de la conexión.</li>
+<li><strong>«DKIM y SPF hacen lo mismo»</strong> — falso: DKIM firma y protege la integridad de lo firmado; SPF autoriza orígenes.</li>
+<li><strong>«DMARC es simplemente rechazar el spam»</strong> — falso: define <strong>política</strong> (none/quarantine/reject), incorpora <strong>alineación</strong> y aporta <strong>informes</strong>.</li>
+<li><strong>«Cc y Cco son equivalentes»</strong> — falso: la copia oculta no es visible para el resto de destinatarios.</li>
+<li><strong>«Webmail y cliente de escritorio son lo mismo»</strong> — falso: navegador sin instalación vs. aplicación instalada y configurada.</li>
+</ul>
+
+<h2 id="4-posibles-preguntas-tipo-test" class="tema-h2">4. Posibles preguntas tipo test</h2>
+<ul class="tema-lista">
+<li>Emparejar <strong>MUA / MSA / MTA / MDA</strong> con su función.</li>
+<li>¿Qué componente <strong>entrega</strong> el mensaje en el buzón del destinatario?</li>
+<li>¿Qué componente recibe el mensaje <strong>enviado por el cliente</strong> y explica la existencia del puerto 587?</li>
+<li>¿Qué es un registro <strong>MX</strong> y qué papel juega la <strong>prioridad</strong>?</li>
+<li>Ordenar el <strong>recorrido</strong> del mensaje desde el MUA emisor hasta el MUA destinatario.</li>
+<li>¿Qué cabecera permite <strong>reconstruir el recorrido</strong> del mensaje?</li>
+<li>Diferencia entre <strong>Cc</strong> y <strong>Cco/Bcc</strong>.</li>
+<li>¿Para qué sirve <strong>MIME</strong> y qué relación tiene con <strong>Base64</strong>?</li>
+<li>¿Qué protocolo se utiliza para el <strong>relay entre servidores</strong>?</li>
+<li>Asociar <strong>puerto → uso</strong>: 25, 587, 465.</li>
+<li>Asociar <strong>puerto → protocolo</strong>: 110, 995, 143, 993.</li>
+<li>¿Qué protocolo mantiene los mensajes <strong>en el servidor</strong> y sincroniza carpetas y estados?</li>
+<li>¿Es cierto que POP3 <strong>debe</strong> borrar los mensajes del servidor?</li>
+<li>¿Qué mecanismo <strong>autoriza los orígenes de envío</strong> de un dominio?</li>
+<li>¿Qué mecanismo aporta <strong>firma e integridad</strong>? ¿Qué clave firma y cuál se publica en DNS?</li>
+<li>¿Qué mecanismo define <strong>política, alineación e informes</strong>? ¿Qué políticas admite?</li>
+<li>¿Qué se publica exactamente en DNS en el caso de <strong>DKIM</strong>?</li>
+<li>¿Qué protocolos configura un <strong>cliente de correo</strong> para enviar y para recibir?</li>
+<li>Diferencia entre <strong>webmail</strong> y <strong>cliente de escritorio</strong>.</li>
+<li>¿Es <strong>MAPI</strong> otro nombre de IMAP?</li>
+</ul>
+
+<h2 id="5-posibles-preguntas-cortas" class="tema-h2">5. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<h4 class="tema-h4">1. Explique la arquitectura MUA / MTA / MDA</h4>
+<ul class="tema-lista">
+<li>Definición de cada agente y su función (usuario, transporte, entrega).</li>
+<li>Encaje del MSA como punto de entrada del envío del cliente.</li>
+<li>Cierre: la implementación real puede variar (agentes integrados o distribuidos).</li>
+</ul>
+<h4 class="tema-h4">2. Explique el papel del MSA</h4>
+<ul class="tema-lista">
+<li>Definición: recibe el correo enviado por el cliente para su submission al sistema.</li>
+<li>Por qué importa: separa <strong>submission del cliente</strong> (autenticada, puerto 587/465) del <strong>relay entre servidores</strong> (puerto 25).</li>
+<li>Cierre: suele convivir con el MTA en el mismo producto.</li>
+</ul>
+<h4 class="tema-h4">3. Explique qué es un registro MX</h4>
+<ul class="tema-lista">
+<li>Definición: registro DNS que indica qué servidores reciben el correo de un dominio.</li>
+<li>Prioridad y posibilidad de varios servidores (respaldo).</li>
+<li>Cierre: el MTA lo consulta antes de entregar; el MX no es el servidor, lo localiza.</li>
+</ul>
+<h4 class="tema-h4">4. Diferencie SMTP, POP3 e IMAP</h4>
+<ul class="tema-lista">
+<li>SMTP: submission y transferencia entre servidores; puertos 25/587/465.</li>
+<li>POP3: descarga desde el servidor; 110/995; sincronización limitada; puede conservar copia.</li>
+<li>IMAP: acceso y gestión en el servidor; 143/993; carpetas y estados sincronizados.</li>
+<li>Cierre: un cliente usa SMTP para enviar e IMAP/POP3 para recibir.</li>
+</ul>
+<h4 class="tema-h4">5. Explique MIME</h4>
+<ul class="tema-lista">
+<li>Definición: estándar que permite representar contenido no limitado a texto simple.</li>
+<li>Qué habilita: HTML, imágenes, adjuntos, varias partes con distintos tipos.</li>
+<li>Precisión: Base64 es una codificación utilizable dentro de MIME, no MIME en sí.</li>
+</ul>
+<h4 class="tema-h4">6. Explique SPF, DKIM y DMARC</h4>
+<ul class="tema-lista">
+<li>SPF: el dominio publica qué orígenes están autorizados a enviar en su nombre (política en DNS).</li>
+<li>DKIM: firma criptográfica; clave privada firma, clave pública en DNS verifica; autenticidad de la firma e integridad de lo firmado.</li>
+<li>DMARC: política sobre los mensajes que no superan autenticación y <strong>alineación</strong>; none/quarantine/reject; informes.</li>
+<li>Cierre: son complementarios y conviene distinguir mecanismo y publicación en DNS.</li>
+</ul>
+<h4 class="tema-h4">7. Diferencie cliente de escritorio y webmail</h4>
+<ul class="tema-lista">
+<li>Escritorio: aplicación instalada, cuentas configuradas con SMTP + IMAP/POP3 (o protocolos propios como MAPI).</li>
+<li>Webmail: acceso por navegador vía HTTP/HTTPS, sin instalación ni configuración local.</li>
+<li>Cierre: ventajas de cada uno (integración y trabajo sin conexión vs. movilidad y cero mantenimiento en el puesto).</li>
+</ul>
+
+<h2 id="6-supuestos-practicos-cau" class="tema-h2">6. Supuestos prácticos CAU</h2>
+<h4 class="tema-h4">Supuesto 1 — Envía pero no recibe</h4>
+<p><strong>Escenario</strong>: un usuario puede enviar correo sin problemas, pero no le entra nada nuevo en la bandeja de entrada.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué indica el síntoma?</strong> Que la parte de <strong>SMTP (envío)</strong> funciona y el problema está en el <strong>acceso al buzón</strong>: <strong>POP3 o IMAP</strong>.</li>
+<li><strong>b) ¿Qué comprobar?</strong> Configuración del servidor entrante y su <strong>puerto</strong> (110/995 para POP3, 143/993 para IMAP), credenciales, y si el buzón recibe correo desde webmail (para separar cliente de servidor).</li>
+<li><strong>c) ¿Qué descarta esto?</strong> Que el fallo esté en el envío: son protocolos distintos, con configuración independiente.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 2 — El mismo buzón en el PC y en el móvil</h4>
+<p><strong>Escenario</strong>: una persona quiere ver los mismos mensajes, carpetas y marcas de leído en su ordenador y en su teléfono.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué protocolo?</strong> <strong>IMAP</strong>: mantiene los mensajes en el servidor y <strong>sincroniza</strong> carpetas y estado entre dispositivos.</li>
+<li><strong>b) ¿Por qué no POP3?</strong> Porque su <strong>capacidad de sincronización es mucho más limitada</strong>: no refleja carpetas ni estados entre clientes.</li>
+<li><strong>c) ¿Qué puerto conviene?</strong> <strong>993</strong> (IMAP con TLS), en línea con las recomendaciones actuales de cifrado.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 3 — Un adjunto llega ilegible</h4>
+<p><strong>Escenario</strong>: un usuario recibe un mensaje cuyo archivo adjunto aparece como texto extraño o no se abre.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Dónde mirar?</strong> En el tratamiento del <strong>contenido del mensaje</strong>: <strong>MIME</strong> y su codificación (por ejemplo, Base64), el <strong>cliente</strong> utilizado y el <strong>formato</strong> del adjunto.</li>
+<li><strong>b) ¿Es un problema de SMTP?</strong> No necesariamente: SMTP ha transportado el mensaje; lo que falla es la <strong>representación o interpretación del contenido</strong>.</li>
+<li><strong>c) ¿Prueba útil?</strong> Abrir el mismo mensaje desde <strong>webmail</strong> u otro cliente para determinar si el problema está en el mensaje o en el cliente concreto.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 4 — Correo aparentemente enviado desde un dominio no autorizado</h4>
+<p><strong>Escenario</strong>: llegan mensajes que dicen proceder de un dominio de la organización, pero salen de servidores desconocidos.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué mecanismos entran en juego?</strong> <strong>SPF</strong> (qué orígenes están autorizados a enviar con ese dominio), <strong>DKIM</strong> (firma e integridad) y <strong>DMARC</strong> (política y alineación, con informes).</li>
+<li><strong>b) ¿Basta con SPF?</strong> No: SPF <strong>no verifica directamente el From visible</strong>; por eso DMARC añade la <strong>alineación</strong> y decide el tratamiento.</li>
+<li><strong>c) ¿Qué política puede aplicarse?</strong> <strong>none</strong>, <strong>quarantine</strong> o <strong>reject</strong>, según la decisión del propietario del dominio.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 5 — «Me llega spam enviado desde mi propia dirección»</h4>
+<p><strong>Escenario</strong>: una usuaria recibe mensajes que aparentan estar enviados por ella misma.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué está ocurriendo?</strong> Una <strong>suplantación (spoofing)</strong> del remitente mostrado: SMTP no verifica por sí mismo la identidad del emisor (la amenaza se estudia en el Tema 25).</li>
+<li><strong>b) ¿Significa que su cuenta está comprometida?</strong> No necesariamente: falsificar el <strong>From</strong> no requiere acceso al buzón. Conviene comprobar indicios adicionales antes de concluirlo.</li>
+<li><strong>c) ¿Qué reduce el problema a nivel de dominio?</strong> Configurar correctamente <strong>SPF, DKIM y DMARC</strong>, que permiten a los receptores detectar y tratar esos mensajes.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 6 — Un mensaje no llega al destinatario</h4>
+<p><strong>Escenario</strong>: un envío a otra administración no aparece en el buzón del destinatario y no hay error visible para el usuario.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué revisar primero?</strong> El <strong>registro MX</strong> del dominio de destino (a qué servidores debía entregarse) y el recorrido por los <strong>MTA</strong>.</li>
+<li><strong>b) ¿Qué evidencia hay en el propio mensaje?</strong> Las cabeceras <strong>Received</strong>, que permiten <strong>localizar dónde se interrumpió el recorrido</strong>.</li>
+<li><strong>c) ¿Qué otras causas encajan?</strong> Que el receptor lo haya tratado conforme a su política (por ejemplo, cuarentena por DMARC) o filtros del destinatario.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 7 — Configurar el correo en un puesto nuevo</h4>
+<p><strong>Escenario</strong>: hay que configurar la cuenta corporativa en el cliente de escritorio de un equipo recién entregado.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué datos son imprescindibles?</strong> Servidor y puerto de <strong>envío (SMTP)</strong> — habitualmente <strong>587</strong> con STARTTLS/TLS o <strong>465</strong> con TLS implícito — y servidor y puerto de <strong>recepción</strong>: <strong>IMAP 993</strong> o <strong>POP3 995</strong>.</li>
+<li><strong>b) ¿Qué elegir para recepción?</strong> <strong>IMAP</strong> si la persona usa varios dispositivos y quiere el buzón sincronizado.</li>
+<li><strong>c) ¿Y si el producto usa protocolos propios?</strong> Puede configurarse mediante <strong>MAPI</strong> u otros mecanismos del fabricante — que <strong>no son equivalentes</strong> a SMTP/IMAP.</li>
+</ul>
+
+<h2 id="7-matriz-de-memorizacion" class="tema-h2">7. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Lo que debo recordar</strong></th>
+</tr>
+<tr>
+<td>MUA</td>
+<td>Programa/interfaz que usa la persona para redactar, enviar y leer correo</td>
+</tr>
+<tr>
+<td>MSA</td>
+<td>Recibe el correo enviado por el cliente (submission); explica el puerto 587</td>
+</tr>
+<tr>
+<td>MTA</td>
+<td>Transporta y encamina mensajes entre servidores mediante SMTP</td>
+</tr>
+<tr>
+<td>MDA</td>
+<td>Entrega el mensaje en el buzón del destinatario</td>
+</tr>
+<tr>
+<td>MX</td>
+<td>Registro DNS que indica qué servidores reciben el correo del dominio; con prioridad</td>
+</tr>
+<tr>
+<td>From</td>
+<td>Remitente mostrado del mensaje</td>
+</tr>
+<tr>
+<td>To</td>
+<td>Destinatario principal</td>
+</tr>
+<tr>
+<td>Cc</td>
+<td>Copia visible para los demás destinatarios</td>
+</tr>
+<tr>
+<td>Cco/Bcc</td>
+<td>Copia oculta: no visible para los demás destinatarios</td>
+</tr>
+<tr>
+<td>Received</td>
+<td>Traza añadida por los servidores; permite reconstruir el recorrido</td>
+</tr>
+<tr>
+<td>MIME</td>
+<td>Estándar para contenido no limitado a texto simple (HTML, imágenes, adjuntos); Base64 es una codificación dentro de él</td>
+</tr>
+<tr>
+<td>SMTP</td>
+<td>Submission + transferencia entre servidores; 25 relay, 587 submission, 465 submission con TLS implícito</td>
+</tr>
+<tr>
+<td>POP3</td>
+<td>Descarga/recuperación desde el servidor; 110 y 995; puede conservar copia; sincronización limitada</td>
+</tr>
+<tr>
+<td>IMAP</td>
+<td>Acceso y gestión en el servidor; 143 y 993; carpetas y estados sincronizados</td>
+</tr>
+<tr>
+<td>SPF</td>
+<td>Autoriza orígenes de envío del dominio; política publicada en DNS</td>
+</tr>
+<tr>
+<td>DKIM</td>
+<td>Firma + integridad; privada firma, pública en DNS verifica; la firma viaja en el mensaje</td>
+</tr>
+<tr>
+<td>DMARC</td>
+<td>Política + alineación + informes; none/quarantine/reject; se publica en DNS bajo _dmarc</td>
+</tr>
+<tr>
+<td>Webmail</td>
+<td>Acceso por navegador (HTTP/HTTPS), sin instalación ni configuración local</td>
+</tr>
+<tr>
+<td>Outlook / Thunderbird</td>
+<td>Clientes de escritorio: SMTP para enviar e IMAP/POP3 para recibir (o protocolos propios como MAPI)</td>
+</tr>
+</table></div>
+
+<h2 id="8-resumen-final" class="tema-h2">8. Resumen final: si mañana fuera el examen</h2>
+<ul class="tema-lista">
+<li><strong>Arquitectura</strong>: <strong>MUA</strong> (lo usa la persona) → <strong>MSA</strong> (recibe el envío del cliente) → <strong>MTA</strong> (transporta entre servidores) → <strong>MDA</strong> (entrega en el buzón). La implementación real puede variar.</li>
+<li><strong>MX</strong> = registro DNS que indica <strong>qué servidores reciben</strong> el correo del dominio, con prioridad. No es el servidor: lo localiza.</li>
+<li><strong>Recorrido</strong>: MUA → MSA/submission → MTA → consulta MX → MTA destino → MDA → buzón → POP3/IMAP → MUA destinatario.</li>
+<li><strong>Mensaje</strong>: cabeceras (<strong>From, To, Cc visibles, Cco ocultos, Subject, Date, Message-ID, Received</strong>) y cuerpo. <strong>Received</strong> reconstruye el recorrido. <strong>MIME</strong> permite contenido no textual; <strong>Base64</strong> es una codificación usada dentro de MIME.</li>
+<li><strong>SMTP</strong> = submission + transferencia: <strong>25 relay · 587 submission (STARTTLS/TLS) · 465 submission con TLS implícito</strong> — 587 y 465 no son lo mismo. SMTP <strong>no</strong> sirve para consultar el buzón.</li>
+<li><strong>POP3</strong> (110/995): descarga; <strong>puede conservar copia</strong> en el servidor; sincronización limitada. <strong>IMAP</strong> (143/993): mensajes en el servidor, con <strong>carpetas y estados sincronizados</strong> entre dispositivos.</li>
+<li><strong>SPF → autoriza orígenes · DKIM → firma + integridad · DMARC → política + alineación + informes</strong> (none/quarantine/reject). En DNS: la <strong>política</strong> SPF, la <strong>clave pública</strong> DKIM (la firma va en el mensaje) y la <strong>política</strong> DMARC bajo <strong>_dmarc</strong>.</li>
+<li><strong>Clientes</strong>: escritorio, webmail y móvil. Un cliente usa <strong>SMTP para enviar</strong> e <strong>IMAP/POP3 para recibir</strong>; <strong>MAPI</strong> (entorno Exchange) es un mecanismo distinto, no otro nombre de los estándares.</li>
+<li>Las <strong>recomendaciones actuales favorecen TLS</strong> tanto en submission como en el acceso al buzón.</li>
+</ul>
+  </div>
+</article>

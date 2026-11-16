@@ -1,0 +1,257 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T7</div>
+    <h1 class="tema-cabecera__titulo">Arquitecturas de almacenamiento masivo NAS y SAN: componentes, funciones y diferencias</h1>
+    <div class="tema-cabecera__meta">Xtra · Bloque II · Tecnología básica</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-datos-y-anclas-de-memoria">1. Datos y anclas de memoria</a></li>
+<li><a href="#2-no-confundir">2. No confundir</a></li>
+<li><a href="#3-posibles-trampas-de-examen">3. Posibles trampas de examen</a></li>
+<li><a href="#4-posibles-preguntas-tipo-test">4. Posibles preguntas tipo test</a></li>
+<li><a href="#5-posibles-preguntas-cortas">5. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#6-supuestos-practicos">6. Supuestos prácticos</a></li>
+<li><a href="#7-matriz-de-memorizacion">7. Matriz de memorización</a></li>
+<li><a href="#8-resumen-final">8. Resumen final: si mañana fuera el examen</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h2 id="1-datos-y-anclas-de-memoria" class="tema-h2">1. Datos y anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>NAS → ARCHIVOS · SAN → BLOQUES · DAS → DIRECTO</strong>.</li>
+<li>Escalera: <strong>DAS (almacenamiento directo) → NAS (fichero por red) → SAN (bloque por red)</strong>.</li>
+<li><strong>NFS → Unix/Linux · SMB/CIFS → Windows</strong> (protocolos de ficheros → acceso tipo NAS).</li>
+<li><strong>Fibre Channel → SAN clásica · iSCSI → SCSI sobre IP</strong> (SAN sobre Ethernet).</li>
+<li><strong>LUN → volumen lógico</strong> que la cabina presenta al servidor (lo ve como un disco).</li>
+<li><strong>HBA → adaptador del servidor</strong> para conectarse a la SAN.</li>
+<li>Camino del dato: <strong>SERVIDOR → HBA → SWITCH/FABRIC → CABINA → LUN</strong>.</li>
+<li>Componentes NAS: controladora + discos (RAID posible, no obligatorio) + interfaz Ethernet/IP.</li>
+<li>Lo definitorio de la SAN es el <strong>bloque</strong>, no la red dedicada.</li>
+<li>NAS consume el usuario/equipo · SAN consume el servidor.</li>
+</ul>
+
+<h2 id="2-no-confundir" class="tema-h2">2. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto A</strong></th>
+<th><strong>Concepto B</strong></th>
+<th><strong>Diferencia clave</strong></th>
+</tr>
+<tr>
+<td><strong>DAS</strong>: discos conectados directamente al equipo</td>
+<td><strong>NAS / SAN</strong>: almacenamiento compartido por red</td>
+<td>DAS solo sirve al equipo que lo tiene conectado</td>
+</tr>
+<tr>
+<td><strong>Nivel de fichero</strong>: se piden carpetas y archivos</td>
+<td><strong>Nivel de bloque</strong>: se accede a bloques/volúmenes</td>
+<td>La regla central: NAS = fichero · SAN = bloque</td>
+</tr>
+<tr>
+<td><strong>NAS</strong>: lo consumen usuarios y equipos</td>
+<td><strong>SAN</strong>: la consumen servidores</td>
+<td>El NAS se ve como unidad de red; la SAN, como disco local del servidor</td>
+</tr>
+<tr>
+<td><strong>NFS</strong>: ficheros, habitual en Unix/Linux</td>
+<td><strong>SMB/CIFS</strong>: ficheros, habitual en Windows</td>
+<td>Mismo nivel (fichero), ecosistemas distintos</td>
+</tr>
+<tr>
+<td><strong>Fibre Channel</strong>: protocolo/tecnología de SAN sobre infraestructura dedicada</td>
+<td><strong>iSCSI</strong>: SCSI sobre TCP/IP (SAN sobre Ethernet)</td>
+<td>Dos vías distintas hacia el mismo acceso a bloque</td>
+</tr>
+<tr>
+<td><strong>LUN</strong>: volumen lógico presentado por la cabina</td>
+<td><strong>Disco físico</strong>: el dispositivo real del Tema 6</td>
+<td>El LUN puede repartirse entre muchos discos; el servidor no lo distingue</td>
+</tr>
+<tr>
+<td><strong>HBA</strong>: adaptador instalado en el servidor</td>
+<td><strong>Switch SAN</strong>: interconecta servidores y cabinas</td>
+<td>El HBA es la «tarjeta de red» de la SAN; el switch, su «cruce de caminos»</td>
+</tr>
+<tr>
+<td><strong>SAN</strong> (Storage Area Network)</td>
+<td><strong>LAN/MAN/WAN</strong>: clasificación geográfica de redes (Tema 28)</td>
+<td>Colisión de siglas: nada que ver entre sí</td>
+</tr>
+<tr>
+<td><strong>RAID</strong>: mecanismo de combinación/protección de discos</td>
+<td><strong>NAS/SAN</strong>: arquitecturas de almacenamiento en red</td>
+<td>NAS/SAN <strong>pueden</strong> usar RAID; no son sinónimos ni requisito</td>
+</tr>
+</table></div>
+
+<h2 id="3-posibles-trampas-de-examen" class="tema-h2">3. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li><strong>«El NAS proporciona acceso a nivel de bloque»</strong> — invertido: el NAS trabaja a nivel de fichero; el bloque es la SAN.</li>
+<li><strong>«La SAN es la red de área que cubre una ciudad»</strong> — colisión de siglas: Storage Area Network no pertenece a la clasificación LAN/MAN/WAN.</li>
+<li><strong>«iSCSI es una variante de Fibre Channel»</strong> — falso: iSCSI transporta SCSI sobre TCP/IP; Fibre Channel es otra tecnología.</li>
+<li><strong>«NFS y SMB son protocolos de bloque»</strong> — falso: son protocolos de acceso/compartición de ficheros.</li>
+<li><strong>«El HBA interconecta los servidores con las cabinas»</strong> — matiz trampa: interconectar es función del switch; el HBA es el adaptador del servidor.</li>
+<li><strong>«Un LUN es un disco físico de la cabina»</strong> — falso: es una unidad lógica presentada al servidor; puede abarcar varios discos.</li>
+<li><strong>«Toda SAN utiliza Fibre Channel y red dedicada»</strong> — falso: puede usar Ethernet/IP con iSCSI; lo esencial es el acceso a bloque.</li>
+<li><strong>«Todo NAS lleva RAID»</strong> — falso: es habitual, no obligatorio.</li>
+<li><strong>«RAID es sinónimo de NAS/SAN»</strong> — falso: RAID es un mecanismo que estas arquitecturas pueden usar.</li>
+<li><strong>«Las bases de datos exigen siempre SAN»</strong> — falso: es un caso de uso habitual, no exclusivo.</li>
+</ul>
+
+<h2 id="4-posibles-preguntas-tipo-test" class="tema-h2">4. Posibles preguntas tipo test</h2>
+<ul class="tema-lista">
+<li>Distinguir <strong>NAS (fichero) de SAN (bloque)</strong> — la pregunta estrella del tema.</li>
+<li>¿Qué significa <strong>DAS</strong> y en qué se diferencia de NAS/SAN?</li>
+<li>¿Qué percibe el cliente en cada arquitectura? (carpetas/archivos vs. disco/volumen).</li>
+<li>Emparejar protocolos: <strong>NFS/SMB → fichero (NAS) · FC/iSCSI → bloque (SAN)</strong>.</li>
+<li>¿Qué protocolo de ficheros corresponde a cada entorno: NFS (Unix/Linux) vs. SMB/CIFS (Windows)?</li>
+<li>¿Qué tecnología permite transportar <strong>SCSI sobre IP</strong>? (iSCSI.)</li>
+<li>¿Qué es un <strong>LUN</strong> y cómo lo «ve» el servidor?</li>
+<li>¿Qué componente permite al servidor conectarse a la SAN? (<strong>HBA</strong>.)</li>
+<li>Ordenar el camino del dato: servidor → HBA → switch/fabric → cabina → LUN.</li>
+<li>¿Es obligatoria la red dedicada en una SAN? (No: puede usar Ethernet/IP con iSCSI.)</li>
+<li>¿Quién consume principalmente cada arquitectura? (usuarios/equipos vs. servidores).</li>
+<li>Identificar componentes de un NAS (controladora, discos, interfaz de red).</li>
+<li>¿Qué papel puede jugar <strong>RAID</strong> en NAS/SAN? (mecanismo posible de protección, no requisito).</li>
+<li>Elegir arquitectura en un supuesto: carpetas de oficina → NAS · almacenamiento de bloques para servidores → SAN.</li>
+</ul>
+
+<h2 id="5-posibles-preguntas-cortas" class="tema-h2">5. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<h4 class="tema-h4">1. Explique qué es un NAS y sus principales componentes</h4>
+<ul class="tema-lista">
+<li>Definición: dispositivo/sistema conectado a la red con acceso a nivel de fichero para múltiples clientes.</li>
+<li>Componentes: controladora/sistema con SO propio, discos (RAID posible, no obligatorio), interfaz Ethernet/IP.</li>
+<li>Funciones: compartir y centralizar ficheros, acceso simultáneo, destino de copias, sencillez de despliegue.</li>
+</ul>
+<h4 class="tema-h4">2. Explique qué es una SAN y sus principales componentes</h4>
+<ul class="tema-lista">
+<li>Definición: arquitectura/red de almacenamiento con acceso a nivel de bloque para servidores.</li>
+<li>Componentes: cabinas (presentan LUN), switch/fabric, HBA en cada servidor.</li>
+<li>El camino del dato: servidor → HBA → switch → cabina → LUN; el servidor trata el LUN como disco local.</li>
+</ul>
+<h4 class="tema-h4">3. Diferencie NAS y SAN</h4>
+<ul class="tema-lista">
+<li>La regla central: fichero vs. bloque.</li>
+<li>Recorrer la tabla: consumidor, red, protocolos, complejidad, uso típico, percepción.</li>
+<li>Cierre: usos habituales (no exclusivos) de cada una.</li>
+</ul>
+<h4 class="tema-h4">4. Explique el acceso a nivel de fichero y a nivel de bloque</h4>
+<ul class="tema-lista">
+<li>Fichero: el cliente pide carpetas y archivos; el sistema remoto gestiona la estructura (NAS, NFS/SMB).</li>
+<li>Bloque: el servidor lee y escribe bloques del volumen y gestiona él mismo el sistema de archivos (SAN, FC/iSCSI).</li>
+<li>Cierre: esta diferencia explica quién consume cada arquitectura y su percepción (unidad de red vs. disco).</li>
+</ul>
+<h4 class="tema-h4">5. Explique qué son un LUN y un HBA</h4>
+<ul class="tema-lista">
+<li>LUN: unidad/volumen lógico que la cabina presenta al servidor, percibido como dispositivo de bloques; no es necesariamente un disco físico.</li>
+<li>HBA: adaptador instalado en el servidor para conectarse a la infraestructura SAN.</li>
+<li>Cierre: situarlos en el camino servidor → HBA → switch → cabina → LUN.</li>
+</ul>
+<h4 class="tema-h4">6. Diferencie NFS, SMB, Fibre Channel e iSCSI</h4>
+<ul class="tema-lista">
+<li>NFS y SMB/CIFS: protocolos de ficheros (Unix/Linux y Windows respectivamente) → acceso tipo NAS.</li>
+<li>Fibre Channel: tecnología/protocolo de SAN, habitualmente sobre infraestructura dedicada.</li>
+<li>iSCSI: comandos SCSI sobre TCP/IP → SAN sobre redes Ethernet/IP.</li>
+<li>Cierre: los dos primeros = fichero; los dos segundos = bloque.</li>
+</ul>
+
+<h2 id="6-supuestos-practicos" class="tema-h2">6. Supuestos prácticos</h2>
+<h4 class="tema-h4">Supuesto 1 — Carpetas compartidas para toda la organización</h4>
+<p><strong>Escenario</strong>: un ayuntamiento quiere centralizar los documentos de sus departamentos en carpetas compartidas accesibles por todo el personal autorizado.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué arquitectura encaja?</strong> NAS: acceso a nivel de fichero, sobre la LAN existente, consumido directamente por usuarios y equipos.</li>
+<li><strong>b) ¿Qué protocolo usarán los puestos Windows?</strong> SMB/CIFS (las «unidades de red»); los sistemas Unix/Linux usarían NFS.</li>
+<li><strong>c) ¿Quién decide qué ve cada usuario?</strong> Los permisos sobre los recursos compartidos — su gestión detallada corresponde al Tema 15.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 2 — Almacenamiento de bloques para varios servidores</h4>
+<p><strong>Escenario</strong>: varios servidores del CPD necesitan almacenamiento compartido que cada uno pueda tratar como discos locales.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué arquitectura corresponde?</strong> SAN: acceso a nivel de bloque; cada servidor recibe sus LUN desde la cabina.</li>
+<li><strong>b) ¿Qué componentes intervienen?</strong> Servidor → HBA → switch/fabric → cabina → LUN.</li>
+<li><strong>c) ¿Casos de uso habituales?</strong> Bases de datos y virtualización, entre otros — habituales, no exclusivos de la SAN.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 3 — Bloques sobre la red Ethernet existente</h4>
+<p><strong>Escenario</strong>: se necesita almacenamiento de bloques para servidores, pero no hay presupuesto para infraestructura dedicada de fibra.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué opción valorar?</strong> Una SAN iSCSI: transporta comandos SCSI sobre TCP/IP y permite el acceso a bloque sobre la red Ethernet/IP.</li>
+<li><strong>b) ¿Qué demuestra este caso?</strong> Que la red dedicada no es lo definitorio de la SAN: lo esencial es el nivel de bloque.</li>
+<li><strong>c) ¿Qué alternativa clásica existe con infraestructura dedicada?</strong> Fibre Channel, con su fabric de switches.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 4 — El servidor que no ve la cabina</h4>
+<p><strong>Escenario</strong>: se incorpora un servidor nuevo que debe conectarse a la cabina de la SAN corporativa y no dispone de conexión a esa infraestructura.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué componente le falta?</strong> El HBA: el adaptador que conecta el servidor a la infraestructura SAN.</li>
+<li><strong>b) Una vez conectado, ¿qué recibirá?</strong> Los LUN que la cabina le presente, que el servidor verá como dispositivos de bloques propios.</li>
+<li><strong>c) ¿Por dónde pasa su tráfico de almacenamiento?</strong> HBA → switch/fabric → cabina.</li>
+</ul>
+
+<h2 id="7-matriz-de-memorizacion" class="tema-h2">7. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Lo que debo recordar</strong></th>
+</tr>
+<tr>
+<td>DAS</td>
+<td>Almacenamiento directamente conectado; solo lo usa ese equipo</td>
+</tr>
+<tr>
+<td>NAS</td>
+<td>Almacenamiento en red a nivel de FICHERO; lo consumen usuarios/equipos</td>
+</tr>
+<tr>
+<td>SAN</td>
+<td>Arquitectura de almacenamiento a nivel de BLOQUE; la consumen servidores</td>
+</tr>
+<tr>
+<td>Nivel de fichero</td>
+<td>El cliente pide carpetas y archivos</td>
+</tr>
+<tr>
+<td>Nivel de bloque</td>
+<td>El servidor accede a bloques/volúmenes como si fueran un disco local</td>
+</tr>
+<tr>
+<td>NFS</td>
+<td>Protocolo de ficheros habitual en Unix/Linux</td>
+</tr>
+<tr>
+<td>SMB/CIFS</td>
+<td>Protocolo de ficheros habitual en Windows</td>
+</tr>
+<tr>
+<td>Fibre Channel</td>
+<td>Tecnología/protocolo habitual de SAN, típicamente sobre infraestructura dedicada</td>
+</tr>
+<tr>
+<td>iSCSI</td>
+<td>Comandos SCSI sobre TCP/IP: bloques sobre Ethernet/IP</td>
+</tr>
+<tr>
+<td>LUN</td>
+<td>Volumen lógico que la cabina presenta al servidor (no necesariamente un disco físico)</td>
+</tr>
+<tr>
+<td>HBA</td>
+<td>Adaptador del servidor para conectarse a la SAN</td>
+</tr>
+<tr>
+<td>Switch SAN</td>
+<td>Interconecta servidores y cabinas (fabric en Fibre Channel)</td>
+</tr>
+</table></div>
+
+<h2 id="8-resumen-final" class="tema-h2">8. Resumen final: si mañana fuera el examen</h2>
+<ul class="tema-lista">
+<li>Escalera: <strong>DAS</strong> (directo) → <strong>NAS</strong> (fichero por red) → <strong>SAN</strong> (bloque por red). DAS es solo el contexto.</li>
+<li><strong>LA regla: NAS = NIVEL DE FICHERO · SAN = NIVEL DE BLOQUE.</strong> El cliente NAS ve carpetas y archivos; el servidor SAN ve un disco/volumen local.</li>
+<li><strong>NAS</strong>: controladora con SO propio + discos (RAID posible, no obligatorio) + interfaz Ethernet/IP. Protocolos de ficheros: <strong>NFS (Unix/Linux) y SMB/CIFS (Windows)</strong> — no exclusivos del NAS. Funciones: compartir, centralizar, acceso simultáneo, destino de copias.</li>
+<li><strong>SAN</strong>: acceso a bloque para servidores; componentes: <strong>cabina → LUN · switch/fabric · HBA</strong>. Camino: <strong>servidor → HBA → switch → cabina → LUN</strong>.</li>
+<li>Protocolos SAN: <strong>Fibre Channel</strong> (habitual, típicamente dedicada) e <strong>iSCSI</strong> (<strong>SCSI sobre TCP/IP</strong>, sobre Ethernet). La red dedicada <strong>no</strong> es lo definitorio: lo es el bloque.</li>
+<li>Diferencias: consumidor (usuarios vs. servidores), red, protocolos, complejidad (generalmente menor/mayor), percepción (carpetas vs. disco), usos típicos (ficheros/copias vs. BD/virtualización — habituales, no exclusivos).</li>
+<li><strong>RAID</strong>: mecanismo que NAS/SAN pueden usar para proteger/configurar; ni base ni sinónimo.</li>
+<li>Ojo a la sigla: esta SAN no es de la familia LAN/MAN/WAN (Tema 28).</li>
+</ul>
+  </div>
+</article>

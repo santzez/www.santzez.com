@@ -1,0 +1,390 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T2</div>
+    <h1 class="tema-cabecera__titulo">Protocolos de comunicación TCP/IP. Direccionamiento IPv4 e IPv6. Conceptos generales.</h1>
+    <div class="tema-cabecera__meta">Xtra · Bloque 1 · Redes, comunicaciones, internet · Bolsa DonostiaTIK 2023 · Instalaciones y Comunicaciones</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-lo-que-cayo-en-el-examen-de-2023">1. Lo que cayó en el examen de 2023</a></li>
+<li><a href="#2-anclas-de-memoria">2. Anclas de memoria</a></li>
+<li><a href="#3-no-confundir">3. No confundir</a></li>
+<li><a href="#4-posibles-trampas-de-examen">4. Posibles trampas de examen</a></li>
+<li><a href="#5-matriz-de-memorizacion">5. Matriz de memorización</a></li>
+<li><a href="#6-preguntas-tipo-test">6. Preguntas tipo test</a></li>
+<li><a href="#7-posibles-preguntas-cortas-con-esquema-de-respuesta">7. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#8-ejercicios-de-subnetting">8. Ejercicios de subnetting</a></li>
+<li><a href="#9-casos-practicos">9. Casos prácticos</a></li>
+<li><a href="#10-repaso-visual-t2">10. Repaso visual · T2</a></li>
+<li><a href="#11-resumen-final-si-manana-fuera-el-examen">11. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#12-actualidad-datos-fechados">12. Actualidad — datos fechados</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h2 id="1-lo-que-cayo-en-el-examen-de-2023" class="tema-h2">1. Lo que cayó en el examen de 2023</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Contenido</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test 5</td>
+<td>Broadcast de 213.114.93.0/26</td>
+<td><strong>213.114.93.63</strong></td>
+</tr>
+<tr>
+<td>Test 7</td>
+<td>Obtener la MAC a partir de la IP</td>
+<td><strong>ARP</strong></td>
+</tr>
+<tr>
+<td>Test 8</td>
+<td>Puerto de SSH</td>
+<td><strong>22</strong></td>
+</tr>
+<tr>
+<td>Caso (enunciado)</td>
+<td>Seis subredes con máscaras /24, /20, /28 y /23</td>
+<td>Interpretar tamaño, rango y forma de asignación</td>
+</tr>
+<tr>
+<td>Caso 4</td>
+<td>Acceso remoto al PLC</td>
+<td><strong>VPN</strong> o redirección de puerto en el cortafuegos</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="2-anclas-de-memoria" class="tema-h2">2. Anclas de memoria</h2>
+<ul class="tema-lista">
+<li><strong>MAC 48 · IPv4 32 · IPv6 128 · puerto 16 bits.</strong></li>
+<li><strong>Puerto → aplicación · IP → equipo · MAC → salto local.</strong></li>
+<li><strong>Privadas: 10/8 · 172.16/12 (hasta 172.31) · 192.168/16.</strong></li>
+<li><strong>Hosts = 2ⁿ − 2 · salto = 256 − máscara · broadcast = siguiente red − 1.</strong></li>
+<li><strong>ARP: IPv4 → MAC en el enlace local; destino remoto → MAC de la puerta de enlace; en IPv6, NDP.</strong></li>
+<li><strong>ICMP: protocolo 1, sin puertos · TCP = 6 · UDP = 17.</strong></li>
+<li><strong>TCP: SYN, SYN-ACK, ACK · UDP: DNS, DHCP, voz, SNMP, NTP, syslog.</strong></li>
+<li><strong>22 SSH · 25 SMTP · 53 DNS · 80 HTTP · 443 HTTPS · 3389 RDP.</strong></li>
+<li><strong>DHCP: DORA, UDP 67/68, relay porque el broadcast no cruza routers · 169.254 = no obtuvo configuración.</strong></li>
+<li><strong>IPv6: sin broadcast, sin ARP · FE80 normal · <code>::</code> una sola vez · puerta de enlace por RA.</strong></li>
+</ul>
+<h2 id="3-no-confundir" class="tema-h2">3. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Esto</th>
+<th>No es esto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MAC</strong> (salto local)</td>
+<td><strong>IP</strong> (destino) y <strong>puerto</strong> (aplicación)</td>
+</tr>
+<tr>
+<td><strong>ARP</strong> (IPv4 → MAC)</td>
+<td><strong>DNS</strong> (nombre → IP) y <strong>NDP</strong> (lo mismo en IPv6)</td>
+</tr>
+<tr>
+<td><strong>ICMP</strong> (control, sin puertos)</td>
+<td><strong>TCP/UDP</strong> (transporte, con puertos)</td>
+</tr>
+<tr>
+<td><strong>TCP</strong> (conexión y garantías)</td>
+<td><strong>UDP</strong> (mínimo, sin garantías)</td>
+</tr>
+<tr>
+<td><strong>IP privada</strong> (no se enruta en Internet)</td>
+<td><strong>IP pública</strong></td>
+</tr>
+<tr>
+<td><strong>IP estática</strong> (en el equipo)</td>
+<td><strong>Reserva DHCP</strong> (en el servidor)</td>
+</tr>
+<tr>
+<td><strong>Dirección de red</strong> (host a 0)</td>
+<td><strong>Broadcast</strong> (host a 1), <strong>host</strong> y <strong>puerta de enlace</strong> (un host, el router)</td>
+</tr>
+<tr>
+<td><strong>Máscara</strong> (delimita la red)</td>
+<td><strong>Puerta de enlace</strong> (la salida)</td>
+</tr>
+<tr>
+<td><strong>Prefijo CIDR</strong> (el real)</td>
+<td><strong>Clase histórica</strong> (A/B/C)</td>
+</tr>
+<tr>
+<td><strong>0.0.0.0</strong> (sin especificar)</td>
+<td><strong>0.0.0.0/0</strong> (ruta por defecto)</td>
+</tr>
+<tr>
+<td><strong>NAT</strong> (traduce)</td>
+<td><strong>PAT</strong> (traduce por puerto), <strong>cortafuegos</strong> (filtra) y <strong>NAC</strong> (control de acceso)</td>
+</tr>
+<tr>
+<td><strong>169.254/16 IPv4</strong> (síntoma)</td>
+<td><strong>FE80::/10 IPv6</strong> (normal)</td>
+</tr>
+<tr>
+<td><strong>SLAAC</strong> (el equipo forma su dirección)</td>
+<td><strong>DHCPv6 con estado</strong> (el servidor la asigna)</td>
+</tr>
+<tr>
+<td><strong>Broadcast IPv4</strong></td>
+<td><strong>Multicast IPv6</strong></td>
+</tr>
+<tr>
+<td><strong>Ping</strong> (¿responde?, RTT)</td>
+<td><strong>Traceroute</strong> (¿por dónde pasa?)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="4-posibles-trampas-de-examen" class="tema-h2">4. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li>Contar la red y el broadcast como hosts útiles.</li>
+<li>Elegir .127 o .255 como broadcast de un /26 que empieza en .0.</li>
+<li>Calcular con la máscara de la clase en lugar del prefijo indicado.</li>
+<li>Decir que ICMP usa un puerto.</li>
+<li>Pensar que DNS solo usa UDP.</li>
+<li>Creer que 172.32.x.x es privada (el rango acaba en 172.31).</li>
+<li>Creer que para un destino remoto se hace ARP por la IP del destino.</li>
+<li>Comprimir con <code>::</code> dos veces en la misma dirección IPv6.</li>
+<li>Creer que IPv6 tiene broadcast o usa ARP.</li>
+<li>Pensar que DHCPv6 da la puerta de enlace.</li>
+<li>Afirmar que IPv6 «no tiene NAT» o que IPsec es obligatorio en IPv6.</li>
+<li>Pensar que NAT protege la red por sí mismo.</li>
+<li>Creer que <code>ping 127.0.0.1</code> comprueba el cable.</li>
+<li>Deducir que un equipo está apagado porque no responde al ping.</li>
+</ul>
+<h2 id="5-matriz-de-memorizacion" class="tema-h2">5. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Dato clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Capas TCP/IP</td>
+<td>Aplicación · transporte · internet · acceso a la red</td>
+</tr>
+<tr>
+<td>IP</td>
+<td>Sin conexión, <em>best effort</em> · TTL / Hop Limit · protocolo 1/6/17</td>
+</tr>
+<tr>
+<td>ICMP</td>
+<td>Echo 8/0 · Time Exceeded 11 · Unreachable 3 · sin puertos</td>
+</tr>
+<tr>
+<td>ARP</td>
+<td>IPv4 → MAC · request broadcast, reply unicast · caché · remoto → puerta de enlace</td>
+</tr>
+<tr>
+<td>TCP / UDP</td>
+<td>Cabecera 20 / 8 B · SYN, SYN-ACK, ACK</td>
+</tr>
+<tr>
+<td>Endpoint</td>
+<td>IP + puerto + protocolo · conexión = IP y puerto origen + IP y puerto destino + protocolo</td>
+</tr>
+<tr>
+<td>Privadas</td>
+<td>10/8 · 172.16/12 · 192.168/16</td>
+</tr>
+<tr>
+<td>Especiales</td>
+<td>127/8 loopback · 169.254/16 link-local · 0.0.0.0/0 ruta por defecto</td>
+</tr>
+<tr>
+<td>/26 · /28 · /20 · /23</td>
+<td>62 · 14 · 4.094 · 510 hosts</td>
+</tr>
+<tr>
+<td>DHCP</td>
+<td>DORA · UDP 67/68 · reserva · relay (<code>ip helper-address</code>)</td>
+</tr>
+<tr>
+<td>NAT</td>
+<td>Estático · dinámico · PAT · redirección de puertos</td>
+</tr>
+<tr>
+<td>IPv6</td>
+<td>128 bits · /64 · FE80::/10 · 2000::/3 · FC00::/7 (FD00::/8) · FF00::/8 · ::1 · ::</td>
+</tr>
+<tr>
+<td>Autoconfiguración IPv6</td>
+<td>RA · SLAAC · DHCPv6 sin/con estado · puerta de enlace por RA</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="6-preguntas-tipo-test" class="tema-h2">6. Preguntas tipo test</h2>
+<p><strong>1.</strong> ¿Cuántos hosts útiles tiene una subred /28?<br />
+a) 16 · b) 30 · c) 14 · d) 12</p>
+<p><strong>2.</strong> El broadcast de 213.114.93.0/26 es:<br />
+a) 213.114.93.63 · b) 213.114.93.127 · c) 213.114.93.255 · d) 213.114.93.31</p>
+<p><strong>3.</strong> ¿Qué dirección NO es privada?<br />
+a) 10.200.1.1 · b) 172.20.5.4 · c) 192.168.50.3 · d) 172.32.0.1</p>
+<p><strong>4.</strong> El protocolo que obtiene la MAC a partir de la IP es:<br />
+a) DNS · b) ARP · c) DHCP · d) NTP</p>
+<p><strong>5.</strong> Un equipo quiere enviar a una IP de otra red. ¿De quién resuelve la MAC con ARP?<br />
+a) Del destino final · b) Del servidor DNS · c) De su puerta de enlace · d) De ninguno</p>
+<p><strong>6.</strong> ICMP:<br />
+a) No usa puertos · b) Va sobre UDP · c) Usa el puerto 7 · d) Solo existe en IPv6</p>
+<p><strong>7.</strong> La secuencia de apertura de una conexión TCP es:<br />
+a) SYN, SYN-ACK, ACK · b) SYN, ACK, FIN · c) ACK, SYN, SYN-ACK · d) SYN, RST, ACK</p>
+<p><strong>8.</strong> La voz sobre IP (RTP) viaja normalmente sobre:<br />
+a) TCP · b) ARP · c) ICMP · d) UDP</p>
+<p><strong>9.</strong> El puerto de SSH es:<br />
+a) 21 · b) 22 · c) 23 · d) 443</p>
+<p><strong>10.</strong> Un PC que esperaba DHCP muestra 169.254.12.40. Es una pista de que:<br />
+a) No obtuvo configuración del DHCP · b) Tiene IP pública · c) Está en la VLAN de gestión · d) Usa IPv6</p>
+<p><strong>11.</strong> El broadcast de la red 10.42.96.0 con máscara 255.255.240.0 es:<br />
+a) 10.42.96.255 · b) 10.42.127.255 · c) 10.42.111.255 · d) 10.42.103.255</p>
+<p><strong>12.</strong> 192.168.0.0/24 y 192.168.1.0/24 se resumen como:<br />
+a) 192.168.0.0/16 · b) 192.168.0.0/25 · c) 192.168.1.0/23 · d) 192.168.0.0/23</p>
+<p><strong>13.</strong> El tipo de NAT con el que toda una LAN sale por una única IP pública es:<br />
+a) NAT estático · b) NAT dinámico · c) NAC · d) PAT</p>
+<p><strong>14.</strong> ¿Cuál es una abreviatura correcta de 2001:0db8:0000:0000:0000:0000:0000:0001?<br />
+a) 2001:db8:::1 · b) 2001:db8::1 · c) 2001::db8::1 · d) 21:db8::1</p>
+<p><strong>15.</strong> Las direcciones IPv6 link-local empiezan por:<br />
+a) FF00 · b) FE80 · c) 2001 · d) FC00</p>
+<p><strong>16.</strong> En IPv6 la función de ARP la hace:<br />
+a) NDP · b) DHCPv6 · c) SLAAC · d) No hace falta</p>
+<p><strong>17.</strong> El DHCP Discover no llega al servidor de otra subred porque:<br />
+a) Va cifrado · b) Usa TCP · c) Es un broadcast y no atraviesa routers · d) Necesita DNS</p>
+<p><strong>18.</strong> Un equipo hace ping a 8.8.8.8 pero no a <a href="http://www.donostia.eus">www.donostia.eus</a>. Lo más probable es un fallo de:<br />
+a) Puerta de enlace · b) DNS · c) Cable · d) Máscara</p>
+<p><strong>19.</strong> En IPv6, el equipo aprende normalmente su puerta de enlace:<br />
+a) Por la opción 3 de DHCPv6 · b) Por ARP · c) Por DNS · d) Por el Router Advertisement</p>
+<p><strong>20.</strong> Una conexión TCP concreta se distingue por:<br />
+a) Solo el puerto de destino · b) Las MAC de origen y destino · c) IP y puerto de origen y de destino, y el protocolo · d) Solo la IP de destino</p>
+<p><strong>21.</strong> En una tabla de rutas, 0.0.0.0/0 representa:<br />
+a) La ruta por defecto · b) El loopback · c) El broadcast limitado · d) La red APIPA</p>
+<p><strong>22.</strong> ¿Están 192.168.16.20/28 y 192.168.16.33/28 en la misma subred?<br />
+a) Sí, porque ambas empiezan por 192.168.16 · b) Sí, porque tienen la misma máscara · c) Depende del DHCP · d) No: una está en .16–.31 y la otra en .32–.47</p>
+<p><strong>Soluciones:</strong> 1 c · 2 a · 3 d · 4 b · 5 c · 6 a · 7 a · 8 d · 9 b · 10 a · 11 c · 12 d · 13 d · 14 b · 15 b · 16 a · 17 c · 18 b · 19 d · 20 c · 21 a · 22 d</p>
+<h2 id="7-posibles-preguntas-cortas-con-esquema-de-respuesta" class="tema-h2">7. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<p><strong>1. Diferencias entre TCP y UDP, con ejemplos.</strong><br />
+Conexión (sí/no) · garantías (ACK, retransmisión, orden, control de flujo y congestión / ninguna) · cabecera 20 frente a 8 B · criterio: fiabilidad frente a inmediatez, según la aplicación · ejemplos TCP: HTTPS, SMTP, SSH; UDP: DHCP, voz, SNMP · DNS usa ambos.</p>
+<p><strong>2. Explica cómo funciona ARP.</strong><br />
+IPv4 → MAC en el enlace local · request en broadcast, reply normalmente unicast · caché ARP · destino remoto → MAC de la puerta de enlace · ARP gratuito e IP duplicada · ARP spoofing (T17) · en IPv6, NDP.</p>
+<p><strong>3. Explica el método del salto con un ejemplo de /20.</strong><br />
+Octeto interesante (el tercero, 240) · salto 16 · múltiplos 0, 16… 96, 112 · 10.42.100.7/20 → red 10.42.96.0 · broadcast 10.42.111.255 · hosts 10.42.96.1–10.42.111.254 (4.094).</p>
+<p><strong>4. Asignación manual, reserva DHCP y DHCP dinámico.</strong><br />
+Cuándo se necesita una dirección estable · estática en el equipo frente a reserva en el servidor · DORA, concesión, UDP 67/68 · relay entre VLAN · opciones (puerta de enlace, DNS, opción 66).</p>
+<p><strong>5. Principales diferencias entre IPv4 e IPv6.</strong><br />
+32 frente a 128 bits y notación · sin broadcast (multicast) · NDP en lugar de ARP · SLAAC y DHCPv6 · cabecera fija de 40 B · fragmentación solo en origen · NAT no es el modelo básico · transición: doble pila, túneles, NAT64.</p>
+<p><strong>6. Qué es NAT, tipos y por qué no es seguridad.</strong><br />
+Traducción de direcciones por el agotamiento de IPv4 · estático, dinámico, PAT, redirección de puertos · PAT distingue por puerto · NAT no filtra: eso lo hacen las reglas del cortafuegos (T14).</p>
+<p><strong>7. Autoconfiguración en IPv6.</strong><br />
+Router Advertisement y sus banderas · SLAAC (identificador estable o temporal; EUI-64 histórico) · DHCPv6 sin estado y con estado · la puerta de enlace se aprende por el RA, no por DHCPv6.</p>
+<h2 id="8-ejercicios-de-subnetting" class="tema-h2">8. Ejercicios de subnetting</h2>
+<p>Resuelve primero y comprueba después. Las soluciones van debajo, razonadas con el método del salto.</p>
+<p><strong>Nivel 1 — Hosts por prefijo</strong></p>
+<p><strong>E1.</strong> ¿Cuántos hosts útiles tiene cada subred: /24, /26, /27 y /28?</p>
+<p><strong>Nivel 2 — Red, rango y broadcast (cuarto octeto)</strong></p>
+<p><strong>E2.</strong> 192.168.193.77/26 (red de usuarios del caso de 2023, subdividida).<br />
+<strong>E3.</strong> 172.16.47.200/27 (red de cámaras del caso, subdividida).<br />
+<strong>E4.</strong> 10.42.5.130/29.</p>
+<p><strong>Nivel 3 — Octeto interesante en el tercero</strong></p>
+<p><strong>E5.</strong> 192.168.123.40/23 (red de Internet libre del caso).<br />
+<strong>E6.</strong> 10.42.100.7/20 (red de telefonía del caso).<br />
+<strong>E7.</strong> 172.16.45.10/22.</p>
+<p><strong>Nivel 4 — ¿Misma subred?</strong></p>
+<p><strong>E8.</strong> ¿Están en la misma subred a) 192.168.16.20/28 y 192.168.16.33/28? b) 192.168.122.10/23 y 192.168.123.200/23?</p>
+<p><strong>Nivel 5 — Elegir el prefijo</strong></p>
+<p><strong>E9.</strong> ¿Qué prefijo mínimo necesitan: a) 50 puestos más la puerta de enlace; b) 12 cámaras más la puerta de enlace; c) 200 teléfonos más la puerta de enlace?</p>
+<p><strong>Nivel 6 — VLSM</strong></p>
+<p><strong>E10.</strong> Reparte 192.168.50.0/24 entre: A, 100 equipos; B, 50; C, 20; D, un enlace punto a punto entre dos routers.</p>
+<p><strong>Soluciones</strong></p>
+<p><strong>E1.</strong> n = bits de host = 32 − prefijo. /24: 2⁸ − 2 = <strong>254</strong> · /26: 2⁶ − 2 = <strong>62</strong> · /27: 2⁵ − 2 = <strong>30</strong> · /28: 2⁴ − 2 = <strong>14</strong>.</p>
+<p><strong>E2.</strong> 192.168.193.77/26 · máscara 255.255.255.192 · octeto interesante el 4.º · salto 256 − 192 = 64 · múltiplos 0, <strong>64</strong>, 128 · 77 cae entre 64 y 128.<br />
+Red <strong>192.168.193.64</strong> · broadcast 128 − 1 = <strong>192.168.193.127</strong> · hosts <strong>.65 – .126</strong> · <strong>62</strong> hosts.</p>
+<p><strong>E3.</strong> 172.16.47.200/27 · máscara 255.255.255.224 · octeto interesante el 4.º · salto 32 · múltiplos … 160, <strong>192</strong>, 224 · 200 cae entre 192 y 224.<br />
+Red <strong>172.16.47.192</strong> · broadcast <strong>172.16.47.223</strong> · hosts <strong>.193 – .222</strong> · <strong>30</strong> hosts.</p>
+<p><strong>E4.</strong> 10.42.5.130/29 · máscara 255.255.255.248 · octeto interesante el 4.º · salto 8 · múltiplos … 120, <strong>128</strong>, 136 · 130 cae entre 128 y 136.<br />
+Red <strong>10.42.5.128</strong> · broadcast <strong>10.42.5.135</strong> · hosts <strong>.129 – .134</strong> · <strong>6</strong> hosts.</p>
+<p><strong>E5.</strong> 192.168.123.40/23 · máscara 255.255.254.0 · octeto interesante el <strong>3.º</strong> · salto 256 − 254 = 2 · múltiplos … 120, <strong>122</strong>, 124 · 123 cae entre 122 y 124.<br />
+Red <strong>192.168.122.0</strong> · broadcast <strong>192.168.123.255</strong> (la siguiente red es 192.168.124.0) · hosts <strong>192.168.122.1 – 192.168.123.254</strong> · 2⁹ − 2 = <strong>510</strong> hosts. Ojo: <strong>192.168.122.255 y 192.168.123.0 son hosts válidos</strong> en una /23.</p>
+<p><strong>E6.</strong> 10.42.100.7/20 · máscara 255.255.240.0 · octeto interesante el 3.º · salto 16 · múltiplos … 80, <strong>96</strong>, 112 · 100 cae entre 96 y 112.<br />
+Red <strong>10.42.96.0</strong> · broadcast <strong>10.42.111.255</strong> · hosts <strong>10.42.96.1 – 10.42.111.254</strong> · 2¹² − 2 = <strong>4.094</strong> hosts.</p>
+<p><strong>E7.</strong> 172.16.45.10/22 · máscara 255.255.252.0 · octeto interesante el 3.º · salto 4 · múltiplos … 40, <strong>44</strong>, 48 · 45 cae entre 44 y 48.<br />
+Red <strong>172.16.44.0</strong> · broadcast <strong>172.16.47.255</strong> · hosts <strong>172.16.44.1 – 172.16.47.254</strong> · 2¹⁰ − 2 = <strong>1.022</strong> hosts.</p>
+<p><strong>E8.</strong> a) Salto 16: .20 está en la red <strong>.16</strong> (.16–.31) y .33 en la red <strong>.32</strong> (.32–.47) → <strong>no</strong> están en la misma subred. b) Salto 2 en el 3.er octeto: 122 y 123 están en la red <strong>192.168.122.0/23</strong> → <strong>sí</strong>.</p>
+<p><strong>E9.</strong> Se busca el menor n con 2ⁿ − 2 ≥ equipos (incluida la puerta de enlace).<br />
+a) 51 → 2⁶ − 2 = 62 → <strong>/26</strong> · b) 13 → 2⁴ − 2 = 14 → <strong>/28</strong> (justo: sin margen, mejor /27 si se prevé crecer) · c) 201 → 2⁸ − 2 = 254 → <strong>/24</strong>.</p>
+<p><strong>E10.</strong> Se asigna <strong>de mayor a menor</strong> para que cada bloque empiece en un múltiplo de su salto.<br />
+A (100) → /25 (126) · <strong>192.168.50.0/25</strong>: hosts .1–.126, broadcast .127.<br />
+B (50) → /26 (62) · <strong>192.168.50.128/26</strong>: hosts .129–.190, broadcast .191.<br />
+C (20) → /27 (30) · <strong>192.168.50.192/27</strong>: hosts .193–.222, broadcast .223.<br />
+D (2) → /30 (2) · <strong>192.168.50.224/30</strong>: hosts .225–.226, broadcast .227 (un /31 también valdría en un enlace punto a punto).<br />
+Quedan libres 192.168.50.228 – .255 para crecer.</p>
+<h2 id="9-casos-practicos" class="tema-h2">9. Casos prácticos</h2>
+<p><strong>Mini caso A — PC con 169.254.</strong> Un PC recién instalado tiene 169.254.33.10 y no navega; los demás de la planta funcionan.<br />
+<em>Esquema:</em> esperaba DHCP y <strong>no obtuvo configuración</strong> · enlace y latiguillo · en el switch, puerto activo y en la <strong>VLAN correcta</strong> · relay de esa VLAN, servidor y direcciones libres en el ámbito · <code>ipconfig /release</code> y <code>/renew</code> · escalado a comunicaciones si hay que tocar el switch.</p>
+<p><strong>Mini caso B — Llega a la puerta de enlace, pero no a Internet.</strong> Un PC tiene IP correcta, responde <code>ping</code> a su puerta de enlace, pero no llega a ninguna IP externa.<br />
+<em>Esquema:</em> la red local funciona · el problema está <strong>más allá de la puerta de enlace</strong> · <code>tracert 8.8.8.8</code> para ver dónde se corta · ¿afecta a todos? → salida, cortafuegos u operador · ¿solo a él? → reglas del cortafuegos para su IP o VLAN · escalar con el dato del salto que falla.</p>
+<p><strong>Mini caso C — Sale por IP, pero no por nombre.</strong> <code>ping 8.8.8.8</code> responde, pero no abre ninguna web por nombre.<br />
+<em>Esquema:</em> la red y la salida funcionan · fallo de <strong>DNS</strong> · <code>ipconfig /all</code> para ver los servidores DNS · <code>nslookup</code> contra el DNS corporativo · si el DNS del equipo es correcto, revisar el servidor (T10).</p>
+<p><strong>Mini caso D — Máscaras distintas.</strong> PC1 tiene 192.168.1.10/24 y PC2 192.168.1.130/25, con la misma puerta de enlace; a veces no se comunican.<br />
+<em>Esquema:</em> PC1 cree que PC2 está en su red (/24) y le envía directamente · PC2 calcula su red como 192.168.1.128/25: cree que PC1 está <strong>fuera</strong> y le contesta a través de la puerta de enlace · el tráfico es incoherente o se pierde · corregir la máscara de PC2 a /24 (o la de quien esté mal según el plan de direccionamiento).</p>
+<p><strong>Mini caso E — ¿Por qué ARP pide la MAC del router?</strong> Un compañero ve con Wireshark que su PC (192.168.193.25/24) envía un ARP preguntando por 192.168.193.1 cuando abre una web externa, y cree que es un error.<br />
+<em>Esquema:</em> el destino está <strong>fuera</strong> de 192.168.193.0/24 · según la <strong>tabla de rutas</strong> se usa la <strong>ruta por defecto</strong> (0.0.0.0/0 → 192.168.193.1) · se necesita la MAC del <strong>siguiente salto</strong>, la puerta de enlace · la trama lleva la MAC del router y el paquete, la IP del destino · es el comportamiento correcto.</p>
+<p><strong>Mini caso F — No caben más equipos.</strong> Hay que añadir 6 tabletas a la subred de registro 192.168.16.16/28, que ya tiene 2 AP, 8 tabletas y la puerta de enlace.<br />
+<em>Esquema:</em> /28 = 14 hosts útiles · ocupados 11 · libres 3 → <strong>no caben 6</strong> · ampliar a /27 (30 hosts) si el plan lo permite (192.168.16.0/27, revisando que no pise otras redes) o crear otra subred · cambio coordinado con comunicaciones (T20).</p>
+<p><strong>Supuesto desarrollado — Plan de direcciones de un edificio municipal (supuesto).</strong> Un edificio va a tener cuatro VLAN: usuarios (90 puestos), telefonía (90 teléfonos), cámaras (12) y gestión de la electrónica de red (8 equipos). Se dispone del bloque privado 10.20.0.0/16 y la salida a Internet es por el cortafuegos municipal.</p>
+<p><em>a) Diseño de subredes.</em><br />
+Usuarios y telefonía: 91 equipos con la puerta de enlace → /25 (126) bastaría; se elige <strong>/24</strong> (254) para crecer · cámaras: 13 → /28 justo; mejor <strong>/27</strong> (30) · gestión: 9 → <strong>/28</strong> (14) · ejemplo: usuarios 10.20.1.0/24, telefonía 10.20.2.0/24, cámaras 10.20.3.0/27, gestión 10.20.3.32/28 · los bloques no se solapan porque cada uno empieza en un múltiplo de su salto.</p>
+<p><em>b) Asignación.</em><br />
+Usuarios y telefonía por <strong>DHCP</strong> con relay en cada VLAN; la de telefonía, con la opción 66 para aprovisionar los teléfonos · cámaras y gestión con <strong>dirección estable</strong> (manual o reserva, según el criterio de la organización) y documentada · la puerta de enlace de cada VLAN, en el switch de capa 3 o en el cortafuegos (T4).</p>
+<p><em>c) Salida a Internet.</em><br />
+Direcciones privadas: salida con <strong>PAT</strong> en el cortafuegos · ningún equipo interno publicado salvo necesidad justificada (redirección de puerto o, mejor, VPN, T15) · reglas del cortafuegos por VLAN (T14).</p>
+<p><em>d) Incidencia.</em><br />
+Tras la puesta en marcha, varios teléfonos muestran 169.254.x.x. Por la escalera: tienen enlace, pero no obtienen configuración DHCP → revisar que su puerto está en la VLAN de voz, que el relay de esa VLAN apunta al servidor y que el ámbito tiene direcciones libres. Se corrige, se verifica con un equipo de prueba y se registra la incidencia (T20).</p>
+<h2 id="10-repaso-visual-t2" class="tema-h2">10. Repaso visual · T2</h2>
+<figure class="tema-figura">
+<figcaption>Repaso 1 · Pila y direcciones</figcaption>
+<svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pila TCP/IP de cuatro capas y la dirección que usa cada nivel: puerto, IP y MAC." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0210pilaa-18" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0210pilav-18" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0210pilam-18" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0210pilag-18" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><text x="170" y="16" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">Modelo TCP/IP · 4 capas</text><text x="530" y="16" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">Dirección que usa</text><rect x="10" y="28" width="320" height="40" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="170.0" y="41.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Aplicación</text><text x="170.0" y="54.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">HTTP/S · DNS · DHCP · SMTP · SSH · SNMP · SIP</text><path d="M170,68 L170,74" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0210pilag-18)"/><rect x="10" y="74" width="320" height="40" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="170.0" y="87.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Transporte</text><text x="170.0" y="100.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">TCP · UDP</text><path d="M170,114 L170,120" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0210pilag-18)"/><rect x="10" y="120" width="320" height="40" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="170.0" y="133.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Internet</text><text x="170.0" y="146.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">IP (v4, v6) · ICMP</text><path d="M170,160 L170,166" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0210pilag-18)"/><rect x="10" y="166" width="320" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="170.0" y="179.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Acceso a la red</text><text x="170.0" y="192.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">Ethernet · wifi · ARP en la frontera</text><rect x="380" y="28" width="310" height="86" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="535.0" y="64.0" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">PUERTO → aplicación</text><text x="535.0" y="78.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#23272e" dominant-baseline="middle">16 bits (0–65.535)</text><rect x="380" y="120" width="310" height="40" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="535.0" y="133.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">IP → equipo de destino</text><text x="535.0" y="146.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">IPv4 32 bits · IPv6 128 bits</text><rect x="380" y="166" width="310" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="535.0" y="179.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">MAC → interfaz en el salto local</text><text x="535.0" y="192.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">48 bits</text><line x1="330" y1="71" x2="380" y2="71" stroke="#5a5652" stroke-width="1.2" stroke-dasharray="5 3"/><line x1="330" y1="140" x2="380" y2="140" stroke="#5a5652" stroke-width="1.2" stroke-dasharray="5 3"/><line x1="330" y1="186" x2="380" y2="186" stroke="#5a5652" stroke-width="1.2" stroke-dasharray="5 3"/><text x="350" y="228" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">Algunos libros usan 5 capas (separan física y enlace): el contenido es el mismo</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 2 · TCP y UDP</figcaption>
+<svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="TCP frente a UDP con sus puertos clave." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0212tcpudpa-19" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0212tcpudpv-19" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0212tcpudpm-19" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0212tcpudpg-19" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="10" width="330" height="196" rx="10" fill="#e6edf7" stroke="#003da5" stroke-width="1.2"/><rect x="360" y="10" width="330" height="196" rx="10" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.2" stroke-dasharray="5 3"/><text x="175" y="32" text-anchor="middle" font-size="13" font-weight="700" fill="#003da5" dominant-baseline="middle">TCP · protocolo 6</text><text x="525" y="32" text-anchor="middle" font-size="13" font-weight="700" fill="#b26a00" dominant-baseline="middle">UDP · protocolo 17</text><text x="175" y="56" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">con conexión (SYN, SYN-ACK, ACK)</text><text x="525" y="56" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">sin conexión</text><text x="175" y="76" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">confirma, ordena y retransmite</text><text x="525" y="76" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">sin confirmación ni retransmisión</text><text x="175" y="96" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">control de flujo y de congestión</text><text x="525" y="96" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">la aplicación decide qué hacer</text><text x="175" y="116" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">cabecera de 20 bytes o más</text><text x="525" y="116" text-anchor="middle" font-size="10.5" font-weight="500" fill="#23272e" dominant-baseline="middle">cabecera de 8 bytes</text><text x="175" y="150" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">22 SSH · 25 SMTP · 80 HTTP</text><text x="175" y="168" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">443 HTTPS · 445 SMB · 3389 RDP</text><text x="525" y="150" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">67/68 DHCP · 69 TFTP · 123 NTP</text><text x="525" y="168" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">161/162 SNMP · 514 syslog · RTP</text><text x="175" y="192" text-anchor="middle" font-size="10.5" font-weight="700" fill="#003da5" dominant-baseline="middle">fiabilidad · orden · control</text><text x="525" y="192" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b26a00" dominant-baseline="middle">simplicidad · poca sobrecarga · tiempo real</text><text x="350" y="228" text-anchor="middle" font-size="10" font-weight="600" fill="#23272e" dominant-baseline="middle">DNS 53 usa los dos (UDP consultas; TCP respuestas grandes y transferencias) · HTTP/3 va sobre QUIC (UDP 443)</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 3 · Subnetting</figcaption>
+<svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Máscaras de /24 a /30 con salto y hosts, y el método del salto." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0213mascarasa-20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0213mascarasv-20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0213mascarasm-20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0213mascarasg-20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><text x="60" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Prefijo</text><text x="190" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Máscara</text><text x="310" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Salto</text><text x="400" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Direcciones</text><text x="500" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Hosts útiles</text><rect x="10" y="28" width="525" height="22" rx="3" fill="#ffffff" stroke="#d8d6d3" stroke-width="0.8"/><text x="60" y="43" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">/24</text><text x="190" y="43" text-anchor="middle" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">255.255.255.0</text><text x="310" y="43" text-anchor="middle" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">—</text><text x="400" y="43" text-anchor="middle" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">256</text><text x="500" y="43" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">254</text><rect x="10" y="52" width="525" height="22" rx="3" fill="#f0efed" stroke="#d8d6d3" stroke-width="0.8"/><text x="60" y="67" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">/25</text><text x="190" y="67" text-anchor="middle" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">255.255.255.128</text><text x="310" y="67" text-anchor="middle" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">128</text><text x="400" y="67" text-anchor="middle" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">128</text><text x="500" y="67" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">126</text><rect x="10" y="76" width="525" height="22" rx="3" fill="#e8f3ea" stroke="#d8d6d3" stroke-width="0.8"/><text x="60" y="91" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">/26</text><text x="190" y="91" text-anchor="middle" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">255.255.255.192</text><text x="310" y="91" text-anchor="middle" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">64</text><text x="400" y="91" text-anchor="middle" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">64</text><text x="500" y="91" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">62</text><rect x="10" y="100" width="525" height="22" rx="3" fill="#f0efed" stroke="#d8d6d3" stroke-width="0.8"/><text x="60" y="115" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">/27</text><text x="190" y="115" text-anchor="middle" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">255.255.255.224</text><text x="310" y="115" text-anchor="middle" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">32</text><text x="400" y="115" text-anchor="middle" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">32</text><text x="500" y="115" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">30</text><rect x="10" y="124" width="525" height="22" rx="3" fill="#e8f3ea" stroke="#d8d6d3" stroke-width="0.8"/><text x="60" y="139" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">/28</text><text x="190" y="139" text-anchor="middle" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">255.255.255.240</text><text x="310" y="139" text-anchor="middle" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">16</text><text x="400" y="139" text-anchor="middle" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">16</text><text x="500" y="139" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">14</text><rect x="10" y="148" width="525" height="22" rx="3" fill="#f0efed" stroke="#d8d6d3" stroke-width="0.8"/><text x="60" y="163" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">/29</text><text x="190" y="163" text-anchor="middle" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">255.255.255.248</text><text x="310" y="163" text-anchor="middle" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">8</text><text x="400" y="163" text-anchor="middle" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">8</text><text x="500" y="163" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">6</text><rect x="10" y="172" width="525" height="22" rx="3" fill="#ffffff" stroke="#d8d6d3" stroke-width="0.8"/><text x="60" y="187" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">/30</text><text x="190" y="187" text-anchor="middle" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">255.255.255.252</text><text x="310" y="187" text-anchor="middle" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">4</text><text x="400" y="187" text-anchor="middle" font-size="11" font-weight="500" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">4</text><text x="500" y="187" text-anchor="middle" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle" font-family="'JetBrains Mono', Menlo, Consolas, monospace">2</text><text x="620" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">Método del salto</text><rect x="545" y="28" width="150" height="28" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="620.0" y="42.0" text-anchor="middle" font-size="9" font-weight="700" fill="#23272e" dominant-baseline="middle">1 octeto interesante</text><rect x="545" y="62" width="150" height="28" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="620.0" y="76.0" text-anchor="middle" font-size="9" font-weight="700" fill="#23272e" dominant-baseline="middle">2 salto = 256 − valor</text><rect x="545" y="96" width="150" height="28" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="620.0" y="110.0" text-anchor="middle" font-size="9" font-weight="700" fill="#23272e" dominant-baseline="middle">3 múltiplos del salto</text><rect x="545" y="130" width="150" height="28" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="620.0" y="144.0" text-anchor="middle" font-size="9" font-weight="700" fill="#23272e" dominant-baseline="middle">4 red = múltiplo ≤ IP</text><rect x="545" y="164" width="150" height="28" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="620.0" y="178.0" text-anchor="middle" font-size="9" font-weight="700" fill="#23272e" dominant-baseline="middle">5 broadcast = sig. red − 1</text><text x="280" y="212" text-anchor="middle" font-size="10.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Hosts útiles = 2ⁿ − 2 (n = bits de host) · el /24 tiene salto 1 en el 3.er octeto</text><text x="280" y="228" text-anchor="middle" font-size="10.5" font-weight="600" fill="#5a5652" dominant-baseline="middle">máscaras de un octeto: 128 · 192 · 224 · 240 · 248 · 252 · 254 · 255</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 4 · Privadas y especiales</figcaption>
+<svg viewBox="0 0 700 244" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Redes privadas RFC 1918 y direcciones especiales IPv4." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0214privadasa-21" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0214privadasv-21" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0214privadasm-21" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0214privadasg-21" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><text x="350" y="16" text-anchor="middle" font-size="12" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">Privadas RFC 1918: no se enrutan en Internet</text><rect x="10" y="28" width="220" height="58" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="120.0" y="43.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">10.0.0.0/8</text><text x="120.0" y="57.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">10.x.x.x</text><text x="120.0" y="71.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">1 bloque grande</text><rect x="240" y="28" width="220" height="58" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="350.0" y="43.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">172.16.0.0/12</text><text x="350.0" y="57.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">172.16 – 172.31</text><text x="350.0" y="71.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">¡no 172.32!</text><rect x="470" y="28" width="220" height="58" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="580.0" y="43.0" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" dominant-baseline="middle">192.168.0.0/16</text><text x="580.0" y="57.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">192.168.x.x</text><text x="580.0" y="71.0" text-anchor="middle" font-size="9.5" font-weight="500" fill="#ffffff" dominant-baseline="middle">la de casa</text><text x="350" y="112" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">Especiales</text><rect x="10" y="124" width="220" height="40" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="120.0" y="137.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">127.0.0.0/8</text><text x="120.0" y="150.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">loopback</text><rect x="240" y="124" width="220" height="40" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="350.0" y="137.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">169.254.0.0/16</text><text x="350.0" y="150.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">link-local (APIPA)</text><rect x="470" y="124" width="220" height="40" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="580.0" y="137.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">100.64.0.0/10</text><text x="580.0" y="150.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">CGNAT operadores</text><rect x="10" y="170" width="220" height="40" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="120.0" y="183.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">0.0.0.0</text><text x="120.0" y="196.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">no especificada</text><rect x="240" y="170" width="220" height="40" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6" stroke-dasharray="5 3"/><text x="350.0" y="183.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">0.0.0.0/0</text><text x="350.0" y="196.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">ruta por defecto</text><rect x="470" y="170" width="220" height="40" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="580.0" y="183.25" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">255.255.255.255</text><text x="580.0" y="196.75" text-anchor="middle" font-size="9.0" font-weight="500" fill="#23272e" dominant-baseline="middle">broadcast limitado</text><text x="350" y="232" text-anchor="middle" font-size="10.5" font-weight="600" fill="#b26a00" dominant-baseline="middle">No confundir 0.0.0.0 (dirección sin asignar) con 0.0.0.0/0 (todas las redes: ruta por defecto)</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 5 · IPv4 frente a IPv6</figcaption>
+<svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Comparación fila a fila entre IPv4 e IPv6." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0215v4v6a-22" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0215v4v6v-22" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0215v4v6m-22" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0215v4v6g-22" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><text x="260" y="16" text-anchor="middle" font-size="12.5" font-weight="700" fill="#003da5" dominant-baseline="middle">IPv4</text><text x="530" y="16" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2e7d3c" dominant-baseline="middle">IPv6</text><text x="20" y="41" text-anchor="start" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Longitud</text><rect x="140" y="26" width="240" height="22" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="260.0" y="37.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">32 bits</text><rect x="410" y="26" width="240" height="22" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="530.0" y="37.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">128 bits</text><text x="20" y="67" text-anchor="start" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Notación</text><rect x="140" y="52" width="240" height="22" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="260.0" y="63.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">decimal con puntos</text><rect x="410" y="52" width="240" height="22" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="530.0" y="63.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">hexadecimal con «:»</text><text x="20" y="93" text-anchor="start" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Vecinos</text><rect x="140" y="78" width="240" height="22" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="260.0" y="89.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">ARP</text><rect x="410" y="78" width="240" height="22" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="530.0" y="89.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">NDP (ICMPv6)</text><text x="20" y="119" text-anchor="start" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Difusión</text><rect x="140" y="104" width="240" height="22" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="260.0" y="115.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">broadcast</text><rect x="410" y="104" width="240" height="22" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="530.0" y="115.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">sin broadcast: multicast</text><text x="20" y="145" text-anchor="start" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Autoconfig.</text><rect x="140" y="130" width="240" height="22" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="260.0" y="141.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">DHCP</text><rect x="410" y="130" width="240" height="22" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="530.0" y="141.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">SLAAC y/o DHCPv6</text><text x="20" y="171" text-anchor="start" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Fragmenta</text><rect x="140" y="156" width="240" height="22" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="260.0" y="167.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">origen y routers</text><rect x="410" y="156" width="240" height="22" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="530.0" y="167.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">solo el origen</text><text x="20" y="197" text-anchor="start" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">Cabecera</text><rect x="140" y="182" width="240" height="22" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="260.0" y="193.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">20–60 B, con checksum</text><rect x="410" y="182" width="240" height="22" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="530.0" y="193.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">40 B fija, sin checksum</text><text x="20" y="223" text-anchor="start" font-size="11" font-weight="700" fill="#23272e" dominant-baseline="middle">NAT</text><rect x="140" y="208" width="240" height="22" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="260.0" y="219.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">habitual (privadas)</text><rect x="410" y="208" width="240" height="22" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="530.0" y="219.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23272e" dominant-baseline="middle">no es el modelo básico</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>Repaso 6 · Diagnóstico</figcaption>
+<svg viewBox="0 0 700 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Siete pasos de diagnóstico de abajo arriba." font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="T0209escaleraa-23" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="T0209escalerav-23" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="T0209escaleram-23" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="T0209escalerag-23" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="10" y="30" width="90" height="54" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="55.0" y="50.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">1 Enlace</text><text x="55.0" y="63.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#23272e" dominant-baseline="middle">luces, cable, puerto</text><path d="M100,57 L106,57" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0209escalerag-23)"/><rect x="108" y="30" width="90" height="54" rx="6" fill="#f0efed" stroke="#5a5652" stroke-width="1.6"/><text x="153.0" y="50.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">2 ¿IP válida?</text><text x="153.0" y="63.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#23272e" dominant-baseline="middle">ipconfig: ¿169.254?</text><path d="M198,57 L204,57" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0209escalerag-23)"/><rect x="206" y="30" width="90" height="54" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="251.0" y="50.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">3 Máscara</text><text x="251.0" y="63.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#23272e" dominant-baseline="middle">y puerta de enlace</text><path d="M296,57 L302,57" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0209escalerag-23)"/><rect x="304" y="30" width="90" height="54" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="349.0" y="50.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">4 ping puerta</text><text x="349.0" y="63.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#23272e" dominant-baseline="middle">red local</text><path d="M394,57 L400,57" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0209escalerag-23)"/><rect x="402" y="30" width="90" height="54" rx="6" fill="#e8f3ea" stroke="#2e7d3c" stroke-width="1.6"/><text x="447.0" y="50.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">5 ping externo</text><text x="447.0" y="63.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#23272e" dominant-baseline="middle">enrutamiento, salida</text><path d="M492,57 L498,57" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0209escalerag-23)"/><rect x="500" y="30" width="90" height="54" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6"/><text x="545.0" y="50.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">6 Nombre</text><text x="545.0" y="63.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#23272e" dominant-baseline="middle">nslookup: DNS</text><path d="M590,57 L596,57" fill="none" stroke="#5a5652" stroke-width="1.2" marker-end="url(#T0209escalerag-23)"/><rect x="598" y="30" width="90" height="54" rx="6" fill="#fbf0dd" stroke="#b26a00" stroke-width="1.6"/><text x="643.0" y="50.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#23272e" dominant-baseline="middle">7 Servicio</text><text x="643.0" y="63.25" text-anchor="middle" font-size="8.0" font-weight="500" fill="#23272e" dominant-baseline="middle">¿responde el puerto?</text><text x="350" y="16" text-anchor="middle" font-size="12" font-weight="700" fill="#23272e" dominant-baseline="middle">De abajo arriba: el primer paso que falla indica la capa del problema</text><text x="350" y="110" text-anchor="middle" font-size="11" font-weight="600" fill="#b26a00" dominant-baseline="middle">ping 127.0.0.1 solo prueba la pila TCP/IP del propio equipo: no verifica cable, switch ni red</text><text x="350" y="128" text-anchor="middle" font-size="10.5" font-weight="500" fill="#5a5652" dominant-baseline="middle">un ping sin respuesta no prueba que el equipo esté apagado: ICMP puede estar filtrado</text></svg>
+</figure>
+<h2 id="11-resumen-final-si-manana-fuera-el-examen" class="tema-h2">11. Resumen final: si mañana fuera el examen</h2>
+<p>TCP/IP tiene <strong>cuatro capas</strong> y cada una <strong>encapsula</strong> a la superior: el <strong>puerto</strong> identifica la aplicación, la <strong>IP</strong> el equipo y la <strong>MAC</strong> la interfaz del salto local. <strong>IP</strong> es sin conexión y <em>best effort</em>; el <strong>TTL</strong> evita bucles y hace posible el traceroute. <strong>ICMP</strong> (ping, traceroute) <strong>no usa puertos</strong>. <strong>ARP</strong> traduce IPv4 a MAC con un request en broadcast; si el destino está fuera, pregunta por la <strong>puerta de enlace</strong>. <strong>TCP</strong> aporta conexión y garantías (SYN, SYN-ACK, ACK); <strong>UDP</strong> es mínimo (DHCP, voz; DNS usa ambos). Una IPv4 tiene <strong>32 bits</strong>: con el <strong>prefijo</strong> (nunca con la clase) se calculan red, <strong>broadcast</strong> y <strong>hosts (2ⁿ − 2)</strong> usando el <strong>salto = 256 − máscara</strong>. Las <strong>privadas</strong> (10/8, 172.16/12, 192.168/16) salen habitualmente con <strong>PAT</strong>; NAT <strong>no es seguridad</strong>. <strong>DHCP</strong> sigue <strong>DORA</strong>, necesita <strong>relay</strong> entre VLAN, y <strong>169.254</strong> indica que no se obtuvo configuración. <strong>IPv6</strong> tiene <strong>128 bits</strong>, se abrevia con <code>::</code> <strong>una vez</strong>, no tiene broadcast ni ARP (<strong>NDP</strong>), se autoconfigura con <strong>SLAAC</strong> o <strong>DHCPv6</strong> y aprende la puerta de enlace por el <strong>RA</strong>. Para diagnosticar: <strong>enlace → IP válida → puerta de enlace → IP externa → nombre → servicio</strong>.</p>
+<h2 id="12-actualidad-datos-fechados" class="tema-h2">12. Actualidad — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th>📌 <strong>Información sujeta a cambio · Apuntes actualizados en octubre de 2026</strong><br>Lo estable para el examen es lo explicado arriba; estos datos cambian y <strong>no hay que memorizarlos</strong>.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>Adopción de IPv6.</strong> La estadística pública de Google mide el <strong>porcentaje de usuarios que acceden a los servicios de Google por IPv6</strong>, no «el tráfico de Internet»: ronda la mitad a escala mundial, con mucha variación por país y operador.</li>
+<li>En las redes corporativas internas sigue siendo habitual <strong>IPv4 privado con NAT</strong>; la <strong>doble pila</strong> se despliega de forma progresiva.</li>
+<li><strong>HTTP/3</strong> (sobre <strong>QUIC</strong>, en UDP 443) ya lo usan muchos navegadores y servicios, aunque HTTPS clásico sobre TCP 443 sigue siendo la referencia.</li>
+<li><strong>DNS cifrado</strong> (DoH, DoT) se extiende en navegadores y sistemas; su efecto sobre el filtrado se trata en T14 y T17.</li>
+<li>Los sistemas operativos usan por defecto <strong>identificadores IPv6 temporales o estables</strong> y <strong>MAC aleatorias</strong> en wifi (T1), lo que complica identificar equipos solo por dirección.</li>
+</ul>
+  </div>
+</article>

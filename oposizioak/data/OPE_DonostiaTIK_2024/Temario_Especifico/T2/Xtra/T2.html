@@ -1,0 +1,278 @@
+<article class="tema-articulo">
+  <header class="tema-cabecera">
+    <div class="tema-cabecera__id">T2</div>
+    <h1 class="tema-cabecera__titulo">Gestión de incidentes. Objetivo, alcance y ámbito</h1>
+    <div class="tema-cabecera__meta">Xtra · Bloque I · Ámbito organizativo</div>
+  </header>
+
+  <nav class="tema-indice" aria-label="Índice del tema"><div class="tema-indice__titulo">Contenido</div><ol class="tema-indice__lista">
+<li><a href="#1-datos-y-anclas-de-memoria">1. Datos y anclas de memoria</a></li>
+<li><a href="#2-no-confundir">2. No confundir</a></li>
+<li><a href="#3-posibles-trampas-de-examen">3. Posibles trampas de examen</a></li>
+<li><a href="#4-posibles-preguntas-tipo-test">4. Posibles preguntas tipo test</a></li>
+<li><a href="#5-posibles-preguntas-cortas">5. Posibles preguntas cortas (con esquema de respuesta)</a></li>
+<li><a href="#6-supuestos-practicos">6. Supuestos prácticos</a></li>
+<li><a href="#7-matriz-de-memorizacion">7. Matriz de memorización</a></li>
+<li><a href="#8-resumen-final">8. Resumen final: si mañana fuera el examen</a></li>
+</ol></nav>
+
+  <div class="tema-cuerpo">
+<h2 id="1-datos-y-anclas-de-memoria" class="tema-h2">1. Datos y anclas de memoria</h2>
+<h4 class="tema-h4">Anclas esenciales</h4>
+<ul class="tema-lista">
+<li><strong>INCIDENTE → interrupción o degradación</strong> (no planificada).</li>
+<li><strong>OBJETIVO → restaurar + minimizar impacto</strong> (lo más rápido posible).</li>
+<li><strong>PETICIÓN → quiero algo normal/catalogado</strong> (sin fallo).</li>
+<li><strong>PROBLEMA → causa</strong> (real o potencial, de uno o varios incidentes).</li>
+<li><strong>CAMBIO → modificación</strong> (controlada, que puede afectar a servicios).</li>
+<li><strong>EVENTO → hecho detectable</strong> por monitorización; no necesariamente incidente.</li>
+<li><strong>IMPACTO → extensión · URGENCIA → velocidad</strong>.</li>
+<li><strong>SLA → cliente · OLA → interno · UC → proveedor externo</strong>.</li>
+<li><strong>WORKAROUND → restaurar sin causa raíz</strong>; puede dar lugar a un problema.</li>
+</ul>
+<h4 class="tema-h4">Definiciones formales (memorización prioritaria)</h4>
+<ul class="tema-lista">
+<li><strong>Propósito</strong>: «minimizar el impacto negativo de los incidentes, restaurando el funcionamiento normal del servicio lo más rápido posible».</li>
+<li><strong>Incidente</strong>: «interrupción no planificada de un servicio, o reducción de la calidad de un servicio».</li>
+<li><strong>Problema</strong>: causa, real o potencial, de uno o varios incidentes.</li>
+<li><strong>Cambio</strong>: adición, modificación o eliminación de cualquier cosa que pueda tener un efecto sobre los servicios.</li>
+</ul>
+<h4 class="tema-h4">Encuadre y acrónimos</h4>
+<ul class="tema-lista">
+<li>Práctica de <strong>gestión de servicios</strong> (una de las 17, de las 34 totales); opera sobre todo en <strong>Deliver &amp; support</strong>.</li>
+<li><strong>ITSM</strong> — herramienta de gestión de servicios (ticket) · <strong>KB</strong> — base de conocimiento · <strong>CMDB</strong> — base de datos de configuración · <strong>CI</strong> — elemento de configuración.</li>
+<li>Detección: <strong>reactiva</strong> (usuario) · <strong>proactiva</strong> (monitorización).</li>
+</ul>
+
+<h2 id="2-no-confundir" class="tema-h2">2. No confundir</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto A</strong></th>
+<th><strong>Concepto B</strong></th>
+<th><strong>Diferencia clave</strong></th>
+</tr>
+<tr>
+<td><strong>Incidente</strong>: algo falla o se degrada</td>
+<td><strong>Petición de servicio</strong>: se solicita algo catalogado, sin fallo</td>
+<td>Si no hay nada roto ni degradado, <strong>no es incidente</strong></td>
+</tr>
+<tr>
+<td><strong>Incidente</strong>: el síntoma, cada aparición del fallo</td>
+<td><strong>Problema</strong>: la causa real o potencial</td>
+<td>El incidente se <strong>restaura</strong>; el problema se <strong>investiga</strong></td>
+</tr>
+<tr>
+<td><strong>Incidente</strong>: interrupción o degradación real</td>
+<td><strong>Evento</strong>: hecho detectable por monitorización</td>
+<td>Un evento o alerta <strong>no implica necesariamente</strong> un incidente</td>
+</tr>
+<tr>
+<td><strong>Incidente</strong>: fallo no planificado que ocurre</td>
+<td><strong>Cambio</strong>: modificación controlada que se decide</td>
+<td>El cambio se <strong>planifica</strong>; el incidente <strong>sobreviene</strong></td>
+</tr>
+<tr>
+<td><strong>Objetivo de Incidentes</strong>: restaurar rápido</td>
+<td><strong>Causa raíz</strong>: objeto de la Gestión de Problemas</td>
+<td>Restaurar ≠ investigar por qué falló</td>
+</tr>
+<tr>
+<td><strong>Impacto</strong>: extensión del daño</td>
+<td><strong>Urgencia</strong>: rapidez con la que hay que actuar</td>
+<td>Se valoran <strong>juntos</strong> para ayudar a fijar la prioridad</td>
+</tr>
+<tr>
+<td><strong>Incidente (incluso de alta prioridad)</strong>: flujo normal</td>
+<td><strong>Major Incident</strong>: gestión diferenciada según criterios propios</td>
+<td>La declaración <strong>no es automática</strong>: depende de los criterios de la organización</td>
+</tr>
+<tr>
+<td><strong>Incident Management</strong>: velocidad, servicio restaurado</td>
+<td><strong>Problem Management</strong>: análisis, causas, recurrencia</td>
+<td>Incidentes apaga el fuego; Problemas evita que se repita</td>
+</tr>
+</table></div>
+
+<h2 id="3-posibles-trampas-de-examen" class="tema-h2">3. Posibles trampas de examen</h2>
+<ul class="tema-lista">
+<li><strong>«El objetivo de la Gestión de Incidentes es identificar la causa raíz»</strong> — falso: eso es Problem Management; el objetivo es minimizar el impacto restaurando el servicio lo antes posible.</li>
+<li><strong>«Una solicitud de instalación de software urgente es un incidente»</strong> — falso: la urgencia no convierte una petición en incidente; la frontera es si existe o no un fallo.</li>
+<li><strong>«Un problema tiene como objetivo restaurar inmediatamente el servicio»</strong> — falso: el problema trata causas y recurrencia; la restauración inmediata es del incidente.</li>
+<li><strong>«Toda alerta de monitorización genera un incidente»</strong> — falso: solo si evidencia interrupción o degradación real; muchas alertas motivan actuaciones preventivas.</li>
+<li><strong>«Impacto y urgencia son sinónimos»</strong> — falso: impacto = extensión; urgencia = velocidad necesaria.</li>
+<li><strong>«Un Major Incident es, por definición, cualquier P1»</strong> — falso: la declaración depende de los criterios definidos por la organización, no de un automatismo de prioridad.</li>
+<li><strong>«ITIL define los estados nuevo, en curso, en espera, resuelto y cerrado»</strong> — falso como afirmación literal: los estados y su nomenclatura dependen de la herramienta y la organización.</li>
+<li><strong>«Aplicar un workaround obliga a abrir un problema»</strong> — falso: puede dar lugar a un problema asociado, según el procedimiento y la relevancia del fallo.</li>
+<li><strong>«Toda organización debe tener un puesto de Incident Manager»</strong> — falso: es un rol o responsabilidad que puede establecerse; su existencia y denominación varían.</li>
+<li><strong>«La CMDB contiene siempre las relaciones entre todos los componentes»</strong> — matiz: una CMDB correctamente mantenida puede aportar esa información; su utilidad depende de su actualización.</li>
+</ul>
+
+<h2 id="4-posibles-preguntas-tipo-test" class="tema-h2">4. Posibles preguntas tipo test</h2>
+<ul class="tema-lista">
+<li>¿Cuál es el <strong>propósito literal</strong> de la práctica de Gestión de Incidentes según ITIL 4?</li>
+<li>¿Cuál es la <strong>definición de incidente</strong> y qué dos situaciones cubre (interrupción y degradación)?</li>
+<li>Clasificar un supuesto como <strong>incidente, petición, problema, cambio o evento</strong> («la aplicación va lenta» / «necesito un segundo monitor» / «el fallo se repite cada semana» / «hay que actualizar el servidor» / «alerta de disco al 85 %»).</li>
+<li>¿Qué práctica se ocupa de la <strong>causa raíz</strong>?</li>
+<li>¿Qué es un <strong>workaround</strong> y qué relación puede tener con la Gestión de Problemas?</li>
+<li>¿Qué situaciones quedan <strong>fuera del alcance</strong> de la Gestión de Incidentes?</li>
+<li>¿Qué diferencia la <strong>detección reactiva</strong> de la <strong>proactiva</strong> y qué práctica alimenta la segunda?</li>
+<li>¿Quién <strong>ejecuta</strong>, quién <strong>coordina</strong> y quién <strong>responde de la práctica</strong> en la gestión de incidentes?</li>
+<li>¿Qué aporta la <strong>CMDB</strong> (y sus CI) al diagnóstico? ¿Y la <strong>KB</strong>?</li>
+<li>Emparejar cada <strong>práctica relacionada</strong> con lo que aporta a Incident Management.</li>
+<li>¿Entre quiénes se establecen un <strong>SLA</strong>, un <strong>OLA</strong> y un <strong>UC</strong>?</li>
+<li>¿Qué mide el <strong>impacto</strong> y qué mide la <strong>urgencia</strong>?</li>
+<li>¿En qué actividad de la cadena de valor se encuadra principalmente la práctica?</li>
+<li>¿Qué caracteriza a un <strong>Major Incident</strong> y de qué depende su declaración?</li>
+<li>¿Los estados del ticket son una secuencia oficial de ITIL o dependen de la herramienta?</li>
+</ul>
+
+<h2 id="5-posibles-preguntas-cortas" class="tema-h2">5. Posibles preguntas cortas (con esquema de respuesta)</h2>
+<h4 class="tema-h4">1. Explique el propósito de la Gestión de Incidentes</h4>
+<ul class="tema-lista">
+<li>Definición literal: minimizar el impacto negativo restaurando el funcionamiento normal lo más rápido posible.</li>
+<li>Desglose: restaurar (incluso con workaround) + minimizar impacto (operativo y percibido).</li>
+<li>Contraste: la causa raíz no es su objetivo (Problem Management).</li>
+<li>Cierre: velocidad de restauración como criterio rector de la práctica.</li>
+</ul>
+<h4 class="tema-h4">2. Defina un incidente y diferéncielo de una petición de servicio</h4>
+<ul class="tema-lista">
+<li>Definición formal de incidente (interrupción / degradación, no planificada).</li>
+<li>Definición de petición (solicitud catalogada, sin fallo).</li>
+<li>La frontera: existencia o no de un fallo; la urgencia no cambia la naturaleza.</li>
+<li>Ejemplo de cada una en un contexto municipal.</li>
+</ul>
+<h4 class="tema-h4">3. Explique el alcance de la Gestión de Incidentes</h4>
+<ul class="tema-lista">
+<li>Dentro: interrupciones y degradaciones; detección reactiva y proactiva; incidentes de seguridad (con cautelas organizativas).</li>
+<li>Fuera: peticiones de servicio, causa raíz, cambios planificados.</li>
+<li>Cierre: el alcance delimita qué gestiona esta práctica frente a las prácticas vecinas.</li>
+</ul>
+<h4 class="tema-h4">4. Diferencie Incident Management y Problem Management</h4>
+<ul class="tema-lista">
+<li>Objetivos: restaurar rápido vs. analizar causas y reducir recurrencia e impacto.</li>
+<li>Objeto: el síntoma (cada fallo) vs. la causa (real o potencial).</li>
+<li>Intercambio: incidentes recurrentes alimentan problemas; problemas devuelven causas, errores conocidos y workarounds.</li>
+<li>Ejemplo: reinicio que restaura (incidente) vs. investigación del cuelgue repetido (problema).</li>
+</ul>
+<h4 class="tema-h4">5. Explique el ámbito de la Gestión de Incidentes</h4>
+<ul class="tema-lista">
+<li>Personas: N1/N2 ejecutan; coordinación (rol que puede establecerse); Practice Owner; usuario reporta y valida.</li>
+<li>Herramientas: ITSM (ticket), KB, CMDB/CI, monitorización.</li>
+<li>Prácticas relacionadas: Problemas, Solicitudes, Cambios, Niveles de Servicio, Configuración, Eventos y Monitorización.</li>
+</ul>
+<h4 class="tema-h4">6. Explique la relación de Incident Management con las prácticas de su entorno</h4>
+<ul class="tema-lista">
+<li>Recorrer la tabla del apartado 4 de Apuntes: qué aporta cada práctica (una o dos frases por práctica).</li>
+<li>Cierre: Incident Management no funciona aislada; su eficacia depende de ese ecosistema.</li>
+</ul>
+
+<h2 id="6-supuestos-practicos" class="tema-h2">6. Supuestos prácticos</h2>
+<h4 class="tema-h4">Supuesto 1 — La aplicación municipal que deja de funcionar</h4>
+<p><strong>Escenario</strong>: una aplicación de tramitación municipal deja de funcionar para varias personas usuarias a media mañana.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Es un incidente? ¿Por qué?</strong> Sí: interrupción no planificada de un servicio. Si en lugar de caerse «fuera lentísima», también lo sería (degradación).</li>
+<li><strong>b) ¿Cuál es el objetivo inmediato?</strong> Restaurar el funcionamiento normal lo antes posible y minimizar el impacto — no investigar todavía la causa de fondo.</li>
+<li><strong>c) ¿Qué herramientas se utilizarían?</strong> ITSM para registrar el ticket (uno o varios, enlazados); KB por si hay solución documentada; una CMDB bien mantenida para ver de qué servidores o servicios depende la aplicación; la monitorización puede haberlo alertado ya.</li>
+<li><strong>d) ¿Qué otras prácticas podrían intervenir?</strong> Si la resolución exige tocar producción, Habilitación del Cambio (vía de emergencia); si el fallo se repite, Gestión de Problemas; los plazos de referencia derivan de los acuerdos (SLM).</li>
+</ul>
+<h4 class="tema-h4">Supuesto 2 — ¿Incidente, petición, problema o evento?</h4>
+<p><strong>Escenario</strong>: en una misma mañana el CAU recibe: (1) «se me ha bloqueado la cuenta y no puedo entrar»; (2) «necesito acceso a la aplicación de padrón para una compañera nueva»; (3) la monitorización avisa: «disco del servidor de ficheros al 85 %»; (4) el técnico de N2 observa que el servidor de impresión se cuelga cada semana.</p>
+<ul class="tema-lista">
+<li><strong>a) Clasifica cada caso.</strong> (1) Incidente: hay un fallo que impide trabajar. (2) Petición de servicio: no hay fallo, es una solicitud catalogada. (3) Evento/alerta: aún no hay degradación del servicio — motivará una actuación preventiva, no necesariamente un incidente. (4) Candidato a problema: causa recurrente de incidentes.</li>
+<li><strong>b) ¿Qué práctica gestiona cada uno?</strong> (1) Gestión de Incidentes; (2) Gestión de Solicitudes de Servicio; (3) Monitorización y Gestión de Eventos (que decidirá si abre incidente); (4) Gestión de Problemas.</li>
+<li><strong>c) ¿Por qué importa clasificar bien?</strong> Cada tipo sigue un flujo, unos plazos y unas estadísticas distintas; clasificar mal deforma indicadores y retrasa la respuesta adecuada.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 3 — El workaround y lo que viene después</h4>
+<p><strong>Escenario</strong>: el certificado de un servicio web municipal provoca errores intermitentes. El N2 aplica una configuración provisional que estabiliza el servicio mientras se tramita la renovación definitiva.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Se ha cumplido el objetivo de la Gestión de Incidentes?</strong> Sí: el servicio queda restaurado mediante un workaround; el objetivo es restaurar y minimizar impacto, no eliminar la causa.</li>
+<li><strong>b) ¿Qué ocurre con la causa de fondo?</strong> Puede dar lugar a un problema asociado (y la renovación del certificado, si toca producción, se tramitará como cambio). Que se abra o no depende del procedimiento de la organización.</li>
+<li><strong>c) ¿Qué debe quedar en la KB?</strong> El diagnóstico y la solución provisional documentados, para que un caso similar se resuelva más rápido — conocimiento reutilizable.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 4 — Caída general y gestión diferenciada</h4>
+<p><strong>Escenario</strong>: a primera hora cae la red de todas las sedes: ni la plantilla puede trabajar ni se puede atender al público. La organización tiene definidos criterios de incidente grave.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Cómo se encuadra la situación?</strong> Es un incidente (interrupción) de máximo impacto; al cumplir los criterios definidos por la organización, es candidato a declararse <strong>incidente grave</strong> y gestionarse de forma diferenciada.</li>
+<li><strong>b) ¿Qué implica esa gestión diferenciada?</strong> Habitualmente: coordinación reforzada (una persona coordinando equipos), comunicación proactiva a dirección y afectados, y procedimiento propio de seguimiento — prácticas habituales, no requisitos universales.</li>
+<li><strong>c) ¿Sería automático declararlo por ser «P1»?</strong> No: la declaración depende de los criterios de la organización, no de un automatismo de prioridad.</li>
+</ul>
+
+<h2 id="7-matriz-de-memorizacion" class="tema-h2">7. Matriz de memorización</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Lo que debo recordar</strong></th>
+</tr>
+<tr>
+<td>Incidente</td>
+<td>Interrupción NO planificada o reducción de calidad de un servicio (interrupción o degradación)</td>
+</tr>
+<tr>
+<td>Propósito</td>
+<td>Minimizar el impacto negativo restaurando el funcionamiento normal lo más rápido posible (literal)</td>
+</tr>
+<tr>
+<td>Petición</td>
+<td>Solicitud catalogada, sin fallo → Service Request Management</td>
+</tr>
+<tr>
+<td>Problema</td>
+<td>Causa real o potencial de incidentes → Problem Management (causa raíz)</td>
+</tr>
+<tr>
+<td>Cambio</td>
+<td>Adición/modificación/eliminación que puede afectar a servicios → Change Enablement</td>
+</tr>
+<tr>
+<td>Evento</td>
+<td>Hecho detectable por monitorización; no necesariamente incidente</td>
+</tr>
+<tr>
+<td>Impacto</td>
+<td>Extensión de la afectación (a cuántos alcanza)</td>
+</tr>
+<tr>
+<td>Urgencia</td>
+<td>Rapidez con la que debe actuarse</td>
+</tr>
+<tr>
+<td>SLA</td>
+<td>Proveedor ↔ cliente</td>
+</tr>
+<tr>
+<td>OLA</td>
+<td>Acuerdo operativo interno</td>
+</tr>
+<tr>
+<td>UC</td>
+<td>Contrato con proveedor externo</td>
+</tr>
+<tr>
+<td>Workaround</td>
+<td>Restaura sin eliminar la causa raíz; puede dar lugar a un problema</td>
+</tr>
+<tr>
+<td>CMDB</td>
+<td>Inventario de CI y relaciones; bien mantenida, ayuda a valorar impacto y dirigir diagnóstico</td>
+</tr>
+<tr>
+<td>Major Incident</td>
+<td>Gestión diferenciada según criterios de la organización; no es automáticamente «un P1»</td>
+</tr>
+</table></div>
+
+<h2 id="8-resumen-final" class="tema-h2">8. Resumen final: si mañana fuera el examen</h2>
+<ul class="tema-lista">
+<li><strong>Qué es</strong>: práctica de gestión de servicios de ITIL 4 (una de las 17, de 34 totales), encuadrada sobre todo en Deliver &amp; support.</li>
+<li><strong>Objetivo</strong> (literal): minimizar el impacto negativo de los incidentes restaurando el funcionamiento normal del servicio lo más rápido posible. Restaurar ≠ causa raíz (eso es Problemas); el <strong>workaround</strong> cumple el objetivo y puede dar lugar a un problema.</li>
+<li><strong>Incidente</strong> = interrupción no planificada o reducción de calidad (interrupción o degradación).</li>
+<li><strong>Alcance — dentro</strong>: interrupciones, degradaciones, detección reactiva y proactiva, incidentes de seguridad (con posibles procedimientos específicos según la organización). <strong>Fuera</strong>: peticiones, causa raíz, cambios planificados.</li>
+<li>Fronteras de cinco: <strong>incidente</strong> (se rompe) · <strong>petición</strong> (quiero algo) · <strong>problema</strong> (la causa) · <strong>cambio</strong> (voy a modificar) · <strong>evento</strong> (hecho detectable, no necesariamente incidente).</li>
+<li><strong>Ámbito — personas</strong>: N1/N2 ejecutan; Incident Manager como rol que puede establecerse; Practice Owner responde de la práctica; el usuario reporta y valida el cierre. <strong>Herramientas</strong>: ITSM, KB, CMDB/CI (bien mantenida), monitorización. <strong>Prácticas relacionadas</strong>: Problemas, Solicitudes, Cambios, Niveles de Servicio, Configuración, Eventos y Monitorización — con lo que aporta cada una.</li>
+<li><strong>SLA = cliente · OLA = interno · UC = externo</strong>; pueden respaldar los compromisos del SLA.</li>
+<li>Prioridad: se valora con <strong>impacto</strong> (extensión) y <strong>urgencia</strong> (velocidad); la matriz es una ayuda posible, no una fórmula oficial.</li>
+<li>Flujo (contexto, detalle en T1): registro → categorización → priorización → diagnóstico → escalado → resolución → cierre; los estados del ticket dependen de la herramienta.</li>
+<li><strong>Major Incident</strong> (ampliación): gestión diferenciada conforme a criterios de la organización; no equivale automáticamente a «P1».</li>
+</ul>
+  </div>
+</article>
