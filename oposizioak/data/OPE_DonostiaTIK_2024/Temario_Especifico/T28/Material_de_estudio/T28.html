@@ -64,6 +64,7 @@
 <th><strong>⚠️ TRAMPA DE EXAMEN — cómo NO se define una LAN</strong><br>Es <strong>incorrecto</strong> definir la LAN por:<br>· <strong>«pertenecer o estar gestionada por una sola organización»</strong>;<br>· <strong>«ser de alta velocidad»</strong>.<br>Ambas son <strong>características habituales</strong>, no <strong>criterios definitorios</strong>. El criterio que define LAN, MAN y WAN es la <strong>EXTENSIÓN GEOGRÁFICA</strong>.<br>Existen LAN lentas y WAN rápidas; existen LAN compartidas por varias entidades. Nada de ello altera su clasificación.</th>
 </tr>
 </table></div>
+<p>No hay <strong>fronteras en kilómetros</strong> entre las tres. Y <strong>WAN no es sinónimo de Internet</strong>, que es una red de redes.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>🧠 Para memorizar</strong><br><strong>LAN → LOCAL · MAN → METROPOLITANA · WAN → AMPLIA.</strong><br>Las tres siglas se distinguen por su <strong>segunda letra</strong>: <strong>L</strong>ocal, <strong>M</strong>etropolitan, <strong>W</strong>ide.</th>
@@ -127,9 +128,9 @@
 <tr>
 <td><strong>Anillo</strong></td>
 <td>Cada equipo se conecta al siguiente <strong>formando un circuito cerrado</strong></td>
-<td>Acceso ordenado al medio</td>
-<td>Un fallo puede interrumpir el anillo</td>
-<td><strong>Histórica</strong> (Token Ring, FDDI)</td>
+<td>Camino alternativo si está protegido</td>
+<td>Si no lo está, un fallo puede interrumpirlo</td>
+<td><strong>Histórica en LAN</strong> (Token Ring, FDDI); sigue en redes industriales y de transporte</td>
 </tr>
 <tr>
 <td><strong>Malla</strong></td>
@@ -146,6 +147,11 @@
 <td><strong>Habitual en edificios y campus</strong></td>
 </tr>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — topología física y lógica</strong><br><strong>Física</strong> → cómo están tendidos los enlaces. <strong>Lógica</strong> → cómo circula la comunicación. Un <strong>hub</strong> es una <strong>estrella física</strong> y un <strong>bus lógico</strong>.</th>
+</tr>
+</table></div>
 <h4 class="tema-h4">3.1 La topología en estrella</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -158,13 +164,31 @@
 </tr>
 </table></div>
 <h4 class="tema-h4">3.2 La topología en malla</h4>
-<p>Ofrece <strong>alta redundancia y tolerancia a fallos</strong>, porque existen <strong>caminos alternativos</strong> entre nodos. Su coste es <strong>más enlaces y mayor complejidad</strong> de diseño y gestión. Las redes inalámbricas <em>mesh</em> corresponden al <strong>Tema 30</strong>.</p>
+<p>Ofrece <strong>alta redundancia y tolerancia a fallos</strong>, porque existen <strong>caminos alternativos</strong> entre nodos. Es <strong>completa</strong> si todos se unen con todos y <strong>parcial</strong> si solo algunos. Su coste es <strong>más enlaces y mayor complejidad</strong> de diseño y gestión. Las redes inalámbricas <em>mesh</em> corresponden al <strong>Tema 30</strong>.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🧠 Para memorizar — la realidad de una LAN actual</strong><br>Lo que se encuentra hoy en un edificio es una <strong>estrella extendida o jerárquica (árbol)</strong>: cada planta tiene su <strong>switch</strong> en estrella, y esos switches se conectan a un <strong>nivel superior</strong>. <strong>Bus y anillo son históricas</strong>; la <strong>malla</strong> aparece en <strong>núcleos y troncales</strong>, donde interesa la redundancia.</th>
+<th><strong>🧠 Para memorizar — la realidad de una LAN actual</strong><br>Lo que se encuentra hoy en un edificio es una <strong>estrella extendida o jerárquica (árbol)</strong>: cada planta tiene su <strong>switch</strong> en estrella, y esos switches se conectan a un <strong>nivel superior</strong>. <strong>Bus y anillo son históricas en la LAN</strong> (el anillo protegido sigue vivo en redes industriales y de transporte); la <strong>malla</strong> aparece en <strong>núcleos y troncales</strong>, donde interesa la redundancia.</th>
 </tr>
 </table></div>
 <h2 id="4-metodos-de-acceso" class="tema-h2">4. Métodos de acceso al medio</h2>
+<p>Regulan <strong>quién transmite en un medio compartido</strong> (no tienen que ver con el control de acceso de seguridad).</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Modo</strong></th>
+<th><strong>Cómo transmite</strong></th>
+<th><strong>¿Colisiones?</strong></th>
+</tr>
+<tr>
+<td><strong>Half-duplex</strong></td>
+<td>En los dos sentidos, pero <strong>no a la vez</strong></td>
+<td>Posibles en medio compartido</td>
+</tr>
+<tr>
+<td><strong>Full-duplex</strong></td>
+<td>En los dos sentidos <strong>a la vez</strong></td>
+<td>No</td>
+</tr>
+</table></div>
 <h4 class="tema-h4">4.1 CSMA/CD</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -209,7 +233,7 @@
 <h4 class="tema-h4">4.2 CSMA/CA</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Imprescindible para el examen</strong><br><strong>CSMA/CA</strong> (Carrier Sense Multiple Access with Collision Avoidance) → <strong>método de acceso utilizado por IEEE 802.11 / Wi-Fi</strong>.<br><strong>Objetivo</strong>: <strong>evitar las colisiones ANTES de transmitir</strong>, dado que <strong>en el medio inalámbrico no resulta sencillo detectarlas</strong>.</th>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>CSMA/CA</strong> (Carrier Sense Multiple Access with Collision Avoidance) → <strong>método de acceso utilizado por IEEE 802.11 / Wi-Fi</strong>.<br><strong>Objetivo</strong>: <strong>evitar las colisiones ANTES de transmitir</strong> (las reduce, no las hace imposibles), dado que <strong>en el medio inalámbrico no resulta sencillo detectarlas</strong>.</th>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -222,8 +246,9 @@
 <svg viewBox="0 0 700 216" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at28bp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at28ba" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at28bv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at28bn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at28br" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at28bg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">CSMA/CD</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">CSMA/CA</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Ethernet COMPARTIDA</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="103.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Medio compartido</text><text x="176.0" y="118.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">half-duplex</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">DETECTA la colisión</text><rect x="8.0" y="174" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="191.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Histórico</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Wi-Fi (IEEE 802.11)</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Medio inalámbrico</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">EVITA la colisión</text><rect x="356.0" y="174" width="336.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="191.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Vigente</text></svg>
 </figure>
 <h4 class="tema-h4">4.3 Paso de testigo (token passing)</h4>
-<p><strong>Token passing</strong> → el <strong>permiso de transmisión</strong> se concede mediante un <strong>testigo</strong> que circula entre las estaciones: solo transmite quien lo posee. Ejemplos: <strong>Token Ring</strong> y <strong>FDDI</strong>. Es una <strong>tecnología histórica</strong>, hoy sin presencia en las LAN habituales.</p>
+<p><strong>Token passing</strong> → el <strong>permiso de transmisión</strong> se concede mediante un <strong>testigo</strong> que circula entre las estaciones: solo transmite quien lo posee. Ejemplos: <strong>Token Ring</strong> y <strong>FDDI</strong>. Es una <strong>tecnología histórica</strong>, hoy sin presencia en las LAN habituales. <strong>No es sinónimo de anillo</strong>: el testigo es un método de acceso y el anillo, una topología.</p>
 <h2 id="5-medios-de-transmision" class="tema-h2">5. Medios de transmisión</h2>
+<p>Son <strong>guiados</strong> el cobre y la fibra, y <strong>no guiados</strong> la radio y los infrarrojos.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>Medio</strong></th>
@@ -274,10 +299,44 @@
 <td>Incorpora <strong>pantalla frente a interferencias</strong>; requiere instalación cuidadosa</td>
 </tr>
 </table></div>
+<p>«STP» es un nombre genérico. La nomenclatura formal indica <strong>pantalla general / pantalla de cada par</strong>:</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Sigla</strong></th>
+<th><strong>Pantalla general</strong></th>
+<th><strong>Pantalla por par</strong></th>
+</tr>
+<tr>
+<td><strong>U/UTP</strong></td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>F/UTP</strong></td>
+<td>Lámina</td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>U/FTP</strong></td>
+<td>No</td>
+<td>Lámina</td>
+</tr>
+<tr>
+<td><strong>S/FTP</strong></td>
+<td>Malla</td>
+<td>Lámina</td>
+</tr>
+</table></div>
+<p>El apantallamiento solo funciona con <strong>conectores adecuados, continuidad de la pantalla y conexión a tierra</strong>.</p>
 <p>Las <strong>categorías</strong> del cable —<strong>5e, 6, 6A, 7</strong> y sucesivas— identifican distintos niveles de prestaciones.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>⚠️ Cautela — las categorías no son una escala universal simple</strong><br>No deben presentarse como una progresión lineal en la que «más número es mejor» sin más. Formulación segura:<br><strong>«Las categorías superiores proporcionan prestaciones y frecuencias superiores según las especificaciones de la norma aplicable.»</strong><br>Además, la categoría del cable <strong>no basta por sí sola</strong>: el rendimiento real depende del <strong>conjunto instalado</strong> —conectores, latiguillos y calidad de la instalación—, que es lo que se verifica al certificar el enlace.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — categoría, clase y norma</strong><br>La <strong>categoría</strong> califica componentes; la <strong>clase</strong> de ISO/IEC, el enlace o canal (Cat 5e ↔ D, 6 ↔ E, 6A ↔ EA, 7 ↔ F).<br><strong>Cat 7 la reconoce ISO/IEC, no TIA</strong>: no es «la siguiente» de 6A en todas las normas.<br>Una categoría no da velocidad por sí sola: <strong>10GBASE-T a 100 m pide Cat 6A</strong>, además de equipos y una instalación correctos.</th>
 </tr>
 </table></div>
 <h2 id="7-fibra-optica" class="tema-h2">7. Fibra óptica</h2>
@@ -303,14 +362,14 @@
 <td>Interior de edificios, campus</td>
 </tr>
 <tr>
-<td><strong>Coste de la instalación</strong></td>
-<td>Habitualmente mayor en el equipamiento óptico</td>
-<td>Habitualmente menor</td>
+<td><strong>Coste</strong></td>
+<td>Tradicionalmente más caro en la óptica</td>
+<td>Tradicionalmente más barato; hoy depende del caso</td>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🧠 Truco para no confundirlas</strong><br><strong>MONO = UNO = un solo camino de luz = va MÁS LEJOS.</strong><br><strong>MULTI = VARIOS caminos = se degrada antes = va MÁS CERCA.</strong><br>Es la asociación que resuelve el caso práctico típico: <strong>¿dos edificios separados por cientos de metros? → fibra, y según distancia y entorno, monomodo.</strong></th>
+<th><strong>🧠 Truco para no confundirlas</strong><br><strong>MONO = UNO = un solo camino de luz = va MÁS LEJOS.</strong><br><strong>MULTI = VARIOS caminos = se degrada antes = va MÁS CERCA.</strong><br>Caso típico: <strong>¿dos edificios separados por cientos de metros? → fibra</strong>. El tipo depende de <strong>distancia, velocidad y óptica</strong>: el monomodo sirve también en corto, y el multimodo puede unir edificios próximos.</th>
 </tr>
 </table></div>
 <figure class="tema-figura">
@@ -370,6 +429,11 @@
 <th><strong>🧠 Para memorizar — la escalera de capas</strong><br><strong>CAPA 1 → SEÑAL (repetidor, hub) · CAPA 2 → MAC (bridge, switch) · CAPA 3 → IP (router).</strong><br>Cuanto <strong>más alta la capa</strong>, <strong>más «inteligente» la decisión</strong>: el hub <strong>no decide nada</strong> (repite); el switch decide <strong>puerto</strong> por MAC; el router decide <strong>ruta</strong> por IP.<br>Y la asociación inversa, muy preguntable: <strong>MAC → capa 2 → switch · IP → capa 3 → router</strong>.</th>
 </tr>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — activos y pasivos</strong><br><strong>Activos</strong>: switch, router, AP, convertidor de medios; procesan señal y necesitan alimentación. <strong>Pasivos</strong>: cable, toma, panel de parcheo, latiguillo. <strong>Un panel no es un switch.</strong></th>
+</tr>
+</table></div>
 <figure class="tema-figura">
 <figcaption>Equipo → capa → función</figcaption>
 <svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at28cp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at28ca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at28cv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at28cn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at28cr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at28cg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="684" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><rect x="8" y="4" width="54" height="36" rx="6" fill="#5a5652"/><rect x="56" y="4" width="6" height="36" fill="#5a5652"/><text x="35.0" y="22.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">1</text><text x="76" y="22.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">REPETIDOR · HUB</text><text x="680" y="22.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">regenera / repite a todos — señal</text><rect x="8" y="47" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="47" width="54" height="36" rx="6" fill="#1f5b9e"/><rect x="56" y="47" width="6" height="36" fill="#1f5b9e"/><text x="35.0" y="65.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">2</text><text x="76" y="65.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">BRIDGE · SWITCH</text><text x="680" y="65.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">MAC: conmuta al puerto correspondiente</text><rect x="8" y="90" width="684" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><rect x="8" y="90" width="54" height="36" rx="6" fill="#003da5"/><rect x="56" y="90" width="6" height="36" fill="#003da5"/><text x="35.0" y="108.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">3</text><text x="76" y="108.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">ROUTER</text><text x="680" y="108.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">IP: encamina entre redes</text><rect x="8" y="133" width="684" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><rect x="8" y="133" width="54" height="36" rx="6" fill="#5a5652"/><rect x="56" y="133" width="6" height="36" fill="#5a5652"/><text x="35.0" y="151.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">+</text><text x="76" y="151.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">AP · GATEWAY</text><text x="680" y="151.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">acceso inalámbrico / salida entre redes</text></svg>
@@ -391,6 +455,11 @@
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>⚠️ TRAMPA DE EXAMEN — «el switch elimina las colisiones»</strong><br>Es una formulación <strong>demasiado absoluta</strong>. Lo correcto es explicar el <strong>mecanismo</strong>:<br>· el switch <strong>segmenta los dominios de colisión</strong> —cada puerto es normalmente uno independiente—;<br>· y en <strong>enlaces full-duplex</strong> <strong>no se dan las colisiones propias del medio compartido</strong>.<br>Decir «elimina cualquier colisión en toda la red» es incorrecto: el efecto se explica por la <strong>segmentación</strong> y por el <strong>modo full-duplex</strong>, no por una propiedad mágica del equipo.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Cómo aprende un switch</strong><br><strong>Aprende</strong> de la <strong>MAC de origen</strong> y <strong>decide</strong> por la <strong>MAC de destino</strong>.<br>Si <strong>no conoce el destino</strong>, inunda (<strong>flooding</strong>) los demás puertos de la VLAN; el <strong>broadcast</strong> también sale por todos ellos. No siempre envía por un solo puerto.</th>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -431,6 +500,11 @@
 <th><strong>⚠️ No confundir — switch y router</strong><br><strong>SWITCH → capa 2 · MAC · trama · DENTRO de la red local · decide PUERTO.</strong><br><strong>ROUTER → capa 3 · IP · paquete · ENTRE redes · decide RUTA.</strong><br>El fundamento del encaminamiento se estudia en el <strong>Tema 27</strong>.</th>
 </tr>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — switch L2 y switch L3</strong><br>Un switch <strong>de capa 2 no encamina</strong> entre subredes; un <strong>multicapa (L3) sí</strong>. La distinción es de <strong>función</strong>, no de aparato.</th>
+</tr>
+</table></div>
 <h2 id="10-ap-y-gateway" class="tema-h2">10. Punto de acceso y gateway</h2>
 <h4 class="tema-h4">10.1 Punto de acceso (AP)</h4>
 <p><strong>AP (Access Point)</strong> → equipo que <strong>permite conectar dispositivos Wi-Fi a la infraestructura de red</strong>. Actúa como puerta de entrada de los clientes inalámbricos a la red cableada. El estudio de <strong>WLAN y movilidad</strong> corresponde al <strong>Tema 30</strong>.</p>
@@ -462,7 +536,7 @@
 </tr>
 <tr>
 <td><strong>EN 50173</strong></td>
-<td>Norma <strong>europea</strong> equivalente</td>
+<td>Norma <strong>europea</strong> equivalente (no idéntica en cada detalle)</td>
 </tr>
 <tr>
 <td><strong>TIA-568</strong></td>
@@ -516,9 +590,20 @@
 <figcaption>Subsistemas del cableado estructurado</figcaption>
 <svg viewBox="0 0 700 219" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at28ep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at28ea" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at28ev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at28en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at28er" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at28eg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="684" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><rect x="8" y="4" width="54" height="36" rx="6" fill="#5a5652"/><rect x="56" y="4" width="6" height="36" fill="#5a5652"/><text x="35.0" y="22.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">1</text><text x="76" y="22.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">ÁREA DE TRABAJO</text><text x="680" y="22.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">toma y latiguillo del puesto</text><rect x="8" y="47" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="47" width="54" height="36" rx="6" fill="#1f5b9e"/><rect x="56" y="47" width="6" height="36" fill="#1f5b9e"/><text x="35.0" y="65.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">2</text><text x="76" y="65.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">CABLEADO HORIZONTAL</text><text x="680" y="65.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">cobre — hasta el repartidor de planta</text><rect x="8" y="90" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="90" width="54" height="36" rx="6" fill="#1f5b9e"/><rect x="56" y="90" width="6" height="36" fill="#1f5b9e"/><text x="35.0" y="108.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">3</text><text x="76" y="108.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">REPARTIDOR DE PLANTA</text><text x="680" y="108.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">armario de concentración</text><rect x="8" y="133" width="684" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><rect x="8" y="133" width="54" height="36" rx="6" fill="#003da5"/><rect x="56" y="133" width="6" height="36" fill="#003da5"/><text x="35.0" y="151.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">4</text><text x="76" y="151.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">BACKBONE (vertical)</text><text x="680" y="151.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">fibra — entre repartidores</text><rect x="8" y="176" width="684" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><rect x="8" y="176" width="54" height="36" rx="6" fill="#003da5"/><rect x="56" y="176" width="6" height="36" fill="#003da5"/><text x="35.0" y="194.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">5</text><text x="76" y="194.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">REPARTIDOR PRINCIPAL</text><text x="680" y="194.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">concentración principal</text></svg>
 </figure>
+<h4 class="tema-h4">Del PC al switch</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🧠 Para memorizar — la asociación medio/subsistema</strong><br><strong>HORIZONTAL → COBRE (par trenzado), del armario al puesto.</strong><br><strong>VERTICAL / BACKBONE → FIBRA, entre plantas y entre edificios.</strong><br>Es la respuesta natural a la lógica del apartado 5: <strong>cobre para tramos cortos hasta el puesto; fibra para distancias mayores y mayor capacidad</strong>.</th>
+<th><strong>PC → latiguillo → toma (RJ45) → cableado permanente → panel de parcheo → latiguillo → switch → backbone</strong></th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li>El <strong>panel de parcheo</strong> termina y ordena el cableado fijo; es <strong>pasivo</strong>.</li>
+<li>El <strong>armario o rack</strong> reúne paneles, switches, organizadores, alimentación (con <strong>SAI</strong> si procede) y ventilación.</li>
+<li><strong>T568A y T568B</strong> son los dos esquemas de terminación. Ninguno es mejor: importa <strong>usar el mismo</strong> en toda la instalación.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — la asociación medio/subsistema</strong><br><strong>HORIZONTAL → COBRE (par trenzado), del armario al puesto.</strong><br><strong>VERTICAL / BACKBONE → FIBRA, entre plantas y entre edificios.</strong><br>Son los usos <strong>habituales, no obligatorios</strong>: existe horizontal en fibra, y el <strong>backbone no es solo vertical</strong>, también une edificios (troncal de campus).<br>Es la respuesta natural a la lógica del apartado 5: <strong>cobre para tramos cortos hasta el puesto; fibra para distancias mayores y mayor capacidad</strong>.</th>
 </tr>
 </table></div>
 <h2 id="13-permanent-link-channel" class="tema-h2">13. Permanent link y channel: 90 y 100 metros</h2>
@@ -551,7 +636,7 @@
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ Trampa concreta</strong><br>Es <strong>incorrecto</strong> decir simplemente <strong>«el cableado horizontal tiene un máximo de 90 metros»</strong> sin precisar de qué se habla.<br>Lo correcto: <strong>el PERMANENT LINK llega hasta 90 m; el CHANNEL completo, hasta 100 m incluyendo latiguillos y conexiones</strong>.<br>Los <strong>10 metros de diferencia</strong> son precisamente el margen reservado a los <strong>latiguillos de ambos extremos</strong>: el del armario y el del puesto.</th>
+<th><strong>⚠️ Trampa concreta</strong><br>Es <strong>incorrecto</strong> decir simplemente <strong>«el cableado horizontal tiene un máximo de 90 metros»</strong> sin precisar de qué se habla.<br>Lo correcto: <strong>el PERMANENT LINK llega hasta 90 m; el CHANNEL completo, hasta 100 m incluyendo latiguillos y conexiones</strong>.<br>Los <strong>10 metros de diferencia</strong> son el margen habitual para los <strong>latiguillos de ambos extremos</strong>; el reparto 5 + 5 no es obligatorio.<br>Son cifras del <strong>cableado horizontal de cobre</strong>: <strong>no valen para la fibra</strong> ni para cualquier tecnología.</th>
 </tr>
 </table></div>
 <figure class="tema-figura">
@@ -560,7 +645,25 @@
 <p class="tema-figura__nota">Los 10 m de diferencia son el margen reservado a los latiguillos de ambos extremos.</p></figure>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>💡 Consecuencia práctica</strong><br>Una tirada permanente que <strong>mide 92 m</strong> <strong>supera el límite de 90 m del permanent link</strong>, aunque el total del channel quedara por debajo de 100. La instalación <strong>no cumple</strong> y la certificación del enlace lo detecta.</th>
+<th><strong>💡 Consecuencia práctica</strong><br>Una tirada permanente que <strong>mide 92 m</strong> <strong>supera el límite de 90 m del permanent link</strong>, aunque el total del channel quedara por debajo de 100. La instalación <strong>no cumple el límite de diseño</strong>, aunque alguna medida eléctrica saliera bien.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Tester y certificador</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Instrumento</strong></th>
+<th><strong>Qué comprueba</strong></th>
+<th><strong>Qué permite afirmar</strong></th>
+</tr>
+<tr>
+<td><strong>Tester básico</strong></td>
+<td>Continuidad y mapa de pares</td>
+<td>Que está bien conectado</td>
+</tr>
+<tr>
+<td><strong>Certificador</strong></td>
+<td>Mapa, longitud, atenuación, diafonía, pérdida de retorno…</td>
+<td>Que cumple la <strong>categoría o clase</strong> de la norma elegida</td>
 </tr>
 </table></div>
 <h2 id="14-administracion" class="tema-h2">14. Administración de la red local</h2>
@@ -569,6 +672,14 @@
 <tr>
 <th><strong>Ámbito</strong></th>
 <th><strong>Contenido</strong></th>
+</tr>
+<tr>
+<td><strong>Copias de configuración</strong></td>
+<td>Permiten restaurar, comparar y sustituir equipos compatibles</td>
+</tr>
+<tr>
+<td><strong>Mantenimiento</strong></td>
+<td>Preventivo (revisar, limpiar, actualizar) y correctivo (reparar)</td>
 </tr>
 <tr>
 <td><strong>Documentación</strong></td>
@@ -614,6 +725,49 @@
 <th><strong>💡 Caso típico de CAU</strong><br><strong>Nadie sabe qué puerto del switch corresponde a un puesto concreto.</strong><br><strong>Problema</strong>: <strong>documentación insuficiente</strong> —y, en su caso, <strong>etiquetado deficiente</strong>—.<br><strong>Consecuencia</strong>: cualquier incidencia o sustitución exige <strong>trabajo de rastreo</strong> que multiplica el tiempo de resolución y el riesgo de error.<br>El <strong>etiquetado y la documentación</strong> no son burocracia: son <strong>tiempo de resolución</strong>.</th>
 </tr>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔧 Mapa de puertos — ejemplo inventado</strong><br><strong>Toma A2-034 → armario R2 → panel PP-01, puerto 08 → switch SW-02, puerto 17 → VLAN 120.</strong><br>Con esa cadena se localiza un puesto sin desconectar a otro por error.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">14.2 PoE</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 PoE (Power over Ethernet)</strong> → <strong>datos y alimentación por el cable Ethernet</strong>.<br><strong>PSE</strong> → quien <strong>suministra</strong> (switch PoE, inyector). <strong>PD</strong> → quien <strong>recibe</strong> (AP, teléfono IP, cámara).<br>El switch tiene un <strong>presupuesto de potencia</strong>: si se agota, algunos dispositivos no arrancan aunque no haya avería.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">14.3 Diagnóstico en una LAN</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>SÍNTOMA → ALCANCE → ELEMENTO COMÚN → PRUEBA → ACTUACIÓN → VERIFICACIÓN → DOCUMENTAR.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Alcance</strong></th>
+<th><strong>Dónde mirar primero</strong></th>
+</tr>
+<tr>
+<td><strong>Un puesto</strong></td>
+<td>Latiguillo, toma, panel, puerto, VLAN, configuración del equipo</td>
+</tr>
+<tr>
+<td><strong>Una planta</strong></td>
+<td>Switch de planta, alimentación, enlace de subida</td>
+</tr>
+<tr>
+<td><strong>Todo el edificio o varias sedes</strong></td>
+<td>Núcleo, enlace principal, servicio común, operador</td>
+</tr>
+<tr>
+<td><strong>Puerto que sube y baja, o con errores</strong></td>
+<td>Cable, conector, SFP, puerto, equipo; el contador orienta, no prueba</td>
+</tr>
+<tr>
+<td><strong>Hay enlace y no hay servicio</strong></td>
+<td>VLAN, IP, DHCP, filtrado: <strong>enlace no es servicio</strong></td>
+</tr>
+</table></div>
 <h2 id="15-vlan" class="tema-h2">15. VLAN</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -626,6 +780,23 @@
 <li><strong>Organización</strong> por servicios, departamentos o funciones.</li>
 <li><strong>Control</strong> sobre qué equipos conviven en cada segmento.</li>
 </ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Puerto</strong></th>
+<th><strong>Qué transporta</strong></th>
+<th><strong>Dónde se usa</strong></th>
+</tr>
+<tr>
+<td><strong>Access</strong></td>
+<td><strong>Una VLAN</strong>, sin etiquetar (caso habitual)</td>
+<td>Hacia el equipo final</td>
+</tr>
+<tr>
+<td><strong>Trunk</strong></td>
+<td><strong>Varias VLAN</strong>, etiquetadas con <strong>IEEE 802.1Q</strong></td>
+<td>Entre switches o hacia el router</td>
+</tr>
+</table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>⚠️ TRAMPA DE EXAMEN — VLAN NO ES UN FIREWALL</strong><br>Es <strong>incorrecto</strong> afirmar que <strong>«VLAN = firewall»</strong>.<br>Formulación correcta: <strong>«la VLAN puede mejorar el aislamiento, pero la seguridad entre VLAN depende del routing, de las ACL, del cortafuegos y de la configuración»</strong>.<br>Además, dato clave: <strong>el tráfico entre VLAN normalmente requiere routing de capa 3</strong>. Ese punto de encaminamiento es precisamente donde puede aplicarse el filtrado — que corresponde al <strong>Tema 29</strong>.</th>
@@ -642,9 +813,14 @@
 <th><strong>📌 Imprescindible para el examen</strong><br><strong>SNMP</strong> (Simple Network Management Protocol) → <strong>protocolo utilizado para supervisar y gestionar equipos de red</strong>.<br>Permite: <strong>consultar el estado</strong> · <strong>obtener métricas</strong> · <strong>recibir alertas o traps</strong>.<br><strong>ANCLA: SNMP → MONITORIZACIÓN.</strong></th>
 </tr>
 </table></div>
+<ul class="tema-lista">
+<li><strong>Gestor (NMS) y agente</strong>: la plataforma pregunta y el agente del equipo responde.</li>
+<li><strong>Polling</strong> → el gestor <strong>consulta</strong> cada cierto tiempo. <strong>Trap</strong> → el agente <strong>avisa</strong> de un suceso.</li>
+<li><strong>SNMPv3</strong> puede autenticar y cifrar, según el nivel de seguridad configurado.</li>
+</ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Monitorización</strong><br><strong>Supervisión continua de la disponibilidad, el rendimiento y el estado</strong> de la infraestructura: <strong>switches, routers, puntos de acceso y enlaces</strong>.</th>
+<th><strong>📌 Monitorización</strong><br><strong>Supervisión sistemática (periódica o por eventos) de la disponibilidad, el rendimiento y el estado</strong> de la infraestructura: <strong>switches, routers, puntos de acceso y enlaces</strong>.</th>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -654,14 +830,14 @@
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir — inventario y monitorización</strong><br><strong>INVENTARIO → QUÉ TENGO</strong> (registro de equipos, ubicaciones y características). Es <strong>estático</strong> y se actualiza con los cambios.<br><strong>MONITORIZACIÓN → CÓMO ESTÁ</strong> (disponibilidad, rendimiento, alertas). Es <strong>continua y en tiempo real</strong>.<br>Se complementan: <strong>no puede monitorizarse lo que no está inventariado</strong>.</th>
+<th><strong>⚠️ No confundir — inventario y monitorización</strong><br><strong>INVENTARIO → QUÉ TENGO</strong> (registro de equipos, ubicaciones y características). Es información <strong>estable</strong>, que se actualiza con los cambios y puede alimentarse automáticamente.<br><strong>MONITORIZACIÓN → CÓMO ESTÁ</strong> (disponibilidad, rendimiento, alertas). Es <strong>continua, con el retardo de sus intervalos</strong>: no siempre en tiempo real.<br>Se complementan: <strong>un inventario fiable evita puntos ciegos</strong>, aunque una plataforma puede descubrir equipos no inventariados.<br><strong>Que falle la monitorización no prueba que falle el switch</strong>: puede fallar la red de gestión, las credenciales o la plataforma.</th>
 </tr>
 </table></div>
 <h2 id="17-cambios-y-redundancia" class="tema-h2">17. Control de cambios y redundancia</h2>
 <h4 class="tema-h4">17.1 Control de cambios</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Imprescindible para el examen</strong><br>Los <strong>cambios de configuración deben documentarse, autorizarse y controlarse</strong>.<br>Conecta directamente con la medida <strong>op.exp.5 (Gestión de cambios)</strong> del ENS, estudiada en el <strong>Tema 21</strong>: cualquier cambio relevante debe seguir un <strong>procedimiento formal</strong> y <strong>evaluar su impacto en seguridad</strong>.</th>
+<th><strong>📌 Imprescindible para el examen</strong><br>Los <strong>cambios de configuración deben documentarse, autorizarse y controlarse</strong>.<br>Conecta directamente con la medida <strong>op.exp.5 (Gestión de cambios)</strong> del ENS, estudiada en el <strong>Tema 21</strong>: los cambios se <strong>registran, se planifican y se analiza su riesgo</strong>. En el ENS <strong>se exige desde la categoría MEDIA</strong>; en BÁSICA no aplica, aunque sigue siendo buena práctica.<br><strong>SOLICITAR → EVALUAR → AUTORIZAR → GUARDAR CONFIGURACIÓN → CAMBIAR → PROBAR → DOCUMENTAR.</strong></th>
 </tr>
 </table></div>
 <h4 class="tema-h4">17.2 Redundancia</h4>
@@ -673,7 +849,7 @@
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🧠 Para memorizar</strong><br>La redundancia es la respuesta al <strong>punto único de fallo</strong> señalado en el apartado 3: es lo que evita que la caída del <strong>elemento central</strong> de una estrella deje sin servicio a todos los puestos.<br>Los <strong>protocolos concretos</strong> que gestionan caminos alternativos <strong>no son objeto de este tema</strong>.</th>
+<th><strong>🧠 Para memorizar</strong><br>La redundancia es la respuesta al <strong>punto único de fallo</strong> señalado en el apartado 3: es lo que evita que la caída del <strong>elemento central</strong> de una estrella deje sin servicio a todos los puestos.<br><strong>Dos cables no garantizan redundancia</strong>: en capa 2 forman un <strong>bucle</strong> si no se controla. <strong>STP</strong> evita los bucles y <strong>LACP</strong> agrupa enlaces como uno lógico; su detalle no es objeto de este tema.</th>
 </tr>
 </table></div>
   </div>

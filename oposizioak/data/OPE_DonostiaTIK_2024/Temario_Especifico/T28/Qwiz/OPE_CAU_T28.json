@@ -38,23 +38,23 @@
       "pregunta": "¿Qué caracteriza a una LAN frente a una WAN?",
       "opciones": [
         {
-          "texto": "La LAN se caracteriza por su alta velocidad y su gestión íntegra por una única organización; la WAN suele apoyarse en infraestructura de operadores para interconectar redes distantes.",
+          "texto": "La LAN tiene una extensión limitada (edificio, planta o campus); la WAN abarca una gran extensión e interconecta redes o sedes distantes, a menudo con infraestructura de operadores.",
           "correcta": true
         },
         {
-          "texto": "La WAN solo puede ser propiedad de una administración pública y gestionarse íntegramente por ella; la LAN se apoya en infraestructura de operadores para interconectar redes.",
+          "texto": "La LAN se define por pertenecer a una única organización, sea cual sea su extensión; la WAN, por pertenecer a varias organizaciones a la vez.",
           "correcta": false
         },
         {
-          "texto": "La LAN se apoya siempre en infraestructura de operadores de telecomunicaciones para interconectar equipos; la WAN es de alta velocidad y gestión íntegra de una única organización.",
+          "texto": "La LAN se define por su alta velocidad, sea cual sea su extensión; la WAN, por emplear enlaces más lentos alquilados a operadores de telecomunicaciones.",
           "correcta": false
         },
         {
-          "texto": "La LAN no admite conexiones inalámbricas y se gestiona por una única organización; la WAN incluye las redes inalámbricas e interconecta redes distantes mediante operadores.",
+          "texto": "La LAN se define por usar medios cableados dentro o fuera de un edificio; la WAN, por utilizar medios inalámbricos para interconectar sedes distantes.",
           "correcta": false
         }
       ],
-      "razonamiento": "La LAN es de gestión propia y alta velocidad; la WAN recurre a líneas alquiladas o a la propia Internet. Internet es la WAN por excelencia, formada por la interconexión de innumerables redes.",
+      "razonamiento": "El criterio es la extensión geográfica. La titularidad y la velocidad son características habituales, no criterios: hay LAN compartidas y WAN rápidas.",
       "origen": "T28 §1",
       "dificultad": "Media",
       "tipo": "Diferenciación",
@@ -348,7 +348,7 @@
       "pregunta": "¿Cuál es la diferencia fundamental entre un hub y un switch?",
       "opciones": [
         {
-          "texto": "El hub retransmite lo recibido a todos los puertos, formando un único dominio de colisión; el switch envía cada trama solo al puerto de destino, eliminando las colisiones.",
+          "texto": "El hub retransmite lo recibido a todos los puertos, formando un único dominio de colisión; el switch reenvía por MAC al puerto correspondiente y separa un dominio de colisión por puerto.",
           "correcta": true
         },
         {
@@ -364,7 +364,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "Es la comparación más preguntada del tema: el hub (capa 1) es «tonto» y difunde a todos; el switch (capa 2) aprende direcciones MAC y conmuta selectivamente, mejorando notablemente el rendimiento.",
+      "razonamiento": "El hub (capa 1) repite a todos; el switch (capa 2) aprende las MAC de origen y conmuta por la de destino. No «elimina las colisiones» sin más: segmenta los dominios y, en full-duplex, no se dan. Si no conoce el destino, inunda la VLAN.",
       "origen": "T28 §5",
       "dificultad": "Media",
       "tipo": "Diferenciación",
@@ -408,7 +408,7 @@
           "correcta": false
         },
         {
-          "texto": "Interconectar redes que emplean protocolos distintos entre sí, traduciendo la comunicación entre ambos entornos.",
+          "texto": "Servir de punto de salida o interconexión entre redes o sistemas y, según el contexto, traducir entre protocolos distintos.",
           "correcta": true
         },
         {
@@ -420,7 +420,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "La pasarela traduce entre protocolos distintos. Regenerar la señal es el repetidor, difundir Wi-Fi es el punto de acceso y filtrar tráfico según reglas es el cortafuegos (Tema 29).",
+      "razonamiento": "En una red IP, la puerta de enlace predeterminada es normalmente un router que da salida a otras redes; en otros contextos, una pasarela traduce protocolos. Regenerar la señal es el repetidor, difundir Wi-Fi es el punto de acceso y filtrar es el cortafuegos (Tema 29).",
       "origen": "T28 §5",
       "dificultad": "Media",
       "tipo": "Definición",
@@ -457,7 +457,7 @@
     },
     {
       "id": "OPE_CAU_T28_017",
-      "pregunta": "¿Cuál es la distancia máxima normalizada del cableado horizontal?",
+      "pregunta": "En el cableado horizontal de cobre, ¿cuál es la longitud máxima normalizada de la tirada fija (permanent link)?",
       "opciones": [
         {
           "texto": "30 metros.",
@@ -476,7 +476,7 @@
           "correcta": true
         }
       ],
-      "razonamiento": "El cableado horizontal (de la toma de usuario al armario de planta) tiene una distancia máxima normalizada de 90 metros, habitualmente en par trenzado. Es el dato numérico más preguntable del apartado.",
+      "razonamiento": "La tirada fija, del repartidor de planta a la toma, llega como máximo a 90 metros; el canal completo, con latiguillos y conexiones, a 100.",
       "origen": "T28 §6",
       "dificultad": "Media",
       "tipo": "Precisión",
@@ -672,7 +672,7 @@
           "correcta": true
         }
       ],
-      "razonamiento": "Los cambios sin control ni registro impiden revertir y diagnosticar, y contravienen la medida op.exp.5 del ENS. Etiquetado, control de cambios, documentación actualizada y redundancia sí son buenas prácticas.",
+      "razonamiento": "Los cambios sin control ni registro impiden revertir y diagnosticar. En el ENS los regula op.exp.5, exigible desde la categoría MEDIA. Etiquetado, control de cambios, documentación actualizada y redundancia sí son buenas prácticas.",
       "origen": "T28 §7",
       "dificultad": "Media",
       "tipo": "Detección de errores",
@@ -744,7 +744,7 @@
           "correcta": false
         },
         {
-          "texto": "No: la alta velocidad es una característica habitual, no el criterio definitorio, que es el ámbito geográfico reducido y de titularidad propia.",
+          "texto": "No: la alta velocidad es una característica habitual, igual que la titularidad propia; el criterio definitorio es el ámbito geográfico reducido.",
           "correcta": true
         },
         {
@@ -756,7 +756,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "Los criterios de clasificación LAN/MAN/WAN son el alcance geográfico y el ámbito de gestión. La velocidad es una consecuencia habitual, no la definición.",
+      "razonamiento": "El criterio de clasificación LAN/MAN/WAN es la extensión. La velocidad y la titularidad son consecuencias habituales, no la definición.",
       "dificultad": "Media",
       "tipo": "Detección de errores",
       "concepto": "Criterio de clasificación de redes",
