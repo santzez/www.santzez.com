@@ -31,7 +31,7 @@
 <h2 id="1-definicion-nist" class="tema-h2">1. Definición de cloud computing (NIST SP 800-145)</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Imprescindible para el examen — definición de referencia</strong><br><strong>Cloud computing</strong> → <strong>modelo que permite el acceso conveniente y bajo demanda, mediante red, a un conjunto compartido de recursos informáticos configurables que pueden aprovisionarse y liberarse rápidamente con un esfuerzo mínimo de gestión o de interacción con el proveedor</strong>.<br>Referencia primaria: <strong>NIST SP 800-145</strong>.</th>
+<th><strong>📌 Imprescindible para el examen — definición de referencia</strong><br><strong>Cloud computing</strong> → <strong>modelo que permite el acceso ubicuo, conveniente y bajo demanda, mediante red, a un conjunto compartido de recursos informáticos configurables que pueden aprovisionarse y liberarse rápidamente con un esfuerzo mínimo de gestión o de interacción con el proveedor</strong>.<br>Referencia primaria: <strong>NIST SP 800-145</strong>.</th>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -59,6 +59,16 @@
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>⚠️ TRAMPA DE EXAMEN — la nube no es «Internet + pago por uso»</strong><br>Es <strong>incorrecto</strong> definir cloud computing simplemente como <strong>«Internet + pago por uso»</strong>.<br>El <strong>pago por uso puede ser habitual</strong>, pero <strong>no forma parte de la esencia de la definición de NIST</strong>. Lo definitorio es el <strong>modelo de acceso bajo demanda a recursos compartidos y configurables, aprovisionables y liberables con rapidez y con un esfuerzo mínimo de gestión</strong>.<br>Tampoco basta con «estar en Internet»: un servicio accesible por red <strong>no es cloud</strong> si no reúne esas características.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 NIST → 5 · 3 · 4</strong><br><strong>5</strong> características esenciales · <strong>3</strong> modelos de servicio · <strong>4</strong> modelos de despliegue. El multi-cloud <strong>no</strong> es uno de ellos.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir</strong><br><strong>Virtualización no es nube</strong>: un CPD con máquinas virtuales creadas a mano no cumple por ello el modelo.<br><strong>«Por la red» no es «por Internet»</strong>: una nube privada puede servirse por la red corporativa.</th>
 </tr>
 </table></div>
 <h2 id="2-cinco-caracteristicas" class="tema-h2">2. Las cinco características esenciales</h2>
@@ -113,6 +123,7 @@
 <li><strong>Elasticidad rápida</strong>: <strong>ampliar capacidad</strong> durante un periodo de plazo administrativo y <strong>reducirla</strong> después.</li>
 <li><strong>Servicio medido</strong>: disponer de <strong>informes de consumo</strong> por servicio y periodo.</li>
 </ul>
+<p>Tres matices: el autoservicio <strong>no impide controles internos</strong> (cuotas, autorizaciones); el acceso amplio <strong>no significa acceso para cualquiera</strong>; y el servicio medido <strong>no exige factura variable</strong>.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>🧠 Para memorizar las cinco</strong><br><strong>YO PROVISIONO · POR LA RED · RECURSOS COMPARTIDOS · SUBO Y BAJO · SE MIDE.</strong><br>Cinco, no cuatro ni seis. Si una opción de test incluye «pago por uso» como <strong>característica esencial</strong>, es <strong>incorrecta</strong>: lo que NIST recoge es el <strong>servicio medido</strong>, que es la <strong>medición y control del uso</strong> —condición que <strong>permite</strong> facturar por consumo, pero no es lo mismo.</th>
@@ -130,6 +141,7 @@
 </tr>
 </table></div>
 <p>La tecnología que hace posible ese aislamiento —la <strong>virtualización</strong>— se estudia en el <strong>Tema 10</strong>.</p>
+<p><strong>Multi-tenant no es exclusivo de la pública</strong>: en una privada los inquilinos son las unidades de la propia organización.</p>
 <h4 class="tema-h4">3.2 Elasticidad frente a escalabilidad</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -153,14 +165,19 @@
 <td><strong>Ajuste dinámico</strong>, en ocasiones automático</td>
 </tr>
 </table></div>
+<ul class="tema-lista">
+<li><strong>Escalado vertical</strong>: más o menos CPU y memoria en la misma máquina (scale up/down).</li>
+<li><strong>Escalado horizontal</strong>: más o menos máquinas (scale out/in).</li>
+<li>El <strong>autoescalado</strong> facilita la elasticidad, pero no es obligatorio. La capacidad <strong>no es infinita</strong>: hay cuotas y límites.</li>
+</ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🧠 Para memorizar</strong><br><strong>ESCALABILIDAD → CRECER. ELASTICIDAD → CRECER Y DECRECER.</strong><br>La elasticidad incluye lo que la escalabilidad no garantiza: <strong>devolver los recursos cuando ya no hacen falta</strong>.<br>El término que hay que memorizar como característica NIST es <strong>RAPID ELASTICITY</strong> (elasticidad rápida).</th>
+<th><strong>🧠 Para memorizar</strong><br><strong>ESCALABILIDAD → CRECER. ELASTICIDAD → CRECER Y DECRECER.</strong> Es una mnemotecnia: también se puede escalar a la baja; lo propio de la elasticidad es <strong>seguir la demanda con rapidez</strong>.<br>La elasticidad incluye lo que la escalabilidad no garantiza: <strong>devolver los recursos cuando ya no hacen falta</strong>.<br>El término que hay que memorizar como característica NIST es <strong>RAPID ELASTICITY</strong> (elasticidad rápida).</th>
 </tr>
 </table></div>
 <figure class="tema-figura">
 <figcaption>Escalabilidad vs. elasticidad</figcaption>
-<svg viewBox="0 0 700 136" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at32bp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at32ba" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at32bv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at32bn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at32br" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at32bg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">ESCALABILIDAD</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">ELASTICIDAD</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">CRECER</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Soportar más carga</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">CRECER Y DECRECER</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Ajuste dinámico</text></svg>
+<svg viewBox="0 0 700 136" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at32bp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at32ba" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at32bv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at32bn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at32br" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at32bg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">ESCALABILIDAD</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">ELASTICIDAD</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">CRECER</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Soportar más carga, añadiendo recursos</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">CRECER Y DECRECER</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Ajuste dinámico</text></svg>
 </figure>
 <h2 id="4-modelos-de-servicio" class="tema-h2">4. Modelos de servicio: IaaS, PaaS y SaaS</h2>
 <h4 class="tema-h4">4.1 IaaS</h4>
@@ -242,12 +259,12 @@
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 LA GRAN REGLA DEL TEMA</strong><br><strong>IaaS → MÁS responsabilidad técnica del cliente.</strong><br><strong>PaaS → responsabilidad INTERMEDIA.</strong><br><strong>SaaS → MENOS responsabilidad técnica del cliente.</strong><br>Pero atención: <strong>«menos responsabilidad técnica» NO significa «ninguna responsabilidad»</strong>.<br>Obsérvese la última fila de la matriz: <strong>los DATOS y la CONFIGURACIÓN son del CLIENTE en los tres modelos</strong>.</th>
+<th><strong>📌 LA GRAN REGLA DEL TEMA</strong><br><strong>IaaS → MÁS responsabilidad técnica del cliente.</strong><br><strong>PaaS → responsabilidad INTERMEDIA.</strong><br><strong>SaaS → MENOS responsabilidad técnica del cliente.</strong><br>Pero atención: <strong>«menos responsabilidad técnica» NO significa «ninguna responsabilidad»</strong>.<br>Obsérvese la última fila de la matriz: <strong>de SUS DATOS y de LA CONFIGURACIÓN QUE CONTROLA responde el CLIENTE en los tres modelos</strong>. No quita obligaciones al proveedor: <strong>protege los componentes que opera</strong> y lo que fije el contrato.</th>
 </tr>
 </table></div>
 <figure class="tema-figura">
 <figcaption>Quién gestiona cada capa</figcaption>
-<svg viewBox="0 0 700 219" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at32dp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at32da" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at32dv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at32dn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at32dr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at32dg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="22" y="22.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">APLICACIÓN</text><text x="680" y="22.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">IaaS: cliente · PaaS: cliente · SaaS: proveedor</text><rect x="8" y="47" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="22" y="65.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">RUNTIME</text><text x="680" y="65.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">IaaS: cliente · PaaS y SaaS: proveedor</text><rect x="8" y="90" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="22" y="108.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">SISTEMA OPERATIVO</text><text x="680" y="108.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">IaaS: cliente · PaaS y SaaS: proveedor</text><rect x="8" y="133" width="684" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="22" y="151.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">VIRTUALIZACIÓN Y FÍSICA</text><text x="680" y="151.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">siempre proveedor</text><rect x="8" y="176" width="684" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="22" y="194.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">DATOS Y CONFIGURACIÓN</text><text x="680" y="194.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">SIEMPRE DEL CLIENTE, en los tres modelos</text></svg>
+<svg viewBox="0 0 700 219" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at32dp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at32da" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at32dv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at32dn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at32dr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at32dg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="22" y="22.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">APLICACIÓN</text><text x="680" y="22.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">IaaS: cliente · PaaS: cliente · SaaS: proveedor</text><rect x="8" y="47" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="22" y="65.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">RUNTIME</text><text x="680" y="65.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">IaaS: cliente · PaaS y SaaS: proveedor</text><rect x="8" y="90" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="22" y="108.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">SISTEMA OPERATIVO</text><text x="680" y="108.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">IaaS: cliente · PaaS y SaaS: proveedor</text><rect x="8" y="133" width="684" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="22" y="151.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">VIRTUALIZACIÓN Y FÍSICA</text><text x="680" y="151.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">siempre proveedor</text><rect x="8" y="176" width="684" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="22" y="194.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">DATOS Y CONFIGURACIÓN</text><text x="680" y="194.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">responde el cliente de lo suyo, en los tres modelos</text></svg>
 </figure>
 <h2 id="6-responsabilidad-compartida" class="tema-h2">6. El modelo de responsabilidad compartida</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -291,6 +308,16 @@
 <th><strong>⚠️ TRAMPA DE EXAMEN — SaaS no equivale a «ninguna responsabilidad»</strong><br>Es <strong>incorrecto</strong> afirmar que en SaaS <strong>«el proveedor lo hace todo»</strong>.<br>Aunque el proveedor gestione la aplicación, <strong>el cliente sigue siendo responsable de los usuarios, los permisos, los datos y la configuración disponible</strong>.<br><em>Ejemplo demoledor</em>: si en una herramienta SaaS se concede a todo el personal <strong>permiso de acceso a una carpeta con datos sensibles</strong>, <strong>la responsabilidad es del cliente</strong>, no del proveedor. La aplicación funciona correctamente: lo que está mal es <strong>cómo se ha configurado</strong>.</th>
 </tr>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — disponibilidad y copia</strong><br><strong>Alta disponibilidad, copia de seguridad y SLA son cosas distintas.</strong> Que un SaaS esté siempre disponible no garantiza recuperar un fichero borrado hace seis meses: hay que mirar la <strong>retención</strong> contratada.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔧 Aplicación CAU</strong><br><strong>SÍNTOMA → SERVICIO → MODELO → QUIÉN LO CONTROLA → ACTUAR O ESCALAR.</strong> En SaaS no todo se escala al proveedor: puede ser un permiso nuestro.</th>
+</tr>
+</table></div>
 <h2 id="7-modelos-de-despliegue" class="tema-h2">7. Modelos de despliegue</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -305,8 +332,8 @@
 </tr>
 <tr>
 <td><strong>Pública</strong></td>
-<td>Cloud <strong>disponible para el uso de múltiples consumidores</strong> y operada por un proveedor cloud</td>
-<td><strong>MÚLTIPLES CONSUMIDORES</strong></td>
+<td>Cloud aprovisionada para <strong>uso abierto del público en general</strong>, en las instalaciones del proveedor</td>
+<td><strong>USO ABIERTO</strong></td>
 </tr>
 <tr>
 <td><strong>Privada</strong></td>
@@ -320,15 +347,15 @@
 </tr>
 <tr>
 <td><strong>Híbrida</strong></td>
-<td><strong>Combinación coordinada de nube pública y nube privada</strong></td>
-<td><strong>PÚBLICA + PRIVADA</strong></td>
+<td><strong>Dos o más nubes distintas</strong> (privadas, comunitarias o públicas) <strong>vinculadas</strong> para permitir la portabilidad de datos y aplicaciones</td>
+<td><strong>NUBES DISTINTAS VINCULADAS</strong></td>
 </tr>
 </table></div>
 <h4 class="tema-h4">7.1 Nube pública</h4>
-<p>Se caracteriza por estar <strong>disponible para múltiples consumidores</strong> y ser <strong>operada por un proveedor cloud</strong>. Habitualmente es <strong>multi-tenant</strong> y utiliza <strong>recursos compartidos</strong>.</p>
+<p>Se caracteriza por su <strong>uso abierto al público en general</strong>. Puede ser propiedad de una <strong>empresa, una universidad o un organismo público</strong>: «pública» no significa titularidad pública. Habitualmente es <strong>multi-tenant</strong> y utiliza <strong>recursos compartidos</strong>.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ Cautela — «pública» no significa «todo compartido» sin más</strong><br>No debe reducirse la nube pública a la idea de que <strong>«todo está compartido»</strong> ni, mucho menos, a que <strong>«no tiene seguridad»</strong>.<br>Lo definitorio es que está <strong>disponible para el uso de múltiples consumidores</strong> y <strong>operada por un proveedor</strong>. El <strong>aislamiento lógico</strong> entre clientes y las medidas de seguridad forman parte del servicio.</th>
+<th><strong>⚠️ Cautela — «pública» no significa «todo compartido» sin más</strong><br>No debe reducirse la nube pública a la idea de que <strong>«todo está compartido»</strong> ni, mucho menos, a que <strong>«no tiene seguridad»</strong>.<br>Lo definitorio es que está <strong>abierta al público en general</strong>. El <strong>aislamiento lógico</strong> entre clientes y las medidas de seguridad forman parte del servicio.</th>
 </tr>
 </table></div>
 <h4 class="tema-h4">7.2 Nube privada</h4>
@@ -337,13 +364,18 @@
 <th><strong>⚠️ TRAMPA DE EXAMEN — PRIVADA ≠ ON-PREMISE</strong><br>Una nube privada es la <strong>dedicada exclusivamente a una organización</strong>. Puede estar:<br>· en las <strong>instalaciones propias</strong> de la organización;<br>· o <strong>gestionada por un tercero</strong> y alojada fuera de ellas.<br><strong>Privada se refiere a la EXCLUSIVIDAD DE USO, no a la UBICACIÓN FÍSICA.</strong> Identificar «privada» con «en mi CPD» es un error frecuente.</th>
 </tr>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Y al revés — ON-PREMISE ≠ PRIVADA</strong><br>Un <strong>CPD propio no es una nube privada por ser propio ni por estar virtualizado</strong>: necesita las cinco características. Si no, es <strong>infraestructura local tradicional</strong>.</th>
+</tr>
+</table></div>
 <h4 class="tema-h4">7.3 Nube híbrida y comunitaria</h4>
-<p><strong>Híbrida</strong> → <strong>combinación coordinada de nube pública y nube privada</strong>. <strong>HÍBRIDA = PÚBLICA + PRIVADA.</strong></p>
-<p><strong>Comunitaria</strong> → infraestructura <strong>compartida por varias organizaciones con necesidades, objetivos o requisitos comunes</strong>. <em>Ejemplo</em>: varias organizaciones públicas con requisitos similares. Es de <strong>prioridad secundaria</strong> frente a las tres anteriores, pero <strong>forma parte de los cuatro modelos de NIST</strong> y no debe omitirse.</p>
+<p><strong>Híbrida (NIST)</strong> → <strong>composición de dos o más nubes distintas</strong> (privadas, comunitarias o públicas) que <strong>siguen siendo entidades separadas</strong>, pero están <strong>unidas por tecnología que permite la portabilidad</strong> de datos y aplicaciones. <strong>Pública + privada es el caso típico</strong>, y la respuesta habitual de test si no se ofrece la definición completa.</p>
+<p><strong>Comunitaria</strong> → infraestructura <strong>compartida por varias organizaciones con necesidades, objetivos o requisitos comunes</strong>. <em>Ejemplo</em>: varias organizaciones públicas con requisitos similares. Es de <strong>prioridad secundaria</strong> frente a las tres anteriores, pero <strong>forma parte de los cuatro modelos de NIST</strong> y no debe omitirse. Que varios organismos usen el mismo SaaS público <strong>no</strong> la convierte en comunitaria: su uso es <strong>exclusivo de esa comunidad</strong>.</p>
 <h2 id="8-hibrida-vs-multicloud" class="tema-h2">8. Híbrida frente a multi-cloud</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 UNA DE LAS GRANDES PREGUNTAS DEL TEMA</strong><br><strong>HÍBRIDA</strong> → <strong>combina nube pública y nube privada</strong>.<br><strong>MULTI-CLOUD</strong> → <strong>utiliza servicios de varios proveedores cloud distintos</strong>.<br><strong>Responden a preguntas distintas</strong>: la híbrida se refiere al <strong>tipo de nube</strong>; el multi-cloud, al <strong>número de proveedores</strong>.</th>
+<th><strong>📌 UNA DE LAS GRANDES PREGUNTAS DEL TEMA</strong><br><strong>HÍBRIDA</strong> → <strong>vincula nubes distintas</strong>; típicamente, <strong>pública y privada</strong>.<br><strong>MULTI-CLOUD</strong> → <strong>utiliza servicios de varios proveedores cloud distintos</strong>.<br><strong>Responden a preguntas distintas</strong>: la híbrida se refiere al <strong>tipo de nube</strong>; el multi-cloud, al <strong>número de proveedores</strong>.</th>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -356,23 +388,27 @@
 <td><strong>Multi-cloud</strong></td>
 </tr>
 <tr>
-<td><strong>Azure + CPD propio</strong></td>
+<td><strong>Azure + nube privada propia, integradas</strong></td>
 <td><strong>Híbrida</strong></td>
 </tr>
 <tr>
-<td><strong>Azure + AWS + CPD privado</strong></td>
+<td><strong>Azure + CPD tradicional</strong></td>
+<td><strong>Entorno mixto</strong>: no es híbrida NIST por sí solo (muchos test lo llaman híbrida)</td>
+</tr>
+<tr>
+<td><strong>Azure + AWS + nube privada integrada</strong></td>
 <td><strong>Multi-cloud + híbrida</strong></td>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🧠 Para memorizar — pueden coexistir</strong><br><strong>No son alternativas excluyentes</strong>: una organización puede ser <strong>a la vez híbrida y multi-cloud</strong>.<br>Método para resolver el caso práctico en dos preguntas:<br><strong>1) ¿Hay pública Y privada? → HÍBRIDA.</strong><br><strong>2) ¿Hay VARIOS PROVEEDORES cloud? → MULTI-CLOUD.</strong><br>Si la respuesta es <strong>sí</strong> a las dos, es <strong>ambas cosas</strong>.</th>
+<th><strong>🧠 Para memorizar — pueden coexistir</strong><br><strong>No son alternativas excluyentes</strong>: una organización puede ser <strong>a la vez híbrida y multi-cloud</strong>.<br>Método para resolver el caso práctico en dos preguntas:<br><strong>1) ¿Hay nubes distintas VINCULADAS (típicamente pública y privada)? → HÍBRIDA.</strong><br><strong>2) ¿Hay VARIOS PROVEEDORES cloud? → MULTI-CLOUD.</strong><br>Si la respuesta es <strong>sí</strong> a las dos, es <strong>ambas cosas</strong>.</th>
 </tr>
 </table></div>
 <figure class="tema-figura">
 <figcaption>Híbrida vs. multi-cloud</figcaption>
-<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at32ep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at32ea" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at32ev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at32en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at32er" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at32eg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">HÍBRIDA</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">MULTI-CLOUD</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">QUÉ combina</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Pública + privada</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Ej.: Azure + CPD propio</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">CUÁNTOS proveedores</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Varios proveedores cloud</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Ej.: AWS + Azure</text></svg>
-<p class="tema-figura__nota">Pueden coexistir: AWS + Azure + CPD privado es multi-cloud e híbrida a la vez.</p></figure>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at32ep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at32ea" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at32ev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at32en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at32er" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at32eg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">HÍBRIDA</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">MULTI-CLOUD</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">QUÉ combina</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Nubes distintas vinculadas</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Ej.: Azure + nube privada</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">CUÁNTOS proveedores</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Varios proveedores cloud</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Ej.: AWS + Azure</text></svg>
+<p class="tema-figura__nota">Pueden coexistir: AWS + Azure + una nube privada integrada es multi-cloud e híbrida a la vez.</p></figure>
 <h2 id="9-vendor-lock-in" class="tema-h2">9. Vendor lock-in</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -405,12 +441,13 @@
 <td><strong>Multi-cloud</strong>, cuando realmente aporte valor</td>
 </tr>
 </table></div>
+<p>El <strong>plan de salida o reversibilidad</strong> fija formatos, plazos, responsables, coste y borrado final de los datos.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>⚠️ TRAMPA DE EXAMEN — el multi-cloud no elimina el lock-in</strong><br><strong>El multi-cloud puede reducir la dependencia de un proveedor, pero NO elimina automáticamente el vendor lock-in.</strong><br>Razón: cada servicio utilizado en cada proveedor <strong>puede seguir siendo propietario</strong>. Usar dos proveedores puede significar, sencillamente, <strong>estar atado a dos</strong> en lugar de a uno.<br>Y el lock-in <strong>no es solo económico</strong>: es también <strong>técnico y operativo</strong> —APIs, formatos, arquitectura y conocimiento del equipo—.</th>
 </tr>
 </table></div>
-<p>Los grandes proveedores públicos de referencia son <strong>AWS</strong>, <strong>Microsoft Azure</strong> y <strong>Google Cloud</strong>. Sus <strong>cuotas de mercado</strong> y su orden relativo <strong>no son contenido nuclear</strong> y se tratan en el apartado <strong>23</strong>.</p>
+<p>Los grandes proveedores públicos de referencia son <strong>AWS</strong>, <strong>Microsoft Azure</strong> y <strong>Google Cloud</strong>. Sus <strong>cuotas de mercado</strong> y su orden relativo <strong>no son contenido nuclear</strong> y se tratan en la actualidad fechada (apartado 10 de Xtra).</p>
 <h2 id="10-capex-opex" class="tema-h2">10. CAPEX y OPEX</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -437,6 +474,11 @@
 <th><strong>🧠 Para memorizar</strong><br><strong>CAPEX → INVERSIÓN (comprar) · OPEX → OPERACIÓN (usar y pagar periódicamente).</strong><br>El cambio de modelo <strong>no es una reducción automática de coste</strong>: es un <strong>cambio en la naturaleza del gasto</strong>.</th>
 </tr>
 </table></div>
+<ul class="tema-lista">
+<li><strong>TCO</strong> (coste total de propiedad): lo que cuesta todo el ciclo, no la cuota mensual.</li>
+<li><strong>Egress</strong>: sacar datos de la nube puede tener coste.</li>
+<li>Qué es CAPEX u OPEX lo decide el <strong>tratamiento contable</strong> de cada contrato.</li>
+</ul>
 <h2 id="11-ventajas-e-inconvenientes" class="tema-h2">11. Ventajas e inconvenientes</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -484,10 +526,20 @@
 <th><strong>⚠️ TRAMPA DE EXAMEN — dos conclusiones automáticas que son falsas</strong><br><strong>«Dato sensible = nube privada obligatoria»</strong> → <strong>FALSO</strong>.<br><strong>«ENS = nube privada»</strong> → <strong>FALSO</strong>.<br>La elección <strong>depende</strong> de:<br>· la <strong>categoría</strong> del sistema;<br>· los <strong>requisitos de seguridad</strong>;<br>· las <strong>medidas</strong> aplicadas;<br>· la <strong>ubicación</strong> de los datos;<br>· el <strong>contrato</strong>;<br>· el <strong>servicio concreto</strong>;<br>· el <strong>cumplimiento normativo</strong>.<br>Ninguna de esas variables se resuelve diciendo «privada» de antemano.</th>
 </tr>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — región europea no es cumplimiento automático</strong><br>Cuentan también las <strong>copias, el soporte con acceso remoto, los subencargados y la jurisdicción</strong> a la que está sometido el proveedor.</th>
+</tr>
+</table></div>
 <h2 id="13-nube-y-ens" class="tema-h2">13. La nube en la Administración Pública y el ENS</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>📌 Criterio para el examen</strong><br>En la Administración Pública, la <strong>contratación y el uso de servicios cloud deben evaluarse respecto al ENS y a las demás obligaciones aplicables</strong>.<br><strong>El hecho de ser nube pública no determina por sí solo si es adecuada o inadecuada.</strong><br>La cuestión es: <strong>REQUISITOS + CONTROLES + ARQUITECTURA + CUMPLIMIENTO</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📖 Base normativa — op.nub.1, Protección de servicios en la nube (RD 311/2022)</strong><br>Los servicios en la nube de terceros deben ser <strong>conformes con el ENS</strong> o cumplir una <strong>guía CCN-STIC</strong> que incluye <strong>pruebas de penetración, transparencia, cifrado y gestión de claves y jurisdicción de los datos</strong>.<br><strong>BÁSICA</strong> → la medida. <strong>MEDIA</strong> → + R1, servicios <strong>certificados</strong>. <strong>ALTA</strong> → + R2, configuración según <strong>guía CCN-STIC</strong> específica.<br><strong>La certificación del proveedor no hace conforme el sistema del cliente</strong>: queda su parte.</th>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -518,9 +570,14 @@
 <td>El cliente <strong>gestiona la aplicación</strong>, no el SO</td>
 </tr>
 <tr>
-<td><strong>Azure + CPD municipal</strong></td>
+<td><strong>Azure + nube privada municipal integrada</strong></td>
 <td><strong>Híbrida</strong></td>
-<td>Combina <strong>pública y privada</strong></td>
+<td><strong>Nubes distintas vinculadas</strong></td>
+</tr>
+<tr>
+<td><strong>Azure + CPD tradicional</strong></td>
+<td><strong>Entorno mixto</strong></td>
+<td>El CPD no es nube por ser propio</td>
 </tr>
 <tr>
 <td><strong>AWS + Azure</strong></td>
@@ -528,14 +585,14 @@
 <td><strong>Varios proveedores</strong> cloud</td>
 </tr>
 <tr>
-<td><strong>AWS + Azure + CPD</strong></td>
+<td><strong>AWS + Azure + nube privada integrada</strong></td>
 <td><strong>Híbrida + multi-cloud</strong></td>
-<td>Pública y privada <strong>y</strong> varios proveedores</td>
+<td>Nubes vinculadas <strong>y</strong> varios proveedores</td>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🧠 El método de clasificación en dos pasos</strong><br><strong>PASO 1 — modelo de servicio</strong>: ¿qué gestiona el cliente? <strong>¿El SO? → IaaS. ¿La aplicación? → PaaS. ¿Solo usuarios, permisos, datos y configuración? → SaaS.</strong><br><strong>PASO 2 — modelo de despliegue</strong>: ¿combina <strong>pública y privada</strong>? → <strong>híbrida</strong>. ¿Hay <strong>varios proveedores</strong>? → <strong>multi-cloud</strong>.<br>Con estas dos preguntas se resuelve prácticamente cualquier supuesto de clasificación.</th>
+<th><strong>🧠 El método de clasificación en dos pasos</strong><br><strong>PASO 1 — modelo de servicio</strong>: ¿qué gestiona el cliente? <strong>¿El SO? → IaaS. ¿La aplicación? → PaaS. ¿Solo usuarios, permisos, datos y configuración? → SaaS.</strong><br><strong>PASO 2 — modelo de despliegue</strong>: ¿<strong>vincula nubes distintas</strong> (típicamente pública y privada)? → <strong>híbrida</strong>. ¿Hay <strong>varios proveedores</strong>? → <strong>multi-cloud</strong>.<br>Con estas dos preguntas se resuelve prácticamente cualquier supuesto de clasificación.</th>
 </tr>
 </table></div>
   </div>
