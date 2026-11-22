@@ -13,8 +13,9 @@
 <li><a href="#5-preguntas-cortas">5. Posibles preguntas cortas (con esquema de respuesta)</a></li>
 <li><a href="#6-supuestos-practicos">6. Supuestos prácticos</a></li>
 <li><a href="#7-matriz-de-memorizacion">7. Matriz de memorización</a></li>
-<li><a href="#8-resumen-final">8. Resumen final: si mañana fuera el examen</a></li>
-<li><a href="#9-actualidad-ipv6">9. Actualidad IPv6 — datos fechados</a></li>
+<li><a href="#8-repaso-visual">8. Repaso visual · T27</a></li>
+<li><a href="#9-resumen-final">9. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#10-actualidad-ipv6">10. Actualidad IPv6 — datos fechados</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
@@ -34,7 +35,11 @@
 <li><strong>MAC → DÓNDE EN LA LAN · IP → QUÉ HOST/RED · PUERTO → QUÉ SERVICIO.</strong></li>
 <li><strong>ROUTING → IP + CAPA 3 · SWITCHING → MAC + CAPA 2.</strong></li>
 <li><strong>RIP → vector distancia · OSPF → estado de enlace · BGP → entre sistemas autónomos.</strong></li>
-<li><strong>PING RESPONDE ≠ SERVICIO FUNCIONA.</strong></li>
+<li><strong>PING RESPONDE ≠ SERVICIO FUNCIONA</strong> · ping mide el <strong>RTT</strong>.</li>
+<li><strong>En cada salto cambian las MAC, no las IP</strong> (salvo NAT).</li>
+<li><strong>172.16/12 → hasta 172.31</strong> · <strong>NAT → direcciones · PAT → también puertos</strong>.</li>
+<li><strong>Gana el prefijo más largo · ruta por defecto → 0.0.0.0/0 y ::/0.</strong></li>
+<li><strong>DNS → 53 UDP y TCP.</strong></li>
 </ul>
 <h2 id="2-no-confundir" class="tema-h2">2. No confundir</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -94,6 +99,36 @@
 <td>NAT no es un mecanismo de seguridad</td>
 </tr>
 <tr>
+<td><strong>NAT</strong>: direcciones</td>
+<td><strong>PAT / NAPT</strong>: también puertos</td>
+<td>Compartir una IP pública es PAT</td>
+</tr>
+<tr>
+<td><strong>172.16.0.0/12</strong>: el bloque privado</td>
+<td><strong>172.16.0.0/16</strong>: una parte del bloque</td>
+<td>Las dos son privadas</td>
+</tr>
+<tr>
+<td><strong>169.254/16</strong>: suele ser síntoma</td>
+<td><strong>fe80::/10</strong>: es normal</td>
+<td>Las dos son de enlace local</td>
+</tr>
+<tr>
+<td><strong>Ruta predeterminada</strong></td>
+<td><strong>Ruta específica</strong></td>
+<td>Gana la de prefijo más largo</td>
+</tr>
+<tr>
+<td><strong>Puerto</strong>: número</td>
+<td><strong>Aplicación</strong>: programa o servicio</td>
+<td>443 no garantiza que sea una web</td>
+</tr>
+<tr>
+<td><strong>Router</strong>: un equipo</td>
+<td><strong>Routing</strong>: una función</td>
+<td>Un switch L3 también enruta</td>
+</tr>
+<tr>
 <td><strong>Switching</strong>: capa 2, MAC, trama</td>
 <td><strong>Routing</strong>: capa 3, IP, paquete</td>
 <td>Puerto de salida frente a ruta</td>
@@ -143,52 +178,239 @@
 <li><strong>«TLS es la capa 6»</strong> — no debe memorizarse rígidamente: su encaje en el modelo es <strong>conceptual y discutido</strong>.</li>
 <li><strong>«La capa 1 de OSI es la de Aplicación»</strong> — falso: la <strong>1 es la Física</strong> y la <strong>7 la de Aplicación</strong>.</li>
 <li><strong>«En TCP/IP la capa 3 se llama Red»</strong> — impreciso: en <strong>OSI</strong> se llama <strong>Red</strong>; en <strong>TCP/IP</strong>, <strong>Internet</strong>.</li>
-<li><strong>«172.16.0.0/16 es un rango privado»</strong> — el rango de la RFC 1918 es <strong>172.16.0.0/12</strong>.</li>
+<li><strong>«172.16.0.0/16 es una red privada»</strong> — <strong>verdadero</strong>: está dentro de <strong>172.16.0.0/12</strong>. Lo falso es que el <strong>bloque completo</strong> sea /16.</li>
+<li><strong>«172.32.0.1 es privada»</strong> — falso: el bloque acaba en <strong>172.31.255.255</strong>.</li>
+<li><strong>«La MAC de destino es la misma en todo el trayecto»</strong> — falso: <strong>cambia en cada enlace</strong>.</li>
+<li><strong>«Para llegar a un servidor remoto, el PC resuelve la MAC del servidor»</strong> — falso: la del <strong>gateway</strong>.</li>
+<li><strong>«DNS solo usa UDP»</strong> — falso: <strong>UDP y TCP 53</strong>.</li>
+<li><strong>«El puerto 443 es siempre HTTPS sobre TCP»</strong> — falso: también HTTP/3 sobre UDP u otros servicios.</li>
+<li><strong>«Sin gateway es imposible salir de la red»</strong> — falso como absoluto: pueden existir <strong>rutas específicas</strong>.</li>
+<li><strong>«La ruta por defecto tiene preferencia»</strong> — falso: es la <strong>menos específica</strong>.</li>
+<li><strong>«Un switch nunca enruta»</strong> — falso: el <strong>multicapa</strong> sí.</li>
 <li><strong>«Un /24 es una red mayor que un /16»</strong> — falso: <strong>mayor prefijo, red más pequeña</strong>.</li>
 <li><strong>«Con IPv6 desaparece NAT»</strong> — impreciso: IPv6 evita que NAT sea una <strong>necesidad derivada del agotamiento</strong> de IPv4; puede utilizarse en determinados escenarios.</li>
 <li><strong>Colar contenido ajeno</strong>: LAN/MAN/WAN, cableado y equipos (T28), arquitectura de Internet (T31), correo (T17), navegadores (T20) y SSH (T13) no se desarrollan aquí.</li>
 </ul>
 <h2 id="4-preguntas-tipo-test" class="tema-h2">4. Posibles preguntas tipo test</h2>
-<ul class="tema-lista">
-<li>¿Qué significan las siglas <strong>OSI</strong> y qué organización lo desarrolló?</li>
-<li>¿Cuántas capas tiene <strong>OSI</strong> y cuántas <strong>TCP/IP</strong>?</li>
-<li>Enumerar las <strong>siete capas</strong> en el orden correcto.</li>
-<li>¿Cuál es la <strong>capa 1</strong> de OSI? ¿Y la <strong>capa 7</strong>?</li>
-<li><strong>Capa → función</strong>: servicios de red · formato de datos · gestión de sesiones · extremo a extremo · direccionamiento y encaminamiento · tramas · bits.</li>
-<li><strong>Función → capa</strong>: «direccionamiento y encaminamiento» / «tramas y comunicación local».</li>
-<li><strong>Capa → palabra clave</strong>: TCP/UDP · IP · MAC · señal.</li>
-<li>¿Qué es la <strong>encapsulación</strong> y qué ocurre en el destino?</li>
-<li><strong>PDU → capa</strong>: segmento · paquete · trama · bits.</li>
-<li>¿Qué PDU corresponde a la capa de <strong>enlace</strong>?</li>
-<li>Enumerar las <strong>cuatro capas</strong> del modelo TCP/IP.</li>
-<li><strong>Correspondencia</strong>: ¿a qué capas OSI equivale la capa de <strong>Aplicación</strong> de TCP/IP? ¿Y la de <strong>Acceso a la red</strong>?</li>
-<li>¿Cómo se llama en TCP/IP la capa equivalente a la capa <strong>Red</strong> de OSI?</li>
-<li><strong>Protocolo → capa</strong>: HTTP · TCP · IP · Ethernet · DNS · ICMP · Wi-Fi · SSH.</li>
-<li><strong>Definición</strong> correcta de TCP: identificar la que habla de «garantía absoluta» como incorrecta.</li>
-<li>¿Qué <strong>no</strong> proporciona UDP por sí mismo?</li>
-<li>¿Cuál es la secuencia del <strong>three-way handshake</strong>?</li>
-<li>¿Para qué sirve <strong>ICMP</strong> y qué comando lo utiliza?</li>
-<li>¿Garantiza el <strong>ping</strong> que una aplicación funcione?</li>
-<li>¿Qué protocolo resuelve una <strong>IPv4 a MAC</strong>? ¿Y su equivalente en <strong>IPv6</strong>?</li>
-<li><strong>Puerto → servicio</strong>: 21 · 22 · 23 · 25 · 53 · 80 · 110 · 143 · 443 · 3389.</li>
-<li><strong>Servicio → puerto</strong>: HTTPS · DNS · IMAP · RDP · SMTP.</li>
-<li>Diferencia entre <strong>Telnet</strong> y <strong>SSH</strong> y sus puertos.</li>
-<li>¿Cuántos <strong>bits</strong> tiene una dirección IPv4? ¿Y una IPv6?</li>
-<li>Identificar los <strong>rangos privados</strong> de la RFC 1918.</li>
-<li>¿Es <strong>172.16.0.0/12</strong> o <strong>172.16.0.0/16</strong> el rango privado correcto?</li>
-<li>¿Qué es <strong>NAT</strong>? ¿Constituye un mecanismo de seguridad?</li>
-<li>En <strong>192.168.1.0/24</strong>, ¿cuántos bits corresponden a la parte de red?</li>
-<li>¿Qué red es mayor, un <strong>/16</strong> o un <strong>/24</strong>?</li>
-<li>¿Qué es la <strong>puerta de enlace predeterminada</strong>?</li>
-<li><strong>Supuesto</strong>: PC 192.168.1.20/24 con gateway 192.168.1.1. ¿Adónde envía el tráfico dirigido a 10.0.0.5?</li>
-<li>¿Qué es <strong>dual stack</strong>?</li>
-<li>Diferencias entre <strong>MAC</strong>, <strong>IP</strong> y <strong>puerto</strong>.</li>
-<li>¿A qué capa pertenece el <strong>encaminamiento</strong> en OSI y en TCP/IP?</li>
-<li>¿Qué es el <strong>next hop</strong>? ¿Es el destino final?</li>
-<li>Diferencia entre routing <strong>estático</strong> y <strong>dinámico</strong>.</li>
-<li><strong>Protocolo → tipo</strong>: RIP · OSPF · BGP.</li>
-<li>Diferencias entre <strong>switching</strong> y <strong>routing</strong>: capa, dirección, ámbito, unidad y equipo.</li>
-</ul>
+<p>Treinta y cinco preguntas con una respuesta correcta. Las soluciones están al final de la sección.</p>
+<p><strong>1.</strong> ¿Qué organización desarrolló OSI?<br>a) IETF<br>b) ISO<br>c) IEEE<br>d) IANA</p>
+<p><strong>2.</strong> ¿Cuál es la capa 6 de OSI?<br>a) Presentación<br>b) Sesión<br>c) Aplicación<br>d) Transporte</p>
+<p><strong>3.</strong> ¿Qué capa gestiona el diálogo entre extremos?<br>a) Enlace<br>b) Presentación<br>c) Red<br>d) Sesión</p>
+<p><strong>4.</strong> ¿A qué capa OSI corresponde una trama?<br>a) Red<br>b) Física<br>c) Enlace de datos<br>d) Transporte</p>
+<p><strong>5.</strong> ¿Cómo se llama la PDU de TCP?<br>a) Segmento<br>b) Datagrama<br>c) Paquete<br>d) Trama</p>
+<p><strong>6.</strong> La capa de acceso a la red de TCP/IP equivale en OSI a…<br>a) 3 y 2<br>b) 2 y 1<br>c) 5, 6 y 7<br>d) solo la 1</p>
+<p><strong>7.</strong> La capa Red de OSI se llama en TCP/IP…<br>a) Transporte<br>b) Acceso a la red<br>c) Internet<br>d) Interred física</p>
+<p><strong>8.</strong> ¿Cuál describe mejor OSI?<br>a) Un modelo de referencia por capas<br>b) La pila que usa Internet<br>c) Una norma de cableado<br>d) Un protocolo de encaminamiento</p>
+<p><strong>9.</strong> ¿Qué proporciona TCP?<br>a) Entrega garantizada en cualquier caso<br>b) Datagramas sin conexión<br>c) Cifrado de extremo a extremo<br>d) Un flujo de bytes fiable y ordenado</p>
+<p><strong>10.</strong> ¿Qué tiene UDP?<br>a) Control de congestión<br>b) Menor sobrecarga<br>c) Retransmisión<br>d) Entrega ordenada</p>
+<p><strong>11.</strong> El segundo paso del saludo TCP es…<br>a) ACK<br>b) SYN<br>c) FIN-ACK<br>d) SYN-ACK</p>
+<p><strong>12.</strong> HTTP/3 se transporta sobre…<br>a) TCP puro<br>b) ICMP<br>c) QUIC, sobre UDP<br>d) TLS, sobre TCP</p>
+<p><strong>13.</strong> ¿Qué mide ping?<br>a) El tiempo de ida y vuelta<br>b) El tiempo solo de ida<br>c) El ancho de banda<br>d) La disponibilidad del puerto 443</p>
+<p><strong>14.</strong> ¿En qué se apoya NDP?<br>a) ARP<br>b) UDP<br>c) ICMPv6<br>d) DHCP</p>
+<p><strong>15.</strong> Un PC envía a un servidor de otra red. ¿Qué MAC de destino pone?<br>a) La del servidor<br>b) La del gateway<br>c) La de difusión<br>d) La suya propia</p>
+<p><strong>16.</strong> Al cruzar un router, sin NAT, ¿qué se mantiene?<br>a) Las MAC de origen y destino<br>b) La trama completa<br>c) El TTL<br>d) Las IP de origen y destino</p>
+<p><strong>17.</strong> ¿Qué transporte usa DNS en el puerto 53?<br>a) Solo UDP<br>b) UDP y TCP<br>c) Solo TCP<br>d) ICMP</p>
+<p><strong>18.</strong> ¿Qué puerto es IMAP?<br>a) 143<br>b) 110<br>c) 25<br>d) 389</p>
+<p><strong>19.</strong> ¿Qué puerto es Telnet?<br>a) 22<br>b) 21<br>c) 23<br>d) 3389</p>
+<p><strong>20.</strong> ¿Qué dirección es privada?<br>a) 172.32.5.10<br>b) 172.15.0.1<br>c) 192.169.1.1<br>d) 172.20.5.10</p>
+<p><strong>21.</strong> Sobre 172.16.0.0/16, es cierto que…<br>a) es privada, dentro de 172.16.0.0/12<br>b) es pública, porque el bloque es /12<br>c) es el bloque completo de la RFC 1918<br>d) es una red de enlace local</p>
+<p><strong>22.</strong> La máscara de un /12 es…<br>a) 255.255.0.0<br>b) 255.0.0.0<br>c) 255.240.0.0<br>d) 255.255.240.0</p>
+<p><strong>23.</strong> ¿Cuántos equipos admite un /24 convencional?<br>a) 256<br>b) 254<br>c) 255<br>d) 128</p>
+<p><strong>24.</strong> Un PC con DHCP muestra 169.254.10.7. Esto…<br>a) demuestra que el servidor DHCP está caído<br>b) indica que usa una IP pública<br>c) es lo normal en una red con DHCP<br>d) sugiere que no obtuvo configuración por DHCP</p>
+<p><strong>25.</strong> ¿Qué indica fe80::1?<br>a) Una IPv6 pública global<br>b) Una dirección IPv6 de enlace local<br>c) Un fallo de DHCPv6<br>d) El bucle local de IPv6</p>
+<p><strong>26.</strong> ¿Qué usa IPv6 en lugar de broadcast?<br>a) Multicast<br>b) ARP<br>c) NAT<br>d) Loopback</p>
+<p><strong>27.</strong> Muchos equipos comparten una IP pública distinguiendo por puertos. Es…<br>a) DHCP<br>b) CIDR<br>c) Dual stack<br>d) PAT o NAPT</p>
+<p><strong>28.</strong> ¿Cuántos bits tiene una dirección IPv6?<br>a) 64<br>b) 48<br>c) 128<br>d) 256</p>
+<p><strong>29.</strong> La ruta predeterminada IPv4 es…<br>a) 127.0.0.0/8<br>b) 0.0.0.0/0<br>c) 255.255.255.255/32<br>d) 169.254.0.0/16</p>
+<p><strong>30.</strong> Hacia 10.20.3.5 hay rutas /0, 10.0.0.0/8 y 10.20.0.0/16. ¿Cuál se usa?<br>a) 10.0.0.0/8<br>b) 0.0.0.0/0<br>c) La de menor métrica de las tres<br>d) 10.20.0.0/16</p>
+<p><strong>31.</strong> OSPF es un protocolo de…<br>a) estado de enlace<br>b) vector distancia<br>c) vector de caminos<br>d) resolución de vecinos</p>
+<p><strong>32.</strong> ¿Qué protocolo encamina entre sistemas autónomos?<br>a) RIP<br>b) OSPF<br>c) BGP<br>d) ARP</p>
+<p><strong>33.</strong> Un switch L3 comunica dos VLAN. ¿Qué función realiza?<br>a) Switching de capa 2<br>b) NAT<br>c) Resolución ARP<br>d) Routing</p>
+<p><strong>34.</strong> El ping responde y la web no abre. ¿Qué es correcto?<br>a) Descartar la aplicación<br>b) Investigar nombre, puerto y aplicación<br>c) Concluir que falla el DNS<br>d) Cambiar el cable</p>
+<p><strong>35.</strong> El ping no responde y la web sí abre. Lo probable es…<br>a) que el servidor esté apagado<br>b) que falte el gateway<br>c) que ICMP esté filtrado<br>d) que la IP esté duplicada</p>
+<h4 class="tema-h4">Soluciones</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Pregunta</strong></th>
+<th><strong>Respuesta</strong></th>
+<th><strong>Por qué</strong></th>
+</tr>
+<tr>
+<td>1</td>
+<td><strong>b</strong></td>
+<td>Modelo de referencia de ISO</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>a</strong></td>
+<td>Formato</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>d</strong></td>
+<td>Capa 5</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>c</strong></td>
+<td>Capa 2</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>a</strong></td>
+<td>Transporte</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>b</strong></td>
+<td>Enlace y física</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>c</strong></td>
+<td>Capa 3</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>a</strong></td>
+<td>No es una pila</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>d</strong></td>
+<td>Fiable no es garantía absoluta</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>b</strong></td>
+<td>Sin esos mecanismos</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>d</strong></td>
+<td>SYN, SYN-ACK, ACK</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>c</strong></td>
+<td>No toda la web es TCP</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>a</strong></td>
+<td>RTT</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>c</strong></td>
+<td>Descubrimiento de vecinos</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>b</strong></td>
+<td>Siguiente salto</td>
+</tr>
+<tr>
+<td>16</td>
+<td><strong>d</strong></td>
+<td>La trama se rehace</td>
+</tr>
+<tr>
+<td>17</td>
+<td><strong>b</strong></td>
+<td>Los dos</td>
+</tr>
+<tr>
+<td>18</td>
+<td><strong>a</strong></td>
+<td>POP3 es 110</td>
+</tr>
+<tr>
+<td>19</td>
+<td><strong>c</strong></td>
+<td>Sin cifrar</td>
+</tr>
+<tr>
+<td>20</td>
+<td><strong>d</strong></td>
+<td>De 172.16 a 172.31</td>
+</tr>
+<tr>
+<td>21</td>
+<td><strong>a</strong></td>
+<td>Subred del bloque</td>
+</tr>
+<tr>
+<td>22</td>
+<td><strong>c</strong></td>
+<td>12 bits a uno</td>
+</tr>
+<tr>
+<td>23</td>
+<td><strong>b</strong></td>
+<td>Sin red ni difusión</td>
+</tr>
+<tr>
+<td>24</td>
+<td><strong>d</strong></td>
+<td>APIPA</td>
+</tr>
+<tr>
+<td>25</td>
+<td><strong>b</strong></td>
+<td>fe80::/10</td>
+</tr>
+<tr>
+<td>26</td>
+<td><strong>a</strong></td>
+<td>No tiene difusión</td>
+</tr>
+<tr>
+<td>27</td>
+<td><strong>d</strong></td>
+<td>NAT con puertos</td>
+</tr>
+<tr>
+<td>28</td>
+<td><strong>c</strong></td>
+<td>IPv4: 32</td>
+</tr>
+<tr>
+<td>29</td>
+<td><strong>b</strong></td>
+<td>Cualquier destino</td>
+</tr>
+<tr>
+<td>30</td>
+<td><strong>d</strong></td>
+<td>Prefijo más largo</td>
+</tr>
+<tr>
+<td>31</td>
+<td><strong>a</strong></td>
+<td>RIP: vector distancia</td>
+</tr>
+<tr>
+<td>32</td>
+<td><strong>c</strong></td>
+<td>Vector de caminos</td>
+</tr>
+<tr>
+<td>33</td>
+<td><strong>d</strong></td>
+<td>Importa la función</td>
+</tr>
+<tr>
+<td>34</td>
+<td><strong>b</strong></td>
+<td>Ping no prueba el servicio</td>
+</tr>
+<tr>
+<td>35</td>
+<td><strong>c</strong></td>
+<td>No es una caída</td>
+</tr>
+</table></div>
 <h2 id="5-preguntas-cortas" class="tema-h2">5. Posibles preguntas cortas (con esquema de respuesta)</h2>
 <h4 class="tema-h4">1. Explique el modelo OSI</h4>
 <ul class="tema-lista">
@@ -283,7 +505,7 @@
 <li><strong>a) ¿Qué demuestra el ping?</strong> Que hay <strong>conectividad</strong> hasta ese host y que <strong>responde a ICMP</strong>. Es una prueba de <strong>capa 3</strong>.</li>
 <li><strong>b) ¿Qué NO demuestra?</strong> Que el <strong>servicio</strong> funcione: <strong>ping responde ≠ servicio funciona</strong>.</li>
 <li><strong>c) ¿Qué se investiga a continuación?</strong> <strong>DNS</strong> (¿resuelve el nombre?), <strong>HTTP/HTTPS</strong> (¿escucha el puerto 80 o 443?) y la <strong>propia aplicación</strong>.</li>
-<li><strong>d) ¿Cómo se acota?</strong> Probar por <strong>nombre y por IP</strong>: si por IP funciona y por nombre no, el problema apunta a <strong>DNS</strong>, no a conectividad. (El diagnóstico en el navegador corresponde al <strong>Tema 20</strong>.)</li>
+<li><strong>d) ¿Cómo se acota?</strong> Probar por <strong>nombre y por IP</strong>: si el nombre <strong>no resuelve</strong> y por IP se llega, apunta a la <strong>resolución de nombres</strong> (no prueba que el servidor DNS esté caído). Abrir una web por IP no siempre vale como prueba, porque el servidor puede exigir el nombre. (El diagnóstico en el navegador corresponde al <strong>Tema 20</strong>.)</li>
 </ul>
 <h4 class="tema-h4">Caso 3 — Dos equipos de la misma LAN</h4>
 <p><strong>Escenario</strong>: dos equipos de la <strong>misma red</strong> intercambian ficheros a través del switch de planta.</p>
@@ -312,7 +534,7 @@
 <h4 class="tema-h4">Caso 6 — Salida a Internet desde direccionamiento privado</h4>
 <p><strong>Escenario</strong>: los equipos de la oficina usan direcciones <strong>192.168.x.x</strong> y, sin embargo, todos acceden a Internet a través de <strong>una única dirección pública</strong>.</p>
 <ul class="tema-lista">
-<li><strong>a) ¿Qué mecanismo lo permite?</strong> <strong>NAT</strong>: <strong>traducción de direcciones de red</strong>.</li>
+<li><strong>a) ¿Qué mecanismo lo permite?</strong> <strong>NAT</strong>: <strong>traducción de direcciones de red</strong>; en concreto <strong>PAT o NAPT</strong>, que traduce también los puertos.</li>
 <li><strong>b) ¿Por qué son privadas esas direcciones?</strong> Porque <strong>192.168.0.0/16</strong> es uno de los <strong>rangos privados de la RFC 1918</strong>, junto con <strong>10.0.0.0/8</strong> y <strong>172.16.0.0/12</strong>.</li>
 <li><strong>c) ¿Protege NAT la red?</strong> <strong>No es un mecanismo de seguridad por sí mismo</strong> ni un cortafuegos: solo <strong>traduce direcciones</strong>. El filtrado corresponde al cortafuegos (<strong>Tema 29</strong>).</li>
 <li><strong>d) ¿Sería necesario con IPv6?</strong> IPv6 proporciona <strong>espacio suficiente</strong> para que NAT <strong>no sea una necesidad derivada del agotamiento</strong> de IPv4, aunque pueda utilizarse en determinados escenarios.</li>
@@ -347,8 +569,70 @@
 <li><strong>a) ¿Cómo se llama el proceso?</strong> <strong>Encapsulación</strong>: cada capa <strong>añade la información de control necesaria</strong>.</li>
 <li><strong>b) ¿Cuál es la secuencia?</strong> <strong>Datos → segmento (TCP) → paquete o datagrama IP → trama (Ethernet) → bits</strong>.</li>
 <li><strong>c) ¿Qué ocurre en el destino?</strong> La <strong>desencapsulación</strong>: cada capa retira su información y entrega el contenido a la capa superior, hasta llegar a la aplicación.</li>
-<li><strong>d) ¿Cambian los datos originales?</strong> <strong>No</strong>: se van <strong>envolviendo</strong> y <strong>desenvolviendo</strong>. Los nombres de las PDU pueden variar según el contexto y el protocolo.</li>
+<li><strong>d) ¿Cambian los datos originales?</strong> En el modelo, <strong>no</strong>: se van <strong>envolviendo</strong> y <strong>desenvolviendo</strong> (pueden segmentarse o cifrarse). En cada salto se rehace la trama. Los nombres de las PDU pueden variar según el contexto y el protocolo.</li>
 </ul>
+<h4 class="tema-h4">Caso 11 — Del puesto al servidor, completo</h4>
+<p><strong>Escenario</strong>: <strong>192.168.1.20/24</strong>, con gateway <strong>192.168.1.1</strong>, abre una web de <strong>10.20.0.10</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Local o remoto?</strong> Remoto: usa la ruta predeterminada.</li>
+<li><strong>b) ¿Qué MAC resuelve?</strong> La del <strong>gateway</strong>, con ARP.</li>
+<li><strong>c) ¿Qué lleva la primera trama?</strong> MAC del PC → MAC del gateway; dentro, IP del PC → <strong>IP del servidor</strong>, TCP y puerto 443.</li>
+<li><strong>d) ¿Qué hace cada router?</strong> Elige el <strong>prefijo más largo</strong>, resta TTL y <strong>crea una trama nueva</strong>.</li>
+<li><strong>e) ¿Y al llegar?</strong> El servidor desencapsula y entrega al proceso del puerto 443.</li>
+</ul>
+<h4 class="tema-h4">Mini casos</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Situación</strong></th>
+<th><strong>Capa</strong></th>
+<th><strong>Conclusión</strong></th>
+</tr>
+<tr>
+<td>172.20.5.10</td>
+<td>3</td>
+<td>Privada</td>
+</tr>
+<tr>
+<td>172.32.5.10</td>
+<td>3</td>
+<td>No es privada</td>
+</tr>
+<tr>
+<td>169.254.x.x con DHCP</td>
+<td>3, o inferior</td>
+<td>Revisar enlace, VLAN y DHCP antes de culpar al servidor</td>
+</tr>
+<tr>
+<td>Ping falla y la web abre</td>
+<td>3 y 7</td>
+<td>ICMP filtrado, probablemente</td>
+</tr>
+<tr>
+<td>Sin gateway, pero llega a una red concreta</td>
+<td>3</td>
+<td>Hay una ruta específica</td>
+</tr>
+<tr>
+<td>Rutas /8 y /16 coincidentes</td>
+<td>3</td>
+<td>Se usa /16</td>
+</tr>
+<tr>
+<td>Un switch comunica dos VLAN</td>
+<td>3</td>
+<td>Es multicapa: enruta</td>
+</tr>
+<tr>
+<td>Misma subred y no se ven</td>
+<td>1 y 2</td>
+<td>Enlace, VLAN o filtrado</td>
+</tr>
+<tr>
+<td>El equipo tiene IPv4 e IPv6</td>
+<td>3</td>
+<td>Dual stack; cada aplicación puede usar una u otra</td>
+</tr>
+</table></div>
 <h2 id="7-matriz-de-memorizacion" class="tema-h2">7. Matriz de memorización</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -449,7 +733,11 @@
 </tr>
 <tr>
 <td><strong>NAT</strong></td>
-<td>Traducción de direcciones; no es un mecanismo de seguridad</td>
+<td>Traducción de direcciones; con puertos, PAT/NAPT; no es un mecanismo de seguridad</td>
+</tr>
+<tr>
+<td><strong>Prefijo más largo</strong></td>
+<td>La ruta más específica gana; por defecto, 0.0.0.0/0</td>
 </tr>
 <tr>
 <td><strong>Gateway</strong></td>
@@ -484,7 +772,32 @@
 <td>Routing entre sistemas autónomos</td>
 </tr>
 </table></div>
-<h2 id="8-resumen-final" class="tema-h2">8. Resumen final: si mañana fuera el examen</h2>
+<h2 id="8-repaso-visual" class="tema-h2">8. Repaso visual · T27</h2>
+<figure class="tema-figura">
+<figcaption>1 · Las siete capas OSI</figcaption>
+<svg viewBox="0 0 700 305" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at27ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at27aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at27av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at27an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at27ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at27ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="684" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><rect x="8" y="4" width="54" height="36" rx="6" fill="#003da5"/><rect x="56" y="4" width="6" height="36" fill="#003da5"/><text x="35.0" y="22.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">7</text><text x="76" y="22.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Aplicación</text><text x="680" y="22.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">servicios de red</text><rect x="8" y="47" width="684" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><rect x="8" y="47" width="54" height="36" rx="6" fill="#003da5"/><rect x="56" y="47" width="6" height="36" fill="#003da5"/><text x="35.0" y="65.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">6</text><text x="76" y="65.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Presentación</text><text x="680" y="65.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">formato de los datos</text><rect x="8" y="90" width="684" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><rect x="8" y="90" width="54" height="36" rx="6" fill="#003da5"/><rect x="56" y="90" width="6" height="36" fill="#003da5"/><text x="35.0" y="108.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">5</text><text x="76" y="108.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Sesión</text><text x="680" y="108.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">gestión de la sesión</text><rect x="8" y="133" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="133" width="54" height="36" rx="6" fill="#1f5b9e"/><rect x="56" y="133" width="6" height="36" fill="#1f5b9e"/><text x="35.0" y="151.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">4</text><text x="76" y="151.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Transporte</text><text x="680" y="151.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">TCP / UDP</text><rect x="8" y="176" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="176" width="54" height="36" rx="6" fill="#1f5b9e"/><rect x="56" y="176" width="6" height="36" fill="#1f5b9e"/><text x="35.0" y="194.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">3</text><text x="76" y="194.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Red</text><text x="680" y="194.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">IP</text><rect x="8" y="219" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="219" width="54" height="36" rx="6" fill="#1f5b9e"/><rect x="56" y="219" width="6" height="36" fill="#1f5b9e"/><text x="35.0" y="237.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">2</text><text x="76" y="237.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Enlace</text><text x="680" y="237.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">MAC / tramas</text><rect x="8" y="262" width="684" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><rect x="8" y="262" width="54" height="36" rx="6" fill="#5a5652"/><rect x="56" y="262" width="6" height="36" fill="#5a5652"/><text x="35.0" y="280.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">1</text><text x="76" y="280.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Física</text><text x="680" y="280.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">bits / señal</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>2 · OSI y TCP/IP</figcaption>
+<svg viewBox="0 0 700 216" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at27bp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at27ba" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at27bv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at27bn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at27br" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at27bg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">OSI (7)</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">TCP/IP (4)</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="56.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">7 Aplicación</text><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">6 Presentación</text><text x="176.0" y="86.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">5 Sesión</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">4 Transporte</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">3 Red</text><rect x="8.0" y="174" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="183.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">2 Enlace</text><text x="176.0" y="198.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">1 Física</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Aplicación</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Transporte</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Internet</text><rect x="356.0" y="174" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="191.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Acceso a la red</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>3 · Encapsulación y PDU</figcaption>
+<svg viewBox="0 0 700 58" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at27cp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at27ca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at27cv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at27cn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at27cr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at27cg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="6" width="116.0" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="66.0" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">DATOS</text><text x="66.0" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">aplicación</text><line x1="128.0" y1="29.0" x2="146.0" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at27cp)"/><rect x="150.0" y="6" width="116.0" height="46" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="208.0" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">SEGMENTO</text><text x="208.0" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">transporte</text><line x1="270.0" y1="29.0" x2="288.0" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at27cp)"/><rect x="292.0" y="6" width="116.0" height="46" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="350.0" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">PAQUETE</text><text x="350.0" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">red</text><line x1="412.0" y1="29.0" x2="430.0" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at27cp)"/><rect x="434.0" y="6" width="116.0" height="46" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="492.0" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">TRAMA</text><text x="492.0" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">enlace</text><line x1="554.0" y1="29.0" x2="572.0" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at27cp)"/><rect x="576.0" y="6" width="116.0" height="46" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="634.0" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">BITS</text><text x="634.0" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">física</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>4 · TCP y UDP</figcaption>
+<svg viewBox="0 0 700 296" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at27dp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at27da" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at27dv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at27dn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at27dr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at27dg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">TCP</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">UDP</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Orientado a CONEXIÓN</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">FIABLE</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Entrega ordenada</text><rect x="8.0" y="174" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="191.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Retransmisión</text><rect x="8.0" y="214" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="231.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Control de flujo</text><rect x="8.0" y="254" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="271.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Segmento</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">SIN conexión</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Sin garantía</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Sin orden</text><rect x="356.0" y="174" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="524.0" y="191.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Sin retransmisión</text><rect x="356.0" y="214" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="524.0" y="231.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Menor sobrecarga</text><rect x="356.0" y="254" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="524.0" y="271.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Datagrama</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>5 · MAC, IP y puerto</figcaption>
+<svg viewBox="0 0 700 139" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at27ep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at27ea" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at27ev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at27en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at27er" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at27eg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">MAC — capa 2</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at27ea)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">DÓNDE dentro de la LAN</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">IP — capa 3</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#003da5" stroke-width="2" marker-end="url(#at27ep)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">QUÉ host o red</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">PUERTO — capa 4</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#003da5" stroke-width="2" marker-end="url(#at27ep)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">QUÉ servicio dentro del host</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>6 · Switching y routing</figcaption>
+<svg viewBox="0 0 700 256" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at27fp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at27fa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at27fv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at27fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at27fr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at27fg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">SWITCHING</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">ROUTING</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Capa 2</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">MAC</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Trama</text><rect x="8.0" y="174" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="191.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Dentro de la LAN</text><rect x="8.0" y="214" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="231.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Elige PUERTO</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Capa 3</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">IP</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Paquete</text><rect x="356.0" y="174" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="191.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Entre redes</text><rect x="356.0" y="214" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="231.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Elige RUTA</text></svg>
+</figure>
+<h2 id="9-resumen-final" class="tema-h2">9. Resumen final: si mañana fuera el examen</h2>
 <ul class="tema-lista">
 <li><strong>OSI</strong> = <strong>Open Systems Interconnection</strong>, modelo de referencia de <strong>ISO</strong>, <strong>7 capas</strong>: interoperabilidad, modularidad y diagnóstico. <strong>No es una pila de protocolos.</strong></li>
 <li><strong>7 Aplicación (servicios) · 6 Presentación (formato) · 5 Sesión · 4 Transporte (TCP/UDP) · 3 Red (IP) · 2 Enlace (MAC) · 1 Física (bits).</strong></li>
@@ -497,18 +810,19 @@
 <li><strong>ARP → IPv4 (IP → MAC en la LAN) · NDP → IPv6.</strong> IPv6 <strong>no usa ARP</strong>.</li>
 <li><strong>Puertos</strong>: <strong>21 FTP · 22 SSH · 23 Telnet · 25 SMTP · 53 DNS · 80 HTTP · 110 POP3 · 143 IMAP · 443 HTTPS · 3389 RDP</strong>. <strong>Telnet sin cifrado, SSH seguro.</strong></li>
 <li><strong>IPv4 → 32 bits</strong>, decimal punteada. <strong>RFC 1918</strong>: <strong>10.0.0.0/8 · 172.16.0.0/12 · 192.168.0.0/16</strong>.</li>
-<li><strong>NAT</strong> = traducción de direcciones; permite compartir una IP pública. <strong>NO es un mecanismo de seguridad ni un cortafuegos.</strong></li>
+<li><strong>NAT</strong> = traducción de direcciones; con puertos (<strong>PAT</strong>) permite compartir una IP pública. <strong>NO es un mecanismo de seguridad ni un cortafuegos.</strong></li>
 <li><strong>CIDR</strong> = prefijo <strong>/n</strong>; en <strong>192.168.1.0/24</strong>, 24 bits de red. <strong>MAYOR PREFIJO → RED MÁS PEQUEÑA.</strong></li>
+<li><strong>En cada salto cambian las MAC y se mantienen las IP.</strong> Entre rutas, <strong>gana el prefijo más largo</strong>.</li>
 <li><strong>Gateway</strong> = router para el tráfico dirigido a <strong>otras redes</strong>; <strong>no es el destino final</strong>. <strong>Sin gateway → solo red local.</strong></li>
 <li><strong>IPv6 → 128 bits</strong>, hexadecimal; evita que NAT sea una <strong>necesidad derivada del agotamiento</strong> de IPv4. <strong>Dual stack</strong> = coexistencia de ambas.</li>
 <li><strong>MAC → DÓNDE EN LA LAN (capa 2) · IP → QUÉ HOST/RED (capa 3) · PUERTO → QUÉ SERVICIO (capa 4).</strong></li>
 <li><strong>Routing</strong> = selección de rutas entre redes (capa 3 / Internet); tabla con destino, <strong>next hop</strong>, interfaz y otros parámetros. <strong>Estático</strong> (manual) frente a <strong>dinámico</strong>: <strong>RIP vector distancia · OSPF estado de enlace · BGP entre sistemas autónomos</strong>.</li>
 <li><strong>SWITCHING → capa 2, MAC, trama, LAN, switch, elige PUERTO.</strong> <strong>ROUTING → capa 3, IP, paquete, entre redes, router, elige RUTA.</strong></li>
 </ul>
-<h2 id="9-actualidad-ipv6" class="tema-h2">9. Actualidad IPv6 — datos fechados</h2>
+<h2 id="10-actualidad-ipv6" class="tema-h2">10. Actualidad IPv6 — datos fechados</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Información sujeta a cambio · Fecha de actualización de estos apuntes: agosto de 2026</strong><br>El <strong>núcleo permanente</strong> de examen es: <strong>IPv4 → 32 bits · IPv6 → 128 bits · dual stack</strong>.<br>Cualquier <strong>porcentaje de adopción</strong> es un <strong>dato temporal</strong> que debe citarse siempre con <strong>fuente y fecha</strong>, y <strong>nunca</strong> como contenido nuclear.</th>
+<th><strong>📌 Información sujeta a cambio · Fecha de actualización de estos apuntes: noviembre de 2026</strong><br>El <strong>núcleo permanente</strong> de examen es: <strong>IPv4 → 32 bits · IPv6 → 128 bits · dual stack</strong>.<br>Cualquier <strong>porcentaje de adopción</strong> es un <strong>dato temporal</strong> que debe citarse siempre con <strong>fuente y fecha</strong>, y <strong>nunca</strong> como contenido nuclear.</th>
 </tr>
 </table></div>
 <ul class="tema-lista">

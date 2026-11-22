@@ -64,7 +64,7 @@
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🧠 Para memorizar — por qué importa en un CAU</strong><br>El valor práctico del modelo es el <strong>diagnóstico por capas</strong>: ante una incidencia de red se avanza <strong>de abajo arriba</strong> —¿hay <strong>enlace físico</strong>? ¿hay <strong>dirección IP</strong>? ¿hay <strong>ruta</strong>? ¿responde el <strong>servicio</strong>?—. Ese razonamiento estructurado es lo que convierte OSI en una herramienta y no en un esquema teórico.</th>
+<th><strong>🧠 Para memorizar — por qué importa en un CAU</strong><br>El valor práctico del modelo es el <strong>diagnóstico por capas</strong>: ante una incidencia de red suele avanzarse <strong>de abajo arriba</strong> (si el síntoma señala a una aplicación, se puede empezar por ella) —¿hay <strong>enlace físico</strong>? ¿hay <strong>dirección IP</strong>? ¿hay <strong>ruta</strong>? ¿responde el <strong>servicio</strong>?—. Ese razonamiento estructurado es lo que convierte OSI en una herramienta y no en un esquema teórico.</th>
 </tr>
 </table></div>
 <h2 id="2-las-siete-capas" class="tema-h2">2. Las siete capas de OSI</h2>
@@ -140,6 +140,11 @@
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>⚠️ Cautela — correspondencias conceptuales</strong><br>No conviene hacer depender cada protocolo moderno de una capa OSI rígida cuando la correspondencia es <strong>solo conceptual</strong>.<br><em>Ejemplo típico</em>: <strong>TLS no debe memorizarse rígidamente como «capa 6»</strong>. Su encaje en el modelo es objeto de distintas lecturas y depende de cómo se analice. Lo seguro es describir <strong>qué hace</strong>, no asignarle un número de capa como si fuera un dato incontrovertible.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — capas y palabras parecidas</strong><br>La <strong>capa de aplicación</strong> no es el programa con ventanas: son los servicios de red que este usa. La <strong>capa de sesión</strong> de OSI tampoco es la sesión de usuario.</th>
 </tr>
 </table></div>
 <h2 id="3-encapsulacion-y-pdu" class="tema-h2">3. Encapsulación, desencapsulación y PDU</h2>
@@ -220,13 +225,18 @@
 <p>En <strong>recepción</strong>, el proceso es el <strong>inverso</strong>: los bits se reconstruyen como trama, la trama se abre para obtener el paquete IP, el paquete se abre para obtener el segmento, y el segmento entrega los datos a la aplicación.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>💡 Analogía</strong><br>Una carta dentro de un sobre, el sobre dentro de una saca, la saca dentro de un camión. <strong>Cada envoltorio añade la información que necesita quien lo maneja</strong> y se retira cuando ya no hace falta. El contenido —la carta— <strong>no cambia</strong>.</th>
+<th><strong>💡 Analogía</strong><br>Una carta dentro de un sobre, el sobre dentro de una saca, la saca dentro de un camión. <strong>Cada envoltorio añade la información que necesita quien lo maneja</strong> y se retira cuando ya no hace falta. El contenido —la carta— <strong>no cambia</strong> (es una simplificación: en la realidad puede ir segmentado, cifrado o comprimido).</th>
 </tr>
 </table></div>
 <figure class="tema-figura">
 <figcaption>Encapsulación y PDU</figcaption>
 <svg viewBox="0 0 700 58" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at27cp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at27ca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at27cv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at27cn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at27cr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at27cg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="6" width="116.0" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="66.0" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">DATOS</text><text x="66.0" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">aplicación</text><line x1="128.0" y1="29.0" x2="146.0" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at27cp)"/><rect x="150.0" y="6" width="116.0" height="46" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="208.0" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">SEGMENTO</text><text x="208.0" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">transporte</text><line x1="270.0" y1="29.0" x2="288.0" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at27cp)"/><rect x="292.0" y="6" width="116.0" height="46" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="350.0" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">PAQUETE</text><text x="350.0" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">red</text><line x1="412.0" y1="29.0" x2="430.0" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at27cp)"/><rect x="434.0" y="6" width="116.0" height="46" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="492.0" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">TRAMA</text><text x="492.0" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">enlace</text><line x1="554.0" y1="29.0" x2="572.0" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at27cp)"/><rect x="576.0" y="6" width="116.0" height="46" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="634.0" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">BITS</text><text x="634.0" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">física</text></svg>
 <p class="tema-figura__nota">En destino, el proceso inverso: desencapsulación.</p></figure>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — qué cambia en cada salto</strong><br>Al cruzar cada router <strong>se construye una trama nueva</strong>: las <strong>MAC cambian en cada enlace</strong>.<br>Las <strong>IP de origen y destino se mantienen</strong>, salvo NAT o túneles. El router resta 1 al <strong>TTL</strong> (IPv4) o <strong>Hop Limit</strong> (IPv6).</th>
+</tr>
+</table></div>
 <h2 id="4-modelo-tcp-ip" class="tema-h2">4. El modelo TCP/IP</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -252,7 +262,7 @@
 <tr>
 <td><strong>Internet</strong></td>
 <td>Direccionamiento y encaminamiento entre redes</td>
-<td>IP, ICMP, ARP (en IPv4)</td>
+<td>IP, ICMP; ARP, según el modelo</td>
 </tr>
 <tr>
 <td><strong>Acceso a la red</strong></td>
@@ -356,7 +366,7 @@
 </tr>
 <tr>
 <td><strong>Internet</strong></td>
-<td><strong>IP · ICMP · ARP</strong> (en IPv4)</td>
+<td><strong>IP · ICMP · ARP</strong> (IPv4; según el modelo)</td>
 </tr>
 <tr>
 <td><strong>Acceso a la red</strong></td>
@@ -366,6 +376,11 @@
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>🧠 Para memorizar — el bloque más preguntable</strong><br>Cuatro asociaciones que resuelven la mayoría de los test:<br><strong>TCP y UDP → TRANSPORTE.</strong><br><strong>IP e ICMP → INTERNET / RED.</strong><br><strong>Ethernet y Wi-Fi → ACCESO A LA RED / ENLACE.</strong><br><strong>HTTP, SMTP, DNS, FTP, SSH → APLICACIÓN.</strong><br>Si en una pregunta aparece un protocolo que <strong>nombra un servicio</strong> (web, correo, nombres, ficheros, acceso remoto), es de <strong>aplicación</strong>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Cautela — la capa de ARP</strong><br>Muchos manuales lo sitúan en <strong>Internet</strong> y otros en <strong>acceso a la red</strong> (o entre las capas 2 y 3 de OSI). <strong>No encamina</strong>: solo resuelve vecinos. Si el test no da otra opción, responde <strong>Internet</strong> en TCP/IP.</th>
 </tr>
 </table></div>
 <p>El funcionamiento detallado de estos protocolos corresponde a otros temas: el <strong>correo</strong> (SMTP, POP3, IMAP) al <strong>Tema 17</strong>; los <strong>navegadores</strong> y HTTP/HTTPS al <strong>Tema 20</strong>; <strong>SSH</strong> al <strong>Tema 13</strong>; y la <strong>arquitectura de Internet</strong> al <strong>Tema 31</strong>.</p>
@@ -433,10 +448,15 @@
 </table></div>
 <h4 class="tema-h4">El establecimiento de conexión en TCP</h4>
 <p>TCP establece la conexión mediante el conocido <strong>three-way handshake</strong> (saludo en tres pasos): <strong>SYN → SYN-ACK → ACK</strong>. Es materia de <strong>ampliación</strong>; basta con retener la secuencia.</p>
+<h4 class="tema-h4">Dos precisiones</h4>
+<ul class="tema-lista">
+<li>TCP entrega un <strong>flujo de bytes</strong>: no conserva los límites de los mensajes de la aplicación.</li>
+<li><strong>No toda la web es TCP</strong>: HTTP/3 utiliza <strong>QUIC sobre UDP</strong>. <strong>DNS</strong> usa <strong>UDP y TCP</strong>.</li>
+</ul>
 <h2 id="9-icmp" class="tema-h2">9. ICMP y el comando ping</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Imprescindible para el examen</strong><br><strong>ICMP</strong> → protocolo de <strong>mensajes de control y diagnóstico</strong> de la capa de <strong>Internet / Red</strong>.<br><strong>ping</strong> → utiliza <strong>ICMP</strong> tanto en <strong>IPv4</strong> como en <strong>IPv6</strong>, según el tipo de mensaje de eco empleado.</th>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>ICMP</strong> → protocolo de <strong>mensajes de control y diagnóstico</strong> de la capa de <strong>Internet / Red</strong>.<br><strong>ping</strong> → envía un <strong>Echo Request</strong> y espera un <strong>Echo Reply</strong>: <strong>ICMP</strong> en IPv4, <strong>ICMPv6</strong> en IPv6. Mide el <strong>RTT</strong>, el tiempo de <strong>ida y vuelta</strong>.</th>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -462,13 +482,13 @@
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ Trampa de examen</strong><br>Afirmar que <strong>«IPv6 utiliza ARP»</strong> es <strong>incorrecto</strong>. La función equivalente la desempeña <strong>NDP (Neighbor Discovery Protocol)</strong>, cuyo detalle no es objeto de este tema.<br>Basta con retener la <strong>asociación</strong>: <strong>ARP pertenece al mundo IPv4; NDP, al mundo IPv6</strong>.</th>
+<th><strong>⚠️ Trampa de examen</strong><br>Afirmar que <strong>«IPv6 utiliza ARP»</strong> es <strong>incorrecto</strong>. La función equivalente la desempeña <strong>NDP (Neighbor Discovery Protocol)</strong>, que se apoya en <strong>ICMPv6</strong> y hace además otras funciones, como descubrir routers. Su detalle no es objeto de este tema.<br>Basta con retener la <strong>asociación</strong>: <strong>ARP pertenece al mundo IPv4; NDP, al mundo IPv6</strong>.</th>
 </tr>
 </table></div>
 <h2 id="11-puertos" class="tema-h2">11. Puertos</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>Puerto</strong> → <strong>identifica el servicio o proceso asociado a una comunicación</strong> dentro de un host.<br>Opera en la <strong>capa de transporte</strong>, junto a TCP y UDP.</th>
+<th><strong>📌 Imprescindible para el examen — definición</strong><br><strong>Puerto</strong> → número que <strong>identifica el extremo de transporte</strong> de una comunicación, y con él <strong>el servicio o proceso</strong> que la atiende dentro de un host.<br>Opera en la <strong>capa de transporte</strong>, junto a TCP y UDP.</th>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -522,6 +542,11 @@
 <th><strong>⚠️ TRAMPA DE EXAMEN — IP ≠ PUERTO</strong><br><strong>IP</strong> → <strong>direccionamiento lógico del host o de la interfaz</strong>: identifica <strong>a qué máquina</strong> se dirige la comunicación.<br><strong>Puerto</strong> → <strong>identifica el servicio o proceso</strong>: <strong>a qué se dirige dentro</strong> de esa máquina.<br>Una <strong>IP no identifica un servicio</strong>. Un mismo host, con una sola IP, puede ofrecer <strong>web, correo y acceso remoto</strong> simultáneamente porque cada servicio escucha en un <strong>puerto distinto</strong>.</th>
 </tr>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — puerto habitual no es aplicación segura</strong><br>Son <strong>puertos asignados</strong>, no los únicos posibles, y <strong>TCP y UDP tienen los suyos por separado</strong>: DNS usa <strong>53/UDP y 53/TCP</strong>, y por <strong>443</strong> circulan HTTPS (TCP), HTTP/3 (UDP) u otros servicios. Los puertos <strong>0 a 1023</strong> son los <strong>bien conocidos</strong>.<br>Un extremo se precisa con <strong>IP + protocolo + puerto</strong>.</th>
+</tr>
+</table></div>
 <h4 class="tema-h4">Telnet frente a SSH</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -547,7 +572,25 @@
 <th><strong>📌 Imprescindible para el examen</strong><br><strong>IPv4</strong> → dirección de <strong>32 BITS</strong>, expresada en <strong>notación decimal punteada</strong>: cuatro números separados por puntos.<br><em>Ejemplo</em>: <strong>192.168.1.1</strong>.</th>
 </tr>
 </table></div>
-<p>Cada uno de los cuatro números representa <strong>8 bits</strong> (un octeto), de ahí que <strong>4 × 8 = 32 bits</strong>.</p>
+<p>Cada uno de los cuatro números representa <strong>8 bits</strong> (un octeto, de 0 a 255), de ahí que <strong>4 × 8 = 32 bits</strong>. La dirección se asigna a una <strong>interfaz</strong>: un equipo puede tener varias interfaces y varias IP.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Direcciones especiales</strong></th>
+<th><strong>Significado</strong></th>
+</tr>
+<tr>
+<td><strong>127.0.0.0/8</strong></td>
+<td><strong>Bucle local</strong> (loopback): el propio equipo</td>
+</tr>
+<tr>
+<td><strong>169.254.0.0/16</strong></td>
+<td><strong>Enlace local (APIPA)</strong>: en un PC con DHCP suele indicar que no obtuvo configuración; no prueba que el servidor DHCP esté averiado</td>
+</tr>
+<tr>
+<td><strong>0.0.0.0/0</strong></td>
+<td>Como ruta, <strong>cualquier destino</strong>: la ruta predeterminada</td>
+</tr>
+</table></div>
 <h2 id="13-rangos-privados-y-nat" class="tema-h2">13. Rangos privados y NAT</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -559,10 +602,37 @@
 <th><strong>🧠 Para memorizar los tres rangos</strong><br><strong>10 → /8 · 172.16 → /12 · 192.168 → /16.</strong><br>Obsérvese la progresión: cuanto <strong>mayor</strong> es el primer número, <strong>mayor</strong> es el prefijo y por tanto <strong>menor</strong> el espacio de direcciones. El <strong>172.16.0.0/12</strong> es el que más se confunde: no es /16.<br>El más habitual en entornos domésticos y de oficina pequeña es <strong>192.168.0.0/16</strong>.</th>
 </tr>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Bloque</strong></th>
+<th><strong>Desde</strong></th>
+<th><strong>Hasta</strong></th>
+</tr>
+<tr>
+<td><strong>10.0.0.0/8</strong></td>
+<td>10.0.0.0</td>
+<td>10.255.255.255</td>
+</tr>
+<tr>
+<td><strong>172.16.0.0/12</strong></td>
+<td>172.16.0.0</td>
+<td><strong>172.31.255.255</strong></td>
+</tr>
+<tr>
+<td><strong>192.168.0.0/16</strong></td>
+<td>192.168.0.0</td>
+<td>192.168.255.255</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Trampa de examen — el bloque y sus subredes</strong><br><strong>172.16.0.0/16 sí es una red privada</strong>: es una parte del bloque. Lo falso es decir que <strong>el bloque completo</strong> de la RFC 1918 sea /16.<br><strong>No todo 172.x es privado</strong>: <strong>172.20.5.10</strong> lo es; <strong>172.32.5.10</strong> no.</th>
+</tr>
+</table></div>
 <h4 class="tema-h4">NAT</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Imprescindible para el examen</strong><br><strong>NAT</strong> (Network Address Translation) → <strong>traducción de direcciones de red</strong>.<br>Uso frecuente: <strong>varios equipos con direcciones privadas pueden compartir una dirección IP pública</strong> para salir a Internet.</th>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>NAT</strong> (Network Address Translation) → <strong>traducción de direcciones de red</strong>.<br>Uso frecuente: <strong>varios equipos con direcciones privadas pueden compartir una dirección IP pública</strong> para salir a Internet.<br>Esa variante traduce <strong>también los puertos</strong> para distinguir las conexiones: se llama <strong>PAT o NAPT</strong>. NAT es el término general.</th>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -581,6 +651,34 @@
 <th><strong>🧠 ANCLA — MAYOR PREFIJO → RED MÁS PEQUEÑA</strong><br>Cuantos más bits se dedican a la <strong>red</strong>, menos quedan para los <strong>hosts</strong>:<br><strong>/8 → red muy grande · /16 → intermedia · /24 → red pequeña.</strong><br>Es contraintuitivo y por eso se pregunta: <strong>un número mayor detrás de la barra significa una red MENOR</strong>.</th>
 </tr>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Prefijo</strong></th>
+<th><strong>Máscara</strong></th>
+<th><strong>Direcciones</strong></th>
+</tr>
+<tr>
+<td><strong>/8</strong></td>
+<td>255.0.0.0</td>
+<td>16.777.216</td>
+</tr>
+<tr>
+<td><strong>/12</strong></td>
+<td>255.240.0.0</td>
+<td>1.048.576</td>
+</tr>
+<tr>
+<td><strong>/16</strong></td>
+<td>255.255.0.0</td>
+<td>65.536</td>
+</tr>
+<tr>
+<td><strong>/24</strong></td>
+<td>255.255.255.0</td>
+<td>256 (<strong>254</strong> para equipos)</td>
+</tr>
+</table></div>
+<p>En una subred IPv4 convencional se restan la dirección de <strong>red</strong> y la de <strong>difusión</strong> (broadcast). Una IP acabada en 0 no es siempre la de red: depende del prefijo. La comparación de prefijos solo vale <strong>dentro de la misma versión de IP</strong>.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>⚠️ No confundir — CIDR y dirección IP</strong><br><strong>192.168.1.20</strong> es una <strong>dirección IP</strong>: identifica una interfaz concreta.<br><strong>192.168.1.0/24</strong> es una <strong>red</strong> expresada en notación CIDR.<br><strong>192.168.1.20/24</strong> combina ambas cosas: <strong>esta interfaz, dentro de esta red</strong>. El <strong>/24</strong> es lo que permite al equipo saber <strong>qué destinos están en su propia red</strong> y cuáles requieren salir por el <strong>gateway</strong>.</th>
@@ -604,7 +702,7 @@
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🧠 Regla de diagnóstico CAU</strong><br><strong>SIN GATEWAY → SOLO RED LOCAL.</strong><br>Un equipo con IP y máscara correctas pero <strong>sin puerta de enlace</strong> se comunica con los equipos de <strong>su propia red</strong>, pero <strong>no</strong> con redes externas ni con Internet. Es un síntoma muy característico.</th>
+<th><strong>🧠 Regla de diagnóstico CAU</strong><br><strong>SIN GATEWAY → SOLO RED LOCAL.</strong><br>Un equipo con IP y máscara correctas pero <strong>sin puerta de enlace</strong> se comunica con los equipos de <strong>su propia red</strong>, pero <strong>no</strong> con redes externas ni con Internet. Es un síntoma muy característico.<br>Es la regla de un puesto normal: <strong>si tuviera rutas específicas</strong> (o un túnel o una segunda interfaz), sí llegaría a esas redes.</th>
 </tr>
 </table></div>
 <h2 id="16-ipv6" class="tema-h2">16. IPv6 y dual stack</h2>
@@ -640,6 +738,12 @@
 <td><strong>Mucho mayor</strong></td>
 </tr>
 </table></div>
+<ul class="tema-lista">
+<li><strong>Ejemplo</strong>: <strong>2001:db8::1</strong>. Son ocho grupos separados por dos puntos, y <strong>::</strong> abrevia grupos seguidos de ceros (una sola vez).</li>
+<li><strong>No tiene broadcast</strong>: usa <strong>multicast</strong>.</li>
+<li><strong>fe80::/10</strong> → direcciones de <strong>enlace local</strong>. Son normales en toda interfaz IPv6: a diferencia de 169.254.x.x, <strong>no indican un fallo</strong>.</li>
+<li><strong>::/0</strong> → ruta predeterminada.</li>
+</ul>
 <h4 class="tema-h4">IPv6 y NAT</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -650,7 +754,7 @@
 <p><strong>Dual stack</strong> → <strong>coexistencia de IPv4 e IPv6 en un mismo entorno o equipo</strong>, que dispone así de ambas pilas de protocolos simultáneamente. Los mecanismos de transición no son objeto de este tema.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🧠 El núcleo permanente de este apartado</strong><br><strong>IPv4 → 32 BITS · IPv6 → 128 BITS · DUAL STACK.</strong><br>Los <strong>porcentajes de adopción</strong> —mundiales o por país— <strong>no forman parte del núcleo</strong> y se recogen, con su fecha y su fuente, en el apartado <strong>28</strong>.</th>
+<th><strong>🧠 El núcleo permanente de este apartado</strong><br><strong>IPv4 → 32 BITS · IPv6 → 128 BITS · DUAL STACK.</strong><br>Los <strong>porcentajes de adopción</strong> —mundiales o por país— <strong>no forman parte del núcleo</strong> y se recogen, con su fecha y su fuente, en la actualidad fechada (apartado 10 de Xtra).</th>
 </tr>
 </table></div>
 <h2 id="17-mac-ip-puerto" class="tema-h2">17. MAC, IP y puerto: la gran tríada</h2>
@@ -697,7 +801,7 @@
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>💡 Analogía postal</strong><br><strong>IP</strong> = la <strong>dirección del edificio</strong>: dice a qué inmueble hay que llevar el envío.<br><strong>PUERTO</strong> = el <strong>número de despacho</strong>: dice a quién, dentro del edificio.<br><strong>MAC</strong> = la identificación que usa <strong>el repartidor dentro del propio reparto local</strong>: solo tiene sentido en el tramo final.<br>Por eso la <strong>MAC no sirve para encaminar entre redes</strong>: no sale de la LAN.</th>
+<th><strong>💡 Analogía postal</strong><br><strong>IP</strong> = la <strong>dirección del edificio</strong>: dice a qué inmueble hay que llevar el envío.<br><strong>PUERTO</strong> = el <strong>número de despacho</strong>: dice a quién, dentro del edificio.<br><strong>MAC</strong> = la identificación que usa <strong>el repartidor dentro del propio reparto local</strong>: solo tiene sentido en el tramo final.<br>Por eso la <strong>MAC no sirve para encaminar entre redes</strong>: no sale de la LAN.<br>Una MAC es de una <strong>interfaz</strong>, no del equipo, y puede ser <strong>aleatoria o configurada</strong>: no es siempre única y permanente.</th>
 </tr>
 </table></div>
 <h2 id="18-routing" class="tema-h2">18. Encaminamiento (routing)</h2>
@@ -722,19 +826,18 @@
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🧠 Para memorizar</strong><br>El encaminamiento funciona <strong>salto a salto</strong>: <strong>ningún equipo conoce el camino entero</strong>, solo <strong>a quién entregar</strong> el paquete a continuación. Es exactamente la misma lógica que el <strong>gateway predeterminado</strong> en un PC (apartado 15), aplicada en cada router del trayecto.</th>
+<th><strong>🧠 Para memorizar</strong><br>El reenvío funciona <strong>salto a salto</strong>: cada equipo solo necesita decidir <strong>a quién entregar</strong> el paquete a continuación, aunque algunos protocolos le den información del camino. Es exactamente la misma lógica que el <strong>gateway predeterminado</strong> en un PC (apartado 15), aplicada en cada router del trayecto.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — gana el prefijo más largo</strong><br>Si coinciden varias rutas, se elige <strong>la más específica</strong> (longest prefix match), <strong>antes de mirar la métrica</strong>.<br><em>Ejemplo</em>: hacia <strong>10.20.3.5</strong> coinciden 0.0.0.0/0, 10.0.0.0/8 y <strong>10.20.0.0/16</strong>: se usa <strong>/16</strong>.<br>La <strong>ruta predeterminada</strong> es la menos específica: solo se usa si no hay otra. Las <strong>redes directamente conectadas</strong> no necesitan next hop.</th>
 </tr>
 </table></div>
 <h4 class="tema-h4">18.3 Routing estático</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>Routing estático</strong> → <strong>rutas configuradas manualmente</strong>.</th>
-</tr>
-<tr>
-<td><strong>Ventajas</strong>: <strong>simplicidad</strong> en redes pequeñas y <strong>control</strong> total sobre las rutas.</td>
-</tr>
-<tr>
-<td><strong>Inconvenientes</strong>: <strong>mantenimiento manual</strong> y <strong>poca adaptación</strong> a cambios o incidencias.</td>
+<th><strong>Routing estático</strong> → <strong>rutas configuradas manualmente</strong>.<br><strong>Ventajas</strong>: <strong>simplicidad</strong> y <strong>control</strong> total sobre las rutas. También se usa en redes grandes para casos concretos.<br><strong>Inconvenientes</strong>: <strong>mantenimiento manual</strong> y <strong>poca adaptación</strong> a cambios o incidencias.</th>
 </tr>
 </table></div>
 <h4 class="tema-h4">18.4 Routing dinámico</h4>
@@ -758,7 +861,7 @@
 </tr>
 <tr>
 <td><strong>BGP</strong></td>
-<td><strong>Routing entre sistemas autónomos</strong></td>
+<td><strong>Routing entre sistemas autónomos</strong> (vector de caminos)</td>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -818,6 +921,51 @@
 <figcaption>Switching vs. routing</figcaption>
 <svg viewBox="0 0 700 256" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at27fp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at27fa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at27fv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at27fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at27fr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at27fg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">SWITCHING</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">ROUTING</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Capa 2</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">MAC</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Trama</text><rect x="8.0" y="174" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="191.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Dentro de la LAN</text><rect x="8.0" y="214" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="231.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Elige PUERTO</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Capa 3</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">IP</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Paquete</text><rect x="356.0" y="174" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="191.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Entre redes</text><rect x="356.0" y="214" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="231.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Elige RUTA</text></svg>
 </figure>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — funciones, no cajas</strong><br>Un <strong>switch multicapa (L3)</strong> también <strong>enruta</strong>, por ejemplo entre VLAN distintas, que siempre necesitan capa 3. Importa la <strong>función</strong>, no el nombre del aparato.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">Diagnóstico por capas en el CAU</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Capa</strong></th>
+<th><strong>Pregunta</strong></th>
+<th><strong>Prueba típica</strong></th>
+<th><strong>Lo que no demuestra</strong></th>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td>¿Hay enlace?</td>
+<td>Cable, luz del puerto, señal</td>
+<td>Que haya IP</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>¿Llego al vecino?</td>
+<td>Tabla ARP o de vecinos</td>
+<td>Que haya ruta</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>¿IP, máscara y ruta?</td>
+<td>ipconfig, ping, tracert</td>
+<td>Que el servicio funcione</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td>¿Responde el puerto?</td>
+<td>Probar la conexión al puerto</td>
+<td>Que la aplicación vaya bien</td>
+</tr>
+<tr>
+<td><strong>7</strong></td>
+<td>¿Responde el servicio?</td>
+<td>Resolver el nombre, abrir la aplicación</td>
+<td>—</td>
+</tr>
+</table></div>
+<p>Cada prueba <strong>confirma o descarta una hipótesis</strong>. Estar en la misma subred tampoco garantiza la comunicación: puede fallar el enlace o haber filtrado. <strong>tracert</strong> muestra saltos, pero no siempre todos.</p>
 <p>Las características del hardware de conmutación y encaminamiento se estudian en el <strong>Tema 28</strong>.</p>
   </div>
 </article>

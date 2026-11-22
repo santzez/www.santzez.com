@@ -183,7 +183,7 @@
           "correcta": false
         },
         {
-          "texto": "OSI es un modelo de referencia teórico y didáctico que nunca se implementó tal cual; TCP/IP es el que realmente funciona en Internet.",
+          "texto": "OSI es un modelo de referencia que describe funciones y no una pila que se implemente tal cual; TCP/IP es la familia de protocolos desplegada en Internet.",
           "correcta": true
         },
         {
@@ -279,7 +279,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "ICMP (Internet Control Message Protocol) transporta mensajes de control y diagnóstico de red, y es la base de ping. ARP resuelve direcciones IP a MAC dentro de la red local.",
+      "razonamiento": "ping envía un Echo Request y espera un Echo Reply de ICMP (ICMPv6 en IPv6), y mide el tiempo de ida y vuelta (RTT). ARP resuelve direcciones IPv4 a MAC dentro de la red local.",
       "origen": "T27 §4",
       "dificultad": "Fácil",
       "tipo": "Conocimiento directo",
@@ -307,7 +307,7 @@
           "correcta": true
         }
       ],
-      "razonamiento": "ARP (Address Resolution Protocol) hace la correspondencia IP → MAC en la red local. Asignar IPs es DHCP, traducir nombres es DNS y encaminar entre redes es función del protocolo IP y de los routers.",
+      "razonamiento": "ARP (Address Resolution Protocol) hace la correspondencia IPv4 → MAC en la red local; para un destino remoto se resuelve la MAC del gateway. En IPv6 la función la realiza NDP. Asignar IPs es DHCP y traducir nombres es DNS.",
       "origen": "T27 §4",
       "dificultad": "Media",
       "tipo": "Definición",
@@ -363,7 +363,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "DNS usa el puerto 53. HTTP es el 80, POP3 el 110 y RDP (Escritorio remoto) el 3389.",
+      "razonamiento": "DNS usa el puerto 53, tanto sobre UDP como sobre TCP. HTTP es el 80, POP3 el 110 y RDP (Escritorio remoto) el 3389.",
       "mnemotecnico": "🧠 21 FTP · 22 SSH · 23 Telnet · 25 SMTP · 53 DNS · 80 HTTP · 110 POP3 · 143 IMAP · 443 HTTPS · 3389 RDP.",
       "origen": "T27 §4",
       "dificultad": "Fácil",
@@ -476,7 +476,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "Los rangos privados del RFC 1918 son 10.0.0.0/8, 172.16.0.0/12 y 192.168.0.0/16. El 127.0.0.1 es la dirección de bucle local (loopback) y el 224.0.0.0/4, multicast.",
+      "razonamiento": "Los rangos privados del RFC 1918 son 10.0.0.0/8, 172.16.0.0/12 (de 172.16.0.0 a 172.31.255.255) y 192.168.0.0/16. El 127.0.0.0/8 es bucle local, el 169.254.0.0/16 enlace local (APIPA) y el 100.64.0.0/10, espacio compartido de los operadores (RFC 6598).",
       "origen": "T27 §5",
       "dificultad": "Media",
       "tipo": "Clasificación",
@@ -504,7 +504,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "El NAT permite que una red con direccionamiento privado salga a Internet con una única IP pública. IPv6, por diseño, no necesita depender de NAT, aunque puede convivir con él.",
+      "razonamiento": "NAT traduce direcciones. La variante que deja salir a muchos equipos con una única IP pública traduce además los puertos (PAT o NAPT). No es un cortafuegos. IPv6, por diseño, no necesita depender de NAT, aunque puede convivir con él.",
       "origen": "T27 §5",
       "dificultad": "Media",
       "tipo": "Definición",
