@@ -275,11 +275,11 @@
           "correcta": false
         },
         {
-          "texto": "El atacante queda contenido en ese segmento intermedio, sin obtener por ello acceso directo a la red interna.",
+          "texto": "El atacante no obtiene por ello acceso directo a la red interna, siempre que la segmentación y las reglas del cortafuegos interno sean correctas.",
           "correcta": true
         }
       ],
-      "razonamiento": "Ese es precisamente el objetivo de la DMZ: contener el impacto. El esquema es Internet → cortafuegos externo → DMZ → cortafuegos interno → red interna.",
+      "razonamiento": "La DMZ limita el impacto, pero no garantiza la contención: si el cortafuegos interno permite conexiones amplias desde la DMZ, la separación pierde su sentido. El esquema clásico es Internet → cortafuegos externo → DMZ → cortafuegos interno → red interna.",
       "origen": "T29 §3",
       "dificultad": "Media",
       "tipo": "Caso práctico",
@@ -364,7 +364,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "Es el modelo híbrido clásico: el asimétrico resuelve el problema de establecer la clave de forma segura, y el simétrico, mucho más eficiente, cifra el grueso del tráfico.",
+      "razonamiento": "Es el esquema híbrido: la criptografía asimétrica autentica y permite acordar las claves, y la simétrica protege los datos. Ojo con simplificarlo más: en TLS 1.3 la clave no se envía cifrada con la pública del servidor, sino que se acuerda con claves efímeras y el servidor firma.",
       "origen": "T29 §4",
       "dificultad": "Difícil",
       "tipo": "Procedimiento",
@@ -490,7 +490,7 @@
       "pregunta": "¿Qué es una VPN?",
       "opciones": [
         {
-          "texto": "Una conexión cifrada —un «túnel»— a través de una red no confiable, típicamente Internet, que permite comunicarse como si los equipos estuvieran en la misma red privada.",
+          "texto": "Un canal lógico protegido —un «túnel», habitualmente cifrado— a través de una red no confiable, típicamente Internet, que permite comunicarse como si los equipos estuvieran en la misma red privada.",
           "correcta": true
         },
         {
@@ -506,7 +506,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "La VPN es un túnel cifrado sobre red no confiable. No confundir con la VLAN (segmentación lógica de capa 2, Tema 28), con la línea dedicada física ni con la DMZ.",
+      "razonamiento": "La VPN crea una red privada lógica sobre otra compartida. El cifrado es lo habitual sobre Internet, aunque depende del protocolo y la configuración. No confundir con la VLAN (segmentación de capa 2, Tema 28), con la línea dedicada ni con la DMZ.",
       "origen": "T29 §6",
       "dificultad": "Fácil",
       "tipo": "Definición",
@@ -590,7 +590,7 @@
           "correcta": true
         }
       ],
-      "razonamiento": "OpenVPN (solución y protocolo VPN basado en TLS) y WireGuard (protocolo VPN moderno y de diseño sencillo) se citan como ejemplos de VPN basada en TLS. Los datos de rendimiento, adopción o fechas se recogen, en su caso, en el apartado de actualidad.",
+      "razonamiento": "OpenVPN (basada en TLS) y WireGuard (protocolo moderno y sencillo, con criptografía propia sobre UDP, sin TLS) se citan como ejemplos de VPN. Los datos de rendimiento, adopción o fechas se recogen, en su caso, en el apartado de actualidad.",
       "origen": "T29 §6",
       "dificultad": "Media",
       "tipo": "Conocimiento directo",

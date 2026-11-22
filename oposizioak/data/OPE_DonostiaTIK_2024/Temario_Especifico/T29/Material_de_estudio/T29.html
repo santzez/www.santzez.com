@@ -53,7 +53,7 @@
 </tr>
 <tr>
 <td><strong>Puerto</strong></td>
-<td>Qué servicio se pretende alcanzar</td>
+<td>El de <strong>destino</strong> suele indicar el servicio; el de origen puede usarse también</td>
 </tr>
 <tr>
 <td><strong>Protocolo</strong></td>
@@ -77,6 +77,11 @@
 <th><strong>🧠 Para memorizar — la estructura de una regla</strong><br>Una regla responde siempre a la misma pregunta: <strong>¿QUIÉN, HACIA DÓNDE, POR QUÉ SERVICIO, EN QUÉ SENTIDO Y EN QUÉ ESTADO?</strong> — y decide <strong>PERMITIR o DENEGAR</strong>.<br>Los criterios disponibles <strong>dependen del tipo de cortafuegos</strong>: no todos pueden razonar sobre <strong>estado</strong> ni sobre <strong>aplicación</strong>.</th>
 </tr>
 </table></div>
+<ul class="tema-lista">
+<li><strong>No es solo una caja</strong>: puede ser un equipo, software, un servicio virtual o una función de otro sistema.</li>
+<li><strong>El orden importa</strong>: una regla correcta puede no aplicarse si <strong>otra tiene precedencia</strong>. Muchos productos aplican la primera que coincide, pero no todos.</li>
+<li>Además de permitir o denegar, muchos pueden <strong>registrar, rechazar con respuesta o limitar</strong>.</li>
+</ul>
 <h2 id="2-politica-por-defecto" class="tema-h2">2. La política por defecto</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -128,6 +133,11 @@
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
+<th><strong>⚠️ No confundir — lo que el estado no da</strong><br>Un stateful <strong>también sigue flujos UDP</strong>, con un estado temporal: no es solo para TCP.<br>Que una conexión esté permitida <strong>no la hace segura</strong>: no detecta por sí mismo malware ni fugas de datos. La <strong>DPI</strong> tampoco ve el contenido <strong>cifrado</strong> si no se descifra de forma autorizada.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
 <th><strong>⚠️ Cautela — NGFW no equivale a «firewall de capa 7»</strong><br>No debe definirse el <strong>NGFW</strong> simplemente como <strong>«un firewall de capa 7»</strong>.<br>Un NGFW se caracteriza por <strong>combinar el filtrado avanzado con funciones adicionales</strong> —<strong>DPI</strong> (inspección profunda de paquetes), <strong>IPS</strong> e <strong>identificación de aplicaciones</strong>—, integradas en un mismo sistema. La inspección a nivel de aplicación es <strong>una</strong> de sus capacidades, no su definición completa; además, un <strong>proxy</strong> también actúa sobre el protocolo de aplicación sin ser un NGFW.</th>
 </tr>
 </table></div>
@@ -164,6 +174,7 @@
 <th><strong>🧠 Para memorizar — son complementarios</strong><br>El <strong>perimetral</strong> no ve el tráfico que <strong>no pasa por él</strong>: la comunicación entre dos equipos de la misma red puede no atravesarlo.<br>El <strong>de host</strong> protege <strong>solo a su equipo</strong>, pero <strong>allí donde esté</strong> —incluido fuera de la organización, con un portátil en movilidad—.<br><strong>PERIMETRAL → LA PUERTA DEL EDIFICIO. HOST → LA CERRADURA DE CADA DESPACHO.</strong> Es la lógica de las <strong>líneas de defensa</strong> del ENS (Tema 21).</th>
 </tr>
 </table></div>
+<p>Hay también <strong>cortafuegos internos</strong>, que filtran entre zonas, redes o departamentos: <strong>no todo cortafuegos es perimetral</strong>.</p>
 <h2 id="5-dmz" class="tema-h2">5. La DMZ</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -179,6 +190,11 @@
 <figcaption>Arquitectura con DMZ</figcaption>
 <svg viewBox="0 0 700 312" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at29bp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at29ba" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at29bv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at29bn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at29br" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at29bg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="185.0" y="4" width="330" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="24.0" text-anchor="middle" font-size="13" font-weight="600" fill="#ffffff" dominant-baseline="middle">INTERNET</text><text x="527.0" y="24.0" text-anchor="start" font-size="11.5" font-weight="500" fill="#4c5560" dominant-baseline="middle">no confiable</text><line x1="350.0" y1="48" x2="350.0" y2="66" stroke="#003da5" stroke-width="2" marker-end="url(#at29bp)"/><rect x="185.0" y="70" width="330" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="90.0" text-anchor="middle" font-size="13" font-weight="600" fill="#23272e" dominant-baseline="middle">FIREWALL EXTERNO</text><line x1="350.0" y1="114" x2="350.0" y2="132" stroke="#003da5" stroke-width="2" marker-end="url(#at29bp)"/><rect x="185.0" y="136" width="330" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="156.0" text-anchor="middle" font-size="13" font-weight="600" fill="#23272e" dominant-baseline="middle">DMZ</text><text x="527.0" y="156.0" text-anchor="start" font-size="11.5" font-weight="500" fill="#4c5560" dominant-baseline="middle">servicios expuestos</text><line x1="350.0" y1="180" x2="350.0" y2="198" stroke="#003da5" stroke-width="2" marker-end="url(#at29bp)"/><rect x="185.0" y="202" width="330" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="222.0" text-anchor="middle" font-size="13" font-weight="600" fill="#23272e" dominant-baseline="middle">FIREWALL INTERNO</text><line x1="350.0" y1="246" x2="350.0" y2="264" stroke="#003da5" stroke-width="2" marker-end="url(#at29bp)"/><rect x="185.0" y="268" width="330" height="40" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="288.0" text-anchor="middle" font-size="13" font-weight="600" fill="#23272e" dominant-baseline="middle">RED INTERNA</text><text x="527.0" y="288.0" text-anchor="start" font-size="11.5" font-weight="500" fill="#4c5560" dominant-baseline="middle">no expuesta</text></svg>
 <p class="tema-figura__nota">Limita el acceso directo a la red interna si la segmentación y las reglas son correctas.</p></figure>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — dos cortafuegos no son obligatorios</strong><br>El esquema clásico tiene dos, pero una DMZ también se hace con <strong>un cortafuegos de tres zonas</strong> (exterior, DMZ, interior).<br>Lo definitorio es la <strong>separación con reglas propias</strong>. <strong>DMZ tampoco es NAT.</strong></th>
+</tr>
+</table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>⚠️ TRAMPA DE EXAMEN — la DMZ no garantiza contención absoluta</strong><br>Es <strong>incorrecto</strong> afirmar que una DMZ <strong>garantiza que un atacante quede completamente contenido</strong>.<br>Formulación correcta: <strong>«limita el acceso directo a la red interna si la segmentación y las reglas están correctamente configuradas»</strong>.<br>La eficacia de la DMZ <strong>depende de la configuración</strong>: si las reglas del firewall interno permiten conexiones amplias desde la DMZ hacia la red interna, la separación pierde buena parte de su sentido.</th>
@@ -201,6 +217,11 @@
 <th><strong>⚠️ No confundir — firewall e IDS</strong><br><strong>FIREWALL → APLICA REGLAS</strong> de permitir o denegar: decide <strong>qué puede pasar</strong>.<br><strong>IDS → OBSERVA Y AVISA</strong> ante actividad sospechosa: no decide el paso, <strong>informa</strong>.<br><strong>IPS → OBSERVA Y ACTÚA</strong>: además de detectar, <strong>interviene</strong> sobre el tráfico.<br>La diferencia entre IDS e IPS está en <strong>una sola letra y en una sola capacidad</strong>: <strong>D de detección</strong> frente a <strong>P de prevención</strong>.</th>
 </tr>
 </table></div>
+<ul class="tema-lista">
+<li>Una <strong>alerta no confirma un ataque</strong>: se evalúa.</li>
+<li>Un <strong>IPS puede dar falsos positivos</strong> y bloquear tráfico legítimo: se ajusta, no se apaga.</li>
+<li>Un IDS puede disparar respuestas a través de otros sistemas, pero su función es <strong>detectar</strong>.</li>
+</ul>
 <figure class="tema-figura">
 <figcaption>IDS vs. IPS</figcaption>
 <svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at29cp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at29ca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at29cv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at29cn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at29cr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at29cg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">IDS</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">IPS</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">DETECTA</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">ALERTA</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">No interviene</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">DETECTA</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">BLOQUEA</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Actúa sobre el tráfico</text></svg>
@@ -239,6 +260,11 @@
 <th><strong>⚠️ Cautela — TLS y el transporte</strong><br>No debe definirse TLS como <strong>«protocolo que opera sobre TCP y siempre»</strong>.<br>Formulación correcta: <strong>«TLS se utiliza habitualmente para proteger protocolos de aplicación basados en TCP, como HTTPS, SMTP e IMAP»</strong>.<br>Es una descripción de <strong>uso habitual</strong>, no una dependencia absoluta e indisociable.</th>
 </tr>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — presentar no es acreditar</strong><br>El cliente debe <strong>validar</strong> el certificado: <strong>cadena de confianza, nombre esperado y vigencia</strong>. Ante un aviso no se recomienda «continuar»: se comprueba (también la hora del equipo) y se escala.<br><strong>mTLS</strong> → las dos partes presentan certificado. <strong>DTLS</strong> → la variante para datagramas (UDP). <strong>TLS por sí solo no es una VPN.</strong></th>
+</tr>
+</table></div>
 <p>El funcionamiento de los <strong>certificados</strong>, la <strong>PKI</strong> y las claves corresponde al <strong>Tema 24</strong>.</p>
 <h2 id="8-handshake" class="tema-h2">8. El handshake de TLS</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -273,6 +299,11 @@
 <th><strong>🧠 Para memorizar — por qué simétrica al final</strong><br>La <strong>criptografía simétrica es mucho más eficiente</strong> para proteger un volumen elevado de datos. Por eso el handshake sirve para <strong>llegar a unas claves de sesión compartidas</strong>, y a partir de ahí <strong>la comunicación se protege con criptografía simétrica</strong>.<br><strong>NEGOCIAR → ACREDITAR → ESTABLECER CLAVES → PROTEGER CON SIMÉTRICA.</strong></th>
 </tr>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 TLS 1.3</strong><br>Ya <strong>no se cifra la clave con la pública del servidor</strong>: las partes <strong>acuerdan</strong> un secreto con claves efímeras y el servidor <strong>firma</strong> para acreditarse. Así las sesiones pasadas siguen protegidas si se roba su clave más adelante (<strong>forward secrecy</strong>).</th>
+</tr>
+</table></div>
 <figure class="tema-figura">
 <figcaption>Handshake TLS</figcaption>
 <svg viewBox="0 0 700 58" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at29dp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at29da" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at29dv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at29dn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at29dr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at29dg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="6" width="151.5" height="46" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="83.75" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">NEGOCIAR</text><text x="83.75" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">parámetros</text><line x1="163.5" y1="29.0" x2="181.5" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at29dp)"/><rect x="185.5" y="6" width="151.5" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="261.25" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">ACREDITAR</text><text x="261.25" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">certificado</text><line x1="341.0" y1="29.0" x2="359.0" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at29dp)"/><rect x="363.0" y="6" width="151.5" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="438.75" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">CLAVES</text><text x="438.75" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">de sesión</text><line x1="518.5" y1="29.0" x2="536.5" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at29dp)"/><rect x="540.5" y="6" width="151.5" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="616.25" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">SIMÉTRICA</text><text x="616.25" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">protege datos</text></svg>
@@ -283,6 +314,7 @@
 <th><strong>📌 Imprescindible para el examen</strong><br><strong>HTTPS</strong> → <strong>HTTP protegido mediante TLS</strong>.<br><strong>ANCLA: HTTPS → HTTP + TLS.</strong></th>
 </tr>
 </table></div>
+<p>En el HTTPS clásico, TLS va sobre TCP. <strong>HTTP/3</strong> usa <strong>QUIC sobre UDP</strong>, que integra TLS 1.3.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>⚠️ No confundir — HTTPS y «SSL»</strong><br>Sigue siendo frecuente oír <strong>«el certificado SSL»</strong> o <strong>«la web tiene SSL»</strong>. Es una <strong>denominación heredada</strong>: la tecnología vigente es <strong>TLS</strong>.<br>Y recuerda la regla del <strong>Tema 20</strong>: <strong>HTTPS protege la COMUNICACIÓN; no garantiza la legitimidad del sitio ni del contenido</strong>.</th>
@@ -307,8 +339,8 @@
 </tr>
 <tr>
 <td><strong>Versiones relevantes</strong></td>
-<td>—</td>
-<td><strong>TLS 1.2 y TLS 1.3</strong></td>
+<td>2.0 y 3.0, prohibidas</td>
+<td><strong>TLS 1.2 y TLS 1.3</strong>; la 1.0 y la 1.1, retiradas</td>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -328,6 +360,14 @@
 <li><strong>Integridad</strong> del tráfico protegido.</li>
 <li><strong>Confidencialidad</strong>, mediante cifrado.</li>
 </ul>
+<ul class="tema-lista">
+<li><strong>Antirrepetición</strong>, frente al reenvío de paquetes capturados.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 No es un único protocolo</strong><br><strong>IKE (IKEv2)</strong> → <strong>negocia</strong> las asociaciones de seguridad y las claves.<br><strong>AH y ESP</strong> → <strong>protegen</strong> el tráfico con lo negociado.</th>
+</tr>
+</table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>🧠 LA GRAN COMPARACIÓN DEL TEMA — TLS frente a IPSec</strong><br><strong>TLS → PROTEGE LA COMUNICACIÓN</strong> de protocolos de aplicación (HTTPS, SMTP, IMAP). Lo ve la aplicación.<br><strong>IPSec → PROTEGE IP</strong>, a <strong>nivel de red</strong>. Es <strong>transparente</strong> para las aplicaciones: protege <strong>todo lo que viaje sobre IP</strong> conforme a su configuración.<br>Diferencia de <strong>nivel</strong>, no de calidad: uno actúa <strong>arriba</strong>, junto a la aplicación; el otro, <strong>abajo</strong>, en el propio transporte de paquetes IP.</th>
@@ -369,6 +409,11 @@
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>🧠 Truco para no confundirlos</strong><br><strong>TÚNEL = ENVOLVER ENTERO.</strong> Un túnel <strong>mete el paquete completo dentro de otro</strong>, con una <strong>nueva cabecera IP</strong>. Por eso sirve para unir <strong>redes</strong>: los extremos del túnel son los <strong>equipos de frontera</strong>, no los hosts finales.<br><strong>TRANSPORTE = PROTEGER EL CONTENIDO.</strong> Mantiene la cabecera original, así que los <strong>extremos siguen siendo los hosts</strong>.<br><strong>Si la pregunta habla de dos SEDES o dos REDES → TÚNEL.</strong></th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ Cautela — usos típicos, no definiciones</strong><br>Host ↔ host y red ↔ red son los <strong>casos habituales</strong>. Lo que <strong>define</strong> cada modo es si se <strong>encapsula o no</strong> el paquete original: el túnel también sirve para un teletrabajador.</th>
 </tr>
 </table></div>
 <figure class="tema-figura">
@@ -413,6 +458,11 @@
 <th><strong>🧠 Para memorizar</strong><br><strong>AH → AUTENTICIDAD E INTEGRIDAD (sin cifrado).</strong><br><strong>ESP → CIFRADO + AUTENTICIDAD/INTEGRIDAD.</strong><br>Truco: la <strong>E de ESP</strong> es la de <strong>Encrypting</strong> — <strong>ESP es el que cifra</strong>. Y el que cifra es el que se usa: <strong>ESP → uso principal · AH → uso limitado</strong>.</th>
 </tr>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔍 Para ampliar</strong><br>El cifrado de ESP es lo habitual, pero <strong>la norma permite configurarlo sin cifrado efectivo</strong> (solo integridad).<br><strong>AH choca con NAT</strong>, porque protege campos de la cabecera IP que NAT modifica. ESP lo atraviesa con <strong>NAT-T</strong> (encapsulado en UDP 4500).</th>
+</tr>
+</table></div>
 <figure class="tema-figura">
 <figcaption>AH vs. ESP</figcaption>
 <svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at29fp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at29fa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at29fv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at29fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at29fr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at29fg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">AH</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">ESP</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Autenticidad e integridad</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">NO cifra</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Uso limitado</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">CIFRA</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="103.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Puede aportar además</text><text x="524.0" y="118.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">autenticidad e integridad</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Uso principal</text></svg>
@@ -428,9 +478,10 @@
 <th><strong>⚠️ Cautela — no toda VPN equivale sin más a «conexión cifrada»</strong><br>No debe afirmarse simplemente que <strong>«toda VPN es una conexión cifrada»</strong>.<br>Formulación correcta: <strong>«las propiedades concretas de protección dependen del protocolo y de la configuración empleados»</strong>.<br>El elemento definitorio es la creación de un <strong>canal lógico protegido sobre una red no confiable</strong>; <strong>qué</strong> protección concreta ofrece —confidencialidad, integridad, autenticación— <strong>depende de cómo se implemente</strong>.</th>
 </tr>
 </table></div>
+<p>Hay VPN de operador (por ejemplo, <strong>MPLS</strong>) que <strong>aíslan sin cifrar</strong>. Sobre Internet, cifrado y autenticación son lo habitual y lo exigible.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir — VPN y línea dedicada</strong><br><strong>VPN → canal LÓGICO</strong> establecido <strong>sobre una infraestructura compartida</strong>, típicamente Internet. La palabra <strong>«virtual»</strong> es literal.<br><strong>Línea dedicada → enlace FÍSICO</strong> contratado en exclusiva.<br>La VPN <strong>simula</strong> las propiedades de un enlace privado <strong>sin serlo físicamente</strong>: de ahí «red privada <strong>virtual</strong>».</th>
+<th><strong>⚠️ No confundir — VPN y línea dedicada</strong><br><strong>VPN → canal LÓGICO</strong> establecido <strong>sobre una infraestructura compartida</strong>, típicamente Internet. La palabra <strong>«virtual»</strong> es literal.<br><strong>Línea dedicada → enlace o capacidad contratada en exclusiva</strong> al operador, no siempre un único cable propio.<br>La VPN <strong>simula</strong> las propiedades de un enlace privado <strong>sin serlo físicamente</strong>: de ahí «red privada <strong>virtual</strong>».</th>
 </tr>
 </table></div>
 <h2 id="15-tipos-de-vpn" class="tema-h2">15. Client-to-site y site-to-site</h2>
@@ -462,12 +513,12 @@
 </tr>
 <tr>
 <td><strong>Percepción del usuario</strong></td>
-<td>Debe <strong>iniciar la conexión</strong> con un cliente VPN</td>
+<td><strong>Puede tener que iniciarla</strong>; también puede ser automática</td>
 <td><strong>Transparente</strong>: el usuario no hace nada</td>
 </tr>
 <tr>
 <td><strong>Si se implanta con IPSec</strong></td>
-<td>—</td>
+<td>También suele ser túnel</td>
 <td>Habitualmente <strong>modo TÚNEL</strong></td>
 </tr>
 </table></div>
@@ -478,7 +529,7 @@
 </table></div>
 <figure class="tema-figura">
 <figcaption>Client-to-site vs. site-to-site</figcaption>
-<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at29gp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at29ga" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at29gv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at29gn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at29gr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at29gg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">CLIENT-TO-SITE</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">SITE-TO-SITE</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">PERSONA ↔ organización</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Teletrabajo</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="143.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">El usuario inicia</text><text x="176.0" y="158.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">la conexión</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">RED ↔ RED</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Dos sedes</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="143.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Transparente; con</text><text x="524.0" y="158.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">IPSec, modo túnel</text></svg>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at29gp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at29ga" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at29gv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at29gn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at29gr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at29gg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">CLIENT-TO-SITE</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">SITE-TO-SITE</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">PERSONA ↔ organización</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Teletrabajo</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="143.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Manual o automática</text><text x="176.0" y="158.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">según el diseño</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">RED ↔ RED</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Dos sedes</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="143.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Transparente; con</text><text x="524.0" y="158.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">IPSec, modo túnel</text></svg>
 </figure>
 <h2 id="16-ipsec-vs-vpn" class="tema-h2">16. IPSec frente a VPN y firewall frente a VPN</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -531,17 +582,17 @@
 </tr>
 <tr>
 <td><strong>OpenVPN</strong></td>
-<td>Solución y protocolo <strong>VPN basado en TLS</strong></td>
+<td>Solución y protocolo <strong>VPN basado en TLS</strong>, que usa para autenticar y acordar claves (no es HTTPS)</td>
 </tr>
 <tr>
 <td><strong>WireGuard</strong></td>
-<td>Protocolo VPN <strong>moderno y de diseño sencillo</strong></td>
+<td>Protocolo VPN <strong>moderno y de diseño sencillo</strong>, con criptografía propia sobre UDP: <strong>no usa TLS</strong></td>
 </tr>
 </table></div>
 <p>Ambos se citan como <strong>ejemplos</strong>. Su <strong>configuración</strong>, sus <strong>datos de adopción</strong>, su <strong>rendimiento</strong> y las <strong>fechas</strong> de su incorporación a distintos sistemas <strong>no son materia nuclear</strong>: se recogen, en su caso, en el apartado de <strong>actualidad</strong>.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🧠 Para memorizar — las dos grandes familias de VPN</strong><br><strong>VPN BASADA EN IPSec</strong> → protege a <strong>nivel IP</strong>; típica en <strong>site-to-site</strong> (modo <strong>túnel</strong>).<br><strong>VPN BASADA EN TLS</strong> → se apoya en <strong>TLS</strong>; frecuente en accesos <strong>client-to-site</strong>. Ejemplo: <strong>OpenVPN</strong>.<br>Y una tercera vía moderna: <strong>WireGuard</strong>, protocolo de <strong>diseño sencillo</strong>.<br>La pregunta de examen suele ser <strong>de asociación</strong>: <strong>OpenVPN → TLS · IPSec → nivel IP · WireGuard → moderno y sencillo</strong>.</th>
+<th><strong>🧠 Para memorizar — las dos grandes familias de VPN</strong><br><strong>VPN BASADA EN IPSec</strong> → protege a <strong>nivel IP</strong>; típica en <strong>site-to-site</strong> (modo <strong>túnel</strong>).<br><strong>VPN BASADA EN TLS</strong> → se apoya en <strong>TLS</strong>; frecuente en accesos <strong>client-to-site</strong>. Ejemplo: <strong>OpenVPN</strong>.<br>Y una tercera vía moderna, <strong>que no es TLS ni IPSec</strong>: <strong>WireGuard</strong>, protocolo de <strong>diseño sencillo</strong>.<br>La pregunta de examen suele ser <strong>de asociación</strong>: <strong>OpenVPN → TLS · IPSec → nivel IP · WireGuard → moderno y sencillo</strong>.</th>
 </tr>
 </table></div>
 <h2 id="18-split-tunneling" class="tema-h2">18. Full tunnel y split tunneling</h2>
@@ -575,6 +626,45 @@
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>💡 Síntoma típico en el CAU</strong><br>Una persona en teletrabajo <strong>está conectada a la VPN</strong> y, sin embargo, su <strong>navegación personal no pasa por la organización</strong>. No es un fallo: es el comportamiento propio de un <strong>split tunneling</strong> configurado así.<br><strong>Estar conectado a la VPN no implica automáticamente que TODO el tráfico circule por ella.</strong></th>
+</tr>
+</table></div>
+<p>«Todo» admite excepciones técnicas (la red local, el propio túnel). <strong>Ni el split es siempre inseguro ni el full es seguro por sí solo.</strong></p>
+<h4 class="tema-h4">La VPN conecta, pero el recurso no funciona</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔧 Aplicación CAU</strong><br><strong>CONECTADO ≠ AUTORIZADO ≠ SERVICIO FUNCIONANDO.</strong><br><strong>CONFIRMAR EL TÚNEL → RUTAS → DNS → CORTAFUEGOS → PERMISOS → SERVICIO → ESCALAR CON EVIDENCIAS.</strong><br>No se desactivan cortafuegos ni se cambian reglas para probar sin autorización.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Síntoma</strong></th>
+<th><strong>Hipótesis principal</strong></th>
+<th><strong>Prueba</strong></th>
+</tr>
+<tr>
+<td>La VPN no conecta</td>
+<td>Internet, credenciales, MFA, certificado, filtrado</td>
+<td>Mensaje y registro del cliente</td>
+</tr>
+<tr>
+<td>Va por IP y no por nombre</td>
+<td>DNS interno</td>
+<td>Consultar el nombre y los DNS asignados</td>
+</tr>
+<tr>
+<td>No llega a una subred</td>
+<td>Falta la ruta</td>
+<td><code>route print</code></td>
+</tr>
+<tr>
+<td>Solo falla desde una casa</td>
+<td>Mismo prefijo que la red interna, o filtrado</td>
+<td>Comparar direccionamiento y probar desde otra red</td>
+</tr>
+<tr>
+<td>Llega, pero se le deniega</td>
+<td>Permisos o regla</td>
+<td>Identificar la regla o el responsable</td>
 </tr>
 </table></div>
   </div>
