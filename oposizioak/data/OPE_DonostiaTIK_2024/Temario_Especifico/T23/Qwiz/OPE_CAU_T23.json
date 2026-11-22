@@ -195,7 +195,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "La incremental solo copia lo cambiado desde la última copia, sea del tipo que sea: es la más rápida y compacta, a costa de una restauración más compleja.",
+      "razonamiento": "La incremental solo copia lo cambiado desde la última copia, sea del tipo que sea: es la más rápida y compacta, a costa de una restauración más compleja. Es lo habitual, no una garantía: si cambian muchos datos ese día, también será grande.",
       "origen": "T23 §2",
       "dificultad": "Media",
       "tipo": "Relación",
@@ -247,11 +247,11 @@
           "correcta": false
         },
         {
-          "texto": "A las copias diarias, que se sobrescriben cada semana.",
+          "texto": "A las copias diarias, para la recuperación más reciente.",
           "correcta": true
         }
       ],
-      "razonamiento": "En GFS: hijo = copias diarias (se sobrescriben semanalmente), padre = semanales (se conservan un mes) y abuelo = mensuales (un año o más). Ofrece puntos de recuperación en varias escalas de tiempo sin almacenar todo indefinidamente.",
+      "razonamiento": "En GFS: hijo = copias diarias, padre = semanales y abuelo = mensuales o de largo plazo. Cuánto se conserva cada nivel lo fija la política de retención: no hay plazos universales.",
       "origen": "T23 §3",
       "dificultad": "Media",
       "tipo": "Precisión",
@@ -279,7 +279,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "La regla 3-2-1 exige al menos 3 copias de los datos (el original más dos), en 2 tipos de soporte distintos, con 1 de ellas fuera de las instalaciones (offsite) para sobrevivir a un desastre que afecte a toda la ubicación.",
+      "razonamiento": "La regla 3-2-1 recomienda al menos 3 copias de los datos (el original más dos), en 2 tipos de soporte distintos, con 1 de ellas fuera de las instalaciones (offsite) para sobrevivir a un desastre que afecte a toda la ubicación.",
       "origen": "T23 §4",
       "dificultad": "Fácil",
       "tipo": "Precisión",
@@ -307,7 +307,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "La 3-2-1-1-0 responde a la amenaza del ransomware: exige al menos una copia aislada de la red o inmutable, y verificar que las copias existentes se restauran sin fallos.",
+      "razonamiento": "La 3-2-1-1-0 responde a la amenaza del ransomware: recomienda al menos una copia aislada de la red o inmutable, y verificar que las copias existentes se restauran sin fallos.",
       "origen": "T23 §4",
       "dificultad": "Media",
       "tipo": "Precisión",
@@ -391,7 +391,7 @@
           "correcta": true
         }
       ],
-      "razonamiento": "El RTO mira «hacia delante»: ¿cuánto tiempo podemos permitirnos estar caídos? Cuanto menor sea, más costosa debe ser la solución técnica (clúster de alta disponibilidad frente a restaurar desde cinta).",
+      "razonamiento": "El RTO mira «hacia delante»: ¿cuánto tiempo podemos permitirnos estar caídos? Cuanto menor sea, más rápida y normalmente más costosa será la solución, sin que imponga una tecnología concreta. Es un objetivo: el tiempo real se mide en las pruebas.",
       "mnemotecnico": "🧠 RTO = Tiempo de parada · RPO = Pérdida de datos.",
       "origen": "T23 §5",
       "dificultad": "Media",
@@ -420,7 +420,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "El RPO mira «hacia atrás»: ¿cuánta información podemos permitirnos perder? Un RPO de una hora exige copiar o replicar los datos al menos cada hora.",
+      "razonamiento": "El RPO mira «hacia atrás»: ¿cuánta información podemos permitirnos perder? Es un objetivo, no la frecuencia de copia: copiar o replicar cada hora es una forma de perseguir un RPO de una hora, si las copias no fallan.",
       "origen": "T23 §5",
       "dificultad": "Media",
       "tipo": "Definición",
@@ -440,7 +440,7 @@
           "correcta": false
         },
         {
-          "texto": "Que los datos deben copiarse o replicarse al menos cada 15 minutos.",
+          "texto": "Que debe poder recuperarse un estado de 15 minutos de antigüedad como máximo.",
           "correcta": true
         },
         {
@@ -448,7 +448,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "Cuanto menor es el RPO, mayor debe ser la frecuencia de copia o replicación: es la traducción práctica de «cuántos datos podemos permitirnos perder». Restaurar en menos de 15 minutos sería un RTO de 15 minutos.",
+      "razonamiento": "El RPO es la pérdida admisible. Copiar o replicar al menos cada 15 minutos es una forma de alcanzarlo, no su definición ni una garantía. Restaurar en menos de 15 minutos sería un RTO.",
       "origen": "T23 §5",
       "dificultad": "Difícil",
       "tipo": "Aplicación",
@@ -513,7 +513,7 @@
     },
     {
       "id": "OPE_CAU_T23_019",
-      "pregunta": "¿Qué exige el Anexo II del ENS dentro de las medidas de continuidad del servicio?",
+      "pregunta": "Con nivel ALTO de disponibilidad, ¿qué exige el Anexo II del ENS dentro de las medidas de continuidad del servicio (op.cont)?",
       "opciones": [
         {
           "texto": "Análisis de impacto, elaboración del plan, pruebas periódicas y disposición de medios alternativos.",
@@ -532,7 +532,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "Las medidas de continuidad del Anexo II incluyen análisis de impacto, plan de continuidad, pruebas periódicas y medios alternativos: no basta con hacer copias.",
+      "razonamiento": "op.cont.1 (análisis de impacto) se aplica en MEDIO y ALTO; op.cont.2 (plan de continuidad), op.cont.3 (pruebas periódicas) y op.cont.4 (medios alternativos), solo en ALTO.",
       "origen": "T23 §6",
       "dificultad": "Difícil",
       "tipo": "Conocimiento directo",
@@ -569,7 +569,7 @@
     },
     {
       "id": "OPE_CAU_T23_021",
-      "pregunta": "Un servicio crítico necesita un RTO muy bajo (minutos). ¿Qué tipo de solución técnica es coherente?",
+      "pregunta": "Un servicio crítico necesita un RTO muy bajo (minutos). De estas opciones, ¿cuál es la más coherente?",
       "opciones": [
         {
           "texto": "Restaurar manualmente desde cintas almacenadas fuera de las instalaciones.",
@@ -588,7 +588,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "Cuanto menor es el RTO exigido, más sofisticada y costosa debe ser la solución: la conmutación automática permite recuperar el servicio en minutos, mientras que restaurar desde cinta lleva horas.",
+      "razonamiento": "La conmutación automática es una de las formas de recuperar en minutos. El RTO no obliga a usar un clúster: entre estas opciones, es la única compatible con ese objetivo. Un clúster tampoco sustituye a las copias.",
       "origen": "T23 §5",
       "dificultad": "Difícil",
       "tipo": "Aplicación",
@@ -672,7 +672,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "Trampa clásica: convertir una práctica recomendada en norma. Lo mismo ocurre con su ampliación 3-2-1-1-0, que es una práctica de resiliencia frente al ransomware, no una norma jurídica.",
+      "razonamiento": "Trampa clásica: convertir una práctica recomendada en norma. Lo mismo ocurre con su ampliación 3-2-1-1-0, que es una práctica de resiliencia frente al ransomware, no una norma jurídica. El ENS solo pide una copia separada en lugar diferente con nivel ALTO de disponibilidad (mp.info.6 R2).",
       "mnemotecnico": "🧠 3 copias · 2 soportes · 1 fuera. Buena práctica, no norma.",
       "dificultad": "Media",
       "tipo": "Detección de errores",

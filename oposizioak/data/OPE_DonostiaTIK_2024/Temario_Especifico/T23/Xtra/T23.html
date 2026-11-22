@@ -13,7 +13,9 @@
 <li><a href="#5-preguntas-cortas">5. Posibles preguntas cortas (con esquema de respuesta)</a></li>
 <li><a href="#6-supuestos-practicos">6. Supuestos prácticos</a></li>
 <li><a href="#7-matriz-de-memorizacion">7. Matriz de memorización</a></li>
-<li><a href="#8-resumen-final">8. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#8-repaso-visual">8. Repaso visual · T23</a></li>
+<li><a href="#9-resumen-final">9. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#10-actualidad">10. Actualidad — datos fechados</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
@@ -31,6 +33,10 @@
 <li><strong>BCP → ORGANIZACIÓN · DRP → TECNOLOGÍA</strong>.</li>
 <li><strong>SNAPSHOT ≠ BACKUP · REPLICACIÓN ≠ BACKUP · BACKUP REALIZADO ≠ BACKUP RESTAURABLE</strong>.</li>
 <li><strong>ENS → art. 26 continuidad · mp.info.6 copias de seguridad</strong>.</li>
+<li><strong>mp.info.6 por disponibilidad → BAJO base · MEDIO + pruebas · ALTO + copia separada</strong>.</li>
+<li><strong>op.cont → análisis de impacto desde MEDIO; plan, pruebas y medios, solo ALTO</strong>.</li>
+<li><strong>OFFSITE ≠ OFFLINE ≠ INMUTABLE</strong>.</li>
+<li><strong>SIN CLAVE NO HAY COPIA · RESTAURABLE ≠ SERVICIO RESTABLECIDO</strong>.</li>
 </ul>
 <h2 id="2-no-confundir" class="tema-h2">2. No confundir</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -85,6 +91,31 @@
 <td>Adelante (tiempo) vs. atrás (datos)</td>
 </tr>
 <tr>
+<td><strong>Frecuencia</strong>: cada cuánto copio</td>
+<td><strong>Retención</strong>: cuánto conservo</td>
+<td>Ejecución vs. conservación</td>
+</tr>
+<tr>
+<td><strong>Offsite</strong>: otro lugar</td>
+<td><strong>Offline</strong>: sin conexión</td>
+<td>Lo externo puede estar online</td>
+</tr>
+<tr>
+<td><strong>GFS</strong>: rotación</td>
+<td><strong>Tipo de copia</strong></td>
+<td>Se combinan</td>
+</tr>
+<tr>
+<td><strong>mp.info.6 R1</strong>: probar copias</td>
+<td><strong>op.cont.3</strong>: probar el plan</td>
+<td>Desde MEDIO vs. solo ALTO</td>
+</tr>
+<tr>
+<td><strong>RTO</strong>: objetivo</td>
+<td><strong>Tiempo real</strong></td>
+<td>Lo fijado vs. lo medido</td>
+</tr>
+<tr>
 <td><strong>RPO</strong>: objetivo de pérdida admisible</td>
 <td><strong>Frecuencia de backup</strong>: medio para alcanzarlo</td>
 <td>Objetivo vs. instrumento</td>
@@ -126,41 +157,235 @@
 <li><strong>«Tener backup equivale a tener continuidad»</strong> — falso: la continuidad exige además procedimientos, responsables, medios alternativos y pruebas.</li>
 <li><strong>«Si la copia se ha ejecutado sin errores, se puede restaurar»</strong> — falso: <strong>backup realizado ≠ backup restaurable</strong>; solo la <strong>prueba de recuperación</strong> lo acredita.</li>
 <li><strong>«Guardar las copias en el mismo servidor es suficiente»</strong> — falso: no cubre la pérdida de ese servidor ni un incidente que alcance a todo el sistema.</li>
+<li><strong>«mp.info.6 se refuerza según la categoría del sistema»</strong> — falso: según el <strong>nivel de disponibilidad</strong>.</li>
+<li><strong>«Todo sistema necesita plan de continuidad según el ENS»</strong> — falso: <strong>op.cont.2</strong> solo en <strong>ALTO</strong>.</li>
+<li><strong>«El R2 impone la regla 3-2-1»</strong> — falso: pide <strong>una copia separada en lugar diferente</strong>.</li>
+<li><strong>«Offsite significa offline»</strong> — falso: puede estar <strong>conectada</strong>.</li>
+<li><strong>«GFS es un tipo de copia»</strong> — falso: es <strong>rotación y retención</strong>.</li>
+<li><strong>«Una copia cifrada siempre es recuperable»</strong> — falso: <strong>sin clave, no</strong>.</li>
+<li><strong>«Restaurados los ficheros, cumplido el RTO»</strong> — falso: debe <strong>funcionar el servicio</strong>.</li>
 <li><strong>Colar contenido ajeno</strong>: almacenamiento (T6), virtualización (T10), ENS en profundidad (T21), amenazas (T22), criptografía (T24) y ransomware (T25) no se desarrollan aquí.</li>
 </ul>
 <h2 id="4-preguntas-tipo-test" class="tema-h2">4. Posibles preguntas tipo test</h2>
-<ul class="tema-lista">
-<li><strong>Definición</strong> de política de salvaguarda: ¿se reduce a realizar copias?</li>
-<li>Elementos que debe incluir una política de salvaguarda.</li>
-<li>¿Qué artículo del RD 311/2022 regula la <strong>continuidad de la actividad</strong>?</li>
-<li>¿Qué medida del Anexo II corresponde a las <strong>copias de seguridad</strong>?</li>
-<li>¿Es la <strong>regla 3-2-1</strong> una obligación literal del ENS?</li>
-<li><strong>Definición</strong> de copia completa y su principal ventaja correctamente formulada.</li>
-<li><strong>Definición</strong> de copia incremental: ¿cuál es su referencia?</li>
-<li><strong>Definición</strong> de copia diferencial: ¿cuál es su referencia?</li>
-<li><strong>Escenario</strong>: completa el domingo + incrementales diarias, fallo el jueves. ¿Cuántas copias se necesitan?</li>
-<li><strong>Escenario</strong>: completa el domingo + diferenciales diarias, fallo el jueves. ¿Cuántas copias?</li>
-<li><strong>Escenario</strong>: con diferenciales, ¿varía el número de copias según el día del fallo?</li>
-<li>¿Qué esquema ocupa <strong>menos espacio</strong> por copia y cuál permite una <strong>restauración más sencilla</strong>?</li>
-<li>¿Por qué crece el tamaño de las <strong>diferenciales</strong> a lo largo de la semana?</li>
-<li>Diferencia entre <strong>retención</strong> y <strong>rotación</strong>.</li>
-<li>¿Qué significan las siglas <strong>GFS</strong> y a qué periodicidad corresponde cada nivel?</li>
-<li>¿Establece GFS periodos de conservación universales?</li>
-<li>¿Qué significa cada cifra de la <strong>regla 3-2-1</strong>?</li>
-<li>¿Qué añade <strong>3-2-1-1-0</strong> respecto de 3-2-1?</li>
-<li>Diferencia entre copia <strong>offline</strong> e <strong>inmutable</strong>. ¿Pueden coincidir?</li>
-<li>¿Por qué es especialmente importante <strong>cifrar</strong> las copias offsite y los soportes transportables?</li>
-<li>¿Puede considerarse una <strong>snapshot</strong> una copia de seguridad?</li>
-<li>¿Sustituye la <strong>replicación</strong> al backup? ¿Por qué no, ante una corrupción de datos?</li>
-<li><strong>Definición</strong> de RTO y de RPO.</li>
-<li>¿Es correcto definir el <strong>RPO</strong> como la frecuencia de las copias?</li>
-<li><strong>Escenario</strong>: RPO de 1 hora. ¿Qué significa exactamente?</li>
-<li>¿Cuál de los dos objetivos influye en la <strong>frecuencia</strong> de copia y cuál en la <strong>tecnología de recuperación</strong>?</li>
-<li>Diferencia entre <strong>BCP</strong> y <strong>DRP</strong>.</li>
-<li>Elementos de un <strong>plan de continuidad</strong>.</li>
-<li>¿Qué debe verificar una <strong>prueba de recuperación</strong>?</li>
-<li>¿Garantiza una copia realizada correctamente que pueda restaurarse?</li>
-</ul>
+<p>Treinta y cinco preguntas con una respuesta correcta. Las soluciones están al final de la sección.</p>
+<p><strong>1.</strong> La política de salvaguarda…<br>a) es solo el horario de copias<br>b) es el marco para poder recuperar<br>c) es un tipo de copia<br>d) es el software de backup</p>
+<p><strong>2.</strong> ¿Qué artículo del ENS trata la continuidad de la actividad?<br>a) 18<br>b) 24<br>c) 25<br>d) 26</p>
+<p><strong>3.</strong> ¿Qué medida regula las copias?<br>a) mp.info.6<br>b) op.cont.2<br>c) mp.if.4<br>d) op.exp.1</p>
+<p><strong>4.</strong> mp.info.6 se aplica según…<br>a) la categoría global<br>b) el nivel de confidencialidad<br>c) el nivel de disponibilidad<br>d) el número de usuarios</p>
+<p><strong>5.</strong> ¿Desde qué nivel se exigen pruebas de recuperación?<br>a) BAJO<br>b) MEDIO<br>c) Solo ALTO<br>d) Ninguno</p>
+<p><strong>6.</strong> Una copia separada en otro lugar es exigible en nivel…<br>a) BAJO<br>b) MEDIO<br>c) cualquiera<br>d) ALTO</p>
+<p><strong>7.</strong> El plan de continuidad op.cont.2 se aplica…<br>a) en todos los niveles<br>b) desde BAJO<br>c) solo en ALTO<br>d) solo en MEDIO</p>
+<p><strong>8.</strong> El análisis de impacto op.cont.1 se aplica…<br>a) en MEDIO y ALTO<br>b) solo en ALTO<br>c) en todos<br>d) solo en BAJO</p>
+<p><strong>9.</strong> La incremental toma como referencia…<br>a) la última completa<br>b) la última copia<br>c) la primera copia<br>d) ninguna</p>
+<p><strong>10.</strong> La diferencial toma como referencia…<br>a) la última diferencial<br>b) la última copia<br>c) ninguna<br>d) la última completa</p>
+<p><strong>11.</strong> Completa domingo, incrementales diarias. Fallo el viernes tras copiar. ¿Copias?<br>a) 6<br>b) 5<br>c) 2<br>d) 1</p>
+<p><strong>12.</strong> Completa domingo, diferenciales diarias. Fallo el viernes tras copiar. ¿Copias?<br>a) 6<br>b) 5<br>c) 2<br>d) 1</p>
+<p><strong>13.</strong> Completa domingo, incrementales diarias. Fallo el jueves antes de copiar. ¿Copias?<br>a) 5<br>b) 4<br>c) 2<br>d) 3</p>
+<p><strong>14.</strong> Completa domingo, diferenciales diarias. Hay que volver al martes. ¿Cuáles?<br>a) Domingo y martes<br>b) Domingo y viernes<br>c) Solo martes<br>d) Domingo, lunes y martes</p>
+<p><strong>15.</strong> Falta la incremental del martes. ¿Último punto fiable del ciclo?<br>a) Miércoles<br>b) Jueves<br>c) Ninguno, ni el domingo<br>d) Lunes</p>
+<p><strong>16.</strong> ¿Qué copia tiende a crecer entre completas?<br>a) Incremental<br>b) Snapshot<br>c) Diferencial<br>d) Ninguna</p>
+<p><strong>17.</strong> ¿Qué ventaja tiene la completa?<br>a) Ocupa menos<br>b) Se restaura con una copia<br>c) Se genera antes<br>d) No necesita soporte</p>
+<p><strong>18.</strong> Copias diarias guardadas 30 días. Los 30 días son la…<br>a) frecuencia<br>b) rotación<br>c) retención<br>d) RPO</p>
+<p><strong>19.</strong> Dato corrompido hace 45 días, retención de 14:<br>a) puede no haber punto sano<br>b) se recupera siempre<br>c) basta la última diferencial<br>d) basta la réplica</p>
+<p><strong>20.</strong> En GFS, el padre es la copia…<br>a) diaria<br>b) anual<br>c) horaria<br>d) semanal</p>
+<p><strong>21.</strong> GFS es…<br>a) un tipo de copia<br>b) rotación y retención<br>c) una norma del ENS<br>d) un cifrado</p>
+<p><strong>22.</strong> En 3-2-1, el 1 es una copia…<br>a) completa<br>b) cifrada<br>c) al día<br>d) fuera de las instalaciones</p>
+<p><strong>23.</strong> En 3-2-1-1-0, el 0 es…<br>a) cero copias online<br>b) cero coste<br>c) cero errores al verificar<br>d) cero retención</p>
+<p><strong>24.</strong> Copia en nube, conectada y bloqueada contra borrado:<br>a) offsite e inmutable<br>b) offline<br>c) solo rotación<br>d) offline e inmutable</p>
+<p><strong>25.</strong> Copias cifradas y clave perdida:<br>a) se restauran igual<br>b) pueden ser irrecuperables<br>c) solo pierden integridad<br>d) basta con repetir el RTO</p>
+<p><strong>26.</strong> Una snapshot local…<br>a) es siempre backup<br>b) es offsite<br>c) cumple el R2<br>d) no es automáticamente backup</p>
+<p><strong>27.</strong> Un borrado en el origen, con replicación sin historial…<br>a) se deshace solo<br>b) queda en GFS<br>c) se propaga<br>d) no llega al destino</p>
+<p><strong>28.</strong> El RTO es…<br>a) el tiempo objetivo de recuperación<br>b) la pérdida admisible<br>c) la frecuencia<br>d) la retención</p>
+<p><strong>29.</strong> El RPO es…<br>a) la parada admisible<br>b) la frecuencia por definición<br>c) la pérdida admisible en tiempo<br>d) la rotación</p>
+<p><strong>30.</strong> RPO de 15 minutos con copia diaria:<br>a) se cumple<br>b) no se cumple<br>c) depende del RTO<br>d) depende de GFS</p>
+<p><strong>31.</strong> RTO 30 min: ficheros en 20 y aplicación en 90.<br>a) Se cumple<br>b) Se cumple a medias por norma<br>c) No se puede medir<br>d) No se cumple</p>
+<p><strong>32.</strong> ¿Qué plan recupera los sistemas TIC?<br>a) DRP<br>b) BCP<br>c) BIA<br>d) GFS</p>
+<p><strong>33.</strong> ¿Qué analiza las consecuencias de una interrupción?<br>a) DRP<br>b) BIA<br>c) RPO<br>d) GFS</p>
+<p><strong>34.</strong> Una tarea de copia sin errores prueba que…<br>a) la copia es restaurable<br>b) el servicio arrancará<br>c) la tarea terminó<br>d) se cumple el RTO</p>
+<p><strong>35.</strong> Tras restaurar una aplicación hay que…<br>a) validar una operación real<br>b) borrar las copias<br>c) cambiar la retención<br>d) dar por cerrado al copiar ficheros</p>
+<h4 class="tema-h4">Soluciones</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Pregunta</strong></th>
+<th><strong>Respuesta</strong></th>
+<th><strong>Por qué</strong></th>
+</tr>
+<tr>
+<td>1</td>
+<td><strong>b</strong></td>
+<td>No es solo copiar</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>d</strong></td>
+<td>RD 311/2022</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>a</strong></td>
+<td>Anexo II</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>c</strong></td>
+<td>Dimensión D</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>b</strong></td>
+<td>R1</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>d</strong></td>
+<td>R2</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>c</strong></td>
+<td>Por disponibilidad</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>a</strong></td>
+<td>n.a. en BAJO</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>b</strong></td>
+<td>Completa o incremental</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>d</strong></td>
+<td>Siempre la completa</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>a</strong></td>
+<td>1 + 5</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>c</strong></td>
+<td>Completa y última</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>b</strong></td>
+<td>Hasta el miércoles</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>a</strong></td>
+<td>Punto deseado</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>d</strong></td>
+<td>Cadena rota</td>
+</tr>
+<tr>
+<td>16</td>
+<td><strong>c</strong></td>
+<td>Acumula cambios</td>
+</tr>
+<tr>
+<td>17</td>
+<td><strong>b</strong></td>
+<td>Sencillez</td>
+</tr>
+<tr>
+<td>18</td>
+<td><strong>c</strong></td>
+<td>Cuánto guardo</td>
+</tr>
+<tr>
+<td>19</td>
+<td><strong>a</strong></td>
+<td>Historial corto</td>
+</tr>
+<tr>
+<td>20</td>
+<td><strong>d</strong></td>
+<td>Nivel medio</td>
+</tr>
+<tr>
+<td>21</td>
+<td><strong>b</strong></td>
+<td>Se combina</td>
+</tr>
+<tr>
+<td>22</td>
+<td><strong>d</strong></td>
+<td>Offsite</td>
+</tr>
+<tr>
+<td>23</td>
+<td><strong>c</strong></td>
+<td>Verificación</td>
+</tr>
+<tr>
+<td>24</td>
+<td><strong>a</strong></td>
+<td>Está online</td>
+</tr>
+<tr>
+<td>25</td>
+<td><strong>b</strong></td>
+<td>Custodia</td>
+</tr>
+<tr>
+<td>26</td>
+<td><strong>d</strong></td>
+<td>Depende del origen</td>
+</tr>
+<tr>
+<td>27</td>
+<td><strong>c</strong></td>
+<td>No es backup</td>
+</tr>
+<tr>
+<td>28</td>
+<td><strong>a</strong></td>
+<td>Adelante</td>
+</tr>
+<tr>
+<td>29</td>
+<td><strong>c</strong></td>
+<td>Atrás</td>
+</tr>
+<tr>
+<td>30</td>
+<td><strong>b</strong></td>
+<td>Hasta 24 horas</td>
+</tr>
+<tr>
+<td>31</td>
+<td><strong>d</strong></td>
+<td>Cuenta el servicio</td>
+</tr>
+<tr>
+<td>32</td>
+<td><strong>a</strong></td>
+<td>Tecnología</td>
+</tr>
+<tr>
+<td>33</td>
+<td><strong>b</strong></td>
+<td>Análisis de impacto</td>
+</tr>
+<tr>
+<td>34</td>
+<td><strong>c</strong></td>
+<td>Falta restaurar</td>
+</tr>
+<tr>
+<td>35</td>
+<td><strong>a</strong></td>
+<td>Servicio restablecido</td>
+</tr>
+</table></div>
 <h2 id="5-preguntas-cortas" class="tema-h2">5. Posibles preguntas cortas (con esquema de respuesta)</h2>
 <h4 class="tema-h4">1. Explique qué es una política de salvaguarda</h4>
 <ul class="tema-lista">
@@ -210,8 +435,8 @@
 <h4 class="tema-h4">8. Explique la relación de la salvaguarda con el ENS</h4>
 <ul class="tema-lista">
 <li>RD 311/2022, artículo 26: continuidad de la actividad.</li>
-<li>Anexo II, mp.info.6: copias de seguridad — recuperación de datos, frecuencia, almacenamiento y controles de acceso; refuerzos de pruebas de recuperación y de protección o separación adicional.</li>
-<li>Cierre: las exigencias se aplican según la categoría del sistema; la regla 3-2-1 es buena práctica, no requisito literal.</li>
+<li>Anexo II, mp.info.6: copias de seguridad — recuperación de datos, frecuencia, almacenamiento y controles de acceso; refuerzo R1 de pruebas (desde nivel MEDIO) y R2 de copia separada en lugar diferente (ALTO).</li>
+<li>Cierre: las exigencias se aplican según el nivel de disponibilidad; la regla 3-2-1 es buena práctica, no requisito literal.</li>
 </ul>
 <h4 class="tema-h4">9. Diferencie backup, snapshot y replicación</h4>
 <ul class="tema-lista">
@@ -257,7 +482,7 @@
 <ul class="tema-lista">
 <li><strong>a) ¿Cuál es el problema?</strong> La <strong>falta de separación</strong>: si se pierde el servidor —por avería, incendio o robo—, se pierden <strong>a la vez los datos y sus copias</strong>.</li>
 <li><strong>b) ¿Qué buena práctica lo corrige?</strong> La <strong>regla 3-2-1</strong>: al menos <strong>tres copias</strong>, en <strong>dos soportes o medios diferentes</strong>, con <strong>una fuera de las instalaciones</strong>.</li>
-<li><strong>c) ¿Qué exige el ENS al respecto?</strong> Definir el <strong>almacenamiento</strong> de las copias y sus <strong>controles de acceso</strong> (mp.info.6.2), con la <strong>protección y separación adicional</strong> que corresponda a la categoría del sistema.</li>
+<li><strong>c) ¿Qué exige el ENS al respecto?</strong> Definir el <strong>almacenamiento</strong> de las copias y sus <strong>controles de acceso</strong> (mp.info.6.2), y, con nivel <strong>ALTO</strong> de disponibilidad, <strong>una copia separada en lugar diferente</strong> (R2).</li>
 <li><strong>d) ¿Es suficiente con moverlas a otra carpeta?</strong> No: la separación debe ser <strong>real</strong> respecto del sistema de origen, no solo lógica dentro del mismo equipo.</li>
 </ul>
 <h4 class="tema-h4">Caso 5 — Cifrado del entorno y del repositorio de copias</h4>
@@ -274,7 +499,7 @@
 <li><strong>a) ¿Cuál es el riesgo?</strong> Que la <strong>recuperación no esté verificada</strong>: no se sabe si las copias son restaurables, ni en cuánto tiempo, ni por quién.</li>
 <li><strong>b) ¿Basta con que la copia se haya ejecutado sin errores?</strong> <strong>No</strong>: <strong>backup realizado ≠ backup restaurable</strong>.</li>
 <li><strong>c) ¿Qué debe comprobar la prueba?</strong> <strong>Disponibilidad</strong> de la copia, <strong>integridad suficiente</strong>, <strong>procedimiento de restauración</strong>, <strong>tiempo de recuperación</strong> frente al RTO y <strong>compatibilidad de medios y procedimientos</strong>.</li>
-<li><strong>d) ¿Tiene reflejo normativo?</strong> Sí: el ENS contempla las <strong>pruebas de recuperación</strong> como refuerzo de la medida de copias de seguridad.</li>
+<li><strong>d) ¿Tiene reflejo normativo?</strong> Sí: el ENS exige las <strong>pruebas de recuperación</strong> (mp.info.6 R1) con nivel <strong>MEDIO o ALTO</strong> de disponibilidad.</li>
 </ul>
 <h4 class="tema-h4">Caso 7 — Snapshot propuesta como único backup</h4>
 <p><strong>Escenario</strong>: para una máquina virtual crítica se propone <strong>tomar una snapshot diaria</strong> como <strong>única</strong> medida de salvaguarda.</p>
@@ -292,6 +517,44 @@
 <li><strong>c) ¿Y la organizativa?</strong> El <strong>BCP</strong>: cómo mantiene la organización sus funciones críticas —incluida la atención al público— mientras se recupera el servicio.</li>
 <li><strong>d) ¿Qué falta en la política de salvaguarda?</strong> El <strong>procedimiento de restauración</strong>, los <strong>responsables</strong>, las <strong>pruebas</strong> y la <strong>revisión periódica</strong>: sin ellos hay copias, pero no política.</li>
 </ul>
+<h4 class="tema-h4">Mini casos</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Situación</strong></th>
+<th><strong>Lectura</strong></th>
+<th><strong>Actuación</strong></th>
+</tr>
+<tr>
+<td>Copias cifradas y clave solo en el servidor perdido</td>
+<td>No hay recuperación</td>
+<td>Custodiar la clave aparte</td>
+</tr>
+<tr>
+<td>Las dos últimas copias de 15 minutos fallaron</td>
+<td>RPO incumplido</td>
+<td>Alertar ante fallos y corregir</td>
+</tr>
+<tr>
+<td>La base de datos restaurada no arranca</td>
+<td>Ejecución correcta, sin consistencia</td>
+<td>Probar el servicio completo</td>
+</tr>
+<tr>
+<td>Repositorio externo con la cuenta de producción</td>
+<td>Separado, pero alcanzable</td>
+<td>Separar credenciales</td>
+</tr>
+<tr>
+<td>Se restaura la aplicación antes que su base de datos</td>
+<td>Orden incorrecto</td>
+<td>Seguir las dependencias</td>
+</tr>
+<tr>
+<td>Una persona pide recuperar un fichero</td>
+<td>Solicitud al CAU</td>
+<td>Registrar, comprobar autorización, restaurar sin pisar lo actual, validar</td>
+</tr>
+</table></div>
 <h2 id="7-matriz-de-memorizacion" class="tema-h2">7. Matriz de memorización</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -376,13 +639,38 @@
 </tr>
 <tr>
 <td><strong>mp.info.6</strong></td>
-<td>Copias de seguridad: recuperación de datos, frecuencia, almacenamiento y controles de acceso; refuerzos de pruebas y separación</td>
+<td>Copias de seguridad: recuperación de datos, frecuencia, almacenamiento y controles de acceso; R1 pruebas desde MEDIO y R2 copia separada en ALTO, por disponibilidad</td>
+</tr>
+<tr>
+<td><strong>op.cont</strong></td>
+<td>Análisis de impacto desde MEDIO; plan, pruebas y medios alternativos solo en ALTO</td>
 </tr>
 </table></div>
-<h2 id="8-resumen-final" class="tema-h2">8. Resumen final: si mañana fuera el examen</h2>
+<h2 id="8-repaso-visual" class="tema-h2">8. Repaso visual · T23</h2>
+<figure class="tema-figura">
+<figcaption>1 · Incremental y diferencial</figcaption>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at23ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at23aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at23av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at23an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at23ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at23ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">INCREMENTAL</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">DIFERENCIAL</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="63.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Referencia:</text><text x="176.0" y="78.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">ÚLTIMA COPIA</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Suele ser rápida y pequeña</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="143.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Restaurar: completa +</text><text x="176.0" y="158.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">TODAS las posteriores</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="63.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Referencia:</text><text x="524.0" y="78.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">ÚLTIMA COMPLETA</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Tiende a crecer</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="143.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Restaurar: completa +</text><text x="524.0" y="158.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">ÚLTIMA diferencial (2)</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>2 · Copias para restaurar</figcaption>
+<svg viewBox="0 0 700 139" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at23bp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at23ba" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at23bv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at23bn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at23br" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at23bg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">COMPLETA sola</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#2e7d3c" stroke-width="2" marker-end="url(#at23bv)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">1 copia</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">COMPLETA + INCREMENTALES</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#b26a00" stroke-width="2" marker-end="url(#at23bn)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">1 + n (todas las posteriores)</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">COMPLETA + DIFERENCIALES</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#2e7d3c" stroke-width="2" marker-end="url(#at23bv)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">2 (modelo clásico)</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>3 · 3-2-1-1-0</figcaption>
+<svg viewBox="0 0 700 229" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at23cp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at23ca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at23cv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at23cn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at23cr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at23cg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">3</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at23ca)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Tres copias de los datos</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">2</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at23ca)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Dos soportes o medios diferentes</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">1</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at23ca)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Una copia fuera de las instalaciones</text><rect x="8" y="139" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">+1</text><line x1="264" y1="157.0" x2="356" y2="157.0" stroke="#003da5" stroke-width="2" marker-end="url(#at23cp)"/><rect x="362" y="139" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Una copia OFFLINE o INMUTABLE</text><rect x="8" y="184" width="250" height="36" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="133.0" y="202.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">+0</text><line x1="264" y1="202.0" x2="356" y2="202.0" stroke="#2e7d3c" stroke-width="2" marker-end="url(#at23cv)"/><rect x="362" y="184" width="330" height="36" rx="6" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="527.0" y="202.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Cero errores en las verificaciones</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>4 · RTO y RPO</figcaption>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at23dp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at23da" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at23dv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at23dn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at23dr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at23dg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">RPO</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">RTO</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="63.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">¿Cuántos DATOS</text><text x="176.0" y="78.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">podemos perder?</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Mira ATRÁS</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="143.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Condiciona la</text><text x="176.0" y="158.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">frecuencia de copia</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="63.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">¿Cuánto TIEMPO</text><text x="524.0" y="78.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">podemos estar caídos?</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Mira ADELANTE</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="136.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Condiciona la</text><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">tecnología de</text><text x="524.0" y="166.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">recuperación</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>5 · Realizado no es restaurable</figcaption>
+<svg viewBox="0 0 700 136" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at23fp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at23fa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at23fv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at23fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at23fr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at23fg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">REALIZADO</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">RESTAURABLE</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="63.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">La copia se ha</text><text x="176.0" y="78.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">ejecutado</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="103.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Sin errores de</text><text x="176.0" y="118.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">ejecución</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Se ha PROBADO</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="96.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Disponibilidad · integridad</text><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">procedimiento · tiempo</text><text x="524.0" y="126.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">compatibilidad</text></svg>
+</figure>
+<h2 id="9-resumen-final" class="tema-h2">9. Resumen final: si mañana fuera el examen</h2>
 <ul class="tema-lista">
 <li><strong>Política de salvaguarda</strong> = directrices, procedimientos y medidas para <strong>poder recuperar</strong>. Incluye alcance, frecuencia, retención, tipos de copia, almacenamiento, protección, responsables, procedimiento, <strong>pruebas</strong> y revisión. <strong>No es solo «hacer backups».</strong></li>
-<li><strong>ENS</strong>: <strong>art. 26</strong> continuidad de la actividad · <strong>mp.info.6</strong> copias de seguridad (recuperación de datos, frecuencia, almacenamiento y control de acceso; refuerzos de <strong>pruebas</strong> y de <strong>protección y separación</strong>).</li>
+<li><strong>ENS</strong>: <strong>art. 26</strong> continuidad de la actividad · <strong>mp.info.6</strong> copias de seguridad (recuperación de datos, frecuencia, almacenamiento y control de acceso; por <strong>nivel de disponibilidad</strong>: MEDIO + <strong>pruebas</strong>; ALTO + <strong>copia separada</strong>). <strong>Plan de continuidad (op.cont.2): solo ALTO.</strong></li>
 <li><strong>Completa</strong>: copia íntegra; <strong>la más sencilla de restaurar porque se necesita una única copia</strong> (no «siempre la más rápida»).</li>
 <li><strong>INCREMENTAL → ÚLTIMA COPIA</strong> realizada. Restaurar = <strong>completa + TODAS las posteriores en orden</strong>.</li>
 <li><strong>DIFERENCIAL → ÚLTIMA COMPLETA</strong>. Restaurar = <strong>completa + ÚLTIMA diferencial</strong>, siempre <strong>2 copias</strong>.</li>
@@ -391,11 +679,16 @@
 <li><strong>3-2-1</strong> = 3 copias / 2 soportes / 1 offsite. <strong>3-2-1-1-0</strong> añade <strong>1 offline o inmutable</strong> y <strong>0 errores</strong>. Ambas son <strong>buenas prácticas</strong>, <strong>no obligaciones literales del ENS</strong>.</li>
 <li><strong>OFFLINE</strong> = aislada de la red · <strong>INMUTABLE</strong> = no alterable durante el periodo de protección. <strong>No son sinónimos</strong> y pueden coincidir.</li>
 <li><strong>Cifrado</strong> de copias: especialmente relevante en <strong>offsite, soportes transportables y nube</strong>.</li>
+<li><strong>OFFSITE ≠ OFFLINE.</strong> <strong>Sin clave no hay copia.</strong> <strong>Restaurable ≠ servicio restablecido.</strong></li>
 <li><strong>SNAPSHOT ≠ BACKUP</strong> (depende de la misma infraestructura) · <strong>REPLICACIÓN ≠ BACKUP</strong> (propaga el daño y no aporta historial).</li>
 <li><strong>RTO</strong> = tiempo máximo para recuperar el <strong>servicio</strong> — mira <strong>adelante</strong>. <strong>RPO</strong> = <strong>datos</strong> máximos que se acepta perder — mira <strong>atrás</strong>. <strong>El RPO NO es la frecuencia de backup</strong>: la frecuencia es una forma de alcanzarlo.</li>
 <li><strong>BCP → ORGANIZACIÓN</strong> (personas, procesos, recursos, servicios) · <strong>DRP → TECNOLOGÍA</strong>. No son el mismo documento.</li>
 <li><strong>Plan de continuidad</strong>: análisis de impacto · funciones · responsabilidades · procedimientos · medios alternativos · pruebas. <strong>CRITICIDAD → RTO/RPO → POLÍTICA DE COPIAS.</strong></li>
 <li><strong>LA IDEA CENTRAL</strong>: <strong>una copia no probada no garantiza que pueda restaurarse</strong>. <strong>BACKUP REALIZADO ≠ BACKUP RESTAURABLE.</strong> Y <strong>tener backup ≠ tener continuidad</strong>.</li>
+</ul>
+<h2 id="10-actualidad" class="tema-h2">10. Actualidad — datos fechados</h2>
+<ul class="tema-lista">
+<li><strong>RD 311/2022</strong>: artículo 26, mp.info.6 y op.cont comprobados en el texto consolidado del BOE el <strong>22 de noviembre de 2026</strong>.</li>
 </ul>
   </div>
 </article>
