@@ -182,7 +182,7 @@
           "correcta": false
         },
         {
-          "texto": "Ejecuta todos los servicios del SO dentro de un único bloque de código en modo núcleo, lo que le da mayor rendimiento.",
+          "texto": "Ejecuta la mayor parte de los servicios del SO en modo núcleo, lo que puede reducir la sobrecarga de comunicación entre ellos.",
           "correcta": true
         },
         {
@@ -194,7 +194,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "El monolítico integra gestión de procesos, memoria, sistemas de archivos y drivers en modo núcleo: se comunican por llamadas a función directas, sin cambios de modo, lo que lo hace más rápido pero menos aislado ante fallos.",
+      "razonamiento": "El monolítico integra gestión de procesos, memoria, sistemas de archivos y drivers en modo núcleo: se comunican sin cambios de modo, lo que puede reducir la sobrecarga, a cambio de menor aislamiento ante fallos. No es una ley de rendimiento: depende de la implementación.",
       "origen": "T9 §3",
       "dificultad": "Media",
       "tipo": "Definición",
@@ -222,7 +222,7 @@
           "correcta": true
         }
       ],
-      "razonamiento": "El microkernel gana en aislamiento ante fallos y modularidad, a costa de rendimiento (más comunicación entre procesos y cambios de contexto). El mayor rendimiento es propio del monolítico.",
+      "razonamiento": "El microkernel gana en aislamiento ante fallos y modularidad, a costa de más comunicación entre procesos. Que el monolítico sea más rápido es una tendencia, no una regla absoluta.",
       "origen": "T9 §3",
       "dificultad": "Media",
       "tipo": "Relación",
@@ -278,7 +278,7 @@
           "correcta": true
         }
       ],
-      "razonamiento": "La memoria virtual abstrae la memoria física: el SO traduce direcciones virtuales a físicas de forma transparente para el proceso, que ve un espacio continuo y propio aunque parte resida temporalmente en disco.",
+      "razonamiento": "La memoria virtual abstrae la memoria física: el SO traduce direcciones virtuales a físicas de forma transparente para el proceso, que ve un espacio continuo y propio aunque parte resida temporalmente en disco. No añade RAM ni exige swap: puede existir sin fichero de intercambio.",
       "origen": "T9 §4",
       "dificultad": "Media",
       "tipo": "Definición",
@@ -419,7 +419,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "En el thrashing el sistema pasa más tiempo moviendo páginas entre RAM y disco que ejecutando trabajo útil. Es el diagnóstico típico de un equipo con RAM insuficiente; la solución de fondo es ampliar memoria o reducir la carga.",
+      "razonamiento": "En el thrashing el sistema pasa más tiempo moviendo páginas entre RAM y disco que ejecutando trabajo útil. Hay que confirmarlo con el uso de memoria y la paginación (un disco al 100 % puede tener otras causas); las vías habituales son reducir la carga o ampliar la memoria.",
       "origen": "T9 §4",
       "dificultad": "Difícil",
       "tipo": "Caso práctico",
@@ -503,7 +503,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "Al esperar un evento externo (como una E/S), el proceso pasa de «en ejecución» a «bloqueado». Si simplemente se le retira la CPU por el planificador, pasaría a «listo», que es distinto: ahí sí podría ejecutarse, solo espera turno.",
+      "razonamiento": "Al esperar un evento externo (como una E/S), el proceso pasa de «en ejecución» a «bloqueado». Si simplemente se le retira la CPU por el planificador, pasaría a «listo», que es distinto: ahí sí podría ejecutarse, solo espera turno. Es el modelo clásico con E/S bloqueante; con E/S asíncrona el proceso puede seguir trabajando.",
       "origen": "T9 §5",
       "dificultad": "Media",
       "tipo": "Procedimiento",
@@ -531,7 +531,7 @@
           "correcta": true
         }
       ],
-      "razonamiento": "El proceso es la unidad de asignación de recursos (memoria propia, alto aislamiento); el hilo es la unidad de ejecución, más ligera, que comparte la memoria del proceso y por eso es más barata de crear y cambiar de contexto, a costa de menor aislamiento.",
+      "razonamiento": "El proceso es la unidad de asignación de recursos (memoria propia, alto aislamiento); el hilo es la unidad de ejecución, más ligera, que comparte la memoria del proceso y por eso suele ser más barata de crear y cambiar de contexto, a costa de menor aislamiento.",
       "origen": "T9 §5",
       "dificultad": "Media",
       "tipo": "Diferenciación",
@@ -811,7 +811,7 @@
           "correcta": true
         }
       ],
-      "razonamiento": "En DMA un controlador dedicado transfiere los datos directamente a memoria: la CPU solo interviene al configurar la operación y al recibir la interrupción final. El polling es el peor caso (la CPU queda bloqueada preguntando) y las interrupciones, intermedias.",
+      "razonamiento": "En DMA un controlador dedicado transfiere los datos directamente a memoria: la CPU configura la operación y atiende la interrupción final, interviniendo poco (no nada). El polling es el que más la ocupa y las interrupciones, intermedias.",
       "origen": "T9 §7",
       "dificultad": "Media",
       "tipo": "Conocimiento directo",
@@ -831,7 +831,7 @@
           "correcta": false
         },
         {
-          "texto": "Pregunta activa y repetidamente si el dispositivo ha terminado, quedando bloqueada esperando.",
+          "texto": "Pregunta activa y repetidamente si el dispositivo ha terminado, consumiendo ciclos mientras espera.",
           "correcta": true
         },
         {
@@ -839,7 +839,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "El polling consiste en sondear repetidamente el estado del dispositivo, desperdiciando ciclos de CPU. El aviso del dispositivo es la E/S por interrupciones, y la delegación en un controlador es el DMA.",
+      "razonamiento": "El polling consiste en sondear repetidamente el estado del dispositivo, gastando ciclos de CPU. El aviso del dispositivo es la E/S por interrupciones, y la delegación en un controlador es el DMA.",
       "origen": "T9 §7",
       "dificultad": "Media",
       "tipo": "Diferenciación",

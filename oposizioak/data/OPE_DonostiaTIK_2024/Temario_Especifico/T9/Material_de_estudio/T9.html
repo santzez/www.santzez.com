@@ -27,7 +27,7 @@
 <p>Clásicamente se explica su papel desde dos visiones complementarias:</p>
 <ul class="tema-lista">
 <li><strong>SO como gestor de recursos</strong>: reparte de forma ordenada y eficiente los recursos limitados (tiempo de CPU, memoria, dispositivos) entre los programas que compiten por ellos, evitando conflictos.</li>
-<li><strong>SO como máquina virtual extendida (máquina abstracta)</strong>: oculta la complejidad real del hardware, ofreciendo una interfaz más sencilla y uniforme («guardar un fichero» en lugar de manejar el controlador del disco).</li>
+<li><strong>SO como máquina virtual extendida (máquina abstracta)</strong> — una visión abstracta, <strong>no un hipervisor</strong> (Tema 10): oculta la complejidad real del hardware, ofreciendo una interfaz más sencilla y uniforme («guardar un fichero» en lugar de manejar el controlador del disco).</li>
 </ul>
 <h4 class="tema-h4">Funciones</h4>
 <ul class="tema-lista">
@@ -77,6 +77,7 @@
 <td>Para qué entorno está diseñado</td>
 </tr>
 </table></div>
+<p>La <strong>multitarea no exige varias CPU</strong>: con un núcleo basta alternar. Y <strong>tiempo real no significa «muy rápido»</strong>, sino <strong>cumplir plazos</strong>.</p>
 <p>Como ejemplo histórico útil: <strong>MS-DOS es un ejemplo clásico de sistema monousuario y monotarea</strong>. Los sistemas de escritorio y servidor actuales son multitarea y, en general, multiusuario y de tiempo compartido.</p>
 <h4 class="tema-h4">Tiempo compartido frente a tiempo real</h4>
 <ul class="tema-lista">
@@ -97,6 +98,15 @@
 <li><strong>Llamada al sistema (system call)</strong>: el mecanismo mediante el que una aplicación <strong>solicita servicios al SO</strong> (leer un fichero, reservar memoria): provoca un cambio controlado a modo núcleo, el SO atiende la petición y se retorna a modo usuario con el resultado.</li>
 </ul>
 <p>Matiz de precisión: no todo el software del SO se ejecuta en modo núcleo — muchas utilidades y servicios del propio sistema funcionan en modo usuario; el reparto exacto depende de la arquitectura.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — tres cambios distintos</strong><br><strong>System call</strong> → la aplicación <strong>pide</strong> un servicio. Una <strong>interrupción</strong> o una <strong>excepción</strong> también llevan a modo núcleo, pero <strong>no son llamadas al sistema</strong>.<br><strong>Cambio de modo</strong> (usuario ↔ núcleo) <strong>no es cambio de contexto</strong> (pasar a otro proceso o hilo).</th>
+</tr>
+</table></div>
+<figure class="tema-figura">
+<figcaption>Modo usuario vs. modo kernel</figcaption>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at9ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at9aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at9av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at9an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at9ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at9ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">MODO USUARIO</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">MODO KERNEL</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">LIMITADO</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Aplicaciones</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Pide servicios al SO</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">PRIVILEGIADO</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Núcleo del SO</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Acceso al hardware</text></svg>
+<p class="tema-figura__nota">La system call es el paso controlado de un modo al otro.</p></figure>
 <h4 class="tema-h4">Tipos de kernel</h4>
 <ul class="tema-lista">
 <li><strong>Monolítico</strong>: la mayor parte de los servicios (procesos, memoria, sistemas de archivos, drivers) se ejecutan en espacio de núcleo. <strong>Puede reducir la sobrecarga de comunicación</strong> entre servicios al mantenerlos juntos en el núcleo; a cambio, un fallo puede afectar a más componentes y el núcleo tiende a crecer.</li>
@@ -112,10 +122,10 @@
 <h2 id="4-administracion-de-memoria" class="tema-h2">4. Administración de memoria</h2>
 <p>El SO gestiona la memoria principal: decide la <strong>asignación</strong> (qué procesos residen en memoria y dónde), garantiza la <strong>protección</strong> (el espacio de cada proceso queda aislado del resto) y administra el <strong>espacio de direcciones</strong> de cada proceso.</p>
 <h4 class="tema-h4">Memoria virtual</h4>
-<p>La <strong>memoria virtual</strong> es una técnica de gestión que da a cada proceso un <strong>espacio de direcciones virtual</strong> propio y continuo, que el SO <strong>traduce a memoria física</strong> de forma transparente. Aporta <strong>aislamiento entre procesos</strong> y permite utilizar <strong>almacenamiento secundario</strong> como extensión cuando corresponde.</p>
+<p>La <strong>memoria virtual</strong> es una técnica de gestión que da a cada proceso un <strong>espacio de direcciones virtual</strong> propio y continuo, que el SO <strong>traduce a memoria física</strong> de forma transparente. Aporta <strong>aislamiento entre procesos</strong> y permite utilizar <strong>almacenamiento secundario</strong> como extensión cuando corresponde. La traducción la hace la <strong>MMU</strong> (unidad de gestión de memoria) con las tablas del SO.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Imprescindible para el examen</strong><br><strong>MEMORIA VIRTUAL ≠ RAM FÍSICA ADICIONAL.</strong> Es una <strong>abstracción/técnica de gestión</strong>: no añade memoria real, organiza y traduce la existente (y puede apoyarse en disco, mucho más lento).</th>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>MEMORIA VIRTUAL ≠ RAM FÍSICA ADICIONAL.</strong> Es una <strong>abstracción/técnica de gestión</strong>: no añade memoria real, organiza y traduce la existente (y puede apoyarse en disco, mucho más lento).<br><strong>Y tampoco es el swap</strong>: hay memoria virtual y paginación <strong>aunque no exista fichero de intercambio</strong>.</th>
 </tr>
 </table></div>
 <h4 class="tema-h4">Paginación y segmentación</h4>
@@ -132,6 +142,11 @@
 <th><strong>📌 Imprescindible para el examen</strong><br><strong>PÁGINA = FIJA → fragmentación interna posible · SEGMENTO = VARIABLE → fragmentación externa posible.</strong><br>Y la formulación actual: <strong>la paginación es fundamental en la memoria virtual de muchos sistemas actuales; la segmentación clásica tiene hoy un papel más limitado</strong> que en los modelos tradicionales.</th>
 </tr>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Imprescindible para el examen — el fallo de página</strong><br><strong>PAGE FAULT</strong> → se accede a una página que <strong>no está en un marco de RAM</strong>: el SO la trae (de disco o de otra zona de memoria) y el proceso <strong>continúa</strong>.<br><strong>No es un error fatal</strong>: solo lo es si el acceso no era válido.</th>
+</tr>
+</table></div>
 <h4 class="tema-h4">Swapping y thrashing</h4>
 <ul class="tema-lista">
 <li><strong>Swapping (intercambio)</strong>: traslado temporal de información entre la RAM y el almacenamiento (zona de intercambio o swap) para <strong>liberar RAM</strong>. Según el esquema, lo que se mueve pueden ser páginas o procesos completos — no son términos equivalentes. Tiene un <strong>coste de rendimiento</strong>: el disco es mucho más lento que la RAM.</li>
@@ -139,7 +154,7 @@
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>💡 Caso CAU</strong><br>Equipo con poca RAM, <strong>disco constantemente activo</strong> y respuesta lentísima: cuadro típico de thrashing. Las vías de mejora habituales son ampliar la RAM o reducir la carga simultánea (también puede influir el estado del propio sistema); no hay una única solución universal.</th>
+<th><strong>💡 Caso CAU</strong><br>Equipo con poca RAM, <strong>disco constantemente activo</strong> y respuesta lentísima: cuadro típico de thrashing, <strong>si se confirma</strong> con la memoria comprometida y mucha actividad de paginación — un disco al 100 % también puede ser una copia, una actualización o el antivirus. Las vías de mejora habituales son ampliar la RAM o reducir la carga simultánea (también puede influir el estado del propio sistema); no hay una única solución universal.</th>
 </tr>
 </table></div>
 <h2 id="5-procesos-y-subprocesos" class="tema-h2">5. Procesos y subprocesos</h2>
@@ -152,11 +167,16 @@
 <li><strong>Bloqueado / en espera (waiting)</strong>: no puede continuar; espera un evento externo.</li>
 <li><strong>Terminado</strong>: finalizado; el SO libera sus recursos.</li>
 </ul>
+<p>Es el <strong>modelo didáctico de cinco estados</strong>: los sistemas reales añaden otros (suspendido, detenido, zombi). Además, <strong>en ejecución → listo</strong> ocurre cuando el planificador <strong>expulsa</strong> al proceso (fin de quantum o llega otro más prioritario).</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Imprescindible para el examen</strong><br>La transición estrella: <strong>EJECUCIÓN → BLOQUEADO cuando el proceso espera una operación de E/S</strong>. (Y de bloqueado pasa a <strong>listo</strong> cuando el evento llega — no directamente a ejecución.)</th>
+<th><strong>📌 Imprescindible para el examen</strong><br>La transición estrella: <strong>EJECUCIÓN → BLOQUEADO cuando el proceso espera una operación de E/S bloqueante</strong> (con E/S asíncrona puede seguir trabajando). (Y de bloqueado pasa a <strong>listo</strong> cuando el evento llega — no directamente a ejecución.)</th>
 </tr>
 </table></div>
+<figure class="tema-figura">
+<figcaption>Estados de un proceso</figcaption>
+<svg viewBox="0 0 700 58" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at9dp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at9da" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at9dv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at9dn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at9dr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at9dg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="6" width="116.0" height="46" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="66.0" y="29.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">NUEVO</text><line x1="128.0" y1="29.0" x2="146.0" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at9dp)"/><rect x="150.0" y="6" width="116.0" height="46" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="208.0" y="29.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">LISTO</text><line x1="270.0" y1="29.0" x2="288.0" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at9dp)"/><rect x="292.0" y="6" width="116.0" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="350.0" y="29.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">EJECUCIÓN</text><line x1="412.0" y1="29.0" x2="430.0" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at9dp)"/><rect x="434.0" y="6" width="116.0" height="46" rx="6" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="492.0" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">BLOQUEADO</text><text x="492.0" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">(E/S)</text><line x1="554.0" y1="29.0" x2="572.0" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at9dp)"/><rect x="576.0" y="6" width="116.0" height="46" rx="6" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="634.0" y="29.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">TERMINADO</text></svg>
+</figure>
 <h4 class="tema-h4">Hilos (subprocesos, threads)</h4>
 <p>Un <strong>hilo</strong> es una <strong>unidad de ejecución dentro de un proceso</strong>. Los hilos de un mismo proceso <strong>comparten el espacio de memoria y los recursos</strong> del proceso, pero cada hilo mantiene información propia de ejecución, como su <strong>contador de programa</strong> y su <strong>pila</strong>.</p>
 <p><strong>Multithreading (multihebra)</strong>: ejecución concurrente de varios hilos dentro de un mismo proceso — por ejemplo, un editor que corrige la ortografía mientras el usuario escribe.</p>
@@ -187,11 +207,30 @@
 <td>Bajo: un fallo puede afectar a todo el proceso</td>
 </tr>
 </table></div>
+<p>Los costes de la tabla son la <strong>tendencia habitual</strong>, no una ley. Y los hilos que comparten memoria necesitan <strong>sincronización</strong>; los procesos se comunican por <strong>IPC</strong> (comunicación entre procesos).</p>
+<figure class="tema-figura">
+<figcaption>Proceso vs. hilo</figcaption>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at9cp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at9ca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at9cv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at9cn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at9cr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at9cg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">PROCESO</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">HILO</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">RECURSOS</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Tiene su PCB</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Memoria propia</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">EJECUCIÓN</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Comparte memoria</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Pila y contador propios</text></svg>
+</figure>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — concurrencia y paralelismo</strong><br><strong>CONCURRENCIA</strong> → varias tareas <strong>progresan alternándose</strong>: basta un núcleo.<br><strong>PARALELISMO</strong> → se ejecutan <strong>a la vez de verdad</strong>, en núcleos distintos.<br>Tener varios hilos <strong>no garantiza</strong> ir más rápido.</th>
+</tr>
+</table></div>
 <h4 class="tema-h4">Deadlock y starvation</h4>
 <ul class="tema-lista">
 <li><strong>Interbloqueo (deadlock)</strong>: procesos bloqueados esperando recursos <strong>de manera circular</strong>: A tiene la impresora y espera el escáner; B tiene el escáner y espera la impresora — ninguno avanzará. El SO puede prevenir, evitar o detectar y resolver (por ejemplo, abortando un proceso).</li>
-<li><strong>Inanición (starvation)</strong>: un proceso espera <strong>indefinidamente porque otros obtienen los recursos o turnos de forma continuada</strong> — podría avanzar, pero nunca le llega la vez (típico con prioridades mal gestionadas).</li>
+<li><strong>Inanición (starvation)</strong>: un proceso espera <strong>indefinidamente porque otros obtienen los recursos o turnos de forma continuada</strong> — podría avanzar, pero nunca le llega la vez (típico con prioridades mal gestionadas). Se combate con <strong>envejecimiento (aging)</strong>: subir la prioridad a quien lleva mucho esperando.</li>
 </ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar — condiciones de Coffman</strong><br>El interbloqueo clásico exige <strong>las cuatro a la vez</strong>: <strong>exclusión mutua · retención y espera · no expropiación · espera circular</strong>. Basta romper una para prevenirlo.<br><strong>Esperar mucho no es interbloqueo</strong>, ni esperar a un disco lento es inanición.</th>
+</tr>
+</table></div>
+<figure class="tema-figura">
+<figcaption>Deadlock vs. starvation</figcaption>
+<svg viewBox="0 0 700 136" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at9fp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at9fa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at9fv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at9fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at9fr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at9fg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#c62828" stroke="#c62828" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">DEADLOCK</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">STARVATION</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#fbe6e6" stroke="#c62828" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">ESPERA CIRCULAR</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#fbe6e6" stroke="#c62828" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Nadie avanza</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">NO LE LLEGA EL TURNO</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Otros sí avanzan</text></svg>
+</figure>
 <h2 id="6-planificacion-y-gestion-multitarea" class="tema-h2">6. Planificación y gestión multitarea</h2>
 <p>El <strong>planificador (scheduler)</strong> decide qué proceso o hilo <strong>listo</strong> recibe la CPU en cada momento. El <strong>cambio de contexto (context switch)</strong> guarda el estado de ejecución del saliente y restaura el del entrante; gracias a esa alternancia rápida, una única CPU da sensación de simultaneidad.</p>
 <h4 class="tema-h4">Multitarea cooperativa frente a expulsiva</h4>
@@ -214,7 +253,7 @@
 <tr>
 <td><strong>SJF</strong> (Shortest Job First)</td>
 <td>Menor duración estimada primero</td>
-<td>Puede minimizar el tiempo medio de espera <strong>bajo las condiciones clásicas del algoritmo y con estimaciones apropiadas</strong> de duración</td>
+<td>Minimiza el tiempo medio de espera <strong>si se conocen las duraciones y llegan a la vez</strong>; en la práctica hay que estimarlas</td>
 </tr>
 <tr>
 <td><strong>Round Robin</strong></td>
@@ -232,12 +271,45 @@
 <th><strong>📌 Imprescindible para el examen — el quantum</strong><br><strong>QUANTUM</strong> → intervalo de CPU asignado a un proceso antes de producirse la expulsión/cambio.<br><strong>Demasiado corto</strong> → muchos cambios de contexto (sobrecoste).<br><strong>Demasiado largo</strong> → comportamiento parecido a FCFS (pierde capacidad de respuesta).</th>
 </tr>
 </table></div>
+<h4 class="tema-h4">Ejercicio resuelto: los tres algoritmos</h4>
+<p>Tres procesos llegan <strong>a la vez</strong>, en el orden P1, P2, P3. Necesitan <strong>P1 = 5, P2 = 3 y P3 = 2</strong> unidades de CPU. Espera = tiempo en la cola de listos.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Algoritmo</strong></th>
+<th><strong>Orden de ejecución</strong></th>
+<th><strong>Esperas P1 · P2 · P3</strong></th>
+<th><strong>Espera media</strong></th>
+</tr>
+<tr>
+<td><strong>FCFS</strong></td>
+<td>P1 (0-5) · P2 (5-8) · P3 (8-10)</td>
+<td>0 · 5 · 8</td>
+<td><strong>4,33</strong></td>
+</tr>
+<tr>
+<td><strong>SJF</strong></td>
+<td>P3 (0-2) · P2 (2-5) · P1 (5-10)</td>
+<td>5 · 2 · 0</td>
+<td><strong>2,33</strong></td>
+</tr>
+<tr>
+<td><strong>Round Robin, quantum 2</strong></td>
+<td>P1 · P2 · P3 · P1 · P2 · P1 (corte en 2, 4, 6, 8, 9 y 10)</td>
+<td>5 · 6 · 4</td>
+<td><strong>5</strong></td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🧠 Para memorizar</strong><br><strong>SJF da la menor espera media; Round Robin, el reparto más equitativo</strong> (nadie espera más de dos turnos ajenos para empezar). En RR un proceso <strong>puede no agotar el quantum</strong>: P2 termina con 1 unidad.</th>
+</tr>
+</table></div>
 <figure class="tema-figura">
 <figcaption>Algoritmos de planificación</figcaption>
-<svg viewBox="0 0 700 184" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at9ep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at9ea" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at9ev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at9en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at9er" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at9eg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">FCFS</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at9eg)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Por orden de llegada</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">SJF</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at9ea)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">El trabajo más corto primero</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">ROUND ROBIN</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#003da5" stroke-width="2" marker-end="url(#at9ep)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Turnos con QUANTUM</text><rect x="8" y="139" width="250" height="36" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="133.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">PRIORIDADES</text><line x1="264" y1="157.0" x2="356" y2="157.0" stroke="#b26a00" stroke-width="2" marker-end="url(#at9en)"/><rect x="362" y="139" width="330" height="36" rx="6" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="527.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Riesgo de inanición</text></svg>
+<svg viewBox="0 0 700 184" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at9ep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at9ea" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at9ev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at9en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at9er" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at9eg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">FCFS</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at9eg)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Por orden de llegada</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">SJF</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at9ea)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">El más corto primero (duración estimada)</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">ROUND ROBIN</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#003da5" stroke-width="2" marker-end="url(#at9ep)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Turnos con QUANTUM</text><rect x="8" y="139" width="250" height="36" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="133.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">PRIORIDADES</text><line x1="264" y1="157.0" x2="356" y2="157.0" stroke="#b26a00" stroke-width="2" marker-end="url(#at9en)"/><rect x="362" y="139" width="330" height="36" rx="6" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="527.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Riesgo de inanición</text></svg>
 </figure>
 <h2 id="7-entrada-salida" class="tema-h2">7. Entrada/salida</h2>
-<p>El SO intermedia entre los procesos y los dispositivos mediante los <strong>drivers</strong> (controladores específicos de cada dispositivo) y utiliza <strong>buffers</strong> — zonas de memoria intermedia — para compensar la diferencia de velocidad entre la CPU y los periféricos.</p>
+<p>El SO intermedia entre los procesos y los dispositivos mediante los <strong>drivers</strong> (controladores específicos de cada dispositivo) y utiliza <strong>buffers</strong> — zonas de memoria intermedia — para compensar la diferencia de velocidad entre la CPU y los periféricos. <strong>Buffer no es caché</strong>: el buffer retiene datos <strong>en tránsito</strong>; la caché guarda copias para <strong>reutilizarlas</strong>.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>Método</strong></th>
@@ -262,7 +334,7 @@
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Imprescindible para el examen</strong><br>El <strong>DMA reduce de forma significativa la intervención de la CPU en las transferencias de bloques</strong>: un controlador dedicado mueve los datos entre el dispositivo y la memoria, y la CPU solo configura la operación y recibe la interrupción final. Formúlalo así — no como «el método más eficiente en cualquier circunstancia».</th>
+<th><strong>📌 Imprescindible para el examen</strong><br>El <strong>DMA reduce de forma significativa la intervención de la CPU en las transferencias de bloques</strong>: un controlador dedicado mueve los datos entre el dispositivo y la memoria, y la CPU solo configura la operación y recibe la interrupción final. Formúlalo así — no como «el método más eficiente en cualquier circunstancia».<br>Y no son excluyentes: el <strong>DMA avisa con una interrupción</strong> al terminar.</th>
 </tr>
 </table></div>
 <h2 id="8-sistemas-de-archivo" class="tema-h2">8. Sistemas de archivo</h2>
@@ -270,7 +342,9 @@
 <ul class="tema-lista">
 <li>Organiza los ficheros en una <strong>jerarquía</strong> en árbol a partir de un directorio raíz.</li>
 <li>Mantiene los <strong>metadatos</strong> de cada fichero: tamaño, fechas, propietario, permisos.</li>
+<li>Se <strong>monta</strong> en un punto del árbol (o en una letra de unidad) para hacerlo accesible.</li>
 </ul>
+<p><strong>Partición ≠ sistema de archivos</strong> (la partición es el espacio; el sistema de archivos, su organización); <strong>formatear</strong> crea el sistema de archivos, no es borrado seguro; y el <strong>journaling</strong> ayuda a recuperar la coherencia tras un corte, pero <strong>no es una copia de seguridad</strong>.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>⚠️ No confundir</strong><br><strong>Tema 4</strong> → la estructura lógica de la información <strong>dentro</strong> del fichero (registros, claves, métodos de acceso).<br><strong>Tema 9</strong> → la función del sistema de archivos del SO para <strong>gestionar ficheros y directorios</strong> sobre el almacenamiento.<br>Como ejemplos de sistemas de archivos pueden citarse NTFS (Windows), ext4 (Linux) o APFS (macOS); su desarrollo, y el de los permisos y ACL, corresponde a los temas de cada sistema concreto.</th>
