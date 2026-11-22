@@ -38,17 +38,6 @@
       <span id="quiz-titulo-migas">Quiz</span>
     </nav>
 
-    <!-- Tabs de navegación al tema (Apuntes/Qwiz/Ask_Claude). Solo se muestran
-         si el ope del quiz proviene de un tema con estructura de tabs
-         (típicamente Temario_Especifico/T{n}/Qwiz). -->
-    <div class="tabs" id="quiz-tabs" hidden>
-      <div class="tabs__cabecera" role="tablist">
-        <a class="tabs__tab" role="tab" id="tab-apuntes" href="#">Apuntes</a>
-        <a class="tabs__tab activo" role="tab" aria-selected="true">Qwiz</a>
-        <a class="tabs__tab" role="tab" id="tab-ask-claude" href="#">Ask_Claude</a>
-      </div>
-    </div>
-
     <div class="quiz-cabecera">
       <h2 id="quiz-titulo">Quiz</h2>
       <div class="quiz-info">
@@ -108,7 +97,7 @@
       });
     if (opeNueva !== opeAntigua) {
       params.set('ope', opeNueva);
-      location.replace(`${location.pathname}?${params}`);
+      location.replace(`${location.pathname}?${params}${location.hash}`);
       return;
     }
     const opeParam = params.get('ope') || '';

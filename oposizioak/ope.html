@@ -107,7 +107,7 @@
       .replace(/\/Temario_General_C1\/(Qwiz|Material_de_estudio)$/, '/Temario_General_C1');
     if (opeNueva !== opeAntigua) {
       params.set('ope', opeNueva);
-      location.replace(`${location.pathname}?${params}`);
+      location.replace(`${location.pathname}?${params}${location.hash}`);
       return;
     }
     const rutaOpe = params.get('ope');
@@ -120,6 +120,15 @@
       Temario_Especifico: 'Temario Específico',
       Temario_General_C1: 'Temario General C-1',
       Examenes_y_guia: 'Exámenes y guía',
+      BOLSA_DonostiaTIK_2023: 'Bolsa DonostiaTIK 2023',
+    };
+    // Tema de referencia: su info.json es {"id": "T3", "ref": "<ruta del original>"}.
+    // Se navega con la ruta nueva, pero el contenido, las preguntas y el
+    // progreso son los del original. Devuelve la ruta donde están los datos.
+    const rutaDeRef = (info) => {
+      if (!info?.ref) return null;
+      if (!/^\w+(\/[\w-]+)+$/.test(info.ref)) throw new Error('Referencia de tema no válida');
+      return info.ref;
     };
     const formatear = id => NOMBRES[id] || id.replace(/_/g, ' ');
     const partes = rutaOpe.split('/').filter(Boolean);
@@ -163,7 +172,13 @@
         return;
       }
       if (!resp.ok) throw new Error('No se pudo cargar la información');
-      const info = await resp.json();
+      let info = await resp.json();
+      const refTema = rutaDeRef(info);
+      if (refTema) {
+        const rRef = await fetch(`data/${refTema}/info.json`, { cache: 'no-store' });
+        if (!rRef.ok) throw new Error('No se encuentra el tema de referencia');
+        info = { ...(await rRef.json()), rutaDatos: refTema };
+      }
 
       // Secciones solo para el admin (p. ej. Informe del examen)
       if (info.soloAdmin && !(await AuthSession.esAdmin())) {
@@ -242,8 +257,12 @@
         if (textos) return textos;
         const pares = await Promise.all(temas.map(async t => {
           try {
+            let base = `${rutaOpe}/${t.id}`;
+            const rInfo = await fetch(`data/${base}/info.json`);
+            if (rInfo.ok) base = rutaDeRef(await rInfo.json()) || base;
+            const idDatos = base.split('/').pop();
             const leer = async (pestana) => {
-              const r = await fetch(`data/${rutaOpe}/${t.id}/${pestana}/${t.id}.html`);
+              const r = await fetch(`data/${base}/${pestana}/${idDatos}.html`);
               return r.ok ? r.text() : '';
             };
             const html = (await Promise.all(['Material_de_estudio', 'Xtra'].map(leer))).join(' ');
@@ -486,6 +505,13 @@
         } catch { /* silencioso: si falla el lookup, no bloqueamos la vista */ }
         // -----------------------------------------------------------------------
 
+        if (info.rutaDatos) {
+          const [opeOrigen, ...resto] = info.rutaDatos.split('/');
+          const nota = document.createElement('p');
+          nota.className = 'tema-compartido';
+          nota.textContent = `Tema compartido con ${formatear(opeOrigen)} · ${resto.pop()}: mismos apuntes, preguntas y progreso.`;
+          cont.appendChild(nota);
+        }
         cont.appendChild(tabsWrap);
         if (navTemas) cont.appendChild(navTemas);
 
@@ -607,7 +633,7 @@
         // Cargar contenido de cada hijo en su panel (paralelo)
         await Promise.all(info.hijos.map(async (h) => {
           const panel = tabsWrap.querySelector(`[data-panel="${h.id}"]`);
-          const rutaHijo = `${rutaOpe}/${h.id}`;
+          const rutaHijo = `${info.rutaDatos || rutaOpe}/${h.id}`;
           try {
             const r = await fetch(`data/${rutaHijo}/info.json`, { cache: 'no-store' });
             if (!r.ok) {
@@ -841,10 +867,27 @@
 
       // Tipo "grupo" → renderizar hijos como tarjetas navegables
       if (info.tipo === 'grupo' && Array.isArray(info.hijos)) {
-        subtitulo.textContent = 'Selecciona una sección';
+        const proxima = info.estado === 'proximamente';
+        subtitulo.textContent = proxima ? 'Secciones previstas' : 'Selecciona una sección';
+        if (info.aviso) {
+          const aviso = document.createElement('div');
+          aviso.className = 'aviso-proximamente';
+          aviso.innerHTML = `<span class="estado-proximamente">Próximamente</span><p>${info.aviso}</p>`;
+          subtitulo.before(aviso);
+        }
         const esAdmin = await AuthSession.esAdmin();
         info.hijos.filter(h => !h.soloAdmin || esAdmin).forEach((hijo, i) => {
           const rutaHijo = `${rutaOpe}/${hijo.id}`;
+          if (hijo.estado === 'proximamente') {
+            const caja = document.createElement('div');
+            caja.className = 'tarjeta tarjeta--proxima tarjeta--aparecer';
+            caja.innerHTML = `
+              <div class="tarjeta__titulo">${hijo.nombre || hijo.id}</div>
+              <p class="tarjeta__descripcion">${hijo.descripcion || ''}</p>
+              <span class="estado-proximamente">Próximamente</span>`;
+            cont.appendChild(caja);
+            return;
+          }
           const a = document.createElement('a');
           a.className = 'tarjeta tarjeta--clicable tarjeta--aparecer';
           a.style.animationDelay = (i * 60) + 'ms';
@@ -856,6 +899,24 @@
         });
         if (info.hijos.length === 0) {
           cont.innerHTML = '<div class="tarjeta">Sin contenido todavía.</div>';
+        }
+        // Material de otras oposiciones que sirve mientras esta no se publica
+        if (info.mientrasTanto?.length) {
+          const titulo = document.createElement('h2');
+          titulo.className = 'mientras-tanto';
+          titulo.textContent = 'Mientras tanto, puedes estudiar';
+          const lista = document.createElement('div');
+          lista.className = cont.className;
+          info.mientrasTanto.forEach(m => {
+            const a = document.createElement('a');
+            a.className = 'tarjeta tarjeta--clicable';
+            a.href = `ope.html?ope=${encodeURIComponent(m.ruta)}`;
+            a.innerHTML = `
+              <div class="tarjeta__titulo">${m.nombre}</div>
+              <p class="tarjeta__descripcion">${m.descripcion || ''}</p>`;
+            lista.appendChild(a);
+          });
+          cont.after(titulo, lista);
         }
         return;
       }

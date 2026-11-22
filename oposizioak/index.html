@@ -83,14 +83,17 @@
       cont.innerHTML = '';
       (datos.opes || []).forEach((ope, i) => {
         const a = document.createElement('a');
-        a.className = 'tarjeta tarjeta--aparecer';
+        const proxima = ope.estado === 'proximamente';
+        a.className = 'tarjeta tarjeta--aparecer' + (proxima ? ' tarjeta--proxima' : '');
         a.style.animationDelay = (i * 60) + 'ms';
         a.href = `ope.html?ope=${encodeURIComponent(ope.id)}`;
         a.innerHTML = `
           <div class="tarjeta__titulo">${ope.nombre || ope.id}</div>
           <p class="tarjeta__descripcion">${ope.descripcion || ''}</p>
           <div class="tarjeta__meta">
-            <span>${ope.temas ? `${ope.temas} tema${ope.temas === 1 ? '' : 's'}` : 'Próximamente'}</span>
+            ${ope.temas && !proxima
+              ? `<span>${ope.temas} tema${ope.temas === 1 ? '' : 's'}</span>`
+              : '<span class="estado-proximamente">Próximamente</span>'}
           </div>`;
         cont.appendChild(a);
       });

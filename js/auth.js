@@ -75,7 +75,7 @@ const AuthSession = {
   async exigirLogin() {
     const sesion = await this.getSesion();
     if (!sesion) {
-      const destino = encodeURIComponent(location.pathname + location.search);
+      const destino = encodeURIComponent(location.pathname + location.search + location.hash);
       location.href = `/login.html?destino=${destino}`;
       return null;
     }
