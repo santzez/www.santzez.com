@@ -13,8 +13,9 @@
 <li><a href="#5-preguntas-cortas">5. Posibles preguntas cortas (con esquema de respuesta)</a></li>
 <li><a href="#6-supuestos-practicos">6. Supuestos prácticos</a></li>
 <li><a href="#7-matriz-de-memorizacion">7. Matriz de memorización</a></li>
-<li><a href="#8-resumen-final">8. Resumen final: si mañana fuera el examen</a></li>
-<li><a href="#9-actualidad">9. Actualidad de movilidad y Wi-Fi — datos fechados</a></li>
+<li><a href="#8-repaso-visual">8. Repaso visual · T30</a></li>
+<li><a href="#9-resumen-final">9. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#10-actualidad">10. Actualidad de movilidad y Wi-Fi — datos fechados</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
@@ -27,13 +28,18 @@
 <li><strong>2,4 GHz → más alcance, más interferencia · 5 GHz → más capacidad, menos alcance · 6 GHz → espectro amplio, menos congestión.</strong></li>
 <li><strong>WEP → NO · WPA → NO · WPA2 → AES · WPA3 → SAE.</strong></li>
 <li><strong>SSID → NOMBRE DE LA RED</strong>, no la contraseña. <strong>Ocultar SSID y filtrar MAC → NO son seguridad fuerte.</strong></li>
-<li><strong>MESH → BACKHAUL INALÁMBRICO ENTRE NODOS</strong>, no «varios AP con el mismo SSID».</li>
+<li><strong>MESH → NODOS COORDINADOS CON BACKHAUL, típicamente inalámbrico</strong>, no «varios AP con el mismo SSID».</li>
 <li><strong>MDM → GESTIONAR + CONFIGURAR + PROTEGER + SUPERVISAR.</strong></li>
 <li><strong>ENROLLMENT → PRIMER PASO DE GESTIÓN.</strong></li>
 <li><strong>CICLO MDM</strong>: <strong>inscripción → configuración → políticas → apps → monitorización/compliance → actualización → retirada/borrado</strong>.</li>
 <li><strong>SELECTIVE WIPE → LO DE LA EMPRESA · FULL WIPE → TODO.</strong></li>
 <li><strong>COPE → corporativo con uso personal · BYOD → personal para trabajo · COBO → corporativo solo trabajo.</strong></li>
 <li><strong>MDM → EL MÓVIL · MAM → APPS Y DATOS · UEM → TODO EL ENDPOINT.</strong></li>
+<li><strong>2G YA TENÍA DATOS (GPRS, EDGE).</strong></li>
+<li><strong>PERSONAL → contraseña (PSK / SAE) · ENTERPRISE → 802.1X.</strong></li>
+<li><strong>OWE → red abierta cifrada, sin autenticar. 6 GHz → sin WPA2.</strong></li>
+<li><strong>MAM puede ir SIN inscripción MDM.</strong></li>
+<li><strong>BORRADO PENDIENTE ≠ EJECUTADO.</strong></li>
 </ul>
 <h2 id="2-no-confundir" class="tema-h2">2. No confundir</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -58,9 +64,9 @@
 <td>Tecnologías y finalidades distintas</td>
 </tr>
 <tr>
-<td><strong>Wi-Fi mesh</strong>: nodos con backhaul inalámbrico</td>
+<td><strong>Wi-Fi mesh</strong>: nodos coordinados y enlazados entre sí</td>
 <td><strong>Varios AP cableados</strong> con el mismo SSID</td>
-<td>El enlace inalámbrico entre nodos es lo definitorio</td>
+<td>El backhaul suele ser por radio, aunque puede admitir cable</td>
 </tr>
 <tr>
 <td><strong>Wi-Fi 6</strong>: 802.11ax</td>
@@ -91,6 +97,36 @@
 <td><strong>Filtrado MAC</strong></td>
 <td><strong>Seguridad real</strong></td>
 <td>La MAC puede falsificarse</td>
+</tr>
+<tr>
+<td><strong>Handover</strong>: entre células</td>
+<td><strong>Roaming de operador</strong>: otra red</td>
+<td>El roaming Wi-Fi es entre AP</td>
+</tr>
+<tr>
+<td><strong>SSID</strong>: la red</td>
+<td><strong>BSSID</strong>: la radio</td>
+<td>Nombre frente a punto concreto</td>
+</tr>
+<tr>
+<td><strong>Personal</strong>: contraseña</td>
+<td><strong>Enterprise</strong>: 802.1X</td>
+<td>SAE es solo de Personal</td>
+</tr>
+<tr>
+<td><strong>WPA3-Personal</strong>: autentica con SAE</td>
+<td><strong>OWE</strong>: cifra sin autenticar</td>
+<td>Con y sin contraseña</td>
+</tr>
+<tr>
+<td><strong>Orden de borrado</strong></td>
+<td><strong>Borrado ejecutado</strong></td>
+<td>Hay que verificar</td>
+</tr>
+<tr>
+<td><strong>Conforme</strong></td>
+<td><strong>Seguro</strong></td>
+<td>Cumplir no es estar a salvo</td>
 </tr>
 <tr>
 <td><strong>MDM</strong>: gestiona el dispositivo</td>
@@ -129,7 +165,8 @@
 <li><strong>«Configurar el mismo SSID garantiza el roaming»</strong> — falso: depende de la <strong>infraestructura y de la configuración</strong>.</li>
 <li><strong>«Ocultar el SSID protege la red»</strong> — falso: <strong>no proporciona seguridad fuerte</strong>.</li>
 <li><strong>«El filtrado por MAC es una medida de seguridad sólida»</strong> — falso: la <strong>MAC puede falsificarse</strong>.</li>
-<li><strong>«Wi-Fi mesh es simplemente varios AP con el mismo SSID»</strong> — falso: lo definitorio es el <strong>backhaul inalámbrico entre nodos</strong>.</li>
+<li><strong>«Wi-Fi mesh es simplemente varios AP con el mismo SSID»</strong> — falso: los <strong>nodos se coordinan y se enlazan entre sí</strong>, normalmente por radio.</li>
+<li><strong>«Un sistema mesh no admite ningún enlace por cable»</strong> — falso: EasyMesh, por ejemplo, lo admite.</li>
 <li><strong>«Wi-Fi 6 opera en la banda de 6 GHz»</strong> — falso: quien incorpora 6 GHz es <strong>Wi-Fi 6E</strong>.</li>
 <li><strong>«Wi-Fi 6E es un estándar distinto de 802.11ax»</strong> — falso: es <strong>802.11ax + banda de 6 GHz</strong>.</li>
 <li><strong>«Wi-Fi 7 es 802.11ax»</strong> — falso: es <strong>802.11be</strong>.</li>
@@ -146,52 +183,235 @@
 <li><strong>«COPE y BYOD son equivalentes»</strong> — falso: en COPE el dispositivo es <strong>de la organización</strong>; en BYOD, <strong>de la persona</strong>.</li>
 <li><strong>«El borrado selectivo borra el dispositivo»</strong> — falso: elimina <strong>datos y aplicaciones corporativos</strong>; el que borra todo es el <strong>full wipe</strong>.</li>
 <li><strong>«En BYOD la empresa puede controlar ilimitadamente el dispositivo»</strong> — falso: existen límites de <strong>privacidad</strong> y procedimientos que respetar.</li>
-<li><strong>«Sin inscripción se pueden aplicar políticas MDM»</strong> — falso: el <strong>enrollment es el primer paso</strong> de la gestión.</li>
+<li><strong>«Sin inscripción se pueden aplicar políticas MDM»</strong> — falso: el <strong>enrollment es el primer paso</strong> de la gestión del dispositivo.</li>
+<li><strong>«Sin inscripción no cabe ninguna protección corporativa»</strong> — falso: existe <strong>MAM sin inscripción</strong>.</li>
+<li><strong>«Los datos móviles nacen con 3G»</strong> — falso: <strong>2G</strong> ya tenía GPRS y EDGE.</li>
+<li><strong>«WPA3-Enterprise se basa en SAE»</strong> — falso: en <strong>802.1X/EAP</strong>.</li>
+<li><strong>«En 6 GHz puede usarse WPA2»</strong> — falso: <strong>WPA3 o Enhanced Open</strong>.</li>
+<li><strong>«Borrado enviado es borrado hecho»</strong> — falso: puede quedar <strong>pendiente</strong>.</li>
+<li><strong>«El borrado selectivo elimina toda copia corporativa»</strong> — falso: solo lo <strong>gestionado</strong>.</li>
 <li><strong>Colar contenido ajeno</strong>: Bluetooth (T8), distribución general de software (T16), malware (T25), OSI/TCP-IP (T27), AP y VLAN como equipamiento (T28) y VPN o cortafuegos (T29) no se desarrollan aquí.</li>
 </ul>
 <h2 id="4-preguntas-tipo-test" class="tema-h2">4. Posibles preguntas tipo test</h2>
-<ul class="tema-lista">
-<li><strong>Definición</strong> de red celular y elementos que la caracterizan.</li>
-<li>¿Qué es el <strong>handover</strong>?</li>
-<li>¿Para qué sirve la <strong>reutilización de frecuencias</strong>?</li>
-<li><strong>Generación → idea principal</strong>: 1G · 2G · 3G · 4G · 5G.</li>
-<li>¿Qué generación introdujo los <strong>SMS</strong>? ¿Y los <strong>datos móviles</strong>?</li>
-<li>Los tres rasgos característicos de <strong>5G</strong>.</li>
-<li><strong>Sigla → escenario 5G</strong>: eMBB · URLLC · mMTC.</li>
-<li>¿A qué familia de estándares corresponde <strong>Wi-Fi</strong>?</li>
-<li>Diferencia entre modo <strong>infraestructura</strong> y modo <strong>ad-hoc</strong>.</li>
-<li><strong>Definición</strong> de SSID. ¿Es la contraseña?</li>
-<li><strong>Definición</strong> de roaming Wi-Fi. ¿Basta el mismo SSID?</li>
-<li><strong>Definición</strong> de Wi-Fi mesh. ¿Es lo mismo que varios AP con el mismo SSID?</li>
-<li><strong>Denominación → estándar</strong>: Wi-Fi 4 · Wi-Fi 5 · Wi-Fi 6 · Wi-Fi 6E · Wi-Fi 7.</li>
-<li><strong>Estándar → denominación</strong>: 802.11n · 802.11ac · 802.11ax · 802.11be.</li>
-<li>¿En qué se diferencia <strong>Wi-Fi 6E</strong> de <strong>Wi-Fi 6</strong>?</li>
-<li>¿Opera <strong>Wi-Fi 6</strong> en la banda de 6 GHz?</li>
-<li><strong>Banda → característica</strong>: 2,4 GHz · 5 GHz · 6 GHz.</li>
-<li>¿Qué banda ofrece <strong>mayor alcance</strong>? ¿Y <strong>mayor capacidad</strong>?</li>
-<li><strong>Ordenar</strong> WEP, WPA, WPA2 y WPA3 por antigüedad y robustez.</li>
-<li>¿Cuál es el mecanismo <strong>obsoleto e inseguro</strong>? ¿Cuál el <strong>recomendado para nuevos despliegues</strong>?</li>
-<li>¿En qué se basa <strong>WPA2</strong> en sus modos robustos?</li>
-<li>¿Qué es <strong>SAE</strong> y a qué mecanismo pertenece?</li>
-<li>¿Proporciona seguridad fuerte <strong>ocultar el SSID</strong>?</li>
-<li>¿Y el <strong>filtrado por dirección MAC</strong>? ¿Por qué no?</li>
-<li>Elementos de una <strong>red de invitados</strong> correctamente planteada.</li>
-<li>¿Garantiza el aislamiento crear una <strong>VLAN</strong> de invitados?</li>
-<li>Principales <strong>amenazas</strong> sobre un dispositivo móvil.</li>
-<li><strong>Medida → amenaza</strong>: cifrado · bloqueo automático · borrado remoto · actualizaciones.</li>
-<li>¿Convierte la <strong>VPN</strong> una Wi-Fi pública en segura? ¿A qué no sustituye?</li>
-<li><strong>Definición</strong> de MDM y sus cuatro verbos característicos.</li>
-<li>¿Qué es el <strong>enrollment</strong> y qué lugar ocupa en el ciclo?</li>
-<li><strong>Ordenar</strong> las fases del ciclo de vida MDM.</li>
-<li>Ejemplos de <strong>políticas</strong> aplicables desde un MDM.</li>
-<li>¿Qué permite <strong>inventariar</strong> un MDM?</li>
-<li>Diferencia entre <strong>selective wipe</strong> y <strong>full wipe</strong>.</li>
-<li>¿Qué tipo de borrado se prefiere en <strong>BYOD</strong> y por qué?</li>
-<li><strong>Sigla → modelo</strong>: COPE · BYOD · COBO.</li>
-<li>¿Qué riesgos adicionales introduce el <strong>BYOD</strong>?</li>
-<li>Diferencia entre <strong>MDM</strong>, <strong>MAM</strong> y <strong>UEM</strong>.</li>
-<li><strong>Supuesto</strong>: gestionar PC y móviles desde una única consola. ¿Qué corresponde?</li>
-</ul>
+<p>Treinta y cinco preguntas con una respuesta correcta. Las soluciones están al final de la sección.</p>
+<p><strong>1.</strong> ¿Qué define una red celular?<br>a) Un único transmisor nacional<br>b) Cobertura dividida en células<br>c) AP con el mismo SSID<br>d) Enlaces punto a punto</p>
+<p><strong>2.</strong> El traspaso entre células se llama…<br>a) enrollment<br>b) roaming de operador<br>c) backhaul<br>d) handover</p>
+<p><strong>3.</strong> Usar la red de otro operador en el extranjero es…<br>a) roaming de operador<br>b) handover<br>c) roaming Wi-Fi<br>d) mesh</p>
+<p><strong>4.</strong> ¿Qué generación tuvo ya GPRS y EDGE?<br>a) 1G<br>b) 4G<br>c) 2G<br>d) 5G</p>
+<p><strong>5.</strong> La banda ancha móvil se asocia a…<br>a) 2G<br>b) 4G<br>c) 1G<br>d) GPRS</p>
+<p><strong>6.</strong> ¿Qué escenario 5G busca baja latencia y alta fiabilidad?<br>a) eMBB<br>b) mMTC<br>c) OWE<br>d) URLLC</p>
+<p><strong>7.</strong> ¿Quién certifica la interoperabilidad Wi-Fi?<br>a) IETF<br>b) ITU<br>c) Wi-Fi Alliance<br>d) ISO</p>
+<p><strong>8.</strong> ¿Qué identifica el BSSID?<br>a) La radio concreta que sirve la red<br>b) La contraseña de la red<br>c) El usuario autenticado<br>d) La VLAN de invitados</p>
+<p><strong>9.</strong> ¿Quién decide sobre todo el cambio de AP?<br>a) El servidor RADIUS<br>b) El cliente<br>c) El switch<br>d) El MDM</p>
+<p><strong>10.</strong> ¿Qué caracteriza a mesh?<br>a) Solo compartir SSID<br>b) Prohibir cualquier cable<br>c) Tener un único AP<br>d) Nodos coordinados y enlazados entre sí</p>
+<p><strong>11.</strong> Wi-Fi 5 es…<br>a) 802.11ac<br>b) 802.11n<br>c) 802.11ax<br>d) 802.11be</p>
+<p><strong>12.</strong> Wi-Fi 6E es…<br>a) 802.11be con 6 GHz<br>b) 802.11ac con 6 GHz<br>c) 802.11ax con 6 GHz<br>d) un estándar 802.11e</p>
+<p><strong>13.</strong> MLO es característico de…<br>a) Wi-Fi 5<br>b) Wi-Fi 4<br>c) WPA3<br>d) Wi-Fi 7</p>
+<p><strong>14.</strong> ¿Qué banda suele llegar más lejos?<br>a) 5 GHz<br>b) 2,4 GHz<br>c) 6 GHz<br>d) Las tres igual</p>
+<p><strong>15.</strong> Buena señal y conexión mala por ruido. ¿Qué medida lo explica?<br>a) SSID<br>b) BSSID<br>c) SNR<br>d) SAE</p>
+<p><strong>16.</strong> ¿Cuál es obsoleto e inseguro?<br>a) WEP<br>b) WPA2<br>c) WPA3<br>d) OWE</p>
+<p><strong>17.</strong> WPA2 robusto se basa en…<br>a) WEP<br>b) SAE<br>c) OWE<br>d) AES</p>
+<p><strong>18.</strong> SAE pertenece a…<br>a) WPA3-Enterprise<br>b) WPA3-Personal<br>c) WPA2-Enterprise<br>d) Enhanced Open</p>
+<p><strong>19.</strong> La modalidad Enterprise autentica con…<br>a) SAE<br>b) una contraseña común<br>c) 802.1X/EAP<br>d) el SSID oculto</p>
+<p><strong>20.</strong> En WPA3 es obligatorio…<br>a) PMF<br>b) ocultar el SSID<br>c) filtrar por MAC<br>d) usar VPN</p>
+<p><strong>21.</strong> ¿Qué seguridad admite la banda de 6 GHz?<br>a) WPA2 o WPA3<br>b) WPA3 o Enhanced Open<br>c) WEP o WPA<br>d) Cualquiera</p>
+<p><strong>22.</strong> Enhanced Open…<br>a) autentica con contraseña<br>b) es WPA3-Personal<br>c) exige 802.1X<br>d) cifra sin autenticar la red</p>
+<p><strong>23.</strong> Filtrar por MAC es débil porque…<br>a) la MAC puede falsificarse<br>b) cifra con AES<br>c) exige RADIUS<br>d) solo va en 5 GHz</p>
+<p><strong>24.</strong> Para aislar a los invitados de la red interna hace falta…<br>a) solo una VLAN<br>b) solo otro SSID<br>c) segmentar y filtrar<br>d) ocultar la red interna</p>
+<p><strong>25.</strong> Un móvil perdido está sin cobertura. ¿Qué protege ya sus datos?<br>a) La orden de borrado pendiente<br>b) El cifrado previo con bloqueo<br>c) El inventario<br>d) La VPN</p>
+<p><strong>26.</strong> La consola dice «borrado pendiente». Significa que…<br>a) ya está borrado<br>b) el móvil está cifrado<br>c) ha fallado para siempre<br>d) aún no consta ejecutado</p>
+<p><strong>27.</strong> Además de ordenar el borrado, conviene…<br>a) publicar el número<br>b) desactivar el cifrado<br>c) revocar los accesos<br>d) borrar el inventario</p>
+<p><strong>28.</strong> Una VPN en Wi-Fi pública…<br>a) protege hasta el extremo VPN<br>b) evita el phishing<br>c) sustituye a HTTPS<br>d) limpia el dispositivo</p>
+<p><strong>29.</strong> ¿Cuál es el primer paso del ciclo MDM?<br>a) Compliance<br>b) Inscripción<br>c) Actualización<br>d) Distribución de apps</p>
+<p><strong>30.</strong> ¿Qué indica «conforme»?<br>a) Que está libre de riesgos<br>b) Que no tiene malware<br>c) Que es corporativo<br>d) Que cumple la política</p>
+<p><strong>31.</strong> Proteger solo la app de correo de un móvil personal no inscrito:<br>a) MDM completo<br>b) UEM completo<br>c) MAM<br>d) COBO</p>
+<p><strong>32.</strong> ¿Qué borrado se prefiere en BYOD?<br>a) Selectivo<br>b) Completo<br>c) Físico<br>d) Ninguno</p>
+<p><strong>33.</strong> ¿Qué límite tiene el borrado selectivo?<br>a) Borra siempre las fotos<br>b) No alcanza copias ya exportadas<br>c) Solo va en COBO<br>d) Exige desactivar el cifrado</p>
+<p><strong>34.</strong> Equipo de la organización con uso personal permitido:<br>a) BYOD<br>b) COBO<br>c) MAM<br>d) COPE</p>
+<p><strong>35.</strong> Gestionar PC, móviles y tabletas en una consola:<br>a) MAM<br>b) COPE<br>c) UEM<br>d) SAE</p>
+<h4 class="tema-h4">Soluciones</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Pregunta</strong></th>
+<th><strong>Respuesta</strong></th>
+<th><strong>Por qué</strong></th>
+</tr>
+<tr>
+<td>1</td>
+<td><strong>b</strong></td>
+<td>Estaciones base</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>d</strong></td>
+<td>Movilidad</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>a</strong></td>
+<td>Tres traspasos</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>c</strong></td>
+<td>Datos lentos</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>b</strong></td>
+<td>LTE</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>d</strong></td>
+<td>Fiabilidad</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>c</strong></td>
+<td>IEEE hace el estándar</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>a</strong></td>
+<td>Diagnóstico de roaming</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>b</strong></td>
+<td>Sticky client</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>d</strong></td>
+<td>Backhaul</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>a</strong></td>
+<td>4 n, 5 ac</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>c</strong></td>
+<td>Extended</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>d</strong></td>
+<td>802.11be</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>b</strong></td>
+<td>Regla general</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>c</strong></td>
+<td>Señal/ruido</td>
+</tr>
+<tr>
+<td>16</td>
+<td><strong>a</strong></td>
+<td>Retirar</td>
+</tr>
+<tr>
+<td>17</td>
+<td><strong>d</strong></td>
+<td>CCMP</td>
+</tr>
+<tr>
+<td>18</td>
+<td><strong>b</strong></td>
+<td>Diccionario offline</td>
+</tr>
+<tr>
+<td>19</td>
+<td><strong>c</strong></td>
+<td>RADIUS</td>
+</tr>
+<tr>
+<td>20</td>
+<td><strong>a</strong></td>
+<td>Tramas de gestión</td>
+</tr>
+<tr>
+<td>21</td>
+<td><strong>b</strong></td>
+<td>Sin WPA2</td>
+</tr>
+<tr>
+<td>22</td>
+<td><strong>d</strong></td>
+<td>OWE</td>
+</tr>
+<tr>
+<td>23</td>
+<td><strong>a</strong></td>
+<td>Suplantación</td>
+</tr>
+<tr>
+<td>24</td>
+<td><strong>c</strong></td>
+<td>Routing y cortafuegos</td>
+</tr>
+<tr>
+<td>25</td>
+<td><strong>b</strong></td>
+<td>No depende de la red</td>
+</tr>
+<tr>
+<td>26</td>
+<td><strong>d</strong></td>
+<td>Verificar</td>
+</tr>
+<tr>
+<td>27</td>
+<td><strong>c</strong></td>
+<td>Sesiones y tokens</td>
+</tr>
+<tr>
+<td>28</td>
+<td><strong>a</strong></td>
+<td>Solo el tramo</td>
+</tr>
+<tr>
+<td>29</td>
+<td><strong>b</strong></td>
+<td>Enrollment</td>
+</tr>
+<tr>
+<td>30</td>
+<td><strong>d</strong></td>
+<td>No es seguro</td>
+</tr>
+<tr>
+<td>31</td>
+<td><strong>c</strong></td>
+<td>Sin enrollment</td>
+</tr>
+<tr>
+<td>32</td>
+<td><strong>a</strong></td>
+<td>Privacidad</td>
+</tr>
+<tr>
+<td>33</td>
+<td><strong>b</strong></td>
+<td>Solo lo gestionado</td>
+</tr>
+<tr>
+<td>34</td>
+<td><strong>d</strong></td>
+<td>Personally Enabled</td>
+</tr>
+<tr>
+<td>35</td>
+<td><strong>c</strong></td>
+<td>Endpoints</td>
+</tr>
+</table></div>
 <h2 id="5-preguntas-cortas" class="tema-h2">5. Posibles preguntas cortas (con esquema de respuesta)</h2>
 <h4 class="tema-h4">1. Explique cómo funcionan las redes celulares</h4>
 <ul class="tema-lista">
@@ -276,8 +496,8 @@
 <h4 class="tema-h4">Caso 1 — Pérdida de un móvil corporativo</h4>
 <p><strong>Escenario</strong>: una persona comunica al CAU que ha <strong>perdido su móvil corporativo</strong>, en el que tenía acceso al correo y a aplicaciones de gestión.</p>
 <ul class="tema-lista">
-<li><strong>a) ¿Qué actuación inmediata procede?</strong> <strong>Bloqueo</strong> del dispositivo y, si no se recupera, <strong>borrado remoto</strong> desde la plataforma MDM.</li>
-<li><strong>b) ¿Qué medida protege los datos mientras tanto?</strong> El <strong>cifrado del almacenamiento</strong>: es la única que <strong>no depende</strong> de que el dispositivo vuelva a conectarse.</li>
+<li><strong>a) ¿Qué actuación inmediata procede?</strong> <strong>Bloqueo</strong> del dispositivo, <strong>revocación de accesos</strong> y, si no se recupera, <strong>borrado remoto</strong> desde la plataforma MDM, <strong>comprobando que se ejecuta</strong>.</li>
+<li><strong>b) ¿Qué medida protege los datos mientras tanto?</strong> El <strong>cifrado del almacenamiento</strong>, con el bloqueo: <strong>no dependen</strong> de que el dispositivo vuelva a conectarse.</li>
 <li><strong>c) ¿Qué tipo de borrado corresponde?</strong> Al ser <strong>corporativo</strong>, cabe el <strong>full wipe</strong>: borra <strong>todo el dispositivo</strong>.</li>
 <li><strong>d) ¿Algo más?</strong> Tratarlo como <strong>incidente</strong> conforme al procedimiento de la organización y revisar los accesos asociados.</li>
 </ul>
@@ -302,7 +522,7 @@
 <ul class="tema-lista">
 <li><strong>a) ¿Cómo se resuelve?</strong> Mediante la <strong>distribución de aplicaciones</strong> del MDM: <strong>catálogo corporativo</strong> e <strong>instalación y control centralizado</strong>.</li>
 <li><strong>b) ¿Qué se evita?</strong> Tener que <strong>intervenir dispositivo a dispositivo</strong> y depender de que cada persona la instale correctamente.</li>
-<li><strong>c) ¿Qué requisito previo hay?</strong> Que los dispositivos estén <strong>inscritos (enrollment)</strong>: sin inscripción no hay gestión posible.</li>
+<li><strong>c) ¿Qué requisito previo hay?</strong> Que los dispositivos estén <strong>inscritos (enrollment)</strong>: sin inscripción no hay despliegue MDM (en BYOD cabría MAM para proteger la app).</li>
 <li><strong>d) Relación con otros temas.</strong> Es la misma lógica de <strong>despliegue centralizado</strong> del <strong>Tema 16</strong>, aplicada aquí a dispositivos móviles.</li>
 </ul>
 <h4 class="tema-h4">Caso 5 — Dispositivo que no cumple el PIN mínimo</h4>
@@ -318,7 +538,7 @@
 <ul class="tema-lista">
 <li><strong>a) ¿Qué concepto está en juego?</strong> El <strong>roaming</strong>: transición entre AP <strong>manteniendo la conectividad</strong>.</li>
 <li><strong>b) ¿Basta con poner el mismo SSID?</strong> <strong>No.</strong> Es necesario, pero el roaming efectivo <strong>depende de la infraestructura y de la configuración</strong>: coherencia de seguridad, diseño de cobertura y solapamiento adecuado.</li>
-<li><strong>c) ¿Sería esto una red mesh?</strong> <strong>No</strong>, si los AP están <strong>cableados</strong>. El <strong>mesh</strong> requiere <strong>backhaul inalámbrico entre nodos</strong>.</li>
+<li><strong>c) ¿Sería esto una red mesh?</strong> <strong>No necesariamente</strong>: dos AP cableados con el mismo SSID son una WLAN convencional. Lo sería si forman un <strong>sistema de nodos coordinados</strong>, que suele enlazarse por radio y puede admitir cable.</li>
 <li><strong>d) ¿Qué más conviene revisar?</strong> Que ambos AP compartan la <strong>configuración de seguridad</strong> (WPA2/WPA3) y que la <strong>cobertura</strong> solape lo suficiente.</li>
 </ul>
 <h4 class="tema-h4">Caso 7 — Crear una red Wi-Fi de invitados</h4>
@@ -353,6 +573,57 @@
 <li><strong>c) ¿Y el MAM?</strong> Actúa a otro nivel: <strong>gestiona las aplicaciones y los datos corporativos</strong>, no el dispositivo.</li>
 <li><strong>d) ¿Cambia el ciclo de gestión?</strong> No en lo esencial: <strong>inscripción → configuración → políticas → aplicaciones → compliance → actualización → retirada</strong>, aplicado a más tipos de dispositivo.</li>
 </ul>
+<h4 class="tema-h4">Caso 11 — BYOD sin inscripción y borrado pendiente</h4>
+<p><strong>Escenario</strong>: se pierde un móvil <strong>personal no inscrito</strong>, con el correo protegido por <strong>MAM</strong>. La consola deja el borrado de la app en <strong>«pendiente»</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Es posible gestionarlo sin inscripción?</strong> Sí: se gestiona <strong>la aplicación</strong>, no el dispositivo.</li>
+<li><strong>b) ¿Está borrado?</strong> No: <strong>pendiente no es ejecutado</strong>.</li>
+<li><strong>c) ¿Qué se hace?</strong> <strong>Revocar sesiones y accesos</strong>, vigilar el estado y documentar.</li>
+<li><strong>d) ¿Y lo que hubiera exportado a apps personales?</strong> Queda <strong>fuera del alcance</strong> del borrado.</li>
+</ul>
+<h4 class="tema-h4">Mini casos</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Situación</strong></th>
+<th><strong>Hipótesis o criterio</strong></th>
+<th><strong>Actuación</strong></th>
+</tr>
+<tr>
+<td>Móvil antiguo no entra en WPA3</td>
+<td>Compatibilidad</td>
+<td>Alternativa autorizada, sin rebajar la red</td>
+</tr>
+<tr>
+<td>Portátil Wi-Fi 6 no ve la red de 6 GHz</td>
+<td>No es 6E</td>
+<td>Comprobar adaptador, sistema y seguridad</td>
+</tr>
+<tr>
+<td>La llamada se corta al andar</td>
+<td>Cliente pegajoso o cobertura</td>
+<td>Mirar BSSID y señal</td>
+</tr>
+<tr>
+<td>Hay Wi-Fi y no hay Internet</td>
+<td>Asociado no es conectado</td>
+<td>IP, DNS y servicio (Tema 27)</td>
+</tr>
+<tr>
+<td>Baja de una persona con BYOD</td>
+<td>Datos corporativos</td>
+<td>Revocar, borrado selectivo y desinscribir</td>
+</tr>
+<tr>
+<td>Tableta que cambia de usuario</td>
+<td>Datos del anterior</td>
+<td>Restablecer, inscribir y verificar</td>
+</tr>
+<tr>
+<td>«¿Qué veis de mi móvil personal?»</td>
+<td>Depende del tipo de gestión</td>
+<td>Dar la información oficial, sin prometer</td>
+</tr>
+</table></div>
 <h2 id="7-matriz-de-memorizacion" class="tema-h2">7. Matriz de memorización</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -377,7 +648,7 @@
 </tr>
 <tr>
 <td><strong>3G</strong></td>
-<td>Datos móviles</td>
+<td>Datos móviles a mayor velocidad (2G ya tenía GPRS y EDGE)</td>
 </tr>
 <tr>
 <td><strong>4G</strong></td>
@@ -405,7 +676,7 @@
 </tr>
 <tr>
 <td><strong>Mesh</strong></td>
-<td>Nodos que colaboran mediante enlaces inalámbricos de backhaul para ampliar cobertura</td>
+<td>Nodos coordinados con backhaul, típicamente inalámbrico, para ampliar cobertura</td>
 </tr>
 <tr>
 <td><strong>Wi-Fi 4</strong></td>
@@ -477,7 +748,7 @@
 </tr>
 <tr>
 <td><strong>MAM</strong></td>
-<td>Gestiona y aplica políticas sobre aplicaciones y datos corporativos</td>
+<td>Puede ir sin inscripción; gestiona y aplica políticas sobre aplicaciones y datos corporativos</td>
 </tr>
 <tr>
 <td><strong>UEM</strong></td>
@@ -492,16 +763,42 @@
 <td>Borra todo el dispositivo</td>
 </tr>
 </table></div>
-<h2 id="8-resumen-final" class="tema-h2">8. Resumen final: si mañana fuera el examen</h2>
+<h2 id="8-repaso-visual" class="tema-h2">8. Repaso visual · T30</h2>
+<figure class="tema-figura">
+<figcaption>1 · Generaciones móviles</figcaption>
+<svg viewBox="0 0 700 229" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at30ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at30aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at30av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at30an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at30ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at30ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">1G</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at30ag)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Voz analógica</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">2G</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at30ag)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Digital + SMS + datos lentos</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">3G</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at30aa)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Datos móviles más rápidos</text><rect x="8" y="139" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">4G</text><line x1="264" y1="157.0" x2="356" y2="157.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at30aa)"/><rect x="362" y="139" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Banda ancha móvil</text><rect x="8" y="184" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="202.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">5G</text><line x1="264" y1="202.0" x2="356" y2="202.0" stroke="#003da5" stroke-width="2" marker-end="url(#at30ap)"/><rect x="362" y="184" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="202.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Velocidad + baja latencia + densidad</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>2 · Estándares Wi-Fi</figcaption>
+<svg viewBox="0 0 700 229" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at30bp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at30ba" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at30bv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at30bn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at30br" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at30bg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">Wi-Fi 4</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at30bg)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">802.11n</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">Wi-Fi 5</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at30ba)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">802.11ac</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">Wi-Fi 6</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at30ba)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">802.11ax</text><rect x="8" y="139" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">Wi-Fi 6E</text><line x1="264" y1="157.0" x2="356" y2="157.0" stroke="#003da5" stroke-width="2" marker-end="url(#at30bp)"/><rect x="362" y="139" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">802.11ax + banda de 6 GHz</text><rect x="8" y="184" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="202.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">Wi-Fi 7</text><line x1="264" y1="202.0" x2="356" y2="202.0" stroke="#003da5" stroke-width="2" marker-end="url(#at30bp)"/><rect x="362" y="184" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="202.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">802.11be</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>3 · Seguridad Wi-Fi</figcaption>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at30dp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at30da" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at30dv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at30dn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at30dr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at30dg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="684" height="36" rx="6" fill="#fbe6e6" stroke="#c62828" stroke-width="1.6"/><rect x="8" y="4" width="48" height="36" rx="6" fill="#c62828"/><rect x="50" y="4" width="6" height="36" fill="#c62828"/><text x="32.0" y="22.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">NO</text><text x="70" y="22.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">WEP</text><text x="680" y="22.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">obsoleto e inseguro</text><rect x="8" y="47" width="684" height="36" rx="6" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><rect x="8" y="47" width="48" height="36" rx="6" fill="#b26a00"/><rect x="50" y="47" width="6" height="36" fill="#b26a00"/><text x="32.0" y="65.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">NO</text><text x="70" y="65.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">WPA</text><text x="680" y="65.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">obsoleto para nuevos despliegues</text><rect x="8" y="90" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="90" width="48" height="36" rx="6" fill="#1f5b9e"/><rect x="50" y="90" width="6" height="36" fill="#1f5b9e"/><text x="32.0" y="108.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">SÍ</text><text x="70" y="108.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">WPA2</text><text x="680" y="108.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">ampliamente utilizado — AES</text><rect x="8" y="133" width="684" height="36" rx="6" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><rect x="8" y="133" width="48" height="36" rx="6" fill="#2e7d3c"/><rect x="50" y="133" width="6" height="36" fill="#2e7d3c"/><text x="32.0" y="151.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">SÍ+</text><text x="70" y="151.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">WPA3</text><text x="680" y="151.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">recomendado — SAE en modo Personal</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>4 · Ciclo de vida MDM</figcaption>
+<svg viewBox="0 0 700 305" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at30ep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at30ea" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at30ev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at30en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at30er" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at30eg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="684" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><rect x="8" y="4" width="54" height="36" rx="6" fill="#003da5"/><rect x="56" y="4" width="6" height="36" fill="#003da5"/><text x="35.0" y="22.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">1</text><text x="76" y="22.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">INSCRIPCIÓN (enrollment)</text><text x="680" y="22.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">primer paso de la gestión</text><rect x="8" y="47" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="47" width="54" height="36" rx="6" fill="#1f5b9e"/><rect x="56" y="47" width="6" height="36" fill="#1f5b9e"/><text x="35.0" y="65.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">2</text><text x="76" y="65.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">CONFIGURACIÓN</text><text x="680" y="65.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">red, correo, certificados</text><rect x="8" y="90" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="90" width="54" height="36" rx="6" fill="#1f5b9e"/><rect x="56" y="90" width="6" height="36" fill="#1f5b9e"/><text x="35.0" y="108.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">3</text><text x="76" y="108.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">POLÍTICAS</text><text x="680" y="108.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">PIN, cifrado, bloqueo, restricciones</text><rect x="8" y="133" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="133" width="54" height="36" rx="6" fill="#1f5b9e"/><rect x="56" y="133" width="6" height="36" fill="#1f5b9e"/><text x="35.0" y="151.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">4</text><text x="76" y="151.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">APLICACIONES</text><text x="680" y="151.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">catálogo corporativo</text><rect x="8" y="176" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="176" width="54" height="36" rx="6" fill="#1f5b9e"/><rect x="56" y="176" width="6" height="36" fill="#1f5b9e"/><text x="35.0" y="194.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">5</text><text x="76" y="194.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">MONITORIZACIÓN / COMPLIANCE</text><text x="680" y="194.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">estado de cumplimiento</text><rect x="8" y="219" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="219" width="54" height="36" rx="6" fill="#1f5b9e"/><rect x="56" y="219" width="6" height="36" fill="#1f5b9e"/><text x="35.0" y="237.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">6</text><text x="76" y="237.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">ACTUALIZACIÓN</text><text x="680" y="237.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">versiones del sistema y apps</text><rect x="8" y="262" width="684" height="36" rx="6" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><rect x="8" y="262" width="54" height="36" rx="6" fill="#b26a00"/><rect x="56" y="262" width="6" height="36" fill="#b26a00"/><text x="35.0" y="280.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">7</text><text x="76" y="280.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">RETIRADA / BORRADO</text><text x="680" y="280.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">selectivo o completo</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>5 · COPE, BYOD y COBO</figcaption>
+<svg viewBox="0 0 700 139" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at30fp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at30fa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at30fv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at30fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at30fr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at30fg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">COPE</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at30fa)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Corporativo, con uso personal permitido</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">BYOD</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#b26a00" stroke-width="2" marker-end="url(#at30fn)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">PERSONAL, usado para trabajo</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">COBO</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at30fa)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Corporativo, solo uso laboral</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>6 · MDM, MAM y UEM</figcaption>
+<svg viewBox="0 0 700 136" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at30gp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at30ga" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at30gv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at30gn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at30gr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at30gg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="220.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="118.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">MDM</text><rect x="240.0" y="6" width="220.0" height="40" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="350.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">MAM</text><rect x="472.0" y="6" width="220.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="582.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">UEM</text><rect x="8.0" y="54" width="220.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="118.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">El DISPOSITIVO</text><rect x="8.0" y="94" width="220.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="118.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Móviles y tabletas</text><rect x="240.0" y="54" width="220.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="350.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">APPS y DATOS</text><rect x="240.0" y="94" width="220.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="350.0" y="103.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Políticas sobre</text><text x="350.0" y="118.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">el contenido</text><rect x="472.0" y="54" width="220.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="582.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">TODOS los endpoints</text><rect x="472.0" y="94" width="220.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="582.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">PC + móvil + tableta</text></svg>
+</figure>
+<h2 id="9-resumen-final" class="tema-h2">9. Resumen final: si mañana fuera el examen</h2>
 <ul class="tema-lista">
 <li><strong>Red celular</strong> = cobertura en <strong>células</strong> con <strong>estaciones base</strong>, <strong>reutilización de frecuencias</strong> y <strong>handover</strong>.</li>
 <li><strong>1G analógica · 2G SMS · 3G datos · 4G banda ancha · 5G velocidad + latencia + densidad</strong> (eMBB, URLLC, mMTC como ampliación).</li>
 <li><strong>Wi-Fi = IEEE 802.11.</strong> Modos <strong>infraestructura</strong> (con AP) y <strong>ad-hoc</strong> (directo).</li>
 <li><strong>SSID</strong> = nombre de la red, <strong>no la contraseña</strong>. <strong>Roaming</strong> = transición entre AP manteniendo la conexión, <strong>cuando la infraestructura y la configuración lo permiten</strong>. <strong>Mismo SSID no garantiza roaming.</strong></li>
-<li><strong>Mesh</strong> = nodos que colaboran mediante <strong>backhaul inalámbrico</strong>; <strong>no es «varios AP con el mismo SSID»</strong>.</li>
+<li><strong>Mesh</strong> = nodos coordinados con <strong>backhaul, típicamente inalámbrico</strong>; <strong>no es «varios AP con el mismo SSID»</strong>.</li>
 <li><strong>Wi-Fi 4 → n · Wi-Fi 5 → ac · Wi-Fi 6 → ax · Wi-Fi 6E → ax + 6 GHz · Wi-Fi 7 → be.</strong> <strong>Wi-Fi 6 NO implica 6 GHz.</strong></li>
 <li><strong>Bandas</strong>: <strong>2,4 GHz</strong> más alcance y más interferencia · <strong>5 GHz</strong> más capacidad y menos alcance · <strong>6 GHz</strong> espectro amplio y menos congestión. Son <strong>reglas generales</strong>.</li>
 <li><strong>WEP obsoleto · WPA obsoleto para nuevos despliegues · WPA2 (AES) ampliamente utilizado · WPA3 recomendado</strong>, con <strong>SAE</strong> en su modalidad <strong>Personal</strong> frente a <strong>diccionario offline</strong>.</li>
+<li><strong>Enterprise → 802.1X</strong> (no SAE). <strong>OWE</strong> cifra una red abierta sin autenticarla. <strong>En 6 GHz no vale WPA2.</strong></li>
 <li><strong>Ocultar el SSID y filtrar por MAC NO son seguridad fuerte</strong> (la MAC se falsifica) y <strong>no sustituyen</strong> a WPA2/WPA3 bien configurado.</li>
 <li><strong>Red de invitados</strong>: SSID separado + VLAN dedicada + <strong>reglas de aislamiento</strong>. <strong>La VLAN no basta</strong>: hace falta política de <strong>routing y cortafuegos</strong>.</li>
 <li><strong>Amenazas móviles</strong>: pérdida o robo · Wi-Fi públicas · apps maliciosas · phishing · fuera del perímetro · sistema desactualizado.</li>
@@ -511,12 +808,13 @@
 <li><strong>CICLO MDM</strong>: <strong>inscripción (enrollment) → configuración → políticas → distribución de apps → monitorización/compliance → actualización → retirada/borrado</strong>.</li>
 <li><strong>Contenedor o perfil de trabajo</strong> separa lo corporativo de lo personal. <strong>SELECTIVE WIPE → lo corporativo · FULL WIPE → todo.</strong> En <strong>BYOD</strong> se prefiere el <strong>selectivo</strong> cuando la política y la arquitectura lo permitan.</li>
 <li><strong>COPE</strong> corporativo con uso personal · <strong>BYOD</strong> personal para trabajo (riesgos añadidos de <strong>seguridad y privacidad</strong>, destacados por <strong>NIST</strong>) · <strong>COBO</strong> corporativo solo laboral.</li>
+<li><strong>Borrado pendiente ≠ ejecutado.</strong> <strong>MAM puede proteger apps sin inscribir el móvil.</strong></li>
 <li><strong>MDM → el dispositivo · MAM → apps y datos · UEM → todos los endpoints.</strong> El <strong>UEM amplía el alcance del MDM</strong>.</li>
 </ul>
-<h2 id="9-actualidad" class="tema-h2">9. Actualidad de movilidad y Wi-Fi — datos fechados</h2>
+<h2 id="10-actualidad" class="tema-h2">10. Actualidad de movilidad y Wi-Fi — datos fechados</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Información sujeta a cambio · Fecha de actualización de estos apuntes: agosto de 2026</strong><br>Nada de este apartado desplaza al núcleo. Las <strong>cifras de adopción</strong>, los <strong>productos concretos</strong> y las <strong>fechas comerciales</strong> no son materia de examen.</th>
+<th><strong>📌 Información sujeta a cambio · Fecha de revisión de estos apuntes: noviembre de 2026 · la regla de seguridad de 6 GHz, contrastada con documentación de Cisco y HPE Aruba</strong><br>Nada de este apartado desplaza al núcleo. Las <strong>cifras de adopción</strong>, los <strong>productos concretos</strong> y las <strong>fechas comerciales</strong> no son materia de examen.</th>
 </tr>
 </table></div>
 <ul class="tema-lista">
