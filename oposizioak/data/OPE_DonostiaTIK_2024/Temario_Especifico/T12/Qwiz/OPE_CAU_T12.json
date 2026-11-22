@@ -26,7 +26,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "Server Core reduce la superficie de ataque y la necesidad de reinicios al prescindir del entorno gráfico. La instalación con interfaz gráfica completa se denomina Desktop Experience.",
+      "razonamiento": "Server Core reduce la superficie de ataque y parte del mantenimiento al prescindir del entorno gráfico, aunque sigue necesitando actualizaciones y reinicios. La instalación con interfaz gráfica completa se denomina Desktop Experience.",
       "origen": "T12 §1",
       "dificultad": "Media",
       "tipo": "Definición",
@@ -54,7 +54,7 @@
           "correcta": true
         }
       ],
-      "razonamiento": "La diferencia clave es el derecho de virtualización: Standard incluye hasta 2 VM por licencia y Datacenter, ilimitadas, además de funciones avanzadas de almacenamiento y clúster para centros de datos muy virtualizados.",
+      "razonamiento": "La diferencia clave es el derecho de virtualización: Standard da derecho a 2 VM con todos los núcleos físicos licenciados (ampliable con más licencias) y Datacenter, ilimitadas. Es un derecho de licencia, no un límite técnico.",
       "origen": "T12 §1",
       "dificultad": "Media",
       "tipo": "Diferenciación",
@@ -166,7 +166,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "La secuencia estándar es probar → planificar la ventana → asegurar la vuelta atrás (copia o instantánea, Tema 10) → aplicar. Evita tanto el riesgo de aplicar a ciegas como el de dejar el servidor sin parchear indefinidamente.",
+      "razonamiento": "La secuencia estándar es probar → planificar la ventana → asegurar la vuelta atrás (copia o instantánea, Tema 10) → aplicar. Evita tanto el riesgo de aplicar a ciegas como el de dejar el servidor sin parchear indefinidamente. En un controlador de dominio, revertir una snapshot exige un procedimiento soportado para no dañar la replicación.",
       "origen": "T12 §3",
       "dificultad": "Media",
       "tipo": "Procedimiento",
@@ -246,11 +246,11 @@
           "correcta": false
         },
         {
-          "texto": "Un servicio de directorio: base de datos centralizada y jerárquica de los objetos de la red que presta servicios de autenticación y autorización.",
+          "texto": "Un servicio de directorio: base de datos distribuida, replicada y jerárquica de los objetos de la red que presta servicios de autenticación y autorización.",
           "correcta": true
         }
       ],
-      "razonamiento": "AD DS almacena usuarios, equipos, grupos e impresoras y centraliza la autenticación y autorización. Asignar direcciones IP es función de DHCP, otro rol distinto.",
+      "razonamiento": "AD DS almacena usuarios, equipos, grupos e impresoras, replicados entre los controladores de dominio, y centraliza la administración, la autenticación y la autorización. Asignar direcciones IP es función de DHCP, otro rol distinto.",
       "origen": "T12 §4",
       "dificultad": "Fácil",
       "tipo": "Definición",
@@ -278,7 +278,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "LDAP (Lightweight Directory Access Protocol) permite consultar y modificar los objetos del directorio; Kerberos autentica de forma segura a usuarios y equipos. Es una asociación muy preguntada.",
+      "razonamiento": "LDAP (Lightweight Directory Access Protocol) permite consultar y modificar los objetos del directorio; Kerberos autentica de forma segura a usuarios y equipos. Es una asociación muy preguntada. Es la mnemotecnia útil: LDAP también admite autenticación (bind) y en algunos casos interviene NTLM.",
       "mnemotecnico": "🧠 LDAP consulta · Kerberos autentica.",
       "origen": "T12 §4",
       "dificultad": "Media",
@@ -475,7 +475,7 @@
           "correcta": true
         }
       ],
-      "razonamiento": "El trust vincula dominios o bosques para permitir el acceso a recursos entre ellos. La replicación entre controladores es otro mecanismo distinto, propio del funcionamiento interno del dominio.",
+      "razonamiento": "El trust vincula dominios o bosques para permitir el acceso a recursos entre ellos. La replicación entre controladores es otro mecanismo distinto, propio del funcionamiento interno del dominio. El acceso concreto sigue dependiendo de los permisos de cada recurso.",
       "origen": "T12 §5",
       "dificultad": "Media",
       "tipo": "Definición",
@@ -527,11 +527,11 @@
           "correcta": false
         },
         {
-          "texto": "Una copia parcial, con los atributos más consultados, de todos los objetos de todos los dominios del bosque, para acelerar las búsquedas globales.",
+          "texto": "Una réplica completa de su propio dominio y parcial (los atributos más consultados) de los demás dominios del bosque, para acelerar las búsquedas globales.",
           "correcta": true
         }
       ],
-      "razonamiento": "El catálogo global almacena una copia parcial de todos los objetos del bosque para que las búsquedas que abarcan varios dominios sean rápidas. La definición de clases y atributos es el esquema.",
+      "razonamiento": "El catálogo global permite que las búsquedas que abarcan varios dominios sean rápidas y también interviene en el inicio de sesión (grupos universales). La definición de clases y atributos es el esquema.",
       "origen": "T12 §6",
       "dificultad": "Media",
       "tipo": "Diferenciación",
@@ -559,7 +559,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "Reparto FSMO: bosque → Maestro de esquema y Maestro de nomenclatura de dominios (únicos en todo el bosque); dominio → Maestro de RID, Emulador de PDC y Maestro de infraestructura (uno de cada por dominio).",
+      "razonamiento": "Reparto FSMO: bosque → Maestro de esquema y Maestro de nomenclatura de dominios (únicos en todo el bosque); dominio → Maestro de RID, Emulador de PDC y Maestro de infraestructura (uno de cada por dominio). Con varios dominios, los tres de dominio se repiten en cada uno: total = 2 + 3 × número de dominios.",
       "mnemotecnico": "🧠 2 de bosque + 3 de dominio = 5 FSMO.",
       "origen": "T12 §6",
       "dificultad": "Difícil",
@@ -644,7 +644,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "El RID Master reparte bloques de identificadores relativos a los DC del dominio, garantizando que cada objeto creado reciba un SID único. Controlar el alta de dominios es el Maestro de nomenclatura (ámbito de bosque).",
+      "razonamiento": "El RID Master reparte bloques de identificadores relativos a los DC del dominio, garantizando que cada objeto creado reciba un SID único. Controlar el alta de dominios es el Maestro de nomenclatura (ámbito de bosque). Si el RID Master no está disponible, los DC siguen creando objetos mientras les queden bloques.",
       "origen": "T12 §6",
       "dificultad": "Difícil",
       "tipo": "Conocimiento directo",
@@ -783,7 +783,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "Deprecated no equivale a inoperativo: significa que no se prevén nuevas funcionalidades y que se orienta la migración hacia soluciones de gestión en la nube, sin que ello impida su uso actual.",
+      "razonamiento": "Deprecated no equivale a inoperativo: significa que no se prevén nuevas funcionalidades y que se orienta la migración hacia soluciones de gestión en la nube, sin que ello impida su uso actual. Microsoft ha anunciado que Windows Server 2028 ya no incluirá el rol.",
       "dificultad": "Media",
       "tipo": "Precisión",
       "concepto": "Estado de WSUS",

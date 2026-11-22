@@ -13,8 +13,9 @@
 <li><a href="#5-posibles-preguntas-cortas">5. Posibles preguntas cortas (con esquema de respuesta)</a></li>
 <li><a href="#6-supuestos-practicos">6. Supuestos prácticos</a></li>
 <li><a href="#7-matriz-de-memorizacion">7. Matriz de memorización</a></li>
-<li><a href="#8-resumen-final">8. Resumen final: si mañana fuera el examen</a></li>
-<li><a href="#9-actualidad-windows-server">9. Actualidad Windows Server — datos fechados</a></li>
+<li><a href="#8-repaso-visual">8. Repaso visual · T12</a></li>
+<li><a href="#9-resumen-final">9. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#10-actualidad-windows-server">10. Actualidad Windows Server — datos fechados</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
@@ -29,14 +30,14 @@
 <li><strong>DC</strong> = réplica de AD DS + autenticación y directorio; AD DS es <strong>multimaestro</strong> salvo FSMO.</li>
 <li><strong>GC → BÚSQUEDA</strong> (réplica parcial del bosque) · <strong>SCHEMA → CLASES + ATRIBUTOS</strong> (común al bosque).</li>
 <li><strong>FSMO → 2 BOSQUE + 3 DOMINIO</strong>: Schema → estructura · Naming → dominios · RID → identificadores · PDC → tiempo/contraseñas · Infrastructure → referencias.</li>
-<li><strong>AD DS depende de DNS</strong> para localizar los controladores de dominio.</li>
+<li><strong>AD DS depende de DNS</strong> para localizar los controladores de dominio (registros <strong>SRV</strong>).</li>
+<li><strong>FSMO totales = 2 + 3 × dominios.</strong></li>
+<li><strong>GC → su dominio completo + parcial de los demás.</strong></li>
+<li><strong>LSDOU</strong>: local → sitio → dominio → OU.</li>
+<li><strong>Instalar AD DS ≠ promover a DC · Hotpatch ≠ cero reinicios.</strong></li>
 <li><strong>WSUS</strong> = rol de gestión centralizada de actualizaciones; <strong>deprecated pero soportado</strong>.</li>
 <li>Monitorización: <strong>Performance Monitor · Resource Monitor · Visor de eventos</strong> (alta) · Windows Admin Center · SCOM (media).</li>
 </ul>
-<figure class="tema-figura">
-<figcaption>LDAP · Kerberos · GC · Schema</figcaption>
-<svg viewBox="0 0 700 184" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at12ep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at12ea" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at12ev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at12en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at12er" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at12eg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">LDAP</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#003da5" stroke-width="2" marker-end="url(#at12ep)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Acceso al DIRECTORIO</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">KERBEROS</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#003da5" stroke-width="2" marker-end="url(#at12ep)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">AUTENTICACIÓN</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">CATÁLOGO GLOBAL</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at12ea)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Búsqueda: réplica parcial del bosque</text><rect x="8" y="139" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">ESQUEMA</text><line x1="264" y1="157.0" x2="356" y2="157.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at12eg)"/><rect x="362" y="139" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Clases y atributos, común al bosque</text></svg>
-</figure>
 <h2 id="2-no-confundir" class="tema-h2">2. No confundir</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -115,6 +116,26 @@
 <td>Los tres son de dominio, con funciones distintas</td>
 </tr>
 <tr>
+<td><strong>Instalar el rol AD DS</strong></td>
+<td><strong>Promover a DC</strong></td>
+<td>Sin promoción no hay controlador</td>
+</tr>
+<tr>
+<td><strong>DC escribible</strong></td>
+<td><strong>RODC</strong></td>
+<td>Solo lectura</td>
+</tr>
+<tr>
+<td><strong>GPO</strong>: conjunto de directivas</td>
+<td><strong>Grupo</strong>: conjunto de identidades</td>
+<td>No son lo mismo</td>
+</tr>
+<tr>
+<td><strong>Hotpatch</strong>: sin reinicio en meses intermedios</td>
+<td><strong>Línea base</strong>: con reinicio trimestral</td>
+<td>Menos reinicios, no ninguno</td>
+</tr>
+<tr>
 <td><strong>WSUS deprecated</strong>: sin nuevas funciones</td>
 <td><strong>WSUS fuera de servicio</strong>: afirmación falsa</td>
 <td>Sigue soportado en producción</td>
@@ -135,29 +156,235 @@
 <li><strong>«Schema Master añade dominios al bosque»</strong> — falso: eso es el Domain Naming Master.</li>
 <li><strong>«El RID Master sincroniza la hora del dominio»</strong> — falso: la referencia horaria y los cambios de contraseña con prioridad son del PDC Emulator.</li>
 <li><strong>«AD DS puede funcionar sin DNS»</strong> — falso: depende de DNS para localizar los controladores de dominio y los servicios asociados.</li>
+<li><strong>«Un bosque con tres dominios tiene cinco FSMO»</strong> — falso: <strong>2 + 3 × 3 = 11</strong>.</li>
+<li><strong>«El GC solo tiene una réplica parcial»</strong> — impreciso: tiene <strong>su dominio completo</strong> y una parcial de los demás.</li>
+<li><strong>«Si cae el RID Master no se pueden crear usuarios»</strong> — falso a corto plazo: quedan bloques RID.</li>
+<li><strong>«El Infrastructure Master nunca puede estar en un GC»</strong> — falso: depende del bosque.</li>
+<li><strong>«Instalar el rol AD DS ya crea un DC»</strong> — falso: hay que promoverlo.</li>
+<li><strong>«Con hotpatch no se reinicia nunca»</strong> — falso.</li>
+<li><strong>«Un trust da acceso a todos los recursos»</strong> — falso: siguen mandando los permisos.</li>
 <li><strong>«Server Core elimina los reinicios y el mantenimiento»</strong> — falso: reduce componentes y superficie de ataque, no elimina el mantenimiento.</li>
 </ul>
 <h2 id="4-posibles-preguntas-tipo-test" class="tema-h2">4. Posibles preguntas tipo test</h2>
-<ul class="tema-lista">
-<li>Diferencia entre <strong>Server Core y Desktop Experience</strong> y ventajas del primero.</li>
-<li>Clasificar como <strong>rol o característica</strong>: AD DS, DNS, DHCP, IIS, Hyper-V, RDS · Backup, Failover Clustering, RSAT.</li>
-<li>Diferencia entre las ediciones <strong>Standard y Datacenter</strong> en derechos de virtualización.</li>
-<li>¿Con qué herramientas se añaden roles y características? (<strong>Server Manager</strong>, PowerShell).</li>
-<li>Definición precisa de <strong>AD DS</strong> (servicio de directorio, información distribuida y jerárquica).</li>
-<li>¿Qué protocolo <strong>consulta el directorio</strong> y cuál <strong>autentica</strong> en el dominio?</li>
-<li>Ordenar la jerarquía lógica: <strong>dominio → árbol → bosque</strong>; ¿cuál es el límite de seguridad?</li>
-<li>¿Para qué sirve una <strong>OU</strong> y en qué se diferencia de un dominio?</li>
-<li>¿Qué es un <strong>sitio</strong> y para qué lo usa AD DS?</li>
-<li>¿Qué es un <strong>controlador de dominio</strong> y qué significa que AD DS sea <strong>multimaestro</strong>?</li>
-<li>¿Qué es el <strong>catálogo global</strong>? ¿Y el <strong>esquema</strong>? ¿En qué se diferencian?</li>
-<li>¿A qué elementos puede vincularse una <strong>GPO</strong>? (sitio, dominio, OU).</li>
-<li>¿Cuántos <strong>FSMO</strong> hay y cómo se reparten? (5 = 2 bosque + 3 dominio).</li>
-<li>Clasificar cada FSMO por ámbito: Schema, Naming, RID, PDC, Infrastructure.</li>
-<li>Asociar función y rol FSMO: «añadir un dominio» → Naming; «modificar clases y atributos» → Schema; «asignar identificadores» → RID.</li>
-<li>¿Por qué <strong>AD DS depende de DNS</strong>?</li>
-<li>Estado actual de <strong>WSUS</strong> y su función como rol.</li>
-<li>Herramientas de <strong>monitorización</strong> del servidor y para qué sirve cada una.</li>
-</ul>
+<p>Treinta y cinco preguntas con una respuesta correcta. Las soluciones están al final de la sección.</p>
+<p><strong>1.</strong> Instalación de Windows Server sin escritorio gráfico completo:<br>a) Server Core<br>b) Desktop Experience<br>c) Nano Desktop<br>d) Modo seguro</p>
+<p><strong>2.</strong> Server Core…<br>a) no se reinicia nunca<br>b) no tiene consola<br>c) sigue necesitando actualizaciones y reinicios<br>d) no admite PowerShell</p>
+<p><strong>3.</strong> Los derechos de Standard para 2 VM exigen…<br>a) una sola licencia cualquiera<br>b) licenciar todos los núcleos físicos<br>c) Datacenter<br>d) una CAL por VM</p>
+<p><strong>4.</strong> Datacenter ofrece…<br>a) solo 2 VM<br>b) ningún derecho de virtualización<br>c) solo contenedores<br>d) VM ilimitadas por licencia</p>
+<p><strong>5.</strong> ¿Cuál es una característica?<br>a) Failover Clustering<br>b) AD DS<br>c) DHCP<br>d) DNS</p>
+<p><strong>6.</strong> Tras instalar el rol AD DS, para tener un DC falta…<br>a) reiniciar el cliente<br>b) promover el servidor<br>c) instalar IIS<br>d) crear una OU</p>
+<p><strong>7.</strong> Publicación mensual habitual de Microsoft:<br>a) el primer lunes<br>b) el último viernes<br>c) el segundo martes<br>d) cada trimestre</p>
+<p><strong>8.</strong> Con hotpatch en Windows Server 2025…<br>a) nunca se reinicia<br>b) solo hay parches de características<br>c) no hay parches de seguridad<br>d) hay un reinicio trimestral de línea base</p>
+<p><strong>9.</strong> WSUS en Windows Server 2025…<br>a) sigue soportado<br>b) ya no existe<br>c) es obligatorio<br>d) se llama Intune</p>
+<p><strong>10.</strong> Contadores de rendimiento históricos y en tiempo real:<br>a) Visor de eventos<br>b) Performance Monitor<br>c) Server Manager<br>d) RSAT</p>
+<p><strong>11.</strong> AD DS es…<br>a) una base de datos en un solo servidor<br>b) un servidor DNS<br>c) un servicio de directorio distribuido y replicado<br>d) un protocolo</p>
+<p><strong>12.</strong> Consultar el directorio:<br>a) LDAP<br>b) Kerberos<br>c) NTLM<br>d) SMB</p>
+<p><strong>13.</strong> Autenticación por tickets en el dominio:<br>a) LDAP<br>b) DHCP<br>c) DNS<br>d) Kerberos</p>
+<p><strong>14.</strong> Los clientes localizan los DC con registros…<br>a) MX<br>b) SRV del DNS<br>c) PTR del DHCP<br>d) A del proxy</p>
+<p><strong>15.</strong> Unidad lógica de administración y seguridad:<br>a) sitio<br>b) subred<br>c) dominio<br>d) OU</p>
+<p><strong>16.</strong> Dominios con espacio de nombres contiguo:<br>a) bosque<br>b) sitio<br>c) OU<br>d) árbol</p>
+<p><strong>17.</strong> Límite de seguridad de AD DS:<br>a) el bosque<br>b) la OU<br>c) el sitio<br>d) el dominio</p>
+<p><strong>18.</strong> ¿Puede un bosque tener un solo dominio?<br>a) No<br>b) Sí<br>c) Solo con dos árboles<br>d) Solo en Datacenter</p>
+<p><strong>19.</strong> Contenedor para organizar objetos y delegar tareas:<br>a) bosque<br>b) sitio<br>c) OU<br>d) trust</p>
+<p><strong>20.</strong> Un trust entre dominios…<br>a) da acceso a todo<br>b) fusiona dominios<br>c) sustituye a DNS<br>d) permite autenticarse; el acceso depende de permisos</p>
+<p><strong>21.</strong> Subredes bien conectadas:<br>a) sitio<br>b) dominio<br>c) OU<br>d) árbol</p>
+<p><strong>22.</strong> Controlador de dominio de solo lectura:<br>a) PDC<br>b) GC<br>c) RODC<br>d) FSMO</p>
+<p><strong>23.</strong> El catálogo global guarda…<br>a) solo atributos de su dominio<br>b) su dominio completo y parte de los demás<br>c) el esquema<br>d) las GPO</p>
+<p><strong>24.</strong> Clases y atributos del directorio:<br>a) GC<br>b) LDAP<br>c) sitio<br>d) esquema</p>
+<p><strong>25.</strong> Orden de procesamiento de GPO:<br>a) local, sitio, dominio, OU<br>b) OU, dominio, sitio, local<br>c) dominio, OU, sitio, local<br>d) sitio, local, OU, dominio</p>
+<p><strong>26.</strong> Una GPO se vincula a…<br>a) un usuario concreto<br>b) sitio, dominio u OU<br>c) un grupo<br>d) un puerto</p>
+<p><strong>27.</strong> FSMO de bosque:<br>a) RID y PDC<br>b) PDC e Infrastructure<br>c) Schema y Domain Naming<br>d) RID e Infrastructure</p>
+<p><strong>28.</strong> Bosque con tres dominios: total de roles FSMO<br>a) 5<br>b) 9<br>c) 15<br>d) 11</p>
+<p><strong>29.</strong> Añadir un dominio al bosque exige el…<br>a) Domain Naming Master<br>b) RID Master<br>c) PDC Emulator<br>d) Infrastructure Master</p>
+<p><strong>30.</strong> Asigna bloques de identificadores:<br>a) PDC Emulator<br>b) RID Master<br>c) Schema Master<br>d) GC</p>
+<p><strong>31.</strong> Referencia de hora del dominio:<br>a) RID Master<br>b) Infrastructure Master<br>c) PDC Emulator<br>d) Schema Master</p>
+<p><strong>32.</strong> Si cae el RID Master, los DC…<br>a) no crean nada<br>b) pierden usuarios<br>c) reinician<br>d) siguen creando objetos con sus bloques</p>
+<p><strong>33.</strong> Infrastructure Master en un GC…<br>a) vale si el bosque tiene un dominio<br>b) está siempre prohibido<br>c) es obligatorio<br>d) no existe</p>
+<p><strong>34.</strong> Gestiona y rota la contraseña del administrador local:<br>a) WSUS<br>b) RODC<br>c) LAPS<br>d) GC</p>
+<p><strong>35.</strong> Revertir la snapshot de un DC a la ligera…<br>a) es la recuperación normal<br>b) puede romper la replicación<br>c) es hotpatch<br>d) es LAPS</p>
+<h4 class="tema-h4">Soluciones</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Pregunta</strong></th>
+<th><strong>Respuesta</strong></th>
+<th><strong>Por qué</strong></th>
+</tr>
+<tr>
+<td>1</td>
+<td><strong>a</strong></td>
+<td>Menos superficie</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>c</strong></td>
+<td>Menos, no cero</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>b</strong></td>
+<td>Licencia ≠ técnica</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>d</strong></td>
+<td>Muy virtualizado</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>a</strong></td>
+<td>Apoyo</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>b</strong></td>
+<td>Promoción</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>c</strong></td>
+<td>Patch Tuesday</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>d</strong></td>
+<td>Menos reinicios</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>a</strong></td>
+<td>Fuera en 2028</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>b</strong></td>
+<td>perfmon</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>c</strong></td>
+<td>Varios DC</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>a</strong></td>
+<td>Directorio</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>d</strong></td>
+<td>KDC</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>b</strong></td>
+<td>DC Locator</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>c</strong></td>
+<td>Lógico</td>
+</tr>
+<tr>
+<td>16</td>
+<td><strong>d</strong></td>
+<td>Contiguo</td>
+</tr>
+<tr>
+<td>17</td>
+<td><strong>a</strong></td>
+<td>Máximo</td>
+</tr>
+<tr>
+<td>18</td>
+<td><strong>b</strong></td>
+<td>Mínimo uno</td>
+</tr>
+<tr>
+<td>19</td>
+<td><strong>c</strong></td>
+<td>No es dominio</td>
+</tr>
+<tr>
+<td>20</td>
+<td><strong>d</strong></td>
+<td>Permisos</td>
+</tr>
+<tr>
+<td>21</td>
+<td><strong>a</strong></td>
+<td>Físico</td>
+</tr>
+<tr>
+<td>22</td>
+<td><strong>c</strong></td>
+<td>Sedes con menos garantías</td>
+</tr>
+<tr>
+<td>23</td>
+<td><strong>b</strong></td>
+<td>Réplica parcial del resto</td>
+</tr>
+<tr>
+<td>24</td>
+<td><strong>d</strong></td>
+<td>Común al bosque</td>
+</tr>
+<tr>
+<td>25</td>
+<td><strong>a</strong></td>
+<td>LSDOU</td>
+</tr>
+<tr>
+<td>26</td>
+<td><strong>b</strong></td>
+<td>Tres ámbitos</td>
+</tr>
+<tr>
+<td>27</td>
+<td><strong>c</strong></td>
+<td>Dos</td>
+</tr>
+<tr>
+<td>28</td>
+<td><strong>d</strong></td>
+<td>2 + 3 × 3</td>
+</tr>
+<tr>
+<td>29</td>
+<td><strong>a</strong></td>
+<td>Bosque</td>
+</tr>
+<tr>
+<td>30</td>
+<td><strong>b</strong></td>
+<td>SID único</td>
+</tr>
+<tr>
+<td>31</td>
+<td><strong>c</strong></td>
+<td>Kerberos</td>
+</tr>
+<tr>
+<td>32</td>
+<td><strong>d</strong></td>
+<td>Bloques previos</td>
+</tr>
+<tr>
+<td>33</td>
+<td><strong>a</strong></td>
+<td>Depende</td>
+</tr>
+<tr>
+<td>34</td>
+<td><strong>c</strong></td>
+<td>Contraseñas distintas</td>
+</tr>
+<tr>
+<td>35</td>
+<td><strong>b</strong></td>
+<td>Procedimiento</td>
+</tr>
+</table></div>
 <h2 id="5-posibles-preguntas-cortas" class="tema-h2">5. Posibles preguntas cortas (con esquema de respuesta)</h2>
 <h4 class="tema-h4">1. Diferencie Server Core y Desktop Experience</h4>
 <ul class="tema-lista">
@@ -240,7 +467,7 @@
 <h4 class="tema-h4">Supuesto 4 — Problemas al crear objetos nuevos</h4>
 <p><strong>Escenario</strong>: en un dominio empiezan a fallar las altas de usuarios y equipos con errores relacionados con la asignación de identificadores.</p>
 <ul class="tema-lista">
-<li><strong>a) ¿Qué rol conviene revisar?</strong> El <strong>RID Master</strong> del dominio: asigna los <strong>bloques de RID</strong> que los DC necesitan para crear objetos con identificador único.</li>
+<li><strong>a) ¿Qué rol conviene revisar?</strong> El <strong>RID Master</strong> del dominio: asigna los <strong>bloques de RID</strong> que los DC necesitan para crear objetos con identificador único. Los fallos aparecen cuando un DC <strong>agota</strong> los bloques que ya tenía.</li>
 <li><strong>b) ¿Es un rol de bosque o de dominio?</strong> De <strong>dominio</strong> — como PDC Emulator e Infrastructure Master.</li>
 <li><strong>c) ¿Qué otros síntomas apuntarían al PDC Emulator?</strong> Problemas de <strong>hora</strong> en el dominio o de <strong>cambios de contraseña</strong>.</li>
 </ul>
@@ -262,9 +489,44 @@
 <p><strong>Escenario</strong>: se quiere aprobar y distribuir las actualizaciones desde la propia organización, evitando que cada servidor se actualice por su cuenta.</p>
 <ul class="tema-lista">
 <li><strong>a) ¿Qué rol encaja?</strong> <strong>WSUS</strong>: descarga y aprobación centralizada, con distribución controlada.</li>
-<li><strong>b) ¿Sigue siendo una opción válida?</strong> Sí: está <strong>deprecated</strong> (sin nuevas funciones) pero <strong>soportado</strong> para producción — no está fuera de servicio.</li>
+<li><strong>b) ¿Sigue siendo una opción válida?</strong> Sí: está <strong>deprecated</strong> (sin nuevas funciones) pero <strong>soportado</strong> en Windows Server 2025; <strong>Windows Server 2028 ya no lo incluirá</strong>, así que conviene planificar la alternativa.</li>
 <li><strong>c) ¿Qué buena práctica acompaña al despliegue?</strong> Probar en preproducción, aplicar en ventana de mantenimiento y disponer de copia/snapshot previo para poder revertir.</li>
 </ul>
+<h4 class="tema-h4">Mini casos</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Situación</strong></th>
+<th><strong>Lectura</strong></th>
+</tr>
+<tr>
+<td>Seis VM Windows Server en un host con Standard</td>
+<td>Posible: hay que licenciar más (o Datacenter)</td>
+</tr>
+<tr>
+<td>Un cliente usa solo un DNS público</td>
+<td>No encuentra los DC: falla el inicio de sesión</td>
+</tr>
+<tr>
+<td>Una sede usa un DC de otra ciudad</td>
+<td>Revisar la asociación de subredes a sitios</td>
+</tr>
+<tr>
+<td>Cae el DC que tiene el PDC Emulator</td>
+<td>Fallan funciones concretas, no todo el dominio</td>
+</tr>
+<tr>
+<td>Un equipo nuevo no recibe su GPO</td>
+<td>Comprobar unión, OU, DNS y conectividad</td>
+</tr>
+<tr>
+<td>Un cambio no aparece aún en otro DC</td>
+<td>Replicación pendiente: no es instantánea</td>
+</tr>
+<tr>
+<td>Inicio de sesión sin red con cuenta de dominio</td>
+<td>Credenciales en caché, no autenticación en línea</td>
+</tr>
+</table></div>
 <h2 id="7-matriz-de-memorizacion" class="tema-h2">7. Matriz de memorización</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -337,7 +599,7 @@
 </tr>
 <tr>
 <td>Global Catalog</td>
-<td>Réplica parcial de objetos del bosque; acelera búsquedas</td>
+<td>Su dominio completo + réplica parcial del resto del bosque; búsquedas e inicio de sesión</td>
 </tr>
 <tr>
 <td>Esquema</td>
@@ -369,29 +631,62 @@
 </tr>
 <tr>
 <td>DNS</td>
-<td>AD DS depende de él para localizar controladores de dominio y servicios</td>
+<td>AD DS depende de él para localizar controladores de dominio y servicios (registros SRV)</td>
+</tr>
+<tr>
+<td>RODC</td>
+<td>Controlador de dominio de solo lectura</td>
+</tr>
+<tr>
+<td>LSDOU</td>
+<td>Orden de aplicación de GPO: local, sitio, dominio, OU</td>
+</tr>
+<tr>
+<td>Hotpatch</td>
+<td>Parches sin reinicio entre líneas base trimestrales que sí reinician</td>
 </tr>
 </table></div>
-<h2 id="8-resumen-final" class="tema-h2">8. Resumen final: si mañana fuera el examen</h2>
+<h2 id="8-repaso-visual" class="tema-h2">8. Repaso visual · T12</h2>
+<figure class="tema-figura">
+<figcaption>1 · Standard y Datacenter</figcaption>
+<svg viewBox="0 0 700 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at12bp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at12ba" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at12bv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at12bn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at12br" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at12bg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">STANDARD</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">DATACENTER</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">2 OSE/VM con núcleos licenciados</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">OSE/VM ilimitadas</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>2 · Rol y característica</figcaption>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at12ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at12aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at12av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at12an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at12ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at12ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">ROL</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">CARACTERÍSTICA</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Presta un SERVICIO</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">AD DS · DNS · DHCP</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">IIS · Hyper-V · RDS</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Función de APOYO</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Backup · RSAT</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Failover Clustering</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>3 · Estructura lógica de AD DS</figcaption>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at12cp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at12ca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at12cv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at12cn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at12cr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at12cg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="4" width="54" height="36" rx="6" fill="#1f5b9e"/><rect x="56" y="4" width="6" height="36" fill="#1f5b9e"/><text x="35.0" y="22.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">1</text><text x="76" y="22.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">DOMINIO</text><text x="680" y="22.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">unidad administrativa</text><rect x="8" y="47" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="47" width="54" height="36" rx="6" fill="#1f5b9e"/><rect x="56" y="47" width="6" height="36" fill="#1f5b9e"/><text x="35.0" y="65.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">2</text><text x="76" y="65.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">ÁRBOL</text><text x="680" y="65.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">dominios con espacio de nombres contiguo</text><rect x="8" y="90" width="684" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><rect x="8" y="90" width="54" height="36" rx="6" fill="#003da5"/><rect x="56" y="90" width="6" height="36" fill="#003da5"/><text x="35.0" y="108.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">3</text><text x="76" y="108.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">BOSQUE</text><text x="680" y="108.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">límite de seguridad</text><rect x="8" y="133" width="684" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><rect x="8" y="133" width="54" height="36" rx="6" fill="#5a5652"/><rect x="56" y="133" width="6" height="36" fill="#5a5652"/><text x="35.0" y="151.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">+</text><text x="76" y="151.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">OU</text><text x="680" y="151.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">organiza objetos y aplica GPO</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>4 · Los roles FSMO</figcaption>
+<svg viewBox="0 0 700 229" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at12dp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at12da" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at12dv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at12dn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at12dr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at12dg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">SCHEMA (bosque)</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#003da5" stroke-width="2" marker-end="url(#at12dp)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Estructura del esquema</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">NAMING (bosque)</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#003da5" stroke-width="2" marker-end="url(#at12dp)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Altas y bajas de dominios</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">RID (dominio)</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at12da)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Reparto de identificadores</text><rect x="8" y="139" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">PDC (dominio)</text><line x1="264" y1="157.0" x2="356" y2="157.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at12da)"/><rect x="362" y="139" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Tiempo y contraseñas</text><rect x="8" y="184" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="202.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">INFRASTRUCTURE (dominio)</text><line x1="264" y1="202.0" x2="356" y2="202.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at12da)"/><rect x="362" y="184" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="202.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Referencias (×3 roles en cada dominio)</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>5 · LDAP, Kerberos, GC y esquema</figcaption>
+<svg viewBox="0 0 700 184" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at12ep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at12ea" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at12ev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at12en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at12er" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at12eg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">LDAP</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#003da5" stroke-width="2" marker-end="url(#at12ep)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Acceso al DIRECTORIO</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">KERBEROS</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#003da5" stroke-width="2" marker-end="url(#at12ep)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">AUTENTICACIÓN</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">CATÁLOGO GLOBAL</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at12ea)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Búsqueda: su dominio + parcial del resto</text><rect x="8" y="139" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">ESQUEMA</text><line x1="264" y1="157.0" x2="356" y2="157.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at12eg)"/><rect x="362" y="139" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Clases y atributos, común al bosque</text></svg>
+</figure>
+<h2 id="9-resumen-final" class="tema-h2">9. Resumen final: si mañana fuera el examen</h2>
 <ul class="tema-lista">
 <li><strong>Windows Server</strong>: SO orientado a servicios y conexiones múltiples. <strong>Server Core</strong> (sin GUI completa; menos superficie de ataque) vs. <strong>Desktop Experience</strong>. Ediciones <strong>Standard</strong> (2 OSE/VM por licencia) y <strong>Datacenter</strong> (ilimitadas) — derechos por licencia, no límite del servidor.</li>
 <li>Tras instalar, el servidor <strong>se especializa con roles y características</strong>: <strong>rol = servicio</strong> (AD DS, DNS, DHCP, IIS, Hyper-V, RDS) · <strong>característica = apoyo</strong> (Backup, Clustering, RSAT). Administración con <strong>Server Manager</strong> y <strong>PowerShell</strong>.</li>
 <li><strong>Actualizaciones</strong>: ciclo mensual (Patch Tuesday como referencia), pruebas previas, ventana de mantenimiento y copia/snapshot. <strong>WSUS</strong> = rol de gestión centralizada; <strong>deprecated pero soportado</strong>. <strong>Monitorización</strong>: Performance Monitor, Resource Monitor y Visor de eventos (alta); Windows Admin Center y SCOM (media).</li>
 <li><strong>AD DS</strong> = servicio de directorio con base <strong>distribuida y jerárquica</strong> de objetos de red; hace autenticación, autorización, organización y gestión centralizada. <strong>LDAP → directorio · Kerberos → autenticación</strong>. <strong>Depende de DNS</strong>.</li>
 <li><strong>Estructura lógica</strong>: <strong>dominio → árbol → bosque</strong> (límite de seguridad); <strong>OU</strong> organiza y permite aplicar GPO (no es un dominio); <strong>trusts</strong> entre dominios/bosques. <strong>Estructura física</strong>: <strong>sitios</strong> (subredes bien conectadas) y <strong>DC</strong>.</li>
-<li><strong>Multimaestro</strong> salvo los <strong>5 FSMO</strong>: <strong>2 de bosque</strong> (Schema → estructura; Naming → dominios) + <strong>3 de dominio</strong> (RID → identificadores; PDC → tiempo/contraseñas; Infrastructure → referencias).</li>
+<li><strong>Multimaestro</strong> salvo los <strong>FSMO</strong> (<strong>2 + 3 por dominio</strong>; con un dominio, 5): <strong>2 de bosque</strong> (Schema → estructura; Naming → dominios) + <strong>3 de dominio</strong> (RID → identificadores; PDC → tiempo/contraseñas; Infrastructure → referencias).</li>
 <li><strong>GC → búsqueda</strong> (réplica parcial del bosque) · <strong>esquema → clases y atributos</strong> (común al bosque). <strong>GPO</strong> se vincula a sitio, dominio u OU.</li>
 </ul>
-<h2 id="9-actualidad-windows-server" class="tema-h2">9. Actualidad Windows Server — datos fechados</h2>
+<h2 id="10-actualidad-windows-server" class="tema-h2">10. Actualidad Windows Server — datos fechados</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Información sujeta a cambio · Fecha de actualización de estos apuntes: agosto de 2026</strong><br>Estos datos pueden variar con nuevas versiones. El resto del tema no depende de ellos.</th>
+<th><strong>📌 Información sujeta a cambio · Comprobado en Microsoft Learn el 23 de noviembre de 2026</strong><br>Estos datos pueden variar con nuevas versiones. El resto del tema no depende de ellos.</th>
 </tr>
 </table></div>
 <ul class="tema-lista">
-<li><strong>Versión vigente</strong>: <strong>Windows Server 2025</strong> (disponible desde finales de 2024), conviviendo con un parque amplio de <strong>Windows Server 2022</strong> y versiones anteriores.</li>
-<li><strong>Novedades relevantes de Windows Server 2025</strong> (ampliación, no núcleo del tema): requisitos más exigentes de <strong>firma/cifrado LDAP</strong> en nuevas implementaciones, soporte de <strong>TLS 1.3</strong> para LDAP sobre TLS, nuevas funciones de seguridad del directorio y <strong>hotpatch</strong> (aplicar parches sin reiniciar) en determinados escenarios de Azure.</li>
-<li><strong>Estado de WSUS</strong>: <strong>deprecado desde 2024</strong> — sin nuevas funcionalidades — pero <strong>sigue soportado</strong> para despliegues de producción y recibiendo actualizaciones de seguridad y calidad conforme a su ciclo de vida. Como alternativa moderna existen herramientas de gestión de actualizaciones en la nube.</li>
+<li><strong>Versión vigente</strong>: <strong>Windows Server 2025</strong>, disponible desde el <strong>1/11/2024</strong>, con soporte estándar hasta el <strong>13/11/2029</strong> y extendido hasta el <strong>14/11/2034</strong>. <strong>Windows Server 2028</strong> está en versión preliminar.</li>
+<li><strong>Novedades relevantes de Windows Server 2025</strong> (ampliación, no núcleo del tema): las nuevas implementaciones de AD <strong>exigen firma/cifrado LDAP</strong> por defecto, <strong>TLS 1.3</strong> para LDAP sobre TLS y <strong>hotpatch</strong> también en servidores locales conectados a <strong>Azure Arc</strong>, ya <strong>sin coste adicional</strong>.</li>
+<li><strong>Estado de WSUS</strong>: <strong>deprecado desde septiembre de 2024</strong> — sin nuevas funcionalidades — pero <strong>soportado en Windows Server 2025</strong> durante su ciclo de vida. Microsoft ha anunciado que <strong>Windows Server 2028 ya no incluirá el rol</strong> WSUS (además de WINS, DirectAccess, SMBv1, VBScript y WMIC).</li>
 <li><strong>LAPS</strong>: solución de gestión y rotación de contraseñas de administrador local, reforzada en las versiones recientes de Windows Server.</li>
 </ul>
   </div>
