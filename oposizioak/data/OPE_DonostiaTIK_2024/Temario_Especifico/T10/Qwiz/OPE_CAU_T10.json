@@ -110,7 +110,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "VirtualBox, VMware Workstation/Fusion y Parallels Desktop son de tipo 2: se instalan como una aplicación más sobre un SO existente. ESXi, KVM, Xen, Hyper-V y Proxmox VE son de tipo 1.",
+      "razonamiento": "VirtualBox, VMware Workstation/Fusion y Parallels Desktop son de tipo 2: se instalan como una aplicación más sobre un SO existente. ESXi, Xen y Hyper-V son de tipo 1; KVM se suele clasificar como tal por funcionar en el núcleo, y Proxmox VE es una plataforma que lo integra.",
       "origen": "T10 §2",
       "dificultad": "Media",
       "tipo": "Clasificación",
@@ -147,7 +147,7 @@
     },
     {
       "id": "OPE_CAU_T10_006",
-      "pregunta": "¿Qué hipervisor de tipo 1 está integrado en el núcleo de Linux?",
+      "pregunta": "¿Qué tecnología de virtualización está integrada en el núcleo de Linux?",
       "opciones": [
         {
           "texto": "VirtualBox.",
@@ -166,7 +166,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "KVM (Kernel-based Virtual Machine) está integrado en el núcleo Linux y suele gestionarse mediante plataformas como Proxmox VE. ESXi es de VMware y Hyper-V, de Microsoft.",
+      "razonamiento": "KVM (Kernel-based Virtual Machine) es un módulo del núcleo Linux, que suele usarse con QEMU y gestionarse mediante plataformas como Proxmox VE. ESXi es de VMware y Hyper-V, de Microsoft.",
       "origen": "T10 §2",
       "dificultad": "Media",
       "tipo": "Conocimiento directo",
@@ -194,7 +194,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "El tipo 1 evita la capa intermedia del SO anfitrión y por eso rinde mejor: es el modelo de servidores y producción. El tipo 2 es más cómodo de desplegar y se reserva para escritorio, pruebas y desarrollo.",
+      "razonamiento": "El tipo 1 evita la capa intermedia del SO anfitrión, lo que suele darle mejor rendimiento: es el modelo de servidores y producción. El tipo 2 es más cómodo de desplegar y se reserva para escritorio, pruebas y desarrollo.",
       "origen": "T10 §2",
       "dificultad": "Fácil",
       "tipo": "Relación",
@@ -222,7 +222,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "En la virtualización completa el guest no sabe que está virtualizado y no requiere modificaciones; se apoya en extensiones de hardware (Intel VT-x, AMD-V) para acelerar la simulación. Modificar el guest es paravirtualización.",
+      "razonamiento": "En la virtualización completa el invitado no necesita modificaciones (aunque puede detectar que está virtualizado e instalar herramientas o drivers paravirtualizados); se apoya en extensiones de hardware (Intel VT-x, AMD-V). Usar interfaces específicas es paravirtualización.",
       "origen": "T10 §3",
       "dificultad": "Media",
       "tipo": "Definición",
@@ -382,7 +382,7 @@
           "correcta": false
         },
         {
-          "texto": "Mover una máquina virtual en ejecución de un host físico a otro sin interrumpir el servicio.",
+          "texto": "Mover una máquina virtual en ejecución de un host físico a otro, con una interrupción mínima o imperceptible.",
           "correcta": true
         },
         {
@@ -390,7 +390,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "La migración en caliente traslada una VM en funcionamiento entre hosts sin corte de servicio, lo que permite realizar mantenimiento planificado del hardware sin tiempos de inactividad.",
+      "razonamiento": "La migración en caliente traslada una VM en funcionamiento entre hosts con una pausa mínima, lo que permite el mantenimiento planificado del hardware. No garantiza «cero corte» en cualquier situación.",
       "origen": "T10 §4",
       "dificultad": "Media",
       "tipo": "Definición",
@@ -502,7 +502,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "Concentrar muchas VM en un host implica que su fallo afecta a todas a la vez, a diferencia de un servidor físico dedicado, cuyo fallo solo afecta a un servicio. Por eso se despliegan configuraciones de alta disponibilidad.",
+      "razonamiento": "Concentrar muchas VM en un host implica que su fallo afecta a todas a la vez, a diferencia de un servidor físico dedicado, cuyo fallo solo afecta a un servicio. Por eso se despliegan configuraciones de alta disponibilidad. Esas configuraciones suelen reiniciar las VM en otro host, con un corte breve.",
       "origen": "T10 §5",
       "dificultad": "Media",
       "tipo": "Relación",
@@ -598,7 +598,7 @@
       "pregunta": "¿Qué puede afirmarse sobre la migración en caliente de una máquina virtual entre hosts?",
       "opciones": [
         {
-          "texto": "Permite mover la VM en funcionamiento cuando la infraestructura lo permite (almacenamiento compartido, hosts compatibles), con una interrupción mínima o prácticamente imperceptible, pero no cabe garantizar «cero corte» en cualquier situación.",
+          "texto": "Permite mover la VM en funcionamiento cuando la infraestructura lo permite (hosts compatibles y almacenamiento compartido, o migración también de los discos), con una interrupción mínima o prácticamente imperceptible, pero no cabe garantizar «cero corte» en cualquier situación.",
           "correcta": true
         },
         {
@@ -614,7 +614,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "La migración en caliente (vMotion en VMware o Live Migration en Hyper-V, citados como ejemplos y no como contenido de marca) requiere condiciones de infraestructura: almacenamiento compartido y hosts compatibles. La expectativa correcta es interrupción mínima o prácticamente imperceptible, no cero garantizado.",
+      "razonamiento": "vMotion (VMware) o Live Migration (Hyper-V), como ejemplos. Requiere hosts compatibles y capacidad; el almacenamiento compartido es lo habitual, aunque hay variantes que mueven también los discos. La expectativa correcta es interrupción mínima, no cero garantizado.",
       "origen": "T10 §6",
       "dificultad": "Media",
       "tipo": "Conocimiento directo",
@@ -725,7 +725,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "Imprecisión frecuente. KVM es un componente del kernel Linux; las plataformas que lo integran (como Proxmox VE) sí son productos con gestión, interfaz y funcionalidades añadidas.",
+      "razonamiento": "Imprecisión frecuente. KVM es un componente del kernel Linux; las plataformas que lo integran (como Proxmox VE) sí son productos con gestión, interfaz y funcionalidades añadidas. Suele trabajar junto a QEMU, que emula los dispositivos.",
       "dificultad": "Difícil",
       "tipo": "Detección de errores",
       "concepto": "KVM frente a ESXi",

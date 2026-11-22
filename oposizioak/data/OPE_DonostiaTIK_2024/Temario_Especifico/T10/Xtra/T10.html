@@ -13,7 +13,8 @@
 <li><a href="#5-posibles-preguntas-cortas">5. Posibles preguntas cortas (con esquema de respuesta)</a></li>
 <li><a href="#6-supuestos-practicos">6. Supuestos prácticos</a></li>
 <li><a href="#7-matriz-de-memorizacion">7. Matriz de memorización</a></li>
-<li><a href="#8-resumen-final">8. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#8-repaso-visual">8. Repaso visual · T10</a></li>
+<li><a href="#9-resumen-final">9. Resumen final: si mañana fuera el examen</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
@@ -30,23 +31,11 @@
 <li><strong>MIGRACIÓN EN CALIENTE → mover VM funcionando</strong> (interrupción mínima según tecnología, no «cero garantizado»).</li>
 <li><strong>Overcommit</strong> = prometer más recursos virtuales que los físicos; <strong>overhead</strong> = coste de la capa de virtualización.</li>
 <li>Sin HA: host único = <strong>punto único de fallo</strong>.</li>
+<li><strong>HA → reinicio en otro host (corte breve) · FAULT TOLERANCE → sin corte.</strong></li>
+<li><strong>KVM → núcleo · QEMU → emula dispositivos · PROXMOX → plataforma.</strong></li>
+<li><strong>vCPU ≠ núcleo reservado · OVERCOMMIT ≠ error.</strong></li>
+<li><strong>VDI ≠ RDP ≠ RDS.</strong></li>
 </ul>
-<figure class="tema-figura">
-<figcaption>KVM y Proxmox VE</figcaption>
-<svg viewBox="0 0 700 94" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at10ep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at10ea" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at10ev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at10en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at10er" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at10eg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">KVM</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#003da5" stroke-width="2" marker-end="url(#at10ep)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Módulo del kernel de Linux</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">PROXMOX VE</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at10ea)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Plataforma: KVM + LXC</text></svg>
-</figure>
-<figure class="tema-figura">
-<figcaption>Snapshot vs. backup</figcaption>
-<svg viewBox="0 0 700 136" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at10dp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at10da" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at10dv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at10dn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at10dr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at10dg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">SNAPSHOT</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">BACKUP</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Volver atrás rápido</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="103.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Ligado a la</text><text x="176.0" y="118.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">infraestructura</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Copia para recuperar</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Independiente</text></svg>
-<p class="tema-figura__nota">No son lo mismo: una snapshot no sustituye a una copia de seguridad.</p></figure>
-<figure class="tema-figura">
-<figcaption>Hipervisor de tipo 1 vs. tipo 2</figcaption>
-<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at10bp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at10ba" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at10bv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at10bn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at10br" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at10bg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">TIPO 1</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">TIPO 2</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Sobre el HARDWARE</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Bare metal</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Hyper-V, KVM</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Sobre el SO ANFITRIÓN</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Alojado</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Escritorio y pruebas</text></svg>
-<p class="tema-figura__nota">Hyper-V es de tipo 1 aunque se active desde Windows.</p></figure>
-<figure class="tema-figura">
-<figcaption>Host · Guest · VM · Hipervisor</figcaption>
-<svg viewBox="0 0 700 184" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at10ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at10aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at10av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at10an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at10ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at10ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">HOST</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at10ag)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Máquina física</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">HIPERVISOR / VMM</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#003da5" stroke-width="2" marker-end="url(#at10ap)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Crea, gestiona, asigna y aísla</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">VM</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at10aa)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Ordenador definido por software</text><rect x="8" y="139" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">GUEST</text><line x1="264" y1="157.0" x2="356" y2="157.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at10aa)"/><rect x="362" y="139" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Sistema invitado dentro de la VM</text></svg>
-</figure>
 <h2 id="2-no-confundir" class="tema-h2">2. No confundir</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -105,6 +94,31 @@
 <td>Uno es estructural; el otro, un error de planificación</td>
 </tr>
 <tr>
+<td><strong>KVM</strong>: virtualización en el núcleo</td>
+<td><strong>QEMU</strong>: emulación de dispositivos</td>
+<td>Capas que colaboran</td>
+</tr>
+<tr>
+<td><strong>Virtualizar</strong>: misma arquitectura</td>
+<td><strong>Emular</strong>: otra arquitectura</td>
+<td>Más lento</td>
+</tr>
+<tr>
+<td><strong>HA</strong>: reinicia en otro host</td>
+<td><strong>Fault tolerance</strong>: sin corte</td>
+<td>Breve corte frente a ninguno</td>
+</tr>
+<tr>
+<td><strong>Migración en caliente</strong></td>
+<td><strong>Migración en frío</strong></td>
+<td>VM encendida o apagada</td>
+</tr>
+<tr>
+<td><strong>VDI</strong>: escritorios en VM</td>
+<td><strong>RDP / RDS</strong>: protocolo / sesiones compartidas</td>
+<td>Arquitectura, protocolo, modelo</td>
+</tr>
+<tr>
 <td><strong>HA</strong>: varios hosts que se respaldan</td>
 <td><strong>Punto único de fallo</strong>: un host único del que depende todo</td>
 <td>La HA es precisamente la respuesta al SPOF</td>
@@ -122,24 +136,235 @@
 <li><strong>«Virtualizar elimina los puntos únicos de fallo»</strong> — al revés sin HA: un host único concentra el riesgo de varias VM.</li>
 <li><strong>«La migración en caliente garantiza cero interrupción en cualquier situación»</strong> — matiz: la interrupción es mínima o prácticamente imperceptible según tecnología y configuración.</li>
 <li><strong>«Virtualizar siempre reduce costes»</strong> — matiz: depende de escala, licencias, almacenamiento, red, administración y HA.</li>
+<li><strong>«La HA garantiza cero corte»</strong> — falso: suele <strong>reiniciar</strong> la VM en otro host.</li>
+<li><strong>«Dos hosts ya son alta disponibilidad»</strong> — falso: hace falta configuración y <strong>capacidad de reserva</strong>.</li>
+<li><strong>«La migración en caliente exige siempre almacenamiento compartido»</strong> — falso: algunas mueven también los discos.</li>
+<li><strong>«Una vCPU es un núcleo físico reservado»</strong> — falso.</li>
+<li><strong>«El overcommit es siempre un error»</strong> — falso: es una decisión que hay que vigilar.</li>
+<li><strong>«QEMU y KVM son lo mismo»</strong> — falso.</li>
+<li><strong>«VDI es RDP»</strong> — falso: RDP es un protocolo de acceso.</li>
 <li><strong>«La virtualización completa exige modificar el SO invitado»</strong> — invertido: es la paravirtualización la que usa interfaces específicas; la completa ejecuta el SO sin modificaciones significativas.</li>
 </ul>
 <h2 id="4-posibles-preguntas-tipo-test" class="tema-h2">4. Posibles preguntas tipo test</h2>
-<ul class="tema-lista">
-<li>Definición de <strong>virtualización</strong> y de <strong>host, guest y VM</strong>.</li>
-<li>Distinguir <strong>hipervisor tipo 1 y tipo 2</strong> por su arquitectura (¿hay SO anfitrión debajo?).</li>
-<li>Clasificar ejemplos: ESXi, Xen → tipo 1 · VirtualBox, Workstation, Parallels → tipo 2 · <strong>Hyper-V → tipo 1</strong> (trampa).</li>
-<li>¿Qué son <strong>KVM</strong> y <strong>Proxmox VE</strong> exactamente?</li>
-<li>Diferencia entre <strong>virtualización completa y paravirtualización</strong>; qué son <strong>VT-x/AMD-V</strong>.</li>
-<li>Diferencias <strong>VM vs. contenedor</strong> (SO propio vs. kernel compartido; peso).</li>
-<li>Identificar la <strong>consolidación de servidores</strong> como caso de uso principal.</li>
-<li>¿Qué permite la <strong>migración en caliente</strong> y con qué matiz sobre la interrupción?</li>
-<li>¿Qué es un <strong>snapshot</strong>, para qué sirve y qué NO es (backup)?</li>
-<li>¿Qué es <strong>VDI</strong>?</li>
-<li>Ventajas y desventajas: identificar el <strong>overhead</strong>, el <strong>punto único de fallo</strong> sin HA y el <strong>overcommit</strong>.</li>
-<li>¿Qué relación hay entre <strong>virtualización y cloud</strong>? (tecnología fundamental; el cloud es del Tema 32).</li>
-<li>Supuesto: «tras activar Hyper-V, ¿dónde se ejecuta Windows?» → como partición raíz sobre el hipervisor.</li>
-</ul>
+<p>Treinta y cinco preguntas con una respuesta correcta. Las soluciones están al final de la sección.</p>
+<p><strong>1.</strong> El equipo físico que aporta los recursos es el…<br>a) host<br>b) guest<br>c) hipervisor<br>d) contenedor</p>
+<p><strong>2.</strong> El sistema que se ejecuta dentro de la VM es el…<br>a) host<br>b) VMM<br>c) guest<br>d) clúster</p>
+<p><strong>3.</strong> Una vCPU…<br>a) es un núcleo físico dedicado<br>b) no equivale a un núcleo reservado<br>c) es un procesador lógico del host<br>d) es una VM</p>
+<p><strong>4.</strong> La capa que crea y aísla las VM es el…<br>a) SO invitado<br>b) contenedor<br>c) driver<br>d) hipervisor</p>
+<p><strong>5.</strong> Hipervisor sobre el hardware:<br>a) tipo 1<br>b) tipo 2<br>c) contenedor<br>d) emulador</p>
+<p><strong>6.</strong> VirtualBox es habitualmente…<br>a) tipo 1<br>b) tipo 2<br>c) un contenedor<br>d) una CPU</p>
+<p><strong>7.</strong> Al activar Hyper-V, Windows pasa a ser…<br>a) un hipervisor de tipo 2<br>b) un contenedor<br>c) la partición raíz<br>d) un emulador</p>
+<p><strong>8.</strong> KVM es…<br>a) un producto empaquetado como ESXi<br>b) una aplicación gráfica<br>c) un emulador puro<br>d) virtualización del núcleo Linux</p>
+<p><strong>9.</strong> Proxmox VE combina…<br>a) KVM y LXC<br>b) Hyper-V y Docker<br>c) ESXi y QEMU<br>d) VirtualBox y LXC</p>
+<p><strong>10.</strong> QEMU…<br>a) es lo mismo que KVM<br>b) emula dispositivos y puede usar KVM<br>c) es un contenedor<br>d) es una CPU</p>
+<p><strong>11.</strong> Intel VT-x y AMD-V son…<br>a) hipervisores<br>b) formatos de disco<br>c) contenedores<br>d) extensiones del procesador</p>
+<p><strong>12.</strong> En virtualización completa el invitado…<br>a) debe modificarse siempre<br>b) comparte kernel<br>c) no necesita modificarse<br>d) no tiene SO</p>
+<p><strong>13.</strong> Drivers VirtIO en una VM de virtualización completa…<br>a) es una combinación habitual<br>b) son incompatibles<br>c) convierten en contenedor<br>d) exigen emulación</p>
+<p><strong>14.</strong> Ejecutar software de otra arquitectura de CPU exige…<br>a) paravirtualización<br>b) emulación<br>c) un contenedor<br>d) HA</p>
+<p><strong>15.</strong> Un contenedor comparte con el host…<br>a) la BIOS<br>b) el hipervisor tipo 2<br>c) el SO invitado completo<br>d) el kernel</p>
+<p><strong>16.</strong> Como tendencia, ofrece más aislamiento…<br>a) el contenedor<br>b) el host<br>c) la VM<br>d) el driver</p>
+<p><strong>17.</strong> Reunir varios servidores físicos en menos hosts:<br>a) consolidación<br>b) DR<br>c) VDI<br>d) migración</p>
+<p><strong>18.</strong> Antes de consolidar se miran…<br>a) solo la media de CPU<br>b) los picos además de la media<br>c) solo el disco<br>d) solo las licencias</p>
+<p><strong>19.</strong> Consolidar en un único host sin HA…<br>a) da alta disponibilidad<br>b) elimina el SPOF<br>c) concentra el riesgo<br>d) duplica servicios</p>
+<p><strong>20.</strong> Duplicar una VM para pruebas es…<br>a) migrar<br>b) replicar en HA<br>c) emular<br>d) clonar</p>
+<p><strong>21.</strong> Ante la caída de un host, la HA suele…<br>a) evitar todo corte<br>b) hacer un backup<br>c) reiniciar las VM en otro host<br>d) apagar el clúster</p>
+<p><strong>22.</strong> Mantener el servicio sin ningún corte ante un fallo:<br>a) tolerancia a fallos<br>b) HA básica<br>c) snapshot<br>d) DR</p>
+<p><strong>23.</strong> Dos hosts sin capacidad de reserva…<br>a) son HA<br>b) no garantizan HA<br>c) son DR<br>d) son tolerancia a fallos</p>
+<p><strong>24.</strong> Mover una VM encendida entre hosts:<br>a) migración en frío<br>b) clonado<br>c) snapshot<br>d) migración en caliente</p>
+<p><strong>25.</strong> La migración en caliente…<br>a) no exige siempre almacenamiento compartido<br>b) exige siempre almacenamiento compartido<br>c) garantiza cero pausa<br>d) apaga la VM</p>
+<p><strong>26.</strong> Una snapshot local…<br>a) es un backup<br>b) es offsite<br>c) no protege si se pierde el almacenamiento<br>d) incluye siempre la RAM</p>
+<p><strong>27.</strong> Antes de un cambio arriesgado:<br>a) borrar el backup<br>b) snapshot y backup vigente<br>c) migrar en frío<br>d) apagar el host</p>
+<p><strong>28.</strong> La replicación de VM…<br>a) es un backup histórico<br>b) elimina el DR<br>c) es una snapshot<br>d) no equivale a historial de copias</p>
+<p><strong>29.</strong> VDI es…<br>a) escritorios en VM centralizadas<br>b) el protocolo RDP<br>c) sesiones en un servidor<br>d) un contenedor</p>
+<p><strong>30.</strong> Overhead es…<br>a) asignar más de lo físico<br>b) el SPOF<br>c) el coste de la capa de virtualización<br>d) una licencia</p>
+<p><strong>31.</strong> 32 vCPU en un host de 16 procesadores lógicos:<br>a) no arranca<br>b) puede funcionar si la carga cabe<br>c) es fault tolerance<br>d) es emulación</p>
+<p><strong>32.</strong> Thin provisioning se refiere a…<br>a) CPU<br>b) RAM<br>c) red<br>d) disco</p>
+<p><strong>33.</strong> Virtualizar un CPD…<br>a) es tener nube pública<br>b) es SaaS<br>c) no es tener una nube<br>d) es IaaS público</p>
+<p><strong>34.</strong> ¿Ahorra siempre la virtualización?<br>a) No necesariamente<br>b) Siempre<br>c) Nunca<br>d) Solo en tipo 2</p>
+<p><strong>35.</strong> VM lenta: primero…<br>a) reinstalar el host<br>b) ver si el problema es del invitado o del host<br>c) borrar snapshots al azar<br>d) migrar en frío</p>
+<h4 class="tema-h4">Soluciones</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Pregunta</strong></th>
+<th><strong>Respuesta</strong></th>
+<th><strong>Por qué</strong></th>
+</tr>
+<tr>
+<td>1</td>
+<td><strong>a</strong></td>
+<td>Anfitrión</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>c</strong></td>
+<td>Invitado</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>b</strong></td>
+<td>Asignación</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>d</strong></td>
+<td>VMM</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>a</strong></td>
+<td>Bare-metal</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>b</strong></td>
+<td>Sobre SO anfitrión</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>c</strong></td>
+<td>Tipo 1</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>d</strong></td>
+<td>Módulo del kernel</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>a</strong></td>
+<td>Plataforma</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>b</strong></td>
+<td>Capas distintas</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>d</strong></td>
+<td>Aceleran</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>c</strong></td>
+<td>Puede detectar la VM</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>a</strong></td>
+<td>Se combinan</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>b</strong></td>
+<td>Otra arquitectura</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>d</strong></td>
+<td>Kernel compartido</td>
+</tr>
+<tr>
+<td>16</td>
+<td><strong>c</strong></td>
+<td>SO propio</td>
+</tr>
+<tr>
+<td>17</td>
+<td><strong>a</strong></td>
+<td>Caso principal</td>
+</tr>
+<tr>
+<td>18</td>
+<td><strong>b</strong></td>
+<td>Dimensionar</td>
+</tr>
+<tr>
+<td>19</td>
+<td><strong>c</strong></td>
+<td>Punto único de fallo</td>
+</tr>
+<tr>
+<td>20</td>
+<td><strong>d</strong></td>
+<td>Copia</td>
+</tr>
+<tr>
+<td>21</td>
+<td><strong>c</strong></td>
+<td>Corte breve</td>
+</tr>
+<tr>
+<td>22</td>
+<td><strong>a</strong></td>
+<td>Fault tolerance</td>
+</tr>
+<tr>
+<td>23</td>
+<td><strong>b</strong></td>
+<td>Hace falta capacidad</td>
+</tr>
+<tr>
+<td>24</td>
+<td><strong>d</strong></td>
+<td>Live migration</td>
+</tr>
+<tr>
+<td>25</td>
+<td><strong>a</strong></td>
+<td>Puede mover discos</td>
+</tr>
+<tr>
+<td>26</td>
+<td><strong>c</strong></td>
+<td>Depende del origen</td>
+</tr>
+<tr>
+<td>27</td>
+<td><strong>b</strong></td>
+<td>Volver atrás</td>
+</tr>
+<tr>
+<td>28</td>
+<td><strong>d</strong></td>
+<td>Propaga cambios</td>
+</tr>
+<tr>
+<td>29</td>
+<td><strong>a</strong></td>
+<td>No es RDP</td>
+</tr>
+<tr>
+<td>30</td>
+<td><strong>c</strong></td>
+<td>Sobrecarga</td>
+</tr>
+<tr>
+<td>31</td>
+<td><strong>b</strong></td>
+<td>Overcommit</td>
+</tr>
+<tr>
+<td>32</td>
+<td><strong>d</strong></td>
+<td>Capacidad lógica</td>
+</tr>
+<tr>
+<td>33</td>
+<td><strong>c</strong></td>
+<td>Tema 32</td>
+</tr>
+<tr>
+<td>34</td>
+<td><strong>a</strong></td>
+<td>Licencias, HA, almacenamiento</td>
+</tr>
+<tr>
+<td>35</td>
+<td><strong>b</strong></td>
+<td>Acotar con métricas</td>
+</tr>
+</table></div>
 <h2 id="5-posibles-preguntas-cortas" class="tema-h2">5. Posibles preguntas cortas (con esquema de respuesta)</h2>
 <h4 class="tema-h4">1. Defina la virtualización y sus conceptos básicos</h4>
 <ul class="tema-lista">
@@ -197,7 +422,7 @@
 <h4 class="tema-h4">Supuesto 3 — Mantenimiento sin cortar el servicio</h4>
 <p><strong>Escenario</strong>: hay que sustituir la fuente de alimentación de un host que ejecuta VM en producción.</p>
 <ul class="tema-lista">
-<li><strong>a) ¿Qué mecanismo lo permite?</strong> La migración en caliente: trasladar las VM en ejecución a otro host antes del mantenimiento, si la infraestructura lo permite (almacenamiento compartido, hosts compatibles).</li>
+<li><strong>a) ¿Qué mecanismo lo permite?</strong> La migración en caliente: trasladar las VM en ejecución a otro host antes del mantenimiento, si la infraestructura lo permite (hosts compatibles, capacidad libre y almacenamiento compartido o migración también de los discos).</li>
 <li><strong>b) ¿Con qué expectativa de corte?</strong> Interrupción mínima o prácticamente imperceptible según la tecnología y configuración — no «cero garantizado» en cualquier situación.</li>
 <li><strong>c) Ejemplos de tecnologías.</strong> vMotion (VMware), Live Migration (Hyper-V) — como ejemplos, no contenido de marca.</li>
 </ul>
@@ -205,7 +430,7 @@
 <p><strong>Escenario</strong>: un único host sin HA alberga diez VM con servicios municipales; una avería de hardware lo detiene por completo.</p>
 <ul class="tema-lista">
 <li><strong>a) ¿Qué ha ocurrido conceptualmente?</strong> Se ha materializado el punto único de fallo: HOST → varias VM → fallo del host → varios servicios afectados a la vez.</li>
-<li><strong>b) ¿Cómo se mitiga?</strong> Alta disponibilidad: varios hosts, almacenamiento compartido y mecanismos de reubicación de VM; además, copias de seguridad independientes.</li>
+<li><strong>b) ¿Cómo se mitiga?</strong> Alta disponibilidad: varios hosts con capacidad de reserva, almacenamiento compartido o replicado y reinicio automático de las VM en otro host (con un corte breve); además, copias de seguridad independientes.</li>
 <li><strong>c) ¿Qué lección deja sobre la consolidación?</strong> Concentrar servicios exige plan de contingencia: la consolidación sin HA aumenta el impacto de cada fallo físico.</li>
 </ul>
 <h4 class="tema-h4">Supuesto 5 — «Con los snapshots ya tenemos copia»</h4>
@@ -215,6 +440,37 @@
 <li><strong>b) ¿Para qué sí sirven los snapshots?</strong> Retorno rápido a un estado anterior ante cambios fallidos — complemento, no sustituto.</li>
 <li><strong>c) ¿Qué debe mantenerse?</strong> Una estrategia de copia de seguridad independiente (su detalle corresponde al Tema 23).</li>
 </ul>
+<h4 class="tema-h4">Mini casos</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Situación</strong></th>
+<th><strong>Lectura</strong></th>
+</tr>
+<tr>
+<td>Se activa Hyper-V en un Windows</td>
+<td>Tipo 1; Windows queda como partición raíz</td>
+</tr>
+<tr>
+<td>Host de 64 GB con VM que suman 96 GB</td>
+<td>Depende de la técnica del hipervisor y del consumo real</td>
+</tr>
+<tr>
+<td>Falla un host y las VM arrancan en otro a los dos minutos</td>
+<td>Es HA, aunque haya corte</td>
+</tr>
+<tr>
+<td>VM apagada y movida a otro host</td>
+<td>Migración en frío</td>
+</tr>
+<tr>
+<td>VM y snapshots en el único almacenamiento, que se rompe</td>
+<td>Se pierden ambas: hace falta backup independiente</td>
+</tr>
+<tr>
+<td>Clonar una VM con datos del padrón para pruebas</td>
+<td>Requiere los mismos controles de acceso y protección de datos</td>
+</tr>
+</table></div>
 <h2 id="7-matriz-de-memorizacion" class="tema-h2">7. Matriz de memorización</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -289,15 +545,48 @@
 <td>Overhead</td>
 <td>Coste de rendimiento de la capa de virtualización</td>
 </tr>
+<tr>
+<td>vCPU</td>
+<td>CPU virtual; no equivale a un núcleo reservado</td>
+</tr>
+<tr>
+<td>QEMU</td>
+<td>Emula dispositivos; acelera con KVM</td>
+</tr>
+<tr>
+<td>Fault tolerance</td>
+<td>Continuidad sin corte; la HA suele reiniciar</td>
+</tr>
 </table></div>
-<h2 id="8-resumen-final" class="tema-h2">8. Resumen final: si mañana fuera el examen</h2>
+<h2 id="8-repaso-visual" class="tema-h2">8. Repaso visual · T10</h2>
+<figure class="tema-figura">
+<figcaption>1 · Máquina virtual y contenedor</figcaption>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at10cp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at10ca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at10cv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at10cn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at10cr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at10cg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">MÁQUINA VIRTUAL</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">CONTENEDOR</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">SO PROPIO</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Más aislamiento</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Más pesada</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">KERNEL COMPARTIDO</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Más ligero</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Arranque rápido</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>2 · KVM y Proxmox VE</figcaption>
+<svg viewBox="0 0 700 94" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at10ep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at10ea" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at10ev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at10en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at10er" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at10eg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">KVM</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#003da5" stroke-width="2" marker-end="url(#at10ep)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Módulo del kernel de Linux</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">PROXMOX VE</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at10ea)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Plataforma: KVM + LXC</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>3 · Snapshot y backup</figcaption>
+<svg viewBox="0 0 700 136" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at10dp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at10da" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at10dv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at10dn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at10dr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at10dg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">SNAPSHOT</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">BACKUP</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Volver atrás rápido</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="103.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Ligado a la</text><text x="176.0" y="118.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">infraestructura</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Copia para recuperar</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Independiente</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>4 · Tipo 1 y tipo 2</figcaption>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at10bp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at10ba" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at10bv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at10bn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at10br" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at10bg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">TIPO 1</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">TIPO 2</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Sobre el HARDWARE</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Bare metal</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">ESXi, Hyper-V, Xen</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Sobre el SO ANFITRIÓN</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Alojado</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Escritorio y pruebas</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>5 · Host, guest, VM e hipervisor</figcaption>
+<svg viewBox="0 0 700 184" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at10ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at10aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at10av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at10an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at10ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at10ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">HOST</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at10ag)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Máquina física</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">HIPERVISOR / VMM</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#003da5" stroke-width="2" marker-end="url(#at10ap)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Crea, gestiona, asigna y aísla</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">VM</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at10aa)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Ordenador definido por software</text><rect x="8" y="139" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">GUEST</text><line x1="264" y1="157.0" x2="356" y2="157.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at10aa)"/><rect x="362" y="139" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Sistema invitado dentro de la VM</text></svg>
+</figure>
+<h2 id="9-resumen-final" class="tema-h2">9. Resumen final: si mañana fuera el examen</h2>
 <ul class="tema-lista">
 <li><strong>Virtualización</strong> = abstraer recursos físicos en virtuales; en servidores: varias VM sobre un host. <strong>Host = físico · guest = invitado · VM = máquina por software</strong>.</li>
 <li><strong>Hipervisor (VMM)</strong>: crea, gestiona, asigna, aísla. <strong>Tipo 1</strong>: hardware → hipervisor → VM (ESXi, Hyper-V, Xen). <strong>Tipo 2</strong>: hardware → SO anfitrión → hipervisor → VM (VirtualBox, Workstation, Parallels). <strong>Hyper-V es tipo 1</strong> aunque se active desde Windows (partición raíz).</li>
 <li><strong>KVM</strong> = módulo del kernel Linux · <strong>Proxmox VE</strong> = plataforma que integra KVM (VM) y LXC (contenedores).</li>
 <li><strong>Completa</strong> (SO sin modificar, VT-x/AMD-V) vs. <strong>paravirtualización</strong> (interfaces específicas); drivers paravirtualizados como concepto aparte. <strong>VM (SO propio) ≠ contenedor (kernel compartido, más ligero)</strong>.</li>
 <li><strong>Casos de uso</strong>: consolidación · pruebas · HA · migración en caliente (interrupción mínima según tecnología) · DR · VDI · base tecnológica del cloud (T32).</li>
-<li><strong>Snapshot ≠ backup</strong>: volver atrás rápido vs. copia independiente para recuperación.</li>
+<li><strong>Snapshot ≠ backup</strong>: volver atrás rápido vs. copia independiente para recuperación. <strong>HA</strong> reinicia (corte breve) ≠ <strong>tolerancia a fallos</strong> (sin corte). <strong>vCPU ≠ núcleo</strong>; <strong>overcommit</strong> se vigila, no es error. <strong>VDI ≠ RDP.</strong></li>
 <li><strong>Ventajas</strong>: aprovechamiento, ahorro de infraestructura (según escala y licencias), aislamiento, rapidez, snapshots, migración. <strong>Desventajas</strong>: overhead, punto único de fallo sin HA (HOST → VMs → fallo → varios servicios caídos), complejidad, overcommit, licencias.</li>
 <li>Productos solo como ejemplos: interesan los conceptos y arquitecturas, no la evolución comercial de los fabricantes.</li>
 </ul>

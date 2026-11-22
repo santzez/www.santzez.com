@@ -28,14 +28,40 @@
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>💡 Analogía</strong><br>El host es un edificio; las VM, apartamentos independientes: cada inquilino (el sistema invitado) tiene sus habitaciones y su puerta con llave, y no ve los demás apartamentos, aunque todos compartan la estructura y los suministros del edificio (el hardware físico).</th>
+<th><strong>💡 Analogía</strong><br>El host es un edificio; las VM, apartamentos independientes (la analogía exagera: el aislamiento es fuerte, <strong>no absoluto</strong>): cada inquilino (el sistema invitado) tiene sus habitaciones y su puerta con llave, y no ve los demás apartamentos, aunque todos compartan la estructura y los suministros del edificio (el hardware físico).</th>
 </tr>
 </table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Físico (host)</strong></th>
+<th><strong>Virtual (VM)</strong></th>
+</tr>
+<tr>
+<td>CPU y núcleos</td>
+<td><strong>vCPU</strong>: no equivale a un núcleo reservado</td>
+</tr>
+<tr>
+<td>RAM</td>
+<td>Memoria asignada, que no siempre está reservada en exclusiva</td>
+</tr>
+<tr>
+<td>Disco</td>
+<td>Disco virtual (fichero o volumen: VMDK, VHDX, QCOW2)</td>
+</tr>
+<tr>
+<td>Tarjeta de red</td>
+<td>Adaptador virtual conectado a un conmutador virtual</td>
+</tr>
+</table></div>
+<figure class="tema-figura">
+<figcaption>Host · Guest · VM · Hipervisor</figcaption>
+<svg viewBox="0 0 700 184" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at10ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at10aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at10av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at10an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at10ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at10ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">HOST</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at10ag)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Máquina física</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">HIPERVISOR / VMM</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#003da5" stroke-width="2" marker-end="url(#at10ap)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Crea, gestiona, asigna y aísla</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">VM</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at10aa)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Ordenador definido por software</text><rect x="8" y="139" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">GUEST</text><line x1="264" y1="157.0" x2="356" y2="157.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at10aa)"/><rect x="362" y="139" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Sistema invitado dentro de la VM</text></svg>
+</figure>
 <h2 id="2-el-hipervisor-concepto-y-tipos" class="tema-h2">2. El hipervisor: concepto y tipos</h2>
 <p>El <strong>hipervisor</strong> (o <strong>VMM, Virtual Machine Monitor</strong>) es la capa de software que <strong>crea y gestiona las máquinas virtuales, asigna los recursos y mantiene su aislamiento</strong>.</p>
 <h4 class="tema-h4">Tipo 1 (bare-metal)</h4>
 <ul class="tema-lista">
-<li>Se ejecuta <strong>directamente sobre el hardware</strong>, sin un sistema operativo convencional debajo.</li>
+<li>Se ejecuta <strong>directamente sobre el hardware</strong>, sin un sistema operativo convencional debajo (puede tener una partición o un sistema de gestión por encima).</li>
 <li>Es el modelo habitual en servidores y producción.</li>
 <li>Ejemplos principales: <strong>VMware ESXi, Microsoft Hyper-V, Xen</strong>.</li>
 </ul>
@@ -55,29 +81,39 @@
 <th><strong>⚠️ No confundir — trampa de examen: Hyper-V</strong><br>Aunque se habilite <strong>desde Windows</strong> (como rol o característica), <strong>Hyper-V es un hipervisor de tipo 1</strong>: al activarlo, el hipervisor se coloca directamente sobre el hardware y el propio Windows pasa a ejecutarse por encima como <strong>partición raíz</strong>. Que se instale «desde» un SO no lo convierte en tipo 2.</th>
 </tr>
 </table></div>
+<figure class="tema-figura">
+<figcaption>Hipervisor de tipo 1 vs. tipo 2</figcaption>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at10bp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at10ba" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at10bv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at10bn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at10br" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at10bg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">TIPO 1</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">TIPO 2</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Sobre el HARDWARE</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Bare metal</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">ESXi, Hyper-V, Xen</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Sobre el SO ANFITRIÓN</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Alojado</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Escritorio y pruebas</text></svg>
+<p class="tema-figura__nota">Hyper-V es de tipo 1 aunque se active desde Windows.</p></figure>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Precisión — KVM y Proxmox VE</strong><br><strong>KVM</strong> → <strong>tecnología/módulo de virtualización integrado en el kernel Linux</strong>, que convierte al núcleo en capaz de ejecutar máquinas virtuales.<br><strong>Proxmox VE</strong> → <strong>plataforma de virtualización y gestión</strong> que integra <strong>KVM para máquinas virtuales y LXC para contenedores</strong>.<br>Son ejemplos del ecosistema de virtualización de código abierto; no deben clasificarse sin más como «productos tipo 1 equivalentes a ESXi».</th>
+<th><strong>📌 Precisión — KVM y Proxmox VE</strong><br><strong>KVM</strong> → <strong>tecnología/módulo de virtualización integrado en el kernel Linux</strong>, que convierte al núcleo en capaz de ejecutar máquinas virtuales.<br><strong>Proxmox VE</strong> → <strong>plataforma de virtualización y gestión</strong> que integra <strong>KVM para máquinas virtuales y LXC para contenedores</strong>.<br><strong>QEMU</strong> → emula los dispositivos de la VM y usa KVM para acelerar; <strong>QEMU y KVM no son lo mismo</strong>.<br>Por funcionar dentro del núcleo, <strong>KVM se suele clasificar como tipo 1</strong>, pero <strong>no es un producto empaquetado</strong> como ESXi.</th>
 </tr>
 </table></div>
+<figure class="tema-figura">
+<figcaption>KVM y Proxmox VE</figcaption>
+<svg viewBox="0 0 700 94" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at10ep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at10ea" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at10ev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at10en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at10er" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at10eg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">KVM</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#003da5" stroke-width="2" marker-end="url(#at10ep)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Módulo del kernel de Linux</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">PROXMOX VE</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at10ea)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Plataforma: KVM + LXC</text></svg>
+</figure>
 <h2 id="3-tipos-de-virtualizacion" class="tema-h2">3. Tipos de virtualización</h2>
 <h4 class="tema-h4">Virtualización completa (full virtualization)</h4>
 <ul class="tema-lista">
 <li>El hipervisor presenta a la VM un <strong>hardware virtual</strong> completo.</li>
-<li>El <strong>SO invitado se ejecuta sin modificaciones significativas</strong>, sin ser consciente de la virtualización, con <strong>aislamiento</strong> completo.</li>
+<li>El <strong>SO invitado se ejecuta sin modificaciones significativas</strong>: puede <strong>detectar</strong> que está virtualizado e instalar herramientas de integración; lo esencial es que <strong>no necesita</strong> cambios para funcionar.</li>
 <li>Se apoya habitualmente en las <strong>extensiones hardware de virtualización</strong> del procesador — <strong>Intel VT-x y AMD-V</strong> — que aceleran la ejecución (no todas las implementaciones dependen obligatoriamente de ellas).</li>
 </ul>
 <h4 class="tema-h4">Paravirtualización</h4>
 <ul class="tema-lista">
 <li>El software invitado <strong>utiliza interfaces específicas de virtualización</strong> para comunicarse con el hipervisor, <strong>reduciendo el coste de determinadas operaciones</strong>.</li>
 <li>No implica necesariamente modificar todo el sistema operativo: puede afectar a componentes concretos.</li>
-<li>Distinción conceptual: la <strong>paravirtualización</strong> (el enfoque general) no es lo mismo que los <strong>drivers paravirtualizados</strong> — controladores optimizados para el entorno virtual que puede usar incluso un SO con virtualización completa (VirtIO es un ejemplo puntual).</li>
+<li>Distinción conceptual: la <strong>paravirtualización</strong> (el enfoque general) no es lo mismo que los <strong>drivers paravirtualizados</strong> — controladores optimizados para el entorno virtual que puede usar incluso un SO con virtualización completa (VirtIO es un ejemplo puntual). <strong>Ambas cosas se combinan</strong>: virtualización completa con drivers paravirtualizados es lo habitual.</li>
 </ul>
+<h4 class="tema-h4">Emulación</h4>
+<p><strong>Emular</strong> es reproducir <strong>otra arquitectura</strong> (por ejemplo, ejecutar software de otra CPU): más lento. <strong>Virtualizar</strong> aprovecha que el invitado usa la <strong>misma arquitectura</strong> que el host. Los productos combinan ambas cosas (QEMU emula dispositivos y virtualiza la CPU con KVM).</p>
 <h4 class="tema-h4">Ampliación: contenedores</h4>
 <ul class="tema-lista">
 <li><strong>VM</strong> → hardware virtual + <strong>SO propio</strong> por máquina.</li>
 <li><strong>Contenedor</strong> → <strong>procesos aislados que comparten el kernel</strong> del host; empaqueta una aplicación con sus dependencias, no un SO completo.</li>
-<li>Los contenedores <strong>suelen ser más ligeros</strong> que una VM (arranque y consumo menores).</li>
+<li>Los contenedores <strong>suelen ser más ligeros</strong> que una VM (arranque y consumo menores). Llevan bibliotecas y herramientas propias: lo que <strong>no traen es kernel</strong>.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -103,7 +139,7 @@
 <tr>
 <td>Aislamiento</td>
 <td>Muy alto</td>
-<td>Menor que una VM</td>
+<td>Menor que una VM, como tendencia: depende de la configuración</td>
 </tr>
 </table></div>
 <figure class="tema-figura">
@@ -115,18 +151,22 @@
 <ul class="tema-lista">
 <li><strong>Consolidación de servidores</strong>: sustituir varios servidores físicos infrautilizados por un host que ejecuta varias VM, aprovechando mejor la capacidad.</li>
 <li><strong>Pruebas y desarrollo</strong>: crear y destruir VM bajo demanda para probar software o cambios sin arriesgar producción.</li>
-<li><strong>Alta disponibilidad (HA)</strong>: configuraciones con varios hosts que permiten reubicar las VM ante fallos o mantenimientos.</li>
-<li><strong>Migración en caliente</strong>: traslado de una VM <strong>en ejecución</strong> entre hosts <strong>con interrupción mínima o prácticamente imperceptible, según la tecnología y configuración</strong> (ejemplos: vMotion, Live Migration). No debe afirmarse «cero interrupción» garantizada en cualquier situación.</li>
+<li><strong>Alta disponibilidad (HA)</strong>: configuraciones con varios hosts que permiten reubicar las VM ante fallos o mantenimientos. Ante una caída, lo habitual es que <strong>la VM se reinicie en otro host</strong>: hay corte, aunque corto. Sin corte alguno es la <strong>tolerancia a fallos</strong> (fault tolerance), un mecanismo distinto.</li>
+<li><strong>Migración en caliente</strong>: traslado de una VM <strong>en ejecución</strong> entre hosts <strong>con interrupción mínima o prácticamente imperceptible, según la tecnología y configuración</strong> (ejemplos: vMotion, Live Migration). No debe afirmarse «cero interrupción» garantizada en cualquier situación, ni que exija siempre almacenamiento compartido: hay migraciones que <strong>mueven también los discos</strong>. La migración <strong>en frío</strong> es con la VM apagada.</li>
 <li><strong>Recuperación ante desastres (DR)</strong>: replicar VM completas hacia otro emplazamiento para recuperar el servicio con rapidez.</li>
-<li><strong>VDI (escritorios virtuales)</strong>: alojar los escritorios de los usuarios como VM centralizadas a las que se accede de forma remota, con gestión y actualización centralizadas.</li>
+<li><strong>VDI (escritorios virtuales)</strong>: alojar los escritorios de los usuarios como VM centralizadas a las que se accede de forma remota, con gestión y actualización centralizadas. <strong>VDI no es RDP</strong> (RDP es un protocolo de acceso) ni <strong>RDS</strong> (varias sesiones en un mismo servidor).</li>
 <li><strong>Relación con la nube</strong>: la virtualización constituye una de las tecnologías fundamentales utilizadas por los proveedores cloud (el detalle, en el Tema 32).</li>
 </ul>
 <h4 class="tema-h4">Snapshot</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Imprescindible para el examen — SNAPSHOT ≠ BACKUP</strong><br><strong>Snapshot</strong>: captura de un <strong>estado</strong> de la VM que permite <strong>volver rápidamente a un punto anterior</strong> — muy útil antes de un cambio arriesgado.<br>Un snapshot <strong>no sustituye a una estrategia de copia de seguridad</strong>: reside junto a la propia VM y su infraestructura, y no está pensado para retención ni recuperación ante la pérdida del host o del almacenamiento. El <strong>backup</strong> es una copia independiente destinada a la recuperación.</th>
+<th><strong>📌 Imprescindible para el examen — SNAPSHOT ≠ BACKUP</strong><br><strong>Snapshot</strong>: captura de un <strong>estado</strong> de la VM que permite <strong>volver rápidamente a un punto anterior</strong> — muy útil antes de un cambio arriesgado.<br>Un snapshot <strong>no sustituye a una estrategia de copia de seguridad</strong>: reside junto a la propia VM y su infraestructura, y no está pensado para retención ni recuperación ante la pérdida del host o del almacenamiento. El <strong>backup</strong> es una copia independiente destinada a la recuperación.<br>Matiz: es la <strong>snapshot local</strong> la que no protege; algunas soluciones <strong>exportan o replican</strong> snapshots dentro de un backup independiente. Y la snapshot puede ser <strong>consistente ante caída</strong> o <strong>consistente con la aplicación</strong>, y no siempre incluye la memoria.</th>
 </tr>
 </table></div>
+<figure class="tema-figura">
+<figcaption>Snapshot vs. backup</figcaption>
+<svg viewBox="0 0 700 136" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at10dp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at10da" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at10dv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at10dn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at10dr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at10dg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">SNAPSHOT</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">BACKUP</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Volver atrás rápido</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="103.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Ligado a la</text><text x="176.0" y="118.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">infraestructura</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Copia para recuperar</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Independiente</text></svg>
+<p class="tema-figura__nota">No son lo mismo: una snapshot no sustituye a una copia de seguridad.</p></figure>
 <h2 id="5-ventajas-y-desventajas" class="tema-h2">5. Ventajas y desventajas</h2>
 <h4 class="tema-h4">Ventajas</h4>
 <ul class="tema-lista">
@@ -142,9 +182,14 @@
 <li><strong>Overhead</strong>: la capa de virtualización consume recursos y puede introducir cierta pérdida de rendimiento (reducida por las extensiones hardware).</li>
 <li><strong>Punto único de fallo</strong>: si el host falla <strong>y no existe alta disponibilidad</strong>, todas sus VM caen a la vez.</li>
 <li><strong>Mayor complejidad</strong> de gestión y planificación de recursos.</li>
-<li><strong>Overcommit</strong>: <strong>asignar recursos virtuales que pueden superar la capacidad física</strong>, suponiendo que no todas las VM usarán el máximo simultáneamente; mal controlado, degrada el rendimiento de todo el host.</li>
+<li><strong>Overcommit</strong>: <strong>asignar recursos virtuales que pueden superar la capacidad física</strong>, suponiendo que no todas las VM usarán el máximo simultáneamente; mal controlado, degrada el rendimiento de todo el host. <strong>No es un error en sí</strong>: 32 vCPU sobre 16 procesadores lógicos pueden funcionar bien si la carga real cabe. La CPU, la RAM y el disco (<strong>thin provisioning</strong>) se sobreasignan de forma distinta.</li>
 <li><strong>Posibles costes de licenciamiento</strong> del software de virtualización empresarial.</li>
 </ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — consolidar no es dar alta disponibilidad</strong><br>Para dimensionar se miran los <strong>picos</strong>, no solo la media: un 5 % de CPU media puede esconder picos altos. Y tener <strong>dos hosts no es HA</strong> si uno no tiene <strong>capacidad de reserva</strong> para las VM del otro.</th>
+</tr>
+</table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>🧠 Para memorizar — el punto único de fallo</strong><br>Sin alta disponibilidad: <strong>HOST → varias VM → fallo del host → varios servicios afectados a la vez</strong>. Es la desventaja estructural clásica, y un caso práctico habitual.</th>
