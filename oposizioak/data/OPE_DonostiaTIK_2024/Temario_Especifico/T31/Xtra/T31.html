@@ -13,8 +13,9 @@
 <li><a href="#5-preguntas-cortas">5. Posibles preguntas cortas (con esquema de respuesta)</a></li>
 <li><a href="#6-supuestos-practicos">6. Supuestos prácticos</a></li>
 <li><a href="#7-matriz-de-memorizacion">7. Matriz de memorización</a></li>
-<li><a href="#8-resumen-final">8. Resumen final: si mañana fuera el examen</a></li>
-<li><a href="#9-actualidad">9. Actualidad de Internet — datos fechados</a></li>
+<li><a href="#8-repaso-visual">8. Repaso visual · T31</a></li>
+<li><a href="#9-resumen-final">9. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#10-actualidad">10. Actualidad de Internet — datos fechados</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
@@ -34,6 +35,11 @@
 <li><strong>SSH → ACCESO REMOTO SEGURO · TELNET → SIN CIFRAR.</strong></li>
 <li><strong>IPv4 → 32 BITS · IPv6 → 128 BITS · DUAL STACK → COEXISTENCIA.</strong></li>
 <li><strong>FLUJO: DNS → IP → TRANSPORTE → TLS → HTTP → RECURSOS.</strong></li>
+<li><strong>5 RIR: RIPE NCC, ARIN, LACNIC, APNIC, AFRINIC.</strong></li>
+<li><strong>NS → servidores DNS · TXT → texto · PTR → inversa.</strong></li>
+<li><strong>TTL DNS → caché. DNS → 53 UDP y TCP.</strong></li>
+<li><strong>4xx → petición · 5xx → servidor · 404 ≠ sin Internet.</strong></li>
+<li><strong>SÍNTOMA ≠ CAUSA.</strong></li>
 </ul>
 <h2 id="2-no-confundir" class="tema-h2">2. No confundir</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -61,6 +67,31 @@
 <td><strong>IANA</strong>: registros centrales</td>
 <td><strong>RIR</strong>: distribución regional</td>
 <td>Central frente a regional</td>
+</tr>
+<tr>
+<td><strong>RIR</strong>: registro regional</td>
+<td><strong>ISP</strong>: proveedor</td>
+<td>Repartir recursos frente a dar conexión</td>
+</tr>
+<tr>
+<td><strong>CNAME</strong>: alias DNS</td>
+<td><strong>Redirección HTTP</strong></td>
+<td>DNS frente a aplicación</td>
+</tr>
+<tr>
+<td><strong>TTL DNS</strong>: caché</td>
+<td><strong>TTL IP</strong>: saltos</td>
+<td>Mismo nombre, distinta cosa</td>
+</tr>
+<tr>
+<td><strong>401</strong>: falta autenticarse</td>
+<td><strong>403</strong>: prohibido</td>
+<td>Identidad frente a permiso</td>
+</tr>
+<tr>
+<td><strong>Intranet</strong></td>
+<td><strong>Extranet</strong></td>
+<td>Interna frente a terceros autorizados</td>
 </tr>
 <tr>
 <td><strong>RFC</strong>: documento técnico</td>
@@ -162,43 +193,237 @@
 <li><strong>«Telnet y SSH son equivalentes»</strong> — falso: <strong>Telnet no cifra</strong>.</li>
 <li><strong>«IPv6 representa el 45-50 % del tráfico mundial»</strong> como afirmación estructural — <strong>incorrecto</strong>: el porcentaje <strong>depende de la fuente y la metodología</strong>, y no debe confundirse <strong>porcentaje de usuarios de un servicio</strong> con <strong>porcentaje de tráfico mundial</strong>.</li>
 <li><strong>«HTTP/3 supone el 20-40 % del tráfico»</strong> como dato permanente — <strong>incorrecto</strong>: las cifras varían según fuente, muestra, recursos, CDN, región y metodología.</li>
+<li><strong>«Todos los RFC proceden del IETF»</strong> — falso: hay otras procedencias.</li>
+<li><strong>«Los RIR son tres»</strong> — falso: son <strong>cinco</strong>.</li>
+<li><strong>«Cualquiera obtiene sus IP directamente de RIPE NCC»</strong> — falso: lo habitual es el <strong>ISP</strong>.</li>
+<li><strong>«CNAME es una redirección web»</strong> — falso: es un <strong>alias DNS</strong>.</li>
+<li><strong>«DNS solo usa UDP»</strong> — falso: <strong>UDP y TCP</strong>.</li>
+<li><strong>«HTTP/3 no cifra, porque va sobre UDP»</strong> — falso: <strong>QUIC integra TLS 1.3</strong>.</li>
+<li><strong>«HTTP/3 es siempre más rápido»</strong> — falso: depende de la red y la implementación.</li>
+<li><strong>«Un 404 indica que no hay Internet»</strong> — falso: ha respondido el servidor.</li>
+<li><strong>«Dual stack obliga a publicar A y AAAA»</strong> — falso: depende de lo que se publique.</li>
 <li><strong>Colar contenido ajeno</strong>: correo (T17), navegadores (T20), TCP/IP y routing (T27), TLS y VPN (T29) y nube (T32) no se desarrollan aquí.</li>
 </ul>
 <h2 id="4-preguntas-tipo-test" class="tema-h2">4. Posibles preguntas tipo test</h2>
-<ul class="tema-lista">
-<li><strong>Definición</strong> de Internet. ¿Existe una organización propietaria del conjunto?</li>
-<li><strong>Organismo → función</strong>: IETF · ICANN · IANA · RIR.</li>
-<li>¿Qué organismo <strong>estandariza los protocolos</strong> de Internet?</li>
-<li>¿Qué son los <strong>RFC</strong>? ¿Son todos estándares obligatorios?</li>
-<li>¿Cuál es la misión de <strong>ICANN</strong>? ¿Controla los contenidos?</li>
-<li>¿Qué gestiona la función <strong>IANA</strong>?</li>
-<li>¿Qué hacen los <strong>RIR</strong>? ¿Cuál corresponde a la región europea?</li>
-<li><strong>Definición</strong> de DNS. ¿Se limita a traducir nombres a IP?</li>
-<li>Ordenar la <strong>jerarquía DNS</strong>: raíz, TLD, dominio y subdominio.</li>
-<li>En <strong>www.gipuzkoa.eus</strong>, ¿qué es <strong>.eus</strong>? ¿Y <strong>gipuzkoa</strong>?</li>
-<li>Diferencia entre <strong>resolver recursivo</strong> y <strong>servidor autoritativo</strong>.</li>
-<li>¿Consulta el cliente directamente a los servidores raíz?</li>
-<li>¿Qué ruta puede recorrerse cuando <strong>no hay información en caché</strong>?</li>
-<li><strong>Registro → función</strong>: A · AAAA · CNAME · MX.</li>
-<li>¿Qué registro se utiliza para una dirección <strong>IPv6</strong>?</li>
-<li>¿Qué registro indica los <strong>servidores de correo</strong> de un dominio?</li>
-<li>Diferencia entre <strong>Internet</strong> y <strong>Web</strong>.</li>
-<li><strong>Definición</strong> de HTTP.</li>
-<li>¿Abre <strong>HTTP/1.1</strong> una conexión TCP por cada petición?</li>
-<li>¿Qué caracteriza a <strong>HTTP/2</strong>?</li>
-<li>¿Sobre qué se transporta <strong>HTTP/3</strong>? ¿Y sobre qué funciona QUIC?</li>
-<li><strong>Versión → transporte</strong>: HTTP/1.1 · HTTP/2 · HTTP/3.</li>
-<li>¿Qué evita HTTP/3 respecto de HTTP/2 sobre TCP?</li>
-<li>¿Qué es <strong>HTTPS</strong>?</li>
-<li><strong>Servicio → protocolo</strong>: web · correo · ficheros · acceso remoto · resolución de nombres.</li>
-<li>Diferencia entre <strong>FTP</strong>, <strong>SFTP</strong> y <strong>FTPS</strong>.</li>
-<li>¿Sobre qué se apoya <strong>SFTP</strong>? ¿Y <strong>FTPS</strong>?</li>
-<li>Diferencia entre <strong>SSH</strong> y <strong>Telnet</strong>.</li>
-<li>¿Cuántos bits tiene una dirección <strong>IPv4</strong>? ¿Y una <strong>IPv6</strong>?</li>
-<li>¿Qué es <strong>dual stack</strong>?</li>
-<li><strong>Ordenar</strong> los pasos que siguen a la introducción de una URL HTTPS.</li>
-<li>¿Puede afirmarse en un examen un <strong>porcentaje concreto</strong> de adopción de IPv6? ¿Por qué no?</li>
-</ul>
+<p>Treinta y cinco preguntas con una respuesta correcta. Las soluciones están al final de la sección.</p>
+<p><strong>1.</strong> ¿Qué es Internet?<br>a) Una red de redes independientes<br>b) Un servicio basado en HTTP<br>c) Una red propiedad de ICANN<br>d) La red de un operador mundial</p>
+<p><strong>2.</strong> ¿Qué red abre servicios internos a terceros autorizados?<br>a) Intranet<br>b) Internet pública<br>c) Extranet<br>d) WLAN</p>
+<p><strong>3.</strong> ¿Quién estandariza los protocolos de Internet?<br>a) ICANN<br>b) IETF<br>c) IANA<br>d) RIPE NCC</p>
+<p><strong>4.</strong> ¿Qué es cierto de los RFC?<br>a) Todos son obligatorios<br>b) Todos son del IETF<br>c) Los publica cada RIR<br>d) No todos son estándares</p>
+<p><strong>5.</strong> ¿Quién coordina los identificadores únicos?<br>a) IETF<br>b) IRTF<br>c) ICANN<br>d) ISO</p>
+<p><strong>6.</strong> ¿Qué entidad presta hoy las funciones IANA?<br>a) PTI, filial de ICANN<br>b) El IETF<br>c) RIPE NCC<br>d) Un ISP</p>
+<p><strong>7.</strong> ¿Cuántos RIR hay?<br>a) Tres<br>b) Cinco<br>c) Cuatro<br>d) Trece</p>
+<p><strong>8.</strong> ¿Cuál es el RIR de Asia-Pacífico?<br>a) ARIN<br>b) AFRINIC<br>c) LACNIC<br>d) APNIC</p>
+<p><strong>9.</strong> Un hogar obtiene su IP pública normalmente de…<br>a) su ISP<br>b) RIPE NCC<br>c) IANA<br>d) ICANN</p>
+<p><strong>10.</strong> ¿Qué resuelve el DNS en una URL?<br>a) La ruta<br>b) La consulta<br>c) El nombre<br>d) El esquema</p>
+<p><strong>11.</strong> En sede.ejemplo.eus, el TLD es…<br>a) ejemplo<br>b) sede<br>c) ejemplo.eus<br>d) eus</p>
+<p><strong>12.</strong> ¿Quién resuelve en nombre del cliente?<br>a) El autoritativo<br>b) El recursivo<br>c) El servidor raíz<br>d) El TLD</p>
+<p><strong>13.</strong> La respuesta «pregunta a este otro» es propia de la consulta…<br>a) recursiva<br>b) iterativa<br>c) inversa<br>d) autoritativa</p>
+<p><strong>14.</strong> ¿Qué indica el TTL DNS?<br>a) Tiempo en caché<br>b) Saltos del paquete<br>c) Latencia del resolver<br>d) Vigencia del certificado</p>
+<p><strong>15.</strong> Dos personas obtienen IP distintas del mismo dominio. Esto…<br>a) prueba un ataque<br>b) prueba un fallo DNS<br>c) es imposible<br>d) puede ser legítimo</p>
+<p><strong>16.</strong> ¿Qué registro da una IPv6?<br>a) A<br>b) MX<br>c) AAAA<br>d) PTR</p>
+<p><strong>17.</strong> ¿Qué registro sirve para la resolución inversa?<br>a) NS<br>b) PTR<br>c) TXT<br>d) CNAME</p>
+<p><strong>18.</strong> ¿Qué indica el registro NS?<br>a) Servidores de correo<br>b) Alias<br>c) Texto<br>d) Servidores de nombres</p>
+<p><strong>19.</strong> ¿A qué apunta un MX?<br>a) Al nombre de un servidor de correo<br>b) A una URL<br>c) A un puerto<br>d) A una página de acceso</p>
+<p><strong>20.</strong> DNS usa el puerto 53 con…<br>a) solo UDP<br>b) solo TCP<br>c) UDP y TCP<br>d) SCTP</p>
+<p><strong>21.</strong> La Web es…<br>a) sinónimo de Internet<br>b) la infraestructura<br>c) un organismo<br>d) un servicio sobre Internet</p>
+<p><strong>22.</strong> ¿Qué método pide un recurso?<br>a) POST<br>b) GET<br>c) CONNECT<br>d) PTR</p>
+<p><strong>23.</strong> Acceso prohibido:<br>a) 403<br>b) 401<br>c) 404<br>d) 503</p>
+<p><strong>24.</strong> ¿Qué familia indica error del servidor?<br>a) 4xx<br>b) 3xx<br>c) 5xx<br>d) 2xx</p>
+<p><strong>25.</strong> HTTP/1.1 se caracteriza por…<br>a) una conexión por petición<br>b) conexiones persistentes<br>c) usar QUIC<br>d) multiplexar streams</p>
+<p><strong>26.</strong> HTTP/2 aporta sobre TCP…<br>a) QUIC<br>b) UDP<br>c) hipertexto<br>d) multiplexación</p>
+<p><strong>27.</strong> HTTP/3 funciona sobre…<br>a) QUIC y UDP<br>b) QUIC y TCP<br>c) TCP y TLS<br>d) UDP sin cifrar</p>
+<p><strong>28.</strong> Si UDP está bloqueado, una web con HTTP/3…<br>a) no abre nunca<br>b) pasa a FTP<br>c) puede abrir por HTTP/2<br>d) deja de resolver</p>
+<p><strong>29.</strong> HTTPS garantiza…<br>a) un sitio honesto<br>b) una comunicación protegida<br>c) un contenido veraz<br>d) un equipo sin malware</p>
+<p><strong>30.</strong> SFTP se apoya en…<br>a) TLS<br>b) FTP<br>c) UDP<br>d) SSH</p>
+<p><strong>31.</strong> ¿Qué protocolo de acceso remoto no cifra?<br>a) SSH<br>b) SFTP<br>c) Telnet<br>d) HTTPS</p>
+<p><strong>32.</strong> Dual stack significa…<br>a) coexistencia de IPv4 e IPv6<br>b) dos resolvers DNS<br>c) fin de IPv4<br>d) HTTP/2 y HTTP/3</p>
+<p><strong>33.</strong> La cifra de IPv6 de Google mide…<br>a) tráfico mundial<br>b) usuarios que acceden a Google por IPv6<br>c) redes migradas<br>d) dominios con AAAA</p>
+<p><strong>34.</strong> Primer paso al abrir una URL nueva por nombre:<br>a) negociar TLS<br>b) enviar GET<br>c) recibir recursos<br>d) resolver el nombre</p>
+<p><strong>35.</strong> El usuario dice «no hay Internet» y ve un 404. Conclusión:<br>a) falla el DNS<br>b) está caída la red<br>c) hay conexión y responde el servidor<br>d) ha caducado el certificado</p>
+<h4 class="tema-h4">Soluciones</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Pregunta</strong></th>
+<th><strong>Respuesta</strong></th>
+<th><strong>Por qué</strong></th>
+</tr>
+<tr>
+<td>1</td>
+<td><strong>a</strong></td>
+<td>Protocolos comunes</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>c</strong></td>
+<td>No equivale a VPN</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>b</strong></td>
+<td>RFC</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>d</strong></td>
+<td>Naturaleza diversa</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>c</strong></td>
+<td>Dentro de su misión</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>a</strong></td>
+<td>iana.org</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>b</strong></td>
+<td>Por regiones</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>d</strong></td>
+<td>Cinco RIR</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>a</strong></td>
+<td>Jerarquía</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>c</strong></td>
+<td>No la URL entera</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>d</strong></td>
+<td>Derecha a izquierda</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>b</strong></td>
+<td>Con caché</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>b</strong></td>
+<td>Remisiones</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>a</strong></td>
+<td>No es el de IP</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>d</strong></td>
+<td>CDN, balanceo</td>
+</tr>
+<tr>
+<td>16</td>
+<td><strong>c</strong></td>
+<td>128 bits</td>
+</tr>
+<tr>
+<td>17</td>
+<td><strong>b</strong></td>
+<td>IP a nombre</td>
+</tr>
+<tr>
+<td>18</td>
+<td><strong>d</strong></td>
+<td>Delegación</td>
+</tr>
+<tr>
+<td>19</td>
+<td><strong>a</strong></td>
+<td>No a una IP</td>
+</tr>
+<tr>
+<td>20</td>
+<td><strong>c</strong></td>
+<td>Los dos</td>
+</tr>
+<tr>
+<td>21</td>
+<td><strong>d</strong></td>
+<td>HTTP</td>
+</tr>
+<tr>
+<td>22</td>
+<td><strong>b</strong></td>
+<td>Semántica HTTP</td>
+</tr>
+<tr>
+<td>23</td>
+<td><strong>a</strong></td>
+<td>401 es autenticación</td>
+</tr>
+<tr>
+<td>24</td>
+<td><strong>c</strong></td>
+<td>500, 503</td>
+</tr>
+<tr>
+<td>25</td>
+<td><strong>b</strong></td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>26</td>
+<td><strong>d</strong></td>
+<td>Y compresión de cabeceras</td>
+</tr>
+<tr>
+<td>27</td>
+<td><strong>a</strong></td>
+<td>Integra TLS 1.3</td>
+</tr>
+<tr>
+<td>28</td>
+<td><strong>c</strong></td>
+<td>Fallback</td>
+</tr>
+<tr>
+<td>29</td>
+<td><strong>b</strong></td>
+<td>No legitimidad</td>
+</tr>
+<tr>
+<td>30</td>
+<td><strong>d</strong></td>
+<td>FTPS usa TLS</td>
+</tr>
+<tr>
+<td>31</td>
+<td><strong>c</strong></td>
+<td>Sustituir por SSH</td>
+</tr>
+<tr>
+<td>32</td>
+<td><strong>a</strong></td>
+<td>Convivencia</td>
+</tr>
+<tr>
+<td>33</td>
+<td><strong>b</strong></td>
+<td>Una métrica concreta</td>
+</tr>
+<tr>
+<td>34</td>
+<td><strong>d</strong></td>
+<td>DNS</td>
+</tr>
+<tr>
+<td>35</td>
+<td><strong>c</strong></td>
+<td>Recurso no encontrado</td>
+</tr>
+</table></div>
 <h2 id="5-preguntas-cortas" class="tema-h2">5. Posibles preguntas cortas (con esquema de respuesta)</h2>
 <h4 class="tema-h4">1. Defina Internet</h4>
 <ul class="tema-lista">
@@ -284,7 +509,7 @@
 <h4 class="tema-h4">Caso 1 — Funciona por IP pero no por nombre</h4>
 <p><strong>Escenario</strong>: una persona usuaria puede acceder a una aplicación <strong>escribiendo su dirección IP</strong>, pero <strong>no</strong> cuando utiliza el <strong>nombre de dominio</strong>.</p>
 <ul class="tema-lista">
-<li><strong>a) ¿Dónde está el problema?</strong> En la <strong>resolución DNS</strong>: la conectividad funciona (se llega por IP), pero <strong>el nombre no se resuelve</strong>.</li>
+<li><strong>a) ¿Dónde está el problema?</strong> Lo más probable, en la <strong>resolución DNS</strong>: se llega por IP. Se confirma <strong>consultando el nombre</strong>; en HTTPS, probar por IP no siempre equivale a probar por nombre.</li>
 <li><strong>b) ¿Qué paso del flujo falla?</strong> El <strong>paso 1</strong>: DNS resuelve el nombre. Los pasos de <strong>transporte, TLS y HTTP</strong> ni siquiera llegan a intentarse con la dirección correcta.</li>
 <li><strong>c) ¿Qué se comprueba?</strong> El <strong>resolver</strong> configurado en el equipo, si responde, y si el <strong>registro</strong> existe en el servidor <strong>autoritativo</strong>.</li>
 <li><strong>d) ¿Es un problema de red?</strong> <strong>No</strong>: la conectividad IP está demostrada. Es un problema del <strong>servicio de nombres</strong>.</li>
@@ -333,7 +558,7 @@
 <p><strong>Escenario</strong>: un servidor dispone <strong>simultáneamente</strong> de direccionamiento <strong>IPv4 e IPv6</strong>.</p>
 <ul class="tema-lista">
 <li><strong>a) ¿Cómo se denomina esa situación?</strong> <strong>Dual stack</strong>: <strong>coexistencia de ambas pilas</strong>.</li>
-<li><strong>b) ¿Qué registros DNS tendrá?</strong> Un registro <strong>A</strong> para IPv4 y un registro <strong>AAAA</strong> para IPv6.</li>
+<li><strong>b) ¿Qué registros DNS puede publicar?</strong> Un registro <strong>A</strong> para IPv4 y un registro <strong>AAAA</strong> para IPv6; tener ambas pilas no obliga a publicar ambos.</li>
 <li><strong>c) ¿Por qué se llega a esta situación?</strong> Por la <strong>migración progresiva</strong> derivada del <strong>agotamiento de IPv4</strong> y del <strong>crecimiento del número de dispositivos</strong>.</li>
 <li><strong>d) ¿Es un estado transitorio?</strong> Conceptualmente sí, pero la <strong>convivencia se ha consolidado</strong>: la sustitución completa de IPv4 no se ha producido.</li>
 </ul>
@@ -361,6 +586,49 @@
 <li><strong>c) ¿Qué se comprueba entonces?</strong> El <strong>servicio concreto</strong> afectado y su <strong>protocolo</strong>: correo (SMTP/IMAP/POP3), ficheros (FTP/SFTP/FTPS), acceso remoto (SSH) o resolución de nombres (DNS).</li>
 <li><strong>d) ¿Qué error habría que evitar?</strong> Concluir que <strong>«no hay Internet»</strong> cuando lo que falla es <strong>un servicio determinado</strong>.</li>
 </ul>
+<h4 class="tema-h4">Mini casos</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Síntoma</strong></th>
+<th><strong>Hipótesis</strong></th>
+<th><strong>Comprobación</strong></th>
+</tr>
+<tr>
+<td>El nombre no resuelve</td>
+<td>Nombre, resolver o zona</td>
+<td>Consultar a otro resolver autorizado</td>
+</tr>
+<tr>
+<td>Resuelve y la web no abre</td>
+<td>Puerto, filtrado o servidor</td>
+<td>Probar la conexión al puerto</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Ruta errónea o recurso retirado</td>
+<td>Revisar la URL</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Servicio saturado o en mantenimiento</td>
+<td>Alcance y responsable del servicio</td>
+</tr>
+<tr>
+<td>Aviso de certificado</td>
+<td>Nombre, fecha, confianza u hora</td>
+<td>No continuar; verificar y escalar</td>
+</tr>
+<tr>
+<td>Va más lento en una red con UDP filtrado</td>
+<td>Vuelta de HTTP/3 a HTTP/2</td>
+<td>Ver el protocolo en el navegador</td>
+</tr>
+<tr>
+<td>IP distinta dentro y fuera</td>
+<td>Split DNS</td>
+<td>Preguntar al responsable antes de tocar</td>
+</tr>
+</table></div>
 <h2 id="7-matriz-de-memorizacion" class="tema-h2">7. Matriz de memorización</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -377,7 +645,7 @@
 </tr>
 <tr>
 <td><strong>RFC</strong></td>
-<td>Documento técnico publicado por el IETF; no equivale a estándar obligatorio</td>
+<td>Documento técnico, sobre todo del IETF; no equivale a estándar obligatorio</td>
 </tr>
 <tr>
 <td><strong>ICANN</strong></td>
@@ -390,6 +658,10 @@
 <tr>
 <td><strong>RIR</strong></td>
 <td>Registros regionales que reciben bloques de IP y los distribuyen y asignan en su región</td>
+</tr>
+<tr>
+<td><strong>Los cinco RIR</strong></td>
+<td>RIPE NCC, ARIN, LACNIC, APNIC y AFRINIC</td>
 </tr>
 <tr>
 <td><strong>RIPE NCC</strong></td>
@@ -488,7 +760,32 @@
 <td>Coexistencia de IPv4 e IPv6</td>
 </tr>
 </table></div>
-<h2 id="8-resumen-final" class="tema-h2">8. Resumen final: si mañana fuera el examen</h2>
+<h2 id="8-repaso-visual" class="tema-h2">8. Repaso visual · T31</h2>
+<figure class="tema-figura">
+<figcaption>1 · Quién es quién en Internet</figcaption>
+<svg viewBox="0 0 700 229" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at31ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at31aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at31av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at31an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at31ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at31ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">IETF</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#003da5" stroke-width="2" marker-end="url(#at31ap)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">PROTOCOLOS y estándares (publica RFC)</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">ICANN</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#003da5" stroke-width="2" marker-end="url(#at31ap)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Coordina los IDENTIFICADORES únicos</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">IANA</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at31aa)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">REGISTROS centrales, en el marco de ICANN</text><rect x="8" y="139" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">RIR</text><line x1="264" y1="157.0" x2="356" y2="157.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at31aa)"/><rect x="362" y="139" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Reparto REGIONAL de direcciones IP</text><rect x="8" y="184" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="202.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">RIPE NCC</text><line x1="264" y1="202.0" x2="356" y2="202.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at31ag)"/><rect x="362" y="184" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="202.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">RIR de la región europea</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>2 · Jerarquía del DNS</figcaption>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at31bp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at31ba" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at31bv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at31bn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at31br" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at31bg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="684" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><rect x="8" y="4" width="54" height="36" rx="6" fill="#003da5"/><rect x="56" y="4" width="6" height="36" fill="#003da5"/><text x="35.0" y="22.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">1</text><text x="76" y="22.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">RAÍZ (root)</text><rect x="8" y="47" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="47" width="54" height="36" rx="6" fill="#1f5b9e"/><rect x="56" y="47" width="6" height="36" fill="#1f5b9e"/><text x="35.0" y="65.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">2</text><text x="76" y="65.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">TLD</text><text x="680" y="65.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">ej.: .eus</text><rect x="8" y="90" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="90" width="54" height="36" rx="6" fill="#1f5b9e"/><rect x="56" y="90" width="6" height="36" fill="#1f5b9e"/><text x="35.0" y="108.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">3</text><text x="76" y="108.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">DOMINIO</text><text x="680" y="108.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">ej.: gipuzkoa</text><rect x="8" y="133" width="684" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><rect x="8" y="133" width="54" height="36" rx="6" fill="#5a5652"/><rect x="56" y="133" width="6" height="36" fill="#5a5652"/><text x="35.0" y="151.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">4</text><text x="76" y="151.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">SUBDOMINIO / HOST</text><text x="680" y="151.0" text-anchor="end" font-size="12" font-weight="500" fill="#4c5560" dominant-baseline="middle">ej.: www</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>3 · Resolución DNS</figcaption>
+<svg viewBox="0 0 700 58" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at31cp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at31ca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at31cv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at31cn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at31cr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at31cg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="6" width="116.0" height="46" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="66.0" y="29.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">CLIENTE</text><line x1="128.0" y1="29.0" x2="146.0" y2="29.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at31ca)"/><rect x="150.0" y="6" width="116.0" height="46" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="208.0" y="22.4" text-anchor="middle" font-size="10.1" font-weight="600" fill="#23272e" dominant-baseline="middle">RESOLVER</text><text x="208.0" y="35.5" text-anchor="middle" font-size="10.1" font-weight="600" fill="#23272e" dominant-baseline="middle">recursivo / caché</text><line x1="270.0" y1="29.0" x2="288.0" y2="29.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at31ca)"/><rect x="292.0" y="6" width="116.0" height="46" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="350.0" y="29.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">ROOT</text><line x1="412.0" y1="29.0" x2="430.0" y2="29.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at31ca)"/><rect x="434.0" y="6" width="116.0" height="46" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="492.0" y="29.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">TLD</text><line x1="554.0" y1="29.0" x2="572.0" y2="29.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at31ca)"/><rect x="576.0" y="6" width="116.0" height="46" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="634.0" y="29.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">AUTORITATIVO</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>4 · Internet y Web</figcaption>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at31ep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at31ea" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at31ev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at31en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at31er" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at31eg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">INTERNET</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">WEB</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">INFRAESTRUCTURA</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Red mundial de redes</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="176.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Protocolos comunes</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">SERVICIO sobre ella</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="103.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">HTTP + recursos</text><text x="524.0" y="118.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">enlazados</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Uno de tantos servicios</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>5 · HTTP: versión y transporte</figcaption>
+<svg viewBox="0 0 700 139" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at31fp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at31fa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at31fv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at31fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at31fr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at31fg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">HTTP/1.1</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at31fa)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">TCP — conexiones persistentes</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">HTTP/2</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at31fa)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">TCP — multiplexación + compresión</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">HTTP/3</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#003da5" stroke-width="2" marker-end="url(#at31fp)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">QUIC sobre UDP — streams independientes</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>6 · De la URL a la página</figcaption>
+<svg viewBox="0 0 700 58" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at31gp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at31ga" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at31gv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at31gn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at31gr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at31gg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="6" width="92.33333333333333" height="46" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="54.166666666666664" y="29.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">DNS</text><line x1="104.33333333333333" y1="29.0" x2="122.33333333333333" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at31gp)"/><rect x="126.33333333333333" y="6" width="92.33333333333333" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="172.5" y="29.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">IP</text><line x1="222.66666666666666" y1="29.0" x2="240.66666666666666" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at31gp)"/><rect x="244.66666666666666" y="6" width="92.33333333333333" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="290.8333333333333" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">TRANSPORTE</text><text x="290.8333333333333" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">TCP o QUIC</text><line x1="341.0" y1="29.0" x2="359.0" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at31gp)"/><rect x="363.0" y="6" width="92.33333333333333" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="409.1666666666667" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">TLS</text><text x="409.1666666666667" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">si HTTPS</text><line x1="459.3333333333333" y1="29.0" x2="477.3333333333333" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at31gp)"/><rect x="481.3333333333333" y="6" width="92.33333333333333" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.5" y="29.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">HTTP</text><line x1="577.6666666666666" y1="29.0" x2="595.6666666666666" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at31gp)"/><rect x="599.6666666666666" y="6" width="92.33333333333333" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="645.8333333333333" y="29.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">RECURSOS</text></svg>
+</figure>
+<h2 id="9-resumen-final" class="tema-h2">9. Resumen final: si mañana fuera el examen</h2>
 <ul class="tema-lista">
 <li><strong>Internet</strong> = <strong>interconexión mundial de redes independientes con protocolos comunes</strong>. <strong>No hay una única organización propietaria o gestora del conjunto</strong>, pero <strong>sí organismos de coordinación, estandarización y gestión de identificadores</strong>.</li>
 <li><strong>IETF → PROTOCOLOS</strong> (publica <strong>RFC</strong>: documentos técnicos, <strong>no necesariamente estándares obligatorios</strong>). <strong>ICANN → IDENTIFICADORES</strong> (no controla Internet ni los contenidos). <strong>IANA → REGISTROS CENTRALES</strong>, en el marco de ICANN. <strong>RIR → REPARTO REGIONAL</strong>; <strong>RIPE NCC</strong> en Europa.</li>
@@ -498,7 +795,7 @@
 <li><strong>INTERNET ≠ WEB</strong>: infraestructura frente a <strong>servicio basado en HTTP</strong> y recursos enlazados.</li>
 <li><strong>HTTP/1.1 → TCP con CONEXIONES PERSISTENTES</strong> (no una conexión por petición). <strong>HTTP/2 → TCP + MULTIPLEXACIÓN</strong> y compresión de cabeceras. <strong>HTTP/3 → QUIC, que va sobre UDP</strong>.</li>
 <li><strong>HTTP/3</strong>: multiplexación por streams, conexión de <strong>baja latencia</strong> y <strong>evita que la pérdida de paquetes de un stream bloquee los demás streams de la misma conexión</strong>. <strong>No digas «elimina todo el head-of-line blocking».</strong> (RFC 9114.)</li>
-<li><strong>HTTPS = HTTP + TLS.</strong></li>
+<li><strong>HTTPS = HTTP + TLS.</strong> QUIC ya lo integra. <strong>4xx petición, 5xx servidor.</strong></li>
 <li><strong>Servicios</strong>: web → HTTP/HTTPS · correo → SMTP/IMAP/POP3 · ficheros → FTP/SFTP/FTPS · acceso remoto → SSH · nombres → DNS.</li>
 <li><strong>FTP → sin protección por defecto · SFTP → mediante SSH · FTPS → FTP con TLS.</strong> <strong>SFTP ≠ FTPS.</strong></li>
 <li><strong>SSH → acceso remoto seguro · TELNET → sin cifrado.</strong></li>
@@ -506,14 +803,14 @@
 <li><strong>FLUJO INTEGRADOR</strong>: <strong>DNS resuelve → se determina la IP → se establece el transporte → se negocia TLS (si HTTPS) → petición HTTP → el servidor devuelve los recursos.</strong></li>
 <li><strong>Tendencias</strong>: consolidación de HTTPS · migración progresiva a IPv6 · crecimiento de HTTP/3 y QUIC · nube · IoT · mayores exigencias de ciberseguridad. <strong>Ninguna cifra de adopción es contenido nuclear</strong>: depende de <strong>fuente, fecha y métrica</strong>.</li>
 </ul>
-<h2 id="9-actualidad" class="tema-h2">9. Actualidad de Internet — datos fechados</h2>
+<h2 id="10-actualidad" class="tema-h2">10. Actualidad de Internet — datos fechados</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Información sujeta a cambio · Fecha de actualización de estos apuntes: agosto de 2026</strong><br><strong>Toda estadística debe indicar FUENTE, FECHA y MÉTRICA.</strong><br>Y una advertencia esencial: <strong>no debe mezclarse</strong> el «<strong>porcentaje de usuarios que acceden a un servicio concreto mediante IPv6</strong>» con el «<strong>porcentaje del tráfico mundial de Internet</strong>». <strong>Son métricas distintas</strong> y no son intercambiables.</th>
+<th><strong>📌 Información sujeta a cambio · Cifras y organismos comprobados en Google e iana.org el 22 de noviembre de 2026</strong><br><strong>Toda estadística debe indicar FUENTE, FECHA y MÉTRICA.</strong><br>Y una advertencia esencial: <strong>no debe mezclarse</strong> el «<strong>porcentaje de usuarios que acceden a un servicio concreto mediante IPv6</strong>» con el «<strong>porcentaje del tráfico mundial de Internet</strong>». <strong>Son métricas distintas</strong> y no son intercambiables.</th>
 </tr>
 </table></div>
 <ul class="tema-lista">
-<li><strong>Adopción de IPv6</strong>: el porcentaje <strong>depende de la fuente y de la metodología</strong>. A modo de ejemplo de <strong>una</strong> métrica concreta: <strong>Google mide el porcentaje de usuarios que acceden a Google mediante IPv6</strong>, y registró un <strong>48,68 % el 14 de junio de 2026</strong>. <strong>Ese dato no equivale al porcentaje de tráfico mundial de Internet</strong> ni debe presentarse como tal. En un examen, la respuesta segura es la <strong>tendencia</strong>: <strong>migración progresiva con coexistencia mediante dual stack</strong>.</li>
+<li><strong>Adopción de IPv6</strong>: el porcentaje <strong>depende de la fuente y de la metodología</strong>. A modo de ejemplo de <strong>una</strong> métrica concreta: <strong>Google mide el porcentaje de usuarios que acceden a Google mediante IPv6</strong>, y registró un <strong>48,68 % el 14 de junio de 2026</strong> y un <strong>48,58 % el 20 de noviembre de 2026</strong> (oscila según el día de la semana). <strong>Ese dato no equivale al porcentaje de tráfico mundial de Internet</strong> ni debe presentarse como tal. En un examen, la respuesta segura es la <strong>tendencia</strong>: <strong>migración progresiva con coexistencia mediante dual stack</strong>.</li>
 <li><strong>Adopción de IPv6 por país</strong>: los datos nacionales <strong>varían notablemente</strong> entre países y entre fuentes. <strong>No debe fijarse ninguna cifra</strong> —tampoco para España— como dato permanente, salvo que proceda de una <strong>fuente actualizada</strong> y se indique expresamente <strong>fecha y métrica</strong>.</li>
 <li><strong>Adopción de HTTP/3</strong>: las cifras <strong>varían mucho</strong> según <strong>fuente, muestra, tipo de recursos, CDN, región y metodología</strong>. El <strong>núcleo estable</strong> es: <strong>«HTTP/3 sigue extendiéndose y convive con HTTP/1.1 y HTTP/2»</strong>. <strong>No debe afirmarse ningún porcentaje</strong> como dato permanente.</li>
 <li><strong>Evolución de QUIC</strong>: su despliegue continúa creciendo, impulsado por los grandes proveedores de contenido y las redes de distribución. Lo <strong>estable</strong> es la asociación <strong>HTTP/3 → QUIC → UDP</strong>.</li>
