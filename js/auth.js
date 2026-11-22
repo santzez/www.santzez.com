@@ -1,7 +1,7 @@
 /* =============================================================
    auth.js — Autenticación contra Supabase
    -------------------------------------------------------------
-   Reemplaza al sistema antiguo basado en usuarios.json + hash
+   Reemplaza al sistema antiguo de usuarios del repositorio
    estático. Usa Supabase Auth (email/contraseña, recuperación
    de contraseña por email) + tabla `perfiles` con campo
    `aprobado` para que un nuevo registro NO pueda usar la web
