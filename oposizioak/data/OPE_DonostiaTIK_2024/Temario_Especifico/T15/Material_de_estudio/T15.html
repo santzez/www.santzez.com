@@ -16,13 +16,11 @@
 </ol></nav>
 
   <div class="tema-cuerpo">
-
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>⚠️ No confundir — fronteras del tema</strong><br>Este tema es la <strong>administración práctica</strong> de eventos, recursos compartidos y permisos en Windows. Los fundamentos de AD DS y GPO son el <strong>Tema 12</strong>; los usuarios y grupos, el <strong>Tema 14</strong>; el NAS y SMB desde la arquitectura de almacenamiento, el <strong>Tema 7</strong>; la seguridad de la información, los <strong>Temas 21-25</strong>; y las redes, el <strong>Tema 28</strong>. Aquí no se desarrollan AD avanzado, GPO avanzada, Kerberos, SIEM ni la arquitectura interna de SMB.</th>
 </tr>
 </table></div>
-
 <h2 id="1-el-visor-de-eventos" class="tema-h2">1. El Visor de eventos: estructura y registros</h2>
 <p>El <strong>Visor de eventos (eventvwr.msc)</strong> es la <strong>consola MMC para consultar los eventos registrados por Windows y las aplicaciones</strong>. Los registros se almacenan en archivos con extensión <strong>.evtx</strong>.</p>
 <p>Cada evento incluye, entre otros datos:</p>
@@ -63,7 +61,6 @@
 <figcaption>Registros del Visor de eventos</figcaption>
 <svg viewBox="0 0 700 184" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at15ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at15aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at15av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at15an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at15ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at15ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">APLICACIÓN</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at15aa)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Sucesos de PROGRAMAS</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">SEGURIDAD</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#003da5" stroke-width="2" marker-end="url(#at15ap)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">AUDITORÍA (si está habilitada)</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">SISTEMA</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at15aa)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">SO, drivers y servicios</text><rect x="8" y="139" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">INSTALACIÓN / REENVIADOS</text><line x1="264" y1="157.0" x2="356" y2="157.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at15ag)"/><rect x="362" y="139" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Despliegue y WEF</text></svg>
 <p class="tema-figura__nota">Los registros se guardan en .evtx; cada evento tiene Event ID, origen, fecha y descripción.</p></figure>
-
 <p>Los registros <strong>Instalación</strong> y <strong>Eventos reenviados</strong> no se comportan exactamente igual ni tienen el mismo peso en todas las versiones y escenarios de Windows: su contenido depende del rol del equipo y de la configuración.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -75,7 +72,6 @@
 <th><strong>🧠 Para memorizar — equivalencia funcional aproximada</strong><br><strong>Visor de eventos (Windows) ↔ journalctl + /var/log (Linux, Tema 13)</strong>: ambos son el histórico de lo ocurrido en el sistema. Es una <strong>equivalencia funcional aproximada</strong>: los mecanismos no son idénticos.</th>
 </tr>
 </table></div>
-
 <h2 id="2-niveles-y-auditoria" class="tema-h2">2. Niveles de evento y resultados de auditoría</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -106,7 +102,6 @@
 </tr>
 </table></div>
 <p>Un evento <strong>Critical</strong> no implica necesariamente pérdida de datos: indica gravedad potencial, no un desenlace concreto.</p>
-
 <h2 id="3-supervision-practica" class="tema-h2">3. Supervisión práctica: vistas, tareas y reenvío</h2>
 <ul class="tema-lista">
 <li><strong>Vistas personalizadas (Custom Views)</strong>: <strong>filtros guardados</strong> sobre uno o varios registros, para centrarse solo en los eventos relevantes (por ejemplo, errores y críticos de las últimas 24 horas).</li>
@@ -119,14 +114,12 @@
 <th><strong>🔍 Para ampliar</strong><br>La secuencia habitual en organizaciones grandes es <strong>WEF → agregación → posible SIEM</strong> (herramientas de correlación y análisis de eventos de múltiples fuentes). El detalle del SIEM queda fuera del alcance de este tema.</th>
 </tr>
 </table></div>
-
 <h2 id="4-recursos-compartidos" class="tema-h2">4. Recursos compartidos: carpetas e impresoras</h2>
 <p>Una <strong>carpeta compartida</strong> es un <strong>recurso accesible desde otros equipos de la red</strong>, identificado por su <strong>ruta UNC</strong>: <strong>\\servidor\recurso</strong>. El protocolo de compartición de archivos en Windows es <strong>SMB</strong>; <strong>CIFS</strong> es una denominación histórica asociada a una versión e implementación antigua del ecosistema SMB.</p>
 <figure class="tema-figura">
 <figcaption>Compartir en red</figcaption>
 <svg viewBox="0 0 700 139" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at15cp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at15ca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at15cv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at15cn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at15cr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at15cg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">UNC</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at15ca)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">\\servidor\recurso</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">SMB</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at15ca)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Protocolo para COMPARTIR (CIFS, histórico)</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">C$ · ADMIN$</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#b26a00" stroke-width="2" marker-end="url(#at15cn)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Recurso administrativo OCULTO</text></svg>
 <p class="tema-figura__nota">«Oculto» no significa inaccesible.</p></figure>
-
 <h4 class="tema-h4">Herramientas</h4>
 <ul class="tema-lista">
 <li><strong>Explorador de archivos</strong>: Propiedades → Compartir.</li>
@@ -141,7 +134,6 @@
 </table></div>
 <h4 class="tema-h4">Impresoras compartidas</h4>
 <p>Compartir una <strong>impresora</strong> sigue la misma lógica: el equipo o servidor que la publica permite que <strong>otros equipos de la red</strong> le envíen trabajos sin tenerla conectada directamente. (La gestión de servidores de impresión no es objeto de este tema.)</p>
-
 <h2 id="5-permisos-de-recurso-compartido" class="tema-h2">5. Permisos de recurso compartido (Share)</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -166,7 +158,6 @@
 <th><strong>📌 Imprescindible para el examen</strong><br>Los permisos de recurso compartido <strong>se aplican al acceder a través de la red</strong> (por su ruta UNC). <strong>NO intervienen en un acceso local</strong> directo al equipo donde reside la carpeta.</th>
 </tr>
 </table></div>
-
 <h2 id="6-permisos-ntfs" class="tema-h2">6. Permisos NTFS, ACL/ACE y herencia</h2>
 <p>Los <strong>permisos NTFS</strong> se definen en el sistema de archivos y presentan tres rasgos clave:</p>
 <ul class="tema-lista">
@@ -189,7 +180,6 @@
 <th><strong>📌 Imprescindible para el examen — formulación prudente</strong><br><strong>Una denegación explícita suele prevalecer sobre los permisos de permitir aplicables al mismo acceso.</strong><br>Es la regla que hay que dominar para el examen; evita formularla como un absoluto («cualquier Deny elimina siempre el acceso en cualquier circunstancia»), porque el resultado depende del conjunto de entradas aplicables y de la configuración concreta.</th>
 </tr>
 </table></div>
-
 <h2 id="7-permiso-efectivo" class="tema-h2">7. El permiso efectivo: local y por red</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -200,7 +190,6 @@
 <figcaption>Permiso efectivo</figcaption>
 <svg viewBox="0 0 700 133" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at15ep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at15ea" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at15ev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at15en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at15er" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at15eg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="4" width="110" height="36" rx="6" fill="#1f5b9e"/><rect x="112" y="4" width="6" height="36" fill="#1f5b9e"/><text x="63.0" y="22.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">LOCAL</text><text x="132" y="22.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Se aplica solo NTFS</text><rect x="8" y="47" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="47" width="110" height="36" rx="6" fill="#1f5b9e"/><rect x="112" y="47" width="6" height="36" fill="#1f5b9e"/><text x="63.0" y="65.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">RED</text><text x="132" y="65.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Se combinan SHARE + NTFS</text><rect x="8" y="90" width="684" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><rect x="8" y="90" width="110" height="36" rx="6" fill="#003da5"/><rect x="112" y="90" width="6" height="36" fill="#003da5"/><text x="63.0" y="108.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">EFECTIVO</text><text x="132" y="108.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Prevalece el MÁS RESTRICTIVO</text></svg>
 </figure>
-
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>Permiso Share</strong></th>

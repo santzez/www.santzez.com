@@ -16,13 +16,11 @@
 </ol></nav>
 
   <div class="tema-cuerpo">
-
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>⚠️ No confundir — fronteras del tema</strong><br>El enunciado oficial es <strong>arquitectura, componentes y clientes</strong>: ese es el núcleo. IBM/HCL Notes es el <strong>Tema 18</strong>; los servicios y plataformas web (incluido el webmail), el <strong>Tema 20</strong>; la criptografía, el <strong>Tema 24</strong>; el spoofing, el spam y el phishing, el <strong>Tema 25</strong>; y DNS y redes, los <strong>Temas 27-28</strong>. Aquí se citan solo para contextualizar.</th>
 </tr>
 </table></div>
-
 <h2 id="1-arquitectura-y-componentes" class="tema-h2">1. Arquitectura y componentes: MUA, MSA, MTA y MDA</h2>
 <p>El correo electrónico funciona gracias a la cooperación de varios agentes con papeles bien diferenciados. Distinguirlos es el contenido más preguntable del tema.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -61,9 +59,7 @@
 <figcaption>Los cuatro agentes del correo</figcaption>
 <svg viewBox="0 0 700 58" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at17ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at17aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at17av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at17an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at17ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at17ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="6" width="151.5" height="46" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="83.75" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">MUA</text><text x="83.75" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">usa</text><line x1="163.5" y1="29.0" x2="181.5" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at17ap)"/><rect x="185.5" y="6" width="151.5" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="261.25" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">MSA</text><text x="261.25" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">submission</text><line x1="341.0" y1="29.0" x2="359.0" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at17ap)"/><rect x="363.0" y="6" width="151.5" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="438.75" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">MTA</text><text x="438.75" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">transporta</text><line x1="518.5" y1="29.0" x2="536.5" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at17ap)"/><rect x="540.5" y="6" width="151.5" height="46" rx="6" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="616.25" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">MDA</text><text x="616.25" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">entrega</text></svg>
 </figure>
-
 <p>El <strong>MSA</strong> se introduce aquí sobre todo porque explica la razón de ser del <strong>puerto 587</strong> (apartado 4): separar el <strong>envío del cliente</strong> (submission, normalmente autenticado) del <strong>transporte entre servidores</strong> (relay). En muchas implementaciones el MSA y el MTA forman parte del mismo producto.</p>
-
 <h2 id="2-el-registro-mx-y-el-recorrido-del-mensaje" class="tema-h2">2. El registro MX y el recorrido del mensaje</h2>
 <h4 class="tema-h4">Registro MX</h4>
 <ul class="tema-lista">
@@ -89,7 +85,6 @@
 <th><strong>⚠️ Modelo didáctico, no secuencia rígida</strong><br>La arquitectura real <strong>puede variar</strong>: MSA, MTA y MDA <strong>pueden estar implementados de formas distintas</strong> (integrados en un mismo producto, distribuidos en varios servidores, o sustituidos por servicios en la nube con sus propios flujos internos). El esquema anterior sirve para <strong>razonar el recorrido</strong>, no como secuencia obligatoria de cualquier plataforma.</th>
 </tr>
 </table></div>
-
 <h2 id="3-estructura-del-mensaje" class="tema-h2">3. Estructura del mensaje: cabeceras, cuerpo y MIME</h2>
 <p>Todo mensaje se compone de <strong>cabeceras (headers)</strong> y <strong>cuerpo</strong>.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -152,7 +147,6 @@
 <th><strong>⚠️ No confundir — MIME ≠ Base64</strong><br><strong>MIME es el estándar</strong> que estructura y describe el contenido del mensaje. <strong>Base64 es una de las codificaciones</strong> que pueden utilizarse <strong>dentro de MIME</strong> para representar contenido binario de forma segura en el transporte. Decir que «MIME es Base64» es un error conceptual.</th>
 </tr>
 </table></div>
-
 <h2 id="4-smtp" class="tema-h2">4. SMTP: envío y transferencia</h2>
 <p><strong>SMTP (Simple Mail Transfer Protocol)</strong> es el protocolo utilizado tanto para el <strong>message submission</strong> (la entrada del mensaje al sistema desde el cliente) como para la <strong>transferencia o relay</strong> del correo <strong>entre servidores</strong>.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -185,7 +179,6 @@
 <th><strong>📌 Actualidad de los protocolos</strong><br>Las <strong>recomendaciones actuales favorecen el uso de TLS</strong> tanto para la submission como para el acceso al correo: <strong>587 con STARTTLS/TLS</strong>, <strong>465 con TLS implícito</strong>, <strong>995</strong> (POP3) y <strong>993</strong> (IMAP) con TLS. Los puertos sin cifrado se citan para reconocerlos, <strong>no como recomendación práctica</strong>.</th>
 </tr>
 </table></div>
-
 <h2 id="5-pop3-e-imap" class="tema-h2">5. Acceso al buzón: POP3 e IMAP</h2>
 <h4 class="tema-h4">POP3</h4>
 <ul class="tema-lista">
@@ -212,7 +205,6 @@
 <figcaption>SMTP · IMAP · POP3</figcaption>
 <svg viewBox="0 0 700 136" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at17cp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at17ca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at17cv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at17cn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at17cr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at17cg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="220.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="118.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">SMTP</text><rect x="240.0" y="6" width="220.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="350.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">IMAP</text><rect x="472.0" y="6" width="220.0" height="40" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="582.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">POP3</text><rect x="8.0" y="54" width="220.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="118.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">ENVÍA y transporta</text><rect x="8.0" y="94" width="220.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="118.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">25 · 587 · 465</text><rect x="240.0" y="54" width="220.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="350.0" y="63.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Deja en el SERVIDOR</text><text x="350.0" y="78.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">y SINCRONIZA</text><rect x="240.0" y="94" width="220.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="350.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">143 / 993</text><rect x="472.0" y="54" width="220.0" height="34" rx="5" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="582.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">DESCARGA al cliente</text><rect x="472.0" y="94" width="220.0" height="34" rx="5" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="582.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">110 / 995</text></svg>
 <p class="tema-figura__nota">Los puertos «9x» son las variantes con TLS implícito.</p></figure>
-
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th></th>
@@ -245,7 +237,6 @@
 <td>143 / 993</td>
 </tr>
 </table></div>
-
 <h2 id="6-spf-dkim-dmarc" class="tema-h2">6. Autenticación del dominio: SPF, DKIM y DMARC</h2>
 <p>SMTP, por diseño, no verifica que quien envía sea quien dice ser. Para mitigarlo existen tres mecanismos complementarios, asociados al <strong>dominio</strong> remitente. (El spoofing, el spam y el phishing como amenazas se estudian en el <strong>Tema 25</strong>; la criptografía, en el <strong>Tema 24</strong>.)</p>
 <h4 class="tema-h4">SPF</h4>
@@ -285,7 +276,6 @@
 <figcaption>SPF · DKIM · DMARC</figcaption>
 <svg viewBox="0 0 700 139" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at17ep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at17ea" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at17ev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at17en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at17er" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at17eg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">SPF</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at17ea)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">AUTORIZA qué servidores pueden enviar</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">DKIM</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at17ea)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">FIRMA el mensaje (+ integridad)</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">DMARC</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#003da5" stroke-width="2" marker-end="url(#at17ep)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">POLÍTICA + alineación + informes</text></svg>
 <p class="tema-figura__nota">Los tres se publican en el DNS; la firma DKIM viaja en el propio mensaje.</p></figure>
-
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>Mecanismo</strong></th>
@@ -309,7 +299,6 @@
 <th><strong>📌 Imprescindible para el examen — relación con el DNS</strong><br>No es exacto decir sin más que «SPF, DKIM y DMARC son registros DNS»:<br><strong>SPF</strong> → <strong>política publicada en DNS</strong>.<br><strong>DKIM</strong> → <strong>la firma viaja en el mensaje</strong>; lo que se publica en DNS es la <strong>clave pública</strong> de verificación.<br><strong>DMARC</strong> → <strong>política publicada en DNS</strong>, normalmente bajo <strong>_dmarc</strong>.<br>Distinguir el <strong>mecanismo</strong> de lo que se <strong>publica en DNS</strong> es conceptualmente importante.</th>
 </tr>
 </table></div>
-
 <h2 id="7-clientes-de-correo" class="tema-h2">7. Clientes de correo</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
