@@ -3115,3 +3115,43 @@ div.tarjeta.tarjeta--proxima { cursor: default; transform: none; box-shadow: non
 .aviso-proximamente p { margin: 0.6rem 0 0; max-width: 70ch; }
 .mientras-tanto { margin-top: 2rem; }
 .tema-compartido { margin: 0.5rem 0 0; font-size: 0.85rem; color: var(--color-texto-suave); }
+
+/* =============================================================
+   LECTURA Y MÓVIL (nov-2026)
+   ============================================================= */
+/* V1 · Negrita en negro dentro de los apuntes: el azul queda para títulos y enlaces */
+.tema-articulo p strong, .tema-articulo li strong, .tema-articulo td strong { color: var(--color-texto); }
+
+/* V2 · Recuadros: título en azul y texto normal, no todo en negrita azul */
+.tabla-tema tr:only-child > th:only-child {
+  font-weight: 400; color: var(--color-texto); line-height: 1.6;
+  border-left: 4px solid var(--color-primario);
+}
+.tabla-tema tr:only-child > th:only-child strong { color: var(--color-texto); }
+.tabla-tema tr:only-child > th:only-child > strong:first-child { color: var(--color-primario); }
+
+@media (max-width: 640px) {
+  /* V3 · Las cuatro pestañas caben: icono encima del nombre */
+  .tabs .tabs__tab, button.tabs__tab {
+    flex: 1 0 auto; flex-direction: column; justify-content: center; gap: 0.3rem;
+    padding: 0.55rem 0.2rem; font-size: 0.72rem; letter-spacing: 0.02em;
+  }
+  .tabs__icono { margin: 0; }
+
+  /* V4 · Barra del tema en una línea al bajar */
+  .tema-contexto__bloque { display: none; }
+  .tema-contexto__nav { display: none; }
+  .tema-contexto--stuck .tema-contexto__nav { display: inline-flex; gap: 0.2rem; }
+  .tema-contexto { min-height: 50px; }   /* misma altura con y sin iconos: sin saltos al fijarse */
+  .tema-contexto__info { flex-wrap: nowrap; }
+  .tema-contexto__tema { white-space: nowrap; }
+  .tema-contexto__icono { width: 32px; height: 32px; }
+
+  /* V5 · Cabecera y migas más bajas */
+  .cabecera .contenedor { padding-top: 0.45rem; padding-bottom: 0.45rem; row-gap: 0.15rem; }
+  .cabecera__marca img { height: 30px !important; }
+  .migas { font-size: 0.78rem; flex-wrap: nowrap; white-space: nowrap; overflow-x: auto; }
+
+  /* V6 · Estadísticas: cifras de dos en dos */
+  .kpis { grid-template-columns: 1fr 1fr; }
+}
