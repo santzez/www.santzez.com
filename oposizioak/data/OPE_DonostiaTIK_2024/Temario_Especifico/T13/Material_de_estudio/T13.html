@@ -130,7 +130,7 @@
 <ul class="tema-lista">
 <li><strong>Qué es</strong>: una <strong>capa de abstracción entre el almacenamiento físico y los volúmenes lógicos</strong>.</li>
 <li><strong>Ventajas</strong>: <strong>flexibilidad</strong>, <strong>agrupación de dispositivos y volúmenes</strong>, <strong>ampliación de volúmenes</strong> en determinados escenarios y una administración más flexible que el <strong>particionado clásico</strong> de tamaño fijo.</li>
-<li><strong>Tres capas</strong>: <strong>PV</strong> (*physical volume*, el disco o la partición preparados para LVM) → <strong>VG</strong> (*volume group*, la bolsa de capacidad que suman uno o varios PV) → <strong>LV</strong> (*logical volume*, el volumen que se reparte de esa bolsa). Sobre el LV se crea el sistema de archivos y se monta.</li>
+<li><strong>Tres capas</strong>: <strong>PV</strong> (<em>physical volume</em>, el disco o la partición preparados para LVM) → <strong>VG</strong> (<em>volume group</em>, la bolsa de capacidad que suman uno o varios PV) → <strong>LV</strong> (<em>logical volume</em>, el volumen que se reparte de esa bolsa). Sobre el LV se crea el sistema de archivos y se monta.</li>
 <li><strong>Ampliar el LV no amplía por sí solo el sistema de archivos</strong>: son dos pasos (crecer el volumen y crecer el sistema de archivos), aunque hay herramientas que los coordinan, como <code>lvextend -r</code>. Y solo se puede crecer si <strong>queda espacio libre en el VG</strong>.</li>
 <li><strong>Reducir es otra cosa</strong>: <strong>XFS no se puede reducir</strong>; <strong>ext4</strong> sí, pero <strong>desmontado</strong> y con copia previa.</li>
 <li><strong>Snapshot LVM ≠ copia de seguridad</strong>: depende del mismo almacenamiento (Tema 23). Y <strong>LVM ≠ RAID</strong>: LVM organiza; la redundancia es cosa del RAID.</li>
@@ -246,7 +246,7 @@
 <li><strong>.socket</strong>: activación por socket.</li>
 <li><strong>.mount</strong>: puntos de montaje.</li>
 <li><strong>.timer</strong>: <strong>los timers de systemd proporcionan un mecanismo integrado de programación de tareas y pueden utilizarse en lugar de cron en muchos escenarios</strong> (no son, sin más, «el reemplazo de cron»).</li>
-<li><strong>.target</strong>: <strong>agrupa unidades</strong> y marca estados del arranque (por ejemplo, <code>multi-user.target</code>, el modo servidor sin gráficos). Se parecen a los antiguos *runlevels*, pero no son idénticos.</li>
+<li><strong>.target</strong>: <strong>agrupa unidades</strong> y marca estados del arranque (por ejemplo, <code>multi-user.target</code>, el modo servidor sin gráficos). Se parecen a los antiguos <em>runlevels</em>, pero no son idénticos.</li>
 <li>Las unidades se relacionan por <strong>dependencias y orden de arranque</strong>: si falla una de la que depende un servicio, el servicio tampoco arranca.</li>
 </ul>
 <h4 class="tema-h4">systemctl</h4>
@@ -324,7 +324,7 @@
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Imprescindible para el examen — las claves SSH</strong><br><strong>Clave pública</strong> → se <strong>instala/autoriza en el servidor</strong>.<br><strong>Clave privada</strong> → <strong>permanece en el cliente</strong> y debe protegerse (nunca se copia al servidor), normalmente con una <strong>frase de paso</strong> (*passphrase*), que no es la clave sino lo que la protege.<br>Invertir esto es una trampa clásica.</th>
+<th><strong>📌 Imprescindible para el examen — las claves SSH</strong><br><strong>Clave pública</strong> → se <strong>instala/autoriza en el servidor</strong>.<br><strong>Clave privada</strong> → <strong>permanece en el cliente</strong> y debe protegerse (nunca se copia al servidor), normalmente con una <strong>frase de paso</strong> (<em>passphrase</em>), que no es la clave sino lo que la protege.<br>Invertir esto es una trampa clásica.</th>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -405,7 +405,7 @@
 </figure>
 <h4 class="tema-h4">Leer bien las cifras</h4>
 <ul class="tema-lista">
-<li><strong>Memoria</strong>: Linux usa la RAM libre como <strong>caché</strong> (*buff/cache*) y la devuelve cuando hace falta. Una columna <strong>free</strong> baja es normal; lo que indica presión es una <strong>available</strong> baja, junto con uso de swap creciente. Un poco de swap en uso no es por sí solo una avería.</li>
+<li><strong>Memoria</strong>: Linux usa la RAM libre como <strong>caché</strong> (<em>buff/cache</em>) y la devuelve cuando hace falta. Una columna <strong>free</strong> baja es normal; lo que indica presión es una <strong>available</strong> baja, junto con uso de swap creciente. Un poco de swap en uso no es por sí solo una avería.</li>
 <li><strong>Load average</strong>: <strong>no es un porcentaje de CPU</strong>. En Linux cuenta los procesos <strong>ejecutándose o esperando CPU</strong> y los que esperan <strong>E/S de disco</strong>. Se interpreta según el <strong>número de núcleos</strong>: una carga de 4 satura un servidor de un núcleo y es poco para uno de dieciséis. <strong>Carga alta con CPU baja</strong> suele apuntar a <strong>disco o almacenamiento</strong>.</li>
 <li><strong>df y du pueden no cuadrar</strong>: un <strong>archivo borrado que un proceso mantiene abierto</strong> sigue ocupando espacio (lo ve df, no du) hasta que el proceso lo cierra; también influyen los bloques reservados o los montajes.</li>
 <li><strong>Inodos</strong>: cada archivo consume un inodo. Si se agotan (muchos archivos pequeños), <strong>no se pueden crear archivos aunque <code>df -h</code> muestre espacio libre</strong>: se comprueba con <code>df -i</code>.</li>

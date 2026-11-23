@@ -549,7 +549,7 @@
 <ul class="tema-lista">
 <li><strong>a) ¿Primer comando?</strong> <code>systemctl status servicio</code>: estado actual, últimos mensajes y si está configurado como <em>enabled</em>.</li>
 <li><strong>b) ¿Y si el estado no basta?</strong> <code>journalctl -u servicio</code> para ver los eventos con detalle.</li>
-<li><strong>c) ¿Qué más revisar?</strong> Configuración y dependencias del servicio; recursos y permisos (espacio en disco, memoria, puertos ocupados). Tras corregir, comprobar que la <strong>aplicación responde</strong>, no solo que el estado sea *active*.</li>
+<li><strong>c) ¿Qué más revisar?</strong> Configuración y dependencias del servicio; recursos y permisos (espacio en disco, memoria, puertos ocupados). Tras corregir, comprobar que la <strong>aplicación responde</strong>, no solo que el estado sea <em>active</em>.</li>
 <li><strong>d) Si arrancó a mano pero vuelve a faltar tras reiniciar, ¿qué ocurre?</strong> Lo más probable es que se hiciera <code>start</code> sin <code>enable</code>: no está configurado para arrancar con el sistema (se corrige con <code>enable</code>, o <code>enable --now</code>). No es la única causa posible: también una dependencia o un orden de arranque que falla.</li>
 </ul>
 <h4 class="tema-h4">Supuesto 2 — Sistema de archivos lleno</h4>
@@ -599,9 +599,9 @@
 <li><strong>c) ¿Qué más hay que vigilar?</strong> El <strong>ciclo de vida</strong> de la distribución: una versión sin soporte deja de recibir parches y obliga a planificar la migración. Y si se actualiza el <strong>kernel</strong>, prever el <strong>reinicio</strong> (o live patching, si está contratado).</li>
 </ul>
 <h4 class="tema-h4">Supuesto 8 — Activo, pero la web no responde</h4>
-<p><strong>Escenario</strong>: <code>systemctl status</code> muestra el servicio web como *active (running)*, pero la aplicación no carga.</p>
+<p><strong>Escenario</strong>: <code>systemctl status</code> muestra el servicio web como <em>active (running)</em>, pero la aplicación no carga.</p>
 <ul class="tema-lista">
-<li><strong>a) ¿Está resuelto?</strong> No: *active* solo dice que el proceso está en marcha.</li>
+<li><strong>a) ¿Está resuelto?</strong> No: <em>active</em> solo dice que el proceso está en marcha.</li>
 <li><strong>b) ¿Qué comprobar?</strong> Con <code>ss -tuln</code>, que <strong>escucha en el puerto</strong> esperado; en el journal y en los registros de la aplicación, los errores; y la respuesta real desde un cliente.</li>
 <li><strong>c) ¿Qué no hacer?</strong> Reiniciar en bucle sin leer los registros.</li>
 </ul>
@@ -646,7 +646,7 @@
 <td>Hay actualizaciones disponibles; aún no se han instalado</td>
 </tr>
 <tr>
-<td>Servicio *active* y la web no responde</td>
+<td>Servicio <em>active</em> y la web no responde</td>
 <td>Revisar puerto, registros y aplicación</td>
 </tr>
 <tr>
