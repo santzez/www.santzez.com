@@ -13,7 +13,8 @@
 <li><a href="#5-posibles-preguntas-cortas">5. Posibles preguntas cortas (con esquema de respuesta)</a></li>
 <li><a href="#6-supuestos-practicos-cau">6. Supuestos prácticos CAU</a></li>
 <li><a href="#7-matriz-de-memorizacion">7. Matriz de memorización</a></li>
-<li><a href="#8-resumen-final">8. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#8-repaso-visual">8. Repaso visual · T15</a></li>
+<li><a href="#9-resumen-final">9. Resumen final: si mañana fuera el examen</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
@@ -25,16 +26,22 @@
 <li>El registro de Seguridad depende de que la <strong>auditoría esté habilitada</strong>.</li>
 <li><strong>WEF</strong> = reenvío a un equipo recolector, sobre <strong>WinRM</strong>; después, posible SIEM.</li>
 <li><strong>UNC → \\servidor\recurso · SMB → COMPARTIR</strong> (CIFS = denominación histórica).</li>
-<li><strong>$ = recurso administrativo oculto</strong> (C$, ADMIN$): oculto, no inaccesible.</li>
+<li><strong>$ = recurso oculto</strong> (C$, ADMIN$ y también los creados a mano, como Documentos$): oculto, no inaccesible.</li>
 <li>Share: <strong>Read · Change · Full Control</strong>. NTFS básicos: <strong>Full Control · Modify · Read &amp; Execute · List Folder Contents · Read · Write</strong>.</li>
 <li><strong>SHARE → SOLO RED · NTFS → LOCAL + RED</strong>.</li>
 <li><strong>ACL → LISTA · ACE → ENTRADA</strong>; la herencia puede modificarse o deshabilitarse.</li>
 <li><strong>LOCAL → NTFS · RED → SHARE + NTFS · EFECTIVO → MÁS RESTRICTIVO</strong>.</li>
 <li>Una <strong>denegación explícita suele prevalecer</strong> sobre los permisos de permitir aplicables.</li>
+<li><strong>Event ID + origen</strong> identifican el evento · <strong>4624 correcto · 4625 fallido · 4663 acceso a objeto</strong>.</li>
+<li><strong>DACL → permisos · SACL → auditoría</strong> (auditar una carpeta = directiva + SACL).</li>
+<li><strong>WEF no activa auditorías</strong> · <strong>WEC = recolector</strong> · suscripción iniciada por <strong>origen</strong> o por <strong>recolector</strong>.</li>
+<li><strong>$ = oculto, no administrativo por sí mismo</strong> (Documentos$).</li>
+<li>Orden: <strong>Denegar explícito → Permitir explícito → Denegar heredado → Permitir heredado</strong>.</li>
+<li><strong>NTFS: los Permitir de varios grupos se suman</strong> · <strong>Share + NTFS: lo que permiten ambas</strong>.</li>
 </ul>
 <figure class="tema-figura">
 <figcaption>Permisos de recurso compartido vs. NTFS</figcaption>
-<svg viewBox="0 0 700 136" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at15dp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at15da" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at15dv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at15dn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at15dr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at15dg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">SHARE</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">NTFS</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Solo por RED</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="103.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Read · Change</text><text x="176.0" y="118.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">· Full Control</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">LOCAL y por RED</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="96.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Full Control · Modify</text><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Read &amp;amp; Execute · Read</text><text x="524.0" y="126.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Write · List Folder</text></svg>
+<svg viewBox="0 0 700 136" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at15dp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at15da" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at15dv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at15dn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at15dr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at15dg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">SHARE</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">NTFS</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Solo por RED</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="103.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Read · Change</text><text x="176.0" y="118.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">· Full Control</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">LOCAL y por RED</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="96.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Full Control · Modify</text><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Read &amp; Execute · Read</text><text x="524.0" y="126.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Write · List Folder</text></svg>
 </figure>
 <figure class="tema-figura">
 <figcaption>Niveles vs. auditoría</figcaption>
@@ -107,6 +114,41 @@
 <td><strong>Tener permiso efectivo</strong> sobre el recurso</td>
 <td>Ser miembro no basta si el permiso resultante no lo concede</td>
 </tr>
+<tr>
+<td><strong>DACL</strong>: permisos</td>
+<td><strong>SACL</strong>: auditoría</td>
+<td>La SACL no concede acceso</td>
+</tr>
+<tr>
+<td><strong>Filtro</strong>: consulta del momento</td>
+<td><strong>Vista personalizada</strong>: filtro guardado</td>
+<td>Ninguno borra eventos</td>
+</tr>
+<tr>
+<td><strong>WEF</strong>: reenvío</td>
+<td><strong>WEC</strong>: recolector</td>
+<td>El reenvío no activa auditorías</td>
+</tr>
+<tr>
+<td><strong>Recurso con $</strong>: oculto</td>
+<td><strong>Recurso administrativo</strong> (C$, ADMIN$)</td>
+<td>Documentos$ está oculto pero no es administrativo</td>
+</tr>
+<tr>
+<td><strong>Modify</strong></td>
+<td><strong>Full Control</strong></td>
+<td>Full Control añade cambiar permisos y tomar posesión</td>
+</tr>
+<tr>
+<td><strong>ACE explícita</strong></td>
+<td><strong>ACE heredada</strong></td>
+<td>El Permitir explícito gana al Denegar heredado</td>
+</tr>
+<tr>
+<td><strong>Varios grupos en NTFS</strong>: se suman</td>
+<td><strong>Share frente a NTFS</strong>: lo común</td>
+<td>Dos cálculos distintos</td>
+</tr>
 </table></div>
 <h2 id="3-posibles-trampas-de-examen" class="tema-h2">3. Posibles trampas de examen</h2>
 <ul class="tema-lista">
@@ -122,29 +164,239 @@
 <li><strong>«Un Deny de cualquier grupo elimina siempre el acceso en cualquier circunstancia»</strong> — formulación demasiado absoluta: <strong>una denegación explícita suele prevalecer</strong> sobre los permitir aplicables al mismo acceso.</li>
 <li><strong>«La herencia de permisos no se puede modificar»</strong> — falso: puede modificarse o deshabilitarse según la configuración.</li>
 <li><strong>«Critical implica pérdida de datos»</strong> — falso: indica gravedad potencial, no un desenlace concreto.</li>
+<li><strong>«Un Event ID significa lo mismo en cualquier origen»</strong> — falso: el número va con su origen.</li>
+<li><strong>«Para auditar el acceso a una carpeta basta con activar la directiva»</strong> — falso: también hace falta su <strong>SACL</strong>.</li>
+<li><strong>«DACL y SACL hacen lo mismo»</strong> — falso: permisos frente a auditoría.</li>
+<li><strong>«WEF activa las auditorías que faltan»</strong> — falso: solo reenvía lo que ya se registra.</li>
+<li><strong>«Vaciar el registro soluciona los errores»</strong> — falso: solo borra la información.</li>
+<li><strong>«Todo recurso con $ es administrativo»</strong> — falso: el $ solo lo oculta.</li>
+<li><strong>«Modify y Full Control son iguales»</strong> — falso: Full Control permite además cambiar permisos.</li>
+<li><strong>«El usuario recibe el permiso menor de todos sus grupos»</strong> — falso: en NTFS los Permitir se suman.</li>
+<li><strong>«Un Denegar heredado gana siempre a un Permitir explícito»</strong> — falso: lo explícito se evalúa antes.</li>
+<li><strong>«Denegar Eliminar impide también leer»</strong> — falso: solo bloquea el derecho denegado.</li>
+<li><strong>«Si no accede, el fallo está en la ACL»</strong> — falso: antes, conectividad, autenticación y recurso.</li>
 <li><strong>Colar contenido ajeno</strong>: M.2, discos o arquitectura de red no son objeto de este tema.</li>
 </ul>
 <h2 id="4-posibles-preguntas-tipo-test" class="tema-h2">4. Posibles preguntas tipo test</h2>
-<ul class="tema-lista">
-<li>¿Qué consola abre el Visor de eventos y en qué formato se guardan los registros?</li>
-<li>Emparejar registro y contenido: <strong>Aplicación · Seguridad · Sistema · Instalación · Eventos reenviados</strong>.</li>
-<li>¿Qué datos identifican un evento? (Event ID, origen, fecha/hora, descripción).</li>
-<li>¿Cuáles son los <strong>niveles de evento</strong>? ¿Y los <strong>resultados de auditoría</strong>?</li>
-<li>¿De qué depende que el registro de Seguridad recoja un acceso?</li>
-<li>¿Qué es una <strong>vista personalizada</strong>? ¿Y adjuntar una tarea a un evento?</li>
-<li>¿Qué es <strong>WEF</strong> y sobre qué infraestructura se apoya?</li>
-<li>Interpretar una <strong>ruta UNC</strong> y reconocer un <strong>recurso administrativo</strong> (C$, ADMIN$).</li>
-<li>¿Qué significa el sufijo <strong>$</strong> en un recurso compartido?</li>
-<li>Enumerar los <strong>tres permisos Share</strong> y decir cuándo se aplican.</li>
-<li>Enumerar los <strong>permisos NTFS básicos</strong> y decir cuándo se aplican.</li>
-<li>Diferencia entre <strong>ACL</strong> y <strong>ACE</strong>.</li>
-<li>¿Puede deshabilitarse la <strong>herencia</strong> de permisos?</li>
-<li><strong>Cálculo</strong>: Share = Full Control, NTFS = Read, acceso por red → ¿efectivo?</li>
-<li><strong>Cálculo</strong>: Share = Read, NTFS = Modify, acceso <strong>local</strong> → ¿efectivo?</li>
-<li><strong>Cálculo</strong>: Share = Change, NTFS = Read, acceso por red → ¿efectivo?</li>
-<li>¿Qué capas se evalúan en un acceso <strong>local</strong>? ¿Y en uno <strong>por red</strong>?</li>
-<li>¿Qué prevalece cuando concurren una denegación explícita y permisos de permitir aplicables?</li>
-</ul>
+<p>Treinta y cinco preguntas con una respuesta correcta. Las soluciones están al final de la sección.</p>
+<p><strong>1.</strong> Consola del Visor de eventos:<br>a) fsmgmt.msc<br>b) eventvwr.msc<br>c) lusrmgr.msc<br>d) services.msc</p>
+<p><strong>2.</strong> Formato de los archivos de registro de eventos:<br>a) .msc<br>b) .log<br>c) .dat<br>d) .evtx</p>
+<p><strong>3.</strong> Un evento se identifica bien por…<br>a) su Event ID junto con su origen y registro<br>b) su Event ID solo, que es único en Windows<br>c) la hora a la que ocurrió<br>d) el nombre del equipo</p>
+<p><strong>4.</strong> Registro con los eventos de auditoría:<br>a) Aplicación<br>b) Sistema<br>c) Seguridad<br>d) Instalación</p>
+<p><strong>5.</strong> Servicios, controladores y arranque se registran en…<br>a) Sistema<br>b) Seguridad<br>c) Aplicación<br>d) Eventos reenviados</p>
+<p><strong>6.</strong> Success Audit y Failure Audit son…<br>a) niveles entre Warning y Error<br>b) niveles del registro de Aplicación<br>c) estados del servicio de registro<br>d) resultados de auditoría, no niveles de gravedad</p>
+<p><strong>7.</strong> Un evento Critical…<br>a) significa siempre pérdida de datos<br>b) indica gravedad, no necesariamente pérdida de datos<br>c) es un resultado de auditoría<br>d) solo aparece en Seguridad</p>
+<p><strong>8.</strong> Event ID 4625 en Seguridad:<br>a) inicio de sesión correcto<br>b) acceso a un objeto<br>c) inicio de sesión fallido<br>d) apagado del equipo</p>
+<p><strong>9.</strong> Para auditar el acceso a una carpeta hace falta…<br>a) la directiva de auditoría y la SACL de la carpeta<br>b) solo activar la directiva<br>c) solo la DACL<br>d) WEF</p>
+<p><strong>10.</strong> La SACL de un objeto…<br>a) concede permisos de lectura<br>b) es la lista de usuarios del dominio<br>c) es la ruta UNC<br>d) define qué accesos se auditan</p>
+<p><strong>11.</strong> Una vista personalizada…<br>a) borra los eventos no seleccionados<br>b) guarda un filtro reutilizable<br>c) reenvía eventos<br>d) activa la auditoría</p>
+<p><strong>12.</strong> WEF…<br>a) activa las auditorías que faltan<br>b) es un SIEM<br>c) reenvía a un recolector los eventos ya registrados<br>d) vacía los registros de origen</p>
+<p><strong>13.</strong> Infraestructura sobre la que funciona WEF:<br>a) WinRM<br>b) SMB<br>c) LDAP<br>d) DHCP</p>
+<p><strong>14.</strong> Suscripción en la que los equipos envían sus eventos, configurados normalmente por GPO:<br>a) iniciada por el recolector<br>b) iniciada por el origen<br>c) vista personalizada<br>d) tarea adjunta</p>
+<p><strong>15.</strong> Ruta UNC correcta:<br>a) <code>C:\recurso</code><br>b) <code>//servidor:recurso</code><br>c) <code>servidor@recurso</code><br>d) <code>\servidor\recurso</code></p>
+<p><strong>16.</strong> Protocolo de compartición de Windows:<br>a) NFS<br>b) FTP<br>c) SMB<br>d) HTTP</p>
+<p><strong>17.</strong> Ante un equipo antiguo que solo habla SMB 1, lo correcto es…<br>a) no reactivar SMB 1 a la ligera<br>b) reactivar SMB 1 en todos los equipos<br>c) desactivar SMB 3<br>d) compartir sin permisos</p>
+<p><strong>18.</strong> El sufijo $ en un recurso compartido…<br>a) lo hace inaccesible<br>b) lo convierte en administrativo<br>c) lo cifra<br>d) lo oculta en la exploración, sin protegerlo</p>
+<p><strong>19.</strong> Documentos$, creado por un técnico, es…<br>a) un recurso administrativo de Windows<br>b) un recurso oculto corriente<br>c) inaccesible para todos<br>d) un registro de eventos</p>
+<p><strong>20.</strong> Permisos de recurso compartido:<br>a) Read, Write y Modify<br>b) Allow y Deny<br>c) Read, Change y Full Control<br>d) List y Execute</p>
+<p><strong>21.</strong> Los permisos Share se aplican…<br>a) solo en el acceso por red<br>b) también en el acceso local<br>c) solo en el acceso local<br>d) solo a los administradores</p>
+<p><strong>22.</strong> Permiso Share por defecto al compartir una carpeta:<br>a) Control total para Todos<br>b) Lectura para Todos<br>c) Cambiar para Usuarios<br>d) Ninguno</p>
+<p><strong>23.</strong> Los permisos NTFS se aplican…<br>a) solo por red<br>b) solo en local<br>c) solo a carpetas compartidas<br>d) en el acceso local y por red</p>
+<p><strong>24.</strong> Diferencia de Full Control frente a Modify en NTFS:<br>a) borrar archivos<br>b) leer<br>c) cambiar permisos y tomar posesión<br>d) escribir</p>
+<p><strong>25.</strong> Una ACE es…<br>a) una entrada de la ACL<br>b) la lista completa<br>c) un registro de eventos<br>d) un recurso oculto</p>
+<p><strong>26.</strong> Al deshabilitar la herencia, Windows ofrece…<br>a) solo borrar la carpeta<br>b) cambiar el propietario<br>c) reiniciar el servidor<br>d) convertir los heredados en explícitos o quitarlos</p>
+<p><strong>27.</strong> Denegar heredado y Permitir explícito para el mismo derecho:<br>a) prevalece siempre el Denegar<br>b) prevalece el Permitir explícito<br>c) se pide al administrador<br>d) se aplica el del grupo mayor</p>
+<p><strong>28.</strong> Grupo A da Lectura y grupo B Modificar (NTFS, sin Denegar):<br>a) Lectura<br>b) Ninguno<br>c) Modificar<br>d) Control total</p>
+<p><strong>29.</strong> Modify con Denegar Eliminar explícito:<br>a) puede leer y guardar, pero no borrar<br>b) no puede hacer nada<br>c) puede borrar<br>d) tiene Control total</p>
+<p><strong>30.</strong> Share Read y NTFS Modify, acceso por red:<br>a) Modificar<br>b) Control total<br>c) Ninguno<br>d) Lectura</p>
+<p><strong>31.</strong> Share Read y NTFS Modify, acceso local:<br>a) Lectura<br>b) Modificar<br>c) Ninguno<br>d) Control total</p>
+<p><strong>32.</strong> Share Full Control y NTFS Read, acceso por red:<br>a) Control total<br>b) Modificar<br>c) Lectura<br>d) Ninguno</p>
+<p><strong>33.</strong> Share Full Control y NTFS Modify, acceso por red:<br>a) Modificar<br>b) Control total<br>c) Lectura<br>d) Cambiar</p>
+<p><strong>34.</strong> No accede a la carpeta y el servidor no responde:<br>a) dar Control total<br>b) quitar la herencia<br>c) vaciar el registro<br>d) revisar la conexión antes de tocar permisos</p>
+<p><strong>35.</strong> Herramienta para estimar el permiso de un usuario sobre una carpeta:<br>a) Visor de eventos<br>b) pestaña Acceso efectivo<br>c) fsmgmt.msc<br>d) net use</p>
+<h4 class="tema-h4">Soluciones</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Pregunta</strong></th>
+<th><strong>Respuesta</strong></th>
+<th><strong>Por qué</strong></th>
+</tr>
+<tr>
+<td>1</td>
+<td><strong>b</strong></td>
+<td>MMC</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>d</strong></td>
+<td>Event log</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>a</strong></td>
+<td>El ID va con el origen</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>c</strong></td>
+<td>Si la auditoría está activa</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>a</strong></td>
+<td>Componentes del SO</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>d</strong></td>
+<td>Éxito o fallo</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>b</strong></td>
+<td>Contexto</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>c</strong></td>
+<td>4624 es el correcto</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>a</strong></td>
+<td>Dos piezas</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>d</strong></td>
+<td>DACL → permisos</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>b</strong></td>
+<td>Filtro guardado</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>c</strong></td>
+<td>Recoge, no audita</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>a</strong></td>
+<td>Gestión remota</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>b</strong></td>
+<td>Escala bien</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>d</strong></td>
+<td>Universal Naming Convention</td>
+</tr>
+<tr>
+<td>16</td>
+<td><strong>c</strong></td>
+<td>CIFS = histórico</td>
+</tr>
+<tr>
+<td>17</td>
+<td><strong>a</strong></td>
+<td>Protocolo heredado</td>
+</tr>
+<tr>
+<td>18</td>
+<td><strong>d</strong></td>
+<td>Oculto ≠ protegido</td>
+</tr>
+<tr>
+<td>19</td>
+<td><strong>b</strong></td>
+<td>$ no es administrativo</td>
+</tr>
+<tr>
+<td>20</td>
+<td><strong>c</strong></td>
+<td>Tres</td>
+</tr>
+<tr>
+<td>21</td>
+<td><strong>a</strong></td>
+<td>Capa de red</td>
+</tr>
+<tr>
+<td>22</td>
+<td><strong>b</strong></td>
+<td>Hay que ampliarlo</td>
+</tr>
+<tr>
+<td>23</td>
+<td><strong>d</strong></td>
+<td>Siempre</td>
+</tr>
+<tr>
+<td>24</td>
+<td><strong>c</strong></td>
+<td>Administración</td>
+</tr>
+<tr>
+<td>25</td>
+<td><strong>a</strong></td>
+<td>Lista ≠ entrada</td>
+</tr>
+<tr>
+<td>26</td>
+<td><strong>d</strong></td>
+<td>Dos opciones</td>
+</tr>
+<tr>
+<td>27</td>
+<td><strong>b</strong></td>
+<td>Lo explícito va antes</td>
+</tr>
+<tr>
+<td>28</td>
+<td><strong>c</strong></td>
+<td>Se suman</td>
+</tr>
+<tr>
+<td>29</td>
+<td><strong>a</strong></td>
+<td>Solo el derecho denegado</td>
+</tr>
+<tr>
+<td>30</td>
+<td><strong>d</strong></td>
+<td>Lo común</td>
+</tr>
+<tr>
+<td>31</td>
+<td><strong>b</strong></td>
+<td>Share no interviene</td>
+</tr>
+<tr>
+<td>32</td>
+<td><strong>c</strong></td>
+<td>Manda NTFS</td>
+</tr>
+<tr>
+<td>33</td>
+<td><strong>a</strong></td>
+<td>No cambia permisos</td>
+</tr>
+<tr>
+<td>34</td>
+<td><strong>d</strong></td>
+<td>Primero la red</td>
+</tr>
+<tr>
+<td>35</td>
+<td><strong>b</strong></td>
+<td>Configuración avanzada</td>
+</tr>
+</table></div>
 <h2 id="5-posibles-preguntas-cortas" class="tema-h2">5. Posibles preguntas cortas (con esquema de respuesta)</h2>
 <h4 class="tema-h4">1. Explique la función del Visor de eventos</h4>
 <ul class="tema-lista">
@@ -195,6 +447,30 @@
 <li>Añadir el efecto de una denegación explícita, que suele prevalecer sobre los permitir aplicables.</li>
 <li>Ejemplo numérico breve (Share Full + NTFS Read → Read).</li>
 </ul>
+<h4 class="tema-h4">9. Diferencie DACL y SACL</h4>
+<ul class="tema-lista">
+<li>DACL: permisos (quién puede hacer qué).</li>
+<li>SACL: auditoría (qué accesos se registran); no concede nada.</li>
+<li>Auditar una carpeta exige la directiva de auditoría y su SACL.</li>
+</ul>
+<h4 class="tema-h4">10. Explique cómo combinan los permisos NTFS de varios grupos</h4>
+<ul class="tema-lista">
+<li>Los Permitir de todos los grupos se suman.</li>
+<li>Los Denegar bloquean el derecho que deniegan; lo explícito se evalúa antes que lo heredado.</li>
+<li>Distinto del cálculo Share + NTFS, donde vale lo que permiten las dos capas.</li>
+</ul>
+<h4 class="tema-h4">11. Explique WEF y sus límites</h4>
+<ul class="tema-lista">
+<li>Reenvío a un recolector (WEC) mediante suscripciones, sobre WinRM.</li>
+<li>Suscripción iniciada por el origen o por el recolector.</li>
+<li>No activa auditorías, no reenvía todo y no es un SIEM.</li>
+</ul>
+<h4 class="tema-h4">12. Recursos ocultos y administrativos</h4>
+<ul class="tema-lista">
+<li>El $ oculta el recurso en la exploración, no lo protege.</li>
+<li>C$, ADMIN$ e IPC$ los crea Windows; Documentos$ es un recurso corriente oculto.</li>
+<li>El acceso depende de credenciales y permisos.</li>
+</ul>
 <h2 id="6-supuestos-practicos-cau" class="tema-h2">6. Supuestos prácticos CAU</h2>
 <h4 class="tema-h4">Supuesto 1 — Lectura por red pese al NTFS</h4>
 <p><strong>Escenario</strong>: sobre la carpeta \\servidor\contabilidad, el grupo tiene <strong>Share = Read</strong> y <strong>NTFS = Modify</strong>. La usuaria accede <strong>por red</strong>.</p>
@@ -221,13 +497,13 @@
 <p><strong>Escenario</strong>: un usuario pertenece al grupo correcto, el recurso existe y aun así no puede modificar archivos.</p>
 <ul class="tema-lista">
 <li><strong>a) ¿Qué comprobar, por orden?</strong> Tipo de acceso (red/local) → recurso UNC utilizado → permisos Share → permisos NTFS → grupos del usuario → <strong>denegaciones explícitas</strong> → permiso efectivo.</li>
-<li><strong>b) ¿Qué explica el caso más a menudo?</strong> Una capa restrictiva (Share o NTFS) o una <strong>denegación explícita</strong>, que suele prevalecer sobre los permitir aplicables.</li>
+<li><strong>b) ¿Qué explica el caso más a menudo?</strong> Una capa restrictiva (Share o NTFS) o una <strong>denegación explícita</strong>, que suele prevalecer sobre los permitir aplicables. Si acaban de añadirle al grupo, que <strong>vuelva a iniciar sesión</strong>. La pestaña <strong>Acceso efectivo</strong> ayuda a confirmarlo.</li>
 <li><strong>c) ¿Basta con pertenecer al grupo?</strong> No: la pertenencia (Tema 14) es condición necesaria, pero el acceso depende del permiso efectivo.</li>
 </ul>
 <h4 class="tema-h4">Supuesto 5 — Investigar un problema de inicio de sesión</h4>
 <p><strong>Escenario</strong>: una persona informa de que no consigue iniciar sesión y hay que averiguar qué ocurre.</p>
 <ul class="tema-lista">
-<li><strong>a) ¿Dónde mirar?</strong> En el registro de <strong>Seguridad</strong> del Visor de eventos, buscando los eventos de inicio de sesión y sus <strong>resultados de auditoría</strong> (Success/Failure Audit).</li>
+<li><strong>a) ¿Dónde mirar?</strong> En el registro de <strong>Seguridad</strong> del Visor de eventos, buscando los eventos de inicio de sesión y sus <strong>resultados de auditoría</strong> (Success/Failure Audit): el <strong>4625</strong> es el inicio de sesión fallido. Con cuentas de dominio, el rastro puede estar también en el <strong>controlador de dominio</strong>: se pide su revisión si procede.</li>
 <li><strong>b) ¿Y si no aparece nada?</strong> Comprobar si la <strong>política de auditoría</strong> correspondiente está habilitada: sin ella, esos sucesos pueden no registrarse.</li>
 <li><strong>c) ¿Qué otro registro puede ayudar?</strong> El de <strong>Sistema</strong>, para descartar problemas de servicios o del propio equipo.</li>
 </ul>
@@ -235,7 +511,7 @@
 <p><strong>Escenario</strong>: la organización quiere revisar los eventos de muchos equipos sin conectarse a cada uno.</p>
 <ul class="tema-lista">
 <li><strong>a) ¿Qué mecanismo?</strong> <strong>WEF (Windows Event Forwarding)</strong> con un <strong>equipo recolector</strong>; los eventos llegan al registro <strong>Eventos reenviados</strong>.</li>
-<li><strong>b) ¿Sobre qué se apoya?</strong> Sobre <strong>WinRM</strong>.</li>
+<li><strong>b) ¿Sobre qué se apoya?</strong> Sobre <strong>WinRM</strong>, con una <strong>suscripción</strong> (iniciada por los equipos de origen si son muchos).</li>
 <li><strong>c) ¿Y después?</strong> La agregación puede alimentar un <strong>SIEM</strong> para correlación y análisis — ampliación fuera del alcance del tema.</li>
 </ul>
 <h4 class="tema-h4">Supuesto 7 — Acceso administrativo remoto</h4>
@@ -243,8 +519,80 @@
 <ul class="tema-lista">
 <li><strong>a) ¿Por qué no aparece nada?</strong> Los recursos administrativos terminan en <strong>$</strong> (C$, ADMIN$) y <strong>no se muestran</strong> en la exploración normal de la red.</li>
 <li><strong>b) ¿Significa que no puede acceder?</strong> No: oculto no es inaccesible; el acceso depende de disponer de <strong>credenciales y permisos adecuados</strong>.</li>
-<li><strong>c) ¿Qué ruta utilizaría?</strong> La UNC directa al recurso administrativo correspondiente.</li>
+<li><strong>c) ¿Qué ruta utilizaría?</strong> La UNC directa al recurso administrativo correspondiente, con <strong>autorización</strong> y dejando constancia.</li>
 </ul>
+<h4 class="tema-h4">Supuesto 8 — Abre los archivos, pero no puede guardar</h4>
+<p><strong>Escenario</strong>: por red, una persona abre los documentos de \\servidor\obras, pero al guardar recibe «acceso denegado». Share = Change; NTFS = Read para su grupo.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Por qué?</strong> Por red manda lo que permiten <strong>las dos capas</strong>: Change y Read → <strong>Read</strong>.</li>
+<li><strong>b) ¿Dónde se corrige?</strong> En <strong>NTFS</strong>, dando Modify al grupo adecuado, con autorización.</li>
+<li><strong>c) ¿Qué no hacer?</strong> Dar Control total a la persona «para que funcione».</li>
+</ul>
+<h4 class="tema-h4">Supuesto 9 — Activada la auditoría y sin eventos</h4>
+<p><strong>Escenario</strong>: se activa por GPO la auditoría de acceso a objetos, pero no aparece ningún evento al abrir una carpeta sensible.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué falta?</strong> Probablemente la <strong>SACL</strong> de la carpeta: qué accesos y de quién se auditan.</li>
+<li><strong>b) ¿Y si la SACL está bien?</strong> Comprobar que la directiva llegó al servidor, que la operación es la auditada y el <strong>registro de Seguridad de ese servidor</strong>.</li>
+<li><strong>c) ¿Sirve WEF para arreglarlo?</strong> No: WEF solo reenvía lo que ya se registra.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 10 — Denegar en un grupo, permitir en otro</h4>
+<p><strong>Escenario</strong>: un usuario tiene <strong>Modify</strong> por el grupo Obras y un <strong>Denegar Eliminar explícito</strong> por el grupo Becarios.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué puede hacer?</strong> Leer, crear y modificar, pero <strong>no borrar</strong>: el Denegar bloquea solo ese derecho.</li>
+<li><strong>b) ¿Y si el Denegar fuera heredado y el Modify explícito?</strong> Prevalecería el <strong>Permitir explícito</strong>.</li>
+<li><strong>c) ¿Qué comprobar en la práctica?</strong> La pestaña <strong>Acceso efectivo</strong> y por qué está en Becarios.</li>
+</ul>
+<h4 class="tema-h4">Mini casos</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Situación</strong></th>
+<th><strong>Lectura</strong></th>
+</tr>
+<tr>
+<td>Un error de las 11:30</td>
+<td>Filtrar el registro en torno a esa hora</td>
+</tr>
+<tr>
+<td>Muchos 4625 de la misma cuenta</td>
+<td>Inicios fallidos: contraseña, bloqueo o restricción</td>
+</tr>
+<tr>
+<td>WEF sin eventos de acceso</td>
+<td>Falta la auditoría o la SACL en origen</td>
+</tr>
+<tr>
+<td>\\equipo no muestra nada</td>
+<td>Recursos con $ ocultos; no prueba que no existan</td>
+</tr>
+<tr>
+<td>Documentos$</td>
+<td>Oculto, pero no administrativo</td>
+</tr>
+<tr>
+<td>Share Change y NTFS Modify</td>
+<td>Modify por red</td>
+</tr>
+<tr>
+<td>Share Full y NTFS Read</td>
+<td>Read por red</td>
+</tr>
+<tr>
+<td>Dos grupos: Read y Modify</td>
+<td>Modify (se suman)</td>
+</tr>
+<tr>
+<td>Denegar Eliminar explícito</td>
+<td>Todo menos borrar</td>
+</tr>
+<tr>
+<td>Por UNC entra, pero no tiene Z:</td>
+<td>Fallo del mapeo, no de permisos (Tema 14)</td>
+</tr>
+<tr>
+<td>Permisos correctos y servidor caído</td>
+<td>Problema de red o servicio, no de ACL</td>
+</tr>
+</table></div>
 <h2 id="7-matriz-de-memorizacion" class="tema-h2">7. Matriz de memorización</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -355,17 +703,62 @@
 <td>Permiso efectivo</td>
 <td>Local = NTFS · Red = Share + NTFS, el más restrictivo</td>
 </tr>
+<tr>
+<td>4624 / 4625 / 4663</td>
+<td>Inicio correcto / inicio fallido / acceso a objeto</td>
+</tr>
+<tr>
+<td>DACL / SACL</td>
+<td>Permisos / auditoría</td>
+</tr>
+<tr>
+<td>WEC</td>
+<td>Equipo recolector de WEF</td>
+</tr>
+<tr>
+<td>Orden de las ACE</td>
+<td>Denegar explícito → Permitir explícito → heredados</td>
+</tr>
+<tr>
+<td>Varios grupos (NTFS)</td>
+<td>Los Permitir se suman</td>
+</tr>
+<tr>
+<td>Acceso efectivo</td>
+<td>Pestaña que estima el permiso real de un usuario</td>
+</tr>
 </table></div>
-<h2 id="8-resumen-final" class="tema-h2">8. Resumen final: si mañana fuera el examen</h2>
+<h2 id="8-repaso-visual" class="tema-h2">8. Repaso visual · T15</h2>
+<figure class="tema-figura">
+<figcaption>1 · Registros del Visor de eventos</figcaption>
+<svg viewBox="0 0 700 184" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at15ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at15aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at15av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at15an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at15ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at15ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">APLICACIÓN</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at15aa)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Sucesos de PROGRAMAS</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">SEGURIDAD</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#003da5" stroke-width="2" marker-end="url(#at15ap)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">AUDITORÍA (si está habilitada)</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">SISTEMA</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at15aa)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">SO, drivers y servicios</text><rect x="8" y="139" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">INSTALACIÓN / REENVIADOS</text><line x1="264" y1="157.0" x2="356" y2="157.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at15ag)"/><rect x="362" y="139" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Despliegue y WEF</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>2 · Compartir en red</figcaption>
+<svg viewBox="0 0 700 139" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at15cp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at15ca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at15cv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at15cn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at15cr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at15cg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">UNC</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at15ca)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">\\servidor\recurso</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">SMB</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at15ca)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Protocolo para COMPARTIR (CIFS, histórico)</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">C$ · ADMIN$</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#b26a00" stroke-width="2" marker-end="url(#at15cn)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Recurso administrativo OCULTO</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>3 · Permiso efectivo</figcaption>
+<svg viewBox="0 0 700 133" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at15ep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at15ea" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at15ev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at15en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at15er" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at15eg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="4" width="110" height="36" rx="6" fill="#1f5b9e"/><rect x="112" y="4" width="6" height="36" fill="#1f5b9e"/><text x="63.0" y="22.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">LOCAL</text><text x="132" y="22.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Se aplica solo NTFS</text><rect x="8" y="47" width="684" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><rect x="8" y="47" width="110" height="36" rx="6" fill="#1f5b9e"/><rect x="112" y="47" width="6" height="36" fill="#1f5b9e"/><text x="63.0" y="65.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">RED</text><text x="132" y="65.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Se combinan SHARE + NTFS</text><rect x="8" y="90" width="684" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><rect x="8" y="90" width="110" height="36" rx="6" fill="#003da5"/><rect x="112" y="90" width="6" height="36" fill="#003da5"/><text x="63.0" y="108.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" dominant-baseline="middle">EFECTIVO</text><text x="132" y="108.0" text-anchor="start" font-size="13.5" font-weight="700" fill="#23272e" dominant-baseline="middle">Prevalece el MÁS RESTRICTIVO</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>4 · Permisos Share frente a NTFS</figcaption>
+<svg viewBox="0 0 700 136" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at15dp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at15da" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at15dv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at15dn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at15dr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at15dg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">SHARE</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">NTFS</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Solo por RED</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="176.0" y="103.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Read · Change</text><text x="176.0" y="118.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">· Full Control</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">LOCAL y por RED</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="524.0" y="96.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Full Control · Modify</text><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Read &amp; Execute · Read</text><text x="524.0" y="126.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Write · List Folder</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>5 · Niveles frente a auditoría</figcaption>
+<svg viewBox="0 0 700 216" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at15bp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at15ba" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at15bv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at15bn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at15br" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at15bg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">NIVELES</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">AUDITORÍA</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Information</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Warning</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Error</text><rect x="8.0" y="174" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="191.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Critical</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Success Audit</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="524.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Failure Audit</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">—</text><rect x="356.0" y="174" width="336.0" height="34" rx="5" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="524.0" y="191.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">—</text></svg>
+</figure>
+<h2 id="9-resumen-final" class="tema-h2">9. Resumen final: si mañana fuera el examen</h2>
 <ul class="tema-lista">
 <li><strong>Visor de eventos (eventvwr.msc)</strong>: eventos de Windows y aplicaciones en archivos <strong>.evtx</strong>, con <strong>Event ID</strong>, origen, fecha/hora y descripción. Registros: <strong>Aplicación · Seguridad · Sistema</strong> (+ Instalación y Eventos reenviados).</li>
-<li><strong>Niveles</strong>: Information · Warning · Error · Critical. <strong>Resultados de auditoría</strong>: Success/Failure Audit — <strong>no son niveles de gravedad</strong>. El registro de <strong>Seguridad depende de la auditoría habilitada</strong>.</li>
-<li><strong>Supervisión</strong>: vistas personalizadas (filtros guardados), tareas adjuntas a eventos, y <strong>WEF sobre WinRM</strong> para centralizar en un equipo recolector (después, posible SIEM).</li>
-<li><strong>Compartidos</strong>: <strong>UNC \\servidor\recurso</strong> sobre <strong>SMB</strong> (CIFS = histórico); herramientas: Explorador, <strong>fsmgmt.msc</strong>, PowerShell. <strong>$ = recurso administrativo oculto</strong> (C$, ADMIN$): oculto, no inaccesible.</li>
+<li><strong>Niveles</strong>: Information · Warning · Error · Critical. <strong>Resultados de auditoría</strong>: Success/Failure Audit — <strong>no son niveles de gravedad</strong>. El registro de <strong>Seguridad depende de la auditoría habilitada</strong>; para archivos, además, de la <strong>SACL</strong>. <strong>4624</strong> correcto · <strong>4625</strong> fallido · <strong>4663</strong> acceso a objeto. El Event ID se lee con su origen.</li>
+<li><strong>Supervisión</strong>: vistas personalizadas (filtros guardados), tareas adjuntas a eventos, y <strong>WEF sobre WinRM</strong> para centralizar en un equipo recolector (WEC) mediante suscripciones; <strong>no activa auditorías</strong> (después, posible SIEM).</li>
+<li><strong>Compartidos</strong>: <strong>UNC \\servidor\recurso</strong> sobre <strong>SMB</strong> (CIFS = histórico); herramientas: Explorador, <strong>fsmgmt.msc</strong>, PowerShell. <strong>$ = recurso oculto</strong> (C$, ADMIN$ y también los creados a mano, como Documentos$): oculto, no inaccesible.</li>
 <li><strong>Permisos Share</strong>: <strong>Read · Change · Full Control</strong> — <strong>solo en acceso por red</strong>. <strong>Permisos NTFS</strong>: Full Control, Modify, Read &amp; Execute, List Folder Contents, Read, Write — <strong>local y por red</strong>, con granularidad por archivo/carpeta.</li>
-<li><strong>ACL = lista · ACE = entrada</strong>; la <strong>herencia</strong> puede modificarse o deshabilitarse; una <strong>denegación explícita suele prevalecer</strong> sobre los permitir aplicables.</li>
+<li><strong>ACL = lista · ACE = entrada</strong>; la <strong>herencia</strong> puede modificarse o deshabilitarse; una <strong>denegación explícita suele prevalecer</strong> sobre los permitir aplicables (orden: Denegar explícito → Permitir explícito → heredados). En NTFS <strong>los Permitir de varios grupos se suman</strong>.</li>
 <li><strong>LA regla</strong>: <strong>LOCAL → NTFS · RED → SHARE + NTFS · EFECTIVO → EL MÁS RESTRICTIVO</strong>. Buena práctica: Share suficientemente amplio y <strong>NTFS como control fino</strong> asignado a los grupos adecuados.</li>
-<li><strong>Diagnóstico CAU</strong>: red o local → UNC → Share → NTFS → grupos → denegaciones → permiso efectivo.</li>
+<li><strong>Diagnóstico CAU</strong>: ¿responde y autentica? → red o local → UNC → Share → NTFS → grupos (y sesión renovada) → denegaciones → permiso efectivo → operación concreta.</li>
 </ul>
   </div>
 </article>

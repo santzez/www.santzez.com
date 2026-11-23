@@ -25,11 +25,13 @@
 <p>El <strong>Visor de eventos (eventvwr.msc)</strong> es la <strong>consola MMC para consultar los eventos registrados por Windows y las aplicaciones</strong>. Los registros se almacenan en archivos con extensión <strong>.evtx</strong>.</p>
 <p>Cada evento incluye, entre otros datos:</p>
 <ul class="tema-lista">
-<li><strong>Event ID</strong>: identificador numérico del tipo de suceso.</li>
-<li><strong>Origen</strong>: el componente o aplicación que lo generó.</li>
+<li><strong>Event ID</strong>: identificador numérico del tipo de suceso <strong>dentro de su origen</strong>: el mismo número puede significar cosas distintas en orígenes distintos. Se identifica un evento por <strong>ID + origen + registro</strong>.</li>
+<li><strong>Origen</strong> (proveedor): el componente o aplicación que lo generó.</li>
 <li><strong>Fecha y hora</strong> del suceso.</li>
 <li><strong>Descripción</strong> del evento.</li>
+<li>Además: <strong>nivel</strong>, <strong>equipo</strong>, <strong>usuario</strong> y <strong>categoría de tarea</strong> cuando existen.</li>
 </ul>
+<p>Un <strong>evento no es un error</strong>: la mayoría son informativos. Ante una incidencia se busca en una <strong>ventana de tiempo</strong> alrededor de la hora indicada, no en miles de sucesos antiguos.</p>
 <h4 class="tema-h4">Registros principales</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -61,7 +63,12 @@
 <figcaption>Registros del Visor de eventos</figcaption>
 <svg viewBox="0 0 700 184" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at15ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at15aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at15av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at15an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at15ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at15ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">APLICACIÓN</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at15aa)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Sucesos de PROGRAMAS</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">SEGURIDAD</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#003da5" stroke-width="2" marker-end="url(#at15ap)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">AUDITORÍA (si está habilitada)</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">SISTEMA</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at15aa)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">SO, drivers y servicios</text><rect x="8" y="139" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">INSTALACIÓN / REENVIADOS</text><line x1="264" y1="157.0" x2="356" y2="157.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at15ag)"/><rect x="362" y="139" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Despliegue y WEF</text></svg>
 <p class="tema-figura__nota">Los registros se guardan en .evtx; cada evento tiene Event ID, origen, fecha y descripción.</p></figure>
-<p>Los registros <strong>Instalación</strong> y <strong>Eventos reenviados</strong> no se comportan exactamente igual ni tienen el mismo peso en todas las versiones y escenarios de Windows: su contenido depende del rol del equipo y de la configuración.</p>
+<p>Los registros <strong>Instalación</strong> y <strong>Eventos reenviados</strong> no se comportan exactamente igual ni tienen el mismo peso en todas las versiones y escenarios de Windows: su contenido depende del rol del equipo y de la configuración. Además de estos, en <strong>Registros de aplicaciones y servicios</strong> hay canales propios de cada componente (por ejemplo, los <strong>Operational</strong>): no todo está en los cinco registros clásicos.</p>
+<ul class="tema-lista">
+<li>Cada registro tiene un <strong>tamaño máximo</strong>: al llenarse, según la configuración, <strong>sobrescribe</strong> los eventos antiguos. No se conservan indefinidamente.</li>
+<li><strong>Vaciar un registro no arregla nada</strong> y destruye información que puede hacer falta en una auditoría.</li>
+<li>Leer el registro de <strong>Seguridad</strong> está restringido a cuentas autorizadas.</li>
+</ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>📌 Imprescindible para el examen — el registro de Seguridad y la auditoría</strong><br>El registro de Seguridad <strong>no registra automáticamente cualquier acceso, cambio o modificación</strong>. Los eventos de auditoría aparecen <strong>cuando la política de auditoría correspondiente está habilitada</strong> (habitualmente mediante directivas, Tema 12) <strong>y se produce una acción que debe auditarse</strong>: por ejemplo, un <strong>inicio de sesión</strong>, el <strong>acceso a determinados objetos</strong> o <strong>cambios de determinadas configuraciones</strong>.</th>
@@ -101,14 +108,48 @@
 <td>Problema grave que <strong>puede afectar significativamente al sistema</strong></td>
 </tr>
 </table></div>
-<p>Un evento <strong>Critical</strong> no implica necesariamente pérdida de datos: indica gravedad potencial, no un desenlace concreto.</p>
+<p>Un evento <strong>Critical</strong> no implica necesariamente pérdida de datos: indica gravedad potencial, no un desenlace concreto. Y un <strong>Error</strong> no siempre es una caída: el componente puede haberse recuperado. El nivel orienta; la causa se deduce del origen, la descripción, la repetición y el contexto.</p>
+<h4 class="tema-h4">Eventos de auditoría que conviene reconocer</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Event ID</strong> (registro de Seguridad)</th>
+<th><strong>Qué indica</strong></th>
+</tr>
+<tr>
+<td><strong>4624</strong></td>
+<td>Inicio de sesión <strong>correcto</strong></td>
+</tr>
+<tr>
+<td><strong>4625</strong></td>
+<td>Inicio de sesión <strong>fallido</strong> (contraseña errónea, cuenta deshabilitada o bloqueada, restricción…)</td>
+</tr>
+<tr>
+<td><strong>4663</strong></td>
+<td><strong>Intento de acceso a un objeto</strong> auditado (por ejemplo, un archivo)</td>
+</tr>
+</table></div>
+<p>Un <strong>Failure Audit</strong> no es una avería del sistema: es un intento que no prosperó.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — auditar el acceso a una carpeta exige dos cosas</strong><br><strong>1.</strong> Activar la <strong>directiva de auditoría</strong> de acceso a objetos (habitualmente por GPO).<br><strong>2.</strong> Configurar la <strong>auditoría en la propia carpeta</strong>: su <strong>SACL</strong>.<br><strong>DACL</strong> → <strong>permisos</strong>: quién puede hacer qué. <strong>SACL</strong> → <strong>auditoría</strong>: qué accesos se registran. La SACL <strong>no concede</strong> ningún permiso. «ACL» es el término general que engloba las dos.</th>
+</tr>
+</table></div>
 <h2 id="3-supervision-practica" class="tema-h2">3. Supervisión práctica: vistas, tareas y reenvío</h2>
 <ul class="tema-lista">
-<li><strong>Vistas personalizadas (Custom Views)</strong>: <strong>filtros guardados</strong> sobre uno o varios registros, para centrarse solo en los eventos relevantes (por ejemplo, errores y críticos de las últimas 24 horas).</li>
-<li><strong>Adjuntar tarea a este evento</strong>: <strong>automatización de la respuesta</strong> ante un evento concreto (ejecutar un script, lanzar una acción).</li>
+<li><strong>Filtrar el registro actual</strong>: limita lo que se ve (nivel, periodo, Event ID, origen) en ese momento.</li>
+<li><strong>Vistas personalizadas (Custom Views)</strong>: <strong>filtros guardados</strong> y reutilizables sobre uno o varios registros, para centrarse solo en los eventos relevantes (por ejemplo, errores y críticos de las últimas 24 horas). Ni el filtro ni la vista <strong>borran</strong> nada.</li>
+<li><strong>Adjuntar tarea a este evento</strong>: <strong>automatización de la respuesta</strong> ante un evento concreto (ejecutar un script, lanzar una acción). Debe hacerse con autorización y cuidado: una acción automática mal planteada puede causar más daño que el evento.</li>
+<li><strong>Exportar</strong> o guardar el registro permite analizarlo después o adjuntarlo a una incidencia.</li>
 <li><strong>WEF (Windows Event Forwarding)</strong>: <strong>reenvío de eventos</strong> desde varios equipos a un <strong>equipo recolector</strong>, para supervisar de forma centralizada sin conectarse uno a uno.</li>
 <li><strong>WinRM</strong>: la <strong>infraestructura utilizada para la gestión y el reenvío</strong> en este escenario.</li>
+<li><strong>WEC (recolector)</strong> → el equipo que <strong>recibe</strong>; los eventos llegan a su registro <strong>Eventos reenviados</strong>.</li>
+<li><strong>Suscripción</strong> → qué eventos se recogen y de qué equipos. Puede ser <strong>iniciada por el recolector</strong> (él pide los eventos a una lista de equipos; útil con pocos) o <strong>iniciada por el origen</strong> (los equipos los envían, configurados normalmente por GPO; útil con muchos).</li>
 </ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — WEF no audita</strong><br>WEF <strong>reenvía lo que ya se registra</strong>: <strong>no activa</strong> las auditorías que falten. Tampoco reenvía «todo», sino lo que pide la suscripción, y puede haber <strong>retraso</strong> si falla la conexión. Y <strong>WEF no es un SIEM</strong>: recoge; no correlaciona.</th>
+</tr>
+</table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>🔍 Para ampliar</strong><br>La secuencia habitual en organizaciones grandes es <strong>WEF → agregación → posible SIEM</strong> (herramientas de correlación y análisis de eventos de múltiples fuentes). El detalle del SIEM queda fuera del alcance de este tema.</th>
@@ -116,6 +157,12 @@
 </table></div>
 <h2 id="4-recursos-compartidos" class="tema-h2">4. Recursos compartidos: carpetas e impresoras</h2>
 <p>Una <strong>carpeta compartida</strong> es un <strong>recurso accesible desde otros equipos de la red</strong>, identificado por su <strong>ruta UNC</strong>: <strong>\\servidor\recurso</strong>. El protocolo de compartición de archivos en Windows es <strong>SMB</strong>; <strong>CIFS</strong> es una denominación histórica asociada a una versión e implementación antigua del ecosistema SMB.</p>
+<ul class="tema-lista">
+<li>Versiones: <strong>SMB 1</strong> (heredado, <strong>ya no se instala por defecto</strong> en Windows actuales y <strong>no se reactiva</strong> para «arreglar» un equipo antiguo), <strong>SMB 2</strong> y <strong>SMB 3</strong>.</li>
+<li>La ruta UNC puede seguir dentro del recurso: <code>\servidor\recurso\subcarpeta\archivo.docx</code>.</li>
+<li>Una <strong>unidad mapeada</strong> (Z:) es solo una letra que apunta a una ruta UNC: el almacenamiento sigue en el servidor (Tema 14).</li>
+<li><strong>No toda carpeta NTFS está compartida</strong>: compartir es una configuración aparte.</li>
+</ul>
 <figure class="tema-figura">
 <figcaption>Compartir en red</figcaption>
 <svg viewBox="0 0 700 139" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at15cp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at15ca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at15cv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at15cn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at15cr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at15cg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">UNC</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at15ca)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">\\servidor\recurso</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">SMB</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at15ca)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Protocolo para COMPARTIR (CIFS, histórico)</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#b26a00" stroke="#b26a00" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">C$ · ADMIN$</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#b26a00" stroke-width="2" marker-end="url(#at15cn)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#fdf1de" stroke="#b26a00" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Recurso administrativo OCULTO</text></svg>
@@ -124,12 +171,13 @@
 <ul class="tema-lista">
 <li><strong>Explorador de archivos</strong>: Propiedades → Compartir.</li>
 <li><strong>fsmgmt.msc</strong>: consola de carpetas compartidas.</li>
-<li><strong>PowerShell</strong>: por ejemplo, <code>New-SmbShare</code>.</li>
+<li><strong>PowerShell</strong>: <code>New-SmbShare</code> crea un recurso; <code>Get-SmbShare</code> los lista; <code>Get-SmbSession</code> muestra las sesiones abiertas en el servidor.</li>
+<li><strong>fsmgmt.msc</strong> permite ver también las <strong>sesiones</strong> y los <strong>archivos abiertos</strong> por red.</li>
 </ul>
 <h4 class="tema-h4">Recursos administrativos</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Imprescindible para el examen</strong><br>Windows crea recursos como <strong>C$</strong>, <strong>ADMIN$</strong> y otros terminados en <strong>$</strong>. El símbolo <strong>$ indica un recurso administrativo oculto</strong>: <strong>no se muestra en la exploración normal de la red</strong>. <strong>Oculto no significa inaccesible</strong>: su acceso depende de disponer de las <strong>credenciales y permisos adecuados</strong>.</th>
+<th><strong>📌 Imprescindible para el examen</strong><br>Windows crea recursos como <strong>C$</strong> (la unidad C:), <strong>ADMIN$</strong> (la carpeta de Windows) e <strong>IPC$</strong> (comunicación entre procesos, no es una carpeta de datos). El símbolo <strong>$ oculta</strong> el recurso: <strong>no se muestra en la exploración normal de la red</strong>. <strong>Oculto no significa inaccesible</strong>: su acceso depende de disponer de las <strong>credenciales y permisos adecuados</strong> (para C$ y ADMIN$, de administrador).<br><strong>$ no significa «administrativo»</strong>: cualquiera puede crear un recurso llamado, por ejemplo, <strong>Documentos$</strong>. Está oculto, pero es un recurso corriente, no uno de los administrativos de Windows.</th>
 </tr>
 </table></div>
 <h4 class="tema-h4">Impresoras compartidas</h4>
@@ -153,6 +201,7 @@
 <td>Además, <strong>gestión de los permisos del recurso compartido</strong></td>
 </tr>
 </table></div>
+<p>Al crear un recurso compartido, Windows propone por defecto <strong>Lectura para Todos</strong>: si los usuarios deben escribir, hay que ampliarlo. Que el Share permita escribir <strong>no basta</strong> si NTFS lo impide.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>📌 Imprescindible para el examen</strong><br>Los permisos de recurso compartido <strong>se aplican al acceder a través de la red</strong> (por su ruta UNC). <strong>NO intervienen en un acceso local</strong> directo al equipo donde reside la carpeta.</th>
@@ -166,24 +215,60 @@
 <li>Se organizan en <strong>permisos básicos</strong> y <strong>permisos avanzados</strong> (desglose más fino sobre el que se construyen los básicos).</li>
 </ul>
 <p><strong>Permisos básicos</strong>: <strong>Full Control · Modify · Read &amp; Execute · List Folder Contents · Read · Write</strong>.</p>
+<ul class="tema-lista">
+<li><strong>Modify ≠ Full Control</strong>: Modify permite leer, escribir, modificar y <strong>borrar</strong>; Full Control añade <strong>cambiar permisos</strong> y <strong>tomar posesión</strong>.</li>
+<li><strong>Write ≠ Modify</strong>: Write permite crear y escribir, pero <strong>no borrar</strong>.</li>
+<li>El <strong>propietario</strong> del objeto puede cambiar sus permisos, aunque eso no le da por sí solo acceso a los datos.</li>
+</ul>
 <h4 class="tema-h4">ACL y ACE</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Imprescindible para el examen</strong><br><strong>ACL (Access Control List)</strong> → el <strong>conjunto de entradas</strong> de control de acceso de un objeto.<br><strong>ACE (Access Control Entry)</strong> → <strong>cada entrada</strong> que define permisos para una cuenta o grupo concreto.<br><strong>La ACL está formada por ACE</strong>: lista frente a entrada.</th>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>ACL (Access Control List)</strong> → el <strong>conjunto de entradas</strong> de control de acceso de un objeto.<br><strong>ACE (Access Control Entry)</strong> → <strong>cada entrada</strong> que define permisos para una cuenta o grupo concreto.<br><strong>La ACL está formada por ACE</strong>: lista frente a entrada.<br>La que regula los <strong>permisos</strong> es la <strong>DACL</strong>; la de <strong>auditoría</strong>, la <strong>SACL</strong> (apartado 2).</th>
 </tr>
 </table></div>
 <h4 class="tema-h4">Herencia</h4>
-<p>Los permisos establecidos en una carpeta <strong>pueden heredarse a los objetos inferiores</strong> de la jerarquía (subcarpetas y archivos). Esa <strong>herencia puede modificarse o deshabilitarse</strong> según la configuración, para definir permisos explícitos distintos en un punto concreto del árbol.</p>
+<p>Los permisos establecidos en una carpeta <strong>pueden heredarse a los objetos inferiores</strong> de la jerarquía (subcarpetas y archivos). Esa <strong>herencia puede modificarse o deshabilitarse</strong> según la configuración, para definir permisos explícitos distintos en un punto concreto del árbol. Al deshabilitarla, Windows pregunta si <strong>convertir</strong> los permisos heredados en <strong>explícitos</strong> o <strong>quitarlos</strong>: no es lo mismo.</p>
+<ul class="tema-lista">
+<li><strong>ACE explícita</strong> → definida en el <strong>propio objeto</strong>. <strong>ACE heredada</strong> → viene de una <strong>carpeta superior</strong>.</li>
+</ul>
 <h4 class="tema-h4">Permitir y denegar</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>📌 Imprescindible para el examen — formulación prudente</strong><br><strong>Una denegación explícita suele prevalecer sobre los permisos de permitir aplicables al mismo acceso.</strong><br>Es la regla que hay que dominar para el examen; evita formularla como un absoluto («cualquier Deny elimina siempre el acceso en cualquier circunstancia»), porque el resultado depende del conjunto de entradas aplicables y de la configuración concreta.</th>
 </tr>
 </table></div>
+<p>Windows ordena las entradas así (Microsoft Learn, «Order of ACEs in a DACL»):</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Orden</strong></th>
+<th><strong>Entrada</strong></th>
+</tr>
+<tr>
+<td>1</td>
+<td><strong>Denegar explícito</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Permitir explícito</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Denegar heredado (de la carpeta madre, luego la abuela…)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Permitir heredado</td>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li>Por eso un <strong>Permitir explícito prevalece sobre un Denegar heredado</strong>.</li>
+<li>Un Denegar solo bloquea <strong>el derecho que deniega</strong>: denegar <strong>Eliminar</strong> no impide leer ni guardar.</li>
+<li>Los <strong>Permitir de varios grupos se suman</strong>: si un grupo da Lectura y otro Modificar, el usuario tiene <strong>Modificar</strong>. Dentro de NTFS <strong>no se coge el permiso menor</strong> de los grupos.</li>
+</ul>
 <h2 id="7-permiso-efectivo" class="tema-h2">7. El permiso efectivo: local y por red</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 LA regla del tema</strong><br><strong>ACCESO LOCAL → solo NTFS.</strong><br><strong>ACCESO POR RED → SHARE + NTFS.</strong><br><strong>PERMISO EFECTIVO por red → el MÁS RESTRICTIVO de ambas capas.</strong></th>
+<th><strong>📌 LA regla del tema</strong><br><strong>ACCESO LOCAL → solo NTFS.</strong><br><strong>ACCESO POR RED → SHARE + NTFS.</strong><br><strong>PERMISO EFECTIVO por red → el MÁS RESTRICTIVO de ambas capas</strong>: lo que <strong>permiten las dos a la vez</strong>.<br>Dentro de NTFS es otra cuenta: se <strong>suman los Permitir</strong> de todos los grupos y se restan los <strong>Denegar</strong>.</th>
 </tr>
 </table></div>
 <figure class="tema-figura">
@@ -227,12 +312,36 @@
 <td><strong>Local</strong></td>
 <td><strong>Modify</strong> — el permiso Share <strong>no interviene</strong> en el acceso local</td>
 </tr>
+<tr>
+<td>Full Control</td>
+<td>Modify</td>
+<td>Red</td>
+<td><strong>Modify</strong> (no Full Control: NTFS no deja cambiar permisos)</td>
+</tr>
+<tr>
+<td>Full Control</td>
+<td>Grupo A Read + grupo B Modify</td>
+<td>Red</td>
+<td><strong>Modify</strong> (en NTFS se suman los grupos)</td>
+</tr>
+<tr>
+<td>Change</td>
+<td>Modify con <strong>Denegar Eliminar</strong></td>
+<td>Red</td>
+<td><strong>Modify sin borrar</strong></td>
+</tr>
+<tr>
+<td>Read</td>
+<td>Write</td>
+<td>Red</td>
+<td><strong>Solo lo común</strong>: leer y abrir; no guardar (no son escalones de una misma escala)</td>
+</tr>
 </table></div>
 <h4 class="tema-h4">Buena práctica de administración</h4>
 <p>Una práctica habitual es <strong>mantener los permisos de recurso compartido suficientemente amplios</strong> y <strong>utilizar NTFS para el control detallado</strong>, asignando el acceso a los <strong>grupos adecuados</strong> (regla AGDLP, Tema 14). La idea clave: <strong>NTFS = control fino · Share = capa de acceso por red</strong>. No se trata de conceder genéricamente «Control total a Todos/Everyone», sino de que la capa fina sea NTFS y esté asignada a los grupos correctos.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>💡 Procedimiento CAU — «no puedo abrir/modificar la carpeta compartida»</strong><br><strong>1.</strong> ¿Accede <strong>por red o localmente</strong>?<br><strong>2.</strong> ¿Qué <strong>recurso UNC</strong> utiliza?<br><strong>3.</strong> ¿Qué <strong>permisos Share</strong> tiene?<br><strong>4.</strong> ¿Qué <strong>permisos NTFS</strong> tiene?<br><strong>5.</strong> ¿A qué <strong>grupos</strong> pertenece el usuario?<br><strong>6.</strong> ¿Hay alguna <strong>denegación explícita</strong> aplicable?<br><strong>7.</strong> ¿Cuál es, por tanto, el <strong>permiso efectivo</strong>?</th>
+<th><strong>💡 Procedimiento CAU — «no puedo abrir/modificar la carpeta compartida»</strong><br><strong>0.</strong> ¿El <strong>servidor responde</strong> y el usuario <strong>se autentica</strong>? ¿Con <strong>qué cuenta</strong> se conecta? Si falla la conexión, no se tocan permisos.<br><strong>1.</strong> ¿Accede <strong>por red o localmente</strong>?<br><strong>2.</strong> ¿Qué <strong>recurso UNC</strong> utiliza?<br><strong>3.</strong> ¿Qué <strong>permisos Share</strong> tiene?<br><strong>4.</strong> ¿Qué <strong>permisos NTFS</strong> tiene?<br><strong>5.</strong> ¿A qué <strong>grupos</strong> pertenece el usuario?<br><strong>6.</strong> ¿Hay alguna <strong>denegación explícita</strong> aplicable?<br><strong>7.</strong> ¿Cuál es, por tanto, el <strong>permiso efectivo</strong>? (Pestaña <strong>Acceso efectivo</strong> de la configuración avanzada de seguridad.)<br><strong>8.</strong> ¿Qué <strong>operación</strong> falla: leer, guardar, crear o borrar? Cada una necesita derechos distintos.<br>Si se le acaba de añadir a un grupo, ¿ha <strong>vuelto a iniciar sesión</strong> (Tema 14)? Tras el cambio autorizado, comprobar que hace lo que necesita <strong>y nada más</strong>, y no conceder Control total «para que funcione».</th>
 </tr>
 </table></div>
   </div>

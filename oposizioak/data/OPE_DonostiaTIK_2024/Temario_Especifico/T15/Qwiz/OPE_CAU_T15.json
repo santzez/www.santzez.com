@@ -119,7 +119,7 @@
     },
     {
       "id": "OPE_CAU_T15_005",
-      "pregunta": "¿Qué niveles de gravedad son exclusivos del registro de Seguridad?",
+      "pregunta": "¿Qué valores, propios del registro de Seguridad, indican el resultado de una acción auditada?",
       "opciones": [
         {
           "texto": "Advertencia de seguridad y Error crítico.",
@@ -138,7 +138,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "Los niveles generales son Información, Advertencia, Error y Crítico; «Auditoría correcta» y «Auditoría con error» (éxito o fracaso de una acción auditada, como un inicio de sesión) son específicos del registro de Seguridad.",
+      "razonamiento": "«Auditoría correcta» y «Auditoría con error» indican si la acción auditada (por ejemplo, un inicio de sesión) tuvo éxito o falló. No son niveles de gravedad: esos son Información, Advertencia, Error y Crítico.",
       "origen": "T15 §2",
       "dificultad": "Media",
       "tipo": "Precisión",
@@ -462,7 +462,7 @@
           "correcta": false
         },
         {
-          "texto": "Prevalece la denegación: Denegar gana siempre sobre Permitir.",
+          "texto": "Prevalece la denegación, salvo que el «Permitir» sea explícito y el «Denegar» heredado.",
           "correcta": true
         },
         {
@@ -474,7 +474,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "Basta una única denegación explícita en cualquier grupo al que pertenezca el usuario para bloquear el acceso, sin importar cuántos «Permitir» tenga por otras vías. Es uno de los puntos más preguntados del tema.",
+      "razonamiento": "Windows evalúa primero las entradas explícitas y después las heredadas; dentro de cada grupo, la denegación va antes que el permiso. Por eso una denegación explícita bloquea el derecho que deniega aunque haya «Permitir» por otros grupos, pero un «Permitir» explícito prevalece sobre un «Denegar» heredado. Y el «Denegar» solo bloquea el derecho concreto que deniega.",
       "mnemotecnico": "🧠 Denegar > Permitir, siempre.",
       "origen": "T15 §6",
       "dificultad": "Media",
@@ -531,7 +531,7 @@
           "correcta": true
         }
       ],
-      "razonamiento": "El permiso efectivo por red es la intersección: siempre el más restrictivo de los dos. Por eso la práctica habitual es dejar el share en Control total y gestionar el control fino solo por NTFS.",
+      "razonamiento": "Por red se combinan las dos capas y vale lo que permiten ambas a la vez: el más restrictivo de los dos. Por eso la práctica habitual es dejar el share amplio para el grupo y gestionar el control fino por NTFS. Dentro de NTFS es otra cuenta: los «Permitir» de varios grupos se suman.",
       "origen": "T15 §7",
       "dificultad": "Media",
       "tipo": "Procedimiento",
