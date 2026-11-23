@@ -83,7 +83,7 @@
           "correcta": true
         }
       ],
-      "razonamiento": "Rocky Linux y AlmaLinux son hoy las opciones de referencia compatibles con RHEL sin coste de licencia. CentOS Stream es una rama de desarrollo previa a RHEL, no equivalente en estabilidad a la antigua CentOS Linux.",
+      "razonamiento": "Rocky Linux y AlmaLinux son hoy las opciones de referencia compatibles con RHEL sin coste de licencia. CentOS Stream es la rama de desarrollo que va por delante de las versiones menores de RHEL, no un clon de una versión ya publicada como lo era la antigua CentOS Linux.",
       "origen": "T13 §1",
       "dificultad": "Media",
       "tipo": "Conocimiento directo",
@@ -111,7 +111,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "LTS (Long Term Support) garantiza soporte prolongado (cinco años de soporte estándar, ampliables con ESM), lo que la hace idónea para servidores en producción frente a las versiones intermedias de ciclo corto.",
+      "razonamiento": "LTS (Long Term Support) garantiza soporte prolongado, pero con fecha de fin: cinco años de soporte estándar, ampliables hasta diez con Ubuntu Pro. Por eso es idónea para servidores en producción frente a las versiones intermedias de ciclo corto.",
       "origen": "T13 §1 y §6",
       "dificultad": "Fácil",
       "tipo": "Definición",
@@ -167,7 +167,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "Kickstart automatiza la instalación en la familia Red Hat; en Debian/Ubuntu se usa preseed o, cada vez más, cloud-init. Sysprep pertenece al mundo Windows y Zypper es el gestor de paquetes de SUSE.",
+      "razonamiento": "Kickstart automatiza la instalación en la familia Red Hat. En Debian, el instalador clásico usa preseed; Ubuntu Server actual usa Autoinstall, que procesa su instalador (cloud-init solo puede entregar esa configuración). Sysprep pertenece al mundo Windows y Zypper es el gestor de paquetes de SUSE.",
       "origen": "T13 §2",
       "dificultad": "Media",
       "tipo": "Identificación",
@@ -191,11 +191,11 @@
           "correcta": false
         },
         {
-          "texto": "Permite agrupar discos físicos y crear particiones lógicas redimensionables en caliente, con mucha más flexibilidad.",
+          "texto": "Permite agrupar discos en un grupo de volúmenes y repartir volúmenes lógicos que se amplían con mucha más flexibilidad.",
           "correcta": true
         }
       ],
-      "razonamiento": "LVM añade una capa de abstracción que permite redimensionar volúmenes en caliente y agrupar varios discos físicos. La duplicación de datos es RAID y el cifrado, otra capa distinta (LUKS).",
+      "razonamiento": "LVM organiza el almacenamiento en tres capas: PV (discos o particiones) → VG (grupo) → LV (volúmenes lógicos). Ampliar un LV exige espacio libre en el VG y crecer después el sistema de archivos; reducir depende de este (XFS no se reduce). La duplicación de datos es RAID y el cifrado, otra capa distinta (LUKS).",
       "origen": "T13 §2",
       "dificultad": "Media",
       "tipo": "Relación",
@@ -303,7 +303,7 @@
           "correcta": false
         },
         {
-          "texto": "El sistema de inicio y gestor de servicios estándar, primer proceso que arranca tras el núcleo (PID 1).",
+          "texto": "El sistema de inicio y gestor de servicios de la mayoría de distribuciones, primer proceso que arranca tras el núcleo (PID 1).",
           "correcta": true
         }
       ],
@@ -316,7 +316,7 @@
     },
     {
       "id": "OPE_CAU_T13_012",
-      "pregunta": "¿Qué PID tiene siempre systemd?",
+      "pregunta": "Cuando systemd actúa como sistema de inicio, ¿qué PID tiene?",
       "opciones": [
         {
           "texto": "100.",
@@ -335,7 +335,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "systemd es el primer proceso que arranca el núcleo, por lo que recibe siempre el PID 1 y es el antecesor de todos los demás procesos del sistema.",
+      "razonamiento": "Cuando systemd es el sistema de inicio, es el primer proceso que arranca el núcleo: recibe el PID 1 y es el antecesor de los demás procesos. No todas las distribuciones ni todos los contenedores usan systemd como init.",
       "origen": "T13 §4",
       "dificultad": "Media",
       "tipo": "Precisión",
@@ -448,7 +448,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "Con claves, la privada nunca sale del cliente y la pública queda en el servidor: se elimina el riesgo de ataques de fuerza bruta o diccionario contra contraseñas. La comunicación sigue cifrada en ambos casos.",
+      "razonamiento": "Con claves, la privada nunca sale del cliente y la pública queda autorizada en el servidor: se elimina el riesgo de ataques de fuerza bruta o diccionario contra contraseñas. La comunicación va cifrada en ambos casos; la identidad del servidor la confirma, aparte, su clave de host.",
       "origen": "T13 §5",
       "dificultad": "Media",
       "tipo": "Relación",
@@ -532,7 +532,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "Actualizar el kernel requiere reiniciar. Algunas distribuciones ofrecen live patching (por ejemplo, kpatch) para aplicar parches críticos en caliente y posponer el reinicio a una ventana de mantenimiento.",
+      "razonamiento": "Actualizar el kernel normalmente requiere reiniciar. Algunas distribuciones ofrecen live patching (kpatch en Red Hat, Livepatch en Ubuntu) para aplicar determinados parches en caliente y posponer el reinicio a una ventana de mantenimiento; reduce los reinicios, no los elimina todos.",
       "origen": "T13 §6",
       "dificultad": "Media",
       "tipo": "Conocimiento directo",
@@ -811,7 +811,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "Equivalencia falsa muy preguntable. En la familia Debian, refrescar metadatos (apt update) y aplicar actualizaciones (apt upgrade) son pasos separados; la correspondencia con dnf no es literal.",
+      "razonamiento": "Equivalencia falsa muy preguntable. apt update refresca los metadatos; dnf check-update comprueba qué actualizaciones hay. Lo más parecido a apt update en DNF es dnf makecache. En ambos casos, aplicar las actualizaciones es otro paso (apt upgrade, dnf upgrade).",
       "dificultad": "Difícil",
       "tipo": "Detección de errores",
       "concepto": "Gestión de paquetes: apt y dnf",

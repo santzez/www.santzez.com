@@ -23,7 +23,7 @@
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Cómo leer este tema</strong><br>El <strong>núcleo memorizable</strong> (distribuciones y gestores, LVM, systemd, SSH, root/sudo, comandos de monitorización) es estable. Los datos que cambian con el tiempo (situación de CentOS, ciclos de vida concretos, mecanismos de live patching) están reunidos y fechados en el <strong>apartado 9 de Xtra</strong>.</th>
+<th><strong>📌 Cómo leer este tema</strong><br>El <strong>núcleo memorizable</strong> (distribuciones y gestores, LVM, systemd, SSH, root/sudo, comandos de monitorización) es estable. Los datos que cambian con el tiempo (situación de CentOS, ciclos de vida concretos, mecanismos de live patching) están reunidos y fechados en la actualidad del tema (apartado 10 de Xtra).</th>
 </tr>
 </table></div>
 <h2 id="1-linux-y-distribuciones" class="tema-h2">1. Linux y distribuciones</h2>
@@ -58,52 +58,130 @@
 <td><strong>.rpm</strong></td>
 </tr>
 </table></div>
-<p><strong>Ubuntu pertenece a la familia Debian</strong> (deriva de ella y comparte APT y el formato .deb): no es una familia independiente. Sus versiones <strong>LTS (Long Term Support)</strong> tienen un <strong>ciclo de soporte prolongado</strong>, lo que las hace habituales en servidores; los años y fechas concretas son dato de actualidad, no materia nuclear.</p>
+<p><strong>Ubuntu pertenece a la familia Debian</strong> (deriva de ella y comparte APT y el formato .deb): no es una familia independiente. Eso no hace intercambiables sus <strong>repositorios</strong> ni sus versiones: cada distribución mantiene los suyos. Sus versiones <strong>LTS (Long Term Support)</strong> tienen un <strong>ciclo de soporte prolongado</strong>, lo que las hace habituales en servidores; los años y fechas concretas son dato de actualidad, no materia nuclear.</p>
+<ul class="tema-lista">
+<li><strong>LTS no es soporte indefinido</strong>: es un plazo <strong>prolongado pero fijo</strong>, que varía según producto y modalidad (estándar o ampliado de pago). Al acabar llega el <strong>fin de vida (EOL)</strong>.</li>
+<li><strong>Formato ≠ gestor</strong>: <strong>.deb</strong> y <strong>.rpm</strong> son <strong>formatos de paquete</strong>; <strong>APT, DNF y Zypper</strong> son las <strong>herramientas</strong> que los gestionan.</li>
+<li><strong>Libre ≠ sin soporte comercial</strong>: Debian, Rocky o AlmaLinux son comunitarias; <strong>RHEL</strong> y <strong>SLES</strong> se distribuyen con <strong>suscripción</strong> de soporte, y Ubuntu ofrece soporte ampliado de pago (Ubuntu Pro).</li>
+<li>En el lenguaje corriente se dice «el sistema operativo Linux» para referirse al sistema completo. Para el examen, la distinción es <strong>kernel ≠ distribución</strong>.</li>
+</ul>
 <figure class="tema-figura">
 <figcaption>Familias de distribuciones</figcaption>
-<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at13ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at13aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at13av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at13an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at13ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at13ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="220.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="118.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">DEBIAN / UBUNTU</text><rect x="240.0" y="6" width="220.0" height="40" rx="6" fill="#c62828" stroke="#c62828" stroke-width="1.6"/><text x="350.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">RED HAT</text><rect x="472.0" y="6" width="220.0" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="582.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">SUSE</text><rect x="8.0" y="54" width="220.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="118.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Gestor: APT</text><rect x="8.0" y="94" width="220.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="118.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Paquete: .DEB</text><rect x="8.0" y="134" width="220.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="118.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">preseed · cloud-init</text><rect x="240.0" y="54" width="220.0" height="34" rx="5" fill="#fbe6e6" stroke="#c62828" stroke-width="1.6"/><text x="350.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Gestor: DNF</text><rect x="240.0" y="94" width="220.0" height="34" rx="5" fill="#fbe6e6" stroke="#c62828" stroke-width="1.6"/><text x="350.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Paquete: .RPM</text><rect x="240.0" y="134" width="220.0" height="34" rx="5" fill="#fbe6e6" stroke="#c62828" stroke-width="1.6"/><text x="350.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Kickstart</text><rect x="472.0" y="54" width="220.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="582.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Gestor: Zypper</text><rect x="472.0" y="94" width="220.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="582.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Paquete: .RPM</text><rect x="472.0" y="134" width="220.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="582.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">—</text></svg>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at13ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at13aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at13av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at13an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at13ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at13ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="220.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="118.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">DEBIAN / UBUNTU</text><rect x="240.0" y="6" width="220.0" height="40" rx="6" fill="#c62828" stroke="#c62828" stroke-width="1.6"/><text x="350.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">RED HAT</text><rect x="472.0" y="6" width="220.0" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="582.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">SUSE</text><rect x="8.0" y="54" width="220.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="118.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Gestor: APT</text><rect x="8.0" y="94" width="220.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="118.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Paquete: .DEB</text><rect x="8.0" y="134" width="220.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="118.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Autoinstall (Ubuntu) · preseed</text><rect x="240.0" y="54" width="220.0" height="34" rx="5" fill="#fbe6e6" stroke="#c62828" stroke-width="1.6"/><text x="350.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Gestor: DNF</text><rect x="240.0" y="94" width="220.0" height="34" rx="5" fill="#fbe6e6" stroke="#c62828" stroke-width="1.6"/><text x="350.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Paquete: .RPM</text><rect x="240.0" y="134" width="220.0" height="34" rx="5" fill="#fbe6e6" stroke="#c62828" stroke-width="1.6"/><text x="350.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Kickstart</text><rect x="472.0" y="54" width="220.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="582.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Gestor: Zypper</text><rect x="472.0" y="94" width="220.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="582.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Paquete: .RPM</text><rect x="472.0" y="134" width="220.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="582.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">—</text></svg>
 <p class="tema-figura__nota">Linux es el kernel; la distribución añade herramientas, gestor y configuración.</p></figure>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🔍 Para ampliar — CentOS, Rocky y Alma</strong><br><strong>CentOS Linux</strong> tradicional llegó a su <strong>fin de vida</strong>; <strong>CentOS Stream</strong> cumple otra función dentro del ecosistema Red Hat (rama previa a RHEL, no equivalente en estabilidad a la antigua CentOS). <strong>Rocky Linux</strong> y <strong>AlmaLinux</strong> son alternativas compatibles con RHEL. Los datos de ciclo de vida figuran, fechados, en el apartado 9 de Xtra.</th>
+<th><strong>🔍 Para ampliar — CentOS, Rocky y Alma</strong><br><strong>CentOS Linux</strong> tradicional llegó a su <strong>fin de vida</strong>; <strong>CentOS Stream</strong> cumple otra función dentro del ecosistema Red Hat: es la rama de desarrollo <strong>por delante</strong> de las versiones menores de RHEL, no un clon de una versión ya publicada. <strong>Rocky Linux</strong> y <strong>AlmaLinux</strong> se orientan a la <strong>compatibilidad con RHEL</strong>, cada una con sus propias políticas; no son idénticas en todo. Los datos de ciclo de vida figuran, fechados, en la actualidad del tema (apartado 10 de Xtra).</th>
 </tr>
 </table></div>
 <h2 id="2-instalacion-de-un-servidor-linux" class="tema-h2">2. Instalación de un servidor Linux</h2>
 <h4 class="tema-h4">Métodos</h4>
 <ul class="tema-lista">
-<li><strong>Instalación manual</strong>: desde una imagen <strong>ISO</strong>, respondiendo de forma interactiva al instalador — <strong>particionado</strong>, configuración de <strong>red</strong>, creación del <strong>usuario inicial</strong>.</li>
-<li><strong>Instalación automatizada/desatendida</strong>: las respuestas se aportan en un fichero de configuración, imprescindible para desplegar muchos servidores de forma idéntica. En la familia <strong>Red Hat</strong>, el mecanismo clásico es <strong>Kickstart</strong>; en <strong>Debian/Ubuntu</strong> se emplean herramientas de instalación automatizada como <strong>preseed</strong> o <strong>cloud-init</strong>, sin que todas las versiones actuales utilicen exactamente el mismo mecanismo.</li>
+<li><strong>Instalación manual</strong>: desde una imagen <strong>ISO</strong>, respondiendo de forma interactiva al instalador: idioma, <strong>almacenamiento y particionado</strong>, <strong>red</strong>, <strong>usuario inicial</strong>, selección de servicios, reinicio y comprobación.</li>
+<li><strong>Instalación automatizada/desatendida</strong>: las respuestas se aportan en un fichero de configuración, imprescindible para desplegar muchos servidores de forma idéntica y reproducible.</li>
 </ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Mecanismo</strong></th>
+<th><strong>Dónde</strong></th>
+<th><strong>Qué hace</strong></th>
+</tr>
+<tr>
+<td><strong>Kickstart</strong></td>
+<td>Familia <strong>Red Hat</strong></td>
+<td>Fichero de respuestas del instalador</td>
+</tr>
+<tr>
+<td><strong>preseed</strong></td>
+<td>Instalador clásico de <strong>Debian</strong> (debian-installer)</td>
+<td>Respuestas del instalador clásico</td>
+</tr>
+<tr>
+<td><strong>Autoinstall</strong></td>
+<td><strong>Ubuntu Server 20.04 y posteriores</strong> (instalador <strong>Subiquity</strong>)</td>
+<td>Configuración declarativa en <strong>YAML</strong></td>
+</tr>
+<tr>
+<td><strong>cloud-init</strong></td>
+<td>Imágenes de nube y primer arranque</td>
+<td>Inicializa el sistema; también puede <strong>entregar</strong> la configuración Autoinstall</td>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — Autoinstall, preseed y cloud-init</strong><br>El instalador actual de <strong>Ubuntu Server</strong> usa <strong>Autoinstall</strong>, no preseed: preseed es del instalador clásico de Debian.<br><strong>cloud-init</strong> puede <strong>transportar</strong> la configuración Autoinstall, pero <strong>no la interpreta</strong>: la procesa el instalador (Subiquity).</th>
+</tr>
+</table></div>
 <h4 class="tema-h4">Servidor sin entorno gráfico</h4>
-<p>Un servidor Linux <strong>suele instalarse sin entorno gráfico</strong>. Ventajas: <strong>menor consumo de recursos</strong>, <strong>menor superficie de ataque</strong>, <strong>menos componentes</strong> que mantener y actualizar, y administración por <strong>consola o SSH</strong>. Es una práctica habitual, no una imposibilidad técnica: <strong>un servidor Linux sí puede tener GUI</strong> si el caso lo justifica.</p>
+<p>Un servidor Linux <strong>suele instalarse sin entorno gráfico</strong>. Ventajas: <strong>menor consumo de recursos</strong>, <strong>menor superficie de ataque</strong>, <strong>menos componentes</strong> que mantener y actualizar, y administración por <strong>consola o SSH</strong>. Es una práctica habitual, no una imposibilidad técnica: <strong>un servidor Linux sí puede tener GUI</strong> si el caso lo justifica. <strong>Sin GUI no es sin interfaz</strong>: queda la shell en consola o por SSH. Y una <strong>instalación mínima</strong> reduce componentes, pero <strong>no garantiza</strong> por sí sola la seguridad.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>🧠 Para memorizar — paralelismo</strong><br>La filosofía coincide con la de <strong>Windows Server Core</strong> (Tema 12): menos componentes, menos superficie de ataque, administración por línea de comandos o remota.</th>
 </tr>
 </table></div>
+<h4 class="tema-h4">Particiones, puntos de montaje y swap</h4>
+<ul class="tema-lista">
+<li><strong>Partición</strong>: trozo de un disco. <strong>Sistema de archivos</strong>: la organización de los datos dentro de una partición o volumen. <strong>Punto de montaje</strong>: el directorio donde se hace visible (<code>/</code>, <code>/boot</code>, <code>/home</code>, <code>/var</code>, <code>/tmp</code>).</li>
+<li>Separar <code>/var</code> o <code>/home</code> es habitual en servidores para que un directorio que crece no llene la raíz, pero <strong>no es obligatorio</strong> en todas las distribuciones.</li>
+<li><strong>swap</strong>: espacio de intercambio, en <strong>partición o en archivo</strong>. Su funcionamiento es materia del <strong>Tema 9</strong>.</li>
+<li>Antes de instalar se <strong>planifica</strong>: capacidad, sistema de archivos, red, actualizaciones, acceso administrativo y copia de seguridad.</li>
+</ul>
 <h4 class="tema-h4">LVM (Logical Volume Manager)</h4>
 <ul class="tema-lista">
 <li><strong>Qué es</strong>: una <strong>capa de abstracción entre el almacenamiento físico y los volúmenes lógicos</strong>.</li>
 <li><strong>Ventajas</strong>: <strong>flexibilidad</strong>, <strong>agrupación de dispositivos y volúmenes</strong>, <strong>ampliación de volúmenes</strong> en determinados escenarios y una administración más flexible que el <strong>particionado clásico</strong> de tamaño fijo.</li>
-<li><strong>Matiz</strong>: no todas las operaciones son posibles sin condiciones — la reducción o el redimensionado en caliente <strong>dependen del sistema de archivos y del escenario</strong>.</li>
+<li><strong>Tres capas</strong>: <strong>PV</strong> (*physical volume*, el disco o la partición preparados para LVM) → <strong>VG</strong> (*volume group*, la bolsa de capacidad que suman uno o varios PV) → <strong>LV</strong> (*logical volume*, el volumen que se reparte de esa bolsa). Sobre el LV se crea el sistema de archivos y se monta.</li>
+<li><strong>Ampliar el LV no amplía por sí solo el sistema de archivos</strong>: son dos pasos (crecer el volumen y crecer el sistema de archivos), aunque hay herramientas que los coordinan, como <code>lvextend -r</code>. Y solo se puede crecer si <strong>queda espacio libre en el VG</strong>.</li>
+<li><strong>Reducir es otra cosa</strong>: <strong>XFS no se puede reducir</strong>; <strong>ext4</strong> sí, pero <strong>desmontado</strong> y con copia previa.</li>
+<li><strong>Snapshot LVM ≠ copia de seguridad</strong>: depende del mismo almacenamiento (Tema 23). Y <strong>LVM ≠ RAID</strong>: LVM organiza; la redundancia es cosa del RAID.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🧠 Para memorizar</strong><br><strong>LVM → FLEXIBILIDAD.</strong> Y ojo: <strong>LVM no es un sistema de archivos</strong>, es la capa sobre la que se crean los volúmenes que luego se formatean.</th>
+<th><strong>🧠 Para memorizar</strong><br><strong>LVM → FLEXIBILIDAD.</strong> Y ojo: <strong>LVM no es un sistema de archivos</strong>, es la capa sobre la que se crean los volúmenes que luego se formatean.<br><strong>DISCO → PV → VG → LV → SISTEMA DE ARCHIVOS → MONTAJE.</strong></th>
 </tr>
 </table></div>
 <h4 class="tema-h4">Sistemas de archivos habituales</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Sistema</strong></th>
+<th><strong>Dónde se ve</strong></th>
+<th><strong>Crecer</strong></th>
+<th><strong>Reducir</strong></th>
+<th><strong>Snapshots propios</strong></th>
+</tr>
+<tr>
+<td><strong>ext4</strong></td>
+<td>Muy extendido; por defecto en Debian y Ubuntu</td>
+<td>Sí, también montado</td>
+<td>Sí, <strong>desmontado</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>XFS</strong></td>
+<td>Por defecto en RHEL y derivados</td>
+<td>Sí, montado</td>
+<td><strong>No</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Btrfs</strong></td>
+<td>openSUSE y SLES, entre otros</td>
+<td>Sí</td>
+<td>Sí</td>
+<td><strong>Sí</strong>, con subvolúmenes y sumas de comprobación</td>
+</tr>
+</table></div>
 <ul class="tema-lista">
-<li><strong>ext4</strong>: muy extendido, opción por defecto en muchas distribuciones.</li>
-<li><strong>XFS</strong>: habitual en entornos Red Hat; adecuado para determinados escenarios de grandes volúmenes y ficheros.</li>
-<li><strong>Btrfs</strong>: funciones avanzadas como <strong>snapshots</strong> y <strong>subvolúmenes</strong>.</li>
+<li>Ninguno es «el mejor» para todo: depende de la carga y de la distribución.</li>
+<li>El <strong>journaling</strong> ayuda a recuperar la coherencia tras un corte; <strong>no es una copia de seguridad</strong>.</li>
+<li>Un volumen puede <strong>existir sin estar montado</strong>: si no está montado, sus datos no se ven en ningún directorio.</li>
 </ul>
 <h2 id="3-gestion-de-paquetes" class="tema-h2">3. Gestión de paquetes y del software</h2>
 <ul class="tema-lista">
-<li><strong>Repositorio</strong>: servidor con las versiones disponibles del software.</li>
+<li><strong>Repositorio</strong>: <strong>origen configurado</strong> de paquetes y de sus metadatos: un servidor oficial, un espejo o un repositorio interno de la organización.</li>
 <li><strong>Paquete</strong>: unidad de software distribuible (<strong>.deb</strong> o <strong>.rpm</strong>).</li>
 <li><strong>Dependencia</strong>: otro paquete necesario para que el software funcione.</li>
-<li><strong>Gestor de paquetes</strong>: instala, actualiza y elimina software <strong>resolviendo automáticamente las dependencias</strong> desde los repositorios configurados. A bajo nivel existen <code>dpkg</code> (.deb) y <code>rpm</code> (.rpm), que instalan un paquete suelto sin resolver dependencias por sí mismos.</li>
+<li><strong>Gestor de paquetes</strong>: instala, actualiza y elimina software <strong>resolviendo las dependencias</strong> desde los repositorios configurados (aunque un conflicto puede impedir la operación) y <strong>verificando las firmas</strong> de los paquetes. A bajo nivel existen <code>dpkg</code> (.deb) y <code>rpm</code> (.rpm), que instalan un paquete suelto sin resolver dependencias por sí mismos.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -114,7 +192,7 @@
 <tr>
 <td>Actualizar metadatos de repositorios</td>
 <td><code>apt update</code></td>
-<td>Equivalente funcional: actualizar la metadata de los repositorios</td>
+<td><code>dnf makecache</code></td>
 </tr>
 <tr>
 <td>Consultar actualizaciones disponibles</td>
@@ -128,19 +206,34 @@
 </tr>
 <tr>
 <td>Instalar un paquete</td>
-<td><code>apt install</code></td>
-<td><code>dnf install</code></td>
+<td><code>apt install paquete</code></td>
+<td><code>dnf install paquete</code></td>
+</tr>
+<tr>
+<td>Eliminar un paquete</td>
+<td><code>apt remove paquete</code></td>
+<td><code>dnf remove paquete</code></td>
+</tr>
+<tr>
+<td>Buscar un paquete</td>
+<td><code>apt search término</code></td>
+<td><code>dnf search término</code></td>
 </tr>
 </table></div>
+<p>En SUSE, las mismas acciones se hacen con <strong>Zypper</strong> (<code>zypper refresh</code>, <code>zypper update</code>, <code>zypper install</code>).</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir — dos precisiones</strong><br>1) <strong>apt update ≠ apt upgrade</strong>: el primero <strong>actualiza los metadatos/caché</strong> de los repositorios (no instala nada); el segundo <strong>instala</strong> las versiones más recientes de los paquetes ya presentes.<br>2) <strong>apt update ≠ dnf check-update</strong>: <strong>no son equivalentes exactos</strong>. <code>apt update</code> refresca los metadatos; <code>dnf check-update</code> <strong>comprueba qué actualizaciones están disponibles</strong>.</th>
+<th><strong>⚠️ No confundir — dos precisiones</strong><br>1) <strong>apt update ≠ apt upgrade</strong>: el primero <strong>actualiza los metadatos/caché</strong> de los repositorios (no instala nada); el segundo <strong>instala</strong> las versiones más recientes de los paquetes ya presentes.<br>2) <strong>apt update ≠ dnf check-update</strong>: <strong>no son equivalentes exactos</strong>. <code>apt update</code> refresca los metadatos; <code>dnf check-update</code> <strong>comprueba qué actualizaciones están disponibles</strong>. Lo más parecido a <code>apt update</code> es <code>dnf makecache</code>.<br>3) <strong>apt upgrade ≠ cambiar de versión de la distribución</strong>: actualiza paquetes <strong>dentro de la misma versión</strong>. Pasar de una versión a otra es una <strong>migración</strong> con su propio procedimiento. <code>apt full-upgrade</code> puede además añadir o retirar paquetes por cambios de dependencias, así que no se usa a ciegas.</th>
 </tr>
 </table></div>
+<ul class="tema-lista">
+<li>Solo se instala desde <strong>repositorios autorizados</strong>: un paquete de origen dudoso es un riesgo.</li>
+<li><strong>Paquete instalado ≠ servicio funcionando</strong>: tras instalar, el servicio puede no estar iniciado, estar mal configurado o tener el puerto ocupado.</li>
+</ul>
 <h2 id="4-systemd-y-gestion-de-servicios" class="tema-h2">4. systemd y gestión de servicios</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Imprescindible para el examen</strong><br><strong>systemd</strong> → <strong>sistema de inicio y marco de gestión de servicios</strong> adoptado por la mayoría de distribuciones actuales.<br><strong>PID 1</strong> → es el <strong>primer proceso de espacio de usuario iniciado por el kernel</strong>.<br><strong>systemd ≠ kernel</strong>: el kernel arranca a systemd, no al revés.</th>
+<th><strong>📌 Imprescindible para el examen</strong><br><strong>systemd</strong> → <strong>sistema de inicio y marco de gestión de servicios</strong> adoptado por la mayoría de distribuciones actuales (no por todas: existen otros sistemas de inicio).<br><strong>PID 1</strong> → es el <strong>primer proceso de espacio de usuario iniciado por el kernel</strong>. Cuando systemd es el sistema de inicio, <strong>systemd es el PID 1</strong>.<br><strong>systemd ≠ kernel</strong>: el kernel arranca a systemd, no al revés.</th>
 </tr>
 </table></div>
 <figure class="tema-figura">
@@ -153,6 +246,8 @@
 <li><strong>.socket</strong>: activación por socket.</li>
 <li><strong>.mount</strong>: puntos de montaje.</li>
 <li><strong>.timer</strong>: <strong>los timers de systemd proporcionan un mecanismo integrado de programación de tareas y pueden utilizarse en lugar de cron en muchos escenarios</strong> (no son, sin más, «el reemplazo de cron»).</li>
+<li><strong>.target</strong>: <strong>agrupa unidades</strong> y marca estados del arranque (por ejemplo, <code>multi-user.target</code>, el modo servidor sin gráficos). Se parecen a los antiguos *runlevels*, pero no son idénticos.</li>
+<li>Las unidades se relacionan por <strong>dependencias y orden de arranque</strong>: si falla una de la que depende un servicio, el servicio tampoco arranca.</li>
 </ul>
 <h4 class="tema-h4">systemctl</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -170,59 +265,90 @@
 </tr>
 <tr>
 <td><code>systemctl restart servicio</code></td>
-<td>Lo reinicia</td>
+<td>Lo reinicia (lo para y lo vuelve a arrancar)</td>
+</tr>
+<tr>
+<td><code>systemctl reload servicio</code></td>
+<td>Le pide <strong>releer su configuración</strong> sin pararlo, si el servicio lo admite</td>
 </tr>
 <tr>
 <td><code>systemctl status servicio</code></td>
-<td>Consulta su <strong>estado</strong></td>
+<td>Consulta su <strong>estado</strong> y los últimos mensajes</td>
 </tr>
 <tr>
 <td><code>systemctl enable servicio</code></td>
 <td>Configura su <strong>inicio automático</strong> con el sistema</td>
 </tr>
 <tr>
+<td><code>systemctl enable --now servicio</code></td>
+<td>Lo <strong>habilita y lo arranca</strong> a la vez</td>
+</tr>
+<tr>
 <td><code>systemctl disable servicio</code></td>
-<td>Desactiva el inicio automático</td>
+<td>Quita el inicio automático; <strong>no lo detiene</strong> si está en marcha</td>
+</tr>
+<tr>
+<td><code>systemctl mask servicio</code></td>
+<td><strong>Bloquea</strong> la unidad: no se puede arrancar ni a mano ni por dependencia</td>
+</tr>
+<tr>
+<td><code>systemctl daemon-reload</code></td>
+<td>Hace que systemd <strong>relea los ficheros de unidad</strong> tras editarlos; no reinicia los servicios</td>
 </tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir — start ≠ enable</strong><br><strong>start</strong> arranca el servicio <strong>en ese momento</strong>. <strong>enable</strong> configura que <strong>arranque automáticamente con el sistema</strong>, pero <strong>no significa necesariamente que se inicie ahora</strong>. Y al revés: un servicio iniciado con <code>start</code> no quedará activo tras un reinicio si no está <em>enabled</em>.</th>
+<th><strong>⚠️ No confundir — start ≠ enable</strong><br><strong>start</strong> arranca el servicio <strong>en ese momento</strong>. <strong>enable</strong> configura que <strong>arranque automáticamente con el sistema</strong>, pero <strong>no significa necesariamente que se inicie ahora</strong>. Y al revés: un servicio iniciado con <code>start</code> no quedará activo tras un reinicio si no está <em>enabled</em>. Para las dos cosas a la vez: <code>enable --now</code>.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — los estados</strong><br><strong>active</strong> (<code>systemctl is-active</code>) → <strong>está en marcha ahora</strong>. <strong>enabled</strong> (<code>systemctl is-enabled</code>) → <strong>arrancará con el sistema</strong>. Son independientes: un servicio puede estar activo y no habilitado, o al revés.<br><strong>static</strong> → la unidad no se habilita por sí misma; la activa otra. <strong>No es una avería.</strong><br><strong>failed</strong> → la unidad falló; <strong>la causa hay que buscarla</strong> en el estado y el journal.<br><strong>disable ≠ stop · disable ≠ mask · reload ≠ restart · daemon-reload ≠ reiniciar servicios.</strong></th>
 </tr>
 </table></div>
 <h4 class="tema-h4">journalctl</h4>
 <ul class="tema-lista">
 <li><strong>journalctl</strong> consulta el <strong>journal gestionado por systemd</strong>.</li>
 <li><code>journalctl -u servicio</code> muestra los eventos de <strong>un servicio concreto</strong> — herramienta de diagnóstico de primer orden.</li>
+<li><code>journalctl -b</code> → desde el <strong>último arranque</strong> · <code>journalctl -f</code> → <strong>sigue</strong> los mensajes nuevos en directo · <code>journalctl -p err</code> → solo los de prioridad <strong>error</strong> o más grave.</li>
+<li>Que el journal <strong>se conserve tras reiniciar</strong> depende de la configuración: puede ser <strong>persistente</strong> (en disco) o <strong>volátil</strong> (solo en memoria).</li>
 <li><strong>Matiz</strong>: el journal <strong>no contiene automáticamente todos los logs generados por cualquier aplicación Linux</strong>; muchas aplicaciones escriben sus propios ficheros, tradicionalmente bajo <code>/var/log</code>.</li>
+<li><strong>logrotate</strong> rota, comprime y elimina esos ficheros según una política. Los registros no se borran a mano «para ganar espacio» sin saber si hacen falta: pueden ser <strong>evidencias</strong> de un incidente.</li>
 </ul>
 <h2 id="5-acceso-remoto-y-privilegios" class="tema-h2">5. Acceso remoto (SSH) y privilegios (root/sudo)</h2>
 <h4 class="tema-h4">SSH</h4>
 <ul class="tema-lista">
 <li><strong>SSH (Secure Shell)</strong>: <strong>protocolo seguro de administración remota</strong>, que cifra la comunicación entre cliente y servidor.</li>
-<li><strong>Puerto por defecto: 22/TCP</strong>.</li>
+<li><strong>Puerto por defecto: 22/TCP</strong>. Se puede cambiar, pero cambiarlo <strong>no sustituye</strong> a una autenticación robusta. La implementación habitual es <strong>OpenSSH</strong>.</li>
 <li><strong>Métodos de autenticación</strong>: por <strong>contraseña</strong> o mediante <strong>claves criptográficas</strong> — <strong>preferible la autenticación por claves</strong> en entornos de producción.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Imprescindible para el examen — las claves SSH</strong><br><strong>Clave pública</strong> → se <strong>instala/autoriza en el servidor</strong>.<br><strong>Clave privada</strong> → <strong>permanece en el cliente</strong> y debe protegerse (nunca se copia al servidor).<br>Invertir esto es una trampa clásica.</th>
+<th><strong>📌 Imprescindible para el examen — las claves SSH</strong><br><strong>Clave pública</strong> → se <strong>instala/autoriza en el servidor</strong>.<br><strong>Clave privada</strong> → <strong>permanece en el cliente</strong> y debe protegerse (nunca se copia al servidor), normalmente con una <strong>frase de paso</strong> (*passphrase*), que no es la clave sino lo que la protege.<br>Invertir esto es una trampa clásica.</th>
+</tr>
+</table></div>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — clave del usuario y clave de host</strong><br>El servidor tiene su propio par de claves, la <strong>clave de host</strong>, que <strong>demuestra su identidad</strong> al cliente. El cliente guarda las claves de host conocidas en <strong><code>known_hosts</code></strong>.<br>El cifrado <strong>no garantiza</strong> que se hable con el servidor correcto: si se acepta sin comprobar una clave de host desconocida, se abre la puerta a un <strong>ataque de intermediario</strong>.<br>Si aparece el aviso de <strong>clave de host cambiada</strong>, se <strong>verifica por un canal oficial</strong> (por ejemplo, porque el servidor se reinstaló) antes de aceptarla. Borrar <code>known_hosts</code> para que desaparezca el aviso no es la solución.</th>
 </tr>
 </table></div>
 <h4 class="tema-h4">root y sudo</h4>
 <ul class="tema-lista">
 <li><strong>root</strong>: el <strong>superusuario</strong>, con privilegios totales sobre el sistema.</li>
-<li><strong>sudo</strong>: permite <strong>ejecutar comandos concretos con privilegios elevados</strong> desde una cuenta normal, de forma puntual y auditable.</li>
-<li><strong>Buena práctica</strong>: trabajar con un <strong>usuario normal + sudo</strong>, en lugar de iniciar sesión directamente como root.</li>
+<li><strong>sudo</strong>: permite <strong>ejecutar comandos concretos con privilegios elevados</strong> desde una cuenta normal, de forma puntual y <strong>registrable</strong>. Lo que cada cuenta puede hacer lo fija la política <strong>sudoers</strong>; normalmente eleva a root, pero también puede ejecutar como otro usuario (<code>sudo -u</code>).</li>
+<li><strong>su</strong>: <strong>cambia de usuario</strong> en la sesión (por defecto, a root) pidiendo la contraseña de esa cuenta; sudo ejecuta <strong>un comando</strong> con la identidad autorizada y pide la contraseña propia.</li>
+<li>root tiene los <strong>máximos privilegios convencionales</strong>, aunque mecanismos como SELinux, AppArmor o los contenedores pueden limitarlo.</li>
+<li><strong>Buena práctica</strong>: trabajar con un <strong>usuario normal + sudo</strong>, en lugar de iniciar sesión directamente como root, aplicando <strong>mínimo privilegio</strong>: se concede lo justo (por ejemplo, reiniciar un servicio concreto), no un sudo total. La gestión de usuarios y grupos es materia del <strong>Tema 14</strong>.</li>
 </ul>
 <h2 id="6-actualizaciones" class="tema-h2">6. Actualizaciones y ciclo de vida</h2>
 <ul class="tema-lista">
 <li><strong>Actualización manual</strong>: con el gestor de paquetes (apartado 3), planificada en una ventana de mantenimiento.</li>
-<li><strong>Actualización automática</strong>: <strong>unattended-upgrades</strong> en Debian/Ubuntu y <strong>dnf-automatic</strong> en la familia Red Hat. Lo que se instala automáticamente <strong>depende de la configuración</strong>: no debe darse por hecho que siempre instalan todos los parches críticos.</li>
-<li><strong>Ciclo de vida y soporte</strong>: cada distribución tiene su periodo de soporte y su <strong>fin de soporte</strong>; las versiones <strong>LTS</strong> ofrecen ciclos prolongados. Operar una versión sin soporte deja el servidor sin parches, por lo que la <strong>migración debe planificarse</strong> con antelación. Los plazos concretos son dato de actualidad (apartado 9 de Xtra).</li>
+<li><strong>Actualización automática</strong>: <strong>unattended-upgrades</strong> en Debian/Ubuntu y <strong>dnf-automatic</strong> en la familia Red Hat. Lo que se instala automáticamente <strong>depende de la configuración</strong> (orígenes permitidos, tipos de actualización, ventanas): no debe darse por hecho que siempre instalan todos los parches críticos, <strong>ni que reinicien</strong> el servidor cuando hace falta.</li>
+<li><strong>Ciclo de vida y soporte</strong>: cada distribución tiene su periodo de soporte y su <strong>fin de soporte</strong>; las versiones <strong>LTS</strong> ofrecen ciclos prolongados. Al llegar el <strong>fin de vida (EOL)</strong> el sistema <strong>sigue arrancando</strong>, pero <strong>deja de recibir parches</strong>: vulnerabilidades sin corregir, software que deja de ser compatible y problemas de cumplimiento. Por eso la <strong>migración debe planificarse</strong> con antelación. Los plazos concretos son dato de actualidad (apartado 10 de Xtra).</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🔍 Para ampliar — live patching</strong><br>Actualizar el kernel normalmente exige reiniciar. Existen mecanismos de <strong>live patching</strong> (por ejemplo, <strong>kpatch</strong> u otros según la distribución) que permiten aplicar determinados parches al núcleo <strong>sin reiniciar</strong>, retrasando el reinicio a una ventana de mantenimiento. Contenido de ampliación.</th>
+<th><strong>🔍 Para ampliar — live patching</strong><br>Actualizar el kernel normalmente exige reiniciar. Existen mecanismos de <strong>live patching</strong> (por ejemplo, <strong>kpatch</strong> en la familia Red Hat o <strong>Livepatch</strong> de Canonical en Ubuntu) que permiten aplicar determinados parches al núcleo <strong>sin reiniciar</strong>, retrasando el reinicio a una ventana de mantenimiento. <strong>No eliminan todos los reinicios</strong>: no cubren todos los parches y suelen depender de la suscripción. Contenido de ampliación.</th>
 </tr>
 </table></div>
 <h2 id="7-monitorizacion" class="tema-h2">7. Monitorización</h2>
@@ -241,23 +367,23 @@
 </tr>
 <tr>
 <td><strong>free</strong></td>
-<td>Memoria RAM + swap (usada y libre)</td>
+<td>Memoria RAM + swap; mirar la columna <strong>available</strong></td>
 </tr>
 <tr>
 <td><strong>df</strong></td>
-<td>Espacio de los <strong>sistemas de archivos</strong> (ocupado y libre)</td>
+<td>Espacio de los <strong>sistemas de archivos</strong> (ocupado y libre); <code>df -h</code> legible, <code>df -i</code> <strong>inodos</strong></td>
 </tr>
 <tr>
 <td><strong>du</strong></td>
-<td>Espacio ocupado por <strong>archivos y directorios</strong></td>
+<td>Espacio ocupado por <strong>archivos y directorios</strong>; <code>du -sh ruta</code> resume, <code>du -x</code> no sale del sistema de archivos</td>
 </tr>
 <tr>
 <td><strong>uptime</strong></td>
-<td>Tiempo activo + <strong>load average</strong></td>
+<td>Tiempo activo + <strong>load average</strong> (1, 5 y 15 minutos)</td>
 </tr>
 <tr>
 <td><strong>ss</strong></td>
-<td><strong>Conexiones y puertos</strong> de red</td>
+<td><strong>Conexiones y puertos</strong> de red; <code>ss -tuln</code> lista los puertos TCP y UDP en escucha</td>
 </tr>
 <tr>
 <td><strong>journalctl</strong></td>
@@ -277,21 +403,32 @@
 <figcaption>Comandos de diagnóstico</figcaption>
 <svg viewBox="0 0 700 274" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at13dp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at13da" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at13dv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at13dn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at13dr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at13dg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">df</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at13da)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Ocupación del SISTEMA DE ARCHIVOS</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">du</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at13da)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Tamaño de DIRECTORIOS y archivos</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">free</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at13da)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">MEMORIA</text><rect x="8" y="139" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">ss</text><line x1="264" y1="157.0" x2="356" y2="157.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at13da)"/><rect x="362" y="139" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Conexiones de RED</text><rect x="8" y="184" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="202.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">ps</text><line x1="264" y1="202.0" x2="356" y2="202.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at13dg)"/><rect x="362" y="184" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="202.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Instantánea de PROCESOS</text><rect x="8" y="229" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="247.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">top / htop</text><line x1="264" y1="247.0" x2="356" y2="247.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at13dg)"/><rect x="362" y="229" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="247.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Vista INTERACTIVA</text></svg>
 </figure>
+<h4 class="tema-h4">Leer bien las cifras</h4>
+<ul class="tema-lista">
+<li><strong>Memoria</strong>: Linux usa la RAM libre como <strong>caché</strong> (*buff/cache*) y la devuelve cuando hace falta. Una columna <strong>free</strong> baja es normal; lo que indica presión es una <strong>available</strong> baja, junto con uso de swap creciente. Un poco de swap en uso no es por sí solo una avería.</li>
+<li><strong>Load average</strong>: <strong>no es un porcentaje de CPU</strong>. En Linux cuenta los procesos <strong>ejecutándose o esperando CPU</strong> y los que esperan <strong>E/S de disco</strong>. Se interpreta según el <strong>número de núcleos</strong>: una carga de 4 satura un servidor de un núcleo y es poco para uno de dieciséis. <strong>Carga alta con CPU baja</strong> suele apuntar a <strong>disco o almacenamiento</strong>.</li>
+<li><strong>df y du pueden no cuadrar</strong>: un <strong>archivo borrado que un proceso mantiene abierto</strong> sigue ocupando espacio (lo ve df, no du) hasta que el proceso lo cierra; también influyen los bloques reservados o los montajes.</li>
+<li><strong>Inodos</strong>: cada archivo consume un inodo. Si se agotan (muchos archivos pequeños), <strong>no se pueden crear archivos aunque <code>df -h</code> muestre espacio libre</strong>: se comprueba con <code>df -i</code>.</li>
+<li><strong>ss</strong> dice si un puerto <strong>escucha</strong>; no prueba que la aplicación <strong>responda bien</strong>.</li>
+</ul>
 <h4 class="tema-h4">Mini-procedimiento: un servicio no arranca</h4>
 <ul class="tema-lista">
 <li><strong>1.</strong> <code>systemctl status servicio</code> — estado, últimos mensajes y si está <em>enabled</em>.</li>
 <li><strong>2.</strong> <code>journalctl -u servicio</code> — eventos del servicio con más detalle.</li>
 <li><strong>3.</strong> Comprobar <strong>configuración y dependencias</strong> (fichero de configuración, unidades de las que depende).</li>
 <li><strong>4.</strong> Revisar <strong>recursos y permisos</strong> cuando proceda (espacio, memoria, propietario de ficheros, puertos en uso).</li>
+<li><strong>5.</strong> Aplicar la <strong>actuación autorizada</strong> y <strong>verificar el servicio real</strong>: que el puerto escuche y la aplicación responda. <strong>active no es «funciona»</strong>.</li>
 </ul>
 <h4 class="tema-h4">Mini-procedimiento: sistema de archivos lleno</h4>
 <ul class="tema-lista">
 <li><strong>1.</strong> <code>df</code> — <strong>identificar qué sistema de archivos</strong> está lleno.</li>
 <li><strong>2.</strong> <code>du</code> — <strong>localizar qué directorios o archivos</strong> ocupan el espacio dentro de ese sistema de archivos.</li>
+<li><strong>3.</strong> Si <strong>df</strong> sigue lleno tras borrar, buscar <strong>archivos borrados aún abiertos</strong>; si <strong>df -h</strong> muestra espacio pero no se pueden crear archivos, mirar <strong>df -i</strong> (inodos).</li>
+<li><strong>4.</strong> Liberar con el <strong>procedimiento autorizado</strong> (rotación de registros, limpieza de temporales, ampliación del volumen). Nada de <code>rm -rf</code> a ciegas.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🔍 Para ampliar — monitorización centralizada</strong><br>Para muchos servidores, estas herramientas puntuales se complementan con soluciones que recogen métricas de forma continua y alertan: <strong>Nagios, Zabbix</strong> o la combinación <strong>Prometheus + Grafana</strong>. Su configuración queda fuera del alcance del tema.</th>
+<th><strong>🔍 Para ampliar — monitorización centralizada</strong><br>Para muchos servidores, estas herramientas puntuales se complementan con soluciones que recogen métricas de forma continua y alertan: <strong>Nagios, Zabbix</strong> o la combinación <strong>Prometheus + Grafana</strong> (Prometheus <strong>recoge</strong> métricas y alerta; Grafana las <strong>visualiza</strong>). Una <strong>métrica</strong> es un valor medible; un <strong>log</strong>, un registro de eventos. Una <strong>alerta</strong> avisa de una condición, <strong>no confirma la causa</strong>. Su configuración queda fuera del alcance del tema.</th>
 </tr>
 </table></div>
 <h4 class="tema-h4">Equivalencias Linux / Windows (recurso didáctico)</h4>

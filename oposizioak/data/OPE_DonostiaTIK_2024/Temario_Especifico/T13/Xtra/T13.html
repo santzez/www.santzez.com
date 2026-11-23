@@ -13,8 +13,9 @@
 <li><a href="#5-posibles-preguntas-cortas">5. Posibles preguntas cortas (con esquema de respuesta)</a></li>
 <li><a href="#6-supuestos-practicos">6. Supuestos prácticos</a></li>
 <li><a href="#7-matriz-de-memorizacion">7. Matriz de memorización</a></li>
-<li><a href="#8-resumen-final">8. Resumen final: si mañana fuera el examen</a></li>
-<li><a href="#9-actualidad-linux-server">9. Actualidad Linux Server — datos fechados</a></li>
+<li><a href="#8-repaso-visual">8. Repaso visual · T13</a></li>
+<li><a href="#9-resumen-final">9. Resumen final: si mañana fuera el examen</a></li>
+<li><a href="#10-actualidad-linux-server">10. Actualidad Linux Server — datos fechados</a></li>
 </ol></nav>
 
   <div class="tema-cuerpo">
@@ -28,9 +29,14 @@
 <li><strong>root → TODO · sudo → ELEVACIÓN PUNTUAL</strong>.</li>
 <li><strong>LVM → FLEXIBILIDAD</strong> (capa entre almacenamiento físico y volúmenes lógicos; no es un sistema de archivos).</li>
 <li><strong>df → SISTEMA DE ARCHIVOS · du → DIRECTORIOS/ARCHIVOS · free → MEMORIA · ss → RED · ps → instantánea · top/htop → interactivo</strong>.</li>
-<li>Instalación desatendida: <strong>Kickstart</strong> (Red Hat) · <strong>preseed/cloud-init</strong> (Debian/Ubuntu).</li>
+<li>Instalación desatendida: <strong>Kickstart</strong> (Red Hat) · <strong>Autoinstall</strong> (Ubuntu Server) · <strong>preseed</strong> (Debian clásico).</li>
 <li>Actualización automática: <strong>unattended-upgrades</strong> (Debian/Ubuntu) · <strong>dnf-automatic</strong> (Red Hat) — según configuración.</li>
 <li>Sistemas de archivos: <strong>ext4</strong> (extendido) · <strong>XFS</strong> (Red Hat, grandes volúmenes) · <strong>Btrfs</strong> (snapshots, subvolúmenes).</li>
+<li><strong>PV → VG → LV</strong>; ampliar el LV <strong>no</strong> amplía solo el sistema de archivos; <strong>XFS no se reduce</strong>.</li>
+<li><strong>Autoinstall → Ubuntu Server actual</strong> · <strong>preseed → instalador clásico de Debian</strong> · <strong>cloud-init → entrega la configuración, no la interpreta</strong>.</li>
+<li><strong>dnf makecache ≈ apt update</strong> · <strong>enable --now = habilitar + arrancar</strong> · <strong>active ≠ enabled</strong> · <strong>disable ≠ stop</strong>.</li>
+<li><strong>Clave de host → identidad del servidor</strong> (<code>known_hosts</code>).</li>
+<li><strong>available</strong> mejor que free · <strong>load ≠ % de CPU</strong> · <strong>df -i → inodos</strong>.</li>
 </ul>
 <figure class="tema-figura">
 <figcaption>start vs. enable</figcaption>
@@ -118,6 +124,91 @@
 <td><strong>Sistema de archivos</strong> (ext4, XFS, Btrfs)</td>
 <td>LVM gestiona volúmenes; el FS se crea encima</td>
 </tr>
+<tr>
+<td><strong>CentOS Linux</strong>: descontinuado</td>
+<td><strong>CentOS Stream</strong>: rama por delante de RHEL</td>
+<td>No son lo mismo</td>
+</tr>
+<tr>
+<td><strong>preseed</strong>: instalador clásico de Debian</td>
+<td><strong>Autoinstall</strong>: Ubuntu Server actual (YAML)</td>
+<td>Ubuntu Server ya no usa preseed</td>
+</tr>
+<tr>
+<td><strong>Autoinstall</strong>: lo procesa el instalador</td>
+<td><strong>cloud-init</strong>: inicializa y puede entregar la configuración</td>
+<td>cloud-init no interpreta Autoinstall</td>
+</tr>
+<tr>
+<td><strong>Ampliar el LV</strong></td>
+<td><strong>Ampliar el sistema de archivos</strong></td>
+<td>Son dos pasos</td>
+</tr>
+<tr>
+<td><strong>Snapshot LVM</strong></td>
+<td><strong>Copia de seguridad</strong></td>
+<td>La snapshot depende del mismo almacenamiento</td>
+</tr>
+<tr>
+<td><strong>apt update</strong></td>
+<td><strong>dnf makecache</strong></td>
+<td>Los dos refrescan metadatos</td>
+</tr>
+<tr>
+<td><strong>apt upgrade</strong>: paquetes</td>
+<td><strong>Cambio de versión de la distribución</strong></td>
+<td>Lo segundo es una migración</td>
+</tr>
+<tr>
+<td><strong>active</strong>: en marcha ahora</td>
+<td><strong>enabled</strong>: arranca con el sistema</td>
+<td>Son independientes</td>
+</tr>
+<tr>
+<td><strong>disable</strong>: quita el arranque automático</td>
+<td><strong>mask</strong>: bloquea cualquier arranque</td>
+<td>disable tampoco para el servicio</td>
+</tr>
+<tr>
+<td><strong>reload</strong>: relee la configuración</td>
+<td><strong>restart</strong>: para y arranca</td>
+<td>No todos admiten reload</td>
+</tr>
+<tr>
+<td><strong>daemon-reload</strong>: systemd relee unidades</td>
+<td><strong>restart</strong>: reinicia un servicio</td>
+<td>daemon-reload no reinicia nada</td>
+</tr>
+<tr>
+<td><strong>Clave del usuario</strong>: autentica al usuario</td>
+<td><strong>Clave de host</strong>: identifica al servidor</td>
+<td>Dos pares distintos</td>
+</tr>
+<tr>
+<td><strong>su</strong>: cambia de usuario</td>
+<td><strong>sudo</strong>: ejecuta un comando autorizado</td>
+<td>Contraseña de destino frente a la propia</td>
+</tr>
+<tr>
+<td><strong>free</strong> baja</td>
+<td><strong>available</strong> baja</td>
+<td>Solo lo segundo indica presión de memoria</td>
+</tr>
+<tr>
+<td><strong>load average</strong></td>
+<td><strong>% de CPU</strong></td>
+<td>La carga incluye la espera de disco</td>
+</tr>
+<tr>
+<td><strong>df -h</strong>: espacio</td>
+<td><strong>df -i</strong>: inodos</td>
+<td>Puede sobrar espacio y faltar inodos</td>
+</tr>
+<tr>
+<td><strong>Servicio active</strong></td>
+<td><strong>Aplicación que responde</strong></td>
+<td>Comprobar puerto y respuesta</td>
+</tr>
 </table></div>
 <h2 id="3-posibles-trampas-de-examen" class="tema-h2">3. Posibles trampas de examen</h2>
 <ul class="tema-lista">
@@ -135,30 +226,249 @@
 <li><strong>«LVM es un sistema de archivos»</strong> — falso: es una capa de gestión de volúmenes.</li>
 <li><strong>«Un servidor Linux nunca puede tener interfaz gráfica»</strong> — falso: es una práctica habitual instalarlo sin GUI, no una imposibilidad.</li>
 <li><strong>«La actualización automática instala siempre todos los parches críticos»</strong> — matiz: depende de la configuración de la herramienta.</li>
+<li><strong>«LTS significa soporte indefinido»</strong> — falso: soporte prolongado con fecha de fin.</li>
+<li><strong>«CentOS Stream es lo mismo que el antiguo CentOS Linux»</strong> — falso.</li>
+<li><strong>«Ubuntu Server actual se automatiza con preseed»</strong> — falso: usa <strong>Autoinstall</strong> (Subiquity).</li>
+<li><strong>«cloud-init interpreta las directivas Autoinstall»</strong> — falso: las entrega; las procesa el instalador.</li>
+<li><strong>«Ampliar el LV amplía automáticamente el sistema de archivos»</strong> — falso: son dos pasos, salvo con opciones como <code>lvextend -r</code>.</li>
+<li><strong>«XFS se puede reducir»</strong> — falso.</li>
+<li><strong>«dpkg resuelve las dependencias como APT»</strong> — falso.</li>
+<li><strong>«systemd es el PID 1 en cualquier sistema Linux»</strong> — falso: lo es cuando actúa como sistema de inicio.</li>
+<li><strong>«systemctl disable detiene el servicio»</strong> — falso: solo quita el arranque automático.</li>
+<li><strong>«reload equivale siempre a restart»</strong> — falso.</li>
+<li><strong>«daemon-reload reinicia todos los servicios»</strong> — falso: systemd relee los ficheros de unidad.</li>
+<li><strong>«active y enabled significan lo mismo»</strong> — falso.</li>
+<li><strong>«El journal siempre se conserva tras reiniciar»</strong> — falso: depende de la configuración.</li>
+<li><strong>«SSH tiene que usar el puerto 22»</strong> — falso: es el puerto por defecto.</li>
+<li><strong>«Si la conexión SSH está cifrada, el servidor es el correcto»</strong> — falso: hay que verificar la clave de host.</li>
+<li><strong>«sudo ejecuta siempre como root»</strong> — falso: puede ejecutar como otro usuario.</li>
+<li><strong>«El live patching elimina todos los reinicios»</strong> — falso.</li>
+<li><strong>«Poca memoria free significa falta de RAM»</strong> — falso: hay que mirar available.</li>
+<li><strong>«Load average 4 es un 4 % de CPU»</strong> — falso: no es un porcentaje.</li>
+<li><strong>«df y du siempre suman lo mismo»</strong> — falso: por ejemplo, archivos borrados aún abiertos.</li>
+<li><strong>«Si df -h muestra espacio libre, siempre se pueden crear archivos»</strong> — falso: pueden faltar inodos.</li>
+<li><strong>«Un servicio active garantiza que la aplicación responde»</strong> — falso.</li>
 </ul>
 <h2 id="4-posibles-preguntas-tipo-test" class="tema-h2">4. Posibles preguntas tipo test</h2>
-<ul class="tema-lista">
-<li>Diferencia entre <strong>Linux (kernel)</strong> y <strong>distribución</strong>.</li>
-<li>Emparejar <strong>familia → gestor → formato</strong>: Debian/APT/.deb · Red Hat/DNF/.rpm · SUSE/Zypper/.rpm.</li>
-<li>¿A qué familia pertenece <strong>Ubuntu Server</strong>?</li>
-<li>¿Qué significa <strong>LTS</strong>?</li>
-<li>Mecanismos de <strong>instalación desatendida</strong>: Kickstart (Red Hat), preseed/cloud-init (Debian/Ubuntu).</li>
-<li>Ventajas de instalar un servidor <strong>sin entorno gráfico</strong>.</li>
-<li>¿Qué es <strong>LVM</strong> y qué aporta frente al particionado clásico?</li>
-<li>Reconocer sistemas de archivos: <strong>ext4, XFS, Btrfs</strong> (y qué caracteriza a cada uno).</li>
-<li>Diferencia entre <strong>apt update</strong> y <strong>apt upgrade</strong>.</li>
-<li>¿Qué es un <strong>repositorio</strong>? ¿Y una <strong>dependencia</strong>?</li>
-<li>¿Qué es <strong>systemd</strong> y con qué <strong>PID</strong> se ejecuta?</li>
-<li>Asociar comando → función: <code>systemctl status</code>, <code>enable</code>, <code>start</code>, <code>restart</code>.</li>
-<li>¿Con qué comando se consultan los eventos de <strong>un servicio concreto</strong>?</li>
-<li>Puerto por defecto de <strong>SSH</strong> y método de autenticación preferible.</li>
-<li>¿Qué clave SSH se instala en el <strong>servidor</strong> y cuál permanece en el <strong>cliente</strong>?</li>
-<li>Diferencia entre <strong>root</strong> y <strong>sudo</strong>; buena práctica recomendada.</li>
-<li>Herramientas de <strong>actualización automática</strong> por familia.</li>
-<li>Asociar comando → función de monitorización: <strong>df, du, free, ps, top, ss, uptime</strong>.</li>
-<li>¿Qué comando usar primero ante un sistema de archivos lleno y cuál después?</li>
-<li>Equivalente funcional aproximado en Windows de <strong>systemctl</strong>, <strong>journalctl</strong> y <strong>top</strong>.</li>
-</ul>
+<p>Treinta y cinco preguntas con una respuesta correcta. Las soluciones están al final de la sección.</p>
+<p><strong>1.</strong> En sentido estricto, Linux es…<br>a) una distribución completa<br>b) el kernel<br>c) un gestor de paquetes<br>d) un entorno gráfico</p>
+<p><strong>2.</strong> Debian y Ubuntu usan…<br>a) DNF y paquetes .rpm<br>b) Zypper y paquetes .rpm<br>c) APT y paquetes .deb<br>d) winget y paquetes .msi</p>
+<p><strong>3.</strong> Rocky Linux y AlmaLinux usan…<br>a) DNF y paquetes .rpm<br>b) APT y paquetes .deb<br>c) Zypper y paquetes .deb<br>d) dpkg y paquetes .rpm</p>
+<p><strong>4.</strong> SUSE (SLES, openSUSE) usa…<br>a) APT y paquetes .deb<br>b) DNF y paquetes .deb<br>c) pacman y paquetes .pkg<br>d) Zypper y paquetes .rpm</p>
+<p><strong>5.</strong> Una versión LTS…<br>a) tiene soporte prolongado con fecha de fin<br>b) tiene soporte indefinido<br>c) no recibe actualizaciones<br>d) solo sirve para escritorio</p>
+<p><strong>6.</strong> CentOS Stream es…<br>a) el antiguo CentOS Linux con otro nombre<br>b) un clon exacto de RHEL publicado<br>c) la rama de desarrollo por delante de RHEL<br>d) una distribución de la familia Debian</p>
+<p><strong>7.</strong> Instalación desatendida clásica en la familia Red Hat:<br>a) preseed<br>b) Autoinstall<br>c) sysprep<br>d) Kickstart</p>
+<p><strong>8.</strong> Ubuntu Server actual automatiza la instalación con…<br>a) preseed, procesado por debian-installer<br>b) Autoinstall, procesado por Subiquity<br>c) Kickstart, procesado por Anaconda<br>d) cloud-init, que interpreta todo</p>
+<p><strong>9.</strong> Respecto a Autoinstall, cloud-init…<br>a) puede entregar la configuración, pero no la interpreta<br>b) interpreta todas sus directivas<br>c) sustituye al instalador<br>d) es el formato de preseed</p>
+<p><strong>10.</strong> Orden de capas en LVM:<br>a) LV → VG → PV<br>b) VG → PV → LV<br>c) PV → LV → VG<br>d) PV → VG → LV</p>
+<p><strong>11.</strong> Tras ampliar un LV…<br>a) el sistema de archivos crece siempre solo<br>b) hay que ampliar también el sistema de archivos<br>c) hay que reformatearlo<br>d) se pierde la información</p>
+<p><strong>12.</strong> Sistema de archivos que no se puede reducir:<br>a) ext4<br>b) Btrfs<br>c) XFS<br>d) ninguno: todos se reducen</p>
+<p><strong>13.</strong> Una snapshot LVM…<br>a) no sustituye a una copia de seguridad<br>b) es una copia independiente<br>c) es lo mismo que un RAID 1<br>d) solo existe en XFS</p>
+<p><strong>14.</strong> apt update…<br>a) instala las nuevas versiones<br>b) cambia de versión la distribución<br>c) elimina paquetes huérfanos<br>d) refresca los metadatos de los repositorios</p>
+<p><strong>15.</strong> apt upgrade…<br>a) solo descarga la lista de paquetes<br>b) actualiza los paquetes instalados<br>c) migra a la siguiente versión<br>d) borra la caché de paquetes</p>
+<p><strong>16.</strong> Lo más parecido a apt update en DNF es…<br>a) dnf check-update<br>b) dnf upgrade<br>c) dnf makecache<br>d) dnf install</p>
+<p><strong>17.</strong> Instalar un .deb suelto con dpkg…<br>a) no resuelve las dependencias por sí solo<br>b) las resuelve igual que APT<br>c) descarga del repositorio<br>d) solo funciona en Red Hat</p>
+<p><strong>18.</strong> Instalar un paquete sin errores garantiza que…<br>a) el servicio responde<br>b) el puerto está abierto<br>c) la configuración es correcta<br>d) nada: el servicio puede no estar en marcha</p>
+<p><strong>19.</strong> Cuando actúa como sistema de inicio, systemd tiene el PID…<br>a) 0<br>b) 1<br>c) 100<br>d) que asigne el kernel cada vez</p>
+<p><strong>20.</strong> systemctl enable servicio…<br>a) lo arranca ahora y no al reiniciar<br>b) lo bloquea<br>c) configura el arranque automático, sin arrancarlo ahora<br>d) lo reinicia</p>
+<p><strong>21.</strong> Habilitar y arrancar un servicio en un solo comando:<br>a) systemctl enable --now<br>b) systemctl start --boot<br>c) systemctl reload<br>d) systemctl daemon-reload</p>
+<p><strong>22.</strong> systemctl disable servicio…<br>a) lo detiene y lo bloquea<br>b) lo desinstala<br>c) lo reinicia<br>d) quita el arranque automático, pero no lo detiene</p>
+<p><strong>23.</strong> Tras editar un fichero de unidad, systemd lo relee con…<br>a) systemctl reload<br>b) systemctl daemon-reload<br>c) systemctl restart --all<br>d) journalctl -u</p>
+<p><strong>24.</strong> Una unidad «active» pero no «enabled»…<br>a) está averiada<br>b) arrancará tras reiniciar<br>c) está en marcha y no arrancará tras reiniciar<br>d) está bloqueada</p>
+<p><strong>25.</strong> Eventos de un servicio concreto:<br>a) journalctl -u servicio<br>b) journalctl -b<br>c) systemctl enable<br>d) ss -tuln</p>
+<p><strong>26.</strong> Puerto por defecto de SSH:<br>a) 23/TCP<br>b) 443/TCP<br>c) 3389/TCP<br>d) 22/TCP</p>
+<p><strong>27.</strong> En la autenticación SSH por claves, en el servidor se autoriza…<br>a) la clave privada del usuario<br>b) la clave pública del usuario<br>c) la frase de paso<br>d) la clave de host del cliente</p>
+<p><strong>28.</strong> La clave de host SSH sirve para…<br>a) autenticar al usuario<br>b) cifrar la clave privada<br>c) verificar la identidad del servidor<br>d) sustituir a la contraseña</p>
+<p><strong>29.</strong> Diferencia entre su y sudo:<br>a) su cambia de usuario; sudo ejecuta un comando autorizado<br>b) son el mismo programa<br>c) sudo cambia de usuario; su ejecuta un comando<br>d) su solo existe en Ubuntu</p>
+<p><strong>30.</strong> Con unattended-upgrades o dnf-automatic…<br>a) se instala todo siempre<br>b) el servidor se reinicia siempre<br>c) no hacen falta ventanas de mantenimiento<br>d) lo que se instala depende de la configuración</p>
+<p><strong>31.</strong> Al llegar el fin de vida (EOL) de una versión…<br>a) el servidor deja de arrancar<br>b) deja de recibir parches, aunque siga arrancando<br>c) se actualiza sola a la siguiente<br>d) sus paquetes se borran</p>
+<p><strong>32.</strong> El live patching del kernel…<br>a) elimina todos los reinicios<br>b) solo actualiza aplicaciones<br>c) reduce reinicios, pero no los elimina todos<br>d) es lo mismo que unattended-upgrades</p>
+<p><strong>33.</strong> Para valorar si falta RAM con free se mira sobre todo…<br>a) available<br>b) free<br>c) shared<br>d) total</p>
+<p><strong>34.</strong> Load average de 4 en un servidor de 16 núcleos:<br>a) un 4 % de CPU<br>b) saturación segura<br>c) un 400 % de CPU<br>d) carga moderada; no es un porcentaje de CPU</p>
+<p><strong>35.</strong> df -h muestra espacio libre, pero no se pueden crear archivos. Se comprueba…<br>a) du -sh<br>b) df -i (inodos)<br>c) free<br>d) ss -tuln</p>
+<h4 class="tema-h4">Soluciones</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Pregunta</strong></th>
+<th><strong>Respuesta</strong></th>
+<th><strong>Por qué</strong></th>
+</tr>
+<tr>
+<td>1</td>
+<td><strong>b</strong></td>
+<td>Kernel ≠ distribución</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>c</strong></td>
+<td>Familia Debian</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>a</strong></td>
+<td>Familia Red Hat</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>d</strong></td>
+<td>Familia SUSE</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>a</strong></td>
+<td>Long Term Support</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>c</strong></td>
+<td>No es CentOS Linux</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>d</strong></td>
+<td>Red Hat</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>b</strong></td>
+<td>Desde 20.04</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>a</strong></td>
+<td>Lo procesa el instalador</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>d</strong></td>
+<td>Físico, grupo, lógico</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>b</strong></td>
+<td>Dos pasos</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>c</strong></td>
+<td>Solo crece</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>a</strong></td>
+<td>Mismo almacenamiento</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>d</strong></td>
+<td>No instala</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>b</strong></td>
+<td>Dentro de la versión</td>
+</tr>
+<tr>
+<td>16</td>
+<td><strong>c</strong></td>
+<td>Metadatos</td>
+</tr>
+<tr>
+<td>17</td>
+<td><strong>a</strong></td>
+<td>Bajo nivel</td>
+</tr>
+<tr>
+<td>18</td>
+<td><strong>d</strong></td>
+<td>Instalar ≠ funcionar</td>
+</tr>
+<tr>
+<td>19</td>
+<td><strong>b</strong></td>
+<td>Primer proceso de usuario</td>
+</tr>
+<tr>
+<td>20</td>
+<td><strong>c</strong></td>
+<td>Enable ≠ start</td>
+</tr>
+<tr>
+<td>21</td>
+<td><strong>a</strong></td>
+<td>--now</td>
+</tr>
+<tr>
+<td>22</td>
+<td><strong>d</strong></td>
+<td>Disable ≠ stop</td>
+</tr>
+<tr>
+<td>23</td>
+<td><strong>b</strong></td>
+<td>No reinicia servicios</td>
+</tr>
+<tr>
+<td>24</td>
+<td><strong>c</strong></td>
+<td>Estados independientes</td>
+</tr>
+<tr>
+<td>25</td>
+<td><strong>a</strong></td>
+<td>Por unidad</td>
+</tr>
+<tr>
+<td>26</td>
+<td><strong>d</strong></td>
+<td>Se puede cambiar</td>
+</tr>
+<tr>
+<td>27</td>
+<td><strong>b</strong></td>
+<td>La privada no sale</td>
+</tr>
+<tr>
+<td>28</td>
+<td><strong>c</strong></td>
+<td>known_hosts</td>
+</tr>
+<tr>
+<td>29</td>
+<td><strong>a</strong></td>
+<td>Contraseña de destino o propia</td>
+</tr>
+<tr>
+<td>30</td>
+<td><strong>d</strong></td>
+<td>Según configuración</td>
+</tr>
+<tr>
+<td>31</td>
+<td><strong>b</strong></td>
+<td>Sin parches</td>
+</tr>
+<tr>
+<td>32</td>
+<td><strong>c</strong></td>
+<td>No cubre todo</td>
+</tr>
+<tr>
+<td>33</td>
+<td><strong>a</strong></td>
+<td>La caché se libera</td>
+</tr>
+<tr>
+<td>34</td>
+<td><strong>d</strong></td>
+<td>Según núcleos</td>
+</tr>
+<tr>
+<td>35</td>
+<td><strong>b</strong></td>
+<td>Inodos agotados</td>
+</tr>
+</table></div>
 <h2 id="5-posibles-preguntas-cortas" class="tema-h2">5. Posibles preguntas cortas (con esquema de respuesta)</h2>
 <h4 class="tema-h4">1. Explique qué es una distribución Linux</h4>
 <ul class="tema-lista">
@@ -209,14 +519,38 @@
 <li>du: espacio ocupado por directorios y archivos concretos.</li>
 <li>Cierre: el procedimiento habitual — df para localizar el FS lleno, du para encontrar qué lo llena.</li>
 </ul>
+<h4 class="tema-h4">9. Diferencie Kickstart, preseed y Autoinstall</h4>
+<ul class="tema-lista">
+<li>Kickstart: instalación desatendida de la familia Red Hat.</li>
+<li>preseed: respuestas del instalador clásico de Debian.</li>
+<li>Autoinstall: Ubuntu Server 20.04 y posteriores, en YAML, procesado por Subiquity; cloud-init puede entregarlo, no interpretarlo.</li>
+</ul>
+<h4 class="tema-h4">10. Explique PV, VG y LV</h4>
+<ul class="tema-lista">
+<li>PV: disco o partición preparados para LVM. VG: suma de PV. LV: volumen que se asigna del VG.</li>
+<li>Sobre el LV se crea el sistema de archivos y se monta.</li>
+<li>Ampliar exige espacio libre en el VG y crecer también el sistema de archivos; XFS no se reduce.</li>
+</ul>
+<h4 class="tema-h4">11. Diferencie start, enable, active y enabled</h4>
+<ul class="tema-lista">
+<li>start arranca ahora; enable programa el arranque con el sistema; enable --now hace las dos cosas.</li>
+<li>active: está en marcha; enabled: arrancará al iniciar. Son independientes.</li>
+<li>Ejemplo CAU: un servicio que falta tras reiniciar estaba active pero no enabled.</li>
+</ul>
+<h4 class="tema-h4">12. Interprete memoria, carga e inodos</h4>
+<ul class="tema-lista">
+<li>free: mirar available, no solo free; la caché se libera.</li>
+<li>Load average: procesos en CPU o esperando disco; según el número de núcleos; no es un porcentaje.</li>
+<li>Inodos: con df -i; pueden agotarse con espacio libre.</li>
+</ul>
 <h2 id="6-supuestos-practicos" class="tema-h2">6. Supuestos prácticos</h2>
 <h4 class="tema-h4">Supuesto 1 — Un servicio no arranca</h4>
 <p><strong>Escenario</strong>: tras un reinicio programado, un servicio de una aplicación municipal alojada en un servidor Linux no está disponible.</p>
 <ul class="tema-lista">
 <li><strong>a) ¿Primer comando?</strong> <code>systemctl status servicio</code>: estado actual, últimos mensajes y si está configurado como <em>enabled</em>.</li>
 <li><strong>b) ¿Y si el estado no basta?</strong> <code>journalctl -u servicio</code> para ver los eventos con detalle.</li>
-<li><strong>c) ¿Qué más revisar?</strong> Configuración y dependencias del servicio; recursos y permisos (espacio en disco, memoria, puertos ocupados).</li>
-<li><strong>d) Si arrancó a mano pero vuelve a faltar tras reiniciar, ¿qué ocurre?</strong> Que se hizo <code>start</code> sin <code>enable</code>: no está configurado para arrancar con el sistema.</li>
+<li><strong>c) ¿Qué más revisar?</strong> Configuración y dependencias del servicio; recursos y permisos (espacio en disco, memoria, puertos ocupados). Tras corregir, comprobar que la <strong>aplicación responde</strong>, no solo que el estado sea *active*.</li>
+<li><strong>d) Si arrancó a mano pero vuelve a faltar tras reiniciar, ¿qué ocurre?</strong> Lo más probable es que se hiciera <code>start</code> sin <code>enable</code>: no está configurado para arrancar con el sistema (se corrige con <code>enable</code>, o <code>enable --now</code>). No es la única causa posible: también una dependencia o un orden de arranque que falla.</li>
 </ul>
 <h4 class="tema-h4">Supuesto 2 — Sistema de archivos lleno</h4>
 <p><strong>Escenario</strong>: un servidor empieza a fallar y se sospecha falta de espacio.</p>
@@ -224,6 +558,8 @@
 <li><strong>a) ¿Cómo confirmarlo?</strong> Con <code>df</code>: identifica <strong>qué sistema de archivos</strong> está al límite.</li>
 <li><strong>b) ¿Cómo localizar la causa?</strong> Con <code>du</code> dentro de ese sistema de archivos: <strong>qué directorios o archivos</strong> ocupan el espacio.</li>
 <li><strong>c) Sospechosos habituales.</strong> Registros acumulados (por ejemplo, bajo <code>/var/log</code>), copias temporales o volcados; la política de rotación y limpieza es parte del mantenimiento.</li>
+<li><strong>d) ¿Y si se borra un log enorme y df no baja?</strong> Un proceso mantiene <strong>abierto</strong> el archivo borrado: el espacio no se libera hasta que lo cierra (por ejemplo, al reiniciar el servicio de forma autorizada).</li>
+<li><strong>e) ¿Y si hay espacio pero no se pueden crear archivos?</strong> Se han agotado los <strong>inodos</strong>: <code>df -i</code>.</li>
 </ul>
 <h4 class="tema-h4">Supuesto 3 — Administrar el servidor desde el CAU</h4>
 <p><strong>Escenario</strong>: hay que revisar la configuración de un servidor situado en el CPD sin desplazarse.</p>
@@ -231,18 +567,19 @@
 <li><strong>a) ¿Qué herramienta?</strong> <strong>SSH</strong>, protocolo seguro de administración remota (puerto 22/TCP por defecto).</li>
 <li><strong>b) ¿Qué autenticación conviene?</strong> Mediante <strong>claves</strong>: la pública autorizada en el servidor y la privada protegida en el equipo cliente.</li>
 <li><strong>c) ¿Con qué cuenta trabajar?</strong> Con un <strong>usuario normal</strong>, elevando con <strong>sudo</strong> las acciones que lo requieran.</li>
+<li><strong>d) ¿Qué se comprueba la primera vez que se conecta?</strong> La <strong>clave de host</strong> del servidor: la huella debe coincidir con la publicada por un canal oficial antes de aceptarla.</li>
 </ul>
 <h4 class="tema-h4">Supuesto 4 — Instalar y actualizar software</h4>
 <p><strong>Escenario</strong>: hay que instalar un paquete nuevo y dejar el servidor actualizado en un servidor Ubuntu y en otro Rocky Linux.</p>
 <ul class="tema-lista">
 <li><strong>a) ¿Qué gestor en cada uno?</strong> <strong>APT</strong> (.deb) en Ubuntu — familia Debian; <strong>DNF</strong> (.rpm) en Rocky — familia Red Hat.</li>
-<li><strong>b) ¿Qué pasos en APT?</strong> Actualizar metadatos (<code>apt update</code>), consultar lo actualizable (<code>apt list --upgradable</code>), actualizar (<code>apt upgrade</code>) e instalar (<code>apt install</code>).</li>
+<li><strong>b) ¿Qué pasos en APT?</strong> Actualizar metadatos (<code>apt update</code>), consultar lo actualizable (<code>apt list --upgradable</code>), actualizar (<code>apt upgrade</code>) e instalar (<code>apt install</code>). En Rocky: <code>dnf makecache</code>, <code>dnf check-update</code>, <code>dnf upgrade</code> y <code>dnf install</code>.</li>
 <li><strong>c) ¿De dónde sale el software y qué resuelve el gestor?</strong> De los <strong>repositorios</strong> configurados; el gestor resuelve automáticamente las <strong>dependencias</strong>.</li>
 </ul>
 <h4 class="tema-h4">Supuesto 5 — Ampliar el almacenamiento con flexibilidad</h4>
 <p><strong>Escenario</strong>: un volumen de datos se queda corto y se prevé que siga creciendo.</p>
 <ul class="tema-lista">
-<li><strong>a) ¿Qué tecnología conviene haber previsto?</strong> <strong>LVM</strong>: capa entre el almacenamiento físico y los volúmenes lógicos, que permite agrupar dispositivos y ampliar volúmenes en determinados escenarios.</li>
+<li><strong>a) ¿Qué tecnología conviene haber previsto?</strong> <strong>LVM</strong>: capa entre el almacenamiento físico y los volúmenes lógicos, que permite agrupar dispositivos y ampliar volúmenes en determinados escenarios. Si el <strong>VG</strong> no tiene espacio libre, se añade un disco como nuevo <strong>PV</strong>, se amplía el VG, después el <strong>LV</strong> y por último el <strong>sistema de archivos</strong>.</li>
 <li><strong>b) ¿Qué ventaja frente al particionado clásico?</strong> Flexibilidad: no queda todo fijado por el tamaño de partición inicial.</li>
 <li><strong>c) ¿Es una operación siempre trivial?</strong> No: las posibilidades de redimensionado dependen del sistema de archivos y del escenario; conviene planificar y respaldar.</li>
 </ul>
@@ -250,16 +587,93 @@
 <p><strong>Escenario</strong>: los usuarios de una aplicación notan lentitud; hay que identificar qué está consumiendo el servidor.</p>
 <ul class="tema-lista">
 <li><strong>a) ¿Qué herramientas usar?</strong> <code>top</code>/<code>htop</code> para ver en vivo qué procesos consumen CPU y memoria; <code>ps</code> para una instantánea concreta; <code>free</code> para el estado de memoria y swap; <code>uptime</code> para el <em>load average</em>.</li>
-<li><strong>b) ¿Y si se sospecha de la red?</strong> <code>ss</code> para conexiones y puertos en escucha.</li>
-<li><strong>c) ¿Dónde buscar rastro de errores?</strong> En <code>journalctl</code> y en los registros de <code>/var/log</code>.</li>
+<li><strong>b) ¿Cómo leer las cifras?</strong> En <code>free</code>, la columna <strong>available</strong>; el load average, <strong>según el número de núcleos</strong>. Una carga alta con CPU baja apunta a <strong>espera de disco</strong>.</li>
+<li><strong>c) ¿Y si se sospecha de la red?</strong> <code>ss</code> para conexiones y puertos en escucha.</li>
+<li><strong>d) ¿Dónde buscar rastro de errores?</strong> En <code>journalctl</code> y en los registros de <code>/var/log</code>.</li>
 </ul>
 <h4 class="tema-h4">Supuesto 7 — Mantener el servidor al día</h4>
 <p><strong>Escenario</strong>: se plantea cómo gestionar las actualizaciones de varios servidores Linux.</p>
 <ul class="tema-lista">
 <li><strong>a) ¿Opciones?</strong> Actualización manual planificada en ventana de mantenimiento, o automática con <strong>unattended-upgrades</strong> (Debian/Ubuntu) o <strong>dnf-automatic</strong> (Red Hat).</li>
 <li><strong>b) ¿Puede darse por hecho que lo instalarán todo?</strong> No: <strong>depende de la configuración</strong> de la herramienta.</li>
-<li><strong>c) ¿Qué más hay que vigilar?</strong> El <strong>ciclo de vida</strong> de la distribución: una versión sin soporte deja de recibir parches y obliga a planificar la migración.</li>
+<li><strong>c) ¿Qué más hay que vigilar?</strong> El <strong>ciclo de vida</strong> de la distribución: una versión sin soporte deja de recibir parches y obliga a planificar la migración. Y si se actualiza el <strong>kernel</strong>, prever el <strong>reinicio</strong> (o live patching, si está contratado).</li>
 </ul>
+<h4 class="tema-h4">Supuesto 8 — Activo, pero la web no responde</h4>
+<p><strong>Escenario</strong>: <code>systemctl status</code> muestra el servicio web como *active (running)*, pero la aplicación no carga.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Está resuelto?</strong> No: *active* solo dice que el proceso está en marcha.</li>
+<li><strong>b) ¿Qué comprobar?</strong> Con <code>ss -tuln</code>, que <strong>escucha en el puerto</strong> esperado; en el journal y en los registros de la aplicación, los errores; y la respuesta real desde un cliente.</li>
+<li><strong>c) ¿Qué no hacer?</strong> Reiniciar en bucle sin leer los registros.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 9 — Aviso de clave de host cambiada</h4>
+<p><strong>Escenario</strong>: al conectar por SSH a un servidor, el cliente avisa de que <strong>la identificación del equipo remoto ha cambiado</strong>.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Qué significa?</strong> Que la <strong>clave de host</strong> no coincide con la guardada en <code>known_hosts</code>: o el servidor se reinstaló, o alguien se hace pasar por él.</li>
+<li><strong>b) ¿Qué hacer?</strong> No continuar; <strong>confirmar con el responsable</strong> del servidor, por un canal oficial, si hubo reinstalación y cuál es la huella nueva.</li>
+<li><strong>c) ¿Y después?</strong> Solo si se confirma, sustituir la entrada antigua de ese servidor. No borrar todo <code>known_hosts</code> para quitar el aviso.</li>
+</ul>
+<h4 class="tema-h4">Supuesto 10 — Reducir un volumen XFS</h4>
+<p><strong>Escenario</strong>: se pide quitar espacio a un volumen con XFS para dárselo a otro.</p>
+<ul class="tema-lista">
+<li><strong>a) ¿Es posible?</strong> <strong>No reduciendo XFS</strong>: ese sistema de archivos solo crece.</li>
+<li><strong>b) ¿Alternativa?</strong> Copia de seguridad, crear un volumen más pequeño, restaurar los datos en él y retirar el original, con procedimiento autorizado.</li>
+<li><strong>c) ¿Y con ext4?</strong> Se puede reducir, pero <strong>desmontado</strong> y con copia previa.</li>
+</ul>
+<h4 class="tema-h4">Mini casos</h4>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Situación</strong></th>
+<th><strong>Lectura</strong></th>
+</tr>
+<tr>
+<td>Servidor con <code>dnf</code> y paquetes .rpm</td>
+<td>Familia Red Hat (RHEL, Rocky, AlmaLinux)</td>
+</tr>
+<tr>
+<td>Desplegar diez Ubuntu Server idénticos</td>
+<td>Autoinstall, no preseed</td>
+</tr>
+<tr>
+<td>Un volumen lleno y el VG sin espacio</td>
+<td>Nuevo PV, ampliar VG, LV y sistema de archivos</td>
+</tr>
+<tr>
+<td><code>apt update</code> y no hay nada nuevo instalado</td>
+<td>Normal: solo refresca metadatos</td>
+</tr>
+<tr>
+<td><code>dnf check-update</code> devuelve una lista</td>
+<td>Hay actualizaciones disponibles; aún no se han instalado</td>
+</tr>
+<tr>
+<td>Servicio *active* y la web no responde</td>
+<td>Revisar puerto, registros y aplicación</td>
+</tr>
+<tr>
+<td>El servicio falta tras cada reinicio</td>
+<td>Comprobar <code>is-enabled</code></td>
+</tr>
+<tr>
+<td>Aviso de clave de host cambiada</td>
+<td>Verificar por canal oficial antes de aceptar</td>
+</tr>
+<tr>
+<td>Piden sudo total para reiniciar un servicio</td>
+<td>Conceder solo ese comando, con autorización</td>
+</tr>
+<tr>
+<td>free muy baja y available alta</td>
+<td>No falta RAM: es caché</td>
+</tr>
+<tr>
+<td>df lleno y du no lo encuentra</td>
+<td>Archivo borrado aún abierto</td>
+</tr>
+<tr>
+<td>Load alto con CPU baja</td>
+<td>Revisar el disco y la E/S</td>
+</tr>
+</table></div>
 <h2 id="7-matriz-de-memorizacion" class="tema-h2">7. Matriz de memorización</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -358,29 +772,84 @@
 <td>ss</td>
 <td>Conexiones de red y puertos</td>
 </tr>
-</table></div>
-<h2 id="8-resumen-final" class="tema-h2">8. Resumen final: si mañana fuera el examen</h2>
-<ul class="tema-lista">
-<li><strong>Linux = kernel · distribución = kernel + herramientas + gestor + configuración</strong>. Familias: <strong>Debian (APT/.deb — incluye Ubuntu) · Red Hat (DNF/.rpm) · SUSE (Zypper/.rpm)</strong>. <strong>LTS</strong> = soporte prolongado.</li>
-<li><strong>Instalación</strong>: ISO manual o desatendida (<strong>Kickstart</strong> en Red Hat; <strong>preseed/cloud-init</strong> en Debian/Ubuntu). Servidor <strong>habitualmente sin GUI</strong> (menos recursos y superficie de ataque), en la línea de Windows Server Core — no es una imposibilidad.</li>
-<li><strong>LVM → flexibilidad</strong>: capa entre almacenamiento físico y volúmenes lógicos; permite agrupar y ampliar en determinados escenarios; <strong>no es un sistema de archivos</strong>. FS habituales: <strong>ext4, XFS, Btrfs</strong>.</li>
-<li><strong>Paquetes</strong>: repositorio, paquete, dependencia y gestor. <strong>apt update (metadatos) ≠ apt upgrade (instala)</strong>; <strong>apt update ≠ dnf check-update</strong> (no son equivalentes exactos).</li>
-<li><strong>systemd</strong>: sistema de inicio y gestión de servicios, <strong>PID 1</strong>, <strong>no es el kernel</strong>. Unidades .service/.socket/.mount/.timer. <strong>systemctl</strong>: <strong>start (ahora) ≠ enable (arranque automático)</strong>. <strong>journalctl</strong> consulta el journal (<code>-u servicio</code>); no recoge todos los logs de todas las aplicaciones (<code>/var/log</code>).</li>
-<li><strong>SSH</strong>: administración remota cifrada, <strong>puerto 22/TCP</strong>, mejor <strong>claves</strong> — <strong>pública en el servidor, privada en el cliente</strong>. <strong>root</strong> (todo) vs. <strong>sudo</strong> (elevación puntual); buena práctica: usuario normal + sudo.</li>
-<li><strong>Actualizaciones</strong>: manual o automática (<strong>unattended-upgrades / dnf-automatic</strong>, según configuración); vigilar el <strong>ciclo de vida</strong> y planificar migraciones; <strong>live patching</strong> como ampliación.</li>
-<li><strong>Monitorización</strong>: <strong>top/htop</strong> (procesos en vivo) · <strong>ps</strong> (instantánea) · <strong>free</strong> (memoria) · <strong>df</strong> (sistemas de archivos) · <strong>du</strong> (directorios) · <strong>uptime</strong> (load) · <strong>ss</strong> (red) · <strong>journalctl</strong> y <strong>/var/log</strong> (registros). Procedimientos: servicio caído → status + journalctl; disco lleno → df + du.</li>
-</ul>
-<h2 id="9-actualidad-linux-server" class="tema-h2">9. Actualidad Linux Server — datos fechados</h2>
-<div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Información sujeta a cambio · Fecha de actualización de estos apuntes: agosto de 2026</strong><br>Estos datos evolucionan; el núcleo del tema no depende de ellos.</th>
+<td>PV / VG / LV</td>
+<td>Volumen físico → grupo → volumen lógico</td>
+</tr>
+<tr>
+<td>Autoinstall</td>
+<td>Instalación desatendida de Ubuntu Server actual</td>
+</tr>
+<tr>
+<td>dnf makecache</td>
+<td>Refresca metadatos (≈ apt update)</td>
+</tr>
+<tr>
+<td>enable --now</td>
+<td>Habilitar y arrancar</td>
+</tr>
+<tr>
+<td>active / enabled</td>
+<td>En marcha ahora / arranca con el sistema</td>
+</tr>
+<tr>
+<td>Clave de host</td>
+<td>Identidad del servidor SSH (<code>known_hosts</code>)</td>
+</tr>
+<tr>
+<td>available</td>
+<td>Memoria realmente disponible</td>
+</tr>
+<tr>
+<td>Load average</td>
+<td>Procesos en CPU o esperando disco; no es %</td>
+</tr>
+<tr>
+<td>df -i</td>
+<td>Inodos</td>
 </tr>
 </table></div>
+<h2 id="8-repaso-visual" class="tema-h2">8. Repaso visual · T13</h2>
+<figure class="tema-figura">
+<figcaption>1 · Familias de distribuciones</figcaption>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at13ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at13aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at13av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at13an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at13ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at13ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="220.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="118.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">DEBIAN / UBUNTU</text><rect x="240.0" y="6" width="220.0" height="40" rx="6" fill="#c62828" stroke="#c62828" stroke-width="1.6"/><text x="350.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">RED HAT</text><rect x="472.0" y="6" width="220.0" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="582.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">SUSE</text><rect x="8.0" y="54" width="220.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="118.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Gestor: APT</text><rect x="8.0" y="94" width="220.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="118.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Paquete: .DEB</text><rect x="8.0" y="134" width="220.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="118.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Autoinstall (Ubuntu) · preseed</text><rect x="240.0" y="54" width="220.0" height="34" rx="5" fill="#fbe6e6" stroke="#c62828" stroke-width="1.6"/><text x="350.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Gestor: DNF</text><rect x="240.0" y="94" width="220.0" height="34" rx="5" fill="#fbe6e6" stroke="#c62828" stroke-width="1.6"/><text x="350.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Paquete: .RPM</text><rect x="240.0" y="134" width="220.0" height="34" rx="5" fill="#fbe6e6" stroke="#c62828" stroke-width="1.6"/><text x="350.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Kickstart</text><rect x="472.0" y="54" width="220.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="582.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Gestor: Zypper</text><rect x="472.0" y="94" width="220.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="582.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Paquete: .RPM</text><rect x="472.0" y="134" width="220.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="582.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">—</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>2 · systemd y sus herramientas</figcaption>
+<svg viewBox="0 0 700 139" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at13bp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at13ba" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at13bv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at13bn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at13br" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at13bg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#003da5" stroke="#003da5" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">systemd</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#003da5" stroke-width="2" marker-end="url(#at13bp)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Sistema de init — PID 1 (no es el kernel)</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">systemctl</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at13ba)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Gestión de SERVICIOS</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">journalctl</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at13ba)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Consulta del JOURNAL</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>3 · Comandos de diagnóstico</figcaption>
+<svg viewBox="0 0 700 274" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at13dp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at13da" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at13dv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at13dn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at13dr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at13dg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="4" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">df</text><line x1="264" y1="22.0" x2="356" y2="22.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at13da)"/><rect x="362" y="4" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="22.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Ocupación del SISTEMA DE ARCHIVOS</text><rect x="8" y="49" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">du</text><line x1="264" y1="67.0" x2="356" y2="67.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at13da)"/><rect x="362" y="49" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="67.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Tamaño de DIRECTORIOS y archivos</text><rect x="8" y="94" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">free</text><line x1="264" y1="112.0" x2="356" y2="112.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at13da)"/><rect x="362" y="94" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="112.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">MEMORIA</text><rect x="8" y="139" width="250" height="36" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="133.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">ss</text><line x1="264" y1="157.0" x2="356" y2="157.0" stroke="#1f5b9e" stroke-width="2" marker-end="url(#at13da)"/><rect x="362" y="139" width="330" height="36" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="527.0" y="157.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Conexiones de RED</text><rect x="8" y="184" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="202.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">ps</text><line x1="264" y1="202.0" x2="356" y2="202.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at13dg)"/><rect x="362" y="184" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="202.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Instantánea de PROCESOS</text><rect x="8" y="229" width="250" height="36" rx="6" fill="#5a5652" stroke="#5a5652" stroke-width="1.6"/><text x="133.0" y="247.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff" dominant-baseline="middle">top / htop</text><line x1="264" y1="247.0" x2="356" y2="247.0" stroke="#5a5652" stroke-width="2" marker-end="url(#at13dg)"/><rect x="362" y="229" width="330" height="36" rx="6" fill="#eef0f3" stroke="#5a5652" stroke-width="1.6"/><text x="527.0" y="247.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">Vista INTERACTIVA</text></svg>
+</figure>
+<figure class="tema-figura">
+<figcaption>4 · start frente a enable</figcaption>
+<svg viewBox="0 0 700 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at13cp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at13ca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at13cv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at13cn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at13cr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at13cg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8.0" y="6" width="336.0" height="40" rx="6" fill="#1f5b9e" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">START</text><rect x="356.0" y="6" width="336.0" height="40" rx="6" fill="#2e7d3c" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="26.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff" dominant-baseline="middle">ENABLE</text><rect x="8.0" y="54" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">AHORA</text><rect x="8.0" y="94" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="111.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Arranca el servicio</text><rect x="8.0" y="134" width="336.0" height="34" rx="5" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="176.0" y="143.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">No sobrevive</text><text x="176.0" y="158.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">al reinicio</text><rect x="356.0" y="54" width="336.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="71.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">EN EL ARRANQUE</text><rect x="356.0" y="94" width="336.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="103.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">Activa el inicio</text><text x="524.0" y="118.5" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">automático</text><rect x="356.0" y="134" width="336.0" height="34" rx="5" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="524.0" y="151.0" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e" dominant-baseline="middle">No lo arranca ahora</text></svg>
+</figure>
+<h2 id="9-resumen-final" class="tema-h2">9. Resumen final: si mañana fuera el examen</h2>
 <ul class="tema-lista">
-<li><strong>Situación de CentOS</strong>: <strong>CentOS Linux</strong> tradicional está descontinuado (su última rama estable, CentOS Linux 7, alcanzó el fin de vida en 2024). <strong>CentOS Stream</strong> continúa como rama previa a RHEL dentro del ecosistema Red Hat. Las alternativas gratuitas compatibles con RHEL de referencia son <strong>Rocky Linux</strong> y <strong>AlmaLinux</strong>.</li>
-<li><strong>Ciclos de vida</strong>: las distribuciones publican periodos de soporte que cambian con cada versión; las <strong>LTS de Ubuntu</strong> ofrecen soporte estándar de varios años, ampliable con mantenimiento de seguridad extendido. Conviene consultar el ciclo vigente de la versión concreta antes de planificar una migración.</li>
-<li><strong>Herramientas de instalación automatizada</strong>: <strong>Kickstart</strong> sigue siendo el mecanismo de referencia en la familia Red Hat; en Debian/Ubuntu conviven <strong>preseed</strong> y <strong>cloud-init</strong> según la versión y el instalador utilizado.</li>
-<li><strong>Live patching</strong>: existen mecanismos para aplicar parches al kernel sin reiniciar (por ejemplo, <strong>kpatch</strong> en la familia Red Hat y soluciones equivalentes en otras distribuciones), con condiciones y coberturas que dependen del proveedor y la suscripción.</li>
+<li><strong>Linux = kernel · distribución = kernel + herramientas + gestor + configuración</strong>. Familias: <strong>Debian (APT/.deb — incluye Ubuntu) · Red Hat (DNF/.rpm) · SUSE (Zypper/.rpm)</strong>. <strong>LTS</strong> = soporte prolongado.</li>
+<li><strong>Instalación</strong>: ISO manual o desatendida (<strong>Kickstart</strong> en Red Hat; <strong>Autoinstall</strong> en Ubuntu Server actual; <strong>preseed</strong> en el instalador clásico de Debian; cloud-init solo entrega la configuración). Servidor <strong>habitualmente sin GUI</strong> (menos recursos y superficie de ataque), en la línea de Windows Server Core — no es una imposibilidad.</li>
+<li><strong>LVM → flexibilidad</strong>: <strong>PV → VG → LV</strong>; permite agrupar y ampliar (volumen y luego sistema de archivos); <strong>no es un sistema de archivos</strong>; <strong>XFS no se reduce</strong>. FS habituales: <strong>ext4, XFS, Btrfs</strong>.</li>
+<li><strong>Paquetes</strong>: repositorio, paquete, dependencia y gestor. <strong>apt update (metadatos) ≠ apt upgrade (instala)</strong>; <strong>apt update ≠ dnf check-update</strong> (no son equivalentes exactos).</li>
+<li><strong>systemd</strong>: sistema de inicio y gestión de servicios, <strong>PID 1</strong>, <strong>no es el kernel</strong>. Unidades .service/.socket/.mount/.timer. <strong>systemctl</strong>: <strong>start (ahora) ≠ enable (arranque automático)</strong>; <code>enable --now</code> hace las dos cosas; <strong>active ≠ enabled</strong>; <strong>disable no para</strong>. <strong>journalctl</strong> consulta el journal (<code>-u servicio</code>); no recoge todos los logs de todas las aplicaciones (<code>/var/log</code>).</li>
+<li><strong>SSH</strong>: administración remota cifrada, <strong>puerto 22/TCP</strong>, mejor <strong>claves</strong> — <strong>pública en el servidor, privada en el cliente</strong>; la <strong>clave de host</strong> identifica al servidor. <strong>root</strong> (todo) vs. <strong>sudo</strong> (elevación puntual); buena práctica: usuario normal + sudo.</li>
+<li><strong>Actualizaciones</strong>: manual o automática (<strong>unattended-upgrades / dnf-automatic</strong>, según configuración); vigilar el <strong>ciclo de vida</strong> y planificar migraciones; <strong>live patching</strong> como ampliación.</li>
+<li><strong>Monitorización</strong>: <strong>top/htop</strong> (procesos en vivo) · <strong>ps</strong> (instantánea) · <strong>free</strong> (memoria) · <strong>df</strong> (sistemas de archivos) · <strong>du</strong> (directorios) · <strong>uptime</strong> (load) · <strong>ss</strong> (red) · <strong>journalctl</strong> y <strong>/var/log</strong> (registros). <strong>available</strong> mejor que free; <strong>load ≠ % de CPU</strong>. Procedimientos: servicio caído → status + journalctl; disco lleno → df + du (y df -i).</li>
 </ul>
+<h2 id="10-actualidad-linux-server" class="tema-h2">10. Actualidad Linux Server — datos fechados</h2>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Información sujeta a cambio · Comprobado en las fuentes oficiales el 23 de noviembre de 2026</strong><br>Estos datos evolucionan; el núcleo del tema no depende de ellos.</th>
+</tr>
+</table></div>
+<p>- <strong>Situación de CentOS</strong>: <strong>CentOS Linux</strong> tradicional está descontinuado (su última rama estable, CentOS Linux 7, alcanzó el fin de vida en 2024). <strong>CentOS Stream</strong> continúa como rama previa a RHEL dentro del ecosistema Red Hat. Las alternativas gratuitas compatibles con RHEL de referencia son <strong>Rocky Linux</strong> y <strong>AlmaLinux</strong>.
+- <strong>Versiones vigentes</strong>:
+  - <strong>Ubuntu 26.04 LTS</strong>: publicada el <strong>23/4/2026</strong>, con <strong>cinco años</strong> de soporte estándar y hasta diez con Ubuntu Pro.
+  - <strong>Debian 13 «trixie»</strong>: publicada el <strong>9/8/2025</strong>; versión <strong>13.8</strong> desde el 21/11/2026. Soporte completo hasta el <strong>9/8/2028</strong> y LTS hasta el <strong>30/6/2030</strong>.
+  - <strong>RHEL 10</strong>: publicada el <strong>20/5/2025</strong>, con ciclo de <strong>diez años</strong> (soporte completo y de mantenimiento). Rocky Linux 10 y AlmaLinux 10 siguen su calendario.
+- <strong>Ciclos de vida</strong>: cambian con cada versión; conviene consultar el de la versión concreta antes de planificar una migración.
+- <strong>Herramientas de instalación automatizada</strong>: <strong>Kickstart</strong> sigue siendo el mecanismo de referencia en la familia Red Hat. <strong>Ubuntu Server</strong> usa <strong>Autoinstall</strong> desde la 20.04 (procesado por Subiquity; cloud-init solo lo entrega, y desde la 24.04 también puede ir en un <code>autoinstall.yaml</code> dentro del medio). <strong>preseed</strong> queda para el instalador clásico de Debian.
+- <strong>Live patching</strong>: <strong>kpatch</strong> en la familia Red Hat y <strong>Livepatch</strong> de Canonical en Ubuntu (dentro de Ubuntu Pro), entre otros; condiciones y coberturas dependen del proveedor y la suscripción.</p>
   </div>
 </article>
