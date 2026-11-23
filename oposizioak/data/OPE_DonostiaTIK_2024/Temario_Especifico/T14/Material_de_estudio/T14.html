@@ -53,16 +53,55 @@
 <ul class="tema-lista">
 <li><strong>UPN (User Principal Name)</strong>: formato <code>usuario@dominio</code>.</li>
 <li><strong>Formato tradicional</strong>: <code>DOMINIO\usuario</code>.</li>
+<li><strong>UPN ≠ dirección de correo</strong>: el UPN tiene aspecto de correo y a menudo coincide con él, pero <strong>no tiene por qué</strong>.</li>
+<li><code>EQUIPO\tecnico</code> y <code>DOMINIO\tecnico</code> son <strong>dos cuentas distintas</strong> aunque se llamen igual: una vive en la SAM del equipo y otra en AD DS.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🔍 Para ampliar — cuentas integradas</strong><br>Los sistemas Windows incluyen cuentas integradas como <strong>Administrador</strong> (privilegios completos sobre el equipo) e <strong>Invitado/Guest</strong> (privilegios muy limitados). Su <strong>estado inicial y su tratamiento varían según la versión y la edición</strong>, por lo que no conviene dar por universal una configuración concreta. Contenido complementario: la prioridad está en cuenta local, cuenta de dominio y SID.</th>
+<th><strong>🔍 Para ampliar — cuentas integradas</strong><br>Los sistemas Windows incluyen cuentas integradas como <strong>Administrador</strong> (privilegios completos sobre el equipo) e <strong>Invitado/Guest</strong> (privilegios muy limitados). <strong>Invitado viene deshabilitada</strong> y debe seguir así salvo necesidad. El <strong>estado de Administrador varía</strong>: en Windows cliente viene deshabilitada; en Windows Server es la cuenta con la que se administra al instalar. Hay además otras cuentas del sistema (como DefaultAccount). Contenido complementario: la prioridad está en cuenta local, cuenta de dominio y SID.</th>
 </tr>
 </table></div>
+<ul class="tema-lista">
+<li><strong>Cuenta de servicio</strong>: identidad con la que se ejecuta un servicio o una aplicación. No es una cuenta personal ni debe usarse para trabajar.</li>
+<li><strong>Cuenta personal ≠ cuenta compartida</strong>: la compartida impide saber quién hizo qué. Si una cuenta técnica compartida es imprescindible, debe estar <strong>justificada y controlada</strong> según la política.</li>
+</ul>
 <h2 id="2-el-sid" class="tema-h2">2. El SID: la identidad real de la cuenta</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>📌 Imprescindible para el examen — gran ancla del tema</strong><br><strong>SID (Security Identifier)</strong> → <strong>identificador de seguridad único</strong> que Windows utiliza internamente para identificar cuentas y grupos.<br><strong>El nombre de usuario NO identifica de forma única la cuenta a efectos de seguridad</strong>: lo que se compara al conceder o denegar permisos es el SID.<br>Consecuencia práctica: si una cuenta se <strong>elimina</strong> y después se crea otra <strong>con el mismo nombre</strong>, esta tiene un <strong>SID diferente</strong> y <strong>no hereda automáticamente los permisos</strong> de la anterior.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li>Al iniciar sesión, Windows crea un <strong>token de acceso</strong> con el <strong>SID del usuario y los SID de sus grupos</strong>. Por eso el acceso efectivo depende <strong>también de los grupos</strong>: la cuenta recreada pierde tanto los permisos directos del SID antiguo como las <strong>pertenencias</strong> que no se vuelvan a crear.</li>
+<li><strong>Renombrar conserva el SID</strong>: cambiar el nombre de una cuenta existente no cambia su identidad. <strong>Eliminar y crear</strong> sí da una identidad nueva.</li>
+<li>Si se borra una cuenta, las listas de permisos pueden quedar con un <strong>SID huérfano</strong>, que aparece como un número porque ya no corresponde a nadie (Tema 15).</li>
+<li>Con la <strong>Papelera de reciclaje de AD</strong> habilitada, una cuenta eliminada puede <strong>restaurarse</strong> con su SID y sus pertenencias a grupos.</li>
+</ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Acción</strong></th>
+<th><strong>¿Mismo SID?</strong></th>
+<th><strong>¿Conserva accesos?</strong></th>
+</tr>
+<tr>
+<td><strong>Renombrar</strong></td>
+<td>Sí</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><strong>Deshabilitar</strong></td>
+<td>Sí</td>
+<td>Sí, pero no puede iniciar sesión</td>
+</tr>
+<tr>
+<td><strong>Eliminar y crear otra igual</strong></td>
+<td><strong>No</strong></td>
+<td><strong>No</strong>: hay que volver a darlos</td>
+</tr>
+<tr>
+<td><strong>Restaurar desde la Papelera de AD</strong></td>
+<td>Sí</td>
+<td>Sí, con sus grupos</td>
 </tr>
 </table></div>
 <h2 id="3-grupos-tipos-y-ambitos" class="tema-h2">3. Grupos: tipos y ámbitos</h2>
@@ -78,33 +117,46 @@
 <td>Destinado a la <strong>distribución de correo</strong>; <strong>no</strong> para asignar permisos de recursos</td>
 </tr>
 </table></div>
+<p>Un grupo de seguridad también puede <strong>habilitarse para correo</strong>; uno de distribución nunca sirve para permisos.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — tipo y ámbito</strong><br><strong>Tipo</strong> → <strong>seguridad o distribución</strong>: para qué sirve el grupo.<br><strong>Ámbito</strong> → <strong>Domain Local, Global o Universal</strong>: quién puede ser miembro y dónde puede recibir permisos.<br>Son <strong>dos clasificaciones distintas</strong>: todo grupo tiene un tipo y un ámbito.</th>
+</tr>
+</table></div>
 <h4 class="tema-h4">Ámbitos de grupo</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>Ámbito</strong></th>
 <th><strong>Miembros que puede contener</strong></th>
-<th><strong>Uso para asignar permisos</strong></th>
+<th><strong>Dónde puede recibir permisos</strong></th>
 </tr>
 <tr>
 <td><strong>Domain Local</strong></td>
-<td>Miembros de cualquier dominio del bosque o de relaciones permitidas</td>
-<td>Se utiliza para asignar permisos sobre <strong>recursos del propio dominio</strong></td>
+<td>Cuentas y grupos globales <strong>de cualquier dominio</strong> (también de dominios de confianza), grupos universales del bosque y otros Domain Local <strong>de su dominio</strong></td>
+<td><strong>Solo en su propio dominio</strong></td>
 </tr>
 <tr>
 <td><strong>Global</strong></td>
-<td>Miembros principalmente <strong>del propio dominio</strong></td>
-<td>Puede utilizarse para asignar permisos en dominios con las <strong>relaciones de confianza adecuadas</strong></td>
+<td>Cuentas y otros grupos globales <strong>solo de su propio dominio</strong></td>
+<td>En <strong>cualquier dominio del bosque</strong> y en dominios o bosques que confían</td>
 </tr>
 <tr>
 <td><strong>Universal</strong></td>
-<td>Miembros de <strong>distintos dominios del bosque</strong></td>
-<td>Puede utilizarse para asignar permisos <strong>en el bosque</strong></td>
+<td>Cuentas, grupos globales y universales de <strong>cualquier dominio del mismo bosque</strong></td>
+<td>En <strong>cualquier dominio del bosque</strong> y en bosques que confían</td>
 </tr>
 </table></div>
+<p><strong>Miembros y permisos son dos preguntas distintas</strong>: el Global es el más <strong>restrictivo en miembros</strong> (solo su dominio) y el Domain Local, el más <strong>restrictivo en permisos</strong> (solo su dominio). En un <strong>dominio único</strong> las diferencias se notan poco; con <strong>varios dominios</strong>, son decisivas. Fuente: Microsoft Learn, <em>Active Directory security groups</em>.</p>
 <h4 class="tema-h4">La regla AGDLP</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🧠 Para memorizar — ancla principal</strong><br><strong>A → G → DL → P</strong><br><strong>A</strong>ccounts (cuentas) → <strong>G</strong>lobal Groups → <strong>D</strong>omain <strong>L</strong>ocal Groups → <strong>P</strong>ermissions.<br>Con grupos universales: <strong>AGUDLP</strong> → A → G → <strong>U</strong> → DL → P.<br>Estas reglas permiten <strong>mantener los permisos de forma escalable</strong>: se cambia la pertenencia a grupos, no los permisos del recurso.</th>
+<th><strong>🧠 Para memorizar — ancla principal</strong><br><strong>A → G → DL → P</strong><br><strong>A</strong>ccounts (cuentas) → <strong>G</strong>lobal Groups → <strong>D</strong>omain <strong>L</strong>ocal Groups → <strong>P</strong>ermissions.<br>Con grupos universales: <strong>AGUDLP</strong> → A → G → <strong>U</strong> → DL → P.<br>Estas reglas permiten <strong>mantener los permisos de forma escalable</strong>: se cambia la pertenencia a grupos, no los permisos del recurso.<br><strong>Es un modelo recomendado, no una obligación de Windows</strong>: técnicamente se pueden dar permisos directos a un usuario, pero con muchas personas se vuelve inmanejable.</th>
+</tr>
+</table></div>
+<p><strong>Ejemplo ficticio</strong>: las personas de Urbanismo van al grupo global <strong>GG_Urbanismo</strong>; ese grupo entra en el grupo local de dominio <strong>DL_Urbanismo_Lectura</strong>; y a este se le da <strong>lectura</strong> sobre la carpeta de Urbanismo.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — añadir al grupo no actúa al instante</strong><br>El token de acceso se crea <strong>al iniciar sesión</strong>: tras añadir a alguien a un grupo, normalmente necesita <strong>cerrar sesión y volver a entrar</strong> (o renovar sus credenciales) para que el cambio cuente. Que siga sin acceso justo después <strong>no prueba</strong> que el cambio haya fallado.</th>
 </tr>
 </table></div>
 <figure class="tema-figura">
@@ -120,24 +172,34 @@
 </tr>
 <tr>
 <td><strong>lusrmgr.msc</strong></td>
-<td>Usuarios y grupos <strong>locales</strong> del equipo</td>
+<td>Usuarios y grupos <strong>locales</strong> del equipo (no disponible en Windows Home)</td>
 </tr>
 <tr>
 <td><strong>ADUC (dsa.msc)</strong></td>
-<td>Usuarios, grupos y equipos <strong>del dominio</strong>; ubicación en OU</td>
+<td>Usuarios, grupos y equipos <strong>del dominio</strong>; ubicación en OU. En un PC cliente se obtiene con <strong>RSAT</strong>; no viene instalada</td>
 </tr>
 <tr>
 <td><strong>PowerShell + módulo ActiveDirectory</strong></td>
-<td><strong>Automatización y gestión masiva</strong> (por ejemplo, <code>New-ADUser</code>, <code>Add-ADGroupMember</code>)</td>
+<td><strong>Automatización y gestión masiva</strong>: <code>New-ADUser</code>, <code>Get-ADUser</code>, <code>Set-ADUser</code>, <code>Disable-ADAccount</code>, <code>Enable-ADAccount</code>, <code>Add-ADGroupMember</code>, <code>Remove-ADGroupMember</code>, <code>Get-ADGroupMember</code></td>
+</tr>
+<tr>
+<td><strong>PowerShell (cuentas locales)</strong></td>
+<td><code>Get-LocalUser</code>, <code>New-LocalUser</code>, <code>Get-LocalGroup</code></td>
 </tr>
 </table></div>
 <p>Al crear una cuenta de dominio se definen, entre otros datos, el <strong>nombre de inicio de sesión</strong> (UPN o formato tradicional), la <strong>contraseña inicial</strong> —sujeta a las directivas aplicables— y la <strong>OU</strong> en la que se ubicará el objeto.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>🔧 Aplicación CAU — alta masiva</strong><br>Antes de lanzar un script: <strong>validar el fichero</strong> (por ejemplo, un CSV), evitar <strong>duplicados</strong>, fijar la <strong>OU</strong> y los <strong>grupos</strong>, probar con <strong>cuentas de ensayo</strong> y <strong>registrar el resultado</strong>. <strong>Nunca contraseñas en claro</strong> en el fichero ni en el script.</th>
+</tr>
+</table></div>
 <h2 id="5-perfiles-de-usuario" class="tema-h2">5. Perfiles de usuario y redirección de carpetas</h2>
-<p>El <strong>perfil de usuario</strong> es el <strong>conjunto de carpetas y configuraciones personales</strong> asociado a una cuenta: escritorio, documentos, configuración de aplicaciones y la parte del Registro específica del usuario, almacenada en <strong>NTUSER.DAT</strong>.</p>
+<p>El <strong>perfil de usuario</strong> es el <strong>conjunto de carpetas y configuraciones personales</strong> asociado a una cuenta: escritorio, documentos, configuración de aplicaciones y la parte del Registro específica del usuario, almacenada en <strong>NTUSER.DAT</strong>. NTUSER.DAT guarda <strong>configuración</strong>, no los documentos.</p>
 <ul class="tema-lista">
 <li><strong>Perfil local</strong>: <strong>almacenado en el equipo</strong> (por ejemplo, <code>C:\Users\nombre</code>). Su contenido <strong>no acompaña automáticamente al usuario</strong> si inicia sesión en otro equipo.</li>
-<li><strong>Perfil móvil/itinerante (roaming)</strong>: perfil <strong>almacenado en un servidor</strong> que <strong>puede sincronizarse con el equipo</strong> cuando el usuario inicia y cierra sesión. Es el concepto clásico que hay que comprender; no debe presentarse como la solución moderna universalmente recomendada.</li>
-<li><strong>Perfil obligatorio (mandatory)</strong>: perfil configurado para <strong>no conservar los cambios</strong> realizados por el usuario al cerrar sesión. Útil en <strong>aulas, puestos compartidos y equipos de acceso público</strong>.</li>
+<li><strong>Perfil móvil/itinerante (roaming)</strong>: perfil <strong>almacenado en un servidor</strong> que <strong>puede sincronizarse con el equipo</strong> cuando el usuario inicia y cierra sesión. Es el concepto clásico que hay que comprender; no debe presentarse como la solución moderna universalmente recomendada. La sincronización <strong>no es instantánea ni perfecta</strong>: depende de la red, del tamaño del perfil y de los conflictos entre equipos.</li>
+<li><strong>Perfil obligatorio (mandatory)</strong>: perfil configurado para <strong>no conservar los cambios</strong> realizados por el usuario al cerrar sesión. Útil en <strong>aulas, puestos compartidos y equipos de acceso público</strong>. Se descartan los cambios <strong>del perfil</strong>; los documentos guardados en una carpeta de red autorizada sí se conservan.</li>
+<li><strong>Perfil temporal</strong>: lo carga Windows <strong>cuando no puede cargar el perfil habitual</strong>. Escritorio vacío y aviso de perfil temporal: es una <strong>incidencia</strong>, no un perfil obligatorio. No se borra el perfil antiguo sin salvar antes sus datos.</li>
 <li><strong>Redirección de carpetas</strong>: <strong>determinadas carpetas del usuario</strong> (por ejemplo, <strong>Documentos</strong> o <strong>Escritorio</strong>) <strong>se almacenan en una ubicación de red</strong>, sin necesidad de mover todo el perfil.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -155,7 +217,11 @@
 </tr>
 <tr>
 <td><strong>Obligatorio</strong></td>
-<td>Los cambios no se conservan</td>
+<td>Los cambios no se conservan (por diseño)</td>
+</tr>
+<tr>
+<td><strong>Temporal</strong></td>
+<td>Se cargó porque falló el perfil habitual (incidencia)</td>
 </tr>
 <tr>
 <td><strong>Redirección</strong></td>
@@ -164,7 +230,7 @@
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir — perfil móvil vs. redirección de carpetas</strong><br>En el <strong>perfil móvil</strong> es <strong>el perfil</strong> el que se mueve o sincroniza entre servidor y equipo. En la <strong>redirección de carpetas</strong> son <strong>carpetas concretas</strong> las que se almacenan en una ubicación de red. Son mecanismos distintos, aunque puedan combinarse.</th>
+<th><strong>⚠️ No confundir — perfil móvil vs. redirección de carpetas</strong><br>En el <strong>perfil móvil</strong> es <strong>el perfil</strong> el que se mueve o sincroniza entre servidor y equipo. En la <strong>redirección de carpetas</strong> son <strong>carpetas concretas</strong> las que se almacenan en una ubicación de red. Son mecanismos distintos, aunque puedan combinarse.<br><strong>Datos en el servidor ≠ copia de seguridad</strong>: la redirección centraliza, pero el respaldo es otra cosa (Tema 23). Y depende de que el servidor y la red estén disponibles.<br><strong>OneDrive (traslado de carpetas conocidas)</strong> también lleva Documentos y Escritorio a otro sitio, pero <strong>a la nube</strong>, no a una carpeta compartida del servidor: no es la redirección clásica.</th>
 </tr>
 </table></div>
 <h2 id="6-buenas-practicas" class="tema-h2">6. Buenas prácticas en la gestión de cuentas</h2>
@@ -173,11 +239,14 @@
 <li><strong>Asignar permisos mediante grupos</strong>, no cuenta a cuenta (regla AGDLP): el mantenimiento se vuelve escalable.</li>
 <li><strong>Nomenclatura consistente</strong> de cuentas y grupos, que permita identificar su propósito.</li>
 <li><strong>Evitar cuentas compartidas</strong>: dificultan la trazabilidad de quién hizo qué.</li>
-<li><strong>Deshabilitar antes que eliminar</strong> cuando proceda (bajas temporales, ausencias).</li>
+<li><strong>Deshabilitar antes que eliminar</strong> cuando proceda (bajas temporales, ausencias), según la <strong>política de bajas y retención</strong>.</li>
+<li><strong>Ciclo de la cuenta</strong>: <strong>alta</strong> (autorizada, con los grupos justos) → <strong>modificación</strong> (cambio de puesto: <strong>añadir lo nuevo y retirar lo que ya no corresponde</strong>, para no acumular permisos) → <strong>baja</strong> (retirada controlada de accesos).</li>
+<li><strong>Revisar periódicamente las cuentas inactivas</strong>, sin borrarlas solo por antigüedad.</li>
+<li>El CAU actúa <strong>con autorización</strong> y dentro de su competencia; lo demás se escala.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Imprescindible para el examen — deshabilitar vs. eliminar</strong><br><strong>Deshabilitar</strong> conserva el objeto y su <strong>SID</strong> mientras <strong>impide el acceso</strong>.<br><strong>Eliminar</strong> borra la cuenta del directorio.<br>Y la consecuencia clave: <strong>una nueva cuenta con el mismo nombre tendrá otro SID</strong>, por lo que no recupera automáticamente los permisos de la anterior.</th>
+<th><strong>📌 Imprescindible para el examen — deshabilitar vs. eliminar</strong><br><strong>Deshabilitar</strong> conserva el objeto y su <strong>SID</strong> mientras <strong>impide el acceso</strong>.<br><strong>Eliminar</strong> borra la cuenta del directorio.<br>Y la consecuencia clave: <strong>una nueva cuenta con el mismo nombre tendrá otro SID</strong>, por lo que no recupera automáticamente los permisos de la anterior.<br><strong>Deshabilitar no corta lo que ya está abierto</strong>: una sesión iniciada, credenciales en caché o tickets vigentes pueden seguir funcionando un tiempo. Y una <strong>baja</strong> completa suele exigir más: grupos, aplicaciones, VPN, dispositivos.</th>
 </tr>
 </table></div>
 <figure class="tema-figura">
@@ -194,12 +263,45 @@
 <li>Aplicar <strong>configuración inicial</strong> del puesto.</li>
 </ul>
 <h4 class="tema-h4">Formatos</h4>
-<p>Los scripts de inicio pueden implementarse mediante <strong>archivos por lotes (.bat, .cmd)</strong> o <strong>PowerShell</strong>, entre otros mecanismos. Ambos conviven en las organizaciones: no debe afirmarse que PowerShell haya sustituido universalmente a los scripts por lotes.</p>
+<p>Los scripts de inicio pueden implementarse mediante <strong>archivos por lotes (.bat, .cmd)</strong> o <strong>PowerShell (.ps1)</strong>, entre otros mecanismos. Ambos conviven en las organizaciones: no debe afirmarse que PowerShell haya sustituido universalmente a los scripts por lotes. Los de PowerShell pueden estar limitados por la <strong>directiva de ejecución</strong>; no se desactiva a la ligera para que funcionen.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>⚠️ No confundir — logon y startup</strong><br><strong>Logon script</strong> → al <strong>iniciar sesión un usuario</strong>; se configura en <strong>Configuración de usuario</strong>.<br><strong>Startup script</strong> → al <strong>arrancar el equipo</strong>, antes de que nadie inicie sesión; se configura en <strong>Configuración del equipo</strong> y se ejecuta con la cuenta del sistema.<br>Igual con <strong>logoff</strong> (cierre de sesión) y <strong>shutdown</strong> (apagado).</th>
+</tr>
+</table></div>
 <h4 class="tema-h4">Formas de asignación</h4>
 <ul class="tema-lista">
-<li><strong>Asignación directa al usuario</strong>: en las <strong>propiedades de la cuenta de usuario del dominio</strong> puede indicarse un script de inicio de sesión. El script se almacena en la <strong>infraestructura compartida del dominio</strong>, habitualmente mediante <strong>NETLOGON/SYSVOL</strong>, que se replica entre los controladores de dominio para que esté disponible allí donde el usuario inicie sesión.</li>
-<li><strong>Asignación mediante GPO</strong>: en la <strong>Configuración de usuario → Scripts de inicio/cierre de sesión</strong>. Ventaja: permite <strong>aplicar el script a múltiples usuarios mediante el ámbito de la GPO</strong> (el detalle de las GPO corresponde al Tema 12).</li>
+<li><strong>Asignación directa al usuario</strong>: en las <strong>propiedades de la cuenta de usuario del dominio</strong> (pestaña Perfil) puede indicarse un script de inicio de sesión. El script se guarda en el recurso compartido <strong>NETLOGON</strong>, que es la carpeta de <strong>scripts dentro de SYSVOL</strong>: no son dos sistemas independientes. SYSVOL se <strong>replica</strong> entre los controladores de dominio (hoy con DFSR) para que el script esté disponible allí donde el usuario inicie sesión.</li>
+<li><strong>Asignación mediante GPO</strong>: en la <strong>Configuración de usuario → Scripts de inicio/cierre de sesión</strong>. Ventaja: permite <strong>aplicar el script a múltiples usuarios mediante el ámbito de la GPO</strong> (el detalle de las GPO corresponde al Tema 12). Solo lo ejecuta quien esté <strong>en el ámbito</strong> de la GPO (vínculo, OU, filtrado): guardar un script en SYSVOL no hace que se ejecute para todos.</li>
+<li><strong>Preferencias de directiva de grupo (GPP) · Asignaciones de unidades</strong>: crean unidades de red <strong>sin escribir un script</strong>. Cada elemento tiene una <strong>acción</strong>: <strong>Crear</strong>, <strong>Reemplazar</strong> (borra y vuelve a crear la unidad), <strong>Actualizar</strong> o <strong>Eliminar</strong>. Se <strong>reaplican</strong> en cada actualización de directivas.</li>
 </ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>Mecanismo</strong></th>
+<th><strong>Dónde se configura</strong></th>
+<th><strong>Ventaja</strong></th>
+<th><strong>Qué mirar si falla</strong></th>
+</tr>
+<tr>
+<td><strong>Script en la cuenta</strong></td>
+<td>Propiedades del usuario + NETLOGON</td>
+<td>Sencillo para casos sueltos</td>
+<td>Ruta del script y acceso a NETLOGON</td>
+</tr>
+<tr>
+<td><strong>Script por GPO</strong></td>
+<td>Configuración de usuario → Scripts</td>
+<td>Afecta a todo el ámbito</td>
+<td>Ámbito de la GPO y errores del script</td>
+</tr>
+<tr>
+<td><strong>GPP de unidades</strong></td>
+<td>Preferencias → Asignaciones de unidades</td>
+<td>Sin script; se reaplica</td>
+<td>Acción (Reemplazar, Eliminar) y destino</td>
+</tr>
+</table></div>
+<p>El script puede <strong>ejecutarse y no completar su tarea</strong> (red aún no disponible, recurso inexistente, letra ocupada, falta de permiso), y no siempre termina antes de que aparezca el escritorio.</p>
 <h4 class="tema-h4">net use</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -216,9 +318,16 @@
 </tr>
 </table></div>
 <p>Estas órdenes <strong>establecen conexiones a recursos compartidos</strong> y son el contenido típico de un logon script por lotes.</p>
+<ul class="tema-lista">
+<li><code>\servidor\recurso</code> es una <strong>ruta UNC</strong> (la dirección de red); <strong>Z:</strong> es solo la <strong>letra</strong> que se le asigna en la sesión.</li>
+<li><code>net use</code> sin parámetros <strong>lista</strong> las conexiones; <code>net use Z: /delete</code> quita esa conexión; <code>/persistent:yes</code> o <code>no</code> indica si se recuerda en el siguiente inicio de sesión.</li>
+<li>La conexión de impresora con <strong>LPT1:</strong> es un mecanismo <strong>heredado</strong>; hoy las impresoras se despliegan de otras formas.</li>
+<li>Una unidad mapeada en la sesión normal <strong>puede no verse en un programa ejecutado como administrador</strong> (UAC separa los dos contextos).</li>
+<li>Tener la letra <strong>no garantiza acceso</strong>: puede fallar la autenticación o el permiso.</li>
+</ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>💡 Caso CAU — «ha desaparecido la unidad Z:»</strong><br>Si esa unidad la mapea un logon script, el diagnóstico ordenado es:<br><strong>1.</strong> ¿Se <strong>ejecutó el script</strong>? (cerrar y volver a iniciar sesión).<br><strong>2.</strong> ¿Hay <strong>conectividad</strong> con el servidor?<br><strong>3.</strong> ¿<strong>Existe</strong> el recurso compartido?<br><strong>4.</strong> ¿La cuenta <strong>pertenece al grupo</strong> necesario?<br><strong>5.</strong> ¿Los <strong>permisos</strong> permiten el acceso? (su detalle, en el Tema 15).<br>Recrear la unidad a mano ocultaría el problema real en lugar de resolverlo.</th>
+<th><strong>💡 Caso CAU — «ha desaparecido la unidad Z:»</strong><br>Si esa unidad la mapea un logon script, el diagnóstico ordenado es:<br><strong>0.</strong> ¿<strong>Quién crea la unidad</strong>: script en la cuenta, script por GPO o preferencia GPP? ¿Debe tenerla esta persona?<br><strong>1.</strong> ¿Se <strong>ejecutó el script</strong>? (cerrar y volver a iniciar sesión). ¿Está la <strong>letra ocupada</strong>?<br><strong>2.</strong> ¿Hay <strong>conectividad</strong> con el servidor?<br><strong>3.</strong> ¿<strong>Existe</strong> el recurso compartido?<br><strong>4.</strong> ¿La cuenta <strong>pertenece al grupo</strong> necesario?<br><strong>5.</strong> ¿Los <strong>permisos</strong> permiten el acceso? (su detalle, en el Tema 15). Si se le acaba de añadir al grupo, ¿ha <strong>vuelto a iniciar sesión</strong>?<br><strong>6.</strong> Si es una GPP, ¿tiene una acción <strong>Reemplazar</strong> o <strong>Eliminar</strong> que la quita?<br>Mapear a mano sirve como <strong>prueba</strong> de que el recurso responde, pero no como solución: ocultaría el problema real.</th>
 </tr>
 </table></div>
   </div>

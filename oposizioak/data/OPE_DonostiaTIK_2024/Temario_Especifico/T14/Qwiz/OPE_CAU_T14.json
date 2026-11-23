@@ -91,7 +91,7 @@
     },
     {
       "id": "OPE_CAU_T14_004",
-      "pregunta": "¿Qué dos cuentas locales integradas existen en todo equipo Windows y en qué estado están por defecto en las instalaciones modernas?",
+      "pregunta": "¿Qué dos cuentas locales integradas clásicas tiene un equipo con Windows 10 u 11 y en qué estado vienen por defecto?",
       "opciones": [
         {
           "texto": "Root e Invitado, ambas deshabilitadas por defecto.",
@@ -110,7 +110,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "Administrador (privilegios completos) e Invitado (muy limitados) están deshabilitadas por defecto en las instalaciones modernas, en aplicación del principio de mínimo privilegio. Root es la cuenta equivalente en Linux.",
+      "razonamiento": "Invitado (privilegios muy limitados) viene deshabilitada y debe seguir así salvo necesidad. Administrador (privilegios completos) también viene deshabilitada en Windows cliente; en Windows Server, en cambio, es la cuenta de administración inicial. Hay además otras cuentas del sistema, como DefaultAccount. Root es la cuenta equivalente en Linux.",
       "origen": "T14 §1",
       "dificultad": "Media",
       "tipo": "Conocimiento directo",
@@ -166,7 +166,7 @@
           "correcta": true
         }
       ],
-      "razonamiento": "El grupo local de dominio admite miembros de cualquier dominio del bosque, pero sus permisos solo son válidos en su propio dominio. El global es al revés (solo miembros propios, permisos en cualquier dominio con confianza) y el universal admite ambas cosas.",
+      "razonamiento": "El grupo local de dominio admite cuentas y grupos de cualquier dominio del bosque (y de dominios de confianza), pero solo recibe permisos en su propio dominio. El global es al revés: solo miembros de su dominio y permisos en cualquier dominio del bosque. El universal admite miembros y recibe permisos en todo el bosque.",
       "origen": "T14 §2",
       "dificultad": "Difícil",
       "tipo": "Precisión",
@@ -194,7 +194,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "AGDLP (Account → Global → Domain Local → Permissions), o AGUDLP si se usan grupos universales, es el patrón que hace mantenible la gestión de permisos: al cambiar las funciones de una persona basta con cambiarla de grupo global.",
+      "razonamiento": "AGDLP (Account → Global → Domain Local → Permissions), o AGUDLP si se usan grupos universales, es el patrón que hace mantenible la gestión de permisos: al cambiar las funciones de una persona basta con cambiarla de grupo global. Es una práctica recomendada, no una obligación técnica de Windows.",
       "mnemotecnico": "🧠 A-G-DL-P: cuenta → global → local de dominio → permiso.",
       "origen": "T14 §2",
       "dificultad": "Difícil",
@@ -391,7 +391,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "El perfil obligatorio es una variante de solo lectura del móvil: los cambios de la sesión no se guardan al cerrarla. Es la opción típica en aulas de formación y puestos de acceso público.",
+      "razonamiento": "El perfil obligatorio descarta por diseño los cambios del perfil al cerrar sesión. Es la opción típica en aulas de formación y puestos de acceso público. No hay que confundirlo con el perfil temporal, que Windows carga cuando falla el perfil habitual: es una incidencia.",
       "origen": "T14 §4",
       "dificultad": "Media",
       "tipo": "Caso práctico",
@@ -447,7 +447,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "Al eliminar una cuenta se pierde su SID y, con él, todos los permisos asociados; deshabilitarla impide el acceso conservando la información. Compartir credenciales destruiría la trazabilidad.",
+      "razonamiento": "Al eliminar una cuenta se pierde su SID y, con él, los permisos y grupos asociados (salvo que se restaure desde la Papelera de reciclaje de AD); deshabilitarla impide el acceso conservando el SID. Compartir credenciales destruiría la trazabilidad.",
       "origen": "T14 §5",
       "dificultad": "Media",
       "tipo": "Caso práctico",
@@ -559,7 +559,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "NETLOGON es la carpeta compartida especial que se replica automáticamente entre todos los controladores de dominio, lo que garantiza que el script esté disponible sea cual sea el DC que autentique al usuario. ADMIN$ y C$ son recursos administrativos ocultos.",
+      "razonamiento": "NETLOGON es el recurso compartido de la carpeta de scripts dentro de SYSVOL, que se replica entre todos los controladores de dominio: así el script está disponible sea cual sea el DC que autentique al usuario. ADMIN$ y C$ son recursos administrativos ocultos.",
       "origen": "T14 §6",
       "dificultad": "Media",
       "tipo": "Precisión",
@@ -643,7 +643,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "La unidad la mapea el logon script al iniciar sesión, así que el diagnóstico recorre esa cadena: ejecución del script, conectividad y pertenencia al grupo con permisos. Recrearla a mano ocultaría el problema real y volvería a fallar mañana.",
+      "razonamiento": "Si la unidad la crea un logon script (o una preferencia de directiva), el diagnóstico recorre esa cadena: origen y ejecución del mapeo, conectividad, pertenencia al grupo y permisos. Recrearla a mano solo sirve de prueba: ocultaría el problema real y volvería a fallar.",
       "origen": "T14 §6",
       "dificultad": "Difícil",
       "tipo": "Caso práctico",
