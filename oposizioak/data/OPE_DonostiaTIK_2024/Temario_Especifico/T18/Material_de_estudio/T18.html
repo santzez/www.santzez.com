@@ -35,13 +35,16 @@
 <li><strong>IBM Notes / IBM Domino</strong> — etapa bajo IBM.</li>
 <li><strong>HCL Notes / HCL Domino</strong> — etapa bajo HCL, desde <strong>2019</strong>.</li>
 </ul>
-<p>Los datos de versión, nomenclatura comercial y soporte se recogen, fechados, en el <strong>apartado 9 de Xtra</strong>.</p>
+<p>Los datos de versión, nomenclatura comercial y soporte se recogen, fechados, en la actualidad del tema (apartado 10 de Xtra). <strong>Dato clave</strong>: desde la versión <strong>14.5 (2025)</strong> HCL ha <strong>retirado iNotes</strong> y recomienda <strong>HCL Verse</strong> para el correo web (apartado 8).</p>
 <h2 id="2-nsf-y-nrpc" class="tema-h2">2. Bases de datos NSF y protocolo NRPC</h2>
 <h4 class="tema-h4">NSF</h4>
 <ul class="tema-lista">
 <li><strong>NSF = Notes Storage Facility</strong>: el <strong>formato de base de datos nativo</strong> utilizado para almacenar datos de Notes/Domino.</li>
 <li><strong>Correo, aplicaciones y otros datos del ecosistema Domino se almacenan habitualmente en bases de datos NSF</strong>.</li>
-<li><strong>mail.nsf</strong>: la base de datos NSF que <strong>contiene el buzón de correo</strong> del usuario.</li>
+<li><strong>mail.nsf</strong>: la base de datos NSF que <strong>contiene el buzón de correo</strong> del usuario. Es un <strong>nombre genérico</strong>: en el servidor el buzón suele estar en la carpeta <strong>mail</strong> con un nombre propio de cada persona (por ejemplo, mail\jperez.nsf).</li>
+<li><strong>No todo es NSF</strong>: el <strong>archivo ID</strong> (.id) y <strong>notes.ini</strong> son ficheros aparte; las <strong>plantillas</strong> de diseño son <strong>.ntf</strong>.</li>
+<li>Dentro de una base hay <strong>documentos</strong>, <strong>vistas</strong> (formas de listarlos, no copias) y <strong>formularios</strong>.</li>
+<li>Cada base tiene su propia <strong>ACL</strong>, que fija quién entra y con qué nivel: <strong>Administrador, Diseñador, Editor, Autor, Lector, Depositante</strong> o <strong>Sin acceso</strong>. No son permisos de Windows.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -50,7 +53,7 @@
 </table></div>
 <h4 class="tema-h4">NRPC</h4>
 <ul class="tema-lista">
-<li><strong>NRPC = Notes Remote Procedure Call</strong>: el <strong>protocolo nativo/propietario</strong> mediante el cual el <strong>cliente Notes se comunica con Domino</strong> para muchas de sus operaciones.</li>
+<li><strong>NRPC = Notes Remote Procedure Call</strong>: el <strong>protocolo nativo/propietario</strong> mediante el cual el <strong>cliente Notes se comunica con Domino</strong> para muchas de sus operaciones. Usa por defecto el <strong>puerto TCP 1352</strong>.</li>
 <li>Domino <strong>también admite protocolos estándar</strong> (SMTP, IMAP, POP3) <strong>para interoperabilidad</strong> con el resto del ecosistema de correo — su funcionamiento se estudia en el Tema 17.</li>
 </ul>
 <figure class="tema-figura">
@@ -59,7 +62,7 @@
 </figure>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🧠 Para memorizar</strong><br><strong>NRPC → NOTES ↔ DOMINO.</strong> Es la vía nativa; SMTP/IMAP/POP3 son la vía estándar de interoperabilidad.</th>
+<th><strong>🧠 Para memorizar</strong><br><strong>NRPC → NOTES ↔ DOMINO · TCP 1352.</strong> Es la vía nativa; SMTP/IMAP/POP3 son la vía estándar de interoperabilidad.</th>
 </tr>
 </table></div>
 <h2 id="3-replicacion" class="tema-h2">3. Replicación y réplicas locales</h2>
@@ -72,6 +75,9 @@
 <ul class="tema-lista">
 <li>La <strong>réplica local</strong> es una copia de la base NSF en el propio equipo, que <strong>permite trabajar con datos y aplicaciones sin conexión</strong> y <strong>sincronizar los cambios cuando vuelve la conectividad</strong>.</li>
 <li>Matiz: <strong>no todas las aplicaciones ni todas las configuraciones funcionarán offline exactamente igual</strong> que en línea; depende del diseño de cada base y de los servicios que necesite.</li>
+<li>La replicación <strong>no es instantánea</strong>: puede ser <strong>programada</strong> o <strong>manual</strong>, y puede limitarse a una <strong>selección</strong> de documentos.</li>
+<li>Una réplica comparte un <strong>identificador de réplica</strong> con el original; <strong>copiar el fichero .nsf</strong> sin más no crea una réplica que sincronice.</li>
+<li>Si dos réplicas cambian el <strong>mismo documento</strong> antes de sincronizar, aparece un <strong>conflicto de replicación</strong>, que puede requerir intervención.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -86,12 +92,12 @@
 <h4 class="tema-h4">Archivo ID (.id)</h4>
 <ul class="tema-lista">
 <li>El <strong>ID file</strong> es el archivo que contiene la <strong>información de identidad y las credenciales criptográficas</strong> utilizadas por Notes para <strong>autenticar al usuario</strong> y realizar <strong>operaciones de firma y cifrado</strong>.</li>
-<li>Precisión: <strong>no debe definirse simplemente como «un certificado personal»</strong>. Cumple <strong>funciones de identidad y credenciales más amplias</strong> que las de un simple certificado.</li>
+<li>Precisión: <strong>no debe definirse simplemente como «un certificado personal»</strong>. Cumple <strong>funciones de identidad y credenciales más amplias</strong> que las de un simple certificado: contiene el <strong>par de claves</strong> (pública y privada) y los <strong>certificados</strong> que la avalan.</li>
 </ul>
 <h4 class="tema-h4">Contraseña de Notes</h4>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Imprescindible para el examen — gran trampa</strong><br>La <strong>contraseña de Notes protege el acceso al archivo ID local</strong>.<br><strong>Contraseña de Notes ≠ contraseña de dominio Windows.</strong><br>Consecuencia práctica para el CAU: «restablecer la contraseña del usuario» en el dominio <strong>no resuelve</strong> un olvido de la contraseña del ID.</th>
+<th><strong>📌 Imprescindible para el examen — gran trampa</strong><br>La <strong>contraseña de Notes protege el acceso al archivo ID local</strong>.<br><strong>Contraseña de Notes ≠ contraseña de dominio Windows.</strong><br>Consecuencia práctica para el CAU: «restablecer la contraseña del usuario» en el dominio <strong>no resuelve</strong> un olvido de la contraseña del ID.<br>Matiz: algunas organizaciones <strong>ligan el inicio de sesión de Notes al de Windows</strong> (Notes Shared Login): el usuario no teclea una contraseña de Notes aparte. Siguen siendo mecanismos distintos.</th>
 </tr>
 </table></div>
 <h4 class="tema-h4">ID Vault</h4>
@@ -101,7 +107,7 @@
 </ul>
 <h4 class="tema-h4">Notes.ini</h4>
 <ul class="tema-lista">
-<li><strong>Notes.ini</strong>: <strong>archivo de configuración del cliente Notes</strong>, que almacena <strong>parámetros de funcionamiento</strong>: configuración general, <strong>ubicación de los datos</strong>, <strong>servidor de correo</strong> y otros parámetros.</li>
+<li><strong>Notes.ini</strong>: <strong>archivo de configuración del cliente Notes</strong>, que almacena <strong>parámetros de funcionamiento</strong>: configuración general, <strong>ubicación de los datos</strong>, <strong>servidor de correo</strong> y otros parámetros. No es la única fuente: también cuentan las <strong>ubicaciones</strong> (oficina, casa, sin conexión), las <strong>políticas</strong> que envía el administrador y el directorio.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -110,7 +116,8 @@
 </table></div>
 <h2 id="5-directory" class="tema-h2">5. El Directory / Address Book</h2>
 <ul class="tema-lista">
-<li>El <strong>Directory / Address Book</strong> es la <strong>base de datos o directorio del entorno Domino</strong> que contiene información sobre <strong>usuarios, grupos, recursos y configuración del entorno</strong>.</li>
+<li>El <strong>Directory / Address Book</strong> es la <strong>base de datos o directorio del entorno Domino</strong> que contiene información sobre <strong>usuarios, grupos, recursos y configuración del entorno</strong>. Es una NSF, habitualmente <strong>names.nsf</strong> en el servidor.</li>
+<li>En el puesto también hay un <strong>names.nsf local</strong>: la <strong>libreta personal</strong> de contactos y ubicaciones, que <strong>no es</strong> el directorio corporativo.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -121,10 +128,11 @@
 <p>Procedimiento general (no depende de una versión concreta):</p>
 <ul class="tema-lista">
 <li><strong>1. Instalar el cliente</strong> Notes en el equipo.</li>
-<li><strong>2. Registrar/activar el ID</strong> del usuario, con su contraseña.</li>
+<li><strong>2. Registrar/activar el ID</strong> del usuario, con su contraseña (o descargarlo del <strong>ID Vault</strong>, si la organización lo tiene).</li>
 <li><strong>3. Identificar el servidor Domino</strong> al que debe conectarse.</li>
-<li><strong>4. Configurar o localizar la base de correo</strong> (habitualmente <strong>mail.nsf</strong>) del usuario.</li>
+<li><strong>4. Configurar o localizar la base de correo</strong> del usuario (la que en estos apuntes llamamos <strong>mail.nsf</strong>), que suele tomarse de su ficha en el directorio.</li>
 <li><strong>5. Comprobar el acceso</strong> al buzón y a las aplicaciones necesarias.</li>
+<li>Si no conecta: <strong>red</strong>, <strong>resolución del nombre</strong> del servidor, <strong>puerto 1352</strong> e <strong>identidad</strong> (ID correcto y aceptado por el servidor).</li>
 <li><strong>6. Verificar la replicación</strong> cuando proceda (réplicas locales configuradas y sincronizando).</li>
 </ul>
 <h2 id="7-funcionalidades" class="tema-h2">7. Funcionalidades del cliente</h2>
@@ -145,6 +153,15 @@
 <li>Se accede desde un <strong>navegador web compatible</strong>; el servicio lo presta el propio servidor Domino.</li>
 <li>Uso típico en el CAU: consultar el correo desde un equipo <strong>donde no está instalado ni configurado el cliente Notes</strong>, o para un acceso puntual.</li>
 </ul>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>📌 Actualidad imprescindible — iNotes retirado</strong><br>Con <strong>Notes/Domino 14.5 (2025)</strong>, HCL <strong>retiró el acceso a la interfaz de iNotes</strong>. Para el <strong>correo web</strong> recomienda <strong>HCL Verse</strong>. Quien siga necesitando iNotes debe mantener un servidor <strong>Domino 14.0 o anterior</strong> (documentación de HCL).<br>iNotes sigue siendo materia del tema (el temario es de 2024), pero hoy no es la opción vigente en las versiones nuevas.</th>
+</tr>
+</table></div>
+<ul class="tema-lista">
+<li><strong>HCL Nomad para navegador</strong> (Nomad Web) es otra vía distinta: lleva el <strong>cliente Notes completo al navegador</strong>, con sus aplicaciones. Desde la versión 14.5.1, Domino lo instala por defecto, igual que Verse.</li>
+<li>En un equipo ajeno, además: cerrar la sesión al terminar y no guardar la contraseña en el navegador.</li>
+</ul>
 <h2 id="9-acceso-movil" class="tema-h2">9. Acceso desde dispositivo móvil</h2>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -157,13 +174,21 @@
 </tr>
 <tr>
 <td><strong>iNotes desde el móvil</strong></td>
-<td>Acceso a la interfaz web <strong>mediante navegador</strong>, sin instalar aplicación específica</td>
+<td>Acceso a la interfaz web <strong>mediante navegador</strong>, sin instalar aplicación específica (solo en servidores 14.0 o anteriores)</td>
 </tr>
 <tr>
 <td><strong>HCL Verse</strong></td>
-<td><strong>Cliente/interfaz moderna</strong> de correo y colaboración</td>
+<td><strong>Cliente/interfaz moderna</strong> de correo y colaboración, en web y en móvil</td>
+</tr>
+<tr>
+<td><strong>HCL Nomad</strong></td>
+<td>El <strong>cliente Notes en tableta, móvil o navegador</strong>, para usar <strong>aplicaciones Notes</strong></td>
 </tr>
 </table></div>
+<ul class="tema-lista">
+<li><strong>Traveler</strong> sincroniza; no es un MDM. Y <strong>no es</strong> la réplica local del cliente Notes: son mecanismos distintos.</li>
+<li><strong>Verse ≠ Traveler ≠ Nomad</strong>: interfaz de correo, servicio de sincronización y cliente de aplicaciones.</li>
+</ul>
 <p>La gestión de los propios dispositivos móviles (MDM, políticas, seguridad del terminal) corresponde al <strong>Tema 30</strong>.</p>
   </div>
 </article>
