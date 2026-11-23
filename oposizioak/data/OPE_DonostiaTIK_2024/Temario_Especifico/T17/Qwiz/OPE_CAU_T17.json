@@ -204,7 +204,7 @@
     },
     {
       "id": "OPE_CAU_T17_008",
-      "pregunta": "¿Qué puerto se recomienda actualmente para el envío autenticado desde un cliente de correo (submission)?",
+      "pregunta": "¿Qué puerto está reservado para el envío autenticado desde un cliente de correo (submission) con STARTTLS?",
       "opciones": [
         {
           "texto": "993.",
@@ -223,7 +223,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "El puerto 587 es el recomendado para el envío autenticado desde clientes; el 25 queda para el transporte entre servidores (MTA a MTA) y el 465 es SMTPS (TLS desde el inicio). 110 y 993 son de recepción.",
+      "razonamiento": "El 587 es el puerto de submission con STARTTLS; el 465 es el de submission con TLS implícito, que el RFC 8314 prefiere, aunque pide admitir ambos. El 25 queda para el transporte entre servidores (MTA a MTA). 110 y 993 son de recepción.",
       "origen": "T17 §3",
       "dificultad": "Media",
       "tipo": "Precisión",
@@ -445,11 +445,11 @@
           "correcta": false
         },
         {
-          "texto": "Una firma digital criptográfica en las cabeceras que certifica el origen y que el contenido no ha sido alterado en tránsito.",
+          "texto": "Una firma criptográfica que acredita el dominio firmante y que lo firmado no se ha alterado en tránsito.",
           "correcta": true
         }
       ],
-      "razonamiento": "DKIM (DomainKeys Identified Mail) firma con la clave privada del dominio emisor y se verifica con la clave pública publicada en su DNS: garantiza autenticidad e integridad, aunque no confidencialidad (no cifra el mensaje).",
+      "razonamiento": "DKIM firma con la clave privada del dominio emisor y se verifica con la clave pública publicada en su DNS: acredita qué dominio avaló el mensaje y la integridad de lo firmado, pero no la identidad personal del remitente ni la confidencialidad (no cifra).",
       "origen": "T17 §5",
       "dificultad": "Media",
       "tipo": "Definición",
@@ -477,7 +477,7 @@
           "correcta": false
         }
       ],
-      "razonamiento": "DMARC es la capa de política y visibilidad: define la acción (rechazar, poner en cuarentena o no hacer nada) y proporciona informes sobre los intentos de suplantación. No sustituye a SPF y DKIM: se apoya en ellos.",
+      "razonamiento": "DMARC permite al dueño del dominio fijar una política (none, quarantine o reject) y recibir informes. El mensaje la supera si SPF o DKIM dan resultado válido y alineado con el dominio del From visible: basta uno de los dos.",
       "origen": "T17 §5",
       "dificultad": "Media",
       "tipo": "Definición",

@@ -60,11 +60,18 @@
 <svg viewBox="0 0 700 58" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="" font-family="Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif"><defs><marker id="at17ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#003da5"/></marker><marker id="at17aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1f5b9e"/></marker><marker id="at17av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e7d3c"/></marker><marker id="at17an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#b26a00"/></marker><marker id="at17ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#c62828"/></marker><marker id="at17ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#5a5652"/></marker></defs><rect x="8" y="6" width="151.5" height="46" rx="6" fill="#eaf1fa" stroke="#1f5b9e" stroke-width="1.6"/><text x="83.75" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">MUA</text><text x="83.75" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">usa</text><line x1="163.5" y1="29.0" x2="181.5" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at17ap)"/><rect x="185.5" y="6" width="151.5" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="261.25" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">MSA</text><text x="261.25" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">submission</text><line x1="341.0" y1="29.0" x2="359.0" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at17ap)"/><rect x="363.0" y="6" width="151.5" height="46" rx="6" fill="#e6edf7" stroke="#003da5" stroke-width="1.6"/><text x="438.75" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">MTA</text><text x="438.75" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">transporta</text><line x1="518.5" y1="29.0" x2="536.5" y2="29.0" stroke="#003da5" stroke-width="2" marker-end="url(#at17ap)"/><rect x="540.5" y="6" width="151.5" height="46" rx="6" fill="#e3f3e6" stroke="#2e7d3c" stroke-width="1.6"/><text x="616.25" y="21.2" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">MDA</text><text x="616.25" y="36.8" text-anchor="middle" font-size="12.5" font-weight="600" fill="#23272e" dominant-baseline="middle">entrega</text></svg>
 </figure>
 <p>El <strong>MSA</strong> se introduce aquí sobre todo porque explica la razón de ser del <strong>puerto 587</strong> (apartado 4): separar el <strong>envío del cliente</strong> (submission, normalmente autenticado) del <strong>transporte entre servidores</strong> (relay). En muchas implementaciones el MSA y el MTA forman parte del mismo producto.</p>
+<ul class="tema-lista">
+<li><strong>Quien entrega en el buzón es el MDA</strong>; IMAP o POP3 solo permiten <strong>consultar</strong> lo ya entregado.</li>
+<li>Una <strong>dirección</strong> (parte local @ dominio) no es siempre un buzón propio: puede ser un <strong>alias</strong> o una lista que reenvía a otros.</li>
+</ul>
 <h2 id="2-el-registro-mx-y-el-recorrido-del-mensaje" class="tema-h2">2. El registro MX y el recorrido del mensaje</h2>
 <h4 class="tema-h4">Registro MX</h4>
 <ul class="tema-lista">
 <li><strong>MX = Mail Exchanger</strong>: <strong>registro DNS que indica qué servidor o servidores reciben el correo de un dominio</strong>.</li>
-<li>Admite <strong>varios servidores</strong> con distinta <strong>prioridad</strong>: se intenta primero el de valor de preferencia más bajo y, si no responde, los siguientes — mecanismo básico de respaldo.</li>
+<li>Admite <strong>varios servidores</strong> con distinta <strong>prioridad</strong>: se intenta primero el de valor de preferencia más bajo y, si no responde, los siguientes — mecanismo básico de respaldo. Varios MX pueden tener la <strong>misma</strong> preferencia (se reparten la carga).</li>
+<li>El MX apunta a un <strong>nombre</strong>; ese nombre necesita su registro <strong>A/AAAA</strong> con la dirección IP.</li>
+<li>Si un dominio <strong>no tiene MX</strong>, el remitente intenta entregar en la dirección A/AAAA del propio dominio.</li>
+<li>Si el destino no responde, el MTA guarda el mensaje en <strong>cola</strong> y <strong>reintenta</strong> durante un tiempo. Un error <strong>temporal</strong> (códigos <strong>4xx</strong>) se reintenta; uno <strong>permanente</strong> (<strong>5xx</strong>) se rechaza y genera un <strong>aviso de no entrega (NDR)</strong> al remitente.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -78,6 +85,7 @@
 <li>El <strong>MTA</strong> de salida consulta el <strong>registro MX</strong> del dominio de destino para saber a qué servidor dirigirse.</li>
 <li>El mensaje viaja por <strong>SMTP</strong> hasta el <strong>MTA de destino</strong>, que puede no ser el último: puede haber <strong>relays intermedios</strong>.</li>
 <li>El <strong>MDA</strong> deposita el mensaje en el <strong>buzón</strong> del destinatario.</li>
+<li>Las plataformas guardan <strong>registros de seguimiento</strong> de mensajes: son la mejor prueba para localizar uno que nunca llegó.</li>
 <li>El destinatario accede a su buzón con su <strong>MUA</strong> mediante <strong>POP3 o IMAP</strong>.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
@@ -124,27 +132,40 @@
 <td><strong>Received</strong></td>
 <td>Traza añadida por los servidores/relays que reciben y procesan el mensaje</td>
 </tr>
+<tr>
+<td><strong>Reply-To</strong></td>
+<td>Dirección a la que se propone responder; puede no coincidir con From</td>
+</tr>
+<tr>
+<td><strong>Return-Path</strong></td>
+<td>Dirección de retorno para los avisos de no entrega (la del sobre)</td>
+</tr>
 </table></div>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
 <th><strong>📌 Imprescindible para el examen — Cc y Cco</strong><br><strong>Cc</strong> → los destinatarios <strong>se ven entre sí</strong>. <strong>Cco/Bcc</strong> → los destinatarios en copia oculta <strong>no son visibles</strong> para los demás. Distinción clásica de test y de uso cotidiano (envíos masivos a la ciudadanía, por ejemplo).</th>
 </tr>
 </table></div>
-<h4 class="tema-h4">La cabecera Received</h4>
-<p>Cada servidor o relay que recibe y procesa el mensaje <strong>añade su propia línea Received</strong>. El conjunto permite <strong>reconstruir el recorrido</strong> del mensaje.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>💡 Caso CAU</strong><br>Un mensaje no llega a destino: <strong>revisar las cabeceras Received</strong> permite ver por qué servidores pasó y <strong>localizar dónde se interrumpió el recorrido</strong> (si salió del servidor propio, si llegó al del destinatario, dónde se detuvo). El análisis forense detallado de cabeceras queda fuera de este tema.</th>
+<th><strong>⚠️ No confundir — sobre y cabeceras</strong><br>Como una carta, el correo tiene <strong>sobre</strong> y <strong>contenido</strong>. El <strong>sobre SMTP</strong> lleva <strong>MAIL FROM</strong> (remitente de transporte, al que vuelven los avisos de error) y <strong>RCPT TO</strong> (destinatarios reales). Las <strong>cabeceras</strong> (From, To, Cc) son lo que <strong>muestra</strong> el mensaje.<br>Pueden no coincidir: por eso existe la copia oculta (el destinatario va en el sobre, no en las cabeceras) y por eso SPF mira el sobre y no el From visible.</th>
+</tr>
+</table></div>
+<h4 class="tema-h4">La cabecera Received</h4>
+<p>Cada servidor o relay que recibe y procesa el mensaje <strong>añade su propia línea Received</strong> (la más reciente, <strong>arriba</strong>). El conjunto permite <strong>reconstruir el recorrido</strong> del mensaje. Las líneas añadidas antes de llegar a servidores de confianza <strong>pueden falsificarse</strong>.</p>
+<div class="tabla-wrap"><table class="tabla-tema">
+<tr>
+<th><strong>💡 Caso CAU</strong><br>Un mensaje llega tarde o a una carpeta inesperada: <strong>revisar las cabeceras Received</strong> permite ver por qué servidores pasó y cuánto tardó en cada salto. Pero <strong>si el mensaje no llegó, no hay cabeceras que mirar</strong>: entonces sirven el <strong>seguimiento de mensajes</strong> del servidor de salida, la <strong>cola</strong> y el <strong>NDR</strong>. El análisis forense detallado de cabeceras queda fuera de este tema.</th>
 </tr>
 </table></div>
 <h4 class="tema-h4">MIME</h4>
 <ul class="tema-lista">
 <li><strong>MIME (Multipurpose Internet Mail Extensions)</strong>: <strong>estándar que permite representar contenido no limitado a texto simple dentro de los mensajes</strong> de correo.</li>
-<li>Gracias a MIME un mensaje puede incluir <strong>HTML</strong>, <strong>imágenes</strong>, <strong>adjuntos</strong> y <strong>distintos tipos de contenido</strong>, e incluso varias partes con formatos diferentes.</li>
+<li>Gracias a MIME un mensaje puede incluir <strong>HTML</strong>, <strong>imágenes</strong>, <strong>adjuntos</strong> y <strong>distintos tipos de contenido</strong>, e incluso varias partes con formatos diferentes: <strong>multipart/alternative</strong> (la misma información en texto y en HTML) o <strong>multipart/mixed</strong> (cuerpo más adjuntos).</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir — MIME ≠ Base64</strong><br><strong>MIME es el estándar</strong> que estructura y describe el contenido del mensaje. <strong>Base64 es una de las codificaciones</strong> que pueden utilizarse <strong>dentro de MIME</strong> para representar contenido binario de forma segura en el transporte. Decir que «MIME es Base64» es un error conceptual.</th>
+<th><strong>⚠️ No confundir — MIME ≠ Base64</strong><br><strong>MIME es el estándar</strong> que estructura y describe el contenido del mensaje. <strong>Base64 es una de las codificaciones</strong> que pueden utilizarse <strong>dentro de MIME</strong> para representar contenido binario de forma segura en el transporte. Decir que «MIME es Base64» es un error conceptual. Y <strong>Base64 no cifra</strong>: cualquiera puede descodificarlo.</th>
 </tr>
 </table></div>
 <h2 id="4-smtp" class="tema-h2">4. SMTP: envío y transferencia</h2>
@@ -176,9 +197,14 @@
 <p>Los puertos <strong>587</strong> y <strong>465</strong> <strong>no son equivalentes ni un simple duplicado</strong>: ambos sirven para la submission del cliente, pero difieren en <strong>cómo se establece el cifrado</strong> — negociado sobre la conexión (STARTTLS) en el 587, e <strong>implícito desde el inicio</strong> en el 465.</p>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>📌 Actualidad de los protocolos</strong><br>Las <strong>recomendaciones actuales favorecen el uso de TLS</strong> tanto para la submission como para el acceso al correo: <strong>587 con STARTTLS/TLS</strong>, <strong>465 con TLS implícito</strong>, <strong>995</strong> (POP3) y <strong>993</strong> (IMAP) con TLS. Los puertos sin cifrado se citan para reconocerlos, <strong>no como recomendación práctica</strong>.</th>
+<th><strong>📌 Actualidad de los protocolos</strong><br>Las <strong>recomendaciones actuales favorecen el uso de TLS</strong> tanto para la submission como para el acceso al correo: <strong>587 con STARTTLS/TLS</strong>, <strong>465 con TLS implícito</strong>, <strong>995</strong> (POP3) y <strong>993</strong> (IMAP) con TLS. Los puertos sin cifrado se citan para reconocerlos, <strong>no como recomendación práctica</strong>.<br>El <strong>RFC 8314</strong> (2018) <strong>prefiere el TLS implícito</strong> (465, 993, 995) y pide admitir <strong>también el 587 con STARTTLS</strong> durante la transición: bien configurados, ofrecen la <strong>misma seguridad</strong>. No hay un único puerto «correcto» de envío.</th>
 </tr>
 </table></div>
+<ul class="tema-lista">
+<li>El <strong>puerto 25</strong> también puede cifrar con <strong>STARTTLS</strong> entre servidores.</li>
+<li><strong>TLS protege cada tramo</strong>, no el mensaje de extremo a extremo: en cada servidor el mensaje está en claro. Cifrar el contenido (S/MIME, PGP) es otra cosa (Tema 24).</li>
+<li>El envío desde un cliente suele exigir <strong>autenticación</strong>. Los grandes proveedores usan <strong>autenticación moderna (OAuth 2.0)</strong>, con tokens en lugar de la contraseña, y han ido retirando la autenticación básica. <strong>OAuth autoriza; TLS cifra el canal</strong>: no son lo mismo.</li>
+</ul>
 <h2 id="5-pop3-e-imap" class="tema-h2">5. Acceso al buzón: POP3 e IMAP</h2>
 <h4 class="tema-h4">POP3</h4>
 <ul class="tema-lista">
@@ -194,7 +220,8 @@
 <ul class="tema-lista">
 <li><strong>IMAP (Internet Message Access Protocol)</strong>: permite <strong>acceder y gestionar los mensajes almacenados en el servidor</strong>.</li>
 <li>Puertos: <strong>143</strong> y <strong>993</strong> (con <strong>TLS implícito</strong>).</li>
-<li>Gestiona <strong>carpetas</strong>, el <strong>estado leído/no leído</strong> y los propios <strong>mensajes</strong>, con <strong>sincronización entre dispositivos</strong>: lo que se hace en uno se refleja en los demás.</li>
+<li>Gestiona <strong>carpetas</strong>, el <strong>estado leído/no leído</strong> y los propios <strong>mensajes</strong>, con <strong>sincronización entre dispositivos</strong>: lo que se hace en uno se refleja en los demás (no siempre al instante: depende de la conexión y del cliente). Muchos clientes guardan además una <strong>copia local</strong> para trabajar sin conexión.</li>
+<li><strong>IMAP no envía</strong>: el envío siempre va por SMTP.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -242,7 +269,8 @@
 <h4 class="tema-h4">SPF</h4>
 <ul class="tema-lista">
 <li><strong>SPF (Sender Policy Framework)</strong>: mecanismo mediante el cual un dominio <strong>publica qué hosts u orígenes están autorizados a enviar correo utilizando ese dominio</strong>. La política se publica normalmente <strong>en DNS</strong>.</li>
-<li>Precisión importante: <strong>SPF no verifica directamente que el campo From visible sea auténtico</strong>. Su comprobación se relaciona con la <strong>identidad/dominio utilizada durante el envío</strong> y con el <strong>origen de la conexión</strong>.</li>
+<li>Precisión importante: <strong>SPF no verifica directamente que el campo From visible sea auténtico</strong>. Su comprobación se relaciona con la <strong>identidad/dominio utilizada durante el envío</strong> (el <strong>MAIL FROM</strong> del sobre) y con el <strong>origen de la conexión</strong>.</li>
+<li>El <strong>reenvío</strong> automático puede hacer fallar SPF: el mensaje llega desde un servidor que no está en la lista del dominio original.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -254,6 +282,7 @@
 <li><strong>DKIM (DomainKeys Identified Mail)</strong>: <strong>firma criptográfica</strong> que permite <strong>verificar la autenticidad de la firma y la integridad de los elementos firmados</strong> del mensaje.</li>
 <li><strong>Clave privada</strong> → <strong>firma</strong> (en el lado emisor). <strong>Clave pública</strong> → <strong>se publica en DNS</strong> y sirve para <strong>verificar</strong>.</li>
 <li>Precisión: DKIM <strong>no «certifica al remitente»</strong> como prueba absoluta de identidad personal; acredita que <strong>el dominio firmante avaló el mensaje</strong> y que <strong>lo firmado no se ha alterado</strong>.</li>
+<li><strong>Firmar no es cifrar</strong>: el mensaje sigue legible. La firma indica un <strong>selector</strong> que dice qué clave pública buscar en el DNS.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
@@ -263,13 +292,14 @@
 <h4 class="tema-h4">DMARC</h4>
 <ul class="tema-lista">
 <li><strong>DMARC (Domain-based Message Authentication, Reporting and Conformance)</strong>: <strong>mecanismo y política que permite al propietario de un dominio indicar cómo tratar los mensajes que no superan las comprobaciones de autenticación y de alineación requeridas</strong>.</li>
-<li>Incorpora la idea de <strong>alineación</strong>: no basta con que SPF o DKIM pasen; deben además <strong>corresponderse con el dominio</strong> conforme a la política establecida.</li>
+<li>Incorpora la idea de <strong>alineación</strong>: no basta con que SPF o DKIM pasen; deben además <strong>corresponderse con el dominio</strong> del <strong>From visible</strong> conforme a la política establecida.</li>
+<li><strong>Basta con uno</strong>: DMARC se supera si <strong>SPF o DKIM</strong> dan resultado válido <strong>y alineado</strong> (RFC 7489). No hace falta que pasen los dos.</li>
 <li>Políticas posibles: <strong>none</strong> (no actuar, solo observar), <strong>quarantine</strong> (cuarentena) y <strong>reject</strong> (rechazo).</li>
 <li>Permite además recibir <strong>informes</strong> sobre los resultados de esas comprobaciones.</li>
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>🧠 Para memorizar</strong><br><strong>DMARC → POLÍTICA + ALINEACIÓN + INFORMES.</strong> Reducirlo a «si SPF o DKIM fallan, rechaza» deja fuera lo esencial.</th>
+<th><strong>🧠 Para memorizar</strong><br><strong>DMARC → POLÍTICA + ALINEACIÓN + INFORMES.</strong> Reducirlo a «si SPF o DKIM fallan, rechaza» deja fuera lo esencial: con <strong>uno</strong> válido y alineado, el mensaje lo supera.</th>
 </tr>
 </table></div>
 <figure class="tema-figura">
@@ -330,8 +360,12 @@
 </ul>
 <div class="tabla-wrap"><table class="tabla-tema">
 <tr>
-<th><strong>⚠️ No confundir — MAPI</strong><br><strong>MAPI no es otro nombre de SMTP/IMAP</strong>: es un mecanismo distinto, propio del ecosistema Exchange, que ofrece una integración enriquecida (correo, calendario, contactos) más allá de los protocolos estándar. El detalle de Exchange no es objeto de este tema.</th>
+<th><strong>⚠️ No confundir — MAPI</strong><br><strong>MAPI no es otro nombre de SMTP/IMAP</strong>: es un mecanismo distinto, propio del ecosistema Exchange, que ofrece una integración enriquecida (correo, calendario, contactos) más allá de los protocolos estándar. Hoy Outlook lo usa <strong>sobre HTTPS</strong> (MAPI over HTTP). El detalle de Exchange no es objeto de este tema.</th>
 </tr>
 </table></div>
+<ul class="tema-lista">
+<li>En el <strong>webmail</strong>, HTTPS es solo el tramo <strong>navegador–servidor web</strong>; por detrás, la plataforma sigue usando SMTP y sus propios componentes.</li>
+<li>Al configurar una cuenta, muchos proveedores piden iniciar sesión en su página (<strong>OAuth</strong>) y, a menudo, un <strong>segundo factor</strong>: no siempre se escribe la contraseña en el cliente.</li>
+</ul>
   </div>
 </article>
